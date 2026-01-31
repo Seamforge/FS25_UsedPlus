@@ -1491,6 +1491,14 @@ end
     Pattern from HirePurchasing mod (working reference).
 ]]
 function UnifiedPurchaseDialog:executeCashPurchaseVehicle()
+    -- Delegate to PurchaseExecutorVehicle module
+    local success = PurchaseExecutorVehicle.executeCash(self.context, g_currentMission:getFarmId(), self.shopScreen)
+    if success then
+        self:close()
+    end
+end
+
+function UnifiedPurchaseDialog:executeCashPurchaseVehicle_OLD()
     local farmId = g_currentMission:getFarmId()
     local farm = g_farmManager:getFarmById(farmId)
 
@@ -1887,6 +1895,11 @@ end
     5. PlaceableSystemExtension detects completion, refunds financed amount
 ]]
 function UnifiedPurchaseDialog:executeFinancePurchasePlaceable()
+    -- Delegate to PurchaseExecutorPlaceable module (CRITICAL: temp money flow preserved)
+    PurchaseExecutorPlaceable.executeFinance(self.context, g_currentMission:getFarmId(), self)
+end
+
+function UnifiedPurchaseDialog:executeFinancePurchasePlaceable_OLD()
     UsedPlus.logInfo("╔════════════════════════════════════════════════════════════════")
     UsedPlus.logInfo("║ executeFinancePurchasePlaceable() ENTRY - FINANCE PURCHASE")
     UsedPlus.logInfo("╠════════════════════════════════════════════════════════════════")
