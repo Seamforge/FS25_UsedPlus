@@ -57,89 +57,25 @@ UnifiedPurchaseDialog.CASH_BACK_OPTIONS = {0, 500, 1000, 2500, 5000, 10000}
     @param creditScore - Player's current credit score (300-850)
     @return minPercent - Minimum down payment percentage required
 ]]
+-- REFACTORED: Delegate to CreditCalculations module (backward compatibility wrappers)
 function UnifiedPurchaseDialog.getMinDownPaymentForCredit(creditScore)
-    local minDown = 25  -- Default: worst credit requires 25% down
-    for _, tier in ipairs(UnifiedPurchaseDialog.DOWN_PAYMENT_CREDIT_REQUIREMENTS) do
-        if creditScore >= tier.minCredit then
-            minDown = tier.minDown
-        end
-    end
-    return minDown
+    return CreditCalculations.getMinDownPaymentForCredit(creditScore)
 end
 
---[[
-    Get available down payment options based on settings minimum AND credit score
-    v2.7.1: Now filters by credit score in addition to settings
-    @param creditScore - Player's current credit score (300-850), optional
-    @return filtered table of down payment percentages
-]]
 function UnifiedPurchaseDialog.getDownPaymentOptions(creditScore)
-    -- Get the absolute minimum from settings
-    local settingsMin = UsedPlusSettings and UsedPlusSettings:get("minDownPaymentPercent") or 0
-
-    -- Get the credit-based minimum (if credit score provided)
-    local creditMin = 0
-    if creditScore then
-        creditMin = UnifiedPurchaseDialog.getMinDownPaymentForCredit(creditScore)
-    end
-
-    -- Use the higher of the two minimums
-    local minPercent = math.max(settingsMin, creditMin)
-
-    local options = {}
-    for _, pct in ipairs(UnifiedPurchaseDialog.DOWN_PAYMENT_OPTIONS) do
-        if pct >= minPercent then
-            table.insert(options, pct)
-        end
-    end
-    -- Ensure at least one option exists
-    if #options == 0 then
-        options = {minPercent}
-    end
-    return options
+    return CreditCalculations.getDownPaymentOptions(creditScore)
 end
 
---[[
-    Get the actual down payment percentage for a given dropdown index
-    Uses filtered options from settings and credit score
-    @param index - Dropdown index (1-based)
-    @param creditScore - Optional credit score for filtering
-    @return percentage value
-]]
 function UnifiedPurchaseDialog.getDownPaymentPercent(index, creditScore)
-    local options = UnifiedPurchaseDialog.getDownPaymentOptions(creditScore)
-    return options[index] or options[1] or 0
+    return CreditCalculations.getDownPaymentPercent(index, creditScore)
 end
 
---[[
-    Get maximum allowed finance term based on credit score
-    @param creditScore - Player's current credit score (300-850)
-    @return maxYears - Maximum allowed term in years
-]]
 function UnifiedPurchaseDialog.getMaxTermForCredit(creditScore)
-    local maxYears = 5  -- Default: anyone can get 5 years
-    for _, tier in ipairs(UnifiedPurchaseDialog.TERM_CREDIT_REQUIREMENTS) do
-        if creditScore >= tier.minCredit then
-            maxYears = tier.maxYears
-        end
-    end
-    return maxYears
+    return CreditCalculations.getMaxTermForCredit(creditScore)
 end
 
---[[
-    Get available finance terms based on credit score
-    @param creditScore - Player's current credit score (300-850)
-    @return filtered table of term years
-]]
 function UnifiedPurchaseDialog.getFinanceTermsForCredit(creditScore)
-    local maxYears = UnifiedPurchaseDialog.getMaxTermForCredit(creditScore)
-    local terms = {}
-    for _, years in ipairs(UnifiedPurchaseDialog.FINANCE_TERMS) do
-        if years <= maxYears then
-            table.insert(terms, years)
-        end
-    end
-    return terms
+    return CreditCalculations.getFinanceTermsForCredit(creditScore)
 end
 
 --[[
@@ -320,14 +256,18 @@ function UnifiedPurchaseDialog:setVehicleData(storeItem, price, saleItem, shopSc
     -- Species 2 = PLACEABLE (covers all categories: SILOS, SHEDS, ANIMALS, etc.)
     -- v2.8.0: Uses separate XML dialogs for vehicles (820px) and placeables (650px)
     if storeItem and storeItem.species == 2 then
-        self.itemType = "placeable"
+        self.context.itemType = "placeable"
+        self.itemType = self.context.itemType  -- Shadow field sync
         UsedPlus.logDebug(string.format("Dialog detected placeable: %s (category=%s)",
             tostring(storeItem.name), tostring(storeItem.categoryName)))
         -- Placeables cannot be "used" - always new
-        self.isUsedVehicle = false
-        self.usedCondition = 100
+        self.context.isUsedVehicle = false
+        self.context.usedCondition = 100
+        self.isUsedVehicle = false  -- Shadow field sync
+        self.usedCondition = 100  -- Shadow field sync
     else
-        self.itemType = "vehicle"
+        self.context.itemType = "vehicle"
+        self.itemType = self.context.itemType  -- Shadow field sync
         UsedPlus.logDebug(string.format("Dialog detected vehicle: %s (species=%s)",
             tostring(storeItem.name), tostring(storeItem.species)))
         -- Check if this is a used vehicle
@@ -371,12 +311,10 @@ end
 
 --[[
     v2.0.0: Helper function to check if credit system is enabled
+    REFACTORED: Delegate to CreditCalculations module (backward compatibility wrapper)
 ]]
 function UnifiedPurchaseDialog.isCreditSystemEnabled()
-    if UsedPlusSettings and UsedPlusSettings.get then
-        return UsedPlusSettings:get("enableCreditSystem") ~= false
-    end
-    return true  -- Default to enabled
+    return CreditCalculations.isCreditSystemEnabled()
 end
 
 --[[
@@ -387,41 +325,18 @@ end
 ]]
 function UnifiedPurchaseDialog:calculateCreditParameters()
     local farmId = g_currentMission:getFarmId()
-    local creditEnabled = UnifiedPurchaseDialog.isCreditSystemEnabled()
 
-    if creditEnabled and CreditScore then
-        self.creditScore = CreditScore.calculate(farmId)
-        self.creditRating = CreditScore.getRating(self.creditScore)
+    -- Delegate to CreditCalculations module
+    CreditCalculations.calculate(self.context, farmId)
 
-        -- Calculate interest rate based on credit
-        local baseRate = 0.08
-        local adjustment = CreditScore.getInterestAdjustment(self.creditScore) or 0
-        self.interestRate = math.max(0.03, math.min(0.15, baseRate + adjustment))
-
-        -- Check qualification based on item type
-        if self.itemType == "placeable" then
-            -- Placeables require Excellent credit (750+) - endgame unlock
-            local PLACEABLE_MIN_CREDIT = 750
-            self.canFinance = self.creditScore >= PLACEABLE_MIN_CREDIT
-            self.financeMinScore = PLACEABLE_MIN_CREDIT
-            -- Placeables cannot be leased (only financed or bought)
-            self.canLease = false
-            self.leaseMinScore = 999  -- Never available
-        else
-            -- Vehicles use standard credit checks
-            self.canFinance, self.financeMinScore = CreditScore.canFinance(farmId, "VEHICLE_FINANCE")
-            self.canLease, self.leaseMinScore = CreditScore.canFinance(farmId, "VEHICLE_LEASE")
-        end
-    else
-        -- Credit system disabled - use defaults (always qualified)
-        self.creditScore = 650
-        self.creditRating = "Fair"
-        self.interestRate = 0.08
-        self.canFinance = true
-        self.canLease = (self.itemType == "vehicle")  -- Placeables can't be leased even with credit disabled
-        self.financeMinScore = 550
-        self.leaseMinScore = 600
-    end
+    -- Sync shadow fields (will be removed in Step 9)
+    self.creditScore = self.context.creditScore
+    self.creditRating = self.context.creditRating
+    self.interestRate = self.context.interestRate
+    self.canFinance = self.context.canFinance
+    self.financeMinScore = self.context.financeMinScore
+    self.canLease = self.context.canLease
+    self.leaseMinScore = self.context.leaseMinScore
 
     -- v2.7.0: Update term options based on credit score
     self:updateTermOptionsForCredit()
@@ -442,11 +357,12 @@ function UnifiedPurchaseDialog:updateTermOptionsForCredit()
         return
     end
 
-    local availableTerms = UnifiedPurchaseDialog.getFinanceTermsForCredit(self.creditScore)
-    local maxYears = UnifiedPurchaseDialog.getMaxTermForCredit(self.creditScore)
+    -- Delegate to CreditCalculations module
+    local availableTerms = CreditCalculations.getAvailableTerms(self.context)
+    local maxYears = CreditCalculations.getMaxTermForCredit(self.context.creditScore)
 
-    -- Store available terms for later lookup
-    self.availableFinanceTerms = availableTerms
+    -- Sync shadow field (will be removed in Step 9)
+    self.availableFinanceTerms = self.context.availableFinanceTerms
 
     -- Build texts for available terms
     local texts = {}
@@ -457,7 +373,7 @@ function UnifiedPurchaseDialog:updateTermOptionsForCredit()
     -- If better credit would unlock more terms, show hint
     if maxYears < 15 then
         local nextTier = nil
-        for _, tier in ipairs(UnifiedPurchaseDialog.TERM_CREDIT_REQUIREMENTS) do
+        for _, tier in ipairs(CreditCalculations.TERM_CREDIT_REQUIREMENTS) do
             if tier.maxYears > maxYears then
                 nextTier = tier
                 break
@@ -465,17 +381,20 @@ function UnifiedPurchaseDialog:updateTermOptionsForCredit()
         end
         if nextTier then
             UsedPlus.logDebug(string.format("Credit %d allows up to %d year terms. Score %d+ unlocks %d years.",
-                self.creditScore, maxYears, nextTier.minCredit, nextTier.maxYears))
+                self.context.creditScore, maxYears, nextTier.minCredit, nextTier.maxYears))
         end
     end
 
     self.financeTermSlider:setTexts(texts)
 
     -- Ensure current selection is valid
-    if self.financeTermIndex > #availableTerms then
-        self.financeTermIndex = #availableTerms
+    if self.context.financeTermIndex > #availableTerms then
+        self.context.financeTermIndex = #availableTerms
     end
-    self.financeTermSlider:setState(self.financeTermIndex)
+    self.financeTermSlider:setState(self.context.financeTermIndex)
+
+    -- Sync shadow field
+    self.financeTermIndex = self.context.financeTermIndex
 end
 
 --[[
@@ -488,55 +407,52 @@ end
     - Excellent (750+): 0% down available
 ]]
 function UnifiedPurchaseDialog:updateDownPaymentOptionsForCredit()
+    -- Delegate to CreditCalculations module
+    local availableOptions = CreditCalculations.getAvailableDownPayments(self.context)
+    local minDown = CreditCalculations.getMinDownPaymentForCredit(self.context.creditScore)
+
+    -- Sync shadow fields (will be removed in Step 9)
+    self.availableFinanceDownOptions = self.context.availableFinanceDownOptions
+    self.availableLeaseDownOptions = self.context.availableLeaseDownOptions
+
+    -- Build texts for available options
+    local texts = {}
+    for _, pct in ipairs(availableOptions) do
+        table.insert(texts, pct .. "%")
+    end
+
+    -- Log what's available
+    if minDown > 0 then
+        UsedPlus.logDebug(string.format("Credit %d requires minimum %d%% down payment. Available options: %s",
+            self.context.creditScore, minDown, table.concat(texts, ", ")))
+    end
+
     -- Update finance down payment slider
     if self.financeDownSlider then
-        local availableOptions = UnifiedPurchaseDialog.getDownPaymentOptions(self.creditScore)
-        local minDown = UnifiedPurchaseDialog.getMinDownPaymentForCredit(self.creditScore)
-
-        -- Store available options for later lookup
-        self.availableFinanceDownOptions = availableOptions
-
-        -- Build texts for available options
-        local texts = {}
-        for _, pct in ipairs(availableOptions) do
-            table.insert(texts, pct .. "%")
-        end
-
-        -- Log what's available
-        if minDown > 0 then
-            UsedPlus.logDebug(string.format("Credit %d requires minimum %d%% down payment. Available options: %s",
-                self.creditScore, minDown, table.concat(texts, ", ")))
-        end
-
         self.financeDownSlider:setTexts(texts)
 
         -- Ensure current selection is valid
-        if self.financeDownIndex > #availableOptions then
-            self.financeDownIndex = 1  -- Reset to minimum (first option)
+        if self.context.financeDownIndex > #availableOptions then
+            self.context.financeDownIndex = 1  -- Reset to minimum (first option)
         end
-        self.financeDownSlider:setState(self.financeDownIndex)
+        self.financeDownSlider:setState(self.context.financeDownIndex)
+
+        -- Sync shadow field
+        self.financeDownIndex = self.context.financeDownIndex
     end
 
     -- Update lease down payment slider (same logic)
     if self.leaseDownSlider then
-        local availableOptions = UnifiedPurchaseDialog.getDownPaymentOptions(self.creditScore)
-
-        -- Store available options
-        self.availableLeaseDownOptions = availableOptions
-
-        -- Build texts
-        local texts = {}
-        for _, pct in ipairs(availableOptions) do
-            table.insert(texts, pct .. "%")
-        end
-
         self.leaseDownSlider:setTexts(texts)
 
         -- Ensure current selection is valid
-        if self.leaseDownIndex > #availableOptions then
-            self.leaseDownIndex = 1  -- Reset to minimum
+        if self.context.leaseDownIndex > #availableOptions then
+            self.context.leaseDownIndex = 1  -- Reset to minimum
         end
-        self.leaseDownSlider:setState(self.leaseDownIndex)
+        self.leaseDownSlider:setState(self.context.leaseDownIndex)
+
+        -- Sync shadow field
+        self.leaseDownIndex = self.context.leaseDownIndex
     end
 end
 
@@ -554,42 +470,8 @@ end
     @return isAvailable (boolean), message (string or nil)
 ]]
 function UnifiedPurchaseDialog:isModeAvailable()
-    if self.currentMode == UnifiedPurchaseDialog.MODE_CASH then
-        return true, nil  -- Cash is always available
-    elseif self.currentMode == UnifiedPurchaseDialog.MODE_FINANCE then
-        -- Check minimum financing amount first
-        if FinanceCalculations and FinanceCalculations.meetsMinimumAmount then
-            local meetsMinimum, minRequired = FinanceCalculations.meetsMinimumAmount(self.vehiclePrice, "VEHICLE_FINANCE")
-            if not meetsMinimum then
-                local msg = string.format(g_i18n:getText("usedplus_finance_amountTooSmall") or "Amount too small for financing. Minimum: %s",
-                    g_i18n:formatMoney(minRequired, 0, true, true))
-                return false, msg
-            end
-        end
-        -- Then check credit score
-        if not self.canFinance then
-            local msgTemplate = g_i18n:getText("usedplus_credit_tooLowForFinancing")
-            return false, string.format(msgTemplate, self.creditScore, self.financeMinScore or 550)
-        end
-        return true, nil
-    elseif self.currentMode == UnifiedPurchaseDialog.MODE_LEASE then
-        -- Check minimum lease amount first
-        if FinanceCalculations and FinanceCalculations.meetsMinimumAmount then
-            local meetsMinimum, minRequired = FinanceCalculations.meetsMinimumAmount(self.vehiclePrice, "VEHICLE_LEASE")
-            if not meetsMinimum then
-                local msg = string.format(g_i18n:getText("usedplus_lease_amountTooSmall") or "Amount too small for leasing. Minimum: %s",
-                    g_i18n:formatMoney(minRequired, 0, true, true))
-                return false, msg
-            end
-        end
-        -- Then check credit score
-        if not self.canLease then
-            local msgTemplate = g_i18n:getText("usedplus_credit_tooLowForLeasing")
-            return false, string.format(msgTemplate, self.creditScore, self.leaseMinScore or 600)
-        end
-        return true, nil
-    end
-    return true, nil
+    -- Delegate to CreditCalculations module
+    return CreditCalculations.isModeAvailable(self.context, self.context.currentMode)
 end
 
 --[[
@@ -613,28 +495,8 @@ end
     Condition (damage + wear) further reduces value by up to 30%
 ]]
 function UnifiedPurchaseDialog:getCreditTradeInMultiplier()
-    local score = self.creditScore or 650
-
-    -- v2.6.2: Use baseTradeInPercent setting instead of hardcoded 50%
-    -- Credit bonus adds 0-15% on top based on credit score
-    local basePercent = (UsedPlusSettings and UsedPlusSettings:get("baseTradeInPercent") or 55) / 100
-    local maxBonus = 0.15  -- Excellent credit adds up to 15%
-
-    -- Calculate credit bonus: poor credit = 0, excellent credit = maxBonus
-    local creditBonus = 0
-    if score >= 800 then
-        creditBonus = maxBonus           -- Exceptional: full 15% bonus
-    elseif score >= 740 then
-        creditBonus = maxBonus * 0.73    -- Very good: 11% bonus
-    elseif score >= 670 then
-        creditBonus = maxBonus * 0.47    -- Good: 7% bonus
-    elseif score >= 580 then
-        creditBonus = maxBonus * 0.20    -- Fair: 3% bonus
-    else
-        creditBonus = 0                  -- Poor: no bonus
-    end
-
-    return basePercent + creditBonus
+    -- Delegate to CreditCalculations module
+    return CreditCalculations.getTradeInMultiplier(self.context)
 end
 
 --[[
