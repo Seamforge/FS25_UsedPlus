@@ -264,7 +264,16 @@ UNTERSTÜTZUNG
         <sourceFile filename="src/gui/CreditReportDialog.lua"/>  <!--  Detailed credit report -->
         <sourceFile filename="src/gui/SellVehicleDialog.lua"/>   <!--  Agent-based vehicle sales -->
         <sourceFile filename="src/gui/SaleOfferDialog.lua"/>     <!--  Accept/Decline sale offers -->
-        <sourceFile filename="src/gui/UnifiedPurchaseDialog.lua"/>  <!--  Unified Buy/Finance/Lease dialog -->
+
+        <!-- UnifiedPurchaseDialog modules (load BEFORE dialog) -->
+        <sourceFile filename="src/gui/unifiedpurchase/PurchaseContext.lua"/>
+        <sourceFile filename="src/gui/unifiedpurchase/CreditCalculations.lua"/>
+        <sourceFile filename="src/gui/unifiedpurchase/TradeInHandler.lua"/>
+        <sourceFile filename="src/gui/unifiedpurchase/DisplayUpdater.lua"/>
+        <sourceFile filename="src/gui/unifiedpurchase/PurchaseExecutorVehicle.lua"/>
+        <sourceFile filename="src/gui/unifiedpurchase/PurchaseExecutorPlaceable.lua"/>
+
+        <sourceFile filename="src/gui/UnifiedPurchaseDialog.lua"/>  <!--  Unified Buy/Finance/Lease dialog (depends on modules above) -->
         <sourceFile filename="src/gui/UnifiedLandPurchaseDialog.lua"/>  <!--  Land Buy/Finance/Lease dialog -->
         <sourceFile filename="src/gui/DealDetailsDialog.lua"/>    <!--  Finance/Lease deal details popup -->
         <sourceFile filename="src/gui/PaymentHistoryDialog.lua"/>  <!--  Full amortization schedule view -->
@@ -291,8 +300,10 @@ UNTERSTÜTZUNG
         <!-- Extensions (depend on managers, GUI) -->
         <sourceFile filename="src/extensions/ShopConfigScreenExtension.lua"/>
         <sourceFile filename="src/extensions/BuyVehicleDataExtension.lua"/>
+        <sourceFile filename="src/extensions/BuyPlaceableDataExtension.lua"/>  <!--  v2.8.0: Hook BuyPlaceableData.buy() for placeable financing -->
         <sourceFile filename="src/extensions/FarmExtension.lua"/>
         <sourceFile filename="src/extensions/FarmlandManagerExtension.lua"/>
+        <sourceFile filename="src/extensions/PlaceableSystemExtension.lua"/>  <!--  v2.8.0: Hook placeable placement/deletion for financing -->
         <sourceFile filename="src/extensions/VehicleExtension.lua"/>
         <sourceFile filename="src/extensions/InGameMenuMapFrameExtension.lua"/>
         <sourceFile filename="src/extensions/VehicleSellingPointExtension.lua"/>
