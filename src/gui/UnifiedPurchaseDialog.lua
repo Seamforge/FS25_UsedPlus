@@ -507,80 +507,13 @@ end
     Always less than agent sale values (convenience tradeoff)
 ]]
 function UnifiedPurchaseDialog:loadEligibleTradeIns()
-    self.eligibleTradeIns = {}
-
-    -- v1.4.0: Check settings system for trade-in feature toggle
-    local tradeInEnabled = not UsedPlusSettings or UsedPlusSettings:isSystemEnabled("TradeIn")
-    if not tradeInEnabled then
-        UsedPlus.logDebug("Trade-in system disabled by settings")
-        return
-    end
-
     local farmId = g_currentMission:getFarmId()
 
-    -- Get credit-based trade-in multiplier (returns baseTradeInPercent to baseTradeInPercent+15%)
-    local creditMultiplier = self:getCreditTradeInMultiplier()
+    -- Delegate to TradeInHandler module
+    TradeInHandler.loadEligible(self.context, farmId)
 
-    for _, vehicle in pairs(g_currentMission.vehicleSystem.vehicles) do
-        if vehicle.ownerFarmId == farmId and
-           vehicle.propertyState == VehiclePropertyState.OWNED then
-            -- Check if vehicle has outstanding finance
-            local hasFinance = false
-            if g_financeManager then
-                local deals = g_financeManager:getDealsForFarm(farmId)
-                if deals then
-                    for _, deal in ipairs(deals) do
-                        if deal.status == "active" and deal.itemId == vehicle.configFileName then
-                            hasFinance = true
-                            break
-                        end
-                    end
-                end
-            end
-
-            -- Only add if no outstanding finance
-            if not hasFinance then
-                -- Get base sell price (what vanilla would give you)
-                local sellPrice = vehicle:getSellPrice() or 0
-
-                -- Get vehicle condition using TradeInCalculations helpers
-                local damageLevel = 0
-                local wearLevel = 0
-                local conditionMultiplier = 1.0
-
-                if TradeInCalculations then
-                    damageLevel = TradeInCalculations.getVehicleDamage(vehicle)
-                    wearLevel = TradeInCalculations.getVehicleWear(vehicle)
-                    conditionMultiplier = TradeInCalculations.calculateConditionMultiplier(damageLevel, wearLevel)
-                end
-
-                -- Calculate trade-in value:
-                -- 1. Start with vanilla sell price
-                -- 2. Apply credit-based percentage (50-65%)
-                -- 3. Apply condition multiplier (damage + wear penalty, 70-100%)
-                local tradeInValue = math.floor(sellPrice * creditMultiplier * conditionMultiplier)
-
-                -- Calculate condition percentages for display
-                local repairPercent = math.floor((1 - damageLevel) * 100)
-                local paintPercent = math.floor((1 - wearLevel) * 100)
-
-                table.insert(self.eligibleTradeIns, {
-                    vehicle = vehicle,
-                    name = vehicle:getFullName() or "Unknown",
-                    value = tradeInValue,
-                    sellPrice = sellPrice,  -- Store for reference
-                    creditMultiplier = creditMultiplier,
-                    conditionMultiplier = conditionMultiplier,
-                    damageLevel = damageLevel,
-                    wearLevel = wearLevel,
-                    repairPercent = repairPercent,
-                    paintPercent = paintPercent,
-                    condition = math.floor((repairPercent + paintPercent) / 2),  -- Average condition
-                    operatingHours = vehicle.operatingTime or 0
-                })
-            end
-        end
-    end
+    -- Sync shadow field (will be removed in Step 9)
+    self.eligibleTradeIns = self.context.eligibleTradeIns
 
     -- Update trade-in selector
     self:updateTradeInSelector()
@@ -613,7 +546,10 @@ end
 function UnifiedPurchaseDialog:onOpen()
     UnifiedPurchaseDialog:superClass().onOpen(self)
 
-    -- Reset trade-in state
+    -- Reset trade-in state in context
+    TradeInHandler.setTradeIn(self.context, nil)
+
+    -- Sync shadow fields (will be removed in Step 9)
     self.tradeInEnabled = false
     self.tradeInVehicle = nil
     self.tradeInValue = 0
@@ -792,6 +728,10 @@ function UnifiedPurchaseDialog:onTradeInVehicleChanged()
 
     -- Index 1 = "None" selected
     if index == 1 then
+        -- Clear trade-in in context
+        TradeInHandler.setTradeIn(self.context, nil)
+
+        -- Sync shadow fields (will be removed in Step 9)
         self.tradeInEnabled = false
         self.tradeInVehicle = nil
         self.tradeInValue = 0
@@ -803,8 +743,13 @@ function UnifiedPurchaseDialog:onTradeInVehicleChanged()
     else
         -- Index 2+ = vehicle selected (subtract 1 for eligibleTradeIns array)
         local vehicleIndex = index - 1
-        if vehicleIndex > 0 and vehicleIndex <= #self.eligibleTradeIns then
-            local item = self.eligibleTradeIns[vehicleIndex]
+        local item = TradeInHandler.getItemByIndex(self.context, vehicleIndex)
+
+        if item then
+            -- Set trade-in in context
+            TradeInHandler.setTradeIn(self.context, item.vehicle)
+
+            -- Sync shadow fields (will be removed in Step 9)
             self.tradeInEnabled = true
             self.tradeInVehicle = item.vehicle
             self.tradeInValue = item.value
@@ -866,9 +811,14 @@ function UnifiedPurchaseDialog:onTradeInVehicleChanged()
                 self.tradeInCreditText:setText(string.format("Credit: %d%% | Cond: %d%%", creditPct, condPct))
             end
         else
+            -- Invalid index - clear trade-in
+            TradeInHandler.setTradeIn(self.context, nil)
+
+            -- Sync shadow fields
             self.tradeInEnabled = false
             self.tradeInVehicle = nil
             self.tradeInValue = 0
+
             -- Hide trade-in details container
             if self.tradeInDetailsContainer then
                 self.tradeInDetailsContainer:setVisible(false)
@@ -2318,15 +2268,10 @@ end
     Execute trade-in (sell the trade-in vehicle)
 ]]
 function UnifiedPurchaseDialog:executeTradeIn()
-    if not self.tradeInVehicle then return end
-
     local farmId = g_currentMission:getFarmId()
-    local vehicleId = self.tradeInVehicle.id
-    local tradeInValue = self.tradeInValue or 0
 
-    -- v2.8.0: Use network event for multiplayer synchronization
-    -- Event handles: farm credit, vehicle deletion, credit history
-    TradeInVehicleEvent.sendToServer(farmId, vehicleId, tradeInValue)
+    -- Delegate to TradeInHandler module
+    TradeInHandler.execute(self.context, farmId)
 end
 
 --[[
