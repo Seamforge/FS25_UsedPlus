@@ -488,6 +488,7 @@
         <e k="usedplus_credit_tooLowForLeasing" v="Kiralama için kredi puanı çok düşük. Puanınız: %d (gereken: %d+). Kiralama finansmandan daha iyi kredi gerektirir." eh="50b91953" />
         <e k="usedplus_credit_tooLowForLand" v="Kredi puanı çok düşük (%d). Arazi finansmanı için %d+ gerekli." eh="78d73204" />
         <e k="usedplus_credit_tooLowForRepair" v="Kredi puanı çok düşük (%d). Onarım finansmanı için %d+ gerekli." eh="70147f73" />
+        <e k="usedplus_credit_tooLowForPlaceable" v="Bina finansmanı Mükemmel kredi gerektirir (%d+).\nKrediniz: %d (%s)" eh="0fb63457" />
         <e k="usedplus_credit_needScore" v="Kredi: %d (gereken: %d)" eh="82790b98" />
         <e k="usedplus_finance_amountTooSmall" v="Finansman için tutar çok küçük. Minimum: %s" eh="3a90d8c2" />
         <e k="usedplus_lease_amountTooSmall" v="Kiralama için tutar çok küçük. Minimum: %s" eh="3e2012e8" />
@@ -526,6 +527,7 @@
         <e k="usedplus_mode_cash" v="Nakit ile Satın Al" eh="01dc9cc3" />
         <e k="usedplus_mode_finance" v="Finanse Et" eh="c482980d" />
         <e k="usedplus_mode_lease" v="Kirala" eh="47c96b08" />
+        <e k="usedplus_placeable_cannotLease" v="Binalar kiralanamaz. Nakit veya Finanse seçeneklerini kullanın." eh="e4fd7eed" />
         <e k="usedplus_mode_financeCredit" v="Finanse Et (Kredi: %d+)" eh="0b6c80e3" />
         <e k="usedplus_mode_leaseCredit" v="Kirala (Kredi: %d+)" eh="439bd2b6" />
         <e k="usedplus_notify_vehicleSold" v="%s %s karşılığında satıldı!" eh="159b99b9" />
@@ -538,6 +540,8 @@
         <e k="usedplus_notify_landPurchased" v="%s %s karşılığında satın alındı" eh="ee85175a" />
         <e k="usedplus_notify_landFinanced" v="%s finanse edildi - Bugün %s ödenmesi gerekiyor" eh="874037b7" />
         <e k="usedplus_notify_vehicleNowYours" v="Tebrikler! %s artık sizin!" eh="f9f453e9" />
+        <e k="usedplus_notify_placeableFinanced" v="Bina Finanse Edildi!\n%s\nPeşinat: %s | Aylık: %s %d yıl boyunca" eh="72ebd0e0" />
+        <e k="usedplus_notify_placeableSoldPayoff" v="Bina satıldı. Kredi ödemesi: %s" eh="78ac7164" />
         <e k="usedplus_notify_loanPaidOff" v="Kredi kapatıldı! Toplam: %s" eh="0ba73cba" />
         <e k="usedplus_notify_paymentProcessed" v="%s tutarında ödeme işlendi!" eh="fc4c5db3" />
         <e k="usedplus_notify_paidDealsTotal" v="%d anlaşma ödendi! Toplam: %s" eh="14743f8a" />
@@ -600,6 +604,7 @@
         <e k="usedplus_preview_inspectionProgress" v="%s muayenesi devam ediyor... ~%d saat kaldı" eh="911dfff0" />
         <e k="usedplus_preview_requestInspection" v="Muayene Talep Et" eh="e555e8b2" />
         <e k="usedplus_preview_inProgress" v="Devam Ediyor..." eh="bd62582e" />
+        <e k="usedplus_preview_implementNoInspection" v="[EN] Inspections not available for non-powered implements. Buy as-is only." eh="620e727f" />
         <e k="usedplus_land_modeCash" v="Nakit ile Satın Al" eh="01dc9cc3" />
         <e k="usedplus_land_modeFinance" v="Finanse Et" eh="c482980d" />
         <e k="usedplus_land_modeLease" v="Kirala" eh="47c96b08" />
@@ -773,6 +778,7 @@
         <e k="usedplus_rp_creditImpact" v="Bu haciz kredi puanınızı ciddi şekilde etkiler. Gelecekteki finansman daha pahalı olacak veya reddedilecek." eh="255a010d" />
         <e k="usedplus_rp_footer" v="Gelecekteki hacizlerden kaçınmak için ödemelerinizi zamanında yapın." eh="000e26a4" />
         <e k="usedplus_up_title" v="Araç Satın Al" eh="f5dc36d9" />
+        <e k="usedplus_up_title_placeable" v="Bina Satın Al" eh="6fd17a3d" />
         <e k="usedplus_up_sectionVehicle" v="ARAÇ" eh="e9fa318f" />
         <e k="usedplus_up_sectionMethod" v="SATIN ALMA YÖNTEMİ" eh="f5f3c261" />
         <e k="usedplus_up_methodHelp" v="Nasıl ödemek istediğinizi seçin: peşin nakit, vadeli finansman veya düşük ödemeli kiralama." eh="83636102" />

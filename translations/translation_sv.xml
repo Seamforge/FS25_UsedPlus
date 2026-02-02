@@ -446,19 +446,19 @@
         <e k="usedplus_sell_cantSellFinanced" v="Kan inte salja finansierade fordon. Betala av saldot forst." eh="1dcb38c2" />
 
         <!--  Sale Offer Dialog -->
-        <e k="usedplus_saleOffer_title" v="Sale Offer Received" eh="6eeec636" />
-        <e k="usedplus_saleOffer_message" v="A buyer has been found for your vehicle!" eh="7b1304f7" />
-        <e k="usedplus_saleOffer_offerAmount" v="Offer Amount" eh="0916d967" />
-        <e k="usedplus_saleOffer_expiresIn" v="Offer Expires In" eh="ce06a052" />
-        <e k="usedplus_saleOffer_accept" v="Accept Offer" eh="93a5776a" />
-        <e k="usedplus_saleOffer_decline" v="Decline Offer" eh="3db99481" />
-        <e k="usedplus_saleOffer_hours" v="%d hours" eh="4e8d5e54" />
-        <e k="usedplus_saleOffer_accepted" v="Vehicle sold for %s!" eh="f5cd95ab" />
-        <e k="usedplus_saleOffer_declined" v="Offer declined. Agent continues searching..." eh="b7c0bba6" />
-        <e k="usedplus_saleOffer_expired" v="Offer expired for %s. Agent continues searching..." eh="180bd573" />
+        <e k="usedplus_saleOffer_title" v="Försäljningserbjudande mottaget" eh="6eeec636" />
+        <e k="usedplus_saleOffer_message" v="En köpare har hittats för ditt fordon!" eh="7b1304f7" />
+        <e k="usedplus_saleOffer_offerAmount" v="Erbjudandebelopp" eh="0916d967" />
+        <e k="usedplus_saleOffer_expiresIn" v="Erbjudandet går ut om" eh="ce06a052" />
+        <e k="usedplus_saleOffer_accept" v="Acceptera erbjudande" eh="93a5776a" />
+        <e k="usedplus_saleOffer_decline" v="Avslå erbjudande" eh="3db99481" />
+        <e k="usedplus_saleOffer_hours" v="%d timmar" eh="4e8d5e54" />
+        <e k="usedplus_saleOffer_accepted" v="Fordon sålt för %s!" eh="f5cd95ab" />
+        <e k="usedplus_saleOffer_declined" v="Erbjudande avslaget. Agenten fortsätter söka..." eh="b7c0bba6" />
+        <e k="usedplus_saleOffer_expired" v="Erbjudandet gick ut för %s. Agenten fortsätter söka..." eh="180bd573" />
 
         <!-- Sale Expired Dialog (no buyer found) -->
-        <e k="usedplus_saleExpired_title" v="Sale Listing Expired" eh="610084ea" />
+        <e k="usedplus_saleExpired_title" v="Försäljningsannons utgången" eh="610084ea" />
         <e k="usedplus_saleExpired_sectionInfo" v="LISTING DETAILS" eh="7b3916d2" />
         <e k="usedplus_saleExpired_sectionOutcome" v="OUTCOME" eh="79988be0" />
         <e k="usedplus_saleExpired_noBuyer" v="No buyer was found during the listing period." eh="aa575ade" />
@@ -467,12 +467,12 @@
         <e k="usedplus_saleExpired_relist" v="Relist Vehicle" eh="a556ce3c" />
 
         <!--  Sale Listing Status -->
-        <e k="usedplus_sale_statusActive" v="Searching for buyer..." eh="28e37076" />
-        <e k="usedplus_sale_statusPending" v="OFFER: %s" eh="868cdf29" />
-        <e k="usedplus_sale_statusSold" v="SOLD for %s" eh="737a574b" />
-        <e k="usedplus_sale_statusExpired" v="Expired - No buyer found" eh="3e3e51fd" />
-        <e k="usedplus_sale_statusCancelled" v="Cancelled" eh="a149e85a" />
-        <e k="usedplus_sale_listingExpired" v="No buyer found for %s. Agent fee (%s) was non-refundable." eh="08587fe0" />
+        <e k="usedplus_sale_statusActive" v="Söker efter köpare..." eh="28e37076" />
+        <e k="usedplus_sale_statusPending" v="ERBJUDANDE: %s" eh="868cdf29" />
+        <e k="usedplus_sale_statusSold" v="SÅLD för %s" eh="737a574b" />
+        <e k="usedplus_sale_statusExpired" v="Utgången - Ingen köpare hittades" eh="3e3e51fd" />
+        <e k="usedplus_sale_statusCancelled" v="Avbruten" eh="a149e85a" />
+        <e k="usedplus_sale_listingExpired" v="Ingen köpare hittades för %s. Agentavgift (%s) var ej återbetalningsbar." eh="08587fe0" />
         <e k="usedplus_sale_cancel" v="Cancel Listing" eh="587021c1" />
         <e k="usedplus_sale_cancelConfirm" v="Cancel sale listing for %s? Agent fee will NOT be refunded." eh="3bbc7efa" />
         <e k="usedplus_sale_cancelled" v="Sale listing cancelled for %s." eh="aa5902d2" />
@@ -482,45 +482,45 @@
         <e k="usedplus_manager_noSales" v="No active sale listings" eh="0af1686a" />
 
         <!--  Menu Navigation Buttons -->
-        <e k="usedplus_button_nextPage" v="Next Menu" eh="2553da59" />
-        <e k="usedplus_button_prevPage" v="Previous Menu" eh="d4e01f11" />
+        <e k="usedplus_button_nextPage" v="Nästa meny" eh="2553da59" />
+        <e k="usedplus_button_prevPage" v="Föregående meny" eh="d4e01f11" />
 
         <!-- === MAINTENANCE SYSTEM (Phase 4) === -->
 
         <!--  Engine/Failure Warnings -->
-        <e k="usedPlus_engineStalled" v="Engine stalled!" eh="2cfeb1d2" />
-        <e k="usedPlus_engineStalledRecovery" v="Engine stalled! Wait %d seconds..." eh="9a57b319" />
-        <e k="usedPlus_engineWontStart" v="Engine won't start - try again" eh="daa0591c" />
-        <e k="usedPlus_hydraulicDrift" v="Hydraulic pressure loss!" eh="31f2964d" />
-        <e k="usedPlus_implementCutout" v="Implement stalled!" eh="395b6ba3" />
-        <e k="usedPlus_electricalCutout" v="Electrical fault - implements offline!" eh="0c156989" />
+        <e k="usedPlus_engineStalled" v="Motorn har stannat!" eh="2cfeb1d2" />
+        <e k="usedPlus_engineStalledRecovery" v="Motorn har stannat! Vänta %d sekunder..." eh="9a57b319" />
+        <e k="usedPlus_engineWontStart" v="Motorn startar inte - försök igen" eh="daa0591c" />
+        <e k="usedPlus_hydraulicDrift" v="Hydraultrycksförlust!" eh="31f2964d" />
+        <e k="usedPlus_implementCutout" v="Redskap har stannat!" eh="395b6ba3" />
+        <e k="usedPlus_electricalCutout" v="Elektriskt fel - redskap fungerar inte!" eh="0c156989" />
 
         <!--  Speed Degradation Warnings (v1.4.0) -->
-        <e k="usedPlus_speedDegraded" v="Engine struggling - max speed reduced to %d%%!" eh="af083aef" />
-        <e k="usedPlus_speedDegradedReminder" v="Vehicle running slow - repairs recommended" eh="95eb2457" />
-        <e k="usedPlus_speedGovernor" v="Engine can't sustain this speed!" eh="f9bd1f68" />
-        <e k="usedPlus_firstStartStall" v="Engine failed to start!" eh="cc82faeb" />
-        <e k="usedPlus_steeringLoose" v="Steering feels loose - hydraulics worn!" eh="75649517" />
-        <e k="usedPlus_steeringPull" v="Steering pulling to the %s!" eh="e743ac7b" />
+        <e k="usedPlus_speedDegraded" v="Motorn kämpar - maxhastighet reducerad till %d%%!" eh="af083aef" />
+        <e k="usedPlus_speedDegradedReminder" v="Fordonet kör långsamt - reparation rekommenderas" eh="95eb2457" />
+        <e k="usedPlus_speedGovernor" v="Motorn klarar inte denna hastighet!" eh="f9bd1f68" />
+        <e k="usedPlus_firstStartStall" v="Motorn startade inte!" eh="cc82faeb" />
+        <e k="usedPlus_steeringLoose" v="Styrningen känns lös - hydrauliken sliten!" eh="75649517" />
+        <e k="usedPlus_steeringPull" v="Styrningen drar åt %s!" eh="e743ac7b" />
         <e k="usedPlus_directionLeft" v="left" eh="811882fe" />
         <e k="usedPlus_directionRight" v="right" eh="7c4f2940" />
 
         <!--  Engine Malfunctions (v1.6.0) -->
-        <e k="usedPlus_engineMisfire" v="Engine misfiring!" eh="46773a4f" />
-        <e k="usedPlus_engineOverheating" v="Engine overheating! (%d%%)" eh="736c0a30" />
-        <e k="usedPlus_engineOverheated" v="ENGINE OVERHEATED! Let it cool down!" eh="48a6aa38" />
+        <e k="usedPlus_engineMisfire" v="Motorn misständer!" eh="46773a4f" />
+        <e k="usedPlus_engineOverheating" v="Motorn överhettas! (%d%%)" eh="736c0a30" />
+        <e k="usedPlus_engineOverheated" v="MOTORN ÖVERHETTAD! Låt den svalna!" eh="48a6aa38" />
 
         <!--  Implement Malfunctions (v1.6.0) -->
-        <e k="usedPlus_implementSurge" v="Hydraulic surge - implement raised!" eh="31786612" />
-        <e k="usedPlus_implementDrop" v="Hydraulic failure - implement dropped!" eh="9445c54d" />
-        <e k="usedPlus_ptoToggle" v="Electrical fault - PTO switched %s!" eh="0dce42ac" />
-        <e k="usedPlus_ptoOn" v="on" eh="ed2b5c01" />
-        <e k="usedPlus_ptoOff" v="off" eh="3262d48d" />
-        <e k="usedPlus_hitchFailure" v="HITCH FAILURE - Implement detached!" eh="16f9096e" />
+        <e k="usedPlus_implementSurge" v="Hydraulstöt - redskap höjdes!" eh="31786612" />
+        <e k="usedPlus_implementDrop" v="Hydraulikfel - redskap föll!" eh="9445c54d" />
+        <e k="usedPlus_ptoToggle" v="Elektriskt fel - PTO växlade %s!" eh="0dce42ac" />
+        <e k="usedPlus_ptoOn" v="på" eh="ed2b5c01" />
+        <e k="usedPlus_ptoOff" v="av" eh="3262d48d" />
+        <e k="usedPlus_hitchFailure" v="KOPPLINGSFEL - Redskap lossnat!" eh="16f9096e" />
 
         <!--  Hydraulic Drift Warnings (v1.4.0) -->
-        <e k="usedPlus_hydraulicWeak" v="Hydraulics weak (%d%%) - implements may drift!" eh="dc1e58d4" />
-        <e k="usedPlus_hydraulicDrifted" v="Implement lowered due to hydraulic failure" eh="5df727d2" />
+        <e k="usedPlus_hydraulicWeak" v="Svag hydraulik (%d%%) - redskap kan glida ner!" eh="dc1e58d4" />
+        <e k="usedPlus_hydraulicDrifted" v="Redskap sänktes på grund av hydraulikfel" eh="5df727d2" />
 
         <!--  Inspection System -->
         <e k="usedPlus_inspectButton" v="Inspect (%s)" eh="cd9aa28e" />
@@ -546,9 +546,9 @@
         <e k="usedPlus_maintenanceHistory" v="Maintenance History" eh="ad562d90" />
 
         <!--  Component Labels -->
-        <e k="usedPlus_engineReliability" v="Engine" eh="7bfa3072" />
-        <e k="usedPlus_hydraulicReliability" v="Hydraulics" eh="1de58ed3" />
-        <e k="usedPlus_electricalReliability" v="Electrical" eh="6f15be3d" />
+        <e k="usedPlus_engineReliability" v="Motor" eh="7bfa3072" />
+        <e k="usedPlus_hydraulicReliability" v="Hydraulik" eh="1de58ed3" />
+        <e k="usedPlus_electricalReliability" v="Elsystem" eh="6f15be3d" />
 
         <!--  Vehicle Info Display -->
         <e k="usedPlus_purchasedUsed" v="Purchased used" eh="0cf8d116" />
@@ -569,49 +569,49 @@
         <!-- ============================================== -->
 
         <!-- Error Notifications - Selection/Finding -->
-        <e k="usedplus_error_selectDealFirst" v="Select a finance deal first" eh="b675a0de" />
-        <e k="usedplus_error_noSearchInRow" v="No search in this row" eh="5cdf2cd9" />
-        <e k="usedplus_error_noSaleListingInRow" v="No sale listing in this row" eh="c671d622" />
-        <e k="usedplus_error_noDealInRow" v="No finance deal in this row" eh="875f8314" />
-        <e k="usedplus_error_farmNotFound" v="Error: Could not find farm" eh="a19f69e5" />
-        <e k="usedplus_error_noVehicleSelected" v="No vehicle selected" eh="6662b577" />
+        <e k="usedplus_error_selectDealFirst" v="Välj ett finansieringsavtal först" eh="b675a0de" />
+        <e k="usedplus_error_noSearchInRow" v="Ingen sökning i denna rad" eh="5cdf2cd9" />
+        <e k="usedplus_error_noSaleListingInRow" v="Ingen försäljningsannons i denna rad" eh="c671d622" />
+        <e k="usedplus_error_noDealInRow" v="Inget finansieringsavtal i denna rad" eh="875f8314" />
+        <e k="usedplus_error_farmNotFound" v="Fel: Kunde inte hitta gård" eh="a19f69e5" />
+        <e k="usedplus_error_noVehicleSelected" v="Inget fordon valt" eh="6662b577" />
 
         <!-- Error Notifications - State/Action Conflicts -->
-        <e k="usedplus_error_cannotCancelReady" v="Cannot cancel - this listing is ready for purchase" eh="f4d3a871" />
-        <e k="usedplus_error_searchNotActive" v="This search is no longer active" eh="071b3b9e" />
-        <e k="usedplus_error_noOfferPending" v="No pending offer on this listing" eh="d4e54566" />
-        <e k="usedplus_error_noOfferToDecline" v="No pending offer to decline" eh="e48082ad" />
-        <e k="usedplus_error_cannotCancelPendingOffer" v="Cannot cancel while offer is pending. Accept or decline first." eh="cdf73751" />
-        <e k="usedplus_error_cannotModifyPendingOffer" v="Cannot modify price while an offer is pending." eh="7fb9f02b" />
+        <e k="usedplus_error_cannotCancelReady" v="Kan inte avbryta - denna annons är klar för köp" eh="f4d3a871" />
+        <e k="usedplus_error_searchNotActive" v="Denna sökning är inte längre aktiv" eh="071b3b9e" />
+        <e k="usedplus_error_noOfferPending" v="Inget väntande erbjudande på denna annons" eh="d4e54566" />
+        <e k="usedplus_error_noOfferToDecline" v="Inget väntande erbjudande att avslå" eh="e48082ad" />
+        <e k="usedplus_error_cannotCancelPendingOffer" v="Kan inte avbryta medan erbjudande väntar. Acceptera eller avslå först." eh="cdf73751" />
+        <e k="usedplus_error_cannotModifyPendingOffer" v="Kan inte ändra pris medan ett erbjudande väntar." eh="7fb9f02b" />
 
         <!-- Error Notifications - Invalid Input -->
-        <e k="usedplus_error_invalidPrice" v="Invalid price. Please enter a positive number." eh="89f7cc3c" />
-        <e k="usedplus_error_invalidAmount" v="Invalid amount. Please enter a positive number." eh="9baf36ff" />
+        <e k="usedplus_error_invalidPrice" v="Ogiltigt pris. Ange ett positivt tal." eh="89f7cc3c" />
+        <e k="usedplus_error_invalidAmount" v="Ogiltigt belopp. Ange ett positivt tal." eh="9baf36ff" />
 
         <!-- Error Notifications - Insufficient Funds -->
-        <e k="usedplus_error_insufficientFundsPayment" v="Insufficient funds. Need %s for monthly payment." eh="cea3245c" />
-        <e k="usedplus_error_insufficientFundsPayoff" v="Insufficient funds for payoff" eh="ff08bf99" />
-        <e k="usedplus_error_insufficientFundsNeedHave" v="Insufficient funds. Need %s, have %s" eh="7005b33c" />
-        <e k="usedplus_error_insufficientFundsDownPayment" v="Insufficient funds for down payment! Need %s" eh="e1cfc60d" />
-        <e k="usedplus_error_insufficientFundsGeneric" v="Insufficient funds! Need %s" eh="d8249477" />
-        <e k="usedplus_error_insufficientFundsForPayment" v="Insufficient funds for payment" eh="bc4a233a" />
+        <e k="usedplus_error_insufficientFundsPayment" v="Otillräckliga medel. Behöver %s för månadsbetalning." eh="cea3245c" />
+        <e k="usedplus_error_insufficientFundsPayoff" v="Otillräckliga medel för avbetalning" eh="ff08bf99" />
+        <e k="usedplus_error_insufficientFundsNeedHave" v="Otillräckliga medel. Behöver %s, har %s" eh="7005b33c" />
+        <e k="usedplus_error_insufficientFundsDownPayment" v="Otillräckliga medel för handpenning! Behöver %s" eh="e1cfc60d" />
+        <e k="usedplus_error_insufficientFundsGeneric" v="Otillräckliga medel! Behöver %s" eh="d8249477" />
+        <e k="usedplus_error_insufficientFundsForPayment" v="Otillräckliga medel för betalning" eh="bc4a233a" />
 
         <!-- Error Notifications - No Items/Options -->
-        <e k="usedplus_error_noPaymentOptions" v="No payment options available" eh="5cf01d98" />
-        <e k="usedplus_error_noActiveDeals" v="No active finance deals to make payments on" eh="19c25246" />
-        <e k="usedplus_error_noDealsToPayAll" v="No active finance deals to pay" eh="a8217dc4" />
-        <e k="usedplus_error_noPaymentsDue" v="No payments due this period" eh="9da7e0ff" />
+        <e k="usedplus_error_noPaymentOptions" v="Inga betalningsalternativ tillgängliga" eh="5cf01d98" />
+        <e k="usedplus_error_noActiveDeals" v="Inga aktiva finansieringsavtal att betala på" eh="19c25246" />
+        <e k="usedplus_error_noDealsToPayAll" v="Inga aktiva finansieringsavtal att betala" eh="a8217dc4" />
+        <e k="usedplus_error_noPaymentsDue" v="Inga betalningar förfaller denna period" eh="9da7e0ff" />
 
         <!-- Error Notifications - Operation Failures -->
-        <e k="usedplus_error_payoffFailed" v="Payoff failed" eh="ab252955" />
-        <e k="usedplus_error_paymentFailed" v="Payment failed" eh="1305a2b0" />
-        <e k="usedplus_error_eventNotAvailable" v="Error: %s not available" eh="9c93ae19" />
+        <e k="usedplus_error_payoffFailed" v="Avbetalning misslyckades" eh="ab252955" />
+        <e k="usedplus_error_paymentFailed" v="Betalning misslyckades" eh="1305a2b0" />
+        <e k="usedplus_error_eventNotAvailable" v="Fel: %s inte tillgänglig" eh="9c93ae19" />
 
         <!-- Error Notifications - Credit Score Requirements -->
-        <e k="usedplus_error_creditTooLow" v="Credit Score Too Low" eh="660fbd90" />
-        <e k="usedplus_error_creditTooLowDetail" v="Your credit score (%d) is below the minimum (%d) required for %s." eh="210df978" />
-        <e k="usedplus_error_creditTip" v="Tip: Make on-time payments on existing loans to build credit." eh="3346706d" />
-        <e k="usedplus_error_creditShortfall" v="Shortfall: %d points" eh="a19b5472" />
+        <e k="usedplus_error_creditTooLow" v="Kreditvärdighet för låg" eh="660fbd90" />
+        <e k="usedplus_error_creditTooLowDetail" v="Din kreditvärdighet (%d) är under miniminivån (%d) som krävs för %s." eh="210df978" />
+        <e k="usedplus_error_creditTip" v="Tips: Betala lån i tid för att bygga kredit." eh="3346706d" />
+        <e k="usedplus_error_creditShortfall" v="Underskott: %d poäng" eh="a19b5472" />
         <e k="usedplus_finance_repairFinancing" v="repair financing" eh="4f72a7b2" />
         <e k="usedplus_finance_vehicleFinancing" v="vehicle financing" eh="7b2b15aa" />
         <e k="usedplus_finance_vehicleLeasing" v="vehicle leasing" eh="524b6d9b" />
@@ -623,6 +623,7 @@
         <e k="usedplus_credit_tooLowForLeasing" v="Credit score too low for leasing. Your score: %d (need %d+). Leasing requires better credit than financing." eh="50b91953" />
         <e k="usedplus_credit_tooLowForLand" v="Credit score too low (%d). Need %d+ to finance land." eh="78d73204" />
         <e k="usedplus_credit_tooLowForRepair" v="Credit score too low (%d). Need %d+ to finance repairs." eh="70147f73" />
+        <e k="usedplus_credit_tooLowForPlaceable" v="Byggnadsfinansiering kräver utmärkt kredit (%d+).\nDin kredit: %d (%s)" eh="0fb63457" />
         <e k="usedplus_credit_needScore" v="Credit: %d (need %d)" eh="82790b98" />
 
         <!-- Minimum Financing Amount Messages -->
@@ -633,69 +634,72 @@
 
         <!-- v2.8.0: Multiplayer Transaction Response Messages -->
         <!-- Error responses for server→client feedback in multiplayer -->
-        <e k="usedplus_mp_error_unauthorized" v="Action not authorized for your farm" eh="343a024c" />
-        <e k="usedplus_mp_error_disabled" v="This feature is disabled in settings" eh="d3f06efd" />
-        <e k="usedplus_mp_error_manager" v="System not initialized. Try again." eh="53daf785" />
-        <e k="usedplus_mp_error_invalid_params" v="Invalid parameters" eh="a79fae6b" />
-        <e k="usedplus_mp_error_insufficient_funds" v="Insufficient funds" eh="55f90c96" />
-        <e k="usedplus_mp_error_failed" v="Transaction failed" eh="3f864e37" />
-        <e k="usedplus_mp_error_farm_not_found" v="Farm not found" eh="a13cd50e" />
-        <e k="usedplus_mp_error_deal_not_found" v="Deal not found" eh="f85a8ec8" />
-        <e k="usedplus_mp_error_land_not_found" v="Land not found" eh="db02fd36" />
-        <e k="usedplus_mp_error_land_owned" v="This land is already owned" eh="7175cfeb" />
-        <e k="usedplus_mp_error_already_leased" v="You already have a lease on this land" eh="25394947" />
-        <e k="usedplus_mp_error_invalid_deal_type" v="Invalid deal type" eh="e9926aa4" />
-        <e k="usedplus_mp_error_deal_not_active" v="Deal is not active" eh="4f8a3c97" />
-        <e k="usedplus_mp_error_repair_failed" v="Repair failed" eh="e25882fc" />
-        <e k="usedplus_mp_error_search_failed" v="Search failed" eh="a4d17776" />
+        <e k="usedplus_mp_error_unauthorized" v="Åtgärd ej auktoriserad för din gård" eh="343a024c" />
+        <e k="usedplus_mp_error_disabled" v="Denna funktion är inaktiverad i inställningarna" eh="d3f06efd" />
+        <e k="usedplus_mp_error_manager" v="System ej initialiserat. Försök igen." eh="53daf785" />
+        <e k="usedplus_mp_error_invalid_params" v="Ogiltiga parametrar" eh="a79fae6b" />
+        <e k="usedplus_mp_error_insufficient_funds" v="Otillräckliga medel" eh="55f90c96" />
+        <e k="usedplus_mp_error_failed" v="Transaktion misslyckades" eh="3f864e37" />
+        <e k="usedplus_mp_error_farm_not_found" v="Gård ej funnen" eh="a13cd50e" />
+        <e k="usedplus_mp_error_deal_not_found" v="Avtal ej funnet" eh="f85a8ec8" />
+        <e k="usedplus_mp_error_land_not_found" v="Mark ej funnen" eh="db02fd36" />
+        <e k="usedplus_mp_error_land_owned" v="Denna mark ägs redan" eh="7175cfeb" />
+        <e k="usedplus_mp_error_already_leased" v="Du har redan ett leasingavtal på denna mark" eh="25394947" />
+        <e k="usedplus_mp_error_invalid_deal_type" v="Ogiltig avtalstyp" eh="e9926aa4" />
+        <e k="usedplus_mp_error_deal_not_active" v="Avtalet är inte aktivt" eh="4f8a3c97" />
+        <e k="usedplus_mp_error_repair_failed" v="Reparation misslyckades" eh="e25882fc" />
+        <e k="usedplus_mp_error_search_failed" v="Sökning misslyckades" eh="a4d17776" />
 
         <!-- Success responses for server→client feedback in multiplayer -->
-        <e k="usedplus_mp_success_financed" v="Vehicle financed successfully!" eh="e0a11202" />
-        <e k="usedplus_mp_success_leased" v="Vehicle leased successfully!" eh="f73065ee" />
-        <e k="usedplus_mp_success_loan" v="Loan approved!" eh="96d2eb36" />
-        <e k="usedplus_mp_success_payment" v="Payment processed!" eh="fffcd9ab" />
-        <e k="usedplus_mp_success_land_leased" v="Land leased successfully!" eh="4815779c" />
-        <e k="usedplus_mp_success_land_buyout" v="Land purchased successfully!" eh="9de4a0f4" />
-        <e k="usedplus_mp_success_listed" v="Vehicle listed for sale!" eh="1178dfe3" />
-        <e k="usedplus_mp_success_sale_action" v="Sale action completed!" eh="f4473f61" />
-        <e k="usedplus_mp_success_price_modified" v="Price updated!" eh="3778ab16" />
-        <e k="usedplus_mp_success_repair" v="Repair completed!" eh="9e6d62a2" />
-        <e k="usedplus_mp_success_search_started" v="Search started!" eh="f10690d3" />
-        <e k="usedplus_mp_success_lease_ended" v="Lease ended successfully!" eh="71efe46d" />
-        <e k="usedplus_mp_success_lease_terminated" v="Lease terminated!" eh="2ac6c824" />
-        <e k="usedplus_mp_success_lease_renewed" v="Lease renewed!" eh="30c5a4dd" />
-        <e k="usedplus_mp_success_lease_buyout" v="Lease buyout complete!" eh="b76c5d41" />
+        <e k="usedplus_mp_success_financed" v="Fordon finansierat!" eh="e0a11202" />
+        <e k="usedplus_mp_success_leased" v="Fordon leasat!" eh="f73065ee" />
+        <e k="usedplus_mp_success_loan" v="Lån godkänt!" eh="96d2eb36" />
+        <e k="usedplus_mp_success_payment" v="Betalning behandlad!" eh="fffcd9ab" />
+        <e k="usedplus_mp_success_land_leased" v="Mark leasad!" eh="4815779c" />
+        <e k="usedplus_mp_success_land_buyout" v="Mark köpt!" eh="9de4a0f4" />
+        <e k="usedplus_mp_success_listed" v="Fordon annonserat!" eh="1178dfe3" />
+        <e k="usedplus_mp_success_sale_action" v="Försäljningsåtgärd slutförd!" eh="f4473f61" />
+        <e k="usedplus_mp_success_price_modified" v="Pris uppdaterat!" eh="3778ab16" />
+        <e k="usedplus_mp_success_repair" v="Reparation slutförd!" eh="9e6d62a2" />
+        <e k="usedplus_mp_success_search_started" v="Sökning startad!" eh="f10690d3" />
+        <e k="usedplus_mp_success_lease_ended" v="Leasing avslutad!" eh="71efe46d" />
+        <e k="usedplus_mp_success_lease_terminated" v="Leasing uppsagd!" eh="2ac6c824" />
+        <e k="usedplus_mp_success_lease_renewed" v="Leasing förnyad!" eh="30c5a4dd" />
+        <e k="usedplus_mp_success_lease_buyout" v="Leasingutköp slutfört!" eh="b76c5d41" />
 
         <!-- Mode Selector Options -->
         <e k="usedplus_mode_cash" v="Buy with Cash" eh="01dc9cc3" />
         <e k="usedplus_mode_finance" v="Finance" eh="c482980d" />
         <e k="usedplus_mode_lease" v="Lease" eh="47c96b08" />
+        <e k="usedplus_placeable_cannotLease" v="Byggnader kan inte leasas. Använd Kontant eller Finansiering." eh="e4fd7eed" />
         <e k="usedplus_mode_financeCredit" v="Finance (Credit: %d+)" eh="0b6c80e3" />
         <e k="usedplus_mode_leaseCredit" v="Lease (Credit: %d+)" eh="439bd2b6" />
 
         <!-- Success Notifications - Sales -->
-        <e k="usedplus_notify_vehicleSold" v="Sold %s for %s!" eh="159b99b9" />
-        <e k="usedplus_notify_offerDeclined" v="Offer declined - agent will continue searching" eh="957ec943" />
-        <e k="usedplus_notify_listingCancelled" v="Sale listing for %s cancelled" eh="77f331c5" />
+        <e k="usedplus_notify_vehicleSold" v="Sålde %s för %s!" eh="159b99b9" />
+        <e k="usedplus_notify_offerDeclined" v="Erbjudandet avslaget - agenten fortsätter söka" eh="957ec943" />
+        <e k="usedplus_notify_listingCancelled" v="Försäljningsannons för %s avbruten" eh="77f331c5" />
 
         <!-- Success Notifications - Purchases -->
-        <e k="usedplus_notify_vehiclePurchased" v="Purchased %s for %s" eh="ee85175a" />
-        <e k="usedplus_notify_vehiclePurchasedShop" v="Purchased %s - Visit shop to collect vehicle" eh="3359716e" />
-        <e k="usedplus_notify_vehicleFinanced" v="Financed %s - %s due today" eh="874037b7" />
-        <e k="usedplus_notify_vehicleFinancedShop" v="Financed %s - Visit shop to collect vehicle" eh="815fb77d" />
-        <e k="usedplus_notify_landPurchased" v="Purchased %s for %s" eh="ee85175a" />
-        <e k="usedplus_notify_landFinanced" v="Financed %s - %s due today" eh="874037b7" />
-        <e k="usedplus_notify_vehicleNowYours" v="Congratulations! %s is now yours!" eh="f9f453e9" />
+        <e k="usedplus_notify_vehiclePurchased" v="Köpte %s för %s" eh="ee85175a" />
+        <e k="usedplus_notify_vehiclePurchasedShop" v="Köpte %s - Besök butiken för att hämta fordonet" eh="3359716e" />
+        <e k="usedplus_notify_vehicleFinanced" v="Finansierade %s - %s förfaller idag" eh="874037b7" />
+        <e k="usedplus_notify_vehicleFinancedShop" v="Finansierade %s - Besök butiken för att hämta fordonet" eh="815fb77d" />
+        <e k="usedplus_notify_landPurchased" v="Köpte %s för %s" eh="ee85175a" />
+        <e k="usedplus_notify_landFinanced" v="Finansierade %s - %s förfaller idag" eh="874037b7" />
+        <e k="usedplus_notify_vehicleNowYours" v="Grattis! %s är nu ditt!" eh="f9f453e9" />
+        <e k="usedplus_notify_placeableFinanced" v="Byggnad finansierad!\n%s\nHandpenning: %s | Månadsvis: %s i %d år" eh="72ebd0e0" />
+        <e k="usedplus_notify_placeableSoldPayoff" v="Byggnad såld. Låneåterbetalning: %s" eh="78ac7164" />
 
         <!-- Success Notifications - Payments/Loans -->
-        <e k="usedplus_notify_loanPaidOff" v="Loan paid off! Total: %s" eh="0ba73cba" />
-        <e k="usedplus_notify_paymentProcessed" v="Payment of %s processed!" eh="fc4c5db3" />
-        <e k="usedplus_notify_paidDealsTotal" v="Paid %d deals! Total: %s" eh="14743f8a" />
-        <e k="usedplus_notify_paidDealsSomeFailed" v="Paid %d deals, %d failed" eh="203dd11e" />
-        <e k="usedplus_notify_paymentConfigSaved" v="Payment configuration saved!" eh="c0ea9507" />
+        <e k="usedplus_notify_loanPaidOff" v="Lån avbetalat! Totalt: %s" eh="0ba73cba" />
+        <e k="usedplus_notify_paymentProcessed" v="Betalning på %s behandlad!" eh="fc4c5db3" />
+        <e k="usedplus_notify_paidDealsTotal" v="Betalade %d avtal! Totalt: %s" eh="14743f8a" />
+        <e k="usedplus_notify_paidDealsSomeFailed" v="Betalade %d avtal, %d misslyckades" eh="203dd11e" />
+        <e k="usedplus_notify_paymentConfigSaved" v="Betalningskonfiguration sparad!" eh="c0ea9507" />
 
         <!-- Success Notifications - Leases -->
-        <e k="usedplus_notify_landLeaseTerminated" v="Land lease for %s has been terminated" eh="f2414acd" />
+        <e k="usedplus_notify_landLeaseTerminated" v="Markleasing för %s har avslutats" eh="f2414acd" />
 
         <!-- ============================================== -->
         <!-- PHASE 1: UI Labels (setText hardcoded strings) -->
@@ -735,7 +739,7 @@
         <e k="usedplus_inspection_notReady" v="Inspection not yet complete!" eh="cca0fa21" />
         <e k="usedplus_inspection_notDone" v="Vehicle has not been inspected!" eh="58a6a5a1" />
         <e k="usedplus_inspection_failed" v="Inspection failed: %s" eh="13d9eb55" />
-        <e k="usedplus_inspectionTitle" v="Vehicle Inspection" eh="7276b8fd" />
+        <e k="usedplus_inspectionTitle" v="Fordonsinspektion" eh="7276b8fd" />
         <e k="usedplus_confirmInspection" v="Request %s inspection for %s?\n\nReady in ~%d hours." eh="20a936ac" />
         <e k="usedplus_selectInspectionTier" v="Select Inspection Type:" eh="d920b2ce" />
 
@@ -745,9 +749,9 @@
         <e k="usedplus_tier_comprehensive_desc" v="Full details + DNA hint + repair estimate" eh="a80be59a" />
 
         <!-- Maintenance Report Dialog -->
-        <e k="usedplus_common_yes" v="Yes" eh="93cba074" />
-        <e k="usedplus_common_no" v="No" eh="bafd7322" />
-        <e k="usedplus_common_na" v="N/A" eh="382b0f51" />
+        <e k="usedplus_common_yes" v="Ja" eh="93cba074" />
+        <e k="usedplus_common_no" v="Nej" eh="bafd7322" />
+        <e k="usedplus_common_na" v="–" eh="382b0f51" />
         <e k="usedplus_maintenance_purchasedUsed" v="Purchased Used" eh="9b4614d5" />
         <e k="usedplus_maintenance_purchasedNew" v="Purchased New" eh="675dda81" />
         <e k="usedplus_maintenance_excellentCondition" v="This vehicle is in excellent condition with no maintenance concerns." eh="3b88ba3a" />
@@ -762,7 +766,7 @@
         <e k="usedplus_repairfinance_title_repair" v="Finance Repair" eh="70ef80a4" />
 
         <!-- Used Vehicle Preview Dialog -->
-        <e k="usedplus_preview_title" v="Used Vehicle Found" eh="ac794919" />
+        <e k="usedplus_preview_title" v="Begagnat fordon hittat" eh="ac794919" />
         <e k="usedplus_preview_viewReport" v="View Report" eh="7cd1ac84" />
 
         <!-- Finance Manager Frame -->
@@ -782,6 +786,7 @@
         <e k="usedplus_preview_inspectionProgress" v="%s inspection in progress... ~%d hrs remaining" eh="911dfff0" />
         <e k="usedplus_preview_requestInspection" v="Request Inspection" eh="e555e8b2" />
         <e k="usedplus_preview_inProgress" v="In Progress..." eh="bd62582e" />
+        <e k="usedplus_preview_implementNoInspection" v="[EN] Inspections not available for non-powered implements. Buy as-is only." eh="620e727f" />
 
         <!-- ============================================== -->
         <!-- PHASE 1c: Land Purchase Dialog Notifications   -->
@@ -816,12 +821,12 @@
         <e k="usedplus_land_noDepositRequired" v="no deposit required" eh="467a3088" />
 
         <!-- Land Purchase - Error Notifications -->
-        <e k="usedplus_error_insufficientFundsLand" v="Insufficient funds! Need %s more. Try financing or leasing." eh="d993d097" />
-        <e k="usedplus_error_insufficientFundsDeposit" v="Insufficient funds for security deposit! Need %s more." eh="ad97e0d8" />
-        <e k="usedplus_error_couldNotCompletePurchase" v="Error: Could not complete purchase" eh="a0fca4fc" />
+        <e k="usedplus_error_insufficientFundsLand" v="Otillräckliga medel! Behöver %s mer. Prova finansiering eller leasing." eh="d993d097" />
+        <e k="usedplus_error_insufficientFundsDeposit" v="Otillräckliga medel för deposition! Behöver %s mer." eh="ad97e0d8" />
+        <e k="usedplus_error_couldNotCompletePurchase" v="Fel: Kunde inte slutföra köp" eh="a0fca4fc" />
 
         <!-- Land Purchase - Success Notifications -->
-        <e k="usedplus_notify_landLeased" v="Leased %s! %s/month, %s" eh="71a876f7" />
+        <e k="usedplus_notify_landLeased" v="Leasade %s! %s/månad, %s" eh="71a876f7" />
 
         <!-- Loan System Notifications -->
         <e k="usedplus_loan_useFinancialDashboard" v="Use Financial Dashboard (ESC Menu) to take credit-based loans" eh="1175c14f" />
@@ -832,19 +837,19 @@
         <!-- ============================================== -->
 
         <!-- Common Button Labels -->
-        <e k="usedplus_button_purchase" v="Purchase" eh="76b6a47a" />
-        <e k="usedplus_button_buyNow" v="Buy Now" eh="c1f52fba" />
-        <e k="usedplus_button_decline" v="Decline" eh="0d362728" />
-        <e k="usedplus_button_goBack" v="Go Back" eh="4f2f5e1d" />
-        <e k="usedplus_button_close" v="Close" eh="d3d2e617" />
-        <e k="usedplus_button_confirm" v="Confirm" eh="70d9be9b" />
-        <e k="usedplus_button_cancel" v="Cancel" eh="ea478870" />
-        <e k="usedplus_button_later" v="Later" eh="61057a0c" />
-        <e k="usedplus_button_takeLoan" v="Take Loan" eh="40fe67fa" />
-        <e k="usedplus_button_payOff" v="Pay Off" eh="416ff954" />
+        <e k="usedplus_button_purchase" v="Köp" eh="76b6a47a" />
+        <e k="usedplus_button_buyNow" v="Köp nu" eh="c1f52fba" />
+        <e k="usedplus_button_decline" v="Avslå" eh="0d362728" />
+        <e k="usedplus_button_goBack" v="Gå tillbaka" eh="4f2f5e1d" />
+        <e k="usedplus_button_close" v="Stäng" eh="d3d2e617" />
+        <e k="usedplus_button_confirm" v="Bekräfta" eh="70d9be9b" />
+        <e k="usedplus_button_cancel" v="Avbryt" eh="ea478870" />
+        <e k="usedplus_button_later" v="Senare" eh="61057a0c" />
+        <e k="usedplus_button_takeLoan" v="Ta lån" eh="40fe67fa" />
+        <e k="usedplus_button_payOff" v="Betala av" eh="416ff954" />
 
         <!-- Inspection Report Dialog -->
-        <e k="usedplus_irp_title" v="INSPECTION REPORT" eh="fca75392" />
+        <e k="usedplus_irp_title" v="INSPEKTIONSRAPPORT" eh="fca75392" />
         <e k="usedplus_irp_sectionVehicle" v="VEHICLE" eh="e9fa318f" />
         <e k="usedplus_irp_sectionMechanical" v="MECHANICAL ASSESSMENT" eh="9437e788" />
         <e k="usedplus_irp_sectionNotes" v="INSPECTOR NOTES" eh="24c3a1cc" />
@@ -874,7 +879,7 @@
         <e k="usedplus_irp_worstTire" v="Worst:" eh="4ca3e96d" />
 
         <!-- Maintenance Report Dialog -->
-        <e k="usedplus_mrp_title" v="MAINTENANCE REPORT" eh="a2ca3391" />
+        <e k="usedplus_mrp_title" v="UNDERHÅLLSRAPPORT" eh="a2ca3391" />
         <e k="usedplus_mrp_sectionReliability" v="RELIABILITY RATINGS" eh="87b5f6c4" />
         <e k="usedplus_mrp_sectionHistory" v="MAINTENANCE HISTORY" eh="2ec3182d" />
         <e k="usedplus_mrp_sectionNotes" v="STATUS NOTES" eh="078385a2" />
@@ -917,7 +922,7 @@
         <e k="usedplus_mrp_hours" v="Operating Hours" eh="f6eeda8b" />
 
         <!-- Deal Details Dialog -->
-        <e k="usedplus_dd_title" v="DEAL DETAILS" eh="d711da33" />
+        <e k="usedplus_dd_title" v="AVTALSDETALJER" eh="d711da33" />
         <e k="usedplus_dd_sectionItem" v="ITEM INFORMATION" eh="344a6d4f" />
         <e k="usedplus_dd_sectionTerms" v="FINANCIAL TERMS" eh="cfadb041" />
         <e k="usedplus_dd_sectionProgress" v="PAYMENT PROGRESS" eh="f338b0ad" />
@@ -951,11 +956,11 @@
         <e k="usedplus_dd_payoffInfo" v="Early payoff saves you interest!" eh="3e87cef1" />
         <e k="usedplus_dd_repossessedInfo" v="The following items were repossessed due to missed payments:" eh="b9f50218" />
         <e k="usedplus_dd_repossessedTotal" v="Total value repossessed:" eh="a6274dce" />
-        <e k="usedplus_button_viewHistory" v="View History" eh="db9c40b5" />
-        <e k="usedplus_button_earlyPayoff" v="Early Payoff" eh="4ccf6612" />
+        <e k="usedplus_button_viewHistory" v="Visa historik" eh="db9c40b5" />
+        <e k="usedplus_button_earlyPayoff" v="Tidig avbetalning" eh="4ccf6612" />
 
         <!-- Take Loan Dialog -->
-        <e k="usedplus_tl_title" v="TAKE OUT A LOAN" eh="2d3208d6" />
+        <e k="usedplus_tl_title" v="TA ETT LÅN" eh="2d3208d6" />
         <e k="usedplus_tl_sectionCredit" v="YOUR CREDIT" eh="87d51ea4" />
         <e k="usedplus_tl_score" v="Score:" eh="343bc2b9" />
         <e k="usedplus_tl_yourRate" v="Your Interest Rate:" eh="6387ae1b" />
@@ -975,10 +980,10 @@
         <e k="usedplus_tl_interest" v="Interest:" eh="25df650a" />
         <e k="usedplus_tl_yearly" v="Yearly:" eh="49192394" />
         <e k="usedplus_tl_info" v="Loan funds deposited immediately. Payments auto-deducted monthly." eh="91080370" />
-        <e k="usedplus_button_acceptLoan" v="Accept Loan" eh="ad5f835e" />
+        <e k="usedplus_button_acceptLoan" v="Acceptera lån" eh="ad5f835e" />
 
         <!-- Loan Approved Dialog -->
-        <e k="usedplus_la_title" v="LOAN APPROVED" eh="93e4efbe" />
+        <e k="usedplus_la_title" v="LÅN GODKÄNT" eh="93e4efbe" />
         <e k="usedplus_la_amountDeposited" v="Amount Deposited" eh="682d6e59" />
         <e k="usedplus_la_sectionTerms" v="LOAN TERMS" eh="08b4cdd6" />
         <e k="usedplus_la_term" v="Term:" eh="3980a548" />
@@ -993,7 +998,7 @@
         <e k="usedplus_la_info" v="Payments auto-deducted monthly. On-time payments improve credit!" eh="78d04eb6" />
 
         <!-- Repossession Dialog -->
-        <e k="usedplus_rp_title" v="REPOSSESSION NOTICE" eh="0654d371" />
+        <e k="usedplus_rp_title" v="ÅTERTAGANDEMEDDELANDE" eh="0654d371" />
         <e k="usedplus_rp_sectionTaken" v="ASSET REPOSSESSED" eh="30ef7a0c" />
         <e k="usedplus_rp_value" v="Value:" eh="acdb802b" />
         <e k="usedplus_rp_sectionReason" v="DEFAULT DETAILS" eh="e361d8c2" />
@@ -1004,7 +1009,8 @@
         <e k="usedplus_rp_footer" v="Make timely payments to avoid future repossessions." eh="000e26a4" />
 
         <!-- Unified Purchase Dialog -->
-        <e k="usedplus_up_title" v="Purchase Vehicle" eh="f5dc36d9" />
+        <e k="usedplus_up_title" v="Köp fordon" eh="f5dc36d9" />
+        <e k="usedplus_up_title_placeable" v="Köp byggnad" eh="6fd17a3d" />
         <e k="usedplus_up_sectionVehicle" v="VEHICLE" eh="e9fa318f" />
         <e k="usedplus_up_sectionMethod" v="PURCHASE METHOD" eh="f5f3c261" />
         <e k="usedplus_up_methodHelp" v="Choose how you want to pay: cash upfront, finance over time, or lease with lower payments." eh="83636102" />
@@ -1071,7 +1077,7 @@
         <e k="usedplus_us_infoText" v="Higher tiers cost more but have better success rates and find higher quality matches." eh="5d292c52" />
 
         <!-- Used Vehicle Preview Dialog -->
-        <e k="usedplus_uvp_title" v="Used Vehicle Found" eh="ac794919" />
+        <e k="usedplus_uvp_title" v="Begagnat fordon hittat" eh="ac794919" />
         <e k="usedplus_uvp_sectionVehicle" v="VEHICLE INFORMATION" eh="47b7b38d" />
         <e k="usedplus_uvp_askingPrice" v="Asking Price:" eh="c515d94e" />
         <e k="usedplus_uvp_sectionCondition" v="VISIBLE CONDITION" eh="0eb0492b" />
@@ -1083,8 +1089,8 @@
         <e k="usedplus_uvp_selectTier" v="Select inspection level:" eh="c3d4dde6" />
         <e k="usedplus_uvp_inspectPrompt" v="Pay for professional inspection" eh="2c3e76c2" />
         <e k="usedplus_uvp_inspectedText" v="Vehicle has been inspected - view report" eh="9015cd17" />
-        <e k="usedplus_button_buyAsIs" v="Buy As-Is" eh="43e49e70" />
-        <e k="usedplus_button_inspect" v="Inspect" eh="35a9dbe6" />
+        <e k="usedplus_button_buyAsIs" v="Köp som den är" eh="43e49e70" />
+        <e k="usedplus_button_inspect" v="Inspektera" eh="35a9dbe6" />
         <e k="usedplus_button_tires" v="Tires" eh="3fe2c06a" />
         <e k="usedplus_button_fluids" v="Fluids" eh="c599fed9" />
 
@@ -1145,7 +1151,7 @@
         <e k="usedplus_sli_infoTextSub" v="You'll receive offers to accept or decline as buyers are found." eh="f88e1b82" />
 
         <!-- Sale Offer Notifications -->
-        <e k="usedplus_notify_saleOffer" v="Buyer found for %s! Offering %s" eh="3389313f" />
+        <e k="usedplus_notify_saleOffer" v="Köpare hittad för %s! Erbjuder %s" eh="3389313f" />
 
         <!-- Sale Offer Dialog (REDESIGNED v1.9.6) -->
         <e k="usedplus_so_title_v2" v="BUYER FOUND!" eh="fd3a815d" />
@@ -1163,10 +1169,10 @@
         <!-- Deal quality ratings (set dynamically in Lua) -->
         <!-- Legacy keys kept for compatibility -->
         <e k="usedplus_so_title" v="SALE OFFER RECEIVED!" eh="1596a2b0" />
-        <e k="usedplus_button_acceptOffer" v="Accept Offer" eh="93a5776a" />
+        <e k="usedplus_button_acceptOffer" v="Acceptera erbjudande" eh="93a5776a" />
 
         <!-- Payment Config Dialog -->
-        <e k="usedplus_pc_title" v="Configure Loan Payments" eh="07beb52e" />
+        <e k="usedplus_pc_title" v="BETALNINGSKONFIGURATION" eh="07beb52e" />
         <e k="usedplus_pc_headerLoan" v="Loan" eh="9ad81a8f" />
         <e k="usedplus_pc_headerBalance" v="Balance" eh="99a808d8" />
         <e k="usedplus_pc_headerMode" v="Mode" eh="650be618" />
@@ -1216,7 +1222,7 @@
         <e k="usedplus_conf_title" v="Confirmation" eh="f4d1ea47" />
 
         <!-- Credit Report Dialog -->
-        <e k="usedplus_cr_title" v="CREDIT REPORT" eh="3725e302" />
+        <e k="usedplus_cr_title" v="KREDITRAPPORT" eh="3725e302" />
         <e k="usedplus_cr_reportDate" v="Report Date:" eh="93ad31a7" />
         <e k="usedplus_cr_sectionScore" v="CREDIT SCORE" eh="4f3b169e" />
         <e k="usedplus_cr_scoreRange" v="Score Range: 300-850" eh="3d50ef3a" />
@@ -1300,7 +1306,7 @@
         <e k="usedplus_sld_infoText" v="Higher agent tiers have wider reach but longer wait times." eh="c6eb9c87" />
 
         <!-- Payment History Dialog -->
-        <e k="usedplus_ph_title" v="PAYMENT HISTORY" eh="56a90765" />
+        <e k="usedplus_ph_title" v="BETALNINGSHISTORIK" eh="56a90765" />
         <e k="usedplus_ph_sectionSummary" v="DEAL SUMMARY" eh="395f5e84" />
         <e k="usedplus_ph_item" v="Item:" eh="93125227" />
         <e k="usedplus_ph_original" v="Original:" eh="fd5835ce" />
@@ -1428,7 +1434,7 @@
         <e k="usedplus_fd_quickPayOff" v="Pay Off" eh="416ff954" />
 
         <!-- Repair Finance Dialog -->
-        <e k="usedplus_rf_title" v="Finance Repair" eh="70ef80a4" />
+        <e k="usedplus_rf_title" v="FINANSIERA REPARATION" eh="70ef80a4" />
         <e k="usedplus_rf_sectionService" v="SERVICE DETAILS" eh="22efc112" />
         <e k="usedplus_rf_repairCost" v="Repair Cost:" eh="33553cf9" />
         <e k="usedplus_rf_repaintCost" v="Repaint Cost:" eh="78155645" />
@@ -1542,45 +1548,45 @@
         <e k="usedplus_searchExpired_insufficientFunds" v="Insufficient funds to renew search." eh="ffe2599c" />
 
         <!-- v1.7.0: Tire System Warnings -->
-        <e k="usedplus_warning_tireWorn" v="Warning: Tires are getting worn. Consider replacement soon." eh="b2f94e8c" />
-        <e k="usedplus_warning_tireCritical" v="CRITICAL: Tires are critically worn! Replace immediately to avoid flat tire." eh="773fe608" />
-        <e k="usedplus_warning_flatTire" v="FLAT TIRE! Vehicle handling severely impaired. Tire replacement required." eh="d5759919" />
-        <e k="usedplus_warning_lowTraction" v="Warning: Low traction due to worn tires. Reduce speed in poor conditions." eh="07b59ae5" />
+        <e k="usedplus_warning_tireWorn" v="Varning: Däcken börjar bli slitna. Överväg byte snart." eh="b2f94e8c" />
+        <e k="usedplus_warning_tireCritical" v="KRITISKT: Däcken är kritiskt slitna! Byt omedelbart för att undvika punktering." eh="773fe608" />
+        <e k="usedplus_warning_flatTire" v="PUNKTERING! Fordonets hantering allvarligt försämrad. Däckbyte krävs." eh="d5759919" />
+        <e k="usedplus_warning_lowTraction" v="Varning: Lågt grepp på grund av slitna däck. Minska hastigheten i dåliga förhållanden." eh="07b59ae5" />
 
         <!-- v1.7.0: Oil System Warnings -->
-        <e k="usedplus_warning_oilLow" v="Warning: Oil level is low. Service required soon." eh="035f4e6b" />
-        <e k="usedplus_warning_oilCritical" v="CRITICAL: Oil level dangerously low! Engine damage occurring." eh="e2d09647" />
-        <e k="usedplus_warning_oilLeak" v="Warning: Oil leak detected. Fluid loss accelerating." eh="da087d3f" />
-        <e k="usedplus_warning_engineDamage" v="ENGINE DAMAGE: Permanent reliability loss due to running low on oil!" eh="6b323cd8" />
+        <e k="usedplus_warning_oilLow" v="Varning: Oljenivån är låg. Service krävs snart." eh="035f4e6b" />
+        <e k="usedplus_warning_oilCritical" v="KRITISKT: Oljenivån farligt låg! Motorskador uppstår." eh="e2d09647" />
+        <e k="usedplus_warning_oilLeak" v="Varning: Oljeläckage upptäckt. Vätskeförlust accelererar." eh="da087d3f" />
+        <e k="usedplus_warning_engineDamage" v="MOTORSKADA: Permanent tillförlitlighetsförlust på grund av låg oljenivå!" eh="6b323cd8" />
 
         <!-- v1.7.0: Hydraulic Fluid System Warnings -->
-        <e k="usedplus_warning_hydraulicLow" v="Warning: Hydraulic fluid is low. Service required soon." eh="527899fc" />
-        <e k="usedplus_warning_hydraulicCritical" v="CRITICAL: Hydraulic fluid dangerously low! System damage occurring." eh="fe31b6f1" />
-        <e k="usedplus_warning_hydraulicLeak" v="Warning: Hydraulic leak detected. Fluid loss accelerating." eh="36b8f377" />
-        <e k="usedplus_warning_hydraulicDamage" v="HYDRAULIC DAMAGE: Permanent reliability loss due to running low on fluid!" eh="843ae10a" />
+        <e k="usedplus_warning_hydraulicLow" v="Varning: Hydraulvätskan är låg. Service krävs snart." eh="527899fc" />
+        <e k="usedplus_warning_hydraulicCritical" v="KRITISKT: Hydraulvätskan farligt låg! Systemskador uppstår." eh="fe31b6f1" />
+        <e k="usedplus_warning_hydraulicLeak" v="Varning: Hydraulläckage upptäckt. Vätskeförlust accelererar." eh="36b8f377" />
+        <e k="usedplus_warning_hydraulicDamage" v="HYDRAULSKADA: Permanent tillförlitlighetsförlust på grund av låg vätskenivå!" eh="843ae10a" />
 
         <!-- v1.7.0: Fuel Leak Warning -->
-        <e k="usedplus_warning_fuelLeak" v="Warning: Fuel leak detected! Fuel consumption significantly increased." eh="6654d01e" />
+        <e k="usedplus_warning_fuelLeak" v="Varning: Bränsleläckage upptäckt! Bränsleförbrukning kraftigt ökad." eh="6654d01e" />
 
         <!-- v2.4.0: Hydraulic Surge Warning -->
-        <e k="usedplus_warning_hydraulicSurge" v="POWER STEERING LOSS - Vehicle pulling %s!" eh="a8d164f9" />
+        <e k="usedplus_warning_hydraulicSurge" v="SERVOSTYRNINGSFÖRLUST - Fordonet drar åt %s!" eh="a8d164f9" />
 
         <!-- v2.5.0: Comprehensive Hydraulic Malfunction Warnings -->
         <!-- Runaway Engine -->
-        <e k="usedplus_warning_runaway" v="ENGINE RUNAWAY! Governor failure - TURN OFF ENGINE!" eh="b5041aa9" />
+        <e k="usedplus_warning_runaway" v="MOTOR SKENAR! Regulatorfel - STÄNG AV MOTORN!" eh="b5041aa9" />
         <e k="usedplus_runaway_end_engineOff" v="Engine stopped - runaway ended safely." eh="14fd2da3" />
         <e k="usedplus_runaway_end_crash" v="Impact detected - runaway ended." eh="0354e555" />
         <e k="usedplus_runaway_end_damage" v="Vehicle damaged - runaway ended." eh="ad34ca1f" />
         <e k="usedplus_runaway_end_fluids" v="Fluids restored - governor recovered." eh="7baa9445" />
 
         <!-- Implement Stuck -->
-        <e k="usedplus_warning_stuckDown" v="HYDRAULIC LIFT FAILURE - Implement cannot raise!" eh="8c1e0f84" />
-        <e k="usedplus_warning_stuckUp" v="HYDRAULIC VALVE FAILURE - Implement cannot lower!" eh="b353bdf9" />
+        <e k="usedplus_warning_stuckDown" v="HYDRAULLYFTFEL - Redskap kan inte höjas!" eh="8c1e0f84" />
+        <e k="usedplus_warning_stuckUp" v="HYDRAULVENTILFEL - Redskap kan inte sänkas!" eh="b353bdf9" />
 
         <!-- Implement Effects -->
-        <e k="usedplus_warning_implementPull" v="IMPLEMENT DRAG - Pulling %s!" eh="9542214f" />
-        <e k="usedplus_warning_implementDrag" v="HYDRAULIC STRAIN - Speed reduced!" eh="4202b7ec" />
-        <e k="usedplus_warning_reducedTurning" v="POWER STEERING WEAK - Turning limited!" eh="a9794a39" />
+        <e k="usedplus_warning_implementPull" v="REDSKAPSDRAG - Drar åt %s!" eh="9542214f" />
+        <e k="usedplus_warning_implementDrag" v="HYDRAULBELASTNING - Hastighet reducerad!" eh="4202b7ec" />
+        <e k="usedplus_warning_reducedTurning" v="SVAG SERVOSTYRNING - Svängförmåga begränsad!" eh="a9794a39" />
 
         <!-- v1.7.0: Tire Quality Names -->
         <e k="usedplus_tire_retread" v="Retread" eh="bcf7f101" />
@@ -1684,17 +1690,17 @@
         <e k="usedplus_oilTank_name" v="Oil Service Tank" eh="fa56df0c" />
         <e k="usedplus_oilTank_function" v="Large capacity oil service point for refilling engine oil and hydraulic fluid." eh="e6a6837a" />
         <e k="usedplus_oil_refillAction" v="Refill Engine Oil" eh="001b2a5a" />
-        <e k="usedplus_hydraulic_refillAction" v="Refill Hydraulic Fluid" eh="11081031" />
+        <e k="usedplus_hydraulic_refillAction" v="Fyll på hydraulvätska" eh="11081031" />
         <e k="usedplus_oil_refillComplete" v="Oil refilled - Cost: %s" eh="0dff6e72" />
-        <e k="usedplus_hydraulic_refillComplete" v="Hydraulic fluid refilled - Cost: %s" eh="2d22bcb4" />
+        <e k="usedplus_hydraulic_refillComplete" v="Hydraulvätska påfylld - Kostnad: %s" eh="2d22bcb4" />
         <e k="usedplus_oil_refillCompleteStorage" v="Oil refilled from storage" eh="2d3715a7" />
         <!-- usedplus_hydraulic_refillCompleteStorage moved to line below with format string -->
         <e k="usedplus_oil_notEnoughStorage" v="Not enough oil in storage" eh="4cf5955b" />
-        <e k="usedplus_hydraulic_notEnoughStorage" v="Not enough hydraulic fluid in storage" eh="a1a0eb52" />
+        <e k="usedplus_hydraulic_notEnoughStorage" v="Inte tillräckligt med hydraulvätska i lager" eh="a1a0eb52" />
         <e k="usedplus_oil_alreadyFull" v="Engine oil already full" eh="9474e86e" />
-        <e k="usedplus_hydraulic_alreadyFull" v="Hydraulic fluid already full" eh="904d6078" />
+        <e k="usedplus_hydraulic_alreadyFull" v="Hydraulvätskan är redan full" eh="904d6078" />
         <e k="usedplus_oil_storageLevel" v="Oil Storage: %d / %d L" eh="1a5af945" />
-        <e k="usedplus_hydraulic_storageLevel" v="Hydraulic Storage: %d / %d L" eh="d35b0be5" />
+        <e k="usedplus_hydraulic_storageLevel" v="Hydraullager: %d / %d L" eh="d35b0be5" />
         <e k="usedplus_oil_purchaseAction" v="Purchase Oil" eh="9c9c34d3" />
         <e k="usedplus_oil_purchased" v="Purchased %.0fL of oil - %s (Tank: %.0f/%.0fL)" eh="5b99f35f" />
         <e k="usedplus_oil_storageFull" v="Oil tank is full!" eh="980d9a22" />
@@ -1706,7 +1712,7 @@
         <e k="usedplus_fluid_purchased" v="Purchased %.0fL of %s - %s (Tank: %.0f/%.0fL)" eh="a63f3cbd" />
         <e k="usedplus_fluid_storageFull" v="Tank is full!" eh="3a3fc002" />
         <e k="usedplus_fluid_notEnoughStorage" v="Not enough fluid! Need %.1fL, have %.1fL" eh="4c38b7b9" />
-        <e k="usedplus_hydraulic_refillCompleteStorage" v="Hydraulic fluid refilled - %.1fL used (%.1fL remaining)" eh="8290045e" />
+        <e k="usedplus_hydraulic_refillCompleteStorage" v="Hydraulvätska påfylld - %.1fL använt (%.1fL kvar)" eh="8290045e" />
 
         <!-- v1.9.4: Fluid Inspection Comments (Mechanic's Assessment) -->
         <e k="usedplus_fluid_oilLeakSevere" v="Significant oil leak detected - needs immediate attention." eh="e1254667" />
@@ -2198,7 +2204,7 @@
         <e k="usedplus_preset_reset" v="Reset to Defaults" eh="6795975d" />
 
         <!-- v2.1.0: RVB Workshop Integration -->
-        <e k="usedplus_hydraulic_system" v="Hydraulic System" eh="2f6e031e" />
+        <e k="usedplus_hydraulic_system" v="Hydraulsystem" eh="2f6e031e" />
         <e k="usedplus_maintenance_grade" v="Maintenance" eh="10d0de28" />
         <e k="usedplus_service_history" v="History" eh="16d2b386" />
         <e k="usedplus_mechanic_says" v="Mechanic" eh="64eb6697" />
@@ -2300,9 +2306,9 @@
         <!-- ============================================== -->
 
         <!-- Seizure Warning Messages -->
-        <e k="usedplus_engine_seized" v="ENGINE SEIZED! Repair required before vehicle will start." eh="c22e256a" />
-        <e k="usedplus_hydraulics_seized" v="HYDRAULICS SEIZED! Implements are locked in place." eh="dd09718c" />
-        <e k="usedplus_electrical_seized" v="ELECTRICAL FAILURE! All systems are dead." eh="84b7514a" />
+        <e k="usedplus_engine_seized" v="MOTOR LÅST! Reparation krävs innan fordonet startar." eh="c22e256a" />
+        <e k="usedplus_hydraulics_seized" v="HYDRAULIK LÅST! Redskap är fastlåsta på plats." eh="dd09718c" />
+        <e k="usedplus_electrical_seized" v="ELSYSTEMFEL! Alla system är döda." eh="84b7514a" />
 
         <!-- OBD Scanner Seizure Repair -->
         <e k="usedplus_seizure_detected" v="COMPONENT SEIZED" eh="9def01dd" />
@@ -2315,16 +2321,16 @@
         <!-- ============================================== -->
 
         <!-- General Warnings/Errors -->
-        <e k="usedplus_warning_notEnoughMoney" v="Not enough money!" eh="48f194d4" />
+        <e k="usedplus_warning_notEnoughMoney" v="Inte tillräckligt med pengar!" eh="48f194d4" />
 
         <!-- Finance Deal Messages -->
         <e k="usedplus_notification_landSeized" v="LAND SEIZED: %s has been taken due to non-payment!" eh="1c095ac6" />
-        <e k="usedplus_error_paymentTooLow" v="Payment amount is below the minimum required." eh="4f83eda0" />
-        <e k="usedplus_error_paymentTooHigh" v="Payment amount exceeds the remaining balance." eh="091a9776" />
+        <e k="usedplus_error_paymentTooLow" v="Betalningsbeloppet är under det minimikrav." eh="4f83eda0" />
+        <e k="usedplus_error_paymentTooHigh" v="Betalningsbeloppet överstiger återstående saldo." eh="091a9776" />
         <e k="usedplus_success_paymentMade" v="Payment processed successfully!" eh="b12aba7d" />
 
         <!-- Lease Deal Messages -->
-        <e k="usedplus_error_cannotAffordTermination" v="Not enough money to pay the lease termination fee." eh="64ed9e67" />
+        <e k="usedplus_error_cannotAffordTermination" v="Inte tillräckligt med pengar för att betala leasingavslutningsavgiften." eh="64ed9e67" />
 
         <!-- Credit Requirements -->
         <e k="usedplus_credit_required" v="Credit Required" eh="cefa86b5" />
@@ -2332,14 +2338,14 @@
         <e k="usedplus_lease_credit_msg" v="Leasing requires a credit score of %d or higher." eh="c86cbfc5" />
 
         <!-- Purchase Errors -->
-        <e k="usedplus_error_purchaseFailed" v="Purchase failed - game API not available." eh="c02a7002" />
+        <e k="usedplus_error_purchaseFailed" v="Köp misslyckades - spelets API inte tillgängligt." eh="c02a7002" />
 
         <!-- Finance Calculations -->
-        <e k="usedplus_error_negativeDownPayment" v="Down payment cannot be negative." eh="0634f8d8" />
-        <e k="usedplus_error_downPaymentTooHigh" v="Down payment cannot exceed the purchase price." eh="6bd926ef" />
-        <e k="usedplus_error_invalidTerm" v="Invalid loan term." eh="49e90a5b" />
-        <e k="usedplus_error_leaseDownPaymentTooHigh" v="Down payment cannot exceed the lease price." eh="5e32ae97" />
-        <e k="usedplus_error_leaseTermInvalid" v="Invalid lease term." eh="7f3c3523" />
+        <e k="usedplus_error_negativeDownPayment" v="Handpenning kan inte vara negativ." eh="0634f8d8" />
+        <e k="usedplus_error_downPaymentTooHigh" v="Handpenning kan inte överstiga köpeskillingen." eh="6bd926ef" />
+        <e k="usedplus_error_invalidTerm" v="Ogiltig låneperiod." eh="49e90a5b" />
+        <e k="usedplus_error_leaseDownPaymentTooHigh" v="Handpenning kan inte överstiga leasingpriset." eh="5e32ae97" />
+        <e k="usedplus_error_leaseTermInvalid" v="Ogiltig leasingperiod." eh="7f3c3523" />
 
         <!-- Depreciation Formatting -->
         <e k="usedplus_age_oneYear" v="1 year old" eh="086d4f5c" />
@@ -2353,15 +2359,15 @@
         <!-- v2.8.0: Additional Multiplayer Messages       -->
         <!-- (Main MP messages are in the MP section above) -->
         <!-- ============================================== -->
-        <e k="usedplus_mp_success_vehicle_purchased" v="Vehicle purchased successfully!" eh="b5beec4f" />
-        <e k="usedplus_mp_success_trade_in" v="Trade-in completed successfully!" eh="0a59b49a" />
-        <e k="usedplus_mp_success_field_repair" v="Field repair completed!" eh="06239aac" />
-        <e k="usedplus_mp_success_fluids_refilled" v="Fluids refilled successfully!" eh="9597cd1d" />
-        <e k="usedplus_mp_success_tires_replaced" v="Tires replaced successfully!" eh="5224fbbe" />
-        <e k="usedplus_mp_success_land_purchased" v="Land purchased successfully!" eh="9de4a0f4" />
-        <e k="usedplus_mp_error_purchase_failed" v="Purchase failed. Please try again." eh="42d7ddab" />
-        <e k="usedplus_mp_error_vehicle_not_found" v="Vehicle not found." eh="02c84e79" />
-        <e k="usedplus_mp_error_no_loan" v="No loan balance to pay." eh="5668e12f" />
+        <e k="usedplus_mp_success_vehicle_purchased" v="Fordon köpt!" eh="b5beec4f" />
+        <e k="usedplus_mp_success_trade_in" v="Inbyte slutfört!" eh="0a59b49a" />
+        <e k="usedplus_mp_success_field_repair" v="Fältreparation slutförd!" eh="06239aac" />
+        <e k="usedplus_mp_success_fluids_refilled" v="Vätskor påfyllda!" eh="9597cd1d" />
+        <e k="usedplus_mp_success_tires_replaced" v="Däck bytta!" eh="5224fbbe" />
+        <e k="usedplus_mp_success_land_purchased" v="Mark köpt!" eh="9de4a0f4" />
+        <e k="usedplus_mp_error_purchase_failed" v="Köp misslyckades. Försök igen." eh="42d7ddab" />
+        <e k="usedplus_mp_error_vehicle_not_found" v="Fordon ej funnet." eh="02c84e79" />
+        <e k="usedplus_mp_error_no_loan" v="Inget lånesaldo att betala." eh="5668e12f" />
 
         <!-- ============================================== -->
         <!-- v2.9.5: ADMIN CONTROL PANEL                   -->

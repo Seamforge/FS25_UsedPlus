@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <!--
-     Norwegian (Norsk Bokmal) localization for FS25_UsedPlus
+     Romanian (Romana) localization for FS25_UsedPlus
      STATUS: AI-translated (Claude)
      Pattern from: Game's l10n system
      All GUI text must be defined here for display
@@ -19,508 +19,508 @@
 <l10n>
     <!--  Finance Dialog -->
     <elements>
-        <e k="usedplus_finance_title" v="Finansier kjoretoy" eh="6efef1bd" />
-        <e k="usedplus_finance_itemDetails" v="Kjoretoydetaljer" eh="fcb2575f" />
-        <e k="usedplus_finance_configuration" v="Finansieringsoppsett" eh="0519e514" />
-        <e k="usedplus_finance_term" v="Laneperiode" eh="5d1f9c9f" />
-        <e k="usedplus_finance_loanTerm" v="Laneperiode (ar)" eh="a33ae292" />
-        <e k="usedplus_finance_downPayment" v="Forskuddsbetaling" eh="46b7f6c5" />
-        <e k="usedplus_finance_cashBack" v="Cashback" eh="bca1e43d" />
-        <e k="usedplus_finance_paymentPreview" v="Betalingsoversikt" eh="a3f5396e" />
-        <e k="usedplus_finance_monthlyPayment" v="Manedlig betaling" eh="c102e118" />
-        <e k="usedplus_finance_yearlyPayment" v="Arlig betaling" eh="b4080ee0" />
-        <e k="usedplus_finance_totalInterest" v="Total rente" eh="8c4f3836" />
-        <e k="usedplus_finance_totalCost" v="Totalkostnad" eh="50e91dab" />
-        <e k="usedplus_finance_interestRate" v="Rentesats" eh="0b6e9e85" />
-        <e k="usedplus_finance_creditScore" v="Kredittscore" eh="ae61b052" />
-        <e k="usedplus_finance_creditRating" v="Kredittvurdering" eh="0c50a24a" />
-        <e k="usedplus_finance_important" v="Viktig informasjon" eh="e89802a1" />
-        <e k="usedplus_finance_ownershipTransfers" v="Eierskap overfores umiddelbart ved aksept." eh="8dcaaa5b" />
-        <e k="usedplus_finance_sellAnytime" v="Du kan selge finansierte gjenstander nar som helst. Gjenstaende saldo ma betales fra salgsutbyttet." eh="ce3d5807" />
+        <e k="usedplus_finance_title" v="Finantare Vehicul" eh="6efef1bd" />
+        <e k="usedplus_finance_itemDetails" v="Detalii Vehicul" eh="fcb2575f" />
+        <e k="usedplus_finance_configuration" v="Configurare Finantare" eh="0519e514" />
+        <e k="usedplus_finance_term" v="Durata Imprumutului" eh="5d1f9c9f" />
+        <e k="usedplus_finance_loanTerm" v="Durata Imprumutului (Ani)" eh="a33ae292" />
+        <e k="usedplus_finance_downPayment" v="Avans" eh="46b7f6c5" />
+        <e k="usedplus_finance_cashBack" v="Bani Inapoi" eh="bca1e43d" />
+        <e k="usedplus_finance_paymentPreview" v="Previzualizare Plata" eh="a3f5396e" />
+        <e k="usedplus_finance_monthlyPayment" v="Plata Lunara" eh="c102e118" />
+        <e k="usedplus_finance_yearlyPayment" v="Plata Anuala" eh="b4080ee0" />
+        <e k="usedplus_finance_totalInterest" v="Dobanda Totala" eh="8c4f3836" />
+        <e k="usedplus_finance_totalCost" v="Cost Total" eh="50e91dab" />
+        <e k="usedplus_finance_interestRate" v="Rata Dobanzii" eh="0b6e9e85" />
+        <e k="usedplus_finance_creditScore" v="Scor de Credit" eh="ae61b052" />
+        <e k="usedplus_finance_creditRating" v="Rating Credit" eh="0c50a24a" />
+        <e k="usedplus_finance_important" v="Informatii Importante" eh="e89802a1" />
+        <e k="usedplus_finance_ownershipTransfers" v="Proprietatea se transfera imediat dupa acceptare." eh="8dcaaa5b" />
+        <e k="usedplus_finance_sellAnytime" v="Puteti vinde articolele finantate oricand. Soldul ramas trebuie platit din incasarile vanzarii." eh="ce3d5807" />
 
         <!--  Lease Dialog -->
-        <e k="usedplus_lease_title" v="Leie kjoretoy" eh="beae83e4" />
-        <e k="usedplus_lease_vehicleDetails" v="Kjoretoydetaljer" eh="fcb2575f" />
-        <e k="usedplus_lease_configuration" v="Leieoppsett" eh="07e07e72" />
-        <e k="usedplus_lease_term" v="Leieperiode (ar)" eh="13fd4421" />
-        <e k="usedplus_lease_downPayment" v="Forskuddsbetaling" eh="46b7f6c5" />
-        <e k="usedplus_lease_residualValue" v="Restverdi (sluttoppgjor)" eh="458fd3b9" />
-        <e k="usedplus_lease_paymentPreview" v="Betalingsoversikt" eh="a3f5396e" />
-        <e k="usedplus_lease_monthlyPayment" v="Manedlig betaling" eh="c102e118" />
-        <e k="usedplus_lease_yearlyPayment" v="Arlig betaling" eh="b4080ee0" />
-        <e k="usedplus_lease_totalCost" v="Total leiekostnad" eh="993f980c" />
-        <e k="usedplus_lease_interestRate" v="Rentesats" eh="0b6e9e85" />
-        <e k="usedplus_lease_creditScore" v="Kredittscore" eh="ae61b052" />
-        <e k="usedplus_lease_important" v="Viktig leieinformasjon" eh="767b599f" />
+        <e k="usedplus_lease_title" v="Lease Vehicle" eh="beae83e4" />
+        <e k="usedplus_lease_vehicleDetails" v="Vehicle Details" eh="fcb2575f" />
+        <e k="usedplus_lease_configuration" v="Lease Configuration" eh="07e07e72" />
+        <e k="usedplus_lease_term" v="Lease Term (Years)" eh="13fd4421" />
+        <e k="usedplus_lease_downPayment" v="Down Payment" eh="46b7f6c5" />
+        <e k="usedplus_lease_residualValue" v="Residual Value (Balloon Payment)" eh="458fd3b9" />
+        <e k="usedplus_lease_paymentPreview" v="Payment Preview" eh="a3f5396e" />
+        <e k="usedplus_lease_monthlyPayment" v="Monthly Payment" eh="c102e118" />
+        <e k="usedplus_lease_yearlyPayment" v="Yearly Payment" eh="b4080ee0" />
+        <e k="usedplus_lease_totalCost" v="Total Lease Cost" eh="993f980c" />
+        <e k="usedplus_lease_interestRate" v="Interest Rate" eh="0b6e9e85" />
+        <e k="usedplus_lease_creditScore" v="Credit Score" eh="ae61b052" />
+        <e k="usedplus_lease_important" v="Important Lease Information" eh="767b599f" />
         <!-- REMOVED: usedplus_lease_warningReturn, warningDamage, returnWarning, damageWarning - unused duplicates -->
-        <e k="usedplus_lease_endOfTerm" v="Slutt pa leieperioden" eh="35022911" />
-        <e k="usedplus_lease_buyoutPrice" v="Utkjopspris" eh="8d6be5af" />
-        <e k="usedplus_lease_totalInterest" v="Total rente" eh="8c4f3836" />
+        <e k="usedplus_lease_endOfTerm" v="End of Lease" eh="35022911" />
+        <e k="usedplus_lease_buyoutPrice" v="Buyout Price" eh="8d6be5af" />
+        <e k="usedplus_lease_totalInterest" v="Total Interest" eh="8c4f3836" />
 
         <!--  Used Search Dialog -->
-        <e k="usedplus_search_title" v="Sok etter brukt utstyr" eh="7c093c6a" />
-        <e k="usedplus_search_itemDetails" v="Gjenstandsdetaljer" eh="6df16946" />
-        <e k="usedplus_search_searching" v="Soker etter" eh="7706fe6a" />
-        <e k="usedplus_search_newPrice" v="Nypris:" eh="8def7435" />
-        <e k="usedplus_search_selectTier" v="Velg sokeniva" eh="fe21c40b" />
-        <e k="usedplus_search_tierDescription" v="Velg sokeomfang. Hoyere nivaer koster mer og tar lengre tid, men har bedre suksessrate og kvalitetsmatch." eh="0e9cafdd" />
-        <e k="usedplus_search_tierSelection" v="Valg av sokeniva" eh="a2527868" />
+        <e k="usedplus_search_title" v="Search for Used Equipment" eh="7c093c6a" />
+        <e k="usedplus_search_itemDetails" v="Item Details" eh="6df16946" />
+        <e k="usedplus_search_searching" v="Searching For" eh="7706fe6a" />
+        <e k="usedplus_search_newPrice" v="New Price:" eh="8def7435" />
+        <e k="usedplus_search_selectTier" v="Select Search Tier" eh="fe21c40b" />
+        <e k="usedplus_search_tierDescription" v="Choose your search scope. Higher tiers cost more and take longer, but have better success rates and match quality." eh="0e9cafdd" />
+        <e k="usedplus_search_tierSelection" v="Search Tier Selection" eh="a2527868" />
         <!-- Consolidated: removed usedplus_search_local/regional/national - use _tier* versions -->
-        <e k="usedplus_search_tierLocal" v="Lokalt sok" eh="e1ea5bc1" />
-        <e k="usedplus_search_tierRegional" v="Regionalt sok" eh="722cc490" />
-        <e k="usedplus_search_tierNational" v="Landsdekkende sok" eh="c967061f" />
-        <e k="usedplus_search_cost" v="Sokekostnad" eh="510c1fa6" />
-        <e k="usedplus_search_duration" v="Varighet" eh="e02d2ae0" />
-        <e k="usedplus_search_success" v="Suksessrate" eh="aac60ede" />
-        <e k="usedplus_search_successChance" v="Suksessjanse" eh="7ad5b765" />
-        <e k="usedplus_search_match" v="Sjanse for kvalitetsmatch" eh="da45c669" />
+        <e k="usedplus_search_tierLocal" v="Local Search" eh="e1ea5bc1" />
+        <e k="usedplus_search_tierRegional" v="Regional Search" eh="722cc490" />
+        <e k="usedplus_search_tierNational" v="National Search" eh="c967061f" />
+        <e k="usedplus_search_cost" v="Search Cost" eh="510c1fa6" />
+        <e k="usedplus_search_duration" v="Duration" eh="e02d2ae0" />
+        <e k="usedplus_search_success" v="Success Rate" eh="aac60ede" />
+        <e k="usedplus_search_successChance" v="Success Chance" eh="7ad5b765" />
+        <e k="usedplus_search_match" v="Chance to Match Quality" eh="da45c669" />
         <!-- REMOVED: usedplus_search_matchChance - duplicate of usedplus_search_match -->
-        <e k="usedplus_search_description" v="Beskrivelse" eh="b5a7adde" />
-        <e k="usedplus_search_descLocal" v="Sok hos naerliggende forhandlere. Garantert svar innen 1 maned, 2% kostnad, 40% suksessrate." eh="1aef5e06" />
-        <e k="usedplus_search_descRegional" v="Sok i regionalt nettverk. 1-3 maneder, 6% kostnad, 70% suksessrate." eh="d0d8016e" />
-        <e k="usedplus_search_descNational" v="Sok landsdekkende. 2-6 maneder, 12% kostnad, 85% suksessrate." eh="71992615" />
-        <e k="usedplus_search_qualitySelection" v="Onsket kvalitet" eh="f70a51e0" />
-        <e k="usedplus_search_qualityDescription" v="Lavere kvalitet = billigere pris men mer reparasjoner nodvendig" eh="f991384c" />
-        <e k="usedplus_search_confirmTitle" v="Sok startet" eh="e42ba949" />
+        <e k="usedplus_search_description" v="Description" eh="b5a7adde" />
+        <e k="usedplus_search_descLocal" v="Search nearby dealers. Guaranteed 1 month response, 2% cost, 40% success rate." eh="1aef5e06" />
+        <e k="usedplus_search_descRegional" v="Search regional network. 1-3 months, 6% cost, 70% success rate." eh="d0d8016e" />
+        <e k="usedplus_search_descNational" v="Search nationwide. 2-6 months, 12% cost, 85% success rate." eh="71992615" />
+        <e k="usedplus_search_qualitySelection" v="Desired Quality" eh="f70a51e0" />
+        <e k="usedplus_search_qualityDescription" v="Lower quality = cheaper price but more repairs needed" eh="f991384c" />
+        <e k="usedplus_search_confirmTitle" v="Search Initiated" eh="e42ba949" />
 
         <!-- v1.5.0: Multi-find Agent Model -->
-        <e k="usedplus_search_retainer" v="Agenthonorar" eh="22908ab1" />
-        <e k="usedplus_search_commission" v="Finnerlon" eh="1130f6f3" />
-        <e k="usedplus_search_commissionInfo" v="%d%% lagt til kjoretoypris" eh="e6462a3c" />
-        <e k="usedplus_search_monthProgress" v="Maned %d av %d" eh="b2af1b34" />
-        <e k="usedplus_search_vehiclesFound" v="%d kjoretoy funnet" eh="69e744df" />
-        <e k="usedplus_search_monthlyChance" v="%d%% per maned" eh="c5458c12" />
-        <e k="usedplus_search_foundVehicles" v="FUNNET KJORETOY" eh="4a8990d1" />
-        <e k="usedplus_search_noVehiclesYet" v="Ingen kjoretoy funnet enna" eh="812b14d0" />
-        <e k="usedplus_search_inspectVehicle" v="Inspiser" eh="35a9dbe6" />
-        <e k="usedplus_search_buyVehicle" v="Kjop" eh="831a28f1" />
-        <e k="usedplus_search_declineVehicle" v="Avvis" eh="0d362728" />
-        <e k="usedplus_notify_vehicleFound" v="Agenten din fant en %s!" eh="bf9782f6" />
-        <e k="usedplus_notify_searchComplete" v="Sok fullfort: %d kjoretoy funnet" eh="dbd32f05" />
+        <e k="usedplus_search_retainer" v="Agent Retainer" eh="22908ab1" />
+        <e k="usedplus_search_commission" v="Finder's Fee" eh="1130f6f3" />
+        <e k="usedplus_search_commissionInfo" v="%d%% added to vehicle price" eh="e6462a3c" />
+        <e k="usedplus_search_monthProgress" v="Month %d of %d" eh="b2af1b34" />
+        <e k="usedplus_search_vehiclesFound" v="%d vehicle(s) found" eh="69e744df" />
+        <e k="usedplus_search_monthlyChance" v="%d%% per month" eh="c5458c12" />
+        <e k="usedplus_search_foundVehicles" v="FOUND VEHICLES" eh="4a8990d1" />
+        <e k="usedplus_search_noVehiclesYet" v="No vehicles found yet" eh="812b14d0" />
+        <e k="usedplus_search_inspectVehicle" v="Inspect" eh="35a9dbe6" />
+        <e k="usedplus_search_buyVehicle" v="Buy" eh="831a28f1" />
+        <e k="usedplus_search_declineVehicle" v="Decline" eh="0d362728" />
+        <e k="usedplus_notify_vehicleFound" v="Your agent found a %s!" eh="bf9782f6" />
+        <e k="usedplus_notify_searchComplete" v="Search complete: %d vehicle(s) found" eh="dbd32f05" />
 
         <!-- Confirmation Dialog -->
-        <e k="usedplus_confirmation_title" v="Bekreftelse" eh="f4d1ea47" />
+        <e k="usedplus_confirmation_title" v="Confirmation" eh="f4d1ea47" />
 
         <!--  Finance Manager Frame (InGameMenu page) -->
-        <e k="usedplus_inGameMenuTitle" v="Used Plus - Finans og sok" eh="093c7b9e" />
-        <e k="usedplus_activeFinanceDeals" v="Aktive finansieringsavtaler:" eh="5cf7fac5" />
-        <e k="usedplus_activeSearches" v="Aktive sok:" eh="274e131d" />
-        <e k="usedplus_creditScore" v="Kredittscore:" eh="0199e1a3" />
-        <e k="usedplus_manager_title" v="Finansbehandler" eh="76701fe5" />
-        <e k="usedplus_manager_totalFinanced" v="Totalt finansiert" eh="223e5677" />
-        <e k="usedplus_manager_monthlyObligations" v="Manedlige forpliktelser" eh="398fa99a" />
-        <e k="usedplus_manager_creditScore" v="Kredittscore" eh="ae61b052" />
-        <e k="usedplus_manager_assetValue" v="Eiendelsverdi" eh="5482d5a2" />
-        <e k="usedplus_manager_debtRatio" v="Gjeldsgrad" eh="93581501" />
-        <e k="usedplus_manager_activeDeals" v="Aktive avtaler" eh="5bf89e7b" />
+        <e k="usedplus_inGameMenuTitle" v="Used Plus - Finance &amp; Searches" eh="093c7b9e" />
+        <e k="usedplus_activeFinanceDeals" v="Active Finance Deals:" eh="5cf7fac5" />
+        <e k="usedplus_activeSearches" v="Active Searches:" eh="274e131d" />
+        <e k="usedplus_creditScore" v="Credit Score:" eh="0199e1a3" />
+        <e k="usedplus_manager_title" v="Finance Manager" eh="76701fe5" />
+        <e k="usedplus_manager_totalFinanced" v="Total Financed" eh="223e5677" />
+        <e k="usedplus_manager_monthlyObligations" v="Monthly Obligations" eh="398fa99a" />
+        <e k="usedplus_manager_creditScore" v="Credit Score" eh="ae61b052" />
+        <e k="usedplus_manager_assetValue" v="Asset Value" eh="5482d5a2" />
+        <e k="usedplus_manager_debtRatio" v="Debt Ratio" eh="93581501" />
+        <e k="usedplus_manager_activeDeals" v="Active Deals" eh="5bf89e7b" />
         <e k="usedplus_manager_type" v="Type" eh="a1fa2777" />
-        <e k="usedplus_manager_item" v="Gjenstand" eh="7d74f3b9" />
-        <e k="usedplus_manager_balance" v="Saldo" eh="99a808d8" />
-        <e k="usedplus_manager_monthly" v="Manedlig betaling" eh="c102e118" />
-        <e k="usedplus_manager_progress" v="Fremgang" eh="46b5f8c5" />
-        <e k="usedplus_manager_actions" v="Handlinger" eh="06df3300" />
-        <e k="usedplus_manager_noDeals" v="Ingen aktive finansierings- eller leieavtaler." eh="880134fe" />
-        <e k="usedplus_manager_helpText" v="Finansier kjoretoy fra butikken (F-tast). Sok etter brukt utstyr (V-tast). Betalinger trekkes automatisk manedlig." eh="ea889bec" />
-        <e k="usedplus_vanillaLoan" v="Bankkredittlinje" eh="ae4b0f92" />
-        <e k="usedplus_loanOpen" v="Apen" eh="c3bf447e" />
-        <e k="usedplus_loanNoTerm" v="Ingen periode" eh="8dbfc606" />
-        <e k="usedplus_loanInterestOnly" v="Rente" eh="920beb5d" />
+        <e k="usedplus_manager_item" v="Item" eh="7d74f3b9" />
+        <e k="usedplus_manager_balance" v="Balance" eh="99a808d8" />
+        <e k="usedplus_manager_monthly" v="Monthly Payment" eh="c102e118" />
+        <e k="usedplus_manager_progress" v="Progress" eh="46b5f8c5" />
+        <e k="usedplus_manager_actions" v="Actions" eh="06df3300" />
+        <e k="usedplus_manager_noDeals" v="No active finance or lease deals." eh="880134fe" />
+        <e k="usedplus_manager_helpText" v="Finance vehicles from the shop (F key). Search for used equipment (V key). Payments are automatically deducted monthly." eh="ea889bec" />
+        <e k="usedplus_vanillaLoan" v="Bank Credit Line" eh="ae4b0f92" />
+        <e k="usedplus_loanOpen" v="Open" eh="c3bf447e" />
+        <e k="usedplus_loanNoTerm" v="No Term" eh="8dbfc606" />
+        <e k="usedplus_loanInterestOnly" v="Interest" eh="920beb5d" />
 
         <!--  Finance Detail Frame -->
-        <e k="usedplus_detail_dealInfo" v="Avtaleinformasjon" eh="442669bc" />
-        <e k="usedplus_detail_itemName" v="Gjenstand" eh="7d74f3b9" />
+        <e k="usedplus_detail_dealInfo" v="Deal Information" eh="442669bc" />
+        <e k="usedplus_detail_itemName" v="Item" eh="7d74f3b9" />
         <e k="usedplus_detail_dealType" v="Type" eh="a1fa2777" />
-        <e k="usedplus_detail_originalPrice" v="Opprinnelig pris" eh="8bd19c0a" />
-        <e k="usedplus_detail_downPayment" v="Forskuddsbetaling" eh="46b7f6c5" />
-        <e k="usedplus_detail_amountFinanced" v="Finansiert belop" eh="e285131a" />
-        <e k="usedplus_detail_interestRate" v="Rentesats" eh="0b6e9e85" />
-        <e k="usedplus_detail_term" v="Periode" eh="cf5f3091" />
-        <e k="usedplus_detail_startDate" v="Startdato" eh="db3794c7" />
-        <e k="usedplus_detail_paymentStatus" v="Betalingsstatus" eh="2ea78fad" />
-        <e k="usedplus_detail_currentBalance" v="Navarende saldo" eh="91b496c3" />
-        <e k="usedplus_detail_principalPaid" v="Hovedstol betalt" eh="dbc03b11" />
-        <e k="usedplus_detail_interestPaid" v="Rente betalt" eh="000ffd10" />
-        <e k="usedplus_detail_remainingPrincipal" v="Gjenstaende hovedstol" eh="d6f9e1f5" />
-        <e k="usedplus_detail_projectedInterest" v="Forventet rente (uten forskuddsbetaling)" eh="30c8b124" />
-        <e k="usedplus_detail_makePayment" v="Gjor ekstra betaling" eh="baa79ea4" />
-        <e k="usedplus_detail_paymentAmount" v="Betalingsbelop" eh="5bbe29e8" />
-        <e k="usedplus_detail_paymentSummary" v="Betalingsoversikt" eh="0ca2b553" />
-        <e k="usedplus_detail_paymentTotal" v="Total betaling" eh="4935ede3" />
-        <e k="usedplus_detail_toPrincipal" v="Til hovedstol" eh="5253f523" />
-        <e k="usedplus_detail_toInterest" v="Til rente" eh="d9e82220" />
-        <e k="usedplus_detail_newBalance" v="Ny saldo" eh="17d35991" />
-        <e k="usedplus_detail_prepaymentPenalty" v="Forskuddsbetalingsgebyr" eh="057cca0e" />
+        <e k="usedplus_detail_originalPrice" v="Original Price" eh="8bd19c0a" />
+        <e k="usedplus_detail_downPayment" v="Down Payment" eh="46b7f6c5" />
+        <e k="usedplus_detail_amountFinanced" v="Amount Financed" eh="e285131a" />
+        <e k="usedplus_detail_interestRate" v="Interest Rate" eh="0b6e9e85" />
+        <e k="usedplus_detail_term" v="Term" eh="cf5f3091" />
+        <e k="usedplus_detail_startDate" v="Start Date" eh="db3794c7" />
+        <e k="usedplus_detail_paymentStatus" v="Payment Status" eh="2ea78fad" />
+        <e k="usedplus_detail_currentBalance" v="Current Balance" eh="91b496c3" />
+        <e k="usedplus_detail_principalPaid" v="Principal Paid" eh="dbc03b11" />
+        <e k="usedplus_detail_interestPaid" v="Interest Paid" eh="000ffd10" />
+        <e k="usedplus_detail_remainingPrincipal" v="Remaining Principal" eh="d6f9e1f5" />
+        <e k="usedplus_detail_projectedInterest" v="Projected Interest (if no prepayment)" eh="30c8b124" />
+        <e k="usedplus_detail_makePayment" v="Make Additional Payment" eh="baa79ea4" />
+        <e k="usedplus_detail_paymentAmount" v="Payment Amount" eh="5bbe29e8" />
+        <e k="usedplus_detail_paymentSummary" v="Payment Summary" eh="0ca2b553" />
+        <e k="usedplus_detail_paymentTotal" v="Total Payment" eh="4935ede3" />
+        <e k="usedplus_detail_toPrincipal" v="To Principal" eh="5253f523" />
+        <e k="usedplus_detail_toInterest" v="To Interest" eh="d9e82220" />
+        <e k="usedplus_detail_newBalance" v="New Balance" eh="17d35991" />
+        <e k="usedplus_detail_prepaymentPenalty" v="Prepayment Penalty" eh="057cca0e" />
 
         <!--  Land Finance Dialog -->
-        <e k="usedplus_landFinance_title" v="Finansier jordbruksland" eh="4a5ab59c" />
-        <e k="usedplus_landFinance_fieldDetails" v="Jorddetaljer" eh="cb124d38" />
-        <e k="usedplus_landFinance_configuration" v="Finansieringsoppsett" eh="0519e514" />
-        <e k="usedplus_landFinance_term" v="Laneperiode (ar)" eh="a33ae292" />
-        <e k="usedplus_landFinance_downPayment" v="Forskuddsbetaling" eh="46b7f6c5" />
-        <e k="usedplus_landFinance_paymentPreview" v="Betalingsoversikt" eh="a3f5396e" />
-        <e k="usedplus_landFinance_monthlyPayment" v="Manedlig betaling" eh="c102e118" />
-        <e k="usedplus_landFinance_yearlyPayment" v="Arlig betaling" eh="b4080ee0" />
-        <e k="usedplus_landFinance_totalInterest" v="Total rente" eh="8c4f3836" />
-        <e k="usedplus_landFinance_totalCost" v="Totalkostnad" eh="50e91dab" />
-        <e k="usedplus_landFinance_interestRate" v="Rentesats" eh="0b6e9e85" />
-        <e k="usedplus_landFinance_lowerRates" v="Landfinansiering tilbyr vanligvis lavere renter." eh="6a9be1a3" />
-        <e k="usedplus_landFinance_creditScore" v="Kredittscore" eh="ae61b052" />
-        <e k="usedplus_landFinance_important" v="Viktig informasjon" eh="e89802a1" />
-        <e k="usedplus_landFinance_ownershipTransfers" v="Eierskap til land overfores umiddelbart. Du kan bruke jordet med en gang." eh="6bd793be" />
-        <e k="usedplus_landFinance_seizureWarning" v="Advarsel: Manglende manedlige betalinger kan fore til beslaglegging av land." eh="9e692b4f" />
+        <e k="usedplus_landFinance_title" v="Finance Farmland" eh="4a5ab59c" />
+        <e k="usedplus_landFinance_fieldDetails" v="Field Details" eh="cb124d38" />
+        <e k="usedplus_landFinance_configuration" v="Finance Configuration" eh="0519e514" />
+        <e k="usedplus_landFinance_term" v="Loan Term (Years)" eh="a33ae292" />
+        <e k="usedplus_landFinance_downPayment" v="Down Payment" eh="46b7f6c5" />
+        <e k="usedplus_landFinance_paymentPreview" v="Payment Preview" eh="a3f5396e" />
+        <e k="usedplus_landFinance_monthlyPayment" v="Monthly Payment" eh="c102e118" />
+        <e k="usedplus_landFinance_yearlyPayment" v="Yearly Payment" eh="b4080ee0" />
+        <e k="usedplus_landFinance_totalInterest" v="Total Interest" eh="8c4f3836" />
+        <e k="usedplus_landFinance_totalCost" v="Total Cost" eh="50e91dab" />
+        <e k="usedplus_landFinance_interestRate" v="Interest Rate" eh="0b6e9e85" />
+        <e k="usedplus_landFinance_lowerRates" v="Land financing typically offers lower interest rates." eh="6a9be1a3" />
+        <e k="usedplus_landFinance_creditScore" v="Credit Score" eh="ae61b052" />
+        <e k="usedplus_landFinance_important" v="Important Information" eh="e89802a1" />
+        <e k="usedplus_landFinance_ownershipTransfers" v="Land ownership transfers immediately. You can use the field right away." eh="6bd793be" />
+        <e k="usedplus_landFinance_seizureWarning" v="Warning: Failure to make monthly payments may result in land seizure." eh="9e692b4f" />
 
         <!--  Buttons -->
-        <e k="usedplus_button_acceptFinance" v="Godta finansiering" eh="dac8a2e3" />
-        <e k="usedplus_button_acceptLease" v="Godta leie" eh="8230fec9" />
-        <e k="usedplus_button_startSearch" v="Start sok" eh="39d69ff6" />
-        <e k="usedplus_button_viewDetail" v="Vis detaljer" eh="5d5cd268" />
-        <e k="usedplus_button_makePayment" v="Gjor betaling" eh="772005c5" />
-        <e k="usedplus_button_endLeaseEarly" v="Avslutt leie tidlig" eh="57913dd8" />
-        <e k="usedplus_button_purchaseUsed" v="Kjop brukt" eh="b2e3f11c" />
-        <e k="usedplus_button_finance" v="Finansier" eh="c482980d" />
-        <e k="usedplus_button_financeLand" v="Finansier land" eh="638732e0" />
-        <e k="usedplus_button_leaseLand" v="Lei land" eh="ec34a2a6" />
-        <e k="usedplus_button_lease" v="Lei" eh="47c96b08" />
-        <e k="usedplus_button_searchUsed" v="Sok brukt" eh="11533c61" />
+        <e k="usedplus_button_acceptFinance" v="Accept Finance" eh="dac8a2e3" />
+        <e k="usedplus_button_acceptLease" v="Accept Lease" eh="8230fec9" />
+        <e k="usedplus_button_startSearch" v="Start Search" eh="39d69ff6" />
+        <e k="usedplus_button_viewDetail" v="View Details" eh="5d5cd268" />
+        <e k="usedplus_button_makePayment" v="Make Payment" eh="772005c5" />
+        <e k="usedplus_button_endLeaseEarly" v="End Lease Early" eh="57913dd8" />
+        <e k="usedplus_button_purchaseUsed" v="Purchase Used" eh="b2e3f11c" />
+        <e k="usedplus_button_finance" v="Finance" eh="c482980d" />
+        <e k="usedplus_button_financeLand" v="Finance Land" eh="638732e0" />
+        <e k="usedplus_button_leaseLand" v="Lease Land" eh="ec34a2a6" />
+        <e k="usedplus_button_lease" v="Lease" eh="47c96b08" />
+        <e k="usedplus_button_searchUsed" v="Search Used" eh="11533c61" />
 
         <!--  Notifications (use %s for money - pass g_i18n:formatMoney() values) -->
-        <e k="usedplus_notification_dealComplete" v="%s er nedbetalt!" eh="5d829f21" />
-        <e k="usedplus_notification_searchSuccess" v="Brukt %s funnet!" eh="ef123353" />
-        <e k="usedplus_notification_searchFailed" v="Sok etter %s mislyktes. Ingen treff funnet." eh="fc5652a6" />
-        <e k="usedplus_searchFailed_title" v="Sok fullfort" eh="e92d4ab1" />
-        <e k="usedplus_searchFailed_message" v="Agenten din klarte ikke a finne en %s som matcher kriteriene dine. Sokegebyret refunderes ikke. Du kan starte et nytt sok hvis onsket." eh="f866d76d" />
-        <e k="usedplus_notification_searchStarted" v="Soker etter %s. Forventet fullfort: %d dager." eh="1b04e427" />
-        <e k="usedplus_notification_searchCancelled" v="Sok etter %s kansellert. Ingen refusjon." eh="e5f294f4" />
-        <e k="usedplus_notification_vehicleFound" v="Brukt %s (%s) funnet for %s!" eh="97804817" />
-        <e k="usedplus_notification_dealPaidOff" v="%s er fullstendig nedbetalt!" eh="2d9db7b8" />
-        <e k="usedplus_notification_paymentProcessed" v="Betaling pa %s behandlet for %s" eh="81123b2d" />
-        <e k="usedplus_notification_leaseTerminated" v="Leie for %s avsluttet. Gebyr: %s" eh="b59ab283" />
-        <e k="usedplus_notification_leaseTerminatedNoPenalty" v="Leie for %s avsluttet. Ingen gebyr." eh="07e1dcd5" />
-        <e k="usedplus_notification_missedLeasePayment" v="UTEBLITT LEIEBETALING: Kunne ikke betale %s for %s" eh="1efc41eb" />
-        <e k="usedplus_notification_leaseDamagePenalty" v="Skadegebyr for leie av %s: %s" eh="618cc31d" />
-        <e k="usedplus_notification_leaseComplete" v="Leie fullfort! %s er returnert." eh="d78a78c7" />
-        <e k="usedplus_notification_dealPaidFromSale" v="%s solgt. Finansieringssaldo pa %s betalt fra salgsutbyttet." eh="8ef8395a" />
+        <e k="usedplus_notification_dealComplete" v="%s has been paid off!" eh="5d829f21" />
+        <e k="usedplus_notification_searchSuccess" v="Used %s found!" eh="ef123353" />
+        <e k="usedplus_notification_searchFailed" v="Search for %s failed. No matches found." eh="fc5652a6" />
+        <e k="usedplus_searchFailed_title" v="Search Complete" eh="e92d4ab1" />
+        <e k="usedplus_searchFailed_message" v="Your agent was unable to find a %s matching your criteria. The search fee is non-refundable. You may start a new search if desired." eh="f866d76d" />
+        <e k="usedplus_notification_searchStarted" v="Searching for %s. Expected completion: %d days." eh="1b04e427" />
+        <e k="usedplus_notification_searchCancelled" v="Search for %s cancelled. No refund." eh="e5f294f4" />
+        <e k="usedplus_notification_vehicleFound" v="Used %s (%s) found for %s!" eh="97804817" />
+        <e k="usedplus_notification_dealPaidOff" v="%s has been paid off in full!" eh="2d9db7b8" />
+        <e k="usedplus_notification_paymentProcessed" v="Payment of %s processed for %s" eh="81123b2d" />
+        <e k="usedplus_notification_leaseTerminated" v="Lease for %s terminated. Penalty: %s" eh="b59ab283" />
+        <e k="usedplus_notification_leaseTerminatedNoPenalty" v="Lease for %s terminated. No penalty." eh="07e1dcd5" />
+        <e k="usedplus_notification_missedLeasePayment" v="MISSED LEASE PAYMENT: Unable to pay %s for %s" eh="1efc41eb" />
+        <e k="usedplus_notification_leaseDamagePenalty" v="Lease damage penalty for %s: %s" eh="618cc31d" />
+        <e k="usedplus_notification_leaseComplete" v="Lease complete! %s has been returned." eh="d78a78c7" />
+        <e k="usedplus_notification_dealPaidFromSale" v="%s sold. Finance balance of %s paid from proceeds." eh="8ef8395a" />
 
         <!--  Errors (use %s for money - pass g_i18n:formatMoney() values) -->
-        <e k="usedplus_error_insufficientFunds" v="Utilstrekkelige midler. Pakrevd: %s" eh="e212e92e" />
-        <e k="usedplus_error_searchFailed" v="Kunne ikke starte sok. Vennligst prov igjen." eh="1fdff9c2" />
-        <e k="usedplus_error_insufficientFundsTermination" v="Utilstrekkelige midler for a avslutte leie. Pakrevd: %s" eh="b089241b" />
-        <e k="usedplus_error_invalidDeal" v="Ugyldig avtale. Vennligst kontakt support." eh="5a9d61df" />
-        <e k="usedplus_error_cannotSellLeasedVehicle" v="Kan ikke selge leid kjoretoy. Avslutt leien forst eller vent til leien utloper." eh="056547d3" />
-        <e k="usedplus_error_insufficientSalePrice" v="Kan ikke selge. Gjenstaende saldo (%s) overstiger salgspris (%s)." eh="bb69fad7" />
-        <e k="usedplus_error_maxSaleListings" v="Maksimalt %d kjoretoy kan vaere til salgs samtidig. Vent til et salg fullfort eller avbryt en annonse." eh="a5dd26b0" />
+        <e k="usedplus_error_insufficientFunds" v="Insufficient funds. Required: %s" eh="e212e92e" />
+        <e k="usedplus_error_searchFailed" v="Failed to start search. Please try again." eh="1fdff9c2" />
+        <e k="usedplus_error_insufficientFundsTermination" v="Insufficient funds for lease termination. Required: %s" eh="b089241b" />
+        <e k="usedplus_error_invalidDeal" v="Invalid deal. Please contact support." eh="5a9d61df" />
+        <e k="usedplus_error_cannotSellLeasedVehicle" v="Cannot sell leased vehicle. End lease first or wait until lease expires." eh="056547d3" />
+        <e k="usedplus_error_insufficientSalePrice" v="Cannot sell. Remaining balance (%s) exceeds sale price (%s)." eh="bb69fad7" />
+        <e k="usedplus_error_maxSaleListings" v="Maximum %d vehicles can be listed for sale at once. Wait for a sale to complete or cancel a listing." eh="a5dd26b0" />
 
         <!--  Credit Score Ratings -->
-        <e k="usedplus_credit_excellent" v="Utmerket" eh="fcc2d28a" />
-        <e k="usedplus_credit_good" v="God" eh="0c6ad70b" />
-        <e k="usedplus_credit_fair" v="Middels" eh="f7f20cf0" />
-        <e k="usedplus_credit_poor" v="Darlig" eh="0e94d017" />
+        <e k="usedplus_credit_excellent" v="Excellent" eh="fcc2d28a" />
+        <e k="usedplus_credit_good" v="Good" eh="0c6ad70b" />
+        <e k="usedplus_credit_fair" v="Fair" eh="f7f20cf0" />
+        <e k="usedplus_credit_poor" v="Poor" eh="0e94d017" />
 
         <!--  Equipment Condition Tiers -->
-        <e k="usedplus_condition_critical" v="Kritisk" eh="278d01e5" />
-        <e k="usedplus_condition_poor" v="Darlig" eh="0e94d017" />
-        <e k="usedplus_condition_any" v="Alle" eh="ed36a1ef" />
-        <e k="usedplus_condition_fair" v="Middels" eh="f7f20cf0" />
-        <e k="usedplus_condition_good" v="God" eh="0c6ad70b" />
-        <e k="usedplus_condition_excellent" v="Utmerket" eh="fcc2d28a" />
-        <e k="usedplus_condition_poor_desc" v="Restekasse - kan vaere ubrukelig eller trenge omfattende reparasjoner" eh="01dfd975" />
-        <e k="usedplus_condition_any_desc" v="Billigste fungerende - kan trenge betydelige reparasjoner" eh="4f93d3f3" />
+        <e k="usedplus_condition_critical" v="Critical" eh="278d01e5" />
+        <e k="usedplus_condition_poor" v="Poor" eh="0e94d017" />
+        <e k="usedplus_condition_any" v="Any" eh="ed36a1ef" />
+        <e k="usedplus_condition_fair" v="Fair" eh="f7f20cf0" />
+        <e k="usedplus_condition_good" v="Good" eh="0c6ad70b" />
+        <e k="usedplus_condition_excellent" v="Excellent" eh="fcc2d28a" />
+        <e k="usedplus_condition_poor_desc" v="Bargain bin - may be inoperable or need extensive repairs" eh="01dfd975" />
+        <e k="usedplus_condition_any_desc" v="Cheapest working - may need significant repairs" eh="4f93d3f3" />
 
         <!--  Deal Types -->
-        <e k="usedplus_dealType_finance" v="Finansiering" eh="c482980d" />
-        <e k="usedplus_dealType_lease" v="Leie" eh="47c96b08" />
+        <e k="usedplus_dealType_finance" v="Finance" eh="c482980d" />
+        <e k="usedplus_dealType_lease" v="Lease" eh="47c96b08" />
 
         <!--  Item Types -->
-        <e k="usedplus_itemType_vehicle" v="Kjoretoy" eh="d6af9c1e" />
-        <e k="usedplus_itemType_land" v="Jordbruksland" eh="d13a7835" />
-        <e k="usedplus_itemType_placeable" v="Plassert objekt" eh="a50f608e" />
+        <e k="usedplus_itemType_vehicle" v="Vehicle" eh="d6af9c1e" />
+        <e k="usedplus_itemType_land" v="Farmland" eh="d13a7835" />
+        <e k="usedplus_itemType_placeable" v="Placeable" eh="a50f608e" />
 
         <!--  Used Vehicle Generations -->
-        <e k="usedplus_generation_recent" v="Nylig" eh="dae52b80" />
-        <e k="usedplus_generation_midage" v="Middelaldrende" eh="414353d1" />
-        <e k="usedplus_generation_old" v="Gammel" eh="c7268757" />
+        <e k="usedplus_generation_recent" v="Recent" eh="dae52b80" />
+        <e k="usedplus_generation_midage" v="Mid-age" eh="414353d1" />
+        <e k="usedplus_generation_old" v="Old" eh="c7268757" />
 
         <!--  Help Text -->
-        <e k="usedplus_help_creditScore" v="Kredittscore pavirker rentesatsen din. Forbedre den ved a opprettholde lav gjeldsgrad." eh="a3a769c7" />
-        <e k="usedplus_help_downPayment" v="Hoyere forskuddsbetaling reduserer manedlige betalinger og kan senke rentesatsen." eh="b8e7782b" />
-        <e k="usedplus_help_cashBack" v="Cashback trekkes fra forskuddsbetalingen. Oker finansiert belop." eh="0ff6b424" />
-        <e k="usedplus_help_prepayment" v="Du kan betale ned lanet tidlig for a spare renter. Forskuddsbetalingsgebyr kan palopet." eh="f8455d1a" />
-        <e k="usedplus_help_leaseDamage" v="Hold leide kjoretoy i god stand for a unnga returgebyrer." eh="f99c02f9" />
+        <e k="usedplus_help_creditScore" v="Credit score affects your interest rate. Improve it by maintaining a low debt-to-asset ratio." eh="a3a769c7" />
+        <e k="usedplus_help_downPayment" v="Higher down payment reduces monthly payments and may lower interest rate." eh="b8e7782b" />
+        <e k="usedplus_help_cashBack" v="Cash back is deducted from down payment. Increases amount financed." eh="0ff6b424" />
+        <e k="usedplus_help_prepayment" v="You can pay off your loan early to save on interest. Prepayment penalties may apply." eh="f8455d1a" />
+        <e k="usedplus_help_leaseDamage" v="Keep leased vehicles in good condition to avoid return penalties." eh="f99c02f9" />
 
         <!--  Menu Integration -->
-        <e k="usedplus_menu_financeManager" v="Finansbehandler" eh="76701fe5" />
-        <e k="usedplus_action_openFinanceManager" v="Apne finansbehandler" eh="806bb897" />
-        <e k="usedplus_action_searchUsed" v="Sok brukt utstyr" eh="77397317" />
-        <e k="input_USEDPLUS_OPEN_FINANCE_MANAGER" v="Apne finansbehandler" eh="806bb897" />
-        <e k="input_USEDPLUS_SEARCH_USED" v="Sok brukt utstyr" eh="77397317" />
-        <e k="input_USEDPLUS_INSPECT_VEHICLE" v="Inspiser kjoretoy" eh="c06f09f1" />
-        <e k="input_USEDPLUS_ACTIVATE_OBD" v="Bruk OBD-skanner" eh="9666e26b" />
-        <e k="input_USEDPLUS_TIRES" v="Dekkservice" eh="b0234f4e" />
-        <e k="input_USEDPLUS_SERVICE_TRUCK" v="Servicebil-kontroll" eh="fad0e0f1" />
+        <e k="usedplus_menu_financeManager" v="Finance Manager" eh="76701fe5" />
+        <e k="usedplus_action_openFinanceManager" v="Open Finance Manager" eh="806bb897" />
+        <e k="usedplus_action_searchUsed" v="Search Used Equipment" eh="77397317" />
+        <e k="input_USEDPLUS_OPEN_FINANCE_MANAGER" v="Open Finance Manager" eh="806bb897" />
+        <e k="input_USEDPLUS_SEARCH_USED" v="Search Used Equipment" eh="77397317" />
+        <e k="input_USEDPLUS_INSPECT_VEHICLE" v="Inspect Vehicle" eh="c06f09f1" />
+        <e k="input_USEDPLUS_ACTIVATE_OBD" v="Use OBD Scanner" eh="9666e26b" />
+        <e k="input_USEDPLUS_TIRES" v="Tire Service" eh="b0234f4e" />
+        <e k="input_USEDPLUS_SERVICE_TRUCK" v="Service Truck Control" eh="fad0e0f1" />
 
         <!--  Tooltips for Finance Dialog -->
-        <e k="usedplus_finance_loanTerm_tooltip" v="Fordel betalinger over 1-20 ar. Lengre perioder = mindre manedlige betalinger men mer total rente." eh="e1170142" />
-        <e k="usedplus_finance_downPayment_tooltip" v="Betal pa forhand for a redusere lanebelop. Hoyere forskudd = lavere rente og manedlig betaling. Omrade: 0-50%." eh="cb530b47" />
-        <e k="usedplus_finance_cashBack_tooltip" v="Motta kontanter umiddelbart (legges til lanet). Nyttig for driftsutgifter, men oker manedlige betalinger og totalkostnad." eh="dc2693cd" />
-        <e k="usedplus_finance_monthlyPayment_tooltip" v="Trekkes automatisk fra garden din hver maned i spillet. Sorg for at du har nok penger!" eh="c0ee3f8c" />
-        <e k="usedplus_finance_totalInterest_tooltip" v="Ekstra kostnad ved finansiering vs. kontant betaling. Dette er det du betaler for a spre betalinger over tid." eh="93fba715" />
-        <e k="usedplus_finance_totalCost_tooltip" v="Kjopspris + total rente = det du faktisk betaler over hele laneperioden." eh="52be56aa" />
-        <e k="usedplus_finance_interestRate_tooltip" v="Arlig prosentsats pa lanet ditt. Basert pa kredittscore og forskuddsbetaling. Lavere er bedre!" eh="d2b214cf" />
-        <e k="usedplus_finance_creditScore_tooltip" v="Gardens finansielle vurdering (300-850). Hoyere score = lavere renter. Forbedre ved a holde gjelden lav og betale i tide." eh="63bcbfcf" />
+        <e k="usedplus_finance_loanTerm_tooltip" v="Spread payments over 1-20 years. Longer terms = smaller monthly payments but more total interest paid." eh="e1170142" />
+        <e k="usedplus_finance_downPayment_tooltip" v="Pay upfront to reduce loan amount. Higher down payment = lower interest rate and monthly payment. Range: 0-50%." eh="cb530b47" />
+        <e k="usedplus_finance_cashBack_tooltip" v="Receive cash immediately (added to your loan). Useful for operating expenses, but increases monthly payments and total cost." eh="dc2693cd" />
+        <e k="usedplus_finance_monthlyPayment_tooltip" v="Deducted from your farm account automatically every in-game month. Ensure you have enough money!" eh="c0ee3f8c" />
+        <e k="usedplus_finance_totalInterest_tooltip" v="Extra cost of financing vs. paying cash. This is what you pay for spreading payments over time." eh="93fba715" />
+        <e k="usedplus_finance_totalCost_tooltip" v="Purchase price + total interest = what you'll actually pay over the entire loan term." eh="52be56aa" />
+        <e k="usedplus_finance_interestRate_tooltip" v="Annual percentage charged on your loan. Based on credit score and down payment. Lower is better!" eh="d2b214cf" />
+        <e k="usedplus_finance_creditScore_tooltip" v="Your farm's financial rating (300-850). Higher score = lower rates. Improve by keeping debt low and paying on time." eh="63bcbfcf" />
 
         <!--  Tooltips for Lease Dialog -->
-        <e k="usedplus_lease_term_tooltip" v="Lei i 1-5 ar, returner deretter kjoretoyet eller betal restverdi for a beholde det. Kortere perioder = hoyere manedlige betalinger." eh="dad3d80d" />
-        <e k="usedplus_lease_downPayment_tooltip" v="Forskuddsbetaling. Lavere maksimum (20%) enn finansiering fordi du ikke eier kjoretoyet enna." eh="eee20887" />
-        <e k="usedplus_lease_residualValue_tooltip" v="Belop a betale ved leieslutt hvis du vil beholde kjoretoyet. Basert pa estimert verdifall. Returner kjoretoyet i stedet for a slippe ekstra betaling (hvis i god stand)." eh="828cc532" />
-        <e k="usedplus_lease_monthlyPayment_tooltip" v="Trekkes automatisk hver maned i leieperioden. Lavere enn finansieringsbetalinger fordi du ikke betaler full kjoretoyverdi." eh="a251e99c" />
-        <e k="usedplus_lease_totalCost_tooltip" v="Forskuddsbetaling + alle manedlige betalinger. Inkluderer IKKE restverdi hvis du velger a kjope ved slutt." eh="dc10c085" />
-        <e k="usedplus_lease_interestRate_tooltip" v="Arlig prosentsats for leie. Hoyere enn finansieringsrenter (5,5% vs 4,5%) pa grunn av hoyere utlanerrisiko." eh="f4c00279" />
-        <e k="usedplus_lease_damage_tooltip" v="Ved leieslutt: skade >10% eller slitasje >15% = gebyrer opp til 30% av kjoretoypris. Hold kjoretoyet vedlikeholdt!" eh="01999ed8" />
+        <e k="usedplus_lease_term_tooltip" v="Lease for 1-5 years, then return vehicle or pay residual value to keep it. Shorter terms = higher monthly payments." eh="dad3d80d" />
+        <e k="usedplus_lease_downPayment_tooltip" v="Upfront payment. Lower maximum (20%) than financing because you don't own the vehicle yet." eh="eee20887" />
+        <e k="usedplus_lease_residualValue_tooltip" v="Amount to pay at lease end if you want to keep the vehicle. Based on estimated depreciation. Return vehicle instead to pay nothing extra (if in good condition)." eh="828cc532" />
+        <e k="usedplus_lease_monthlyPayment_tooltip" v="Deducted automatically each month during lease term. Lower than finance payments because you don't pay full vehicle value." eh="a251e99c" />
+        <e k="usedplus_lease_totalCost_tooltip" v="Down payment + all monthly payments. Does NOT include residual value if you choose to buy at end." eh="dc10c085" />
+        <e k="usedplus_lease_interestRate_tooltip" v="Annual percentage for lease. Higher than finance rates (5.5% vs 4.5%) because of higher lender risk." eh="f4c00279" />
+        <e k="usedplus_lease_damage_tooltip" v="At lease end: damage >10% or wear >15% = penalties up to 30% of vehicle price. Keep vehicle maintained!" eh="01999ed8" />
 
         <!--  Tooltips for Used Search Dialog -->
-        <e k="usedplus_search_local_tooltip" v="Sok hos naerliggende forhandlere. Garantert 1 maned svar, 2% kostnad, 40% suksess. Raskt og billig." eh="9b08bf3e" />
-        <e k="usedplus_search_regional_tooltip" v="Sok i regionalt nettverk. 1-3 maneder, 6% kostnad, 70% suksess. God balanse for de fleste sok." eh="e5535f88" />
-        <e k="usedplus_search_national_tooltip" v="Sok landsdekkende. 2-6 maneder, 12% kostnad, 85% suksess. Best for sjeldent utstyr." eh="0717b1d3" />
-        <e k="usedplus_search_cost_tooltip" v="Forskuddsgebyr trekkes umiddelbart. Refunderes ikke selv om soket mislykkes." eh="88816596" />
-        <e k="usedplus_search_duration_tooltip" v="Maneder i spillet til resultater. Du far et varsel nar soket er fullfort." eh="9c9f3c15" />
-        <e k="usedplus_search_successChance_tooltip" v="Sannsynlighet for a finne denne typen utstyr i brukt tilstand i det hele tatt." eh="a25aade9" />
+        <e k="usedplus_search_local_tooltip" v="Search nearby dealers. Guaranteed 1 month response, 2% cost, 40% success. Fast and cheap." eh="9b08bf3e" />
+        <e k="usedplus_search_regional_tooltip" v="Search regional network. 1-3 months, 6% cost, 70% success. Good balance for most searches." eh="e5535f88" />
+        <e k="usedplus_search_national_tooltip" v="Search nationwide. 2-6 months, 12% cost, 85% success. Best for rare equipment." eh="0717b1d3" />
+        <e k="usedplus_search_cost_tooltip" v="Upfront fee deducted immediately. Non-refundable even if search fails." eh="88816596" />
+        <e k="usedplus_search_duration_tooltip" v="In-game months until results. You'll get a notification when search completes." eh="9c9f3c15" />
+        <e k="usedplus_search_successChance_tooltip" v="Probability of finding this type of equipment in used condition at all." eh="a25aade9" />
 
         <!--  Tooltips for Finance Manager -->
-        <e k="usedplus_manager_totalFinanced_tooltip" v="Totalt belop du fortsatt skylder pa tvers av alle lan og leieavtaler. Hold under eiendelsverdien din!" eh="7c15778c" />
-        <e k="usedplus_manager_monthlyObligations_tooltip" v="Totalt trukket fra kontoen din hver maned. Sorg for at du alltid har nok kontantstrrom!" eh="c5cee5ec" />
-        <e k="usedplus_manager_creditScore_tooltip" v="300-850 vurdering. 750+ = Utmerket, 650-749 = God, 550-649 = Middels, &lt;550 = Darlig. Pavirker alle fremtidige renter!" eh="4b1c2269" />
-        <e k="usedplus_manager_assetValue_tooltip" v="Samlet verdi av kjoretoy, utstyr, jorder og bygninger du eier. Bor vaere hoyere enn gjelden din!" eh="64ef61f3" />
-        <e k="usedplus_manager_debtRatio_tooltip" v="Total gjeld / Eiendelsverdi. Hold under 30% for utmerket kreditt. Over 50% skader scoren din betydelig!" eh="041f390c" />
+        <e k="usedplus_manager_totalFinanced_tooltip" v="Total amount you still owe across all loans and leases. Keep below your asset value!" eh="7c15778c" />
+        <e k="usedplus_manager_monthlyObligations_tooltip" v="Total deducted from your account each month. Ensure you always have enough cash flow!" eh="c5cee5ec" />
+        <e k="usedplus_manager_creditScore_tooltip" v="300-850 rating. 750+ = Excellent, 650-749 = Good, 550-649 = Fair, &lt;550 = Poor. Affects all future interest rates!" eh="4b1c2269" />
+        <e k="usedplus_manager_assetValue_tooltip" v="Combined value of vehicles, equipment, fields, and buildings you own. Should be higher than your debt!" eh="64ef61f3" />
+        <e k="usedplus_manager_debtRatio_tooltip" v="Total Debt ÷ Asset Value. Keep below 30% for excellent credit. Above 50% hurts your score significantly!" eh="041f390c" />
 
         <!--  Tooltips for Finance Detail Frame -->
-        <e k="usedplus_detail_principalPaid_tooltip" v="Del av opprinnelig lan du har betalt tilbake. Dette reduserer saldoen din." eh="b4d4023c" />
-        <e k="usedplus_detail_interestPaid_tooltip" v="Ekstra kostnad du har betalt sa langt for a lane penger. Dette reduserer IKKE saldoen din." eh="f0c23fa4" />
-        <e k="usedplus_detail_projectedInterest_tooltip" v="Total rente du betaler hvis du fortsetter med minimum manedlige betalinger. Betal ekstra na for a redusere dette!" eh="d5d18292" />
-        <e k="usedplus_detail_prepaymentPenalty_tooltip" v="Engangsgebyr for tidlig nedbetaling (vanligvis 1-3% av saldo). Belastes fordi utlaner mister fremtidige renteinntekter." eh="aff5ffdd" />
-        <e k="usedplus_detail_currentBalance_tooltip" v="Belop du fortsatt skylder (kun hovedstol). A betale ekstra reduserer dette raskere!" eh="d789bc3a" />
-        <e k="usedplus_detail_paymentSplit_tooltip" v="Viser hvordan betalingen din fordeles: Hovedstol (betaler ned saldo) vs Rente (lanekostnad)." eh="4c8d291b" />
+        <e k="usedplus_detail_principalPaid_tooltip" v="Portion of original loan you've paid back. This reduces your balance." eh="b4d4023c" />
+        <e k="usedplus_detail_interestPaid_tooltip" v="Extra cost you've paid so far for borrowing money. This does NOT reduce your balance." eh="f0c23fa4" />
+        <e k="usedplus_detail_projectedInterest_tooltip" v="Total interest you'll pay if you continue minimum monthly payments. Pay extra now to reduce this!" eh="d5d18292" />
+        <e k="usedplus_detail_prepaymentPenalty_tooltip" v="One-time fee for paying off early (usually 1-3% of balance). Charged because lender loses future interest income." eh="aff5ffdd" />
+        <e k="usedplus_detail_currentBalance_tooltip" v="Amount you still owe (principal only). Paying extra reduces this faster!" eh="d789bc3a" />
+        <e k="usedplus_detail_paymentSplit_tooltip" v="Shows how your payment divides: Principal (pays down balance) vs Interest (borrowing cost)." eh="4c8d291b" />
 
         <!--  Take Loan Dialog -->
-        <e k="usedplus_loan_title" v="Ta opp et lan" eh="f50c2071" />
-        <e k="usedplus_loan_configuration" v="LANEOPPSETT" eh="6c055726" />
-        <e k="usedplus_loan_paymentPreview" v="BETALINGSOVERSIKT" eh="3890682c" />
-        <e k="usedplus_loan_accept" v="Godta lan" eh="ad5f835e" />
-        <e k="usedplus_loan_creditInfo" v="Din kredittscore bestemmer maksimal lanegrense og rentesats." eh="2af2776a" />
-        <e k="usedplus_loan_collateralInfo" v="Sikkerhet beregnes fra 50% av kjoretoyverdier og 60% av landverdier." eh="4a5857f7" />
-        <e k="usedplus_loan_success" v="Lan godkjent! %s satt inn pa kontoen din." eh="aefc6532" />
-        <e k="usedplus_loan_denied" v="Lan avslatt. Utilstrekkelig sikkerhet eller darlig kreditt." eh="c49dcbcb" />
-        <e k="usedplus_loan_monthlyPayment" v="Manedlig betaling" eh="c102e118" />
-        <e k="usedplus_loan_totalInterest" v="Total rente" eh="8c4f3836" />
-        <e k="usedplus_loan_totalRepayment" v="Total tilbakebetaling" eh="78b2ff2b" />
+        <e k="usedplus_loan_title" v="Take Out a Loan" eh="f50c2071" />
+        <e k="usedplus_loan_configuration" v="LOAN CONFIGURATION" eh="6c055726" />
+        <e k="usedplus_loan_paymentPreview" v="PAYMENT PREVIEW" eh="3890682c" />
+        <e k="usedplus_loan_accept" v="Accept Loan" eh="ad5f835e" />
+        <e k="usedplus_loan_creditInfo" v="Your credit score determines your maximum borrowing limit and interest rate." eh="2af2776a" />
+        <e k="usedplus_loan_collateralInfo" v="Collateral is calculated from 50% of vehicle values and 60% of land values." eh="4a5857f7" />
+        <e k="usedplus_loan_success" v="Loan approved! %s deposited to your account." eh="aefc6532" />
+        <e k="usedplus_loan_denied" v="Loan denied. Insufficient collateral or poor credit." eh="c49dcbcb" />
+        <e k="usedplus_loan_monthlyPayment" v="Monthly Payment" eh="c102e118" />
+        <e k="usedplus_loan_totalInterest" v="Total Interest" eh="8c4f3836" />
+        <e k="usedplus_loan_totalRepayment" v="Total Repayment" eh="78b2ff2b" />
         <!-- MOVED: usedplus_button_takeLoan to Common Button Labels section -->
 
         <!--  Repair Dialog -->
-        <e k="usedplus_repair_title" v="Kjoretoyservice" eh="40546bfb" />
-        <e k="usedplus_repair_title_mechanical" v="Mekanisk reparasjon" eh="60a0d54f" />
-        <e k="usedplus_repair_title_repaint" v="Mal kjoretoy pa nytt" eh="d5b4d6be" />
-        <e k="usedplus_repair_mechanical" v="MEKANISK REPARASJON" eh="6294bbee" />
-        <e k="usedplus_repair_cosmetic" v="LAKK OG KOSMETIKK" eh="d111819f" />
-        <e k="usedplus_repair_slider" v="Reparasjonsmengde" eh="0dda5ee8" />
-        <e k="usedplus_repair_cost" v="Reparasjonskostnad" eh="6f0504d5" />
-        <e k="usedplus_repair_after" v="Tilstand etter" eh="d6d75451" />
-        <e k="usedplus_repair_payCash" v="Betal kontant" eh="e490310b" />
-        <e k="usedplus_repair_finance" v="Finansier reparasjon" eh="70ef80a4" />
-        <e k="usedplus_repair_success" v="Reparasjon fullfort! %s reparert." eh="fecc6480" />
-        <e k="usedplus_repaint_slider" v="Malemengde" eh="bf64833d" />
-        <e k="usedplus_repaint_cost" v="Malekostnad" eh="b994cb4e" />
-        <e k="usedplus_button_repairVehicle" v="Reparer kjoretoy" eh="9592bc0d" />
-        <e k="usedplus_button_repaint" v="Mal pa nytt" eh="1d0b7dd4" />
-        <e k="usedplus_button_tradeIn" v="Innbytte" eh="d9a572a1" />
-        <e k="usedplus_repair_financeSuccess" v="Reparasjon finansiert! %s over %d maneder til %s/maned" eh="ac520447" />
-        <e k="usedplus_repair_noRepairsNeeded" v="Dette kjoretoyet trenger ikke reparasjon." eh="58c85fca" />
+        <e k="usedplus_repair_title" v="Vehicle Service" eh="40546bfb" />
+        <e k="usedplus_repair_title_mechanical" v="Mechanical Repair" eh="60a0d54f" />
+        <e k="usedplus_repair_title_repaint" v="Repaint Vehicle" eh="d5b4d6be" />
+        <e k="usedplus_repair_mechanical" v="MECHANICAL REPAIR" eh="6294bbee" />
+        <e k="usedplus_repair_cosmetic" v="PAINT &amp; COSMETIC" eh="d111819f" />
+        <e k="usedplus_repair_slider" v="Repair Amount" eh="0dda5ee8" />
+        <e k="usedplus_repair_cost" v="Repair Cost" eh="6f0504d5" />
+        <e k="usedplus_repair_after" v="Condition After" eh="d6d75451" />
+        <e k="usedplus_repair_payCash" v="Pay Cash" eh="e490310b" />
+        <e k="usedplus_repair_finance" v="Finance Repair" eh="70ef80a4" />
+        <e k="usedplus_repair_success" v="Repair complete! %s repaired." eh="fecc6480" />
+        <e k="usedplus_repaint_slider" v="Repaint Amount" eh="bf64833d" />
+        <e k="usedplus_repaint_cost" v="Repaint Cost" eh="b994cb4e" />
+        <e k="usedplus_button_repairVehicle" v="Repair Vehicle" eh="9592bc0d" />
+        <e k="usedplus_button_repaint" v="Repaint" eh="1d0b7dd4" />
+        <e k="usedplus_button_tradeIn" v="Trade-In" eh="d9a572a1" />
+        <e k="usedplus_repair_financeSuccess" v="Repair financed! %s over %d months at %s/month" eh="ac520447" />
+        <e k="usedplus_repair_noRepairsNeeded" v="This vehicle does not need repairs." eh="58c85fca" />
 
         <!-- ESC Menu Tabs -->
-        <e k="usedplus_tab_finances" v="Finans" eh="46d0ae63" />
-        <e k="usedplus_tab_searches" v="Sok" eh="490fae83" />
-        <e k="usedplus_tab_stats" v="Statistikk" eh="c33e404a" />
+        <e k="usedplus_tab_finances" v="Finances" eh="46d0ae63" />
+        <e k="usedplus_tab_searches" v="Searches" eh="490fae83" />
+        <e k="usedplus_tab_stats" v="Statistics" eh="c33e404a" />
 
         <!-- Searches Tab -->
-        <e k="usedplus_searches_active" v="Aktive sok" eh="f33a3913" />
-        <e k="usedplus_searches_totalCost" v="Total sokekostnad" eh="1bd59244" />
+        <e k="usedplus_searches_active" v="Active Searches" eh="f33a3913" />
+        <e k="usedplus_searches_totalCost" v="Total Search Cost" eh="1bd59244" />
 
         <!-- Stats Tab -->
-        <e k="usedplus_stats_creditInfo" v="Basert pa forhold mellom eiendeler og gjeld" eh="f07db642" />
-        <e k="usedplus_stats_lifetime" v="Livstidsstatistikk" eh="727103d4" />
-        <e k="usedplus_stats_totalFinanced" v="Totalt finansiert (alle tider)" eh="772f294e" />
-        <e k="usedplus_stats_totalInterest" v="Total rente betalt" eh="ee7cd19e" />
-        <e k="usedplus_stats_searchesCompleted" v="Sok fullfort" eh="20cde964" />
-        <e k="usedplus_stats_searchesSuccessful" v="Vellykkede sok" eh="9b0bb3f7" />
+        <e k="usedplus_stats_creditInfo" v="Based on assets vs debt ratio" eh="f07db642" />
+        <e k="usedplus_stats_lifetime" v="Lifetime Statistics" eh="727103d4" />
+        <e k="usedplus_stats_totalFinanced" v="Total Financed (All Time)" eh="772f294e" />
+        <e k="usedplus_stats_totalInterest" v="Total Interest Paid" eh="ee7cd19e" />
+        <e k="usedplus_stats_searchesCompleted" v="Searches Completed" eh="20cde964" />
+        <e k="usedplus_stats_searchesSuccessful" v="Searches Successful" eh="9b0bb3f7" />
 
         <!--  Credit History -->
-        <e k="usedplus_creditHistory_title" v="Kreditthistorikk" eh="317d0ae5" />
-        <e k="usedplus_creditHistory_paymentOnTime" v="Betaling i tide" eh="40b0a85e" />
-        <e k="usedplus_creditHistory_paymentMissed" v="Uteblitt betaling" eh="1c3f3184" />
-        <e k="usedplus_creditHistory_dealPaidOff" v="Lan nedbetalt" eh="d75739c7" />
-        <e k="usedplus_creditHistory_newDebt" v="Ny finansiering" eh="516d9124" />
-        <e k="usedplus_creditHistory_loanTaken" v="Kontantlan tatt" eh="42a815ac" />
-        <e k="usedplus_creditHistory_excellent" v="Utmerket kreditt oppnadd" eh="00e0a79c" />
-        <e k="usedplus_creditHistory_trend" v="Scoretrend" eh="c93fabeb" />
-        <e k="usedplus_creditHistory_trendUp" v="Stigende trend" eh="b308896e" />
-        <e k="usedplus_creditHistory_trendDown" v="Synkende trend" eh="39e2d7ed" />
-        <e k="usedplus_creditHistory_stable" v="Stabil" eh="fa3aff3c" />
+        <e k="usedplus_creditHistory_title" v="Credit History" eh="317d0ae5" />
+        <e k="usedplus_creditHistory_paymentOnTime" v="Payment On Time" eh="40b0a85e" />
+        <e k="usedplus_creditHistory_paymentMissed" v="Missed Payment" eh="1c3f3184" />
+        <e k="usedplus_creditHistory_dealPaidOff" v="Loan Paid Off" eh="d75739c7" />
+        <e k="usedplus_creditHistory_newDebt" v="New Finance" eh="516d9124" />
+        <e k="usedplus_creditHistory_loanTaken" v="Cash Loan Taken" eh="42a815ac" />
+        <e k="usedplus_creditHistory_excellent" v="Excellent Credit Achieved" eh="00e0a79c" />
+        <e k="usedplus_creditHistory_trend" v="Score Trend" eh="c93fabeb" />
+        <e k="usedplus_creditHistory_trendUp" v="Trending Up" eh="b308896e" />
+        <e k="usedplus_creditHistory_trendDown" v="Trending Down" eh="39e2d7ed" />
+        <e k="usedplus_creditHistory_stable" v="Stable" eh="fa3aff3c" />
 
         <!--  Trade-In System -->
-        <e k="usedplus_tradeIn_title" v="Innbytte av kjoretoy" eh="f5f0c421" />
-        <e k="usedplus_tradeIn_select" v="Velg et kjoretoy a bytte inn:" eh="4d5697ad" />
-        <e k="usedplus_tradeIn_value" v="Innbytteverdi" eh="a62d3415" />
-        <e k="usedplus_tradeIn_brandBonus" v="Samme merke-bonus (+10%)" eh="5775348c" />
-        <e k="usedplus_tradeIn_noVehicles" v="Ingen kjoretoy kvalifisert for innbytte" eh="0ffbcb88" />
-        <e k="usedplus_tradeIn_confirm" v="Bruk innbytte" eh="5d265e23" />
-        <e k="usedplus_tradeIn_skip" v="Ingen innbytte" eh="d28a6989" />
-        <e k="usedplus_tradeIn_help" v="Innbytteverdi er 85% av salgspris. Kjop av samme merke gir 10% bonus." eh="acd55aef" />
-        <e k="usedplus_tradeIn_applied" v="Innbytte brukt: %s kreditt" eh="d58037e6" />
-        <e k="usedplus_tradeIn_financed" v="Finansierte kjoretoy kan ikke byttes inn" eh="b99f5ae1" />
+        <e k="usedplus_tradeIn_title" v="Trade-In Vehicle" eh="f5f0c421" />
+        <e k="usedplus_tradeIn_select" v="Select a vehicle to trade in:" eh="4d5697ad" />
+        <e k="usedplus_tradeIn_value" v="Trade-In Value" eh="a62d3415" />
+        <e k="usedplus_tradeIn_brandBonus" v="Same Brand Bonus (+10%)" eh="5775348c" />
+        <e k="usedplus_tradeIn_noVehicles" v="No vehicles eligible for trade-in" eh="0ffbcb88" />
+        <e k="usedplus_tradeIn_confirm" v="Apply Trade-In" eh="5d265e23" />
+        <e k="usedplus_tradeIn_skip" v="No Trade-In" eh="d28a6989" />
+        <e k="usedplus_tradeIn_help" v="Trade-in value is 85% of sell price. Same-brand purchases get a 10% bonus." eh="acd55aef" />
+        <e k="usedplus_tradeIn_applied" v="Trade-in applied: %s credit" eh="d58037e6" />
+        <e k="usedplus_tradeIn_financed" v="Financed vehicles cannot be traded in" eh="b99f5ae1" />
 
         <!--  Financial Dashboard -->
-        <e k="usedplus_dashboard_title" v="Økonomisk Dashbord" eh="475b3fca" />
-        <e k="usedplus_dashboard_creditScore" v="Kredittscore" eh="ae61b052" />
-        <e k="usedplus_dashboard_obligations" v="Månedlige Forpliktelser" eh="398fa99a" />
-        <e k="usedplus_dashboard_debtRatio" v="Gjeld-til-Eiendel-forhold" eh="325f67e0" />
-        <e k="usedplus_dashboard_upcoming" v="Kommende Betalinger" eh="f994fae4" />
-        <e k="usedplus_dashboard_history" v="Nylig Kredittaktivitet" eh="6b32a5cb" />
-        <e k="usedplus_dashboard_statistics" v="Livstidsstatistikk" eh="727103d4" />
-        <e k="usedplus_dashboard_equipment" v="Utstyr" eh="9ccda2d5" />
+        <e k="usedplus_dashboard_title" v="Financial Dashboard" eh="475b3fca" />
+        <e k="usedplus_dashboard_creditScore" v="Credit Score" eh="ae61b052" />
+        <e k="usedplus_dashboard_obligations" v="Monthly Obligations" eh="398fa99a" />
+        <e k="usedplus_dashboard_debtRatio" v="Debt-to-Asset Ratio" eh="325f67e0" />
+        <e k="usedplus_dashboard_upcoming" v="Upcoming Payments" eh="f994fae4" />
+        <e k="usedplus_dashboard_history" v="Recent Credit Activity" eh="6b32a5cb" />
+        <e k="usedplus_dashboard_statistics" v="Lifetime Statistics" eh="727103d4" />
+        <e k="usedplus_dashboard_equipment" v="Equipment" eh="9ccda2d5" />
         <e k="usedplus_dashboard_land" v="Land" eh="512ef7c6" />
-        <e k="usedplus_dashboard_loans" v="Lån" eh="64e109fb" />
-        <e k="usedplus_dashboard_total" v="Totalt" eh="96b01412" />
-        <e k="usedplus_dashboard_assets" v="Totale Eiendeler" eh="7f0b6dfb" />
-        <e k="usedplus_dashboard_debt" v="Total Gjeld" eh="f0648c99" />
-        <e k="usedplus_dashboard_ratio" v="Forhold" eh="8334a158" />
-        <e k="usedplus_dashboard_excellent" v="Utmerket" eh="fcc2d28a" />
-        <e k="usedplus_dashboard_good" v="God" eh="0c6ad70b" />
-        <e k="usedplus_dashboard_fair" v="Middels" eh="f7f20cf0" />
-        <e k="usedplus_dashboard_high" v="Høy" eh="655d20c1" />
-        <e k="usedplus_dashboard_critical" v="Kritisk" eh="278d01e5" />
-        <e k="usedplus_dashboard_noPayments" v="Ingen kommende betalinger" eh="96a72e57" />
-        <e k="usedplus_dashboard_noHistory" v="Ingen kreditthistorikk ennå" eh="4e58800f" />
-        <e k="usedplus_dashboard_onTime" v="Rettidige Betalinger" eh="3f020383" />
-        <e k="usedplus_dashboard_missed" v="Uteblitte Betalinger" eh="352ca78d" />
-        <e k="usedplus_dashboard_tip" v="Tips: Betal i tide for å forbedre kredittscoren din. Betal ned lån tidlig for å spare renter." eh="4878dc76" />
+        <e k="usedplus_dashboard_loans" v="Loans" eh="64e109fb" />
+        <e k="usedplus_dashboard_total" v="Total" eh="96b01412" />
+        <e k="usedplus_dashboard_assets" v="Total Assets" eh="7f0b6dfb" />
+        <e k="usedplus_dashboard_debt" v="Total Debt" eh="f0648c99" />
+        <e k="usedplus_dashboard_ratio" v="Ratio" eh="8334a158" />
+        <e k="usedplus_dashboard_excellent" v="Excellent" eh="fcc2d28a" />
+        <e k="usedplus_dashboard_good" v="Good" eh="0c6ad70b" />
+        <e k="usedplus_dashboard_fair" v="Fair" eh="f7f20cf0" />
+        <e k="usedplus_dashboard_high" v="High" eh="655d20c1" />
+        <e k="usedplus_dashboard_critical" v="Critical" eh="278d01e5" />
+        <e k="usedplus_dashboard_noPayments" v="No upcoming payments" eh="96a72e57" />
+        <e k="usedplus_dashboard_noHistory" v="No credit history yet" eh="4e58800f" />
+        <e k="usedplus_dashboard_onTime" v="On-Time Payments" eh="3f020383" />
+        <e k="usedplus_dashboard_missed" v="Missed Payments" eh="352ca78d" />
+        <e k="usedplus_dashboard_tip" v="Tip: Make payments on time to improve your credit score. Pay off loans early to save on interest." eh="4878dc76" />
 
         <!--  Land Purchase Dialog -->
-        <e k="usedplus_land_title" v="Kjøp Jordbruksland" eh="f741fdc8" />
-        <e k="usedplus_land_purchaseMethod" v="KJØPSMETODE" eh="f5f3c261" />
-        <e k="usedplus_land_paymentSummary" v="BETALINGSOVERSIKT" eh="0dd98605" />
-        <e k="usedplus_land_financeTerms" v="FINANSIERINGSVILKÅR" eh="42352b5c" />
-        <e k="usedplus_land_leaseTerms" v="LEIEVILKÅR" eh="0100690c" />
-        <e k="usedplus_land_landPrice" v="Landpris:" eh="b2d5ac98" />
-        <e k="usedplus_land_taxes" v="Overføringsskatt:" eh="351b4b60" />
-        <e k="usedplus_land_totalDue" v="TOTALT FORFALT:" eh="6527240c" />
-        <e k="usedplus_land_loanTerm" v="Låneperiode:" eh="766186df" />
-        <e k="usedplus_land_leaseTerm" v="Leieperiode:" eh="52b77655" />
-        <e k="usedplus_land_downPayment" v="Forskuddsbetaling:" eh="a706fdb6" />
-        <e k="usedplus_land_amountFinanced" v="Finansiert Beløp:" eh="c9247e08" />
-        <e k="usedplus_land_interestRate" v="Rentesats:" eh="389f9dd8" />
-        <e k="usedplus_land_monthlyPayment" v="Månedlig Betaling:" eh="3499b658" />
-        <e k="usedplus_land_totalInterest" v="Total Rente:" eh="183c0158" />
-        <e k="usedplus_land_dueToday" v="FORFALLER I DAG:" eh="f644eca9" />
-        <e k="usedplus_land_totalLeaseCost" v="Total Leiekostnad:" eh="61a93e0e" />
-        <e k="usedplus_land_buyoutPrice" v="Utkjøpspris:" eh="121b9571" />
-        <e k="usedplus_land_confirm" v="Bekreft Kjøp" eh="c8505ab3" />
+        <e k="usedplus_land_title" v="Purchase Farmland" eh="f741fdc8" />
+        <e k="usedplus_land_purchaseMethod" v="PURCHASE METHOD" eh="f5f3c261" />
+        <e k="usedplus_land_paymentSummary" v="PAYMENT SUMMARY" eh="0dd98605" />
+        <e k="usedplus_land_financeTerms" v="FINANCE TERMS" eh="42352b5c" />
+        <e k="usedplus_land_leaseTerms" v="LEASE TERMS" eh="0100690c" />
+        <e k="usedplus_land_landPrice" v="Land Price:" eh="b2d5ac98" />
+        <e k="usedplus_land_taxes" v="Transfer Tax:" eh="351b4b60" />
+        <e k="usedplus_land_totalDue" v="TOTAL DUE:" eh="6527240c" />
+        <e k="usedplus_land_loanTerm" v="Loan Term:" eh="766186df" />
+        <e k="usedplus_land_leaseTerm" v="Lease Term:" eh="52b77655" />
+        <e k="usedplus_land_downPayment" v="Down Payment:" eh="a706fdb6" />
+        <e k="usedplus_land_amountFinanced" v="Amount Financed:" eh="c9247e08" />
+        <e k="usedplus_land_interestRate" v="Interest Rate:" eh="389f9dd8" />
+        <e k="usedplus_land_monthlyPayment" v="Monthly Payment:" eh="3499b658" />
+        <e k="usedplus_land_totalInterest" v="Total Interest:" eh="183c0158" />
+        <e k="usedplus_land_dueToday" v="DUE TODAY:" eh="f644eca9" />
+        <e k="usedplus_land_totalLeaseCost" v="Total Lease Cost:" eh="61a93e0e" />
+        <e k="usedplus_land_buyoutPrice" v="Buyout Price:" eh="121b9571" />
+        <e k="usedplus_land_confirm" v="Confirm Purchase" eh="c8505ab3" />
 
         <!--  Used Vehicle Marketplace - Agent-Based Sales -->
-        <e k="usedplus_sell_title" v="Selg Kjøretøy" eh="fe030802" />
-        <e k="usedplus_sell_selectAgent" v="Velg Salgsagent" eh="08c52dc1" />
-        <e k="usedplus_sell_vehicleDetails" v="Kjøretøydetaljer" eh="fcb2575f" />
-        <e k="usedplus_sell_vanillaValue" v="Umiddelbar Salgsverdi" eh="8ddad336" />
-        <e k="usedplus_sell_localAgent" v="Lokal Agent" eh="082cb5b6" />
+        <e k="usedplus_sell_title" v="Sell Vehicle" eh="fe030802" />
+        <e k="usedplus_sell_selectAgent" v="Select Sales Agent" eh="08c52dc1" />
+        <e k="usedplus_sell_vehicleDetails" v="Vehicle Details" eh="fcb2575f" />
+        <e k="usedplus_sell_vanillaValue" v="Instant Sell Value" eh="8ddad336" />
+        <e k="usedplus_sell_localAgent" v="Local Agent" eh="082cb5b6" />
         <e k="usedplus_sell_regionalAgent" v="Regional Agent" eh="403955ba" />
-        <e k="usedplus_sell_nationalAgent" v="Nasjonal Agent" eh="eef8214f" />
-        <e k="usedplus_sell_expectedReturn" v="Forventet Avkastning" eh="20b99f1d" />
-        <e k="usedplus_sell_timeFrame" v="Tidsramme" eh="ced18839" />
-        <e k="usedplus_sell_agentFee" v="Agentgebyr" eh="40f286a6" />
-        <e k="usedplus_sell_successRate" v="Suksessrate" eh="aac60ede" />
-        <e k="usedplus_sell_confirm" v="Legg Ut for Salg" eh="8ce97708" />
-        <e k="usedplus_sell_tradeInOnly" v="Kun Innbytte" eh="c9626b59" />
-        <e k="usedplus_sell_tradeInDescription" v="50-65% umiddelbar verdi ved kjøp av nytt kjøretøy" eh="d6dcdb1f" />
-        <e k="usedplus_sell_localDescription" v="Raskt lokalt salg. 1-2 måneder, 85% suksessrate." eh="8cb93a6b" />
-        <e k="usedplus_sell_regionalDescription" v="Regionalt nettverk. 2-4 måneder, 90% suksessrate." eh="9e0c4114" />
-        <e k="usedplus_sell_nationalDescription" v="Landsdekkende. 3-6 måneder, 95% suksessrate." eh="013aefeb" />
-        <e k="usedplus_sell_listed" v="Kjøretøy lagt ut hos %s. Forventet: %s - %s" eh="28271f31" />
-        <e k="usedplus_sell_alreadyListed" v="Dette kjøretøyet er allerede lagt ut for salg" eh="cb22926e" />
-        <e k="usedplus_sell_cantSellFinanced" v="Kan ikke selge finansierte kjøretøy. Betal ned saldoen først." eh="1dcb38c2" />
+        <e k="usedplus_sell_nationalAgent" v="National Agent" eh="eef8214f" />
+        <e k="usedplus_sell_expectedReturn" v="Expected Return" eh="20b99f1d" />
+        <e k="usedplus_sell_timeFrame" v="Time Frame" eh="ced18839" />
+        <e k="usedplus_sell_agentFee" v="Agent Fee" eh="40f286a6" />
+        <e k="usedplus_sell_successRate" v="Success Rate" eh="aac60ede" />
+        <e k="usedplus_sell_confirm" v="List for Sale" eh="8ce97708" />
+        <e k="usedplus_sell_tradeInOnly" v="Trade-In Only" eh="c9626b59" />
+        <e k="usedplus_sell_tradeInDescription" v="50-65% instant value when purchasing a new vehicle" eh="d6dcdb1f" />
+        <e k="usedplus_sell_localDescription" v="Quick local sale. 1-2 months, 85% success rate." eh="8cb93a6b" />
+        <e k="usedplus_sell_regionalDescription" v="Regional network. 2-4 months, 90% success rate." eh="9e0c4114" />
+        <e k="usedplus_sell_nationalDescription" v="Nationwide reach. 3-6 months, 95% success rate." eh="013aefeb" />
+        <e k="usedplus_sell_listed" v="Vehicle listed with %s. Expected: %s - %s" eh="28271f31" />
+        <e k="usedplus_sell_alreadyListed" v="This vehicle is already listed for sale" eh="cb22926e" />
+        <e k="usedplus_sell_cantSellFinanced" v="Cannot sell financed vehicles. Pay off balance first." eh="1dcb38c2" />
 
         <!--  Sale Offer Dialog -->
-        <e k="usedplus_saleOffer_title" v="Salgstilbud Mottatt" eh="6eeec636" />
-        <e k="usedplus_saleOffer_message" v="En kjøper er funnet for kjøretøyet ditt!" eh="7b1304f7" />
-        <e k="usedplus_saleOffer_offerAmount" v="Tilbudsbeløp" eh="0916d967" />
-        <e k="usedplus_saleOffer_expiresIn" v="Tilbudet Utløper Om" eh="ce06a052" />
-        <e k="usedplus_saleOffer_accept" v="Aksepter Tilbud" eh="93a5776a" />
-        <e k="usedplus_saleOffer_decline" v="Avslå Tilbud" eh="3db99481" />
-        <e k="usedplus_saleOffer_hours" v="%d timer" eh="4e8d5e54" />
-        <e k="usedplus_saleOffer_accepted" v="Kjøretøy solgt for %s!" eh="f5cd95ab" />
-        <e k="usedplus_saleOffer_declined" v="Tilbud avslått. Agent fortsetter søket..." eh="b7c0bba6" />
-        <e k="usedplus_saleOffer_expired" v="Tilbud utløpt for %s. Agent fortsetter søket..." eh="180bd573" />
+        <e k="usedplus_saleOffer_title" v="Sale Offer Received" eh="6eeec636" />
+        <e k="usedplus_saleOffer_message" v="A buyer has been found for your vehicle!" eh="7b1304f7" />
+        <e k="usedplus_saleOffer_offerAmount" v="Offer Amount" eh="0916d967" />
+        <e k="usedplus_saleOffer_expiresIn" v="Offer Expires In" eh="ce06a052" />
+        <e k="usedplus_saleOffer_accept" v="Accept Offer" eh="93a5776a" />
+        <e k="usedplus_saleOffer_decline" v="Decline Offer" eh="3db99481" />
+        <e k="usedplus_saleOffer_hours" v="%d hours" eh="4e8d5e54" />
+        <e k="usedplus_saleOffer_accepted" v="Vehicle sold for %s!" eh="f5cd95ab" />
+        <e k="usedplus_saleOffer_declined" v="Offer declined. Agent continues searching..." eh="b7c0bba6" />
+        <e k="usedplus_saleOffer_expired" v="Offer expired for %s. Agent continues searching..." eh="180bd573" />
 
         <!-- Sale Expired Dialog (no buyer found) -->
-        <e k="usedplus_saleExpired_title" v="Salgsannonse Utløpt" eh="610084ea" />
-        <e k="usedplus_saleExpired_sectionInfo" v="ANNONSEDETALJER" eh="7b3916d2" />
-        <e k="usedplus_saleExpired_sectionOutcome" v="RESULTAT" eh="79988be0" />
-        <e k="usedplus_saleExpired_noBuyer" v="Ingen kjøper ble funnet i annonseperioden." eh="aa575ade" />
-        <e k="usedplus_saleExpired_feePaid" v="Agentgebyr Betalt:" eh="ce19a828" />
-        <e k="usedplus_saleExpired_hint" v="Du kan legge ut kjøretøyet på nytt med samme eller andre agent-/prisinnstillinger." eh="e225592c" />
-        <e k="usedplus_saleExpired_relist" v="Legg Ut På Nytt" eh="a556ce3c" />
+        <e k="usedplus_saleExpired_title" v="Sale Listing Expired" eh="610084ea" />
+        <e k="usedplus_saleExpired_sectionInfo" v="LISTING DETAILS" eh="7b3916d2" />
+        <e k="usedplus_saleExpired_sectionOutcome" v="OUTCOME" eh="79988be0" />
+        <e k="usedplus_saleExpired_noBuyer" v="No buyer was found during the listing period." eh="aa575ade" />
+        <e k="usedplus_saleExpired_feePaid" v="Agent Fee Paid:" eh="ce19a828" />
+        <e k="usedplus_saleExpired_hint" v="You can relist this vehicle with the same or different agent/price settings." eh="e225592c" />
+        <e k="usedplus_saleExpired_relist" v="Relist Vehicle" eh="a556ce3c" />
 
         <!--  Sale Listing Status -->
-        <e k="usedplus_sale_statusActive" v="Søker etter kjøper..." eh="28e37076" />
-        <e k="usedplus_sale_statusPending" v="TILBUD: %s" eh="868cdf29" />
-        <e k="usedplus_sale_statusSold" v="SOLGT for %s" eh="737a574b" />
-        <e k="usedplus_sale_statusExpired" v="Utløpt - Ingen kjøper funnet" eh="3e3e51fd" />
-        <e k="usedplus_sale_statusCancelled" v="Kansellert" eh="a149e85a" />
-        <e k="usedplus_sale_listingExpired" v="Ingen kjøper funnet for %s. Agentgebyr (%s) var ikke refunderbart." eh="08587fe0" />
-        <e k="usedplus_sale_cancel" v="Kanseller Annonse" eh="587021c1" />
-        <e k="usedplus_sale_cancelConfirm" v="Kanseller salgsannonse for %s? Agentgebyr vil IKKE refunderes." eh="3bbc7efa" />
-        <e k="usedplus_sale_cancelled" v="Salgsannonse kansellert for %s." eh="aa5902d2" />
+        <e k="usedplus_sale_statusActive" v="Searching for buyer..." eh="28e37076" />
+        <e k="usedplus_sale_statusPending" v="OFFER: %s" eh="868cdf29" />
+        <e k="usedplus_sale_statusSold" v="SOLD for %s" eh="737a574b" />
+        <e k="usedplus_sale_statusExpired" v="Expired - No buyer found" eh="3e3e51fd" />
+        <e k="usedplus_sale_statusCancelled" v="Cancelled" eh="a149e85a" />
+        <e k="usedplus_sale_listingExpired" v="No buyer found for %s. Agent fee (%s) was non-refundable." eh="08587fe0" />
+        <e k="usedplus_sale_cancel" v="Cancel Listing" eh="587021c1" />
+        <e k="usedplus_sale_cancelConfirm" v="Cancel sale listing for %s? Agent fee will NOT be refunded." eh="3bbc7efa" />
+        <e k="usedplus_sale_cancelled" v="Sale listing cancelled for %s." eh="aa5902d2" />
 
         <!--  Finance Manager - Sale Listings Section -->
-        <e k="usedplus_manager_saleListings" v="KJØRETØY TIL SALGS" eh="2f6d760e" />
-        <e k="usedplus_manager_noSales" v="Ingen aktive salgsannonser" eh="0af1686a" />
+        <e k="usedplus_manager_saleListings" v="VEHICLES FOR SALE" eh="2f6d760e" />
+        <e k="usedplus_manager_noSales" v="No active sale listings" eh="0af1686a" />
 
         <!--  Menu Navigation Buttons -->
-        <e k="usedplus_button_nextPage" v="Neste Meny" eh="2553da59" />
-        <e k="usedplus_button_prevPage" v="Forrige Meny" eh="d4e01f11" />
+        <e k="usedplus_button_nextPage" v="Next Menu" eh="2553da59" />
+        <e k="usedplus_button_prevPage" v="Previous Menu" eh="d4e01f11" />
 
         <!-- === MAINTENANCE SYSTEM (Phase 4) === -->
 
         <!--  Engine/Failure Warnings -->
-        <e k="usedPlus_engineStalled" v="Motor stoppet!" eh="2cfeb1d2" />
-        <e k="usedPlus_engineStalledRecovery" v="Motor stoppet! Vent %d sekunder..." eh="9a57b319" />
-        <e k="usedPlus_engineWontStart" v="Motor starter ikke - prøv igjen" eh="daa0591c" />
-        <e k="usedPlus_hydraulicDrift" v="Hydraulisk trykkfall!" eh="31f2964d" />
-        <e k="usedPlus_implementCutout" v="Redskap stoppet!" eh="395b6ba3" />
-        <e k="usedPlus_electricalCutout" v="Elektrisk feil - redskap frakoblet!" eh="0c156989" />
+        <e k="usedPlus_engineStalled" v="Engine stalled!" eh="2cfeb1d2" />
+        <e k="usedPlus_engineStalledRecovery" v="Engine stalled! Wait %d seconds..." eh="9a57b319" />
+        <e k="usedPlus_engineWontStart" v="Engine won't start - try again" eh="daa0591c" />
+        <e k="usedPlus_hydraulicDrift" v="Hydraulic pressure loss!" eh="31f2964d" />
+        <e k="usedPlus_implementCutout" v="Implement stalled!" eh="395b6ba3" />
+        <e k="usedPlus_electricalCutout" v="Electrical fault - implements offline!" eh="0c156989" />
 
         <!--  Speed Degradation Warnings (v1.4.0) -->
-        <e k="usedPlus_speedDegraded" v="Motor sliter - makshastighet redusert til %d%%!" eh="af083aef" />
-        <e k="usedPlus_speedDegradedReminder" v="Kjøretøy går sakte - reparasjon anbefales" eh="95eb2457" />
-        <e k="usedPlus_speedGovernor" v="Motor klarer ikke denne hastigheten!" eh="f9bd1f68" />
-        <e k="usedPlus_firstStartStall" v="Motor startet ikke!" eh="cc82faeb" />
-        <e k="usedPlus_steeringLoose" v="Styring føles løs - hydraulikk slitt!" eh="75649517" />
-        <e k="usedPlus_steeringPull" v="Styring trekker til %s!" eh="e743ac7b" />
-        <e k="usedPlus_directionLeft" v="venstre" eh="811882fe" />
-        <e k="usedPlus_directionRight" v="høyre" eh="7c4f2940" />
+        <e k="usedPlus_speedDegraded" v="Engine struggling - max speed reduced to %d%%!" eh="af083aef" />
+        <e k="usedPlus_speedDegradedReminder" v="Vehicle running slow - repairs recommended" eh="95eb2457" />
+        <e k="usedPlus_speedGovernor" v="Engine can't sustain this speed!" eh="f9bd1f68" />
+        <e k="usedPlus_firstStartStall" v="Engine failed to start!" eh="cc82faeb" />
+        <e k="usedPlus_steeringLoose" v="Steering feels loose - hydraulics worn!" eh="75649517" />
+        <e k="usedPlus_steeringPull" v="Steering pulling to the %s!" eh="e743ac7b" />
+        <e k="usedPlus_directionLeft" v="left" eh="811882fe" />
+        <e k="usedPlus_directionRight" v="right" eh="7c4f2940" />
 
         <!--  Engine Malfunctions (v1.6.0) -->
-        <e k="usedPlus_engineMisfire" v="Motor slår feil!" eh="46773a4f" />
-        <e k="usedPlus_engineOverheating" v="Motor overoppheter! (%d%%)" eh="736c0a30" />
-        <e k="usedPlus_engineOverheated" v="MOTOR OVEROPPH ETET! La den kjøle ned!" eh="48a6aa38" />
+        <e k="usedPlus_engineMisfire" v="Engine misfiring!" eh="46773a4f" />
+        <e k="usedPlus_engineOverheating" v="Engine overheating! (%d%%)" eh="736c0a30" />
+        <e k="usedPlus_engineOverheated" v="ENGINE OVERHEATED! Let it cool down!" eh="48a6aa38" />
 
         <!--  Implement Malfunctions (v1.6.0) -->
-        <e k="usedPlus_implementSurge" v="Hydraulisk støt - redskap løftet!" eh="31786612" />
-        <e k="usedPlus_implementDrop" v="Hydraulisk svikt - redskap senket!" eh="9445c54d" />
-        <e k="usedPlus_ptoToggle" v="Elektrisk feil - PTO slått %s!" eh="0dce42ac" />
-        <e k="usedPlus_ptoOn" v="på" eh="ed2b5c01" />
-        <e k="usedPlus_ptoOff" v="av" eh="3262d48d" />
-        <e k="usedPlus_hitchFailure" v="TREKKFESTE SVIKT - Redskap frakoblet!" eh="16f9096e" />
+        <e k="usedPlus_implementSurge" v="Hydraulic surge - implement raised!" eh="31786612" />
+        <e k="usedPlus_implementDrop" v="Hydraulic failure - implement dropped!" eh="9445c54d" />
+        <e k="usedPlus_ptoToggle" v="Electrical fault - PTO switched %s!" eh="0dce42ac" />
+        <e k="usedPlus_ptoOn" v="on" eh="ed2b5c01" />
+        <e k="usedPlus_ptoOff" v="off" eh="3262d48d" />
+        <e k="usedPlus_hitchFailure" v="HITCH FAILURE - Implement detached!" eh="16f9096e" />
 
         <!--  Hydraulic Drift Warnings (v1.4.0) -->
-        <e k="usedPlus_hydraulicWeak" v="Hydraulikk svak (%d%%) - redskap kan synke!" eh="dc1e58d4" />
-        <e k="usedPlus_hydraulicDrifted" v="Redskap senket grunnet hydraulisk svikt" eh="5df727d2" />
+        <e k="usedPlus_hydraulicWeak" v="Hydraulics weak (%d%%) - implements may drift!" eh="dc1e58d4" />
+        <e k="usedPlus_hydraulicDrifted" v="Implement lowered due to hydraulic failure" eh="5df727d2" />
 
         <!--  Inspection System -->
         <e k="usedPlus_inspectButton" v="Inspect (%s)" eh="cd9aa28e" />
@@ -608,55 +608,54 @@
         <e k="usedplus_error_eventNotAvailable" v="Error: %s not available" eh="9c93ae19" />
 
         <!-- Error Notifications - Credit Score Requirements -->
-        <e k="usedplus_error_creditTooLow" v="Kredittscore For Lav" eh="660fbd90" />
-        <e k="usedplus_error_creditTooLowDetail" v="Din kredittscore (%d) er under minimum (%d) som kreves for %s." eh="210df978" />
-        <e k="usedplus_error_creditTip" v="Tips: Gjør rettidige betalinger på eksisterende lån for å bygge kreditt." eh="3346706d" />
-        <e k="usedplus_error_creditShortfall" v="Mangler: %d poeng" eh="a19b5472" />
-        <e k="usedplus_finance_repairFinancing" v="reparasjonsfinansiering" eh="4f72a7b2" />
-        <e k="usedplus_finance_vehicleFinancing" v="kjøretøyfinansiering" eh="7b2b15aa" />
-        <e k="usedplus_finance_vehicleLeasing" v="kjøretøyleasing" eh="524b6d9b" />
-        <e k="usedplus_finance_landFinancing" v="landfinansiering" eh="ef09c4c7" />
-        <e k="usedplus_finance_cashLoan" v="kontantlån" eh="ac895880" />
+        <e k="usedplus_error_creditTooLow" v="Credit Score Too Low" eh="660fbd90" />
+        <e k="usedplus_error_creditTooLowDetail" v="Your credit score (%d) is below the minimum (%d) required for %s." eh="210df978" />
+        <e k="usedplus_error_creditTip" v="Tip: Make on-time payments on existing loans to build credit." eh="3346706d" />
+        <e k="usedplus_error_creditShortfall" v="Shortfall: %d points" eh="a19b5472" />
+        <e k="usedplus_finance_repairFinancing" v="repair financing" eh="4f72a7b2" />
+        <e k="usedplus_finance_vehicleFinancing" v="vehicle financing" eh="7b2b15aa" />
+        <e k="usedplus_finance_vehicleLeasing" v="vehicle leasing" eh="524b6d9b" />
+        <e k="usedplus_finance_landFinancing" v="land financing" eh="ef09c4c7" />
+        <e k="usedplus_finance_cashLoan" v="cash loans" eh="ac895880" />
 
         <!-- Credit Warning Messages (UX) -->
-        <e k="usedplus_credit_tooLowForFinancing" v="Kredittscore for lav til finansiering. Din score: %d (trenger %d+). Bygg kreditt med rettidige betalinger." eh="c7e03e45" />
-        <e k="usedplus_credit_tooLowForLeasing" v="Kredittscore for lav til leasing. Din score: %d (trenger %d+). Leasing krever bedre kreditt enn finansiering." eh="50b91953" />
-        <e k="usedplus_credit_tooLowForLand" v="Kredittscore for lav (%d). Trenger %d+ for å finansiere land." eh="78d73204" />
-        <e k="usedplus_credit_tooLowForRepair" v="Kredittscore for lav (%d). Trenger %d+ for å finansiere reparasjoner." eh="70147f73" />
-        <e k="usedplus_credit_tooLowForPlaceable" v="Bygningsfinansiering krever utmerket kreditt (%d+).\nDin kreditt: %d (%s)" eh="0fb63457" />
-        <e k="usedplus_credit_needScore" v="Kreditt: %d (trenger %d)" eh="82790b98" />
-        <e k="usedplus_placeable_cannotLease" v="Bygninger kan ikke leies. Bruk kontant eller finansieringsalternativer." eh="e4fd7eed" />
+        <e k="usedplus_credit_tooLowForFinancing" v="Credit score too low for financing. Your score: %d (need %d+). Build credit with on-time payments." eh="c7e03e45" />
+        <e k="usedplus_credit_tooLowForLeasing" v="Credit score too low for leasing. Your score: %d (need %d+). Leasing requires better credit than financing." eh="50b91953" />
+        <e k="usedplus_credit_tooLowForLand" v="Credit score too low (%d). Need %d+ to finance land." eh="78d73204" />
+        <e k="usedplus_credit_tooLowForRepair" v="Credit score too low (%d). Need %d+ to finance repairs." eh="70147f73" />
+        <e k="usedplus_credit_tooLowForPlaceable" v="Finanțarea clădirilor necesită credit Excelent (%d+).\nCreditul dvs: %d (%s)" eh="0fb63457" />
+        <e k="usedplus_credit_needScore" v="Credit: %d (need %d)" eh="82790b98" />
 
         <!-- Minimum Financing Amount Messages -->
-        <e k="usedplus_finance_amountTooSmall" v="Beløp for lite til finansiering. Minimum: %s" eh="3a90d8c2" />
-        <e k="usedplus_lease_amountTooSmall" v="Beløp for lite til leasing. Minimum: %s" eh="3e2012e8" />
-        <e k="usedplus_repair_amountTooSmall" v="Reparasjonskostnad for liten til finansiering. Minimum: %s" eh="446dd4cd" />
-        <e k="usedplus_land_amountTooSmall" v="Landpris for liten til finansiering. Minimum: %s" eh="b4e8480c" />
+        <e k="usedplus_finance_amountTooSmall" v="Amount too small for financing. Minimum: %s" eh="3a90d8c2" />
+        <e k="usedplus_lease_amountTooSmall" v="Amount too small for leasing. Minimum: %s" eh="3e2012e8" />
+        <e k="usedplus_repair_amountTooSmall" v="Repair cost too small to finance. Minimum: %s" eh="446dd4cd" />
+        <e k="usedplus_land_amountTooSmall" v="Land price too small for financing. Minimum: %s" eh="b4e8480c" />
 
         <!-- v2.8.0: Multiplayer Transaction Response Messages -->
         <!-- Error responses for server→client feedback in multiplayer -->
-        <e k="usedplus_mp_error_unauthorized" v="Handling ikke autorisert for din gård" eh="343a024c" />
-        <e k="usedplus_mp_error_disabled" v="Denne funksjonen er deaktivert i innstillingene" eh="d3f06efd" />
-        <e k="usedplus_mp_error_manager" v="System ikke initialisert. Prøv igjen." eh="53daf785" />
-        <e k="usedplus_mp_error_invalid_params" v="Ugyldige parametere" eh="a79fae6b" />
-        <e k="usedplus_mp_error_insufficient_funds" v="Utilstrekkelige midler" eh="55f90c96" />
-        <e k="usedplus_mp_error_failed" v="Transaksjon mislyktes" eh="3f864e37" />
-        <e k="usedplus_mp_error_farm_not_found" v="Gård ikke funnet" eh="a13cd50e" />
-        <e k="usedplus_mp_error_deal_not_found" v="Avtale ikke funnet" eh="f85a8ec8" />
-        <e k="usedplus_mp_error_land_not_found" v="Land ikke funnet" eh="db02fd36" />
-        <e k="usedplus_mp_error_land_owned" v="Dette landet er allerede eid" eh="7175cfeb" />
-        <e k="usedplus_mp_error_already_leased" v="Du har allerede leiet dette landet" eh="25394947" />
-        <e k="usedplus_mp_error_invalid_deal_type" v="Ugyldig avtaletype" eh="e9926aa4" />
-        <e k="usedplus_mp_error_deal_not_active" v="Avtale er ikke aktiv" eh="4f8a3c97" />
-        <e k="usedplus_mp_error_repair_failed" v="Reparasjon mislyktes" eh="e25882fc" />
-        <e k="usedplus_mp_error_search_failed" v="Søk mislyktes" eh="a4d17776" />
+        <e k="usedplus_mp_error_unauthorized" v="Action not authorized for your farm" eh="343a024c" />
+        <e k="usedplus_mp_error_disabled" v="This feature is disabled in settings" eh="d3f06efd" />
+        <e k="usedplus_mp_error_manager" v="System not initialized. Try again." eh="53daf785" />
+        <e k="usedplus_mp_error_invalid_params" v="Invalid parameters" eh="a79fae6b" />
+        <e k="usedplus_mp_error_insufficient_funds" v="Insufficient funds" eh="55f90c96" />
+        <e k="usedplus_mp_error_failed" v="Transaction failed" eh="3f864e37" />
+        <e k="usedplus_mp_error_farm_not_found" v="Farm not found" eh="a13cd50e" />
+        <e k="usedplus_mp_error_deal_not_found" v="Deal not found" eh="f85a8ec8" />
+        <e k="usedplus_mp_error_land_not_found" v="Land not found" eh="db02fd36" />
+        <e k="usedplus_mp_error_land_owned" v="This land is already owned" eh="7175cfeb" />
+        <e k="usedplus_mp_error_already_leased" v="You already have a lease on this land" eh="25394947" />
+        <e k="usedplus_mp_error_invalid_deal_type" v="Invalid deal type" eh="e9926aa4" />
+        <e k="usedplus_mp_error_deal_not_active" v="Deal is not active" eh="4f8a3c97" />
+        <e k="usedplus_mp_error_repair_failed" v="Repair failed" eh="e25882fc" />
+        <e k="usedplus_mp_error_search_failed" v="Search failed" eh="a4d17776" />
 
         <!-- Success responses for server→client feedback in multiplayer -->
-        <e k="usedplus_mp_success_financed" v="Kjøretøy finansiert!" eh="e0a11202" />
-        <e k="usedplus_mp_success_leased" v="Kjøretøy leaset!" eh="f73065ee" />
-        <e k="usedplus_mp_success_loan" v="Lån godkjent!" eh="96d2eb36" />
-        <e k="usedplus_mp_success_payment" v="Betaling behandlet!" eh="fffcd9ab" />
-        <e k="usedplus_mp_success_land_leased" v="Land leaset!" eh="4815779c" />
+        <e k="usedplus_mp_success_financed" v="Vehicle financed successfully!" eh="e0a11202" />
+        <e k="usedplus_mp_success_leased" v="Vehicle leased successfully!" eh="f73065ee" />
+        <e k="usedplus_mp_success_loan" v="Loan approved!" eh="96d2eb36" />
+        <e k="usedplus_mp_success_payment" v="Payment processed!" eh="fffcd9ab" />
+        <e k="usedplus_mp_success_land_leased" v="Land leased successfully!" eh="4815779c" />
         <e k="usedplus_mp_success_land_buyout" v="Land purchased successfully!" eh="9de4a0f4" />
         <e k="usedplus_mp_success_listed" v="Vehicle listed for sale!" eh="1178dfe3" />
         <e k="usedplus_mp_success_sale_action" v="Sale action completed!" eh="f4473f61" />
@@ -672,6 +671,7 @@
         <e k="usedplus_mode_cash" v="Buy with Cash" eh="01dc9cc3" />
         <e k="usedplus_mode_finance" v="Finance" eh="c482980d" />
         <e k="usedplus_mode_lease" v="Lease" eh="47c96b08" />
+        <e k="usedplus_placeable_cannotLease" v="Clădirile nu pot fi închiriate. Utilizați opțiunile Cash sau Finance." eh="e4fd7eed" />
         <e k="usedplus_mode_financeCredit" v="Finance (Credit: %d+)" eh="0b6c80e3" />
         <e k="usedplus_mode_leaseCredit" v="Lease (Credit: %d+)" eh="439bd2b6" />
 
@@ -688,8 +688,8 @@
         <e k="usedplus_notify_landPurchased" v="Purchased %s for %s" eh="ee85175a" />
         <e k="usedplus_notify_landFinanced" v="Financed %s - %s due today" eh="874037b7" />
         <e k="usedplus_notify_vehicleNowYours" v="Congratulations! %s is now yours!" eh="f9f453e9" />
-        <e k="usedplus_notify_placeableFinanced" v="Bygning finansiert!\n%s\nNedbetaling: %s | Månedlig: %s i %d år" eh="72ebd0e0" />
-        <e k="usedplus_notify_placeableSoldPayoff" v="Bygning solgt. Lånenedbetaling: %s" eh="78ac7164" />
+        <e k="usedplus_notify_placeableFinanced" v="Clădire Finanțată!\n%s\nAvans: %s | Lunar: %s pentru %d ani" eh="72ebd0e0" />
+        <e k="usedplus_notify_placeableSoldPayoff" v="Clădire vândută. Rambursare împrumut: %s" eh="78ac7164" />
 
         <!-- Success Notifications - Payments/Loans -->
         <e k="usedplus_notify_loanPaidOff" v="Loan paid off! Total: %s" eh="0ba73cba" />
@@ -778,59 +778,59 @@
         <e k="usedplus_dealdetails_earlyPayoffSaves" v="Early payoff saves you %s in interest!" eh="482a76d4" />
 
         <!-- Used Vehicle Preview Dialog -->
-        <e k="usedplus_preview_ageYears" v="%d år" eh="86730d79" />
-        <e k="usedplus_preview_payForInspection" v="Betal %s for profesjonell inspeksjon" eh="a64ff42a" />
+        <e k="usedplus_preview_ageYears" v="%d years" eh="86730d79" />
+        <e k="usedplus_preview_payForInspection" v="Pay %s for professional inspection" eh="a64ff42a" />
 
         <!-- v2.7.0: Preview Dialog - Delayed Inspection -->
-        <e k="usedplus_preview_inspectionRange" v="Inspeksjonsalternativer: %s - %s" eh="47ff59b3" />
-        <e k="usedplus_preview_inspectionProgress" v="%s inspeksjon pågår... ~%d timer gjenstår" eh="911dfff0" />
-        <e k="usedplus_preview_requestInspection" v="Bestill Inspeksjon" eh="e555e8b2" />
-        <e k="usedplus_preview_inProgress" v="Pågår..." eh="bd62582e" />
-        <e k="usedplus_preview_implementNoInspection" v="Inspeksjoner ikke tilgjengelig for ikke-motoriserte redskap. Kun kjøp som den er." eh="620e727f" />
+        <e k="usedplus_preview_inspectionRange" v="Inspection options: %s - %s" eh="47ff59b3" />
+        <e k="usedplus_preview_inspectionProgress" v="%s inspection in progress... ~%d hrs remaining" eh="911dfff0" />
+        <e k="usedplus_preview_requestInspection" v="Request Inspection" eh="e555e8b2" />
+        <e k="usedplus_preview_inProgress" v="In Progress..." eh="bd62582e" />
+        <e k="usedplus_preview_implementNoInspection" v="[EN] Inspections not available for non-powered implements. Buy as-is only." eh="620e727f" />
 
         <!-- ============================================== -->
         <!-- PHASE 1c: Land Purchase Dialog Notifications   -->
         <!-- ============================================== -->
 
         <!-- Land Purchase - Mode Selector -->
-        <e k="usedplus_land_modeCash" v="Kjøp med Kontanter" eh="01dc9cc3" />
-        <e k="usedplus_land_modeFinance" v="Finansier" eh="c482980d" />
-        <e k="usedplus_land_modeLease" v="Lei" eh="47c96b08" />
+        <e k="usedplus_land_modeCash" v="Buy with Cash" eh="01dc9cc3" />
+        <e k="usedplus_land_modeFinance" v="Finance" eh="c482980d" />
+        <e k="usedplus_land_modeLease" v="Lease" eh="47c96b08" />
 
         <!-- Land Purchase - Context Menu Actions -->
-        <e k="usedplus_action_financeLand" v="Finansier" eh="c482980d" />
-        <e k="usedplus_action_leaseLand" v="Lei" eh="47c96b08" />
+        <e k="usedplus_action_financeLand" v="Finance" eh="c482980d" />
+        <e k="usedplus_action_leaseLand" v="Lease" eh="47c96b08" />
 
         <!-- Land Purchase - Term Sliders -->
-        <e k="usedplus_land_termYears" v="%d År" eh="b655468c" />
-        <e k="usedplus_land_termYear" v="1 År" eh="cc1a252a" />
-        <e k="usedplus_land_termMonths" v="%d Måneder" eh="d36b3bae" />
-        <e k="usedplus_land_termMonth" v="1 Måned" eh="cf13b270" />
+        <e k="usedplus_land_termYears" v="%d Years" eh="b655468c" />
+        <e k="usedplus_land_termYear" v="1 Year" eh="cc1a252a" />
+        <e k="usedplus_land_termMonths" v="%d Months" eh="d36b3bae" />
+        <e k="usedplus_land_termMonth" v="1 Month" eh="cf13b270" />
 
         <!-- Land Purchase - Credit Adjustment -->
-        <e k="usedplus_land_noAdjustment" v="Ingen justering (Middels kreditt)" eh="cda8e933" />
+        <e k="usedplus_land_noAdjustment" v="No adjustment (Fair credit)" eh="cda8e933" />
 
         <!-- Land Purchase - Security Deposit -->
-        <e k="usedplus_land_noDeposit" v="Ingen Depositum (%s kreditt)" eh="e022dc69" />
-        <e k="usedplus_land_depositInfo" v="%s (%d mnd, %s kreditt)" eh="062ae4ba" />
+        <e k="usedplus_land_noDeposit" v="No Deposit (%s credit)" eh="e022dc69" />
+        <e k="usedplus_land_depositInfo" v="%s (%d mo, %s credit)" eh="062ae4ba" />
 
         <!-- Land Purchase - Lease Info -->
-        <e k="usedplus_land_buyoutAnytime" v="Utkjøp når som helst: %s" eh="056478ed" />
-        <e k="usedplus_land_signingBonus" v="Signeringsbonus: Inkluderer stående %s verdt %s" eh="bec8cd54" />
-        <e k="usedplus_land_securityDeposit" v="%s depositum" eh="d8780aed" />
-        <e k="usedplus_land_noDepositRequired" v="ingen depositum påkrevd" eh="467a3088" />
+        <e k="usedplus_land_buyoutAnytime" v="Buyout anytime: %s" eh="056478ed" />
+        <e k="usedplus_land_signingBonus" v="Signing Bonus: Includes standing %s worth %s" eh="bec8cd54" />
+        <e k="usedplus_land_securityDeposit" v="%s security deposit" eh="d8780aed" />
+        <e k="usedplus_land_noDepositRequired" v="no deposit required" eh="467a3088" />
 
         <!-- Land Purchase - Error Notifications -->
-        <e k="usedplus_error_insufficientFundsLand" v="Utilstrekkelige midler! Trenger %s mer. Prøv finansiering eller leasing." eh="d993d097" />
-        <e k="usedplus_error_insufficientFundsDeposit" v="Utilstrekkelige midler for depositum! Trenger %s mer." eh="ad97e0d8" />
-        <e k="usedplus_error_couldNotCompletePurchase" v="Feil: Kunne ikke fullføre kjøp" eh="a0fca4fc" />
+        <e k="usedplus_error_insufficientFundsLand" v="Insufficient funds! Need %s more. Try financing or leasing." eh="d993d097" />
+        <e k="usedplus_error_insufficientFundsDeposit" v="Insufficient funds for security deposit! Need %s more." eh="ad97e0d8" />
+        <e k="usedplus_error_couldNotCompletePurchase" v="Error: Could not complete purchase" eh="a0fca4fc" />
 
         <!-- Land Purchase - Success Notifications -->
-        <e k="usedplus_notify_landLeased" v="Leaset %s! %s/måned, %s" eh="71a876f7" />
+        <e k="usedplus_notify_landLeased" v="Leased %s! %s/month, %s" eh="71a876f7" />
 
         <!-- Loan System Notifications -->
-        <e k="usedplus_loan_useFinancialDashboard" v="Bruk Økonomisk Dashbord (ESC-meny) for å ta kredittbaserte lån" eh="1175c14f" />
-        <e k="usedplus_loan_vanillaBorrowDisabled" v="Vanilla-lån deaktivert. Åpne Økonomisk Dashbord for kredittbaserte lån." eh="c81aff14" />
+        <e k="usedplus_loan_useFinancialDashboard" v="Use Financial Dashboard (ESC Menu) to take credit-based loans" eh="1175c14f" />
+        <e k="usedplus_loan_vanillaBorrowDisabled" v="Vanilla borrowing disabled. Open Financial Dashboard for credit-based loans." eh="c81aff14" />
 
         <!-- ============================================== -->
         <!-- PHASE 1d: XML Dialog Labels and Buttons        -->
@@ -891,52 +891,52 @@
         <e k="usedplus_mrp_overallCondition" v="OVERALL CONDITION" eh="c8090411" />
 
         <!-- Financial Dashboard -->
-        <e k="usedplus_dash_creditScore" v="KREDITTSCORE" eh="4f3b169e" />
-        <e k="usedplus_dash_debtRatio" v="GJELDSGRAD" eh="c32f2503" />
-        <e k="usedplus_dash_assets" v="Eiendeler:" eh="9c1a8d1e" />
-        <e k="usedplus_dash_debt" v="Gjeld:" eh="5cd7ac01" />
-        <e k="usedplus_dash_ratio" v="Forhold:" eh="a5be3d44" />
+        <e k="usedplus_dash_creditScore" v="CREDIT SCORE" eh="4f3b169e" />
+        <e k="usedplus_dash_debtRatio" v="DEBT RATIO" eh="c32f2503" />
+        <e k="usedplus_dash_assets" v="Assets:" eh="9c1a8d1e" />
+        <e k="usedplus_dash_debt" v="Debt:" eh="5cd7ac01" />
+        <e k="usedplus_dash_ratio" v="Ratio:" eh="a5be3d44" />
         <e k="usedplus_dash_trend" v="Trend:" eh="0bc8b222" />
-        <e k="usedplus_dash_monthlyObligations" v="MÅNEDLIGE FORPLIKTELSER" eh="5f11ba8b" />
-        <e k="usedplus_dash_equipment" v="Utstyr:" eh="36f0f45f" />
+        <e k="usedplus_dash_monthlyObligations" v="MONTHLY OBLIGATIONS" eh="5f11ba8b" />
+        <e k="usedplus_dash_equipment" v="Equipment:" eh="36f0f45f" />
         <e k="usedplus_dash_land" v="Land:" eh="40db99ca" />
-        <e k="usedplus_dash_loans" v="Lån:" eh="b60186ea" />
-        <e k="usedplus_dash_total" v="TOTALT:" eh="fe30028d" />
-        <e k="usedplus_dash_upcomingPayments" v="KOMMENDE BETALINGER" eh="75dbf3ca" />
-        <e k="usedplus_dash_noPayments" v="Ingen kommende betalinger" eh="96a72e57" />
-        <e k="usedplus_dash_lifetimeStats" v="LIVSTIDSSTATISTIKK" eh="10e8dd52" />
-        <e k="usedplus_dash_totalFinanced" v="Totalt Finansiert:" eh="43df67a8" />
-        <e k="usedplus_dash_interestPaid" v="Rente Betalt:" eh="e8344297" />
-        <e k="usedplus_dash_dealsCompleted" v="Avtaler Fullført:" eh="1bd021c5" />
-        <e k="usedplus_dash_onTime" v="Rettidig:" eh="f99e4430" />
-        <e k="usedplus_dash_missed" v="Uteblitt:" eh="e60f2982" />
-        <e k="usedplus_dash_tip" v="Tips: Betal i tide for å forbedre kreditt. Betal ned lån tidlig for å spare renter." eh="f34bfad5" />
+        <e k="usedplus_dash_loans" v="Loans:" eh="b60186ea" />
+        <e k="usedplus_dash_total" v="TOTAL:" eh="fe30028d" />
+        <e k="usedplus_dash_upcomingPayments" v="UPCOMING PAYMENTS" eh="75dbf3ca" />
+        <e k="usedplus_dash_noPayments" v="No upcoming payments" eh="96a72e57" />
+        <e k="usedplus_dash_lifetimeStats" v="LIFETIME STATISTICS" eh="10e8dd52" />
+        <e k="usedplus_dash_totalFinanced" v="Total Financed:" eh="43df67a8" />
+        <e k="usedplus_dash_interestPaid" v="Interest Paid:" eh="e8344297" />
+        <e k="usedplus_dash_dealsCompleted" v="Deals Completed:" eh="1bd021c5" />
+        <e k="usedplus_dash_onTime" v="On-Time:" eh="f99e4430" />
+        <e k="usedplus_dash_missed" v="Missed:" eh="e60f2982" />
+        <e k="usedplus_dash_tip" v="Tip: Make payments on time to improve credit. Pay off loans early to save on interest." eh="f34bfad5" />
 
         <!-- Maintenance Report Dialog - Additional -->
-        <e k="usedplus_mrp_sectionMechanical" v="MEKANISK STATUS" eh="5f94ecb6" />
-        <e k="usedplus_mrp_sectionService" v="SERVICEHISTORIKK" eh="2bf3d81d" />
+        <e k="usedplus_mrp_sectionMechanical" v="MECHANICAL STATUS" eh="5f94ecb6" />
+        <e k="usedplus_mrp_sectionService" v="SERVICE HISTORY" eh="2bf3d81d" />
         <e k="usedplus_mrp_sectionStatus" v="STATUS" eh="5f241c8c" />
-        <e k="usedplus_mrp_shopRepairs" v="Verkstedreparasjoner" eh="6aec1607" />
-        <e k="usedplus_mrp_overall" v="Totalt:" eh="418a41b5" />
-        <e k="usedplus_mrp_condition" v="Tilstand:" eh="ed51222f" />
-        <e k="usedplus_mrp_hours" v="Driftstimer" eh="f6eeda8b" />
+        <e k="usedplus_mrp_shopRepairs" v="Shop Repairs" eh="6aec1607" />
+        <e k="usedplus_mrp_overall" v="Overall:" eh="418a41b5" />
+        <e k="usedplus_mrp_condition" v="Condition:" eh="ed51222f" />
+        <e k="usedplus_mrp_hours" v="Operating Hours" eh="f6eeda8b" />
 
         <!-- Deal Details Dialog -->
-        <e k="usedplus_dd_title" v="AVTALEDETALJER" eh="d711da33" />
-        <e k="usedplus_dd_sectionItem" v="GJENSTANDSINFORMASJON" eh="344a6d4f" />
-        <e k="usedplus_dd_sectionTerms" v="ØKONOMISKE VILKÅR" eh="cfadb041" />
-        <e k="usedplus_dd_sectionProgress" v="BETALINGSFREMGANG" eh="f338b0ad" />
-        <e k="usedplus_dd_sectionSummary" v="BETALINGSOVERSIKT" eh="0dd98605" />
-        <e k="usedplus_dd_sectionMultiplier" v="BETALINGSMULTIPLIKATOR" eh="db8d799b" />
-        <e k="usedplus_dd_sectionPayoff" v="TIDLIG NEDBETALING" eh="58ce5d42" />
-        <e k="usedplus_dd_sectionRepossessed" v="TILBAKEHOLDT SIKKERHET" eh="e0b8734f" />
-        <e k="usedplus_dd_name" v="Navn:" eh="4e140ba7" />
+        <e k="usedplus_dd_title" v="DEAL DETAILS" eh="d711da33" />
+        <e k="usedplus_dd_sectionItem" v="ITEM INFORMATION" eh="344a6d4f" />
+        <e k="usedplus_dd_sectionTerms" v="FINANCIAL TERMS" eh="cfadb041" />
+        <e k="usedplus_dd_sectionProgress" v="PAYMENT PROGRESS" eh="f338b0ad" />
+        <e k="usedplus_dd_sectionSummary" v="PAYMENT SUMMARY" eh="0dd98605" />
+        <e k="usedplus_dd_sectionMultiplier" v="PAYMENT MULTIPLIER" eh="db8d799b" />
+        <e k="usedplus_dd_sectionPayoff" v="EARLY PAYOFF" eh="58ce5d42" />
+        <e k="usedplus_dd_sectionRepossessed" v="REPOSSESSED COLLATERAL" eh="e0b8734f" />
+        <e k="usedplus_dd_name" v="Name:" eh="4e140ba7" />
         <e k="usedplus_dd_type" v="Type:" eh="e659b52e" />
         <e k="usedplus_dd_status" v="Status:" eh="24a23d78" />
-        <e k="usedplus_dd_missed" v="Uteblitt:" eh="e60f2982" />
-        <e k="usedplus_dd_original" v="Opprinnelig:" eh="fd5835ce" />
-        <e k="usedplus_dd_down" v="Forskudd:" eh="d3d840b3" />
-        <e k="usedplus_dd_financed" v="Finansiert:" eh="ed7c65d7" />
+        <e k="usedplus_dd_missed" v="Missed:" eh="e60f2982" />
+        <e k="usedplus_dd_original" v="Original:" eh="fd5835ce" />
+        <e k="usedplus_dd_down" v="Down:" eh="d3d840b3" />
+        <e k="usedplus_dd_financed" v="Financed:" eh="ed7c65d7" />
         <e k="usedplus_dd_term" v="Term:" eh="3980a548" />
         <e k="usedplus_dd_rate" v="Rate:" eh="9f754529" />
         <e k="usedplus_dd_monthly" v="Monthly:" eh="01963e19" />
@@ -1010,7 +1010,7 @@
 
         <!-- Unified Purchase Dialog -->
         <e k="usedplus_up_title" v="Purchase Vehicle" eh="f5dc36d9" />
-        <e k="usedplus_up_title_placeable" v="Kjøp bygning" eh="6fd17a3d" />
+        <e k="usedplus_up_title_placeable" v="Cumpără clădire" eh="6fd17a3d" />
         <e k="usedplus_up_sectionVehicle" v="VEHICLE" eh="e9fa318f" />
         <e k="usedplus_up_sectionMethod" v="PURCHASE METHOD" eh="f5f3c261" />
         <e k="usedplus_up_methodHelp" v="Choose how you want to pay: cash upfront, finance over time, or lease with lower payments." eh="83636102" />
@@ -1400,60 +1400,60 @@
         <e k="usedplus_fmf_quickRefLine2" v="Monthly payments auto-deduct. Early payoff saves interest." eh="73cd35d9" />
 
         <!-- Land Lease Dialog -->
-        <e k="usedplus_ll_title" v="Lei Land" eh="ec34a2a6" />
-        <e k="usedplus_ll_sectionDetails" v="FELTDETALJER" eh="9550d705" />
-        <e k="usedplus_ll_field" v="Felt:" eh="af9b2925" />
-        <e k="usedplus_ll_size" v="Størrelse:" eh="af645946" />
-        <e k="usedplus_ll_value" v="Verdi:" eh="acdb802b" />
-        <e k="usedplus_ll_sectionTerm" v="LEIEPERIODE" eh="bb3b670a" />
-        <e k="usedplus_ll_selectDuration" v="Velg leievarighet:" eh="8f0c8cd2" />
-        <e k="usedplus_ll_sectionCosts" v="LEIEKOSTNADER" eh="5793e394" />
-        <e k="usedplus_ll_monthlyPayment" v="Månedlig Betaling:" eh="3499b658" />
-        <e k="usedplus_ll_yearlyPayment" v="Årlig Betaling:" eh="e1ddacf9" />
-        <e k="usedplus_ll_totalCost" v="Total Leiekostnad:" eh="61a93e0e" />
-        <e k="usedplus_ll_markup" v="Påslagsbeløp:" eh="62aed63e" />
-        <e k="usedplus_ll_buyoutPrice" v="Utkjøpspris:" eh="121b9571" />
-        <e k="usedplus_ll_note1" v="Leasing tillater landbruk uten fullstendig kjøp." eh="b4808387" />
-        <e k="usedplus_ll_note2" v="Land returneres til markedet ved leieslutt med mindre det kjøpes ut." eh="bbed7c34" />
+        <e k="usedplus_ll_title" v="Lease Land" eh="ec34a2a6" />
+        <e k="usedplus_ll_sectionDetails" v="FIELD DETAILS" eh="9550d705" />
+        <e k="usedplus_ll_field" v="Field:" eh="af9b2925" />
+        <e k="usedplus_ll_size" v="Size:" eh="af645946" />
+        <e k="usedplus_ll_value" v="Value:" eh="acdb802b" />
+        <e k="usedplus_ll_sectionTerm" v="LEASE TERM" eh="bb3b670a" />
+        <e k="usedplus_ll_selectDuration" v="Select lease duration:" eh="8f0c8cd2" />
+        <e k="usedplus_ll_sectionCosts" v="LEASE COSTS" eh="5793e394" />
+        <e k="usedplus_ll_monthlyPayment" v="Monthly Payment:" eh="3499b658" />
+        <e k="usedplus_ll_yearlyPayment" v="Yearly Payment:" eh="e1ddacf9" />
+        <e k="usedplus_ll_totalCost" v="Total Lease Cost:" eh="61a93e0e" />
+        <e k="usedplus_ll_markup" v="Markup Amount:" eh="62aed63e" />
+        <e k="usedplus_ll_buyoutPrice" v="Buyout Price:" eh="121b9571" />
+        <e k="usedplus_ll_note1" v="Lease allows land use without full purchase." eh="b4808387" />
+        <e k="usedplus_ll_note2" v="Land returns to market at lease end unless bought out." eh="bbed7c34" />
         <!-- REMOVED: usedplus_button_acceptLease - duplicate, use Buttons section -->
 
         <!-- Land Finance Dialog - Additional -->
-        <e k="usedplus_lf_field" v="Felt:" eh="af9b2925" />
-        <e k="usedplus_lf_size" v="Størrelse:" eh="af645946" />
-        <e k="usedplus_lf_price" v="Pris:" eh="f2c12ae1" />
-        <e k="usedplus_lf_sectionDueToday" v="FORFALLER I DAG VED SIGNERING" eh="cdbd21f6" />
-        <e k="usedplus_lf_downPayment" v="Forskuddsbetaling:" eh="a706fdb6" />
-        <e k="usedplus_lf_youPayToday" v="DU BETALER I DAG:" eh="6d6d4e26" />
-        <e k="usedplus_lf_lowerRatesNote" v="Landfinansiering har lavere renter enn kjøretøylån." eh="1e35d132" />
+        <e k="usedplus_lf_field" v="Field:" eh="af9b2925" />
+        <e k="usedplus_lf_size" v="Size:" eh="af645946" />
+        <e k="usedplus_lf_price" v="Price:" eh="f2c12ae1" />
+        <e k="usedplus_lf_sectionDueToday" v="DUE TODAY AT SIGNING" eh="cdbd21f6" />
+        <e k="usedplus_lf_downPayment" v="Down Payment:" eh="a706fdb6" />
+        <e k="usedplus_lf_youPayToday" v="YOU PAY TODAY:" eh="6d6d4e26" />
+        <e k="usedplus_lf_lowerRatesNote" v="Land financing has lower rates than vehicle loans." eh="1e35d132" />
 
         <!-- Finance Detail Frame -->
-        <e k="usedplus_fd_title" v="Finansavtaledetaljer" eh="b49b6b5b" />
-        <e k="usedplus_fd_quick1Month" v="1 Måned" eh="cf13b270" />
-        <e k="usedplus_fd_quick6Months" v="6 Måneder" eh="1d4545e8" />
-        <e k="usedplus_fd_quick1Year" v="1 År" eh="cc1a252a" />
-        <e k="usedplus_fd_quickPayOff" v="Betal Ned" eh="416ff954" />
+        <e k="usedplus_fd_title" v="Finance Deal Details" eh="b49b6b5b" />
+        <e k="usedplus_fd_quick1Month" v="1 Month" eh="cf13b270" />
+        <e k="usedplus_fd_quick6Months" v="6 Months" eh="1d4545e8" />
+        <e k="usedplus_fd_quick1Year" v="1 Year" eh="cc1a252a" />
+        <e k="usedplus_fd_quickPayOff" v="Pay Off" eh="416ff954" />
 
         <!-- Repair Finance Dialog -->
-        <e k="usedplus_rf_title" v="Finansier Reparasjon" eh="70ef80a4" />
-        <e k="usedplus_rf_sectionService" v="SERVICEDETALJER" eh="22efc112" />
-        <e k="usedplus_rf_repairCost" v="Reparasjonskostnad:" eh="33553cf9" />
-        <e k="usedplus_rf_repaintCost" v="Lakkerings Kostnad:" eh="78155645" />
-        <e k="usedplus_rf_loanTerm" v="Låneperiode:" eh="766186df" />
-        <e k="usedplus_rf_downPayment" v="Forskuddsbetaling:" eh="a706fdb6" />
-        <e k="usedplus_rf_monthlyPayment" v="Månedlig Betaling:" eh="3499b658" />
-        <e k="usedplus_rf_totalInterest" v="Total Rente:" eh="183c0158" />
-        <e k="usedplus_rf_interestRate" v="Rentesats:" eh="389f9dd8" />
-        <e k="usedplus_rf_totalPayments" v="Totale Betalinger:" eh="66fc72d1" />
-        <e k="usedplus_rf_creditScore" v="Kredittscore:" eh="0199e1a3" />
-        <e k="usedplus_rf_infoText" v="Månedlige betalinger trekkes automatisk. Betal ned tidlig for å spare renter." eh="1318c91c" />
+        <e k="usedplus_rf_title" v="Finance Repair" eh="70ef80a4" />
+        <e k="usedplus_rf_sectionService" v="SERVICE DETAILS" eh="22efc112" />
+        <e k="usedplus_rf_repairCost" v="Repair Cost:" eh="33553cf9" />
+        <e k="usedplus_rf_repaintCost" v="Repaint Cost:" eh="78155645" />
+        <e k="usedplus_rf_loanTerm" v="Loan Term:" eh="766186df" />
+        <e k="usedplus_rf_downPayment" v="Down Payment:" eh="a706fdb6" />
+        <e k="usedplus_rf_monthlyPayment" v="Monthly Payment:" eh="3499b658" />
+        <e k="usedplus_rf_totalInterest" v="Total Interest:" eh="183c0158" />
+        <e k="usedplus_rf_interestRate" v="Interest Rate:" eh="389f9dd8" />
+        <e k="usedplus_rf_totalPayments" v="Total Payments:" eh="66fc72d1" />
+        <e k="usedplus_rf_creditScore" v="Credit Score:" eh="0199e1a3" />
+        <e k="usedplus_rf_infoText" v="Monthly payments auto-deduct. Pay off early to save on interest." eh="1318c91c" />
         <!-- REMOVED: usedplus_button_acceptFinance - duplicate, use Buttons section -->
 
         <!-- TakeLoan Dialog - Credit Tiers -->
-        <e k="usedplus_tl_excellent" v="Utmerket 750+: 6.5%" eh="c1a424c4" />
-        <e k="usedplus_tl_good" v="God 700-749: 7.5%" eh="98ac4cee" />
-        <e k="usedplus_tl_fair" v="Middels 650-699: 8.5%" eh="45ddaf78" />
-        <e k="usedplus_tl_poor" v="Dårlig 600-649: 9.5%" eh="58571247" />
-        <e k="usedplus_tl_veryPoor" v="Svært Dårlig &lt;600: 11%" eh="fbe67fc1" />
+        <e k="usedplus_tl_excellent" v="Excellent 750+: 6.5%" eh="c1a424c4" />
+        <e k="usedplus_tl_good" v="Good 700-749: 7.5%" eh="98ac4cee" />
+        <e k="usedplus_tl_fair" v="Fair 650-699: 8.5%" eh="45ddaf78" />
+        <e k="usedplus_tl_poor" v="Poor 600-649: 9.5%" eh="58571247" />
+        <e k="usedplus_tl_veryPoor" v="Very Poor &lt;600: 11%" eh="fbe67fc1" />
 
         <!-- ============================================================== -->
         <!-- INSPECTOR QUOTES - Workhorse/Lemon Scale System                 -->

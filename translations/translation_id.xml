@@ -623,7 +623,9 @@
         <e k="usedplus_credit_tooLowForLeasing" v="Skor kredit terlalu rendah untuk sewa. Skor Anda: %d (butuh %d+). Sewa membutuhkan kredit lebih baik daripada pembiayaan." eh="50b91953" />
         <e k="usedplus_credit_tooLowForLand" v="Skor kredit terlalu rendah (%d). Butuh %d+ untuk membiayai lahan." eh="78d73204" />
         <e k="usedplus_credit_tooLowForRepair" v="Skor kredit terlalu rendah (%d). Butuh %d+ untuk membiayai perbaikan." eh="70147f73" />
+        <e k="usedplus_credit_tooLowForPlaceable" v="Pembiayaan bangunan memerlukan kredit Sempurna (%d+).\nKredit Anda: %d (%s)" eh="0fb63457" />
         <e k="usedplus_credit_needScore" v="Kredit: %d (butuh %d)" eh="82790b98" />
+        <e k="usedplus_placeable_cannotLease" v="Bangunan tidak dapat disewa. Gunakan opsi Tunai atau Pembiayaan." eh="e4fd7eed" />
 
         <!-- Minimum Financing Amount Messages -->
         <e k="usedplus_finance_amountTooSmall" v="Jumlah terlalu kecil untuk pembiayaan. Minimum: %s" eh="3a90d8c2" />
@@ -686,6 +688,8 @@
         <e k="usedplus_notify_landPurchased" v="Membeli %s seharga %s" eh="ee85175a" />
         <e k="usedplus_notify_landFinanced" v="Membiayai %s - %s jatuh tempo hari ini" eh="874037b7" />
         <e k="usedplus_notify_vehicleNowYours" v="Selamat! %s sekarang milik Anda!" eh="f9f453e9" />
+        <e k="usedplus_notify_placeableFinanced" v="Bangunan Dibiayai!\n%s\nUang Muka: %s | Bulanan: %s selama %d tahun" eh="72ebd0e0" />
+        <e k="usedplus_notify_placeableSoldPayoff" v="Bangunan terjual. Pelunasan pinjaman: %s" eh="78ac7164" />
 
         <!-- Success Notifications - Payments/Loans -->
         <e k="usedplus_notify_loanPaidOff" v="Pinjaman lunas! Total: %s" eh="0ba73cba" />
@@ -782,6 +786,7 @@
         <e k="usedplus_preview_inspectionProgress" v="Inspeksi %s dalam proses... ~%d jam tersisa" eh="911dfff0" />
         <e k="usedplus_preview_requestInspection" v="Minta Inspeksi" eh="e555e8b2" />
         <e k="usedplus_preview_inProgress" v="Dalam Proses..." eh="bd62582e" />
+        <e k="usedplus_preview_implementNoInspection" v="[EN] Inspections not available for non-powered implements. Buy as-is only." eh="620e727f" />
 
         <!-- ============================================== -->
         <!-- PHASE 1c: Land Purchase Dialog Notifications   -->
@@ -1005,6 +1010,7 @@
 
         <!-- Unified Purchase Dialog -->
         <e k="usedplus_up_title" v="Beli Kendaraan" eh="f5dc36d9" />
+        <e k="usedplus_up_title_placeable" v="Beli Bangunan" eh="6fd17a3d" />
         <e k="usedplus_up_sectionVehicle" v="KENDARAAN" eh="e9fa318f" />
         <e k="usedplus_up_sectionMethod" v="METODE PEMBELIAN" eh="f5f3c261" />
         <e k="usedplus_up_methodHelp" v="Pilih cara pembayaran: tunai langsung, pembiayaan bertahap, atau sewa dengan cicilan lebih rendah." eh="83636102" />
@@ -2096,7 +2102,7 @@
         <e k="usedplus_setting_bankInterest" v="Bunga Bank" eh="1267ace4" />
         <e k="usedplus_setting_bankInterest_desc" v="Dapatkan bunga pada saldo kas positif (bulanan, seperti rekening tabungan)" eh="8e706865" />
         <e k="usedplus_setting_bankInterestRate" v="Suku Bunga (APY)" eh="798c19e6" />
-        <e k="usedplus_setting_bankInterestRate_desc" v="Suku bunga tahunan pada kas. 1% = <e k="usedplus_setting_bankInterestRate_desc" v="0.000 tahunan pada saldo <e k="usedplus_setting_bankInterestRate_desc" v="M"usedplus_setting_bankInterestRate_desc" v="0.000 tahunan pada saldo <e k="usedplus_setting_bankInterestRate_desc" v="M"usedplus_setting_bankInterestRate_desc" v="0.000 tahunan pada saldo <e k="usedplus_setting_bankInterestRate_desc" v="M" eh="80e4314a" />
+        <e k="usedplus_setting_bankInterestRate_desc" v="Suku bunga tahunan pada kas. 1% = <e k=" eh="80e4314a" />
 
         <!-- v2.6.2: Mod Compatibility Settings -->
         <e k="usedplus_settings_compatibility" v="Kompatibilitas Mod" eh="5581e454" />
@@ -2438,9 +2444,9 @@
         <e k="usedplus_admin_btn_paint_destroyed" v="Hancur" eh="aefbd059" />
 
         <!-- Buttons - Tab 3 (Finance) -->
-        <e k="usedplus_admin_btn_add_10k" v="+<e k="usedplus_admin_btn_add_10k" v="0.000"usedplus_admin_btn_add_10k" v="0.000"usedplus_admin_btn_add_10k" v="0.000" eh="3ca6f66c" />
-        <e k="usedplus_admin_btn_add_100k" v="+<e k="usedplus_admin_btn_add_100k" v="00.000"usedplus_admin_btn_add_100k" v="00.000"usedplus_admin_btn_add_100k" v="00.000" eh="860860a5" />
-        <e k="usedplus_admin_btn_add_1m" v="+<e k="usedplus_admin_btn_add_1m" v=".000.000"usedplus_admin_btn_add_1m" v=".000.000"usedplus_admin_btn_add_1m" v=".000.000" eh="8946b435" />
+        <e k="usedplus_admin_btn_add_10k" v="+<e k=" eh="3ca6f66c" />
+        <e k="usedplus_admin_btn_add_100k" v="+<e k=" eh="860860a5" />
+        <e k="usedplus_admin_btn_add_1m" v="+<e k=" eh="8946b435" />
         <e k="usedplus_admin_btn_set_zero" v="Set $0" eh="ca8864ed" />
         <e k="usedplus_admin_btn_list_deals" v="Daftar Transaksi" eh="936e496b" />
         <e k="usedplus_admin_btn_payoff_all" v="Lunasi Semua" eh="3817edc8" />

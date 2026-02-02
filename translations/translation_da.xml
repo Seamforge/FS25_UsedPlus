@@ -623,7 +623,9 @@
         <e k="usedplus_credit_tooLowForLeasing" v="Kreditscore for lav til leasing. Din score: %d (behøver %d+). Leasing kræver bedre kredit end finansiering." eh="50b91953" />
         <e k="usedplus_credit_tooLowForLand" v="Kreditscore for lav (%d). Behøver %d+ til jordfinansiering." eh="78d73204" />
         <e k="usedplus_credit_tooLowForRepair" v="Kreditscore for lav (%d). Behøver %d+ til reparationsfinansiering." eh="70147f73" />
+        <e k="usedplus_credit_tooLowForPlaceable" v="Bygningsfinansiering kræver fremragende kredit (%d+).\nDin kredit: %d (%s)" eh="0fb63457" />
         <e k="usedplus_credit_needScore" v="Kredit: %d (behøver %d)" eh="82790b98" />
+        <e k="usedplus_placeable_cannotLease" v="Bygninger kan ikke leases. Brug Kontant eller Finansier muligheder." eh="e4fd7eed" />
 
         <!-- Minimum Financing Amount Messages -->
         <e k="usedplus_finance_amountTooSmall" v="Beløb for lille til finansiering. Minimum: %s" eh="3a90d8c2" />
@@ -686,6 +688,8 @@
         <e k="usedplus_notify_landPurchased" v="Købte %s for %s" eh="ee85175a" />
         <e k="usedplus_notify_landFinanced" v="Finansierede %s - %s forfaldent i dag" eh="874037b7" />
         <e k="usedplus_notify_vehicleNowYours" v="Tillykke! %s er nu din!" eh="f9f453e9" />
+        <e k="usedplus_notify_placeableFinanced" v="Bygning Finansieret!\n%s\nUdbetaling: %s | Månedligt: %s i %d år" eh="72ebd0e0" />
+        <e k="usedplus_notify_placeableSoldPayoff" v="Bygning solgt. Låneafbetaling: %s" eh="78ac7164" />
 
         <!-- Success Notifications - Payments/Loans -->
         <e k="usedplus_notify_loanPaidOff" v="Lån betalt! Total: %s" eh="0ba73cba" />
@@ -782,6 +786,7 @@
         <e k="usedplus_preview_inspectionProgress" v="%s inspektion i gang... ~%d timer tilbage" eh="911dfff0" />
         <e k="usedplus_preview_requestInspection" v="Anmod om Inspektion" eh="e555e8b2" />
         <e k="usedplus_preview_inProgress" v="I Gang..." eh="bd62582e" />
+        <e k="usedplus_preview_implementNoInspection" v="[EN] Inspections not available for non-powered implements. Buy as-is only." eh="620e727f" />
 
         <!-- ============================================== -->
         <!-- PHASE 1c: Land Purchase Dialog Notifications   -->
@@ -1005,6 +1010,7 @@
 
         <!-- Unified Purchase Dialog -->
         <e k="usedplus_up_title" v="Køb Køretøj" eh="f5dc36d9" />
+        <e k="usedplus_up_title_placeable" v="Køb bygning" eh="6fd17a3d" />
         <e k="usedplus_up_sectionVehicle" v="KØRETØJ" eh="e9fa318f" />
         <e k="usedplus_up_sectionMethod" v="KØBSMETODE" eh="f5f3c261" />
         <e k="usedplus_up_methodHelp" v="Vælg hvordan du vil betale: kontant, finansiering over tid, eller leasing med lavere betalinger." eh="83636102" />
@@ -2442,9 +2448,9 @@ Fortsæt med reparation?" eh="bf702608" />
         <e k="usedplus_admin_btn_paint_destroyed" v="Ødelagt" eh="aefbd059" />
 
         <!-- Buttons - Tab 3 (Finance) -->
-        <e k="usedplus_admin_btn_add_10k" v="Tilføj <e k="usedplus_admin_btn_add_10k" v="0k" eh="3ca6f66c" />
-        <e k="usedplus_admin_btn_add_100k" v="Tilføj <e k="usedplus_admin_btn_add_100k" v="00k" eh="860860a5" />
-        <e k="usedplus_admin_btn_add_1m" v="Tilføj <e k="usedplus_admin_btn_add_1m" v="M" eh="8946b435" />
+        <e k="usedplus_admin_btn_add_10k" v="Tilføj <e k=" eh="3ca6f66c" />
+        <e k="usedplus_admin_btn_add_100k" v="Tilføj <e k=" eh="860860a5" />
+        <e k="usedplus_admin_btn_add_1m" v="Tilføj <e k=" eh="8946b435" />
         <e k="usedplus_admin_btn_set_zero" v="Sæt $0" eh="ca8864ed" />
         <e k="usedplus_admin_btn_list_deals" v="List aftaler" eh="936e496b" />
         <e k="usedplus_admin_btn_payoff_all" v="Betal Alle" eh="3817edc8" />

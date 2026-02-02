@@ -72,7 +72,7 @@
         <e k="usedplus_search_duration" v="Продолжительность" eh="e02d2ae0" />
         <e k="usedplus_search_success" v="Уровень успеха" eh="aac60ede" />
         <e k="usedplus_search_successChance" v="Шанс на успех" eh="7ad5b765" />
-        <e k="usedplus_search_match" v="Качество матча" eh="91a4fcac" />
+        <e k="usedplus_search_match" v="Шанс совпадения качества" eh="da45c669" />
         <!-- REMOVED: usedplus_search_matchChance - duplicate of usedplus_search_match -->
         <e k="usedplus_search_description" v="Описание" eh="b5a7adde" />
         <e k="usedplus_search_descLocal" v="Найдите ближайших дилеров. Гарантированный ответ в течение 1 месяца, стоимость 2%, вероятность успеха 40%." eh="1aef5e06" />
@@ -255,7 +255,7 @@
         <e k="input_USEDPLUS_INSPECT_VEHICLE" v="Осмотреть автомобиль" eh="c06f09f1" />
         <e k="input_USEDPLUS_ACTIVATE_OBD" v="Использовать OBD-сканер" eh="9666e26b" />
         <e k="input_USEDPLUS_TIRES" v="Шиномонтаж" eh="b0234f4e" />
-        <e k="input_USEDPLUS_SERVICE_TRUCK" v="Управление сервисным грузовиком" />
+        <e k="input_USEDPLUS_SERVICE_TRUCK" v="Управление сервисным грузовиком" eh="fad0e0f1" />
 
         <!--  Tooltips for Finance Dialog -->
         <e k="usedplus_finance_loanTerm_tooltip" v="Распределите выплаты на период от 1 до 20 лет. Более длительные сроки = меньшие ежемесячные платежи, но более высокая общая сумма выплачиваемых процентов." eh="e1170142" />
@@ -622,6 +622,7 @@
         <e k="usedplus_credit_tooLowForLeasing" v="Кредитный рейтинг слишком низкий для лизинга. Ваш балл: %d (нужно %d+). Лизинг требует лучшего кредита, чем финансирование." eh="50b91953" />
         <e k="usedplus_credit_tooLowForLand" v="Кредитный рейтинг слишком низкий (%d). Нужен %d+ для финансирования земли." eh="78d73204" />
         <e k="usedplus_credit_tooLowForRepair" v="Кредитный рейтинг слишком низкий (%d). Нужен %d+ для финансирования ремонта." eh="70147f73" />
+        <e k="usedplus_credit_tooLowForPlaceable" v="Финансирование зданий требует отличного кредита (%d+).\nВаш кредит: %d (%s)" eh="0fb63457" />
         <e k="usedplus_credit_needScore" v="Кредит: %d (нужно %d)" eh="82790b98" />
 
         <!-- Minimum Financing Amount Messages -->
@@ -664,6 +665,7 @@
         <e k="usedplus_mode_cash" v="Купить за наличные" eh="01dc9cc3" />
         <e k="usedplus_mode_finance" v="Финансы" eh="c482980d" />
         <e k="usedplus_mode_lease" v="Арендовать" eh="47c96b08" />
+        <e k="usedplus_placeable_cannotLease" v="Здания нельзя арендовать. Используйте варианты Наличные или Финансирование." eh="e4fd7eed" />
         <e k="usedplus_mode_financeCredit" v="Финансы (Кредит: %d+)" eh="0b6c80e3" />
         <e k="usedplus_mode_leaseCredit" v="Аренда (Кредит: %d+)" eh="439bd2b6" />
 
@@ -680,6 +682,8 @@
         <e k="usedplus_notify_landPurchased" v="Куплен %s за %s" eh="ee85175a" />
         <e k="usedplus_notify_landFinanced" v="Профинансировано %s - ​​%s со сроком погашения сегодня" eh="874037b7" />
         <e k="usedplus_notify_vehicleNowYours" v="Поздравляем! %s теперь твой!" eh="f9f453e9" />
+        <e k="usedplus_notify_placeableFinanced" v="Здание профинансировано!\n%s\nПервоначальный взнос: %s | Ежемесячно: %s на %d лет" eh="72ebd0e0" />
+        <e k="usedplus_notify_placeableSoldPayoff" v="Здание продано. Погашение кредита: %s" eh="78ac7164" />
 
         <!-- Success Notifications - Payments/Loans -->
         <e k="usedplus_notify_loanPaidOff" v="Кредит выплачен! Итого: %s" eh="0ba73cba" />
@@ -770,6 +774,7 @@
     <e k="usedplus_preview_inspectionProgress" v="Осмотр %s выполняется... ~%d ч. осталось" eh="911dfff0" />
     <e k="usedplus_preview_requestInspection" v="Запросить осмотр" eh="e555e8b2" />
     <e k="usedplus_preview_inProgress" v="Выполняется..." eh="bd62582e" />
+        <e k="usedplus_preview_implementNoInspection" v="[EN] Inspections not available for non-powered implements. Buy as-is only." eh="620e727f" />
 
         <!-- ============================================== -->
         <!-- PHASE 1c: Land Purchase Dialog Notifications   -->
@@ -949,8 +954,8 @@
         <e k="usedplus_tl_yourRate" v="Ваша процентная ставка:" eh="6387ae1b" />
         <e k="usedplus_tl_sectionCollateral" v="ВЫБЕРИТЕ ОБЕСПЕЧЕНИЕ" eh="fdb2d731" />
         <e k="usedplus_tl_collateralHelp" v="Нажмите, чтобы переключить активы в качестве залога (показаны только необремененные активы)" eh="618ea809" />
-        <e k="usedplus_tl_prev" v="&lt; Предыдущий" eh="bddeed69" />
-        <e k="usedplus_tl_next" v="Следующий &gt;" eh="4b0a535a" />
+        <e k="usedplus_tl_prev" v="&lt; Назад" eh="93819e8f" />
+        <e k="usedplus_tl_next" v="Вперёд &gt;" eh="3ef61c7b" />
         <e k="usedplus_tl_selected" v="Выбрано:" eh="e8418a9e" />
         <e k="usedplus_tl_existingDebt" v="Существующий долг:" eh="e7d0c3fb" />
         <e k="usedplus_tl_maxLoan" v="МАКСИМАЛЬНЫЙ КРЕДИТ:" eh="f2517379" />
@@ -993,6 +998,7 @@
 
         <!-- Unified Purchase Dialog -->
         <e k="usedplus_up_title" v="Покупка автомобиля" eh="f5dc36d9" />
+        <e k="usedplus_up_title_placeable" v="Купить здание" eh="6fd17a3d" />
         <e k="usedplus_up_sectionVehicle" v="ТРАНСПОРТНОЕ СРЕДСТВО" eh="e9fa318f" />
         <e k="usedplus_up_sectionMethod" v="СПОСОБ ПОКУПКИ" eh="f5f3c261" />
         <e k="usedplus_up_methodHelp" v="Выберите способ оплаты: наличными авансом, постепенным финансированием или арендой с более низкими платежами." eh="83636102" />
@@ -1354,7 +1360,7 @@
         <e k="usedplus_fmf_vehiclesFound" v="Найдено транспорта:" eh="047a7db6" />
         <e k="usedplus_fmf_feesSpent" v="Потрачено на сборы:" eh="787c75fb" />
         <e k="usedplus_fmf_successRate" v="Уровень успеха:" eh="346bdbd3" />
-        <e k="usedplus_fmf_totalSaved" v="Рыночная Стоимость:" eh="7d88f3ce" />
+        <e k="usedplus_fmf_totalSaved" v="Рыночная Стоимость:" eh="bf7d98b0" />
         <e k="usedplus_fmf_yourCreditScore" v="Ваш кредитный рейтинг" eh="5bbd5087" />
         <e k="usedplus_fmf_creditRanges" v="Кредитные диапазоны:" eh="a4a7b278" />
         <e k="usedplus_fmf_tierExcellent" v="750-850 Отлично -1,5%" eh="8d6d7463" />
@@ -2081,7 +2087,7 @@
     <e k="usedplus_electrical_seized" v="ОТКАЗ ЭЛЕКТРИКИ! Все системы мертвы." eh="84b7514a" />
     <e k="usedplus_component_engine" v="Двигатель" eh="7bfa3072" />
     <e k="usedplus_component_hydraulic" v="Гидравлика" eh="1de58ed3" />
-    <e k="usedplus_component_electrical" v="Электросистема" eh="7a1b3240" />
+    <e k="usedplus_component_electrical" v="Электросистема" eh="6f15be3d" />
     <e k="usedplus_component_fuel_system" v="Топливная система" eh="136d85c8" />
     <e k="usedplus_component_tires" v="Шины" eh="3fe2c06a" />
     <e k="usedplus_malfunction_seized" v="ЗАКЛИНИЛО" eh="cdceb6dd" />

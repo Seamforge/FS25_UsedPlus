@@ -623,7 +623,9 @@
         <e k="usedplus_credit_tooLowForLeasing" v="Luottopisteet liian alhaiset leasingiin. Pisteesi: %d (tarvitaan %d+). Leasing vaatii paremmat luottopisteet kuin rahoitus." eh="50b91953" />
         <e k="usedplus_credit_tooLowForLand" v="Luottopisteet liian alhaiset (%d). Tarvitaan %d+ maan rahoittamiseen." eh="78d73204" />
         <e k="usedplus_credit_tooLowForRepair" v="Luottopisteet liian alhaiset (%d). Tarvitaan %d+ korjausten rahoittamiseen." eh="70147f73" />
+        <e k="usedplus_credit_tooLowForPlaceable" v="Rakennuksen rahoitus vaatii Erinomaisen luoton (%d+).\nLuottosi: %d (%s)" eh="0fb63457" />
         <e k="usedplus_credit_needScore" v="Luotto: %d (tarvitaan %d)" eh="82790b98" />
+        <e k="usedplus_placeable_cannotLease" v="Rakennuksia ei voi vuokrata. Käytä Käteinen tai Rahoitus -vaihtoehtoja." eh="e4fd7eed" />
 
         <!-- Minimum Financing Amount Messages -->
         <e k="usedplus_finance_amountTooSmall" v="Summa liian pieni rahoitettavaksi. Vahimmainen: %s" eh="3a90d8c2" />
@@ -686,6 +688,8 @@
         <e k="usedplus_notify_landPurchased" v="Ostettu %s hintaan %s" eh="ee85175a" />
         <e k="usedplus_notify_landFinanced" v="Rahoitettu %s - %s maksettava tanaan" eh="874037b7" />
         <e k="usedplus_notify_vehicleNowYours" v="Onnittelut! %s on nyt sinun!" eh="f9f453e9" />
+        <e k="usedplus_notify_placeableFinanced" v="Rakennus rahoitettu!\n%s\nAlkumaksu: %s | Kuukausittain: %s %d vuodeksi" eh="72ebd0e0" />
+        <e k="usedplus_notify_placeableSoldPayoff" v="Rakennus myyty. Lainan takaisinmaksu: %s" eh="78ac7164" />
 
         <!-- Success Notifications - Payments/Loans -->
         <e k="usedplus_notify_loanPaidOff" v="Laina maksettu! Yhteensa: %s" eh="0ba73cba" />
@@ -782,6 +786,7 @@
         <e k="usedplus_preview_inspectionProgress" v="%s tarkastus kaynnissa... ~%d h jaljella" eh="911dfff0" />
         <e k="usedplus_preview_requestInspection" v="Tilaa tarkastus" eh="e555e8b2" />
         <e k="usedplus_preview_inProgress" v="Kaynnissa..." eh="bd62582e" />
+        <e k="usedplus_preview_implementNoInspection" v="Tarkastukset eivät ole saatavilla moottoroimattomille työkaluille. Osta vain sellaisenaan." eh="620e727f" />
 
         <!-- ============================================== -->
         <!-- PHASE 1c: Land Purchase Dialog Notifications   -->
@@ -1005,6 +1010,7 @@
 
         <!-- Unified Purchase Dialog -->
         <e k="usedplus_up_title" v="Osta ajoneuvo" eh="f5dc36d9" />
+        <e k="usedplus_up_title_placeable" v="Osta rakennus" eh="6fd17a3d" />
         <e k="usedplus_up_sectionVehicle" v="AJONEUVO" eh="e9fa318f" />
         <e k="usedplus_up_sectionMethod" v="OSTOTAPA" eh="f5f3c261" />
         <e k="usedplus_up_methodHelp" v="Valitse maksutapa: käteisellä heti, rahoituksella ajan myötä tai leasing pienemmillä maksuilla." eh="83636102" />
@@ -1059,394 +1065,394 @@
         <e k="usedplus_lp_totalLeaseCost" v="Vuokran kokonaiskustannus:" eh="61a93e0e" />
 
         <!-- Used Search Dialog -->
-        <e k="usedplus_us_sectionVehicle" v="VEHICLE" eh="e9fa318f" />
-        <e k="usedplus_us_sectionTier" v="SEARCH TIER" eh="2a7a1103" />
-        <e k="usedplus_us_sectionQuality" v="DESIRED QUALITY" eh="4a96fcfe" />
-        <e k="usedplus_us_qualityAny" v="Any" eh="ed36a1ef" />
-        <e k="usedplus_us_qualityPoor" v="Poor" eh="0e94d017" />
-        <e k="usedplus_us_qualityFair" v="Fair" eh="f7f20cf0" />
-        <e k="usedplus_us_qualityGood" v="Good" eh="0c6ad70b" />
-        <e k="usedplus_us_qualityExcellent" v="Excellent" eh="fcc2d28a" />
-        <e k="usedplus_us_discountFormat" v="~%d%% off" eh="69923e02" />
-        <e k="usedplus_us_infoText" v="Higher tiers cost more but have better success rates and find higher quality matches." eh="5d292c52" />
+        <e k="usedplus_us_sectionVehicle" v="AJONEUVO" eh="e9fa318f" />
+        <e k="usedplus_us_sectionTier" v="HAUN TASO" eh="2a7a1103" />
+        <e k="usedplus_us_sectionQuality" v="HALUTTU LAATU" eh="4a96fcfe" />
+        <e k="usedplus_us_qualityAny" v="Mikä tahansa" eh="ed36a1ef" />
+        <e k="usedplus_us_qualityPoor" v="Huono" eh="0e94d017" />
+        <e k="usedplus_us_qualityFair" v="Kohtalainen" eh="f7f20cf0" />
+        <e k="usedplus_us_qualityGood" v="Hyvä" eh="0c6ad70b" />
+        <e k="usedplus_us_qualityExcellent" v="Erinomainen" eh="fcc2d28a" />
+        <e k="usedplus_us_discountFormat" v="~%d%% alennus" eh="69923e02" />
+        <e k="usedplus_us_infoText" v="Korkeammat tasot maksavat enemmän, mutta niillä on paremmat onnistumisprosentit ja ne löytävät laadukkaampia kohteita." eh="5d292c52" />
 
         <!-- Used Vehicle Preview Dialog -->
-        <e k="usedplus_uvp_title" v="Used Vehicle Found" eh="ac794919" />
-        <e k="usedplus_uvp_sectionVehicle" v="VEHICLE INFORMATION" eh="47b7b38d" />
-        <e k="usedplus_uvp_askingPrice" v="Asking Price:" eh="c515d94e" />
-        <e k="usedplus_uvp_sectionCondition" v="VISIBLE CONDITION" eh="0eb0492b" />
-        <e k="usedplus_uvp_age" v="Age:" eh="25235196" />
-        <e k="usedplus_uvp_hours" v="Hours:" eh="ad179a10" />
-        <e k="usedplus_uvp_damage" v="Damage:" eh="5a50c456" />
-        <e k="usedplus_uvp_wear" v="Wear:" eh="0f25ac5c" />
-        <e k="usedplus_uvp_warningTitle" v="Hidden mechanical condition unknown" eh="d2e42691" />
-        <e k="usedplus_uvp_selectTier" v="Select inspection level:" eh="c3d4dde6" />
-        <e k="usedplus_uvp_inspectPrompt" v="Pay for professional inspection" eh="2c3e76c2" />
-        <e k="usedplus_uvp_inspectedText" v="Vehicle has been inspected - view report" eh="9015cd17" />
-        <e k="usedplus_button_buyAsIs" v="Buy As-Is" eh="43e49e70" />
-        <e k="usedplus_button_inspect" v="Inspect" eh="35a9dbe6" />
-        <e k="usedplus_button_tires" v="Tires" eh="3fe2c06a" />
-        <e k="usedplus_button_fluids" v="Fluids" eh="c599fed9" />
+        <e k="usedplus_uvp_title" v="Käytetty ajoneuvo löydetty" eh="ac794919" />
+        <e k="usedplus_uvp_sectionVehicle" v="AJONEUVON TIEDOT" eh="47b7b38d" />
+        <e k="usedplus_uvp_askingPrice" v="Pyyntihinta:" eh="c515d94e" />
+        <e k="usedplus_uvp_sectionCondition" v="NÄKYVÄ KUNTO" eh="0eb0492b" />
+        <e k="usedplus_uvp_age" v="Ikä:" eh="25235196" />
+        <e k="usedplus_uvp_hours" v="Tunnit:" eh="ad179a10" />
+        <e k="usedplus_uvp_damage" v="Vaurio:" eh="5a50c456" />
+        <e k="usedplus_uvp_wear" v="Kuluminen:" eh="0f25ac5c" />
+        <e k="usedplus_uvp_warningTitle" v="Piilotettu mekaaninen kunto tuntematon" eh="d2e42691" />
+        <e k="usedplus_uvp_selectTier" v="Valitse tarkastustaso:" eh="c3d4dde6" />
+        <e k="usedplus_uvp_inspectPrompt" v="Maksa ammattimaisesta tarkastuksesta" eh="2c3e76c2" />
+        <e k="usedplus_uvp_inspectedText" v="Ajoneuvo on tarkastettu - katso raportti" eh="9015cd17" />
+        <e k="usedplus_button_buyAsIs" v="Osta sellaisenaan" eh="43e49e70" />
+        <e k="usedplus_button_inspect" v="Tarkasta" eh="35a9dbe6" />
+        <e k="usedplus_button_tires" v="Renkaat" eh="3fe2c06a" />
+        <e k="usedplus_button_fluids" v="Nesteet" eh="c599fed9" />
 
         <!-- Repair Dialog (uses usedplus_rp_* for legacy compatibility, NOT usedplus_repair_*) -->
         <!-- Note: usedplus_rp_title removed - code uses usedplus_repair_title instead -->
-        <e k="usedplus_rp_sectionStatus" v="VEHICLE STATUS" eh="41898172" />
-        <e k="usedplus_rp_mechanical" v="Mechanical:" eh="80061faf" />
-        <e k="usedplus_rp_paint" v="Paint:" eh="d65951a4" />
-        <e k="usedplus_rp_sectionRepair" v="MECHANICAL REPAIR" eh="6294bbee" />
-        <e k="usedplus_rp_sectionRepaint" v="REPAINT" eh="8c638cea" />
-        <e k="usedplus_rp_selectAmount" v="Select how much to repair:" eh="99d6f5e9" />
-        <e k="usedplus_rp_selectPaint" v="Select how much to repaint:" eh="9c5d4c7b" />
-        <e k="usedplus_rp_percentExplain" v="Percentage of remaining damage to fix. 100% = restore to full condition." eh="83a0df1d" />
-        <e k="usedplus_rp_percentExplainPaint" v="Percentage of paint wear to restore. 100% = fresh factory finish." eh="e8268659" />
-        <e k="usedplus_rp_selected" v="Selected:" eh="e8418a9e" />
-        <e k="usedplus_rp_cost" v="Cost:" eh="69edde90" />
-        <e k="usedplus_rp_after" v="After:" eh="fdbe650f" />
-        <e k="usedplus_rp_sectionPayment" v="PAYMENT" eh="b842122b" />
-        <e k="usedplus_rp_totalCost" v="TOTAL COST:" eh="c4886680" />
-        <e k="usedplus_rp_result" v="RESULT:" eh="442def3f" />
-        <e k="usedplus_rp_yourMoney" v="Your Money:" eh="8f18f24a" />
-        <e k="usedplus_rp_infoText" v="Pay now or finance over time with monthly payments." eh="9462576c" />
-        <e k="usedplus_button_payCash" v="PAY CASH" eh="b134b99e" />
-        <e k="usedplus_rp_buttonFinance" v="FINANCE" eh="65fe55e3" />
+        <e k="usedplus_rp_sectionStatus" v="AJONEUVON TILA" eh="41898172" />
+        <e k="usedplus_rp_mechanical" v="Mekaaninen:" eh="80061faf" />
+        <e k="usedplus_rp_paint" v="Maali:" eh="d65951a4" />
+        <e k="usedplus_rp_sectionRepair" v="MEKAANINEN KORJAUS" eh="6294bbee" />
+        <e k="usedplus_rp_sectionRepaint" v="MAALAUS" eh="8c638cea" />
+        <e k="usedplus_rp_selectAmount" v="Valitse korjauksen määrä:" eh="99d6f5e9" />
+        <e k="usedplus_rp_selectPaint" v="Valitse maalauksen määrä:" eh="9c5d4c7b" />
+        <e k="usedplus_rp_percentExplain" v="Prosenttiosuus jäljellä olevasta vahingosta korjattavaksi. 100% = palautus täyteen kuntoon." eh="83a0df1d" />
+        <e k="usedplus_rp_percentExplainPaint" v="Prosenttiosuus maalin kulumisesta palautettavaksi. 100% = uusi tehdaspinta." eh="e8268659" />
+        <e k="usedplus_rp_selected" v="Valittu:" eh="e8418a9e" />
+        <e k="usedplus_rp_cost" v="Hinta:" eh="69edde90" />
+        <e k="usedplus_rp_after" v="Jälkeen:" eh="fdbe650f" />
+        <e k="usedplus_rp_sectionPayment" v="MAKSU" eh="b842122b" />
+        <e k="usedplus_rp_totalCost" v="KOKONAISHINTA:" eh="c4886680" />
+        <e k="usedplus_rp_result" v="TULOS:" eh="442def3f" />
+        <e k="usedplus_rp_yourMoney" v="Rahasi:" eh="8f18f24a" />
+        <e k="usedplus_rp_infoText" v="Maksa nyt tai rahoita ajan mittaan kuukausimaksuilla." eh="9462576c" />
+        <e k="usedplus_button_payCash" v="MAKSA KÄTEISELLÄ" eh="b134b99e" />
+        <e k="usedplus_rp_buttonFinance" v="RAHOITUS" eh="65fe55e3" />
 
         <!-- Sell Vehicle Dialog -->
-        <e k="usedplus_sv_title" v="Sell Vehicle" eh="fe030802" />
-        <e k="usedplus_sv_sectionVehicle" v="VEHICLE FOR SALE" eh="e26b5c39" />
-        <e k="usedplus_sv_sectionOptions" v="SALES OPTIONS" eh="7aa5cdd7" />
-        <e k="usedplus_sv_optionsHelp" v="Hire an agent to find buyers. Higher-tier agents reach more buyers but charge more." eh="ba69b5e8" />
-        <e k="usedplus_sv_agent" v="Agent:" eh="8c014e8c" />
-        <e k="usedplus_sv_askingPrice" v="Asking Price:" eh="c515d94e" />
-        <e k="usedplus_sv_sectionOutcome" v="EXPECTED OUTCOME" eh="938f969b" />
-        <e k="usedplus_sv_expectedReturn" v="Expected Return:" eh="a64a415f" />
-        <e k="usedplus_sv_returnPercent" v="Return Percent:" eh="a4f3603f" />
-        <e k="usedplus_sv_agentFee" v="Agent Fee:" eh="d9e5adff" />
-        <e k="usedplus_sv_netAfterFee" v="Net After Fee:" eh="95d8ccf3" />
-        <e k="usedplus_sv_expectedTime" v="Expected Time:" eh="34fab0d7" />
-        <e k="usedplus_sv_successRate" v="Success Rate:" eh="346bdbd3" />
-        <e k="usedplus_sv_selected" v="Selected:" eh="e8418a9e" />
-        <e k="usedplus_sv_sectionCompare" v="ALTERNATIVE OPTIONS" eh="0c82f4b3" />
-        <e k="usedplus_sv_tradeInCompare" v="Trade-In (if buying):" eh="4625f0a8" />
-        <e k="usedplus_sv_infoText" v="Agent searches for buyers. You receive offers to accept or decline." eh="8cf963a6" />
-        <e k="usedplus_sv_warningText" v="Agent fee is non-refundable. Vehicle remains yours until sold." eh="c1203e3c" />
-        <e k="usedplus_button_hireAgent" v="Hire Agent" eh="876d6229" />
+        <e k="usedplus_sv_title" v="Myy ajoneuvo" eh="fe030802" />
+        <e k="usedplus_sv_sectionVehicle" v="MYYTÄVÄ AJONEUVO" eh="e26b5c39" />
+        <e k="usedplus_sv_sectionOptions" v="MYYNTIVAIHTOEHDOT" eh="7aa5cdd7" />
+        <e k="usedplus_sv_optionsHelp" v="Palkkaa agentti etsimään ostajia. Korkeamman tason agentit tavoittavat enemmän ostajia, mutta veloittavat enemmän." eh="ba69b5e8" />
+        <e k="usedplus_sv_agent" v="Agentti:" eh="8c014e8c" />
+        <e k="usedplus_sv_askingPrice" v="Pyyntihinta:" eh="c515d94e" />
+        <e k="usedplus_sv_sectionOutcome" v="ODOTETTU TULOS" eh="938f969b" />
+        <e k="usedplus_sv_expectedReturn" v="Odotettu tuotto:" eh="a64a415f" />
+        <e k="usedplus_sv_returnPercent" v="Tuottoprosentti:" eh="a4f3603f" />
+        <e k="usedplus_sv_agentFee" v="Agentin palkkio:" eh="d9e5adff" />
+        <e k="usedplus_sv_netAfterFee" v="Netto palkkion jälkeen:" eh="95d8ccf3" />
+        <e k="usedplus_sv_expectedTime" v="Odotettu aika:" eh="34fab0d7" />
+        <e k="usedplus_sv_successRate" v="Onnistumisprosentti:" eh="346bdbd3" />
+        <e k="usedplus_sv_selected" v="Valittu:" eh="e8418a9e" />
+        <e k="usedplus_sv_sectionCompare" v="VAIHTOEHTOISET VAIHTOEHDOT" eh="0c82f4b3" />
+        <e k="usedplus_sv_tradeInCompare" v="Vaihto (jos ostat):" eh="4625f0a8" />
+        <e k="usedplus_sv_infoText" v="Agentti etsii ostajia. Saat tarjouksia hyväksyttäväksi tai hylättäväksi." eh="8cf963a6" />
+        <e k="usedplus_sv_warningText" v="Agentin palkkio ei palauteta. Ajoneuvo pysyy sinun, kunnes se myydään." eh="c1203e3c" />
+        <e k="usedplus_button_hireAgent" v="Palkkaa agentti" eh="876d6229" />
 
         <!-- Sale Listing Initiated Dialog -->
-        <e k="usedplus_sli_title" v="Listing Created!" eh="9b42efd7" />
-        <e k="usedplus_sli_sectionAgent" v="AGENT DETAILS" eh="07b84291" />
-        <e k="usedplus_sli_agentType" v="Agent:" eh="8c014e8c" />
-        <e k="usedplus_sli_feeCharged" v="Fee Charged:" eh="b8b2c7fb" />
-        <e k="usedplus_sli_sectionListing" v="LISTING DETAILS" eh="7b3916d2" />
-        <e k="usedplus_sli_priceTier" v="Price Tier:" eh="a2139c66" />
-        <e k="usedplus_sli_expectedPrice" v="Expected Price:" eh="47fafc20" />
-        <e k="usedplus_sli_timeline" v="Timeline:" eh="00e0ede6" />
-        <e k="usedplus_sli_successRate" v="Success Rate:" eh="346bdbd3" />
-        <e k="usedplus_sli_infoText" v="Your agent is now searching for buyers." eh="ebe12ffc" />
-        <e k="usedplus_sli_infoTextSub" v="You'll receive offers to accept or decline as buyers are found." eh="f88e1b82" />
+        <e k="usedplus_sli_title" v="Ilmoitus luotu!" eh="9b42efd7" />
+        <e k="usedplus_sli_sectionAgent" v="AGENTIN TIEDOT" eh="07b84291" />
+        <e k="usedplus_sli_agentType" v="Agentti:" eh="8c014e8c" />
+        <e k="usedplus_sli_feeCharged" v="Veloitettu palkkio:" eh="b8b2c7fb" />
+        <e k="usedplus_sli_sectionListing" v="ILMOITUKSEN TIEDOT" eh="7b3916d2" />
+        <e k="usedplus_sli_priceTier" v="Hintataso:" eh="a2139c66" />
+        <e k="usedplus_sli_expectedPrice" v="Odotettu hinta:" eh="47fafc20" />
+        <e k="usedplus_sli_timeline" v="Aikataulu:" eh="00e0ede6" />
+        <e k="usedplus_sli_successRate" v="Onnistumisprosentti:" eh="346bdbd3" />
+        <e k="usedplus_sli_infoText" v="Agenttisi etsii nyt ostajia." eh="ebe12ffc" />
+        <e k="usedplus_sli_infoTextSub" v="Saat tarjouksia hyväksyttäväksi tai hylättäväksi, kun ostajia löytyy." eh="f88e1b82" />
 
         <!-- Sale Offer Notifications -->
-        <e k="usedplus_notify_saleOffer" v="Buyer found for %s! Offering %s" eh="3389313f" />
+        <e k="usedplus_notify_saleOffer" v="Ostaja löydetty kohteelle %s! Tarjous %s" eh="3389313f" />
 
         <!-- Sale Offer Dialog (REDESIGNED v1.9.6) -->
-        <e k="usedplus_so_title_v2" v="BUYER FOUND!" eh="fd3a815d" />
-        <e k="usedplus_so_expectedRange" v="EXPECTED RANGE" eh="97d4cf24" />
+        <e k="usedplus_so_title_v2" v="OSTAJA LÖYDETTY!" eh="fd3a815d" />
+        <e k="usedplus_so_expectedRange" v="ODOTETTU VAIHTELUVÄLI" eh="97d4cf24" />
         <e k="usedplus_so_rangeMin" v="Min" eh="78d811e9" />
-        <e k="usedplus_so_rangeOffer" v="This Offer" eh="7b80f546" />
-        <e k="usedplus_so_rangeMax" v="Max" eh="6a061313" />
-        <e k="usedplus_so_yourOptions" v="YOUR OPTIONS" eh="b9646b5a" />
-        <e k="usedplus_so_thisOffer" v="Accept Offer:" eh="24352753" />
-        <e k="usedplus_so_keepWaiting" v="Keep Waiting:" eh="9cc093ff" />
-        <e k="usedplus_so_keepWaitingNote" v="May get better offer, or listing expires" eh="6b53991a" />
-        <e k="usedplus_so_expiresIn" v="Offer expires in:" eh="ca2ce4a5" />
-        <e k="usedplus_so_acceptOffer" v="Accept Offer" eh="93a5776a" />
-        <e k="usedplus_so_keepWaitingBtn" v="Keep Waiting" eh="addcd152" />
+        <e k="usedplus_so_rangeOffer" v="Tämä tarjous" eh="7b80f546" />
+        <e k="usedplus_so_rangeMax" v="Maks" eh="6a061313" />
+        <e k="usedplus_so_yourOptions" v="VAIHTOEHTOSI" eh="b9646b5a" />
+        <e k="usedplus_so_thisOffer" v="Hyväksy tarjous:" eh="24352753" />
+        <e k="usedplus_so_keepWaiting" v="Jatka odotusta:" eh="9cc093ff" />
+        <e k="usedplus_so_keepWaitingNote" v="Saattaa saada paremman tarjouksen tai ilmoitus vanhenee" eh="6b53991a" />
+        <e k="usedplus_so_expiresIn" v="Tarjous vanhenee:" eh="ca2ce4a5" />
+        <e k="usedplus_so_acceptOffer" v="Hyväksy tarjous" eh="93a5776a" />
+        <e k="usedplus_so_keepWaitingBtn" v="Jatka odotusta" eh="addcd152" />
         <!-- Deal quality ratings (set dynamically in Lua) -->
         <!-- Legacy keys kept for compatibility -->
-        <e k="usedplus_so_title" v="SALE OFFER RECEIVED!" eh="1596a2b0" />
-        <e k="usedplus_button_acceptOffer" v="Accept Offer" eh="93a5776a" />
+        <e k="usedplus_so_title" v="MYYNTITARJOUS VASTAANOTETTU!" eh="1596a2b0" />
+        <e k="usedplus_button_acceptOffer" v="Hyväksy tarjous" eh="93a5776a" />
 
         <!-- Payment Config Dialog -->
-        <e k="usedplus_pc_title" v="Configure Loan Payments" eh="07beb52e" />
-        <e k="usedplus_pc_headerLoan" v="Loan" eh="9ad81a8f" />
-        <e k="usedplus_pc_headerBalance" v="Balance" eh="99a808d8" />
-        <e k="usedplus_pc_headerMode" v="Mode" eh="650be618" />
-        <e k="usedplus_pc_headerPayment" v="Payment" eh="c453a4b8" />
-        <e k="usedplus_pc_selectLoan" v="Select a loan above to change its payment mode" eh="9c398fdf" />
-        <e k="usedplus_pc_totalPayment" v="TOTAL PAYMENT" eh="bea684c8" />
-        <e k="usedplus_button_resetAll" v="Reset All" eh="b69a15a8" />
-        <e k="usedplus_button_apply" v="Apply" eh="9639e32c" />
+        <e k="usedplus_pc_title" v="Määritä lainan maksut" eh="07beb52e" />
+        <e k="usedplus_pc_headerLoan" v="Laina" eh="9ad81a8f" />
+        <e k="usedplus_pc_headerBalance" v="Saldo" eh="99a808d8" />
+        <e k="usedplus_pc_headerMode" v="Tila" eh="650be618" />
+        <e k="usedplus_pc_headerPayment" v="Maksu" eh="c453a4b8" />
+        <e k="usedplus_pc_selectLoan" v="Valitse yllä oleva laina muuttaaksesi sen maksutapaa" eh="9c398fdf" />
+        <e k="usedplus_pc_totalPayment" v="KOKONAISMAKSU" eh="bea684c8" />
+        <e k="usedplus_button_resetAll" v="Nollaa kaikki" eh="b69a15a8" />
+        <e k="usedplus_button_apply" v="Käytä" eh="9639e32c" />
 
         <!-- Lease End Dialog -->
-        <e k="usedplus_le_chooseOption" v="Choose an Option:" eh="c4477bb4" />
-        <e k="usedplus_le_returnTitle" v="RETURN VEHICLE" eh="2c0e1ab5" />
-        <e k="usedplus_le_returnDesc" v="Return to dealer, pay any damage penalties" eh="91a379d9" />
-        <e k="usedplus_le_buyoutTitle" v="BUYOUT VEHICLE" eh="4fd832ea" />
-        <e k="usedplus_le_buyoutDesc" v="Pay residual value, keep vehicle permanently" eh="2397b13e" />
-        <e k="usedplus_button_returnVehicle" v="Return Vehicle" eh="29494bde" />
-        <e k="usedplus_button_buyoutVehicle" v="Buyout Vehicle" eh="941e30d2" />
+        <e k="usedplus_le_chooseOption" v="Valitse vaihtoehto:" eh="c4477bb4" />
+        <e k="usedplus_le_returnTitle" v="PALAUTA AJONEUVO" eh="2c0e1ab5" />
+        <e k="usedplus_le_returnDesc" v="Palauta jälleenmyyjälle, maksa mahdolliset vahinkoseuraamukset" eh="91a379d9" />
+        <e k="usedplus_le_buyoutTitle" v="LUNASTA AJONEUVO" eh="4fd832ea" />
+        <e k="usedplus_le_buyoutDesc" v="Maksa jäännösarvo, pidä ajoneuvo pysyvästi" eh="2397b13e" />
+        <e k="usedplus_button_returnVehicle" v="Palauta ajoneuvo" eh="29494bde" />
+        <e k="usedplus_button_buyoutVehicle" v="Lunasta ajoneuvo" eh="941e30d2" />
 
         <!-- Lease Renewal Dialog -->
-        <e k="usedplus_lr_title" v="Lease Term Complete" eh="6aa968eb" />
-        <e k="usedplus_lr_sectionSummary" v="LEASE SUMMARY" eh="4d8adcee" />
-        <e k="usedplus_lr_term" v="Term:" eh="3980a548" />
-        <e k="usedplus_lr_paymentsMade" v="Payments Made:" eh="c6d673a2" />
-        <e k="usedplus_lr_totalPaid" v="Total Paid:" eh="752d1456" />
-        <e k="usedplus_lr_equityBuilt" v="Equity Built:" eh="9a889d2d" />
-        <e k="usedplus_lr_sectionDeposit" v="DEPOSIT STATUS" eh="664a8e6a" />
-        <e k="usedplus_lr_securityDeposit" v="Security Deposit:" eh="40ff2282" />
-        <e k="usedplus_lr_deductions" v="Deductions:" eh="18e6b2d1" />
-        <e k="usedplus_lr_refundAmount" v="Refund Amount:" eh="601b295e" />
-        <e k="usedplus_lr_vehicleCondition" v="Vehicle Condition:" eh="507cbde4" />
-        <e k="usedplus_lr_sectionOptions" v="YOUR OPTIONS" eh="b9646b5a" />
-        <e k="usedplus_lr_optionReturn" v="RETURN" eh="a2bec276" />
-        <e k="usedplus_lr_optionReturnDesc" v="Give back asset" eh="d3b59566" />
-        <e k="usedplus_lr_youReceive" v="You receive:" eh="7d826ecb" />
-        <e k="usedplus_lr_optionBuyout" v="BUYOUT" eh="824fbea1" />
-        <e k="usedplus_lr_optionBuyoutDesc" v="Purchase to own" eh="f27e9e96" />
-        <e k="usedplus_lr_youPay" v="You pay:" eh="58ef0d24" />
-        <e k="usedplus_lr_optionRenew" v="RENEW" eh="f2120692" />
-        <e k="usedplus_lr_optionRenewDesc" v="Extend lease term" eh="392db1c5" />
-        <e k="usedplus_lr_equityCarries" v="Equity carries over:" eh="4c5d28b7" />
-        <e k="usedplus_button_return" v="Return" eh="988fd738" />
-        <e k="usedplus_button_buyout" v="Buyout" eh="6e052e38" />
-        <e k="usedplus_button_renew" v="Renew" eh="0b9feba3" />
-        <e k="usedplus_lr_helpText" v="You must choose an option. Returning gives you your deposit back. Buyout uses your equity toward purchase. Renewing extends the lease with equity applied to future buyout." eh="91673bf9" />
+        <e k="usedplus_lr_title" v="Vuokra-aika päättynyt" eh="6aa968eb" />
+        <e k="usedplus_lr_sectionSummary" v="VUOKRAN YHTEENVETO" eh="4d8adcee" />
+        <e k="usedplus_lr_term" v="Aika:" eh="3980a548" />
+        <e k="usedplus_lr_paymentsMade" v="Suoritetut maksut:" eh="c6d673a2" />
+        <e k="usedplus_lr_totalPaid" v="Maksettu yhteensä:" eh="752d1456" />
+        <e k="usedplus_lr_equityBuilt" v="Kertynyt pääoma:" eh="9a889d2d" />
+        <e k="usedplus_lr_sectionDeposit" v="VAKUUDEN TILA" eh="664a8e6a" />
+        <e k="usedplus_lr_securityDeposit" v="Vakuusmaksu:" eh="40ff2282" />
+        <e k="usedplus_lr_deductions" v="Vähennykset:" eh="18e6b2d1" />
+        <e k="usedplus_lr_refundAmount" v="Palautusmäärä:" eh="601b295e" />
+        <e k="usedplus_lr_vehicleCondition" v="Ajoneuvon kunto:" eh="507cbde4" />
+        <e k="usedplus_lr_sectionOptions" v="VAIHTOEHTOSI" eh="b9646b5a" />
+        <e k="usedplus_lr_optionReturn" v="PALAUTUS" eh="a2bec276" />
+        <e k="usedplus_lr_optionReturnDesc" v="Palauta omaisuus" eh="d3b59566" />
+        <e k="usedplus_lr_youReceive" v="Saat:" eh="7d826ecb" />
+        <e k="usedplus_lr_optionBuyout" v="LUNASTUS" eh="824fbea1" />
+        <e k="usedplus_lr_optionBuyoutDesc" v="Osta omaksi" eh="f27e9e96" />
+        <e k="usedplus_lr_youPay" v="Maksat:" eh="58ef0d24" />
+        <e k="usedplus_lr_optionRenew" v="UUDISTA" eh="f2120692" />
+        <e k="usedplus_lr_optionRenewDesc" v="Jatka vuokra-aikaa" eh="392db1c5" />
+        <e k="usedplus_lr_equityCarries" v="Pääoma siirtyy:" eh="4c5d28b7" />
+        <e k="usedplus_button_return" v="Palauta" eh="988fd738" />
+        <e k="usedplus_button_buyout" v="Lunasta" eh="6e052e38" />
+        <e k="usedplus_button_renew" v="Uudista" eh="0b9feba3" />
+        <e k="usedplus_lr_helpText" v="Sinun on valittava vaihtoehto. Palautus antaa vakuusmaksusi takaisin. Lunastus käyttää pääomaasi ostoon. Uudistaminen jatkaa vuokraa pääoman kanssa tulevaa lunastusta varten." eh="91673bf9" />
 
         <!-- Confirmation Dialog -->
-        <e k="usedplus_conf_title" v="Confirmation" eh="f4d1ea47" />
+        <e k="usedplus_conf_title" v="Vahvistus" eh="f4d1ea47" />
 
         <!-- Credit Report Dialog -->
-        <e k="usedplus_cr_title" v="CREDIT REPORT" eh="3725e302" />
-        <e k="usedplus_cr_reportDate" v="Report Date:" eh="93ad31a7" />
-        <e k="usedplus_cr_sectionScore" v="CREDIT SCORE" eh="4f3b169e" />
-        <e k="usedplus_cr_scoreRange" v="Score Range: 300-850" eh="3d50ef3a" />
-        <e k="usedplus_cr_sectionTrend" v="SCORE TREND" eh="e48c7243" />
-        <e k="usedplus_cr_noHistory" v="No History" eh="be5404ee" />
-        <e k="usedplus_cr_sectionFactors" v="FACTORS AFFECTING SCORE" eh="2d37fbe6" />
-        <e k="usedplus_cr_factorPayment" v="Payment History (35%):" eh="64428de4" />
-        <e k="usedplus_cr_factorUtilization" v="Credit Utilization (30%):" eh="1781c289" />
-        <e k="usedplus_cr_factorAge" v="Account Age (15%):" eh="25e0a509" />
-        <e k="usedplus_cr_factorMix" v="Account Mix (10%):" eh="10cfcc8e" />
-        <e k="usedplus_cr_factorInquiries" v="Recent Inquiries (10%):" eh="2707f9d5" />
-        <e k="usedplus_cr_sectionAccount" v="ACCOUNT SUMMARY" eh="30b999cb" />
-        <e k="usedplus_cr_openAccounts" v="Open Accounts:" eh="63f11347" />
-        <e k="usedplus_cr_closedAccounts" v="Closed Accounts:" eh="66278d88" />
-        <e k="usedplus_cr_outstandingBalance" v="Outstanding Balance:" eh="992c579f" />
-        <e k="usedplus_cr_sectionActive" v="ACTIVE ACCOUNTS" eh="7aed11c2" />
-        <e k="usedplus_cr_noActiveAccounts" v="No active accounts" eh="1b3f60a4" />
-        <e k="usedplus_cr_sectionPayment" v="PAYMENT HISTORY" eh="56a90765" />
-        <e k="usedplus_cr_onTimePayments" v="On-Time Payments:" eh="5fe2e027" />
-        <e k="usedplus_cr_missedPayments" v="Missed Payments:" eh="b96a6a49" />
-        <e k="usedplus_cr_currentStreak" v="Current Streak:" eh="532fbb21" />
-        <e k="usedplus_cr_longestStreak" v="Longest Streak:" eh="2cfe9c97" />
-        <e k="usedplus_cr_section12Month" v="12-MONTH HISTORY" eh="3a1a2ffd" />
-        <e k="usedplus_cr_sectionTips" v="TIPS TO IMPROVE" eh="b68d1668" />
-        <e k="usedplus_cr_tip1" v="Pay on time to build credit" eh="a69f1a91" />
-        <e k="usedplus_cr_tip2" v="Keep debt below 50% of assets" eh="70d62f24" />
-        <e k="usedplus_cr_tip3" v="Build history with small loans" eh="dc1c9766" />
+        <e k="usedplus_cr_title" v="LUOTTORAPORTTI" eh="3725e302" />
+        <e k="usedplus_cr_reportDate" v="Raportin päivämäärä:" eh="93ad31a7" />
+        <e k="usedplus_cr_sectionScore" v="LUOTTOPISTEMÄÄRÄ" eh="4f3b169e" />
+        <e k="usedplus_cr_scoreRange" v="Pisteväli: 300-850" eh="3d50ef3a" />
+        <e k="usedplus_cr_sectionTrend" v="PISTEIDEN KEHITYS" eh="e48c7243" />
+        <e k="usedplus_cr_noHistory" v="Ei historiaa" eh="be5404ee" />
+        <e k="usedplus_cr_sectionFactors" v="PISTEISIIN VAIKUTTAVAT TEKIJÄT" eh="2d37fbe6" />
+        <e k="usedplus_cr_factorPayment" v="Maksuhistoria (35%):" eh="64428de4" />
+        <e k="usedplus_cr_factorUtilization" v="Luoton käyttöaste (30%):" eh="1781c289" />
+        <e k="usedplus_cr_factorAge" v="Tilin ikä (15%):" eh="25e0a509" />
+        <e k="usedplus_cr_factorMix" v="Tilien yhdistelmä (10%):" eh="10cfcc8e" />
+        <e k="usedplus_cr_factorInquiries" v="Viimeaikaiset kyselyt (10%):" eh="2707f9d5" />
+        <e k="usedplus_cr_sectionAccount" v="TILIN YHTEENVETO" eh="30b999cb" />
+        <e k="usedplus_cr_openAccounts" v="Avoimet tilit:" eh="63f11347" />
+        <e k="usedplus_cr_closedAccounts" v="Suljetut tilit:" eh="66278d88" />
+        <e k="usedplus_cr_outstandingBalance" v="Maksamaton saldo:" eh="992c579f" />
+        <e k="usedplus_cr_sectionActive" v="AKTIIVISET TILIT" eh="7aed11c2" />
+        <e k="usedplus_cr_noActiveAccounts" v="Ei aktiivisia tilejä" eh="1b3f60a4" />
+        <e k="usedplus_cr_sectionPayment" v="MAKSUHISTORIA" eh="56a90765" />
+        <e k="usedplus_cr_onTimePayments" v="Ajoissa maksetut:" eh="5fe2e027" />
+        <e k="usedplus_cr_missedPayments" v="Myöhästyneet maksut:" eh="b96a6a49" />
+        <e k="usedplus_cr_currentStreak" v="Nykyinen putki:" eh="532fbb21" />
+        <e k="usedplus_cr_longestStreak" v="Pisin putki:" eh="2cfe9c97" />
+        <e k="usedplus_cr_section12Month" v="12 KUUKAUDEN HISTORIA" eh="3a1a2ffd" />
+        <e k="usedplus_cr_sectionTips" v="VINKKEJÄ PARANTAMISEEN" eh="b68d1668" />
+        <e k="usedplus_cr_tip1" v="Maksa ajoissa rakentaaksesi luottoa" eh="a69f1a91" />
+        <e k="usedplus_cr_tip2" v="Pidä velka alle 50% varoista" eh="70d62f24" />
+        <e k="usedplus_cr_tip3" v="Rakenna historiaa pienillä lainoilla" eh="dc1c9766" />
         <!-- v2.0.0: Credit system disabled messages -->
-        <e k="usedplus_cr_creditDisabled" v="Credit Scoring is Disabled" eh="62d14b3c" />
-        <e k="usedplus_cr_creditDisabledHint" v="Enable credit scoring in UsedPlus settings to view your credit report." eh="4c217397" />
+        <e k="usedplus_cr_creditDisabled" v="Luottopisteytys on poistettu käytöstä" eh="62d14b3c" />
+        <e k="usedplus_cr_creditDisabledHint" v="Ota luottopisteytys käyttöön UsedPlus-asetuksista nähdäksesi luottoraporttisi." eh="4c217397" />
         <!-- REMOVED: usedplus_button_close - duplicate, use Common Button Labels -->
 
         <!-- Search Details Dialog -->
-        <e k="usedplus_sd_title" v="SEARCH DETAILS" eh="b3338e43" />
-        <e k="usedplus_sd_sectionSearching" v="SEARCHING FOR" eh="fb7b73d1" />
-        <e k="usedplus_sd_sectionConfig" v="SEARCH CONFIGURATION" eh="b1db3ac1" />
-        <e k="usedplus_sd_searchTier" v="Search Tier:" eh="1659ba2c" />
-        <e k="usedplus_sd_agentFee" v="Agent Fee:" eh="d9e5adff" />
-        <e k="usedplus_sd_baseSuccess" v="Base Success:" eh="7cb62230" />
-        <e k="usedplus_sd_qualitySought" v="Quality Sought:" eh="5596b7f2" />
-        <e k="usedplus_sd_successModifier" v="Success Modifier:" eh="6dd11cf5" />
-        <e k="usedplus_sd_combinedChance" v="Combined Chance:" eh="7f4e4f53" />
-        <e k="usedplus_sd_sectionPricing" v="EXPECTED PRICING" eh="76b4b461" />
-        <e k="usedplus_sd_newPrice" v="New Price:" eh="8def7435" />
-        <e k="usedplus_sd_expectedUsed" v="Expected Used:" eh="28f47fae" />
-        <e k="usedplus_sd_savings" v="Savings:" eh="f3815936" />
-        <e k="usedplus_sd_qualityRange" v="Quality Range:" eh="d897532c" />
-        <e k="usedplus_sd_priceRange" v="Price Range:" eh="f0c5f00f" />
-        <e k="usedplus_sd_sectionStatus" v="SEARCH STATUS" eh="58667467" />
-        <e k="usedplus_sd_status" v="Status:" eh="24a23d78" />
-        <e k="usedplus_sd_timeRemaining" v="Time Remaining:" eh="d67a16ee" />
-        <e k="usedplus_sd_started" v="Started:" eh="cf864170" />
-        <e k="usedplus_sd_elapsed" v="Elapsed:" eh="97ce22df" />
-        <e k="usedplus_sd_infoText" v="Regional searches offer the best value for success rate." eh="83c02892" />
+        <e k="usedplus_sd_title" v="HAUN TIEDOT" eh="b3338e43" />
+        <e k="usedplus_sd_sectionSearching" v="ETSITÄÄN" eh="fb7b73d1" />
+        <e k="usedplus_sd_sectionConfig" v="HAUN ASETUKSET" eh="b1db3ac1" />
+        <e k="usedplus_sd_searchTier" v="Haun taso:" eh="1659ba2c" />
+        <e k="usedplus_sd_agentFee" v="Agentin palkkio:" eh="d9e5adff" />
+        <e k="usedplus_sd_baseSuccess" v="Perusonnistuminen:" eh="7cb62230" />
+        <e k="usedplus_sd_qualitySought" v="Etsitty laatu:" eh="5596b7f2" />
+        <e k="usedplus_sd_successModifier" v="Onnistumiskerroin:" eh="6dd11cf5" />
+        <e k="usedplus_sd_combinedChance" v="Yhdistetty mahdollisuus:" eh="7f4e4f53" />
+        <e k="usedplus_sd_sectionPricing" v="ODOTETTU HINNOITTELU" eh="76b4b461" />
+        <e k="usedplus_sd_newPrice" v="Uusi hinta:" eh="8def7435" />
+        <e k="usedplus_sd_expectedUsed" v="Odotettu käytetty:" eh="28f47fae" />
+        <e k="usedplus_sd_savings" v="Säästöt:" eh="f3815936" />
+        <e k="usedplus_sd_qualityRange" v="Laatuväli:" eh="d897532c" />
+        <e k="usedplus_sd_priceRange" v="Hintaväli:" eh="f0c5f00f" />
+        <e k="usedplus_sd_sectionStatus" v="HAUN TILA" eh="58667467" />
+        <e k="usedplus_sd_status" v="Tila:" eh="24a23d78" />
+        <e k="usedplus_sd_timeRemaining" v="Aikaa jäljellä:" eh="d67a16ee" />
+        <e k="usedplus_sd_started" v="Aloitettu:" eh="cf864170" />
+        <e k="usedplus_sd_elapsed" v="Kulunut:" eh="97ce22df" />
+        <e k="usedplus_sd_infoText" v="Alueelliset haut tarjoavat parhaan vastineen onnistumisprosentille." eh="83c02892" />
 
         <!-- Sale Listing Details Dialog -->
-        <e k="usedplus_sld_title" v="SALE LISTING DETAILS" eh="9e334439" />
-        <e k="usedplus_sld_sectionVehicle" v="VEHICLE" eh="e9fa318f" />
-        <e k="usedplus_sld_sectionStatus" v="STATUS" eh="5f241c8c" />
-        <e k="usedplus_sld_condition" v="Condition:" eh="ed51222f" />
-        <e k="usedplus_sld_hours" v="Hours:" eh="ad179a10" />
-        <e k="usedplus_sld_timeLeft" v="Time Left:" eh="39eed84f" />
-        <e k="usedplus_sld_sectionConfig" v="SALE CONFIGURATION" eh="363705b3" />
-        <e k="usedplus_sld_agentTier" v="Agent Tier:" eh="4eb7801b" />
-        <e k="usedplus_sld_agentFee" v="Agent Fee:" eh="d9e5adff" />
-        <e k="usedplus_sld_baseSuccess" v="Base Success:" eh="7cb62230" />
-        <e k="usedplus_sld_priceTier" v="Price Tier:" eh="a2139c66" />
-        <e k="usedplus_sld_priceRange" v="Price Range:" eh="f0c5f00f" />
-        <e k="usedplus_sld_successMod" v="Success Mod:" eh="072a440b" />
-        <e k="usedplus_sld_sectionValue" v="VALUE COMPARISON" eh="b15429bc" />
-        <e k="usedplus_sld_vanillaSell" v="Vanilla Sell:" eh="5aa2c432" />
-        <e k="usedplus_sld_tradeInValue" v="Trade-In Value:" eh="4f0e849e" />
-        <e k="usedplus_sld_tradeInNote" v="(Trade-In: 50-65% instant)" eh="29c1fe6d" />
-        <e k="usedplus_sld_expected" v="Expected:" eh="28cd6614" />
-        <e k="usedplus_sld_vsVanilla" v="vs Vanilla:" eh="c4365310" />
-        <e k="usedplus_sld_netAfterFee" v="Net (after fee):" eh="505e1f8c" />
-        <e k="usedplus_sld_sectionOffers" v="OFFER HISTORY" eh="673b6b05" />
-        <e k="usedplus_sld_offersReceived" v="Offers Received:" eh="6c54540b" />
-        <e k="usedplus_sld_offersDeclined" v="Offers Declined:" eh="b3088f05" />
-        <e k="usedplus_sld_listedFor" v="Listed For:" eh="3df84bda" />
-        <e k="usedplus_sld_infoText" v="Higher agent tiers have wider reach but longer wait times." eh="c6eb9c87" />
+        <e k="usedplus_sld_title" v="MYYNTI-ILMOITUKSEN TIEDOT" eh="9e334439" />
+        <e k="usedplus_sld_sectionVehicle" v="AJONEUVO" eh="e9fa318f" />
+        <e k="usedplus_sld_sectionStatus" v="TILA" eh="5f241c8c" />
+        <e k="usedplus_sld_condition" v="Kunto:" eh="ed51222f" />
+        <e k="usedplus_sld_hours" v="Tunnit:" eh="ad179a10" />
+        <e k="usedplus_sld_timeLeft" v="Aikaa jäljellä:" eh="39eed84f" />
+        <e k="usedplus_sld_sectionConfig" v="MYYNNIN ASETUKSET" eh="363705b3" />
+        <e k="usedplus_sld_agentTier" v="Agentin taso:" eh="4eb7801b" />
+        <e k="usedplus_sld_agentFee" v="Agentin palkkio:" eh="d9e5adff" />
+        <e k="usedplus_sld_baseSuccess" v="Perusonnistuminen:" eh="7cb62230" />
+        <e k="usedplus_sld_priceTier" v="Hintataso:" eh="a2139c66" />
+        <e k="usedplus_sld_priceRange" v="Hintaväli:" eh="f0c5f00f" />
+        <e k="usedplus_sld_successMod" v="Onnistumiskerroin:" eh="072a440b" />
+        <e k="usedplus_sld_sectionValue" v="ARVOVERTAILU" eh="b15429bc" />
+        <e k="usedplus_sld_vanillaSell" v="Tavallinen myynti:" eh="5aa2c432" />
+        <e k="usedplus_sld_tradeInValue" v="Vaihtoarvo:" eh="4f0e849e" />
+        <e k="usedplus_sld_tradeInNote" v="(Vaihto: 50-65% välittömästi)" eh="29c1fe6d" />
+        <e k="usedplus_sld_expected" v="Odotettu:" eh="28cd6614" />
+        <e k="usedplus_sld_vsVanilla" v="vs. Tavallinen:" eh="c4365310" />
+        <e k="usedplus_sld_netAfterFee" v="Netto (palkkion jälkeen):" eh="505e1f8c" />
+        <e k="usedplus_sld_sectionOffers" v="TARJOUSHISTORIA" eh="673b6b05" />
+        <e k="usedplus_sld_offersReceived" v="Vastaanotetut tarjoukset:" eh="6c54540b" />
+        <e k="usedplus_sld_offersDeclined" v="Hylätyt tarjoukset:" eh="b3088f05" />
+        <e k="usedplus_sld_listedFor" v="Listattu:" eh="3df84bda" />
+        <e k="usedplus_sld_infoText" v="Korkeammat agenttiluokat tavoittavat laajemman yleisön, mutta odotusajat ovat pidempiä." eh="c6eb9c87" />
 
         <!-- Payment History Dialog -->
-        <e k="usedplus_ph_title" v="PAYMENT HISTORY" eh="56a90765" />
-        <e k="usedplus_ph_sectionSummary" v="DEAL SUMMARY" eh="395f5e84" />
-        <e k="usedplus_ph_item" v="Item:" eh="93125227" />
-        <e k="usedplus_ph_original" v="Original:" eh="fd5835ce" />
-        <e k="usedplus_ph_rate" v="Rate:" eh="9f754529" />
-        <e k="usedplus_ph_monthly" v="Monthly:" eh="01963e19" />
-        <e k="usedplus_ph_progress" v="Progress:" eh="2e6e937b" />
+        <e k="usedplus_ph_title" v="MAKSUHISTORIA" eh="56a90765" />
+        <e k="usedplus_ph_sectionSummary" v="KAUPAN YHTEENVETO" eh="395f5e84" />
+        <e k="usedplus_ph_item" v="Kohde:" eh="93125227" />
+        <e k="usedplus_ph_original" v="Alkuperäinen:" eh="fd5835ce" />
+        <e k="usedplus_ph_rate" v="Korko:" eh="9f754529" />
+        <e k="usedplus_ph_monthly" v="Kuukausittain:" eh="01963e19" />
+        <e k="usedplus_ph_progress" v="Edistyminen:" eh="2e6e937b" />
         <e k="usedplus_ph_balance" v="Balance:" eh="b5397350" />
         <e k="usedplus_ph_headerNum" v="#" eh="01abfc75" />
-        <e k="usedplus_ph_headerPayment" v="PAYMENT" eh="b842122b" />
-        <e k="usedplus_ph_headerPrincipal" v="PRINCIPAL" eh="5396ab10" />
-        <e k="usedplus_ph_headerInterest" v="INTEREST" eh="c1833ca6" />
-        <e k="usedplus_ph_headerBalance" v="BALANCE" eh="bd50bfda" />
-        <e k="usedplus_ph_headerStatus" v="STATUS" eh="5f241c8c" />
-        <e k="usedplus_button_prev" v="PREV" eh="504ec00b" />
-        <e k="usedplus_button_next" v="NEXT" eh="47559fb8" />
-        <e k="usedplus_ph_pageInfo" v="Showing payments %d-%d of %d" eh="2984020e" />
+        <e k="usedplus_ph_headerPayment" v="MAKSU" eh="b842122b" />
+        <e k="usedplus_ph_headerPrincipal" v="PÄÄOMA" eh="5396ab10" />
+        <e k="usedplus_ph_headerInterest" v="KORKO" eh="c1833ca6" />
+        <e k="usedplus_ph_headerBalance" v="SALDO" eh="bd50bfda" />
+        <e k="usedplus_ph_headerStatus" v="TILA" eh="5f241c8c" />
+        <e k="usedplus_button_prev" v="EDELLINEN" eh="504ec00b" />
+        <e k="usedplus_button_next" v="SEURAAVA" eh="47559fb8" />
+        <e k="usedplus_ph_pageInfo" v="Näytetään maksut %d-%d / %d" eh="2984020e" />
 
         <!-- Finance Manager Frame -->
-        <e k="usedplus_fmf_sectionFinances" v="FINANCES" eh="15625374" />
-        <e k="usedplus_fmf_sectionMarketplace" v="USED MARKETPLACE" eh="ad2d33e9" />
-        <e k="usedplus_fmf_sectionCredit" v="CREDIT &amp; STATISTICS" eh="8a71fbbe" />
-        <e k="usedplus_fmf_sectionStatistics" v="STATISTICS" eh="bd71bd5e" />
-        <e k="usedplus_fmf_noActiveDeals" v="No active finance deals" eh="171c5c5d" />
-        <e k="usedplus_fmf_headerType" v="TYPE" eh="94849514" />
-        <e k="usedplus_fmf_headerItem" v="ITEM" eh="2b911c01" />
-        <e k="usedplus_fmf_headerBalance" v="BALANCE" eh="bd50bfda" />
-        <e k="usedplus_fmf_headerMonthly" v="MONTHLY" eh="c107927c" />
-        <e k="usedplus_fmf_headerProgress" v="PROGRESS" eh="ee886345" />
-        <e k="usedplus_fmf_headerLeft" v="LEFT" eh="684d325a" />
-        <e k="usedplus_fmf_totalOwed" v="Total Owed:" eh="3dcc8909" />
-        <e k="usedplus_fmf_monthlyLabel" v="Monthly:" eh="01963e19" />
-        <e k="usedplus_fmf_interestLabel" v="Interest:" eh="25df650a" />
-        <e k="usedplus_fmf_dealsLabel" v="Deals:" eh="bf915594" />
-        <e k="usedplus_fmf_payEarly" v="PAY EARLY" eh="5fa1eddb" />
-        <e k="usedplus_fmf_info" v="INFO" eh="551b723e" />
-        <e k="usedplus_fmf_searchTierInfo" v="Search Tier Information" eh="0770e1cd" />
-        <e k="usedplus_fmf_localSearch" v="Local Search" eh="e1ea5bc1" />
-        <e k="usedplus_fmf_localStats" v="2% fee | 40% success | 1 month" eh="3ccea670" />
-        <e k="usedplus_fmf_regionalSearch" v="Regional Search" eh="722cc490" />
-        <e k="usedplus_fmf_regionalStats" v="6% fee | 70% success | 1-3 months" eh="edd16abf" />
-        <e k="usedplus_fmf_nationalSearch" v="National Search" eh="c967061f" />
-        <e k="usedplus_fmf_nationalStats" v="12% fee | 85% success | 2-6 months" eh="685c2f27" />
-        <e k="usedplus_fmf_startFromShop" v="Start searches from shop via 'Search Used'" eh="f0c6f05a" />
+        <e k="usedplus_fmf_sectionFinances" v="RAHOITUS" eh="15625374" />
+        <e k="usedplus_fmf_sectionMarketplace" v="KÄYTETTYJEN MARKKINAPAIKKA" eh="ad2d33e9" />
+        <e k="usedplus_fmf_sectionCredit" v="LUOTTO & TILASTOT" eh="8a71fbbe" />
+        <e k="usedplus_fmf_sectionStatistics" v="TILASTOT" eh="bd71bd5e" />
+        <e k="usedplus_fmf_noActiveDeals" v="Ei aktiivisia rahoitussopimuksia" eh="171c5c5d" />
+        <e k="usedplus_fmf_headerType" v="TYYPPI" eh="94849514" />
+        <e k="usedplus_fmf_headerItem" v="KOHDE" eh="2b911c01" />
+        <e k="usedplus_fmf_headerBalance" v="SALDO" eh="bd50bfda" />
+        <e k="usedplus_fmf_headerMonthly" v="KUUKAUSITTAIN" eh="c107927c" />
+        <e k="usedplus_fmf_headerProgress" v="EDISTYMINEN" eh="ee886345" />
+        <e k="usedplus_fmf_headerLeft" v="JÄLJELLÄ" eh="684d325a" />
+        <e k="usedplus_fmf_totalOwed" v="Velkaa yhteensä:" eh="3dcc8909" />
+        <e k="usedplus_fmf_monthlyLabel" v="Kuukausittain:" eh="01963e19" />
+        <e k="usedplus_fmf_interestLabel" v="Korko:" eh="25df650a" />
+        <e k="usedplus_fmf_dealsLabel" v="Sopimukset:" eh="bf915594" />
+        <e k="usedplus_fmf_payEarly" v="MAKSA AIKAISIN" eh="5fa1eddb" />
+        <e k="usedplus_fmf_info" v="TIEDOT" eh="551b723e" />
+        <e k="usedplus_fmf_searchTierInfo" v="Haun tason tiedot" eh="0770e1cd" />
+        <e k="usedplus_fmf_localSearch" v="Paikallinen haku" eh="e1ea5bc1" />
+        <e k="usedplus_fmf_localStats" v="2% palkkio | 40% onnistuminen | 1 kuukausi" eh="3ccea670" />
+        <e k="usedplus_fmf_regionalSearch" v="Alueellinen haku" eh="722cc490" />
+        <e k="usedplus_fmf_regionalStats" v="6% palkkio | 70% onnistuminen | 1-3 kuukautta" eh="edd16abf" />
+        <e k="usedplus_fmf_nationalSearch" v="Valtakunnallinen haku" eh="c967061f" />
+        <e k="usedplus_fmf_nationalStats" v="12% palkkio | 85% onnistuminen | 2-6 kuukautta" eh="685c2f27" />
+        <e k="usedplus_fmf_startFromShop" v="Aloita haut kaupasta valinnalla 'Etsi käytetty'" eh="f0c6f05a" />
         <e k="usedplus_fmf_viaSearchUsed" v="" eh="d41d8cd9" />
-        <e k="usedplus_fmf_usedVehicleSearches" v="Used Vehicle Searches" eh="a3601db6" />
-        <e k="usedplus_fmf_noActiveSearches" v="No active searches. Start from Shop." eh="6f447735" />
-        <e k="usedplus_fmf_headerPrice" v="PRICE" eh="6da7ab78" />
-        <e k="usedplus_fmf_headerTier" v="TIER" eh="cd24a010" />
-        <e k="usedplus_fmf_headerStatus" v="STATUS" eh="5f241c8c" />
-        <e k="usedplus_fmf_headerChance" v="QUALITY" eh="ac7ac10c" />
-        <e k="usedplus_fmf_headerTime" v="TIME" eh="346ff32e" />
-        <e k="usedplus_fmf_headerOffers" v="OFFERS" eh="627d160c" />
-        <e k="usedplus_fmf_vehiclesForSale" v="Vehicles For Sale" eh="de8a84e8" />
-        <e k="usedplus_fmf_noListings" v="No listings. Sell from Garage menu." eh="d0462537" />
-        <e k="usedplus_fmf_lifetimeStats" v="Lifetime Statistics" eh="727103d4" />
-        <e k="usedplus_fmf_financeHistory" v="-- Finance History --" eh="ea637866" />
-        <e k="usedplus_fmf_dealsCompleted" v="Deals Completed:" eh="1bd021c5" />
-        <e k="usedplus_fmf_totalFinanced" v="Total Financed:" eh="43df67a8" />
-        <e k="usedplus_fmf_interestPaid" v="Interest Paid:" eh="e8344297" />
-        <e k="usedplus_fmf_paymentsMade" v="Payments Made:" eh="c6d673a2" />
-        <e k="usedplus_fmf_searchHistory" v="-- Search History --" eh="c0835495" />
-        <e k="usedplus_fmf_searchesStarted" v="Searches Started:" eh="5828679f" />
-        <e k="usedplus_fmf_vehiclesFound" v="Vehicles Found:" eh="047a7db6" />
-        <e k="usedplus_fmf_feesSpent" v="Fees Spent:" eh="787c75fb" />
-        <e k="usedplus_fmf_successRate" v="Success Rate:" eh="346bdbd3" />
-        <e k="usedplus_fmf_totalSaved" v="Marketplace Value:" eh="bf7d98b0" />
-        <e k="usedplus_fmf_yourCreditScore" v="Your Credit Score" eh="5bbd5087" />
-        <e k="usedplus_fmf_creditRanges" v="Credit Ranges:" eh="a4a7b278" />
-        <e k="usedplus_fmf_tierExcellent" v="750-850 Excellent -1.5%" eh="8d6d7463" />
-        <e k="usedplus_fmf_tierGood" v="700-749 Good -0.5%" eh="331b260e" />
-        <e k="usedplus_fmf_tierFair" v="650-699 Fair +0.5%" eh="ce30f0f5" />
-        <e k="usedplus_fmf_tierPoor" v="600-649 Poor +1.5%" eh="f6639d3f" />
-        <e k="usedplus_fmf_tierVeryPoor" v="300-599 Very Poor +3.0%" eh="e80b837e" />
-        <e k="usedplus_fmf_listings" v="%d listings" eh="5a6d48e6" />
+        <e k="usedplus_fmf_usedVehicleSearches" v="Käytettyjen ajoneuvojen haut" eh="a3601db6" />
+        <e k="usedplus_fmf_noActiveSearches" v="Ei aktiivisia hakuja. Aloita kaupasta." eh="6f447735" />
+        <e k="usedplus_fmf_headerPrice" v="HINTA" eh="6da7ab78" />
+        <e k="usedplus_fmf_headerTier" v="TASO" eh="cd24a010" />
+        <e k="usedplus_fmf_headerStatus" v="TILA" eh="5f241c8c" />
+        <e k="usedplus_fmf_headerChance" v="LAATU" eh="ac7ac10c" />
+        <e k="usedplus_fmf_headerTime" v="AIKA" eh="346ff32e" />
+        <e k="usedplus_fmf_headerOffers" v="TARJOUKSET" eh="627d160c" />
+        <e k="usedplus_fmf_vehiclesForSale" v="Myytävät ajoneuvot" eh="de8a84e8" />
+        <e k="usedplus_fmf_noListings" v="Ei ilmoituksia. Myy autohallin valikosta." eh="d0462537" />
+        <e k="usedplus_fmf_lifetimeStats" v="Elinikäiset tilastot" eh="727103d4" />
+        <e k="usedplus_fmf_financeHistory" v="-- Rahoitushistoria --" eh="ea637866" />
+        <e k="usedplus_fmf_dealsCompleted" v="Tehdyt kaupat:" eh="1bd021c5" />
+        <e k="usedplus_fmf_totalFinanced" v="Rahoitettu yhteensä:" eh="43df67a8" />
+        <e k="usedplus_fmf_interestPaid" v="Maksettu korko:" eh="e8344297" />
+        <e k="usedplus_fmf_paymentsMade" v="Suoritetut maksut:" eh="c6d673a2" />
+        <e k="usedplus_fmf_searchHistory" v="-- Hakuhistoria --" eh="c0835495" />
+        <e k="usedplus_fmf_searchesStarted" v="Aloitetut haut:" eh="5828679f" />
+        <e k="usedplus_fmf_vehiclesFound" v="Löydetyt ajoneuvot:" eh="047a7db6" />
+        <e k="usedplus_fmf_feesSpent" v="Maksetut palkkiot:" eh="787c75fb" />
+        <e k="usedplus_fmf_successRate" v="Onnistumisprosentti:" eh="346bdbd3" />
+        <e k="usedplus_fmf_totalSaved" v="Markkinapaikan arvo:" eh="bf7d98b0" />
+        <e k="usedplus_fmf_yourCreditScore" v="Luottopisteesi" eh="5bbd5087" />
+        <e k="usedplus_fmf_creditRanges" v="Luottovä lit:" eh="a4a7b278" />
+        <e k="usedplus_fmf_tierExcellent" v="750-850 Erinomainen -1.5%" eh="8d6d7463" />
+        <e k="usedplus_fmf_tierGood" v="700-749 Hyvä -0.5%" eh="331b260e" />
+        <e k="usedplus_fmf_tierFair" v="650-699 Kohtalainen +0.5%" eh="ce30f0f5" />
+        <e k="usedplus_fmf_tierPoor" v="600-649 Huono +1.5%" eh="f6639d3f" />
+        <e k="usedplus_fmf_tierVeryPoor" v="300-599 Erittäin huono +3.0%" eh="e80b837e" />
+        <e k="usedplus_fmf_listings" v="%d ilmoitusta" eh="5a6d48e6" />
 
         <!-- Overview Panel -->
-        <e k="usedplus_fmf_overview" v="OVERVIEW" eh="3b9ae4ee" />
-        <e k="usedplus_fmf_overviewLine1" v="UsedPlus expands the vanilla economy with realistic financing, a used marketplace, and credit system." eh="608d34f6" />
-        <e k="usedplus_fmf_overviewLine2" v="Finance or lease from Shop. Trade-In old equipment. Sell via agents for better returns than vanilla." eh="a48f7073" />
-        <e k="usedplus_fmf_buyingUsed" v="BUYING USED" eh="bcd9a06a" />
-        <e k="usedplus_fmf_buyingLine1" v="Shop → 'Search Used' to hire agents. LOCAL: 2%, 40%. REGIONAL: 6%, 70%. NATIONAL: 12%, 85%." eh="28ec9203" />
-        <e k="usedplus_fmf_buyingLine2" v="Higher tiers = wider search, better odds. Used vehicles have varying condition and hours." eh="1d91fbdb" />
-        <e k="usedplus_fmf_sellingEquip" v="SELLING EQUIPMENT" eh="e3d28030" />
-        <e k="usedplus_fmf_sellingLine1" v="Garage → List for Sale. Trade-In: 50-65%. Local: 60-75%. Regional: 75-90%. National: 90-100%." eh="b08f8684" />
-        <e k="usedplus_fmf_sellingLine2" v="Condition and hours affect value. Accept/decline offers from this screen." eh="6dc501b7" />
-        <e k="usedplus_fmf_creditScore" v="CREDIT SCORE (300-850)" eh="e0e72acc" />
-        <e k="usedplus_fmf_creditLine1" v="Determines interest rates and trade-in values. Improves through: on-time payments, completing deals. Drops from: missed payments, defaults." eh="8408535e" />
-        <e k="usedplus_fmf_creditLine2" v="Assets provide collateral but don't prove creditworthiness. Payment history matters most—inherited land doesn't mean good credit!" eh="d9504a0d" />
-        <e k="usedplus_fmf_quickRef" v="QUICK REFERENCE" eh="011d2c62" />
-        <e k="usedplus_fmf_quickRefLine1" v="Shop → Finance/Lease/Search Used | Garage → List for Sale" eh="426419c9" />
-        <e k="usedplus_fmf_quickRefLine2" v="Monthly payments auto-deduct. Early payoff saves interest." eh="73cd35d9" />
+        <e k="usedplus_fmf_overview" v="YLEISKATSAUS" eh="3b9ae4ee" />
+        <e k="usedplus_fmf_overviewLine1" v="UsedPlus laajentaa perustalouden realistisella rahoituksella, käytettyjen markkinapaikalla ja luottojärjestelmällä." eh="608d34f6" />
+        <e k="usedplus_fmf_overviewLine2" v="Rahoita tai vuokraa kaupasta. Vaihda vanha kalusto. Myy agenttien kautta paremmalla tuotolla kuin perusversiossa." eh="a48f7073" />
+        <e k="usedplus_fmf_buyingUsed" v="KÄYTETTYJEN OSTAMINEN" eh="bcd9a06a" />
+        <e k="usedplus_fmf_buyingLine1" v="Kauppa → 'Etsi käytetty' palkataksesi agentteja. PAIKALLINEN: 2%, 40%. ALUEELLINEN: 6%, 70%. VALTAKUNNALLINEN: 12%, 85%." eh="28ec9203" />
+        <e k="usedplus_fmf_buyingLine2" v="Korkeammat tasot = laajempi haku, paremmat mahdollisuudet. Käytetyillä ajoneuvoilla on vaihteleva kunto ja tunnit." eh="1d91fbdb" />
+        <e k="usedplus_fmf_sellingEquip" v="KALUSTON MYYNTI" eh="e3d28030" />
+        <e k="usedplus_fmf_sellingLine1" v="Autohalli → Listaa myyntiin. Vaihto: 50-65%. Paikallinen: 60-75%. Alueellinen: 75-90%. Valtakunnallinen: 90-100%." eh="b08f8684" />
+        <e k="usedplus_fmf_sellingLine2" v="Kunto ja tunnit vaikuttavat arvoon. Hyväksy/hylkää tarjoukset tältä näytöltä." eh="6dc501b7" />
+        <e k="usedplus_fmf_creditScore" v="LUOTTOPISTEET (300-850)" eh="e0e72acc" />
+        <e k="usedplus_fmf_creditLine1" v="Määrittää korot ja vaihtoarvot. Paranee: ajoissa maksamalla, kauppoja tekemällä. Laskee: maksujen myöhästyessä, laiminlyönneistä." eh="8408535e" />
+        <e k="usedplus_fmf_creditLine2" v="Varat tarjoavat vakuuden, mutta eivät todista luottokelpoisuutta. Maksuhistoria on tärkein—peritty maa ei tarkoita hyvää luottoa!" eh="d9504a0d" />
+        <e k="usedplus_fmf_quickRef" v="PIKAOHJE" eh="011d2c62" />
+        <e k="usedplus_fmf_quickRefLine1" v="Kauppa → Rahoita/Vuokraa/Etsi käytetty | Autohalli → Listaa myyntiin" eh="426419c9" />
+        <e k="usedplus_fmf_quickRefLine2" v="Kuukausimaksut vähennetään automaattisesti. Aikainen maksu säästää korkoja." eh="73cd35d9" />
 
         <!-- Land Lease Dialog -->
-        <e k="usedplus_ll_title" v="Lease Land" eh="ec34a2a6" />
-        <e k="usedplus_ll_sectionDetails" v="FIELD DETAILS" eh="9550d705" />
-        <e k="usedplus_ll_field" v="Field:" eh="af9b2925" />
-        <e k="usedplus_ll_size" v="Size:" eh="af645946" />
-        <e k="usedplus_ll_value" v="Value:" eh="acdb802b" />
-        <e k="usedplus_ll_sectionTerm" v="LEASE TERM" eh="bb3b670a" />
-        <e k="usedplus_ll_selectDuration" v="Select lease duration:" eh="8f0c8cd2" />
-        <e k="usedplus_ll_sectionCosts" v="LEASE COSTS" eh="5793e394" />
-        <e k="usedplus_ll_monthlyPayment" v="Monthly Payment:" eh="3499b658" />
-        <e k="usedplus_ll_yearlyPayment" v="Yearly Payment:" eh="e1ddacf9" />
-        <e k="usedplus_ll_totalCost" v="Total Lease Cost:" eh="61a93e0e" />
-        <e k="usedplus_ll_markup" v="Markup Amount:" eh="62aed63e" />
-        <e k="usedplus_ll_buyoutPrice" v="Buyout Price:" eh="121b9571" />
-        <e k="usedplus_ll_note1" v="Lease allows land use without full purchase." eh="b4808387" />
-        <e k="usedplus_ll_note2" v="Land returns to market at lease end unless bought out." eh="bbed7c34" />
+        <e k="usedplus_ll_title" v="Vuokraa maata" eh="ec34a2a6" />
+        <e k="usedplus_ll_sectionDetails" v="PELLON TIEDOT" eh="9550d705" />
+        <e k="usedplus_ll_field" v="Pelto:" eh="af9b2925" />
+        <e k="usedplus_ll_size" v="Koko:" eh="af645946" />
+        <e k="usedplus_ll_value" v="Arvo:" eh="acdb802b" />
+        <e k="usedplus_ll_sectionTerm" v="VUOKRA-AIKA" eh="bb3b670a" />
+        <e k="usedplus_ll_selectDuration" v="Valitse vuokra-aika:" eh="8f0c8cd2" />
+        <e k="usedplus_ll_sectionCosts" v="VUOKRAKUSTANNUKSET" eh="5793e394" />
+        <e k="usedplus_ll_monthlyPayment" v="Kuukausimaksu:" eh="3499b658" />
+        <e k="usedplus_ll_yearlyPayment" v="Vuosimaksu:" eh="e1ddacf9" />
+        <e k="usedplus_ll_totalCost" v="Vuokran kokonaiskustannus:" eh="61a93e0e" />
+        <e k="usedplus_ll_markup" v="Korotusmäärä:" eh="62aed63e" />
+        <e k="usedplus_ll_buyoutPrice" v="Lunastushinta:" eh="121b9571" />
+        <e k="usedplus_ll_note1" v="Vuokra mahdollistaa maan käytön ilman täyttä ostoa." eh="b4808387" />
+        <e k="usedplus_ll_note2" v="Maa palaa markkinoille vuokra-ajan päättyessä, ellei sitä lunasteta." eh="bbed7c34" />
         <!-- REMOVED: usedplus_button_acceptLease - duplicate, use Buttons section -->
 
         <!-- Land Finance Dialog - Additional -->
-        <e k="usedplus_lf_field" v="Field:" eh="af9b2925" />
-        <e k="usedplus_lf_size" v="Size:" eh="af645946" />
-        <e k="usedplus_lf_price" v="Price:" eh="f2c12ae1" />
-        <e k="usedplus_lf_sectionDueToday" v="DUE TODAY AT SIGNING" eh="cdbd21f6" />
-        <e k="usedplus_lf_downPayment" v="Down Payment:" eh="a706fdb6" />
-        <e k="usedplus_lf_youPayToday" v="YOU PAY TODAY:" eh="6d6d4e26" />
-        <e k="usedplus_lf_lowerRatesNote" v="Land financing has lower rates than vehicle loans." eh="1e35d132" />
+        <e k="usedplus_lf_field" v="Pelto:" eh="af9b2925" />
+        <e k="usedplus_lf_size" v="Koko:" eh="af645946" />
+        <e k="usedplus_lf_price" v="Hinta:" eh="f2c12ae1" />
+        <e k="usedplus_lf_sectionDueToday" v="MAKSETTAVA TÄNÄÄN ALLEKIRJOITUKSESSA" eh="cdbd21f6" />
+        <e k="usedplus_lf_downPayment" v="Käsiraha:" eh="a706fdb6" />
+        <e k="usedplus_lf_youPayToday" v="MAKSAT TÄNÄÄN:" eh="6d6d4e26" />
+        <e k="usedplus_lf_lowerRatesNote" v="Maan rahoituksella on matalammat korot kuin ajoneuvolainoilla." eh="1e35d132" />
 
         <!-- Finance Detail Frame -->
-        <e k="usedplus_fd_title" v="Finance Deal Details" eh="b49b6b5b" />
-        <e k="usedplus_fd_quick1Month" v="1 Month" eh="cf13b270" />
-        <e k="usedplus_fd_quick6Months" v="6 Months" eh="1d4545e8" />
-        <e k="usedplus_fd_quick1Year" v="1 Year" eh="cc1a252a" />
-        <e k="usedplus_fd_quickPayOff" v="Pay Off" eh="416ff954" />
+        <e k="usedplus_fd_title" v="Rahoituskaupan tiedot" eh="b49b6b5b" />
+        <e k="usedplus_fd_quick1Month" v="1 kuukausi" eh="cf13b270" />
+        <e k="usedplus_fd_quick6Months" v="6 kuukautta" eh="1d4545e8" />
+        <e k="usedplus_fd_quick1Year" v="1 vuosi" eh="cc1a252a" />
+        <e k="usedplus_fd_quickPayOff" v="Maksa pois" eh="416ff954" />
 
         <!-- Repair Finance Dialog -->
-        <e k="usedplus_rf_title" v="Finance Repair" eh="70ef80a4" />
-        <e k="usedplus_rf_sectionService" v="SERVICE DETAILS" eh="22efc112" />
-        <e k="usedplus_rf_repairCost" v="Repair Cost:" eh="33553cf9" />
-        <e k="usedplus_rf_repaintCost" v="Repaint Cost:" eh="78155645" />
-        <e k="usedplus_rf_loanTerm" v="Loan Term:" eh="766186df" />
-        <e k="usedplus_rf_downPayment" v="Down Payment:" eh="a706fdb6" />
-        <e k="usedplus_rf_monthlyPayment" v="Monthly Payment:" eh="3499b658" />
-        <e k="usedplus_rf_totalInterest" v="Total Interest:" eh="183c0158" />
-        <e k="usedplus_rf_interestRate" v="Interest Rate:" eh="389f9dd8" />
-        <e k="usedplus_rf_totalPayments" v="Total Payments:" eh="66fc72d1" />
-        <e k="usedplus_rf_creditScore" v="Credit Score:" eh="0199e1a3" />
-        <e k="usedplus_rf_infoText" v="Monthly payments auto-deduct. Pay off early to save on interest." eh="1318c91c" />
+        <e k="usedplus_rf_title" v="Rahoita korjaus" eh="70ef80a4" />
+        <e k="usedplus_rf_sectionService" v="HUOLLON TIEDOT" eh="22efc112" />
+        <e k="usedplus_rf_repairCost" v="Korjauskustannus:" eh="33553cf9" />
+        <e k="usedplus_rf_repaintCost" v="Maalauksen kustannus:" eh="78155645" />
+        <e k="usedplus_rf_loanTerm" v="Laina-aika:" eh="766186df" />
+        <e k="usedplus_rf_downPayment" v="Käsiraha:" eh="a706fdb6" />
+        <e k="usedplus_rf_monthlyPayment" v="Kuukausimaksu:" eh="3499b658" />
+        <e k="usedplus_rf_totalInterest" v="Kokonaiskorko:" eh="183c0158" />
+        <e k="usedplus_rf_interestRate" v="Korkoprosentti:" eh="389f9dd8" />
+        <e k="usedplus_rf_totalPayments" v="Maksut yhteensä:" eh="66fc72d1" />
+        <e k="usedplus_rf_creditScore" v="Luottopisteet:" eh="0199e1a3" />
+        <e k="usedplus_rf_infoText" v="Kuukausimaksut vähennetään automaattisesti. Maksa pois aikaisin säästääksesi korkoja." eh="1318c91c" />
         <!-- REMOVED: usedplus_button_acceptFinance - duplicate, use Buttons section -->
 
         <!-- TakeLoan Dialog - Credit Tiers -->
-        <e k="usedplus_tl_excellent" v="Excellent 750+: 6.5%" eh="c1a424c4" />
-        <e k="usedplus_tl_good" v="Good 700-749: 7.5%" eh="98ac4cee" />
-        <e k="usedplus_tl_fair" v="Fair 650-699: 8.5%" eh="45ddaf78" />
-        <e k="usedplus_tl_poor" v="Poor 600-649: 9.5%" eh="58571247" />
+        <e k="usedplus_tl_excellent" v="Erinomainen 750+: 6.5%" eh="c1a424c4" />
+        <e k="usedplus_tl_good" v="Hyvä 700-749: 7.5%" eh="98ac4cee" />
+        <e k="usedplus_tl_fair" v="Kohtalainen 650-699: 8.5%" eh="45ddaf78" />
+        <e k="usedplus_tl_poor" v="Huono 600-649: 9.5%" eh="58571247" />
         <e k="usedplus_tl_veryPoor" v="Very Poor &lt;600: 11%" eh="fbe67fc1" />
 
         <!-- ============================================================== -->
@@ -1456,362 +1462,362 @@
         <!-- ============================================================== -->
 
         <!-- CATASTROPHIC (0.00-0.09) - Pure Lemons -->
-        <e k="usedplus_quote_cat_1" v="I'm genuinely surprised this made it to the lot." eh="cb9f59c6" />
-        <e k="usedplus_quote_cat_2" v="Whoever assembled this should find a new career." eh="b2d238fe" />
-        <e k="usedplus_quote_cat_3" v="I'd tell ya to run, but I reckon this thing couldn't catch ya anyway." eh="2b06c2fb" />
-        <e k="usedplus_quote_cat_4" v="I'd burn some sage before driving this one off the lot." eh="0ddabc9c" />
-        <e k="usedplus_quote_cat_5" v="This thing's got more bad juju than a broken mirror factory." eh="59775a6e" />
+        <e k="usedplus_quote_cat_1" v="Olen aidosti yllättynyt, että tämä pääsi myyntiin." eh="cb9f59c6" />
+        <e k="usedplus_quote_cat_2" v="Tämän kokoonpannut henkilön pitäisi etsiä uusi ura." eh="b2d238fe" />
+        <e k="usedplus_quote_cat_3" v="Neuvoisin juoksemaan pakoon, mutta luulen ettei tämä pystyisi saamaan sinua kiinni." eh="2b06c2fb" />
+        <e k="usedplus_quote_cat_4" v="Polttaisin salviaasavua ennen kuin ajaisin tämän pois." eh="0ddabc9c" />
+        <e k="usedplus_quote_cat_5" v="Tässä on enemmän huonoa karmaa kuin rikkoutuneessa peilitehtaassa." eh="59775a6e" />
 
         <!-- TERRIBLE (0.10-0.19) - Severe Issues -->
-        <e k="usedplus_quote_ter_1" v="My cousin had one like this. Used it for a chicken coop after. That's about all it was good for." eh="6c3c344d" />
-        <e k="usedplus_quote_ter_2" v="Some machines just come off the line wrong. This is one of them." eh="b07bc8cf" />
-        <e k="usedplus_quote_ter_3" v="My advice? Budget for a lot of shop visits." eh="2da8e09a" />
-        <e k="usedplus_quote_ter_4" v="If machines could be cursed, this one surely is." eh="0d4be32b" />
-        <e k="usedplus_quote_ter_5" v="Something ain't right with this one. Can't explain it, but I feel it in my bones." eh="bc8c0b65" />
+        <e k="usedplus_quote_ter_1" v="Serkkuni omisti tällaisen. Käytti sitä kanalana sen jälkeen. Siinä oli suunnilleen kaikki mihin se kelpasi." eh="6c3c344d" />
+        <e k="usedplus_quote_ter_2" v="Jotkut koneet vain tulevat linjalta väärin. Tämä on yksi niistä." eh="b07bc8cf" />
+        <e k="usedplus_quote_ter_3" v="Neuvoni? Varaa budjettia moniin korjaamovisitteihin." eh="2da8e09a" />
+        <e k="usedplus_quote_ter_4" v="Jos koneita voitaisiin kiroilla, tämä on varmasti kirottu." eh="0d4be32b" />
+        <e k="usedplus_quote_ter_5" v="Jotain ei ole kunnossa tämän kanssa. En osaa selittää, mutta tunnen sen luissani." eh="bc8c0b65" />
 
         <!-- POOR (0.20-0.29) - Problematic -->
-        <e k="usedplus_quote_poor_1" v="She'll run, but don't expect her to thank you for it." eh="92bbf125" />
-        <e k="usedplus_quote_poor_2" v="This here's what we call a 'parts tractor' back home." eh="a7f1ab7c" />
-        <e k="usedplus_quote_poor_3" v="Might want to keep your mechanic on speed dial." eh="eb88b7e4" />
-        <e k="usedplus_quote_poor_4" v="My grandfather would've called this one 'snake-bit.'" eh="be274117" />
-        <e k="usedplus_quote_poor_5" v="Some tractors attract trouble like a lightning rod. This is one of 'em." eh="b44d96fb" />
+        <e k="usedplus_quote_poor_1" v="Se käynnistyy, mutta älä odota sen kiittävän sinua siitä." eh="92bbf125" />
+        <e k="usedplus_quote_poor_2" v="Tätä kutsumme kotona 'varaosatraktori ksi'." eh="a7f1ab7c" />
+        <e k="usedplus_quote_poor_3" v="Kannattaa pitää mekaanikkosi pikavalinnassa." eh="eb88b7e4" />
+        <e k="usedplus_quote_poor_4" v="Isoisäni olisi kutsunut tätä 'käärmeenpuraisuksi'." eh="be274117" />
+        <e k="usedplus_quote_poor_5" v="Jotkut traktorit houkuttelevat ongelmia kuin salamanjohtaja. Tämä on yksi niistä." eh="b44d96fb" />
 
         <!-- BELOW AVERAGE (0.30-0.39) - Mediocre Build -->
-        <e k="usedplus_quote_below_1" v="Nothing special here. Just... adequate." eh="353a9d86" />
-        <e k="usedplus_quote_below_2" v="She's about as reliable as a screen door on a submarine." eh="95df2b9a" />
-        <e k="usedplus_quote_below_3" v="She'll get the job done. Eventually." eh="74dee67d" />
-        <e k="usedplus_quote_below_4" v="Not saying it's haunted, but I wouldn't leave it running alone at night." eh="085f159e" />
-        <e k="usedplus_quote_below_5" v="Some machines carry a little bad karma. This one's got a touch." eh="69ea1a61" />
+        <e k="usedplus_quote_below_1" v="Ei mitään erikoista. Vain... riittävä." eh="353a9d86" />
+        <e k="usedplus_quote_below_2" v="Se on suunnilleen yhtä luotettava kuin verkkoovi sukellusveneessä." eh="95df2b9a" />
+        <e k="usedplus_quote_below_3" v="Se saa työn tehtyä. Lopulta." eh="74dee67d" />
+        <e k="usedplus_quote_below_4" v="En sano että se on kummituksen vallassa, mutta en jättäisi sitä käyntiin yöksi yksin." eh="085f159e" />
+        <e k="usedplus_quote_below_5" v="Jotkin koneet kantavat hieman huonoa karmaa. Tässä on ripaus sitä." eh="69ea1a61" />
 
         <!-- SLIGHTLY BELOW (0.40-0.49) - Minor Concerns -->
-        <e k="usedplus_quote_slight_1" v="Acceptable tolerances. Barely." eh="9a318f89" />
-        <e k="usedplus_quote_slight_2" v="I've seen better put together by my nephew with a wrench and some baling wire." eh="56702efd" />
-        <e k="usedplus_quote_slight_3" v="Standard factory quality. That's all I can say." eh="c4cd00f0" />
-        <e k="usedplus_quote_slight_4" v="My gut says she'll give you a few headaches. Gut's usually right." eh="f352c300" />
-        <e k="usedplus_quote_slight_5" v="There's an old saying - some iron just don't want to cooperate." eh="b44d3544" />
+        <e k="usedplus_quote_slight_1" v="Hyväksyttävät toleranssit. Tuskin." eh="9a318f89" />
+        <e k="usedplus_quote_slight_2" v="Olen nähnyt paremmin koottuja veljenpojaltani jakoavaimella ja sitomislangalla." eh="56702efd" />
+        <e k="usedplus_quote_slight_3" v="Tavallinen tehdaslaatu. Siinä kaikki mitä voin sanoa." eh="c4cd00f0" />
+        <e k="usedplus_quote_slight_4" v="Vatsani sanoo että tämä tuottaa muutaman päänsäryn. Vatsa on yleensä oikeassa." eh="f352c300" />
+        <e k="usedplus_quote_slight_5" v="Vanha sanonta sanoo - jotkut raudat vain eivät halua tehdä yhteistyötä." eh="b44d3544" />
 
         <!-- AVERAGE (0.50-0.59) - Middle of the Road -->
-        <e k="usedplus_quote_avg_1" v="Right down the middle. Nothing remarkable, nothing concerning." eh="9d7020c8" />
-        <e k="usedplus_quote_avg_2" v="She'll give you fair service for fair treatment." eh="14751760" />
-        <e k="usedplus_quote_avg_3" v="It ain't fancy, but it'll plow a field same as any other." eh="f66f8232" />
-        <e k="usedplus_quote_avg_4" v="The spirits are neutral on this one, if you believe in that sort of thing." eh="f65de15b" />
-        <e k="usedplus_quote_avg_5" v="Not blessed, not cursed. Just... a machine." eh="0f28d736" />
+        <e k="usedplus_quote_avg_1" v="Juuri keskitasoa. Ei mitään huomattavaa, ei mitään huolestuttavaa." eh="9d7020c8" />
+        <e k="usedplus_quote_avg_2" v="Se tarjoaa reilua palvelua reilusta kohtelusta." eh="14751760" />
+        <e k="usedplus_quote_avg_3" v="Ei ole hieno, mutta kyntää pellon kuten mikä tahansa muu." eh="f66f8232" />
+        <e k="usedplus_quote_avg_4" v="Henget ovat neutraaleja tämän suhteen, jos uskot sellaiseen." eh="f65de15b" />
+        <e k="usedplus_quote_avg_5" v="Ei siunattu, ei kirottu. Vain... kone." eh="0f28d736" />
 
         <!-- ABOVE AVERAGE (0.60-0.69) - Decent Quality -->
-        <e k="usedplus_quote_above_1" v="Whoever put this together knew what they were doing." eh="b71cc554" />
-        <e k="usedplus_quote_above_2" v="That's a machine that'll be with you through more than a few harvests." eh="099289d7" />
-        <e k="usedplus_quote_above_3" v="Good bones on this one." eh="d3b25028" />
-        <e k="usedplus_quote_above_4" v="Got a good feeling about this one. Call it mechanic's intuition." eh="f9ff1887" />
-        <e k="usedplus_quote_above_5" v="Some machines just want to work. This one's got that spirit in her." eh="02e28acf" />
+        <e k="usedplus_quote_above_1" v="Se joka kokosi tämän tiesi mitä teki." eh="b71cc554" />
+        <e k="usedplus_quote_above_2" v="Tämä on kone joka on kanssasi useamman sadonkorjuun läpi." eh="099289d7" />
+        <e k="usedplus_quote_above_3" v="Hyvät perusteet tässä." eh="d3b25028" />
+        <e k="usedplus_quote_above_4" v="Minulla on hyvä tunne tästä. Kutsutaan sitä mekaanikon intuitioksi." eh="f9ff1887" />
+        <e k="usedplus_quote_above_5" v="Jotkut koneet vain haluavat työskennellä. Tässä on se henki." eh="02e28acf" />
 
         <!-- GOOD (0.70-0.79) - Quality Build -->
-        <e k="usedplus_quote_good_1" v="This one came out of the factory right." eh="e96c0227" />
-        <e k="usedplus_quote_good_2" v="Now that's the kind of iron my grandpappy would've been proud to park in the barn." eh="7eb71e1b" />
-        <e k="usedplus_quote_good_3" v="Someone on the assembly line was having a good day." eh="570a36cf" />
-        <e k="usedplus_quote_good_4" v="My old mentor used to say some tractors are born lucky. This might be one." eh="b5a7fdf3" />
-        <e k="usedplus_quote_good_5" v="There's good iron and bad iron. This here's the good stuff." eh="c8c3113e" />
+        <e k="usedplus_quote_good_1" v="Tämä tuli tehtaalta oikein." eh="e96c0227" />
+        <e k="usedplus_quote_good_2" v="Tällaista rautaa isoisäni olisi ollut ylpeä pysäköidä navettaan." eh="7eb71e1b" />
+        <e k="usedplus_quote_good_3" v="Joku kokoonpanolinjalla oli hyvällä tuulella." eh="570a36cf" />
+        <e k="usedplus_quote_good_4" v="Vanha mentorini sanoi että jotkut traktorit syntyvät onnekkaana. Tämä saattaa olla yksi niistä." eh="b5a7fdf3" />
+        <e k="usedplus_quote_good_5" v="On hyvää rautaa ja huonoa rautaa. Tämä on sitä hyvää tavaraa." eh="c8c3113e" />
 
         <!-- EXCELLENT (0.80-0.89) - Exceptional Build -->
-        <e k="usedplus_quote_exc_1" v="Now THIS is how they should all be built." eh="ec1fb8fb" />
-        <e k="usedplus_quote_exc_2" v="She's a keeper if I ever saw one." eh="081d1c8c" />
-        <e k="usedplus_quote_exc_3" v="Finer than frog hair split four ways - and that's sayin' somethin'." eh="9c89cba9" />
-        <e k="usedplus_quote_exc_4" v="If I believed in lucky stars, I'd say this one was born under a whole constellation." eh="95bb8742" />
-        <e k="usedplus_quote_exc_5" v="Some machines got a soul. This one's got a good one." eh="8513dfed" />
+        <e k="usedplus_quote_exc_1" v="NÄIN ne kaikki pitäisi rakentaa." eh="ec1fb8fb" />
+        <e k="usedplus_quote_exc_2" v="Tämä kannattaa pitää, jos olen koskaan nähnyt sellaista." eh="081d1c8c" />
+        <e k="usedplus_quote_exc_3" v="Hienompi kuin sammakon karva jaettuna neljään osaan - ja se tarkoittaa jotain." eh="9c89cba9" />
+        <e k="usedplus_quote_exc_4" v="Jos uskoisin onnentähtiin, sanoisin että tämä syntyi kokonaisen tähdistön alla." eh="95bb8742" />
+        <e k="usedplus_quote_exc_5" v="Joillain koneilla on sielu. Tällä on hyvä sellainen." eh="8513dfed" />
 
         <!-- LEGENDARY (0.90-1.00) - Workhorse -->
-        <e k="usedplus_quote_leg_1" v="In 30 years, I've seen maybe a dozen this well built." eh="754ee998" />
-        <e k="usedplus_quote_leg_2" v="This one here's got more soul than a Sunday gospel choir." eh="e7a5f517" />
-        <e k="usedplus_quote_leg_3" v="Hold onto this one. You won't find another like it." eh="9b78b8eb" />
-        <e k="usedplus_quote_leg_4" v="Old-timers used to talk about tractors like this. Thought they were just legends." eh="79b4f4fa" />
-        <e k="usedplus_quote_leg_5" v="This one's got guardian angels working overtime in the engine bay." eh="d8d30168" />
+        <e k="usedplus_quote_leg_1" v="30 vuodessa olen nähnyt ehkä tusina näin hyvin rakennettua." eh="754ee998" />
+        <e k="usedplus_quote_leg_2" v="Tässä on enemmän sielua kuin sunnuntain gospelkuorossa." eh="e7a5f517" />
+        <e k="usedplus_quote_leg_3" v="Pidä kiinni tästä. Et löydä toista samanlaista." eh="9b78b8eb" />
+        <e k="usedplus_quote_leg_4" v="Vanhat miehet puhuivat tällaisista traktoreista. Luulin niiden olevan vain legendoja." eh="79b4f4fa" />
+        <e k="usedplus_quote_leg_5" v="Tällä on suojelusenkelit ylityövuoroilla moottorilokeron." eh="d8d30168" />
 
         <!-- Search Expired Dialog (v1.5.1) -->
-        <e k="usedplus_searchExpired_title" v="Search Complete" eh="e92d4ab1" />
-        <e k="usedplus_searchExpired_summary" v="SEARCH SUMMARY" eh="6fa784ed" />
-        <e k="usedplus_searchExpired_searchedFor" v="Searched For:" eh="e67ff702" />
-        <e k="usedplus_searchExpired_agentTier" v="Agent Tier:" eh="4eb7801b" />
-        <e k="usedplus_searchExpired_quality" v="Quality:" eh="3ded0b1d" />
-        <e k="usedplus_searchExpired_duration" v="Duration:" eh="68311558" />
-        <e k="usedplus_searchExpired_results" v="RESULTS" eh="44795920" />
-        <e k="usedplus_searchExpired_vehiclesFound" v="%d vehicle(s) found" eh="69e744df" />
-        <e k="usedplus_searchExpired_noVehicles" v="No vehicles found" eh="df1eff24" />
-        <e k="usedplus_searchExpired_renewSearch" v="RENEW SEARCH?" eh="e65ba949" />
-        <e k="usedplus_searchExpired_renewCost" v="Renewal Cost:" eh="cab42ff8" />
-        <e k="usedplus_searchExpired_renew" v="Renew Search" eh="5f2a7f33" />
-        <e k="usedplus_searchExpired_renewed" v="Search renewed for %s!" eh="3f0b77e5" />
-        <e k="usedplus_searchExpired_insufficientFunds" v="Insufficient funds to renew search." eh="ffe2599c" />
+        <e k="usedplus_searchExpired_title" v="Haku valmis" eh="e92d4ab1" />
+        <e k="usedplus_searchExpired_summary" v="HAUN YHTEENVETO" eh="6fa784ed" />
+        <e k="usedplus_searchExpired_searchedFor" v="Etsitty:" eh="e67ff702" />
+        <e k="usedplus_searchExpired_agentTier" v="Agentin taso:" eh="4eb7801b" />
+        <e k="usedplus_searchExpired_quality" v="Laatu:" eh="3ded0b1d" />
+        <e k="usedplus_searchExpired_duration" v="Kesto:" eh="68311558" />
+        <e k="usedplus_searchExpired_results" v="TULOKSET" eh="44795920" />
+        <e k="usedplus_searchExpired_vehiclesFound" v="%d ajoneuvo(a) löydetty" eh="69e744df" />
+        <e k="usedplus_searchExpired_noVehicles" v="Ei ajoneuvoja löydetty" eh="df1eff24" />
+        <e k="usedplus_searchExpired_renewSearch" v="UUDISTA HAKU?" eh="e65ba949" />
+        <e k="usedplus_searchExpired_renewCost" v="Uudistamisen hinta:" eh="cab42ff8" />
+        <e k="usedplus_searchExpired_renew" v="Uudista haku" eh="5f2a7f33" />
+        <e k="usedplus_searchExpired_renewed" v="Haku uudistettu %s!" eh="3f0b77e5" />
+        <e k="usedplus_searchExpired_insufficientFunds" v="Riittämättömät varat hakun uudistamiseen." eh="ffe2599c" />
 
         <!-- v1.7.0: Tire System Warnings -->
-        <e k="usedplus_warning_tireWorn" v="Warning: Tires are getting worn. Consider replacement soon." eh="b2f94e8c" />
-        <e k="usedplus_warning_tireCritical" v="CRITICAL: Tires are critically worn! Replace immediately to avoid flat tire." eh="773fe608" />
-        <e k="usedplus_warning_flatTire" v="FLAT TIRE! Vehicle handling severely impaired. Tire replacement required." eh="d5759919" />
-        <e k="usedplus_warning_lowTraction" v="Warning: Low traction due to worn tires. Reduce speed in poor conditions." eh="07b59ae5" />
+        <e k="usedplus_warning_tireWorn" v="Varoitus: Renkaat kuluvat. Harkitse vaihtoa pian." eh="b2f94e8c" />
+        <e k="usedplus_warning_tireCritical" v="KRIITTINEN: Renkaat kriittisesti kuluneet! Vaihda välittömästi välttääksesi rengasrikon." eh="773fe608" />
+        <e k="usedplus_warning_flatTire" v="RENGASRIKKO! Ajoneuvon käsittely vakavasti heikentynyt. Renkaiden vaihto vaaditaan." eh="d5759919" />
+        <e k="usedplus_warning_lowTraction" v="Varoitus: Heikko pito kuluneista renkaista. Vähennä nopeutta huonoissa olosuhteissa." eh="07b59ae5" />
 
         <!-- v1.7.0: Oil System Warnings -->
-        <e k="usedplus_warning_oilLow" v="Warning: Oil level is low. Service required soon." eh="035f4e6b" />
-        <e k="usedplus_warning_oilCritical" v="CRITICAL: Oil level dangerously low! Engine damage occurring." eh="e2d09647" />
-        <e k="usedplus_warning_oilLeak" v="Warning: Oil leak detected. Fluid loss accelerating." eh="da087d3f" />
-        <e k="usedplus_warning_engineDamage" v="ENGINE DAMAGE: Permanent reliability loss due to running low on oil!" eh="6b323cd8" />
+        <e k="usedplus_warning_oilLow" v="Varoitus: Öljytaso matala. Huolto vaaditaan pian." eh="035f4e6b" />
+        <e k="usedplus_warning_oilCritical" v="KRIITTINEN: Öljytaso vaarallisen matala! Moottorivaurio tapahtuu." eh="e2d09647" />
+        <e k="usedplus_warning_oilLeak" v="Varoitus: Öljyvuoto havaittu. Nestehävikki kiihtyy." eh="da087d3f" />
+        <e k="usedplus_warning_engineDamage" v="MOOTTORIVAURIO: Pysyvä luotettavuuden menetys vähäisen öljyn vuoksi!" eh="6b323cd8" />
 
         <!-- v1.7.0: Hydraulic Fluid System Warnings -->
-        <e k="usedplus_warning_hydraulicLow" v="Warning: Hydraulic fluid is low. Service required soon." eh="527899fc" />
-        <e k="usedplus_warning_hydraulicCritical" v="CRITICAL: Hydraulic fluid dangerously low! System damage occurring." eh="fe31b6f1" />
-        <e k="usedplus_warning_hydraulicLeak" v="Warning: Hydraulic leak detected. Fluid loss accelerating." eh="36b8f377" />
-        <e k="usedplus_warning_hydraulicDamage" v="HYDRAULIC DAMAGE: Permanent reliability loss due to running low on fluid!" eh="843ae10a" />
+        <e k="usedplus_warning_hydraulicLow" v="Varoitus: Hydraulineste matala. Huolto vaaditaan pian." eh="527899fc" />
+        <e k="usedplus_warning_hydraulicCritical" v="KRIITTINEN: Hydraulineste vaarallisen matala! Järjestelmävaurio tapahtuu." eh="fe31b6f1" />
+        <e k="usedplus_warning_hydraulicLeak" v="Varoitus: Hydraulivuoto havaittu. Nestehävikki kiihtyy." eh="36b8f377" />
+        <e k="usedplus_warning_hydraulicDamage" v="HYDRAULIVAURIO: Pysyvä luotettavuuden menetys vähäisen nesteen vuoksi!" eh="843ae10a" />
 
         <!-- v1.7.0: Fuel Leak Warning -->
-        <e k="usedplus_warning_fuelLeak" v="Warning: Fuel leak detected! Fuel consumption significantly increased." eh="6654d01e" />
+        <e k="usedplus_warning_fuelLeak" v="Varoitus: Polttoainevuoto havaittu! Polttoaineen kulutus merkittävästi lisääntynyt." eh="6654d01e" />
 
         <!-- v2.4.0: Hydraulic Surge Warning -->
-        <e k="usedplus_warning_hydraulicSurge" v="POWER STEERING LOSS - Vehicle pulling %s!" eh="a8d164f9" />
+        <e k="usedplus_warning_hydraulicSurge" v="OHJAUSTEHOSTIMEN MENETYS - Ajoneuvo vetää %s!" eh="a8d164f9" />
 
         <!-- v2.5.0: Comprehensive Hydraulic Malfunction Warnings -->
         <!-- Runaway Engine -->
-        <e k="usedplus_warning_runaway" v="ENGINE RUNAWAY! Governor failure - TURN OFF ENGINE!" eh="b5041aa9" />
-        <e k="usedplus_runaway_end_engineOff" v="Engine stopped - runaway ended safely." eh="14fd2da3" />
-        <e k="usedplus_runaway_end_crash" v="Impact detected - runaway ended." eh="0354e555" />
-        <e k="usedplus_runaway_end_damage" v="Vehicle damaged - runaway ended." eh="ad34ca1f" />
-        <e k="usedplus_runaway_end_fluids" v="Fluids restored - governor recovered." eh="7baa9445" />
+        <e k="usedplus_warning_runaway" v="MOOTTORI KARANNUT! Säätimen vika - SAMMUTA MOOTTORI!" eh="b5041aa9" />
+        <e k="usedplus_runaway_end_engineOff" v="Moottori sammutettu - karkailu päättyi turvallisesti." eh="14fd2da3" />
+        <e k="usedplus_runaway_end_crash" v="Törmäys havaittu - karkailu päättyi." eh="0354e555" />
+        <e k="usedplus_runaway_end_damage" v="Ajoneuvo vaurioitunut - karkailu päättyi." eh="ad34ca1f" />
+        <e k="usedplus_runaway_end_fluids" v="Nesteet palautettu - säädin toipunut." eh="7baa9445" />
 
         <!-- Implement Stuck -->
-        <e k="usedplus_warning_stuckDown" v="HYDRAULIC LIFT FAILURE - Implement cannot raise!" eh="8c1e0f84" />
-        <e k="usedplus_warning_stuckUp" v="HYDRAULIC VALVE FAILURE - Implement cannot lower!" eh="b353bdf9" />
+        <e k="usedplus_warning_stuckDown" v="HYDRAULINOSTOVIKA - Työkalua ei voi nostaa!" eh="8c1e0f84" />
+        <e k="usedplus_warning_stuckUp" v="HYDRAULIVENTTIIVIVIKA - Työkalua ei voi laskea!" eh="b353bdf9" />
 
         <!-- Implement Effects -->
-        <e k="usedplus_warning_implementPull" v="IMPLEMENT DRAG - Pulling %s!" eh="9542214f" />
-        <e k="usedplus_warning_implementDrag" v="HYDRAULIC STRAIN - Speed reduced!" eh="4202b7ec" />
-        <e k="usedplus_warning_reducedTurning" v="POWER STEERING WEAK - Turning limited!" eh="a9794a39" />
+        <e k="usedplus_warning_implementPull" v="TYÖKALUN VETO - Vetää %s!" eh="9542214f" />
+        <e k="usedplus_warning_implementDrag" v="HYDRAULIRASITUS - Nopeus alentunut!" eh="4202b7ec" />
+        <e k="usedplus_warning_reducedTurning" v="OHJAUSTEHOSTIN HEIKKO - Kääntyminen rajoitettu!" eh="a9794a39" />
 
         <!-- v1.7.0: Tire Quality Names -->
-        <e k="usedplus_tire_retread" v="Retread" eh="bcf7f101" />
-        <e k="usedplus_tire_normal" v="Normal" eh="960b44c5" />
-        <e k="usedplus_tire_quality" v="Quality" eh="571094bb" />
+        <e k="usedplus_tire_retread" v="Pinnoitettu" eh="bcf7f101" />
+        <e k="usedplus_tire_normal" v="Normaali" eh="960b44c5" />
+        <e k="usedplus_tire_quality" v="Laadukas" eh="571094bb" />
 
         <!-- v1.7.0: Fluids Dialog Labels (duplicates removed - kept in v1.7.0 Fluids Service Dialog section) -->
-        <e k="usedplus_fluids_level" v="Level:" eh="07ad8151" />
-        <e k="usedplus_fluids_status" v="Status:" eh="24a23d78" />
+        <e k="usedplus_fluids_level" v="Taso:" eh="07ad8151" />
+        <e k="usedplus_fluids_status" v="Tila:" eh="24a23d78" />
         <e k="usedplus_fluids_statusOk" v="OK" eh="e0aa021e" />
-        <e k="usedplus_fluids_statusLow" v="LOW" eh="41bc94cb" />
-        <e k="usedplus_fluids_statusCritical" v="CRITICAL" eh="99cd1c61" />
-        <e k="usedplus_fluids_statusLeaking" v="LEAKING" eh="2ec9e171" />
-        <e k="usedplus_fluids_leakMinor" v="Minor Leak" eh="b6c9aa5d" />
-        <e k="usedplus_fluids_leakModerate" v="Moderate Leak" eh="ed8731d2" />
-        <e k="usedplus_fluids_leakSevere" v="Severe Leak" eh="2d132bfd" />
-        <e k="usedplus_fluids_topUp" v="Top Up" eh="e38f9cb0" />
-        <e k="usedplus_fluids_fullChange" v="Full Change" eh="08692df2" />
-        <e k="usedplus_fluids_cost" v="Cost:" eh="69edde90" />
+        <e k="usedplus_fluids_statusLow" v="MATALA" eh="41bc94cb" />
+        <e k="usedplus_fluids_statusCritical" v="KRIITTINEN" eh="99cd1c61" />
+        <e k="usedplus_fluids_statusLeaking" v="VUOTAA" eh="2ec9e171" />
+        <e k="usedplus_fluids_leakMinor" v="Pieni vuoto" eh="b6c9aa5d" />
+        <e k="usedplus_fluids_leakModerate" v="Kohtalainen vuoto" eh="ed8731d2" />
+        <e k="usedplus_fluids_leakSevere" v="Vakava vuoto" eh="2d132bfd" />
+        <e k="usedplus_fluids_topUp" v="Täytä" eh="e38f9cb0" />
+        <e k="usedplus_fluids_fullChange" v="Täysvaihto" eh="08692df2" />
+        <e k="usedplus_fluids_cost" v="Hinta:" eh="69edde90" />
 
         <!-- v1.7.0: Tires Dialog Labels (duplicates removed - kept in v1.7.0 Tires Service Dialog section) -->
-        <e k="usedplus_tires_condition" v="Condition:" eh="ed51222f" />
-        <e k="usedplus_tires_traction" v="Traction:" eh="8d38bce1" />
-        <e k="usedplus_tires_flatTire" v="FLAT TIRE" eh="6e87cc30" />
-        <e k="usedplus_tires_replace" v="Replace Tires" eh="3a0d1434" />
-        <e k="usedplus_tires_retreadDesc" v="Budget option - lower traction, higher failure risk" eh="f277d077" />
-        <e k="usedplus_tires_normalDesc" v="Standard tires - balanced performance" eh="df677172" />
-        <e k="usedplus_tires_qualityDesc" v="Premium tires - better traction, lower failure risk" eh="69e595ca" />
-        <e k="usedplus_tires_cost" v="Cost:" eh="69edde90" />
+        <e k="usedplus_tires_condition" v="Kunto:" eh="ed51222f" />
+        <e k="usedplus_tires_traction" v="Pito:" eh="8d38bce1" />
+        <e k="usedplus_tires_flatTire" v="RENGASRIKKO" eh="6e87cc30" />
+        <e k="usedplus_tires_replace" v="Vaihda renkaat" eh="3a0d1434" />
+        <e k="usedplus_tires_retreadDesc" v="Budjettivalinta - heikompi pito, suurempi rikkoutumisriski" eh="f277d077" />
+        <e k="usedplus_tires_normalDesc" v="Tavalliset renkaat - tasapainoinen suorituskyky" eh="df677172" />
+        <e k="usedplus_tires_qualityDesc" v="Premium renkaat - parempi pito, pienempi rikkoutumisriski" eh="69e595ca" />
+        <e k="usedplus_tires_cost" v="Hinta:" eh="69edde90" />
 
         <!-- v1.7.0: Maintenance Report - Tire/Fluid Section -->
-        <e k="usedplus_mr_tires" v="TIRES" eh="36173e29" />
-        <e k="usedplus_mr_fluids" v="FLUIDS" eh="d857c0c4" />
-        <e k="usedplus_mr_tireCondition" v="Tire Condition:" eh="e8946816" />
-        <e k="usedplus_mr_tireQuality" v="Tire Quality:" eh="40db131b" />
-        <e k="usedplus_mr_oilLevel" v="Oil Level:" eh="0fe915e8" />
-        <e k="usedplus_mr_hydraulicLevel" v="Hydraulic Fluid:" eh="45673d76" />
-        <e k="usedplus_mr_fuelLeak" v="Fuel Leak:" eh="caf0d1a8" />
-        <e k="usedplus_mr_yes" v="Yes" eh="93cba074" />
-        <e k="usedplus_mr_no" v="No" eh="bafd7322" />
+        <e k="usedplus_mr_tires" v="RENKAAT" eh="36173e29" />
+        <e k="usedplus_mr_fluids" v="NESTEET" eh="d857c0c4" />
+        <e k="usedplus_mr_tireCondition" v="Renkaiden kunto:" eh="e8946816" />
+        <e k="usedplus_mr_tireQuality" v="Renkaiden laatu:" eh="40db131b" />
+        <e k="usedplus_mr_oilLevel" v="Öljytaso:" eh="0fe915e8" />
+        <e k="usedplus_mr_hydraulicLevel" v="Hydraulineste:" eh="45673d76" />
+        <e k="usedplus_mr_fuelLeak" v="Polttoainevuoto:" eh="caf0d1a8" />
+        <e k="usedplus_mr_yes" v="Kyllä" eh="93cba074" />
+        <e k="usedplus_mr_no" v="Ei" eh="bafd7322" />
 
         <!-- v2.8.0: Vehicle Info Box Display (when pointing at vehicle) -->
-        <e k="usedplus_info_oil_level" v="Oil Level" eh="a6d699fb" />
-        <e k="usedplus_info_hydraulic_level" v="Hydraulic Fluid" eh="f9c4d7d9" />
-        <e k="usedplus_info_tire_condition" v="Tires" eh="3fe2c06a" />
+        <e k="usedplus_info_oil_level" v="Öljytaso" eh="a6d699fb" />
+        <e k="usedplus_info_hydraulic_level" v="Hydraulineste" eh="f9c4d7d9" />
+        <e k="usedplus_info_tire_condition" v="Renkaat" eh="3fe2c06a" />
 
         <!-- v1.7.0: Tires Service Dialog -->
-        <e k="usedplus_tires_title" v="Tire Service" eh="b0234f4e" />
-        <e k="usedplus_tires_sectionStatus" v="VEHICLE &amp; TIRE STATUS" eh="c0e3631e" />
-        <e k="usedplus_tires_sectionSelect" v="SELECT TIRE QUALITY" eh="42abee54" />
-        <e k="usedplus_tires_sectionPayment" v="PAYMENT SUMMARY" eh="0dd98605" />
-        <e k="usedplus_tires_currentQuality" v="Current Quality:" eh="b46a9180" />
-        <e k="usedplus_tires_currentCondition" v="Tire Condition:" eh="e8946816" />
-        <e k="usedplus_tires_selectHelp" v="Click a tire type to select. Higher quality = better performance." eh="0c321a8a" />
-        <e k="usedplus_tires_retread" v="Retread" eh="bcf7f101" />
-        <e k="usedplus_tires_normal" v="Normal" eh="960b44c5" />
-        <e k="usedplus_tires_quality" v="Quality" eh="571094bb" />
-        <e k="usedplus_tires_retreadInfo" v="85% traction, 3x failure" eh="5d43f3aa" />
-        <e k="usedplus_tires_normalInfo" v="100% traction, baseline" eh="c5306480" />
-        <e k="usedplus_tires_qualityInfo" v="110% traction, 0.5x failure" eh="0017aa0f" />
-        <e k="usedplus_tires_selectedTire" v="Selected Tire:" eh="83200a19" />
-        <e k="usedplus_tires_selectedQuality" v="Selected Quality:" eh="c8df8c6c" />
-        <e k="usedplus_tires_totalCost" v="Total Cost:" eh="a131af32" />
-        <e k="usedplus_tires_selectOne" v="Select a tire..." eh="b97fd8a1" />
-        <e k="usedplus_tires_selectQuality" v="Select quality" eh="46aef69c" />
-        <e k="usedplus_tires_selectAbove" v="Select above" eh="cf957b6f" />
-        <e k="usedplus_tires_infoText" v="New tires restore 100% condition. Retreads are recycled casings." eh="3196a18f" />
-        <e k="usedplus_tires_flatWarning" v="FLAT TIRE - Replacement Required!" eh="1f8d653d" />
-        <e k="usedplus_tires_selectFirst" v="Please select a tire quality first." eh="41ebcf2f" />
-        <e k="usedplus_tires_replaced" v="Tires replaced: %s" eh="b2a5385c" />
+        <e k="usedplus_tires_title" v="Rengashuolto" eh="b0234f4e" />
+        <e k="usedplus_tires_sectionStatus" v="AJONEUVON & RENKAIDEN TILA" eh="c0e3631e" />
+        <e k="usedplus_tires_sectionSelect" v="VALITSE RENKAIDEN LAATU" eh="42abee54" />
+        <e k="usedplus_tires_sectionPayment" v="MAKSUN YHTEENVETO" eh="0dd98605" />
+        <e k="usedplus_tires_currentQuality" v="Nykyinen laatu:" eh="b46a9180" />
+        <e k="usedplus_tires_currentCondition" v="Renkaiden kunto:" eh="e8946816" />
+        <e k="usedplus_tires_selectHelp" v="Napsauta rengastyyppiä valitaksesi. Korkeampi laatu = parempi suorituskyky." eh="0c321a8a" />
+        <e k="usedplus_tires_retread" v="Pinnoitettu" eh="bcf7f101" />
+        <e k="usedplus_tires_normal" v="Normaali" eh="960b44c5" />
+        <e k="usedplus_tires_quality" v="Laadukas" eh="571094bb" />
+        <e k="usedplus_tires_retreadInfo" v="85% pito, 3x rikkoutuminen" eh="5d43f3aa" />
+        <e k="usedplus_tires_normalInfo" v="100% pito, perustaso" eh="c5306480" />
+        <e k="usedplus_tires_qualityInfo" v="110% pito, 0.5x rikkoutuminen" eh="0017aa0f" />
+        <e k="usedplus_tires_selectedTire" v="Valitut renkaat:" eh="83200a19" />
+        <e k="usedplus_tires_selectedQuality" v="Valittu laatu:" eh="c8df8c6c" />
+        <e k="usedplus_tires_totalCost" v="Kokonaishinta:" eh="a131af32" />
+        <e k="usedplus_tires_selectOne" v="Valitse renkaat..." eh="b97fd8a1" />
+        <e k="usedplus_tires_selectQuality" v="Valitse laatu" eh="46aef69c" />
+        <e k="usedplus_tires_selectAbove" v="Valitse yllä" eh="cf957b6f" />
+        <e k="usedplus_tires_infoText" v="Uudet renkaat palauttavat 100% kunnon. Pinnoitetut ovat kierrätettyjä runkoja." eh="3196a18f" />
+        <e k="usedplus_tires_flatWarning" v="RENGASRIKKO - Vaihto vaaditaan!" eh="1f8d653d" />
+        <e k="usedplus_tires_selectFirst" v="Valitse ensin renkaiden laatu." eh="41ebcf2f" />
+        <e k="usedplus_tires_replaced" v="Renkaat vaihdettu: %s" eh="b2a5385c" />
         <!-- v2.3.0: UYT Deep Integration -->
-        <e k="usedplus_tires_conditionUYT" v="Tire Wear (UYT):" eh="27375886" />
+        <e k="usedplus_tires_conditionUYT" v="Renkaiden kuluminen (UYT):" eh="27375886" />
 
         <!-- v1.7.0: Fluids Service Dialog -->
-        <e k="usedplus_fluids_title" v="Fluid Service" eh="7eb767c6" />
-        <e k="usedplus_fluids_sectionStatus" v="VEHICLE &amp; FLUID STATUS" eh="2fb5c91e" />
-        <e k="usedplus_fluids_sectionService" v="SERVICE OPTIONS" eh="6a49411d" />
-        <e k="usedplus_fluids_sectionPayment" v="PAYMENT SUMMARY" eh="0dd98605" />
-        <e k="usedplus_fluids_oilLevel" v="Engine Oil:" eh="2168f846" />
-        <e k="usedplus_fluids_hydraulicLevel" v="Hydraulic Fluid:" eh="45673d76" />
-        <e k="usedplus_fluids_oilRefill" v="Engine Oil Refill" eh="1df82b4c" />
-        <e k="usedplus_fluids_hydraulicRefill" v="Hydraulic Fluid Refill" eh="706eafaf" />
-        <e k="usedplus_fluids_full" v="Full" eh="bbd47109" />
-        <e k="usedplus_fluids_refillAmount" v="Refill: %.0f%%" eh="9ef2791c" />
-        <e k="usedplus_fluids_noRefillNeeded" v="No refill needed" eh="4d6cc245" />
-        <e k="usedplus_fluids_oil" v="Oil" eh="2e69df59" />
-        <e k="usedplus_fluids_hydraulic" v="Hydraulic" eh="fda2bff7" />
-        <e k="usedplus_fluids_selectedServices" v="Selected Services:" eh="457540d9" />
-        <e k="usedplus_fluids_totalCost" v="Total Cost:" eh="a131af32" />
-        <e k="usedplus_fluids_selectServices" v="Select services..." eh="6f7d0cbb" />
-        <e k="usedplus_fluids_infoText" v="Click services to select. Refills restore fluid levels to 100%." eh="67b41eeb" />
-        <e k="usedplus_fluids_oilLeakWarning" v="OIL LEAK DETECTED" eh="ca7f272e" />
-        <e k="usedplus_fluids_hydraulicLeakWarning" v="HYDRAULIC LEAK DETECTED" eh="daa3a59f" />
-        <e k="usedplus_fluids_selectFirst" v="Please select at least one service." eh="a638ea70" />
-        <e k="usedplus_fluids_refilled" v="Fluids refilled: %s" eh="b427d6fd" />
+        <e k="usedplus_fluids_title" v="Nestehuolto" eh="7eb767c6" />
+        <e k="usedplus_fluids_sectionStatus" v="AJONEUVON & NESTEIDEN TILA" eh="2fb5c91e" />
+        <e k="usedplus_fluids_sectionService" v="HUOLTOVAIHTOEHDOT" eh="6a49411d" />
+        <e k="usedplus_fluids_sectionPayment" v="MAKSUN YHTEENVETO" eh="0dd98605" />
+        <e k="usedplus_fluids_oilLevel" v="Moottoriöljy:" eh="2168f846" />
+        <e k="usedplus_fluids_hydraulicLevel" v="Hydraulineste:" eh="45673d76" />
+        <e k="usedplus_fluids_oilRefill" v="Moottoriöljyn täyttö" eh="1df82b4c" />
+        <e k="usedplus_fluids_hydraulicRefill" v="Hydraulinesteen täyttö" eh="706eafaf" />
+        <e k="usedplus_fluids_full" v="Täysi" eh="bbd47109" />
+        <e k="usedplus_fluids_refillAmount" v="Täytä: %.0f%%" eh="9ef2791c" />
+        <e k="usedplus_fluids_noRefillNeeded" v="Ei täyttöä tarvita" eh="4d6cc245" />
+        <e k="usedplus_fluids_oil" v="Öljy" eh="2e69df59" />
+        <e k="usedplus_fluids_hydraulic" v="Hydraulineste" eh="fda2bff7" />
+        <e k="usedplus_fluids_selectedServices" v="Valitut palvelut:" eh="457540d9" />
+        <e k="usedplus_fluids_totalCost" v="Kokonaishinta:" eh="a131af32" />
+        <e k="usedplus_fluids_selectServices" v="Valitse palvelut..." eh="6f7d0cbb" />
+        <e k="usedplus_fluids_infoText" v="Napsauta palveluita valitaksesi. Täytöt palauttavat nesteet 100%:iin." eh="67b41eeb" />
+        <e k="usedplus_fluids_oilLeakWarning" v="ÖLJYVUOTO HAVAITTU" eh="ca7f272e" />
+        <e k="usedplus_fluids_hydraulicLeakWarning" v="HYDRAULIVUOTO HAVAITTU" eh="daa3a59f" />
+        <e k="usedplus_fluids_selectFirst" v="Valitse vähintään yksi palvelu." eh="a638ea70" />
+        <e k="usedplus_fluids_refilled" v="Nesteet täytetty: %s" eh="b427d6fd" />
 
         <!-- v1.8.0: Oil Service Placeables -->
-        <e k="usedplus_oilBarrel_name" v="Oil Service Barrel" eh="54ea297f" />
-        <e k="usedplus_oilBarrel_function" v="Drive a vehicle nearby to refill engine oil and hydraulic fluid." eh="7dfb134d" />
-        <e k="usedplus_oilBarrel_specUnlimited" v="Unlimited" eh="545f6c2f" />
-        <e k="usedplus_oilTank_name" v="Oil Service Tank" eh="fa56df0c" />
-        <e k="usedplus_oilTank_function" v="Large capacity oil service point for refilling engine oil and hydraulic fluid." eh="e6a6837a" />
-        <e k="usedplus_oil_refillAction" v="Refill Engine Oil" eh="001b2a5a" />
-        <e k="usedplus_hydraulic_refillAction" v="Refill Hydraulic Fluid" eh="11081031" />
-        <e k="usedplus_oil_refillComplete" v="Oil refilled - Cost: %s" eh="0dff6e72" />
-        <e k="usedplus_hydraulic_refillComplete" v="Hydraulic fluid refilled - Cost: %s" eh="2d22bcb4" />
-        <e k="usedplus_oil_refillCompleteStorage" v="Oil refilled from storage" eh="2d3715a7" />
+        <e k="usedplus_oilBarrel_name" v="Öljyhuoltotynnyr" eh="54ea297f" />
+        <e k="usedplus_oilBarrel_function" v="Aja ajoneuvo lähelle täyttääksesi moottoriöljyn ja hydraulinesteen." eh="7dfb134d" />
+        <e k="usedplus_oilBarrel_specUnlimited" v="Rajoittamaton" eh="545f6c2f" />
+        <e k="usedplus_oilTank_name" v="Öljyhuoltosäiliö" eh="fa56df0c" />
+        <e k="usedplus_oilTank_function" v="Suuren kapasiteetin öljyhuoltopiste moottoriöljyn ja hydraulinesteen täyttöön." eh="e6a6837a" />
+        <e k="usedplus_oil_refillAction" v="Täytä moottoriöljy" eh="001b2a5a" />
+        <e k="usedplus_hydraulic_refillAction" v="Täytä hydraulineste" eh="11081031" />
+        <e k="usedplus_oil_refillComplete" v="Öljy täytetty - Hinta: %s" eh="0dff6e72" />
+        <e k="usedplus_hydraulic_refillComplete" v="Hydraulineste täytetty - Hinta: %s" eh="2d22bcb4" />
+        <e k="usedplus_oil_refillCompleteStorage" v="Öljy täytetty varastosta" eh="2d3715a7" />
         <!-- usedplus_hydraulic_refillCompleteStorage moved to line below with format string -->
-        <e k="usedplus_oil_notEnoughStorage" v="Not enough oil in storage" eh="4cf5955b" />
-        <e k="usedplus_hydraulic_notEnoughStorage" v="Not enough hydraulic fluid in storage" eh="a1a0eb52" />
-        <e k="usedplus_oil_alreadyFull" v="Engine oil already full" eh="9474e86e" />
-        <e k="usedplus_hydraulic_alreadyFull" v="Hydraulic fluid already full" eh="904d6078" />
-        <e k="usedplus_oil_storageLevel" v="Oil Storage: %d / %d L" eh="1a5af945" />
-        <e k="usedplus_hydraulic_storageLevel" v="Hydraulic Storage: %d / %d L" eh="d35b0be5" />
-        <e k="usedplus_oil_purchaseAction" v="Purchase Oil" eh="9c9c34d3" />
-        <e k="usedplus_oil_purchased" v="Purchased %.0fL of oil - %s (Tank: %.0f/%.0fL)" eh="5b99f35f" />
-        <e k="usedplus_oil_storageFull" v="Oil tank is full!" eh="980d9a22" />
+        <e k="usedplus_oil_notEnoughStorage" v="Ei tarpeeksi öljyä varastossa" eh="4cf5955b" />
+        <e k="usedplus_hydraulic_notEnoughStorage" v="Ei tarpeeksi hydraulinestettä varastossa" eh="a1a0eb52" />
+        <e k="usedplus_oil_alreadyFull" v="Moottoriöljy jo täynnä" eh="9474e86e" />
+        <e k="usedplus_hydraulic_alreadyFull" v="Hydraulineste jo täynnä" eh="904d6078" />
+        <e k="usedplus_oil_storageLevel" v="Öljyvarasto: %d / %d L" eh="1a5af945" />
+        <e k="usedplus_hydraulic_storageLevel" v="Hydraulivarasto: %d / %d L" eh="d35b0be5" />
+        <e k="usedplus_oil_purchaseAction" v="Osta öljyä" eh="9c9c34d3" />
+        <e k="usedplus_oil_purchased" v="Ostettu %.0fL öljyä - %s (Säiliö: %.0f/%.0fL)" eh="5b99f35f" />
+        <e k="usedplus_oil_storageFull" v="Öljysäiliö täynnä!" eh="980d9a22" />
 
         <!-- v1.9.0: Unified Fluid Storage System -->
-        <e k="usedplus_fluid_purchaseAction" v="Purchase Fluids" eh="6533ddc5" />
-        <e k="usedplus_fluid_oil" v="Engine Oil" eh="d2d4a89d" />
-        <e k="usedplus_fluid_hydraulic" v="Hydraulic Fluid" eh="f9c4d7d9" />
-        <e k="usedplus_fluid_purchased" v="Purchased %.0fL of %s - %s (Tank: %.0f/%.0fL)" eh="a63f3cbd" />
-        <e k="usedplus_fluid_storageFull" v="Tank is full!" eh="3a3fc002" />
-        <e k="usedplus_fluid_notEnoughStorage" v="Not enough fluid! Need %.1fL, have %.1fL" eh="4c38b7b9" />
-        <e k="usedplus_hydraulic_refillCompleteStorage" v="Hydraulic fluid refilled - %.1fL used (%.1fL remaining)" eh="8290045e" />
+        <e k="usedplus_fluid_purchaseAction" v="Osta nesteitä" eh="6533ddc5" />
+        <e k="usedplus_fluid_oil" v="Moottoriöljy" eh="d2d4a89d" />
+        <e k="usedplus_fluid_hydraulic" v="Hydraulineste" eh="f9c4d7d9" />
+        <e k="usedplus_fluid_purchased" v="Ostettu %.0fL %s - %s (Säiliö: %.0f/%.0fL)" eh="a63f3cbd" />
+        <e k="usedplus_fluid_storageFull" v="Säiliö täynnä!" eh="3a3fc002" />
+        <e k="usedplus_fluid_notEnoughStorage" v="Ei tarpeeksi nestettä! Tarvitaan %.1fL, saatavilla %.1fL" eh="4c38b7b9" />
+        <e k="usedplus_hydraulic_refillCompleteStorage" v="Hydraulineste täytetty - %.1fL käytetty (%.1fL jäljellä)" eh="8290045e" />
 
         <!-- v1.9.4: Fluid Inspection Comments (Mechanic's Assessment) -->
-        <e k="usedplus_fluid_oilLeakSevere" v="Significant oil leak detected - needs immediate attention." eh="e1254667" />
-        <e k="usedplus_fluid_oilLeakMinor" v="Minor oil leak present - may worsen over time." eh="f363cc55" />
-        <e k="usedplus_fluid_oilCritical" v="Oil level critically low - top up before operation." eh="ae9c42e9" />
-        <e k="usedplus_fluid_oilLow" v="Oil level below recommended - needs topping up." eh="38c0af65" />
-        <e k="usedplus_fluid_oilAdequate" v="Oil level adequate but monitor regularly." eh="248537b5" />
-        <e k="usedplus_fluid_oilGood" v="Oil level looks good." eh="5e690ecc" />
-        <e k="usedplus_fluid_hydLeakSevere" v="Major hydraulic leak found - repair urgently needed." eh="7c247db5" />
-        <e k="usedplus_fluid_hydLeakMinor" v="Small hydraulic leak detected - keep an eye on it." eh="82823907" />
-        <e k="usedplus_fluid_hydCritical" v="Hydraulic fluid dangerously low - implements may not function properly." eh="c7aee2e5" />
-        <e k="usedplus_fluid_hydLow" v="Hydraulic fluid running low - recommend refill." eh="869a87d8" />
-        <e k="usedplus_fluid_hydGood" v="Hydraulic system looks healthy." eh="0419e98f" />
-        <e k="usedplus_fluid_fuelLeak" v="CAUTION: Fuel leak detected - fire hazard, needs repair." eh="9016df52" />
-        <e k="usedplus_fluid_allClear" v="All fluid systems appear normal." eh="339f1e72" />
+        <e k="usedplus_fluid_oilLeakSevere" v="Merkittävä öljyvuoto havaittu - vaatii välitöntä huomiota." eh="e1254667" />
+        <e k="usedplus_fluid_oilLeakMinor" v="Pieni öljyvuoto läsnä - saattaa pahentua ajan myötä." eh="f363cc55" />
+        <e k="usedplus_fluid_oilCritical" v="Öljytaso kriittisen matala - täytä ennen käyttöä." eh="ae9c42e9" />
+        <e k="usedplus_fluid_oilLow" v="Öljytaso suositeltua matalampi - kaipaa täyttöä." eh="38c0af65" />
+        <e k="usedplus_fluid_oilAdequate" v="Öljytaso riittävä, mutta seuraa säännöllisesti." eh="248537b5" />
+        <e k="usedplus_fluid_oilGood" v="Öljytaso näyttää hyvältä." eh="5e690ecc" />
+        <e k="usedplus_fluid_hydLeakSevere" v="Suuri hydraulivuoto löydetty - kiireellinen korjaus tarvitaan." eh="7c247db5" />
+        <e k="usedplus_fluid_hydLeakMinor" v="Pieni hydraulivuoto havaittu - pidä silmällä." eh="82823907" />
+        <e k="usedplus_fluid_hydCritical" v="Hydraulineste vaarallisen matala - työkalut eivät ehkä toimi kunnolla." eh="c7aee2e5" />
+        <e k="usedplus_fluid_hydLow" v="Hydraulineste loppumassa - suosittelen täyttöä." eh="869a87d8" />
+        <e k="usedplus_fluid_hydGood" v="Hydraulijärjestelmä näyttää terveeltä." eh="0419e98f" />
+        <e k="usedplus_fluid_fuelLeak" v="VAROITUS: Polttoainevuoto havaittu - palovaara, vaatii korjauksen." eh="9016df52" />
+        <e k="usedplus_fluid_allClear" v="Kaikki nestejärjestelmät vaikuttavat normaaleilta." eh="339f1e72" />
 
         <!-- v1.8.0: OBD Scanner (portable diagnostic tool) -->
-        <e k="usedplus_fsk_name" v="OBD Scanner" eh="96023669" />
-        <e k="usedplus_fsk_function" v="Portable OBD diagnostic scanner for emergency field repairs. Connects to vehicle diagnostics port to read fault codes and sensor data. Consumable - single use." eh="bfdb43fa" />
-        <e k="usedplus_fsk_tier_basic" v="Basic OBD" eh="36823daa" />
-        <e k="usedplus_fsk_activate" v="Connect OBD Scanner" eh="dc1214b1" />
-        <e k="usedplus_fsk_title" v="OBD DIAGNOSTIC SCANNER - FIELD SERVICE" eh="04584a39" />
-        <e k="usedplus_fsk_vehicle" v="Connected to:" eh="ed4c66be" />
-        <e k="usedplus_fsk_status" v="Vehicle Status:" eh="4e265002" />
-        <e k="usedplus_fsk_status_disabled" v="FAULT - INOPERABLE" eh="44f80aed" />
-        <e k="usedplus_fsk_status_needs_service" v="SERVICE REQUIRED" eh="83142576" />
-        <e k="usedplus_fsk_select_system" v="OBD scan detected faults in multiple systems. Which system do you want to diagnose?" eh="a0116adf" />
-        <e k="usedplus_fsk_reliability" v="System Health" eh="5bbdb0be" />
-        <e k="usedplus_fsk_system_engine" v="Engine ECU" eh="0171f3c6" />
-        <e k="usedplus_fsk_system_electrical" v="Electrical System" eh="7a1b3240" />
-        <e k="usedplus_fsk_system_hydraulic" v="Hydraulic Control" eh="ab71d1ba" />
-        <e k="usedplus_fsk_warning_choose" v="Choose the system most likely at fault - misdiagnosis reduces repair effectiveness" eh="88de8162" />
-        <e k="usedplus_fsk_diagnosis" v="OBD FAULT ANALYSIS" eh="65f2e448" />
-        <e k="usedplus_fsk_symptoms_observed" v="OBD SCANNER READINGS:" eh="1f7e1f8b" />
-        <e k="usedplus_fsk_diagnosis_question" v="Based on these diagnostic codes, what is the root cause?" eh="05d464f1" />
+        <e k="usedplus_fsk_name" v="OBD-skanneri" eh="96023669" />
+        <e k="usedplus_fsk_function" v="Kannettava OBD-diagnostiikkaskanneri hätäkorjauksiin kentällä. Liitetään ajoneuvon diagnostiikkaporttiin lukeakseen vikakoodeja ja anturitietoja. Kulutettava - kertakäyttö." eh="bfdb43fa" />
+        <e k="usedplus_fsk_tier_basic" v="Perus-OBD" eh="36823daa" />
+        <e k="usedplus_fsk_activate" v="Yhdistä OBD-skanneri" eh="dc1214b1" />
+        <e k="usedplus_fsk_title" v="OBD-DIAGNOSTIIKKASKANNERI - KENTTÄHUOLTO" eh="04584a39" />
+        <e k="usedplus_fsk_vehicle" v="Yhdistetty:" eh="ed4c66be" />
+        <e k="usedplus_fsk_status" v="Ajoneuvon tila:" eh="4e265002" />
+        <e k="usedplus_fsk_status_disabled" v="VIKA - EI TOIMINNASSA" eh="44f80aed" />
+        <e k="usedplus_fsk_status_needs_service" v="HUOLTO VAADITAAN" eh="83142576" />
+        <e k="usedplus_fsk_select_system" v="OBD-skannaus havaitsi vikoja useissa järjestelmissä. Minkä järjestelmän haluat diagnosoida?" eh="a0116adf" />
+        <e k="usedplus_fsk_reliability" v="Järjestelmän terveys" eh="5bbdb0be" />
+        <e k="usedplus_fsk_system_engine" v="Moottorin ECU" eh="0171f3c6" />
+        <e k="usedplus_fsk_system_electrical" v="Sähköjärjestelmä" eh="7a1b3240" />
+        <e k="usedplus_fsk_system_hydraulic" v="Hydrauliohjaus" eh="ab71d1ba" />
+        <e k="usedplus_fsk_warning_choose" v="Valitse todennäköisin vikainen järjestelmä - väärä diagnoosi vähentää korjauksen tehokkuutta" eh="88de8162" />
+        <e k="usedplus_fsk_diagnosis" v="OBD-VIKAANALYYSI" eh="65f2e448" />
+        <e k="usedplus_fsk_symptoms_observed" v="OBD-SKANNERIN LUKEMAT:" eh="1f7e1f8b" />
+        <e k="usedplus_fsk_diagnosis_question" v="Näiden diagnostiikkakoodien perusteella, mikä on perussyy?" eh="05d464f1" />
 
         <!-- Engine diagnostic readings (as scanner output) -->
-        <e k="usedplus_fsk_symptom_engine_misfiring" v="Cylinder misfire detected - irregular combustion pattern" eh="54e95868" />
-        <e k="usedplus_fsk_symptom_engine_black_smoke" v="Exhaust sensor: Rich fuel mixture / incomplete combustion" eh="0c232d74" />
-        <e k="usedplus_fsk_symptom_engine_power_loss_gradual" v="Power output: 40% below rated - declining trend" eh="105e5a11" />
-        <e k="usedplus_fsk_symptom_engine_hard_start" v="Starter motor cycles: Excessive cranking required" eh="a231fd9d" />
-        <e k="usedplus_fsk_symptom_engine_stalling" v="RPM fluctuation: Engine stalling under load" eh="627b64ae" />
-        <e k="usedplus_fsk_symptom_engine_sputtering" v="Fuel delivery: Intermittent flow detected" eh="a72d2ca7" />
-        <e k="usedplus_fsk_symptom_engine_rough_idle" v="Idle quality: Unstable RPM at rest" eh="0560c5a8" />
-        <e k="usedplus_fsk_symptom_engine_misfiring_high_rpm" v="High RPM misfire: Ignition timing fault" eh="ccc64a6c" />
-        <e k="usedplus_fsk_symptom_engine_poor_acceleration" v="Throttle response: Delayed / weak acceleration" eh="1286a3a2" />
-        <e k="usedplus_fsk_symptom_engine_backfiring" v="Timing analysis: Combustion occurring in exhaust" eh="4c4186cb" />
-        <e k="usedplus_fsk_symptom_engine_wont_start" v="Engine status: No ignition - cranks but won't fire" eh="f9e71ec8" />
-        <e k="usedplus_fsk_symptom_engine_timing_off" v="Valve timing: Out of specification" eh="1e354219" />
+        <e k="usedplus_fsk_symptom_engine_misfiring" v="Sylinterin sytytyshäiriö havaittu - epäsäännöllinen palokuvio" eh="54e95868" />
+        <e k="usedplus_fsk_symptom_engine_black_smoke" v="Pakokaasuanturi: Rikas polttoaineseos / epätäydellinen palaminen" eh="0c232d74" />
+        <e k="usedplus_fsk_symptom_engine_power_loss_gradual" v="Teho: 40% alle nimellisen - laskeva trendi" eh="105e5a11" />
+        <e k="usedplus_fsk_symptom_engine_hard_start" v="Käynnistinmoottorin syklit: Liiallinen pyöritys vaaditaan" eh="a231fd9d" />
+        <e k="usedplus_fsk_symptom_engine_stalling" v="RPM-vaihtelu: Moottori sammuu kuormituksen alla" eh="627b64ae" />
+        <e k="usedplus_fsk_symptom_engine_sputtering" v="Polttoaineen syöttö: Katkonainen virtaus havaittu" eh="a72d2ca7" />
+        <e k="usedplus_fsk_symptom_engine_rough_idle" v="Joutokäynnin laatu: Epävakaa kierrosnopeus levossa" eh="0560c5a8" />
+        <e k="usedplus_fsk_symptom_engine_misfiring_high_rpm" v="Korkean kierrosluvun sytytyshäiriö: Sytytysajoituksen vika" eh="ccc64a6c" />
+        <e k="usedplus_fsk_symptom_engine_poor_acceleration" v="Kaasuvaste: Viivästynyt / heikko kiihdytys" eh="1286a3a2" />
+        <e k="usedplus_fsk_symptom_engine_backfiring" v="Ajoitusanalyysi: Palamista tapahtuu pakosarjassa" eh="4c4186cb" />
+        <e k="usedplus_fsk_symptom_engine_wont_start" v="Moottorin tila: Ei sytytystä - käynnistyy mutta ei syty" eh="f9e71ec8" />
+        <e k="usedplus_fsk_symptom_engine_timing_off" v="Venttiiliajoitus: Spesifikaation ulkopuolella" eh="1e354219" />
 
         <!-- Engine diagnoses -->
-        <e k="usedplus_fsk_diag_fuel_filter" v="Fuel filter clogged" eh="045d7210" />
-        <e k="usedplus_fsk_diag_spark_plugs" v="Spark plugs fouled" eh="4e46ad59" />
-        <e k="usedplus_fsk_diag_air_filter" v="Air filter blocked" eh="0e4e8481" />
-        <e k="usedplus_fsk_diag_timing_belt" v="Timing belt slipped" eh="47655d97" />
+        <e k="usedplus_fsk_diag_fuel_filter" v="Polttoainesuodatin tukossa" eh="045d7210" />
+        <e k="usedplus_fsk_diag_spark_plugs" v="Sytytystulpat likaantuneet" eh="4e46ad59" />
+        <e k="usedplus_fsk_diag_air_filter" v="Ilmansuodatin tukossa" eh="0e4e8481" />
+        <e k="usedplus_fsk_diag_timing_belt" v="Jakohihna liukunut" eh="47655d97" />
 
         <!-- Electrical diagnostic readings -->
-        <e k="usedplus_fsk_symptom_elec_no_crank" v="Starter circuit: No current to starter motor" eh="887c1d68" />
-        <e k="usedplus_fsk_symptom_elec_no_lights" v="Lighting circuit: Zero voltage detected" eh="cff7d4f0" />
-        <e k="usedplus_fsk_symptom_elec_clicking" v="Relay status: Rapid clicking - insufficient power" eh="25817132" />
-        <e k="usedplus_fsk_symptom_elec_random_shutdowns" v="Power stability: Unexpected system shutdowns" eh="06cc91ba" />
-        <e k="usedplus_fsk_symptom_elec_specific_systems_fail" v="Circuit analysis: Isolated system failures" eh="ed1119bc" />
-        <e k="usedplus_fsk_symptom_elec_partial_power" v="Power distribution: Some circuits dead" eh="a79bdcf7" />
-        <e k="usedplus_fsk_symptom_elec_starts_then_dies" v="Run time: Engine dies shortly after start" eh="7cf039bd" />
-        <e k="usedplus_fsk_symptom_elec_dim_lights" v="Voltage level: Below normal - lights dim at idle" eh="f25674a2" />
-        <e k="usedplus_fsk_symptom_elec_battery_warning" v="Battery status: Not charging while running" eh="cf8ccb1e" />
-        <e k="usedplus_fsk_symptom_elec_intermittent" v="Connection quality: Intermittent power drops" eh="0e6113d4" />
-        <e k="usedplus_fsk_symptom_elec_works_when_wiggling" v="Wire harness: Movement-sensitive connections" eh="dfed316f" />
-        <e k="usedplus_fsk_symptom_elec_flickering" v="Power output: Fluctuating voltage levels" eh="a07a6d54" />
+        <e k="usedplus_fsk_symptom_elec_no_crank" v="Käynnistyspiiri: Ei virtaa käynnistinmoottoriin" eh="887c1d68" />
+        <e k="usedplus_fsk_symptom_elec_no_lights" v="Valaistuspiiri: Nollajoännite havaittu" eh="cff7d4f0" />
+        <e k="usedplus_fsk_symptom_elec_clicking" v="Rele tila: Nopea naksutus - riittämätön teho" eh="25817132" />
+        <e k="usedplus_fsk_symptom_elec_random_shutdowns" v="Tehon vakaus: Odottamattomat järjestelmän sammutukset" eh="06cc91ba" />
+        <e k="usedplus_fsk_symptom_elec_specific_systems_fail" v="Piirianalyysi: Eristetyt järjestelmäviat" eh="ed1119bc" />
+        <e k="usedplus_fsk_symptom_elec_partial_power" v="Tehon jakelu: Jotkut piirit kuolleet" eh="a79bdcf7" />
+        <e k="usedplus_fsk_symptom_elec_starts_then_dies" v="Käyntiaika: Moottori sammuu pian käynnistyksen jälkeen" eh="7cf039bd" />
+        <e k="usedplus_fsk_symptom_elec_dim_lights" v="Jännitevtaso: Normaalia alhaisempi - valot himmeät joutokäynnillä" eh="f25674a2" />
+        <e k="usedplus_fsk_symptom_elec_battery_warning" v="Akun tila: Ei lataudu käynnin aikana" eh="cf8ccb1e" />
+        <e k="usedplus_fsk_symptom_elec_intermittent" v="Liitännän laatu: Ajoittaisia tehonpudotuksia" eh="0e6113d4" />
+        <e k="usedplus_fsk_symptom_elec_works_when_wiggling" v="Johtosarja: Liikeherkät liitännät" eh="dfed316f" />
+        <e k="usedplus_fsk_symptom_elec_flickering" v="Tehon tuotto: Vaihteleva jännitetaso" eh="a07a6d54" />
 
         <!-- Electrical diagnoses -->
-        <e k="usedplus_fsk_diag_battery" v="Battery dead/disconnected" eh="50d3c4fc" />
-        <e k="usedplus_fsk_diag_fuse" v="Blown fuse" eh="1776843f" />
-        <e k="usedplus_fsk_diag_alternator" v="Alternator failing" eh="788d66fc" />
-        <e k="usedplus_fsk_diag_wiring" v="Loose wiring connection" eh="0096822d" />
+        <e k="usedplus_fsk_diag_battery" v="Akku tyhjä/irrotettu" eh="50d3c4fc" />
+        <e k="usedplus_fsk_diag_fuse" v="Palanut sulake" eh="1776843f" />
+        <e k="usedplus_fsk_diag_alternator" v="Laturi vikaantumassa" eh="788d66fc" />
+        <e k="usedplus_fsk_diag_wiring" v="Löysä johdotusliitäntä" eh="0096822d" />
 
         <!-- Hydraulic diagnostic readings -->
-        <e k="usedplus_fsk_symptom_hyd_slow_response" v="Response time: Hydraulic actuators slow to move" eh="ca10c213" />
-        <e k="usedplus_fsk_symptom_hyd_weak_lift" v="Lift capacity: Below rated lifting force" eh="76c62746" />
-        <e k="usedplus_fsk_symptom_hyd_low_pressure" v="System pressure: 40% below operating spec" eh="696b0dd4" />
-        <e k="usedplus_fsk_symptom_hyd_jerky" v="Movement quality: Jerky/stuttering operation" eh="df8361c5" />
-        <e k="usedplus_fsk_symptom_hyd_spongy" v="Control feel: Spongy/soft pedal response" eh="d345985c" />
-        <e k="usedplus_fsk_symptom_hyd_inconsistent" v="Pressure stability: Fluctuating readings" eh="0be9dee1" />
-        <e k="usedplus_fsk_symptom_hyd_grinding" v="Pump noise: Grinding/cavitation sounds" eh="8af6855a" />
-        <e k="usedplus_fsk_symptom_hyd_overheating" v="Fluid temp: Overheating detected (95C+)" eh="f81562f9" />
-        <e k="usedplus_fsk_symptom_hyd_whining" v="Pump noise: High-pitched whine under load" eh="14db1d73" />
-        <e k="usedplus_fsk_symptom_hyd_visible_leak" v="Leak detector: External fluid loss detected" eh="58be5bf5" />
-        <e k="usedplus_fsk_symptom_hyd_oil_spots" v="Fluid level: Dropping - external leak likely" eh="8ff50abe" />
-        <e k="usedplus_fsk_symptom_hyd_pressure_drop" v="Pressure trend: Gradual decline over time" eh="d445c192" />
+        <e k="usedplus_fsk_symptom_hyd_slow_response" v="Vasteaika: Hydraulitoimilaitteet hitaita liikkumaan" eh="ca10c213" />
+        <e k="usedplus_fsk_symptom_hyd_weak_lift" v="Nostokyky: Alle nimellisen nostovoiman" eh="76c62746" />
+        <e k="usedplus_fsk_symptom_hyd_low_pressure" v="Järjestelmän paine: 40% alle käyttöspesifikaation" eh="696b0dd4" />
+        <e k="usedplus_fsk_symptom_hyd_jerky" v="Liikkeen laatu: Nykivä/takova toiminta" eh="df8361c5" />
+        <e k="usedplus_fsk_symptom_hyd_spongy" v="Ohjauksen tuntu: Svampea/pehmeä poljinvaste" eh="d345985c" />
+        <e k="usedplus_fsk_symptom_hyd_inconsistent" v="Paineen vakaus: Vaihtelevat lukemat" eh="0be9dee1" />
+        <e k="usedplus_fsk_symptom_hyd_grinding" v="Pumpun melu: Hiova/kavitaatioääni" eh="8af6855a" />
+        <e k="usedplus_fsk_symptom_hyd_overheating" v="Nesteen lämpötila: Ylikuumeneminen havaittu (95C+)" eh="f81562f9" />
+        <e k="usedplus_fsk_symptom_hyd_whining" v="Pumpun melu: Korkea vinkuna kuormituksen alla" eh="14db1d73" />
+        <e k="usedplus_fsk_symptom_hyd_visible_leak" v="Vuototunnistin: Ulkoinen nestehävikki havaittu" eh="58be5bf5" />
+        <e k="usedplus_fsk_symptom_hyd_oil_spots" v="Nestetaso: Laskee - ulkoinen vuoto todennäköinen" eh="8ff50abe" />
+        <e k="usedplus_fsk_symptom_hyd_pressure_drop" v="Paineen trendi: Asteittainen lasku ajan myötä" eh="d445c192" />
 
         <!-- Hydraulic diagnoses -->
-        <e k="usedplus_fsk_diag_hyd_fluid" v="Low fluid level" eh="86179cbc" />
-        <e k="usedplus_fsk_diag_hyd_air" v="Air in hydraulic lines" eh="1c8c7fbb" />
-        <e k="usedplus_fsk_diag_hyd_pump" v="Hydraulic pump wear" eh="36c963f7" />
-        <e k="usedplus_fsk_diag_hyd_seals" v="Seal/gasket failure" eh="e2110dbd" />
+        <e k="usedplus_fsk_diag_hyd_fluid" v="Matala nestetaso" eh="86179cbc" />
+        <e k="usedplus_fsk_diag_hyd_air" v="Ilmaa hydraulilinjoissa" eh="1c8c7fbb" />
+        <e k="usedplus_fsk_diag_hyd_pump" v="Hydraulipumpun kuluminen" eh="36c963f7" />
+        <e k="usedplus_fsk_diag_hyd_seals" v="Tiivisteen/tiivisteen vika" eh="e2110dbd" />
 
         <!-- Repair descriptions -->
-        <e k="usedplus_fsk_repair_air_filter" v="Cleared blocked air filter - airflow restored." eh="da165550" />
-        <e k="usedplus_fsk_repair_fuel_filter" v="Cleaned fuel filter - fuel flow restored." eh="66acd0b3" />
-        <e k="usedplus_fsk_repair_spark_plugs" v="Cleaned/gapped spark plugs - ignition improved." eh="78a202f1" />
-        <e k="usedplus_fsk_repair_timing" v="Adjusted timing components - sync restored." eh="a2ab2028" />
-        <e k="usedplus_fsk_repair_battery" v="Cleaned terminals and jump-started - power restored." eh="705ece14" />
-        <e k="usedplus_fsk_repair_fuse" v="Replaced blown fuse with spare." eh="4b7be2fa" />
-        <e k="usedplus_fsk_repair_alternator" v="Temporary alternator bypass - limited charging." eh="df04f816" />
-        <e k="usedplus_fsk_repair_wiring" v="Secured loose connections - circuit restored." eh="03bc6610" />
+        <e k="usedplus_fsk_repair_air_filter" v="Tukossa ollut ilmansuodatin puhdistettu - ilmavirtaus palautettu." eh="da165550" />
+        <e k="usedplus_fsk_repair_fuel_filter" v="Polttoainesuodatin puhdistettu - polttoaineen virtaus palautettu." eh="66acd0b3" />
+        <e k="usedplus_fsk_repair_spark_plugs" v="Sytytystulpat puhdistettu/säädetty - sytytys parantunut." eh="78a202f1" />
+        <e k="usedplus_fsk_repair_timing" v="Ajoituskomponentit säädetty - synkronointi palautettu." eh="a2ab2028" />
+        <e k="usedplus_fsk_repair_battery" v="Navat puhdistettu ja käynnistetty apukäynnistyksellä - virta palautettu." eh="705ece14" />
+        <e k="usedplus_fsk_repair_fuse" v="Palanut sulake vaihdettu varaosasulakkeeseen." eh="4b7be2fa" />
+        <e k="usedplus_fsk_repair_alternator" v="Väliaikainen laturin ohitus - rajoitettu lataus." eh="df04f816" />
+        <e k="usedplus_fsk_repair_wiring" v="Löysät liitännät kiristetty - piiri palautettu." eh="03bc6610" />
         <e k="usedplus_fsk_repair_hyd_fluid" v="Topped up hydraulic fluid from kit reserves." eh="80207351" />
         <e k="usedplus_fsk_repair_hyd_bleed" v="Bled air from hydraulic lines." eh="df37c387" />
         <e k="usedplus_fsk_repair_hyd_pump" v="Applied temporary pump seal treatment." eh="89e6edb3" />
@@ -1825,205 +1831,205 @@
         <e k="usedplus_fsk_result_good" v="Right system, but diagnosis was off. General repairs applied." eh="47b6188e" />
         <e k="usedplus_fsk_result_poor" v="Wrong system identified. Only basic maintenance applied." eh="38caed38" />
         <e k="usedplus_fsk_results" v="REPAIR RESULTS" eh="bb6599cb" />
-        <e k="usedplus_fsk_before" v="Before:" eh="0519a746" />
-        <e k="usedplus_fsk_after" v="After:" eh="fdbe650f" />
-        <e k="usedplus_fsk_feedback_perfect" v="Correct diagnosis!" eh="ea6dac23" />
-        <e k="usedplus_fsk_feedback_partial" v="Right system, but the specific cause was different." eh="ad5b77ef" />
-        <e k="usedplus_fsk_feedback_wrong" v="The actual problem was in a different system." eh="9b04c318" />
-        <e k="usedplus_fsk_temp_repair" v="TEMPORARY FIELD REPAIR" eh="b3bc3876" />
+        <e k="usedplus_fsk_before" v="Ennen:" eh="0519a746" />
+        <e k="usedplus_fsk_after" v="Jälkeen:" eh="fdbe650f" />
+        <e k="usedplus_fsk_feedback_perfect" v="Oikea diagnoosi!" eh="ea6dac23" />
+        <e k="usedplus_fsk_feedback_partial" v="Oikea järjestelmä, mutta tarkka syy oli eri." eh="ad5b77ef" />
+        <e k="usedplus_fsk_feedback_wrong" v="Todellinen ongelma oli eri järjestelmässä." eh="9b04c318" />
+        <e k="usedplus_fsk_temp_repair" v="VÄLIAIKAINEN KENTTÄKORJAUS" eh="b3bc3876" />
         <e k="usedplus_fsk_temp_repair_desc" v="This is an emergency fix. Visit a proper workshop for full service." eh="648457f5" />
-        <e k="usedplus_fsk_kit_consumed" v="OBD Scanner has been consumed." eh="b2ea1455" />
+        <e k="usedplus_fsk_kit_consumed" v="OBD-skanneri on kulutettu." eh="b2ea1455" />
         <!-- v2.8.0: Corrected messaging - OBD fixes reliability, not damage -->
-        <e k="usedplus_fsk_onetime_title" v="FIELD SERVICE COMPLETE" eh="4336e84b" />
+        <e k="usedplus_fsk_onetime_title" v="KENTTÄHUOLTO VALMIS" eh="4336e84b" />
         <e k="usedplus_fsk_onetime_desc" v="Further diagnostics on this system require workshop equipment" eh="38988277" />
         <e k="usedplus_fsk_kit_consumed_onetime" v="OBD Scanner consumed. All field-serviceable adjustments have been made to this system." eh="4ae3775f" />
-        <e k="usedplus_fsk_cannot_cancel" v="Repair in progress - cannot cancel at this stage." eh="6172d2ec" />
-        <e k="usedplus_fsk_noVehicle" v="No vehicle detected within range. Move the scanner closer to a vehicle." eh="e89e127f" />
+        <e k="usedplus_fsk_cannot_cancel" v="Korjaus käynnissä - ei voi peruuttaa tässä vaiheessa." eh="6172d2ec" />
+        <e k="usedplus_fsk_noVehicle" v="Ei ajoneuvoa havaittu kantamalla. Siirrä skanneri lähemmäs ajoneuvoa." eh="e89e127f" />
 
         <!-- Tire repair -->
-        <e k="usedplus_fsk_tire_repair" v="FLAT TIRE DETECTED - Click to Repair" eh="0cd0073e" />
-        <e k="usedplus_fsk_tire_repair_title" v="TIRE EMERGENCY REPAIR" eh="fe197822" />
-        <e k="usedplus_fsk_tire_choose" v="Choose repair method:" eh="51db1af3" />
-        <e k="usedplus_fsk_tire_patch" v="PATCH" eh="63bc9a39" />
-        <e k="usedplus_fsk_tire_patch_desc" v="Quick temporary fix" eh="796b53da" />
-        <e k="usedplus_fsk_tire_patch_result" v="Restores to 30% condition" eh="37d192f4" />
-        <e k="usedplus_fsk_tire_plug" v="PLUG" eh="c18d6117" />
-        <e k="usedplus_fsk_tire_plug_desc" v="Better emergency repair" eh="b3aa3113" />
-        <e k="usedplus_fsk_tire_plug_result" v="Restores to 50% condition" eh="98bf223c" />
-        <e k="usedplus_fsk_tires_ok" v="All tires OK - No repair needed" eh="e070fe8d" />
+        <e k="usedplus_fsk_tire_repair" v="RENGASRIKKO HAVAITTU - Napsauta korjataksesi" eh="0cd0073e" />
+        <e k="usedplus_fsk_tire_repair_title" v="RENKAAN HÄTÄKORJAUS" eh="fe197822" />
+        <e k="usedplus_fsk_tire_choose" v="Valitse korjausmenetelmä:" eh="51db1af3" />
+        <e k="usedplus_fsk_tire_patch" v="PAIKKAUS" eh="63bc9a39" />
+        <e k="usedplus_fsk_tire_patch_desc" v="Nopea väliaikainen korjaus" eh="796b53da" />
+        <e k="usedplus_fsk_tire_patch_result" v="Palauttaa 30% kuntoon" eh="37d192f4" />
+        <e k="usedplus_fsk_tire_plug" v="TULPPA" eh="c18d6117" />
+        <e k="usedplus_fsk_tire_plug_desc" v="Parempi hätäkorjaus" eh="b3aa3113" />
+        <e k="usedplus_fsk_tire_plug_result" v="Palauttaa 50% kuntoon" eh="98bf223c" />
+        <e k="usedplus_fsk_tires_ok" v="Kaikki renkaat OK - Ei korjausta tarvita" eh="e070fe8d" />
 
         <!-- v2.1.0: Scanner Readout Hints (Step 1 hints to deduce failed system) -->
-        <e k="usedplus_fsk_scanner_readout" v="OBD SCANNER READOUT" eh="e81cab15" />
-        <e k="usedplus_fsk_hint_no_faults" v="No critical fault codes stored" eh="56f7aa39" />
-        <e k="usedplus_fsk_hint_preventive" v="Preventive maintenance recommended" eh="695fff39" />
+        <e k="usedplus_fsk_scanner_readout" v="OBD-SKANNERIN LUKEMAT" eh="e81cab15" />
+        <e k="usedplus_fsk_hint_no_faults" v="Ei kriittisiä vikakoodeja tallennettuna" eh="56f7aa39" />
+        <e k="usedplus_fsk_hint_preventive" v="Ennaltaehkäisevä huolto suositeltu" eh="695fff39" />
 
         <!-- ENGINE hints (keywords: powertrain, combustion, fuel, exhaust, P-codes) -->
-        <e k="usedplus_fsk_hint_engine_dtc" v="DTC P0xxx: Powertrain fault codes stored" eh="3ef35761" />
-        <e k="usedplus_fsk_hint_engine_combustion" v="Irregular combustion cycle patterns logged" eh="cfc95185" />
-        <e k="usedplus_fsk_hint_engine_airfuel" v="Air-fuel mixture readings out of specification" eh="e0a6626d" />
-        <e k="usedplus_fsk_hint_engine_exhaust" v="Exhaust gas sensor readings abnormal" eh="f491ddaa" />
-        <e k="usedplus_fsk_hint_engine_throttle" v="Throttle response deviation detected" eh="b702d132" />
-        <e k="usedplus_fsk_hint_engine_timing" v="Crankshaft timing variance recorded" eh="c6429837" />
+        <e k="usedplus_fsk_hint_engine_dtc" v="DTC P0xxx: Voimansiirron vikakoodit tallennettuna" eh="3ef35761" />
+        <e k="usedplus_fsk_hint_engine_combustion" v="Epäsäännöllisiä palojaksomalleja kirjattu" eh="cfc95185" />
+        <e k="usedplus_fsk_hint_engine_airfuel" v="Ilma-polttoaineseoksen lukemat spesifikaation ulkopuolella" eh="e0a6626d" />
+        <e k="usedplus_fsk_hint_engine_exhaust" v="Pakokaasuanturin lukemat poikkeavat" eh="f491ddaa" />
+        <e k="usedplus_fsk_hint_engine_throttle" v="Kaasuviippeen vasteen poikkeama havaittu" eh="b702d132" />
+        <e k="usedplus_fsk_hint_engine_timing" v="Kampiakselin ajoituksen vaihtelu kirjattu" eh="c6429837" />
 
         <!-- ELECTRICAL hints (keywords: voltage, signal, communication, B/U-codes) -->
-        <e k="usedplus_fsk_hint_elec_dtc" v="DTC B/U codes: Network communication faults" eh="5dc3a478" />
-        <e k="usedplus_fsk_hint_elec_voltage" v="Voltage regulation outside normal parameters" eh="f6b58c16" />
-        <e k="usedplus_fsk_hint_elec_signal" v="Intermittent sensor signal dropouts detected" eh="5f4e98be" />
-        <e k="usedplus_fsk_hint_elec_canbus" v="CAN bus communication errors logged" eh="06868b16" />
-        <e k="usedplus_fsk_hint_elec_timeout" v="Module response timeouts recorded" eh="8d47cb04" />
-        <e k="usedplus_fsk_hint_elec_ground" v="Ground fault indicators triggered" eh="aeded58c" />
+        <e k="usedplus_fsk_hint_elec_dtc" v="DTC B/U koodit: Verkon viestintävikoja" eh="5dc3a478" />
+        <e k="usedplus_fsk_hint_elec_voltage" v="Jännitteen säätö normaalien parametrien ulkopuolella" eh="f6b58c16" />
+        <e k="usedplus_fsk_hint_elec_signal" v="Ajoittaisia anturisignaalin katkoksia havaittu" eh="5f4e98be" />
+        <e k="usedplus_fsk_hint_elec_canbus" v="CAN-väylän viestintävirheitä kirjattu" eh="06868b16" />
+        <e k="usedplus_fsk_hint_elec_timeout" v="Moduulin vastausaikakatkaisuja kirjattu" eh="8d47cb04" />
+        <e k="usedplus_fsk_hint_elec_ground" v="Maasulun indikaattorit lauennut" eh="aeded58c" />
 
         <!-- HYDRAULIC hints (keywords: pressure, implement, hitch, flow, actuator) -->
-        <e k="usedplus_fsk_hint_hyd_response" v="Implement response time exceeds threshold" eh="c51368ce" />
-        <e k="usedplus_fsk_hint_hyd_pressure" v="Hydraulic pressure fluctuations detected" eh="c884962a" />
-        <e k="usedplus_fsk_hint_hyd_hitch" v="Three-point hitch position sensor drift" eh="f047bc25" />
-        <e k="usedplus_fsk_hint_hyd_actuator" v="Actuator cycle time degradation noted" eh="78638bc2" />
-        <e k="usedplus_fsk_hint_hyd_flow" v="Flow rate irregularities in aux circuits" eh="36d131ee" />
-        <e k="usedplus_fsk_hint_hyd_temp" v="Hydraulic fluid temperature warnings logged" eh="cfc27131" />
+        <e k="usedplus_fsk_hint_hyd_response" v="Työkalun vasteaika ylittää kynnyksen" eh="c51368ce" />
+        <e k="usedplus_fsk_hint_hyd_pressure" v="Hydraulipaineen vaihteluita havaittu" eh="c884962a" />
+        <e k="usedplus_fsk_hint_hyd_hitch" v="Kolmipistelaitteen asentoanturin ajautuminen" eh="f047bc25" />
+        <e k="usedplus_fsk_hint_hyd_actuator" v="Toimilaitteen sykliajan heikkeneminen havaittu" eh="78638bc2" />
+        <e k="usedplus_fsk_hint_hyd_flow" v="Virtausnopeuden epäsäännöllisyyksiä lisäpiireissä" eh="36d131ee" />
+        <e k="usedplus_fsk_hint_hyd_temp" v="Hydraulinesteen lämpötilavaro ituksia kirjattu" eh="cfc27131" />
 
         <!-- v2.7.0: Mode Selection -->
-        <e k="usedplus_fsk_mode_diagnose" v="Diagnose Component" eh="3b9e5655" />
-        <e k="usedplus_fsk_mode_malfunctions" v="Locate Malfunctions" eh="26d2acee" />
-        <e k="usedplus_fsk_mode_tire" v="Tire Service" eh="b0234f4e" />
-        <e k="usedplus_fsk_mode_rvb" v="RVB System Analysis" eh="5f5c4944" />
-        <e k="usedplus_fsk_rvb_not_installed" v="RVB mod not installed" eh="68a5ac1b" />
-        <e k="usedplus_fsk_rvb_no_data" v="No RVB data available for this vehicle" eh="772bef55" />
-        <e k="usedplus_fsk_no_malfunctions" v="No active malfunctions detected" eh="3d25e830" />
+        <e k="usedplus_fsk_mode_diagnose" v="Diagnosoi komponentti" eh="3b9e5655" />
+        <e k="usedplus_fsk_mode_malfunctions" v="Paikanna toimintahäiriöt" eh="26d2acee" />
+        <e k="usedplus_fsk_mode_tire" v="Rengashuolto" eh="b0234f4e" />
+        <e k="usedplus_fsk_mode_rvb" v="RVB-järjestelmäanalyysi" eh="5f5c4944" />
+        <e k="usedplus_fsk_rvb_not_installed" v="RVB-modi ei asennettu" eh="68a5ac1b" />
+        <e k="usedplus_fsk_rvb_no_data" v="Ei RVB-tietoja saatavilla tälle ajoneuvolle" eh="772bef55" />
+        <e k="usedplus_fsk_no_malfunctions" v="Ei aktiivisia toimintahäiriöitä havaittu" eh="3d25e830" />
 
         <!-- v2.7.0: Malfunction/Component names -->
-        <e k="usedplus_component_engine" v="Engine" eh="7bfa3072" />
-        <e k="usedplus_component_hydraulic" v="Hydraulics" eh="1de58ed3" />
-        <e k="usedplus_component_electrical" v="Electrical" eh="6f15be3d" />
-        <e k="usedplus_component_fuel_system" v="Fuel System" eh="136d85c8" />
-        <e k="usedplus_component_tires" v="Tires" eh="3fe2c06a" />
-        <e k="usedplus_malfunction_seized" v="SEIZED" eh="cdceb6dd" />
-        <e k="usedplus_malfunction_leak" v="LEAKING" eh="2ec9e171" />
-        <e k="usedplus_malfunction_flat" v="FLAT" eh="f88a77e3" />
+        <e k="usedplus_component_engine" v="Moottori" eh="7bfa3072" />
+        <e k="usedplus_component_hydraulic" v="Hydrauliikka" eh="1de58ed3" />
+        <e k="usedplus_component_electrical" v="Sähköjärjestelmä" eh="6f15be3d" />
+        <e k="usedplus_component_fuel_system" v="Polttoainejärjestelmä" eh="136d85c8" />
+        <e k="usedplus_component_tires" v="Renkaat" eh="3fe2c06a" />
+        <e k="usedplus_malfunction_seized" v="JUUTTUNUT" eh="cdceb6dd" />
+        <e k="usedplus_malfunction_leak" v="VUOTAA" eh="2ec9e171" />
+        <e k="usedplus_malfunction_flat" v="PUHJENNUT" eh="f88a77e3" />
 
         <!-- v2.8.0: OBD diagnosis limit (one-time boost per system) -->
         <e k="usedplus_fsk_diagnosis_exhausted" v="This system has already received field service. Further repairs require workshop equipment." eh="79b71f1e" />
 
         <!-- v2.9.0: Service Truck - Long-Term Restoration System -->
-        <e k="usedplus_serviceTruck_name" v="Service Truck" eh="51b741d0" />
+        <e k="usedplus_serviceTruck_name" v="Huoltoauto" eh="51b741d0" />
         <e k="usedplus_serviceTruck_function" v="Mobile workshop for long-term vehicle restoration. Can restore reliability AND reliability ceiling over time. Requires diesel, oil, hydraulic fluid, and spare parts." eh="3c12f4e8" />
-        <e k="usedplus_serviceTruck_typeDesc" v="Restoration Vehicle" eh="7d7e5cd9" />
-        <e k="usedplus_serviceTruck_dialogTitle" v="SERVICE TRUCK - VEHICLE RESTORATION" eh="00a2db6f" />
-        <e k="usedplus_serviceTruck_inspect" v="Inspect %s" eh="1fb02eae" />
-        <e k="usedplus_serviceTruck_noTarget" v="No vehicle nearby" eh="c02151b6" />
-        <e k="usedplus_serviceTruck_noVehicle" v="No vehicle nearby to restore" eh="a06fd6fe" />
-        <e k="usedplus_serviceTruck_resume" v="Resume Restoration" eh="0e390222" />
-        <e k="usedplus_serviceTruck_stop" v="Stop Restoration" eh="145970e3" />
-        <e k="usedplus_serviceTruck_started" v="Started restoration of %s" eh="9ae2b7d4" />
-        <e k="usedplus_serviceTruck_stopped" v="Stopped restoration of %s" eh="486b803c" />
-        <e k="usedplus_serviceTruck_resumed" v="Restoration resumed" eh="4dd62e8e" />
-        <e k="usedplus_serviceTruck_complete" v="Restoration complete: %s" eh="9d83e616" />
-        <e k="usedplus_serviceTruck_needParts" v="Need spare parts pallet nearby!" eh="13f1aea0" />
-        <e k="usedplus_serviceTruck_damage" v="Warning: Restoration damage due to empty resources!" eh="a0546a3a" />
-        <e k="usedplus_serviceTruck_ceiling" v="Max Potential: %d%%" eh="6f7241ba" />
+        <e k="usedplus_serviceTruck_typeDesc" v="Kunnostusajoneuvo" eh="7d7e5cd9" />
+        <e k="usedplus_serviceTruck_dialogTitle" v="HUOLTOAUTO - AJONEUVON KUNNOSTUS" eh="00a2db6f" />
+        <e k="usedplus_serviceTruck_inspect" v="Tarkasta %s" eh="1fb02eae" />
+        <e k="usedplus_serviceTruck_noTarget" v="Ei ajoneuvoa lähistöllä" eh="c02151b6" />
+        <e k="usedplus_serviceTruck_noVehicle" v="Ei kunnostettavaa ajoneuvoa lähistöllä" eh="a06fd6fe" />
+        <e k="usedplus_serviceTruck_resume" v="Jatka kunnostusta" eh="0e390222" />
+        <e k="usedplus_serviceTruck_stop" v="Lopeta kunnostus" eh="145970e3" />
+        <e k="usedplus_serviceTruck_started" v="Aloitettu kunnostus: %s" eh="9ae2b7d4" />
+        <e k="usedplus_serviceTruck_stopped" v="Lopetettu kunnostus: %s" eh="486b803c" />
+        <e k="usedplus_serviceTruck_resumed" v="Kunnostus jatkettu" eh="4dd62e8e" />
+        <e k="usedplus_serviceTruck_complete" v="Kunnostus valmis: %s" eh="9d83e616" />
+        <e k="usedplus_serviceTruck_needParts" v="Tarvitaan varaosalava lähellä!" eh="13f1aea0" />
+        <e k="usedplus_serviceTruck_damage" v="Varoitus: Kunnostusvaurio tyhjien resurssien vuoksi!" eh="a0546a3a" />
+        <e k="usedplus_serviceTruck_ceiling" v="Maksimipotentiaali: %d%%" eh="6f7241ba" />
         <e k="usedplus_serviceTruck_selectInfo" v="Select a component to begin deep restoration. Unlike field repairs, this process takes hours but can fully restore the vehicle." eh="979901a5" />
-        <e k="usedplus_serviceTruck_cooldown" v="Cooldown: %dh" eh="2ea1fcb2" />
-        <e k="usedplus_serviceTruck_healthy" v="System Healthy" eh="5576cd8a" />
-        <e k="usedplus_serviceTruck_inspecting" v="Inspecting: %s" eh="e11e1d26" />
-        <e k="usedplus_serviceTruck_estimatedTime" v="Estimated time: %d hours" eh="1d3deb3e" />
-        <e k="usedplus_serviceTruck_inspectionPassed" v="INSPECTION PASSED" eh="47f7fcfd" />
-        <e k="usedplus_serviceTruck_inspectionFailed" v="INSPECTION FAILED" eh="a631d00c" />
-        <e k="usedplus_serviceTruck_canStartRestoration" v="Restoration can begin. Estimated: %d hours" eh="0e981aef" />
-        <e k="usedplus_serviceTruck_wrongDiagnosis" v="Incorrect diagnosis. You must wait before retrying this component." eh="5a4aabc9" />
-        <e k="usedplus_serviceTruck_cooldownApplied" v="Cooldown: %d hours" eh="2c7183c1" />
-        <e k="usedplus_serviceTruck_startRestoration" v="START RESTORATION" eh="696ac7a5" />
-        <e k="usedplus_serviceTruck_paused_diesel" v="Restoration paused - refill diesel tank" eh="1fe7b196" />
-        <e k="usedplus_serviceTruck_paused_oil" v="Restoration paused - refill oil tank" eh="e8431b21" />
-        <e k="usedplus_serviceTruck_paused_hydraulic" v="Restoration paused - refill hydraulic fluid" eh="613a5371" />
-        <e k="usedplus_serviceTruck_paused_parts" v="Restoration paused - need more spare parts!" eh="bd1c3747" />
+        <e k="usedplus_serviceTruck_cooldown" v="Viilennysaika: %dh" eh="2ea1fcb2" />
+        <e k="usedplus_serviceTruck_healthy" v="Järjestelmä terve" eh="5576cd8a" />
+        <e k="usedplus_serviceTruck_inspecting" v="Tarkastetaan: %s" eh="e11e1d26" />
+        <e k="usedplus_serviceTruck_estimatedTime" v="Arvioitu aika: %d tuntia" eh="1d3deb3e" />
+        <e k="usedplus_serviceTruck_inspectionPassed" v="TARKASTUS LÄPÄISTY" eh="47f7fcfd" />
+        <e k="usedplus_serviceTruck_inspectionFailed" v="TARKASTUS EPÄONNISTUI" eh="a631d00c" />
+        <e k="usedplus_serviceTruck_canStartRestoration" v="Kunnostus voidaan aloittaa. Arvio: %d tuntia" eh="0e981aef" />
+        <e k="usedplus_serviceTruck_wrongDiagnosis" v="Virheellinen diagnoosi. Sinun on odotettava ennen tämän komponentin uudelleenyritystä." eh="5a4aabc9" />
+        <e k="usedplus_serviceTruck_cooldownApplied" v="Viilennysaika: %d tuntia" eh="2c7183c1" />
+        <e k="usedplus_serviceTruck_startRestoration" v="ALOITA KUNNOSTUS" eh="696ac7a5" />
+        <e k="usedplus_serviceTruck_paused_diesel" v="Kunnostus keskeytetty - täytä dieselsäiliö" eh="1fe7b196" />
+        <e k="usedplus_serviceTruck_paused_oil" v="Kunnostus keskeytetty - täytä öljysäiliö" eh="e8431b21" />
+        <e k="usedplus_serviceTruck_paused_hydraulic" v="Kunnostus keskeytetty - täytä hydraulineste" eh="613a5371" />
+        <e k="usedplus_serviceTruck_paused_parts" v="Kunnostus keskeytetty - tarvitaan lisää varaosia!" eh="bd1c3747" />
 
         <!-- Service Truck Discovery -->
-        <e k="usedplus_serviceTruck_discoveryTitle" v="SPECIAL OPPORTUNITY" eh="5859f1ad" />
-        <e k="usedplus_serviceTruck_discoverySubtitle" v="Your National Agent Has a Connection" eh="c0c9fe88" />
+        <e k="usedplus_serviceTruck_discoveryTitle" v="ERIKOISTARJOUS" eh="5859f1ad" />
+        <e k="usedplus_serviceTruck_discoverySubtitle" v="Valtakunnallisella agentillasi on kontakti" eh="c0c9fe88" />
         <e k="usedplus_serviceTruck_mechanicQuote" v="&quot;I know a mechanic retiring from the repair business. He's got a fully-equipped service truck he's looking to sell. Cash only, but I can get you a good deal. Interested?&quot;" eh="219139f8" />
-        <e k="usedplus_serviceTruck_vehicleName" v="GMC C7000 Service Truck" eh="7f78c3d1" />
-        <e k="usedplus_serviceTruck_feature1" v="Long-term vehicle restoration" eh="0fa4b175" />
-        <e k="usedplus_serviceTruck_feature2" v="Reliability ceiling repair" eh="dee9f0ff" />
-        <e k="usedplus_serviceTruck_feature3" v="The only way to save lemons" eh="e025ba61" />
-        <e k="usedplus_serviceTruck_originalPrice" v="Regular Price: $75,000" eh="70fcf983" />
-        <e k="usedplus_serviceTruck_yourPrice" v="YOUR PRICE" eh="6dd8d761" />
-        <e k="usedplus_serviceTruck_cashOnly" v="CASH ONLY" eh="087d1524" />
-        <e k="usedplus_serviceTruck_expiryNote" v="Offer expires in %d days" eh="9d7bc900" />
-        <e k="usedplus_serviceTruck_buyNow" v="Buy Now" eh="c1f52fba" />
-        <e k="usedplus_serviceTruck_notNow" v="Not Now" eh="8dff1db0" />
-        <e k="usedplus_serviceTruck_purchaseSuccess" v="Service Truck purchased! Find it at the shop spawn point." eh="16cacb8d" />
-        <e k="usedplus_serviceTruck_opportunitySaved" v="Opportunity saved. Check Finance Manager to purchase later." eh="410b1a26" />
-        <e k="usedplus_serviceTruck_opportunityExpired" v="Service Truck opportunity has expired." eh="a5d3a5fb" />
-        <e k="usedplus_serviceTruck_insufficientFunds" v="Insufficient funds! You need $%s cash." eh="9b84e434" />
-        <e k="usedplus_serviceTruck_alreadyOwned" v="You already own a Service Truck." eh="8d7c53f6" />
+        <e k="usedplus_serviceTruck_vehicleName" v="GMC C7000 Huoltoauto" eh="7f78c3d1" />
+        <e k="usedplus_serviceTruck_feature1" v="Pitkäaikainen ajoneuvojen kunnostus" eh="0fa4b175" />
+        <e k="usedplus_serviceTruck_feature2" v="Luotettavuuskaton korjaus" eh="dee9f0ff" />
+        <e k="usedplus_serviceTruck_feature3" v="Ainoa tapa pelastaa sitruunat" eh="e025ba61" />
+        <e k="usedplus_serviceTruck_originalPrice" v="Normaali hinta: $75,000" eh="70fcf983" />
+        <e k="usedplus_serviceTruck_yourPrice" v="SINUN HINTASI" eh="6dd8d761" />
+        <e k="usedplus_serviceTruck_cashOnly" v="VAIN KÄTEINEN" eh="087d1524" />
+        <e k="usedplus_serviceTruck_expiryNote" v="Tarjous vanhenee %d päivässä" eh="9d7bc900" />
+        <e k="usedplus_serviceTruck_buyNow" v="Osta nyt" eh="c1f52fba" />
+        <e k="usedplus_serviceTruck_notNow" v="Ei nyt" eh="8dff1db0" />
+        <e k="usedplus_serviceTruck_purchaseSuccess" v="Huoltoauto ostettu! Löydät sen kaupan esiintymispisteestä." eh="16cacb8d" />
+        <e k="usedplus_serviceTruck_opportunitySaved" v="Tilaisuus tallennettu. Tarkista Rahoitushallinnoija ostaaksesi myöhemmin." eh="410b1a26" />
+        <e k="usedplus_serviceTruck_opportunityExpired" v="Huoltoauton tilaisuus on vanhentunut." eh="a5d3a5fb" />
+        <e k="usedplus_serviceTruck_insufficientFunds" v="Riittämättömät varat! Tarvitset $%s käteistä." eh="9b84e434" />
+        <e k="usedplus_serviceTruck_alreadyOwned" v="Omistat jo huoltoauton." eh="8d7c53f6" />
 
         <!-- v2.9.0: Spare Parts Pallet -->
-        <e k="usedplus_sparePartsPallet_name" v="Spare Parts Pallet" eh="9bf39a93" />
+        <e k="usedplus_sparePartsPallet_name" v="Varaosalava" eh="9bf39a93" />
         <e k="usedplus_sparePartsPallet_function" v="Consumable spare parts for Service Truck restoration. Place near the truck during restoration work." eh="c90aa3eb" />
-        <e k="fillType_spareParts" v="Spare Parts" eh="ab6b8ce1" />
-        <e k="unit_pcs" v="pcs" eh="3ecf2642" />
+        <e k="fillType_spareParts" v="Varaosat" eh="ab6b8ce1" />
+        <e k="unit_pcs" v="kpl" eh="3ecf2642" />
 
         <!-- v2.9.0: Restoration Diagnostic Symptoms - Engine -->
-        <e k="usedplus_resto_symptom_engine_knocking_load" v="Severe knocking under load" eh="fb8c3067" />
-        <e k="usedplus_resto_symptom_engine_low_oil_pressure" v="Oil pressure critically low" eh="a3efa42d" />
-        <e k="usedplus_resto_symptom_engine_excessive_vibration" v="Excessive vibration at all speeds" eh="b99e166e" />
-        <e k="usedplus_resto_symptom_engine_blue_smoke" v="Heavy blue smoke from exhaust" eh="7565a2d6" />
-        <e k="usedplus_resto_symptom_engine_oil_consumption" v="Consuming 2L oil per hour" eh="dec5fc5f" />
-        <e k="usedplus_resto_symptom_engine_compression_loss" v="Compression test: 40% below spec" eh="5ebe46dc" />
-        <e k="usedplus_resto_symptom_engine_blowby" v="Excessive crankcase blowby" eh="a7ba64cb" />
-        <e k="usedplus_resto_symptom_engine_power_loss" v="Power output 50% of rated" eh="f3aaa976" />
-        <e k="usedplus_resto_symptom_engine_crankcase_pressure" v="Crankcase pressure elevated" eh="c5f32b50" />
-        <e k="usedplus_resto_symptom_engine_ticking" v="Rhythmic ticking from valve train" eh="c52cdfd8" />
-        <e k="usedplus_resto_symptom_engine_rough_idle" v="Extreme rough idle" eh="479de259" />
-        <e k="usedplus_resto_symptom_engine_valve_noise" v="Valve train noise increasing" eh="ce1f139d" />
+        <e k="usedplus_resto_symptom_engine_knocking_load" v="Vakava kolkutus kuormituksen alla" eh="fb8c3067" />
+        <e k="usedplus_resto_symptom_engine_low_oil_pressure" v="Öljynpaine kriittisen matala" eh="a3efa42d" />
+        <e k="usedplus_resto_symptom_engine_excessive_vibration" v="Liiallinen tärinä kaikilla nopeuksilla" eh="b99e166e" />
+        <e k="usedplus_resto_symptom_engine_blue_smoke" v="Runsasta sinistä savua pakoputkesta" eh="7565a2d6" />
+        <e k="usedplus_resto_symptom_engine_oil_consumption" v="Kuluttaa 2L öljyä tunnissa" eh="dec5fc5f" />
+        <e k="usedplus_resto_symptom_engine_compression_loss" v="Puristuskoe: 40% spesifikaation alapuolella" eh="5ebe46dc" />
+        <e k="usedplus_resto_symptom_engine_blowby" v="Liiallinen kampikammion vuoto" eh="a7ba64cb" />
+        <e k="usedplus_resto_symptom_engine_power_loss" v="Teho 50% nimellisestä" eh="f3aaa976" />
+        <e k="usedplus_resto_symptom_engine_crankcase_pressure" v="Kampikammion paine koholla" eh="c5f32b50" />
+        <e k="usedplus_resto_symptom_engine_ticking" v="Rytminen tikitys venttiilimekanismista" eh="c52cdfd8" />
+        <e k="usedplus_resto_symptom_engine_rough_idle" v="Äärimmäisen karkea joutokäynti" eh="479de259" />
+        <e k="usedplus_resto_symptom_engine_valve_noise" v="Venttiilimekanismin melu kasvaa" eh="ce1f139d" />
 
         <!-- v2.9.0: Restoration Diagnoses - Engine -->
-        <e k="usedplus_resto_diag_cylinder_wear" v="Cylinder wall wear" eh="2e9abecf" />
-        <e k="usedplus_resto_diag_main_bearings" v="Main bearings worn" eh="10706469" />
-        <e k="usedplus_resto_diag_piston_rings" v="Piston rings failed" eh="93ad31e3" />
-        <e k="usedplus_resto_diag_camshaft_wear" v="Camshaft/lifter wear" eh="ec3a7cd5" />
+        <e k="usedplus_resto_diag_cylinder_wear" v="Sylinterin seinämän kuluminen" eh="2e9abecf" />
+        <e k="usedplus_resto_diag_main_bearings" v="Päälaakerit kuluneet" eh="10706469" />
+        <e k="usedplus_resto_diag_piston_rings" v="Männänrenkaat viallisia" eh="93ad31e3" />
+        <e k="usedplus_resto_diag_camshaft_wear" v="Nokka-akselin/nokkimen kuluminen" eh="ec3a7cd5" />
 
         <!-- v2.9.0: Restoration Diagnostic Symptoms - Electrical -->
-        <e k="usedplus_resto_symptom_elec_intermittent_systems" v="Multiple systems failing intermittently" eh="023ad81b" />
-        <e k="usedplus_resto_symptom_elec_corrosion_visible" v="Visible corrosion on connectors" eh="5c9a9a3c" />
-        <e k="usedplus_resto_symptom_elec_multiple_faults" v="Stored fault codes across all modules" eh="d4ade2b6" />
-        <e k="usedplus_resto_symptom_elec_erratic_behavior" v="Erratic system behavior" eh="b69e9c62" />
-        <e k="usedplus_resto_symptom_elec_no_communication" v="No CAN bus communication" eh="d003610c" />
-        <e k="usedplus_resto_symptom_elec_stored_codes" v="Hundreds of stored fault codes" eh="40791f46" />
-        <e k="usedplus_resto_symptom_elec_wrong_readings" v="Sensors giving impossible readings" eh="cb94f53b" />
-        <e k="usedplus_resto_symptom_elec_limp_mode" v="Constant limp mode activation" eh="f2301c42" />
-        <e k="usedplus_resto_symptom_elec_poor_response" v="Sluggish throttle/control response" eh="66546509" />
-        <e k="usedplus_resto_symptom_elec_voltage_drops" v="Severe voltage drops under load" eh="01228a80" />
-        <e k="usedplus_resto_symptom_elec_dim_lights" v="Lights dim significantly at idle" eh="37cdb057" />
-        <e k="usedplus_resto_symptom_elec_starter_slow" v="Starter motor barely cranks" eh="886fcc59" />
+        <e k="usedplus_resto_symptom_elec_intermittent_systems" v="Useita järjestelmiä vikaantuu ajoittain" eh="023ad81b" />
+        <e k="usedplus_resto_symptom_elec_corrosion_visible" v="Näkyvää korroosiota liittimissä" eh="5c9a9a3c" />
+        <e k="usedplus_resto_symptom_elec_multiple_faults" v="Tallennettuja vikakoodeja kaikissa moduuleissa" eh="d4ade2b6" />
+        <e k="usedplus_resto_symptom_elec_erratic_behavior" v="Arvaamaton järjestelmän käyttäytyminen" eh="b69e9c62" />
+        <e k="usedplus_resto_symptom_elec_no_communication" v="Ei CAN-väylän viestintää" eh="d003610c" />
+        <e k="usedplus_resto_symptom_elec_stored_codes" v="Satoja tallennettuja vikakoodeja" eh="40791f46" />
+        <e k="usedplus_resto_symptom_elec_wrong_readings" v="Anturit antavat mahdottomia lukemia" eh="cb94f53b" />
+        <e k="usedplus_resto_symptom_elec_limp_mode" v="Jatkuva hätätilan aktivoituminen" eh="f2301c42" />
+        <e k="usedplus_resto_symptom_elec_poor_response" v="Hidas kaasu/ohjausvaste" eh="66546509" />
+        <e k="usedplus_resto_symptom_elec_voltage_drops" v="Vakavat jännitelaskut kuormituksen alla" eh="01228a80" />
+        <e k="usedplus_resto_symptom_elec_dim_lights" v="Valot himmenevät merkittävästi joutokäynnillä" eh="37cdb057" />
+        <e k="usedplus_resto_symptom_elec_starter_slow" v="Käynnistinmoottori tuskin pyörittää" eh="886fcc59" />
 
         <!-- v2.9.0: Restoration Diagnoses - Electrical -->
-        <e k="usedplus_resto_diag_harness_degradation" v="Wiring harness degradation" eh="1ac0bee9" />
-        <e k="usedplus_resto_diag_ecu_failure" v="ECU/controller failure" eh="c58a3f02" />
-        <e k="usedplus_resto_diag_sensor_array" v="Sensor array degradation" eh="dbf631b9" />
-        <e k="usedplus_resto_diag_ground_points" v="Ground point corrosion" eh="76c3875c" />
+        <e k="usedplus_resto_diag_harness_degradation" v="Johtosarjan heikkeneminen" eh="1ac0bee9" />
+        <e k="usedplus_resto_diag_ecu_failure" v="ECU/ohjaimen vika" eh="c58a3f02" />
+        <e k="usedplus_resto_diag_sensor_array" v="Anturiryhman heikkeneminen" eh="dbf631b9" />
+        <e k="usedplus_resto_diag_ground_points" v="Maadoituspisteen korroosio" eh="76c3875c" />
 
         <!-- v2.9.0: Restoration Diagnostic Symptoms - Hydraulic -->
-        <e k="usedplus_resto_symptom_hyd_slow_operation" v="Extremely slow hydraulic operation" eh="1491284f" />
-        <e k="usedplus_resto_symptom_hyd_cavitation_noise" v="Pump cavitation noise" eh="78a4d860" />
-        <e k="usedplus_resto_symptom_hyd_low_pressure" v="System pressure 60% below spec" eh="4fb95c5c" />
-        <e k="usedplus_resto_symptom_hyd_drift" v="Implements drifting under load" eh="161be612" />
-        <e k="usedplus_resto_symptom_hyd_uneven_response" v="Uneven response between circuits" eh="ed5383af" />
-        <e k="usedplus_resto_symptom_hyd_internal_leak" v="Internal leak detected - pressure won't hold" eh="24df5973" />
-        <e k="usedplus_resto_symptom_hyd_external_leak" v="External fluid leak visible" eh="83e3f803" />
-        <e k="usedplus_resto_symptom_hyd_rod_scoring" v="Cylinder rod scoring visible" eh="afc6f369" />
-        <e k="usedplus_resto_symptom_hyd_position_creep" v="Position creep under static load" eh="e0a2a78c" />
-        <e k="usedplus_resto_symptom_hyd_visible_cracks" v="Visible cracks in hose covers" eh="4a3b0a3e" />
-        <e k="usedplus_resto_symptom_hyd_bulging" v="Hose bulging under pressure" eh="45b25f17" />
-        <e k="usedplus_resto_symptom_hyd_seepage" v="Fluid seepage at fittings" eh="5a712984" />
+        <e k="usedplus_resto_symptom_hyd_slow_operation" v="Erittäin hidas hydraulitoiminta" eh="1491284f" />
+        <e k="usedplus_resto_symptom_hyd_cavitation_noise" v="Pumpun kavitaatiomelu" eh="78a4d860" />
+        <e k="usedplus_resto_symptom_hyd_low_pressure" v="Järjestelmän paine 60% spesifikaation alapuolella" eh="4fb95c5c" />
+        <e k="usedplus_resto_symptom_hyd_drift" v="Työkalut ajautuvat kuormituksen alla" eh="161be612" />
+        <e k="usedplus_resto_symptom_hyd_uneven_response" v="Epätasainen vaste piirien välillä" eh="ed5383af" />
+        <e k="usedplus_resto_symptom_hyd_internal_leak" v="Sisäinen vuoto havaittu - paine ei pysy" eh="24df5973" />
+        <e k="usedplus_resto_symptom_hyd_external_leak" v="Ulkoinen nestevuoto näkyvissä" eh="83e3f803" />
+        <e k="usedplus_resto_symptom_hyd_rod_scoring" v="Sylinterin varren naarmuuntuminen näkyvissä" eh="afc6f369" />
+        <e k="usedplus_resto_symptom_hyd_position_creep" v="Asennon liukuminen staattisen kuorman alla" eh="e0a2a78c" />
+        <e k="usedplus_resto_symptom_hyd_visible_cracks" v="Näkyviä halkeamia letkujen suojissa" eh="4a3b0a3e" />
+        <e k="usedplus_resto_symptom_hyd_bulging" v="Letku pullistuu paineen alla" eh="45b25f17" />
+        <e k="usedplus_resto_symptom_hyd_seepage" v="Nesteen tihkumista liittimissä" eh="5a712984" />
 
         <!-- v2.9.0: Restoration Diagnoses - Hydraulic -->
-        <e k="usedplus_resto_diag_pump_wear" v="Hydraulic pump worn" eh="52b93aef" />
-        <e k="usedplus_resto_diag_valve_wear" v="Control valve wear" eh="a8b29f50" />
-        <e k="usedplus_resto_diag_cylinder_seals" v="Cylinder seal failure" eh="b1160c88" />
-        <e k="usedplus_resto_diag_hose_degradation" v="Hose degradation" eh="a8e8141c" />
+        <e k="usedplus_resto_diag_pump_wear" v="Hydraulipumppu kulunut" eh="52b93aef" />
+        <e k="usedplus_resto_diag_valve_wear" v="Ohjausventtiilin kuluminen" eh="a8b29f50" />
+        <e k="usedplus_resto_diag_cylinder_seals" v="Sylinterin tiivisteen vika" eh="b1160c88" />
+        <e k="usedplus_resto_diag_hose_degradation" v="Letkun heikkeneminen" eh="a8e8141c" />
 
         <!-- v2.9.0: Restoration Hints -->
-        <e k="usedplus_resto_hint_engine_compression" v="Compression test: Multiple cylinders low" eh="3a3b3c44" />
+        <e k="usedplus_resto_hint_engine_compression" v="Puristuskoe: Useita sylintereita matalia" eh="3a3b3c44" />
         <e k="usedplus_resto_hint_engine_oil_analysis" v="Oil analysis: High metal content" eh="bd8248e0" />
         <e k="usedplus_resto_hint_engine_vibration" v="Vibration analysis: Bearing frequency" eh="effbd7bc" />
         <e k="usedplus_resto_hint_engine_blowby" v="Blowby measurement: 3x normal" eh="623f710e" />
@@ -2080,7 +2086,7 @@
         <e k="usedplus_setting_credit_desc" v="Enable dynamic credit-based interest rates" eh="ea6286a9" />
         <e k="usedplus_setting_tirewear" v="Tire Wear" eh="fa71e50e" />
         <e k="usedplus_setting_tirewear_desc" v="Enable realistic tire degradation over time" eh="0a955572" />
-        <e k="usedplus_setting_malfunctions" v="Malfunctions" eh="97801e8a" />
+        <e k="usedplus_setting_malfunctions" v="Toimintahäiriöt" eh="97801e8a" />
         <e k="usedplus_setting_malfunctions_desc" v="Enable random breakdowns and component failures" eh="fbbe01f9" />
         <!-- v2.8.0: Malfunction Frequency slider -->
         <e k="usedplus_setting_malfunctionFrequency" v="Malfunction Frequency" eh="6bf458c7" />
@@ -2194,19 +2200,19 @@
         <e k="usedplus_preset_realistic_desc" v="Default balanced simulation - the intended experience" eh="e4b620f0" />
         <e k="usedplus_preset_casual_desc" v="Maximum forgiveness - focus on farming, not finance" eh="81004805" />
         <e k="usedplus_preset_lite_desc" v="Just finance and lease - no extras" eh="e3952520" />
-        <e k="usedplus_preset_apply" v="Apply" eh="9639e32c" />
+        <e k="usedplus_preset_apply" v="Käytä" eh="9639e32c" />
         <e k="usedplus_preset_reset" v="Reset to Defaults" eh="6795975d" />
 
         <!-- v2.1.0: RVB Workshop Integration -->
         <e k="usedplus_hydraulic_system" v="Hydraulic System" eh="2f6e031e" />
-        <e k="usedplus_maintenance_grade" v="Maintenance" eh="10d0de28" />
-        <e k="usedplus_service_history" v="History" eh="16d2b386" />
+        <e k="usedplus_maintenance_grade" v="Huolto" eh="10d0de28" />
+        <e k="usedplus_service_history" v="Historia" eh="16d2b386" />
         <e k="usedplus_mechanic_says" v="Mechanic" eh="64eb6697" />
         <e k="usedplus_mechanic_assessment" v="MECHANIC'S ASSESSMENT" eh="ed0defaa" />
-        <e k="usedplus_grade_excellent" v="Excellent" eh="fcc2d28a" />
-        <e k="usedplus_grade_good" v="Good" eh="0c6ad70b" />
-        <e k="usedplus_grade_fair" v="Fair" eh="f7f20cf0" />
-        <e k="usedplus_grade_poor" v="Poor" eh="0e94d017" />
+        <e k="usedplus_grade_excellent" v="Erinomainen" eh="fcc2d28a" />
+        <e k="usedplus_grade_good" v="Hyvä" eh="0c6ad70b" />
+        <e k="usedplus_grade_fair" v="Kohtalainen" eh="f7f20cf0" />
+        <e k="usedplus_grade_poor" v="Huono" eh="0e94d017" />
         <e k="usedplus_grade_critical" v="Critical" eh="278d01e5" />
 
         <!-- ============================================== -->
@@ -2214,16 +2220,16 @@
         <!-- ============================================== -->
 
         <!-- Buttons -->
-        <e k="usedplus_button_makeOffer" v="Make Offer" eh="4b779fa1" />
+        <e k="usedplus_button_makeOffer" v="Tee tarjous" eh="4b779fa1" />
 
         <!-- Negotiation Dialog -->
         <e k="usedplus_neg_title" v="MAKE AN OFFER" eh="a91f8bed" />
-        <e k="usedplus_neg_sectionVehicle" v="VEHICLE" eh="e9fa318f" />
+        <e k="usedplus_neg_sectionVehicle" v="AJONEUVO" eh="e9fa318f" />
         <e k="usedplus_neg_sectionWhisper" v="MECHANIC'S WHISPER" eh="29e2cd4f" />
         <e k="usedplus_neg_sectionOffer" v="YOUR OFFER" eh="0b3b396e" />
-        <e k="usedplus_neg_askingPrice" v="Asking Price:" eh="c515d94e" />
-        <e k="usedplus_neg_yourOffer" v="Your Offer:" eh="4e018663" />
-        <e k="usedplus_neg_savings" v="Savings:" eh="f3815936" />
+        <e k="usedplus_neg_askingPrice" v="Pyyntihinta:" eh="c515d94e" />
+        <e k="usedplus_neg_yourOffer" v="Tarjouksesi:" eh="4e018663" />
+        <e k="usedplus_neg_savings" v="Säästöt:" eh="f3815936" />
         <e k="usedplus_neg_sendOffer" v="Send Offer" eh="1afbee68" />
 
         <!-- Mechanic Seller Whispers (Twist #2) -->
@@ -2246,13 +2252,13 @@
         <e k="usedplus_sr_titleCounter" v="COUNTER OFFER" eh="544441c8" />
         <e k="usedplus_sr_titleReject" v="OFFER REJECTED" eh="2b54c509" />
         <e k="usedplus_sr_titleWalkaway" v="SELLER WALKED AWAY" eh="d4da1912" />
-        <e k="usedplus_sr_yourOffer" v="Your Offer:" eh="4e018663" />
+        <e k="usedplus_sr_yourOffer" v="Tarjouksesi:" eh="4e018663" />
         <e k="usedplus_sr_counterOffer" v="Counter Offer:" eh="768065b8" />
         <e k="usedplus_sr_sellerPrice" v="Seller's Price:" eh="1402265a" />
         <e k="usedplus_sr_completePurchase" v="Complete Purchase" eh="e1c9f521" />
         <e k="usedplus_sr_acceptCounter" v="Accept Counter" eh="fdbaf6cf" />
         <e k="usedplus_sr_standFirm" v="Stand Firm" eh="3b35ba7f" />
-        <e k="usedplus_sr_walkAway" v="Walk Away" eh="5218f5e2" />
+        <e k="usedplus_sr_walkAway" v="Kävele pois" eh="5218f5e2" />
         <e k="usedplus_sr_payFullPrice" v="Pay Full Price" eh="1d0533bd" />
 
         <!-- Seller Responses -->
@@ -2284,153 +2290,153 @@
         <e k="usedplus_seller_immovable_hint" v="This seller knows exactly what they have. Don't expect any negotiation room." eh="afe11ced" />
 
         <!-- v2.6.2: Settings-based mode disabled messages -->
-        <e k="usedplus_mode_finance_disabled" v="Finance (Disabled)" eh="a7fe11df" />
-        <e k="usedplus_mode_lease_disabled" v="Lease (Disabled)" eh="2c3f5a31" />
-        <e k="usedplus_finance_disabled_title" v="Feature Disabled" eh="e4c783e8" />
-        <e k="usedplus_finance_disabled_msg" v="Vehicle financing is disabled in UsedPlus settings." eh="fffb70a6" />
-        <e k="usedplus_lease_disabled_title" v="Feature Disabled" eh="e4c783e8" />
-        <e k="usedplus_lease_disabled_msg" v="Vehicle leasing is disabled in UsedPlus settings." eh="bd7f5b24" />
-        <e k="usedplus_land_finance_disabled_msg" v="Land financing is disabled in UsedPlus settings." eh="0335547a" />
-        <e k="usedplus_land_lease_disabled_msg" v="Land leasing is disabled in UsedPlus settings." eh="f875a63d" />
-        <e k="usedplus_land_modeFinance_disabled" v="Finance (Disabled)" eh="a7fe11df" />
-        <e k="usedplus_land_modeLease_disabled" v="Lease (Disabled)" eh="2c3f5a31" />
+        <e k="usedplus_mode_finance_disabled" v="Rahoitus (pois käytöstä)" eh="a7fe11df" />
+        <e k="usedplus_mode_lease_disabled" v="Vuokraus (pois käytöstä)" eh="2c3f5a31" />
+        <e k="usedplus_finance_disabled_title" v="Ominaisuus pois käytöstä" eh="e4c783e8" />
+        <e k="usedplus_finance_disabled_msg" v="Ajoneuvojen rahoitus on poistettu käytöstä UsedPlus-asetuksissa." eh="fffb70a6" />
+        <e k="usedplus_lease_disabled_title" v="Ominaisuus pois käytöstä" eh="e4c783e8" />
+        <e k="usedplus_lease_disabled_msg" v="Ajoneuvojen vuokraus on poistettu käytöstä UsedPlus-asetuksissa." eh="bd7f5b24" />
+        <e k="usedplus_land_finance_disabled_msg" v="Maan rahoitus on poistettu käytöstä UsedPlus-asetuksissa." eh="0335547a" />
+        <e k="usedplus_land_lease_disabled_msg" v="Maan vuokraus on poistettu käytöstä UsedPlus-asetuksissa." eh="f875a63d" />
+        <e k="usedplus_land_modeFinance_disabled" v="Rahoitus (pois käytöstä)" eh="a7fe11df" />
+        <e k="usedplus_land_modeLease_disabled" v="Vuokraus (pois käytöstä)" eh="2c3f5a31" />
 
         <!-- ============================================== -->
         <!-- v2.7.0: SEIZURE ESCALATION SYSTEM              -->
         <!-- ============================================== -->
 
         <!-- Seizure Warning Messages -->
-        <e k="usedplus_engine_seized" v="ENGINE SEIZED! Repair required before vehicle will start." eh="c22e256a" />
-        <e k="usedplus_hydraulics_seized" v="HYDRAULICS SEIZED! Implements are locked in place." eh="dd09718c" />
-        <e k="usedplus_electrical_seized" v="ELECTRICAL FAILURE! All systems are dead." eh="84b7514a" />
+        <e k="usedplus_engine_seized" v="MOOTTORI TAKERTUNYT! Korjaus vaaditaan ennen kuin ajoneuvo käynnistyy." eh="c22e256a" />
+        <e k="usedplus_hydraulics_seized" v="HYDRAULIIKKA TAKERTUNYT! Työkalut lukittu paikoilleen." eh="dd09718c" />
+        <e k="usedplus_electrical_seized" v="SÄHKÖVIKA! Kaikki järjestelmät kuolleet." eh="84b7514a" />
 
         <!-- OBD Scanner Seizure Repair -->
-        <e k="usedplus_seizure_detected" v="COMPONENT SEIZED" eh="9def01dd" />
+        <e k="usedplus_seizure_detected" v="KOMPONENTTI TAKERTUNYT" eh="9def01dd" />
         <e k="usedplus_seizure_repair_confirm" v="%s is seized and requires emergency repair.\n\nRepair cost: %s\n\nProceed with repair?" eh="bf702608" />
-        <e k="usedplus_seizure_repaired" v="%s repaired! Reliability restored to %d%%" eh="323fa338" />
-        <e k="usedplus_repair_no_money" v="Not enough money for repair!" eh="0c0a7c19" />
+        <e k="usedplus_seizure_repaired" v="%s korjattu! Luotettavuus palautettu %d%%" eh="323fa338" />
+        <e k="usedplus_repair_no_money" v="Ei tarpeeksi rahaa korjaukseen!" eh="0c0a7c19" />
 
         <!-- ============================================== -->
         <!-- v2.7.1: ADDITIONAL MISSING TRANSLATIONS        -->
         <!-- ============================================== -->
 
         <!-- General Warnings/Errors -->
-        <e k="usedplus_warning_notEnoughMoney" v="Not enough money!" eh="48f194d4" />
+        <e k="usedplus_warning_notEnoughMoney" v="Ei tarpeeksi rahaa!" eh="48f194d4" />
 
         <!-- Finance Deal Messages -->
-        <e k="usedplus_notification_landSeized" v="LAND SEIZED: %s has been taken due to non-payment!" eh="1c095ac6" />
-        <e k="usedplus_error_paymentTooLow" v="Payment amount is below the minimum required." eh="4f83eda0" />
-        <e k="usedplus_error_paymentTooHigh" v="Payment amount exceeds the remaining balance." eh="091a9776" />
-        <e k="usedplus_success_paymentMade" v="Payment processed successfully!" eh="b12aba7d" />
+        <e k="usedplus_notification_landSeized" v="MAA TAKAVARIKOITU: %s on otettu maksamattomuuden vuoksi!" eh="1c095ac6" />
+        <e k="usedplus_error_paymentTooLow" v="Maksun määrä on alle vaaditun minimin." eh="4f83eda0" />
+        <e k="usedplus_error_paymentTooHigh" v="Maksun määrä ylittää jäljellä olevan saldon." eh="091a9776" />
+        <e k="usedplus_success_paymentMade" v="Maksu käsitelty onnistuneesti!" eh="b12aba7d" />
 
         <!-- Lease Deal Messages -->
-        <e k="usedplus_error_cannotAffordTermination" v="Not enough money to pay the lease termination fee." eh="64ed9e67" />
+        <e k="usedplus_error_cannotAffordTermination" v="Ei tarpeeksi rahaa vuokran päättämismaksun maksuun." eh="64ed9e67" />
 
         <!-- Credit Requirements -->
-        <e k="usedplus_credit_required" v="Credit Required" eh="cefa86b5" />
-        <e k="usedplus_finance_credit_msg" v="Financing requires a credit score of %d or higher." eh="7d3d6778" />
-        <e k="usedplus_lease_credit_msg" v="Leasing requires a credit score of %d or higher." eh="c86cbfc5" />
+        <e k="usedplus_credit_required" v="Luotto vaaditaan" eh="cefa86b5" />
+        <e k="usedplus_finance_credit_msg" v="Rahoitus vaatii luottopistemäärän %d tai enemmän." eh="7d3d6778" />
+        <e k="usedplus_lease_credit_msg" v="Vuokraus vaatii luottopistemäärän %d tai enemmän." eh="c86cbfc5" />
 
         <!-- Purchase Errors -->
-        <e k="usedplus_error_purchaseFailed" v="Purchase failed - game API not available." eh="c02a7002" />
+        <e k="usedplus_error_purchaseFailed" v="Osto epäonnistui - pelin API ei saatavilla." eh="c02a7002" />
 
         <!-- Finance Calculations -->
-        <e k="usedplus_error_negativeDownPayment" v="Down payment cannot be negative." eh="0634f8d8" />
-        <e k="usedplus_error_downPaymentTooHigh" v="Down payment cannot exceed the purchase price." eh="6bd926ef" />
-        <e k="usedplus_error_invalidTerm" v="Invalid loan term." eh="49e90a5b" />
-        <e k="usedplus_error_leaseDownPaymentTooHigh" v="Down payment cannot exceed the lease price." eh="5e32ae97" />
-        <e k="usedplus_error_leaseTermInvalid" v="Invalid lease term." eh="7f3c3523" />
+        <e k="usedplus_error_negativeDownPayment" v="Käsiraha ei voi olla negatiivinen." eh="0634f8d8" />
+        <e k="usedplus_error_downPaymentTooHigh" v="Käsiraha ei voi ylittää ostohintaa." eh="6bd926ef" />
+        <e k="usedplus_error_invalidTerm" v="Virheellinen laina-aika." eh="49e90a5b" />
+        <e k="usedplus_error_leaseDownPaymentTooHigh" v="Käsiraha ei voi ylittää vuokrahintaa." eh="5e32ae97" />
+        <e k="usedplus_error_leaseTermInvalid" v="Virheellinen vuokra-aika." eh="7f3c3523" />
 
         <!-- Depreciation Formatting -->
-        <e k="usedplus_age_oneYear" v="1 year old" eh="086d4f5c" />
-        <e k="usedplus_age_years" v="%d years old" eh="afdf2194" />
-        <e k="usedplus_hours" v="%d hours" eh="4e8d5e54" />
+        <e k="usedplus_age_oneYear" v="1 vuoden ikäinen" eh="086d4f5c" />
+        <e k="usedplus_age_years" v="%d vuoden ikäinen" eh="afdf2194" />
+        <e k="usedplus_hours" v="%d tuntia" eh="4e8d5e54" />
 
         <!-- Loan Notifications -->
-        <e k="usedplus_notification_vanillaLoanPaidOff" v="Bank loan paid off!" eh="a6f2a43b" />
+        <e k="usedplus_notification_vanillaLoanPaidOff" v="Pankkilaina maksettu!" eh="a6f2a43b" />
 
         <!-- ============================================== -->
         <!-- v2.8.0: Additional Multiplayer Messages       -->
         <!-- (Main MP messages are in the MP section above) -->
         <!-- ============================================== -->
-        <e k="usedplus_mp_success_vehicle_purchased" v="Vehicle purchased successfully!" eh="b5beec4f" />
-        <e k="usedplus_mp_success_trade_in" v="Trade-in completed successfully!" eh="0a59b49a" />
-        <e k="usedplus_mp_success_field_repair" v="Field repair completed!" eh="06239aac" />
-        <e k="usedplus_mp_success_fluids_refilled" v="Fluids refilled successfully!" eh="9597cd1d" />
-        <e k="usedplus_mp_success_tires_replaced" v="Tires replaced successfully!" eh="5224fbbe" />
-        <e k="usedplus_mp_success_land_purchased" v="Land purchased successfully!" eh="9de4a0f4" />
-        <e k="usedplus_mp_error_purchase_failed" v="Purchase failed. Please try again." eh="42d7ddab" />
-        <e k="usedplus_mp_error_vehicle_not_found" v="Vehicle not found." eh="02c84e79" />
-        <e k="usedplus_mp_error_no_loan" v="No loan balance to pay." eh="5668e12f" />
+        <e k="usedplus_mp_success_vehicle_purchased" v="Ajoneuvo ostettu onnistuneesti!" eh="b5beec4f" />
+        <e k="usedplus_mp_success_trade_in" v="Vaihto suoritettu onnistuneesti!" eh="0a59b49a" />
+        <e k="usedplus_mp_success_field_repair" v="Kenttäkorjaus valmis!" eh="06239aac" />
+        <e k="usedplus_mp_success_fluids_refilled" v="Nesteet täytetty onnistuneesti!" eh="9597cd1d" />
+        <e k="usedplus_mp_success_tires_replaced" v="Renkaat vaihdettu onnistuneesti!" eh="5224fbbe" />
+        <e k="usedplus_mp_success_land_purchased" v="Maa ostettu onnistuneesti!" eh="9de4a0f4" />
+        <e k="usedplus_mp_error_purchase_failed" v="Osto epäonnistui. Yritä uudelleen." eh="42d7ddab" />
+        <e k="usedplus_mp_error_vehicle_not_found" v="Ajoneuvoa ei löydetty." eh="02c84e79" />
+        <e k="usedplus_mp_error_no_loan" v="Ei lainasaldoa maksettavaksi." eh="5668e12f" />
 
         <!-- ============================================== -->
         <!-- v2.9.5: ADMIN CONTROL PANEL                   -->
         <!-- ============================================== -->
 
         <!-- Dialog Title -->
-        <e k="usedplus_admin_title" v="UsedPlus Admin Panel" eh="f1ae106e" />
+        <e k="usedplus_admin_title" v="UsedPlus-hallintapaneeli" eh="f1ae106e" />
 
         <!-- Tab Names -->
-        <e k="usedplus_admin_tab_malfunctions" v="Malfunctions" eh="97801e8a" />
-        <e k="usedplus_admin_tab_spawning" v="Spawning" eh="abd8b510" />
-        <e k="usedplus_admin_tab_finance" v="Finance" eh="c482980d" />
-        <e k="usedplus_admin_tab_dialogs" v="Dialogs" eh="258853ae" />
-        <e k="usedplus_admin_tab_state" v="State" eh="46a2a41c" />
+        <e k="usedplus_admin_tab_malfunctions" v="Toimintahäiriöt" eh="97801e8a" />
+        <e k="usedplus_admin_tab_spawning" v="Esiintyminen" eh="abd8b510" />
+        <e k="usedplus_admin_tab_finance" v="Rahoitus" eh="c482980d" />
+        <e k="usedplus_admin_tab_dialogs" v="Dialogit" eh="258853ae" />
+        <e k="usedplus_admin_tab_state" v="Tila" eh="46a2a41c" />
 
         <!-- Section Headers - Tab 1 (Malfunctions) -->
-        <e k="usedplus_admin_section_engine" v="ENGINE" eh="1942d6cf" />
-        <e k="usedplus_admin_section_electrical" v="ELECTRICAL" eh="9f317629" />
-        <e k="usedplus_admin_section_hydraulic" v="HYDRAULIC" eh="3e0b9977" />
-        <e k="usedplus_admin_section_tires" v="TIRES" eh="36173e29" />
-        <e k="usedplus_admin_section_utility" v="UTILITY" eh="1697ce5d" />
+        <e k="usedplus_admin_section_engine" v="MOOTTORI" eh="1942d6cf" />
+        <e k="usedplus_admin_section_electrical" v="SÄHKÖJÄRJESTELMÄ" eh="9f317629" />
+        <e k="usedplus_admin_section_hydraulic" v="HYDRAULIIKKA" eh="3e0b9977" />
+        <e k="usedplus_admin_section_tires" v="RENKAAT" eh="36173e29" />
+        <e k="usedplus_admin_section_utility" v="APUOHJELMAT" eh="1697ce5d" />
 
         <!-- Section Headers - Tab 2 (Spawning) -->
-        <e k="usedplus_admin_section_items" v="ITEMS" eh="9a932d55" />
-        <e k="usedplus_admin_section_discovery" v="DISCOVERY" eh="f5be5d66" />
-        <e k="usedplus_admin_section_test_vehicles" v="TEST VEHICLES" eh="682cb0f3" />
-        <e k="usedplus_admin_section_condition" v="CONDITION PAINTER" eh="2593ea9b" />
+        <e k="usedplus_admin_section_items" v="KOHTEET" eh="9a932d55" />
+        <e k="usedplus_admin_section_discovery" v="LÖYTÖ" eh="f5be5d66" />
+        <e k="usedplus_admin_section_test_vehicles" v="TESTIAJONEUVOT" eh="682cb0f3" />
+        <e k="usedplus_admin_section_condition" v="KUNNON MAALAAJA" eh="2593ea9b" />
 
         <!-- Section Headers - Tab 3 (Finance) -->
-        <e k="usedplus_admin_section_money" v="MONEY" eh="2bc794c2" />
-        <e k="usedplus_admin_section_credit" v="CREDIT SCORE" eh="4f3b169e" />
-        <e k="usedplus_admin_section_deals" v="DEALS" eh="bdcaa389" />
+        <e k="usedplus_admin_section_money" v="RAHA" eh="2bc794c2" />
+        <e k="usedplus_admin_section_credit" v="LUOTTOPISTEMÄÄRÄ" eh="4f3b169e" />
+        <e k="usedplus_admin_section_deals" v="KAUPAT" eh="bdcaa389" />
 
         <!-- Section Headers - Tab 4 (Dialogs) -->
-        <e k="usedplus_admin_section_finance_dialogs" v="FINANCE DIALOGS" eh="babbf134" />
-        <e k="usedplus_admin_section_market_dialogs" v="MARKETPLACE DIALOGS" eh="4c8988f5" />
-        <e k="usedplus_admin_section_service_dialogs" v="SERVICE DIALOGS" eh="e407aa85" />
-        <e k="usedplus_admin_section_lease_dialogs" v="LEASE DIALOGS" eh="479e552e" />
+        <e k="usedplus_admin_section_finance_dialogs" v="RAHOITUSDIALOGIT" eh="babbf134" />
+        <e k="usedplus_admin_section_market_dialogs" v="MARKKINAPAIKKA-DIALOGIT" eh="4c8988f5" />
+        <e k="usedplus_admin_section_service_dialogs" v="HUOLTODIALOGIT" eh="e407aa85" />
+        <e k="usedplus_admin_section_lease_dialogs" v="VUOKRAUSDIALOGIT" eh="479e552e" />
 
         <!-- Section Headers - Tab 5 (State) -->
-        <e k="usedplus_admin_section_debug" v="DEBUG MODE" eh="c7ee79cd" />
-        <e k="usedplus_admin_section_vehicle_state" v="VEHICLE STATE" eh="c077f4be" />
-        <e k="usedplus_admin_section_dna" v="SELLER DNA (Next Search)" eh="0e284459" />
-        <e k="usedplus_admin_section_quick_vehicle" v="QUICK VEHICLE SWAP" eh="01242f7d" />
+        <e k="usedplus_admin_section_debug" v="VIRHEENKORJAUSTILA" eh="c7ee79cd" />
+        <e k="usedplus_admin_section_vehicle_state" v="AJONEUVON TILA" eh="c077f4be" />
+        <e k="usedplus_admin_section_dna" v="MYYJÄN DNA (Seuraava haku)" eh="0e284459" />
+        <e k="usedplus_admin_section_quick_vehicle" v="NOPEA AJONEUVON VAIHTO" eh="01242f7d" />
 
         <!-- Buttons - Tab 1 (Malfunctions) -->
-        <e k="usedplus_admin_btn_stall" v="Stall" eh="a0f50ad4" />
-        <e k="usedplus_admin_btn_misfire" v="Misfire" eh="9b9bd091" />
-        <e k="usedplus_admin_btn_overheat" v="Overheat" eh="5d266c94" />
-        <e k="usedplus_admin_btn_runaway" v="Runaway" eh="dbdba743" />
-        <e k="usedplus_admin_btn_seizure" v="Seizure" eh="82d09d65" />
-        <e k="usedplus_admin_btn_cutout" v="Cutout" eh="330be5af" />
-        <e k="usedplus_admin_btn_surge_l" v="Surge (L)" eh="14a7255f" />
-        <e k="usedplus_admin_btn_surge_r" v="Surge (R)" eh="f9261697" />
-        <e k="usedplus_admin_btn_flat_l" v="Flat (L)" eh="427238a9" />
-        <e k="usedplus_admin_btn_flat_r" v="Flat (R)" eh="5a2301a8" />
-        <e k="usedplus_admin_btn_reset_cooldown" v="Reset CD" eh="d2165eba" />
-        <e k="usedplus_admin_btn_malf_info" v="Malf Info" eh="92badb26" />
-        <e k="usedplus_admin_btn_fix_all" v="Fix All" eh="1c7feed4" />
+        <e k="usedplus_admin_btn_stall" v="Pysäytä" eh="a0f50ad4" />
+        <e k="usedplus_admin_btn_misfire" v="Sytytyshäiriö" eh="9b9bd091" />
+        <e k="usedplus_admin_btn_overheat" v="Ylikuumene" eh="5d266c94" />
+        <e k="usedplus_admin_btn_runaway" v="Karkaa" eh="dbdba743" />
+        <e k="usedplus_admin_btn_seizure" v="Takerru" eh="82d09d65" />
+        <e k="usedplus_admin_btn_cutout" v="Katkos" eh="330be5af" />
+        <e k="usedplus_admin_btn_surge_l" v="Pulssi (V)" eh="14a7255f" />
+        <e k="usedplus_admin_btn_surge_r" v="Pulssi (O)" eh="f9261697" />
+        <e k="usedplus_admin_btn_flat_l" v="Puhjennut (V)" eh="427238a9" />
+        <e k="usedplus_admin_btn_flat_r" v="Puhjennut (O)" eh="5a2301a8" />
+        <e k="usedplus_admin_btn_reset_cooldown" v="Nollaa CD" eh="d2165eba" />
+        <e k="usedplus_admin_btn_malf_info" v="Toimintahäiriötiedot" eh="92badb26" />
+        <e k="usedplus_admin_btn_fix_all" v="Korjaa kaikki" eh="1c7feed4" />
 
         <!-- Buttons - Tab 2 (Spawning) -->
-        <e k="usedplus_admin_btn_spawn_obd" v="OBD Scanner" eh="96023669" />
-        <e k="usedplus_admin_btn_spawn_truck" v="Svc Truck" eh="083ff302" />
-        <e k="usedplus_admin_btn_spawn_parts" v="Parts Pallet" eh="ca04c55a" />
-        <e k="usedplus_admin_btn_trigger_discovery" v="Trigger Disc" eh="adaba831" />
-        <e k="usedplus_admin_btn_reset_discovery" v="Reset Disc" eh="f78bfb71" />
-        <e k="usedplus_admin_btn_discovery_status" v="Disc Status" eh="bce3ddd2" />
-        <e k="usedplus_admin_btn_spawn_lemon" v="Spawn Lemon" eh="13d3e048" />
-        <e k="usedplus_admin_btn_spawn_workhorse" v="Workhorse" eh="50cf5190" />
+        <e k="usedplus_admin_btn_spawn_obd" v="OBD-skanneri" eh="96023669" />
+        <e k="usedplus_admin_btn_spawn_truck" v="Huoltoauto" eh="083ff302" />
+        <e k="usedplus_admin_btn_spawn_parts" v="Varaosalava" eh="ca04c55a" />
+        <e k="usedplus_admin_btn_trigger_discovery" v="Laukaise löytö" eh="adaba831" />
+        <e k="usedplus_admin_btn_reset_discovery" v="Nollaa löytö" eh="f78bfb71" />
+        <e k="usedplus_admin_btn_discovery_status" v="Löydön tila" eh="bce3ddd2" />
+        <e k="usedplus_admin_btn_spawn_lemon" v="Luo sitruuna" eh="13d3e048" />
+        <e k="usedplus_admin_btn_spawn_workhorse" v="Työjuhta" eh="50cf5190" />
         <e k="usedplus_admin_btn_spawn_damaged" v="Damaged" eh="f7bd791a" />
         <e k="usedplus_admin_btn_paint_pristine" v="Pristine" eh="96af3470" />
         <e k="usedplus_admin_btn_paint_worn" v="Worn" eh="36cc503e" />
@@ -2450,22 +2456,22 @@
 
         <!-- Buttons - Tab 4 (Dialogs) -->
         <e k="usedplus_admin_btn_dlg_loan" v="Take Loan" eh="40fe67fa" />
-        <e k="usedplus_admin_btn_dlg_approved" v="Approved" eh="6f806341" />
+        <e k="usedplus_admin_btn_dlg_approved" v="Hyväksytty" eh="6f806341" />
         <e k="usedplus_admin_btn_dlg_credit" v="Credit" eh="0a90b1bc" />
-        <e k="usedplus_admin_btn_dlg_history" v="History" eh="16d2b386" />
+        <e k="usedplus_admin_btn_dlg_history" v="Historia" eh="16d2b386" />
         <e k="usedplus_admin_btn_dlg_repo" v="Repo" eh="0f74adf1" />
         <e k="usedplus_admin_btn_dlg_search" v="Search" eh="13348442" />
         <e k="usedplus_admin_btn_dlg_purchase" v="Purchase" eh="76b6a47a" />
         <e k="usedplus_admin_btn_dlg_negotiate" v="Negotiate" eh="e481ddec" />
         <e k="usedplus_admin_btn_dlg_seller" v="Seller Resp" eh="8ff31b45" />
         <e k="usedplus_admin_btn_dlg_obd" v="OBD" eh="9971dd97" />
-        <e k="usedplus_admin_btn_dlg_service" v="Svc Truck" eh="083ff302" />
-        <e k="usedplus_admin_btn_dlg_inspect" v="Inspect" eh="35a9dbe6" />
+        <e k="usedplus_admin_btn_dlg_service" v="Huoltoauto" eh="083ff302" />
+        <e k="usedplus_admin_btn_dlg_inspect" v="Tarkasta" eh="35a9dbe6" />
         <e k="usedplus_admin_btn_dlg_lease_end" v="Lease End" eh="da7801f1" />
         <e k="usedplus_admin_btn_dlg_lease_renew" v="Lease Renew" eh="7a794930" />
 
         <!-- Buttons - Tab 5 (State) -->
-        <e k="usedplus_admin_btn_toggle_debug" v="Toggle Debug" eh="e69cb6a0" />
+        <e k="usedplus_admin_btn_toggle_debug" v="Vaihda virheenkorjausta" eh="e69cb6a0" />
         <e k="usedplus_admin_btn_rel_100" v="Rel: 100%" eh="dfdb79d3" />
         <e k="usedplus_admin_btn_rel_50" v="Rel: 50%" eh="9ce7a0a2" />
         <e k="usedplus_admin_btn_rel_10" v="Rel: 10%" eh="54d6e770" />
@@ -2479,7 +2485,7 @@
 
         <!-- Info Labels -->
         <e k="usedplus_admin_current_balance" v="Current Balance:" eh="473e7f9e" />
-        <e k="usedplus_admin_current_credit" v="Credit Score:" eh="0199e1a3" />
+        <e k="usedplus_admin_current_credit" v="Luottopisteet:" eh="0199e1a3" />
 
         <!-- Status Messages -->
         <e k="usedplus_admin_status_ready" v="Ready. Select an action." eh="1ef35a42" />

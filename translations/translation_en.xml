@@ -622,7 +622,9 @@
         <e k="usedplus_credit_tooLowForLeasing" v="Credit score too low for leasing. Your score: %d (need %d+). Leasing requires better credit than financing." eh="50b91953" />
         <e k="usedplus_credit_tooLowForLand" v="Credit score too low (%d). Need %d+ to finance land." eh="78d73204" />
         <e k="usedplus_credit_tooLowForRepair" v="Credit score too low (%d). Need %d+ to finance repairs." eh="70147f73" />
+        <e k="usedplus_credit_tooLowForPlaceable" v="Building financing requires Excellent credit (%d+).\nYour credit: %d (%s)" eh="0fb63457" />
         <e k="usedplus_credit_needScore" v="Credit: %d (need %d)" eh="82790b98" />
+        <e k="usedplus_placeable_cannotLease" v="Buildings cannot be leased. Use Cash or Finance options." eh="e4fd7eed" />
 
         <!-- Minimum Financing Amount Messages -->
         <e k="usedplus_finance_amountTooSmall" v="Amount too small for financing. Minimum: %s" eh="3a90d8c2" />
@@ -685,6 +687,8 @@
         <e k="usedplus_notify_landPurchased" v="Purchased %s for %s" eh="ee85175a" />
         <e k="usedplus_notify_landFinanced" v="Financed %s - %s due today" eh="874037b7" />
         <e k="usedplus_notify_vehicleNowYours" v="Congratulations! %s is now yours!" eh="f9f453e9" />
+        <e k="usedplus_notify_placeableFinanced" v="Building Financed!\n%s\nDown: %s | Monthly: %s for %d years" eh="72ebd0e0" />
+        <e k="usedplus_notify_placeableSoldPayoff" v="Building sold. Loan payoff: %s" eh="78ac7164" />
 
         <!-- Success Notifications - Payments/Loans -->
         <e k="usedplus_notify_loanPaidOff" v="Loan paid off! Total: %s" eh="0ba73cba" />
@@ -781,6 +785,7 @@
         <e k="usedplus_preview_inspectionProgress" v="%s inspection in progress... ~%d hrs remaining" eh="911dfff0" />
         <e k="usedplus_preview_requestInspection" v="Request Inspection" eh="e555e8b2" />
         <e k="usedplus_preview_inProgress" v="In Progress..." eh="bd62582e" />
+        <e k="usedplus_preview_implementNoInspection" v="Inspections not available for non-powered implements. Buy as-is only." eh="620e727f" />
 
         <!-- ============================================== -->
         <!-- PHASE 1c: Land Purchase Dialog Notifications   -->
@@ -1004,6 +1009,7 @@
 
         <!-- Unified Purchase Dialog -->
         <e k="usedplus_up_title" v="Purchase Vehicle" eh="f5dc36d9" />
+        <e k="usedplus_up_title_placeable" v="Purchase Building" eh="6fd17a3d" />
         <e k="usedplus_up_sectionVehicle" v="VEHICLE" eh="e9fa318f" />
         <e k="usedplus_up_sectionMethod" v="PURCHASE METHOD" eh="f5f3c261" />
         <e k="usedplus_up_methodHelp" v="Choose how you want to pay: cash upfront, finance over time, or lease with lower payments." eh="83636102" />

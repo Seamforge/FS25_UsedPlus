@@ -72,7 +72,7 @@
         <e k="usedplus_search_duration" v="Тривалість" eh="e02d2ae0" />
         <e k="usedplus_search_success" v="Коефіцієнт успішності" eh="aac60ede" />
         <e k="usedplus_search_successChance" v="Шанс на успіх" eh="7ad5b765" />
-        <e k="usedplus_search_match" v="Якість відповідності" eh="91a4fcac" />
+        <e k="usedplus_search_match" v="Шанс відповідності якості" eh="da45c669" />
         <!-- REMOVED: usedplus_search_matchChance - duplicate of usedplus_search_match -->
         <e k="usedplus_search_description" v="опис" eh="b5a7adde" />
         <e k="usedplus_search_descLocal" v="Шукайте найближчих дилерів. Гарантована відповідь протягом 1 місяця, 2% вартості, 40% успіху." eh="1aef5e06" />
@@ -255,7 +255,7 @@
         <e k="input_USEDPLUS_INSPECT_VEHICLE" v="Огляньте транспортний засіб" eh="c06f09f1" />
         <e k="input_USEDPLUS_ACTIVATE_OBD" v="Використати OBD-сканер" eh="9666e26b" />
         <e k="input_USEDPLUS_TIRES" v="Шиномонтаж" eh="b0234f4e" />
-        <e k="input_USEDPLUS_SERVICE_TRUCK" v="Керування сервісною вантажівкою" />
+        <e k="input_USEDPLUS_SERVICE_TRUCK" v="Керування сервісною вантажівкою" eh="fad0e0f1" />
 
         <!--  Tooltips for Finance Dialog -->
         <e k="usedplus_finance_loanTerm_tooltip" v="Розподіліть виплати на 1-20 років. Довші терміни = менші щомісячні платежі, але більша загальна сплата відсотків." eh="e1170142" />
@@ -622,7 +622,9 @@
         <e k="usedplus_credit_tooLowForLeasing" v="Кредитний рейтинг занадто низький для лізингу. Ваша оцінка: %d (потрібно %d+). Лізинг вимагає кращого кредиту, ніж фінансування." eh="50b91953" />
         <e k="usedplus_credit_tooLowForLand" v="Занизький кредитний рейтинг (%d). Потрібен %d+ для фінансування землі." eh="78d73204" />
         <e k="usedplus_credit_tooLowForRepair" v="Занизький кредитний рейтинг (%d). Потрібен %d+ для фінансування ремонту." eh="70147f73" />
+        <e k="usedplus_credit_tooLowForPlaceable" v="Фінансування будівлі вимагає відмінного кредиту (%d+).\nВаш кредит: %d (%s)" eh="0fb63457" />
         <e k="usedplus_credit_needScore" v="Кредит: %d (потрібно %d)" eh="82790b98" />
+        <e k="usedplus_placeable_cannotLease" v="Будівлі не можна орендувати. Використовуйте варіанти готівки або фінансування." eh="e4fd7eed" />
 
         <!-- Minimum Financing Amount Messages -->
         <e k="usedplus_finance_amountTooSmall" v="Сума занадто мала для фінансування. Мінімум: %s" eh="3a90d8c2" />
@@ -680,6 +682,8 @@
         <e k="usedplus_notify_landPurchased" v="Придбано %s за %s" eh="ee85175a" />
         <e k="usedplus_notify_landFinanced" v="Профінансовано %s - ​​%s сьогодні" eh="874037b7" />
         <e k="usedplus_notify_vehicleNowYours" v="Щиро вітаю! %s тепер ваш!" eh="f9f453e9" />
+        <e k="usedplus_notify_placeableFinanced" v="Будівлю профінансовано!\n%s\nАванс: %s | Щомісяця: %s протягом %d років" eh="72ebd0e0" />
+        <e k="usedplus_notify_placeableSoldPayoff" v="Будівля продана. Виплата кредиту: %s" eh="78ac7164" />
 
         <!-- Success Notifications - Payments/Loans -->
         <e k="usedplus_notify_loanPaidOff" v="Кредит погашено! Всього: %s" eh="0ba73cba" />
@@ -770,6 +774,7 @@
     <e k="usedplus_preview_inspectionProgress" v="Огляд %s виконується... залишилось ~%d год" eh="911dfff0" />
     <e k="usedplus_preview_requestInspection" v="Замовити огляд" eh="e555e8b2" />
     <e k="usedplus_preview_inProgress" v="Виконується..." eh="bd62582e" />
+        <e k="usedplus_preview_implementNoInspection" v="[EN] Inspections not available for non-powered implements. Buy as-is only." eh="620e727f" />
 
         <!-- ============================================== -->
         <!-- PHASE 1c: Land Purchase Dialog Notifications   -->
@@ -949,8 +954,8 @@
         <e k="usedplus_tl_yourRate" v="Ваша відсоткова ставка:" eh="6387ae1b" />
         <e k="usedplus_tl_sectionCollateral" v="ОБРАТИ ЗАСТАВУ" eh="fdb2d731" />
         <e k="usedplus_tl_collateralHelp" v="Натисніть для перемикання активів як застави (показані лише вільні активи)" eh="618ea809" />
-        <e k="usedplus_tl_prev" v="&lt; Попер" eh="bddeed69" />
-        <e k="usedplus_tl_next" v="Далі &gt;" eh="4b0a535a" />
+        <e k="usedplus_tl_prev" v="&lt; Назад" eh="93819e8f" />
+        <e k="usedplus_tl_next" v="Вперед &gt;" eh="3ef61c7b" />
         <e k="usedplus_tl_selected" v="Вибрано:" eh="e8418a9e" />
         <e k="usedplus_tl_existingDebt" v="Наявний борг:" eh="e7d0c3fb" />
         <e k="usedplus_tl_maxLoan" v="МАКСИМАЛЬНА ПОЗИКА:" eh="f2517379" />
@@ -993,6 +998,7 @@
 
         <!-- Unified Purchase Dialog -->
         <e k="usedplus_up_title" v="Купити транспорт" eh="f5dc36d9" />
+        <e k="usedplus_up_title_placeable" v="Купити будівлю" eh="6fd17a3d" />
         <e k="usedplus_up_sectionVehicle" v="ТРАНСПОРТ" eh="e9fa318f" />
         <e k="usedplus_up_sectionMethod" v="СПОСІБ КУПІВЛІ" eh="f5f3c261" />
         <e k="usedplus_up_methodHelp" v="Виберіть спосіб оплати: готівкою наперед, фінансування в розстрочку або лізинг з меншими платежами." eh="83636102" />
@@ -1354,7 +1360,7 @@
         <e k="usedplus_fmf_vehiclesFound" v="Знайдено транспорту:" eh="047a7db6" />
         <e k="usedplus_fmf_feesSpent" v="Витрачено на збори:" eh="787c75fb" />
         <e k="usedplus_fmf_successRate" v="Відсоток успіху:" eh="346bdbd3" />
-        <e k="usedplus_fmf_totalSaved" v="Ринкова Вартість:" eh="7d88f3ce" />
+        <e k="usedplus_fmf_totalSaved" v="Ринкова Вартість:" eh="bf7d98b0" />
         <e k="usedplus_fmf_yourCreditScore" v="Ваш кредитний рейтинг" eh="5bbd5087" />
         <e k="usedplus_fmf_creditRanges" v="Кредитні діапазони:" eh="a4a7b278" />
         <e k="usedplus_fmf_tierExcellent" v="750-850 Відмінно -1,5%" eh="8d6d7463" />
@@ -2081,7 +2087,7 @@
     <e k="usedplus_electrical_seized" v="ВІДМОВА ЕЛЕКТРИКИ! Усі системи не працюють." eh="84b7514a" />
     <e k="usedplus_component_engine" v="Двигун" eh="7bfa3072" />
     <e k="usedplus_component_hydraulic" v="Гідравліка" eh="1de58ed3" />
-    <e k="usedplus_component_electrical" v="Електрична система" eh="7a1b3240" />
+    <e k="usedplus_component_electrical" v="Електрична система" eh="6f15be3d" />
     <e k="usedplus_component_fuel_system" v="Паливна система" eh="136d85c8" />
     <e k="usedplus_component_tires" v="Шини" eh="3fe2c06a" />
     <e k="usedplus_malfunction_seized" v="ЗАКЛИНИЛО" eh="cdceb6dd" />

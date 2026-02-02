@@ -19,683 +19,687 @@
 <l10n>
     <!--  Finance Dialog -->
     <elements>
-        <e k="usedplus_finance_title" v="Finance Vehicle" eh="6efef1bd" />
-        <e k="usedplus_finance_itemDetails" v="Vehicle Details" eh="fcb2575f" />
-        <e k="usedplus_finance_configuration" v="Finance Configuration" eh="0519e514" />
-        <e k="usedplus_finance_term" v="Loan Term" eh="5d1f9c9f" />
-        <e k="usedplus_finance_loanTerm" v="Loan Term (Years)" eh="a33ae292" />
-        <e k="usedplus_finance_downPayment" v="Down Payment" eh="46b7f6c5" />
-        <e k="usedplus_finance_cashBack" v="Cash Back" eh="bca1e43d" />
-        <e k="usedplus_finance_paymentPreview" v="Payment Preview" eh="a3f5396e" />
-        <e k="usedplus_finance_monthlyPayment" v="Monthly Payment" eh="c102e118" />
-        <e k="usedplus_finance_yearlyPayment" v="Yearly Payment" eh="b4080ee0" />
-        <e k="usedplus_finance_totalInterest" v="Total Interest" eh="8c4f3836" />
-        <e k="usedplus_finance_totalCost" v="Total Cost" eh="50e91dab" />
-        <e k="usedplus_finance_interestRate" v="Interest Rate" eh="0b6e9e85" />
-        <e k="usedplus_finance_creditScore" v="Credit Score" eh="ae61b052" />
-        <e k="usedplus_finance_creditRating" v="Credit Rating" eh="0c50a24a" />
-        <e k="usedplus_finance_important" v="Important Information" eh="e89802a1" />
-        <e k="usedplus_finance_ownershipTransfers" v="Ownership transfers immediately upon acceptance." eh="8dcaaa5b" />
-        <e k="usedplus_finance_sellAnytime" v="You may sell financed items at any time. Remaining balance must be paid from sale proceeds." eh="ce3d5807" />
+        <e k="usedplus_finance_title" v="차량 융자" eh="6efef1bd" />
+        <e k="usedplus_finance_itemDetails" v="차량 세부정보" eh="fcb2575f" />
+        <e k="usedplus_finance_configuration" v="융자 설정" eh="0519e514" />
+        <e k="usedplus_finance_term" v="대출 기간" eh="5d1f9c9f" />
+        <e k="usedplus_finance_loanTerm" v="대출 기간 (년)" eh="a33ae292" />
+        <e k="usedplus_finance_downPayment" v="계약금" eh="46b7f6c5" />
+        <e k="usedplus_finance_cashBack" v="캐시백" eh="bca1e43d" />
+        <e k="usedplus_finance_paymentPreview" v="납부액 미리보기" eh="a3f5396e" />
+        <e k="usedplus_finance_monthlyPayment" v="월 납부액" eh="c102e118" />
+        <e k="usedplus_finance_yearlyPayment" v="연간 납부액" eh="b4080ee0" />
+        <e k="usedplus_finance_totalInterest" v="총 이자" eh="8c4f3836" />
+        <e k="usedplus_finance_totalCost" v="총 비용" eh="50e91dab" />
+        <e k="usedplus_finance_interestRate" v="이자율" eh="0b6e9e85" />
+        <e k="usedplus_finance_creditScore" v="신용 점수" eh="ae61b052" />
+        <e k="usedplus_finance_creditRating" v="신용 등급" eh="0c50a24a" />
+        <e k="usedplus_finance_important" v="중요 정보" eh="e89802a1" />
+        <e k="usedplus_finance_ownershipTransfers" v="승인 즉시 소유권이 이전됩니다." eh="8dcaaa5b" />
+        <e k="usedplus_finance_sellAnytime" v="융자 품목은 언제든지 판매할 수 있습니다. 판매 대금에서 잔액을 납부해야 합니다." eh="ce3d5807" />
 
         <!--  Lease Dialog -->
-        <e k="usedplus_lease_title" v="Lease Vehicle" eh="beae83e4" />
-        <e k="usedplus_lease_vehicleDetails" v="Vehicle Details" eh="fcb2575f" />
-        <e k="usedplus_lease_configuration" v="Lease Configuration" eh="07e07e72" />
-        <e k="usedplus_lease_term" v="Lease Term (Years)" eh="13fd4421" />
-        <e k="usedplus_lease_downPayment" v="Down Payment" eh="46b7f6c5" />
-        <e k="usedplus_lease_residualValue" v="Residual Value (Balloon Payment)" eh="458fd3b9" />
-        <e k="usedplus_lease_paymentPreview" v="Payment Preview" eh="a3f5396e" />
-        <e k="usedplus_lease_monthlyPayment" v="Monthly Payment" eh="c102e118" />
-        <e k="usedplus_lease_yearlyPayment" v="Yearly Payment" eh="b4080ee0" />
-        <e k="usedplus_lease_totalCost" v="Total Lease Cost" eh="993f980c" />
-        <e k="usedplus_lease_interestRate" v="Interest Rate" eh="0b6e9e85" />
-        <e k="usedplus_lease_creditScore" v="Credit Score" eh="ae61b052" />
-        <e k="usedplus_lease_important" v="Important Lease Information" eh="767b599f" />
+        <e k="usedplus_lease_title" v="차량 임대" eh="beae83e4" />
+        <e k="usedplus_lease_vehicleDetails" v="차량 세부정보" eh="fcb2575f" />
+        <e k="usedplus_lease_configuration" v="임대 설정" eh="07e07e72" />
+        <e k="usedplus_lease_term" v="임대 기간 (년)" eh="13fd4421" />
+        <e k="usedplus_lease_downPayment" v="계약금" eh="46b7f6c5" />
+        <e k="usedplus_lease_residualValue" v="잔존 가치 (최종 납부금)" eh="458fd3b9" />
+        <e k="usedplus_lease_paymentPreview" v="납부액 미리보기" eh="a3f5396e" />
+        <e k="usedplus_lease_monthlyPayment" v="월 납부액" eh="c102e118" />
+        <e k="usedplus_lease_yearlyPayment" v="연간 납부액" eh="b4080ee0" />
+        <e k="usedplus_lease_totalCost" v="총 임대 비용" eh="993f980c" />
+        <e k="usedplus_lease_interestRate" v="이자율" eh="0b6e9e85" />
+        <e k="usedplus_lease_creditScore" v="신용 점수" eh="ae61b052" />
+        <e k="usedplus_lease_important" v="임대 중요 정보" eh="767b599f" />
         <!-- REMOVED: usedplus_lease_warningReturn, warningDamage, returnWarning, damageWarning - unused duplicates -->
-        <e k="usedplus_lease_endOfTerm" v="End of Lease" eh="35022911" />
-        <e k="usedplus_lease_buyoutPrice" v="Buyout Price" eh="8d6be5af" />
-        <e k="usedplus_lease_totalInterest" v="Total Interest" eh="8c4f3836" />
+        <e k="usedplus_lease_endOfTerm" v="임대 종료" eh="35022911" />
+        <e k="usedplus_lease_buyoutPrice" v="인수 가격" eh="8d6be5af" />
+        <e k="usedplus_lease_totalInterest" v="총 이자" eh="8c4f3836" />
 
         <!--  Used Search Dialog -->
-        <e k="usedplus_search_title" v="Search for Used Equipment" eh="7c093c6a" />
-        <e k="usedplus_search_itemDetails" v="Item Details" eh="6df16946" />
-        <e k="usedplus_search_searching" v="Searching For" eh="7706fe6a" />
-        <e k="usedplus_search_newPrice" v="New Price:" eh="8def7435" />
-        <e k="usedplus_search_selectTier" v="Select Search Tier" eh="fe21c40b" />
-        <e k="usedplus_search_tierDescription" v="Choose your search scope. Higher tiers cost more and take longer, but have better success rates and match quality." eh="0e9cafdd" />
-        <e k="usedplus_search_tierSelection" v="Search Tier Selection" eh="a2527868" />
+        <e k="usedplus_search_title" v="중고 장비 검색" eh="7c093c6a" />
+        <e k="usedplus_search_itemDetails" v="품목 세부정보" eh="6df16946" />
+        <e k="usedplus_search_searching" v="검색 중" eh="7706fe6a" />
+        <e k="usedplus_search_newPrice" v="신품 가격:" eh="8def7435" />
+        <e k="usedplus_search_selectTier" v="검색 단계 선택" eh="fe21c40b" />
+        <e k="usedplus_search_tierDescription" v="검색 범위를 선택하세요. 상위 단계는 비용과 시간이 더 들지만 성공률과 품질이 더 좋습니다." eh="0e9cafdd" />
+        <e k="usedplus_search_tierSelection" v="검색 단계 선택" eh="a2527868" />
         <!-- Consolidated: removed usedplus_search_local/regional/national - use _tier* versions -->
-        <e k="usedplus_search_tierLocal" v="Local Search" eh="e1ea5bc1" />
-        <e k="usedplus_search_tierRegional" v="Regional Search" eh="722cc490" />
-        <e k="usedplus_search_tierNational" v="National Search" eh="c967061f" />
-        <e k="usedplus_search_cost" v="Search Cost" eh="510c1fa6" />
-        <e k="usedplus_search_duration" v="Duration" eh="e02d2ae0" />
-        <e k="usedplus_search_success" v="Success Rate" eh="aac60ede" />
-        <e k="usedplus_search_successChance" v="Success Chance" eh="7ad5b765" />
-        <e k="usedplus_search_match" v="Chance to Match Quality" eh="da45c669" />
+        <e k="usedplus_search_tierLocal" v="지역 검색" eh="e1ea5bc1" />
+        <e k="usedplus_search_tierRegional" v="광역 검색" eh="722cc490" />
+        <e k="usedplus_search_tierNational" v="전국 검색" eh="c967061f" />
+        <e k="usedplus_search_cost" v="검색 비용" eh="510c1fa6" />
+        <e k="usedplus_search_duration" v="소요 시간" eh="e02d2ae0" />
+        <e k="usedplus_search_success" v="성공률" eh="aac60ede" />
+        <e k="usedplus_search_successChance" v="성공 확률" eh="7ad5b765" />
+        <e k="usedplus_search_match" v="품질 매칭 확률" eh="da45c669" />
         <!-- REMOVED: usedplus_search_matchChance - duplicate of usedplus_search_match -->
-        <e k="usedplus_search_description" v="Description" eh="b5a7adde" />
-        <e k="usedplus_search_descLocal" v="Search nearby dealers. Guaranteed 1 month response, 2% cost, 40% success rate." eh="1aef5e06" />
-        <e k="usedplus_search_descRegional" v="Search regional network. 1-3 months, 6% cost, 70% success rate." eh="d0d8016e" />
-        <e k="usedplus_search_descNational" v="Search nationwide. 2-6 months, 12% cost, 85% success rate." eh="71992615" />
-        <e k="usedplus_search_qualitySelection" v="Desired Quality" eh="f70a51e0" />
-        <e k="usedplus_search_qualityDescription" v="Lower quality = cheaper price but more repairs needed" eh="f991384c" />
-        <e k="usedplus_search_confirmTitle" v="Search Initiated" eh="e42ba949" />
+        <e k="usedplus_search_description" v="설명" eh="b5a7adde" />
+        <e k="usedplus_search_descLocal" v="인근 딜러 검색. 1개월 보장, 2% 비용, 40% 성공률." eh="1aef5e06" />
+        <e k="usedplus_search_descRegional" v="광역 네트워크 검색. 1-3개월, 6% 비용, 70% 성공률." eh="d0d8016e" />
+        <e k="usedplus_search_descNational" v="전국 검색. 2-6개월, 12% 비용, 85% 성공률." eh="71992615" />
+        <e k="usedplus_search_qualitySelection" v="희망 품질" eh="f70a51e0" />
+        <e k="usedplus_search_qualityDescription" v="낮은 품질 = 저렴한 가격이지만 더 많은 수리 필요" eh="f991384c" />
+        <e k="usedplus_search_confirmTitle" v="검색 시작됨" eh="e42ba949" />
 
         <!-- v1.5.0: Multi-find Agent Model -->
-        <e k="usedplus_search_retainer" v="Agent Retainer" eh="22908ab1" />
-        <e k="usedplus_search_commission" v="Finder's Fee" eh="1130f6f3" />
-        <e k="usedplus_search_commissionInfo" v="%d%% added to vehicle price" eh="e6462a3c" />
-        <e k="usedplus_search_monthProgress" v="Month %d of %d" eh="b2af1b34" />
-        <e k="usedplus_search_vehiclesFound" v="%d vehicle(s) found" eh="69e744df" />
-        <e k="usedplus_search_monthlyChance" v="%d%% per month" eh="c5458c12" />
-        <e k="usedplus_search_foundVehicles" v="FOUND VEHICLES" eh="4a8990d1" />
-        <e k="usedplus_search_noVehiclesYet" v="No vehicles found yet" eh="812b14d0" />
-        <e k="usedplus_search_inspectVehicle" v="Inspect" eh="35a9dbe6" />
-        <e k="usedplus_search_buyVehicle" v="Buy" eh="831a28f1" />
-        <e k="usedplus_search_declineVehicle" v="Decline" eh="0d362728" />
-        <e k="usedplus_notify_vehicleFound" v="Your agent found a %s!" eh="bf9782f6" />
-        <e k="usedplus_notify_searchComplete" v="Search complete: %d vehicle(s) found" eh="dbd32f05" />
+        <e k="usedplus_search_retainer" v="중개인 착수금" eh="22908ab1" />
+        <e k="usedplus_search_commission" v="중개 수수료" eh="1130f6f3" />
+        <e k="usedplus_search_commissionInfo" v="차량 가격에 %d%% 추가" eh="e6462a3c" />
+        <e k="usedplus_search_monthProgress" v="%d/%d 개월" eh="b2af1b34" />
+        <e k="usedplus_search_vehiclesFound" v="%d대 발견" eh="69e744df" />
+        <e k="usedplus_search_monthlyChance" v="매월 %d%%" eh="c5458c12" />
+        <e k="usedplus_search_foundVehicles" v="발견된 차량" eh="4a8990d1" />
+        <e k="usedplus_search_noVehiclesYet" v="아직 차량을 찾지 못했습니다" eh="812b14d0" />
+        <e k="usedplus_search_inspectVehicle" v="검사" eh="35a9dbe6" />
+        <e k="usedplus_search_buyVehicle" v="구매" eh="831a28f1" />
+        <e k="usedplus_search_declineVehicle" v="거절" eh="0d362728" />
+        <e k="usedplus_notify_vehicleFound" v="중개인이 %s을(를) 찾았습니다!" eh="bf9782f6" />
+        <e k="usedplus_notify_searchComplete" v="검색 완료: %d대 발견" eh="dbd32f05" />
 
         <!-- Confirmation Dialog -->
-        <e k="usedplus_confirmation_title" v="Confirmation" eh="f4d1ea47" />
+        <e k="usedplus_confirmation_title" v="확인" eh="f4d1ea47" />
 
         <!--  Finance Manager Frame (InGameMenu page) -->
-        <e k="usedplus_inGameMenuTitle" v="Used Plus - Finance &amp; Searches" eh="093c7b9e" />
-        <e k="usedplus_activeFinanceDeals" v="Active Finance Deals:" eh="5cf7fac5" />
-        <e k="usedplus_activeSearches" v="Active Searches:" eh="274e131d" />
-        <e k="usedplus_creditScore" v="Credit Score:" eh="0199e1a3" />
-        <e k="usedplus_manager_title" v="Finance Manager" eh="76701fe5" />
-        <e k="usedplus_manager_totalFinanced" v="Total Financed" eh="223e5677" />
-        <e k="usedplus_manager_monthlyObligations" v="Monthly Obligations" eh="398fa99a" />
-        <e k="usedplus_manager_creditScore" v="Credit Score" eh="ae61b052" />
-        <e k="usedplus_manager_assetValue" v="Asset Value" eh="5482d5a2" />
-        <e k="usedplus_manager_debtRatio" v="Debt Ratio" eh="93581501" />
-        <e k="usedplus_manager_activeDeals" v="Active Deals" eh="5bf89e7b" />
-        <e k="usedplus_manager_type" v="Type" eh="a1fa2777" />
-        <e k="usedplus_manager_item" v="Item" eh="7d74f3b9" />
-        <e k="usedplus_manager_balance" v="Balance" eh="99a808d8" />
-        <e k="usedplus_manager_monthly" v="Monthly Payment" eh="c102e118" />
-        <e k="usedplus_manager_progress" v="Progress" eh="46b5f8c5" />
-        <e k="usedplus_manager_actions" v="Actions" eh="06df3300" />
-        <e k="usedplus_manager_noDeals" v="No active finance or lease deals." eh="880134fe" />
-        <e k="usedplus_manager_helpText" v="Finance vehicles from the shop (F key). Search for used equipment (V key). Payments are automatically deducted monthly." eh="ea889bec" />
-        <e k="usedplus_vanillaLoan" v="Bank Credit Line" eh="ae4b0f92" />
-        <e k="usedplus_loanOpen" v="Open" eh="c3bf447e" />
-        <e k="usedplus_loanNoTerm" v="No Term" eh="8dbfc606" />
-        <e k="usedplus_loanInterestOnly" v="Interest" eh="920beb5d" />
+        <e k="usedplus_inGameMenuTitle" v="Used Plus - 금융 및 검색" eh="093c7b9e" />
+        <e k="usedplus_activeFinanceDeals" v="활성 융자 거래:" eh="5cf7fac5" />
+        <e k="usedplus_activeSearches" v="활성 검색:" eh="274e131d" />
+        <e k="usedplus_creditScore" v="신용 점수:" eh="0199e1a3" />
+        <e k="usedplus_manager_title" v="금융 관리자" eh="76701fe5" />
+        <e k="usedplus_manager_totalFinanced" v="총 융자액" eh="223e5677" />
+        <e k="usedplus_manager_monthlyObligations" v="월 납부 의무" eh="398fa99a" />
+        <e k="usedplus_manager_creditScore" v="신용 점수" eh="ae61b052" />
+        <e k="usedplus_manager_assetValue" v="자산 가치" eh="5482d5a2" />
+        <e k="usedplus_manager_debtRatio" v="부채 비율" eh="93581501" />
+        <e k="usedplus_manager_activeDeals" v="활성 거래" eh="5bf89e7b" />
+        <e k="usedplus_manager_type" v="유형" eh="a1fa2777" />
+        <e k="usedplus_manager_item" v="품목" eh="7d74f3b9" />
+        <e k="usedplus_manager_balance" v="잔액" eh="99a808d8" />
+        <e k="usedplus_manager_monthly" v="월 납부액" eh="c102e118" />
+        <e k="usedplus_manager_progress" v="진행률" eh="46b5f8c5" />
+        <e k="usedplus_manager_actions" v="작업" eh="06df3300" />
+        <e k="usedplus_manager_noDeals" v="활성 융자 또는 임대 거래가 없습니다." eh="880134fe" />
+        <e k="usedplus_manager_helpText" v="상점에서 차량을 융자하세요 (F키). 중고 장비를 검색하세요 (V키). 납부액은 매월 자동으로 차감됩니다." eh="ea889bec" />
+        <e k="usedplus_vanillaLoan" v="은행 신용 한도" eh="ae4b0f92" />
+        <e k="usedplus_loanOpen" v="열림" eh="c3bf447e" />
+        <e k="usedplus_loanNoTerm" v="기간 없음" eh="8dbfc606" />
+        <e k="usedplus_loanInterestOnly" v="이자" eh="920beb5d" />
 
         <!--  Finance Detail Frame -->
-        <e k="usedplus_detail_dealInfo" v="Deal Information" eh="442669bc" />
-        <e k="usedplus_detail_itemName" v="Item" eh="7d74f3b9" />
-        <e k="usedplus_detail_dealType" v="Type" eh="a1fa2777" />
-        <e k="usedplus_detail_originalPrice" v="Original Price" eh="8bd19c0a" />
-        <e k="usedplus_detail_downPayment" v="Down Payment" eh="46b7f6c5" />
-        <e k="usedplus_detail_amountFinanced" v="Amount Financed" eh="e285131a" />
-        <e k="usedplus_detail_interestRate" v="Interest Rate" eh="0b6e9e85" />
-        <e k="usedplus_detail_term" v="Term" eh="cf5f3091" />
-        <e k="usedplus_detail_startDate" v="Start Date" eh="db3794c7" />
-        <e k="usedplus_detail_paymentStatus" v="Payment Status" eh="2ea78fad" />
-        <e k="usedplus_detail_currentBalance" v="Current Balance" eh="91b496c3" />
-        <e k="usedplus_detail_principalPaid" v="Principal Paid" eh="dbc03b11" />
-        <e k="usedplus_detail_interestPaid" v="Interest Paid" eh="000ffd10" />
-        <e k="usedplus_detail_remainingPrincipal" v="Remaining Principal" eh="d6f9e1f5" />
-        <e k="usedplus_detail_projectedInterest" v="Projected Interest (if no prepayment)" eh="30c8b124" />
-        <e k="usedplus_detail_makePayment" v="Make Additional Payment" eh="baa79ea4" />
-        <e k="usedplus_detail_paymentAmount" v="Payment Amount" eh="5bbe29e8" />
-        <e k="usedplus_detail_paymentSummary" v="Payment Summary" eh="0ca2b553" />
-        <e k="usedplus_detail_paymentTotal" v="Total Payment" eh="4935ede3" />
-        <e k="usedplus_detail_toPrincipal" v="To Principal" eh="5253f523" />
-        <e k="usedplus_detail_toInterest" v="To Interest" eh="d9e82220" />
-        <e k="usedplus_detail_newBalance" v="New Balance" eh="17d35991" />
-        <e k="usedplus_detail_prepaymentPenalty" v="Prepayment Penalty" eh="057cca0e" />
+        <e k="usedplus_detail_dealInfo" v="거래 정보" eh="442669bc" />
+        <e k="usedplus_detail_itemName" v="품목" eh="7d74f3b9" />
+        <e k="usedplus_detail_dealType" v="유형" eh="a1fa2777" />
+        <e k="usedplus_detail_originalPrice" v="원래 가격" eh="8bd19c0a" />
+        <e k="usedplus_detail_downPayment" v="계약금" eh="46b7f6c5" />
+        <e k="usedplus_detail_amountFinanced" v="융자 금액" eh="e285131a" />
+        <e k="usedplus_detail_interestRate" v="이자율" eh="0b6e9e85" />
+        <e k="usedplus_detail_term" v="기간" eh="cf5f3091" />
+        <e k="usedplus_detail_startDate" v="시작 날짜" eh="db3794c7" />
+        <e k="usedplus_detail_paymentStatus" v="납부 상태" eh="2ea78fad" />
+        <e k="usedplus_detail_currentBalance" v="현재 잔액" eh="91b496c3" />
+        <e k="usedplus_detail_principalPaid" v="납부된 원금" eh="dbc03b11" />
+        <e k="usedplus_detail_interestPaid" v="납부된 이자" eh="000ffd10" />
+        <e k="usedplus_detail_remainingPrincipal" v="잔여 원금" eh="d6f9e1f5" />
+        <e k="usedplus_detail_projectedInterest" v="예상 이자 (조기 상환 없을 경우)" eh="30c8b124" />
+        <e k="usedplus_detail_makePayment" v="추가 납부" eh="baa79ea4" />
+        <e k="usedplus_detail_paymentAmount" v="납부 금액" eh="5bbe29e8" />
+        <e k="usedplus_detail_paymentSummary" v="납부 요약" eh="0ca2b553" />
+        <e k="usedplus_detail_paymentTotal" v="총 납부액" eh="4935ede3" />
+        <e k="usedplus_detail_toPrincipal" v="원금으로" eh="5253f523" />
+        <e k="usedplus_detail_toInterest" v="이자로" eh="d9e82220" />
+        <e k="usedplus_detail_newBalance" v="새로운 잔액" eh="17d35991" />
+        <e k="usedplus_detail_prepaymentPenalty" v="조기 상환 수수료" eh="057cca0e" />
 
         <!--  Land Finance Dialog -->
-        <e k="usedplus_landFinance_title" v="Finance Farmland" eh="4a5ab59c" />
-        <e k="usedplus_landFinance_fieldDetails" v="Field Details" eh="cb124d38" />
-        <e k="usedplus_landFinance_configuration" v="Finance Configuration" eh="0519e514" />
-        <e k="usedplus_landFinance_term" v="Loan Term (Years)" eh="a33ae292" />
-        <e k="usedplus_landFinance_downPayment" v="Down Payment" eh="46b7f6c5" />
-        <e k="usedplus_landFinance_paymentPreview" v="Payment Preview" eh="a3f5396e" />
-        <e k="usedplus_landFinance_monthlyPayment" v="Monthly Payment" eh="c102e118" />
-        <e k="usedplus_landFinance_yearlyPayment" v="Yearly Payment" eh="b4080ee0" />
-        <e k="usedplus_landFinance_totalInterest" v="Total Interest" eh="8c4f3836" />
-        <e k="usedplus_landFinance_totalCost" v="Total Cost" eh="50e91dab" />
-        <e k="usedplus_landFinance_interestRate" v="Interest Rate" eh="0b6e9e85" />
-        <e k="usedplus_landFinance_lowerRates" v="Land financing typically offers lower interest rates." eh="6a9be1a3" />
-        <e k="usedplus_landFinance_creditScore" v="Credit Score" eh="ae61b052" />
-        <e k="usedplus_landFinance_important" v="Important Information" eh="e89802a1" />
-        <e k="usedplus_landFinance_ownershipTransfers" v="Land ownership transfers immediately. You can use the field right away." eh="6bd793be" />
-        <e k="usedplus_landFinance_seizureWarning" v="Warning: Failure to make monthly payments may result in land seizure." eh="9e692b4f" />
+        <e k="usedplus_landFinance_title" v="농지 융자" eh="4a5ab59c" />
+        <e k="usedplus_landFinance_fieldDetails" v="경작지 세부정보" eh="cb124d38" />
+        <e k="usedplus_landFinance_configuration" v="융자 설정" eh="0519e514" />
+        <e k="usedplus_landFinance_term" v="대출 기간 (년)" eh="a33ae292" />
+        <e k="usedplus_landFinance_downPayment" v="계약금" eh="46b7f6c5" />
+        <e k="usedplus_landFinance_paymentPreview" v="납부액 미리보기" eh="a3f5396e" />
+        <e k="usedplus_landFinance_monthlyPayment" v="월 납부액" eh="c102e118" />
+        <e k="usedplus_landFinance_yearlyPayment" v="연간 납부액" eh="b4080ee0" />
+        <e k="usedplus_landFinance_totalInterest" v="총 이자" eh="8c4f3836" />
+        <e k="usedplus_landFinance_totalCost" v="총 비용" eh="50e91dab" />
+        <e k="usedplus_landFinance_interestRate" v="이자율" eh="0b6e9e85" />
+        <e k="usedplus_landFinance_lowerRates" v="토지 융자는 일반적으로 더 낮은 이자율을 제공합니다." eh="6a9be1a3" />
+        <e k="usedplus_landFinance_creditScore" v="신용 점수" eh="ae61b052" />
+        <e k="usedplus_landFinance_important" v="중요 정보" eh="e89802a1" />
+        <e k="usedplus_landFinance_ownershipTransfers" v="토지 소유권은 즉시 이전됩니다. 경작지를 바로 사용할 수 있습니다." eh="6bd793be" />
+        <e k="usedplus_landFinance_seizureWarning" v="경고: 월 납부를 하지 않으면 토지가 압류될 수 있습니다." eh="9e692b4f" />
 
         <!--  Buttons -->
-        <e k="usedplus_button_acceptFinance" v="Accept Finance" eh="dac8a2e3" />
-        <e k="usedplus_button_acceptLease" v="Accept Lease" eh="8230fec9" />
-        <e k="usedplus_button_startSearch" v="Start Search" eh="39d69ff6" />
-        <e k="usedplus_button_viewDetail" v="View Details" eh="5d5cd268" />
-        <e k="usedplus_button_makePayment" v="Make Payment" eh="772005c5" />
-        <e k="usedplus_button_endLeaseEarly" v="End Lease Early" eh="57913dd8" />
-        <e k="usedplus_button_purchaseUsed" v="Purchase Used" eh="b2e3f11c" />
-        <e k="usedplus_button_finance" v="Finance" eh="c482980d" />
-        <e k="usedplus_button_financeLand" v="Finance Land" eh="638732e0" />
-        <e k="usedplus_button_leaseLand" v="Lease Land" eh="ec34a2a6" />
-        <e k="usedplus_button_lease" v="Lease" eh="47c96b08" />
-        <e k="usedplus_button_searchUsed" v="Search Used" eh="11533c61" />
+        <e k="usedplus_button_acceptFinance" v="융자 수락" eh="dac8a2e3" />
+        <e k="usedplus_button_acceptLease" v="임대 수락" eh="8230fec9" />
+        <e k="usedplus_button_startSearch" v="검색 시작" eh="39d69ff6" />
+        <e k="usedplus_button_viewDetail" v="세부정보 보기" eh="5d5cd268" />
+        <e k="usedplus_button_makePayment" v="납부하기" eh="772005c5" />
+        <e k="usedplus_button_endLeaseEarly" v="조기 임대 종료" eh="57913dd8" />
+        <e k="usedplus_button_purchaseUsed" v="중고 구매" eh="b2e3f11c" />
+        <e k="usedplus_button_finance" v="융자" eh="c482980d" />
+        <e k="usedplus_button_financeLand" v="토지 융자" eh="638732e0" />
+        <e k="usedplus_button_leaseLand" v="토지 임대" eh="ec34a2a6" />
+        <e k="usedplus_button_lease" v="임대" eh="47c96b08" />
+        <e k="usedplus_button_searchUsed" v="중고 검색" eh="11533c61" />
 
         <!--  Notifications (use %s for money - pass g_i18n:formatMoney() values) -->
-        <e k="usedplus_notification_dealComplete" v="%s has been paid off!" eh="5d829f21" />
-        <e k="usedplus_notification_searchSuccess" v="Used %s found!" eh="ef123353" />
-        <e k="usedplus_notification_searchFailed" v="Search for %s failed. No matches found." eh="fc5652a6" />
-        <e k="usedplus_searchFailed_title" v="Search Complete" eh="e92d4ab1" />
-        <e k="usedplus_searchFailed_message" v="Your agent was unable to find a %s matching your criteria. The search fee is non-refundable. You may start a new search if desired." eh="f866d76d" />
-        <e k="usedplus_notification_searchStarted" v="Searching for %s. Expected completion: %d days." eh="1b04e427" />
-        <e k="usedplus_notification_searchCancelled" v="Search for %s cancelled. No refund." eh="e5f294f4" />
-        <e k="usedplus_notification_vehicleFound" v="Used %s (%s) found for %s!" eh="97804817" />
-        <e k="usedplus_notification_dealPaidOff" v="%s has been paid off in full!" eh="2d9db7b8" />
-        <e k="usedplus_notification_paymentProcessed" v="Payment of %s processed for %s" eh="81123b2d" />
-        <e k="usedplus_notification_leaseTerminated" v="Lease for %s terminated. Penalty: %s" eh="b59ab283" />
-        <e k="usedplus_notification_leaseTerminatedNoPenalty" v="Lease for %s terminated. No penalty." eh="07e1dcd5" />
-        <e k="usedplus_notification_missedLeasePayment" v="MISSED LEASE PAYMENT: Unable to pay %s for %s" eh="1efc41eb" />
-        <e k="usedplus_notification_leaseDamagePenalty" v="Lease damage penalty for %s: %s" eh="618cc31d" />
-        <e k="usedplus_notification_leaseComplete" v="Lease complete! %s has been returned." eh="d78a78c7" />
-        <e k="usedplus_notification_dealPaidFromSale" v="%s sold. Finance balance of %s paid from proceeds." eh="8ef8395a" />
+        <e k="usedplus_notification_dealComplete" v="%s이(가) 상환되었습니다!" eh="5d829f21" />
+        <e k="usedplus_notification_searchSuccess" v="중고 %s을(를) 찾았습니다!" eh="ef123353" />
+        <e k="usedplus_notification_searchFailed" v="%s 검색 실패. 일치하는 항목이 없습니다." eh="fc5652a6" />
+        <e k="usedplus_searchFailed_title" v="검색 완료" eh="e92d4ab1" />
+        <e k="usedplus_searchFailed_message" v="중개인이 귀하의 기준에 맞는 %s을(를) 찾지 못했습니다. 검색 수수료는 환불되지 않습니다. 원하시면 새로운 검색을 시작할 수 있습니다." eh="f866d76d" />
+        <e k="usedplus_notification_searchStarted" v="%s 검색 중. 예상 완료: %d일." eh="1b04e427" />
+        <e k="usedplus_notification_searchCancelled" v="%s 검색 취소됨. 환불 없음." eh="e5f294f4" />
+        <e k="usedplus_notification_vehicleFound" v="중고 %s (%s)을(를) %s에 찾았습니다!" eh="97804817" />
+        <e k="usedplus_notification_dealPaidOff" v="%s이(가) 완전히 상환되었습니다!" eh="2d9db7b8" />
+        <e k="usedplus_notification_paymentProcessed" v="%s 납부가 %s에 대해 처리되었습니다" eh="81123b2d" />
+        <e k="usedplus_notification_leaseTerminated" v="%s 임대 종료됨. 위약금: %s" eh="b59ab283" />
+        <e k="usedplus_notification_leaseTerminatedNoPenalty" v="%s 임대 종료됨. 위약금 없음." eh="07e1dcd5" />
+        <e k="usedplus_notification_missedLeasePayment" v="임대 납부 미납: %s에 대한 %s을(를) 납부할 수 없습니다" eh="1efc41eb" />
+        <e k="usedplus_notification_leaseDamagePenalty" v="%s에 대한 임대 손상 위약금: %s" eh="618cc31d" />
+        <e k="usedplus_notification_leaseComplete" v="임대 완료! %s이(가) 반환되었습니다." eh="d78a78c7" />
+        <e k="usedplus_notification_dealPaidFromSale" v="%s 판매됨. %s의 융자 잔액이 판매 대금에서 납부되었습니다." eh="8ef8395a" />
 
         <!--  Errors (use %s for money - pass g_i18n:formatMoney() values) -->
-        <e k="usedplus_error_insufficientFunds" v="Insufficient funds. Required: %s" eh="e212e92e" />
-        <e k="usedplus_error_searchFailed" v="Failed to start search. Please try again." eh="1fdff9c2" />
-        <e k="usedplus_error_insufficientFundsTermination" v="Insufficient funds for lease termination. Required: %s" eh="b089241b" />
-        <e k="usedplus_error_invalidDeal" v="Invalid deal. Please contact support." eh="5a9d61df" />
-        <e k="usedplus_error_cannotSellLeasedVehicle" v="Cannot sell leased vehicle. End lease first or wait until lease expires." eh="056547d3" />
-        <e k="usedplus_error_insufficientSalePrice" v="Cannot sell. Remaining balance (%s) exceeds sale price (%s)." eh="bb69fad7" />
-        <e k="usedplus_error_maxSaleListings" v="Maximum %d vehicles can be listed for sale at once. Wait for a sale to complete or cancel a listing." eh="a5dd26b0" />
+        <e k="usedplus_error_insufficientFunds" v="자금 부족. 필요 금액: %s" eh="e212e92e" />
+        <e k="usedplus_error_searchFailed" v="검색 시작 실패. 다시 시도하세요." eh="1fdff9c2" />
+        <e k="usedplus_error_insufficientFundsTermination" v="임대 종료 자금 부족. 필요 금액: %s" eh="b089241b" />
+        <e k="usedplus_error_invalidDeal" v="유효하지 않은 거래. 지원팀에 문의하세요." eh="5a9d61df" />
+        <e k="usedplus_error_cannotSellLeasedVehicle" v="임대 차량은 판매할 수 없습니다. 먼저 임대를 종료하거나 임대 기간이 만료될 때까지 기다리세요." eh="056547d3" />
+        <e k="usedplus_error_insufficientSalePrice" v="판매 불가. 잔액(%s)이 판매 가격(%s)을 초과합니다." eh="bb69fad7" />
+        <e k="usedplus_error_maxSaleListings" v="한 번에 최대 %d대의 차량만 판매 등록할 수 있습니다. 판매가 완료되거나 등록을 취소할 때까지 기다리세요." eh="a5dd26b0" />
 
         <!--  Credit Score Ratings -->
-        <e k="usedplus_credit_excellent" v="Excellent" eh="fcc2d28a" />
-        <e k="usedplus_credit_good" v="Good" eh="0c6ad70b" />
-        <e k="usedplus_credit_fair" v="Fair" eh="f7f20cf0" />
-        <e k="usedplus_credit_poor" v="Poor" eh="0e94d017" />
+        <e k="usedplus_credit_excellent" v="우수" eh="fcc2d28a" />
+        <e k="usedplus_credit_good" v="양호" eh="0c6ad70b" />
+        <e k="usedplus_credit_fair" v="보통" eh="f7f20cf0" />
+        <e k="usedplus_credit_poor" v="불량" eh="0e94d017" />
 
         <!--  Equipment Condition Tiers -->
-        <e k="usedplus_condition_critical" v="Critical" eh="278d01e5" />
-        <e k="usedplus_condition_poor" v="Poor" eh="0e94d017" />
-        <e k="usedplus_condition_any" v="Any" eh="ed36a1ef" />
-        <e k="usedplus_condition_fair" v="Fair" eh="f7f20cf0" />
-        <e k="usedplus_condition_good" v="Good" eh="0c6ad70b" />
-        <e k="usedplus_condition_excellent" v="Excellent" eh="fcc2d28a" />
-        <e k="usedplus_condition_poor_desc" v="Bargain bin - may be inoperable or need extensive repairs" eh="01dfd975" />
-        <e k="usedplus_condition_any_desc" v="Cheapest working - may need significant repairs" eh="4f93d3f3" />
+        <e k="usedplus_condition_critical" v="심각" eh="278d01e5" />
+        <e k="usedplus_condition_poor" v="불량" eh="0e94d017" />
+        <e k="usedplus_condition_any" v="모두" eh="ed36a1ef" />
+        <e k="usedplus_condition_fair" v="보통" eh="f7f20cf0" />
+        <e k="usedplus_condition_good" v="양호" eh="0c6ad70b" />
+        <e k="usedplus_condition_excellent" v="우수" eh="fcc2d28a" />
+        <e k="usedplus_condition_poor_desc" v="저가 상품 - 작동하지 않거나 대규모 수리가 필요할 수 있음" eh="01dfd975" />
+        <e k="usedplus_condition_any_desc" v="최저가 작동 - 상당한 수리가 필요할 수 있음" eh="4f93d3f3" />
 
         <!--  Deal Types -->
-        <e k="usedplus_dealType_finance" v="Finance" eh="c482980d" />
-        <e k="usedplus_dealType_lease" v="Lease" eh="47c96b08" />
+        <e k="usedplus_dealType_finance" v="융자" eh="c482980d" />
+        <e k="usedplus_dealType_lease" v="임대" eh="47c96b08" />
 
         <!--  Item Types -->
-        <e k="usedplus_itemType_vehicle" v="Vehicle" eh="d6af9c1e" />
-        <e k="usedplus_itemType_land" v="Farmland" eh="d13a7835" />
-        <e k="usedplus_itemType_placeable" v="Placeable" eh="a50f608e" />
+        <e k="usedplus_itemType_vehicle" v="차량" eh="d6af9c1e" />
+        <e k="usedplus_itemType_land" v="농지" eh="d13a7835" />
+        <e k="usedplus_itemType_placeable" v="설치물" eh="a50f608e" />
 
         <!--  Used Vehicle Generations -->
-        <e k="usedplus_generation_recent" v="Recent" eh="dae52b80" />
-        <e k="usedplus_generation_midage" v="Mid-age" eh="414353d1" />
-        <e k="usedplus_generation_old" v="Old" eh="c7268757" />
+        <e k="usedplus_generation_recent" v="최근" eh="dae52b80" />
+        <e k="usedplus_generation_midage" v="중간 연식" eh="414353d1" />
+        <e k="usedplus_generation_old" v="오래됨" eh="c7268757" />
 
         <!--  Help Text -->
-        <e k="usedplus_help_creditScore" v="Credit score affects your interest rate. Improve it by maintaining a low debt-to-asset ratio." eh="a3a769c7" />
-        <e k="usedplus_help_downPayment" v="Higher down payment reduces monthly payments and may lower interest rate." eh="b8e7782b" />
-        <e k="usedplus_help_cashBack" v="Cash back is deducted from down payment. Increases amount financed." eh="0ff6b424" />
-        <e k="usedplus_help_prepayment" v="You can pay off your loan early to save on interest. Prepayment penalties may apply." eh="f8455d1a" />
-        <e k="usedplus_help_leaseDamage" v="Keep leased vehicles in good condition to avoid return penalties." eh="f99c02f9" />
+        <e k="usedplus_help_creditScore" v="신용 점수가 이자율에 영향을 미칩니다. 낮은 부채 대 자산 비율을 유지하여 개선하세요." eh="a3a769c7" />
+        <e k="usedplus_help_downPayment" v="높은 계약금은 월 납부액을 줄이고 이자율을 낮출 수 있습니다." eh="b8e7782b" />
+        <e k="usedplus_help_cashBack" v="캐시백은 계약금에서 차감됩니다. 융자 금액이 증가합니다." eh="0ff6b424" />
+        <e k="usedplus_help_prepayment" v="조기 상환으로 이자를 절약할 수 있습니다. 조기 상환 수수료가 적용될 수 있습니다." eh="f8455d1a" />
+        <e k="usedplus_help_leaseDamage" v="반환 위약금을 피하려면 임대 차량을 양호한 상태로 유지하세요." eh="f99c02f9" />
 
         <!--  Menu Integration -->
-        <e k="usedplus_menu_financeManager" v="Finance Manager" eh="76701fe5" />
-        <e k="usedplus_action_openFinanceManager" v="Open Finance Manager" eh="806bb897" />
-        <e k="usedplus_action_searchUsed" v="Search Used Equipment" eh="77397317" />
-        <e k="input_USEDPLUS_OPEN_FINANCE_MANAGER" v="Open Finance Manager" eh="806bb897" />
-        <e k="input_USEDPLUS_SEARCH_USED" v="Search Used Equipment" eh="77397317" />
-        <e k="input_USEDPLUS_INSPECT_VEHICLE" v="Inspect Vehicle" eh="c06f09f1" />
-        <e k="input_USEDPLUS_ACTIVATE_OBD" v="Use OBD Scanner" eh="9666e26b" />
-        <e k="input_USEDPLUS_TIRES" v="Tire Service" eh="b0234f4e" />
-        <e k="input_USEDPLUS_SERVICE_TRUCK" v="Service Truck Control" eh="fad0e0f1" />
+        <e k="usedplus_menu_financeManager" v="금융 관리자" eh="76701fe5" />
+        <e k="usedplus_action_openFinanceManager" v="금융 관리자 열기" eh="806bb897" />
+        <e k="usedplus_action_searchUsed" v="중고 장비 검색" eh="77397317" />
+        <e k="input_USEDPLUS_OPEN_FINANCE_MANAGER" v="금융 관리자 열기" eh="806bb897" />
+        <e k="input_USEDPLUS_SEARCH_USED" v="중고 장비 검색" eh="77397317" />
+        <e k="input_USEDPLUS_INSPECT_VEHICLE" v="차량 검사" eh="c06f09f1" />
+        <e k="input_USEDPLUS_ACTIVATE_OBD" v="OBD 스캐너 사용" eh="9666e26b" />
+        <e k="input_USEDPLUS_TIRES" v="타이어 서비스" eh="b0234f4e" />
+        <e k="input_USEDPLUS_SERVICE_TRUCK" v="서비스 트럭 제어" eh="fad0e0f1" />
 
         <!--  Tooltips for Finance Dialog -->
-        <e k="usedplus_finance_loanTerm_tooltip" v="Spread payments over 1-20 years. Longer terms = smaller monthly payments but more total interest paid." eh="e1170142" />
-        <e k="usedplus_finance_downPayment_tooltip" v="Pay upfront to reduce loan amount. Higher down payment = lower interest rate and monthly payment. Range: 0-50%." eh="cb530b47" />
-        <e k="usedplus_finance_cashBack_tooltip" v="Receive cash immediately (added to your loan). Useful for operating expenses, but increases monthly payments and total cost." eh="dc2693cd" />
-        <e k="usedplus_finance_monthlyPayment_tooltip" v="Deducted from your farm account automatically every in-game month. Ensure you have enough money!" eh="c0ee3f8c" />
-        <e k="usedplus_finance_totalInterest_tooltip" v="Extra cost of financing vs. paying cash. This is what you pay for spreading payments over time." eh="93fba715" />
-        <e k="usedplus_finance_totalCost_tooltip" v="Purchase price + total interest = what you'll actually pay over the entire loan term." eh="52be56aa" />
-        <e k="usedplus_finance_interestRate_tooltip" v="Annual percentage charged on your loan. Based on credit score and down payment. Lower is better!" eh="d2b214cf" />
-        <e k="usedplus_finance_creditScore_tooltip" v="Your farm's financial rating (300-850). Higher score = lower rates. Improve by keeping debt low and paying on time." eh="63bcbfcf" />
+        <e k="usedplus_finance_loanTerm_tooltip" v="1-20년에 걸쳐 납부를 분산하세요. 긴 기간 = 작은 월 납부액이지만 더 많은 총 이자 납부." eh="e1170142" />
+        <e k="usedplus_finance_downPayment_tooltip" v="대출 금액을 줄이기 위해 선불하세요. 높은 계약금 = 낮은 이자율과 월 납부액. 범위: 0-50%." eh="cb530b47" />
+        <e k="usedplus_finance_cashBack_tooltip" v="즉시 현금을 받습니다 (대출에 추가됨). 운영 비용에 유용하지만 월 납부액과 총 비용이 증가합니다." eh="dc2693cd" />
+        <e k="usedplus_finance_monthlyPayment_tooltip" v="매 게임 내 월마다 농장 계좌에서 자동으로 차감됩니다. 충분한 자금이 있는지 확인하세요!" eh="c0ee3f8c" />
+        <e k="usedplus_finance_totalInterest_tooltip" v="현금 납부 대비 융자의 추가 비용. 시간에 걸쳐 납부를 분산하는 대가입니다." eh="93fba715" />
+        <e k="usedplus_finance_totalCost_tooltip" v="구매 가격 + 총 이자 = 전체 대출 기간 동안 실제로 납부할 금액." eh="52be56aa" />
+        <e k="usedplus_finance_interestRate_tooltip" v="대출에 대한 연간 백분율. 신용 점수와 계약금을 기반으로 합니다. 낮을수록 좋습니다!" eh="d2b214cf" />
+        <e k="usedplus_finance_creditScore_tooltip" v="귀하의 농장 금융 등급(300-850). 높은 점수 = 낮은 요율. 부채를 낮게 유지하고 정시에 납부하여 개선하세요." eh="63bcbfcf" />
 
         <!--  Tooltips for Lease Dialog -->
-        <e k="usedplus_lease_term_tooltip" v="Lease for 1-5 years, then return vehicle or pay residual value to keep it. Shorter terms = higher monthly payments." eh="dad3d80d" />
-        <e k="usedplus_lease_downPayment_tooltip" v="Upfront payment. Lower maximum (20%) than financing because you don't own the vehicle yet." eh="eee20887" />
-        <e k="usedplus_lease_residualValue_tooltip" v="Amount to pay at lease end if you want to keep the vehicle. Based on estimated depreciation. Return vehicle instead to pay nothing extra (if in good condition)." eh="828cc532" />
-        <e k="usedplus_lease_monthlyPayment_tooltip" v="Deducted automatically each month during lease term. Lower than finance payments because you don't pay full vehicle value." eh="a251e99c" />
-        <e k="usedplus_lease_totalCost_tooltip" v="Down payment + all monthly payments. Does NOT include residual value if you choose to buy at end." eh="dc10c085" />
-        <e k="usedplus_lease_interestRate_tooltip" v="Annual percentage for lease. Higher than finance rates (5.5% vs 4.5%) because of higher lender risk." eh="f4c00279" />
-        <e k="usedplus_lease_damage_tooltip" v="At lease end: damage >10% or wear >15% = penalties up to 30% of vehicle price. Keep vehicle maintained!" eh="01999ed8" />
+        <e k="usedplus_lease_term_tooltip" v="1-5년 동안 임대한 후 차량을 반환하거나 잔존 가치를 납부하여 유지하세요. 짧은 기간 = 높은 월 납부액." eh="dad3d80d" />
+        <e k="usedplus_lease_downPayment_tooltip" v="선불 납부. 아직 차량을 소유하지 않았기 때문에 융자보다 낮은 최대(20%)." eh="eee20887" />
+        <e k="usedplus_lease_residualValue_tooltip" v="차량을 유지하려면 임대 종료 시 납부할 금액. 예상 감가상각을 기반으로 합니다. 추가 비용 없이 차량을 반환하세요 (양호한 상태일 경우)." eh="828cc532" />
+        <e k="usedplus_lease_monthlyPayment_tooltip" v="임대 기간 동안 매월 자동으로 차감됩니다. 전체 차량 가치를 납부하지 않기 때문에 융자 납부액보다 낮습니다." eh="a251e99c" />
+        <e k="usedplus_lease_totalCost_tooltip" v="계약금 + 모든 월 납부액. 종료 시 구매를 선택하면 잔존 가치는 포함되지 않습니다." eh="dc10c085" />
+        <e k="usedplus_lease_interestRate_tooltip" v="임대에 대한 연간 백분율. 대출자 위험이 높기 때문에 융자 요율보다 높습니다 (5.5% vs 4.5%)." eh="f4c00279" />
+        <e k="usedplus_lease_damage_tooltip" v="임대 종료 시: 손상 >10% 또는 마모 >15% = 차량 가격의 최대 30% 위약금. 차량을 유지 관리하세요!" eh="01999ed8" />
 
         <!--  Tooltips for Used Search Dialog -->
-        <e k="usedplus_search_local_tooltip" v="Search nearby dealers. Guaranteed 1 month response, 2% cost, 40% success. Fast and cheap." eh="9b08bf3e" />
-        <e k="usedplus_search_regional_tooltip" v="Search regional network. 1-3 months, 6% cost, 70% success. Good balance for most searches." eh="e5535f88" />
-        <e k="usedplus_search_national_tooltip" v="Search nationwide. 2-6 months, 12% cost, 85% success. Best for rare equipment." eh="0717b1d3" />
-        <e k="usedplus_search_cost_tooltip" v="Upfront fee deducted immediately. Non-refundable even if search fails." eh="88816596" />
-        <e k="usedplus_search_duration_tooltip" v="In-game months until results. You'll get a notification when search completes." eh="9c9f3c15" />
-        <e k="usedplus_search_successChance_tooltip" v="Probability of finding this type of equipment in used condition at all." eh="a25aade9" />
+        <e k="usedplus_search_local_tooltip" v="인근 딜러 검색. 1개월 응답 보장, 2% 비용, 40% 성공. 빠르고 저렴합니다." eh="9b08bf3e" />
+        <e k="usedplus_search_regional_tooltip" v="광역 네트워크 검색. 1-3개월, 6% 비용, 70% 성공. 대부분의 검색에 좋은 균형." eh="e5535f88" />
+        <e k="usedplus_search_national_tooltip" v="전국 검색. 2-6개월, 12% 비용, 85% 성공. 희귀 장비에 최적." eh="0717b1d3" />
+        <e k="usedplus_search_cost_tooltip" v="즉시 차감되는 선불 수수료. 검색 실패 시에도 환불되지 않습니다." eh="88816596" />
+        <e k="usedplus_search_duration_tooltip" v="결과가 나올 때까지 게임 내 월. 검색 완료 시 알림을 받습니다." eh="9c9f3c15" />
+        <e k="usedplus_search_successChance_tooltip" v="이 유형의 장비를 중고 상태로 찾을 확률." eh="a25aade9" />
 
         <!--  Tooltips for Finance Manager -->
-        <e k="usedplus_manager_totalFinanced_tooltip" v="Total amount you still owe across all loans and leases. Keep below your asset value!" eh="7c15778c" />
-        <e k="usedplus_manager_monthlyObligations_tooltip" v="Total deducted from your account each month. Ensure you always have enough cash flow!" eh="c5cee5ec" />
-        <e k="usedplus_manager_creditScore_tooltip" v="300-850 rating. 750+ = Excellent, 650-749 = Good, 550-649 = Fair, &lt;550 = Poor. Affects all future interest rates!" eh="4b1c2269" />
-        <e k="usedplus_manager_assetValue_tooltip" v="Combined value of vehicles, equipment, fields, and buildings you own. Should be higher than your debt!" eh="64ef61f3" />
-        <e k="usedplus_manager_debtRatio_tooltip" v="Total Debt ÷ Asset Value. Keep below 30% for excellent credit. Above 50% hurts your score significantly!" eh="041f390c" />
+        <e k="usedplus_manager_totalFinanced_tooltip" v="모든 대출 및 임대에 대해 아직 빚진 총액. 자산 가치 이하로 유지하세요!" eh="7c15778c" />
+        <e k="usedplus_manager_monthlyObligations_tooltip" v="매월 계좌에서 차감되는 총액. 항상 충분한 현금 흐름이 있는지 확인하세요!" eh="c5cee5ec" />
+        <e k="usedplus_manager_creditScore_tooltip" v="300-850 등급. 750+ = 우수, 650-749 = 양호, 550-649 = 보통, &lt;550 = 불량. 모든 미래 이자율에 영향을 미칩니다!" eh="4b1c2269" />
+        <e k="usedplus_manager_assetValue_tooltip" v="소유한 차량, 장비, 경작지 및 건물의 총 가치. 부채보다 높아야 합니다!" eh="64ef61f3" />
+        <e k="usedplus_manager_debtRatio_tooltip" v="총 부채 ÷ 자산 가치. 우수한 신용을 위해 30% 이하로 유지하세요. 50% 이상은 점수를 크게 손상시킵니다!" eh="041f390c" />
 
         <!--  Tooltips for Finance Detail Frame -->
-        <e k="usedplus_detail_principalPaid_tooltip" v="Portion of original loan you've paid back. This reduces your balance." eh="b4d4023c" />
-        <e k="usedplus_detail_interestPaid_tooltip" v="Extra cost you've paid so far for borrowing money. This does NOT reduce your balance." eh="f0c23fa4" />
-        <e k="usedplus_detail_projectedInterest_tooltip" v="Total interest you'll pay if you continue minimum monthly payments. Pay extra now to reduce this!" eh="d5d18292" />
-        <e k="usedplus_detail_prepaymentPenalty_tooltip" v="One-time fee for paying off early (usually 1-3% of balance). Charged because lender loses future interest income." eh="aff5ffdd" />
-        <e k="usedplus_detail_currentBalance_tooltip" v="Amount you still owe (principal only). Paying extra reduces this faster!" eh="d789bc3a" />
-        <e k="usedplus_detail_paymentSplit_tooltip" v="Shows how your payment divides: Principal (pays down balance) vs Interest (borrowing cost)." eh="4c8d291b" />
+        <e k="usedplus_detail_principalPaid_tooltip" v="상환한 원래 대출의 일부. 잔액을 줄입니다." eh="b4d4023c" />
+        <e k="usedplus_detail_interestPaid_tooltip" v="돈을 빌리기 위해 지금까지 납부한 추가 비용. 잔액을 줄이지 않습니다." eh="f0c23fa4" />
+        <e k="usedplus_detail_projectedInterest_tooltip" v="최소 월 납부액을 계속하면 납부할 총 이자. 이를 줄이려면 지금 추가로 납부하세요!" eh="d5d18292" />
+        <e k="usedplus_detail_prepaymentPenalty_tooltip" v="조기 상환을 위한 일회성 수수료 (일반적으로 잔액의 1-3%). 대출자가 미래 이자 수입을 잃기 때문에 부과됩니다." eh="aff5ffdd" />
+        <e k="usedplus_detail_currentBalance_tooltip" v="아직 빚진 금액 (원금만). 추가로 납부하면 더 빨리 줄어듭니다!" eh="d789bc3a" />
+        <e k="usedplus_detail_paymentSplit_tooltip" v="납부액이 어떻게 나뉘는지 보여줍니다: 원금 (잔액 감소) vs 이자 (차입 비용)." eh="4c8d291b" />
 
         <!--  Take Loan Dialog -->
-        <e k="usedplus_loan_title" v="Take Out a Loan" eh="f50c2071" />
-        <e k="usedplus_loan_configuration" v="LOAN CONFIGURATION" eh="6c055726" />
-        <e k="usedplus_loan_paymentPreview" v="PAYMENT PREVIEW" eh="3890682c" />
-        <e k="usedplus_loan_accept" v="Accept Loan" eh="ad5f835e" />
-        <e k="usedplus_loan_creditInfo" v="Your credit score determines your maximum borrowing limit and interest rate." eh="2af2776a" />
-        <e k="usedplus_loan_collateralInfo" v="Collateral is calculated from 50% of vehicle values and 60% of land values." eh="4a5857f7" />
-        <e k="usedplus_loan_success" v="Loan approved! %s deposited to your account." eh="aefc6532" />
-        <e k="usedplus_loan_denied" v="Loan denied. Insufficient collateral or poor credit." eh="c49dcbcb" />
-        <e k="usedplus_loan_monthlyPayment" v="Monthly Payment" eh="c102e118" />
-        <e k="usedplus_loan_totalInterest" v="Total Interest" eh="8c4f3836" />
-        <e k="usedplus_loan_totalRepayment" v="Total Repayment" eh="78b2ff2b" />
+        <e k="usedplus_loan_title" v="대출 받기" eh="f50c2071" />
+        <e k="usedplus_loan_configuration" v="대출 설정" eh="6c055726" />
+        <e k="usedplus_loan_paymentPreview" v="납부액 미리보기" eh="3890682c" />
+        <e k="usedplus_loan_accept" v="대출 수락" eh="ad5f835e" />
+        <e k="usedplus_loan_creditInfo" v="귀하의 신용 점수가 최대 차입 한도와 이자율을 결정합니다." eh="2af2776a" />
+        <e k="usedplus_loan_collateralInfo" v="담보는 차량 가치의 50%와 토지 가치의 60%로 계산됩니다." eh="4a5857f7" />
+        <e k="usedplus_loan_success" v="대출 승인됨! %s이(가) 계좌에 입금되었습니다." eh="aefc6532" />
+        <e k="usedplus_loan_denied" v="대출 거절됨. 담보 부족 또는 불량 신용." eh="c49dcbcb" />
+        <e k="usedplus_loan_monthlyPayment" v="월 납부액" eh="c102e118" />
+        <e k="usedplus_loan_totalInterest" v="총 이자" eh="8c4f3836" />
+        <e k="usedplus_loan_totalRepayment" v="총 상환액" eh="78b2ff2b" />
         <!-- MOVED: usedplus_button_takeLoan to Common Button Labels section -->
 
         <!--  Repair Dialog -->
-        <e k="usedplus_repair_title" v="Vehicle Service" eh="40546bfb" />
-        <e k="usedplus_repair_title_mechanical" v="Mechanical Repair" eh="60a0d54f" />
-        <e k="usedplus_repair_title_repaint" v="Repaint Vehicle" eh="d5b4d6be" />
-        <e k="usedplus_repair_mechanical" v="MECHANICAL REPAIR" eh="6294bbee" />
-        <e k="usedplus_repair_cosmetic" v="PAINT &amp; COSMETIC" eh="d111819f" />
-        <e k="usedplus_repair_slider" v="Repair Amount" eh="0dda5ee8" />
-        <e k="usedplus_repair_cost" v="Repair Cost" eh="6f0504d5" />
-        <e k="usedplus_repair_after" v="Condition After" eh="d6d75451" />
-        <e k="usedplus_repair_payCash" v="Pay Cash" eh="e490310b" />
-        <e k="usedplus_repair_finance" v="Finance Repair" eh="70ef80a4" />
-        <e k="usedplus_repair_success" v="Repair complete! %s repaired." eh="fecc6480" />
-        <e k="usedplus_repaint_slider" v="Repaint Amount" eh="bf64833d" />
-        <e k="usedplus_repaint_cost" v="Repaint Cost" eh="b994cb4e" />
-        <e k="usedplus_button_repairVehicle" v="Repair Vehicle" eh="9592bc0d" />
-        <e k="usedplus_button_repaint" v="Repaint" eh="1d0b7dd4" />
-        <e k="usedplus_button_tradeIn" v="Trade-In" eh="d9a572a1" />
-        <e k="usedplus_repair_financeSuccess" v="Repair financed! %s over %d months at %s/month" eh="ac520447" />
-        <e k="usedplus_repair_noRepairsNeeded" v="This vehicle does not need repairs." eh="58c85fca" />
+        <e k="usedplus_repair_title" v="차량 서비스" eh="40546bfb" />
+        <e k="usedplus_repair_title_mechanical" v="기계 수리" eh="60a0d54f" />
+        <e k="usedplus_repair_title_repaint" v="차량 재도색" eh="d5b4d6be" />
+        <e k="usedplus_repair_mechanical" v="기계 수리" eh="6294bbee" />
+        <e k="usedplus_repair_cosmetic" v="도장 및 미용" eh="d111819f" />
+        <e k="usedplus_repair_slider" v="수리 금액" eh="0dda5ee8" />
+        <e k="usedplus_repair_cost" v="수리 비용" eh="6f0504d5" />
+        <e k="usedplus_repair_after" v="수리 후 상태" eh="d6d75451" />
+        <e k="usedplus_repair_payCash" v="현금 납부" eh="e490310b" />
+        <e k="usedplus_repair_finance" v="수리 융자" eh="70ef80a4" />
+        <e k="usedplus_repair_success" v="수리 완료! %s 수리됨." eh="fecc6480" />
+        <e k="usedplus_repaint_slider" v="재도색 양" eh="bf64833d" />
+        <e k="usedplus_repaint_cost" v="재도색 비용" eh="b994cb4e" />
+        <e k="usedplus_button_repairVehicle" v="차량 수리" eh="9592bc0d" />
+        <e k="usedplus_button_repaint" v="재도색" eh="1d0b7dd4" />
+        <e k="usedplus_button_tradeIn" v="교환" eh="d9a572a1" />
+        <e k="usedplus_repair_financeSuccess" v="수리 융자됨! %s, %d개월에 걸쳐 월 %s" eh="ac520447" />
+        <e k="usedplus_repair_noRepairsNeeded" v="이 차량은 수리가 필요하지 않습니다." eh="58c85fca" />
 
         <!-- ESC Menu Tabs -->
-        <e k="usedplus_tab_finances" v="Finances" eh="46d0ae63" />
-        <e k="usedplus_tab_searches" v="Searches" eh="490fae83" />
-        <e k="usedplus_tab_stats" v="Statistics" eh="c33e404a" />
+        <e k="usedplus_tab_finances" v="금융" eh="46d0ae63" />
+        <e k="usedplus_tab_searches" v="검색" eh="490fae83" />
+        <e k="usedplus_tab_stats" v="통계" eh="c33e404a" />
 
         <!-- Searches Tab -->
-        <e k="usedplus_searches_active" v="Active Searches" eh="f33a3913" />
-        <e k="usedplus_searches_totalCost" v="Total Search Cost" eh="1bd59244" />
+        <e k="usedplus_searches_active" v="활성 검색" eh="f33a3913" />
+        <e k="usedplus_searches_totalCost" v="총 검색 비용" eh="1bd59244" />
 
         <!-- Stats Tab -->
-        <e k="usedplus_stats_creditInfo" v="Based on assets vs debt ratio" eh="f07db642" />
-        <e k="usedplus_stats_lifetime" v="Lifetime Statistics" eh="727103d4" />
-        <e k="usedplus_stats_totalFinanced" v="Total Financed (All Time)" eh="772f294e" />
-        <e k="usedplus_stats_totalInterest" v="Total Interest Paid" eh="ee7cd19e" />
-        <e k="usedplus_stats_searchesCompleted" v="Searches Completed" eh="20cde964" />
-        <e k="usedplus_stats_searchesSuccessful" v="Searches Successful" eh="9b0bb3f7" />
+        <e k="usedplus_stats_creditInfo" v="자산 대 부채 비율 기반" eh="f07db642" />
+        <e k="usedplus_stats_lifetime" v="평생 통계" eh="727103d4" />
+        <e k="usedplus_stats_totalFinanced" v="총 융자액 (전체 기간)" eh="772f294e" />
+        <e k="usedplus_stats_totalInterest" v="총 납부 이자" eh="ee7cd19e" />
+        <e k="usedplus_stats_searchesCompleted" v="완료된 검색" eh="20cde964" />
+        <e k="usedplus_stats_searchesSuccessful" v="성공한 검색" eh="9b0bb3f7" />
 
         <!--  Credit History -->
-        <e k="usedplus_creditHistory_title" v="Credit History" eh="317d0ae5" />
-        <e k="usedplus_creditHistory_paymentOnTime" v="Payment On Time" eh="40b0a85e" />
-        <e k="usedplus_creditHistory_paymentMissed" v="Missed Payment" eh="1c3f3184" />
-        <e k="usedplus_creditHistory_dealPaidOff" v="Loan Paid Off" eh="d75739c7" />
-        <e k="usedplus_creditHistory_newDebt" v="New Finance" eh="516d9124" />
-        <e k="usedplus_creditHistory_loanTaken" v="Cash Loan Taken" eh="42a815ac" />
-        <e k="usedplus_creditHistory_excellent" v="Excellent Credit Achieved" eh="00e0a79c" />
-        <e k="usedplus_creditHistory_trend" v="Score Trend" eh="c93fabeb" />
-        <e k="usedplus_creditHistory_trendUp" v="Trending Up" eh="b308896e" />
-        <e k="usedplus_creditHistory_trendDown" v="Trending Down" eh="39e2d7ed" />
-        <e k="usedplus_creditHistory_stable" v="Stable" eh="fa3aff3c" />
+        <e k="usedplus_creditHistory_title" v="신용 내역" eh="317d0ae5" />
+        <e k="usedplus_creditHistory_paymentOnTime" v="정시 납부" eh="40b0a85e" />
+        <e k="usedplus_creditHistory_paymentMissed" v="납부 누락" eh="1c3f3184" />
+        <e k="usedplus_creditHistory_dealPaidOff" v="대출 상환됨" eh="d75739c7" />
+        <e k="usedplus_creditHistory_newDebt" v="새 융자" eh="516d9124" />
+        <e k="usedplus_creditHistory_loanTaken" v="현금 대출 받음" eh="42a815ac" />
+        <e k="usedplus_creditHistory_excellent" v="우수 신용 달성" eh="00e0a79c" />
+        <e k="usedplus_creditHistory_trend" v="점수 추세" eh="c93fabeb" />
+        <e k="usedplus_creditHistory_trendUp" v="상승 추세" eh="b308896e" />
+        <e k="usedplus_creditHistory_trendDown" v="하락 추세" eh="39e2d7ed" />
+        <e k="usedplus_creditHistory_stable" v="안정적" eh="fa3aff3c" />
 
         <!--  Trade-In System -->
-        <e k="usedplus_tradeIn_title" v="Trade-In Vehicle" eh="f5f0c421" />
-        <e k="usedplus_tradeIn_select" v="Select a vehicle to trade in:" eh="4d5697ad" />
-        <e k="usedplus_tradeIn_value" v="Trade-In Value" eh="a62d3415" />
-        <e k="usedplus_tradeIn_brandBonus" v="Same Brand Bonus (+10%)" eh="5775348c" />
-        <e k="usedplus_tradeIn_noVehicles" v="No vehicles eligible for trade-in" eh="0ffbcb88" />
-        <e k="usedplus_tradeIn_confirm" v="Apply Trade-In" eh="5d265e23" />
-        <e k="usedplus_tradeIn_skip" v="No Trade-In" eh="d28a6989" />
-        <e k="usedplus_tradeIn_help" v="Trade-in value is 85% of sell price. Same-brand purchases get a 10% bonus." eh="acd55aef" />
-        <e k="usedplus_tradeIn_applied" v="Trade-in applied: %s credit" eh="d58037e6" />
-        <e k="usedplus_tradeIn_financed" v="Financed vehicles cannot be traded in" eh="b99f5ae1" />
+        <e k="usedplus_tradeIn_title" v="차량 교환" eh="f5f0c421" />
+        <e k="usedplus_tradeIn_select" v="교환할 차량을 선택하세요:" eh="4d5697ad" />
+        <e k="usedplus_tradeIn_value" v="교환 가치" eh="a62d3415" />
+        <e k="usedplus_tradeIn_brandBonus" v="동일 브랜드 보너스 (+10%)" eh="5775348c" />
+        <e k="usedplus_tradeIn_noVehicles" v="교환 가능한 차량 없음" eh="0ffbcb88" />
+        <e k="usedplus_tradeIn_confirm" v="교환 적용" eh="5d265e23" />
+        <e k="usedplus_tradeIn_skip" v="교환 없음" eh="d28a6989" />
+        <e k="usedplus_tradeIn_help" v="교환 가치는 판매 가격의 85%입니다. 동일 브랜드 구매 시 10% 보너스를 받습니다." eh="acd55aef" />
+        <e k="usedplus_tradeIn_applied" v="교환 적용됨: %s 크레딧" eh="d58037e6" />
+        <e k="usedplus_tradeIn_financed" v="융자된 차량은 교환할 수 없습니다" eh="b99f5ae1" />
 
         <!--  Financial Dashboard -->
-        <e k="usedplus_dashboard_title" v="Financial Dashboard" eh="475b3fca" />
-        <e k="usedplus_dashboard_creditScore" v="Credit Score" eh="ae61b052" />
-        <e k="usedplus_dashboard_obligations" v="Monthly Obligations" eh="398fa99a" />
-        <e k="usedplus_dashboard_debtRatio" v="Debt-to-Asset Ratio" eh="325f67e0" />
-        <e k="usedplus_dashboard_upcoming" v="Upcoming Payments" eh="f994fae4" />
-        <e k="usedplus_dashboard_history" v="Recent Credit Activity" eh="6b32a5cb" />
-        <e k="usedplus_dashboard_statistics" v="Lifetime Statistics" eh="727103d4" />
-        <e k="usedplus_dashboard_equipment" v="Equipment" eh="9ccda2d5" />
-        <e k="usedplus_dashboard_land" v="Land" eh="512ef7c6" />
-        <e k="usedplus_dashboard_loans" v="Loans" eh="64e109fb" />
-        <e k="usedplus_dashboard_total" v="Total" eh="96b01412" />
-        <e k="usedplus_dashboard_assets" v="Total Assets" eh="7f0b6dfb" />
-        <e k="usedplus_dashboard_debt" v="Total Debt" eh="f0648c99" />
-        <e k="usedplus_dashboard_ratio" v="Ratio" eh="8334a158" />
-        <e k="usedplus_dashboard_excellent" v="Excellent" eh="fcc2d28a" />
-        <e k="usedplus_dashboard_good" v="Good" eh="0c6ad70b" />
-        <e k="usedplus_dashboard_fair" v="Fair" eh="f7f20cf0" />
-        <e k="usedplus_dashboard_high" v="High" eh="655d20c1" />
-        <e k="usedplus_dashboard_critical" v="Critical" eh="278d01e5" />
-        <e k="usedplus_dashboard_noPayments" v="No upcoming payments" eh="96a72e57" />
-        <e k="usedplus_dashboard_noHistory" v="No credit history yet" eh="4e58800f" />
-        <e k="usedplus_dashboard_onTime" v="On-Time Payments" eh="3f020383" />
-        <e k="usedplus_dashboard_missed" v="Missed Payments" eh="352ca78d" />
-        <e k="usedplus_dashboard_tip" v="Tip: Make payments on time to improve your credit score. Pay off loans early to save on interest." eh="4878dc76" />
+        <e k="usedplus_dashboard_title" v="금융 대시보드" eh="475b3fca" />
+        <e k="usedplus_dashboard_creditScore" v="신용 점수" eh="ae61b052" />
+        <e k="usedplus_dashboard_obligations" v="월 납부 의무" eh="398fa99a" />
+        <e k="usedplus_dashboard_debtRatio" v="부채 대 자산 비율" eh="325f67e0" />
+        <e k="usedplus_dashboard_upcoming" v="예정된 납부" eh="f994fae4" />
+        <e k="usedplus_dashboard_history" v="최근 신용 활동" eh="6b32a5cb" />
+        <e k="usedplus_dashboard_statistics" v="평생 통계" eh="727103d4" />
+        <e k="usedplus_dashboard_equipment" v="장비" eh="9ccda2d5" />
+        <e k="usedplus_dashboard_land" v="토지" eh="512ef7c6" />
+        <e k="usedplus_dashboard_loans" v="대출" eh="64e109fb" />
+        <e k="usedplus_dashboard_total" v="합계" eh="96b01412" />
+        <e k="usedplus_dashboard_assets" v="총 자산" eh="7f0b6dfb" />
+        <e k="usedplus_dashboard_debt" v="총 부채" eh="f0648c99" />
+        <e k="usedplus_dashboard_ratio" v="비율" eh="8334a158" />
+        <e k="usedplus_dashboard_excellent" v="우수" eh="fcc2d28a" />
+        <e k="usedplus_dashboard_good" v="양호" eh="0c6ad70b" />
+        <e k="usedplus_dashboard_fair" v="보통" eh="f7f20cf0" />
+        <e k="usedplus_dashboard_high" v="높음" eh="655d20c1" />
+        <e k="usedplus_dashboard_critical" v="심각" eh="278d01e5" />
+        <e k="usedplus_dashboard_noPayments" v="예정된 납부 없음" eh="96a72e57" />
+        <e k="usedplus_dashboard_noHistory" v="아직 신용 내역 없음" eh="4e58800f" />
+        <e k="usedplus_dashboard_onTime" v="정시 납부" eh="3f020383" />
+        <e k="usedplus_dashboard_missed" v="납부 누락" eh="352ca78d" />
+        <e k="usedplus_dashboard_tip" v="팁: 신용 점수를 높이려면 정시에 납부하세요. 조기 상환으로 이자를 절약하세요." eh="4878dc76" />
 
         <!--  Land Purchase Dialog -->
-        <e k="usedplus_land_title" v="Purchase Farmland" eh="f741fdc8" />
-        <e k="usedplus_land_purchaseMethod" v="PURCHASE METHOD" eh="f5f3c261" />
-        <e k="usedplus_land_paymentSummary" v="PAYMENT SUMMARY" eh="0dd98605" />
-        <e k="usedplus_land_financeTerms" v="FINANCE TERMS" eh="42352b5c" />
-        <e k="usedplus_land_leaseTerms" v="LEASE TERMS" eh="0100690c" />
-        <e k="usedplus_land_landPrice" v="Land Price:" eh="b2d5ac98" />
-        <e k="usedplus_land_taxes" v="Transfer Tax:" eh="351b4b60" />
-        <e k="usedplus_land_totalDue" v="TOTAL DUE:" eh="6527240c" />
-        <e k="usedplus_land_loanTerm" v="Loan Term:" eh="766186df" />
-        <e k="usedplus_land_leaseTerm" v="Lease Term:" eh="52b77655" />
-        <e k="usedplus_land_downPayment" v="Down Payment:" eh="a706fdb6" />
-        <e k="usedplus_land_amountFinanced" v="Amount Financed:" eh="c9247e08" />
-        <e k="usedplus_land_interestRate" v="Interest Rate:" eh="389f9dd8" />
-        <e k="usedplus_land_monthlyPayment" v="Monthly Payment:" eh="3499b658" />
-        <e k="usedplus_land_totalInterest" v="Total Interest:" eh="183c0158" />
-        <e k="usedplus_land_dueToday" v="DUE TODAY:" eh="f644eca9" />
-        <e k="usedplus_land_totalLeaseCost" v="Total Lease Cost:" eh="61a93e0e" />
-        <e k="usedplus_land_buyoutPrice" v="Buyout Price:" eh="121b9571" />
-        <e k="usedplus_land_confirm" v="Confirm Purchase" eh="c8505ab3" />
+        <e k="usedplus_land_title" v="농지 구매" eh="f741fdc8" />
+        <e k="usedplus_land_purchaseMethod" v="구매 방법" eh="f5f3c261" />
+        <e k="usedplus_land_paymentSummary" v="납부 요약" eh="0dd98605" />
+        <e k="usedplus_land_financeTerms" v="융자 조건" eh="42352b5c" />
+        <e k="usedplus_land_leaseTerms" v="임대 조건" eh="0100690c" />
+        <e k="usedplus_land_landPrice" v="토지 가격:" eh="b2d5ac98" />
+        <e k="usedplus_land_taxes" v="양도세:" eh="351b4b60" />
+        <e k="usedplus_land_totalDue" v="총 납부액:" eh="6527240c" />
+        <e k="usedplus_land_loanTerm" v="대출 기간:" eh="766186df" />
+        <e k="usedplus_land_leaseTerm" v="임대 기간:" eh="52b77655" />
+        <e k="usedplus_land_downPayment" v="계약금:" eh="a706fdb6" />
+        <e k="usedplus_land_amountFinanced" v="융자 금액:" eh="c9247e08" />
+        <e k="usedplus_land_interestRate" v="이자율:" eh="389f9dd8" />
+        <e k="usedplus_land_monthlyPayment" v="월 납부액:" eh="3499b658" />
+        <e k="usedplus_land_totalInterest" v="총 이자:" eh="183c0158" />
+        <e k="usedplus_land_dueToday" v="오늘 납부액:" eh="f644eca9" />
+        <e k="usedplus_land_totalLeaseCost" v="총 임대 비용:" eh="61a93e0e" />
+        <e k="usedplus_land_buyoutPrice" v="인수 가격:" eh="121b9571" />
+        <e k="usedplus_land_confirm" v="구매 확인" eh="c8505ab3" />
 
         <!--  Used Vehicle Marketplace - Agent-Based Sales -->
-        <e k="usedplus_sell_title" v="Sell Vehicle" eh="fe030802" />
-        <e k="usedplus_sell_selectAgent" v="Select Sales Agent" eh="08c52dc1" />
-        <e k="usedplus_sell_vehicleDetails" v="Vehicle Details" eh="fcb2575f" />
-        <e k="usedplus_sell_vanillaValue" v="Instant Sell Value" eh="8ddad336" />
-        <e k="usedplus_sell_localAgent" v="Local Agent" eh="082cb5b6" />
-        <e k="usedplus_sell_regionalAgent" v="Regional Agent" eh="403955ba" />
-        <e k="usedplus_sell_nationalAgent" v="National Agent" eh="eef8214f" />
-        <e k="usedplus_sell_expectedReturn" v="Expected Return" eh="20b99f1d" />
-        <e k="usedplus_sell_timeFrame" v="Time Frame" eh="ced18839" />
-        <e k="usedplus_sell_agentFee" v="Agent Fee" eh="40f286a6" />
-        <e k="usedplus_sell_successRate" v="Success Rate" eh="aac60ede" />
-        <e k="usedplus_sell_confirm" v="List for Sale" eh="8ce97708" />
-        <e k="usedplus_sell_tradeInOnly" v="Trade-In Only" eh="c9626b59" />
-        <e k="usedplus_sell_tradeInDescription" v="50-65% instant value when purchasing a new vehicle" eh="d6dcdb1f" />
-        <e k="usedplus_sell_localDescription" v="Quick local sale. 1-2 months, 85% success rate." eh="8cb93a6b" />
-        <e k="usedplus_sell_regionalDescription" v="Regional network. 2-4 months, 90% success rate." eh="9e0c4114" />
-        <e k="usedplus_sell_nationalDescription" v="Nationwide reach. 3-6 months, 95% success rate." eh="013aefeb" />
-        <e k="usedplus_sell_listed" v="Vehicle listed with %s. Expected: %s - %s" eh="28271f31" />
-        <e k="usedplus_sell_alreadyListed" v="This vehicle is already listed for sale" eh="cb22926e" />
-        <e k="usedplus_sell_cantSellFinanced" v="Cannot sell financed vehicles. Pay off balance first." eh="1dcb38c2" />
+        <e k="usedplus_sell_title" v="차량 판매" eh="fe030802" />
+        <e k="usedplus_sell_selectAgent" v="판매 중개인 선택" eh="08c52dc1" />
+        <e k="usedplus_sell_vehicleDetails" v="차량 세부정보" eh="fcb2575f" />
+        <e k="usedplus_sell_vanillaValue" v="즉시 판매 가치" eh="8ddad336" />
+        <e k="usedplus_sell_localAgent" v="지역 중개인" eh="082cb5b6" />
+        <e k="usedplus_sell_regionalAgent" v="광역 중개인" eh="403955ba" />
+        <e k="usedplus_sell_nationalAgent" v="전국 중개인" eh="eef8214f" />
+        <e k="usedplus_sell_expectedReturn" v="예상 수익" eh="20b99f1d" />
+        <e k="usedplus_sell_timeFrame" v="시간 프레임" eh="ced18839" />
+        <e k="usedplus_sell_agentFee" v="중개인 수수료" eh="40f286a6" />
+        <e k="usedplus_sell_successRate" v="성공률" eh="aac60ede" />
+        <e k="usedplus_sell_confirm" v="판매 등록" eh="8ce97708" />
+        <e k="usedplus_sell_tradeInOnly" v="교환만" eh="c9626b59" />
+        <e k="usedplus_sell_tradeInDescription" v="새 차량 구매 시 50-65% 즉시 가치" eh="d6dcdb1f" />
+        <e k="usedplus_sell_localDescription" v="빠른 지역 판매. 1-2개월, 85% 성공률." eh="8cb93a6b" />
+        <e k="usedplus_sell_regionalDescription" v="광역 네트워크. 2-4개월, 90% 성공률." eh="9e0c4114" />
+        <e k="usedplus_sell_nationalDescription" v="전국 도달. 3-6개월, 95% 성공률." eh="013aefeb" />
+        <e k="usedplus_sell_listed" v="차량이 %s에 등록됨. 예상: %s - %s" eh="28271f31" />
+        <e k="usedplus_sell_alreadyListed" v="이 차량은 이미 판매 등록되었습니다" eh="cb22926e" />
+        <e k="usedplus_sell_cantSellFinanced" v="융자된 차량은 판매할 수 없습니다. 먼저 잔액을 상환하세요." eh="1dcb38c2" />
 
         <!--  Sale Offer Dialog -->
-        <e k="usedplus_saleOffer_title" v="Sale Offer Received" eh="6eeec636" />
-        <e k="usedplus_saleOffer_message" v="A buyer has been found for your vehicle!" eh="7b1304f7" />
-        <e k="usedplus_saleOffer_offerAmount" v="Offer Amount" eh="0916d967" />
-        <e k="usedplus_saleOffer_expiresIn" v="Offer Expires In" eh="ce06a052" />
-        <e k="usedplus_saleOffer_accept" v="Accept Offer" eh="93a5776a" />
-        <e k="usedplus_saleOffer_decline" v="Decline Offer" eh="3db99481" />
-        <e k="usedplus_saleOffer_hours" v="%d hours" eh="4e8d5e54" />
-        <e k="usedplus_saleOffer_accepted" v="Vehicle sold for %s!" eh="f5cd95ab" />
-        <e k="usedplus_saleOffer_declined" v="Offer declined. Agent continues searching..." eh="b7c0bba6" />
-        <e k="usedplus_saleOffer_expired" v="Offer expired for %s. Agent continues searching..." eh="180bd573" />
+        <e k="usedplus_saleOffer_title" v="판매 제안 받음" eh="6eeec636" />
+        <e k="usedplus_saleOffer_message" v="귀하의 차량에 대한 구매자를 찾았습니다!" eh="7b1304f7" />
+        <e k="usedplus_saleOffer_offerAmount" v="제안 금액" eh="0916d967" />
+        <e k="usedplus_saleOffer_expiresIn" v="제안 만료" eh="ce06a052" />
+        <e k="usedplus_saleOffer_accept" v="제안 수락" eh="93a5776a" />
+        <e k="usedplus_saleOffer_decline" v="제안 거절" eh="3db99481" />
+        <e k="usedplus_saleOffer_hours" v="%d시간" eh="4e8d5e54" />
+        <e k="usedplus_saleOffer_accepted" v="차량이 %s에 판매되었습니다!" eh="f5cd95ab" />
+        <e k="usedplus_saleOffer_declined" v="제안 거절됨. 중개인이 계속 검색 중..." eh="b7c0bba6" />
+        <e k="usedplus_saleOffer_expired" v="%s에 대한 제안 만료됨. 중개인이 계속 검색 중..." eh="180bd573" />
 
         <!-- Sale Expired Dialog (no buyer found) -->
-        <e k="usedplus_saleExpired_title" v="Sale Listing Expired" eh="610084ea" />
-        <e k="usedplus_saleExpired_sectionInfo" v="LISTING DETAILS" eh="7b3916d2" />
-        <e k="usedplus_saleExpired_sectionOutcome" v="OUTCOME" eh="79988be0" />
-        <e k="usedplus_saleExpired_noBuyer" v="No buyer was found during the listing period." eh="aa575ade" />
-        <e k="usedplus_saleExpired_feePaid" v="Agent Fee Paid:" eh="ce19a828" />
-        <e k="usedplus_saleExpired_hint" v="You can relist this vehicle with the same or different agent/price settings." eh="e225592c" />
-        <e k="usedplus_saleExpired_relist" v="Relist Vehicle" eh="a556ce3c" />
+        <e k="usedplus_saleExpired_title" v="판매 등록 만료됨" eh="610084ea" />
+        <e k="usedplus_saleExpired_sectionInfo" v="등록 세부정보" eh="7b3916d2" />
+        <e k="usedplus_saleExpired_sectionOutcome" v="결과" eh="79988be0" />
+        <e k="usedplus_saleExpired_noBuyer" v="등록 기간 동안 구매자를 찾지 못했습니다." eh="aa575ade" />
+        <e k="usedplus_saleExpired_feePaid" v="중개인 수수료 납부:" eh="ce19a828" />
+        <e k="usedplus_saleExpired_hint" v="동일하거나 다른 중개인/가격 설정으로 이 차량을 재등록할 수 있습니다." eh="e225592c" />
+        <e k="usedplus_saleExpired_relist" v="차량 재등록" eh="a556ce3c" />
 
         <!--  Sale Listing Status -->
-        <e k="usedplus_sale_statusActive" v="Searching for buyer..." eh="28e37076" />
-        <e k="usedplus_sale_statusPending" v="OFFER: %s" eh="868cdf29" />
-        <e k="usedplus_sale_statusSold" v="SOLD for %s" eh="737a574b" />
-        <e k="usedplus_sale_statusExpired" v="Expired - No buyer found" eh="3e3e51fd" />
-        <e k="usedplus_sale_statusCancelled" v="Cancelled" eh="a149e85a" />
-        <e k="usedplus_sale_listingExpired" v="No buyer found for %s. Agent fee (%s) was non-refundable." eh="08587fe0" />
-        <e k="usedplus_sale_cancel" v="Cancel Listing" eh="587021c1" />
-        <e k="usedplus_sale_cancelConfirm" v="Cancel sale listing for %s? Agent fee will NOT be refunded." eh="3bbc7efa" />
-        <e k="usedplus_sale_cancelled" v="Sale listing cancelled for %s." eh="aa5902d2" />
+        <e k="usedplus_sale_statusActive" v="구매자 검색 중..." eh="28e37076" />
+        <e k="usedplus_sale_statusPending" v="제안: %s" eh="868cdf29" />
+        <e k="usedplus_sale_statusSold" v="%s에 판매됨" eh="737a574b" />
+        <e k="usedplus_sale_statusExpired" v="만료됨 - 구매자를 찾지 못함" eh="3e3e51fd" />
+        <e k="usedplus_sale_statusCancelled" v="취소됨" eh="a149e85a" />
+        <e k="usedplus_sale_listingExpired" v="%s에 대한 구매자를 찾지 못했습니다. 중개인 수수료(%s)는 환불되지 않습니다." eh="08587fe0" />
+        <e k="usedplus_sale_cancel" v="등록 취소" eh="587021c1" />
+        <e k="usedplus_sale_cancelConfirm" v="%s에 대한 판매 등록을 취소하시겠습니까? 중개인 수수료는 환불되지 않습니다." eh="3bbc7efa" />
+        <e k="usedplus_sale_cancelled" v="%s에 대한 판매 등록이 취소되었습니다." eh="aa5902d2" />
 
         <!--  Finance Manager - Sale Listings Section -->
-        <e k="usedplus_manager_saleListings" v="VEHICLES FOR SALE" eh="2f6d760e" />
-        <e k="usedplus_manager_noSales" v="No active sale listings" eh="0af1686a" />
+        <e k="usedplus_manager_saleListings" v="판매 차량" eh="2f6d760e" />
+        <e k="usedplus_manager_noSales" v="활성 판매 등록 없음" eh="0af1686a" />
 
         <!--  Menu Navigation Buttons -->
-        <e k="usedplus_button_nextPage" v="Next Menu" eh="2553da59" />
-        <e k="usedplus_button_prevPage" v="Previous Menu" eh="d4e01f11" />
+        <e k="usedplus_button_nextPage" v="다음 메뉴" eh="2553da59" />
+        <e k="usedplus_button_prevPage" v="이전 메뉴" eh="d4e01f11" />
 
         <!-- === MAINTENANCE SYSTEM (Phase 4) === -->
 
         <!--  Engine/Failure Warnings -->
-        <e k="usedPlus_engineStalled" v="Engine stalled!" eh="2cfeb1d2" />
-        <e k="usedPlus_engineStalledRecovery" v="Engine stalled! Wait %d seconds..." eh="9a57b319" />
-        <e k="usedPlus_engineWontStart" v="Engine won't start - try again" eh="daa0591c" />
-        <e k="usedPlus_hydraulicDrift" v="Hydraulic pressure loss!" eh="31f2964d" />
-        <e k="usedPlus_implementCutout" v="Implement stalled!" eh="395b6ba3" />
-        <e k="usedPlus_electricalCutout" v="Electrical fault - implements offline!" eh="0c156989" />
+        <e k="usedPlus_engineStalled" v="엔진 정지됨!" eh="2cfeb1d2" />
+        <e k="usedPlus_engineStalledRecovery" v="엔진 정지됨! %d초 기다리세요..." eh="9a57b319" />
+        <e k="usedPlus_engineWontStart" v="엔진 시동 안 됨 - 다시 시도하세요" eh="daa0591c" />
+        <e k="usedPlus_hydraulicDrift" v="유압 압력 손실!" eh="31f2964d" />
+        <e k="usedPlus_implementCutout" v="농기구 정지됨!" eh="395b6ba3" />
+        <e k="usedPlus_electricalCutout" v="전기 고장 - 농기구 오프라인!" eh="0c156989" />
 
         <!--  Speed Degradation Warnings (v1.4.0) -->
-        <e k="usedPlus_speedDegraded" v="Engine struggling - max speed reduced to %d%%!" eh="af083aef" />
-        <e k="usedPlus_speedDegradedReminder" v="Vehicle running slow - repairs recommended" eh="95eb2457" />
-        <e k="usedPlus_speedGovernor" v="Engine can't sustain this speed!" eh="f9bd1f68" />
-        <e k="usedPlus_firstStartStall" v="Engine failed to start!" eh="cc82faeb" />
-        <e k="usedPlus_steeringLoose" v="Steering feels loose - hydraulics worn!" eh="75649517" />
-        <e k="usedPlus_steeringPull" v="Steering pulling to the %s!" eh="e743ac7b" />
-        <e k="usedPlus_directionLeft" v="left" eh="811882fe" />
-        <e k="usedPlus_directionRight" v="right" eh="7c4f2940" />
+        <e k="usedPlus_speedDegraded" v="엔진 고장 - 최대 속도 %d%%로 감소!" eh="af083aef" />
+        <e k="usedPlus_speedDegradedReminder" v="차량이 느리게 작동 - 수리 권장" eh="95eb2457" />
+        <e k="usedPlus_speedGovernor" v="엔진이 이 속도를 유지할 수 없습니다!" eh="f9bd1f68" />
+        <e k="usedPlus_firstStartStall" v="엔진 시동 실패!" eh="cc82faeb" />
+        <e k="usedPlus_steeringLoose" v="조향이 느슨함 - 유압 마모됨!" eh="75649517" />
+        <e k="usedPlus_steeringPull" v="조향이 %s(으)로 쏠립니다!" eh="e743ac7b" />
+        <e k="usedPlus_directionLeft" v="왼쪽" eh="811882fe" />
+        <e k="usedPlus_directionRight" v="오른쪽" eh="7c4f2940" />
 
         <!--  Engine Malfunctions (v1.6.0) -->
-        <e k="usedPlus_engineMisfire" v="Engine misfiring!" eh="46773a4f" />
-        <e k="usedPlus_engineOverheating" v="Engine overheating! (%d%%)" eh="736c0a30" />
-        <e k="usedPlus_engineOverheated" v="ENGINE OVERHEATED! Let it cool down!" eh="48a6aa38" />
+        <e k="usedPlus_engineMisfire" v="엔진 미스파이어!" eh="46773a4f" />
+        <e k="usedPlus_engineOverheating" v="엔진 과열! (%d%%)" eh="736c0a30" />
+        <e k="usedPlus_engineOverheated" v="엔진 과열됨! 냉각시키세요!" eh="48a6aa38" />
 
         <!--  Implement Malfunctions (v1.6.0) -->
-        <e k="usedPlus_implementSurge" v="Hydraulic surge - implement raised!" eh="31786612" />
-        <e k="usedPlus_implementDrop" v="Hydraulic failure - implement dropped!" eh="9445c54d" />
-        <e k="usedPlus_ptoToggle" v="Electrical fault - PTO switched %s!" eh="0dce42ac" />
-        <e k="usedPlus_ptoOn" v="on" eh="ed2b5c01" />
-        <e k="usedPlus_ptoOff" v="off" eh="3262d48d" />
-        <e k="usedPlus_hitchFailure" v="HITCH FAILURE - Implement detached!" eh="16f9096e" />
+        <e k="usedPlus_implementSurge" v="유압 급등 - 농기구 상승!" eh="31786612" />
+        <e k="usedPlus_implementDrop" v="유압 고장 - 농기구 낙하!" eh="9445c54d" />
+        <e k="usedPlus_ptoToggle" v="전기 고장 - PTO %s 전환됨!" eh="0dce42ac" />
+        <e k="usedPlus_ptoOn" v="켜짐" eh="ed2b5c01" />
+        <e k="usedPlus_ptoOff" v="꺼짐" eh="3262d48d" />
+        <e k="usedPlus_hitchFailure" v="히치 고장 - 농기구 분리됨!" eh="16f9096e" />
 
         <!--  Hydraulic Drift Warnings (v1.4.0) -->
-        <e k="usedPlus_hydraulicWeak" v="Hydraulics weak (%d%%) - implements may drift!" eh="dc1e58d4" />
-        <e k="usedPlus_hydraulicDrifted" v="Implement lowered due to hydraulic failure" eh="5df727d2" />
+        <e k="usedPlus_hydraulicWeak" v="유압 약함 (%d%%) - 농기구가 드리프트될 수 있습니다!" eh="dc1e58d4" />
+        <e k="usedPlus_hydraulicDrifted" v="유압 고장으로 농기구 낮아짐" eh="5df727d2" />
 
         <!--  Inspection System -->
-        <e k="usedPlus_inspectButton" v="Inspect (%s)" eh="cd9aa28e" />
-        <e k="usedPlus_inspectionTitle" v="Inspection Report" eh="ecd12a05" />
-        <e k="usedPlus_inspectionCost" v="Inspection Cost" eh="5cb45e67" />
-        <e k="usedPlus_mechanicalAssessment" v="MECHANICAL ASSESSMENT" eh="9437e788" />
-        <e k="usedPlus_inspectorNotes" v="Inspector Notes" eh="0f769201" />
-        <e k="usedPlus_recommendation" v="Recommendation" eh="c76e3867" />
-        <e k="usedPlus_hiddenConditionWarning" v="Hidden mechanical condition unknown" eh="d2e42691" />
-        <e k="usedPlus_payForInspection" v="Pay for professional inspection" eh="2c3e76c2" />
+        <e k="usedPlus_inspectButton" v="검사 (%s)" eh="cd9aa28e" />
+        <e k="usedPlus_inspectionTitle" v="검사 보고서" eh="ecd12a05" />
+        <e k="usedPlus_inspectionCost" v="검사 비용" eh="5cb45e67" />
+        <e k="usedPlus_mechanicalAssessment" v="기계 평가" eh="9437e788" />
+        <e k="usedPlus_inspectorNotes" v="검사자 의견" eh="0f769201" />
+        <e k="usedPlus_recommendation" v="권장 사항" eh="c76e3867" />
+        <e k="usedPlus_hiddenConditionWarning" v="숨겨진 기계 상태 알 수 없음" eh="d2e42691" />
+        <e k="usedPlus_payForInspection" v="전문 검사 비용 납부" eh="2c3e76c2" />
 
         <!--  Reliability Ratings -->
-        <e k="usedPlus_conditionGood" v="Good" eh="0c6ad70b" />
-        <e k="usedPlus_conditionAcceptable" v="Acceptable" eh="e684de7f" />
-        <e k="usedPlus_conditionBelowAverage" v="Below Average" eh="271d9709" />
-        <e k="usedPlus_conditionPoor" v="Poor" eh="0e94d017" />
-        <e k="usedPlus_conditionCritical" v="Critical" eh="278d01e5" />
+        <e k="usedPlus_conditionGood" v="양호" eh="0c6ad70b" />
+        <e k="usedPlus_conditionAcceptable" v="수용 가능" eh="e684de7f" />
+        <e k="usedPlus_conditionBelowAverage" v="평균 이하" eh="271d9709" />
+        <e k="usedPlus_conditionPoor" v="불량" eh="0e94d017" />
+        <e k="usedPlus_conditionCritical" v="심각" eh="278d01e5" />
 
         <!--  Vehicle Name Indicators (Phase 5) -->
-        <e k="usedPlus_indicatorCritical" v="[CRITICAL]" eh="b0eac769" />
-        <e k="usedPlus_indicatorNeedsService" v="[NEEDS SERVICE]" eh="c3591f0d" />
-        <e k="usedPlus_indicatorWorn" v="[WORN]" eh="393432f2" />
-        <e k="usedPlus_maintenanceHistory" v="Maintenance History" eh="ad562d90" />
+        <e k="usedPlus_indicatorCritical" v="[심각]" eh="b0eac769" />
+        <e k="usedPlus_indicatorNeedsService" v="[서비스 필요]" eh="c3591f0d" />
+        <e k="usedPlus_indicatorWorn" v="[마모됨]" eh="393432f2" />
+        <e k="usedPlus_maintenanceHistory" v="정비 내역" eh="ad562d90" />
 
         <!--  Component Labels -->
-        <e k="usedPlus_engineReliability" v="Engine" eh="7bfa3072" />
-        <e k="usedPlus_hydraulicReliability" v="Hydraulics" eh="1de58ed3" />
-        <e k="usedPlus_electricalReliability" v="Electrical" eh="6f15be3d" />
+        <e k="usedPlus_engineReliability" v="엔진" eh="7bfa3072" />
+        <e k="usedPlus_hydraulicReliability" v="유압" eh="1de58ed3" />
+        <e k="usedPlus_electricalReliability" v="전기" eh="6f15be3d" />
 
         <!--  Vehicle Info Display -->
-        <e k="usedPlus_purchasedUsed" v="Purchased used" eh="0cf8d116" />
-        <e k="usedPlus_repairHistory" v="Repairs: %d (%s total)" eh="724d4694" />
-        <e k="usedPlus_breakdownHistory" v="Breakdowns: %d" eh="18b384ef" />
-        <e k="usedPlus_mechanicalCondition" v="Mechanical: %s" eh="e74c01b3" />
+        <e k="usedPlus_purchasedUsed" v="중고로 구매됨" eh="0cf8d116" />
+        <e k="usedPlus_repairHistory" v="수리: %d회 (총 %s)" eh="724d4694" />
+        <e k="usedPlus_breakdownHistory" v="고장: %d회" eh="18b384ef" />
+        <e k="usedPlus_mechanicalCondition" v="기계: %s" eh="e74c01b3" />
 
         <!--  Inspection Notes -->
-        <e k="usedPlus_noteEngineWorn" v="Engine shows signs of hard use. Expect occasional stalling under load." eh="40261310" />
-        <e k="usedPlus_noteHydraulicWorn" v="Hydraulic system worn. Implements may drift when raised." eh="8b84b53a" />
-        <e k="usedPlus_noteElectricalIssues" v="Electrical issues detected. Implements may cut out unexpectedly." eh="439af566" />
-        <e k="usedPlus_noteVehicleOk" v="Vehicle in acceptable mechanical condition." eh="876a0550" />
-        <e k="usedPlus_recommendNegotiate" v="Negotiate price or budget for repairs" eh="0721eac5" />
-        <e k="usedPlus_recommendProceed" v="Good mechanical condition - proceed with confidence" eh="96c54629" />
+        <e k="usedPlus_noteEngineWorn" v="엔진에 과도한 사용 흔적이 있습니다. 부하 상태에서 간헐적 정지 예상됩니다." eh="40261310" />
+        <e k="usedPlus_noteHydraulicWorn" v="유압 시스템 마모됨. 상승 시 농기구가 드리프트될 수 있습니다." eh="8b84b53a" />
+        <e k="usedPlus_noteElectricalIssues" v="전기 문제 감지됨. 농기구가 예기치 않게 차단될 수 있습니다." eh="439af566" />
+        <e k="usedPlus_noteVehicleOk" v="차량이 수용 가능한 기계 상태입니다." eh="876a0550" />
+        <e k="usedPlus_recommendNegotiate" v="가격 협상 또는 수리 예산 계획" eh="0721eac5" />
+        <e k="usedPlus_recommendProceed" v="좋은 기계 상태 - 자신있게 진행하세요" eh="96c54629" />
 
         <!-- ============================================== -->
         <!-- PHASE 1: Notification Messages (i18n cleanup) -->
         <!-- ============================================== -->
 
         <!-- Error Notifications - Selection/Finding -->
-        <e k="usedplus_error_selectDealFirst" v="Select a finance deal first" eh="b675a0de" />
-        <e k="usedplus_error_noSearchInRow" v="No search in this row" eh="5cdf2cd9" />
-        <e k="usedplus_error_noSaleListingInRow" v="No sale listing in this row" eh="c671d622" />
-        <e k="usedplus_error_noDealInRow" v="No finance deal in this row" eh="875f8314" />
-        <e k="usedplus_error_farmNotFound" v="Error: Could not find farm" eh="a19f69e5" />
-        <e k="usedplus_error_noVehicleSelected" v="No vehicle selected" eh="6662b577" />
+        <e k="usedplus_error_selectDealFirst" v="먼저 융자 거래를 선택하세요" eh="b675a0de" />
+        <e k="usedplus_error_noSearchInRow" v="이 행에 검색이 없습니다" eh="5cdf2cd9" />
+        <e k="usedplus_error_noSaleListingInRow" v="이 행에 판매 등록이 없습니다" eh="c671d622" />
+        <e k="usedplus_error_noDealInRow" v="이 행에 융자 거래가 없습니다" eh="875f8314" />
+        <e k="usedplus_error_farmNotFound" v="오류: 농장을 찾을 수 없습니다" eh="a19f69e5" />
+        <e k="usedplus_error_noVehicleSelected" v="차량이 선택되지 않았습니다" eh="6662b577" />
 
         <!-- Error Notifications - State/Action Conflicts -->
-        <e k="usedplus_error_cannotCancelReady" v="Cannot cancel - this listing is ready for purchase" eh="f4d3a871" />
-        <e k="usedplus_error_searchNotActive" v="This search is no longer active" eh="071b3b9e" />
-        <e k="usedplus_error_noOfferPending" v="No pending offer on this listing" eh="d4e54566" />
-        <e k="usedplus_error_noOfferToDecline" v="No pending offer to decline" eh="e48082ad" />
-        <e k="usedplus_error_cannotCancelPendingOffer" v="Cannot cancel while offer is pending. Accept or decline first." eh="cdf73751" />
-        <e k="usedplus_error_cannotModifyPendingOffer" v="Cannot modify price while an offer is pending." eh="7fb9f02b" />
+        <e k="usedplus_error_cannotCancelReady" v="취소 불가 - 이 등록은 구매 준비가 완료되었습니다" eh="f4d3a871" />
+        <e k="usedplus_error_searchNotActive" v="이 검색은 더 이상 활성화되어 있지 않습니다" eh="071b3b9e" />
+        <e k="usedplus_error_noOfferPending" v="이 등록에 대기 중인 제안이 없습니다" eh="d4e54566" />
+        <e k="usedplus_error_noOfferToDecline" v="거절할 대기 중인 제안이 없습니다" eh="e48082ad" />
+        <e k="usedplus_error_cannotCancelPendingOffer" v="제안이 대기 중일 때는 취소할 수 없습니다. 먼저 수락하거나 거절하세요." eh="cdf73751" />
+        <e k="usedplus_error_cannotModifyPendingOffer" v="제안이 대기 중일 때는 가격을 수정할 수 없습니다." eh="7fb9f02b" />
 
         <!-- Error Notifications - Invalid Input -->
-        <e k="usedplus_error_invalidPrice" v="Invalid price. Please enter a positive number." eh="89f7cc3c" />
-        <e k="usedplus_error_invalidAmount" v="Invalid amount. Please enter a positive number." eh="9baf36ff" />
+        <e k="usedplus_error_invalidPrice" v="유효하지 않은 가격. 양수를 입력하세요." eh="89f7cc3c" />
+        <e k="usedplus_error_invalidAmount" v="유효하지 않은 금액. 양수를 입력하세요." eh="9baf36ff" />
 
         <!-- Error Notifications - Insufficient Funds -->
-        <e k="usedplus_error_insufficientFundsPayment" v="Insufficient funds. Need %s for monthly payment." eh="cea3245c" />
-        <e k="usedplus_error_insufficientFundsPayoff" v="Insufficient funds for payoff" eh="ff08bf99" />
-        <e k="usedplus_error_insufficientFundsNeedHave" v="Insufficient funds. Need %s, have %s" eh="7005b33c" />
-        <e k="usedplus_error_insufficientFundsDownPayment" v="Insufficient funds for down payment! Need %s" eh="e1cfc60d" />
-        <e k="usedplus_error_insufficientFundsGeneric" v="Insufficient funds! Need %s" eh="d8249477" />
-        <e k="usedplus_error_insufficientFundsForPayment" v="Insufficient funds for payment" eh="bc4a233a" />
+        <e k="usedplus_error_insufficientFundsPayment" v="자금 부족. 월 납부액으로 %s이(가) 필요합니다." eh="cea3245c" />
+        <e k="usedplus_error_insufficientFundsPayoff" v="상환을 위한 자금이 부족합니다" eh="ff08bf99" />
+        <e k="usedplus_error_insufficientFundsNeedHave" v="자금 부족. 필요: %s, 보유: %s" eh="7005b33c" />
+        <e k="usedplus_error_insufficientFundsDownPayment" v="계약금을 위한 자금이 부족합니다! 필요: %s" eh="e1cfc60d" />
+        <e k="usedplus_error_insufficientFundsGeneric" v="자금 부족! 필요: %s" eh="d8249477" />
+        <e k="usedplus_error_insufficientFundsForPayment" v="납부를 위한 자금이 부족합니다" eh="bc4a233a" />
 
         <!-- Error Notifications - No Items/Options -->
-        <e k="usedplus_error_noPaymentOptions" v="No payment options available" eh="5cf01d98" />
-        <e k="usedplus_error_noActiveDeals" v="No active finance deals to make payments on" eh="19c25246" />
-        <e k="usedplus_error_noDealsToPayAll" v="No active finance deals to pay" eh="a8217dc4" />
-        <e k="usedplus_error_noPaymentsDue" v="No payments due this period" eh="9da7e0ff" />
+        <e k="usedplus_error_noPaymentOptions" v="사용 가능한 납부 옵션 없음" eh="5cf01d98" />
+        <e k="usedplus_error_noActiveDeals" v="납부할 활성 융자 거래가 없습니다" eh="19c25246" />
+        <e k="usedplus_error_noDealsToPayAll" v="납부할 활성 융자 거래가 없습니다" eh="a8217dc4" />
+        <e k="usedplus_error_noPaymentsDue" v="이 기간에 납부 기한이 없습니다" eh="9da7e0ff" />
 
         <!-- Error Notifications - Operation Failures -->
-        <e k="usedplus_error_payoffFailed" v="Payoff failed" eh="ab252955" />
-        <e k="usedplus_error_paymentFailed" v="Payment failed" eh="1305a2b0" />
-        <e k="usedplus_error_eventNotAvailable" v="Error: %s not available" eh="9c93ae19" />
+        <e k="usedplus_error_payoffFailed" v="상환 실패" eh="ab252955" />
+        <e k="usedplus_error_paymentFailed" v="납부 실패" eh="1305a2b0" />
+        <e k="usedplus_error_eventNotAvailable" v="오류: %s을(를) 사용할 수 없습니다" eh="9c93ae19" />
 
         <!-- Error Notifications - Credit Score Requirements -->
-        <e k="usedplus_error_creditTooLow" v="Credit Score Too Low" eh="660fbd90" />
-        <e k="usedplus_error_creditTooLowDetail" v="Your credit score (%d) is below the minimum (%d) required for %s." eh="210df978" />
-        <e k="usedplus_error_creditTip" v="Tip: Make on-time payments on existing loans to build credit." eh="3346706d" />
-        <e k="usedplus_error_creditShortfall" v="Shortfall: %d points" eh="a19b5472" />
-        <e k="usedplus_finance_repairFinancing" v="repair financing" eh="4f72a7b2" />
-        <e k="usedplus_finance_vehicleFinancing" v="vehicle financing" eh="7b2b15aa" />
-        <e k="usedplus_finance_vehicleLeasing" v="vehicle leasing" eh="524b6d9b" />
-        <e k="usedplus_finance_landFinancing" v="land financing" eh="ef09c4c7" />
-        <e k="usedplus_finance_cashLoan" v="cash loans" eh="ac895880" />
+        <e k="usedplus_error_creditTooLow" v="신용 점수 너무 낮음" eh="660fbd90" />
+        <e k="usedplus_error_creditTooLowDetail" v="귀하의 신용 점수(%d)가 %s에 필요한 최소값(%d) 미만입니다." eh="210df978" />
+        <e k="usedplus_error_creditTip" v="팁: 기존 대출을 정시에 납부하여 신용을 구축하세요." eh="3346706d" />
+        <e k="usedplus_error_creditShortfall" v="부족: %d점" eh="a19b5472" />
+        <e k="usedplus_finance_repairFinancing" v="수리 융자" eh="4f72a7b2" />
+        <e k="usedplus_finance_vehicleFinancing" v="차량 융자" eh="7b2b15aa" />
+        <e k="usedplus_finance_vehicleLeasing" v="차량 임대" eh="524b6d9b" />
+        <e k="usedplus_finance_landFinancing" v="토지 융자" eh="ef09c4c7" />
+        <e k="usedplus_finance_cashLoan" v="현금 대출" eh="ac895880" />
 
         <!-- Credit Warning Messages (UX) -->
-        <e k="usedplus_credit_tooLowForFinancing" v="Credit score too low for financing. Your score: %d (need %d+). Build credit with on-time payments." eh="c7e03e45" />
-        <e k="usedplus_credit_tooLowForLeasing" v="Credit score too low for leasing. Your score: %d (need %d+). Leasing requires better credit than financing." eh="50b91953" />
-        <e k="usedplus_credit_tooLowForLand" v="Credit score too low (%d). Need %d+ to finance land." eh="78d73204" />
-        <e k="usedplus_credit_tooLowForRepair" v="Credit score too low (%d). Need %d+ to finance repairs." eh="70147f73" />
-        <e k="usedplus_credit_needScore" v="Credit: %d (need %d)" eh="82790b98" />
+        <e k="usedplus_credit_tooLowForFinancing" v="융자를 위한 신용 점수가 너무 낮습니다. 귀하의 점수: %d (필요: %d+). 정시 납부로 신용을 구축하세요." eh="c7e03e45" />
+        <e k="usedplus_credit_tooLowForLeasing" v="임대를 위한 신용 점수가 너무 낮습니다. 귀하의 점수: %d (필요: %d+). 임대는 융자보다 더 나은 신용이 필요합니다." eh="50b91953" />
+        <e k="usedplus_credit_tooLowForLand" v="신용 점수가 너무 낮습니다 (%d). 토지를 융자하려면 %d+ 필요합니다." eh="78d73204" />
+        <e k="usedplus_credit_tooLowForRepair" v="신용 점수가 너무 낮습니다 (%d). 수리를 융자하려면 %d+ 필요합니다." eh="70147f73" />
+        <e k="usedplus_credit_tooLowForPlaceable" v="건물 융자에는 우수 신용 등급(%d+)이 필요합니다.\n귀하의 신용: %d (%s)" eh="0fb63457" />
+        <e k="usedplus_credit_needScore" v="신용: %d (필요: %d)" eh="82790b98" />
+        <e k="usedplus_placeable_cannotLease" v="건물은 임대할 수 없습니다. 현금 또는 융자 옵션을 사용하세요." eh="e4fd7eed" />
 
         <!-- Minimum Financing Amount Messages -->
-        <e k="usedplus_finance_amountTooSmall" v="Amount too small for financing. Minimum: %s" eh="3a90d8c2" />
-        <e k="usedplus_lease_amountTooSmall" v="Amount too small for leasing. Minimum: %s" eh="3e2012e8" />
-        <e k="usedplus_repair_amountTooSmall" v="Repair cost too small to finance. Minimum: %s" eh="446dd4cd" />
-        <e k="usedplus_land_amountTooSmall" v="Land price too small for financing. Minimum: %s" eh="b4e8480c" />
+        <e k="usedplus_finance_amountTooSmall" v="융자하기에 너무 작은 금액입니다. 최소: %s" eh="3a90d8c2" />
+        <e k="usedplus_lease_amountTooSmall" v="임대하기에 너무 작은 금액입니다. 최소: %s" eh="3e2012e8" />
+        <e k="usedplus_repair_amountTooSmall" v="융자하기에 너무 작은 수리 비용입니다. 최소: %s" eh="446dd4cd" />
+        <e k="usedplus_land_amountTooSmall" v="융자하기에 너무 작은 토지 가격입니다. 최소: %s" eh="b4e8480c" />
 
         <!-- v2.8.0: Multiplayer Transaction Response Messages -->
         <!-- Error responses for server→client feedback in multiplayer -->
-        <e k="usedplus_mp_error_unauthorized" v="Action not authorized for your farm" eh="343a024c" />
-        <e k="usedplus_mp_error_disabled" v="This feature is disabled in settings" eh="d3f06efd" />
-        <e k="usedplus_mp_error_manager" v="System not initialized. Try again." eh="53daf785" />
-        <e k="usedplus_mp_error_invalid_params" v="Invalid parameters" eh="a79fae6b" />
-        <e k="usedplus_mp_error_insufficient_funds" v="Insufficient funds" eh="55f90c96" />
-        <e k="usedplus_mp_error_failed" v="Transaction failed" eh="3f864e37" />
-        <e k="usedplus_mp_error_farm_not_found" v="Farm not found" eh="a13cd50e" />
-        <e k="usedplus_mp_error_deal_not_found" v="Deal not found" eh="f85a8ec8" />
-        <e k="usedplus_mp_error_land_not_found" v="Land not found" eh="db02fd36" />
-        <e k="usedplus_mp_error_land_owned" v="This land is already owned" eh="7175cfeb" />
-        <e k="usedplus_mp_error_already_leased" v="You already have a lease on this land" eh="25394947" />
-        <e k="usedplus_mp_error_invalid_deal_type" v="Invalid deal type" eh="e9926aa4" />
-        <e k="usedplus_mp_error_deal_not_active" v="Deal is not active" eh="4f8a3c97" />
-        <e k="usedplus_mp_error_repair_failed" v="Repair failed" eh="e25882fc" />
-        <e k="usedplus_mp_error_search_failed" v="Search failed" eh="a4d17776" />
+        <e k="usedplus_mp_error_unauthorized" v="귀하의 농장에 대해 작업이 승인되지 않았습니다" eh="343a024c" />
+        <e k="usedplus_mp_error_disabled" v="이 기능은 설정에서 비활성화되어 있습니다" eh="d3f06efd" />
+        <e k="usedplus_mp_error_manager" v="시스템이 초기화되지 않았습니다. 다시 시도하세요." eh="53daf785" />
+        <e k="usedplus_mp_error_invalid_params" v="유효하지 않은 매개변수" eh="a79fae6b" />
+        <e k="usedplus_mp_error_insufficient_funds" v="자금 부족" eh="55f90c96" />
+        <e k="usedplus_mp_error_failed" v="거래 실패" eh="3f864e37" />
+        <e k="usedplus_mp_error_farm_not_found" v="농장을 찾을 수 없습니다" eh="a13cd50e" />
+        <e k="usedplus_mp_error_deal_not_found" v="거래를 찾을 수 없습니다" eh="f85a8ec8" />
+        <e k="usedplus_mp_error_land_not_found" v="토지를 찾을 수 없습니다" eh="db02fd36" />
+        <e k="usedplus_mp_error_land_owned" v="이 토지는 이미 소유되어 있습니다" eh="7175cfeb" />
+        <e k="usedplus_mp_error_already_leased" v="이미 이 토지에 대한 임대가 있습니다" eh="25394947" />
+        <e k="usedplus_mp_error_invalid_deal_type" v="유효하지 않은 거래 유형" eh="e9926aa4" />
+        <e k="usedplus_mp_error_deal_not_active" v="거래가 활성화되어 있지 않습니다" eh="4f8a3c97" />
+        <e k="usedplus_mp_error_repair_failed" v="수리 실패" eh="e25882fc" />
+        <e k="usedplus_mp_error_search_failed" v="검색 실패" eh="a4d17776" />
 
         <!-- Success responses for server→client feedback in multiplayer -->
-        <e k="usedplus_mp_success_financed" v="Vehicle financed successfully!" eh="e0a11202" />
-        <e k="usedplus_mp_success_leased" v="Vehicle leased successfully!" eh="f73065ee" />
+        <e k="usedplus_mp_success_financed" v="차량이 성공적으로 융자되었습니다!" eh="e0a11202" />
+        <e k="usedplus_mp_success_leased" v="차량이 성공적으로 임대되었습니다!" eh="f73065ee" />
         <e k="usedplus_mp_success_loan" v="Loan approved!" eh="96d2eb36" />
         <e k="usedplus_mp_success_payment" v="Payment processed!" eh="fffcd9ab" />
-        <e k="usedplus_mp_success_land_leased" v="Land leased successfully!" eh="4815779c" />
-        <e k="usedplus_mp_success_land_buyout" v="Land purchased successfully!" eh="9de4a0f4" />
+        <e k="usedplus_mp_success_land_leased" v="토지가 성공적으로 임대되었습니다!" eh="4815779c" />
+        <e k="usedplus_mp_success_land_buyout" v="토지가 성공적으로 구매되었습니다!" eh="9de4a0f4" />
         <e k="usedplus_mp_success_listed" v="Vehicle listed for sale!" eh="1178dfe3" />
         <e k="usedplus_mp_success_sale_action" v="Sale action completed!" eh="f4473f61" />
         <e k="usedplus_mp_success_price_modified" v="Price updated!" eh="3778ab16" />
         <e k="usedplus_mp_success_repair" v="Repair completed!" eh="9e6d62a2" />
         <e k="usedplus_mp_success_search_started" v="Search started!" eh="f10690d3" />
-        <e k="usedplus_mp_success_lease_ended" v="Lease ended successfully!" eh="71efe46d" />
+        <e k="usedplus_mp_success_lease_ended" v="임대가 성공적으로 종료되었습니다!" eh="71efe46d" />
         <e k="usedplus_mp_success_lease_terminated" v="Lease terminated!" eh="2ac6c824" />
         <e k="usedplus_mp_success_lease_renewed" v="Lease renewed!" eh="30c5a4dd" />
         <e k="usedplus_mp_success_lease_buyout" v="Lease buyout complete!" eh="b76c5d41" />
 
         <!-- Mode Selector Options -->
-        <e k="usedplus_mode_cash" v="Buy with Cash" eh="01dc9cc3" />
-        <e k="usedplus_mode_finance" v="Finance" eh="c482980d" />
-        <e k="usedplus_mode_lease" v="Lease" eh="47c96b08" />
-        <e k="usedplus_mode_financeCredit" v="Finance (Credit: %d+)" eh="0b6c80e3" />
-        <e k="usedplus_mode_leaseCredit" v="Lease (Credit: %d+)" eh="439bd2b6" />
+        <e k="usedplus_mode_cash" v="현금으로 구매" eh="01dc9cc3" />
+        <e k="usedplus_mode_finance" v="융자" eh="c482980d" />
+        <e k="usedplus_mode_lease" v="임대" eh="47c96b08" />
+        <e k="usedplus_mode_financeCredit" v="융자 (신용: %d+)" eh="0b6c80e3" />
+        <e k="usedplus_mode_leaseCredit" v="임대 (신용: %d+)" eh="439bd2b6" />
 
         <!-- Success Notifications - Sales -->
-        <e k="usedplus_notify_vehicleSold" v="Sold %s for %s!" eh="159b99b9" />
-        <e k="usedplus_notify_offerDeclined" v="Offer declined - agent will continue searching" eh="957ec943" />
-        <e k="usedplus_notify_listingCancelled" v="Sale listing for %s cancelled" eh="77f331c5" />
+        <e k="usedplus_notify_vehicleSold" v="%s을(를) %s에 판매했습니다!" eh="159b99b9" />
+        <e k="usedplus_notify_offerDeclined" v="제안 거절됨 - 중개인이 계속 검색합니다" eh="957ec943" />
+        <e k="usedplus_notify_listingCancelled" v="%s에 대한 판매 등록이 취소되었습니다" eh="77f331c5" />
 
         <!-- Success Notifications - Purchases -->
-        <e k="usedplus_notify_vehiclePurchased" v="Purchased %s for %s" eh="ee85175a" />
-        <e k="usedplus_notify_vehiclePurchasedShop" v="Purchased %s - Visit shop to collect vehicle" eh="3359716e" />
-        <e k="usedplus_notify_vehicleFinanced" v="Financed %s - %s due today" eh="874037b7" />
-        <e k="usedplus_notify_vehicleFinancedShop" v="Financed %s - Visit shop to collect vehicle" eh="815fb77d" />
-        <e k="usedplus_notify_landPurchased" v="Purchased %s for %s" eh="ee85175a" />
-        <e k="usedplus_notify_landFinanced" v="Financed %s - %s due today" eh="874037b7" />
-        <e k="usedplus_notify_vehicleNowYours" v="Congratulations! %s is now yours!" eh="f9f453e9" />
+        <e k="usedplus_notify_vehiclePurchased" v="%s을(를) %s에 구매했습니다" eh="ee85175a" />
+        <e k="usedplus_notify_vehiclePurchasedShop" v="%s을(를) 구매했습니다 - 차량을 수령하러 상점을 방문하세요" eh="3359716e" />
+        <e k="usedplus_notify_vehicleFinanced" v="%s 융자됨 - 오늘 납부액: %s" eh="874037b7" />
+        <e k="usedplus_notify_vehicleFinancedShop" v="%s을(를) 구매했습니다 - 차량을 수령하러 상점을 방문하세요" eh="815fb77d" />
+        <e k="usedplus_notify_landPurchased" v="%s을(를) %s에 구매했습니다" eh="ee85175a" />
+        <e k="usedplus_notify_landFinanced" v="%s 융자됨 - 오늘 납부액: %s" eh="874037b7" />
+        <e k="usedplus_notify_vehicleNowYours" v="축하합니다! %s이(가) 이제 귀하의 것입니다!" eh="f9f453e9" />
+        <e k="usedplus_notify_placeableFinanced" v="건물 융자 완료!\n%s\n계약금: %s | 월 납부액: %s (%d년간)" eh="72ebd0e0" />
+        <e k="usedplus_notify_placeableSoldPayoff" v="건물이 판매되었습니다. 대출 상환액: %s" eh="78ac7164" />
 
         <!-- Success Notifications - Payments/Loans -->
-        <e k="usedplus_notify_loanPaidOff" v="Loan paid off! Total: %s" eh="0ba73cba" />
-        <e k="usedplus_notify_paymentProcessed" v="Payment of %s processed!" eh="fc4c5db3" />
-        <e k="usedplus_notify_paidDealsTotal" v="Paid %d deals! Total: %s" eh="14743f8a" />
-        <e k="usedplus_notify_paidDealsSomeFailed" v="Paid %d deals, %d failed" eh="203dd11e" />
-        <e k="usedplus_notify_paymentConfigSaved" v="Payment configuration saved!" eh="c0ea9507" />
+        <e k="usedplus_notify_loanPaidOff" v="대출 상환됨! 총액: %s" eh="0ba73cba" />
+        <e k="usedplus_notify_paymentProcessed" v="%s 납부가 처리되었습니다!" eh="fc4c5db3" />
+        <e k="usedplus_notify_paidDealsTotal" v="%d개 거래 납부! 총액: %s" eh="14743f8a" />
+        <e k="usedplus_notify_paidDealsSomeFailed" v="%d개 거래 납부, %d개 실패" eh="203dd11e" />
+        <e k="usedplus_notify_paymentConfigSaved" v="납부 설정 저장됨!" eh="c0ea9507" />
 
         <!-- Success Notifications - Leases -->
-        <e k="usedplus_notify_landLeaseTerminated" v="Land lease for %s has been terminated" eh="f2414acd" />
+        <e k="usedplus_notify_landLeaseTerminated" v="%s에 대한 토지 임대가 종료되었습니다" eh="f2414acd" />
 
         <!-- ============================================== -->
         <!-- PHASE 1: UI Labels (setText hardcoded strings) -->
@@ -745,10 +749,10 @@
         <e k="usedplus_tier_comprehensive_desc" v="Full details + DNA hint + repair estimate" eh="a80be59a" />
 
         <!-- Maintenance Report Dialog -->
-        <e k="usedplus_common_yes" v="Yes" eh="93cba074" />
-        <e k="usedplus_common_no" v="No" eh="bafd7322" />
+        <e k="usedplus_common_yes" v="예" eh="93cba074" />
+        <e k="usedplus_common_no" v="아니오" eh="bafd7322" />
         <e k="usedplus_common_na" v="N/A" eh="382b0f51" />
-        <e k="usedplus_maintenance_purchasedUsed" v="Purchased Used" eh="9b4614d5" />
+        <e k="usedplus_maintenance_purchasedUsed" v="중고로 구매됨" eh="9b4614d5" />
         <e k="usedplus_maintenance_purchasedNew" v="Purchased New" eh="675dda81" />
         <e k="usedplus_maintenance_excellentCondition" v="This vehicle is in excellent condition with no maintenance concerns." eh="3b88ba3a" />
 
@@ -759,11 +763,11 @@
 
         <!-- Repair Finance Dialog -->
         <e k="usedplus_repairfinance_title_repaint" v="Finance Repaint" eh="fdcf5d38" />
-        <e k="usedplus_repairfinance_title_repair" v="Finance Repair" eh="70ef80a4" />
+        <e k="usedplus_repairfinance_title_repair" v="수리 융자" eh="70ef80a4" />
 
         <!-- Used Vehicle Preview Dialog -->
         <e k="usedplus_preview_title" v="Used Vehicle Found" eh="ac794919" />
-        <e k="usedplus_preview_viewReport" v="View Report" eh="7cd1ac84" />
+        <e k="usedplus_preview_viewReport" v="보고서 보기" eh="7cd1ac84" />
 
         <!-- Finance Manager Frame -->
         <e k="usedplus_manager_clickToSelect" v="Click row to select" eh="51c56c6f" />
@@ -782,19 +786,20 @@
         <e k="usedplus_preview_inspectionProgress" v="%s inspection in progress... ~%d hrs remaining" eh="911dfff0" />
         <e k="usedplus_preview_requestInspection" v="Request Inspection" eh="e555e8b2" />
         <e k="usedplus_preview_inProgress" v="In Progress..." eh="bd62582e" />
+        <e k="usedplus_preview_implementNoInspection" v="비동력 농기구는 검사를 이용할 수 없습니다. 현상태로만 구매 가능합니다." eh="620e727f" />
 
         <!-- ============================================== -->
         <!-- PHASE 1c: Land Purchase Dialog Notifications   -->
         <!-- ============================================== -->
 
         <!-- Land Purchase - Mode Selector -->
-        <e k="usedplus_land_modeCash" v="Buy with Cash" eh="01dc9cc3" />
-        <e k="usedplus_land_modeFinance" v="Finance" eh="c482980d" />
-        <e k="usedplus_land_modeLease" v="Lease" eh="47c96b08" />
+        <e k="usedplus_land_modeCash" v="현금으로 구매" eh="01dc9cc3" />
+        <e k="usedplus_land_modeFinance" v="융자" eh="c482980d" />
+        <e k="usedplus_land_modeLease" v="임대" eh="47c96b08" />
 
         <!-- Land Purchase - Context Menu Actions -->
-        <e k="usedplus_action_financeLand" v="Finance" eh="c482980d" />
-        <e k="usedplus_action_leaseLand" v="Lease" eh="47c96b08" />
+        <e k="usedplus_action_financeLand" v="융자" eh="c482980d" />
+        <e k="usedplus_action_leaseLand" v="임대" eh="47c96b08" />
 
         <!-- Land Purchase - Term Sliders -->
         <e k="usedplus_land_termYears" v="%d Years" eh="b655468c" />
@@ -834,23 +839,23 @@
         <!-- Common Button Labels -->
         <e k="usedplus_button_purchase" v="Purchase" eh="76b6a47a" />
         <e k="usedplus_button_buyNow" v="Buy Now" eh="c1f52fba" />
-        <e k="usedplus_button_decline" v="Decline" eh="0d362728" />
+        <e k="usedplus_button_decline" v="거절" eh="0d362728" />
         <e k="usedplus_button_goBack" v="Go Back" eh="4f2f5e1d" />
-        <e k="usedplus_button_close" v="Close" eh="d3d2e617" />
-        <e k="usedplus_button_confirm" v="Confirm" eh="70d9be9b" />
-        <e k="usedplus_button_cancel" v="Cancel" eh="ea478870" />
-        <e k="usedplus_button_later" v="Later" eh="61057a0c" />
-        <e k="usedplus_button_takeLoan" v="Take Loan" eh="40fe67fa" />
+        <e k="usedplus_button_close" v="닫기" eh="d3d2e617" />
+        <e k="usedplus_button_confirm" v="확인" eh="70d9be9b" />
+        <e k="usedplus_button_cancel" v="취소" eh="ea478870" />
+        <e k="usedplus_button_later" v="나중에" eh="61057a0c" />
+        <e k="usedplus_button_takeLoan" v="대출 받기" eh="40fe67fa" />
         <e k="usedplus_button_payOff" v="Pay Off" eh="416ff954" />
 
         <!-- Inspection Report Dialog -->
         <e k="usedplus_irp_title" v="INSPECTION REPORT" eh="fca75392" />
         <e k="usedplus_irp_sectionVehicle" v="VEHICLE" eh="e9fa318f" />
-        <e k="usedplus_irp_sectionMechanical" v="MECHANICAL ASSESSMENT" eh="9437e788" />
+        <e k="usedplus_irp_sectionMechanical" v="기계 평가" eh="9437e788" />
         <e k="usedplus_irp_sectionNotes" v="INSPECTOR NOTES" eh="24c3a1cc" />
         <e k="usedplus_irp_sectionMechanic" v="MECHANIC'S ASSESSMENT" eh="ed0defaa" />
         <e k="usedplus_irp_mechanicName" v="- Jim" eh="32d190f0" />
-        <e k="usedplus_irp_sectionRecommend" v="RECOMMENDATION" eh="7ae70d6c" />
+        <e k="usedplus_irp_sectionRecommend" v="권장 사항" eh="7ae70d6c" />
         <e k="usedplus_irp_listedPrice" v="Listed Price:" eh="64a72200" />
         <e k="usedplus_irp_engine" v="Engine:" eh="c7d60198" />
         <e k="usedplus_irp_hydraulics" v="Hydraulics:" eh="1dccde48" />
@@ -862,7 +867,7 @@
 
         <!-- v2.1.0: RVB Parts Breakdown (Inspection Report) -->
         <e k="usedplus_irp_sectionRvbParts" v="COMPONENT STATUS" eh="73555be1" />
-        <e k="usedplus_irp_part_engine" v="Engine" eh="7bfa3072" />
+        <e k="usedplus_irp_part_engine" v="엔진" eh="7bfa3072" />
         <e k="usedplus_irp_part_thermostat" v="Thermostat" eh="91e0b95d" />
         <e k="usedplus_irp_part_generator" v="Generator" eh="92a8f0b9" />
         <e k="usedplus_irp_part_battery" v="Battery" eh="d67c9286" />
@@ -879,7 +884,7 @@
         <e k="usedplus_mrp_sectionHistory" v="MAINTENANCE HISTORY" eh="2ec3182d" />
         <e k="usedplus_mrp_sectionNotes" v="STATUS NOTES" eh="078385a2" />
         <e k="usedplus_mrp_breakdowns" v="Breakdowns" eh="ff1cc005" />
-        <e k="usedplus_mrp_repairs" v="Repairs" eh="810a4b9e" />
+        <e k="usedplus_mrp_repairs" v="수리" eh="810a4b9e" />
         <e k="usedplus_mrp_inspected" v="Inspected" eh="3a07b37b" />
         <e k="usedplus_mrp_resaleImpact" v="Resale Impact:" eh="92b1671e" />
         <e k="usedplus_mrp_origin" v="Origin:" eh="dd187730" />
@@ -898,7 +903,7 @@
         <e k="usedplus_dash_loans" v="Loans:" eh="b60186ea" />
         <e k="usedplus_dash_total" v="TOTAL:" eh="fe30028d" />
         <e k="usedplus_dash_upcomingPayments" v="UPCOMING PAYMENTS" eh="75dbf3ca" />
-        <e k="usedplus_dash_noPayments" v="No upcoming payments" eh="96a72e57" />
+        <e k="usedplus_dash_noPayments" v="예정된 납부 없음" eh="96a72e57" />
         <e k="usedplus_dash_lifetimeStats" v="LIFETIME STATISTICS" eh="10e8dd52" />
         <e k="usedplus_dash_totalFinanced" v="Total Financed:" eh="43df67a8" />
         <e k="usedplus_dash_interestPaid" v="Interest Paid:" eh="e8344297" />
@@ -914,14 +919,14 @@
         <e k="usedplus_mrp_shopRepairs" v="Shop Repairs" eh="6aec1607" />
         <e k="usedplus_mrp_overall" v="Overall:" eh="418a41b5" />
         <e k="usedplus_mrp_condition" v="Condition:" eh="ed51222f" />
-        <e k="usedplus_mrp_hours" v="Operating Hours" eh="f6eeda8b" />
+        <e k="usedplus_mrp_hours" v="작동 시간" eh="f6eeda8b" />
 
         <!-- Deal Details Dialog -->
         <e k="usedplus_dd_title" v="DEAL DETAILS" eh="d711da33" />
         <e k="usedplus_dd_sectionItem" v="ITEM INFORMATION" eh="344a6d4f" />
         <e k="usedplus_dd_sectionTerms" v="FINANCIAL TERMS" eh="cfadb041" />
         <e k="usedplus_dd_sectionProgress" v="PAYMENT PROGRESS" eh="f338b0ad" />
-        <e k="usedplus_dd_sectionSummary" v="PAYMENT SUMMARY" eh="0dd98605" />
+        <e k="usedplus_dd_sectionSummary" v="납부 요약" eh="0dd98605" />
         <e k="usedplus_dd_sectionMultiplier" v="PAYMENT MULTIPLIER" eh="db8d799b" />
         <e k="usedplus_dd_sectionPayoff" v="EARLY PAYOFF" eh="58ce5d42" />
         <e k="usedplus_dd_sectionRepossessed" v="REPOSSESSED COLLATERAL" eh="e0b8734f" />
@@ -952,7 +957,7 @@
         <e k="usedplus_dd_repossessedInfo" v="The following items were repossessed due to missed payments:" eh="b9f50218" />
         <e k="usedplus_dd_repossessedTotal" v="Total value repossessed:" eh="a6274dce" />
         <e k="usedplus_button_viewHistory" v="View History" eh="db9c40b5" />
-        <e k="usedplus_button_earlyPayoff" v="Early Payoff" eh="4ccf6612" />
+        <e k="usedplus_button_earlyPayoff" v="조기 상환" eh="4ccf6612" />
 
         <!-- Take Loan Dialog -->
         <e k="usedplus_tl_title" v="TAKE OUT A LOAN" eh="2d3208d6" />
@@ -966,27 +971,27 @@
         <e k="usedplus_tl_selected" v="Selected:" eh="e8418a9e" />
         <e k="usedplus_tl_existingDebt" v="Existing Debt:" eh="e7d0c3fb" />
         <e k="usedplus_tl_maxLoan" v="MAXIMUM LOAN:" eh="f2517379" />
-        <e k="usedplus_tl_sectionConfig" v="LOAN CONFIGURATION" eh="6c055726" />
+        <e k="usedplus_tl_sectionConfig" v="대출 설정" eh="6c055726" />
         <e k="usedplus_tl_amount" v="Amount:" eh="6702a6e3" />
         <e k="usedplus_tl_term" v="Term:" eh="3980a548" />
-        <e k="usedplus_tl_sectionPayment" v="PAYMENT PREVIEW" eh="3890682c" />
+        <e k="usedplus_tl_sectionPayment" v="납부액 미리보기" eh="3890682c" />
         <e k="usedplus_tl_monthly" v="Monthly:" eh="01963e19" />
         <e k="usedplus_tl_total" v="Total:" eh="66c4c511" />
         <e k="usedplus_tl_interest" v="Interest:" eh="25df650a" />
         <e k="usedplus_tl_yearly" v="Yearly:" eh="49192394" />
         <e k="usedplus_tl_info" v="Loan funds deposited immediately. Payments auto-deducted monthly." eh="91080370" />
-        <e k="usedplus_button_acceptLoan" v="Accept Loan" eh="ad5f835e" />
+        <e k="usedplus_button_acceptLoan" v="대출 수락" eh="ad5f835e" />
 
         <!-- Loan Approved Dialog -->
         <e k="usedplus_la_title" v="LOAN APPROVED" eh="93e4efbe" />
         <e k="usedplus_la_amountDeposited" v="Amount Deposited" eh="682d6e59" />
         <e k="usedplus_la_sectionTerms" v="LOAN TERMS" eh="08b4cdd6" />
         <e k="usedplus_la_term" v="Term:" eh="3980a548" />
-        <e k="usedplus_la_rate" v="Interest Rate:" eh="389f9dd8" />
+        <e k="usedplus_la_rate" v="이자율:" eh="389f9dd8" />
         <e k="usedplus_la_sectionPayment" v="PAYMENT SCHEDULE" eh="7facfc46" />
         <e k="usedplus_la_monthly" v="Monthly:" eh="01963e19" />
         <e k="usedplus_la_yearly" v="Yearly:" eh="49192394" />
-        <e k="usedplus_la_totalInterest" v="Total Interest:" eh="183c0158" />
+        <e k="usedplus_la_totalInterest" v="총 이자:" eh="183c0158" />
         <e k="usedplus_la_sectionCredit" v="CREDIT IMPACT" eh="2bc4f898" />
         <e k="usedplus_la_previous" v="Previous:" eh="1db2aece" />
         <e k="usedplus_la_newScore" v="New Score:" eh="cf060e2c" />
@@ -1005,38 +1010,39 @@
 
         <!-- Unified Purchase Dialog -->
         <e k="usedplus_up_title" v="Purchase Vehicle" eh="f5dc36d9" />
+        <e k="usedplus_up_title_placeable" v="건물 구매" eh="6fd17a3d" />
         <e k="usedplus_up_sectionVehicle" v="VEHICLE" eh="e9fa318f" />
-        <e k="usedplus_up_sectionMethod" v="PURCHASE METHOD" eh="f5f3c261" />
+        <e k="usedplus_up_sectionMethod" v="구매 방법" eh="f5f3c261" />
         <e k="usedplus_up_methodHelp" v="Choose how you want to pay: cash upfront, finance over time, or lease with lower payments." eh="83636102" />
         <e k="usedplus_up_sectionTradeIn" v="TRADE-IN (Optional)" eh="e5bfdf59" />
         <e k="usedplus_up_tradeInHelp" v="Select a vehicle to trade in and reduce your amount due." eh="93193d20" />
         <e k="usedplus_up_tradeInVehicle" v="Trade-In Vehicle:" eh="300da437" />
         <e k="usedplus_up_tradeInValue" v="Trade-In Value:" eh="4f0e849e" />
-        <e k="usedplus_up_sectionCash" v="PAYMENT SUMMARY" eh="0dd98605" />
+        <e k="usedplus_up_sectionCash" v="납부 요약" eh="0dd98605" />
         <e k="usedplus_up_cashHelp" v="Pay the full amount now. Trade-in value is deducted from the total." eh="6439a515" />
         <e k="usedplus_up_vehiclePrice" v="Vehicle Price:" eh="3c3c7b43" />
         <e k="usedplus_up_tradeInCredit" v="Trade-In Credit:" eh="ce4811cd" />
-        <e k="usedplus_up_totalDue" v="TOTAL DUE:" eh="6527240c" />
-        <e k="usedplus_up_sectionFinance" v="FINANCE TERMS" eh="42352b5c" />
+        <e k="usedplus_up_totalDue" v="총 납부액:" eh="6527240c" />
+        <e k="usedplus_up_sectionFinance" v="융자 조건" eh="42352b5c" />
         <e k="usedplus_up_financeHelp" v="Spread payments over time. Adjust term, down payment, and cash back to find your ideal monthly payment." eh="9efc0b37" />
-        <e k="usedplus_up_loanTerm" v="Loan Term:" eh="766186df" />
-        <e k="usedplus_up_downPayment" v="Down Payment:" eh="a706fdb6" />
+        <e k="usedplus_up_loanTerm" v="대출 기간:" eh="766186df" />
+        <e k="usedplus_up_downPayment" v="계약금:" eh="a706fdb6" />
         <e k="usedplus_up_cashBack" v="Cash Back:" eh="3a5f448d" />
-        <e k="usedplus_up_amountFinanced" v="Amount Financed:" eh="c9247e08" />
-        <e k="usedplus_up_interestRate" v="Interest Rate:" eh="389f9dd8" />
-        <e k="usedplus_up_monthlyPayment" v="Monthly Payment:" eh="3499b658" />
-        <e k="usedplus_up_totalInterest" v="Total Interest:" eh="183c0158" />
-        <e k="usedplus_up_dueToday" v="DUE TODAY:" eh="f644eca9" />
+        <e k="usedplus_up_amountFinanced" v="융자 금액:" eh="c9247e08" />
+        <e k="usedplus_up_interestRate" v="이자율:" eh="389f9dd8" />
+        <e k="usedplus_up_monthlyPayment" v="월 납부액:" eh="3499b658" />
+        <e k="usedplus_up_totalInterest" v="총 이자:" eh="183c0158" />
+        <e k="usedplus_up_dueToday" v="오늘 납부액:" eh="f644eca9" />
         <e k="usedplus_up_sectionPayment" v="PAYMENT SCHEDULE" eh="7facfc46" />
         <e k="usedplus_up_sectionDueToday" v="AMOUNT DUE TODAY" eh="7490fb39" />
         <e k="usedplus_up_youPayNow" v="You Pay Now:" eh="3dceb6af" />
-        <e k="usedplus_up_sectionLease" v="LEASE TERMS" eh="0100690c" />
+        <e k="usedplus_up_sectionLease" v="임대 조건" eh="0100690c" />
         <e k="usedplus_up_leaseHelp" v="Longer terms = lower monthly AND lower buyout. Down payment reduces amount due today." eh="e7576928" />
-        <e k="usedplus_up_leaseTerm" v="Lease Term:" eh="52b77655" />
+        <e k="usedplus_up_leaseTerm" v="임대 기간:" eh="52b77655" />
         <e k="usedplus_up_securityDeposit" v="Security Deposit:" eh="40ff2282" />
-        <e k="usedplus_up_totalLeaseCost" v="Total Lease Cost:" eh="61a93e0e" />
+        <e k="usedplus_up_totalLeaseCost" v="총 임대 비용:" eh="61a93e0e" />
         <e k="usedplus_up_buyoutAtEnd" v="Buyout at End:" eh="c79112f8" />
-        <e k="usedplus_button_confirmPurchase" v="Confirm Purchase" eh="c8505ab3" />
+        <e k="usedplus_button_confirmPurchase" v="구매 확인" eh="c8505ab3" />
 
         <!-- Unified Land Purchase Dialog - Additional Labels -->
         <e k="usedplus_lp_sectionDetails" v="FARMLAND DETAILS" eh="e41fc419" />
@@ -1050,51 +1056,51 @@
         <e k="usedplus_lp_cashHelp" v="Pay the full amount now to own the land outright." eh="1d680803" />
         <e k="usedplus_lp_financeHelp" v="Finance the land purchase with monthly payments. Adjust term and down payment below." eh="c823a585" />
         <e k="usedplus_lp_leaseHelp" v="Lease the land with monthly payments. Rate is based on acreage and soil quality." eh="fcb662a3" />
-        <e k="usedplus_lp_leaseTerm" v="Lease Term:" eh="52b77655" />
-        <e k="usedplus_lp_monthlyPayment" v="Monthly Payment:" eh="3499b658" />
+        <e k="usedplus_lp_leaseTerm" v="임대 기간:" eh="52b77655" />
+        <e k="usedplus_lp_monthlyPayment" v="월 납부액:" eh="3499b658" />
         <e k="usedplus_lp_annualCost" v="Annual Cost:" eh="bdfc1025" />
         <e k="usedplus_lp_rateCalc" v="Rate Calculation:" eh="0514b02f" />
         <e k="usedplus_lp_securityDeposit" v="Security Deposit:" eh="40ff2282" />
         <e k="usedplus_lp_dueToday" v="Due Today:" eh="bbc41d05" />
-        <e k="usedplus_lp_totalLeaseCost" v="Total Lease Cost:" eh="61a93e0e" />
+        <e k="usedplus_lp_totalLeaseCost" v="총 임대 비용:" eh="61a93e0e" />
 
         <!-- Used Search Dialog -->
         <e k="usedplus_us_sectionVehicle" v="VEHICLE" eh="e9fa318f" />
         <e k="usedplus_us_sectionTier" v="SEARCH TIER" eh="2a7a1103" />
         <e k="usedplus_us_sectionQuality" v="DESIRED QUALITY" eh="4a96fcfe" />
-        <e k="usedplus_us_qualityAny" v="Any" eh="ed36a1ef" />
-        <e k="usedplus_us_qualityPoor" v="Poor" eh="0e94d017" />
-        <e k="usedplus_us_qualityFair" v="Fair" eh="f7f20cf0" />
-        <e k="usedplus_us_qualityGood" v="Good" eh="0c6ad70b" />
-        <e k="usedplus_us_qualityExcellent" v="Excellent" eh="fcc2d28a" />
+        <e k="usedplus_us_qualityAny" v="모두" eh="ed36a1ef" />
+        <e k="usedplus_us_qualityPoor" v="불량" eh="0e94d017" />
+        <e k="usedplus_us_qualityFair" v="보통" eh="f7f20cf0" />
+        <e k="usedplus_us_qualityGood" v="양호" eh="0c6ad70b" />
+        <e k="usedplus_us_qualityExcellent" v="우수" eh="fcc2d28a" />
         <e k="usedplus_us_discountFormat" v="~%d%% off" eh="69923e02" />
         <e k="usedplus_us_infoText" v="Higher tiers cost more but have better success rates and find higher quality matches." eh="5d292c52" />
 
         <!-- Used Vehicle Preview Dialog -->
         <e k="usedplus_uvp_title" v="Used Vehicle Found" eh="ac794919" />
-        <e k="usedplus_uvp_sectionVehicle" v="VEHICLE INFORMATION" eh="47b7b38d" />
+        <e k="usedplus_uvp_sectionVehicle" v="차량 정보" eh="47b7b38d" />
         <e k="usedplus_uvp_askingPrice" v="Asking Price:" eh="c515d94e" />
         <e k="usedplus_uvp_sectionCondition" v="VISIBLE CONDITION" eh="0eb0492b" />
         <e k="usedplus_uvp_age" v="Age:" eh="25235196" />
         <e k="usedplus_uvp_hours" v="Hours:" eh="ad179a10" />
         <e k="usedplus_uvp_damage" v="Damage:" eh="5a50c456" />
         <e k="usedplus_uvp_wear" v="Wear:" eh="0f25ac5c" />
-        <e k="usedplus_uvp_warningTitle" v="Hidden mechanical condition unknown" eh="d2e42691" />
+        <e k="usedplus_uvp_warningTitle" v="숨겨진 기계 상태 알 수 없음" eh="d2e42691" />
         <e k="usedplus_uvp_selectTier" v="Select inspection level:" eh="c3d4dde6" />
-        <e k="usedplus_uvp_inspectPrompt" v="Pay for professional inspection" eh="2c3e76c2" />
+        <e k="usedplus_uvp_inspectPrompt" v="전문 검사 비용 납부" eh="2c3e76c2" />
         <e k="usedplus_uvp_inspectedText" v="Vehicle has been inspected - view report" eh="9015cd17" />
-        <e k="usedplus_button_buyAsIs" v="Buy As-Is" eh="43e49e70" />
-        <e k="usedplus_button_inspect" v="Inspect" eh="35a9dbe6" />
-        <e k="usedplus_button_tires" v="Tires" eh="3fe2c06a" />
-        <e k="usedplus_button_fluids" v="Fluids" eh="c599fed9" />
+        <e k="usedplus_button_buyAsIs" v="현상태로 구매" eh="43e49e70" />
+        <e k="usedplus_button_inspect" v="검사" eh="35a9dbe6" />
+        <e k="usedplus_button_tires" v="타이어" eh="3fe2c06a" />
+        <e k="usedplus_button_fluids" v="유체" eh="c599fed9" />
 
         <!-- Repair Dialog (uses usedplus_rp_* for legacy compatibility, NOT usedplus_repair_*) -->
         <!-- Note: usedplus_rp_title removed - code uses usedplus_repair_title instead -->
         <e k="usedplus_rp_sectionStatus" v="VEHICLE STATUS" eh="41898172" />
         <e k="usedplus_rp_mechanical" v="Mechanical:" eh="80061faf" />
         <e k="usedplus_rp_paint" v="Paint:" eh="d65951a4" />
-        <e k="usedplus_rp_sectionRepair" v="MECHANICAL REPAIR" eh="6294bbee" />
-        <e k="usedplus_rp_sectionRepaint" v="REPAINT" eh="8c638cea" />
+        <e k="usedplus_rp_sectionRepair" v="기계 수리" eh="6294bbee" />
+        <e k="usedplus_rp_sectionRepaint" v="재도색" eh="8c638cea" />
         <e k="usedplus_rp_selectAmount" v="Select how much to repair:" eh="99d6f5e9" />
         <e k="usedplus_rp_selectPaint" v="Select how much to repaint:" eh="9c5d4c7b" />
         <e k="usedplus_rp_percentExplain" v="Percentage of remaining damage to fix. 100% = restore to full condition." eh="83a0df1d" />
@@ -1111,7 +1117,7 @@
         <e k="usedplus_rp_buttonFinance" v="FINANCE" eh="65fe55e3" />
 
         <!-- Sell Vehicle Dialog -->
-        <e k="usedplus_sv_title" v="Sell Vehicle" eh="fe030802" />
+        <e k="usedplus_sv_title" v="차량 판매" eh="fe030802" />
         <e k="usedplus_sv_sectionVehicle" v="VEHICLE FOR SALE" eh="e26b5c39" />
         <e k="usedplus_sv_sectionOptions" v="SALES OPTIONS" eh="7aa5cdd7" />
         <e k="usedplus_sv_optionsHelp" v="Hire an agent to find buyers. Higher-tier agents reach more buyers but charge more." eh="ba69b5e8" />
@@ -1136,7 +1142,7 @@
         <e k="usedplus_sli_sectionAgent" v="AGENT DETAILS" eh="07b84291" />
         <e k="usedplus_sli_agentType" v="Agent:" eh="8c014e8c" />
         <e k="usedplus_sli_feeCharged" v="Fee Charged:" eh="b8b2c7fb" />
-        <e k="usedplus_sli_sectionListing" v="LISTING DETAILS" eh="7b3916d2" />
+        <e k="usedplus_sli_sectionListing" v="등록 세부정보" eh="7b3916d2" />
         <e k="usedplus_sli_priceTier" v="Price Tier:" eh="a2139c66" />
         <e k="usedplus_sli_expectedPrice" v="Expected Price:" eh="47fafc20" />
         <e k="usedplus_sli_timeline" v="Timeline:" eh="00e0ede6" />
@@ -1158,23 +1164,23 @@
         <e k="usedplus_so_keepWaiting" v="Keep Waiting:" eh="9cc093ff" />
         <e k="usedplus_so_keepWaitingNote" v="May get better offer, or listing expires" eh="6b53991a" />
         <e k="usedplus_so_expiresIn" v="Offer expires in:" eh="ca2ce4a5" />
-        <e k="usedplus_so_acceptOffer" v="Accept Offer" eh="93a5776a" />
+        <e k="usedplus_so_acceptOffer" v="제안 수락" eh="93a5776a" />
         <e k="usedplus_so_keepWaitingBtn" v="Keep Waiting" eh="addcd152" />
         <!-- Deal quality ratings (set dynamically in Lua) -->
         <!-- Legacy keys kept for compatibility -->
         <e k="usedplus_so_title" v="SALE OFFER RECEIVED!" eh="1596a2b0" />
-        <e k="usedplus_button_acceptOffer" v="Accept Offer" eh="93a5776a" />
+        <e k="usedplus_button_acceptOffer" v="제안 수락" eh="93a5776a" />
 
         <!-- Payment Config Dialog -->
         <e k="usedplus_pc_title" v="Configure Loan Payments" eh="07beb52e" />
-        <e k="usedplus_pc_headerLoan" v="Loan" eh="9ad81a8f" />
-        <e k="usedplus_pc_headerBalance" v="Balance" eh="99a808d8" />
+        <e k="usedplus_pc_headerLoan" v="대출" eh="9ad81a8f" />
+        <e k="usedplus_pc_headerBalance" v="잔액" eh="99a808d8" />
         <e k="usedplus_pc_headerMode" v="Mode" eh="650be618" />
-        <e k="usedplus_pc_headerPayment" v="Payment" eh="c453a4b8" />
+        <e k="usedplus_pc_headerPayment" v="납부액" eh="c453a4b8" />
         <e k="usedplus_pc_selectLoan" v="Select a loan above to change its payment mode" eh="9c398fdf" />
         <e k="usedplus_pc_totalPayment" v="TOTAL PAYMENT" eh="bea684c8" />
         <e k="usedplus_button_resetAll" v="Reset All" eh="b69a15a8" />
-        <e k="usedplus_button_apply" v="Apply" eh="9639e32c" />
+        <e k="usedplus_button_apply" v="적용" eh="9639e32c" />
 
         <!-- Lease End Dialog -->
         <e k="usedplus_le_chooseOption" v="Choose an Option:" eh="c4477bb4" />
@@ -1182,8 +1188,8 @@
         <e k="usedplus_le_returnDesc" v="Return to dealer, pay any damage penalties" eh="91a379d9" />
         <e k="usedplus_le_buyoutTitle" v="BUYOUT VEHICLE" eh="4fd832ea" />
         <e k="usedplus_le_buyoutDesc" v="Pay residual value, keep vehicle permanently" eh="2397b13e" />
-        <e k="usedplus_button_returnVehicle" v="Return Vehicle" eh="29494bde" />
-        <e k="usedplus_button_buyoutVehicle" v="Buyout Vehicle" eh="941e30d2" />
+        <e k="usedplus_button_returnVehicle" v="차량 반환" eh="29494bde" />
+        <e k="usedplus_button_buyoutVehicle" v="차량 인수" eh="941e30d2" />
 
         <!-- Lease Renewal Dialog -->
         <e k="usedplus_lr_title" v="Lease Term Complete" eh="6aa968eb" />
@@ -1208,12 +1214,12 @@
         <e k="usedplus_lr_optionRenewDesc" v="Extend lease term" eh="392db1c5" />
         <e k="usedplus_lr_equityCarries" v="Equity carries over:" eh="4c5d28b7" />
         <e k="usedplus_button_return" v="Return" eh="988fd738" />
-        <e k="usedplus_button_buyout" v="Buyout" eh="6e052e38" />
+        <e k="usedplus_button_buyout" v="인수" eh="6e052e38" />
         <e k="usedplus_button_renew" v="Renew" eh="0b9feba3" />
         <e k="usedplus_lr_helpText" v="You must choose an option. Returning gives you your deposit back. Buyout uses your equity toward purchase. Renewing extends the lease with equity applied to future buyout." eh="91673bf9" />
 
         <!-- Confirmation Dialog -->
-        <e k="usedplus_conf_title" v="Confirmation" eh="f4d1ea47" />
+        <e k="usedplus_conf_title" v="확인" eh="f4d1ea47" />
 
         <!-- Credit Report Dialog -->
         <e k="usedplus_cr_title" v="CREDIT REPORT" eh="3725e302" />
@@ -1260,7 +1266,7 @@
         <e k="usedplus_sd_successModifier" v="Success Modifier:" eh="6dd11cf5" />
         <e k="usedplus_sd_combinedChance" v="Combined Chance:" eh="7f4e4f53" />
         <e k="usedplus_sd_sectionPricing" v="EXPECTED PRICING" eh="76b4b461" />
-        <e k="usedplus_sd_newPrice" v="New Price:" eh="8def7435" />
+        <e k="usedplus_sd_newPrice" v="신품 가격:" eh="8def7435" />
         <e k="usedplus_sd_expectedUsed" v="Expected Used:" eh="28f47fae" />
         <e k="usedplus_sd_savings" v="Savings:" eh="f3815936" />
         <e k="usedplus_sd_qualityRange" v="Quality Range:" eh="d897532c" />
@@ -1337,11 +1343,11 @@
         <e k="usedplus_fmf_payEarly" v="PAY EARLY" eh="5fa1eddb" />
         <e k="usedplus_fmf_info" v="INFO" eh="551b723e" />
         <e k="usedplus_fmf_searchTierInfo" v="Search Tier Information" eh="0770e1cd" />
-        <e k="usedplus_fmf_localSearch" v="Local Search" eh="e1ea5bc1" />
+        <e k="usedplus_fmf_localSearch" v="지역 검색" eh="e1ea5bc1" />
         <e k="usedplus_fmf_localStats" v="2% fee | 40% success | 1 month" eh="3ccea670" />
-        <e k="usedplus_fmf_regionalSearch" v="Regional Search" eh="722cc490" />
+        <e k="usedplus_fmf_regionalSearch" v="광역 검색" eh="722cc490" />
         <e k="usedplus_fmf_regionalStats" v="6% fee | 70% success | 1-3 months" eh="edd16abf" />
-        <e k="usedplus_fmf_nationalSearch" v="National Search" eh="c967061f" />
+        <e k="usedplus_fmf_nationalSearch" v="전국 검색" eh="c967061f" />
         <e k="usedplus_fmf_nationalStats" v="12% fee | 85% success | 2-6 months" eh="685c2f27" />
         <e k="usedplus_fmf_startFromShop" v="Start searches from shop via 'Search Used'" eh="f0c6f05a" />
         <e k="usedplus_fmf_viaSearchUsed" v="" eh="d41d8cd9" />
@@ -1355,7 +1361,7 @@
         <e k="usedplus_fmf_headerOffers" v="OFFERS" eh="627d160c" />
         <e k="usedplus_fmf_vehiclesForSale" v="Vehicles For Sale" eh="de8a84e8" />
         <e k="usedplus_fmf_noListings" v="No listings. Sell from Garage menu." eh="d0462537" />
-        <e k="usedplus_fmf_lifetimeStats" v="Lifetime Statistics" eh="727103d4" />
+        <e k="usedplus_fmf_lifetimeStats" v="평생 통계" eh="727103d4" />
         <e k="usedplus_fmf_financeHistory" v="-- Finance History --" eh="ea637866" />
         <e k="usedplus_fmf_dealsCompleted" v="Deals Completed:" eh="1bd021c5" />
         <e k="usedplus_fmf_totalFinanced" v="Total Financed:" eh="43df67a8" />
@@ -1367,7 +1373,7 @@
         <e k="usedplus_fmf_feesSpent" v="Fees Spent:" eh="787c75fb" />
         <e k="usedplus_fmf_successRate" v="Success Rate:" eh="346bdbd3" />
         <e k="usedplus_fmf_totalSaved" v="Marketplace Value:" eh="bf7d98b0" />
-        <e k="usedplus_fmf_yourCreditScore" v="Your Credit Score" eh="5bbd5087" />
+        <e k="usedplus_fmf_yourCreditScore" v="귀하의 신용 점수" eh="5bbd5087" />
         <e k="usedplus_fmf_creditRanges" v="Credit Ranges:" eh="a4a7b278" />
         <e k="usedplus_fmf_tierExcellent" v="750-850 Excellent -1.5%" eh="8d6d7463" />
         <e k="usedplus_fmf_tierGood" v="700-749 Good -0.5%" eh="331b260e" />
@@ -1394,7 +1400,7 @@
         <e k="usedplus_fmf_quickRefLine2" v="Monthly payments auto-deduct. Early payoff saves interest." eh="73cd35d9" />
 
         <!-- Land Lease Dialog -->
-        <e k="usedplus_ll_title" v="Lease Land" eh="ec34a2a6" />
+        <e k="usedplus_ll_title" v="토지 임대" eh="ec34a2a6" />
         <e k="usedplus_ll_sectionDetails" v="FIELD DETAILS" eh="9550d705" />
         <e k="usedplus_ll_field" v="Field:" eh="af9b2925" />
         <e k="usedplus_ll_size" v="Size:" eh="af645946" />
@@ -1402,11 +1408,11 @@
         <e k="usedplus_ll_sectionTerm" v="LEASE TERM" eh="bb3b670a" />
         <e k="usedplus_ll_selectDuration" v="Select lease duration:" eh="8f0c8cd2" />
         <e k="usedplus_ll_sectionCosts" v="LEASE COSTS" eh="5793e394" />
-        <e k="usedplus_ll_monthlyPayment" v="Monthly Payment:" eh="3499b658" />
+        <e k="usedplus_ll_monthlyPayment" v="월 납부액:" eh="3499b658" />
         <e k="usedplus_ll_yearlyPayment" v="Yearly Payment:" eh="e1ddacf9" />
-        <e k="usedplus_ll_totalCost" v="Total Lease Cost:" eh="61a93e0e" />
+        <e k="usedplus_ll_totalCost" v="총 임대 비용:" eh="61a93e0e" />
         <e k="usedplus_ll_markup" v="Markup Amount:" eh="62aed63e" />
-        <e k="usedplus_ll_buyoutPrice" v="Buyout Price:" eh="121b9571" />
+        <e k="usedplus_ll_buyoutPrice" v="인수 가격:" eh="121b9571" />
         <e k="usedplus_ll_note1" v="Lease allows land use without full purchase." eh="b4808387" />
         <e k="usedplus_ll_note2" v="Land returns to market at lease end unless bought out." eh="bbed7c34" />
         <!-- REMOVED: usedplus_button_acceptLease - duplicate, use Buttons section -->
@@ -1416,29 +1422,29 @@
         <e k="usedplus_lf_size" v="Size:" eh="af645946" />
         <e k="usedplus_lf_price" v="Price:" eh="f2c12ae1" />
         <e k="usedplus_lf_sectionDueToday" v="DUE TODAY AT SIGNING" eh="cdbd21f6" />
-        <e k="usedplus_lf_downPayment" v="Down Payment:" eh="a706fdb6" />
+        <e k="usedplus_lf_downPayment" v="계약금:" eh="a706fdb6" />
         <e k="usedplus_lf_youPayToday" v="YOU PAY TODAY:" eh="6d6d4e26" />
         <e k="usedplus_lf_lowerRatesNote" v="Land financing has lower rates than vehicle loans." eh="1e35d132" />
 
         <!-- Finance Detail Frame -->
-        <e k="usedplus_fd_title" v="Finance Deal Details" eh="b49b6b5b" />
+        <e k="usedplus_fd_title" v="융자 거래 세부정보" eh="b49b6b5b" />
         <e k="usedplus_fd_quick1Month" v="1 Month" eh="cf13b270" />
         <e k="usedplus_fd_quick6Months" v="6 Months" eh="1d4545e8" />
         <e k="usedplus_fd_quick1Year" v="1 Year" eh="cc1a252a" />
         <e k="usedplus_fd_quickPayOff" v="Pay Off" eh="416ff954" />
 
         <!-- Repair Finance Dialog -->
-        <e k="usedplus_rf_title" v="Finance Repair" eh="70ef80a4" />
+        <e k="usedplus_rf_title" v="수리 융자" eh="70ef80a4" />
         <e k="usedplus_rf_sectionService" v="SERVICE DETAILS" eh="22efc112" />
         <e k="usedplus_rf_repairCost" v="Repair Cost:" eh="33553cf9" />
         <e k="usedplus_rf_repaintCost" v="Repaint Cost:" eh="78155645" />
-        <e k="usedplus_rf_loanTerm" v="Loan Term:" eh="766186df" />
-        <e k="usedplus_rf_downPayment" v="Down Payment:" eh="a706fdb6" />
-        <e k="usedplus_rf_monthlyPayment" v="Monthly Payment:" eh="3499b658" />
-        <e k="usedplus_rf_totalInterest" v="Total Interest:" eh="183c0158" />
-        <e k="usedplus_rf_interestRate" v="Interest Rate:" eh="389f9dd8" />
+        <e k="usedplus_rf_loanTerm" v="대출 기간:" eh="766186df" />
+        <e k="usedplus_rf_downPayment" v="계약금:" eh="a706fdb6" />
+        <e k="usedplus_rf_monthlyPayment" v="월 납부액:" eh="3499b658" />
+        <e k="usedplus_rf_totalInterest" v="총 이자:" eh="183c0158" />
+        <e k="usedplus_rf_interestRate" v="이자율:" eh="389f9dd8" />
         <e k="usedplus_rf_totalPayments" v="Total Payments:" eh="66fc72d1" />
-        <e k="usedplus_rf_creditScore" v="Credit Score:" eh="0199e1a3" />
+        <e k="usedplus_rf_creditScore" v="신용 점수:" eh="0199e1a3" />
         <e k="usedplus_rf_infoText" v="Monthly payments auto-deduct. Pay off early to save on interest." eh="1318c91c" />
         <!-- REMOVED: usedplus_button_acceptFinance - duplicate, use Buttons section -->
 
@@ -1526,14 +1532,14 @@
         <e k="usedplus_quote_leg_5" v="This one's got guardian angels working overtime in the engine bay." eh="d8d30168" />
 
         <!-- Search Expired Dialog (v1.5.1) -->
-        <e k="usedplus_searchExpired_title" v="Search Complete" eh="e92d4ab1" />
+        <e k="usedplus_searchExpired_title" v="검색 완료" eh="e92d4ab1" />
         <e k="usedplus_searchExpired_summary" v="SEARCH SUMMARY" eh="6fa784ed" />
         <e k="usedplus_searchExpired_searchedFor" v="Searched For:" eh="e67ff702" />
         <e k="usedplus_searchExpired_agentTier" v="Agent Tier:" eh="4eb7801b" />
         <e k="usedplus_searchExpired_quality" v="Quality:" eh="3ded0b1d" />
         <e k="usedplus_searchExpired_duration" v="Duration:" eh="68311558" />
         <e k="usedplus_searchExpired_results" v="RESULTS" eh="44795920" />
-        <e k="usedplus_searchExpired_vehiclesFound" v="%d vehicle(s) found" eh="69e744df" />
+        <e k="usedplus_searchExpired_vehiclesFound" v="%d대 발견" eh="69e744df" />
         <e k="usedplus_searchExpired_noVehicles" v="No vehicles found" eh="df1eff24" />
         <e k="usedplus_searchExpired_renewSearch" v="RENEW SEARCH?" eh="e65ba949" />
         <e k="usedplus_searchExpired_renewCost" v="Renewal Cost:" eh="cab42ff8" />
@@ -1584,13 +1590,13 @@
 
         <!-- v1.7.0: Tire Quality Names -->
         <e k="usedplus_tire_retread" v="Retread" eh="bcf7f101" />
-        <e k="usedplus_tire_normal" v="Normal" eh="960b44c5" />
-        <e k="usedplus_tire_quality" v="Quality" eh="571094bb" />
+        <e k="usedplus_tire_normal" v="보통" eh="960b44c5" />
+        <e k="usedplus_tire_quality" v="품질" eh="571094bb" />
 
         <!-- v1.7.0: Fluids Dialog Labels (duplicates removed - kept in v1.7.0 Fluids Service Dialog section) -->
         <e k="usedplus_fluids_level" v="Level:" eh="07ad8151" />
         <e k="usedplus_fluids_status" v="Status:" eh="24a23d78" />
-        <e k="usedplus_fluids_statusOk" v="OK" eh="e0aa021e" />
+        <e k="usedplus_fluids_statusOk" v="확인" eh="e0aa021e" />
         <e k="usedplus_fluids_statusLow" v="LOW" eh="41bc94cb" />
         <e k="usedplus_fluids_statusCritical" v="CRITICAL" eh="99cd1c61" />
         <e k="usedplus_fluids_statusLeaking" v="LEAKING" eh="2ec9e171" />
@@ -1605,7 +1611,7 @@
         <e k="usedplus_tires_condition" v="Condition:" eh="ed51222f" />
         <e k="usedplus_tires_traction" v="Traction:" eh="8d38bce1" />
         <e k="usedplus_tires_flatTire" v="FLAT TIRE" eh="6e87cc30" />
-        <e k="usedplus_tires_replace" v="Replace Tires" eh="3a0d1434" />
+        <e k="usedplus_tires_replace" v="타이어 교체" eh="3a0d1434" />
         <e k="usedplus_tires_retreadDesc" v="Budget option - lower traction, higher failure risk" eh="f277d077" />
         <e k="usedplus_tires_normalDesc" v="Standard tires - balanced performance" eh="df677172" />
         <e k="usedplus_tires_qualityDesc" v="Premium tires - better traction, lower failure risk" eh="69e595ca" />
@@ -1619,25 +1625,25 @@
         <e k="usedplus_mr_oilLevel" v="Oil Level:" eh="0fe915e8" />
         <e k="usedplus_mr_hydraulicLevel" v="Hydraulic Fluid:" eh="45673d76" />
         <e k="usedplus_mr_fuelLeak" v="Fuel Leak:" eh="caf0d1a8" />
-        <e k="usedplus_mr_yes" v="Yes" eh="93cba074" />
-        <e k="usedplus_mr_no" v="No" eh="bafd7322" />
+        <e k="usedplus_mr_yes" v="예" eh="93cba074" />
+        <e k="usedplus_mr_no" v="아니오" eh="bafd7322" />
 
         <!-- v2.8.0: Vehicle Info Box Display (when pointing at vehicle) -->
-        <e k="usedplus_info_oil_level" v="Oil Level" eh="a6d699fb" />
-        <e k="usedplus_info_hydraulic_level" v="Hydraulic Fluid" eh="f9c4d7d9" />
-        <e k="usedplus_info_tire_condition" v="Tires" eh="3fe2c06a" />
+        <e k="usedplus_info_oil_level" v="오일 레벨" eh="a6d699fb" />
+        <e k="usedplus_info_hydraulic_level" v="유압유" eh="f9c4d7d9" />
+        <e k="usedplus_info_tire_condition" v="타이어" eh="3fe2c06a" />
 
         <!-- v1.7.0: Tires Service Dialog -->
-        <e k="usedplus_tires_title" v="Tire Service" eh="b0234f4e" />
+        <e k="usedplus_tires_title" v="타이어 서비스" eh="b0234f4e" />
         <e k="usedplus_tires_sectionStatus" v="VEHICLE &amp; TIRE STATUS" eh="c0e3631e" />
         <e k="usedplus_tires_sectionSelect" v="SELECT TIRE QUALITY" eh="42abee54" />
-        <e k="usedplus_tires_sectionPayment" v="PAYMENT SUMMARY" eh="0dd98605" />
+        <e k="usedplus_tires_sectionPayment" v="납부 요약" eh="0dd98605" />
         <e k="usedplus_tires_currentQuality" v="Current Quality:" eh="b46a9180" />
         <e k="usedplus_tires_currentCondition" v="Tire Condition:" eh="e8946816" />
         <e k="usedplus_tires_selectHelp" v="Click a tire type to select. Higher quality = better performance." eh="0c321a8a" />
         <e k="usedplus_tires_retread" v="Retread" eh="bcf7f101" />
-        <e k="usedplus_tires_normal" v="Normal" eh="960b44c5" />
-        <e k="usedplus_tires_quality" v="Quality" eh="571094bb" />
+        <e k="usedplus_tires_normal" v="보통" eh="960b44c5" />
+        <e k="usedplus_tires_quality" v="품질" eh="571094bb" />
         <e k="usedplus_tires_retreadInfo" v="85% traction, 3x failure" eh="5d43f3aa" />
         <e k="usedplus_tires_normalInfo" v="100% traction, baseline" eh="c5306480" />
         <e k="usedplus_tires_qualityInfo" v="110% traction, 0.5x failure" eh="0017aa0f" />
@@ -1658,7 +1664,7 @@
         <e k="usedplus_fluids_title" v="Fluid Service" eh="7eb767c6" />
         <e k="usedplus_fluids_sectionStatus" v="VEHICLE &amp; FLUID STATUS" eh="2fb5c91e" />
         <e k="usedplus_fluids_sectionService" v="SERVICE OPTIONS" eh="6a49411d" />
-        <e k="usedplus_fluids_sectionPayment" v="PAYMENT SUMMARY" eh="0dd98605" />
+        <e k="usedplus_fluids_sectionPayment" v="납부 요약" eh="0dd98605" />
         <e k="usedplus_fluids_oilLevel" v="Engine Oil:" eh="2168f846" />
         <e k="usedplus_fluids_hydraulicLevel" v="Hydraulic Fluid:" eh="45673d76" />
         <e k="usedplus_fluids_oilRefill" v="Engine Oil Refill" eh="1df82b4c" />
@@ -1683,8 +1689,8 @@
         <e k="usedplus_oilBarrel_specUnlimited" v="Unlimited" eh="545f6c2f" />
         <e k="usedplus_oilTank_name" v="Oil Service Tank" eh="fa56df0c" />
         <e k="usedplus_oilTank_function" v="Large capacity oil service point for refilling engine oil and hydraulic fluid." eh="e6a6837a" />
-        <e k="usedplus_oil_refillAction" v="Refill Engine Oil" eh="001b2a5a" />
-        <e k="usedplus_hydraulic_refillAction" v="Refill Hydraulic Fluid" eh="11081031" />
+        <e k="usedplus_oil_refillAction" v="엔진 오일 재충전" eh="001b2a5a" />
+        <e k="usedplus_hydraulic_refillAction" v="유압유 재충전" eh="11081031" />
         <e k="usedplus_oil_refillComplete" v="Oil refilled - Cost: %s" eh="0dff6e72" />
         <e k="usedplus_hydraulic_refillComplete" v="Hydraulic fluid refilled - Cost: %s" eh="2d22bcb4" />
         <e k="usedplus_oil_refillCompleteStorage" v="Oil refilled from storage" eh="2d3715a7" />
@@ -1701,8 +1707,8 @@
 
         <!-- v1.9.0: Unified Fluid Storage System -->
         <e k="usedplus_fluid_purchaseAction" v="Purchase Fluids" eh="6533ddc5" />
-        <e k="usedplus_fluid_oil" v="Engine Oil" eh="d2d4a89d" />
-        <e k="usedplus_fluid_hydraulic" v="Hydraulic Fluid" eh="f9c4d7d9" />
+        <e k="usedplus_fluid_oil" v="엔진 오일" eh="d2d4a89d" />
+        <e k="usedplus_fluid_hydraulic" v="유압유" eh="f9c4d7d9" />
         <e k="usedplus_fluid_purchased" v="Purchased %.0fL of %s - %s (Tank: %.0f/%.0fL)" eh="a63f3cbd" />
         <e k="usedplus_fluid_storageFull" v="Tank is full!" eh="3a3fc002" />
         <e k="usedplus_fluid_notEnoughStorage" v="Not enough fluid! Need %.1fL, have %.1fL" eh="4c38b7b9" />
@@ -1724,7 +1730,7 @@
         <e k="usedplus_fluid_allClear" v="All fluid systems appear normal." eh="339f1e72" />
 
         <!-- v1.8.0: OBD Scanner (portable diagnostic tool) -->
-        <e k="usedplus_fsk_name" v="OBD Scanner" eh="96023669" />
+        <e k="usedplus_fsk_name" v="OBD 스캐너" eh="96023669" />
         <e k="usedplus_fsk_function" v="Portable OBD diagnostic scanner for emergency field repairs. Connects to vehicle diagnostics port to read fault codes and sensor data. Consumable - single use." eh="bfdb43fa" />
         <e k="usedplus_fsk_tier_basic" v="Basic OBD" eh="36823daa" />
         <e k="usedplus_fsk_activate" v="Connect OBD Scanner" eh="dc1214b1" />
@@ -1736,7 +1742,7 @@
         <e k="usedplus_fsk_select_system" v="OBD scan detected faults in multiple systems. Which system do you want to diagnose?" eh="a0116adf" />
         <e k="usedplus_fsk_reliability" v="System Health" eh="5bbdb0be" />
         <e k="usedplus_fsk_system_engine" v="Engine ECU" eh="0171f3c6" />
-        <e k="usedplus_fsk_system_electrical" v="Electrical System" eh="7a1b3240" />
+        <e k="usedplus_fsk_system_electrical" v="전기 시스템" eh="7a1b3240" />
         <e k="usedplus_fsk_system_hydraulic" v="Hydraulic Control" eh="ab71d1ba" />
         <e k="usedplus_fsk_warning_choose" v="Choose the system most likely at fault - misdiagnosis reduces repair effectiveness" eh="88de8162" />
         <e k="usedplus_fsk_diagnosis" v="OBD FAULT ANALYSIS" eh="65f2e448" />
@@ -1884,18 +1890,18 @@
         <!-- v2.7.0: Mode Selection -->
         <e k="usedplus_fsk_mode_diagnose" v="Diagnose Component" eh="3b9e5655" />
         <e k="usedplus_fsk_mode_malfunctions" v="Locate Malfunctions" eh="26d2acee" />
-        <e k="usedplus_fsk_mode_tire" v="Tire Service" eh="b0234f4e" />
+        <e k="usedplus_fsk_mode_tire" v="타이어 서비스" eh="b0234f4e" />
         <e k="usedplus_fsk_mode_rvb" v="RVB System Analysis" eh="5f5c4944" />
         <e k="usedplus_fsk_rvb_not_installed" v="RVB mod not installed" eh="68a5ac1b" />
         <e k="usedplus_fsk_rvb_no_data" v="No RVB data available for this vehicle" eh="772bef55" />
         <e k="usedplus_fsk_no_malfunctions" v="No active malfunctions detected" eh="3d25e830" />
 
         <!-- v2.7.0: Malfunction/Component names -->
-        <e k="usedplus_component_engine" v="Engine" eh="7bfa3072" />
-        <e k="usedplus_component_hydraulic" v="Hydraulics" eh="1de58ed3" />
-        <e k="usedplus_component_electrical" v="Electrical" eh="6f15be3d" />
+        <e k="usedplus_component_engine" v="엔진" eh="7bfa3072" />
+        <e k="usedplus_component_hydraulic" v="유압" eh="1de58ed3" />
+        <e k="usedplus_component_electrical" v="전기" eh="6f15be3d" />
         <e k="usedplus_component_fuel_system" v="Fuel System" eh="136d85c8" />
-        <e k="usedplus_component_tires" v="Tires" eh="3fe2c06a" />
+        <e k="usedplus_component_tires" v="타이어" eh="3fe2c06a" />
         <e k="usedplus_malfunction_seized" v="SEIZED" eh="cdceb6dd" />
         <e k="usedplus_malfunction_leak" v="LEAKING" eh="2ec9e171" />
         <e k="usedplus_malfunction_flat" v="FLAT" eh="f88a77e3" />
@@ -1904,7 +1910,7 @@
         <e k="usedplus_fsk_diagnosis_exhausted" v="This system has already received field service. Further repairs require workshop equipment." eh="79b71f1e" />
 
         <!-- v2.9.0: Service Truck - Long-Term Restoration System -->
-        <e k="usedplus_serviceTruck_name" v="Service Truck" eh="51b741d0" />
+        <e k="usedplus_serviceTruck_name" v="서비스 트럭" eh="51b741d0" />
         <e k="usedplus_serviceTruck_function" v="Mobile workshop for long-term vehicle restoration. Can restore reliability AND reliability ceiling over time. Requires diesel, oil, hydraulic fluid, and spare parts." eh="3c12f4e8" />
         <e k="usedplus_serviceTruck_typeDesc" v="Restoration Vehicle" eh="7d7e5cd9" />
         <e k="usedplus_serviceTruck_dialogTitle" v="SERVICE TRUCK - VEHICLE RESTORATION" eh="00a2db6f" />
@@ -1957,9 +1963,9 @@
         <e k="usedplus_serviceTruck_alreadyOwned" v="You already own a Service Truck." eh="8d7c53f6" />
 
         <!-- v2.9.0: Spare Parts Pallet -->
-        <e k="usedplus_sparePartsPallet_name" v="Spare Parts Pallet" eh="9bf39a93" />
+        <e k="usedplus_sparePartsPallet_name" v="예비 부품 팔레트" eh="9bf39a93" />
         <e k="usedplus_sparePartsPallet_function" v="Consumable spare parts for Service Truck restoration. Place near the truck during restoration work." eh="c90aa3eb" />
-        <e k="fillType_spareParts" v="Spare Parts" eh="ab6b8ce1" />
+        <e k="fillType_spareParts" v="예비 부품" eh="ab6b8ce1" />
         <e k="unit_pcs" v="pcs" eh="3ecf2642" />
 
         <!-- v2.9.0: Restoration Diagnostic Symptoms - Engine -->
@@ -2066,7 +2072,7 @@
         <!-- System Toggles with Descriptions -->
         <e k="usedplus_setting_finance" v="Vehicle/Land Financing" eh="8159256d" />
         <e k="usedplus_setting_finance_desc" v="Enable financing for vehicle and land purchases" eh="4834038c" />
-        <e k="usedplus_setting_lease" v="Leasing" eh="9e668941" />
+        <e k="usedplus_setting_lease" v="임대" eh="9e668941" />
         <e k="usedplus_setting_lease_desc" v="Enable vehicle and land leasing with buyout options" eh="689ee038" />
         <e k="usedplus_setting_search" v="Used Vehicle Search" eh="07c38501" />
         <e k="usedplus_setting_search_desc" v="Enable agent-based searching for used equipment" eh="73690f8f" />
@@ -2078,15 +2084,15 @@
         <e k="usedplus_setting_tradein_desc" v="Enable trading in vehicles during purchases" eh="464eed0d" />
         <e k="usedplus_setting_credit" v="Credit Scoring" eh="c709b51e" />
         <e k="usedplus_setting_credit_desc" v="Enable dynamic credit-based interest rates" eh="ea6286a9" />
-        <e k="usedplus_setting_tirewear" v="Tire Wear" eh="fa71e50e" />
+        <e k="usedplus_setting_tirewear" v="타이어 마모" eh="fa71e50e" />
         <e k="usedplus_setting_tirewear_desc" v="Enable realistic tire degradation over time" eh="0a955572" />
         <e k="usedplus_setting_malfunctions" v="Malfunctions" eh="97801e8a" />
         <e k="usedplus_setting_malfunctions_desc" v="Enable random breakdowns and component failures" eh="fbbe01f9" />
         <!-- v2.8.0: Malfunction Frequency slider -->
-        <e k="usedplus_setting_malfunctionFrequency" v="Malfunction Frequency" eh="6bf458c7" />
+        <e k="usedplus_setting_malfunctionFrequency" v="고장 빈도" eh="6bf458c7" />
         <e k="usedplus_setting_malfunctionFrequency_desc" v="How often malfunctions occur. 100% = normal, 50% = half as often, 200% = twice as often" eh="4ab011c4" />
         <!-- v2.0.0: NEW - Partial Repair/Repaint toggles -->
-        <e k="usedplus_setting_partialRepair" v="Partial Repair" eh="dc6b627a" />
+        <e k="usedplus_setting_partialRepair" v="부분 수리" eh="dc6b627a" />
         <e k="usedplus_setting_partialRepair_desc" v="Enable partial repairs in vehicle shop (disabling hides repair button)" eh="84fe180c" />
         <e k="usedplus_setting_partialRepaint" v="Partial Repaint" eh="3fca656d" />
         <e k="usedplus_setting_partialRepaint_desc" v="Enable partial repaints in vehicle shop (disabling hides repaint button)" eh="4ca7214a" />
@@ -2175,13 +2181,13 @@
         <!-- v2.0.0: Expanded Presets (6 presets) -->
         <e k="usedplus_preset_title" v="Apply Preset" eh="124235e0" />
         <!-- New presets -->
-        <e k="usedplus_preset_easy" v="Easy" eh="7f943921" />
+        <e k="usedplus_preset_easy" v="쉬움" eh="7f943921" />
         <e k="usedplus_preset_easy_desc" v="Maximum forgiveness - focus on farming, not finance" eh="81004805" />
         <e k="usedplus_preset_balanced" v="Balanced" eh="c6589f52" />
         <e k="usedplus_preset_balanced_desc" v="Default balanced simulation - the intended experience" eh="e4b620f0" />
         <e k="usedplus_preset_challenging" v="Challenging" eh="4235e068" />
         <e k="usedplus_preset_challenging_desc" v="Real consequences - decisions matter" eh="232773e0" />
-        <e k="usedplus_preset_hardcore" v="Hardcore" eh="1c800aa9" />
+        <e k="usedplus_preset_hardcore" v="하드코어" eh="1c800aa9" />
         <e k="usedplus_preset_hardcore_desc" v="Economic survival - every dollar counts" eh="f893227a" />
         <e k="usedplus_preset_streamlined" v="Streamlined" eh="093eb019" />
         <e k="usedplus_preset_streamlined_desc" v="Just finance and lease - no extras" eh="e3952520" />
@@ -2189,32 +2195,32 @@
         <e k="usedplus_preset_immersive_desc" v="Full simulation - best with RVB/UYT mods" eh="777e7831" />
         <!-- Legacy aliases (for backwards compatibility) -->
         <e k="usedplus_preset_realistic" v="Balanced" eh="c6589f52" />
-        <e k="usedplus_preset_casual" v="Easy" eh="7f943921" />
+        <e k="usedplus_preset_casual" v="쉬움" eh="7f943921" />
         <e k="usedplus_preset_lite" v="Streamlined" eh="093eb019" />
         <e k="usedplus_preset_realistic_desc" v="Default balanced simulation - the intended experience" eh="e4b620f0" />
         <e k="usedplus_preset_casual_desc" v="Maximum forgiveness - focus on farming, not finance" eh="81004805" />
         <e k="usedplus_preset_lite_desc" v="Just finance and lease - no extras" eh="e3952520" />
-        <e k="usedplus_preset_apply" v="Apply" eh="9639e32c" />
+        <e k="usedplus_preset_apply" v="적용" eh="9639e32c" />
         <e k="usedplus_preset_reset" v="Reset to Defaults" eh="6795975d" />
 
         <!-- v2.1.0: RVB Workshop Integration -->
-        <e k="usedplus_hydraulic_system" v="Hydraulic System" eh="2f6e031e" />
-        <e k="usedplus_maintenance_grade" v="Maintenance" eh="10d0de28" />
-        <e k="usedplus_service_history" v="History" eh="16d2b386" />
-        <e k="usedplus_mechanic_says" v="Mechanic" eh="64eb6697" />
+        <e k="usedplus_hydraulic_system" v="유압 시스템" eh="2f6e031e" />
+        <e k="usedplus_maintenance_grade" v="정비" eh="10d0de28" />
+        <e k="usedplus_service_history" v="내역" eh="16d2b386" />
+        <e k="usedplus_mechanic_says" v="정비사" eh="64eb6697" />
         <e k="usedplus_mechanic_assessment" v="MECHANIC'S ASSESSMENT" eh="ed0defaa" />
-        <e k="usedplus_grade_excellent" v="Excellent" eh="fcc2d28a" />
-        <e k="usedplus_grade_good" v="Good" eh="0c6ad70b" />
-        <e k="usedplus_grade_fair" v="Fair" eh="f7f20cf0" />
-        <e k="usedplus_grade_poor" v="Poor" eh="0e94d017" />
-        <e k="usedplus_grade_critical" v="Critical" eh="278d01e5" />
+        <e k="usedplus_grade_excellent" v="우수" eh="fcc2d28a" />
+        <e k="usedplus_grade_good" v="양호" eh="0c6ad70b" />
+        <e k="usedplus_grade_fair" v="보통" eh="f7f20cf0" />
+        <e k="usedplus_grade_poor" v="불량" eh="0e94d017" />
+        <e k="usedplus_grade_critical" v="심각" eh="278d01e5" />
 
         <!-- ============================================== -->
         <!-- v2.6.0: NEGOTIATION SYSTEM                     -->
         <!-- ============================================== -->
 
         <!-- Buttons -->
-        <e k="usedplus_button_makeOffer" v="Make Offer" eh="4b779fa1" />
+        <e k="usedplus_button_makeOffer" v="제안하기" eh="4b779fa1" />
 
         <!-- Negotiation Dialog -->
         <e k="usedplus_neg_title" v="MAKE AN OFFER" eh="a91f8bed" />
@@ -2251,8 +2257,8 @@
         <e k="usedplus_sr_sellerPrice" v="Seller's Price:" eh="1402265a" />
         <e k="usedplus_sr_completePurchase" v="Complete Purchase" eh="e1c9f521" />
         <e k="usedplus_sr_acceptCounter" v="Accept Counter" eh="fdbaf6cf" />
-        <e k="usedplus_sr_standFirm" v="Stand Firm" eh="3b35ba7f" />
-        <e k="usedplus_sr_walkAway" v="Walk Away" eh="5218f5e2" />
+        <e k="usedplus_sr_standFirm" v="가격 고수" eh="3b35ba7f" />
+        <e k="usedplus_sr_walkAway" v="거래 포기" eh="5218f5e2" />
         <e k="usedplus_sr_payFullPrice" v="Pay Full Price" eh="1d0533bd" />
 
         <!-- Seller Responses -->
@@ -2343,8 +2349,8 @@
 
         <!-- Depreciation Formatting -->
         <e k="usedplus_age_oneYear" v="1 year old" eh="086d4f5c" />
-        <e k="usedplus_age_years" v="%d years old" eh="afdf2194" />
-        <e k="usedplus_hours" v="%d hours" eh="4e8d5e54" />
+        <e k="usedplus_age_years" v="%d년 경과" eh="afdf2194" />
+        <e k="usedplus_hours" v="%d시간" eh="4e8d5e54" />
 
         <!-- Loan Notifications -->
         <e k="usedplus_notification_vanillaLoanPaidOff" v="Bank loan paid off!" eh="a6f2a43b" />
@@ -2358,7 +2364,7 @@
         <e k="usedplus_mp_success_field_repair" v="Field repair completed!" eh="06239aac" />
         <e k="usedplus_mp_success_fluids_refilled" v="Fluids refilled successfully!" eh="9597cd1d" />
         <e k="usedplus_mp_success_tires_replaced" v="Tires replaced successfully!" eh="5224fbbe" />
-        <e k="usedplus_mp_success_land_purchased" v="Land purchased successfully!" eh="9de4a0f4" />
+        <e k="usedplus_mp_success_land_purchased" v="토지가 성공적으로 구매되었습니다!" eh="9de4a0f4" />
         <e k="usedplus_mp_error_purchase_failed" v="Purchase failed. Please try again." eh="42d7ddab" />
         <e k="usedplus_mp_error_vehicle_not_found" v="Vehicle not found." eh="02c84e79" />
         <e k="usedplus_mp_error_no_loan" v="No loan balance to pay." eh="5668e12f" />
@@ -2373,7 +2379,7 @@
         <!-- Tab Names -->
         <e k="usedplus_admin_tab_malfunctions" v="Malfunctions" eh="97801e8a" />
         <e k="usedplus_admin_tab_spawning" v="Spawning" eh="abd8b510" />
-        <e k="usedplus_admin_tab_finance" v="Finance" eh="c482980d" />
+        <e k="usedplus_admin_tab_finance" v="융자" eh="c482980d" />
         <e k="usedplus_admin_tab_dialogs" v="Dialogs" eh="258853ae" />
         <e k="usedplus_admin_tab_state" v="State" eh="46a2a41c" />
 
@@ -2423,7 +2429,7 @@
         <e k="usedplus_admin_btn_fix_all" v="Fix All" eh="1c7feed4" />
 
         <!-- Buttons - Tab 2 (Spawning) -->
-        <e k="usedplus_admin_btn_spawn_obd" v="OBD Scanner" eh="96023669" />
+        <e k="usedplus_admin_btn_spawn_obd" v="OBD 스캐너" eh="96023669" />
         <e k="usedplus_admin_btn_spawn_truck" v="Svc Truck" eh="083ff302" />
         <e k="usedplus_admin_btn_spawn_parts" v="Parts Pallet" eh="ca04c55a" />
         <e k="usedplus_admin_btn_trigger_discovery" v="Trigger Disc" eh="adaba831" />
@@ -2431,9 +2437,9 @@
         <e k="usedplus_admin_btn_discovery_status" v="Disc Status" eh="bce3ddd2" />
         <e k="usedplus_admin_btn_spawn_lemon" v="Spawn Lemon" eh="13d3e048" />
         <e k="usedplus_admin_btn_spawn_workhorse" v="Workhorse" eh="50cf5190" />
-        <e k="usedplus_admin_btn_spawn_damaged" v="Damaged" eh="f7bd791a" />
-        <e k="usedplus_admin_btn_paint_pristine" v="Pristine" eh="96af3470" />
-        <e k="usedplus_admin_btn_paint_worn" v="Worn" eh="36cc503e" />
+        <e k="usedplus_admin_btn_spawn_damaged" v="손상됨" eh="f7bd791a" />
+        <e k="usedplus_admin_btn_paint_pristine" v="최상" eh="96af3470" />
+        <e k="usedplus_admin_btn_paint_worn" v="마모됨" eh="36cc503e" />
         <e k="usedplus_admin_btn_paint_beaten" v="Beaten" eh="866731dc" />
         <e k="usedplus_admin_btn_paint_destroyed" v="Destroyed" eh="aefbd059" />
 
@@ -2449,23 +2455,23 @@
         <e k="usedplus_admin_btn_missed_payment" v="Miss Payment" eh="4890557c" />
 
         <!-- Buttons - Tab 4 (Dialogs) -->
-        <e k="usedplus_admin_btn_dlg_loan" v="Take Loan" eh="40fe67fa" />
-        <e k="usedplus_admin_btn_dlg_approved" v="Approved" eh="6f806341" />
-        <e k="usedplus_admin_btn_dlg_credit" v="Credit" eh="0a90b1bc" />
-        <e k="usedplus_admin_btn_dlg_history" v="History" eh="16d2b386" />
+        <e k="usedplus_admin_btn_dlg_loan" v="대출 받기" eh="40fe67fa" />
+        <e k="usedplus_admin_btn_dlg_approved" v="승인됨" eh="6f806341" />
+        <e k="usedplus_admin_btn_dlg_credit" v="신용" eh="0a90b1bc" />
+        <e k="usedplus_admin_btn_dlg_history" v="내역" eh="16d2b386" />
         <e k="usedplus_admin_btn_dlg_repo" v="Repo" eh="0f74adf1" />
-        <e k="usedplus_admin_btn_dlg_search" v="Search" eh="13348442" />
+        <e k="usedplus_admin_btn_dlg_search" v="검색" eh="13348442" />
         <e k="usedplus_admin_btn_dlg_purchase" v="Purchase" eh="76b6a47a" />
         <e k="usedplus_admin_btn_dlg_negotiate" v="Negotiate" eh="e481ddec" />
         <e k="usedplus_admin_btn_dlg_seller" v="Seller Resp" eh="8ff31b45" />
         <e k="usedplus_admin_btn_dlg_obd" v="OBD" eh="9971dd97" />
         <e k="usedplus_admin_btn_dlg_service" v="Svc Truck" eh="083ff302" />
-        <e k="usedplus_admin_btn_dlg_inspect" v="Inspect" eh="35a9dbe6" />
+        <e k="usedplus_admin_btn_dlg_inspect" v="검사" eh="35a9dbe6" />
         <e k="usedplus_admin_btn_dlg_lease_end" v="Lease End" eh="da7801f1" />
         <e k="usedplus_admin_btn_dlg_lease_renew" v="Lease Renew" eh="7a794930" />
 
         <!-- Buttons - Tab 5 (State) -->
-        <e k="usedplus_admin_btn_toggle_debug" v="Toggle Debug" eh="e69cb6a0" />
+        <e k="usedplus_admin_btn_toggle_debug" v="디버그 토글" eh="e69cb6a0" />
         <e k="usedplus_admin_btn_rel_100" v="Rel: 100%" eh="dfdb79d3" />
         <e k="usedplus_admin_btn_rel_50" v="Rel: 50%" eh="9ce7a0a2" />
         <e k="usedplus_admin_btn_rel_10" v="Rel: 10%" eh="54d6e770" />
@@ -2479,7 +2485,7 @@
 
         <!-- Info Labels -->
         <e k="usedplus_admin_current_balance" v="Current Balance:" eh="473e7f9e" />
-        <e k="usedplus_admin_current_credit" v="Credit Score:" eh="0199e1a3" />
+        <e k="usedplus_admin_current_credit" v="신용 점수:" eh="0199e1a3" />
 
         <!-- Status Messages -->
         <e k="usedplus_admin_status_ready" v="Ready. Select an action." eh="1ef35a42" />

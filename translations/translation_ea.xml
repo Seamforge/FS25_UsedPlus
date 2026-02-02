@@ -623,7 +623,9 @@
         <e k="usedplus_credit_tooLowForLeasing" v="Puntaje de crédito muy bajo para arrendar. Tu puntaje: %d (necesitas %d+). El arrendamiento requiere mejor crédito que el financiamiento." eh="50b91953" />
         <e k="usedplus_credit_tooLowForLand" v="Puntaje de crédito muy bajo (%d). Necesitas %d+ para financiar terreno." eh="78d73204" />
         <e k="usedplus_credit_tooLowForRepair" v="Puntaje de crédito muy bajo (%d). Necesitas %d+ para financiar reparaciones." eh="70147f73" />
+        <e k="usedplus_credit_tooLowForPlaceable" v="Financiar edificios requiere crédito Excelente (%d+).\nTu crédito: %d (%s)" eh="0fb63457" />
         <e k="usedplus_credit_needScore" v="Crédito: %d (necesitas %d)" eh="82790b98" />
+        <e k="usedplus_placeable_cannotLease" v="Los edificios no se pueden arrendar. Usa las opciones de Efectivo o Financiar." eh="e4fd7eed" />
 
         <!-- Minimum Financing Amount Messages -->
         <e k="usedplus_finance_amountTooSmall" v="Monto muy pequeño para financiar. Mínimo: %s" eh="3a90d8c2" />
@@ -686,6 +688,8 @@
         <e k="usedplus_notify_landPurchased" v="Comprado %s por %s" eh="ee85175a" />
         <e k="usedplus_notify_landFinanced" v="Financiado %s - %s a pagar hoy" eh="874037b7" />
         <e k="usedplus_notify_vehicleNowYours" v="¡Felicidades! ¡%s ahora es tuyo!" eh="f9f453e9" />
+        <e k="usedplus_notify_placeableFinanced" v="¡Edificio Financiado!\n%s\nEnganche: %s | Mensual: %s por %d años" eh="72ebd0e0" />
+        <e k="usedplus_notify_placeableSoldPayoff" v="Edificio vendido. Liquidación del préstamo: %s" eh="78ac7164" />
 
         <!-- Success Notifications - Payments/Loans -->
         <e k="usedplus_notify_loanPaidOff" v="¡Préstamo liquidado! Total: %s" eh="0ba73cba" />
@@ -782,6 +786,7 @@
         <e k="usedplus_preview_inspectionProgress" v="Inspección %s en progreso... ~%d hrs restantes" eh="911dfff0" />
         <e k="usedplus_preview_requestInspection" v="Solicitar Inspección" eh="e555e8b2" />
         <e k="usedplus_preview_inProgress" v="En Progreso..." eh="bd62582e" />
+        <e k="usedplus_preview_implementNoInspection" v="[EN] Inspections not available for non-powered implements. Buy as-is only." eh="620e727f" />
 
         <!-- ============================================== -->
         <!-- PHASE 1c: Land Purchase Dialog Notifications   -->
@@ -1005,6 +1010,7 @@
 
         <!-- Unified Purchase Dialog -->
         <e k="usedplus_up_title" v="Comprar Vehículo" eh="f5dc36d9" />
+        <e k="usedplus_up_title_placeable" v="Purchase Building" eh="6fd17a3d" />
         <e k="usedplus_up_sectionVehicle" v="VEHÍCULO" eh="e9fa318f" />
         <e k="usedplus_up_sectionMethod" v="MÉTODO DE COMPRA" eh="f5f3c261" />
         <e k="usedplus_up_methodHelp" v="Elige cómo quieres pagar: efectivo al contado, financiamiento a plazos, o arrendamiento con pagos menores." eh="83636102" />
@@ -2096,7 +2102,7 @@
         <e k="usedplus_setting_bankInterest" v="Interés Bancario" eh="1267ace4" />
         <e k="usedplus_setting_bankInterest_desc" v="Gana interés en saldos de efectivo positivos (mensual, como una cuenta de ahorros)" eh="8e706865" />
         <e k="usedplus_setting_bankInterestRate" v="Tasa de Interés (TAE)" eh="798c19e6" />
-        <e k="usedplus_setting_bankInterestRate_desc" v="Tasa de interés anual en efectivo. 1% = <e k="usedplus_setting_bankInterestRate_desc" v="0,000 anual en saldo de <e k="usedplus_setting_bankInterestRate_desc" v="M" eh="80e4314a" />
+        <e k="usedplus_setting_bankInterestRate_desc" v="Tasa de interés anual en efectivo. 1% = <e k=" eh="80e4314a" />
 
         <!-- v2.6.2: Mod Compatibility Settings -->
         <e k="usedplus_settings_compatibility" v="Compatibilidad de Mods" eh="5581e454" />

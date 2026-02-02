@@ -72,7 +72,7 @@
         <e k="usedplus_search_duration" v="Dauer" eh="e02d2ae0" />
         <e k="usedplus_search_success" v="Erfolgsquote" eh="aac60ede" />
         <e k="usedplus_search_successChance" v="Erfolgschance" eh="7ad5b765" />
-        <e k="usedplus_search_match" v="Chance auf Qualitätstreffer" eh="91a4fcac" />
+        <e k="usedplus_search_match" v="Chance auf Qualitätsübereinstimmung" eh="da45c669" />
         <!-- REMOVED: usedplus_search_matchChance - duplicate of usedplus_search_match -->
         <e k="usedplus_search_description" v="Beschreibung" eh="b5a7adde" />
         <e k="usedplus_search_descLocal" v="Suchen Sie nach Händlern in der Nähe. Garantierte 1-monatige Antwort, 2 % Kosten, 40 % Erfolgsquote." eh="1aef5e06" />
@@ -255,7 +255,7 @@
         <e k="input_USEDPLUS_INSPECT_VEHICLE" v="Fahrzeug prüfen" eh="c06f09f1" />
         <e k="input_USEDPLUS_ACTIVATE_OBD" v="OBD-Scanner verwenden" eh="9666e26b" />
         <e k="input_USEDPLUS_TIRES" v="Reifenservice" eh="b0234f4e" />
-        <e k="input_USEDPLUS_SERVICE_TRUCK" v="Servicewagen-Steuerung" />
+        <e k="input_USEDPLUS_SERVICE_TRUCK" v="Servicewagen-Steuerung" eh="fad0e0f1" />
 
         <!--  Tooltips for Finance Dialog -->
         <e k="usedplus_finance_loanTerm_tooltip" v="Verteilen Sie die Zahlungen über 1–20 Jahre. Längere Laufzeiten = geringere monatliche Zahlungen, aber höhere gezahlte Gesamtzinsen." eh="e1170142" />
@@ -622,7 +622,9 @@
         <e k="usedplus_credit_tooLowForLeasing" v="Kreditwürdigkeit für Leasing zu niedrig. Ihre Punktzahl: %d (benötigt %d+). Leasing erfordert eine bessere Bonität als eine Finanzierung." eh="50b91953" />
         <e k="usedplus_credit_tooLowForLand" v="Kreditwürdigkeit zu niedrig (%d). Benötigen Sie %d+ zur Finanzierung von Grundstücken." eh="78d73204" />
         <e k="usedplus_credit_tooLowForRepair" v="Kreditwürdigkeit zu niedrig (%d). Benötige %d+ zur Finanzierung von Reparaturen." eh="70147f73" />
+        <e k="usedplus_credit_tooLowForPlaceable" v="Gebäudefinanzierung erfordert ausgezeichnete Bonität (%d+).\nIhre Kreditwürdigkeit: %d (%s)" eh="0fb63457" />
         <e k="usedplus_credit_needScore" v="Gutschrift: %d (benötigt %d)" eh="82790b98" />
+        <e k="usedplus_placeable_cannotLease" v="Gebäude können nicht geleast werden. Verwenden Sie die Optionen Bar oder Finanzierung." eh="e4fd7eed" />
 
         <!-- Minimum Financing Amount Messages -->
         <e k="usedplus_finance_amountTooSmall" v="Betrag zu gering für Finanzierung. Minimum: %s" eh="3a90d8c2" />
@@ -632,38 +634,38 @@
 
         <!-- v2.8.0: Multiplayer Transaction Response Messages -->
         <!-- Error responses for server→client feedback in multiplayer -->
-        <e k="usedplus_mp_error_unauthorized" v="Aktion für Ihren Betrieb nicht autorisiert" />
-        <e k="usedplus_mp_error_disabled" v="Diese Funktion ist in den Einstellungen deaktiviert" />
-        <e k="usedplus_mp_error_manager" v="System nicht initialisiert. Versuchen Sie es erneut." />
-        <e k="usedplus_mp_error_invalid_params" v="Ungültige Parameter" />
-        <e k="usedplus_mp_error_insufficient_funds" v="Unzureichende Mittel" />
-        <e k="usedplus_mp_error_failed" v="Transaktion fehlgeschlagen" />
-        <e k="usedplus_mp_error_farm_not_found" v="Betrieb nicht gefunden" />
-        <e k="usedplus_mp_error_deal_not_found" v="Vertrag nicht gefunden" />
-        <e k="usedplus_mp_error_land_not_found" v="Grundstück nicht gefunden" />
-        <e k="usedplus_mp_error_land_owned" v="Dieses Grundstück ist bereits im Besitz" />
-        <e k="usedplus_mp_error_already_leased" v="Sie haben bereits einen Pachtvertrag für dieses Grundstück" />
-        <e k="usedplus_mp_error_invalid_deal_type" v="Ungültiger Vertragstyp" />
-        <e k="usedplus_mp_error_deal_not_active" v="Vertrag ist nicht aktiv" />
-        <e k="usedplus_mp_error_repair_failed" v="Reparatur fehlgeschlagen" />
-        <e k="usedplus_mp_error_search_failed" v="Suche fehlgeschlagen" />
+        <e k="usedplus_mp_error_unauthorized" v="Aktion für Ihren Betrieb nicht autorisiert" eh="343a024c" />
+        <e k="usedplus_mp_error_disabled" v="Diese Funktion ist in den Einstellungen deaktiviert" eh="d3f06efd" />
+        <e k="usedplus_mp_error_manager" v="System nicht initialisiert. Versuchen Sie es erneut." eh="53daf785" />
+        <e k="usedplus_mp_error_invalid_params" v="Ungültige Parameter" eh="a79fae6b" />
+        <e k="usedplus_mp_error_insufficient_funds" v="Unzureichende Mittel" eh="55f90c96" />
+        <e k="usedplus_mp_error_failed" v="Transaktion fehlgeschlagen" eh="3f864e37" />
+        <e k="usedplus_mp_error_farm_not_found" v="Betrieb nicht gefunden" eh="a13cd50e" />
+        <e k="usedplus_mp_error_deal_not_found" v="Vertrag nicht gefunden" eh="f85a8ec8" />
+        <e k="usedplus_mp_error_land_not_found" v="Grundstück nicht gefunden" eh="db02fd36" />
+        <e k="usedplus_mp_error_land_owned" v="Dieses Grundstück ist bereits im Besitz" eh="7175cfeb" />
+        <e k="usedplus_mp_error_already_leased" v="Sie haben bereits einen Pachtvertrag für dieses Grundstück" eh="25394947" />
+        <e k="usedplus_mp_error_invalid_deal_type" v="Ungültiger Vertragstyp" eh="e9926aa4" />
+        <e k="usedplus_mp_error_deal_not_active" v="Vertrag ist nicht aktiv" eh="4f8a3c97" />
+        <e k="usedplus_mp_error_repair_failed" v="Reparatur fehlgeschlagen" eh="e25882fc" />
+        <e k="usedplus_mp_error_search_failed" v="Suche fehlgeschlagen" eh="a4d17776" />
 
         <!-- Success responses for server→client feedback in multiplayer -->
-        <e k="usedplus_mp_success_financed" v="Fahrzeug erfolgreich finanziert!" />
-        <e k="usedplus_mp_success_leased" v="Fahrzeug erfolgreich geleast!" />
-        <e k="usedplus_mp_success_loan" v="Kredit genehmigt!" />
-        <e k="usedplus_mp_success_payment" v="Zahlung verarbeitet!" />
-        <e k="usedplus_mp_success_land_leased" v="Grundstück erfolgreich gepachtet!" />
-        <e k="usedplus_mp_success_land_buyout" v="Grundstück erfolgreich gekauft!" />
-        <e k="usedplus_mp_success_listed" v="Fahrzeug zum Verkauf gelistet!" />
-        <e k="usedplus_mp_success_sale_action" v="Verkaufsaktion abgeschlossen!" />
-        <e k="usedplus_mp_success_price_modified" v="Preis aktualisiert!" />
-        <e k="usedplus_mp_success_repair" v="Reparatur abgeschlossen!" />
-        <e k="usedplus_mp_success_search_started" v="Suche gestartet!" />
-        <e k="usedplus_mp_success_lease_ended" v="Leasing erfolgreich beendet!" />
-        <e k="usedplus_mp_success_lease_terminated" v="Leasing gekündigt!" />
-        <e k="usedplus_mp_success_lease_renewed" v="Leasing verlängert!" />
-        <e k="usedplus_mp_success_lease_buyout" v="Leasing-Übernahme abgeschlossen!" />
+        <e k="usedplus_mp_success_financed" v="Fahrzeug erfolgreich finanziert!" eh="e0a11202" />
+        <e k="usedplus_mp_success_leased" v="Fahrzeug erfolgreich geleast!" eh="f73065ee" />
+        <e k="usedplus_mp_success_loan" v="Kredit genehmigt!" eh="96d2eb36" />
+        <e k="usedplus_mp_success_payment" v="Zahlung verarbeitet!" eh="fffcd9ab" />
+        <e k="usedplus_mp_success_land_leased" v="Grundstück erfolgreich gepachtet!" eh="4815779c" />
+        <e k="usedplus_mp_success_land_buyout" v="Grundstück erfolgreich gekauft!" eh="9de4a0f4" />
+        <e k="usedplus_mp_success_listed" v="Fahrzeug zum Verkauf gelistet!" eh="1178dfe3" />
+        <e k="usedplus_mp_success_sale_action" v="Verkaufsaktion abgeschlossen!" eh="f4473f61" />
+        <e k="usedplus_mp_success_price_modified" v="Preis aktualisiert!" eh="3778ab16" />
+        <e k="usedplus_mp_success_repair" v="Reparatur abgeschlossen!" eh="9e6d62a2" />
+        <e k="usedplus_mp_success_search_started" v="Suche gestartet!" eh="f10690d3" />
+        <e k="usedplus_mp_success_lease_ended" v="Leasing erfolgreich beendet!" eh="71efe46d" />
+        <e k="usedplus_mp_success_lease_terminated" v="Leasing gekündigt!" eh="2ac6c824" />
+        <e k="usedplus_mp_success_lease_renewed" v="Leasing verlängert!" eh="30c5a4dd" />
+        <e k="usedplus_mp_success_lease_buyout" v="Leasing-Übernahme abgeschlossen!" eh="b76c5d41" />
 
         <!-- Mode Selector Options -->
         <e k="usedplus_mode_cash" v="Kaufen Sie mit Bargeld" eh="01dc9cc3" />
@@ -685,6 +687,8 @@
         <e k="usedplus_notify_landPurchased" v="Gekauft %s für %s" eh="ee85175a" />
         <e k="usedplus_notify_landFinanced" v="Finanziert %s - ​​%s fällig heute" eh="874037b7" />
         <e k="usedplus_notify_vehicleNowYours" v="Glückwunsch! %s gehört jetzt dir!" eh="f9f453e9" />
+        <e k="usedplus_notify_placeableFinanced" v="Gebäude finanziert!\n%s\nAnzahlung: %s | Monatlich: %s für %d Jahre" eh="72ebd0e0" />
+        <e k="usedplus_notify_placeableSoldPayoff" v="Gebäude verkauft. Kreditrückzahlung: %s" eh="78ac7164" />
 
         <!-- Success Notifications - Payments/Loans -->
         <e k="usedplus_notify_loanPaidOff" v="Kredit abbezahlt! Gesamt: %s" eh="0ba73cba" />
@@ -775,6 +779,7 @@
     <e k="usedplus_preview_inspectionProgress" v="%s-Inspektion läuft... ~%d Std. verbleibend" eh="911dfff0" />
     <e k="usedplus_preview_requestInspection" v="Inspektion anfordern" eh="e555e8b2" />
     <e k="usedplus_preview_inProgress" v="In Bearbeitung..." eh="bd62582e" />
+        <e k="usedplus_preview_implementNoInspection" v="[EN] Inspections not available for non-powered implements. Buy as-is only." eh="620e727f" />
 
         <!-- ============================================== -->
         <!-- PHASE 1c: Land Purchase Dialog Notifications   -->
@@ -832,7 +837,7 @@
         <e k="usedplus_button_close" v="Schließen" eh="d3d2e617" />
         <e k="usedplus_button_confirm" v="Bestätigen" eh="70d9be9b" />
         <e k="usedplus_button_cancel" v="Stornieren" eh="ea478870" />
-        <e k="usedplus_button_later" v="Später" />
+        <e k="usedplus_button_later" v="Später" eh="61057a0c" />
         <e k="usedplus_button_takeLoan" v="Nehmen Sie einen Kredit auf" eh="40fe67fa" />
         <e k="usedplus_button_payOff" v="Auszahlen" eh="416ff954" />
 
@@ -954,8 +959,8 @@
         <e k="usedplus_tl_yourRate" v="Ihr Zinssatz:" eh="6387ae1b" />
         <e k="usedplus_tl_sectionCollateral" v="SICHERHEITEN AUSWÄHLEN" eh="fdb2d731" />
         <e k="usedplus_tl_collateralHelp" v="Klicken Sie hier, um Vermögenswerte als Sicherheit umzuschalten (es werden nur unbelastete Vermögenswerte angezeigt)." eh="618ea809" />
-        <e k="usedplus_tl_prev" v="&lt; Vorher" eh="bddeed69" />
-        <e k="usedplus_tl_next" v="Weiter &gt;" eh="4b0a535a" />
+        <e k="usedplus_tl_prev" v="&lt; Vorher" eh="93819e8f" />
+        <e k="usedplus_tl_next" v="Weiter &gt;" eh="3ef61c7b" />
         <e k="usedplus_tl_selected" v="Ausgewählt:" eh="e8418a9e" />
         <e k="usedplus_tl_existingDebt" v="Bestehende Schulden:" eh="e7d0c3fb" />
         <e k="usedplus_tl_maxLoan" v="MAXIMALES DARLEHEN:" eh="f2517379" />
@@ -998,6 +1003,7 @@
 
         <!-- Unified Purchase Dialog -->
         <e k="usedplus_up_title" v="Fahrzeug kaufen" eh="f5dc36d9" />
+        <e k="usedplus_up_title_placeable" v="Gebäude kaufen" eh="6fd17a3d" />
         <e k="usedplus_up_sectionVehicle" v="FAHRZEUG" eh="e9fa318f" />
         <e k="usedplus_up_sectionMethod" v="KAUFMETHODE" eh="f5f3c261" />
         <e k="usedplus_up_methodHelp" v="Wählen Sie, wie Sie bezahlen möchten: Barzahlung im Voraus, Finanzierung über einen längeren Zeitraum oder Leasing mit niedrigeren Raten." eh="83636102" />
@@ -1359,7 +1365,7 @@
         <e k="usedplus_fmf_vehiclesFound" v="Gefundene Fahrzeuge:" eh="047a7db6" />
         <e k="usedplus_fmf_feesSpent" v="Ausgegebene Gebühren:" eh="787c75fb" />
         <e k="usedplus_fmf_successRate" v="Erfolgsquote:" eh="346bdbd3" />
-        <e k="usedplus_fmf_totalSaved" v="Marktwert:" eh="7d88f3ce" />
+        <e k="usedplus_fmf_totalSaved" v="Marktwert:" eh="bf7d98b0" />
         <e k="usedplus_fmf_yourCreditScore" v="Ihr Kredit-Score" eh="5bbd5087" />
         <e k="usedplus_fmf_creditRanges" v="Kreditbereiche:" eh="a4a7b278" />
         <e k="usedplus_fmf_tierExcellent" v="750-850 Ausgezeichnet -1,5 %" eh="8d6d7463" />
@@ -1804,9 +1810,9 @@
         <e k="usedplus_fsk_temp_repair_desc" v="Dies ist eine Notfallreparatur. Besuchen Sie eine richtige Werkstatt für vollständigen Service." eh="648457f5" />
         <e k="usedplus_fsk_kit_consumed" v="OBD-Scanner wurde verbraucht." eh="b2ea1455" />
         <!-- v2.8.0: Corrected messaging - OBD fixes reliability, not damage -->
-        <e k="usedplus_fsk_onetime_title" v="FELDSERVICE ABGESCHLOSSEN" />
-        <e k="usedplus_fsk_onetime_desc" v="Weitere Diagnosen an diesem System erfordern Werkstattausrüstung" />
-        <e k="usedplus_fsk_kit_consumed_onetime" v="OBD-Scanner verbraucht. Alle feldtauglichen Einstellungen wurden an diesem System vorgenommen." />
+        <e k="usedplus_fsk_onetime_title" v="FELDSERVICE ABGESCHLOSSEN" eh="4336e84b" />
+        <e k="usedplus_fsk_onetime_desc" v="Weitere Diagnosen an diesem System erfordern Werkstattausrüstung" eh="38988277" />
+        <e k="usedplus_fsk_kit_consumed_onetime" v="OBD-Scanner verbraucht. Alle feldtauglichen Einstellungen wurden an diesem System vorgenommen." eh="4ae3775f" />
         <e k="usedplus_fsk_cannot_cancel" v="Reparatur im Gange - kann in diesem Stadium nicht abgebrochen werden." eh="6172d2ec" />
         <e k="usedplus_fsk_noVehicle" v="Kein Fahrzeug in Reichweite erkannt. Bringen Sie den Scanner näher an ein Fahrzeug." eh="e89e127f" />
 
@@ -2091,7 +2097,7 @@
     <e k="usedplus_electrical_seized" v="ELEKTRIKAUSFALL! Alle Systeme sind tot." eh="84b7514a" />
     <e k="usedplus_component_engine" v="Motor" eh="7bfa3072" />
     <e k="usedplus_component_hydraulic" v="Hydraulik" eh="1de58ed3" />
-    <e k="usedplus_component_electrical" v="Elektrik" eh="7a1b3240" />
+    <e k="usedplus_component_electrical" v="Elektrik" eh="6f15be3d" />
     <e k="usedplus_component_fuel_system" v="Kraftstoffsystem" eh="136d85c8" />
     <e k="usedplus_component_tires" v="Reifen" eh="3fe2c06a" />
     <e k="usedplus_malfunction_seized" v="BLOCKIERT" eh="cdceb6dd" />
@@ -2122,7 +2128,7 @@
         <e k="usedplus_notification_vanillaLoanPaidOff" v="Bankkredit abbezahlt!" eh="a6f2a43b" />
 
     <!-- v2.8.0: OBD diagnosis limit -->
-    <e k="usedplus_fsk_diagnosis_exhausted" v="Dieses System hat bereits Feldservice erhalten. Weitere Reparaturen erfordern Werkstattausrüstung." />
+    <e k="usedplus_fsk_diagnosis_exhausted" v="Dieses System hat bereits Feldservice erhalten. Weitere Reparaturen erfordern Werkstattausrüstung." eh="79b71f1e" />
         <e k="usedplus_serviceTruck_name" v="Werkstattwagen" eh="51b741d0" />
         <e k="usedplus_serviceTruck_function" v="Mobile Werkstatt fuer langfristige Fahrzeugrestaurierung. Kann Zuverlaessigkeit UND Zuverlaessigkeitsobergrenze wiederherstellen. Benoetigt Diesel, Oel, Hydraulikflüssigkeit und Ersatzteile." eh="3c12f4e8" />
         <e k="usedplus_serviceTruck_typeDesc" v="Restaurierungsfahrzeug" eh="7d7e5cd9" />
@@ -2258,15 +2264,15 @@
     <!-- v2.8.0: Zusätzliche Multiplayer-Meldungen     -->
     <!-- (Haupt-MP-Meldungen sind oben im MP-Abschnitt) -->
     <!-- ============================================== -->
-    <e k="usedplus_mp_success_vehicle_purchased" v="Fahrzeug erfolgreich gekauft!" />
-    <e k="usedplus_mp_success_trade_in" v="Inzahlungnahme erfolgreich abgeschlossen!" />
-    <e k="usedplus_mp_success_field_repair" v="Feldreparatur abgeschlossen!" />
-    <e k="usedplus_mp_success_fluids_refilled" v="Flüssigkeiten erfolgreich nachgefüllt!" />
-    <e k="usedplus_mp_success_tires_replaced" v="Reifen erfolgreich gewechselt!" />
-    <e k="usedplus_mp_success_land_purchased" v="Land erfolgreich gekauft!" />
-    <e k="usedplus_mp_error_purchase_failed" v="Kauf fehlgeschlagen. Bitte erneut versuchen." />
-    <e k="usedplus_mp_error_vehicle_not_found" v="Fahrzeug nicht gefunden." />
-    <e k="usedplus_mp_error_no_loan" v="Kein Kreditsaldo zum Bezahlen." />
+    <e k="usedplus_mp_success_vehicle_purchased" v="Fahrzeug erfolgreich gekauft!" eh="b5beec4f" />
+    <e k="usedplus_mp_success_trade_in" v="Inzahlungnahme erfolgreich abgeschlossen!" eh="0a59b49a" />
+    <e k="usedplus_mp_success_field_repair" v="Feldreparatur abgeschlossen!" eh="06239aac" />
+    <e k="usedplus_mp_success_fluids_refilled" v="Flüssigkeiten erfolgreich nachgefüllt!" eh="9597cd1d" />
+    <e k="usedplus_mp_success_tires_replaced" v="Reifen erfolgreich gewechselt!" eh="5224fbbe" />
+    <e k="usedplus_mp_success_land_purchased" v="Land erfolgreich gekauft!" eh="9de4a0f4" />
+    <e k="usedplus_mp_error_purchase_failed" v="Kauf fehlgeschlagen. Bitte erneut versuchen." eh="42d7ddab" />
+    <e k="usedplus_mp_error_vehicle_not_found" v="Fahrzeug nicht gefunden." eh="02c84e79" />
+    <e k="usedplus_mp_error_no_loan" v="Kein Kreditsaldo zum Bezahlen." eh="5668e12f" />
         <e k="usedplus_admin_title" v="UsedPlus Admin-Panel" eh="f1ae106e" />
         <e k="usedplus_admin_tab_malfunctions" v="Stoerungen" eh="97801e8a" />
         <e k="usedplus_admin_tab_spawning" v="Spawnen" eh="abd8b510" />

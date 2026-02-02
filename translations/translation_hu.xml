@@ -488,7 +488,9 @@
         <e k="usedplus_credit_tooLowForLeasing" v="Hitelpontszám túl alacsony lízinghez. Pontszáma: %d (minimum: %d+). A lízing jobb hitelt igényel mint a finanszírozás." eh="50b91953" />
         <e k="usedplus_credit_tooLowForLand" v="Hitelpontszám túl alacsony (%d). %d+ szükséges a földfinanszírozáshoz." eh="78d73204" />
         <e k="usedplus_credit_tooLowForRepair" v="Hitelpontszám túl alacsony (%d). %d+ szükséges a javítás finanszírozásához." eh="70147f73" />
+        <e k="usedplus_credit_tooLowForPlaceable" v="Az épület finanszírozása Kiváló hitelt igényel (%d+).\nAz Ön hitele: %d (%s)" eh="0fb63457" />
         <e k="usedplus_credit_needScore" v="Hitel: %d (szükséges: %d)" eh="82790b98" />
+        <e k="usedplus_placeable_cannotLease" v="Épületek nem lízingelhetők. Használja a Készpénz vagy Finanszírozás lehetőséget." eh="e4fd7eed" />
         <e k="usedplus_finance_amountTooSmall" v="Az összeg túl kicsi finanszírozáshoz. Minimum: %s" eh="3a90d8c2" />
         <e k="usedplus_lease_amountTooSmall" v="Az összeg túl kicsi lízinghez. Minimum: %s" eh="3e2012e8" />
         <e k="usedplus_repair_amountTooSmall" v="A javítási költség túl kicsi finanszírozáshoz. Minimum: %s" eh="446dd4cd" />
@@ -538,6 +540,8 @@
         <e k="usedplus_notify_landPurchased" v="%s megvásárolva %s-ért" eh="ee85175a" />
         <e k="usedplus_notify_landFinanced" v="%s finanszírozva - %s esedékes ma" eh="874037b7" />
         <e k="usedplus_notify_vehicleNowYours" v="Gratulálunk! %s most az Öné!" eh="f9f453e9" />
+        <e k="usedplus_notify_placeableFinanced" v="Épület finanszírozva!\n%s\nElőleg: %s | Havi: %s %d évig" eh="72ebd0e0" />
+        <e k="usedplus_notify_placeableSoldPayoff" v="Épület eladva. Kölcsön visszafizetése: %s" eh="78ac7164" />
         <e k="usedplus_notify_loanPaidOff" v="Hitel kifizetve! Összesen: %s" eh="0ba73cba" />
         <e k="usedplus_notify_paymentProcessed" v="%s törlesztés feldolgozva!" eh="fc4c5db3" />
         <e k="usedplus_notify_paidDealsTotal" v="%d szerződés kifizetve! Összesen: %s" eh="14743f8a" />
@@ -600,6 +604,7 @@
         <e k="usedplus_preview_inspectionProgress" v="%s átvizsgálás folyamatban... ~%d óra hátra" eh="911dfff0" />
         <e k="usedplus_preview_requestInspection" v="Átvizsgálás kérése" eh="e555e8b2" />
         <e k="usedplus_preview_inProgress" v="Folyamatban..." eh="bd62582e" />
+        <e k="usedplus_preview_implementNoInspection" v="[EN] Inspections not available for non-powered implements. Buy as-is only." eh="620e727f" />
         <e k="usedplus_land_modeCash" v="Készpénzes vásárlás" eh="01dc9cc3" />
         <e k="usedplus_land_modeFinance" v="Finanszírozás" eh="c482980d" />
         <e k="usedplus_land_modeLease" v="Lízing" eh="47c96b08" />
@@ -773,6 +778,7 @@
         <e k="usedplus_rp_creditImpact" v="Ez az elkobzás súlyosan befolyásolja a hitelpontszámát. A jövőbeli finanszírozás drágább lesz vagy elutasításra kerül." eh="255a010d" />
         <e k="usedplus_rp_footer" v="Fizessen időben a jövőbeli elkobzások elkerüléséhez." eh="000e26a4" />
         <e k="usedplus_up_title" v="Jármű vásárlása" eh="f5dc36d9" />
+        <e k="usedplus_up_title_placeable" v="Épület vásárlása" eh="6fd17a3d" />
         <e k="usedplus_up_sectionVehicle" v="JÁRMŰ" eh="e9fa318f" />
         <e k="usedplus_up_sectionMethod" v="VÁSÁRLÁSI MÓD" eh="f5f3c261" />
         <e k="usedplus_up_methodHelp" v="Válassza ki a fizetés módját: készpénz előre, finanszírozás idővel, vagy lízing alacsonyabb törlesztéssel." eh="83636102" />
