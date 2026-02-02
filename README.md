@@ -41,7 +41,7 @@ UsedPlus transforms Farming Simulator 25 into a **real business simulation**. Yo
 Money in, money out. Click buy. Equipment appears. Sell for recycled value. Repeat.
 
 **With UsedPlus:**
-- Finance that combine over 10 years—but watch your credit score or rates skyrocket
+- Finance vehicles AND buildings over 10-30 years—but watch your credit score or rates skyrocket
 - Buy used equipment from AI sellers who remember if you lowballed them last time
 - Inspect before you buy—is it a reliable workhorse or a lemon waiting to break?
 - Negotiate deals when weather tanks prices, or overpay when you're desperate
