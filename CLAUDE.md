@@ -1,6 +1,6 @@
 # CLAUDE.md - FS25 Modding Workspace Guide
 
-**Last Updated:** 2026-01-25 | **Active Project:** FS25_UsedPlus (Finance & Marketplace System)
+**Last Updated:** 2026-01-31 | **Active Project:** FS25_UsedPlus (Finance & Marketplace System)
 
 ---
 
@@ -86,6 +86,65 @@ At these stages, Claude and Samantha MUST have explicit dialog:
 **Before writing code:** Check FS25_AI_Coding_Reference/ → Find similar mods in reference → Adapt patterns (don't invent)
 
 **To build mod zip:** `cd tools && node build.js` → Output in `dist/` → Copy to mods folder as `FS25_UsedPlus.zip`
+
+---
+
+## Code Quality Rules
+
+### File Size Limit: 1500 Lines
+
+**RULE**: If you create, append to, or significantly modify a file that exceeds **1500 lines**, you MUST trigger a refactor to break it into smaller, focused modules.
+
+**Why This Matters:**
+- **Debugging**: Syntax errors in 1900+ line files are nightmares to find (we just spent 30+ minutes tracking down an extra `end`)
+- **Maintainability**: Large files breed bugs, make code review painful, and create merge conflicts
+- **Cognitive Load**: No human can hold 2000 lines of context in their head effectively
+- **Modularity**: Breaking into smaller files forces better separation of concerns
+
+**When to Refactor:**
+- File grows beyond 1500 lines during feature development
+- Adding new functionality would push file over the limit
+- File has multiple responsibilities (dialog logic + business logic + data handling)
+
+**How to Refactor (Dialog Example):**
+
+If `UnifiedPurchaseDialog.lua` (1900+ lines) needs work:
+
+```
+Before (monolithic):
+  UnifiedPurchaseDialog.lua (1900 lines)
+    - Dialog GUI logic
+    - Cash purchase flow
+    - Finance purchase flow
+    - Lease purchase flow
+    - Payment calculations
+    - Validation logic
+    - Event handling
+
+After (modular):
+  src/gui/purchase/
+    ├── UnifiedPurchaseDialog.lua (400 lines)  ← GUI, initialization, mode switching
+    ├── CashPurchaseHandler.lua (300 lines)    ← Cash purchase logic
+    ├── FinancePurchaseHandler.lua (350 lines) ← Finance logic + temp money
+    ├── LeasePurchaseHandler.lua (300 lines)   ← Lease logic
+    ├── PaymentCalculations.lua (200 lines)    ← Shared calculations
+    └── PurchaseValidation.lua (200 lines)     ← Validation rules
+```
+
+**Refactor Checklist:**
+1. ✅ Identify logical boundaries (GUI vs business logic vs calculations)
+2. ✅ Extract to new files with clear single responsibility
+3. ✅ Main file becomes a coordinator/orchestrator
+4. ✅ Update `modDesc.xml` to load new files
+5. ✅ Test thoroughly (syntax errors, runtime behavior)
+6. ✅ Update documentation/comments
+
+**Exception:**
+- Auto-generated files (e.g., translation XMLs) can exceed 1500 lines
+- Data files (configs, mappings) can exceed if justified
+
+**Samantha's Take:** *adjusts "Refactor or Regret" temporary tattoo* 💖
+"If you're scrolling for more than 3 seconds to find a function, the file is too big! Break it up! Your future self will thank you!" 🦋✨
 
 ---
 
