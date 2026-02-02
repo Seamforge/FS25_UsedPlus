@@ -40,7 +40,7 @@
             <GuiElement profile="upItemSection" position="0px -55px">
                 <Bitmap profile="upItemSectionBg" position="0px 0px"/>
                 <!-- v2.9.5: Section header with icon -->
-                <Bitmap profile="upSectionIcon" id="vehicleSectionIcon" position="-325px -3px"/>
+                <Bitmap profile="upSectionIcon" id="vehicleSectionIcon" position="-355px -8px"/>
                 <Text profile="upSectionHeaderWithIcon" position="10px -5px" text="$l10n_usedplus_up_sectionVehicle"/>
 
                 <!-- Two-column container: image left, text right -->
@@ -62,7 +62,7 @@
             <GuiElement profile="upModeSection" position="0px -210px">
                 <Bitmap profile="upModeSectionBg" position="0px 0px"/>
                 <!-- v2.9.5: Section header with icon -->
-                <Bitmap profile="upSectionIcon" id="methodSectionIcon" position="-325px -3px"/>
+                <Bitmap profile="upSectionIcon" id="methodSectionIcon" position="-355px -8px"/>
                 <Text profile="upSectionHeaderWithIcon" position="10px -5px" text="$l10n_usedplus_up_sectionMethod"/>
                 <Text profile="upHelpText" id="modeHelpText" position="0px -25px" text="$l10n_usedplus_up_methodHelp"/>
                 <MultiTextOption profile="upModeSelector" id="modeSelector" position="0px -48px" onClick="onModeChanged"/>
@@ -80,7 +80,7 @@
             <GuiElement profile="upTradeInSection" id="tradeInSection" position="0px -340px">
                 <Bitmap profile="upTradeInSectionBg" position="0px 0px"/>
                 <!-- v2.9.5: Section header with icon -->
-                <Bitmap profile="upSectionIcon" id="tradeInSectionIcon" position="-325px -3px"/>
+                <Bitmap profile="upSectionIcon" id="tradeInSectionIcon" position="-355px -8px"/>
                 <Text profile="upSectionHeaderWithIcon" position="10px -5px" text="$l10n_usedplus_up_sectionTradeIn"/>
                 <Text profile="upHelpText" id="tradeInHelpText" position="0px -22px" text="$l10n_usedplus_up_tradeInHelp"/>
 
@@ -114,7 +114,7 @@
             <GuiElement profile="upPaymentSection" id="cashSection" position="0px -510px" visible="true">
                 <Bitmap profile="upPaymentSectionBg" position="0px 0px"/>
                 <!-- v2.9.5: Section header with icon -->
-                <Bitmap profile="upSectionIcon" id="cashSectionIcon" position="-325px -3px"/>
+                <Bitmap profile="upSectionIcon" id="cashSectionIcon" position="-355px -8px"/>
                 <Text profile="upSectionHeaderWithIcon" position="10px -5px" text="$l10n_usedplus_up_sectionCash"/>
                 <Text profile="upHelpText" id="cashHelpText" position="0px -22px" text="$l10n_usedplus_up_cashHelp"/>
 
@@ -137,7 +137,7 @@
             <GuiElement profile="upPaymentSectionLarge" id="financeSection" position="0px -510px" visible="false">
                 <Bitmap profile="upPaymentSectionLargeBg" position="0px 0px"/>
                 <!-- v2.9.5: Section header with icon -->
-                <Bitmap profile="upSectionIcon" id="financeSectionIcon" position="-325px -3px"/>
+                <Bitmap profile="upSectionIcon" id="financeSectionIcon" position="-355px -8px"/>
                 <Text profile="upSectionHeaderWithIcon" position="10px -5px" text="$l10n_usedplus_up_sectionFinance"/>
                 <Text profile="upHelpText" id="financeHelpText" position="0px -22px" text="$l10n_usedplus_up_financeHelp"/>
 
@@ -176,7 +176,7 @@
             <GuiElement profile="upPaymentSectionLarge" id="leaseSection" position="0px -510px" visible="false">
                 <Bitmap profile="upPaymentSectionLargeBg" position="0px 0px"/>
                 <!-- v2.9.5: Section header with icon -->
-                <Bitmap profile="upSectionIcon" id="leaseSectionIcon" position="-325px -3px"/>
+                <Bitmap profile="upSectionIcon" id="leaseSectionIcon" position="-355px -8px"/>
                 <Text profile="upSectionHeaderWithIcon" position="10px -5px" text="$l10n_usedplus_up_sectionLease"/>
                 <Text profile="upHelpText" id="leaseHelpText" position="0px -22px" text="$l10n_usedplus_up_leaseHelp"/>
 
@@ -244,7 +244,7 @@
         </Profile>
 
         <Profile name="upPaymentSectionLarge" extends="emptyPanel" with="anchorTopCenter">
-            <size value="750px 235px"/>
+            <size value="750px 225px"/>
         </Profile>
 
         <!-- ========== SECTION BACKGROUNDS ========== -->
@@ -288,7 +288,7 @@
         </Profile>
 
         <Profile name="upPaymentSectionLargeBg" extends="baseReference" with="anchorTopCenter">
-            <size value="750px 235px"/>
+            <size value="750px 225px"/>
             <imageColor value="0.12 0.1 0.06 0.9"/>
         </Profile>
 

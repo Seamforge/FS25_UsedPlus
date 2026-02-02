@@ -20,7 +20,7 @@
             <!-- ========== SECTION 1: Vehicle Info ========== -->
             <GuiElement profile="negSectionContainer" position="0px -60px">
                 <Bitmap profile="negSectionBg" position="0px 0px"/>
-                <Bitmap profile="negSectionIcon" id="vehicleSectionIcon" position="-300px -5px"/>
+                <Bitmap profile="negSectionIcon" id="vehicleSectionIcon" position="-300px -10px"/>
                 <Text profile="negSectionHeaderWithIcon" position="0px -5px" text="$l10n_usedplus_neg_sectionVehicle"/>
 
                 <!-- Two-column layout: Image left, Info right -->
@@ -40,7 +40,7 @@
             <!-- ========== SECTION 2: Mechanic's Whisper ========== -->
             <GuiElement profile="negWhisperSection" position="0px -210px">
                 <Bitmap profile="negWhisperBg" position="0px 0px"/>
-                <Bitmap profile="negSectionIcon" id="whisperSectionIcon" position="-300px -5px"/>
+                <Bitmap profile="negSectionIcon" id="whisperSectionIcon" position="-300px -10px"/>
                 <Text profile="negSectionHeaderWithIcon" position="0px -5px" text="$l10n_usedplus_neg_sectionWhisper"/>
 
                 <!-- Whisper Icon (v2.9.5: Now uses image icon) -->
@@ -54,7 +54,7 @@
             <!-- ========== SECTION 3: Your Offer ========== -->
             <GuiElement profile="negOfferSection" position="0px -310px">
                 <Bitmap profile="negOfferBg" position="0px 0px"/>
-                <Bitmap profile="negSectionIcon" id="offerSectionIcon" position="-300px -5px"/>
+                <Bitmap profile="negSectionIcon" id="offerSectionIcon" position="-300px -10px"/>
                 <Text profile="negSectionHeaderWithIcon" position="0px -5px" text="$l10n_usedplus_neg_sectionOffer"/>
 
                 <!-- Offer Percentage Buttons (3-layer pattern: Bg + Hit + Text) -->

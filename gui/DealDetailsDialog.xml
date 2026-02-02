@@ -18,7 +18,7 @@
             <GuiElement profile="ddSectionContainer" position="0px -70px">
                 <Bitmap profile="ddSectionBg" position="0px 0px"/>
                 <!-- v2.9.5: Section header with icon -->
-                <Bitmap profile="ddSectionIcon" id="itemSectionIcon" position="-290px -3px"/>
+                <Bitmap profile="ddSectionIcon" id="itemSectionIcon" position="-313px -7px"/>
                 <Text profile="ddSectionHeaderWithIcon" position="10px -5px" text="$l10n_usedplus_dd_sectionItem"/>
 
                 <Text profile="ddLabelSmall" position="-270px -28px" text="$l10n_usedplus_dd_name"/>
@@ -37,7 +37,7 @@
             <GuiElement profile="ddSectionContainerTall" position="0px -160px">
                 <Bitmap profile="ddSectionBgTall" position="0px 0px"/>
                 <!-- v2.9.5: Section header with icon -->
-                <Bitmap profile="ddSectionIcon" id="termsSectionIcon" position="-290px -3px"/>
+                <Bitmap profile="ddSectionIcon" id="termsSectionIcon" position="-313px -7px"/>
                 <Text profile="ddSectionHeaderWithIcon" position="10px -5px" text="$l10n_usedplus_dd_sectionTerms"/>
 
                 <Text profile="ddLabelSmall" position="-270px -28px" text="$l10n_usedplus_dd_original"/>
@@ -60,7 +60,7 @@
             <GuiElement profile="ddSectionContainer" position="0px -250px">
                 <Bitmap profile="ddSectionBg" position="0px 0px"/>
                 <!-- v2.9.5: Section header with icon -->
-                <Bitmap profile="ddSectionIcon" id="progressSectionIcon" position="-290px -3px"/>
+                <Bitmap profile="ddSectionIcon" id="progressSectionIcon" position="-313px -7px"/>
                 <Text profile="ddSectionHeaderWithIcon" position="10px -5px" text="$l10n_usedplus_dd_sectionProgress"/>
 
                 <Text profile="ddLabelSmall" position="-270px -28px" text="$l10n_usedplus_dd_payments"/>
@@ -79,7 +79,7 @@
             <GuiElement profile="ddSectionContainer" position="0px -340px">
                 <Bitmap profile="ddSectionBg" position="0px 0px"/>
                 <!-- v2.9.5: Section header with icon -->
-                <Bitmap profile="ddSectionIcon" id="summarySectionIcon" position="-290px -3px"/>
+                <Bitmap profile="ddSectionIcon" id="summarySectionIcon" position="-313px -7px"/>
                 <Text profile="ddSectionHeaderWithIcon" position="10px -5px" text="$l10n_usedplus_dd_sectionSummary"/>
 
                 <Text profile="ddLabelSmall" position="-270px -28px" text="$l10n_usedplus_dd_principal"/>

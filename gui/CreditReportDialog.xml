@@ -42,7 +42,7 @@
             <GuiElement profile="crScoreSection" position="-200px -95px">
                 <Bitmap profile="crScoreSectionBg" position="0px 0px"/>
                 <!-- v2.9.5: Section header with icon -->
-                <Bitmap profile="crSectionIcon" id="scoreHeaderIcon" position="-165px -3px"/>
+                <Bitmap profile="crSectionIcon" id="scoreHeaderIcon" position="-165px -8px"/>
                 <Text profile="crSectionHeaderWithIcon" position="15px -5px" text="$l10n_usedplus_cr_sectionScore"/>
 
                 <!-- Large Score Display -->
@@ -67,7 +67,7 @@
             <GuiElement profile="crFactorsSection" position="-200px -321px">
                 <Bitmap profile="crFactorsSectionBg" position="0px 0px"/>
                 <!-- v2.9.5: Section header with icon -->
-                <Bitmap profile="crSectionIcon" id="factorsHeaderIcon" position="-165px -3px"/>
+                <Bitmap profile="crSectionIcon" id="factorsHeaderIcon" position="-165px -8px"/>
                 <Text profile="crSectionHeaderWithIcon" position="15px -5px" text="$l10n_usedplus_cr_sectionFactors"/>
 
                 <!-- Factor rows: Label on left (-80px), Value on right (+80px) -->
@@ -93,7 +93,7 @@
             <GuiElement profile="crTipsSection" position="-200px -469px">
                 <Bitmap profile="crTipsSectionBgLeft" position="0px 0px"/>
                 <!-- v2.9.5: Section header with icon -->
-                <Bitmap profile="crSectionIcon" id="tipsHeaderIcon" position="-165px -3px"/>
+                <Bitmap profile="crSectionIcon" id="tipsHeaderIcon" position="-165px -8px"/>
                 <Text profile="crTipsSectionHeaderWithIcon" position="15px -5px" text="$l10n_usedplus_cr_sectionTips"/>
 
                 <Text profile="crTipTextLeft" id="tipText1" position="0px -28px" text="$l10n_usedplus_cr_tip1"/>
@@ -109,7 +109,7 @@
             <GuiElement profile="crAccountSection" position="190px -95px">
                 <Bitmap profile="crAccountSectionBgExtended" position="0px 0px"/>
                 <!-- v2.9.5: Section header with icon -->
-                <Bitmap profile="crSectionIconRight" id="accountHeaderIcon" position="-165px -3px"/>
+                <Bitmap profile="crSectionIconRight" id="accountHeaderIcon" position="-165px -8px"/>
                 <Text profile="crSectionHeaderWithIcon" position="15px -5px" text="$l10n_usedplus_cr_sectionAccount"/>
 
                 <!-- Labels at -80px, Values at +80px - centered in 385px section -->
@@ -142,7 +142,7 @@
             <GuiElement profile="crPaymentSection" position="190px -328px">
                 <Bitmap profile="crPaymentSectionBg" position="0px 0px"/>
                 <!-- v2.9.5: Section header with icon -->
-                <Bitmap profile="crSectionIconRight" id="paymentHeaderIcon" position="-165px -3px"/>
+                <Bitmap profile="crSectionIconRight" id="paymentHeaderIcon" position="-165px -8px"/>
                 <Text profile="crSectionHeaderWithIcon" position="15px -5px" text="$l10n_usedplus_cr_sectionPayment"/>
 
                 <!-- Labels at -80px, Values at +80px - centered in 385px section -->

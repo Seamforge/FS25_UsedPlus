@@ -22,7 +22,7 @@
             <GuiElement profile="irpSectionContainer" position="0px -60px">
                 <Bitmap profile="irpSectionBg" position="0px 0px"/>
                 <!-- v2.9.5: Section header with icon -->
-                <Bitmap profile="irpSectionIcon" id="vehicleSectionIcon" position="-290px -3px"/>
+                <Bitmap profile="irpSectionIcon" id="vehicleSectionIcon" position="-290px -8px"/>
                 <Text profile="irpSectionHeaderWithIcon" position="10px -5px" text="$l10n_usedplus_irp_sectionVehicle"/>
 
                 <!-- Two-column layout: Image left, Info right -->
@@ -45,7 +45,7 @@
             <GuiElement profile="irpMechanicalSection" position="0px -220px">
                 <Bitmap profile="irpMechanicalBg" position="0px 0px"/>
                 <!-- v2.9.5: Section header with icon -->
-                <Bitmap profile="irpSectionIcon" id="mechanicalSectionIcon" position="-290px -3px"/>
+                <Bitmap profile="irpSectionIcon" id="mechanicalSectionIcon" position="-290px -8px"/>
                 <Text profile="irpSectionHeaderWithIcon" position="10px -5px" text="$l10n_usedplus_irp_sectionMechanical"/>
 
                 <!-- ENGINE SYSTEM (with icon) -->
@@ -134,7 +134,7 @@
             <GuiElement profile="irpNotesSectionTall" position="0px -480px">
                 <Bitmap profile="irpNotesBgTall" position="0px 0px"/>
                 <!-- v2.9.5: Section header with icon -->
-                <Bitmap profile="irpSectionIcon" id="mechanicSectionIcon" position="-290px -3px"/>
+                <Bitmap profile="irpSectionIcon" id="mechanicSectionIcon" position="-290px -8px"/>
                 <Text profile="irpSectionHeaderWithIcon" position="10px -5px" text="$l10n_usedplus_irp_sectionMechanic"/>
 
                 <!-- Quote text (italicized, centered) -->
@@ -151,7 +151,7 @@
             <GuiElement profile="irpRecommendSection" position="0px -580px">
                 <Bitmap profile="irpRecommendBg" position="0px 0px"/>
                 <!-- v2.9.5: Section header with icon -->
-                <Bitmap profile="irpSectionIcon" id="recommendSectionIcon" position="-290px -3px"/>
+                <Bitmap profile="irpSectionIcon" id="recommendSectionIcon" position="-290px -8px"/>
                 <Text profile="irpSectionHeaderWithIcon" position="10px -5px" text="$l10n_usedplus_irp_sectionRecommend"/>
 
                 <Text profile="irpRecommendValue" id="recommendationText" position="0px -35px"

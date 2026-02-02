@@ -61,7 +61,7 @@
                 <Bitmap profile="usItemSectionBg" position="0px 0px"/>
 
                 <!-- Section header with icon -->
-                <Bitmap profile="usSectionIcon" id="vehicleSectionIcon" position="-335px -3px"/>
+                <Bitmap profile="usSectionIcon" id="vehicleSectionIcon" position="-335px -8px"/>
                 <Text profile="usSectionHeaderWithIcon" position="10px -5px" text="$l10n_usedplus_us_sectionVehicle"/>
 
                 <!-- Two-column container: image left, text right -->
@@ -81,7 +81,7 @@
             <GuiElement profile="usTierSection" position="0px -215px">
                 <Bitmap profile="usTierSectionBg" position="0px 0px"/>
                 <!-- Section header with icon -->
-                <Bitmap profile="usSectionIcon" id="tierSectionIcon" position="-335px -3px"/>
+                <Bitmap profile="usSectionIcon" id="tierSectionIcon" position="-335px -8px"/>
                 <Text profile="usSectionHeaderWithIcon" position="10px -5px" text="$l10n_usedplus_us_sectionTier"/>
                 <Text profile="usHelpText" position="0px -25px" text="$l10n_usedplus_search_tierDescription"/>
 
@@ -140,7 +140,7 @@
             <GuiElement profile="usQualitySection" position="0px -485px">
                 <Bitmap profile="usQualitySectionBg" position="0px 0px"/>
                 <!-- Section header with icon -->
-                <Bitmap profile="usSectionIcon" id="qualitySectionIcon" position="-335px -3px"/>
+                <Bitmap profile="usSectionIcon" id="qualitySectionIcon" position="-335px -8px"/>
                 <Text profile="usSectionHeaderWithIcon" position="10px -5px" text="$l10n_usedplus_us_sectionQuality"/>
                 <Text profile="usHelpText" position="0px -25px" text="$l10n_usedplus_search_qualityDescription"/>
 
