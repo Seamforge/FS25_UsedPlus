@@ -223,9 +223,12 @@ function UsedVehicleManager:spawnUsedVehicle(listing, farmId)
         listing = listing,
         farmId = farmId,
         xmlFilename = storeItem.xmlFilename,
-        timestamp = g_currentMission.time
+        timestamp = g_currentMission.time,
+        storeItemName = listing.storeItemName or storeItem.name or "unknown",
+        category = storeItem.category or "unknown",
     }
-    UsedPlus.logDebug(string.format("Stored pending purchase: %s", pendingKey))
+    UsedPlus.logInfo(string.format("SPAWN DEBUG: Stored pending purchase: %s (item: %s, category: %s)",
+        pendingKey, self.pendingUsedPurchases[pendingKey].storeItemName, self.pendingUsedPurchases[pendingKey].category))
 
     UsedPlus.logDebug("Sending BuyVehicleEvent...")
 

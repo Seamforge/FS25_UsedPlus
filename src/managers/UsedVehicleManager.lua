@@ -450,33 +450,63 @@ end
     Hook for BuyVehicleData.onBought - applies used condition to purchased vehicles
 ]]
 function UsedVehicleManager.onVehicleBought(buyVehicleData, loadedVehicles, loadingState, callbackArguments)
-    if loadingState ~= VehicleLoadingState.OK then return end
-    if g_usedVehicleManager == nil then return end
+    UsedPlus.logInfo(string.format("SPAWN DEBUG: onVehicleBought called - loadingState: %s, vehicles: %d",
+        tostring(loadingState), loadedVehicles and #loadedVehicles or 0))
+
+    if loadingState ~= VehicleLoadingState.OK then
+        UsedPlus.logWarn(string.format("SPAWN DEBUG: Loading state not OK: %s", tostring(loadingState)))
+        return
+    end
+
+    if g_usedVehicleManager == nil then
+        UsedPlus.logWarn("SPAWN DEBUG: g_usedVehicleManager is nil")
+        return
+    end
+
     if g_usedVehicleManager.pendingUsedPurchases == nil or
        next(g_usedVehicleManager.pendingUsedPurchases) == nil then
+        UsedPlus.logDebug("SPAWN DEBUG: No pending used purchases")
         return
     end
 
     local storeItem = buyVehicleData.storeItem
-    if storeItem == nil then return end
+    if storeItem == nil then
+        UsedPlus.logWarn("SPAWN DEBUG: storeItem is nil in buyVehicleData")
+        return
+    end
 
     local xmlFilename = storeItem.xmlFilename
     local farmId = buyVehicleData.ownerFarmId
 
+    UsedPlus.logInfo(string.format("SPAWN DEBUG: Looking for pending purchase - xml: %s, farmId: %d",
+        tostring(xmlFilename), tostring(farmId)))
+
     -- Find matching pending purchase
     local matchedKey = nil
     local pendingData = nil
+
+    UsedPlus.logInfo(string.format("SPAWN DEBUG: Searching %d pending purchases...",
+        table.getn(g_usedVehicleManager.pendingUsedPurchases) or 0))
+
     for key, data in pairs(g_usedVehicleManager.pendingUsedPurchases) do
+        UsedPlus.logInfo(string.format("SPAWN DEBUG: Checking pending: %s (xml: %s, farmId: %d, name: %s)",
+            key, tostring(data.xmlFilename), tostring(data.farmId), tostring(data.storeItemName)))
         if data.xmlFilename == xmlFilename and data.farmId == farmId then
             matchedKey = key
             pendingData = data
+            UsedPlus.logInfo(string.format("SPAWN DEBUG: MATCH FOUND: %s", key))
             break
         end
     end
 
-    if matchedKey == nil then return end
+    if matchedKey == nil then
+        UsedPlus.logWarn(string.format("SPAWN DEBUG: NO MATCH FOUND for xml: %s, farmId: %d",
+            tostring(xmlFilename), tostring(farmId)))
+        return
+    end
 
-    UsedPlus.logDebug(string.format("onVehicleBought: Found pending purchase %s, applying used condition", matchedKey))
+    UsedPlus.logInfo(string.format("onVehicleBought: Found pending purchase %s, applying used condition to %d vehicles",
+        matchedKey, #loadedVehicles))
 
     for _, vehicle in ipairs(loadedVehicles) do
         -- Calls into VehicleSpawning module
