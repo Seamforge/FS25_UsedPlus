@@ -281,8 +281,10 @@ function DealDetailsDialog:updateDisplay()
     end
 
     -- Calculate potential interest savings
+    -- Use configured payment (with multiplier) for accurate savings calculation
     local remainingMonths = (deal.termMonths or 0) - (deal.monthsPaid or 0)
-    local remainingPayments = remainingMonths * (deal.monthlyPayment or 0)
+    local configuredPayment = deal.getConfiguredPayment and deal:getConfiguredPayment() or deal.monthlyPayment or 0
+    local remainingPayments = remainingMonths * configuredPayment
     local potentialSavings = remainingPayments - payoffAmount
 
     if self.infoText then
@@ -318,8 +320,11 @@ end
 function DealDetailsDialog:onViewHistory()
     if self.deal == nil then return end
 
-    -- Open payment history dialog
-    if PaymentHistoryDialog then
+    -- Open payment history dialog using DialogLoader
+    if DialogLoader and DialogLoader.show then
+        DialogLoader.show("PaymentHistoryDialog", "show", self.deal)
+    elseif PaymentHistoryDialog then
+        -- Fallback to old pattern if DialogLoader not available
         local historyDialog = PaymentHistoryDialog.getInstance()
         historyDialog:show(self.deal)
     else
@@ -648,11 +653,17 @@ function DealDetailsDialog:updateSectionVisibility(isDefaulted)
     -- Hide multiplier section for:
     -- 1. Defaulted deals (no point in changing payment settings)
     -- 2. Leases (paying extra doesn't reduce total cost or shorten term)
+    local showMultiplier = not isDefaulted and not isLease
     if self.multiplierSection then
-        self.multiplierSection:setVisible(not isDefaulted and not isLease)
+        self.multiplierSection:setVisible(showMultiplier)
     end
     if self.payoffSection then
         self.payoffSection:setVisible(not isDefaulted)
+        -- Reposition payoff section based on multiplier visibility
+        -- Multiplier at -430px, 95px tall + gap = -525px normally
+        -- Without multiplier, move up to -340px (directly after summary section)
+        local payoffYPos = showMultiplier and -525 or -340
+        self.payoffSection:setPosition(0, payoffYPos)
     end
 
     -- Show repossessed section only for defaulted deals with repossessed items

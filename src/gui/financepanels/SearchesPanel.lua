@@ -298,7 +298,11 @@ function FinanceManagerFrame:onInfoSearchClick(rowIndex)
         UsedPlus.logDebug(string.format("onInfoSearchClick: Showing details for search %s",
             search.storeItemName or "Unknown"))
 
-        if SearchDetailsDialog then
+        -- Use DialogLoader for consistent dialog management
+        if DialogLoader and DialogLoader.show then
+            DialogLoader.show("SearchDetailsDialog", "show", search)
+        elseif SearchDetailsDialog then
+            -- Fallback to old pattern if DialogLoader not available
             local dialog = SearchDetailsDialog.getInstance()
             dialog:show(search)
         end

@@ -77,6 +77,19 @@ function UsedVehiclePreviewDialog:show(listing, farmId, onPurchaseCallback, call
     self.callbackTarget = callbackTarget
     self.search = search
 
+    -- v2.9.6: Check if this is a powered vehicle (has engine) vs implement
+    local storeItem = g_storeManager:getItemByXMLFilename(listing.storeItemIndex)
+    self.isPoweredVehicle = true  -- Default to powered
+    if storeItem then
+        -- Implements in category "TOOLS" don't have engines to inspect
+        local category = storeItem.category or ""
+        if category == "TOOLS" or category == "PLACEABLES" then
+            self.isPoweredVehicle = false
+            UsedPlus.logDebug(string.format("Non-powered implement detected: %s (category: %s) - inspections disabled",
+                tostring(listing.storeItemName), category))
+        end
+    end
+
     -- v2.7.0: Calculate tier costs
     self.tierCosts = UsedPlusMaintenance.getInspectionTierOptions(listing.price or 0)
 
@@ -190,10 +203,36 @@ end
 
 --[[
     v2.7.0: Update inspection section visibility
+    v2.9.6: Hide ALL inspection UI for non-powered implements
 ]]
 function UsedVehiclePreviewDialog:updateInspectionSections(inspectionState)
     local listing = self.listing
 
+    -- v2.9.6: For non-powered implements, hide ALL inspection UI
+    if not self.isPoweredVehicle then
+        -- Hide warning section
+        if self.warningBg then self.warningBg:setVisible(false) end
+        if self.warningIcon then self.warningIcon:setVisible(false) end
+        if self.warningText then self.warningText:setVisible(false) end
+        if self.inspectPrompt then self.inspectPrompt:setVisible(false) end
+        self:hideTierButtons()
+
+        -- Hide progress section
+        if self.progressSection then self.progressSection:setVisible(false) end
+
+        -- Hide inspected section
+        if self.inspectedSection then self.inspectedSection:setVisible(false) end
+
+        -- Show informational message instead
+        if self.warningText then
+            self.warningText:setVisible(true)
+            self.warningText:setText(g_i18n:getText("usedplus_preview_implementNoInspection") or
+                "Inspections not available for non-powered implements. Buy as-is only.")
+        end
+        return
+    end
+
+    -- Normal flow for powered vehicles
     -- Warning section (not inspected)
     local showWarning = (inspectionState == "none")
     if self.warningBg then self.warningBg:setVisible(showWarning) end
