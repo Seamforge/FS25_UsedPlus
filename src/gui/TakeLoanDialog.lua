@@ -120,10 +120,21 @@ function TakeLoanDialog:onGuiSetupFinished()
         if not self.paymentSectionIcon then
             self.paymentSectionIcon = self.dialogElement:getDescendantByName("paymentSectionIcon")
         end
+
+        -- Bind pagination button background elements (for 3-layer buttons)
+        if not self.prevPageBg then
+            self.prevPageBg = self.dialogElement:getDescendantByName("prevPageBg")
+        end
+        if not self.nextPageBg then
+            self.nextPageBg = self.dialogElement:getDescendantByName("nextPageBg")
+        end
     end
 
     -- v2.9.5: Setup section header icons
     self:setupSectionIcons()
+
+    -- Setup pagination button hover effects (3-layer buttons)
+    self:setupPaginationButtonHoverEffects()
 
     -- Diagnostic logging (using logWarn so it always shows)
     UsedPlus.logWarn(string.format("TakeLoanDialog:onGuiSetupFinished - pageIndicatorText=%s, prevPageBtn=%s, nextPageBtn=%s",
@@ -159,6 +170,76 @@ function TakeLoanDialog:setupSectionIcons()
     -- Payment section - calendar icon
     if self.paymentSectionIcon ~= nil then
         self.paymentSectionIcon:setImageFilename(self.iconDir .. "calendar.png")
+    end
+end
+
+--[[
+    Setup hover effects for 3-layer pagination buttons
+    Changes background color when button is focused/pressed
+]]
+function TakeLoanDialog:setupPaginationButtonHoverEffects()
+    -- Colors for button states
+    local normalColor = {0.15, 0.2, 0.15, 0.9}
+    local focusedColor = {0.3, 0.5, 0.3, 1}
+    local pressedColor = {0.2, 0.35, 0.2, 1}
+
+    -- Helper function to set background color
+    local function setButtonBgColor(bgElement, color)
+        if bgElement and bgElement.setImageColor then
+            bgElement:setImageColor(nil, color[1], color[2], color[3], color[4])
+        end
+    end
+
+    -- Previous button hover handling
+    if self.prevPageBtn and self.prevPageBg then
+        -- Set initial state
+        setButtonBgColor(self.prevPageBg, normalColor)
+
+        -- Store original handlers
+        local origOnFocus = self.prevPageBtn.onFocusCallback
+        local origOnFocusLeave = self.prevPageBtn.onFocusLeaveCallback
+
+        -- Override onFocus to change background color
+        self.prevPageBtn.onFocusCallback = function(element)
+            setButtonBgColor(self.prevPageBg, focusedColor)
+            if origOnFocus then
+                origOnFocus(element)
+            end
+        end
+
+        -- Override onFocusLeave to restore background color
+        self.prevPageBtn.onFocusLeaveCallback = function(element)
+            setButtonBgColor(self.prevPageBg, normalColor)
+            if origOnFocusLeave then
+                origOnFocusLeave(element)
+            end
+        end
+    end
+
+    -- Next button hover handling
+    if self.nextPageBtn and self.nextPageBg then
+        -- Set initial state
+        setButtonBgColor(self.nextPageBg, normalColor)
+
+        -- Store original handlers
+        local origOnFocus = self.nextPageBtn.onFocusCallback
+        local origOnFocusLeave = self.nextPageBtn.onFocusLeaveCallback
+
+        -- Override onFocus to change background color
+        self.nextPageBtn.onFocusCallback = function(element)
+            setButtonBgColor(self.nextPageBg, focusedColor)
+            if origOnFocus then
+                origOnFocus(element)
+            end
+        end
+
+        -- Override onFocusLeave to restore background color
+        self.nextPageBtn.onFocusLeaveCallback = function(element)
+            setButtonBgColor(self.nextPageBg, normalColor)
+            if origOnFocusLeave then
+                origOnFocusLeave(element)
+            end
+        end
     end
 end
 
