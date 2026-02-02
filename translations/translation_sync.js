@@ -292,7 +292,11 @@ function isCognateOrInternationalTerm(value) {
         'original', 'score', 'principal', 'ha', 'pcs', 'elite', 'premium',
         'standard', 'budget', 'basic', 'advanced', 'pro', 'master',
         'leasing', 'spawning', 'repo', 'state', 'misfire', 'overheat',
-        'runaway', 'cutout', 'workhorse', 'integration', 'vanilla'
+        'runaway', 'cutout', 'workhorse', 'integration', 'vanilla',
+        'item', 'land', 'thermostat',
+        // French-English cognates (valid in both languages)
+        'description', 'confirmation', 'actions', 'excellent', 'finance', 'finances',
+        'acceptable', 'stable', 'ratio'
     ];
     const lowerValue = value.toLowerCase().trim();
     if (commonCognates.includes(lowerValue)) return true;

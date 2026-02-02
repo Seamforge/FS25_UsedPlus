@@ -385,6 +385,8 @@
         <e k="usedplus_dashboard_statistics" v="Lebenszeitstatistik" eh="727103d4" />
         <e k="usedplus_dashboard_equipment" v="Ausrüstung" eh="9ccda2d5" />
         <e k="usedplus_dashboard_land" v="Land" eh="512ef7c6" />
+        <e k="usedplus_preview_implementNoInspection" v="Inspektionen nicht verfügbar für nicht motorisierte Anbaugeräte. Nur Kauf wie besichtigt." eh="620e727f" />
+        <e k="usedplus_irp_part_thermostat" v="Thermostat" eh="91e0b95d" />
         <e k="usedplus_dashboard_loans" v="Kredite" eh="64e109fb" />
         <e k="usedplus_dashboard_total" v="Gesamt" eh="96b01412" />
         <e k="usedplus_dashboard_assets" v="Gesamtvermögen" eh="7f0b6dfb" />
@@ -779,7 +781,6 @@
     <e k="usedplus_preview_inspectionProgress" v="%s-Inspektion läuft... ~%d Std. verbleibend" eh="911dfff0" />
     <e k="usedplus_preview_requestInspection" v="Inspektion anfordern" eh="e555e8b2" />
     <e k="usedplus_preview_inProgress" v="In Bearbeitung..." eh="bd62582e" />
-        <e k="usedplus_preview_implementNoInspection" v="[EN] Inspections not available for non-powered implements. Buy as-is only." eh="620e727f" />
 
         <!-- ============================================== -->
         <!-- PHASE 1c: Land Purchase Dialog Notifications   -->
@@ -861,7 +862,6 @@
         <!-- v2.1.0: RVB Parts Breakdown (Inspection Report) -->
         <e k="usedplus_irp_sectionRvbParts" v="KOMPONENTENSTATUS" eh="73555be1" />
         <e k="usedplus_irp_part_engine" v="Motor" eh="7bfa3072" />
-        <e k="usedplus_irp_part_thermostat" v="Thermostat" eh="91e0b95d" />
         <e k="usedplus_irp_part_generator" v="Lichtmaschine" eh="92a8f0b9" />
         <e k="usedplus_irp_part_battery" v="Batterie" eh="d67c9286" />
         <e k="usedplus_irp_part_starter" v="Anlasser" eh="ee6085db" />
