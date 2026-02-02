@@ -43,11 +43,34 @@ DialogLoader.loaded = {}
     @param xmlPath - Path relative to MOD_DIR (e.g., "gui/TakeLoanDialog.xml")
 ]]
 function DialogLoader.register(name, dialogClass, xmlPath)
+    UsedPlus.logDebug(string.format("╔═══ DialogLoader.register() ENTRY ═══"))
+    UsedPlus.logDebug(string.format("  name: '%s'", tostring(name)))
+    UsedPlus.logDebug(string.format("  dialogClass: %s", tostring(dialogClass)))
+    UsedPlus.logDebug(string.format("  dialogClass type: %s", type(dialogClass)))
+    UsedPlus.logDebug(string.format("  xmlPath: '%s'", tostring(xmlPath)))
+
+    -- Check if already registered
+    if DialogLoader.dialogs[name] then
+        UsedPlus.logWarn(string.format("  ⚠ Dialog '%s' ALREADY registered - overwriting", name))
+    end
+
     DialogLoader.dialogs[name] = {
         class = dialogClass,
         xml = xmlPath
     }
     DialogLoader.loaded[name] = false
+
+    -- Verify registration
+    local stored = DialogLoader.dialogs[name]
+    if stored then
+        UsedPlus.logDebug(string.format("  ✓ Stored in dialogs[%s]:", name))
+        UsedPlus.logDebug(string.format("    - class: %s", tostring(stored.class)))
+        UsedPlus.logDebug(string.format("    - xml: %s", tostring(stored.xml)))
+    else
+        UsedPlus.logError(string.format("  ✗ FAILED to store in dialogs[%s]!", name))
+    end
+
+    UsedPlus.logDebug(string.format("╚═══ DialogLoader.register() EXIT ═══"))
 end
 
 --[[
@@ -58,32 +81,79 @@ end
     @return boolean - true if loaded successfully
 ]]
 function DialogLoader.ensureLoaded(name)
+    UsedPlus.logDebug(string.format("╔═══ DialogLoader.ensureLoaded() ENTRY ═══"))
+    UsedPlus.logDebug(string.format("  name: '%s'", tostring(name)))
+
     -- Already loaded?
+    UsedPlus.logDebug(string.format("  Checking if already loaded..."))
+    UsedPlus.logDebug(string.format("    DialogLoader.loaded[%s] = %s", name, tostring(DialogLoader.loaded[name])))
+
     if DialogLoader.loaded[name] then
+        UsedPlus.logDebug(string.format("  ✓ Already loaded, returning true"))
+        UsedPlus.logDebug(string.format("╚═══ DialogLoader.ensureLoaded() EXIT (cached) ═══"))
+        return true
+    end
+
+    -- Check if already loaded by another mechanism (getInstance(), etc.)
+    UsedPlus.logDebug(string.format("  Checking g_gui.guis[%s]...", name))
+    if g_gui and g_gui.guis and g_gui.guis[name] then
+        UsedPlus.logDebug(string.format("  ✓ Already loaded in g_gui (skipping duplicate load)"))
+        DialogLoader.loaded[name] = true
+        UsedPlus.logDebug(string.format("╚═══ DialogLoader.ensureLoaded() EXIT (g_gui cached) ═══"))
         return true
     end
 
     -- Get registration
+    UsedPlus.logDebug(string.format("  Looking up registration for '%s'...", name))
+    UsedPlus.logDebug(string.format("    DialogLoader.dialogs exists: %s", tostring(DialogLoader.dialogs ~= nil)))
+    UsedPlus.logDebug(string.format("    DialogLoader.dialogs type: %s", type(DialogLoader.dialogs)))
+
+    -- DEBUG: List all registered dialogs
+    UsedPlus.logDebug("  Currently registered dialogs:")
+    local count = 0
+    for dialogName, _ in pairs(DialogLoader.dialogs or {}) do
+        count = count + 1
+        UsedPlus.logDebug(string.format("    [%d] '%s'", count, dialogName))
+    end
+    if count == 0 then
+        UsedPlus.logWarn("    ⚠ NO DIALOGS REGISTERED!")
+    end
+
     local registration = DialogLoader.dialogs[name]
+    UsedPlus.logDebug(string.format("  registration exists: %s", tostring(registration ~= nil)))
+
     if not registration then
-        UsedPlus.logError(string.format("DialogLoader: Dialog '%s' not registered", name))
+        UsedPlus.logError(string.format("  ✗ Dialog '%s' not registered", name))
+        UsedPlus.logError(string.format("╚═══ DialogLoader.ensureLoaded() EXIT (not registered) ═══"))
         return false
     end
+
+    UsedPlus.logDebug(string.format("  ✓ Registration found:"))
+    UsedPlus.logDebug(string.format("    - class: %s", tostring(registration.class)))
+    UsedPlus.logDebug(string.format("    - xml: %s", tostring(registration.xml)))
 
     -- Load the dialog
     local dialogClass = registration.class
     local xmlPath = UsedPlus.MOD_DIR .. registration.xml
 
+    UsedPlus.logDebug(string.format("  Full XML path: %s", xmlPath))
+
     if not dialogClass then
-        UsedPlus.logError(string.format("DialogLoader: Dialog class for '%s' is nil", name))
+        UsedPlus.logError(string.format("  ✗ Dialog class for '%s' is nil", name))
+        UsedPlus.logError(string.format("╚═══ DialogLoader.ensureLoaded() EXIT (nil class) ═══"))
         return false
     end
 
+    UsedPlus.logDebug(string.format("  → Creating dialog instance..."))
     local dialog = dialogClass.new(nil, nil, g_i18n)
+    UsedPlus.logDebug(string.format("  ✓ Dialog instance created: %s", tostring(dialog)))
+
+    UsedPlus.logDebug(string.format("  → Loading GUI from XML..."))
     g_gui:loadGui(xmlPath, name, dialog)
 
     DialogLoader.loaded[name] = true
-    UsedPlus.logDebug(string.format("DialogLoader: Loaded '%s'", name))
+    UsedPlus.logInfo(string.format("  ✓ Loaded '%s' successfully", name))
+    UsedPlus.logDebug(string.format("╚═══ DialogLoader.ensureLoaded() EXIT (success) ═══"))
 
     return true
 end
@@ -120,35 +190,54 @@ end
     @return boolean - true if dialog was shown successfully
 ]]
 function DialogLoader.show(name, dataMethod, ...)
+    UsedPlus.logInfo(string.format("╔═══ DialogLoader.show() ENTRY ═══"))
+    UsedPlus.logInfo(string.format("  name: '%s'", tostring(name)))
+    UsedPlus.logInfo(string.format("  dataMethod: '%s'", tostring(dataMethod)))
+
     -- Ensure loaded
+    UsedPlus.logInfo(string.format("  → Calling ensureLoaded('%s')...", name))
     if not DialogLoader.ensureLoaded(name) then
-        UsedPlus.logError(string.format("DialogLoader: Failed to load '%s'", name))
+        UsedPlus.logError(string.format("  ✗ Failed to load '%s'", name))
+        UsedPlus.logError(string.format("╚═══ DialogLoader.show() EXIT (load failed) ═══"))
         return false
     end
 
+    UsedPlus.logInfo(string.format("  ✓ Dialog loaded"))
+
     -- Get dialog instance
+    UsedPlus.logDebug(string.format("  → Getting dialog instance from g_gui.guis..."))
     local dialog = DialogLoader.getDialog(name)
+    UsedPlus.logDebug(string.format("  dialog instance: %s", tostring(dialog)))
+
     if dialog == nil then
-        UsedPlus.logError(string.format("DialogLoader: '%s' not found in g_gui.guis after loading", name))
+        UsedPlus.logError(string.format("  ✗ '%s' not found in g_gui.guis after loading", name))
         -- Reset loaded flag so we try again next time
         DialogLoader.loaded[name] = false
+        UsedPlus.logError(string.format("╚═══ DialogLoader.show() EXIT (not in g_gui) ═══"))
         return false
     end
+
+    UsedPlus.logDebug(string.format("  ✓ Dialog instance retrieved"))
 
     -- Call data method if provided
     if dataMethod then
+        UsedPlus.logDebug(string.format("  → Calling %s:%s()...", name, dataMethod))
         local method = dialog[dataMethod]
         if method and type(method) == "function" then
             method(dialog, ...)
-            UsedPlus.logTrace(string.format("DialogLoader: Called %s:%s()", name, dataMethod))
+            UsedPlus.logDebug(string.format("  ✓ Method called successfully"))
         else
-            UsedPlus.logWarn(string.format("DialogLoader: Method '%s' not found on '%s'", dataMethod, name))
+            UsedPlus.logWarn(string.format("  ⚠ Method '%s' not found on '%s'", dataMethod, name))
         end
     end
 
-    -- Show the dialog
+    -- Show the dialog using showDialog() for proper ESC/close handling
+    -- Standard overlay mode (works for most dialogs)
+    -- Placeable dialog uses showGui() directly in BuyPlaceableDataExtension
+    UsedPlus.logInfo(string.format("  → Calling g_gui:showDialog('%s')...", name))
     g_gui:showDialog(name)
-    UsedPlus.logDebug(string.format("DialogLoader: Showed '%s'", name))
+    UsedPlus.logInfo(string.format("  ✓ Showed '%s' successfully", name))
+    UsedPlus.logInfo(string.format("╚═══ DialogLoader.show() EXIT (success) ═══"))
 
     return true
 end
@@ -178,13 +267,59 @@ function DialogLoader.close(name)
 end
 
 --[[
+    Completely unload a dialog (remove from GUI system and mark as unloaded)
+    Use this when you need to force a fresh reload of a dialog
+    @param name - Dialog name
+    @return boolean - true if unloaded, false if not found
+]]
+function DialogLoader.unload(name)
+    UsedPlus.logInfo(string.format("╔═══ DialogLoader.unload() - Destroying '%s' ═══", name))
+
+    -- Close dialog if open
+    local dialog = g_gui.guis[name]
+    if dialog then
+        if dialog.close then
+            UsedPlus.logDebug("  → Closing dialog before unload...")
+            dialog:close()
+        end
+
+        -- Remove from GUI system
+        UsedPlus.logDebug("  → Removing from g_gui.guis...")
+        g_gui.guis[name] = nil
+
+        -- Delete the dialog object (let Lua GC handle it)
+        UsedPlus.logDebug("  → Dialog instance removed")
+    else
+        UsedPlus.logDebug("  → Dialog not in g_gui.guis (already unloaded?)")
+    end
+
+    -- Mark as unloaded in DialogLoader
+    if DialogLoader.loaded[name] ~= nil then
+        DialogLoader.loaded[name] = false
+        UsedPlus.logDebug("  → Marked as unloaded in DialogLoader")
+    end
+
+    UsedPlus.logInfo(string.format("  ✓ Dialog '%s' completely unloaded", name))
+    UsedPlus.logInfo("╚═══════════════════════════════════════════════════")
+
+    return true
+end
+
+--[[
     Register all UsedPlus dialogs
     Called from main.lua after all dialog classes are loaded
 ]]
 function DialogLoader.registerAll()
+    UsedPlus.logInfo("╔════════════════════════════════════════════════════════════════")
+    UsedPlus.logInfo("║ DialogLoader.registerAll() - REGISTERING ALL DIALOGS")
+    UsedPlus.logInfo("╠════════════════════════════════════════════════════════════════")
+
     -- Finance/Loan dialogs
     if TakeLoanDialog then
+        UsedPlus.logDebug("  Registering TakeLoanDialog...")
         DialogLoader.register("TakeLoanDialog", TakeLoanDialog, "gui/TakeLoanDialog.xml")
+    else
+        UsedPlus.logWarn("  TakeLoanDialog class not available - skipping")
     end
 
     if FinancialDashboard then
@@ -193,6 +328,14 @@ function DialogLoader.registerAll()
 
     if CreditReportDialog then
         DialogLoader.register("CreditReportDialog", CreditReportDialog, "gui/CreditReportDialog.xml")
+    end
+
+    if PaymentHistoryDialog then
+        DialogLoader.register("PaymentHistoryDialog", PaymentHistoryDialog, "gui/PaymentHistoryDialog.xml")
+    end
+
+    if SearchDetailsDialog then
+        DialogLoader.register("SearchDetailsDialog", SearchDetailsDialog, "gui/SearchDetailsDialog.xml")
     end
 
     -- Land dialogs
@@ -218,8 +361,19 @@ function DialogLoader.registerAll()
     end
 
     -- Purchase dialogs
+    UsedPlus.logDebug("  ═══ PURCHASE DIALOGS ═══")
+    UsedPlus.logDebug(string.format("    UnifiedPurchaseDialog class exists: %s", tostring(UnifiedPurchaseDialog ~= nil)))
+    UsedPlus.logDebug(string.format("    UnifiedPurchaseDialog type: %s", type(UnifiedPurchaseDialog)))
+
     if UnifiedPurchaseDialog then
+        UsedPlus.logInfo("  → Registering UnifiedPurchaseDialog...")
         DialogLoader.register("UnifiedPurchaseDialog", UnifiedPurchaseDialog, "gui/UnifiedPurchaseDialog.xml")
+
+        -- v2.8.1: Placeable-specific dialog (same class, different XML layout)
+        UsedPlus.logDebug("  → Registering UnifiedPurchaseDialogPlaceable...")
+        DialogLoader.register("UnifiedPurchaseDialogPlaceable", UnifiedPurchaseDialog, "gui/UnifiedPurchaseDialogPlaceable.xml")
+    else
+        UsedPlus.logWarn("  UnifiedPurchaseDialog class not available - skipping")
     end
 
     if UsedSearchDialog then
@@ -262,6 +416,10 @@ function DialogLoader.registerAll()
         DialogLoader.register("SearchExpiredDialog", SearchExpiredDialog, "gui/SearchExpiredDialog.xml")
     end
 
+    if SearchInitiatedDialog then
+        DialogLoader.register("SearchInitiatedDialog", SearchInitiatedDialog, "gui/SearchInitiatedDialog.xml")
+    end
+
     -- v1.9.8: Repossession notification dialog
     if RepossessionDialog then
         DialogLoader.register("RepossessionDialog", RepossessionDialog, "gui/RepossessionDialog.xml")
@@ -286,7 +444,21 @@ function DialogLoader.registerAll()
         DialogLoader.register("AdminControlPanel", AdminControlPanel, "gui/AdminControlPanel.xml")
     end
 
-    UsedPlus.logInfo("DialogLoader: Registered all dialogs")
+    -- Count registered dialogs
+    local count = 0
+    for dialogName, _ in pairs(DialogLoader.dialogs or {}) do
+        count = count + 1
+    end
+
+    UsedPlus.logInfo(string.format("║ DialogLoader.registerAll() COMPLETE"))
+    UsedPlus.logInfo(string.format("║ Total dialogs registered: %d", count))
+    UsedPlus.logInfo("╚════════════════════════════════════════════════════════════════")
+
+    -- List all registered dialogs for verification
+    UsedPlus.logDebug("  Registered dialog list:")
+    for dialogName, reg in pairs(DialogLoader.dialogs or {}) do
+        UsedPlus.logDebug(string.format("    - '%s' → %s", dialogName, reg.xml))
+    end
 end
 
 --[[

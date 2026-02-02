@@ -4,6 +4,57 @@ All notable changes to this project are documented here.
 
 ---
 
+## [2.10.0] - 2026-02-01
+
+### Added - Building/Placeable Financing
+
+**Major Feature: Finance Your Farm Infrastructure**
+
+You can now finance buildings, sheds, silos, and all placeables - not just vehicles!
+
+**How It Works:**
+- Press `P` to place a building → Position it → Confirm
+- **NEW**: Finance dialog appears with Cash/Finance options
+- Choose Finance to spread costs over 1-30 years
+- Credit score determines rates (same as vehicle financing)
+- Minimum 750 credit score required for building financing
+- 20% down payment required
+
+**Technical Implementation:**
+- PRE-BUY hook intercepts placement before purchase
+- Dialog unload/reload pattern ensures reliable multi-purchase workflow
+- Bypass flag prevents placement cancellation during dialog
+- Temp money system handles vanilla buy() deduction
+- Finance deal created on finalizePlacement
+
+**Transaction Transparency:**
+- Notification explains temp money flow: "Temp credit: $X (loan) | Full price: $Y | Your cost today: $Z down"
+- Transaction log shows both credit and debit for full transparency
+- Players understand the financing mechanics
+
+**UX Optimizations:**
+- Instant dialog response (no delays)
+- Multiple sequential purchases work reliably
+- ESC cancels purchase without deducting money
+- Clean return to gameplay after confirmation
+
+**First-of-Its-Kind:**
+This appears to be the first FS25 mod enabling financing for placeables/buildings. Pattern documented in FS25_AI_Coding_Reference for community use.
+
+### Fixed
+- Second placeable purchase dialog now interactive (was frozen)
+- GUI state machine corruption resolved
+- Dialog input routing fixed via unload/reload pattern
+- Placement cancellation no longer triggered by dialog show
+- Removed delays from purchase flow for instant UX
+
+### Technical
+- Added `DialogLoader.unload()` for complete dialog cleanup
+- Implemented bypass flag system for placement cancellation
+- Documented pattern in `FS25_AI_Coding_Reference/patterns/placeable-purchase-hooks.md`
+
+---
+
 ## [2.9.5] - 2026-01-26
 
 ### Added - Dialog Icon System

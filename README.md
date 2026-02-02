@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-2.9.5-green" alt="Version">
+  <img src="https://img.shields.io/badge/version-2.10.0-green" alt="Version">
   <img src="https://img.shields.io/badge/game-FS25-blue" alt="FS25">
   <img src="https://img.shields.io/badge/multiplayer-ready-brightgreen" alt="Multiplayer Ready">
   <img src="https://img.shields.io/badge/languages-27-orange" alt="27 Languages">
@@ -27,21 +27,27 @@
 
 ---
 
-> ⚠️ **STATUS: Development Preview** — No official release yet. Core features (financing, leasing, credit, marketplace, trade-ins) fully functional. **Work in Progress:** Malfunctions and Service Truck under active development. Try it via `git clone` or download ZIP (see Installation).
+> ⚠️ **STATUS: Development Preview** — No official release yet. Core features (vehicle financing, **building financing**, leasing, credit, marketplace, trade-ins) fully functional. **NEW v2.10.0:** First-of-its-kind building/placeable financing! **Work in Progress:** Malfunctions and Service Truck under active development. Try it via `git clone` or download ZIP (see Installation).
 
 ---
 
 ## What Is UsedPlus?
 
-UsedPlus brings **real financial consequences** to Farming Simulator 25. This isn't "feature soup" - it's an **interconnected economic simulation** where your decisions ripple across systems.
+UsedPlus transforms Farming Simulator 25 into a **real business simulation**. Your farm runs on credit, reputation, and strategic financial decisions—just like actual farming.
 
-In vanilla FS25, every purchase is the same question: *Can I afford it?* Click buy. Done.
+**The core philosophy:** Give players meaningful choices with real consequences. Finance a tractor over 10 years or save up cash. Buy new or search for used. Lease seasonal equipment or own it outright. Finance buildings and infrastructure, not just vehicles. Every path has tradeoffs. Every decision shapes your farm's future.
 
-**UsedPlus asks different questions:**
-- Should I finance this tractor over 10 years or save up cash?
-- Is that "great deal" actually a lemon?
-- Will my credit score let me expand this season?
-- Should I wait for a storm to negotiate a better price?
+**In vanilla FS25:**
+Money in, money out. Click buy. Equipment appears. Sell for recycled value. Repeat.
+
+**With UsedPlus:**
+- Finance that combine over 10 years—but watch your credit score or rates skyrocket
+- Buy used equipment from AI sellers who remember if you lowballed them last time
+- Inspect before you buy—is it a reliable workhorse or a lemon waiting to break?
+- Negotiate deals when weather tanks prices, or overpay when you're desperate
+- Build equity in financed buildings, manage lease terms, secure cash loans with collateral
+
+Your financial decisions compound. Miss payments, lose equipment. Build credit, unlock better rates. Burn a seller relationship, lose access to their inventory. The economy remembers.
 
 ---
 
@@ -80,6 +86,23 @@ In vanilla FS25, every purchase is the same question: *Can I afford it?* Click b
 <img src="gui/icons/trade_in.png" width="48"><br>
 <strong><a href="https://github.com/XelaNull/FS25_UsedPlus/wiki/Trade-In-System">Trade-Ins</a></strong><br>
 <sub>50-65% instant value for convenience</sub>
+</td>
+</tr>
+<tr>
+<td align="center" width="33%">
+<img src="gui/icons/finance.png" width="48"><br>
+<strong>Building Financing</strong><br>
+<sub>Finance sheds, silos, and placeables - credit-based rates</sub>
+</td>
+<td align="center" width="33%">
+<img src="gui/icons/cash.png" width="48"><br>
+<strong><a href="https://github.com/XelaNull/FS25_UsedPlus/wiki/Cash-Loans">Cash Loans</a></strong><br>
+<sub>Borrow against collateral for expansion capital</sub>
+</td>
+<td align="center" width="33%">
+<img src="gui/icons/lease.png" width="48"><br>
+<strong><a href="https://github.com/XelaNull/FS25_UsedPlus/wiki/Vehicle-Leasing">Vehicle Leasing</a></strong><br>
+<sub>Seasonal equipment access without ownership</sub>
 </td>
 </tr>
 <tr>

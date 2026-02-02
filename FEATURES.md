@@ -27,6 +27,15 @@ A comprehensive finance, maintenance, and marketplace overhaul for Farming Simul
 * Early payoff available with no prepayment penalty
 * Full amortization schedule visible in deal details
 
+### Building & Placeable Financing
+* Finance sheds, silos, decorations, and all placeables (1-30 year terms)
+* Requires minimum 750 credit score for building financing
+* 20% down payment required on all placeable purchases
+* Same credit-based interest rates as vehicle financing
+* Seamless purchase flow: place building → choose Cash or Finance → confirm
+* Transaction transparency with detailed notifications explaining finance flow
+* Multiple buildings can be financed sequentially without issues
+
 ### Cash Loans with Collateral
 * Take out general-purpose cash loans against your assets
 * Use owned vehicles and equipment as collateral

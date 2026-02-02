@@ -304,8 +304,14 @@ end
 function UnifiedPurchaseDialog:setInitialMode(mode)
     self.currentMode = mode or UnifiedPurchaseDialog.MODE_CASH
 
+    UsedPlus.logDebug(string.format("  setInitialMode: Setting mode to %d", self.currentMode))
+    UsedPlus.logDebug(string.format("    modeSelector exists: %s", tostring(self.modeSelector ~= nil)))
+
     if self.modeSelector then
         self.modeSelector:setState(self.currentMode)
+        UsedPlus.logDebug(string.format("    modeSelector state set to %d", self.currentMode))
+    else
+        UsedPlus.logWarn("    WARNING: modeSelector is nil! Cannot set initial mode!")
     end
 end
 
@@ -544,7 +550,21 @@ end
     Called when dialog opens
 ]]
 function UnifiedPurchaseDialog:onOpen()
+    -- SAFETY: Clear bypass flag if it's somehow still set
+    -- Defensive programming - flag should already be cleared, but just in case
+    if UsedPlus.bypassPlaceableCancellation then
+        UsedPlus.logWarn("  ⚠️  bypassPlaceableCancellation still set on onOpen! Clearing...")
+        UsedPlus.bypassPlaceableCancellation = nil
+    end
+
     UnifiedPurchaseDialog:superClass().onOpen(self)
+
+    -- IMPORTANT FIX 2.1: Reset context to clear stale state from previous purchase
+    -- This prevents mode/term/down payment from persisting between purchases
+    if self.context and self.context.reset then
+        self.context:reset()
+        UsedPlus.logDebug("UnifiedPurchaseDialog: Context reset (cleared stale state)")
+    end
 
     -- Reset trade-in state in context
     TradeInHandler.setTradeIn(self.context, nil)
@@ -581,6 +601,14 @@ function UnifiedPurchaseDialog:close()
     UsedPlus.logInfo("╔════════════════════════════════════════════════════════════════")
     UsedPlus.logInfo("║ UnifiedPurchaseDialog:close() ENTRY")
     UsedPlus.logInfo("╠════════════════════════════════════════════════════════════════")
+
+    -- CRITICAL: Clear bypass flag to re-enable placement cancellation handling
+    -- This flag was set when showGui() was called to prevent ghost deletion
+    -- Now that dialog is closing, normal cancellation behavior should resume
+    if UsedPlus.bypassPlaceableCancellation then
+        UsedPlus.logInfo("  → Clearing bypassPlaceableCancellation flag")
+        UsedPlus.bypassPlaceableCancellation = nil
+    end
 
     -- Capture current state for debugging
     local farmId = g_currentMission:getFarmId()
@@ -663,8 +691,16 @@ end
     v2.6.2: Validates mode against settings and credit score
 ]]
 function UnifiedPurchaseDialog:onModeChanged()
+    UsedPlus.logInfo("═══════════════════════════════════════════════════════════")
+    UsedPlus.logInfo("UnifiedPurchaseDialog:onModeChanged() - MODE SELECTOR CLICKED")
+    UsedPlus.logInfo("═══════════════════════════════════════════════════════════")
+
     if self.modeSelector then
         local newMode = self.modeSelector:getState()
+        UsedPlus.logInfo(string.format("  Current mode: %d | New mode: %d", self.currentMode or 0, newMode))
+        UsedPlus.logInfo(string.format("  itemType: %s", tostring(self.itemType)))
+        UsedPlus.logInfo(string.format("  canFinance: %s", tostring(self.canFinance)))
+        UsedPlus.logInfo(string.format("  creditScore: %d", self.creditScore or 0))
 
         -- v2.6.2: Check if Finance mode is allowed
         if newMode == UnifiedPurchaseDialog.MODE_FINANCE then
@@ -1578,6 +1614,15 @@ function UnifiedPurchaseDialog:executeCashPurchasePlaceable()
     UsedPlus.logInfo("║ executeCashPurchasePlaceable() ENTRY - CASH PURCHASE")
     UsedPlus.logInfo("╠════════════════════════════════════════════════════════════════")
 
+    -- v2.8.4: Check for PRE-BUY mode (user positioned, dialog shown before buy())
+    if UsedPlus.pendingPlaceableBuy then
+        UsedPlus.logInfo("✅ PRE-BUY MODE DETECTED - Delegating to PRE-BUY cash handler")
+        PurchaseExecutorPlaceable.executePreBuyCash(g_currentMission:getFarmId(), self)
+        return
+    end
+
+    UsedPlus.logWarn("⚠️  No pendingPlaceableBuy - falling back to OLD flow (shouldn't happen!)")
+
     local farmId = g_currentMission:getFarmId()
     local farm = g_farmManager:getFarmById(farmId)
 
@@ -1621,9 +1666,13 @@ function UnifiedPurchaseDialog:executeCashPurchasePlaceable()
         UsedPlus.pendingPlaceableData = nil
         UsedPlus.logDebug("     Cleared pendingPlaceableData")
 
-        -- CRITICAL: Close dialog FIRST to clear GUI modal stack
-        UsedPlus.logInfo("  → Closing dialog BEFORE buy() (deferred execution pattern)")
-        self:close()
+        -- CRITICAL: Hide dialog (don't close) to keep state alive during placement
+        -- We'll close it after placement completes in PlaceableSystemExtension
+        UsedPlus.logInfo("  → HIDING dialog (not closing) - will close after placement")
+        self:setVisible(false)
+
+        -- Store dialog reference for cleanup after placement
+        UsedPlus.pendingPlaceableDialog = self
 
         UsedPlus.logInfo("  → Registering deferred buy() updateable")
         local deferredStartTime = g_currentMission.time
@@ -1895,7 +1944,20 @@ end
     5. PlaceableSystemExtension detects completion, refunds financed amount
 ]]
 function UnifiedPurchaseDialog:executeFinancePurchasePlaceable()
-    -- Delegate to PurchaseExecutorPlaceable module (CRITICAL: temp money flow preserved)
+    UsedPlus.logInfo("╔════════════════════════════════════════════════════════════════")
+    UsedPlus.logInfo("║ executeFinancePurchasePlaceable() ENTRY - FINANCE PURCHASE")
+    UsedPlus.logInfo("╠════════════════════════════════════════════════════════════════")
+
+    -- v2.8.4: Check for PRE-BUY mode (user positioned, dialog shown before buy())
+    if UsedPlus.pendingPlaceableBuy then
+        UsedPlus.logInfo("✅ PRE-BUY MODE DETECTED - Delegating to PRE-BUY finance handler")
+        PurchaseExecutorPlaceable.executePreBuyFinance(self.context, g_currentMission:getFarmId(), self)
+        return
+    end
+
+    UsedPlus.logWarn("⚠️  No pendingPlaceableBuy - falling back to OLD flow (shouldn't happen!)")
+
+    -- Fallback to old executor (should not be reached)
     PurchaseExecutorPlaceable.executeFinance(self.context, g_currentMission:getFarmId(), self)
 end
 

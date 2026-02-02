@@ -81,6 +81,15 @@ function UsedPlus:initialize()
         WorkshopScreenExtension:init()
     end
 
+    -- v2.8.0: Initialize placeable financing hooks (Construction menu)
+    -- BuyPlaceableData and Placeable classes may not exist at script load time
+    if BuyPlaceableDataExtension and BuyPlaceableDataExtension.init then
+        BuyPlaceableDataExtension:init()
+    end
+    if PlaceableSystemExtension and PlaceableSystemExtension.init then
+        PlaceableSystemExtension:init()
+    end
+
     -- v2.1.0: Initialize RVB Workshop integration (injects UsedPlus data into RVB dialog)
     -- This may need delayed init since RVB may not be fully loaded yet
     if RVBWorkshopIntegration and RVBWorkshopIntegration.init then
@@ -93,6 +102,15 @@ function UsedPlus:initialize()
     -- Register all dialogs with DialogLoader for centralized lazy loading
     if DialogLoader and DialogLoader.registerAll then
         DialogLoader.registerAll()
+
+        -- Pre-load problem dialogs that fail with lazy loading
+        -- These dialogs have XML parsing issues when loaded on-demand, so load them upfront
+        UsedPlus.logWarn("Pre-loading problem dialogs at startup...")
+        DialogLoader.ensureLoaded("SearchDetailsDialog")
+        DialogLoader.ensureLoaded("CreditReportDialog")
+        DialogLoader.ensureLoaded("UsedSearchDialog")
+        DialogLoader.ensureLoaded("PaymentHistoryDialog")
+        UsedPlus.logWarn("Pre-loading complete")
     end
 
     -- Register input actions for hotkeys

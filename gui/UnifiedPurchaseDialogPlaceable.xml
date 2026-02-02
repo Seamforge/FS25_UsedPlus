@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<!--
+    FS25_UsedPlus - Unified Purchase Dialog (PLACEABLE VERSION)
+
+    Compact 650px dialog for placeables (no trade-in section needed).
+    Payment sections positioned at -340px instead of -510px.
+
+    Updated: Dark section backgrounds with gold headers matching TakeLoanDialog style.
+-->
+<GUI onOpen="onOpen" onClose="onClose" onCreate="onCreate">
+    <GuiElement profile="newLayer" />
+    <Bitmap profile="dialogFullscreenBg" id="dialogBg" />
+
+    <GuiElement profile="dialogBg" id="dialogElement" size="820px 650px">
+        <ThreePartBitmap profile="fs25_dialogBgMiddle" />
+        <ThreePartBitmap profile="fs25_dialogBgTop" />
+        <ThreePartBitmap profile="fs25_dialogBgBottom" />
+
+        <GuiElement profile="fs25_dialogContentContainer">
+
+            <!-- Title -->
+            <Text profile="fs25_dialogTitle" id="dialogTitleElement" position="0px -25px" text="$l10n_usedplus_up_title"/>
+
+            <!-- ========== SECTION 1: Vehicle Details ========== -->
+            <!--
+                REUSABLE PATTERN: Vehicle Preview with Image + Text
+                =====================================================
+                Same pattern as UsedSearchDialog for visual consistency.
+
+                KEY MEASUREMENTS:
+                - Section: 750px wide x 130px tall
+                - Header row: ~25px (text at -5px from top)
+                - Content container: 100px tall, starts at -28px (below header)
+                - Left cell: 350px wide, centered at X=-185px (image area)
+                - Right cell: 370px wide, centered at X=+175px (text area)
+
+                IMAGE: 170x96px at X=-185px, Y=12px (positive Y moves up)
+                TEXT: at X=175px, Y=-15px/-42px/-67px/-89px (negative Y goes down)
+            -->
+            <GuiElement profile="upItemSection" position="0px -55px">
+                <Bitmap profile="upItemSectionBg" position="0px 0px"/>
+                <!-- v2.9.5: Section header with icon -->
+                <Bitmap profile="upSectionIcon" id="vehicleSectionIcon" position="-355px -8px"/>
+                <Text profile="upSectionHeaderWithIcon" position="10px -5px" text="$l10n_usedplus_up_sectionVehicle"/>
+
+                <!-- Two-column container: image left, text right -->
+                <GuiElement profile="upVehiclePreviewContainer" position="0px -28px">
+                    <!-- IMAGE: Centered in left half of container, moved up 42px (matches UsedSearchDialog) -->
+                    <Bitmap profile="upItemImage" id="itemImage" position="-185px 75px"/>
+
+                    <!-- TEXT: Left-aligned in right half of container -->
+                    <Text profile="upItemName" id="itemNameText" position="175px -15px" text=""/>
+                    <Text profile="upItemPrice" id="itemPriceText" position="175px -42px" text=""/>
+                    <Text profile="upItemCategory" id="itemCategoryText" position="175px -67px" text=""/>
+                    <Text profile="upItemUsedBadge" id="usedBadgeText" position="175px -89px" text="" visible="false"/>
+                </GuiElement>
+            </GuiElement>
+
+            <!-- ========== SECTION 2: Purchase Mode Selector ========== -->
+            <!-- 10px gap after Item Details (145px) = -55 - 145 - 10 = -210 -->
+            <!-- Section is 120px tall to accommodate credit warning banner -->
+            <GuiElement profile="upModeSection" position="0px -210px">
+                <Bitmap profile="upModeSectionBg" position="0px 0px"/>
+                <!-- v2.9.5: Section header with icon -->
+                <Bitmap profile="upSectionIcon" id="methodSectionIcon" position="-355px -8px"/>
+                <Text profile="upSectionHeaderWithIcon" position="10px -5px" text="$l10n_usedplus_up_sectionMethod"/>
+                <Text profile="upHelpText" id="modeHelpText" position="0px -25px" text="$l10n_usedplus_up_methodHelp"/>
+                <MultiTextOption profile="upModeSelector" id="modeSelector" position="0px -48px" onClick="onModeChanged"/>
+
+                <!-- Credit Warning Banner (shown when selected mode requires higher credit) -->
+                <GuiElement profile="upCreditWarningContainer" id="creditWarningContainer" position="0px -78px" visible="false">
+                    <Bitmap profile="upCreditWarningBg" position="0px 0px"/>
+                    <Text profile="upCreditWarningText" id="creditWarningText" position="0px -8px" text=""/>
+                </GuiElement>
+            </GuiElement>
+
+            <!-- ========== SECTION 3: Trade-In (Always Visible) ========== -->
+            <!-- 10px gap after Mode Section (120px) = -210 - 120 - 10 = -340 -->
+            <!-- TWO-COLUMN LAYOUT: Left 30% = image, Right 70% = dropdown + info -->
+            <GuiElement profile="upTradeInSection" id="tradeInSection" position="0px -340px">
+                <Bitmap profile="upTradeInSectionBg" position="0px 0px"/>
+                <!-- v2.9.5: Section header with icon -->
+                <Bitmap profile="upSectionIcon" id="tradeInSectionIcon" position="-355px -8px"/>
+                <Text profile="upSectionHeaderWithIcon" position="10px -5px" text="$l10n_usedplus_up_sectionTradeIn"/>
+                <Text profile="upHelpText" id="tradeInHelpText" position="0px -22px" text="$l10n_usedplus_up_tradeInHelp"/>
+
+                <!-- Dropdown in RIGHT column (70%), centered at +108px - always visible -->
+                <MultiTextOption profile="upTradeInSelector" id="tradeInVehicleSelector" position="108px -42px" onClick="onTradeInVehicleChanged"/>
+
+                <!-- Trade-In Details (visible when vehicle selected) -->
+                <!-- Two-column layout: 30% left (image), 70% right (info grid) -->
+                <GuiElement profile="upTradeInDetailsContainer" id="tradeInDetailsContainer" position="0px -70px" visible="false">
+
+                    <!-- LEFT COLUMN (30%): Vehicle image, centered at -252px, bottom-aligned -->
+                    <Bitmap profile="upTradeInImage" id="tradeInImage" position="-252px 100px"/>
+
+                    <!-- RIGHT COLUMN (70%): Two-column info grid -->
+                    <!-- Left sub-column (vehicle info) - adjusted X for left-edge alignment -->
+                    <Text profile="upTradeInName" id="tradeInNameText" position="20px -5px" text=""/>
+                    <Text profile="upTradeInCondition" id="tradeInConditionText" position="20px -23px" text=""/>
+                    <Text profile="upTradeInCondition2" id="tradeInCondition2Text" position="20px -39px" text=""/>
+                    <Text profile="upTradeInHours" id="tradeInHoursText" position="5px -55px" text=""/>
+
+                    <!-- Right sub-column (value info) - adjusted X for left-edge alignment -->
+                    <Text profile="upTradeInValueLabel" position="200px -5px" text="$l10n_usedplus_up_tradeInValue"/>
+                    <Text profile="upTradeInValue" id="tradeInValueText" position="200px -23px" text=""/>
+                    <Text profile="upTradeInPercent" id="tradeInPercentText" position="215px -39px" text=""/>
+                    <Text profile="upTradeInCreditImpact" id="tradeInCreditText" position="215px -55px" text=""/>
+                </GuiElement>
+            </GuiElement>
+
+            <!-- ========== SECTION 4A: Cash Mode ========== -->
+            <!-- PLACEABLE VERSION: No trade-in, so payment sections start at -340px -->
+            <GuiElement profile="upPaymentSection" id="cashSection" position="0px -340px" visible="true">
+                <Bitmap profile="upPaymentSectionBg" position="0px 0px"/>
+                <!-- v2.9.5: Section header with icon -->
+                <Bitmap profile="upSectionIcon" id="cashSectionIcon" position="-355px -8px"/>
+                <Text profile="upSectionHeaderWithIcon" position="10px -5px" text="$l10n_usedplus_up_sectionCash"/>
+                <Text profile="upHelpText" id="cashHelpText" position="0px -22px" text="$l10n_usedplus_up_cashHelp"/>
+
+                <!-- Two column layout for cash summary - centered in dialog -->
+                <Text profile="upPaymentLabel" position="-120px -50px" text="$l10n_usedplus_up_vehiclePrice"/>
+                <Text profile="upPaymentValue" id="cashPriceText" position="30px -50px" text=""/>
+
+                <Text profile="upPaymentLabel" position="-120px -72px" text="$l10n_usedplus_up_tradeInCredit"/>
+                <Text profile="upTradeInCredit" id="cashTradeInText" position="30px -72px" text=""/>
+
+                <Bitmap profile="upDivider" position="-60px -92px"/>
+
+                <Text profile="upTotalLabel" position="-120px -105px" text="$l10n_usedplus_up_totalDue"/>
+                <Text profile="upTotalValue" id="cashTotalText" position="30px -105px" text=""/>
+            </GuiElement>
+
+            <!-- ========== SECTION 4B: Finance Mode ========== -->
+            <!-- Same position as Cash - only one visible at a time -->
+            <!-- PLACEABLE VERSION: Payment sections at -340px -->
+            <GuiElement profile="upPaymentSectionLarge" id="financeSection" position="0px -340px" visible="false">
+                <Bitmap profile="upPaymentSectionLargeBg" position="0px 0px"/>
+                <!-- v2.9.5: Section header with icon -->
+                <Bitmap profile="upSectionIcon" id="financeSectionIcon" position="-355px -8px"/>
+                <Text profile="upSectionHeaderWithIcon" position="10px -5px" text="$l10n_usedplus_up_sectionFinance"/>
+                <Text profile="upHelpText" id="financeHelpText" position="0px -22px" text="$l10n_usedplus_up_financeHelp"/>
+
+                <!-- Configuration Row: Term, Down Payment, Cash Back - 3 columns at safe positions -->
+                <Text profile="upPaymentLabel" position="-250px -48px" text="$l10n_usedplus_up_loanTerm"/>
+                <MultiTextOption profile="upFinanceOption" id="financeTermSlider" position="-250px -66px" onClick="onFinanceTermChanged"/>
+
+                <Text profile="upPaymentLabel" position="-20px -48px" text="$l10n_usedplus_up_downPayment"/>
+                <MultiTextOption profile="upFinanceOption" id="financeDownSlider" position="-20px -66px" onClick="onFinanceDownChanged"/>
+
+                <Text profile="upPaymentLabel" position="210px -48px" text="$l10n_usedplus_up_cashBack"/>
+                <MultiTextOption profile="upFinanceOption" id="financeCashBackSlider" position="210px -66px" onClick="onFinanceCashBackChanged"/>
+
+                <!-- Finance Details Row - 3 columns -->
+                <Text profile="upPaymentLabel" position="-250px -105px" text="$l10n_usedplus_up_amountFinanced"/>
+                <Text profile="upPaymentValue" id="financeAmountText" position="-250px -123px" text=""/>
+
+                <Text profile="upPaymentLabel" position="-250px -148px" text="$l10n_usedplus_up_interestRate"/>
+                <Text profile="upInterestValue" id="financeRateText" position="-250px -166px" text=""/>
+
+                <Text profile="upPaymentLabel" position="-20px -105px" text="$l10n_usedplus_up_monthlyPayment"/>
+                <Text profile="upMonthlyValue" id="financeMonthlyText" position="-20px -123px" text=""/>
+
+                <Text profile="upPaymentLabel" position="-20px -148px" text="$l10n_usedplus_up_totalInterest"/>
+                <Text profile="upInterestCost" id="financeTotalInterestText" position="-20px -166px" text=""/>
+
+                <Text profile="upTotalLabel" position="210px -105px" text="$l10n_usedplus_up_dueToday"/>
+                <Text profile="upTotalValue" id="financeDueTodayText" position="210px -123px" text=""/>
+
+                <Text profile="upCreditScore" id="financeCreditText" position="210px -148px" text=""/>
+            </GuiElement>
+
+            <!-- ========== SECTION 4C: Lease Mode ========== -->
+            <!-- ========== SECTION 4C: Lease Mode ========== -->
+            <!-- PLACEABLE VERSION: Lease not available - section kept for Lua compatibility but never shown -->
+            <GuiElement profile="upPaymentSectionLarge" id="leaseSection" position="0px -340px" visible="false">
+                <Bitmap profile="upPaymentSectionLargeBg" position="0px 0px"/>
+                <!-- v2.9.5: Section header with icon -->
+                <Bitmap profile="upSectionIcon" id="leaseSectionIcon" position="-355px -8px"/>
+                <Text profile="upSectionHeaderWithIcon" position="10px -5px" text="$l10n_usedplus_up_sectionLease"/>
+                <Text profile="upHelpText" id="leaseHelpText" position="0px -22px" text="$l10n_usedplus_up_leaseHelp"/>
+
+                <!-- Configuration Row: Term, Down Payment - 2 columns centered -->
+                <Text profile="upPaymentLabel" position="-170px -48px" text="$l10n_usedplus_up_leaseTerm"/>
+                <MultiTextOption profile="upFinanceOption" id="leaseTermSlider" position="-170px -66px" onClick="onLeaseTermChanged"/>
+
+                <Text profile="upPaymentLabel" position="80px -48px" text="$l10n_usedplus_up_downPayment"/>
+                <MultiTextOption profile="upFinanceOption" id="leaseDownSlider" position="80px -66px" onClick="onLeaseDownChanged"/>
+
+                <!-- Lease Details Row - 3 columns -->
+                <Text profile="upPaymentLabel" position="-250px -105px" text="$l10n_usedplus_up_monthlyPayment"/>
+                <Text profile="upMonthlyValue" id="leaseMonthlyText" position="-250px -123px" text=""/>
+
+                <Text profile="upPaymentLabel" position="-250px -148px" text="$l10n_usedplus_up_interestRate"/>
+                <Text profile="upInterestValue" id="leaseRateText" position="-250px -166px" text=""/>
+
+                <Text profile="upPaymentLabel" position="-250px -188px" text="$l10n_usedplus_up_securityDeposit"/>
+                <Text profile="upPaymentValue" id="leaseDepositText" position="-250px -206px" text=""/>
+
+                <Text profile="upPaymentLabel" position="-20px -105px" text="$l10n_usedplus_up_totalLeaseCost"/>
+                <Text profile="upPaymentValue" id="leaseTotalText" position="-20px -123px" text=""/>
+
+                <Text profile="upPaymentLabel" position="-20px -148px" text="$l10n_usedplus_up_buyoutAtEnd"/>
+                <Text profile="upBuyoutValue" id="leaseBuyoutText" position="-20px -166px" text=""/>
+
+                <Text profile="upTotalLabel" position="210px -105px" text="$l10n_usedplus_up_dueToday"/>
+                <Text profile="upTotalValue" id="leaseDueTodayText" position="210px -123px" text=""/>
+
+                <Text profile="upCreditScore" id="leaseCreditText" position="210px -148px" text=""/>
+            </GuiElement>
+
+        </GuiElement>
+
+        <!-- Buttons -->
+        <BoxLayout profile="fs25_dialogButtonBox">
+            <Button profile="buttonOK" id="confirmButton" text="$l10n_usedplus_button_confirmPurchase" onClick="onConfirmPurchase"/>
+            <Button profile="buttonBack" id="cancelButton" text="$l10n_button_cancel" onClick="onCancel"/>
+        </BoxLayout>
+
+    </GuiElement>
+
+    <!-- ========== PROFILES ========== -->
+    <GUIProfiles>
+        <!-- ========== SECTION CONTAINERS ========== -->
+        <Profile name="upItemSection" extends="emptyPanel" with="anchorTopCenter">
+            <size value="750px 145px"/>
+        </Profile>
+
+        <!-- Vehicle preview container: two-column layout matching UsedSearchDialog -->
+        <Profile name="upVehiclePreviewContainer" extends="emptyPanel" with="anchorTopCenter">
+            <size value="750px 100px"/>
+        </Profile>
+
+        <Profile name="upModeSection" extends="emptyPanel" with="anchorTopCenter">
+            <size value="750px 120px"/>
+        </Profile>
+
+        <Profile name="upTradeInSection" extends="emptyPanel" with="anchorTopCenter">
+            <size value="750px 160px"/>
+        </Profile>
+
+        <Profile name="upPaymentSection" extends="emptyPanel" with="anchorTopCenter">
+            <size value="750px 140px"/>
+        </Profile>
+
+        <Profile name="upPaymentSectionLarge" extends="emptyPanel" with="anchorTopCenter">
+            <size value="750px 225px"/>
+        </Profile>
+
+        <!-- ========== SECTION BACKGROUNDS ========== -->
+        <Profile name="upItemSectionBg" extends="baseReference" with="anchorTopCenter">
+            <size value="750px 145px"/>
+            <imageColor value="0.08 0.08 0.12 0.9"/>
+        </Profile>
+
+        <Profile name="upModeSectionBg" extends="baseReference" with="anchorTopCenter">
+            <size value="750px 120px"/>
+            <imageColor value="0.08 0.08 0.12 0.9"/>
+        </Profile>
+
+        <!-- Credit warning container (shown when mode unavailable) -->
+        <Profile name="upCreditWarningContainer" extends="emptyPanel" with="anchorTopCenter">
+            <size value="700px 30px"/>
+        </Profile>
+
+        <Profile name="upCreditWarningBg" extends="baseReference" with="anchorTopCenter">
+            <size value="700px 30px"/>
+            <imageColor value="0.4 0.15 0.15 0.95"/>
+        </Profile>
+
+        <Profile name="upCreditWarningText" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="680px 24px"/>
+            <textSize value="11px"/>
+            <textColor value="1 0.8 0.8 1"/>
+            <textAlignment value="center"/>
+            <textVerticalAlignment value="middle"/>
+            <textBold value="true"/>
+        </Profile>
+
+        <Profile name="upTradeInSectionBg" extends="baseReference" with="anchorTopCenter">
+            <size value="750px 160px"/>
+            <imageColor value="0.1 0.1 0.15 0.9"/>
+        </Profile>
+
+        <Profile name="upPaymentSectionBg" extends="baseReference" with="anchorTopCenter">
+            <size value="750px 140px"/>
+            <imageColor value="0.12 0.1 0.06 0.9"/>
+        </Profile>
+
+        <Profile name="upPaymentSectionLargeBg" extends="baseReference" with="anchorTopCenter">
+            <size value="750px 225px"/>
+            <imageColor value="0.12 0.1 0.06 0.9"/>
+        </Profile>
+
+        <!-- ========== SECTION HEADER ========== -->
+        <Profile name="upSectionHeader" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="750px 22px"/>
+            <textSize value="14px"/>
+            <textBold value="true"/>
+            <textColor value="1 0.8 0.2 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+
+        <!-- v2.9.5: Section header with icon - text left-aligned -->
+        <Profile name="upSectionHeaderWithIcon" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="700px 22px"/>
+            <textSize value="14px"/>
+            <textBold value="true"/>
+            <textColor value="1 0.8 0.2 1"/>
+            <textAlignment value="left"/>
+        </Profile>
+
+        <!-- Section icon profile (20px) -->
+        <Profile name="upSectionIcon" extends="baseReference" with="anchorTopCenter">
+            <size value="20px 20px"/>
+            <imageSliceId value="noSlice"/>
+        </Profile>
+
+        <!-- ========== HELP TEXT ========== -->
+        <Profile name="upHelpText" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="720px 18px"/>
+            <textSize value="11px"/>
+            <textColor value="0.55 0.55 0.55 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+
+        <!-- ========== VEHICLE PREVIEW (matches UsedSearchDialog pattern) ========== -->
+        <!--
+            REUSABLE: Vehicle preview image profile
+            - Following RVB pattern: baseReference + square size + noSlice
+            - Position at X=-185px centers in left cell, Y=17px moves up from baseline
+        -->
+        <Profile name="upItemImage" extends="baseReference" with="anchorTopCenter">
+            <size value="180px 180px"/>
+            <imageSliceId value="noSlice"/>
+        </Profile>
+
+        <!--
+            Vehicle info text: left-aligned in right column
+            Position at X=175px centers in right cell
+            Y positions: -15px, -42px, -67px, -89px for 4 lines
+        -->
+        <Profile name="upItemName" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="340px 24px"/>
+            <textSize value="18px"/>
+            <textBold value="true"/>
+            <textAlignment value="left"/>
+        </Profile>
+
+        <Profile name="upItemPrice" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="340px 20px"/>
+            <textSize value="16px"/>
+            <textBold value="true"/>
+            <textColor value="0.3 1 0.4 1"/>
+            <textAlignment value="left"/>
+        </Profile>
+
+        <Profile name="upItemCategory" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="340px 18px"/>
+            <textSize value="13px"/>
+            <textColor value="0.6 0.6 0.6 1"/>
+            <textAlignment value="left"/>
+        </Profile>
+
+        <Profile name="upItemUsedBadge" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="340px 18px"/>
+            <textSize value="12px"/>
+            <textBold value="true"/>
+            <textColor value="1 0.7 0.3 1"/>
+            <textAlignment value="left"/>
+        </Profile>
+
+        <!-- ========== MODE SELECTOR ========== -->
+        <Profile name="upModeSelector" extends="fs25_multiTextOption" with="anchorTopCenter">
+            <size value="500px 28px"/>
+        </Profile>
+
+        <!-- ========== TRADE-IN SECTION ========== -->
+        <Profile name="upTradeInLabel" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="130px 20px"/>
+            <textSize value="13px"/>
+            <textColor value="0.7 0.7 0.7 1"/>
+        </Profile>
+
+        <Profile name="upTradeInSelector" extends="fs25_multiTextOption" with="anchorTopCenter">
+            <size value="380px 28px"/>
+        </Profile>
+
+        <Profile name="upTradeInDetailsContainer" extends="emptyPanel" with="anchorTopCenter">
+            <size value="720px 80px"/>
+        </Profile>
+
+        <!-- Trade-in image: Left column (30%) of two-column layout -->
+        <!-- Centered at -252px (left 30% center), bottom-aligned with Y=100px -->
+        <Profile name="upTradeInImage" extends="baseReference" with="anchorTopCenter">
+            <size value="180px 180px"/>
+            <imageSliceId value="noSlice"/>
+        </Profile>
+
+        <Profile name="upTradeInName" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="200px 18px"/>
+            <textSize value="13px"/>
+            <textBold value="true"/>
+        </Profile>
+
+        <Profile name="upTradeInCondition" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="150px 16px"/>
+            <textSize value="11px"/>
+            <textColor value="0.6 0.6 0.6 1"/>
+        </Profile>
+
+        <Profile name="upTradeInCondition2" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="150px 16px"/>
+            <textSize value="11px"/>
+            <textColor value="0.6 0.6 0.6 1"/>
+        </Profile>
+
+        <Profile name="upTradeInHours" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="120px 16px"/>
+            <textSize value="11px"/>
+            <textColor value="0.6 0.6 0.6 1"/>
+        </Profile>
+
+        <Profile name="upTradeInValueLabel" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="120px 16px"/>
+            <textSize value="12px"/>
+            <textColor value="0.7 0.7 0.7 1"/>
+        </Profile>
+
+        <Profile name="upTradeInValue" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="120px 22px"/>
+            <textSize value="16px"/>
+            <textBold value="true"/>
+            <textColor value="0.5 1 0.8 1"/>
+        </Profile>
+
+        <Profile name="upTradeInPercent" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="150px 14px"/>
+            <textSize value="10px"/>
+            <textColor value="0.7 0.7 0.7 1"/>
+        </Profile>
+
+        <Profile name="upTradeInCreditImpact" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="150px 14px"/>
+            <textSize value="10px"/>
+            <textColor value="0.5 0.8 1 1"/>
+        </Profile>
+
+        <!-- ========== PAYMENT SECTION LABELS & VALUES ========== -->
+        <Profile name="upPaymentLabel" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="130px 16px"/>
+            <textSize value="12px"/>
+            <textColor value="0.6 0.6 0.6 1"/>
+        </Profile>
+
+        <Profile name="upPaymentValue" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="130px 18px"/>
+            <textSize value="14px"/>
+            <textBold value="true"/>
+        </Profile>
+
+        <Profile name="upFinanceOption" extends="fs25_multiTextOption" with="anchorTopCenter">
+            <size value="200px 32px"/>
+        </Profile>
+
+        <Profile name="upTradeInCredit" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="130px 18px"/>
+            <textSize value="14px"/>
+            <textBold value="true"/>
+            <textColor value="0.5 1 0.8 1"/>
+        </Profile>
+
+        <!-- ========== TOTALS ========== -->
+        <Profile name="upTotalLabel" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="130px 20px"/>
+            <textSize value="14px"/>
+            <textBold value="true"/>
+            <textColor value="1 0.85 0.2 1"/>
+        </Profile>
+
+        <Profile name="upTotalValue" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="130px 24px"/>
+            <textSize value="18px"/>
+            <textBold value="true"/>
+            <textColor value="0.3 1 0.3 1"/>
+        </Profile>
+
+        <Profile name="upMonthlyValue" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="130px 20px"/>
+            <textSize value="15px"/>
+            <textBold value="true"/>
+            <textColor value="1 0.85 0.2 1"/>
+        </Profile>
+
+        <Profile name="upInterestValue" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="130px 18px"/>
+            <textSize value="13px"/>
+            <textBold value="true"/>
+            <textColor value="1 0.6 0.2 1"/>
+        </Profile>
+
+        <Profile name="upInterestCost" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="130px 18px"/>
+            <textSize value="13px"/>
+            <textBold value="true"/>
+            <textColor value="1 0.5 0.4 1"/>
+        </Profile>
+
+        <Profile name="upBuyoutValue" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="130px 18px"/>
+            <textSize value="14px"/>
+            <textBold value="true"/>
+            <textColor value="0.7 0.85 1 1"/>
+        </Profile>
+
+        <Profile name="upCreditScore" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="130px 16px"/>
+            <textSize value="11px"/>
+            <textColor value="0.5 0.8 0.5 1"/>
+        </Profile>
+
+        <!-- ========== DIVIDER ========== -->
+        <Profile name="upDivider" extends="baseReference" with="anchorTopCenter">
+            <size value="250px 2px"/>
+            <imageColor value="0.4 0.4 0.4 1"/>
+        </Profile>
+    </GUIProfiles>
+</GUI>
