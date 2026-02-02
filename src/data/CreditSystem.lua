@@ -43,8 +43,8 @@ CreditScore.BASE_SCORE = 500  -- LOWER starting point - must BUILD credit
     a proven track record of on-time payments. Assets alone cap you at ~600.
 
     Score ranges:
-      Excellent (750-850): Requires 24+ on-time payments, 12+ streak
-      Good (700-749): Requires 6+ on-time payments, good history
+      Excellent (750-850): Requires 60+ on-time payments (5 years), 24+ streak - VERY HARD
+      Good (700-749): Requires 12+ on-time payments (1 year), good history
       Fair (650-699): Some payment history OR good assets
       Poor (600-649): Limited/bad history OR high debt
       Very Poor (300-599): No history with debt OR missed payments
@@ -140,10 +140,11 @@ function CreditScore.calculate(farmId)
     score = score + cashScore
 
     -- ============================================================
-    -- FACTOR 4: Clean Slate Bonus (up to +40 points)
-    -- New farms with assets but no payment history get a modest boost
+    -- FACTOR 4: Clean Slate Bonus (up to +15 points)
+    -- New farms with assets but no payment history get a SMALL boost
     -- "We'll give you a chance since you have collateral"
     -- This bonus disappears once you have ANY payment history
+    -- REBALANCED v2.9.6: Reduced from +40 to +15 max (credit builds too fast)
     -- ============================================================
     local stats = PaymentTracker and PaymentTracker.getStats(farmId) or { totalPayments = 0 }
     if stats.totalPayments == 0 and assets > 0 and debt == 0 then
@@ -151,13 +152,13 @@ function CreditScore.calculate(farmId)
         -- Scaled by asset value (more collateral = more trust)
         local cleanSlateBonus = 0
         if assets > 500000 then
-            cleanSlateBonus = 40
+            cleanSlateBonus = 15
         elseif assets > 200000 then
-            cleanSlateBonus = 35
+            cleanSlateBonus = 12
         elseif assets > 100000 then
-            cleanSlateBonus = 30
+            cleanSlateBonus = 10
         elseif assets > 50000 then
-            cleanSlateBonus = 20
+            cleanSlateBonus = 7
         end
         score = score + cleanSlateBonus
     end
@@ -746,16 +747,17 @@ end
 
 --[[
     Check if farm qualifies for "Excellent" credit (750+)
-    Requires: 36+ on-time payments (3 years), current streak of 18+, no recent misses
+    Requires: 60+ on-time payments (5 years), current streak of 24+, no recent misses
+    REBALANCED v2.9.6: Increased from 36→60 payments, 18→24 streak (credit builds too fast)
     This is HARD to achieve - as it should be!
 ]]
 function PaymentTracker.qualifiesForExcellent(farmId)
     local stats = PaymentTracker.getStats(farmId)
     local paymentsSinceLastMiss = stats.totalPayments - stats.lastMissedIndex
 
-    return stats.onTimePayments >= 36 and
-           stats.currentStreak >= 18 and
-           (stats.lastMissedIndex == 0 or paymentsSinceLastMiss >= 18)
+    return stats.onTimePayments >= 60 and
+           stats.currentStreak >= 24 and
+           (stats.lastMissedIndex == 0 or paymentsSinceLastMiss >= 24)
 end
 
 --[[
