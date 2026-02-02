@@ -209,6 +209,10 @@ function FinanceManager:onPeriodChanged()
         -- Process vanilla bank loan extra payments (bridges vanilla loan system)
         self:processVanillaLoanExtraPayments()
     end
+
+    -- v2.8.1: Safety check for stale placeable finance pending state
+    -- If temp money was injected but placement never completed/cancelled, reclaim it
+    self:checkStalePlaceableFinance()
 end
 
 --[[
@@ -266,6 +270,98 @@ function FinanceManager:processVanillaLoanExtraPayments()
                 end
             end
         end
+    end
+end
+
+--[[
+    v2.8.1: Safety check for stale placeable finance pending state
+    If temp money was injected but placement never started/completed, reclaim it after timeout
+    Prevents money leakage from crashes, mod conflicts, or edge cases
+]]
+function FinanceManager:checkStalePlaceableFinance()
+    local pending = UsedPlus.pendingPlaceableFinance
+    if not pending then return end  -- No pending state, nothing to check
+
+    UsedPlus.logDebug("╔════════════════════════════════════════════════════════════════")
+    UsedPlus.logDebug("║ FinanceManager:checkStalePlaceableFinance() - SAFETY CHECK")
+    UsedPlus.logDebug("╠════════════════════════════════════════════════════════════════")
+
+    -- Check if placement is still active
+    UsedPlus.logDebug(string.format("  placementActive: %s", tostring(pending.placementActive)))
+    if not pending.placementActive then
+        UsedPlus.logDebug("  Placement not active - already reconciled, skipping")
+        UsedPlus.logDebug("╚════════════════════════════════════════════════════════════════")
+        return
+    end
+
+    UsedPlus.logDebug("  Pending state still active - checking timeout")
+
+    -- Calculate time since injection (in game milliseconds)
+    local currentTime = g_currentMission.time or 0
+    local injectionTime = pending.injectionTimestamp or 0
+    local elapsed = currentTime - injectionTime
+
+    -- Timeout threshold: 1 game day (24 game hours = 24 * 3600000ms)
+    local TIMEOUT_MS = 24 * 3600000
+    local elapsedDays = elapsed / TIMEOUT_MS
+
+    UsedPlus.logDebug(string.format("  Current time: %.0f", currentTime))
+    UsedPlus.logDebug(string.format("  Injection time: %.0f", injectionTime))
+    UsedPlus.logDebug(string.format("  Elapsed: %.0fms (%.2f game days)", elapsed, elapsedDays))
+    UsedPlus.logDebug(string.format("  Timeout threshold: %.0fms (1 game day)", TIMEOUT_MS))
+
+    if elapsed > TIMEOUT_MS then
+        UsedPlus.logWarn("╔════════════════════════════════════════════════════════════════")
+        UsedPlus.logWarn("║ STALE PLACEABLE FINANCE DETECTED - EMERGENCY CLEANUP")
+        UsedPlus.logWarn("╠════════════════════════════════════════════════════════════════")
+        UsedPlus.logWarn(string.format("  Stale finance detected: %.1f game days old", elapsedDays))
+        UsedPlus.logWarn(string.format("  Building: %s", tostring(pending.itemName)))
+        UsedPlus.logWarn(string.format("  Temp money injected: %s", g_i18n:formatMoney(pending.tempMoneyInjected or 0)))
+
+        -- Get balance before reclaim
+        local farmId = pending.farmId or g_currentMission:getFarmId()
+        local farm = g_farmManager:getFarmById(farmId)
+        local balanceBeforeReclaim = farm and farm.money or 0
+        UsedPlus.logWarn(string.format("  Balance before reclaim: %s", g_i18n:formatMoney(balanceBeforeReclaim)))
+
+        -- Reclaim temp money
+        local tempMoney = pending.tempMoneyInjected or 0
+        if tempMoney > 0 then
+            UsedPlus.logWarn(string.format("  → Reclaiming temp money: %s", g_i18n:formatMoney(tempMoney)))
+            g_currentMission:addMoney(-tempMoney, pending.farmId, MoneyType.OTHER, true, false)
+
+            -- Verify reclaim
+            local farm2 = g_farmManager:getFarmById(pending.farmId)
+            local balanceAfterReclaim = farm2 and farm2.money or 0
+            UsedPlus.logWarn(string.format("  Balance after reclaim: %s", g_i18n:formatMoney(balanceAfterReclaim)))
+
+            if math.abs(balanceAfterReclaim - (balanceBeforeReclaim - tempMoney)) < 1 then
+                UsedPlus.logWarn("  ✓ Temp money reclaim VERIFIED")
+            else
+                UsedPlus.logWarn(string.format("  ✗ Balance mismatch! Expected %s, got %s",
+                    g_i18n:formatMoney(balanceBeforeReclaim - tempMoney),
+                    g_i18n:formatMoney(balanceAfterReclaim)))
+            end
+        else
+            UsedPlus.logWarn("  No temp money to reclaim (tempMoneyInjected = 0)")
+        end
+
+        -- Clear pending state
+        UsedPlus.logWarn("  → Clearing stale pendingPlaceableFinance")
+        UsedPlus.pendingPlaceableFinance = nil
+
+        -- Notify player (this shouldn't happen in normal gameplay)
+        UsedPlus.logWarn("  → Notifying player of emergency cleanup")
+        g_currentMission:addIngameNotification(
+            FSBaseMission.INGAME_NOTIFICATION_INFO,
+            "Building purchase cancelled - funds restored"
+        )
+
+        UsedPlus.logWarn("║ Stale finance cleanup complete")
+        UsedPlus.logWarn("╚════════════════════════════════════════════════════════════════")
+    else
+        UsedPlus.logDebug(string.format("  Not stale yet (%.2f days < 1 day threshold)", elapsedDays))
+        UsedPlus.logDebug("╚════════════════════════════════════════════════════════════════")
     end
 end
 
