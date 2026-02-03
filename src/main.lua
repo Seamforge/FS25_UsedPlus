@@ -334,7 +334,7 @@ function UsedPlus.addShopMenuPage(frame, pageName, uvs, predicateFunc, insertAft
     UsedPlus.logTrace("  Registered page")
 
     -- Add tab icon
-    local iconFileName = Utils.getFilename("icon_UsedPlus.dds", UsedPlus.MOD_DIR)
+    local iconFileName = Utils.getFilename("icon.dds", UsedPlus.MOD_DIR)
     g_shopMenu:addPageTab(g_shopMenu[pageName], iconFileName, GuiUtils.getUVs(uvs))
     UsedPlus.logTrace("  Added icon tab")
 
@@ -410,7 +410,7 @@ function UsedPlus.addInGameMenuPage(frame, pageName, uvs, position, predicateFun
     UsedPlus.logTrace("  Page registered")
 
     -- Add tab icon
-    local iconFileName = Utils.getFilename("icon_UsedPlus.dds", UsedPlus.MOD_DIR)
+    local iconFileName = Utils.getFilename("icon.dds", UsedPlus.MOD_DIR)
     inGameMenu:addPageTab(inGameMenu[pageName], iconFileName, GuiUtils.getUVs(uvs))
     UsedPlus.logTrace("  Tab icon added")
 
@@ -483,6 +483,13 @@ function UsedPlus.loadSavegameData()
         end
     end
 
+    -- v2.9.6: Initialize settings system with dual-persistence
+    if UsedPlusSettings and UsedPlusSettings.init then
+        UsedPlusSettings:init(missionInfo.savegameDirectory)
+    else
+        UsedPlus.logWarn("UsedPlusSettings is nil, cannot load settings!")
+    end
+
     UsedPlus.logInfo("Savegame data loaded successfully")
 
     -- Clear the stored missionInfo
@@ -520,6 +527,11 @@ FSCareerMissionInfo.saveToXMLFile = Utils.appendedFunction(
                 xmlFile:delete()
                 UsedPlus.logInfo("Service Truck Discovery data saved")
             end
+        end
+
+        -- v2.9.6: Save settings to savegame
+        if UsedPlusSettings and UsedPlusSettings.saveToXMLFile then
+            UsedPlusSettings:saveToXMLFile(missionInfo)
         end
 
         UsedPlus.logWarn("saveToXMLFile hook: Complete")
@@ -855,8 +867,30 @@ function UsedPlus.consoleCommandAdminCP(self)
         return "Error: Only administrators can use this command."
     end
 
-    -- Must be in a vehicle
-    local vehicle = g_currentMission.controlledVehicle
+    -- Must be in a vehicle - try multiple detection methods
+    local vehicle = nil
+
+    -- Method 1: Check HUD controlled vehicle (most reliable when in vehicle)
+    if g_currentMission.hud and g_currentMission.hud.controlledVehicle then
+        vehicle = g_currentMission.hud.controlledVehicle
+    end
+
+    -- Method 2: Fallback to standard controlledVehicle
+    if vehicle == nil and g_currentMission.controlledVehicle then
+        vehicle = g_currentMission.controlledVehicle
+    end
+
+    -- Method 3: Check if player is entered in any vehicle
+    if vehicle == nil and g_currentMission.player then
+        -- Iterate through all vehicles to find one the player is in
+        for _, v in pairs(g_currentMission.vehicles) do
+            if v.getIsEntered and v:getIsEntered() then
+                vehicle = v
+                break
+            end
+        end
+    end
+
     if vehicle == nil then
         return "Error: Must be in a vehicle to open Admin Panel."
     end

@@ -18,17 +18,34 @@ FinanceManagerFrame = FinanceManagerFrame or {}
     Shows both active searches AND available listings (results ready for purchase)
 ]]
 function FinanceManagerFrame:updateSearchesSection(farmId)
-    local searchCount = 0
-    local totalCost = 0
+    -- Check if used vehicle search system is enabled
+    local searchEnabled = true
+    if UsedPlusSettings and UsedPlusSettings.get then
+        searchEnabled = UsedPlusSettings:get("enableUsedVehicleSearch") ~= false
+    end
+
     local maxSearches = FinanceManagerFrame.MAX_SEARCH_ROWS
 
-    -- First, hide all rows and show empty state
+    -- Hide all rows first
     for i = 0, FinanceManagerFrame.MAX_SEARCH_ROWS - 1 do
         if self.searchRows[i] and self.searchRows[i].row then
             self.searchRows[i].row:setVisible(false)
         end
     end
 
+    -- If system disabled, show message and return
+    if not searchEnabled then
+        if self.searchEmptyText then
+            self.searchEmptyText:setText(g_i18n:getText("usedplus_fmf_searchDisabled") or "Used vehicle search disabled in settings")
+            self.searchEmptyText:setVisible(true)
+        end
+        return
+    end
+
+    local searchCount = 0
+    local totalCost = 0
+
+    -- Show empty state initially
     if self.searchEmptyText then
         self.searchEmptyText:setVisible(true)
         self.searchEmptyText:setText(string.format("No searches (0/%d). Start from Shop.", maxSearches))

@@ -19,19 +19,50 @@ FinanceManagerFrame = FinanceManagerFrame or {}
     Update Finances section (left column) with row-based table display
 ]]
 function FinanceManagerFrame:updateFinancesSection(farmId, farm)
-    local totalFinanced = 0
-    local totalMonthly = 0
-    local totalInterestPaid = 0
-    local dealCount = 0
+    -- Check if finance system is enabled
+    local financeEnabled = true
+    if UsedPlusSettings and UsedPlusSettings.get then
+        financeEnabled = UsedPlusSettings:get("enableFinanceSystem") ~= false
+    end
 
-    -- First, hide all rows and show empty state
+    -- Hide all rows first
     for i = 0, FinanceManagerFrame.MAX_FINANCE_ROWS - 1 do
         if self.financeRows[i] and self.financeRows[i].row then
             self.financeRows[i].row:setVisible(false)
         end
     end
 
+    -- If system disabled, show message and return
+    if not financeEnabled then
+        if self.financeEmptyText then
+            self.financeEmptyText:setText(g_i18n:getText("usedplus_fmf_financeDisabled") or "Finance system disabled in settings")
+            self.financeEmptyText:setVisible(true)
+        end
+        -- Disable action buttons
+        if self.actionButtons then
+            for _, btnData in pairs(self.actionButtons) do
+                if btnData.btn then
+                    btnData.btn:setDisabled(true)
+                end
+                if btnData.bg then
+                    btnData.bg:setImageColor(nil, unpack(btnData.disabledBgColor or {0.15, 0.15, 0.15, 1}))
+                end
+                if btnData.text then
+                    btnData.text:setTextColor(unpack(btnData.disabledTextColor or {0.4, 0.4, 0.4, 1}))
+                end
+            end
+        end
+        return
+    end
+
+    local totalFinanced = 0
+    local totalMonthly = 0
+    local totalInterestPaid = 0
+    local dealCount = 0
+
+    -- Show empty state initially
     if self.financeEmptyText then
+        self.financeEmptyText:setText(g_i18n:getText("usedplus_fmf_noActiveDeals") or "No active deals")
         self.financeEmptyText:setVisible(true)
     end
 
@@ -493,8 +524,7 @@ function FinanceManagerFrame:onInfoRowClick(rowIndex)
     end
 
     if DealDetailsDialog then
-        local dialog = DealDetailsDialog.getInstance()
-        dialog:show(deal, function()
+        DialogLoader.show("DealDetailsDialog", "show", deal, function()
             self:updateDisplay()
         end)
     end

@@ -159,6 +159,13 @@ UsedSearchDialog.CREDIT_FEE_MODIFIERS = {
      @return modifier (negative = discount, positive = surcharge)
 ]]
 function UsedSearchDialog:getCreditFeeModifier()
+    -- Check if credit system is enabled
+    if UsedPlusSettings and UsedPlusSettings.get then
+        if UsedPlusSettings:get("enableCreditSystem") == false then
+            return 0  -- No modifier when credit system disabled
+        end
+    end
+
     local farm = g_farmManager:getFarmByUserId(g_currentMission.playerUserId)
     if not farm or not CreditScore then
         return 0
@@ -648,7 +655,7 @@ function UsedSearchDialog:onStartSearch()
     local qualityName = qualityTier.name
     local durationText = tier.maxMonths == 1 and "1 month" or string.format("%d months", tier.maxMonths)
 
-    SearchInitiatedDialog.showWithDetails({
+    DialogLoader.show("SearchInitiatedDialog", "show", {
         vehicleName = itemName,
         tierName = tierName,
         duration = durationText,

@@ -20,18 +20,34 @@ FinanceManagerFrame = FinanceManagerFrame or {}
     Shows active vehicle sale listings with agent tier, status, and offer buttons
 ]]
 function FinanceManagerFrame:updateSaleListings(farmId)
-    local listingCount = 0
-    local pendingOffers = 0
+    -- Check if vehicle sale system is enabled
+    local saleEnabled = true
+    if UsedPlusSettings and UsedPlusSettings.get then
+        saleEnabled = UsedPlusSettings:get("enableVehicleSaleSystem") ~= false
+    end
 
-    -- First, hide all rows and show empty state
+    local maxSales = FinanceManagerFrame.MAX_SALE_ROWS
+
+    -- Hide all rows first
     for i = 0, FinanceManagerFrame.MAX_SALE_ROWS - 1 do
         if self.saleRows[i] and self.saleRows[i].row then
             self.saleRows[i].row:setVisible(false)
         end
     end
 
-    local maxSales = FinanceManagerFrame.MAX_SALE_ROWS
+    -- If system disabled, show message and return
+    if not saleEnabled then
+        if self.saleEmptyText then
+            self.saleEmptyText:setText(g_i18n:getText("usedplus_fmf_saleDisabled") or "Vehicle sale system disabled in settings")
+            self.saleEmptyText:setVisible(true)
+        end
+        return
+    end
 
+    local listingCount = 0
+    local pendingOffers = 0
+
+    -- Show empty state initially
     if self.saleEmptyText then
         self.saleEmptyText:setVisible(true)
         self.saleEmptyText:setText(string.format("No listings (0/%d). Sell from Garage menu.", maxSales))
@@ -212,8 +228,7 @@ function FinanceManagerFrame:onInfoSaleClick(rowIndex)
     end
 
     if SaleListingDetailsDialog then
-        local dialog = SaleListingDetailsDialog.getInstance()
-        dialog:show(listing)
+        DialogLoader.show("SaleListingDetailsDialog", "show", listing)
     end
 end
 

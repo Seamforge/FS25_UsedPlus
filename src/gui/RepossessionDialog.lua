@@ -154,13 +154,23 @@ function RepossessionDialog:updateDisplay()
         end
     end
 
-    -- Credit warning
+    -- Credit warning (only show if credit system enabled)
     if self.creditWarningText then
-        local warningText = self.i18n:getText("usedplus_rp_creditImpact")
-        if not warningText or warningText == "usedplus_rp_creditImpact" then
-            warningText = "This repossession severely impacts your credit score. Future financing will be more expensive or denied."
+        local creditEnabled = true
+        if UsedPlusSettings and UsedPlusSettings.get then
+            creditEnabled = UsedPlusSettings:get("enableCreditSystem") ~= false
         end
-        self.creditWarningText:setText(warningText)
+
+        if creditEnabled then
+            local warningText = self.i18n:getText("usedplus_rp_creditImpact")
+            if not warningText or warningText == "usedplus_rp_creditImpact" then
+                warningText = "This repossession severely impacts your credit score. Future financing will be more expensive or denied."
+            end
+            self.creditWarningText:setText(warningText)
+            self.creditWarningText:setVisible(true)
+        else
+            self.creditWarningText:setVisible(false)
+        end
     end
 
     -- Additional items (for multiple collateral)

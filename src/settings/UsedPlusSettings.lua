@@ -26,9 +26,6 @@ UsedPlusSettings = {
     -- Settings version (for future migrations)
     SETTINGS_VERSION = 1,
 
-    -- Save file path (set on init)
-    savePath = nil,
-
     -- Track if initialized
     isInitialized = false,
 }
@@ -129,19 +126,19 @@ function UsedPlusSettings:init(savegameDirectory)
         return
     end
 
-    -- Set save path
-    if savegameDirectory then
-        self.savePath = savegameDirectory .. "/usedplus_settings.xml"
-    end
-
     -- Start with defaults
     self.current = {}
+    local defaultCount = 0
     for key, value in pairs(self.DEFAULTS) do
         self.current[key] = value
+        defaultCount = defaultCount + 1
     end
+    UsedPlus.logInfo(string.format("Loaded %d settings from built-in defaults", defaultCount))
 
-    -- Load saved settings (overwrites defaults with saved values)
-    self:load()
+    -- Load savegame settings (if exists)
+    if savegameDirectory then
+        self:loadFromXMLFile(savegameDirectory)
+    end
 
     -- v2.0.0: Migrate any renamed settings from older versions
     self:migrateSettings()
@@ -191,10 +188,9 @@ function UsedPlusSettings:set(key, value, skipSave, skipNotify)
     self.current[key] = value
     UsedPlus.logDebug(string.format("UsedPlusSettings: Set %s = %s", key, tostring(value)))
 
-    -- Auto-save unless told not to
-    if not skipSave then
-        self:save()
-    end
+    -- v2.9.6: Don't auto-save here - settings persist via saveToXMLFile hook
+    -- This prevents FS25 from cleaning up "orphan" files created outside official save process
+    -- Settings take effect immediately (in memory) and persist on next game save
 
     -- Notify listeners
     if not skipNotify then
@@ -213,10 +209,8 @@ function UsedPlusSettings:setMultiple(settings)
         self:set(key, value, true, true)  -- Skip save and notify for each
     end
 
-    -- Save once at the end
-    self:save()
-
     -- Notify all listeners with "batch" key
+    -- Note: Settings persist via saveToXMLFile hook on next game save
     self:notifyListeners("batch", nil, nil)
 end
 
@@ -255,21 +249,27 @@ function UsedPlusSettings:resetToDefaults()
         self.current[key] = value
     end
 
-    self:save()
+    -- Note: Settings persist via saveToXMLFile hook on next game save
     self:notifyListeners("reset", nil, nil)
     UsedPlus.logInfo("UsedPlusSettings: Reset to defaults")
 end
 
 --[[
     Save settings to XML file
+    Called from FSBaseMission.saveToXMLFile hook
+    @param missionInfo - Mission info containing savegameDirectory
 ]]
-function UsedPlusSettings:save()
-    if not self.savePath then
-        UsedPlus.logDebug("UsedPlusSettings: No save path, skipping save")
-        return false
-    end
+function UsedPlusSettings:saveToXMLFile(missionInfo)
+    -- Extract savegame directory from parameter (like other managers)
+    local savegameDirectory = missionInfo.savegameDirectory
+    if savegameDirectory == nil then return end
 
-    local xmlFile = XMLFile.create("usedPlusSettings", self.savePath, "usedPlusSettings")
+    -- Construct file path dynamically each time
+    local filePath = savegameDirectory .. "/usedPlus_settings.xml"
+
+    -- Create XML file
+    local xmlFile = XMLFile.create("usedPlusSettingsXML", filePath, "usedPlusSettings")
+
     if xmlFile == nil then
         UsedPlus.logError("UsedPlusSettings: Failed to create settings file")
         return false
@@ -302,35 +302,33 @@ function UsedPlusSettings:save()
     xmlFile:save()
     xmlFile:delete()
 
-    UsedPlus.logDebug("UsedPlusSettings: Saved to " .. self.savePath)
+    UsedPlus.logDebug(string.format("UsedPlusSettings: Saved %d settings to %s",
+        settingIndex, filePath))
     return true
 end
 
 --[[
     Load settings from XML file
+    Called during init to load savegame settings
+    @param savegameDirectory - Path to savegame directory
 ]]
-function UsedPlusSettings:load()
-    if not self.savePath then
-        UsedPlus.logDebug("UsedPlusSettings: No save path, using defaults")
-        return false
-    end
+function UsedPlusSettings:loadFromXMLFile(savegameDirectory)
+    if savegameDirectory == nil then return end
 
-    if not fileExists(self.savePath) then
-        UsedPlus.logDebug("UsedPlusSettings: No saved settings, using defaults")
-        return false
-    end
+    local filePath = savegameDirectory .. "/usedPlus_settings.xml"
+    local xmlFile = XMLFile.loadIfExists("usedPlusSettingsXML", filePath)
 
-    local xmlFile = XMLFile.loadIfExists("usedPlusSettings", self.savePath)
     if xmlFile == nil then
-        UsedPlus.logWarn("UsedPlusSettings: Failed to load settings file")
-        return false
+        UsedPlus.logDebug("UsedPlusSettings: No savegame settings file found")
+        return
     end
 
-    -- Check version (for future migrations)
+    -- Load version
     local version = xmlFile:getInt("usedPlusSettings#version", 1)
 
     -- Load each setting
     local settingIndex = 0
+    local loadedCount = 0
     while true do
         local basePath = string.format("usedPlusSettings.settings.setting(%d)", settingIndex)
 
@@ -350,6 +348,7 @@ function UsedPlusSettings:load()
             else
                 self.current[name] = xmlFile:getString(basePath .. "#value", self.DEFAULTS[name])
             end
+            loadedCount = loadedCount + 1
         end
 
         settingIndex = settingIndex + 1
@@ -357,8 +356,9 @@ function UsedPlusSettings:load()
 
     xmlFile:delete()
 
-    UsedPlus.logInfo(string.format("UsedPlusSettings: Loaded %d settings from savegame", settingIndex))
-    return true
+    if loadedCount > 0 then
+        UsedPlus.logInfo(string.format("Loaded %d settings from savegame (overrides)", loadedCount))
+    end
 end
 
 --[[
