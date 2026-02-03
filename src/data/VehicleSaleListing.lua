@@ -694,7 +694,7 @@ function VehicleSaleListing.createFromVehicle(farmId, vehicle, agentTier, priceT
     end
 
     -- Default priceTier for legacy compatibility
-    priceTier = priceTier or 2
+    local priceTier = priceTier or 2
 
     -- Get store item for vehicle info
     local storeItem = nil

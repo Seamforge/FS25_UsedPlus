@@ -73,7 +73,7 @@ UIHelper.Text = {}
     @return Formatted string like "$125,000"
 ]]
 function UIHelper.Text.formatMoney(amount, decimals, showSign, absolute)
-    decimals = decimals or 0
+    local decimals = decimals or 0
     absolute = absolute ~= false
 
     local value = absolute and math.abs(amount or 0) or (amount or 0)
@@ -124,7 +124,7 @@ end
     @return Formatted string like "25%" or "25.50%"
 ]]
 function UIHelper.Text.formatPercent(value, isDecimal, decimals)
-    decimals = decimals or 0
+    local decimals = decimals or 0
     local pct = isDecimal and (value * 100) or value
     return string.format("%." .. decimals .. "f%%", pct)
 end
@@ -136,7 +136,7 @@ end
     @return Formatted string like "8.00%"
 ]]
 function UIHelper.Text.formatInterestRate(rateDecimal, decimals)
-    decimals = decimals or 2
+    local decimals = decimals or 2
     return string.format("%." .. decimals .. "f%%", rateDecimal * 100)
 end
 
@@ -261,7 +261,7 @@ end
     @return Formatted string like "1,234,567"
 ]]
 function UIHelper.Text.formatNumber(num, decimals)
-    decimals = decimals or 0
+    local decimals = decimals or 0
     return g_i18n:formatNumber(num, decimals)
 end
 

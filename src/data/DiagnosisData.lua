@@ -450,7 +450,7 @@ DiagnosisData.SYSTEM_HINTS = {
     @return table - Array of hint translation keys
 ]]
 function DiagnosisData.getSystemHints(systemType, count)
-    count = count or 2
+    local count = count or 2
     local hints = DiagnosisData.SYSTEM_HINTS[systemType]
 
     if hints == nil then

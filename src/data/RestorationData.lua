@@ -406,7 +406,7 @@ end
     @return table - Array of hint translation keys
 ]]
 function RestorationData.getSystemHints(systemType, count)
-    count = count or 2
+    local count = count or 2
     local hints = RestorationData.SYSTEM_HINTS[systemType]
 
     if hints == nil then

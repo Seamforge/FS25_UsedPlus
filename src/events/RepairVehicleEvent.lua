@@ -129,9 +129,9 @@ end
 function RepairVehicleEvent.execute(vehicleId, farmId, repairPercent, repaintPercent, totalCost, isFinanced, termMonths, monthlyPayment, downPayment)
     -- v2.8.0: Apply default values FIRST before validation
     -- These are optional parameters that may not be passed for cash payments
-    termMonths = termMonths or 6
-    monthlyPayment = monthlyPayment or 0
-    downPayment = downPayment or 0
+    local termMonths = termMonths or 6
+    local monthlyPayment = monthlyPayment or 0
+    local downPayment = downPayment or 0
 
     -- v2.7.2 SECURITY: Helper to check for NaN and Infinity values
     -- Note: No longer checks for nil since defaults are applied above

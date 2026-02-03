@@ -84,7 +84,7 @@ function RequestUsedItemEvent.execute(farmId, storeItemIndex, storeItemName, bas
         return false
     end
 
-    qualityLevel = qualityLevel or 1  -- Default to "Any Condition" (index 1 in v1.5.0)
+    local qualityLevel = qualityLevel or 1  -- Default to "Any Condition" (index 1 in v1.5.0)
     if qualityLevel < 1 or qualityLevel > 5 then
         UsedPlus.logWarn(string.format("Invalid quality level: %d, defaulting to 1", qualityLevel))
         qualityLevel = 1
