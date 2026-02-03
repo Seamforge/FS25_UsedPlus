@@ -67,6 +67,11 @@ function UsedPlusMaintenance.showWarning(vehicle, message, duration, malfunction
         return
     end
 
+    -- Client-only: Don't waste server CPU on UI calls
+    if g_dedicatedServer then
+        return
+    end
+
     duration = duration or 2500
 
     if g_currentMission and g_currentMission.showBlinkingWarning then

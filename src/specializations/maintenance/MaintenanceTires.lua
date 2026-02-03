@@ -103,7 +103,9 @@ function UsedPlusMaintenance.applyTireWear(vehicle)
         local wearAmount = distanceKm * wearRate * totalWearMult
 
         -- Apply wear to UsedPlus tire condition
-        spec.tireCondition = math.max(0, (spec.tireCondition or 1.0) - wearAmount)
+        -- v2.8.0: Apply smoothing to reduce UI jitter (EMA factor 0.3 = balanced)
+        local rawCondition = math.max(0, (spec.tireCondition or 1.0) - wearAmount)
+        spec.tireCondition = Smoothing.emaCondition(rawCondition, spec.tireCondition, 0.3)
 
         -- v2.8.0: Update per-wheel conditions based on per-wheel distances
         -- This provides native tire tracking even when UYT doesn't support the vehicle

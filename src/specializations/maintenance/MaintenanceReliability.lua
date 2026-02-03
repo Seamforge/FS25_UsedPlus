@@ -760,10 +760,12 @@ function UsedPlusMaintenance.seizeComponent(vehicle, component)
 
         -- Show critical warning
         if UsedPlusMaintenance.shouldShowWarning(vehicle) then
-            g_currentMission:showBlinkingWarning(
-                g_i18n:getText("usedplus_engine_seized") or "ENGINE SEIZED! Repair required!",
-                5000
-            )
+            if not g_dedicatedServer then
+                g_currentMission:showBlinkingWarning(
+                    g_i18n:getText("usedplus_engine_seized") or "ENGINE SEIZED! Repair required!",
+                    5000
+                )
+            end
         end
 
         -- Stop AI
@@ -774,10 +776,12 @@ function UsedPlusMaintenance.seizeComponent(vehicle, component)
         spec.hydraulicsSeizedTime = currentTime
 
         if UsedPlusMaintenance.shouldShowWarning(vehicle) then
-            g_currentMission:showBlinkingWarning(
-                g_i18n:getText("usedplus_hydraulics_seized") or "HYDRAULICS SEIZED! Implements locked!",
-                5000
-            )
+            if not g_dedicatedServer then
+                g_currentMission:showBlinkingWarning(
+                    g_i18n:getText("usedplus_hydraulics_seized") or "HYDRAULICS SEIZED! Implements locked!",
+                    5000
+                )
+            end
         end
 
     elseif component == "electrical" then
@@ -790,10 +794,12 @@ function UsedPlusMaintenance.seizeComponent(vehicle, component)
         end
 
         if UsedPlusMaintenance.shouldShowWarning(vehicle) then
-            g_currentMission:showBlinkingWarning(
-                g_i18n:getText("usedplus_electrical_seized") or "ELECTRICAL FAILURE! Systems dead!",
-                5000
-            )
+            if not g_dedicatedServer then
+                g_currentMission:showBlinkingWarning(
+                    g_i18n:getText("usedplus_electrical_seized") or "ELECTRICAL FAILURE! Systems dead!",
+                    5000
+                )
+            end
         end
 
         UsedPlusMaintenance.stopAIOnFailure(vehicle)

@@ -885,7 +885,9 @@ function InGameMenuVehiclesFrameExtension.showMaintenanceReportForSelected(frame
         InGameMenuVehiclesFrameExtension.showMaintenanceReport(vehicle)
     else
         UsedPlus.logDebug("showMaintenanceReportForSelected: No vehicle selected")
-        g_currentMission:showBlinkingWarning("No vehicle selected", 2000)
+        if not g_dedicatedServer then
+            g_currentMission:showBlinkingWarning("No vehicle selected", 2000)
+        end
     end
 end
 

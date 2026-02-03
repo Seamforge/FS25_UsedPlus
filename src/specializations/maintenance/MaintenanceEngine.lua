@@ -123,10 +123,12 @@ function UsedPlusMaintenance.triggerEngineStall(vehicle, isFirstStart)
     -- Normal stalls respect shouldShowWarning (checks grace period, control state)
     local shouldShow = isFirstStart or UsedPlusMaintenance.shouldShowWarning(vehicle)
     if shouldShow then
-        g_currentMission:showBlinkingWarning(
-            string.format(message, recoverySeconds),
-            recoveryDuration
-        )
+        if not g_dedicatedServer then
+            g_currentMission:showBlinkingWarning(
+                string.format(message, recoverySeconds),
+                recoveryDuration
+            )
+        end
         UsedPlus.logDebug("Stall warning shown to player")
     else
         UsedPlus.logDebug("Stall warning suppressed (not controlling or grace period)")
@@ -258,10 +260,12 @@ function UsedPlusMaintenance.checkEngineMisfire(vehicle)
 
         -- Show warning (once per session)
         if not spec.hasShownMisfireWarning and UsedPlusMaintenance.shouldShowWarning(vehicle) then
-            g_currentMission:showBlinkingWarning(
-                g_i18n:getText("usedPlus_engineMisfire") or "Engine misfiring!",
-                2000
-            )
+            if not g_dedicatedServer then
+                g_currentMission:showBlinkingWarning(
+                    g_i18n:getText("usedPlus_engineMisfire") or "Engine misfiring!",
+                    2000
+                )
+            end
             spec.hasShownMisfireWarning = true
         end
 
@@ -330,10 +334,12 @@ function UsedPlusMaintenance.updateEngineTemperature(vehicle)
         if spec.engineTemperature >= config.overheatWarningTemp then
             if not spec.hasShownOverheatWarning and UsedPlusMaintenance.shouldShowWarning(vehicle) then
                 local tempPercent = math.floor(spec.engineTemperature * 100)
-                g_currentMission:showBlinkingWarning(
-                    string.format(g_i18n:getText("usedPlus_engineOverheating") or "Engine overheating! (%d%%)", tempPercent),
-                    3000
-                )
+                if not g_dedicatedServer then
+                    g_currentMission:showBlinkingWarning(
+                        string.format(g_i18n:getText("usedPlus_engineOverheating") or "Engine overheating! (%d%%)", tempPercent),
+                        3000
+                    )
+                end
                 spec.hasShownOverheatWarning = true
             end
         end
@@ -353,10 +359,12 @@ function UsedPlusMaintenance.updateEngineTemperature(vehicle)
                 UsedPlusMaintenance.applyBreakdownDegradation(vehicle, "Engine")
 
                 if UsedPlusMaintenance.shouldShowWarning(vehicle) then
-                    g_currentMission:showBlinkingWarning(
-                        g_i18n:getText("usedPlus_engineOverheated") or "ENGINE OVERHEATED! Let it cool down!",
-                        5000
-                    )
+                    if not g_dedicatedServer then
+                        g_currentMission:showBlinkingWarning(
+                            g_i18n:getText("usedPlus_engineOverheated") or "ENGINE OVERHEATED! Let it cool down!",
+                            5000
+                        )
+                    end
                 end
                 spec.hasShownOverheatCritical = true
 

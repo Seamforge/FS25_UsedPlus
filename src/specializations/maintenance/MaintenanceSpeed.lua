@@ -119,10 +119,12 @@ function UsedPlusMaintenance.calculateSpeedLimit(vehicle)
     -- v1.6.0: Only show if player is controlling this vehicle
     if not spec.hasShownSpeedWarning and UsedPlusMaintenance.shouldShowWarning(vehicle) then
         local speedPercent = math.floor(finalFactor * 100)
-        g_currentMission:showBlinkingWarning(
-            string.format(g_i18n:getText("usedPlus_speedDegraded") or "Engine struggling - max speed reduced to %d%%!", speedPercent),
-            4000
-        )
+        if not g_dedicatedServer then
+            g_currentMission:showBlinkingWarning(
+                string.format(g_i18n:getText("usedPlus_speedDegraded") or "Engine struggling - max speed reduced to %d%%!", speedPercent),
+                4000
+            )
+        end
         spec.hasShownSpeedWarning = true
         spec.speedWarningTimer = 0
         UsedPlus.logDebug(string.format("Speed degradation: %d%% (max %d km/h)", speedPercent, math.floor(spec.currentMaxSpeed)))

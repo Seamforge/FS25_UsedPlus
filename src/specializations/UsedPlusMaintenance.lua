@@ -253,10 +253,12 @@ function UsedPlusMaintenance:getCanMotorRun(superFunc)
             spec.governorPulseTimer = (spec.governorPulseTimer or 0) + 1
             if spec.governorPulseTimer % 3 ~= 0 then  -- Cut 2 out of every 3 frames
                 if not spec.hasShownGovernorWarning and UsedPlusMaintenance.shouldShowWarning(self) then
-                    g_currentMission:showBlinkingWarning(
-                        g_i18n:getText("usedPlus_speedGovernor") or "Engine struggling at this speed!",
-                        2000
-                    )
+                    if not g_dedicatedServer then
+                        g_currentMission:showBlinkingWarning(
+                            g_i18n:getText("usedPlus_speedGovernor") or "Engine struggling at this speed!",
+                            2000
+                        )
+                    end
                     spec.hasShownGovernorWarning = true
                 end
                 return false
@@ -413,10 +415,12 @@ function UsedPlusMaintenance:setSteeringInput(superFunc, inputValue, isAnalog, d
             local directionText = spec.steeringPullDirection < 0 and
                 (g_i18n:getText("usedPlus_directionLeft") or "left") or
                 (g_i18n:getText("usedPlus_directionRight") or "right")
-            g_currentMission:showBlinkingWarning(
-                string.format(g_i18n:getText("usedPlus_steeringPull") or "Steering pulling to the %s!", directionText),
-                3000
-            )
+            if not g_dedicatedServer then
+                g_currentMission:showBlinkingWarning(
+                    string.format(g_i18n:getText("usedPlus_steeringPull") or "Steering pulling to the %s!", directionText),
+                    3000
+                )
+            end
             spec.hasShownPullWarning = true
         end
     end
@@ -451,10 +455,12 @@ function UsedPlusMaintenance:setSteeringInput(superFunc, inputValue, isAnalog, d
             inputValue = math.max(-1, math.min(1, inputValue + slip))
 
             if not spec.hasShownSteeringWarning and UsedPlusMaintenance.shouldShowWarning(self) then
-                g_currentMission:showBlinkingWarning(
-                    g_i18n:getText("usedPlus_steeringLoose") or "Steering feels loose!",
-                    2000
-                )
+                if not g_dedicatedServer then
+                    g_currentMission:showBlinkingWarning(
+                        g_i18n:getText("usedPlus_steeringLoose") or "Steering feels loose!",
+                        2000
+                    )
+                end
                 spec.hasShownSteeringWarning = true
             end
         end
@@ -1266,6 +1272,46 @@ function UsedPlusMaintenance:onWriteStream(streamId, connection)
 end
 
 --[[
+    Check if vehicle is sleeping (inactive, can skip expensive updates)
+    Pattern from: MoreRealistic_FS25 sleep/wake optimization
+
+    A vehicle is "sleeping" if:
+    - Not player-controlled
+    - Not moving (speed < 0.1 km/h)
+    - Not AI-active
+    - Engine off
+
+    @return isSleeping (boolean)
+]]
+function UsedPlusMaintenance:isSleeping()
+    -- Player-controlled vehicles are always awake
+    if self.isActiveForInput or self.isActiveForInputIgnoreSelection then
+        return false
+    end
+
+    -- Check AI activity
+    if self.spec_aiVehicle and self.spec_aiVehicle.isActive then
+        return false
+    end
+
+    -- Check movement (speed check BEFORE engine check - catches towed vehicles)
+    local speed = self:getLastSpeed() or 0
+    if speed > 0.1 then  -- >0.1 km/h = moving
+        return false
+    end
+
+    -- Check engine state
+    if self.spec_motorized then
+        if self.spec_motorized.isMotorStarted then
+            return false
+        end
+    end
+
+    -- Vehicle is idle - can sleep
+    return true
+end
+
+--[[
     Called every frame when vehicle is active
     Dispatches to module update functions
     Pattern from: HeadlandManagement onUpdate
@@ -1284,6 +1330,18 @@ function UsedPlusMaintenance:onUpdate(dt, isActiveForInput, isActiveForInputIgno
 
     -- Only process failure simulation on server
     if not self.isServer then return end
+
+    -- v2.8.0: Sleep/wake optimization - skip expensive checks for idle vehicles
+    -- Pattern from: MoreRealistic_FS25 performance optimization
+    if self:isSleeping() then
+        -- Still update critical timers even when sleeping
+        if spec.stallCooldown > 0 then
+            spec.stallCooldown = spec.stallCooldown - dt
+        end
+        return  -- Skip all other maintenance checks
+    end
+
+    -- Vehicle is awake - process normal maintenance updates
 
     -- Update stall cooldown
     if spec.stallCooldown > 0 then

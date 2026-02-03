@@ -314,10 +314,13 @@ function VehicleSaleListing:generateOffer()
 
     -- Add some variance (+/- 5%)
     local variance = 0.95 + (math.random() * 0.10)
-    self.currentOffer = math.floor(self.vanillaSellPrice * priceMultiplier * variance)
+    local rawOffer = math.floor(self.vanillaSellPrice * priceMultiplier * variance)
 
     -- Round to nearest $100
-    self.currentOffer = math.floor(self.currentOffer / 100) * 100
+    rawOffer = math.floor(rawOffer / 100) * 100
+
+    -- v2.8.0: Apply smoothing to prevent large price jumps (EMA factor 0.4 = responsive)
+    self.currentOffer = Smoothing.emaPrice(rawOffer, self.currentOffer or rawOffer, 0.4)
 
     -- Ensure minimum offer
     self.currentOffer = math.max(self.currentOffer, 100)

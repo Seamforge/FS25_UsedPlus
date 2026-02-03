@@ -221,7 +221,9 @@ function UsedPlusMaintenance.endRunaway(vehicle, reason)
     }
 
     -- Show info (not warning - the danger is over)
-    g_currentMission:showBlinkingWarning(messages[reason] or "Runaway ended.", 3000)
+    if not g_dedicatedServer then
+        g_currentMission:showBlinkingWarning(messages[reason] or "Runaway ended.", 3000)
+    end
 
     -- v2.5.2: Fire API event
     UsedPlusMaintenance.fireMalfunctionEnded(vehicle, "runaway")
@@ -649,10 +651,12 @@ function UsedPlusMaintenance.checkImplementSurge(vehicle, implement, hydraulicRe
             UsedPlusMaintenance.recordMalfunctionTime(vehicle)
 
             if not spec.hasShownSurgeWarning and UsedPlusMaintenance.shouldShowWarning(vehicle) then
-                g_currentMission:showBlinkingWarning(
-                    g_i18n:getText("usedPlus_implementSurge") or "Hydraulic surge - implement raised!",
-                    3000
-                )
+                if not g_dedicatedServer then
+                    g_currentMission:showBlinkingWarning(
+                        g_i18n:getText("usedPlus_implementSurge") or "Hydraulic surge - implement raised!",
+                        3000
+                    )
+                end
                 spec.hasShownSurgeWarning = true
             end
 
@@ -717,10 +721,12 @@ function UsedPlusMaintenance.checkImplementDrop(vehicle, implement, hydraulicRel
             UsedPlusMaintenance.applyHydraulicDamageOnFailure(vehicle)
 
             if not spec.hasShownDropWarning and UsedPlusMaintenance.shouldShowWarning(vehicle) then
-                g_currentMission:showBlinkingWarning(
-                    g_i18n:getText("usedPlus_implementDrop") or "Hydraulic failure - implement dropped!",
-                    3000
-                )
+                if not g_dedicatedServer then
+                    g_currentMission:showBlinkingWarning(
+                        g_i18n:getText("usedPlus_implementDrop") or "Hydraulic failure - implement dropped!",
+                        3000
+                    )
+                end
                 spec.hasShownDropWarning = true
             end
 
@@ -769,10 +775,12 @@ function UsedPlusMaintenance.checkPTOToggle(vehicle, implement, electricalReliab
                 local stateText = isOn and
                     (g_i18n:getText("usedPlus_ptoOff") or "off") or
                     (g_i18n:getText("usedPlus_ptoOn") or "on")
-                g_currentMission:showBlinkingWarning(
-                    string.format(g_i18n:getText("usedPlus_ptoToggle") or "Electrical fault - PTO switched %s!", stateText),
-                    3000
-                )
+                if not g_dedicatedServer then
+                    g_currentMission:showBlinkingWarning(
+                        string.format(g_i18n:getText("usedPlus_ptoToggle") or "Electrical fault - PTO switched %s!", stateText),
+                        3000
+                    )
+                end
                 spec.hasShownPTOWarning = true
             end
 
@@ -826,10 +834,12 @@ function UsedPlusMaintenance.checkHitchFailure(vehicle, implementInfo, hydraulic
             UsedPlusMaintenance.applyHydraulicDamageOnFailure(vehicle)
 
             if not spec.hasShownHitchWarning and UsedPlusMaintenance.shouldShowWarning(vehicle) then
-                g_currentMission:showBlinkingWarning(
-                    g_i18n:getText("usedPlus_hitchFailure") or "HITCH FAILURE - Implement detached!",
-                    5000
-                )
+                if not g_dedicatedServer then
+                    g_currentMission:showBlinkingWarning(
+                        g_i18n:getText("usedPlus_hitchFailure") or "HITCH FAILURE - Implement detached!",
+                        5000
+                    )
+                end
                 spec.hasShownHitchWarning = true
             end
 
@@ -928,10 +938,12 @@ function UsedPlusMaintenance.checkImplementCutout(vehicle, dt)
 
         -- Show warning to player
         if UsedPlusMaintenance.shouldShowWarning(vehicle) then
-            g_currentMission:showBlinkingWarning(
-                g_i18n:getText("usedPlus_electricalCutout") or "Electrical fault - implements offline!",
-                3000
-            )
+            if not g_dedicatedServer then
+                g_currentMission:showBlinkingWarning(
+                    g_i18n:getText("usedPlus_electricalCutout") or "Electrical fault - implements offline!",
+                    3000
+                )
+            end
         end
 
         -- Stop AI worker if active

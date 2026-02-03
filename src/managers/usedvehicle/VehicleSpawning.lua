@@ -97,10 +97,12 @@ function UsedVehicleManager:purchaseUsedVehicle(listing, farmId)
 
     -- Check if player can afford
     if farm.money < listing.price then
-        g_currentMission:showBlinkingWarning(
-            string.format("Insufficient funds. Need %s", g_i18n:formatMoney(listing.price, 0, true, true)),
-            3000
-        )
+        if not g_dedicatedServer then
+            g_currentMission:showBlinkingWarning(
+                string.format("Insufficient funds. Need %s", g_i18n:formatMoney(listing.price, 0, true, true)),
+                3000
+            )
+        end
         return false
     end
 
@@ -147,7 +149,9 @@ function UsedVehicleManager:purchaseUsedVehicle(listing, farmId)
     else
         -- Refund if spawn failed
         g_currentMission:addMoney(listing.price, farmId, MoneyType.OTHER, true, true)
-        g_currentMission:showBlinkingWarning("Failed to spawn vehicle. Money refunded.", 5000)
+        if not g_dedicatedServer then
+            g_currentMission:showBlinkingWarning("Failed to spawn vehicle. Money refunded.", 5000)
+        end
         return false
     end
 end

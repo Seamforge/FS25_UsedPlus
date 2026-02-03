@@ -17,6 +17,10 @@
 
 FinanceCalculations = {}
 
+-- Epsilon for safe division (prevents division-by-zero crashes)
+-- Pattern from: realismAddon_gearbox safe division practices
+FinanceCalculations.EPSILON = 0.00001
+
 --[[
     Minimum Financing Thresholds
     Banks don't process loans for trivially small amounts - the administrative

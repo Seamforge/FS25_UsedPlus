@@ -506,7 +506,7 @@ function FinanceManager:createFinanceDeal(farmId, itemType, itemId, itemName, pr
 
     -- Calculate interest rate based on credit score
     local creditScore = CreditScore.calculate(farmId)
-    local downPaymentPercent = downPayment / price
+    local downPaymentPercent = downPayment / (price + FinanceCalculations.EPSILON)
     local termMonths = termYears * 12
 
     local interestRate
@@ -604,7 +604,7 @@ function FinanceManager:createLeaseDeal(farmId, vehicleConfig, vehicleName, pric
 
     -- Calculate lease terms
     local creditScore = CreditScore.calculate(farmId)
-    local downPaymentPercent = downPayment / price
+    local downPaymentPercent = downPayment / (price + FinanceCalculations.EPSILON)
     local termMonths = termYears * 12
 
     local interestRate = FinanceCalculations.calculateLeaseInterestRate(creditScore, downPaymentPercent)

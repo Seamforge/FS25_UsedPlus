@@ -317,10 +317,12 @@ function UsedPlusMaintenance.checkHydraulicDrift(vehicle, dt)
     -- v1.6.0: Only show if player is controlling this vehicle
     if not spec.hasShownDriftWarning and UsedPlusMaintenance.shouldShowWarning(vehicle) then
         local reliabilityPercent = math.floor(hydraulicReliability * 100)
-        g_currentMission:showBlinkingWarning(
-            string.format(g_i18n:getText("usedPlus_hydraulicWeak") or "Hydraulics weak (%d%%) - implements may drift!", reliabilityPercent),
-            4000
-        )
+        if not g_dedicatedServer then
+            g_currentMission:showBlinkingWarning(
+                string.format(g_i18n:getText("usedPlus_hydraulicWeak") or "Hydraulics weak (%d%%) - implements may drift!", reliabilityPercent),
+                4000
+            )
+        end
         spec.hasShownDriftWarning = true
         UsedPlus.logDebug(string.format("Hydraulic drift warning shown: %d%% reliability", reliabilityPercent))
     end

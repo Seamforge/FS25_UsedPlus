@@ -63,6 +63,9 @@ function CreditReportDialog:onCreate()
 
     -- Store icon directory for icons
     self.iconDir = UsedPlus.MOD_DIR .. "gui/icons/"
+
+    -- v2.8.0: Initialize smoothed credit score for jitter reduction
+    self.smoothedCreditScore = nil
 end
 
 --[[
@@ -261,7 +264,12 @@ function CreditReportDialog:updateScoreSection()
     local interestAdj = 0
 
     if CreditScore then
-        score = CreditScore.calculate(self.farmId)
+        local rawScore = CreditScore.calculate(self.farmId)
+
+        -- v2.8.0: Apply smoothing to reduce score jitter (EMA factor 0.15 = very smooth)
+        self.smoothedCreditScore = Smoothing.emaInt(rawScore, self.smoothedCreditScore or rawScore, 0.15)
+        score = self.smoothedCreditScore
+
         rating = CreditScore.getRating(score)
         interestAdj = CreditScore.getInterestAdjustment(score)
     end
