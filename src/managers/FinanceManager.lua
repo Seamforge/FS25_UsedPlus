@@ -104,7 +104,7 @@ end
     @param amount - Amount to add (default 1)
 ]]
 function FinanceManager:incrementStatistic(farmId, statName, amount)
-    amount = amount or 1
+    local amount = amount or 1
     local stats = self:getStatistics(farmId)
     if stats[statName] ~= nil then
         stats[statName] = stats[statName] + amount

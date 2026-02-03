@@ -69,8 +69,8 @@ end
 
 function FieldRepairEvent.execute(farmId, vehicleId, component, cost)
     -- Apply defaults
-    component = component or "all"
-    cost = cost or 0
+    local component = component or "all"
+    local cost = cost or 0
 
     -- v2.8.0 SECURITY: Helper to check for NaN and Infinity values
     local function isInvalidNumber(v)
@@ -265,8 +265,8 @@ end
 
 function RefillFluidsEvent.execute(farmId, vehicleId, fluidType, cost)
     -- Apply defaults
-    fluidType = fluidType or "both"
-    cost = cost or 0
+    local fluidType = fluidType or "both"
+    local cost = cost or 0
 
     -- v2.8.0 SECURITY: Helper to check for NaN and Infinity values
     local function isInvalidNumber(v)
@@ -439,8 +439,8 @@ end
 function ReplaceTiresEvent.execute(farmId, vehicleId, tireQuality, cost)
     -- Apply defaults
     -- tireQuality: 1=Retread, 2=Normal, 3=Quality (matches TiresDialog constants)
-    tireQuality = tonumber(tireQuality) or 2
-    cost = cost or 0
+    local tireQuality = tonumber(tireQuality) or 2
+    local cost = cost or 0
 
     -- v2.8.0 SECURITY: Helper to check for NaN and Infinity values
     local function isInvalidNumber(v)

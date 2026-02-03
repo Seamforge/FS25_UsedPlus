@@ -192,7 +192,7 @@ function DepreciationCalculations.generateUsedVehicleParams(preferredGeneration,
     local tierMod = DepreciationCalculations.TIER_MODIFIERS[searchLevel] or DepreciationCalculations.TIER_MODIFIERS[2]
 
     -- Get quality tier for damage/wear ranges (player's condition preference)
-    qualityLevel = qualityLevel or 1  -- Default to "Any Condition"
+    local qualityLevel = qualityLevel or 1  -- Default to "Any Condition"
     local qualityTier = DepreciationCalculations.QUALITY_TIERS[qualityLevel] or DepreciationCalculations.QUALITY_TIERS[1]
 
     -- Random values within generation ranges

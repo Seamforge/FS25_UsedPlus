@@ -906,7 +906,7 @@ function ModCompatibility.syncTireReplacementWithUYT(vehicle, tireQuality)
     if not UseYourTyres then return false end
     if not vehicle then return false end
 
-    tireQuality = tireQuality or 2  -- Default to Normal
+    local tireQuality = tireQuality or 2  -- Default to Normal
 
     -- Check if vehicle has UYT-compatible tires
     if not vehicle.uytHasTyres then
