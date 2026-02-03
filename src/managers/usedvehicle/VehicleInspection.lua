@@ -111,6 +111,28 @@ function UsedVehicleManager:processInspectionCompletions()
                             listing.inspectionState = "complete"
                             listing.listingOnHold = false  -- Allow expiration again
 
+                            -- v2.10.1: Generate and save mechanic's assessment quote (prevent re-rolling exploit)
+                            -- Only generate if comprehensive inspection (tier 3) and not already saved
+                            if listing.inspectionTier >= 3 and not listing.mechanicQuote then
+                                local usedPlusData = listing.usedPlusData
+                                if usedPlusData and usedPlusData.workhorseLemonScale and UsedPlusMaintenance and UsedPlusMaintenance.getInspectorQuote then
+                                    listing.mechanicQuote = UsedPlusMaintenance.getInspectorQuote(usedPlusData.workhorseLemonScale)
+                                    UsedPlus.logDebug(string.format("Generated mechanic quote for %s: '%s'", listing.storeItemName or "vehicle", listing.mechanicQuote))
+                                end
+                            end
+
+                            -- v2.10.1: Generate and save fluid assessment (prevent re-rolling exploit)
+                            -- Only generate if standard+ inspection (tier 2+) and not already saved
+                            if listing.inspectionTier >= 2 and not listing.fluidAssessment then
+                                local usedPlusData = listing.usedPlusData
+                                if usedPlusData and UsedPlusMaintenance and UsedPlusMaintenance.getFluidInspectorComment then
+                                    listing.fluidAssessment = UsedPlusMaintenance.getFluidInspectorComment(usedPlusData)
+                                    if listing.fluidAssessment then
+                                        UsedPlus.logDebug(string.format("Generated fluid assessment for %s: '%s'", listing.storeItemName or "vehicle", listing.fluidAssessment))
+                                    end
+                                end
+                            end
+
                             completedCount = completedCount + 1
 
                             UsedPlus.logDebug(string.format("Inspection complete: %s (tier %d)",

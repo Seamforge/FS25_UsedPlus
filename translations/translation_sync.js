@@ -111,7 +111,7 @@ const LANGUAGE_NAMES = {
     br: 'Portuguese (BR)',
     pt: 'Portuguese (PT)',
     cz: 'Czech',
-    cs: 'Czech',
+    cs: 'Czech (deprecated)',
     uk: 'Ukrainian',
     nl: 'Dutch',
     da: 'Danish',
@@ -124,8 +124,14 @@ const LANGUAGE_NAMES = {
     ja: 'Japanese',
     jp: 'Japanese',
     ko: 'Korean',
+    kr: 'Korean',
     zh: 'Chinese (Simplified)',
     tw: 'Chinese (Traditional)',
+    ct: 'Chinese (Traditional)',
+    ea: 'Spanish (Latin America)',
+    fc: 'French (Canadian)',
+    id: 'Indonesian',
+    vi: 'Vietnamese',
 };
 
 // ══════════════════════════════════════════════════════════════════════════════

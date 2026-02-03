@@ -254,9 +254,16 @@ function InspectionReportDialog:updateDisplay()
         -- v2.9.1: Mechanic quote/DNA hint only for Comprehensive (revealLevel >= 3)
         if self.mechanicQuoteText then
             if revealLevel >= 3 then
-                local quote = "Vehicle condition assessed."
-                if usedPlusData.workhorseLemonScale and UsedPlusMaintenance and UsedPlusMaintenance.getInspectorQuote then
-                    quote = UsedPlusMaintenance.getInspectorQuote(usedPlusData.workhorseLemonScale)
+                -- v2.10.1: Use saved quote if available (prevents re-rolling exploit)
+                local quote = listing.mechanicQuote
+                if not quote then
+                    -- Fallback: generate if not saved (shouldn't happen after inspection completes)
+                    quote = "Vehicle condition assessed."
+                    if usedPlusData.workhorseLemonScale and UsedPlusMaintenance and UsedPlusMaintenance.getInspectorQuote then
+                        quote = UsedPlusMaintenance.getInspectorQuote(usedPlusData.workhorseLemonScale)
+                        listing.mechanicQuote = quote  -- Save for next time
+                        UsedPlus.logDebug("Generated mechanic quote on-the-fly (should have been saved at inspection completion)")
+                    end
                 end
                 self.mechanicQuoteText:setText('"' .. quote .. '"')
                 self.mechanicQuoteText:setVisible(true)
@@ -269,9 +276,17 @@ function InspectionReportDialog:updateDisplay()
         -- v2.9.1: Fluid assessment only for Standard+ (revealLevel >= 2)
         if self.fluidAssessmentText then
             if revealLevel >= 2 then
-                local fluidComment = nil
-                if UsedPlusMaintenance and UsedPlusMaintenance.getFluidInspectorComment then
-                    fluidComment = UsedPlusMaintenance.getFluidInspectorComment(usedPlusData)
+                -- v2.10.1: Use saved fluid assessment if available (prevents re-rolling exploit)
+                local fluidComment = listing.fluidAssessment
+                if not fluidComment then
+                    -- Fallback: generate if not saved (shouldn't happen after inspection completes)
+                    if UsedPlusMaintenance and UsedPlusMaintenance.getFluidInspectorComment then
+                        fluidComment = UsedPlusMaintenance.getFluidInspectorComment(usedPlusData)
+                        listing.fluidAssessment = fluidComment  -- Save for next time
+                        if fluidComment then
+                            UsedPlus.logDebug("Generated fluid assessment on-the-fly (should have been saved at inspection completion)")
+                        end
+                    end
                 end
                 if fluidComment then
                     self.fluidAssessmentText:setText(fluidComment)
