@@ -148,6 +148,222 @@ After (modular):
 
 ---
 
+## Translation Workflow
+
+### Overview
+
+FS25_UsedPlus supports **25 languages** with **1,954 translation entries** each. Use `tools/translation_sync.js` to manage translations efficiently. This section documents the proven workflow for translation tasks.
+
+### The translation_sync.js Tool
+
+**Location:** `tools/translation_sync.js`
+
+**Commands:**
+```bash
+cd translations
+
+# Check overall status (all languages)
+node translation_sync.js status
+
+# Get detailed report (shows untranslated entries by language)
+node translation_sync.js report
+
+# Sync hashes after manual edits
+node translation_sync.js sync
+
+# Validate format specifiers (prevent game crashes)
+node translation_sync.js validate
+```
+
+**Status Output Format:**
+```
+Language            | Translated | Stale | Untranslated | Placeholder | Format | Missing
+--------------------|------------|-------|--------------|-------------|--------|--------
+English (en)        |       1954 |     0 |            0 |           0 |      0 |      0
+German (de)         |       1954 |     0 |            0 |           0 |      0 |      0
+Swedish (sv)        |       1730 |     0 |          224 |           0 |      0 |      0
+```
+
+**Report Output Format:**
+```
+=== Swedish (sv) ===
+Untranslated entries (224):
+  - usedplus_settings_baseTradeInPercent_tooltip (key: usedplus_settings_baseTradeInPercent_tooltip)
+  - usedplus_settings_leaseMarkupPercent_tooltip (key: usedplus_settings_leaseMarkupPercent_tooltip)
+  ...
+```
+
+### How to Request Translation Work
+
+**❌ WRONG WAY (Inefficient):**
+> "Complete Swedish, Norwegian, and Vietnamese translations"
+
+**Problems:**
+- Agents don't know which entries need translation
+- Agents create temporary scripts to find untranslated entries
+- Agents waste time building infrastructure instead of translating
+- Leaves junk files in `tools/` and `translations/` folders
+
+**✅ RIGHT WAY (Efficient):**
+
+```
+Complete the following language translations using translation_sync.js:
+- Swedish (sv): 224 entries remaining
+- Norwegian (no): 537 entries remaining
+- Vietnamese (vi): 416 entries remaining
+
+CRITICAL WORKFLOW - Follow these steps EXACTLY:
+
+Step 1: Get the untranslated entries list
+  cd translations && node translation_sync.js report | grep -A 500 "Swedish"
+  (This shows you EXACTLY which keys need translation)
+
+Step 2: Edit the XML file directly
+  - Open translations/translation_sv.xml
+  - Find each untranslated entry (search for the key from Step 1)
+  - Translate the text (keep format specifiers like %s, %d, %.1f intact)
+  - DO NOT modify the hash attribute - translation_sync.js will update it
+
+Step 3: Sync hashes after your edits
+  cd translations && node translation_sync.js sync
+
+Step 4: Verify your work
+  cd translations && node translation_sync.js status | grep "Swedish"
+  (Should show 1954 translated, 0 untranslated)
+
+CRITICAL RULES:
+- DO NOT create any temporary files, scripts, or JSON files
+- DO NOT create find_untranslated_*.js or apply_*_translations.js scripts
+- Use translation_sync.js report command to get the list - don't build your own
+- Edit the XML file directly using the Edit tool
+- Work in batches of 50-100 entries, then sync hashes
+- Keep format specifiers intact (%s, %d, %.1f, etc.)
+- Maintain XML structure (no syntax errors)
+
+CLEANUP:
+- DO NOT leave any temporary files in tools/ or translations/
+- Only translation_sync.js, build.js, and generateIcons.js belong in tools/
+```
+
+### Sub-Agent Instructions Template
+
+When delegating translation work to sub-agents, use this template:
+
+```
+Complete [LANGUAGE] translations ([N] entries remaining from [CURRENT]/1954)
+
+WORKFLOW (follow EXACTLY):
+
+Step 1: Get untranslated entries list
+  cd translations && node translation_sync.js report | grep -A 500 "[LANGUAGE]"
+
+Step 2: Edit translation_[CODE].xml directly
+  - Use Edit tool to update entries in batches of 50-100
+  - Translate text while preserving format specifiers (%s, %d, %.1f)
+  - Keep XML structure intact
+  - DO NOT modify hash attributes
+
+Step 3: Sync hashes after each batch
+  cd translations && node translation_sync.js sync
+
+Step 4: Verify progress
+  cd translations && node translation_sync.js status | grep "[LANGUAGE]"
+
+CRITICAL RULES:
+- DO NOT create ANY files (no scripts, no JSON, no temp files)
+- Use translation_sync.js report command - don't build alternatives
+- Edit XML directly using Edit tool
+- Work in batches, sync after each batch
+- Preserve format specifiers EXACTLY
+- When done: verify 1954/1954 translated
+
+CLEANUP:
+- DO NOT leave temporary files in tools/ or translations/
+- Verify clean workspace: ls -la tools/ translations/
+```
+
+### Monitoring Translation Progress
+
+**Check Status Periodically:**
+```bash
+cd translations && node translation_sync.js status | grep -E "Swedish|Norwegian|Vietnamese"
+```
+
+**Check for Unauthorized Files:**
+```bash
+# Should return EMPTY (no temp files)
+ls -la tools/ | grep -E "(find_|apply_|temp|_to_translate)"
+ls -la translations/ | grep -E "(_untranslated|_to_translate|\.json)"
+
+# Should only see legitimate scripts in tools/
+ls -la tools/*.js
+# Expected: build.js, generateIcons.js, translation_sync.js, (courseplay_translation_helper.js, find_unused.js)
+```
+
+**Check Git Status (verify files being edited):**
+```bash
+git status translations/translation_sv.xml translations/translation_no.xml translations/translation_vi.xml --short
+# Should show "M" (modified) for files being worked on
+```
+
+### Common Pitfalls
+
+| Pitfall | Why It Happens | Solution |
+|---------|----------------|----------|
+| Agents create temp scripts | Instructions don't mention translation_sync.js | Explicitly tell them to use `node translation_sync.js report` |
+| Slow progress | Agents build infrastructure | Tell them to edit XML directly, not build tools |
+| Format specifier errors | Missing spaces before % symbols | Hungarian fix: `30%-os` → `30% -os` |
+| Stale hashes | Manual edits without sync | Run `node translation_sync.js sync` after edits |
+| Files littered everywhere | No cleanup instructions | Explicitly forbid file creation, verify workspace |
+| Duplicate work | Multiple agents editing same file | Assign different languages to different agents |
+
+### Translation Quality Guidelines
+
+**Format Specifiers (CRITICAL):**
+- `%s` = string, `%d` = integer, `%.1f` = decimal (1 place), `%.2f` = decimal (2 places)
+- Preserve count and order: "Price: $%.2f" → German: "Preis: %.2f $"
+- Hungarian spacing: Add space before `%` in compound words: `30%-os` → `30% -os`
+
+**Cultural Adaptation:**
+- Currency symbols: Adapt to local conventions (€ 1.234,56 vs $1,234.56)
+- Date formats: DD.MM.YYYY (EU) vs MM/DD/YYYY (US)
+- Unit systems: Keep metric for EU, note imperial conversions if relevant
+- Formality: Match FS25's tone (professional but friendly)
+
+**Testing Translations:**
+1. Run validation: `node translation_sync.js validate`
+2. Build mod: `cd tools && node build.js`
+3. Test in-game: Check dialogs, tooltips, buttons
+4. Verify no crashes on format specifiers
+
+### Success Metrics
+
+**Target:**
+- 25 languages at 1954/1954 (100% translated)
+- 0 stale hashes
+- 0 format errors
+- 0 untranslated entries
+- 0 placeholder entries
+
+**Current Status (v2.10.1):**
+- 21 languages at 100% ✅
+- 3 languages in progress (Swedish, Norwegian, Vietnamese)
+- 1 language planned (Korean - future community contribution)
+
+### Post-Translation Checklist
+
+After completing translation work:
+
+1. ✅ Verify counts: `node translation_sync.js status`
+2. ✅ Validate format: `node translation_sync.js validate`
+3. ✅ Check for junk files: `ls -la tools/ translations/`
+4. ✅ Clean up any temp files: `rm tools/temp*.js translations/*_untranslated*.json`
+5. ✅ Update CHANGELOG.md with translation counts
+6. ✅ Commit with message: `feat(i18n): Complete [languages] translations - [N] languages at 100%`
+7. ✅ Build and test: `cd tools && node build.js` then in-game verification
+
+---
+
 ## Critical Knowledge: What DOESN'T Work
 
 | Pattern | Problem | Solution |
@@ -216,8 +432,22 @@ X position = element CENTER, not left edge. Calculate: `X ± (width/2)` must sta
 
 ### Current Version: 2.10.1
 
+### Codebase Statistics
+
+**Scale:** 135,730 lines of code across 389 files
+- **Code:** 60,285 Lua • 69,352 XML • 6,093 JavaScript (tools)
+- **Assets:** 53 textures (DDS) • 35 icons (PNG) • 5 3D models (I3D)
+- **Architecture:** 33 dialogs • 10 managers • 12 network events • 11 specializations • 13 utilities
+- **Localization:** 1,954 keys translated to 26 languages
+- **Development:** 4 months (Nov 2025 - Feb 2026) • 100% AI-authored
+
+**Largest Components:**
+- ModCompatibility (1,711 lines) • UsedPlusMaintenance (1,221) • FinanceManager (967) • VehicleSaleManager (931)
+
+Run `node tools/codebase_stats.js` for detailed breakdown.
+
 ### Features
-- Vehicle/equipment financing (1-30 years) with dynamic credit scoring (300-850)
+- Vehicle/equipment financing (1-15 years) and land financing (1-20 years) with dynamic credit scoring (300-850)
 - General cash loans against collateral
 - Used Vehicle Marketplace (agent-based buying AND selling with negotiation)
 - Partial repair & repaint system, Trade-in with condition display
@@ -227,8 +457,9 @@ X position = element CENTER, not left edge. Calculate: `X ± (width/2)` must sta
 ```
 FS25_UsedPlus/
 ├── src/{data, utils, events, managers, gui, extensions}/
-├── gui/                # XML dialog definitions
-├── translations/       # l10n files (EN, DE)
+├── gui/                # XML dialog definitions (33 dialogs)
+├── translations/       # 26 languages, 1,954 keys
+├── tools/              # 17 dev tools (build, validate, stats)
 └── modDesc.xml
 ```
 
