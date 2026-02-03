@@ -1281,28 +1281,29 @@ end
     - Not AI-active
     - Engine off
 
+    @param vehicle - The vehicle to check
     @return isSleeping (boolean)
 ]]
-function UsedPlusMaintenance:isSleeping()
+function UsedPlusMaintenance.isSleeping(vehicle)
     -- Player-controlled vehicles are always awake
-    if self.isActiveForInput or self.isActiveForInputIgnoreSelection then
+    if vehicle.isActiveForInput or vehicle.isActiveForInputIgnoreSelection then
         return false
     end
 
     -- Check AI activity
-    if self.spec_aiVehicle and self.spec_aiVehicle.isActive then
+    if vehicle.spec_aiVehicle and vehicle.spec_aiVehicle.isActive then
         return false
     end
 
     -- Check movement (speed check BEFORE engine check - catches towed vehicles)
-    local speed = self:getLastSpeed() or 0
+    local speed = vehicle:getLastSpeed() or 0
     if speed > 0.1 then  -- >0.1 km/h = moving
         return false
     end
 
     -- Check engine state
-    if self.spec_motorized then
-        if self.spec_motorized.isMotorStarted then
+    if vehicle.spec_motorized then
+        if vehicle.spec_motorized.isMotorStarted then
             return false
         end
     end
@@ -1333,7 +1334,7 @@ function UsedPlusMaintenance:onUpdate(dt, isActiveForInput, isActiveForInputIgno
 
     -- v2.8.0: Sleep/wake optimization - skip expensive checks for idle vehicles
     -- Pattern from: MoreRealistic_FS25 performance optimization
-    if self:isSleeping() then
+    if UsedPlusMaintenance.isSleeping(self) then
         -- Still update critical timers even when sleeping
         if spec.stallCooldown > 0 then
             spec.stallCooldown = spec.stallCooldown - dt
