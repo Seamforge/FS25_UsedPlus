@@ -1371,12 +1371,23 @@ function UnifiedPurchaseDialog:updateLeaseDisplay()
     end
 
     -- Due today display (cap reduction + security deposit)
-    UIHelper.Element.setText(self.leaseDueTodayText, UIHelper.Text.formatMoney(dueTodayAmount))
+    local dueTodayText = UIHelper.Text.formatMoney(dueTodayAmount)
+
+    -- v2.11.0: Show trade-in excess warning when residual value limits trade-in benefit
+    -- This helps players understand why their trade-in didn't reduce monthly payment
+    if tradeInExcess > 100 then
+        dueTodayText = dueTodayText .. string.format(
+            "\n💡 Trade-in excess: %s → Lease-end equity",
+            UIHelper.Text.formatMoney(math.floor(tradeInExcess))
+        )
+    end
+
+    UIHelper.Element.setText(self.leaseDueTodayText, dueTodayText)
 
     -- Debug log
-    UsedPlus.logDebug(string.format("Lease: price=$%d, depreciation=$%d, capRed=%d%% ($%d), deposit=$%d (%d mo), residual=$%d, monthly=$%d",
+    UsedPlus.logDebug(string.format("Lease: price=$%d, depreciation=$%d, capRed=%d%% ($%d), deposit=$%d (%d mo), residual=$%d, monthly=$%d, tradeInExcess=$%d",
         self.vehiclePrice, math.floor(depreciation), capReductionPct, math.floor(capReduction),
-        math.floor(securityDeposit), depositMonths, math.floor(residualValue), math.floor(monthlyPayment)))
+        math.floor(securityDeposit), depositMonths, math.floor(residualValue), math.floor(monthlyPayment), math.floor(tradeInExcess)))
 end
 
 --[[
