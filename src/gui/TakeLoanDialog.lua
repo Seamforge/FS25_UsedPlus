@@ -84,6 +84,34 @@ function TakeLoanDialog.new(target, custom_mt, i18n)
 end
 
 --[[
+    Called when GUI elements are created from XML
+    Required for MessageDialog lifecycle - handles element binding
+]]
+function TakeLoanDialog:onCreate()
+    TakeLoanDialog:superClass().onCreate(self)
+    -- Superclass handles element binding from XML
+end
+
+--[[
+    Called when dialog is shown to user
+    Required for MessageDialog lifecycle - initializes interactive state
+]]
+function TakeLoanDialog:onOpen()
+    TakeLoanDialog:superClass().onOpen(self)
+    -- Dialog is now initialized and interactive
+    -- Button callbacks are active
+end
+
+--[[
+    Called when dialog is closed
+    Required for MessageDialog lifecycle - cleanup
+]]
+function TakeLoanDialog:onClose()
+    TakeLoanDialog:superClass().onClose(self)
+    -- Cleanup if needed
+end
+
+--[[
      Called when GUI elements are ready
      Element references are auto-populated by g_gui based on XML id attributes
      Pagination elements need explicit binding due to deep nesting
@@ -656,17 +684,28 @@ function TakeLoanDialog:updateDisplay()
 
     -- Update info text with collateral information
     if self.infoText then
-        local infoMsg = "Loan funds deposited immediately. Payments auto-deducted monthly."
-        if #self.selectedCollateral > 0 then
+        local infoMsg = ""
+        if #self.selectedCollateral == 0 then
+            -- NO collateral selected - show error message
+            infoMsg = "⚠️ Please select at least one asset as collateral to submit your loan application"
+            -- Set text color to warning/error (orange/red)
+            self.infoText:setTextColor(1, 0.4, 0.1, 1)  -- Orange warning
+        else
+            -- Collateral selected - show confirmation
             infoMsg = string.format("%d asset(s) pledged as collateral. Miss 3 payments = repossession!", #self.selectedCollateral)
+            -- Set text color to normal (white)
+            self.infoText:setTextColor(0.9, 0.9, 0.9, 1)
         end
         self.infoText:setText(infoMsg)
     end
 
-    -- Enable/disable accept button
+    -- Enable/disable submit button
     if self.acceptButton then
-        local canAccept = self.loanAmount > 0 and self.loanAmount <= self.maxLoanAmount
-        self.acceptButton:setDisabled(not canAccept)
+        -- Require: valid loan amount AND collateral selected
+        local canSubmit = self.loanAmount > 0 and
+                         self.loanAmount <= self.maxLoanAmount and
+                         #self.selectedCollateral > 0
+        self.acceptButton:setDisabled(not canSubmit)
     end
 end
 
@@ -922,31 +961,21 @@ function TakeLoanDialog:onTermChanged()
 end
 
 --[[
-     Accept loan button clicked
+     Submit loan button clicked
+     Validation is handled by button disable state in updateDisplay()
 ]]
 function TakeLoanDialog:onAcceptLoan()
-    if self.loanAmount <= 0 then
-        g_currentMission:addIngameNotification(
-            FSBaseMission.INGAME_NOTIFICATION_INFO,
-            "Please select a loan amount"
-        )
+    UsedPlus.logInfo("TakeLoanDialog:onAcceptLoan() called - loanAmount=" .. tostring(self.loanAmount) .. ", selectedCollateral count=" .. tostring(#self.selectedCollateral))
+
+    -- Validation: These checks should never fail due to button being disabled,
+    -- but we keep them as defensive programming
+    if self.loanAmount <= 0 or self.loanAmount > self.maxLoanAmount then
+        UsedPlus.logWarn("TakeLoanDialog:onAcceptLoan() - Invalid loan amount (should not happen - button should be disabled)")
         return
     end
 
-    if self.loanAmount > self.maxLoanAmount then
-        g_currentMission:addIngameNotification(
-            FSBaseMission.INGAME_NOTIFICATION_CRITICAL,
-            "Loan amount exceeds maximum allowed"
-        )
-        return
-    end
-
-    -- Warn if no collateral is selected
-    if #self.selectedCollateral == 0 and self.loanAmount > 0 then
-        g_currentMission:addIngameNotification(
-            FSBaseMission.INGAME_NOTIFICATION_CRITICAL,
-            "Please select at least one asset as collateral"
-        )
+    if #self.selectedCollateral == 0 then
+        UsedPlus.logWarn("TakeLoanDialog:onAcceptLoan() - No collateral selected (should not happen - button should be disabled)")
         return
     end
 

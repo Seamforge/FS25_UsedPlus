@@ -77,7 +77,9 @@ function PurchaseContext:reset()
     self.tradeInEnabled = false
     self.tradeInVehicle = nil
     self.tradeInValue = 0
-    self.eligibleTradeIns = {}
+    -- PRESERVE eligibleTradeIns - it's freshly loaded in setVehicleData()
+    -- Only cleared in constructor (new())
+    -- self.eligibleTradeIns = {}  ← REMOVED: Was clearing fresh data
 
     self.itemType = "vehicle"
     self.storeItem = nil
@@ -98,6 +100,7 @@ function PurchaseContext:reset()
 
     -- Keep credit data (persists across opens)
     -- Don't reset: creditScore, creditRating, interestRate, canFinance, canLease
+    -- Don't reset: eligibleTradeIns (freshly loaded per farm state)
 end
 
 --[[
