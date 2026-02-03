@@ -968,7 +968,7 @@
         <e k="usedplus_tl_interest" v="Відсотки:" eh="25df650a" />
         <e k="usedplus_tl_yearly" v="На рік:" eh="49192394" />
         <e k="usedplus_tl_info" v="Кошти позики зараховуються негайно. Платежі списуються автоматично щомісяця." eh="91080370" />
-        <e k="usedplus_button_acceptLoan" v="Прийняти позику" eh="ad5f835e" />
+        <e k="usedplus_button_acceptLoan" v="Подати заявку" eh="63dc9953" />
 
         <!-- Loan Approved Dialog -->
         <e k="usedplus_la_title" v="ПОЗИКУ СХВАЛЕНО" eh="93e4efbe" />
@@ -1318,9 +1318,9 @@
         <e k="usedplus_fmf_sectionCredit" v="КРЕДИТ &amp; СТАТИСТИКА" eh="8a71fbbe" />
         <e k="usedplus_fmf_sectionStatistics" v="СТАТИСТИКА" eh="bd71bd5e" />
         <e k="usedplus_fmf_noActiveDeals" v="Немає активних фінансових угод" eh="171c5c5d" />
-        <e k="usedplus_fmf_financeDisabled" v="Finance system disabled in settings" eh="00000001" />
-        <e k="usedplus_fmf_searchDisabled" v="Used vehicle search disabled in settings" eh="00000002" />
-        <e k="usedplus_fmf_saleDisabled" v="Vehicle sale system disabled in settings" eh="00000003" />
+        <e k="usedplus_fmf_financeDisabled" v="Фінансову систему вимкнено в налаштуваннях" eh="c29d15b7" />
+        <e k="usedplus_fmf_searchDisabled" v="Пошук вживаної техніки вимкнено в налаштуваннях" eh="a472e30b" />
+        <e k="usedplus_fmf_saleDisabled" v="Систему продажу техніки вимкнено в налаштуваннях" eh="0960b75f" />
         <e k="usedplus_fmf_headerType" v="ТИП" eh="94849514" />
         <e k="usedplus_fmf_headerItem" v="ПРЕДМЕТ" eh="2b911c01" />
         <e k="usedplus_fmf_headerBalance" v="БАЛАНС" eh="bd50bfda" />
@@ -1555,6 +1555,7 @@
         <e k="usedplus_warning_hydraulicCritical" v="КРИТИЧНО: Рівень гідравлічної рідини небезпечно низький! Відбувається пошкодження системи." eh="fe31b6f1" />
         <e k="usedplus_warning_hydraulicLeak" v="Увага: Виявлено витік гідравліки. Втрата рідини прискорюється." eh="36b8f377" />
         <e k="usedplus_warning_hydraulicDamage" v="ПОШКОДЖЕННЯ ГІДРАВЛІКИ: Постійна втрата надійності через роботу з низьким рівнем рідини!" eh="843ae10a" />
+        <e k="usedplus_warning_elsDataLoss" v="Для керування деякими позиками потрібен мод EnhancedLoanSystem. Дані збережено, але недоступні." eh="2da68f69" />
 
         <!-- v1.7.0: Fuel Leak Warning -->
         <e k="usedplus_warning_fuelLeak" v="Попередження: Виявлено витік палива! Витрата палива значно збільшена." eh="6654d01e" />
@@ -1923,13 +1924,13 @@
         <e k="usedplus_setting_interestRate" v="Відсоткова Ставка Фінансування" eh="ec5e55f4" />
         <e k="usedplus_setting_interestRate_desc" v="Базова ставка для всього фінансування (техніка, земля, кредити). Кредитний рейтинг впливає на цю ставку." eh="86443f38" />
         <e k="usedplus_setting_tradeInValue" v="Вартість Обміну %" eh="1f2d9066" />
-        <e k="usedplus_setting_tradeInValue_desc" v="Базовий відсоток від ціни продажу для обмінів" eh="63d5cd26" />
+        <e k="usedplus_setting_tradeInValue_desc" v="Базовий відсоток від ціни продажу для обмінів (±7,5% варіація)" eh="7337cf9e" />
         <e k="usedplus_setting_repairCost" v="Множник Вартості Ремонту" eh="f6f74c79" />
         <e k="usedplus_setting_repairCost_desc" v="Множник для всіх витрат на ремонт" eh="d20d8168" />
         <e k="usedplus_setting_paintCost" v="Множник Вартості Фарбування" eh="b5b8f53a" />
         <e k="usedplus_setting_paintCost_desc" v="Множник для витрат на фарбування (окремо від ремонту)" eh="4fcb0c32" />
         <e k="usedplus_setting_leaseMarkup" v="Націнка Лізингу %" eh="aac70e2a" />
-        <e k="usedplus_setting_leaseMarkup_desc" v="Відсоток націнки на щомісячні лізингові платежі" eh="23d9d6f0" />
+        <e k="usedplus_setting_leaseMarkup_desc" v="Націнка ставки лізингу (÷10 для процентних пунктів, напр. 15 = +1,5 п.п.)" eh="e27af0b2" />
 
         <!-- Forgiveness and risk -->
         <e k="usedplus_setting_missedPayments" v="Пропущених Платежів до Вилучення" eh="be335e9f" />

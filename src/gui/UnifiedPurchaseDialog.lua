@@ -762,6 +762,8 @@ function UnifiedPurchaseDialog:onTradeInVehicleChanged()
         index = self.tradeInVehicleSelector:getState()
     end
 
+    UsedPlus.logInfo("UnifiedPurchaseDialog:onTradeInVehicleChanged() called - index=" .. tostring(index))
+
     -- Index 1 = "None" selected
     if index == 1 then
         -- Clear trade-in in context
@@ -781,7 +783,14 @@ function UnifiedPurchaseDialog:onTradeInVehicleChanged()
         local vehicleIndex = index - 1
         local item = TradeInHandler.getItemByIndex(self.context, vehicleIndex)
 
+        UsedPlus.logInfo("  vehicleIndex=" .. tostring(vehicleIndex) .. ", item=" .. tostring(item ~= nil))
+
         if item then
+            UsedPlus.logInfo("  item.name=" .. tostring(item.name) .. ", item.value=" .. tostring(item.value))
+            UsedPlus.logInfo("  Elements bound: tradeInDetailsContainer=" .. tostring(self.tradeInDetailsContainer ~= nil) ..
+                ", tradeInNameText=" .. tostring(self.tradeInNameText ~= nil) ..
+                ", tradeInImage=" .. tostring(self.tradeInImage ~= nil))
+
             -- Set trade-in in context
             TradeInHandler.setTradeIn(self.context, item.vehicle)
 
@@ -801,8 +810,10 @@ function UnifiedPurchaseDialog:onTradeInVehicleChanged()
             end
 
             -- Update trade-in image
-            local storeItem = g_storeManager:getItemByXMLFilename(item.vehicle.configFileName)
-            UIHelper.Image.setStoreItemImage(self.tradeInImage, storeItem)
+            if self.tradeInImage then
+                local storeItem = g_storeManager:getItemByXMLFilename(item.vehicle.configFileName)
+                UIHelper.Image.setStoreItemImage(self.tradeInImage, storeItem)
+            end
 
             -- Update condition display - Line 1: Repair status
             if self.tradeInConditionText then

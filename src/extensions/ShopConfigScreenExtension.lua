@@ -259,14 +259,22 @@ function ShopConfigScreenExtension.updateButtonsHook(self, storeItem, vehicle, s
         -- v2.7.0: Respect overrideShopBuyLease setting - when OFF, never swap callbacks
         if self.buyButton then
             local overrideEnabled = not UsedPlusSettings or UsedPlusSettings:get("overrideShopBuyLease") ~= false
+            local financeEnabled = not UsedPlusSettings or UsedPlusSettings:isSystemEnabled("Finance")
             local isHandTool = storeItem and storeItem.financeCategory == "SHOP_HANDTOOL_BUY"
             local canFinance = ShopConfigScreenExtension.canFinanceItem(storeItem)
 
-            if not overrideEnabled then
-                -- v2.7.0: Override disabled - always use vanilla callback
+            -- THREE-WAY check: override setting + finance system enabled
+            local canOverride = overrideEnabled and financeEnabled
+
+            if not canOverride then
+                -- v2.7.0: Override disabled OR finance system disabled - always use vanilla callback
                 -- User should use Finance button for UsedPlus features
                 self.buyButton.onClickCallback = self.usedPlusOriginalBuyCallback
-                UsedPlus.logDebug("Buy button: restored original callback (override disabled in settings)")
+                if not overrideEnabled then
+                    UsedPlus.logDebug("Buy button: restored original callback (override disabled in settings)")
+                elseif not financeEnabled then
+                    UsedPlus.logDebug("Buy button: restored original callback (finance system disabled)")
+                end
             elseif isOwnedVehicle then
                 -- OWNED VEHICLE: Restore original game callback completely
                 -- Don't touch it - let the game handle customization natively
@@ -304,15 +312,22 @@ function ShopConfigScreenExtension.updateButtonsHook(self, storeItem, vehicle, s
             local isHandTool = storeItem and storeItem.financeCategory == "SHOP_HANDTOOL_BUY"
             local canLease = ShopConfigScreenExtension.canLeaseItem(storeItem)
 
-            if not overrideEnabled then
-                -- v2.7.0: Override disabled - always use vanilla callback
+            -- THREE-WAY check: override setting + lease system enabled
+            local canOverride = overrideEnabled and leaseEnabled
+
+            if not canOverride then
+                -- v2.7.0: Override disabled OR lease system disabled - always use vanilla callback
                 -- User should use Finance button for UsedPlus features
                 self.leaseButton.onClickCallback = self.usedPlusOriginalLeaseCallback
-                UsedPlus.logDebug("Lease button: restored original callback (override disabled in settings)")
-            elseif isOwnedVehicle or not leaseEnabled then
-                -- OWNED VEHICLE or LEASE DISABLED: Restore original game callback
+                if not overrideEnabled then
+                    UsedPlus.logDebug("Lease button: restored original callback (override disabled in settings)")
+                elseif not leaseEnabled then
+                    UsedPlus.logDebug("Lease button: restored original callback (lease system disabled)")
+                end
+            elseif isOwnedVehicle then
+                -- OWNED VEHICLE: Restore original game callback
                 self.leaseButton.onClickCallback = self.usedPlusOriginalLeaseCallback
-                UsedPlus.logDebug("Lease button: restored original callback for owned vehicle or disabled system")
+                UsedPlus.logDebug("Lease button: restored original callback for owned vehicle")
             elseif isHandTool then
                 -- HAND TOOL: Don't wrap callback - restore original and let game handle it
                 self.leaseButton.onClickCallback = self.usedPlusOriginalLeaseCallback

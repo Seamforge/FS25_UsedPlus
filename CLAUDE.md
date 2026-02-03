@@ -214,7 +214,7 @@ X position = element CENTER, not left edge. Calculate: `X ± (width/2)` must sta
 
 ## Project: FS25_UsedPlus
 
-### Current Version: 2.7.1
+### Current Version: 2.10.1
 
 ### Features
 - Vehicle/equipment financing (1-30 years) with dynamic credit scoring (300-850)

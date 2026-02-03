@@ -27,6 +27,12 @@ local UsedVehiclePreviewDialog_mt = Class(UsedVehiclePreviewDialog, ScreenElemen
 -- Dialog instance
 UsedVehiclePreviewDialog.INSTANCE = nil
 
+-- Month name abbreviations for expiration display
+UsedVehiclePreviewDialog.MONTH_NAMES = {
+    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+}
+
 --[[
     Constructor - extends ScreenElement, NOT MessageDialog
 ]]
@@ -155,6 +161,27 @@ function UsedVehiclePreviewDialog:updateDisplay()
     -- Price
     if self.priceText then
         self.priceText:setText(g_i18n:formatMoney(listing.price or 0, 0, true, true))
+    end
+
+    -- v2.10.0: Expiration info
+    if self.expirationText and self.search then
+        local foundMonth = listing.foundMonth or 0
+        local expirationMonths = listing.expirationMonths or 3
+        local currentMonth = self.search.monthsElapsed or 0
+        local age = currentMonth - foundMonth
+        local remaining = expirationMonths - age
+        local expireMonth = foundMonth + expirationMonths
+
+        if remaining > 0 then
+            -- Convert month number to month name (wrap to 1-12 range)
+            local monthIndex = ((expireMonth - 1) % 12) + 1
+            local monthName = UsedVehiclePreviewDialog.MONTH_NAMES[monthIndex] or "Jan"
+
+            self.expirationText:setText(string.format("%d month%s (expires %s)",
+                remaining, remaining == 1 and "" or "s", monthName))
+        else
+            self.expirationText:setText("Expired")
+        end
     end
 
     -- Vehicle image - use UIHelper pattern if available

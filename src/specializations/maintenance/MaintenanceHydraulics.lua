@@ -16,6 +16,10 @@ function UsedPlusMaintenance.checkHydraulicSurge(vehicle)
     local spec = vehicle.spec_usedPlusMaintenance
     if spec == nil then return end
 
+    -- Check if malfunctions are enabled
+    local malfunctionsEnabled = not UsedPlusSettings or UsedPlusSettings:isSystemEnabled("Malfunctions")
+    if not malfunctionsEnabled then return end
+
     local config = UsedPlusMaintenance.CONFIG
     local currentTime = g_currentMission.time or 0
 
@@ -90,6 +94,10 @@ end
 function UsedPlusMaintenance.checkRunawayCondition(vehicle)
     local spec = vehicle.spec_usedPlusMaintenance
     if spec == nil then return end
+
+    -- Check if malfunctions are enabled
+    local malfunctionsEnabled = not UsedPlusSettings or UsedPlusSettings:isSystemEnabled("Malfunctions")
+    if not malfunctionsEnabled then return end
 
     local config = UsedPlusMaintenance.CONFIG
 
@@ -229,6 +237,10 @@ function UsedPlusMaintenance.checkImplementStuckDown(vehicle)
     local spec = vehicle.spec_usedPlusMaintenance
     if spec == nil then return end
 
+    -- Check if malfunctions are enabled
+    local malfunctionsEnabled = not UsedPlusSettings or UsedPlusSettings:isSystemEnabled("Malfunctions")
+    if not malfunctionsEnabled then return end
+
     local config = UsedPlusMaintenance.CONFIG
 
     if not config.enableImplementStuckDown then return end
@@ -290,6 +302,10 @@ end
 function UsedPlusMaintenance.checkImplementStuckUp(vehicle)
     local spec = vehicle.spec_usedPlusMaintenance
     if spec == nil then return end
+
+    -- Check if malfunctions are enabled
+    local malfunctionsEnabled = not UsedPlusSettings or UsedPlusSettings:isSystemEnabled("Malfunctions")
+    if not malfunctionsEnabled then return end
 
     local config = UsedPlusMaintenance.CONFIG
 
@@ -355,6 +371,10 @@ function UsedPlusMaintenance.checkImplementPull(vehicle)
     local spec = vehicle.spec_usedPlusMaintenance
     if spec == nil then return end
 
+    -- Check if malfunctions are enabled
+    local malfunctionsEnabled = not UsedPlusSettings or UsedPlusSettings:isSystemEnabled("Malfunctions")
+    if not malfunctionsEnabled then return end
+
     local config = UsedPlusMaintenance.CONFIG
 
     if not config.enableImplementPull then return end
@@ -415,6 +435,10 @@ end
 function UsedPlusMaintenance.checkImplementDrag(vehicle)
     local spec = vehicle.spec_usedPlusMaintenance
     if spec == nil then return end
+
+    -- Check if malfunctions are enabled
+    local malfunctionsEnabled = not UsedPlusSettings or UsedPlusSettings:isSystemEnabled("Malfunctions")
+    if not malfunctionsEnabled then return end
 
     local config = UsedPlusMaintenance.CONFIG
 
@@ -481,6 +505,10 @@ function UsedPlusMaintenance.checkReducedTurning(vehicle)
     local spec = vehicle.spec_usedPlusMaintenance
     if spec == nil then return end
 
+    -- Check if malfunctions are enabled
+    local malfunctionsEnabled = not UsedPlusSettings or UsedPlusSettings:isSystemEnabled("Malfunctions")
+    if not malfunctionsEnabled then return end
+
     local config = UsedPlusMaintenance.CONFIG
 
     if not config.enableReducedTurning then return end
@@ -530,6 +558,10 @@ function UsedPlusMaintenance.checkImplementMalfunctions(vehicle)
     local spec = vehicle.spec_usedPlusMaintenance
     if spec == nil then return end
 
+    -- Check if malfunctions are enabled
+    local malfunctionsEnabled = not UsedPlusSettings or UsedPlusSettings:isSystemEnabled("Malfunctions")
+    if not malfunctionsEnabled then return end
+
     -- v2.8.0: Check global malfunction cooldown (prevents cascade failures)
     if UsedPlusMaintenance.isInGlobalCooldown(vehicle) then return end
 
@@ -576,6 +608,10 @@ end
 function UsedPlusMaintenance.checkImplementSurge(vehicle, implement, hydraulicReliability)
     local spec = vehicle.spec_usedPlusMaintenance
     if spec == nil then return end
+
+    -- Check if malfunctions are enabled (redundant but safe)
+    local malfunctionsEnabled = not UsedPlusSettings or UsedPlusSettings:isSystemEnabled("Malfunctions")
+    if not malfunctionsEnabled then return end
 
     -- v2.7.0: Skip if hydraulics are seized (implements already locked)
     if spec.hydraulicsSeized then return end
@@ -633,6 +669,10 @@ end
 function UsedPlusMaintenance.checkImplementDrop(vehicle, implement, hydraulicReliability)
     local spec = vehicle.spec_usedPlusMaintenance
     if spec == nil then return end
+
+    -- Check if malfunctions are enabled (redundant but safe)
+    local malfunctionsEnabled = not UsedPlusSettings or UsedPlusSettings:isSystemEnabled("Malfunctions")
+    if not malfunctionsEnabled then return end
 
     -- v2.7.0: Skip if hydraulics are seized (implements already locked)
     if spec.hydraulicsSeized then return end
@@ -698,6 +738,10 @@ function UsedPlusMaintenance.checkPTOToggle(vehicle, implement, electricalReliab
     local spec = vehicle.spec_usedPlusMaintenance
     if spec == nil then return end
 
+    -- Check if malfunctions are enabled (redundant but safe)
+    local malfunctionsEnabled = not UsedPlusSettings or UsedPlusSettings:isSystemEnabled("Malfunctions")
+    if not malfunctionsEnabled then return end
+
     -- v2.7.0: Skip if electrical is seized (already permanently dead)
     if spec.electricalSeized then return end
 
@@ -746,6 +790,10 @@ end
 function UsedPlusMaintenance.checkHitchFailure(vehicle, implementInfo, hydraulicReliability)
     local spec = vehicle.spec_usedPlusMaintenance
     if spec == nil then return end
+
+    -- Check if malfunctions are enabled (redundant but safe)
+    local malfunctionsEnabled = not UsedPlusSettings or UsedPlusSettings:isSystemEnabled("Malfunctions")
+    if not malfunctionsEnabled then return end
 
     local config = UsedPlusMaintenance.CONFIG
     local implement = implementInfo.object
@@ -799,6 +847,10 @@ end
 function UsedPlusMaintenance.checkImplementCutout(vehicle, dt)
     local spec = vehicle.spec_usedPlusMaintenance
     if spec == nil then return end
+
+    -- Check if malfunctions are enabled
+    local malfunctionsEnabled = not UsedPlusSettings or UsedPlusSettings:isSystemEnabled("Malfunctions")
+    if not malfunctionsEnabled then return end
 
     -- v2.7.0: Skip if electrical is seized (already permanently dead)
     if spec.electricalSeized then return end

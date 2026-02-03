@@ -26,6 +26,36 @@ function UsedVehicleManager:processSearchesForFarm(farmId, farm)
     for i = #farm.usedVehicleSearches, 1, -1 do
         local search = farm.usedVehicleSearches[i]
 
+        -- Clean up expired listings even if search is completed
+        -- Listings should expire 2-3 months after being found, regardless of search status
+        if search.status == "completed" and search.foundListings and #search.foundListings > 0 then
+            -- Increment monthsElapsed so listing age calculation works correctly
+            search.monthsElapsed = search.monthsElapsed + 1
+            search.lastCheckDay = g_currentMission.environment.currentDay
+
+            -- Clean up expired listings
+            local normalExpired, earlyExpired = search:cleanupExpiredListings()
+
+            -- Show dialog for early expirations (seller backed out)
+            if earlyExpired and #earlyExpired > 0 then
+                for _, listing in ipairs(earlyExpired) do
+                    self:showSellerBackedOutDialog(listing.name)
+                end
+            end
+
+            -- Notify for normal expirations
+            if normalExpired > 0 then
+                UsedPlus.logDebug(string.format("Search %s (completed): Month %d, cleaned up %d expired listing(s)",
+                    search.id, search.monthsElapsed, normalExpired))
+                if g_currentMission and not g_currentMission.isLoading then
+                    g_currentMission:addIngameNotification(
+                        FSBaseMission.INGAME_NOTIFICATION_INFO,
+                        string.format("%d vehicle offer(s) expired - sellers found other buyers", normalExpired)
+                    )
+                end
+            end
+        end
+
         if search.status == "active" then
             -- Log before monthly check
             UsedPlus.logTrace(string.format("    Search %s: %s - Month %d/%d, Listings: %d/%d",
@@ -66,6 +96,14 @@ function UsedVehicleManager:processSearchesForFarm(farmId, farm)
                 end
             end
 
+            -- Check for early expirations (seller backed out)
+            if search.recentEarlyExpirations and #search.recentEarlyExpirations > 0 then
+                for _, listing in ipairs(search.recentEarlyExpirations) do
+                    self:showSellerBackedOutDialog(listing.name)
+                end
+                search.recentEarlyExpirations = {}  -- Clear after processing
+            end
+
             -- Check if search has completed (expired or player bought a vehicle)
             if search.status == "completed" then
                 UsedPlus.logDebug(string.format("Search %s completed: %s (%d vehicles found)",
@@ -91,6 +129,38 @@ function UsedVehicleManager:processSearchesForFarm(farmId, farm)
             -- else: search still active, will continue next month
         end
     end
+end
+
+--[[
+    v2.10.0: Show dialog when seller backs out early
+    Happens randomly for uninspected vehicles
+]]
+function UsedVehicleManager:showSellerBackedOutDialog(vehicleName)
+    if not g_currentMission or g_currentMission.isLoading then
+        return
+    end
+
+    local message = string.format(
+        "The seller of the %s accepted another offer and is no longer available. Keep searching!",
+        vehicleName or "vehicle"
+    )
+
+    -- Use DialogLoader to show simple info dialog
+    if DialogLoader and DialogLoader.showInfoDialog then
+        DialogLoader.showInfoDialog(
+            "Offer Withdrawn",
+            message,
+            function() end  -- No callback needed
+        )
+    else
+        -- Fallback: Just show notification
+        g_currentMission:addIngameNotification(
+            FSBaseMission.INGAME_NOTIFICATION_INFO,
+            message
+        )
+    end
+
+    UsedPlus.logDebug(string.format("Seller backed out dialog shown for: %s", vehicleName or "unknown"))
 end
 
 --[[

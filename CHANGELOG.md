@@ -4,6 +4,32 @@ All notable changes to this project are documented here.
 
 ---
 
+## [2.10.1] - 2026-02-02
+
+### Fixed
+
+**CRITICAL Bug Fixes:**
+- **Malfunction System**: Added missing `enableMalfunctionsSystem` checks to 18 malfunction trigger functions across MaintenanceEngine, MaintenanceHydraulics, and MaintenanceSteering. Players can now properly disable the malfunction system via settings.
+- **Hungarian Translations**: Fixed 8 format specifier errors that caused game crashes for Hungarian players (percentage symbols incorrectly parsed as format codes).
+
+**HIGH Priority Bug Fixes:**
+- **Manager Background Processing**: Fixed FinanceManager, UsedVehicleManager, and VehicleSaleManager ignoring feature toggle settings during HOUR_CHANGED and PERIOD_CHANGED processing.
+- **BUE Integration**: Fixed UsedVehicleManager initialization bypass when BuyUsedEquipment mod is installed, preventing duplicate used vehicle listings.
+- **Shop Override Buttons**: Implemented THREE-WAY validation (override setting + integration + feature enabled) for Buy and Lease shop buttons.
+
+**UX Improvements:**
+- **Button Semantics**: Changed "Accept Loan" to "Submit Loan" across all languages for clarity in loan application workflow.
+- **Setting Tooltips**: Documented hidden behaviors in settings:
+  - `baseTradeInPercent`: Now shows ±7.5% variance notation
+  - `leaseMarkupPercent`: Now shows ÷10 transform explanation (e.g., 15 = +1.5pp)
+- **ELS Warning**: Added data loss notification when EnhancedLoanSystem loans exist but mod is not installed.
+
+**Translation Quality:**
+- Updated 147 translations across 25 languages with corrected semantics and hash synchronization.
+- All worked languages now 100% synchronized with English source (0 stale entries).
+
+---
+
 ## [2.10.0] - 2026-02-01
 
 ### Added - Building/Placeable Financing

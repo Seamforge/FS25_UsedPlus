@@ -67,6 +67,13 @@ end
 function UsedVehicleManager:onHourChanged()
     if not self.isServer then return end
 
+    -- Check if used vehicle search system is enabled
+    local searchEnabled = not UsedPlusSettings or UsedPlusSettings:get("enableUsedVehicleSearch") ~= false
+    if not searchEnabled then
+        UsedPlus.logDebug("UsedVehicleManager: Search system disabled, skipping HOUR_CHANGED processing")
+        return
+    end
+
     -- Track hours for inspection timing
     local lastHour = self.totalGameHours or 0
     self.totalGameHours = lastHour + 1

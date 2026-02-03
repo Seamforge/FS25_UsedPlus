@@ -980,7 +980,7 @@
         <e k="usedplus_tl_interest" v="Rente:" eh="25df650a" />
         <e k="usedplus_tl_yearly" v="Årlig:" eh="49192394" />
         <e k="usedplus_tl_info" v="Lånemidler indsættes straks. Betalinger trækkes automatisk månedligt." eh="91080370" />
-        <e k="usedplus_button_acceptLoan" v="Accepter Lån" eh="ad5f835e" />
+        <e k="usedplus_button_acceptLoan" v="Ansøg om lån" eh="63dc9953" />
 
         <!-- Loan Approved Dialog -->
         <e k="usedplus_la_title" v="LÅN GODKENDT" eh="93e4efbe" />
@@ -1330,9 +1330,9 @@
         <e k="usedplus_fmf_sectionCredit" v="KREDIT &amp; STATISTIKKER" eh="8a71fbbe" />
         <e k="usedplus_fmf_sectionStatistics" v="STATISTIKKER" eh="bd71bd5e" />
         <e k="usedplus_fmf_noActiveDeals" v="Ingen aktive finansieringsaftaler" eh="171c5c5d" />
-        <e k="usedplus_fmf_financeDisabled" v="Finance system disabled in settings" eh="00000001" />
-        <e k="usedplus_fmf_searchDisabled" v="Used vehicle search disabled in settings" eh="00000002" />
-        <e k="usedplus_fmf_saleDisabled" v="Vehicle sale system disabled in settings" eh="00000003" />
+        <e k="usedplus_fmf_financeDisabled" v="Finansieringssystem deaktiveret i indstillinger" eh="c29d15b7" />
+        <e k="usedplus_fmf_searchDisabled" v="Søgning efter brugte køretøjer deaktiveret i indstillinger" eh="a472e30b" />
+        <e k="usedplus_fmf_saleDisabled" v="Køretøjssalgssystem deaktiveret i indstillinger" eh="0960b75f" />
         <e k="usedplus_fmf_headerType" v="TYPE" eh="94849514" />
         <e k="usedplus_fmf_headerItem" v="VARE" eh="2b911c01" />
         <e k="usedplus_fmf_headerBalance" v="SALDO" eh="bd50bfda" />
@@ -1567,6 +1567,7 @@
         <e k="usedplus_warning_hydraulicCritical" v="KRITISK: Hydraulisk væske farligt lav! Systemskade opstår." eh="fe31b6f1" />
         <e k="usedplus_warning_hydraulicLeak" v="Advarsel: Hydraulisk lækage opdaget. Væsketab accelererer." eh="36b8f377" />
         <e k="usedplus_warning_hydraulicDamage" v="HYDRAULISK SKADE: Permanent pålidelighed mistet på grund af lav væske!" eh="843ae10a" />
+        <e k="usedplus_warning_elsDataLoss" v="Nogle lån kræver EnhancedLoanSystem-mod for at administrere. Data bevares, men er utilgængelige." eh="2da68f69" />
 
         <!-- v1.7.0: Fuel Leak Warning -->
         <e k="usedplus_warning_fuelLeak" v="Advarsel: Brændstof lækage opdaget. Service påkrævet." eh="6654d01e" />
@@ -2134,14 +2135,14 @@
         <e k="usedplus_setting_interestRate" v="Finansieringsrente" eh="ec5e55f4" />
         <e k="usedplus_setting_interestRate_desc" v="Basisrente for al finansiering (køretøjer, jord, lån). Kreditscore ændrer dette." eh="86443f38" />
         <e k="usedplus_setting_tradeInValue" v="Indbytningsværdi %" eh="1f2d9066" />
-        <e k="usedplus_setting_tradeInValue_desc" v="Basis procentdel af salgspris for indbytning" eh="63d5cd26" />
+        <e k="usedplus_setting_tradeInValue_desc" v="Basis procentdel af salgspris for indbytning (±7,5% afvigelse)" eh="7337cf9e" />
         <e k="usedplus_setting_repairCost" v="Reparationsomkostnings multiplikator" eh="f6f74c79" />
         <e k="usedplus_setting_repairCost_desc" v="Multiplikator anvendt på alle reparationsomkostninger" eh="d20d8168" />
         <!-- v2.0.0: NEW - Paint Cost Multiplier (separate from repair) -->
         <e k="usedplus_setting_paintCost" v="Lakeromkostnings multiplikator" eh="b5b8f53a" />
         <e k="usedplus_setting_paintCost_desc" v="Multiplikator anvendt på omlakeringomkostninger (separat fra reparation)" eh="4fcb0c32" />
         <e k="usedplus_setting_leaseMarkup" v="Leasing tillæg %" eh="aac70e2a" />
-        <e k="usedplus_setting_leaseMarkup_desc" v="Procenttillæg på månedlige leasingbetalinger" eh="23d9d6f0" />
+        <e k="usedplus_setting_leaseMarkup_desc" v="Leasingsats tillæg (÷10 for procentpoint, f.eks. 15 = +1,5pp)" eh="e27af0b2" />
 
         <!-- Economic Settings: Forgiveness & Risk -->
         <e k="usedplus_setting_missedPayments" v="Udeblevet betalinger til misligholdelse" eh="be335e9f" />

@@ -95,10 +95,7 @@ end
     @param callback - Function(relistChoice) called on close
 ]]
 function SaleExpiredDialog.showWithListing(listing, callback)
-    local dialog = SaleExpiredDialog.getInstance()
-    if dialog then
-        dialog:show(listing, callback)
-    end
+    DialogLoader.show("SaleExpiredDialog", "show", listing, callback)
 end
 
 --[[

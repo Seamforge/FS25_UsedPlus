@@ -271,15 +271,14 @@ function VehiclePortfolioDialog:onClickViewDetails()
     self:closeDialog()
 
     -- Open preview dialog with purchase callback
-    local previewDialog = UsedVehiclePreviewDialog.getInstance()
-    if previewDialog then
-        local farmId = g_currentMission:getFarmId()
-        previewDialog:show(previewListing, farmId, function(confirmed, purchasedListing)
+    local farmId = g_currentMission:getFarmId()
+    DialogLoader.show("UsedVehiclePreviewDialog", "show",
+        previewListing,
+        farmId,
+        function(confirmed, purchasedListing)
             self:onPreviewResult(confirmed, purchasedListing, listing)
-        end, self)
-    else
-        UsedPlus.logError("Failed to get UsedVehiclePreviewDialog instance")
-    end
+        end,
+        self)
 end
 
 --[[

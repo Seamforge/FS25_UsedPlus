@@ -756,7 +756,7 @@
         <e k="usedplus_tl_interest" v="Juros:" eh="25df650a" />
         <e k="usedplus_tl_yearly" v="Anual:" eh="49192394" />
         <e k="usedplus_tl_info" v="Fundos do empréstimo depositados imediatamente. Pagamentos deduzidos automaticamente mensalmente." eh="91080370" />
-        <e k="usedplus_button_acceptLoan" v="Aceitar Empréstimo" eh="ad5f835e" />
+        <e k="usedplus_button_acceptLoan" v="Submeter pedido" eh="63dc9953" />
         <e k="usedplus_la_title" v="EMPRÉSTIMO APROVADO" eh="93e4efbe" />
         <e k="usedplus_la_amountDeposited" v="Montante Depositado" eh="682d6e59" />
         <e k="usedplus_la_sectionTerms" v="CONDIÇÕES DO EMPRÉSTIMO" eh="08b4cdd6" />
@@ -1061,9 +1061,9 @@
         <e k="usedplus_fmf_sectionCredit" v="CRÉDITO E ESTATÍSTICAS" eh="8a71fbbe" />
         <e k="usedplus_fmf_sectionStatistics" v="ESTATÍSTICAS" eh="bd71bd5e" />
         <e k="usedplus_fmf_noActiveDeals" v="Sem negócios de financiamento ativos" eh="171c5c5d" />
-        <e k="usedplus_fmf_financeDisabled" v="Finance system disabled in settings" eh="00000001" />
-        <e k="usedplus_fmf_searchDisabled" v="Used vehicle search disabled in settings" eh="00000002" />
-        <e k="usedplus_fmf_saleDisabled" v="Vehicle sale system disabled in settings" eh="00000003" />
+        <e k="usedplus_fmf_financeDisabled" v="Sistema de financiamento desativado nas definições" eh="c29d15b7" />
+        <e k="usedplus_fmf_searchDisabled" v="Pesquisa de veículos usados desativada nas definições" eh="a472e30b" />
+        <e k="usedplus_fmf_saleDisabled" v="Sistema de venda de veículos desativado nas definições" eh="0960b75f" />
         <e k="usedplus_fmf_headerType" v="TIPO" eh="94849514" />
         <e k="usedplus_fmf_headerItem" v="ITEM" eh="2b911c01" />
         <e k="usedplus_fmf_headerBalance" v="SALDO" eh="bd50bfda" />
@@ -1250,6 +1250,7 @@
         <e k="usedplus_warning_hydraulicCritical" v="CRÍTICO: Fluído hidráulico perigosamente baixo! A ocorrer danos no sistema." eh="fe31b6f1" />
         <e k="usedplus_warning_hydraulicLeak" v="Aviso: Fuga hidráulica detetada. Perda de fluído a acelerar." eh="36b8f377" />
         <e k="usedplus_warning_hydraulicDamage" v="DANOS HIDRÁULICOS: Perda permanente de fiabilidade por pouco fluído!" eh="843ae10a" />
+        <e k="usedplus_warning_elsDataLoss" v="Alguns empréstimos requerem o mod EnhancedLoanSystem para serem geridos. Dados preservados mas inacessíveis." eh="2da68f69" />
         <e k="usedplus_warning_fuelLeak" v="Aviso: Fuga de combustível detetada! Consumo significativamente aumentado." eh="6654d01e" />
         <e k="usedplus_warning_hydraulicSurge" v="PERDA DE DIREÇÃO ASSISTIDA - Veículo a puxar para %s!" eh="a8d164f9" />
         <e k="usedplus_warning_runaway" v="MOTOR DESCONTROLADO! Falha do regulador - DESLIGUE O MOTOR!" eh="b5041aa9" />
@@ -1711,13 +1712,13 @@
         <e k="usedplus_setting_interestRate" v="Taxa de Juro de Financiamento" eh="ec5e55f4" />
         <e k="usedplus_setting_interestRate_desc" v="Taxa base para todo o financiamento (veículos, terrenos, empréstimos). Pontuação de crédito modifica isto." eh="86443f38" />
         <e k="usedplus_setting_tradeInValue" v="Valor de Retoma %" eh="1f2d9066" />
-        <e k="usedplus_setting_tradeInValue_desc" v="Percentagem base do preço de venda para retomas" eh="63d5cd26" />
+        <e k="usedplus_setting_tradeInValue_desc" v="Percentagem base do preço de venda para retomas (variância ±7,5%)" eh="7337cf9e" />
         <e k="usedplus_setting_repairCost" v="Multiplicador de Custo de Reparação" eh="f6f74c79" />
         <e k="usedplus_setting_repairCost_desc" v="Multiplicador aplicado a todos os custos de reparação" eh="d20d8168" />
         <e k="usedplus_setting_paintCost" v="Multiplicador de Custo de Pintura" eh="b5b8f53a" />
         <e k="usedplus_setting_paintCost_desc" v="Multiplicador aplicado a custos de pintura (separado de reparação)" eh="4fcb0c32" />
         <e k="usedplus_setting_leaseMarkup" v="Margem de Leasing %" eh="aac70e2a" />
-        <e k="usedplus_setting_leaseMarkup_desc" v="Margem percentual nas mensalidades de leasing" eh="23d9d6f0" />
+        <e k="usedplus_setting_leaseMarkup_desc" v="Margem da taxa de leasing (÷10 para pontos percentuais, ex: 15 = +1,5pp)" eh="e27af0b2" />
         <e k="usedplus_setting_missedPayments" v="Pagamentos Falhados até Incumprimento" eh="be335e9f" />
         <e k="usedplus_setting_missedPayments_desc" v="Número de pagamentos falhados antes de apreensão do veículo" eh="71688a5f" />
         <e k="usedplus_setting_downPayment" v="Entrada Mínima %" eh="b70d8e33" />

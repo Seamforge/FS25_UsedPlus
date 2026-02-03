@@ -22,6 +22,10 @@ function UsedPlusMaintenance.checkEngineStall(vehicle)
     local spec = vehicle.spec_usedPlusMaintenance
     if spec == nil then return end
 
+    -- Check if malfunctions are enabled
+    local malfunctionsEnabled = not UsedPlusSettings or UsedPlusSettings:isSystemEnabled("Malfunctions")
+    if not malfunctionsEnabled then return end
+
     -- v2.7.0: Skip if engine is seized (already permanently dead)
     if spec.engineSeized then return end
 
@@ -187,6 +191,10 @@ function UsedPlusMaintenance.checkEngineMisfire(vehicle)
     local spec = vehicle.spec_usedPlusMaintenance
     if spec == nil then return end
 
+    -- Check if malfunctions are enabled
+    local malfunctionsEnabled = not UsedPlusSettings or UsedPlusSettings:isSystemEnabled("Malfunctions")
+    if not malfunctionsEnabled then return end
+
     local config = UsedPlusMaintenance.CONFIG
     local engineReliability = spec.engineReliability or 1.0
 
@@ -270,6 +278,16 @@ end
 function UsedPlusMaintenance.updateEngineTemperature(vehicle)
     local spec = vehicle.spec_usedPlusMaintenance
     if spec == nil then return end
+
+    -- Check if malfunctions are enabled
+    local malfunctionsEnabled = not UsedPlusSettings or UsedPlusSettings:isSystemEnabled("Malfunctions")
+    if not malfunctionsEnabled then
+        -- Reset temperature if malfunctions disabled
+        spec.engineTemperature = 0
+        spec.hasShownOverheatWarning = false
+        spec.hasShownOverheatCritical = false
+        return
+    end
 
     local config = UsedPlusMaintenance.CONFIG
     local engineReliability = spec.engineReliability or 1.0

@@ -171,6 +171,15 @@ end
 function FinanceManager:onPeriodChanged()
     if not self.isServer then return end
 
+    -- Check if finance/lease systems are enabled
+    local financeEnabled = not UsedPlusSettings or UsedPlusSettings:get("enableFinanceSystem") ~= false
+    local leaseEnabled = not UsedPlusSettings or UsedPlusSettings:get("enableLeaseSystem") ~= false
+
+    if not financeEnabled and not leaseEnabled then
+        UsedPlus.logDebug("FinanceManager: Both systems disabled, skipping PERIOD_CHANGED processing")
+        return
+    end
+
     -- v2.7.0: Calculate periods to process (handles time jumps from save/load)
     local currentPeriod = g_currentMission.environment.currentPeriod or 1
     local lastPeriod = self.lastProcessedPeriod or 0
@@ -378,12 +387,21 @@ function FinanceManager:processMonthlyPaymentsForFarm(farmId, deals)
         return
     end
 
+    -- Check which systems are enabled (for per-deal filtering)
+    local financeEnabled = not UsedPlusSettings or UsedPlusSettings:get("enableFinanceSystem") ~= false
+    local leaseEnabled = not UsedPlusSettings or UsedPlusSettings:get("enableLeaseSystem") ~= false
+
     -- Iterate backwards for safe removal
     for i = #deals, 1, -1 do
         local deal = deals[i]
 
-        -- Handle defaulted deals (seized/repossessed) - remove from tracking
-        if deal.status == "defaulted" then
+        -- Skip deals for disabled systems
+        local isLease = (deal.dealType == 2) or (deal.itemType == "lease")
+        local shouldProcess = (isLease and leaseEnabled) or (not isLease and financeEnabled)
+
+        if shouldProcess then
+            -- Handle defaulted deals (seized/repossessed) - remove from tracking
+            if deal.status == "defaulted" then
             UsedPlus.logDebug(string.format("Removing defaulted deal %s: %s", deal.id, deal.itemName))
             table.remove(deals, i)
             self.deals[deal.id] = nil
@@ -446,6 +464,7 @@ function FinanceManager:processMonthlyPaymentsForFarm(farmId, deals)
                 end
             end
         end
+        end  -- Close shouldProcess check
     end
 end
 

@@ -322,6 +322,10 @@ function DialogLoader.registerAll()
         UsedPlus.logWarn("  TakeLoanDialog class not available - skipping")
     end
 
+    if LoanApprovedDialog then
+        DialogLoader.register("LoanApprovedDialog", LoanApprovedDialog, "gui/LoanApprovedDialog.xml")
+    end
+
     if FinancialDashboard then
         DialogLoader.register("FinancialDashboard", FinancialDashboard, "gui/FinancialDashboard.xml")
     end
@@ -334,8 +338,16 @@ function DialogLoader.registerAll()
         DialogLoader.register("PaymentHistoryDialog", PaymentHistoryDialog, "gui/PaymentHistoryDialog.xml")
     end
 
+    if DealDetailsDialog then
+        DialogLoader.register("DealDetailsDialog", DealDetailsDialog, "gui/DealDetailsDialog.xml")
+    end
+
     if SearchDetailsDialog then
         DialogLoader.register("SearchDetailsDialog", SearchDetailsDialog, "gui/SearchDetailsDialog.xml")
+    end
+
+    if SaleListingDetailsDialog then
+        DialogLoader.register("SaleListingDetailsDialog", SaleListingDetailsDialog, "gui/SaleListingDetailsDialog.xml")
     end
 
     -- Land dialogs
@@ -394,6 +406,10 @@ function DialogLoader.registerAll()
         DialogLoader.register("UsedVehiclePreviewDialog", UsedVehiclePreviewDialog, "gui/UsedVehiclePreviewDialog.xml")
     end
 
+    if VehiclePortfolioDialog then
+        DialogLoader.register("VehiclePortfolioDialog", VehiclePortfolioDialog, "gui/VehiclePortfolioDialog.xml")
+    end
+
     if InspectionReportDialog then
         DialogLoader.register("InspectionReportDialog", InspectionReportDialog, "gui/InspectionReportDialog.xml")
     end
@@ -416,8 +432,16 @@ function DialogLoader.registerAll()
         DialogLoader.register("SearchExpiredDialog", SearchExpiredDialog, "gui/SearchExpiredDialog.xml")
     end
 
+    if SaleExpiredDialog then
+        DialogLoader.register("SaleExpiredDialog", SaleExpiredDialog, "gui/SaleExpiredDialog.xml")
+    end
+
     if SearchInitiatedDialog then
         DialogLoader.register("SearchInitiatedDialog", SearchInitiatedDialog, "gui/SearchInitiatedDialog.xml")
+    end
+
+    if SaleListingInitiatedDialog then
+        DialogLoader.register("SaleListingInitiatedDialog", SaleListingInitiatedDialog, "gui/SaleListingInitiatedDialog.xml")
     end
 
     -- v1.9.8: Repossession notification dialog

@@ -470,13 +470,17 @@ function UsedVehicleSearch:processMonthlyCheck()
 
     -- Clean up any expired listings first
     -- "The seller found another buyer..."
-    local expiredCount = self:cleanupExpiredListings()
-    if expiredCount > 0 then
-        -- Notify player that offers expired
+    local normalExpired, earlyExpired = self:cleanupExpiredListings()
+
+    -- Store early expirations to return to manager (for dialog display)
+    self.recentEarlyExpirations = earlyExpired
+
+    -- Notify player for normal expirations
+    if normalExpired > 0 then
         if g_currentMission and not g_currentMission.isLoading then
             g_currentMission:addIngameNotification(
                 FSBaseMission.INGAME_NOTIFICATION_INFO,
-                string.format("%d vehicle offer(s) expired - sellers found other buyers", expiredCount)
+                string.format("%d vehicle offer(s) expired - sellers found other buyers", normalExpired)
             )
         end
     end
@@ -562,15 +566,23 @@ end
     Clean up expired listings from the portfolio
     Each listing has a random expiration of 2-3 months from when it was found
     "The seller found another buyer"
-    @return number of expired listings removed
+    v2.10.0: Added early random expiration for uninspected vehicles
+    @return normalExpiredCount, earlyExpiredListings (table with {id, name})
 ]]
 function UsedVehicleSearch:cleanupExpiredListings()
-    local expiredCount = 0
+    local normalExpiredCount = 0
     local expiredNames = {}
+    local earlyExpiredListings = {}  -- Track early expirations for dialog
+
+    -- Early expiration chance per month for uninspected vehicles
+    -- 10% chance per month after first month
+    local EARLY_EXPIRATION_CHANCE = 0.10
 
     -- Iterate backwards for safe removal
     for i = #self.foundListings, 1, -1 do
         local listing = self.foundListings[i]
+        local shouldRemove = false
+        local isEarlyExpiration = false
 
         -- v2.7.0: Skip listings that are on hold (inspection in progress)
         if listing.listingOnHold then
@@ -580,20 +592,44 @@ function UsedVehicleSearch:cleanupExpiredListings()
             local listingAge = self.monthsElapsed - (listing.foundMonth or 0)
             local maxAge = listing.expirationMonths or 3  -- Default to 3 if not set
 
+            -- Check for normal expiration (reached max age)
             if listingAge >= maxAge then
+                shouldRemove = true
                 table.insert(expiredNames, listing.id or "unknown")
+                normalExpiredCount = normalExpiredCount + 1
+            -- Check for early random expiration (uninspected vehicles only)
+            elseif listingAge > 0 then  -- After first month
+                -- Only if NOT inspected
+                local inspectionState = listing.inspectionState or nil
+                if inspectionState ~= "complete" then
+                    -- Roll for early expiration
+                    math.random()  -- Dry run for better randomness
+                    if math.random() < EARLY_EXPIRATION_CHANCE then
+                        shouldRemove = true
+                        isEarlyExpiration = true
+                        table.insert(earlyExpiredListings, {
+                            id = listing.id,
+                            name = listing.storeItemName or "Unknown Vehicle"
+                        })
+                        UsedPlus.logDebug(string.format("Search %s: Listing %s (%s) - seller backed out early (age %d/%d months)",
+                            self.id, listing.id or "unknown", listing.storeItemName, listingAge, maxAge))
+                    end
+                end
+            end
+
+            -- Remove if either type of expiration occurred
+            if shouldRemove then
                 table.remove(self.foundListings, i)
-                expiredCount = expiredCount + 1
             end
         end
     end
 
-    if expiredCount > 0 then
-        UsedPlus.logDebug(string.format("Search %s: %d listing(s) expired - seller found other buyers (%s)",
-            self.id, expiredCount, table.concat(expiredNames, ", ")))
+    if normalExpiredCount > 0 then
+        UsedPlus.logDebug(string.format("Search %s: %d listing(s) expired naturally (%s)",
+            self.id, normalExpiredCount, table.concat(expiredNames, ", ")))
     end
 
-    return expiredCount
+    return normalExpiredCount, earlyExpiredListings
 end
 
 --[[

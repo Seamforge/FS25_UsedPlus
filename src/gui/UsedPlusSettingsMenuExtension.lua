@@ -313,7 +313,7 @@ function UsedPlusSettingsMenuExtension:addSettingsElements(frame)
     frame.usedplus_tradeInPercent = UsedPlusSettingsMenuExtension:addMultiTextOption(
         frame, "onTradeInPercentChanged", ranges.tradeInPercent,
         g_i18n:getText("usedplus_setting_tradeInValue") or "Trade-In Value %",
-        g_i18n:getText("usedplus_setting_tradeInValue_desc") or "Base percentage of sell price for trade-ins"
+        g_i18n:getText("usedplus_setting_tradeInValue_desc") or "Base percentage of sell price for trade-ins (±7.5% variance)"
     )
 
     frame.usedplus_repairMultiplier = UsedPlusSettingsMenuExtension:addMultiTextOption(
@@ -332,7 +332,7 @@ function UsedPlusSettingsMenuExtension:addSettingsElements(frame)
     frame.usedplus_leaseMarkup = UsedPlusSettingsMenuExtension:addMultiTextOption(
         frame, "onLeaseMarkupChanged", ranges.leaseMarkup,
         g_i18n:getText("usedplus_setting_leaseMarkup") or "Lease Markup %",
-        g_i18n:getText("usedplus_setting_leaseMarkup_desc") or "Percentage markup on lease payments"
+        g_i18n:getText("usedplus_setting_leaseMarkup_desc") or "Lease rate markup (÷10 for percentage points, e.g., 15 = +1.5pp)"
     )
 
     frame.usedplus_missedPayments = UsedPlusSettingsMenuExtension:addMultiTextOption(

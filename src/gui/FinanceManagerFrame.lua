@@ -350,6 +350,47 @@ function FinanceManagerFrame:updateDisplay()
     self:updateSearchesSection(farmId)
     self:updateSaleListings(farmId)
     self:updateStatsSection(farmId, farm)
+
+    -- Check for ELS data loss (ELS loans exist but mod not installed)
+    self:checkForELSDataLoss(farmId, farm)
+end
+
+--[[
+    Check for ELS data loss warning
+    Show warning if ELS loans exist but EnhancedLoanSystem mod is not installed
+]]
+function FinanceManagerFrame:checkForELSDataLoss(farmId, farm)
+    -- Skip if already warned this session
+    if self.hasShownELSWarning then
+        return
+    end
+
+    -- Skip if ELS is integrated (mod is installed and active)
+    if ModCompatibility and ModCompatibility.enhancedLoanSystemInstalled then
+        return
+    end
+
+    -- Check if any deals are marked as ELS loans
+    local hasELSLoans = false
+    if g_financeManager and g_financeManager.deals then
+        for _, deal in pairs(g_financeManager.deals) do
+            if deal.farmId == farmId and deal.isELSLoan and deal.currentBalance and deal.currentBalance > 0 then
+                hasELSLoans = true
+                break
+            end
+        end
+    end
+
+    -- Show warning if ELS loans exist but mod not available
+    if hasELSLoans then
+        g_currentMission:addIngameNotification(
+            FSBaseMission.INGAME_NOTIFICATION_WARNING,
+            g_i18n:getText("usedplus_warning_elsDataLoss") or
+            "Some loans require EnhancedLoanSystem mod to manage. Data preserved but inaccessible."
+        )
+        self.hasShownELSWarning = true
+        UsedPlus.logInfo("ELS data loss warning shown - ELS loans exist but mod not installed")
+    end
 end
 
 --[[

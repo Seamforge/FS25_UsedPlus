@@ -56,7 +56,7 @@
             <!-- ===== TAB 1: MALFUNCTIONS ===== -->
             <GuiElement profile="acpTabContent" id="tabContent1" position="0px -105px">
                 <!-- Engine Section Header -->
-                <Text profile="acpSectionHeader" position="-280px -5px" text="$l10n_usedplus_admin_section_engine"/>
+                <Text profile="acpSectionHeader" position="-230px -5px" text="$l10n_usedplus_admin_section_engine"/>
 
                 <!-- Engine Row (5 buttons) -->
                 <GuiElement profile="acpButtonRow" position="0px -25px">
@@ -82,7 +82,7 @@
                 </GuiElement>
 
                 <!-- Electrical Section Header -->
-                <Text profile="acpSectionHeader" position="-280px -65px" text="$l10n_usedplus_admin_section_electrical"/>
+                <Text profile="acpSectionHeader" position="-230px -65px" text="$l10n_usedplus_admin_section_electrical"/>
 
                 <!-- Electrical Row -->
                 <GuiElement profile="acpButtonRow" position="0px -85px">
@@ -92,7 +92,7 @@
                 </GuiElement>
 
                 <!-- Hydraulic Section Header -->
-                <Text profile="acpSectionHeader" position="-280px -125px" text="$l10n_usedplus_admin_section_hydraulic"/>
+                <Text profile="acpSectionHeader" position="-230px -125px" text="$l10n_usedplus_admin_section_hydraulic"/>
 
                 <!-- Hydraulic Row -->
                 <GuiElement profile="acpButtonRow" position="0px -145px">
@@ -106,7 +106,7 @@
                 </GuiElement>
 
                 <!-- Tire Section Header -->
-                <Text profile="acpSectionHeader" position="-280px -185px" text="$l10n_usedplus_admin_section_tires"/>
+                <Text profile="acpSectionHeader" position="-230px -185px" text="$l10n_usedplus_admin_section_tires"/>
 
                 <!-- Tire Row -->
                 <GuiElement profile="acpButtonRow" position="0px -205px">
@@ -120,7 +120,7 @@
                 </GuiElement>
 
                 <!-- Utility Section Header -->
-                <Text profile="acpSectionHeader" position="-280px -245px" text="$l10n_usedplus_admin_section_utility"/>
+                <Text profile="acpSectionHeader" position="-230px -245px" text="$l10n_usedplus_admin_section_utility"/>
 
                 <!-- Utility Row -->
                 <GuiElement profile="acpButtonRow" position="0px -265px">
@@ -144,7 +144,7 @@
             <!-- ===== TAB 2: SPAWNING ===== -->
             <GuiElement profile="acpTabContent" id="tabContent2" position="0px -105px">
                 <!-- Items Section Header -->
-                <Text profile="acpSectionHeader" position="-280px -5px" text="$l10n_usedplus_admin_section_items"/>
+                <Text profile="acpSectionHeader" position="-230px -5px" text="$l10n_usedplus_admin_section_items"/>
 
                 <!-- Items Row -->
                 <GuiElement profile="acpButtonRow" position="0px -25px">
@@ -162,7 +162,7 @@
                 </GuiElement>
 
                 <!-- Discovery Section Header -->
-                <Text profile="acpSectionHeader" position="-280px -65px" text="$l10n_usedplus_admin_section_discovery"/>
+                <Text profile="acpSectionHeader" position="-230px -65px" text="$l10n_usedplus_admin_section_discovery"/>
 
                 <!-- Discovery Row -->
                 <GuiElement profile="acpButtonRow" position="0px -85px">
@@ -180,7 +180,7 @@
                 </GuiElement>
 
                 <!-- Test Vehicles Section Header -->
-                <Text profile="acpSectionHeader" position="-280px -125px" text="$l10n_usedplus_admin_section_test_vehicles"/>
+                <Text profile="acpSectionHeader" position="-230px -125px" text="$l10n_usedplus_admin_section_test_vehicles"/>
 
                 <!-- Test Vehicles Row -->
                 <GuiElement profile="acpButtonRow" position="0px -145px">
@@ -198,7 +198,7 @@
                 </GuiElement>
 
                 <!-- Condition Painter Section Header -->
-                <Text profile="acpSectionHeader" position="-280px -185px" text="$l10n_usedplus_admin_section_condition"/>
+                <Text profile="acpSectionHeader" position="-230px -185px" text="$l10n_usedplus_admin_section_condition"/>
 
                 <!-- Condition Row -->
                 <GuiElement profile="acpButtonRow" position="0px -205px">
@@ -223,7 +223,7 @@
             <!-- ===== TAB 3: FINANCE ===== -->
             <GuiElement profile="acpTabContent" id="tabContent3" position="0px -105px">
                 <!-- Money Section Header -->
-                <Text profile="acpSectionHeader" position="-280px -5px" text="$l10n_usedplus_admin_section_money"/>
+                <Text profile="acpSectionHeader" position="-230px -5px" text="$l10n_usedplus_admin_section_money"/>
 
                 <!-- Money Row -->
                 <GuiElement profile="acpButtonRow" position="0px -25px">
@@ -245,7 +245,7 @@
                 </GuiElement>
 
                 <!-- Credit Section Header -->
-                <Text profile="acpSectionHeader" position="-280px -65px" text="$l10n_usedplus_admin_section_credit"/>
+                <Text profile="acpSectionHeader" position="-230px -65px" text="$l10n_usedplus_admin_section_credit"/>
 
                 <!-- Credit Row -->
                 <GuiElement profile="acpButtonRow" position="0px -85px">
@@ -271,7 +271,7 @@
                 </GuiElement>
 
                 <!-- Deals Section Header -->
-                <Text profile="acpSectionHeader" position="-280px -125px" text="$l10n_usedplus_admin_section_deals"/>
+                <Text profile="acpSectionHeader" position="-230px -125px" text="$l10n_usedplus_admin_section_deals"/>
 
                 <!-- Deals Row -->
                 <GuiElement profile="acpButtonRow" position="0px -145px">
@@ -310,7 +310,7 @@
             <!-- ===== TAB 4: DIALOGS ===== -->
             <GuiElement profile="acpTabContent" id="tabContent4" position="0px -105px">
                 <!-- Finance Dialogs Section Header -->
-                <Text profile="acpSectionHeader" position="-280px -5px" text="$l10n_usedplus_admin_section_finance_dialogs"/>
+                <Text profile="acpSectionHeader" position="-230px -5px" text="$l10n_usedplus_admin_section_finance_dialogs"/>
 
                 <!-- Finance Dialogs Row -->
                 <GuiElement profile="acpButtonRow" position="0px -25px">
@@ -336,7 +336,7 @@
                 </GuiElement>
 
                 <!-- Marketplace Dialogs Section Header -->
-                <Text profile="acpSectionHeader" position="-280px -65px" text="$l10n_usedplus_admin_section_market_dialogs"/>
+                <Text profile="acpSectionHeader" position="-230px -65px" text="$l10n_usedplus_admin_section_market_dialogs"/>
 
                 <!-- Marketplace Row 1 -->
                 <GuiElement profile="acpButtonRow" position="0px -85px">
@@ -358,7 +358,7 @@
                 </GuiElement>
 
                 <!-- Service Dialogs Section Header -->
-                <Text profile="acpSectionHeader" position="-280px -125px" text="$l10n_usedplus_admin_section_service_dialogs"/>
+                <Text profile="acpSectionHeader" position="-230px -125px" text="$l10n_usedplus_admin_section_service_dialogs"/>
 
                 <!-- Service Dialogs Row -->
                 <GuiElement profile="acpButtonRow" position="0px -145px">
@@ -376,7 +376,7 @@
                 </GuiElement>
 
                 <!-- Lease Dialogs Section Header -->
-                <Text profile="acpSectionHeader" position="-280px -185px" text="$l10n_usedplus_admin_section_lease_dialogs"/>
+                <Text profile="acpSectionHeader" position="-230px -185px" text="$l10n_usedplus_admin_section_lease_dialogs"/>
 
                 <!-- Lease Dialogs Row -->
                 <GuiElement profile="acpButtonRow" position="0px -205px">
@@ -393,7 +393,7 @@
             <!-- ===== TAB 5: STATE ===== -->
             <GuiElement profile="acpTabContent" id="tabContent5" position="0px -105px">
                 <!-- Debug Section Header -->
-                <Text profile="acpSectionHeader" position="-280px -5px" text="$l10n_usedplus_admin_section_debug"/>
+                <Text profile="acpSectionHeader" position="-230px -5px" text="$l10n_usedplus_admin_section_debug"/>
 
                 <!-- Debug Row -->
                 <GuiElement profile="acpButtonRow" position="0px -25px">
@@ -403,7 +403,7 @@
                 </GuiElement>
 
                 <!-- Vehicle State Section Header -->
-                <Text profile="acpSectionHeader" position="-280px -65px" text="$l10n_usedplus_admin_section_vehicle_state"/>
+                <Text profile="acpSectionHeader" position="-230px -65px" text="$l10n_usedplus_admin_section_vehicle_state"/>
 
                 <!-- Reliability Row -->
                 <GuiElement profile="acpButtonRow" position="0px -85px">
@@ -432,7 +432,7 @@
                 </GuiElement>
 
                 <!-- DNA Section Header -->
-                <Text profile="acpSectionHeader" position="-280px -165px" text="$l10n_usedplus_admin_section_dna"/>
+                <Text profile="acpSectionHeader" position="-230px -165px" text="$l10n_usedplus_admin_section_dna"/>
 
                 <!-- DNA Row -->
                 <GuiElement profile="acpButtonRow" position="0px -185px">
@@ -450,7 +450,7 @@
                 </GuiElement>
 
                 <!-- Quick Vehicle Section Header -->
-                <Text profile="acpSectionHeader" position="-280px -225px" text="$l10n_usedplus_admin_section_quick_vehicle"/>
+                <Text profile="acpSectionHeader" position="-230px -225px" text="$l10n_usedplus_admin_section_quick_vehicle"/>
 
                 <!-- Quick Vehicle Row -->
                 <GuiElement profile="acpButtonRow" position="0px -245px">

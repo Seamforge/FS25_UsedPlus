@@ -99,6 +99,13 @@ end
 function VehicleSaleManager:onHourChanged()
     if not self.isServer then return end
 
+    -- Check if vehicle sale system is enabled
+    local saleEnabled = not UsedPlusSettings or UsedPlusSettings:get("enableVehicleSaleSystem") ~= false
+    if not saleEnabled then
+        UsedPlus.logDebug("VehicleSaleManager: Sale system disabled, skipping HOUR_CHANGED processing")
+        return
+    end
+
     -- v1.9.7: Check for pending offers from previous session on first tick
     if self.checkPendingOnFirstTick then
         self.checkPendingOnFirstTick = false

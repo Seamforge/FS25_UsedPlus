@@ -968,7 +968,7 @@
         <e k="usedplus_tl_interest" v="Úroky:" eh="25df650a" />
         <e k="usedplus_tl_yearly" v="Ročně:" eh="49192394" />
         <e k="usedplus_tl_info" v="Prostředky půjčky vloženy okamžitě. Platby automaticky strhávány měsíčně." eh="91080370" />
-        <e k="usedplus_button_acceptLoan" v="Přijměte půjčku" eh="ad5f835e" />
+        <e k="usedplus_button_acceptLoan" v="Podat půjčku" eh="63dc9953" />
 
         <!-- Loan Approved Dialog -->
         <e k="usedplus_la_title" v="PŮJČKA SCHVÁLENA" eh="93e4efbe" />
@@ -1318,9 +1318,9 @@
         <e k="usedplus_fmf_sectionCredit" v="KREDIT &amp; STATISTIKY" eh="8a71fbbe" />
         <e k="usedplus_fmf_sectionStatistics" v="STATISTIKY" eh="bd71bd5e" />
         <e k="usedplus_fmf_noActiveDeals" v="Žádné aktivní finanční obchody" eh="171c5c5d" />
-        <e k="usedplus_fmf_financeDisabled" v="Finance system disabled in settings" eh="00000001" />
-        <e k="usedplus_fmf_searchDisabled" v="Used vehicle search disabled in settings" eh="00000002" />
-        <e k="usedplus_fmf_saleDisabled" v="Vehicle sale system disabled in settings" eh="00000003" />
+        <e k="usedplus_fmf_financeDisabled" v="Finanční systém vypnut v nastavení" eh="c29d15b7" />
+        <e k="usedplus_fmf_searchDisabled" v="Vyhledávání použitých vozidel vypnuto v nastavení" eh="a472e30b" />
+        <e k="usedplus_fmf_saleDisabled" v="Systém prodeje vozidel vypnut v nastavení" eh="0960b75f" />
         <e k="usedplus_fmf_headerType" v="TYP" eh="94849514" />
         <e k="usedplus_fmf_headerItem" v="POLOŽKA" eh="2b911c01" />
         <e k="usedplus_fmf_headerBalance" v="ZŮSTATEK" eh="bd50bfda" />
@@ -1555,6 +1555,7 @@
         <e k="usedplus_warning_hydraulicCritical" v="KRITICKÉ: Hydraulická kapalina nebezpečně nízko! Dochází k poškození systému." eh="fe31b6f1" />
         <e k="usedplus_warning_hydraulicLeak" v="Varování: Zjištěn hydraulický únik. Ztráta kapaliny se zrychluje." eh="36b8f377" />
         <e k="usedplus_warning_hydraulicDamage" v="HYDRAULICKÉ POŠKOZENÍ: Trvalá ztráta spolehlivosti kvůli provozu s málo kapalinou!" eh="843ae10a" />
+        <e k="usedplus_warning_elsDataLoss" v="Některé půjčky vyžadují mod EnhancedLoanSystem ke správě. Data jsou zachována, ale nepřístupná." eh="2da68f69" />
 
         <!-- v1.7.0: Fuel Leak Warning -->
         <e k="usedplus_warning_fuelLeak" v="Varování: Zjištěn únik paliva! Spotřeba paliva výrazně zvýšena." eh="6654d01e" />
@@ -1923,13 +1924,13 @@
         <e k="usedplus_setting_interestRate" v="Úroková Sazba Financování" eh="ec5e55f4" />
         <e k="usedplus_setting_interestRate_desc" v="Základní sazba pro veškeré financování (vozidla, pozemky, půjčky). Kreditní skóre tuto sazbu ovlivňuje." eh="86443f38" />
         <e k="usedplus_setting_tradeInValue" v="Hodnota Protiúčtu %" eh="1f2d9066" />
-        <e k="usedplus_setting_tradeInValue_desc" v="Základní procento prodejní ceny pro protiúčty" eh="63d5cd26" />
+        <e k="usedplus_setting_tradeInValue_desc" v="Základní procento prodejní ceny pro protiúčty (±7,5% variace)" eh="7337cf9e" />
         <e k="usedplus_setting_repairCost" v="Násobitel Nákladů na Opravu" eh="f6f74c79" />
         <e k="usedplus_setting_repairCost_desc" v="Násobitel aplikovaný na všechny náklady na opravy" eh="d20d8168" />
         <e k="usedplus_setting_paintCost" v="Násobitel Nákladů na Lakování" eh="b5b8f53a" />
         <e k="usedplus_setting_paintCost_desc" v="Násobitel aplikovaný na náklady na lakování (odděleno od oprav)" eh="4fcb0c32" />
         <e k="usedplus_setting_leaseMarkup" v="Přirážka Leasingu %" eh="aac70e2a" />
-        <e k="usedplus_setting_leaseMarkup_desc" v="Procentní přirážka na měsíční leasingové splátky" eh="23d9d6f0" />
+        <e k="usedplus_setting_leaseMarkup_desc" v="Přirážka leasingové sazby (÷10 pro procentní body, např. 15 = +1,5 p.b.)" eh="e27af0b2" />
 
         <!-- Forgiveness and risk -->
         <e k="usedplus_setting_missedPayments" v="Zmeškané Platby do Zabavení" eh="be335e9f" />

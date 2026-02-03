@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-2.10.0-green" alt="Version">
+  <img src="https://img.shields.io/badge/version-2.10.1-green" alt="Version">
   <img src="https://img.shields.io/badge/game-FS25-blue" alt="FS25">
   <img src="https://img.shields.io/badge/multiplayer-ready-brightgreen" alt="Multiplayer Ready">
   <img src="https://img.shields.io/badge/languages-27-orange" alt="27 Languages">

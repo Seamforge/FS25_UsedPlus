@@ -339,12 +339,7 @@ function SearchDetailsDialog:onViewPortfolio()
     g_gui:changeScreen(nil)
 
     -- Open the portfolio dialog with saved reference
-    local portfolioDialog = VehiclePortfolioDialog.getInstance()
-    if portfolioDialog then
-        portfolioDialog:show(searchToView)
-    else
-        UsedPlus.logError("Failed to get VehiclePortfolioDialog instance")
-    end
+    DialogLoader.show("VehiclePortfolioDialog", "show", searchToView)
 end
 
 --[[

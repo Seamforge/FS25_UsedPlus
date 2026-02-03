@@ -810,7 +810,7 @@
         <e k="usedplus_tl_interest" v="[EN] Interest:" eh="25df650a" />
         <e k="usedplus_tl_yearly" v="[EN] Yearly:" eh="49192394" />
         <e k="usedplus_tl_info" v="[EN] Loan funds deposited immediately. Payments auto-deducted monthly." eh="91080370" />
-        <e k="usedplus_button_acceptLoan" v="[EN] Accept Loan" eh="ad5f835e" />
+        <e k="usedplus_button_acceptLoan" v="[EN] Accept Loan" eh="63dc9953" />
         <e k="usedplus_la_title" v="[EN] LOAN APPROVED" eh="93e4efbe" />
         <e k="usedplus_la_amountDeposited" v="[EN] Amount Deposited" eh="682d6e59" />
         <e k="usedplus_la_sectionTerms" v="[EN] LOAN TERMS" eh="08b4cdd6" />
@@ -1372,6 +1372,7 @@
         <e k="usedplus_warning_hydraulicCritical" v="NGHIÊM TRỌNG: Dầu thủy lực nguy hiểm thấp! Hệ thống đang bị hư hại." eh="fe31b6f1" />
         <e k="usedplus_warning_hydraulicLeak" v="Cảnh báo: Phát hiện rò thủy lực. Mất dầu đang tăng." eh="36b8f377" />
         <e k="usedplus_warning_hydraulicDamage" v="HƯ HẠI THỦY LỰC: Mất độ tin cậy vĩnh viễn do chạy thiếu dầu!" eh="843ae10a" />
+        <e k="usedplus_warning_elsDataLoss" v="[EN] Some loans require EnhancedLoanSystem mod to manage. Data preserved but inaccessible." eh="2da68f69" />
 
         <!-- v1.7.0: Fuel Leak Warning -->
         <e k="usedplus_warning_fuelLeak" v="Cảnh báo: Phát hiện rò nhiên liệu! Tiêu thụ nhiên liệu tăng đáng kể." eh="6654d01e" />
@@ -1899,13 +1900,13 @@
         <e k="usedplus_setting_interestRate" v="[EN] Financing Interest Rate" eh="ec5e55f4" />
         <e k="usedplus_setting_interestRate_desc" v="[EN] Base rate for all financing (vehicles, land, loans). Credit score modifies this." eh="86443f38" />
         <e k="usedplus_setting_tradeInValue" v="[EN] Trade-In Value %" eh="1f2d9066" />
-        <e k="usedplus_setting_tradeInValue_desc" v="[EN] Base percentage of sell price for trade-ins" eh="63d5cd26" />
+        <e k="usedplus_setting_tradeInValue_desc" v="[EN] Base percentage of sell price for trade-ins" eh="7337cf9e" />
         <e k="usedplus_setting_repairCost" v="[EN] Repair Cost Multiplier" eh="f6f74c79" />
         <e k="usedplus_setting_repairCost_desc" v="[EN] Multiplier applied to all repair costs" eh="d20d8168" />
         <e k="usedplus_setting_paintCost" v="[EN] Paint Cost Multiplier" eh="b5b8f53a" />
         <e k="usedplus_setting_paintCost_desc" v="[EN] Multiplier applied to repaint costs (separate from repair)" eh="4fcb0c32" />
         <e k="usedplus_setting_leaseMarkup" v="Thuê Markup %" eh="aac70e2a" />
-        <e k="usedplus_setting_leaseMarkup_desc" v="[EN] Percentage markup on monthly lease payments" eh="23d9d6f0" />
+        <e k="usedplus_setting_leaseMarkup_desc" v="[EN] Percentage markup on monthly lease payments" eh="e27af0b2" />
         <e k="usedplus_setting_missedPayments" v="[EN] Missed Payments to Default" eh="be335e9f" />
         <e k="usedplus_setting_missedPayments_desc" v="[EN] Number of missed payments before vehicle repossession" eh="71688a5f" />
         <e k="usedplus_setting_downPayment" v="[EN] Min Down Payment %" eh="b70d8e33" />

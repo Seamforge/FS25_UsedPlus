@@ -17,7 +17,7 @@
     end
     ```
 
-    VERSION: 1.0.0 (v2.5.2)
+    VERSION: 1.0.0 (v2.10.1)
     STABILITY: Stable - breaking changes will be versioned
 
     All functions return nil/false gracefully if UsedPlus subsystems unavailable.
@@ -27,7 +27,7 @@ UsedPlusAPI = {}
 
 -- API Version for compatibility checking
 UsedPlusAPI.VERSION = "1.0.0"
-UsedPlusAPI.MOD_VERSION = "2.5.2"
+UsedPlusAPI.MOD_VERSION = "2.10.1"
 
 --============================================================================
 -- VERSION & AVAILABILITY

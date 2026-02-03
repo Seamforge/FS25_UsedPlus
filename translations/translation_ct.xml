@@ -652,7 +652,7 @@
         <e k="usedplus_tl_interest" v="利息：" eh="25df650a" />
         <e k="usedplus_tl_yearly" v="年付款：" eh="49192394" />
         <e k="usedplus_tl_info" v="貸款 funds deposited immediately. 付款 auto-deducted monthly." eh="91080370" />
-        <e k="usedplus_button_acceptLoan" v="接受 貸款" eh="ad5f835e" />
+        <e k="usedplus_button_acceptLoan" v="提交貸款" eh="63dc9953" />
 
         <!-- Loan Approved Dialog -->
         <e k="usedplus_la_title" v="LO一個N 一個PPROVED" eh="93e4efbe" />
@@ -1002,9 +1002,9 @@
         <e k="usedplus_fmf_sectionCredit" v="CREDIT &amp; ST一個TISTICS" eh="8a71fbbe" />
         <e k="usedplus_fmf_sectionStatistics" v="ST一個TISTICS" eh="bd71bd5e" />
         <e k="usedplus_fmf_noActiveDeals" v="沒有active finance deals" eh="171c5c5d" />
-        <e k="usedplus_fmf_financeDisabled" v="Finance system disabled in settings" eh="00000001" />
-        <e k="usedplus_fmf_searchDisabled" v="Used vehicle search disabled in settings" eh="00000002" />
-        <e k="usedplus_fmf_saleDisabled" v="Vehicle sale system disabled in settings" eh="00000003" />
+        <e k="usedplus_fmf_financeDisabled" v="設定中已停用融資系統" eh="c29d15b7" />
+        <e k="usedplus_fmf_searchDisabled" v="設定中已停用中古車搜尋" eh="a472e30b" />
+        <e k="usedplus_fmf_saleDisabled" v="設定中已停用車輛銷售系統" eh="0960b75f" />
         <e k="usedplus_fmf_headerType" v="TYPE" eh="94849514" />
         <e k="usedplus_fmf_headerItem" v="ITEM" eh="2b911c01" />
         <e k="usedplus_fmf_headerBalance" v="B一個L一個NCE" eh="bd50bfda" />
@@ -1239,6 +1239,7 @@
         <e k="usedplus_warning_hydraulicCritical" v="CRITIC一個L: 液壓 fluid dangerously low！ System damage occurring." eh="fe31b6f1" />
         <e k="usedplus_warning_hydraulicLeak" v="警告: 液壓 leak detected. Fluid loss accelerating." eh="36b8f377" />
         <e k="usedplus_warning_hydraulicDamage" v="HYDR一個ULIC D一個M一個GE: Permanent reliability loss due to running low 開啟 fluid！" eh="843ae10a" />
+        <e k="usedplus_warning_elsDataLoss" v="某些貸款需要EnhancedLoanSystem模組來管理。資料已保留但無法存取。" eh="2da68f69" />
 
         <!-- v1.7.0: Fuel Leak Warning -->
         <e k="usedplus_warning_fuelLeak" v="警告: Fuel leak detected！ Fuel consumption significantly increased." eh="6654d01e" />
@@ -1806,14 +1807,14 @@
         <e k="usedplus_setting_interestRate" v="融資 利息 利率" eh="ec5e55f4" />
         <e k="usedplus_setting_interestRate_desc" v="Base rate for all financing (vehicles, land, loans). 信用 score modifies this." eh="86443f38" />
         <e k="usedplus_setting_tradeInValue" v="以舊換新 價值 %" eh="1f2d9066" />
-        <e k="usedplus_setting_tradeInValue_desc" v="以舊換新的售價基礎百分比" eh="63d5cd26" />
+        <e k="usedplus_setting_tradeInValue_desc" v="以舊換新售價的基礎百分比(±7.5%變動)" eh="7337cf9e" />
         <e k="usedplus_setting_repairCost" v="維修 成本 Multiplier" eh="f6f74c79" />
         <e k="usedplus_setting_repairCost_desc" v="應用於所有維修成本的倍數" eh="d20d8168" />
         <!-- v2.0.0: NEW - Paint Cost Multiplier (separate from repair) -->
         <e k="usedplus_setting_paintCost" v="噴漆 成本 Multiplier" eh="b5b8f53a" />
         <e k="usedplus_setting_paintCost_desc" v="應用於重新噴漆成本的倍數（與維修分開）" eh="4fcb0c32" />
         <e k="usedplus_setting_leaseMarkup" v="租賃 Markup %" eh="aac70e2a" />
-        <e k="usedplus_setting_leaseMarkup_desc" v="Percentage markup 開啟 monthly lease payments" eh="23d9d6f0" />
+        <e k="usedplus_setting_leaseMarkup_desc" v="租賃費率加成(÷10為百分點，例:15=+1.5pp)" eh="e27af0b2" />
 
         <!-- Economic Settings: Forgiveness & Risk -->
         <e k="usedplus_setting_missedPayments" v="未付 付款 to 違約" eh="be335e9f" />

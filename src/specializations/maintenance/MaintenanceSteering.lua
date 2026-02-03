@@ -105,6 +105,15 @@ function UsedPlusMaintenance.applyDirectSteeringPull(vehicle, dt)
     local spec = vehicle.spec_usedPlusMaintenance
     if spec == nil then return end
 
+    -- Check if malfunctions are enabled
+    local malfunctionsEnabled = not UsedPlusSettings or UsedPlusSettings:isSystemEnabled("Malfunctions")
+    if not malfunctionsEnabled then
+        -- Reset steering pull state when disabled
+        spec.steeringPullActive = false
+        spec.steeringPullStrength = 0
+        return
+    end
+
     -- Only run on server (physics is server-authoritative)
     if not vehicle.isServer then return end
 
@@ -277,6 +286,15 @@ end
 function UsedPlusMaintenance.checkHydraulicDrift(vehicle, dt)
     local spec = vehicle.spec_usedPlusMaintenance
     if spec == nil then return end
+
+    -- Check if malfunctions are enabled
+    local malfunctionsEnabled = not UsedPlusSettings or UsedPlusSettings:isSystemEnabled("Malfunctions")
+    if not malfunctionsEnabled then
+        -- Reset warning flags when disabled
+        spec.hasShownDriftWarning = false
+        spec.hasShownDriftMidpointWarning = false
+        return
+    end
 
     -- v2.7.0: Skip if hydraulics are seized (implements already locked)
     if spec.hydraulicsSeized then return end

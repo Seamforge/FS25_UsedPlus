@@ -44,9 +44,7 @@ end
     @param details - Table with loan details
 ]]
 function LoanApprovedDialog.show(details)
-    local dialog = LoanApprovedDialog.getInstance()
-    dialog:setLoanDetails(details)
-    g_gui:showDialog("LoanApprovedDialog")
+    DialogLoader.show("LoanApprovedDialog", "setLoanDetails", details)
 end
 
 --[[

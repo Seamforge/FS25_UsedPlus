@@ -754,7 +754,7 @@
         <e k="usedplus_tl_interest" v="利息:" eh="25df650a" />
         <e k="usedplus_tl_yearly" v="年額:" eh="49192394" />
         <e k="usedplus_tl_info" v="ローン資金は即座に入金されます。支払いは毎月自動で引き落とされます。" eh="91080370" />
-        <e k="usedplus_button_acceptLoan" v="ローンを承認" eh="ad5f835e" />
+        <e k="usedplus_button_acceptLoan" v="ローンを提出" eh="63dc9953" />
         <e k="usedplus_la_title" v="ローン承認" eh="93e4efbe" />
         <e k="usedplus_la_amountDeposited" v="入金額" eh="682d6e59" />
         <e k="usedplus_la_sectionTerms" v="ローン条件" eh="08b4cdd6" />
@@ -1059,9 +1059,9 @@
         <e k="usedplus_fmf_sectionCredit" v="信用 &amp;amp; 統計" eh="8a71fbbe" />
         <e k="usedplus_fmf_sectionStatistics" v="統計" eh="bd71bd5e" />
         <e k="usedplus_fmf_noActiveDeals" v="アクティブな融資取引がありません" eh="171c5c5d" />
-        <e k="usedplus_fmf_financeDisabled" v="Finance system disabled in settings" eh="00000001" />
-        <e k="usedplus_fmf_searchDisabled" v="Used vehicle search disabled in settings" eh="00000002" />
-        <e k="usedplus_fmf_saleDisabled" v="Vehicle sale system disabled in settings" eh="00000003" />
+        <e k="usedplus_fmf_financeDisabled" v="設定で融資システムが無効" eh="c29d15b7" />
+        <e k="usedplus_fmf_searchDisabled" v="設定で中古車検索が無効" eh="a472e30b" />
+        <e k="usedplus_fmf_saleDisabled" v="設定で車両販売システムが無効" eh="0960b75f" />
         <e k="usedplus_fmf_headerType" v="タイプ" eh="94849514" />
         <e k="usedplus_fmf_headerItem" v="アイテム" eh="2b911c01" />
         <e k="usedplus_fmf_headerBalance" v="残高" eh="bd50bfda" />
@@ -1248,6 +1248,7 @@
         <e k="usedplus_warning_hydraulicCritical" v="緊急: 作動油レベルが危険域！システム損傷が発生中。" eh="fe31b6f1" />
         <e k="usedplus_warning_hydraulicLeak" v="警告: 作動油漏れを検出。オイル損失が加速中。" eh="36b8f377" />
         <e k="usedplus_warning_hydraulicDamage" v="油圧系損傷: オイル不足により信頼性が永久に低下しました！" eh="843ae10a" />
+        <e k="usedplus_warning_elsDataLoss" v="一部のローンはEnhancedLoanSystemモッドでの管理が必要です。データは保持されていますがアクセスできません。" eh="2da68f69" />
         <e k="usedplus_warning_fuelLeak" v="警告: 燃料漏れを検出！燃料消費が大幅に増加。" eh="6654d01e" />
         <e k="usedplus_warning_hydraulicSurge" v="パワーステアリング喪失 - 車両が%sに引っ張られています！" eh="a8d164f9" />
         <e k="usedplus_warning_runaway" v="エンジン暴走！ガバナー故障 - エンジンを切ってください！" eh="b5041aa9" />
@@ -1709,13 +1710,13 @@
         <e k="usedplus_setting_interestRate" v="ファイナンス金利" eh="ec5e55f4" />
         <e k="usedplus_setting_interestRate_desc" v="全ファイナンス（車両、土地、ローン）の基本金利。信用スコアで変動。" eh="86443f38" />
         <e k="usedplus_setting_tradeInValue" v="下取り価値 %" eh="1f2d9066" />
-        <e k="usedplus_setting_tradeInValue_desc" v="下取りの売却価格に対する基本パーセンテージ" eh="63d5cd26" />
+        <e k="usedplus_setting_tradeInValue_desc" v="下取りの売却価格に対する基本パーセンテージ(±7.5%変動)" eh="7337cf9e" />
         <e k="usedplus_setting_repairCost" v="修理費用倍率" eh="f6f74c79" />
         <e k="usedplus_setting_repairCost_desc" v="全修理費用に適用される倍率" eh="d20d8168" />
         <e k="usedplus_setting_paintCost" v="塗装費用倍率" eh="b5b8f53a" />
         <e k="usedplus_setting_paintCost_desc" v="再塗装費用に適用される倍率（修理とは別）" eh="4fcb0c32" />
         <e k="usedplus_setting_leaseMarkup" v="リース上乗せ %" eh="aac70e2a" />
-        <e k="usedplus_setting_leaseMarkup_desc" v="月額リース料金への上乗せパーセンテージ" eh="23d9d6f0" />
+        <e k="usedplus_setting_leaseMarkup_desc" v="リース料金上乗せ(÷10でパーセントポイント、例:15=+1.5pp)" eh="e27af0b2" />
         <e k="usedplus_setting_missedPayments" v="デフォルトまでの未払い回数" eh="be335e9f" />
         <e k="usedplus_setting_missedPayments_desc" v="車両差し押さえまでの未払い回数" eh="71688a5f" />
         <e k="usedplus_setting_downPayment" v="最低頭金 %" eh="b70d8e33" />

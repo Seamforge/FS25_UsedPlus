@@ -8,7 +8,7 @@
     <GuiElement profile="newLayer" />
     <Bitmap profile="dialogFullscreenBg" id="dialogBg" />
 
-    <GuiElement profile="dialogBg" id="dialogElement" size="720px 770px">
+    <GuiElement profile="dialogBg" id="dialogElement" size="720px 780px">
         <ThreePartBitmap profile="fs25_dialogBgMiddle" />
         <ThreePartBitmap profile="fs25_dialogBgTop" />
         <ThreePartBitmap profile="fs25_dialogBgBottom" />
@@ -22,7 +22,7 @@
             <GuiElement profile="irpSectionContainer" position="0px -60px">
                 <Bitmap profile="irpSectionBg" position="0px 0px"/>
                 <!-- v2.9.5: Section header with icon -->
-                <Bitmap profile="irpSectionIcon" id="vehicleSectionIcon" position="-290px -8px"/>
+                <Bitmap profile="irpSectionIcon" id="vehicleSectionIcon" position="-310px -8px"/>
                 <Text profile="irpSectionHeaderWithIcon" position="10px -5px" text="$l10n_usedplus_irp_sectionVehicle"/>
 
                 <!-- Two-column layout: Image left, Info right -->
@@ -45,46 +45,46 @@
             <GuiElement profile="irpMechanicalSection" position="0px -220px">
                 <Bitmap profile="irpMechanicalBg" position="0px 0px"/>
                 <!-- v2.9.5: Section header with icon -->
-                <Bitmap profile="irpSectionIcon" id="mechanicalSectionIcon" position="-290px -8px"/>
+                <Bitmap profile="irpSectionIcon" id="mechanicalSectionIcon" position="-310px -8px"/>
                 <Text profile="irpSectionHeaderWithIcon" position="10px -5px" text="$l10n_usedplus_irp_sectionMechanical"/>
 
                 <!-- ENGINE SYSTEM (with icon) -->
-                <Bitmap profile="irpSystemIcon" id="engineSystemIcon" position="-285px -30px"/>
-                <Text profile="irpSystemLabel" position="-260px -30px" text="$l10n_usedplus_irp_engine"/>
-                <Text profile="irpSystemValue" id="engineRatingText" position="-160px -30px" text=""/>
-                <Text profile="irpSystemStatus" id="engineStatusText" position="-80px -30px" text=""/>
+                <Bitmap profile="irpSystemIcon" id="engineSystemIcon" position="-290px -30px"/>
+                <Text profile="irpSystemLabel" position="-225px -30px" text="$l10n_usedplus_irp_engine"/>
+                <Text profile="irpSystemValue" id="engineRatingText" position="-125px -30px" text=""/>
+                <Text profile="irpSystemStatus" id="engineStatusText" position="-45px -30px" text=""/>
 
                 <!-- Engine sub-components (shown when RVB data exists) -->
                 <GuiElement id="engineSubComponentsContainer" position="0px 0px">
-                    <Text profile="irpSubLabel" position="-240px -48px" text="Engine Core"/>
-                    <Text profile="irpSubValue" id="engineCoreText" position="-145px -48px" text="--"/>
-                    <Text profile="irpSubLabel" position="-240px -63px" text="Thermostat"/>
-                    <Text profile="irpSubValue" id="thermostatText" position="-145px -63px" text="--"/>
+                    <Text profile="irpSubLabel" position="-205px -48px" text="Engine Core"/>
+                    <Text profile="irpSubValue" id="engineCoreText" position="-110px -48px" text="--"/>
+                    <Text profile="irpSubLabel" position="-205px -63px" text="Thermostat"/>
+                    <Text profile="irpSubValue" id="thermostatText" position="-110px -63px" text="--"/>
                 </GuiElement>
 
                 <!-- HYDRAULIC SYSTEM (with icon, UsedPlus only - RVB doesn't track) -->
-                <Bitmap profile="irpSystemIcon" id="hydraulicSystemIcon" position="-285px -82px"/>
-                <Text profile="irpSystemLabel" position="-260px -82px" text="$l10n_usedplus_irp_hydraulics"/>
-                <Text profile="irpSystemValue" id="hydraulicRatingText" position="-160px -82px" text=""/>
-                <Text profile="irpSystemStatus" id="hydraulicStatusText" position="-80px -82px" text=""/>
+                <Bitmap profile="irpSystemIcon" id="hydraulicSystemIcon" position="-290px -82px"/>
+                <Text profile="irpSystemLabel" position="-225px -82px" text="$l10n_usedplus_irp_hydraulics"/>
+                <Text profile="irpSystemValue" id="hydraulicRatingText" position="-125px -82px" text=""/>
+                <Text profile="irpSystemStatus" id="hydraulicStatusText" position="-45px -82px" text=""/>
 
                 <!-- ELECTRICAL SYSTEM (with icon) -->
-                <Bitmap profile="irpSystemIcon" id="electricalSystemIcon" position="-285px -102px"/>
-                <Text profile="irpSystemLabel" position="-260px -102px" text="$l10n_usedplus_irp_electrical"/>
-                <Text profile="irpSystemValue" id="electricalRatingText" position="-160px -102px" text=""/>
-                <Text profile="irpSystemStatus" id="electricalStatusText" position="-80px -102px" text=""/>
+                <Bitmap profile="irpSystemIcon" id="electricalSystemIcon" position="-290px -110px"/>
+                <Text profile="irpSystemLabel" position="-225px -110px" text="$l10n_usedplus_irp_electrical"/>
+                <Text profile="irpSystemValue" id="electricalRatingText" position="-125px -110px" text=""/>
+                <Text profile="irpSystemStatus" id="electricalStatusText" position="-45px -110px" text=""/>
 
                 <!-- Electrical sub-components (shown when RVB data exists) -->
                 <!-- Column 1: Generator/Starter, Column 2: Battery/Glow Plug (spaced apart) -->
                 <GuiElement id="electricalSubComponentsContainer" position="0px 0px">
-                    <Text profile="irpSubLabel" position="-240px -120px" text="Generator"/>
-                    <Text profile="irpSubValue" id="generatorText" position="-150px -120px" text="--"/>
-                    <Text profile="irpSubLabel" position="-50px -120px" text="Battery"/>
-                    <Text profile="irpSubValue" id="batteryText" position="40px -120px" text="--"/>
-                    <Text profile="irpSubLabel" position="-240px -135px" text="Starter"/>
-                    <Text profile="irpSubValue" id="starterText" position="-150px -135px" text="--"/>
-                    <Text profile="irpSubLabel" position="-50px -135px" text="Glow Plug"/>
-                    <Text profile="irpSubValue" id="glowPlugText" position="40px -135px" text="--"/>
+                    <Text profile="irpSubLabel" position="-205px -128px" text="Generator"/>
+                    <Text profile="irpSubValue" id="generatorText" position="-115px -128px" text="--"/>
+                    <Text profile="irpSubLabel" position="-15px -128px" text="Battery"/>
+                    <Text profile="irpSubValue" id="batteryText" position="75px -128px" text="--"/>
+                    <Text profile="irpSubLabel" position="-205px -143px" text="Starter"/>
+                    <Text profile="irpSubValue" id="starterText" position="-115px -143px" text="--"/>
+                    <Text profile="irpSubLabel" position="-15px -143px" text="Glow Plug"/>
+                    <Text profile="irpSubValue" id="glowPlugText" position="75px -143px" text="--"/>
                 </GuiElement>
 
                 <!-- Right column: Overall & Costs -->
@@ -105,10 +105,12 @@
 
             <!-- ========== SECTION 3: Tire Conditions (v2.1.0) ========== -->
             <!-- Shows per-wheel conditions when tire data exists -->
-            <!-- Position adjusted: was -430px, now -380px (RVB section removed) -->
-            <GuiElement profile="irpTireSection" id="tireSectionContainer" position="0px -380px">
+            <!-- Position adjusted: was -430px, now -390px (mechanical section taller) -->
+            <GuiElement profile="irpTireSection" id="tireSectionContainer" position="0px -390px">
                 <Bitmap profile="irpTireBg" position="0px 0px"/>
-                <Text profile="irpSectionHeader" position="0px -5px" text="$l10n_usedplus_irp_sectionTires"/>
+                <!-- v2.9.5: Section header with icon -->
+                <Bitmap profile="irpSectionIcon" id="tireSectionIcon" position="-310px -8px"/>
+                <Text profile="irpSectionHeaderWithIcon" position="10px -5px" text="$l10n_usedplus_irp_sectionTires"/>
 
                 <!-- 4 tires in a row -->
                 <Text profile="irpTireLabel" position="-230px -30px" text="FL"/>
@@ -130,11 +132,11 @@
 
             <!-- ========== SECTION 4: Mechanic's Assessment (v1.4.0, enhanced v1.9.4) ========== -->
             <!-- Quote from inspector based on hidden DNA quality + fluid assessment -->
-            <!-- Position adjusted for tire section padding (+10px) -->
-            <GuiElement profile="irpNotesSectionTall" position="0px -480px">
+            <!-- Position adjusted for mechanical section height increase (+10px) -->
+            <GuiElement profile="irpNotesSectionTall" position="0px -490px">
                 <Bitmap profile="irpNotesBgTall" position="0px 0px"/>
                 <!-- v2.9.5: Section header with icon -->
-                <Bitmap profile="irpSectionIcon" id="mechanicSectionIcon" position="-290px -8px"/>
+                <Bitmap profile="irpSectionIcon" id="mechanicSectionIcon" position="-310px -8px"/>
                 <Text profile="irpSectionHeaderWithIcon" position="10px -5px" text="$l10n_usedplus_irp_sectionMechanic"/>
 
                 <!-- Quote text (italicized, centered) -->
@@ -147,11 +149,11 @@
             </GuiElement>
 
             <!-- ========== SECTION 5: Recommendation ========== -->
-            <!-- Position adjusted for layout changes -->
-            <GuiElement profile="irpRecommendSection" position="0px -580px">
+            <!-- Position adjusted for mechanical section height increase -->
+            <GuiElement profile="irpRecommendSection" position="0px -590px">
                 <Bitmap profile="irpRecommendBg" position="0px 0px"/>
                 <!-- v2.9.5: Section header with icon -->
-                <Bitmap profile="irpSectionIcon" id="recommendSectionIcon" position="-290px -8px"/>
+                <Bitmap profile="irpSectionIcon" id="recommendSectionIcon" position="-310px -8px"/>
                 <Text profile="irpSectionHeaderWithIcon" position="10px -5px" text="$l10n_usedplus_irp_sectionRecommend"/>
 
                 <Text profile="irpRecommendValue" id="recommendationText" position="0px -35px"
@@ -215,7 +217,7 @@
 
         <!-- v2.1.2: Integrated Mechanical Section (larger to fit sub-components) -->
         <Profile name="irpMechanicalSection" extends="emptyPanel" with="anchorTopCenter">
-            <size value="660px 150px"/>
+            <size value="660px 160px"/>
         </Profile>
 
         <!-- ========== SECTION BACKGROUNDS ========== -->
@@ -246,7 +248,7 @@
 
         <!-- v2.1.2: Integrated Mechanical Section Background -->
         <Profile name="irpMechanicalBg" extends="baseReference" with="anchorTopCenter">
-            <size value="660px 150px"/>
+            <size value="660px 160px"/>
             <imageColor value="0.08 0.08 0.12 0.9"/>
         </Profile>
 

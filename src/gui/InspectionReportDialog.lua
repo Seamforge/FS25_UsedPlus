@@ -68,6 +68,9 @@ function InspectionReportDialog:setupSystemIcons()
     if self.mechanicalSectionIcon ~= nil then
         self.mechanicalSectionIcon:setImageFilename(iconDir .. "sys_engine.png")
     end
+    if self.tireSectionIcon ~= nil then
+        self.tireSectionIcon:setImageFilename(iconDir .. "tire.png")
+    end
     if self.mechanicSectionIcon ~= nil then
         self.mechanicSectionIcon:setImageFilename(iconDir .. "agent.png")
     end
@@ -146,20 +149,18 @@ end
 --[[
     Called when dialog is created by GUI system
     v2.8.0: Set up icons here instead of getInstance() for DialogLoader compatibility
+    NOTE: ScreenElement doesn't have onCreate() in superclass - no super call needed
 ]]
 function InspectionReportDialog:onCreate()
-    InspectionReportDialog:superClass().onCreate(self)
-
     -- Set up system icons (must be done via Lua, not XML paths)
     self:setupSystemIcons()
 end
 
 --[[
     Called when dialog opens
+    NOTE: ScreenElement doesn't have onOpen() in superclass - no super call needed
 ]]
 function InspectionReportDialog:onOpen()
-    InspectionReportDialog:superClass().onOpen(self)
-
     -- Update display with listing data
     if self.listing then
         self:updateDisplay()
@@ -168,9 +169,10 @@ end
 
 --[[
     Called when dialog closes
+    NOTE: ScreenElement doesn't have onClose() in superclass - no super call needed
 ]]
 function InspectionReportDialog:onClose()
-    InspectionReportDialog:superClass().onClose(self)
+    -- No superclass cleanup needed for ScreenElement
 end
 
 --[[

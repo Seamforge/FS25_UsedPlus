@@ -98,10 +98,7 @@ end
     Can be called without getting instance first
 ]]
 function SaleListingInitiatedDialog.showWithDetails(details)
-    local dialog = SaleListingInitiatedDialog.getInstance()
-    if dialog then
-        dialog:show(details)
-    end
+    DialogLoader.show("SaleListingInitiatedDialog", "show", details)
 end
 
 --[[

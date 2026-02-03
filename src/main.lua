@@ -47,13 +47,24 @@ function UsedPlus:initialize()
 
     -- Create global managers (pattern from EnhancedLoanSystem)
     g_financeManager = FinanceManager.new()
-    g_usedVehicleManager = UsedVehicleManager.new()
+
+    -- UsedVehicleManager: Only initialize if BUE not integrated
+    if ModCompatibility.shouldInitUsedVehicleManager() then
+        g_usedVehicleManager = UsedVehicleManager.new()
+        UsedPlus.logInfo("UsedVehicleManager initialized")
+    else
+        g_usedVehicleManager = nil
+        UsedPlus.logInfo("UsedVehicleManager skipped - BuyUsedEquipment handles used search")
+    end
+
     g_vehicleSaleManager = VehicleSaleManager.new()  -- NEW - Agent-based vehicle sales
 
     -- Register managers with mission for event handling
     if g_currentMission then
         addModEventListener(g_financeManager)
-        addModEventListener(g_usedVehicleManager)
+        if g_usedVehicleManager ~= nil then
+            addModEventListener(g_usedVehicleManager)
+        end
         addModEventListener(g_vehicleSaleManager)  -- NEW
     end
 
