@@ -2134,7 +2134,7 @@
         <!-- v2.0.0: Updated description to clarify scope -->
         <e k="usedplus_setting_interestRate" v="Finansieringsrente" eh="ec5e55f4" />
         <e k="usedplus_setting_interestRate_desc" v="Grunnrente for all finansiering (kjøretøy, land, lån). Kredittscore påvirker denne." eh="86443f38" />
-        <e k="usedplus_setting_tradeInValue" v="Trade-In Value %" eh="1f2d9066" />
+        <e k="usedplus_setting_tradeInValue" v="Innbytteverdi %" eh="1f2d9066" />
         <e k="usedplus_setting_tradeInValue_desc" v="Grunnprosent av salgspris for innbytte (±7,5% avvik)" eh="7337cf9e" />
         <e k="usedplus_setting_repairCost" v="Reparasjonskostnad multiplikator" eh="f6f74c79" />
         <e k="usedplus_setting_repairCost_desc" v="Multiplikator som brukes på alle reparasjonskostnader" eh="d20d8168" />
@@ -2237,141 +2237,141 @@
         <e k="usedplus_neg_sendOffer" v="Send tilbud" eh="1afbee68" />
 
         <!-- Mechanic Seller Whispers (Twist #2) -->
-        <e k="usedplus_whisper_desperate_seller" v="Between you and me... they seem pretty eager to sell. Might be in a tough spot." eh="7250e321" />
-        <e k="usedplus_whisper_listed_long" v="Between you and me... I've seen this rig listed for a while now. Seller might be motivated." eh="d05ae609" />
-        <e k="usedplus_whisper_upgrading" v="Between you and me... heard they're upgrading to bigger equipment. Could be flexible." eh="e3972bc6" />
-        <e k="usedplus_whisper_knows_value" v="Between you and me... they've priced it fair and know exactly what it's worth." eh="8acefc9c" />
-        <e k="usedplus_whisper_just_listed" v="Between you and me... just hit the market. Might not be in a rush to deal." eh="b113b9e6" />
-        <e k="usedplus_whisper_standard" v="Between you and me... seems like a straightforward seller. Worth making an offer." eh="b00693e0" />
+        <e k="usedplus_whisper_desperate_seller" v="Mellom oss... de virker ganske ivrige etter å selge. Kan være i en vanskelig situasjon." eh="7250e321" />
+        <e k="usedplus_whisper_listed_long" v="Mellom oss... jeg har sett denne maskinen annonsert en stund nå. Selger kan være motivert." eh="d05ae609" />
+        <e k="usedplus_whisper_upgrading" v="Mellom oss... hørte de oppgraderer til større utstyr. Kan være fleksibel." eh="e3972bc6" />
+        <e k="usedplus_whisper_knows_value" v="Mellom oss... de har priset den rettferdig og vet nøyaktig hva den er verdt." eh="8acefc9c" />
+        <e k="usedplus_whisper_just_listed" v="Mellom oss... nettopp kommet på markedet. Kanskje ikke haster med å gjøre avtale." eh="b113b9e6" />
+        <e k="usedplus_whisper_standard" v="Mellom oss... virker som en grei selger. Verdt å gi et tilbud." eh="b00693e0" />
 
         <!-- Weather Whispers (Twist #3) -->
-        <e k="usedplus_whisper_weather_storm" v="Plus, with that storm rolling in, they might want to close quick." eh="25a637f5" />
-        <e k="usedplus_whisper_weather_rain" v="Rain's keeping everyone cooped up... good time to push for a deal." eh="1b825b89" />
-        <e k="usedplus_whisper_weather_hail" v="That hail's got folks worried about their gear sitting out." eh="023b34f7" />
-        <e k="usedplus_whisper_weather_snow" v="Snow falling... off-season always makes sellers more flexible." eh="bcdab6d9" />
-        <e k="usedplus_whisper_weather_perfect" v="Beautiful day like this though... don't expect any favors." eh="bf201d88" />
+        <e k="usedplus_whisper_weather_storm" v="Pluss, med den stormen som nærmer seg, vil de kanskje avslutte raskt." eh="25a637f5" />
+        <e k="usedplus_whisper_weather_rain" v="Regnet holder alle inne... godt tidspunkt å presse på for en avtale." eh="1b825b89" />
+        <e k="usedplus_whisper_weather_hail" v="Haglet har folk bekymret for utstyret sitt som står ute." eh="023b34f7" />
+        <e k="usedplus_whisper_weather_snow" v="Snø faller... lavsesongen gjør alltid selgere mer fleksible." eh="bcdab6d9" />
+        <e k="usedplus_whisper_weather_perfect" v="En vakker dag som dette... ikke forvent noen tjenester." eh="bf201d88" />
 
         <!-- Seller Response Dialog -->
-        <e k="usedplus_sr_titleAccept" v="OFFER ACCEPTED!" eh="c36f802f" />
-        <e k="usedplus_sr_titleCounter" v="COUNTER OFFER" eh="544441c8" />
-        <e k="usedplus_sr_titleReject" v="OFFER REJECTED" eh="2b54c509" />
-        <e k="usedplus_sr_titleWalkaway" v="SELLER WALKED AWAY" eh="d4da1912" />
-        <e k="usedplus_sr_yourOffer" v="Your Offer:" eh="4e018663" />
-        <e k="usedplus_sr_counterOffer" v="Counter Offer:" eh="768065b8" />
-        <e k="usedplus_sr_sellerPrice" v="Seller's Price:" eh="1402265a" />
-        <e k="usedplus_sr_completePurchase" v="Complete Purchase" eh="e1c9f521" />
-        <e k="usedplus_sr_acceptCounter" v="Accept Counter" eh="fdbaf6cf" />
-        <e k="usedplus_sr_standFirm" v="Stand Firm" eh="3b35ba7f" />
-        <e k="usedplus_sr_walkAway" v="Walk Away" eh="5218f5e2" />
-        <e k="usedplus_sr_payFullPrice" v="Pay Full Price" eh="1d0533bd" />
+        <e k="usedplus_sr_titleAccept" v="TILBUD AKSEPTERT!" eh="c36f802f" />
+        <e k="usedplus_sr_titleCounter" v="MOTTILBUD" eh="544441c8" />
+        <e k="usedplus_sr_titleReject" v="TILBUD AVVIST" eh="2b54c509" />
+        <e k="usedplus_sr_titleWalkaway" v="SELGER TRAKK SEG" eh="d4da1912" />
+        <e k="usedplus_sr_yourOffer" v="Ditt tilbud:" eh="4e018663" />
+        <e k="usedplus_sr_counterOffer" v="Mottilbud:" eh="768065b8" />
+        <e k="usedplus_sr_sellerPrice" v="Selgers pris:" eh="1402265a" />
+        <e k="usedplus_sr_completePurchase" v="Fullfør kjøp" eh="e1c9f521" />
+        <e k="usedplus_sr_acceptCounter" v="Aksepter mottilbud" eh="fdbaf6cf" />
+        <e k="usedplus_sr_standFirm" v="Stå fast" eh="3b35ba7f" />
+        <e k="usedplus_sr_walkAway" v="Gå vekk" eh="5218f5e2" />
+        <e k="usedplus_sr_payFullPrice" v="Betal full pris" eh="1d0533bd" />
 
         <!-- Seller Responses -->
-        <e k="usedplus_response_accepted" v="Deal! You've got yourself a %s." eh="e1b388b0" />
-        <e k="usedplus_response_counter" v="I can't go that low, but I'll meet you partway. How about %s?" eh="6da9eb6a" />
-        <e k="usedplus_response_rejected" v="Sorry, but I can't accept that. My price is firm at %s." eh="d99f0b95" />
-        <e k="usedplus_response_walkaway" v="I think we're too far apart. Come back if you change your mind." eh="c73a083b" />
+        <e k="usedplus_response_accepted" v="Avtale! Du har fått deg en %s." eh="e1b388b0" />
+        <e k="usedplus_response_counter" v="Jeg kan ikke gå så lavt, men jeg møter deg halvveis. Hva med %s?" eh="6da9eb6a" />
+        <e k="usedplus_response_rejected" v="Beklager, men jeg kan ikke akseptere det. Min pris er fast på %s." eh="d99f0b95" />
+        <e k="usedplus_response_walkaway" v="Jeg tror vi er for langt fra hverandre. Kom tilbake hvis du ombestemmer deg." eh="c73a083b" />
 
         <!-- Stand Firm Outcomes -->
-        <e k="usedplus_standfirm_success" v="Alright, alright... you drive a hard bargain. I'll take it." eh="0953e50a" />
-        <e k="usedplus_standfirm_hold" v="Look, %s is as low as I can go. Take it or leave it." eh="2d81ca38" />
-        <e k="usedplus_standfirm_walkaway" v="I don't think we're going to agree. Maybe another time." eh="2d8a7003" />
+        <e k="usedplus_standfirm_success" v="Greit, greit... du forhandler hardt. Jeg tar det." eh="0953e50a" />
+        <e k="usedplus_standfirm_hold" v="Se, %s er så lavt jeg kan gå. Ta det eller la det være." eh="2d81ca38" />
+        <e k="usedplus_standfirm_walkaway" v="Jeg tror ikke vi kommer til å bli enige. Kanskje en annen gang." eh="2d8a7003" />
 
         <!-- Negotiation Lock (after seller walks away) -->
-        <e k="usedplus_negotiation_locked_title" v="Seller Unavailable" eh="00a519f4" />
-        <e k="usedplus_negotiation_locked" v="Seller is unavailable. Try again in %d minutes." eh="938f0f62" />
-        <e k="usedplus_negotiation_locked_hint" v="They might cool off after a bit..." eh="1c8c51e6" />
+        <e k="usedplus_negotiation_locked_title" v="Selger utilgjengelig" eh="00a519f4" />
+        <e k="usedplus_negotiation_locked" v="Selger er utilgjengelig. Prøv igjen om %d minutter." eh="938f0f62" />
+        <e k="usedplus_negotiation_locked_hint" v="De roer seg kanskje ned etter en stund..." eh="1c8c51e6" />
 
         <!-- Negotiation - Cash Validation -->
-        <e k="usedplus_insufficient_funds" v="Insufficient Funds" eh="68c8a940" />
-        <e k="usedplus_insufficient_funds_offer" v="You cannot afford this offer. Used vehicle purchases are cash only." eh="1c7f7913" />
-        <e k="usedplus_insufficient_funds_shortfall" v="You need %s more to complete this purchase." eh="d40315cf" />
-        <e k="usedplus_insufficient_funds_balance" v="Current balance: %s" eh="b9522f76" />
+        <e k="usedplus_insufficient_funds" v="Utilstrekkelige midler" eh="68c8a940" />
+        <e k="usedplus_insufficient_funds_offer" v="Du har ikke råd til dette tilbudet. Brukt kjøretøykjøp er kun kontant." eh="1c7f7913" />
+        <e k="usedplus_insufficient_funds_shortfall" v="Du trenger %s mer for å fullføre dette kjøpet." eh="d40315cf" />
+        <e k="usedplus_insufficient_funds_balance" v="Nåværende saldo: %s" eh="b9522f76" />
 
         <!-- v2.6.2: Seller Walkaway (permanent loss) -->
-        <e k="usedplus_walkaway_title" v="SELLER WALKED AWAY" eh="d4da1912" />
-        <e k="usedplus_walkaway_message" v="Your offer insulted the seller. They've refused to do business with you and this vehicle is no longer available." eh="3ef90ec2" />
-        <e k="usedplus_walkaway_workhorse" v="This seller knows exactly what they have - a machine that's been nothing but reliable. They won't entertain lowball offers." eh="dd4d6411" />
-        <e k="usedplus_seller_immovable_hint" v="This seller knows exactly what they have. Don't expect any negotiation room." eh="afe11ced" />
+        <e k="usedplus_walkaway_title" v="SELGER TRAKK SEG" eh="d4da1912" />
+        <e k="usedplus_walkaway_message" v="Ditt tilbud fornærmet selgeren. De har nektet å gjøre forretninger med deg og dette kjøretøyet er ikke lenger tilgjengelig." eh="3ef90ec2" />
+        <e k="usedplus_walkaway_workhorse" v="Denne selgeren vet nøyaktig hva de har - en maskin som har vært intet annet enn pålitelig. De vil ikke underholde lavballtilbud." eh="dd4d6411" />
+        <e k="usedplus_seller_immovable_hint" v="Denne selgeren vet nøyaktig hva de har. Ikke forvent noe forhandlingsrom." eh="afe11ced" />
 
         <!-- v2.6.2: Settings-based mode disabled messages -->
-        <e k="usedplus_mode_finance_disabled" v="Finance (Disabled)" eh="a7fe11df" />
-        <e k="usedplus_mode_lease_disabled" v="Lease (Disabled)" eh="2c3f5a31" />
-        <e k="usedplus_finance_disabled_title" v="Feature Disabled" eh="e4c783e8" />
-        <e k="usedplus_finance_disabled_msg" v="Vehicle financing is disabled in UsedPlus settings." eh="fffb70a6" />
-        <e k="usedplus_lease_disabled_title" v="Feature Disabled" eh="e4c783e8" />
-        <e k="usedplus_lease_disabled_msg" v="Vehicle leasing is disabled in UsedPlus settings." eh="bd7f5b24" />
-        <e k="usedplus_land_finance_disabled_msg" v="Land financing is disabled in UsedPlus settings." eh="0335547a" />
-        <e k="usedplus_land_lease_disabled_msg" v="Land leasing is disabled in UsedPlus settings." eh="f875a63d" />
-        <e k="usedplus_land_modeFinance_disabled" v="Finance (Disabled)" eh="a7fe11df" />
-        <e k="usedplus_land_modeLease_disabled" v="Lease (Disabled)" eh="2c3f5a31" />
+        <e k="usedplus_mode_finance_disabled" v="Finansiering (Deaktivert)" eh="a7fe11df" />
+        <e k="usedplus_mode_lease_disabled" v="Leasing (Deaktivert)" eh="2c3f5a31" />
+        <e k="usedplus_finance_disabled_title" v="Funksjon deaktivert" eh="e4c783e8" />
+        <e k="usedplus_finance_disabled_msg" v="Kjøretøyfinansiering er deaktivert i UsedPlus innstillinger." eh="fffb70a6" />
+        <e k="usedplus_lease_disabled_title" v="Funksjon deaktivert" eh="e4c783e8" />
+        <e k="usedplus_lease_disabled_msg" v="Kjøretøyleasing er deaktivert i UsedPlus innstillinger." eh="bd7f5b24" />
+        <e k="usedplus_land_finance_disabled_msg" v="Landfinansiering er deaktivert i UsedPlus innstillinger." eh="0335547a" />
+        <e k="usedplus_land_lease_disabled_msg" v="Landleasing er deaktivert i UsedPlus innstillinger." eh="f875a63d" />
+        <e k="usedplus_land_modeFinance_disabled" v="Finansiering (Deaktivert)" eh="a7fe11df" />
+        <e k="usedplus_land_modeLease_disabled" v="Leasing (Deaktivert)" eh="2c3f5a31" />
 
         <!-- ============================================== -->
         <!-- v2.7.0: SEIZURE ESCALATION SYSTEM              -->
         <!-- ============================================== -->
 
         <!-- Seizure Warning Messages -->
-        <e k="usedplus_engine_seized" v="ENGINE SEIZED! Repair required before vehicle will start." eh="c22e256a" />
-        <e k="usedplus_hydraulics_seized" v="HYDRAULICS SEIZED! Implements are locked in place." eh="dd09718c" />
-        <e k="usedplus_electrical_seized" v="ELECTRICAL FAILURE! All systems are dead." eh="84b7514a" />
+        <e k="usedplus_engine_seized" v="MOTOR BESLAGLAGT! Reparasjon kreves før kjøretøy vil starte." eh="c22e256a" />
+        <e k="usedplus_hydraulics_seized" v="HYDRAULIKK BESLAGLAGT! Redskaper er låst på plass." eh="dd09718c" />
+        <e k="usedplus_electrical_seized" v="ELEKTRISK FEIL! Alle systemer er døde." eh="84b7514a" />
 
         <!-- OBD Scanner Seizure Repair -->
-        <e k="usedplus_seizure_detected" v="COMPONENT SEIZED" eh="9def01dd" />
-        <e k="usedplus_seizure_repair_confirm" v="%s is seized and requires emergency repair.\n\nRepair cost: %s\n\nProceed with repair?" eh="bf702608" />
-        <e k="usedplus_seizure_repaired" v="%s repaired! Reliability restored to %d%%" eh="323fa338" />
-        <e k="usedplus_repair_no_money" v="Not enough money for repair!" eh="0c0a7c19" />
+        <e k="usedplus_seizure_detected" v="KOMPONENT BESLAGLAGT" eh="9def01dd" />
+        <e k="usedplus_seizure_repair_confirm" v="%s er beslaglagt og krever nødreparasjon.\n\nReparasjonskostnad: %s\n\nFortsett med reparasjon?" eh="bf702608" />
+        <e k="usedplus_seizure_repaired" v="%s reparert! Pålitelighet gjenopprettet til %d%%" eh="323fa338" />
+        <e k="usedplus_repair_no_money" v="Ikke nok penger til reparasjon!" eh="0c0a7c19" />
 
         <!-- ============================================== -->
         <!-- v2.7.1: ADDITIONAL MISSING TRANSLATIONS        -->
         <!-- ============================================== -->
 
         <!-- General Warnings/Errors -->
-        <e k="usedplus_warning_notEnoughMoney" v="Not enough money!" eh="48f194d4" />
+        <e k="usedplus_warning_notEnoughMoney" v="Ikke nok penger!" eh="48f194d4" />
 
         <!-- Finance Deal Messages -->
-        <e k="usedplus_notification_landSeized" v="LAND SEIZED: %s has been taken due to non-payment!" eh="1c095ac6" />
-        <e k="usedplus_error_paymentTooLow" v="Payment amount is below the minimum required." eh="4f83eda0" />
-        <e k="usedplus_error_paymentTooHigh" v="Payment amount exceeds the remaining balance." eh="091a9776" />
-        <e k="usedplus_success_paymentMade" v="Payment processed successfully!" eh="b12aba7d" />
+        <e k="usedplus_notification_landSeized" v="LAND BESLAGLAGT: %s har blitt overtatt på grunn av manglende betaling!" eh="1c095ac6" />
+        <e k="usedplus_error_paymentTooLow" v="Betalingsbeløp er under minimum påkrevd." eh="4f83eda0" />
+        <e k="usedplus_error_paymentTooHigh" v="Betalingsbeløp overstiger gjenværende saldo." eh="091a9776" />
+        <e k="usedplus_success_paymentMade" v="Betaling behandlet vellykket!" eh="b12aba7d" />
 
         <!-- Lease Deal Messages -->
-        <e k="usedplus_error_cannotAffordTermination" v="Not enough money to pay the lease termination fee." eh="64ed9e67" />
+        <e k="usedplus_error_cannotAffordTermination" v="Ikke nok penger til å betale leasingavslutningsgebyr." eh="64ed9e67" />
 
         <!-- Credit Requirements -->
-        <e k="usedplus_credit_required" v="Credit Required" eh="cefa86b5" />
-        <e k="usedplus_finance_credit_msg" v="Financing requires a credit score of %d or higher." eh="7d3d6778" />
-        <e k="usedplus_lease_credit_msg" v="Leasing requires a credit score of %d or higher." eh="c86cbfc5" />
+        <e k="usedplus_credit_required" v="Kreditt kreves" eh="cefa86b5" />
+        <e k="usedplus_finance_credit_msg" v="Finansiering krever en kredittscore på %d eller høyere." eh="7d3d6778" />
+        <e k="usedplus_lease_credit_msg" v="Leasing krever en kredittscore på %d eller høyere." eh="c86cbfc5" />
 
         <!-- Purchase Errors -->
-        <e k="usedplus_error_purchaseFailed" v="Purchase failed - game API not available." eh="c02a7002" />
+        <e k="usedplus_error_purchaseFailed" v="Kjøp mislyktes - spill-API ikke tilgjengelig." eh="c02a7002" />
 
         <!-- Finance Calculations -->
-        <e k="usedplus_error_negativeDownPayment" v="Down payment cannot be negative." eh="0634f8d8" />
-        <e k="usedplus_error_downPaymentTooHigh" v="Down payment cannot exceed the purchase price." eh="6bd926ef" />
-        <e k="usedplus_error_invalidTerm" v="Invalid loan term." eh="49e90a5b" />
-        <e k="usedplus_error_leaseDownPaymentTooHigh" v="Down payment cannot exceed the lease price." eh="5e32ae97" />
-        <e k="usedplus_error_leaseTermInvalid" v="Invalid lease term." eh="7f3c3523" />
+        <e k="usedplus_error_negativeDownPayment" v="Egenandel kan ikke være negativ." eh="0634f8d8" />
+        <e k="usedplus_error_downPaymentTooHigh" v="Egenandel kan ikke overstige kjøpesummen." eh="6bd926ef" />
+        <e k="usedplus_error_invalidTerm" v="Ugyldig låneperiode." eh="49e90a5b" />
+        <e k="usedplus_error_leaseDownPaymentTooHigh" v="Egenandel kan ikke overstige leasingprisen." eh="5e32ae97" />
+        <e k="usedplus_error_leaseTermInvalid" v="Ugyldig leasingperiode." eh="7f3c3523" />
 
         <!-- Depreciation Formatting -->
-        <e k="usedplus_age_oneYear" v="1 year old" eh="086d4f5c" />
-        <e k="usedplus_age_years" v="%d years old" eh="afdf2194" />
-        <e k="usedplus_hours" v="%d hours" eh="4e8d5e54" />
+        <e k="usedplus_age_oneYear" v="1 år gammel" eh="086d4f5c" />
+        <e k="usedplus_age_years" v="%d år gammel" eh="afdf2194" />
+        <e k="usedplus_hours" v="%d timer" eh="4e8d5e54" />
 
         <!-- Loan Notifications -->
-        <e k="usedplus_notification_vanillaLoanPaidOff" v="Bank loan paid off!" eh="a6f2a43b" />
+        <e k="usedplus_notification_vanillaLoanPaidOff" v="Banklån nedbetalt!" eh="a6f2a43b" />
 
         <!-- ============================================== -->
         <!-- v2.8.0: Additional Multiplayer Messages       -->
         <!-- (Main MP messages are in the MP section above) -->
         <!-- ============================================== -->
-        <e k="usedplus_mp_success_vehicle_purchased" v="Vehicle purchased successfully!" eh="b5beec4f" />
-        <e k="usedplus_mp_success_trade_in" v="Trade-in completed successfully!" eh="0a59b49a" />
-        <e k="usedplus_mp_success_field_repair" v="Field repair completed!" eh="06239aac" />
-        <e k="usedplus_mp_success_fluids_refilled" v="Fluids refilled successfully!" eh="9597cd1d" />
-        <e k="usedplus_mp_success_tires_replaced" v="Tires replaced successfully!" eh="5224fbbe" />
-        <e k="usedplus_mp_success_land_purchased" v="Land purchased successfully!" eh="9de4a0f4" />
-        <e k="usedplus_mp_error_purchase_failed" v="Purchase failed. Please try again." eh="42d7ddab" />
-        <e k="usedplus_mp_error_vehicle_not_found" v="Vehicle not found." eh="02c84e79" />
-        <e k="usedplus_mp_error_no_loan" v="No loan balance to pay." eh="5668e12f" />
+        <e k="usedplus_mp_success_vehicle_purchased" v="Kjøretøy kjøpt vellykket!" eh="b5beec4f" />
+        <e k="usedplus_mp_success_trade_in" v="Innbytte fullført vellykket!" eh="0a59b49a" />
+        <e k="usedplus_mp_success_field_repair" v="Feltreparasjon fullført!" eh="06239aac" />
+        <e k="usedplus_mp_success_fluids_refilled" v="Væsker påfylt vellykket!" eh="9597cd1d" />
+        <e k="usedplus_mp_success_tires_replaced" v="Dekk byttet vellykket!" eh="5224fbbe" />
+        <e k="usedplus_mp_success_land_purchased" v="Land kjøpt vellykket!" eh="9de4a0f4" />
+        <e k="usedplus_mp_error_purchase_failed" v="Kjøp mislyktes. Vennligst prøv igjen." eh="42d7ddab" />
+        <e k="usedplus_mp_error_vehicle_not_found" v="Kjøretøy ikke funnet." eh="02c84e79" />
+        <e k="usedplus_mp_error_no_loan" v="Ingen lånesaldo å betale." eh="5668e12f" />
 
         <!-- ============================================== -->
         <!-- v2.9.5: ADMIN CONTROL PANEL                   -->
@@ -2459,33 +2459,33 @@
         <e k="usedplus_admin_btn_missed_payment" v="Gå glipp av betaling" eh="4890557c" />
 
         <!-- Buttons - Tab 4 (Dialogs) -->
-        <e k="usedplus_admin_btn_dlg_loan" v="Take Loan" eh="40fe67fa" />
-        <e k="usedplus_admin_btn_dlg_approved" v="Approved" eh="6f806341" />
-        <e k="usedplus_admin_btn_dlg_credit" v="Credit" eh="0a90b1bc" />
-        <e k="usedplus_admin_btn_dlg_history" v="History" eh="16d2b386" />
+        <e k="usedplus_admin_btn_dlg_loan" v="Ta lån" eh="40fe67fa" />
+        <e k="usedplus_admin_btn_dlg_approved" v="Godkjent" eh="6f806341" />
+        <e k="usedplus_admin_btn_dlg_credit" v="Kreditt" eh="0a90b1bc" />
+        <e k="usedplus_admin_btn_dlg_history" v="Historikk" eh="16d2b386" />
         <e k="usedplus_admin_btn_dlg_repo" v="Repo" eh="0f74adf1" />
-        <e k="usedplus_admin_btn_dlg_search" v="Search" eh="13348442" />
-        <e k="usedplus_admin_btn_dlg_purchase" v="Purchase" eh="76b6a47a" />
-        <e k="usedplus_admin_btn_dlg_negotiate" v="Negotiate" eh="e481ddec" />
-        <e k="usedplus_admin_btn_dlg_seller" v="Seller Resp" eh="8ff31b45" />
+        <e k="usedplus_admin_btn_dlg_search" v="Søk" eh="13348442" />
+        <e k="usedplus_admin_btn_dlg_purchase" v="Kjøp" eh="76b6a47a" />
+        <e k="usedplus_admin_btn_dlg_negotiate" v="Forhandl" eh="e481ddec" />
+        <e k="usedplus_admin_btn_dlg_seller" v="Selger svar" eh="8ff31b45" />
         <e k="usedplus_admin_btn_dlg_obd" v="OBD" eh="9971dd97" />
-        <e k="usedplus_admin_btn_dlg_service" v="Svc Truck" eh="083ff302" />
-        <e k="usedplus_admin_btn_dlg_inspect" v="Inspect" eh="35a9dbe6" />
-        <e k="usedplus_admin_btn_dlg_lease_end" v="Lease End" eh="da7801f1" />
-        <e k="usedplus_admin_btn_dlg_lease_renew" v="Lease Renew" eh="7a794930" />
+        <e k="usedplus_admin_btn_dlg_service" v="Servicebil" eh="083ff302" />
+        <e k="usedplus_admin_btn_dlg_inspect" v="Inspiser" eh="35a9dbe6" />
+        <e k="usedplus_admin_btn_dlg_lease_end" v="Leasing slutt" eh="da7801f1" />
+        <e k="usedplus_admin_btn_dlg_lease_renew" v="Leasing forny" eh="7a794930" />
 
         <!-- Buttons - Tab 5 (State) -->
-        <e k="usedplus_admin_btn_toggle_debug" v="Toggle Debug" eh="e69cb6a0" />
-        <e k="usedplus_admin_btn_rel_100" v="Rel: 100%" eh="dfdb79d3" />
-        <e k="usedplus_admin_btn_rel_50" v="Rel: 50%" eh="9ce7a0a2" />
-        <e k="usedplus_admin_btn_rel_10" v="Rel: 10%" eh="54d6e770" />
-        <e k="usedplus_admin_btn_reset_hours" v="Reset Hours" eh="a519e5e1" />
-        <e k="usedplus_admin_btn_add_hours" v="+1000 Hours" eh="ef05132d" />
-        <e k="usedplus_admin_btn_dna_desperate" v="Desperate" eh="97df4642" />
-        <e k="usedplus_admin_btn_dna_reasonable" v="Reasonable" eh="e485c034" />
-        <e k="usedplus_admin_btn_dna_immovable" v="Immovable" eh="57d0e57c" />
-        <e k="usedplus_admin_btn_next_vehicle" v="Next Vehicle" eh="e95e97fa" />
-        <e k="usedplus_admin_btn_prev_vehicle" v="Prev Vehicle" eh="69b3a0d0" />
+        <e k="usedplus_admin_btn_toggle_debug" v="Bytt feilsøking" eh="e69cb6a0" />
+        <e k="usedplus_admin_btn_rel_100" v="Pål: 100%" eh="dfdb79d3" />
+        <e k="usedplus_admin_btn_rel_50" v="Pål: 50%" eh="9ce7a0a2" />
+        <e k="usedplus_admin_btn_rel_10" v="Pål: 10%" eh="54d6e770" />
+        <e k="usedplus_admin_btn_reset_hours" v="Nullstill timer" eh="a519e5e1" />
+        <e k="usedplus_admin_btn_add_hours" v="+1000 timer" eh="ef05132d" />
+        <e k="usedplus_admin_btn_dna_desperate" v="Desperat" eh="97df4642" />
+        <e k="usedplus_admin_btn_dna_reasonable" v="Rimelig" eh="e485c034" />
+        <e k="usedplus_admin_btn_dna_immovable" v="Uflyttbar" eh="57d0e57c" />
+        <e k="usedplus_admin_btn_next_vehicle" v="Neste kjøretøy" eh="e95e97fa" />
+        <e k="usedplus_admin_btn_prev_vehicle" v="Forrige kjøretøy" eh="69b3a0d0" />
 
         <!-- Info Labels -->
         <e k="usedplus_admin_current_balance" v="Nåværende saldo:" eh="473e7f9e" />

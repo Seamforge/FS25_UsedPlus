@@ -95,19 +95,19 @@ All notable changes to this project are documented here.
 
 **Translation Quality:**
 - Updated 147 translations across 25 languages with corrected semantics and hash synchronization.
-- All worked languages now 100% synchronized with English source (0 stale entries).
+- All 24 complete languages now 100% synchronized with English source (0 stale entries).
 - **Translation Tool Improvements**: Enhanced `translation_sync.js` with 6 new language code mappings (EA=Spanish LA, FC=French CA, ID=Indonesian, VI=Vietnamese, KR=Korean, CT=Chinese Traditional).
-- **Major Translation Completion**: Completed 2,365 translations across 7 languages:
-  - Spanish (Latin America) - 1954/1954 (+7 entries) ✓
-  - French (Canadian) - 1954/1954 (+7 entries) ✓
-  - Indonesian - 1954/1954 (+7 entries) ✓
-  - Korean - 1954/1954 (+522 entries) ✓
-  - Swedish - 1954/1954 (+557 entries) ✓
-  - Norwegian - 1954/1954 (+599 entries) ✓
-  - Vietnamese - 1954/1954 (+687 entries) ✓
+- **Major Translation Completion**: Completed 1,429 translations across 6 languages to reach 100%:
+  - Spanish (Latin America) - 1954/1954 (+7 entries) ✅
+  - French (Canadian) - 1954/1954 (+7 entries) ✅
+  - Indonesian - 1954/1954 (+7 entries) ✅
+  - Swedish - 1954/1954 (+252 entries) ✅
+  - Norwegian - 1954/1954 (+599 entries) ✅
+  - Vietnamese - 1954/1954 (+557 entries) ✅
 - **Cleanup**: Removed deprecated `translation_cs.xml` (800 entries behind current Czech translation).
-- **Languages at 100%**: 25 of 27 languages now fully translated (93% coverage).
-- **Remaining Partial**: 2 languages with incomplete translations (edge cases/low priority).
+- **Languages at 100%**: **24 of 25 languages** now fully translated (96% coverage).
+- **Remaining Partial**: Korean at 1432/1954 (73.3%) - available for community contribution.
+- **Language Coverage**: Matches Courseplay mod's 26-language support with modern language codes.
 
 ---
 
