@@ -1520,4 +1520,106 @@ function UsedPlusMaintenance:onEnterVehicle(isControlling)
     end
 end
 
+--[[
+    Admin panel helper: Reset ALL malfunction states
+    Comprehensive cleanup for testing purposes
+    @param vehicle - The vehicle to reset
+]]
+function UsedPlusMaintenance.resetAllMalfunctions(vehicle)
+    if not vehicle or not vehicle.spec_usedPlusMaintenance then
+        return
+    end
+
+    local spec = vehicle.spec_usedPlusMaintenance
+
+    -- Reset reliability
+    spec.engineReliability = 1.0
+    spec.hydraulicReliability = 1.0
+    spec.electricalReliability = 1.0
+
+    -- Reset engine malfunctions
+    spec.isStalled = false
+    spec.stallRecoveryEndTime = 0
+    spec.stallCooldown = 0
+    spec.misfireActive = false
+    spec.misfireEndTime = 0
+    spec.misfireBurstRemaining = 0
+    spec.engineTemperature = 0.0  -- Fully cool (pristine reset)
+    spec.isOverheated = false
+    spec.overheatCooldownEndTime = 0
+    spec.runawayActive = false
+    spec.runawayStartTime = 0
+    spec.runawayPreviousSpeed = 0
+    spec.runawayPreviousDamage = 0
+
+    -- Reset hydraulic malfunctions
+    spec.hydraulicSurgeActive = false
+    spec.hydraulicSurgeEndTime = 0
+    spec.hydraulicSurgeFadeStartTime = 0
+    spec.hydraulicSurgeDirection = 0
+    spec.hydraulicSurgeCooldownEnd = 0
+    spec.implementStuckDown = false
+    spec.implementStuckDownEndTime = 0
+    spec.implementStuckUp = false
+    spec.implementStuckUpEndTime = 0
+    spec.implementPullActive = false
+    spec.implementPullEndTime = 0
+    spec.implementDragActive = false
+    spec.implementDragEndTime = 0
+    spec.reducedTurningActive = false
+    spec.reducedTurningEndTime = 0
+
+    -- Reset electrical malfunctions
+    spec.isCutout = false
+    spec.cutoutEndTime = 0
+
+    -- Reset tire malfunctions
+    spec.hasFlatTire = false
+    spec.flatTireSide = 0
+
+    -- Reset seizure states
+    spec.engineSeized = false
+    spec.hydraulicsSeized = false
+    spec.electricalSeized = false
+    spec.engineSeizedTime = 0
+    spec.hydraulicsSeizedTime = 0
+    spec.electricalSeizedTime = 0
+
+    -- Reset cooldowns
+    spec.lastMalfunctionTime = 0
+
+    -- Reset ALL warning flags (allows warnings to show again on next trigger)
+    spec.hasShownSpeedWarning = false
+    spec.hasShownDriftWarning = false
+    spec.hasShownPullWarning = false
+    spec.hasShownSteeringWarning = false
+    spec.hasShownMisfireWarning = false
+    spec.hasShownOverheatWarning = false
+    spec.hasShownOverheatCritical = false
+    spec.hasShownSurgeWarning = false
+    spec.hasShownDropWarning = false
+    spec.hasShownPTOWarning = false
+    spec.hasShownHitchWarning = false
+    spec.hasShownFlatTireWarning = false
+    spec.hasShownLowTractionWarning = false
+    spec.hasShownTireWarnWarning = false
+    spec.hasShownTireCriticalWarning = false
+    spec.hasShownGovernorWarning = false
+
+    -- Reset vehicle damage
+    if vehicle.setDamage then
+        vehicle:setDamage(0)
+    end
+
+    -- Reset wear
+    if vehicle.setWearAmount then
+        vehicle:setWearAmount(0)
+    end
+
+    -- NOTE: We do NOT reset failureCount, repairCount, or totalRepairCost
+    -- Those are historical metrics that testers may want to preserve
+
+    UsedPlus.logInfo("Admin panel: Reset all active malfunctions on " .. (vehicle:getName() or "vehicle"))
+end
+
 UsedPlus.logDebug("UsedPlusMaintenance CORE module loaded (v2.7.2 modular)")

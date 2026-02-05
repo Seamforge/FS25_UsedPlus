@@ -44,6 +44,26 @@ end
     @return scale - DNA value 0.0 (lemon) to 1.0 (workhorse)
 ]]
 function UsedPlusMaintenance.generateUsedVehicleScale(qualityLevel)
+    -- === ADMIN PANEL DNA OVERRIDE (ONE-SHOT) ===
+    if UsedPlus.forcedDNA then
+        local dnaValue = UsedPlus.forcedDNA
+        UsedPlus.forcedDNA = nil  -- Clear immediately (one-shot behavior)
+
+        -- Log consumption for debugging
+        local label = "AVERAGE"
+        if dnaValue < 0.3 then
+            label = "LEMON"
+        elseif dnaValue > 0.7 then
+            label = "WORKHORSE"
+        end
+
+        UsedPlus.logInfo(string.format("DNA OVERRIDE CONSUMED: Forced %.2f (%s) for vehicle generation",
+            dnaValue, label))
+
+        return dnaValue
+    end
+
+    -- === NORMAL GENERATION (existing code continues below) ===
     -- Base roll: triangular distribution (sum of 2 randoms / 2)
     -- Centers at 0.5, ranges 0.0-1.0, natural bell curve peaks in middle
     local r1 = math.random()

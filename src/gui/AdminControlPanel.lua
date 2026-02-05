@@ -44,9 +44,6 @@ function AdminControlPanel.new(target, custom_mt, i18n)
     self.vehicle = nil
     self.statusClearTimer = 0
 
-    -- Forced seller DNA for next search (nil = normal RNG)
-    self.forcedSellerDNA = nil
-
     return self
 end
 
@@ -231,6 +228,8 @@ end
     Close dialog
 ]]
 function AdminControlPanel:onCancel()
+    -- Clear any armed DNA overrides (principle of least surprise)
+    UsedPlus.forcedDNA = nil
     self:close()
 end
 
@@ -287,12 +286,26 @@ function AdminControlPanel:onOverheatClick()
     if not self:requireVehicle() then return end
 
     local spec = self.vehicle.spec_usedPlusMaintenance
-    spec.engineTemperature = 0.85
+    spec.engineTemperature = 0.95  -- Critical overheat threshold
+
+    -- Trigger actual overheat stall
+    if self.vehicle.stopMotor then
+        self.vehicle:stopMotor()
+    end
+    spec.isOverheated = true
+    spec.overheatCooldownEndTime = (g_currentMission.time or 0) + (UsedPlusMaintenance.CONFIG.overheatCooldownMs or 120000)
+    spec.failureCount = (spec.failureCount or 0) + 1
     spec.hasShownOverheatWarning = false
     spec.hasShownOverheatCritical = false
+
     UsedPlusMaintenance.recordMalfunctionTime(self.vehicle)
 
-    self:setStatus(string.format("Set engine temp to 85%% on %s", self.vehicle:getName() or "vehicle"))
+    -- Apply breakdown degradation
+    if UsedPlusMaintenance.applyBreakdownDegradation then
+        UsedPlusMaintenance.applyBreakdownDegradation(self.vehicle, "Engine")
+    end
+
+    self:setStatus(string.format("CRITICAL: Triggered overheat stall at 95%% on %s", self.vehicle:getName() or "vehicle"))
 end
 
 function AdminControlPanel:onRunawayClick()
@@ -372,9 +385,16 @@ function AdminControlPanel:onFlatLClick()
     local spec = self.vehicle.spec_usedPlusMaintenance
     spec.hasFlatTire = true
     spec.flatTireSide = -1  -- Left
-    spec.hasShownFlatTireWarning = true
+    spec.hasShownFlatTireWarning = false  -- Changed to false - allows warning to show
     spec.failureCount = (spec.failureCount or 0) + 1
     UsedPlusMaintenance.recordMalfunctionTime(self.vehicle)
+
+    -- Manually show warning now
+    if UsedPlusMaintenance.showWarning then
+        UsedPlusMaintenance.showWarning(self.vehicle,
+            g_i18n:getText("usedplus_warning_flattire") or "FLAT TIRE!",
+            5000, "flattire")
+    end
 
     self:setStatus(string.format("Triggered flat tire (LEFT) on %s", self.vehicle:getName() or "vehicle"))
 end
@@ -385,9 +405,16 @@ function AdminControlPanel:onFlatRClick()
     local spec = self.vehicle.spec_usedPlusMaintenance
     spec.hasFlatTire = true
     spec.flatTireSide = 1  -- Right
-    spec.hasShownFlatTireWarning = true
+    spec.hasShownFlatTireWarning = false  -- Changed to false - allows warning to show
     spec.failureCount = (spec.failureCount or 0) + 1
     UsedPlusMaintenance.recordMalfunctionTime(self.vehicle)
+
+    -- Manually show warning now
+    if UsedPlusMaintenance.showWarning then
+        UsedPlusMaintenance.showWarning(self.vehicle,
+            g_i18n:getText("usedplus_warning_flattire") or "FLAT TIRE!",
+            5000, "flattire")
+    end
 
     self:setStatus(string.format("Triggered flat tire (RIGHT) on %s", self.vehicle:getName() or "vehicle"))
 end
@@ -416,28 +443,13 @@ end
 function AdminControlPanel:onFixAllClick()
     if not self:requireVehicle() then return end
 
-    local spec = self.vehicle.spec_usedPlusMaintenance
-
-    -- Reset all malfunction states
-    spec.engineReliability = 1.0
-    spec.hydraulicReliability = 1.0
-    spec.electricalReliability = 1.0
-    spec.engineTemperature = 0.3
-    spec.misfireActive = false
-    spec.runawayActive = false
-    spec.hydraulicSurgeActive = false
-    spec.hasFlatTire = false
-    spec.engineSeized = false
-    spec.hydraulicsSeized = false
-    spec.electricalSeized = false
-    spec.lastMalfunctionTime = 0
-
-    -- Reset vehicle damage
-    if self.vehicle.setDamage then
-        self.vehicle:setDamage(0)
+    -- Call comprehensive reset helper
+    if UsedPlusMaintenance and UsedPlusMaintenance.resetAllMalfunctions then
+        UsedPlusMaintenance.resetAllMalfunctions(self.vehicle)
+        self:setStatus(string.format("Reset all active malfunctions on %s (reliability, temperature, seizures, warnings)", self.vehicle:getName() or "vehicle"))
+    else
+        self:setStatus("Error: resetAllMalfunctions not found")
     end
-
-    self:setStatus(string.format("Fixed all malfunctions on %s", self.vehicle:getName() or "vehicle"))
 end
 
 -- ========== TAB 2: SPAWNING HANDLERS ==========
@@ -450,19 +462,31 @@ function AdminControlPanel:onSpawnObdClick()
         return
     end
 
-    local x, y, z = getWorldTranslation(player.rootNode)
-
     -- Use shop system to buy item
     local xmlFile = UsedPlus.MOD_DIR .. "vehicles/fieldServiceKit/fieldServiceKit.xml"
     local storeItem = g_storeManager:getItemByXMLFilename(xmlFile)
 
-    if storeItem then
-        -- Use BuyVehicleEvent pattern for proper spawn
-        self:setStatus("Spawning OBD Scanner at player location...")
-        g_client:getServerConnection():sendEvent(BuyVehicleEvent.new(storeItem, {}, 0, 1, 1, x, y, z))
-    else
+    if not storeItem then
         self:setStatus("Error: Field Service Kit not found in store")
+        return
     end
+
+    -- Create BuyVehicleData - proper FS25 API (position handled automatically)
+    local buyData = BuyVehicleData.new()
+    buyData:setOwnerFarmId(g_currentMission:getFarmId())
+    buyData:setPrice(0)  -- Admin spawn - no cost
+    buyData:setStoreItem(storeItem)
+    buyData:setConfigurations({})
+
+    if buyData.setConfigurationData then
+        buyData:setConfigurationData({})
+    end
+    if buyData.setLicensePlateData then
+        buyData:setLicensePlateData(nil)
+    end
+
+    self:setStatus("Spawning OBD Scanner at player location...")
+    g_client:getServerConnection():sendEvent(BuyVehicleEvent.new(buyData))
 end
 
 function AdminControlPanel:onSpawnTruckClick()
@@ -473,18 +497,30 @@ function AdminControlPanel:onSpawnTruckClick()
         return
     end
 
-    local x, y, z = getWorldTranslation(player.rootNode)
-    x = x + 5  -- Offset to not spawn on player
-
     local xmlFile = UsedPlus.MOD_DIR .. "vehicles/serviceTruck/serviceTruck.xml"
     local storeItem = g_storeManager:getItemByXMLFilename(xmlFile)
 
-    if storeItem then
-        self:setStatus("Spawning Service Truck...")
-        g_client:getServerConnection():sendEvent(BuyVehicleEvent.new(storeItem, {}, 0, 1, 1, x, y, z))
-    else
+    if not storeItem then
         self:setStatus("Error: Service Truck not found in store")
+        return
     end
+
+    -- Create BuyVehicleData - proper FS25 API (position handled automatically)
+    local buyData = BuyVehicleData.new()
+    buyData:setOwnerFarmId(g_currentMission:getFarmId())
+    buyData:setPrice(0)  -- Admin spawn - no cost
+    buyData:setStoreItem(storeItem)
+    buyData:setConfigurations({})
+
+    if buyData.setConfigurationData then
+        buyData:setConfigurationData({})
+    end
+    if buyData.setLicensePlateData then
+        buyData:setLicensePlateData(nil)
+    end
+
+    self:setStatus("Spawning Service Truck...")
+    g_client:getServerConnection():sendEvent(BuyVehicleEvent.new(buyData))
 end
 
 function AdminControlPanel:onSpawnPartsClick()
@@ -494,18 +530,30 @@ function AdminControlPanel:onSpawnPartsClick()
         return
     end
 
-    local x, y, z = getWorldTranslation(player.rootNode)
-    x = x + 3
-
     local xmlFile = UsedPlus.MOD_DIR .. "vehicles/sparePartsPallet/sparePartsPallet.xml"
     local storeItem = g_storeManager:getItemByXMLFilename(xmlFile)
 
-    if storeItem then
-        self:setStatus("Spawning Spare Parts Pallet...")
-        g_client:getServerConnection():sendEvent(BuyVehicleEvent.new(storeItem, {}, 0, 1, 1, x, y, z))
-    else
+    if not storeItem then
         self:setStatus("Error: Spare Parts Pallet not found in store")
+        return
     end
+
+    -- Create BuyVehicleData - proper FS25 API (position handled automatically)
+    local buyData = BuyVehicleData.new()
+    buyData:setOwnerFarmId(g_currentMission:getFarmId())
+    buyData:setPrice(0)  -- Admin spawn - no cost
+    buyData:setStoreItem(storeItem)
+    buyData:setConfigurations({})
+
+    if buyData.setConfigurationData then
+        buyData:setConfigurationData({})
+    end
+    if buyData.setLicensePlateData then
+        buyData:setLicensePlateData(nil)
+    end
+
+    self:setStatus("Spawning Spare Parts Pallet...")
+    g_client:getServerConnection():sendEvent(BuyVehicleEvent.new(buyData))
 end
 
 function AdminControlPanel:onTriggerDiscoveryClick()
@@ -584,6 +632,13 @@ function AdminControlPanel:onPaintWornClick()
         self.vehicle:setWearAmount(0.3)
     end
 
+    local spec = self.vehicle.spec_usedPlusMaintenance
+    if spec then
+        spec.engineReliability = 0.75
+        spec.hydraulicReliability = 0.8
+        spec.electricalReliability = 0.75
+    end
+
     self:setStatus(string.format("Painted %s to worn condition", self.vehicle:getName() or "vehicle"))
 end
 
@@ -595,6 +650,13 @@ function AdminControlPanel:onPaintBeatenClick()
     end
     if self.vehicle.setWearAmount then
         self.vehicle:setWearAmount(0.5)
+    end
+
+    local spec = self.vehicle.spec_usedPlusMaintenance
+    if spec then
+        spec.engineReliability = 0.45
+        spec.hydraulicReliability = 0.5
+        spec.electricalReliability = 0.4
     end
 
     self:setStatus(string.format("Painted %s to beaten condition", self.vehicle:getName() or "vehicle"))
@@ -657,6 +719,13 @@ function AdminControlPanel:setCredit(targetScore)
     local farmId = g_currentMission:getFarmId()
 
     if CreditHistory then
+        -- TODO: This is a STUB implementation. Credit score is primarily calculated
+        -- from PaymentTracker statistics (on-time payments, streaks). Adding
+        -- CreditHistory events only provides small score adjustments (+2 to -5).
+        -- To properly manipulate credit scores, we need to modify PaymentTracker
+        -- data directly. For now, this approximates score changes but won't
+        -- reliably reach exact targets, especially high scores (750+).
+
         -- Get current score
         local currentScore = CreditScore.calculate(farmId)
         local diff = targetScore - currentScore
@@ -666,13 +735,13 @@ function AdminControlPanel:setCredit(targetScore)
             -- Need to increase score - add positive events
             local eventsNeeded = math.ceil(diff / 10)
             for i = 1, eventsNeeded do
-                CreditHistory.addEvent(farmId, "LOAN_PAID", targetScore)
+                CreditHistory.recordEvent(farmId, "LOAN_PAID", targetScore)
             end
         else
             -- Need to decrease score - add negative events
             local eventsNeeded = math.ceil(-diff / 5)
             for i = 1, eventsNeeded do
-                CreditHistory.addEvent(farmId, "LOAN_TAKEN", targetScore)
+                CreditHistory.recordEvent(farmId, "LOAN_TAKEN", targetScore)
             end
         end
 
@@ -717,6 +786,7 @@ function AdminControlPanel:onPayoffAllClick()
     if UsedPlus and UsedPlus.consoleCommandPayoffAll then
         local result = UsedPlus:consoleCommandPayoffAll()
         self:setStatus(result or "Paid off all deals")
+        self:updateFinanceInfo()
     else
         self:setStatus("Error: consoleCommandPayoffAll not found")
     end
@@ -731,6 +801,7 @@ function AdminControlPanel:onCreateLoanClick()
         -- Simple $50k test loan
         TakeLoanEvent.sendToServer(farmId, 50000, 5, 0.08, 1013.75, {})
         self:setStatus("Created $50,000 test loan")
+        self:updateFinanceInfo()
     else
         self:setStatus("Error: FinanceManager not available")
     end
@@ -745,7 +816,7 @@ function AdminControlPanel:onMissedPaymentClick()
     -- Force a missed payment
     if g_financeManager then
         local farmId = g_currentMission:getFarmId()
-        CreditHistory.addEvent(farmId, "MISSED_PAYMENT", 0)
+        CreditHistory.recordEvent(farmId, "PAYMENT_MISSED", 0)
         self:updateFinanceInfo()
         self:setStatus("Recorded missed payment (credit impact)")
     else
@@ -787,8 +858,7 @@ end
 
 function AdminControlPanel:onDlgCreditClick()
     self:close()
-    local farmId = g_currentMission:getFarmId()
-    DialogLoader.show("CreditReportDialog", "setFarmId", farmId)
+    DialogLoader.show("CreditReportDialog")
 end
 
 function AdminControlPanel:onDlgHistoryClick()
@@ -821,7 +891,7 @@ function AdminControlPanel:onDlgSearchClick()
         -- Find a vehicle
         for _, item in ipairs(storeItems) do
             if item.categoryName and string.find(item.categoryName, "TRACTOR") then
-                DialogLoader.show("UsedSearchDialog", "setStoreItem", item)
+                DialogLoader.show("UsedSearchDialog", "setData", item)
                 return
             end
         end
@@ -831,10 +901,31 @@ end
 
 function AdminControlPanel:onDlgPurchaseClick()
     self:close()
-    if self.vehicle then
-        DialogLoader.show("UnifiedPurchaseDialog", "setVehicle", self.vehicle)
-    else
+    if not self.vehicle then
         g_gui:showInfoDialog({text = "Need to be in a vehicle"})
+        return
+    end
+
+    -- Get store item for current vehicle
+    local xmlFilename = self.vehicle.configFileName
+    local storeItem = g_storeManager:getItemByXMLFilename(xmlFilename)
+
+    if storeItem then
+        -- Use static show() method with mock sale data
+        local price = storeItem.price or 100000
+        local saleItem = {
+            price = price,
+            storeItem = storeItem,
+            vehicle = self.vehicle
+        }
+
+        if UnifiedPurchaseDialog.show then
+            UnifiedPurchaseDialog.show(storeItem, price, saleItem, "cash")
+        else
+            DialogLoader.show("UnifiedPurchaseDialog", "setVehicleData", storeItem, price, saleItem, nil)
+        end
+    else
+        g_gui:showInfoDialog({text = "Could not find store item for current vehicle"})
     end
 end
 
@@ -854,7 +945,7 @@ end
 function AdminControlPanel:onDlgObdClick()
     self:close()
     if self.vehicle then
-        DialogLoader.show("FieldServiceKitDialog", "setVehicle", self.vehicle)
+        DialogLoader.show("FieldServiceKitDialog", "setData", self.vehicle, nil, "master")
     else
         g_gui:showInfoDialog({text = "Need to be in a vehicle"})
     end
@@ -868,10 +959,21 @@ end
 
 function AdminControlPanel:onDlgInspectClick()
     self:close()
-    if self.vehicle then
-        DialogLoader.show("InspectionReportDialog", "setVehicle", self.vehicle)
-    else
+    if not self.vehicle then
         g_gui:showInfoDialog({text = "Need to be in a vehicle"})
+        return
+    end
+
+    -- InspectionReportDialog requires listing data, not just vehicle
+    -- For testing purposes, create minimal mock listing
+    if InspectionReportDialog and InspectionReportDialog.show then
+        -- Try direct show() method
+        InspectionReportDialog.show(self.vehicle)
+    else
+        -- Show placeholder message for now
+        g_gui:showInfoDialog({
+            text = "Inspect Dialog requires inspection listing data. Use the used vehicle search system to generate a proper inspection report, or this test launcher needs a mock listing builder."
+        })
     end
 end
 
@@ -944,7 +1046,9 @@ function AdminControlPanel:onAddHoursClick()
 
     if self.vehicle.setOperatingTime then
         local currentHours = self.vehicle:getOperatingTime() or 0
-        local newHours = currentHours + (1000 * 60 * 60 * 1000)  -- 1000 hours in ms
+        local HOURS_TO_ADD = 1000
+        local MS_PER_HOUR = 3600000  -- 60 min × 60 sec × 1000 ms
+        local newHours = currentHours + (HOURS_TO_ADD * MS_PER_HOUR)
         self.vehicle:setOperatingTime(newHours)
         self:setStatus("Added 1000 operating hours")
     else
@@ -952,22 +1056,21 @@ function AdminControlPanel:onAddHoursClick()
     end
 end
 
-function AdminControlPanel:onDnaDesperateClick()
-    self.forcedSellerDNA = "desperate"
-    UsedPlus.forcedSellerDNA = "desperate"
-    self:setStatus("Next search: Forced DESPERATE seller DNA")
+-- ========== TAB 5: STATE - DNA FORCING (FIXED) ==========
+
+function AdminControlPanel:onDnaLemonClick()
+    UsedPlus.forcedDNA = 0.1  -- Force lemon DNA (low reliability)
+    self:setStatus("Next vehicle generation will use DNA 0.1 (LEMON)")
 end
 
-function AdminControlPanel:onDnaReasonableClick()
-    self.forcedSellerDNA = "reasonable"
-    UsedPlus.forcedSellerDNA = "reasonable"
-    self:setStatus("Next search: Forced REASONABLE seller DNA")
+function AdminControlPanel:onDnaAverageClick()
+    UsedPlus.forcedDNA = 0.5  -- Force average DNA (mid reliability)
+    self:setStatus("Next vehicle generation will use DNA 0.5 (AVERAGE)")
 end
 
-function AdminControlPanel:onDnaImmovableClick()
-    self.forcedSellerDNA = "immovable"
-    UsedPlus.forcedSellerDNA = "immovable"
-    self:setStatus("Next search: Forced IMMOVABLE seller DNA")
+function AdminControlPanel:onDnaWorkhorseClick()
+    UsedPlus.forcedDNA = 0.9  -- Force workhorse DNA (high reliability)
+    self:setStatus("Next vehicle generation will use DNA 0.9 (WORKHORSE)")
 end
 
 function AdminControlPanel:onNextVehicleClick()

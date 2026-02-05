@@ -247,10 +247,18 @@ end
     @param shopScreen - Reference to shop screen for vanilla buy flow (optional)
 ]]
 function UnifiedPurchaseDialog:setVehicleData(storeItem, price, saleItem, shopScreen)
-    self.storeItem = storeItem
-    self.vehiclePrice = price or 0
-    self.saleItem = saleItem
-    self.shopScreen = shopScreen  -- Store for vanilla buy flow
+    -- v2.11.0: Sync to BOTH self and context (bidirectional sync pattern)
+    self.context.storeItem = storeItem
+    self.storeItem = self.context.storeItem  -- Shadow field sync
+
+    self.context.vehiclePrice = price or 0
+    self.vehiclePrice = self.context.vehiclePrice  -- Shadow field sync
+
+    self.context.saleItem = saleItem
+    self.saleItem = self.context.saleItem  -- Shadow field sync
+
+    self.context.shopScreen = shopScreen  -- Store for vanilla buy flow
+    self.shopScreen = self.context.shopScreen  -- Shadow field sync
 
     -- Detect item type: vehicle or placeable
     -- Species 2 = PLACEABLE (covers all categories: SILOS, SHEDS, ANIMALS, etc.)
@@ -271,18 +279,27 @@ function UnifiedPurchaseDialog:setVehicleData(storeItem, price, saleItem, shopSc
         UsedPlus.logDebug(string.format("Dialog detected vehicle: %s (species=%s)",
             tostring(storeItem.name), tostring(storeItem.species)))
         -- Check if this is a used vehicle
+        -- v2.11.0: Sync to BOTH self and context (bidirectional sync pattern)
         if saleItem then
-            self.isUsedVehicle = true
-            self.usedCondition = saleItem.condition or 100
+            self.context.isUsedVehicle = true
+            self.isUsedVehicle = self.context.isUsedVehicle  -- Shadow field sync
+            self.context.usedCondition = saleItem.condition or 100
+            self.usedCondition = self.context.usedCondition  -- Shadow field sync
         else
-            self.isUsedVehicle = false
-            self.usedCondition = 100
+            self.context.isUsedVehicle = false
+            self.isUsedVehicle = self.context.isUsedVehicle  -- Shadow field sync
+            self.context.usedCondition = 100
+            self.usedCondition = self.context.usedCondition  -- Shadow field sync
         end
     end
 
     -- Use consolidated utility functions for vehicle name and category
-    self.vehicleName = UIHelper.Vehicle.getFullName(storeItem)
-    self.vehicleCategory = storeItem and UIHelper.Vehicle.getCategoryName(storeItem) or ""
+    -- v2.11.0: Sync to BOTH self and context (bidirectional sync pattern)
+    self.context.vehicleName = UIHelper.Vehicle.getFullName(storeItem)
+    self.vehicleName = self.context.vehicleName  -- Shadow field sync
+
+    self.context.vehicleCategory = storeItem and UIHelper.Vehicle.getCategoryName(storeItem) or ""
+    self.vehicleCategory = self.context.vehicleCategory  -- Shadow field sync
 
     -- Set item image - XML profile handles aspect ratio via imageSliceId="noSlice"
     if self.itemImage then
@@ -559,12 +576,9 @@ function UnifiedPurchaseDialog:onOpen()
 
     UnifiedPurchaseDialog:superClass().onOpen(self)
 
-    -- IMPORTANT FIX 2.1: Reset context to clear stale state from previous purchase
-    -- This prevents mode/term/down payment from persisting between purchases
-    if self.context and self.context.reset then
-        self.context:reset()
-        UsedPlus.logDebug("UnifiedPurchaseDialog: Context reset (cleared stale state)")
-    end
+    -- v2.11.0 FIX: DO NOT reset context in onOpen!
+    -- Context reset was clearing fresh data set by setVehicleData(), breaking purchases
+    -- Reset moved to close() where it belongs (clears stale data AFTER dialog use)
 
     -- Reset trade-in state in context
     TradeInHandler.setTradeIn(self.context, nil)
@@ -681,6 +695,13 @@ function UnifiedPurchaseDialog:close()
 
     UsedPlus.logInfo("║ UnifiedPurchaseDialog:close() EXIT - Calling superclass")
     UsedPlus.logInfo("╚════════════════════════════════════════════════════════════════")
+
+    -- v2.11.0: Reset context when dialog closes to clear stale state for next open
+    -- This prevents mode/term/down payment from persisting between purchases
+    if self.context and self.context.reset then
+        self.context:reset()
+        UsedPlus.logDebug("UnifiedPurchaseDialog:close() - Context reset (cleared stale state)")
+    end
 
     -- Call parent close
     UnifiedPurchaseDialog:superClass().close(self)

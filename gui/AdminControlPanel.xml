@@ -437,16 +437,16 @@
                 <!-- DNA Row -->
                 <GuiElement profile="acpButtonRow" position="0px -185px">
                     <Bitmap profile="acpButtonBg" position="-260px 0px"/>
-                    <Text profile="acpButtonText" position="-260px -8px" text="$l10n_usedplus_admin_btn_dna_desperate"/>
-                    <Button profile="acpButtonHit" id="btnDnaDesperate" position="-260px 0px" onClick="onDnaDesperateClick"/>
+                    <Text profile="acpButtonText" position="-260px -8px" text="$l10n_usedplus_admin_btn_dna_lemon"/>
+                    <Button profile="acpButtonHit" id="btnDnaLemon" position="-260px 0px" onClick="onDnaLemonClick"/>
 
                     <Bitmap profile="acpButtonBg" position="-130px 0px"/>
-                    <Text profile="acpButtonText" position="-130px -8px" text="$l10n_usedplus_admin_btn_dna_reasonable"/>
-                    <Button profile="acpButtonHit" id="btnDnaReasonable" position="-130px 0px" onClick="onDnaReasonableClick"/>
+                    <Text profile="acpButtonText" position="-130px -8px" text="$l10n_usedplus_admin_btn_dna_average"/>
+                    <Button profile="acpButtonHit" id="btnDnaAverage" position="-130px 0px" onClick="onDnaAverageClick"/>
 
                     <Bitmap profile="acpButtonBg" position="0px 0px"/>
-                    <Text profile="acpButtonText" position="0px -8px" text="$l10n_usedplus_admin_btn_dna_immovable"/>
-                    <Button profile="acpButtonHit" id="btnDnaImmovable" position="0px 0px" onClick="onDnaImmovableClick"/>
+                    <Text profile="acpButtonText" position="0px -8px" text="$l10n_usedplus_admin_btn_dna_workhorse"/>
+                    <Button profile="acpButtonHit" id="btnDnaWorkhorse" position="0px 0px" onClick="onDnaWorkhorseClick"/>
                 </GuiElement>
 
                 <!-- Quick Vehicle Section Header -->

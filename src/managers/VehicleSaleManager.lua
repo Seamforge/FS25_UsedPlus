@@ -472,10 +472,14 @@ function VehicleSaleManager:createSaleListing(farmId, vehicle, agentTier, priceT
         return nil
     end
 
-    -- Check vehicle is not financed
+    -- Check vehicle is not financed (v2.11.0: Added user-facing error message)
     if TradeInCalculations and TradeInCalculations.isVehicleFinanced then
         if TradeInCalculations.isVehicleFinanced(vehicle, farmId) then
             UsedPlus.logError("Cannot sell financed vehicle")
+            g_currentMission:addIngameNotification(
+                FSBaseMission.INGAME_NOTIFICATION_ERROR,
+                g_i18n:getText("usedplus_sell_cantSellFinanced") or "Cannot sell financed vehicles. Pay off balance first."
+            )
             return nil
         end
     end

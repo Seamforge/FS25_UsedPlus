@@ -52,6 +52,9 @@ function NegotiationDialog.new(target, customMt)
     -- v2.9.5: Icon directory for dynamic icons
     self.iconDir = UsedPlus.MOD_DIR .. "gui/icons/"
 
+    -- v2.11.0: Debouncing flag for cancel button
+    self.isClosing = false
+
     return self
 end
 
@@ -87,6 +90,9 @@ end
 ]]
 function NegotiationDialog:onOpen()
     NegotiationDialog:superClass().onOpen(self)
+
+    -- v2.11.0: Reset debounce flag for dialog reuse
+    self.isClosing = false
 
     -- v2.9.5: Setup section icons
     self:setupSectionIcons()
@@ -690,20 +696,34 @@ function NegotiationDialog:onClickSendOffer()
         return
     end
 
+    -- Cache values before closing (dialog state may be cleared)
+    local listing = self.listing
+    local search = self.search
+    local offerAmount = self.offerAmount
+    local askingPrice = self.askingPrice
+    local onOfferCallback = self.onOfferCallback
+    local callbackTarget = self.callbackTarget
+
     -- Close this dialog
     self:close()
 
-    -- Show seller response dialog via DialogLoader
-    DialogLoader.show("SellerResponseDialog", "setData",
-        self.listing,
-        self.search,
-        response,
-        self.offerAmount,
-        responseAmount,
-        self.askingPrice,
-        self.onOfferCallback,
-        self.callbackTarget
-    )
+    -- v2.11.0: Defer SellerResponseDialog open to next frame to ensure NegotiationDialog closes first
+    -- This prevents dialog stacking where both dialogs are visible at once
+    g_currentMission:addUpdateable({
+        update = function(self, dt)
+            g_currentMission:removeUpdateable(self)
+            DialogLoader.show("SellerResponseDialog", "setData",
+                listing,
+                search,
+                response,
+                offerAmount,
+                responseAmount,
+                askingPrice,
+                onOfferCallback,
+                callbackTarget
+            )
+        end
+    })
 end
 
 --[[
@@ -773,9 +793,18 @@ end
 
 --[[
     Cancel button click
+    v2.11.0: Added debouncing to prevent multi-fire
 ]]
 function NegotiationDialog:onClickCancel()
     UsedPlus.logDebug("NegotiationDialog:onClickCancel() CALLED")
+
+    -- Prevent double-clicks
+    if self.isClosing then
+        UsedPlus.logDebug("NegotiationDialog:onClickCancel() - already closing, ignoring")
+        return
+    end
+    self.isClosing = true
+
     self:close()
 end
 

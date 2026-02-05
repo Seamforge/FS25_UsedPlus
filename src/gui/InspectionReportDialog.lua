@@ -559,8 +559,10 @@ function InspectionReportDialog:onClickBuy()
     end
 
     -- Store current state for callback
-    local callback = self.onPurchaseCallback
-    local target = self.callbackTarget
+    -- CRITICAL FIX: Use originalPurchaseCallback (the REAL callback from UsedVehicleManager)
+    -- NOT self.onPurchaseCallback (which is the intermediate onInspectionComplete callback)
+    local callback = self.originalPurchaseCallback  -- FIXED: was self.onPurchaseCallback
+    local target = self.originalCallbackTarget      -- FIXED: was self.callbackTarget
     local search = self.search
 
     -- Close this dialog

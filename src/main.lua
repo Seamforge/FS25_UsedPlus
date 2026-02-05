@@ -45,6 +45,9 @@ function UsedPlus:initialize()
 
     UsedPlus.logInfo("Initializing mod...")
 
+    -- DNA override for admin panel testing (one-shot)
+    UsedPlus.forcedDNA = nil
+
     -- Create global managers (pattern from EnhancedLoanSystem)
     g_financeManager = FinanceManager.new()
 

@@ -146,6 +146,7 @@ end
 
 function ServiceTruck:onDelete()
     local spec = self[SPEC_NAME]
+    if spec == nil then return end  -- v2.11.0: Guard against missing specialization
 
     -- Release any target vehicle
     if spec.restorationData ~= nil and spec.restorationData.targetVehicle ~= nil then
