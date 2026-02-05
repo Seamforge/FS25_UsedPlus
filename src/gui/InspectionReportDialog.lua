@@ -578,12 +578,10 @@ function InspectionReportDialog:onClickBuy()
             completedListing.price = finalPrice
 
             -- Call original callback to complete purchase
+            -- v2.11.0 FIX: VehicleSpawning callback expects (confirmed, listing), not (target, confirmed, listing)
+            -- The callback signature is: function(confirmed, resultListing)
             if callback then
-                if target then
-                    callback(target, true, completedListing)
-                else
-                    callback(true, completedListing)
-                end
+                callback(true, completedListing)
             end
         end
     end
