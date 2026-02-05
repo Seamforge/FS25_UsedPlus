@@ -28,7 +28,7 @@
 ---
 
 <p align="center">
-  <img src="screenshots/used_plus_finances.png" alt="Finance Manager Dashboard - Your Central Hub" width="95%">
+  <img src="screenshots/used_plus_finances_zoomed.png" alt="Finance Manager Dashboard - Your Central Hub" width="95%">
 </p>
 
 <p align="center">
