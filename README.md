@@ -214,7 +214,7 @@ Every function, every dialog, every network event, every XML layout - all genera
 - **11 vehicle specializations** for maintenance systems
 - **13 utility/helper modules** for shared logic
 - **17 development tools** for validation & stats
-- **1,954 localization keys** translated to 25 languages (24 at 100%)
+- **1,954 localization keys** translated to 25 languages
 - **4 months development** (November 2025 - February 2026)
 
 <details>
@@ -295,11 +295,9 @@ We believe this is one of the most ambitious AI-human collaborative software pro
 
 ## 🌍 Languages
 
-UsedPlus supports **25 languages** with **1,954 translation keys**:
+UsedPlus supports **25 languages** with **1,954 translation keys** each:
 
-✅ **Complete (100% - 24 languages):** English (en), German (de), French (fr), French Canadian (fc), Spanish (es), Spanish LatAm (ea), Italian (it), Portuguese (pt), Portuguese BR (br), Polish (pl), Czech (cz), Russian (ru), Ukrainian (uk), Dutch (nl), Hungarian (hu), Turkish (tr), Japanese (jp), Danish (da), Indonesian (id), Norwegian (no), Romanian (ro), Swedish (sv), Vietnamese (vi), Finnish (fi), Chinese Traditional (ct)
-
-⚠️ **Partial (73%):** Korean (kr) - 1,432/1,954 keys translated (community contributions welcome!)
+English (en) • German (de) • French (fr) • French Canadian (fc) • Spanish (es) • Spanish LatAm (ea) • Italian (it) • Portuguese (pt) • Portuguese BR (br) • Polish (pl) • Czech (cz) • Russian (ru) • Ukrainian (uk) • Dutch (nl) • Hungarian (hu) • Turkish (tr) • Japanese (jp) • Korean (kr) • Danish (da) • Indonesian (id) • Norwegian (no) • Romanian (ro) • Swedish (sv) • Vietnamese (vi) • Finnish (fi) • Chinese Traditional (ct)
 
 All translations are AI-generated using Claude. If you notice issues, please [report them](https://github.com/XelaNull/FS25_UsedPlus/issues)!
 
