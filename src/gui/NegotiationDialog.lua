@@ -141,6 +141,10 @@ end
 ]]
 function NegotiationDialog:onClose()
     NegotiationDialog:superClass().onClose(self)
+
+    -- v2.11.0: Reset debouncing flag when dialog actually closes
+    -- This allows the dialog to be reopened and closed again properly
+    self.isClosing = false
 end
 
 --[[
