@@ -36,6 +36,11 @@
   <sub><em>Manage loans, leases, credit score, used vehicle searches, and vehicle sales—all in one unified interface</em></sub>
 </p>
 
+<p align="center">
+  📸 <a href="https://github.com/XelaNull/FS25_UsedPlus/wiki/Gallery"><strong>View Full Screenshot Gallery (23 images)</strong></a> •
+  📚 <a href="https://github.com/XelaNull/FS25_UsedPlus/wiki"><strong>Explore the Wiki</strong></a>
+</p>
+
 ---
 
 > ⚠️ **STATUS: Development Preview** — No official release yet. Core features (vehicle financing, **building financing**, leasing, credit, marketplace, trade-ins) fully functional. **NEW v2.10.0:** First-of-its-kind building/placeable financing! **Work in Progress:** Malfunctions and Service Truck under active development. Try it via `git clone` or download ZIP (see Installation).
