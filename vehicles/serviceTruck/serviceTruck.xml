@@ -39,7 +39,7 @@
 
     <base>
         <typeDesc>$l10n_usedplus_serviceTruck_typeDesc</typeDesc>
-        <filename>C7000.i3d</filename>
+        <filename>vehicles/serviceTruck/C7000.i3d</filename>
         <size width="2.5" length="5" height="3.85"/>
         <sounds filename="$data/vehicles/international/transtarII/sounds/transtarII.xml" volumeFactor="0.35"/>
         <components count="1">
@@ -91,19 +91,19 @@
         <wheelConfigurations>
             <wheelConfiguration name="Stock">
                 <wheels autoRotateBackSpeed="2.1">
-                    <wheel filename="wheels/wheels1.xml" configId="rim2Front" isLeft="true" hasTireTracks="true" hasParticles="true">
+                    <wheel filename="vehicles/serviceTruck/wheels/wheels1.xml" configId="rim2Front" isLeft="true" hasTireTracks="true" hasParticles="true">
                         <physics rotSpeed="1" restLoad="2.3" repr="wheelFrontLeft" forcePointRatio="0.4" initialCompression="35" suspTravel="0.17" spring="35" damper="40" frictionScale="2.0" yOffset="0.0125"/>
                     </wheel>
-                    <wheel filename="wheels/wheels1.xml" configId="rim2Front" isLeft="false" hasTireTracks="true" hasParticles="true">
+                    <wheel filename="vehicles/serviceTruck/wheels/wheels1.xml" configId="rim2Front" isLeft="false" hasTireTracks="true" hasParticles="true">
                         <physics rotSpeed="1" restLoad="2.3" repr="wheelFrontRight" forcePointRatio="0.4" initialCompression="35" suspTravel="0.17" spring="35" damper="40" frictionScale="2.0" yOffset="0.0125"/>
                     </wheel>
-                    <wheel filename="wheels/wheels1.xml" configId="dual" isLeft="true" hasTireTracks="true" hasParticles="true">
+                    <wheel filename="vehicles/serviceTruck/wheels/wheels1.xml" configId="dual" isLeft="true" hasTireTracks="true" hasParticles="true">
                         <physics rotSpeed="0" restLoad="1.1" repr="wheelBackLeft" forcePointRatio="0.2" initialCompression="15" suspTravel="0.08" spring="72" damper="250" frictionScale="2.2" yOffset="-0.041"/>
-                        <additionalWheel filename="wheels/wheels1.xml" configId="dual2" isLeft="true" offset="-0.66"/>
+                        <additionalWheel filename="vehicles/serviceTruck/wheels/wheels1.xml" configId="dual2" isLeft="true" offset="-0.66"/>
                     </wheel>
-                    <wheel filename="wheels/wheels1.xml" configId="dual" isLeft="false" hasTireTracks="true" hasParticles="true">
+                    <wheel filename="vehicles/serviceTruck/wheels/wheels1.xml" configId="dual" isLeft="false" hasTireTracks="true" hasParticles="true">
                         <physics rotSpeed="0" restLoad="1.1" repr="wheelBackRight" forcePointRatio="0.2" initialCompression="15" suspTravel="0.08" spring="72" damper="250" frictionScale="2.2" yOffset="-0.041"/>
-                        <additionalWheel filename="wheels/wheels1.xml" configId="dual2" isLeft="false" offset="-0.67"/>
+                        <additionalWheel filename="vehicles/serviceTruck/wheels/wheels1.xml" configId="dual2" isLeft="false" offset="-0.67"/>
                     </wheel>
                 </wheels>
             </wheelConfiguration>
@@ -380,6 +380,19 @@
         <baseColorConfiguration materialTemplateName="SKODA_MOON_WHITE" isDefault="true"/>
         <material materialSlotName="Paint"/>
     </baseColorConfigurations>
+
+    <baseColor2Configurations title="$l10n_configuration_bodyColor" useDefaultColors="true">
+        <baseColor2Configuration materialTemplateName="SKODA_ENERGY_BLUE"/>
+        <baseColor2Configuration materialTemplateName="SKODA_STEEL_GREY"/>
+        <baseColor2Configuration materialTemplateName="SKODA_VELVET_RED_METALLIC"/>
+        <baseColor2Configuration materialTemplateName="SKODA_GRAPHITE_GREY_METALLIC"/>
+        <baseColor2Configuration materialTemplateName="SKODA_BRILLIANT_SILVER_METALLIC"/>
+        <baseColor2Configuration materialTemplateName="SKODA_RACE_BLUE_METALLIC"/>
+        <baseColor2Configuration materialTemplateName="SKODA_GOLD_BRONZE"/>
+        <baseColor2Configuration materialTemplateName="SKODA_BLACK_MAGIC"/>
+        <baseColor2Configuration materialTemplateName="SKODA_MOON_WHITE" isDefault="true"/>
+        <material materialSlotName="Doors"/>
+    </baseColor2Configurations>
 
     <rimColorConfigurations useDefaultColors="true">
         <rimColorConfiguration materialTemplateName="RIM_CONFIGURATION_CHROME" price="1000"/>

@@ -97,7 +97,7 @@
             <!-- SECTION 5: Expiration Warning (v2.9.5: timer icon) -->
             <!-- ================================================================ -->
             <GuiElement position="0px -480px">
-                <Bitmap profile="soTimerIcon" id="timerIcon" position="-90px -5px"/>
+                <Bitmap profile="soTimerIcon" id="timerIcon" position="-125px -5px"/>
                 <Text profile="soExpirationLabel" position="0px 0px" text="$l10n_usedplus_so_expiresIn"/>
                 <Text profile="soExpirationValue" id="expirationText" position="100px 0px"/>
             </GuiElement>

@@ -3,33 +3,33 @@
     <default>
 		<physics radius="0.575" width="0.3302" mass="0.115" tireType="offRoad" frictionScale="1.60" maxLongStiffness="8" maxLatStiffness="100" maxLatStiffnessLoad="2" />
         <tire filename="$data/shared/wheels/tires/continental/contiCrossTracHS3/_13R22_5.i3d" nodeLeft="0|0" nodeRight="0|0" maxDeformation="0.02" tireTrackAtlasIndex="4" hasMudMesh="true" />
-		<!-- <innerRim filename="wheels/wheels1.i3d" nodeLeft="0|1" nodeRight="0|3" />		 -->
+		<!-- <innerRim filename="vehicles/serviceTruck/wheels/wheels1.i3d" nodeLeft="0|1" nodeRight="0|3" />		 -->
     </default>
     <configurations>	
 		<configuration id="rim2Front" >
         <tire filename="$data/shared/wheels/tires/continental/contiCrossTracHS3/_13R22_5.i3d" nodeLeft="0|0" nodeRight="0|0" maxDeformation="0.02" tireTrackAtlasIndex="4" hasMudMesh="true" />
-			<innerRim filename="wheels/wheels1.i3d" nodeLeft="1|1" nodeRight="1|0" />			
+			<innerRim filename="vehicles/serviceTruck/wheels/wheels1.i3d" nodeLeft="1|1" nodeRight="1|0" />			
         </configuration>
 		<configuration id="rim3Front" >
         <tire filename="$data/shared/wheels/tires/continental/contiCrossTracHS3/_13R22_5.i3d" nodeLeft="0|0" nodeRight="0|0" maxDeformation="0.02" tireTrackAtlasIndex="4" hasMudMesh="true" />
-			<innerRim filename="wheels/wheels1.i3d" nodeLeft="1|5" nodeRight="1|4" />			
+			<innerRim filename="vehicles/serviceTruck/wheels/wheels1.i3d" nodeLeft="1|5" nodeRight="1|4" />			
         </configuration>
 		<configuration id="rim4Front" >
         <tire filename="$data/shared/wheels/tires/continental/contiCrossTracHS3/_13R22_5.i3d" nodeLeft="0|0" nodeRight="0|0" maxDeformation="0.02" tireTrackAtlasIndex="4" hasMudMesh="true" />
-			<innerRim filename="wheels/wheels1.i3d" nodeLeft="1|7" nodeRight="1|6" />			
+			<innerRim filename="vehicles/serviceTruck/wheels/wheels1.i3d" nodeLeft="1|7" nodeRight="1|6" />			
         </configuration>
 		<configuration id="dual" >
             <tire filename="$data/shared/wheels/tires/continental/contiCrossTracHS3/_13R22_5.i3d" nodeLeft="0|0" nodeRight="0|0" maxDeformation="0.02" tireTrackAtlasIndex="4" hasMudMesh="true" />
-			<innerRim filename="wheels/wheels1.i3d" nodeLeft="2|0" nodeRight="2|1" />			
+			<innerRim filename="vehicles/serviceTruck/wheels/wheels1.i3d" nodeLeft="2|0" nodeRight="2|1" />			
         </configuration>
 		<configuration id="dual3" >
             <tire filename="$data/shared/wheels/tires/continental/contiCrossTracHS3/_13R22_5.i3d" nodeLeft="0|0" nodeRight="0|0" maxDeformation="0.02" tireTrackAtlasIndex="4" hasMudMesh="true" />
-			<innerRim filename="wheels/wheels1.i3d" nodeLeft="2|2" nodeRight="2|3" />			
+			<innerRim filename="vehicles/serviceTruck/wheels/wheels1.i3d" nodeLeft="2|2" nodeRight="2|3" />			
         </configuration>		
 		<configuration id="superSingleFront" >
 			<physics radius="0.575" width="0.3502" mass="0.15" tireType="offRoad" frictionScale="1.60" maxLongStiffness="8" maxLatStiffness="100" maxLatStiffnessLoad="2" />
-			<tire filename="wheels/wheels1.i3d" nodeLeft="0|0" nodeRight="0|0" maxDeformation="0.02" tireTrackAtlasIndex="1" hasMudMesh="true"/>
-			<innerRim filename="wheels/wheels1.i3d" nodeLeft="1|3" nodeRight="1|2" />			
+			<tire filename="vehicles/serviceTruck/wheels/wheels1.i3d" nodeLeft="0|0" nodeRight="0|0" maxDeformation="0.02" tireTrackAtlasIndex="1" hasMudMesh="true"/>
+			<innerRim filename="vehicles/serviceTruck/wheels/wheels1.i3d" nodeLeft="1|3" nodeRight="1|2" />			
         </configuration>
 		<configuration id="dual2" >
             <tire filename="$data/shared/wheels/tires/continental/contiCrossTracHS3/_13R22_5.i3d" nodeLeft="0|0" nodeRight="0|0" maxDeformation="0.02" tireTrackAtlasIndex="4" hasMudMesh="true" />		

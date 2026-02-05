@@ -579,12 +579,24 @@ function VehicleSaleManager:acceptOffer(listingId)
     -- Accept the offer (updates listing status)
     listing:acceptOffer()
 
-    -- Find and delete the vehicle
-    local vehicleDeleted = self:deleteVehicleById(vehicleId)
-    if not vehicleDeleted then
-        UsedPlus.logWarn(string.format("Could not find vehicle to delete for listing %s", listingId))
-        -- Continue anyway - money should still be credited
-    end
+    -- v2.11.0: Defer vehicle deletion to next frame to prevent GUI event queue conflicts
+    -- Issue: If vehicle is deleted immediately, pending mouse events may still reference it
+    -- causing FSBaseMission.lua:2472 "attempt to index nil with 'id'" crash
+    -- Solution: Schedule deletion for next frame after GUI events are processed
+    local vehicleIdToDelete = vehicleId
+    local listingIdForLog = listingId
+
+    g_currentMission:addUpdateable({
+        update = function(self, dt)
+            -- Delete the vehicle on next frame
+            local vehicleDeleted = g_vehicleSaleManager:deleteVehicleById(vehicleIdToDelete)
+            if not vehicleDeleted then
+                UsedPlus.logWarn(string.format("Could not find vehicle to delete for listing %s", listingIdForLog))
+            end
+            -- Remove this updateable after one execution
+            g_currentMission:removeUpdateable(self)
+        end
+    })
 
     -- Credit NET sale price to farm (after agent commission)
     g_currentMission:addMoney(netSalePrice, farmId, MoneyType.VEHICLE_SELL, true, true)

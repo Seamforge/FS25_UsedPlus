@@ -622,6 +622,13 @@
       <Custommap name="detailNormal" fileId="42"/>
       <Custommap name="detailDiffuse" fileId="43"/>
     </Material>
+    <Material name="bodyPaintMat" materialId="168" diffuseColor="0.8 0.8 0.8 1" customShaderId="40">
+      <Normalmap fileId="4"/>
+      <Glossmap fileId="23"/>
+      <Custommap name="detailSpecular" fileId="41"/>
+      <Custommap name="detailNormal" fileId="42"/>
+      <Custommap name="detailDiffuse" fileId="43"/>
+    </Material>
     <Material name="oiler_mat" materialId="158">
       <Texture fileId="147"/>
       <Normalmap fileId="148"/>
@@ -1031,7 +1038,7 @@
             <TransformGroup name="Doors" translation="2.03727 -0.0103634 1.27323" rotation="-90 2.23118e-05 -90" scale="1 1 1.00806" nodeId="713">
               <TransformGroup name="Door1" translation="1.29327 1.039 -0.812" rotation="1.35802e-05 -9.57979e-08 -5.1151e-05" scale="1.01788 1 1" nodeId="714">
                 <Shape name="Cube.053" translation="0.000369549 -0.000159979 -0.0404362" rotation="-90 1.00179e-05 180" shapeId="157" nodeId="715" castsShadows="true" receiveShadows="true" materialIds="90"/>
-                <Shape name="Cube.057" translation="0.00267053 0.06312 -0.452188" rotation="-90 1.00179e-05 180" shapeId="158" nodeId="716" castsShadows="true" receiveShadows="true" materialIds="88"/>
+                <Shape name="Cube.057" translation="0.00267053 0.06312 -0.452188" rotation="-90 1.00179e-05 180" shapeId="158" nodeId="716" castsShadows="true" receiveShadows="true" materialIds="168"/>
                 <TransformGroup name="transform" translation="0.0219332 0.0619539 -0.496126" rotation="-3.64253e-06 1.79091e-07 -3.55296e-06" scale="0.982437 1 1" nodeId="717"/>
                 <TransformGroup name="WAGNA1" translation="-0.000265241 0 1.95911e-08" rotation="-8.61132e-06 1.38307e-07 2.42563e-05" scale="0.982434 1 1" nodeId="718">
                   <Shape name="Cube.028" translation="0.00607157 -0.444671 -0.172076" rotation="-90 9.84042e-06 180" scale="1.01804 1 1" shapeId="159" nodeId="719" castsShadows="true" receiveShadows="true" materialIds="156"/>
@@ -1040,7 +1047,7 @@
               </TransformGroup>
               <TransformGroup name="Door2" translation="1.29327 1.039 -1.41158" rotation="8.61135e-06 -1.35873e-07 -2.38302e-05" scale="1.01788 1 1" nodeId="721">
                 <Shape name="d" translation="0.000369549 -0.000159979 -0.0404362" rotation="-90 1.00179e-05 180" shapeId="157" nodeId="722" castsShadows="true" receiveShadows="true" materialIds="90"/>
-                <Shape name="Cube.057" translation="0.00267053 0.06312 -0.452188" rotation="-90 1.00179e-05 180" shapeId="158" nodeId="723" castsShadows="true" receiveShadows="true" materialIds="88"/>
+                <Shape name="Cube.057" translation="0.00267053 0.06312 -0.452188" rotation="-90 1.00179e-05 180" shapeId="158" nodeId="723" castsShadows="true" receiveShadows="true" materialIds="168"/>
                 <TransformGroup name="transform" translation="0.022 0.0619539 -0.496126" rotation="-3.64253e-06 1.79091e-07 -3.55296e-06" scale="0.982437 1 1" nodeId="724"/>
                 <TransformGroup name="WAGNA2" translation="-0.000265241 0 -0.000419925" rotation="-3.64247e-06 1.79092e-07 -3.55297e-06" scale="0.982434 1 1" nodeId="725">
                   <Shape name="Cube.031" translation="0.00194883 0.439451 -0.103499" rotation="-90 9.84042e-06 180" scale="1.01804 1 1" shapeId="161" nodeId="726" castsShadows="true" receiveShadows="true" materialIds="156"/>
@@ -1049,7 +1056,7 @@
               </TransformGroup>
               <TransformGroup name="Door3" translation="1.29327 1.07248 -2.65059" rotation="8.61135e-06 -1.35873e-07 -2.38302e-05" scale="1.01788 1 1" nodeId="728">
                 <Shape name="Cube.059" translation="0.000370026 0.0414398 0.000199962" rotation="-90 1.00179e-05 180" shapeId="163" nodeId="729" castsShadows="true" receiveShadows="true" materialIds="90"/>
-                <Shape name="Cube.060" translation="0.00267029 0.45988 -0.000330307" rotation="-90 1.00179e-05 180" shapeId="164" nodeId="730" castsShadows="true" receiveShadows="true" materialIds="88"/>
+                <Shape name="Cube.060" translation="0.00267029 0.45988 -0.000330307" rotation="-90 1.00179e-05 180" shapeId="164" nodeId="730" castsShadows="true" receiveShadows="true" materialIds="168"/>
                 <TransformGroup name="transform" translation="0.022 0.483412 0.0026926" rotation="-8.61139e-06 1.38305e-07 2.42563e-05" scale="0.982437 1 1" nodeId="731"/>
                 <TransformGroup name="WAGNA3" translation="-0.000265241 -0.000479937 -0.000410152" rotation="-3.64247e-06 1.79092e-07 -3.55297e-06" scale="0.982434 1 1" nodeId="732">
                   <Shape name="Cube.018" translation="0.00333321 0.421981 -0.0192122" rotation="-90 9.84042e-06 180" scale="1.01804 1 1" shapeId="165" nodeId="733" castsShadows="true" receiveShadows="true" materialIds="155"/>
@@ -1058,7 +1065,7 @@
               </TransformGroup>
               <TransformGroup name="Door4" translation="1.29327 1.039 -3.32909" rotation="8.61135e-06 -1.35873e-07 -2.38302e-05" scale="1.01788 1 1" nodeId="735">
                 <Shape name="Cube.062" translation="0.000370026 -0.000159979 -0.0420571" rotation="-90 1.00179e-05 180" shapeId="167" nodeId="736" castsShadows="true" receiveShadows="true" materialIds="90"/>
-                <Shape name="Cube.063" translation="0.00267029 0.06312 -0.453807" rotation="-90 1.00179e-05 180" shapeId="168" nodeId="737" castsShadows="true" receiveShadows="true" materialIds="88"/>
+                <Shape name="Cube.063" translation="0.00267029 0.06312 -0.453807" rotation="-90 1.00179e-05 180" shapeId="168" nodeId="737" castsShadows="true" receiveShadows="true" materialIds="168"/>
                 <TransformGroup name="transform" translation="0.022 0.0302317 -0.532398" rotation="-3.64253e-06 1.79091e-07 -3.55295e-06" scale="0.982437 1 1" nodeId="738"/>
                 <TransformGroup name="WAGNA4" translation="-0.000265241 0 9.00522e-05" rotation="-3.64247e-06 1.79092e-07 -3.55297e-06" scale="0.982434 1 1" nodeId="739">
                   <Shape name="Cube.017" translation="0.0015415 0.425241 -0.0480647" rotation="-90 9.84042e-06 180" scale="1.01804 1 1" shapeId="169" nodeId="740" castsShadows="true" receiveShadows="true" materialIds="155"/>
@@ -1067,7 +1074,7 @@
               </TransformGroup>
               <TransformGroup name="DoorSERVICE" translation="-1.31555 1.039 -0.809963" rotation="8.61135e-06 -1.35873e-07 -2.38302e-05" scale="1.01788 1 1" nodeId="742">
                 <Shape name="Cube.050" translation="5.98431e-05 -0.000159979 -0.0418254" rotation="-90 1.00179e-05 180" shapeId="171" nodeId="743" castsShadows="true" receiveShadows="true" materialIds="90"/>
-                <Shape name="Cube.051" translation="-0.00223017 0.0631199 -0.453575" rotation="-90 1.00179e-05 180" shapeId="172" nodeId="744" castsShadows="true" receiveShadows="true" materialIds="88"/>
+                <Shape name="Cube.051" translation="-0.00223017 0.0631199 -0.453575" rotation="-90 1.00179e-05 180" shapeId="172" nodeId="744" castsShadows="true" receiveShadows="true" materialIds="168"/>
                 <TransformGroup name="transform" translation="-0.022 0.0616716 -0.499306" rotation="-180 -9.75194e-08 -180" scale="0.982437 1 1" nodeId="745"/>
                 <TransformGroup name="WAGNA5" translation="-0.000442147 0 -3.70169e-05" rotation="-3.64247e-06 1.79092e-07 -3.55297e-06" scale="0.982434 1 1" nodeId="746">
                   <Shape name="Cube.014" translation="0.000175238 0.425252 -0.0477058" rotation="-90 9.84042e-06 180" scale="1.01804 1 1" shapeId="173" nodeId="747" castsShadows="true" receiveShadows="true" materialIds="155"/>
@@ -1076,7 +1083,7 @@
               </TransformGroup>
               <TransformGroup name="Door6" translation="-1.31555 1.039 -1.41158" rotation="8.61135e-06 -1.35873e-07 -2.38302e-05" scale="1.01788 1 1" nodeId="749">
                 <Shape name="Cube.047" translation="5.98431e-05 -0.000159979 -0.0404356" rotation="-90 1.00179e-05 180" shapeId="175" nodeId="750" castsShadows="true" receiveShadows="true" materialIds="90"/>
-                <Shape name="Cube.048" translation="-0.00222993 0.06312 -0.452188" rotation="-90 1.00179e-05 180" shapeId="176" nodeId="751" castsShadows="true" receiveShadows="true" materialIds="88"/>
+                <Shape name="Cube.048" translation="-0.00222993 0.06312 -0.452188" rotation="-90 1.00179e-05 180" shapeId="176" nodeId="751" castsShadows="true" receiveShadows="true" materialIds="168"/>
                 <TransformGroup name="transform" translation="-0.00133479 0.0332304 -0.443568" rotation="-3.64252e-06 1.79091e-07 -3.553e-06" scale="0.982437 1 1" nodeId="752"/>
                 <TransformGroup name="WAGNA6" translation="-0.000442147 0 -0.000419917" rotation="-3.64247e-06 1.79092e-07 -3.55297e-06" scale="0.982434 1 1" nodeId="753">
                   <Shape name="Cube.009" translation="0.000175238 0.425242 -0.0459386" rotation="-90 9.84042e-06 180" scale="1.01804 1 1" shapeId="177" nodeId="754" castsShadows="true" receiveShadows="true" materialIds="155"/>
@@ -1085,7 +1092,7 @@
               </TransformGroup>
               <TransformGroup name="Door7" translation="-1.31555 1.07041 -2.65392" rotation="-2.246e-06 -8.31317e-06 0" scale="1.01788 1 1" nodeId="756">
                 <Shape name="Cube.040" translation="5.98431e-05 0.0435078 0.00353711" rotation="-90 1.00179e-05 180" shapeId="179" nodeId="757" castsShadows="true" receiveShadows="true" materialIds="90"/>
-                <Shape name="Cube.042" translation="-0.00223017 0.461948 0.00300684" rotation="-90 1.00179e-05 180" shapeId="180" nodeId="758" castsShadows="true" receiveShadows="true" materialIds="88"/>
+                <Shape name="Cube.042" translation="-0.00223017 0.461948 0.00300684" rotation="-90 1.00179e-05 180" shapeId="180" nodeId="758" castsShadows="true" receiveShadows="true" materialIds="168"/>
                 <TransformGroup name="transform" translation="-0.022 0.484708 -0.0281821" rotation="-3.64253e-06 1.79091e-07 -3.55296e-06" scale="0.982437 1 1" nodeId="759"/>
                 <TransformGroup name="WAGNA7" translation="-0.000442147 0.00656164 0.00818222" rotation="-3.64247e-06 1.79092e-07 -3.55297e-06" scale="0.982434 1 1" nodeId="760">
                   <Shape name="Cube.039" translation="-0.00161648 0.417011 -0.0244746" rotation="-90 9.84042e-06 180" scale="1.01804 1 1" shapeId="181" nodeId="761" castsShadows="true" receiveShadows="true" materialIds="156"/>
@@ -1093,7 +1100,7 @@
                 </TransformGroup>
               </TransformGroup>
               <TransformGroup name="Door8" translation="-1.31555 1.039 -3.33072" rotation="8.61135e-06 -1.35873e-07 -2.38302e-05" scale="1.01788 1 1" nodeId="763">
-                <Shape name="Cube.045" translation="-0.00223017 0.06312 -0.452177" rotation="-90 1.00179e-05 180" shapeId="183" nodeId="764" castsShadows="true" receiveShadows="true" materialIds="88"/>
+                <Shape name="Cube.045" translation="-0.00223017 0.06312 -0.452177" rotation="-90 1.00179e-05 180" shapeId="183" nodeId="764" castsShadows="true" receiveShadows="true" materialIds="168"/>
                 <Shape name="Cube.044" translation="6.00815e-05 -0.000159979 -0.0404268" rotation="-90 1.00179e-05 180" shapeId="184" nodeId="765" castsShadows="true" receiveShadows="true" materialIds="90"/>
                 <TransformGroup name="transform" translation="-0.022 0.0583047 -0.494396" rotation="-3.64253e-06 1.79091e-07 -3.55296e-06" scale="0.982437 1 1" nodeId="766"/>
                 <TransformGroup name="WAGNA8" translation="-0.000442147 0 0.00877922" rotation="-3.64247e-06 1.79092e-07 -3.55297e-06" scale="0.982434 1 1" nodeId="767">
@@ -1113,14 +1120,14 @@
             <Shape name="doorhandle3.001" translation="-1.96539 0.0185703 -0.253623" rotation="-1.36604e-05 4.45112e-12 1.36604e-05" scale="0.26116 0.512078 0.367619" shapeId="193" nodeId="777" castsShadows="true" receiveShadows="true" materialIds="132"/>
             <Shape name="fender_detail" translation="-1.36106 0.0018179 0.988353" rotation="-7.26534 1.86693e-05 90" scale="0.8748 0.863427 0.863427" shapeId="194" nodeId="778" castsShadows="true" receiveShadows="true" materialIds="125"/>
             <TransformGroup name="transform" translation="1.23125 3.68092 1.59823" rotation="-90 1.00179e-05 90" scale="1.01788 1 1.00806" nodeId="779">
-              <Shape name="Cube.021" translation="-2.32283 2.27782 1.70544" rotation="90 -0 0" shapeId="195" nodeId="780" castsShadows="false" receiveShadows="false" materialIds="88"/>
-              <Shape name="Cube.022" translation="-2.32283 2.27782 0.579915" rotation="90 -0 0" shapeId="196" nodeId="781" castsShadows="false" receiveShadows="false" materialIds="88"/>
+              <Shape name="Cube.021" translation="-2.32283 2.27782 1.70544" rotation="90 -0 0" shapeId="195" nodeId="780" castsShadows="false" receiveShadows="false" materialIds="168"/>
+              <Shape name="Cube.022" translation="-2.32283 2.27782 0.579915" rotation="90 -0 0" shapeId="196" nodeId="781" castsShadows="false" receiveShadows="false" materialIds="168"/>
               <Shape name="Cube.065" translation="-4.90728 2.09764 1.70508" rotation="90 -0 0" shapeId="197" nodeId="782" castsShadows="false" receiveShadows="false" materialIds="90"/>
               <Shape name="Cube.066" translation="-4.90728 2.09764 0.579553" rotation="90 -0 0" shapeId="198" nodeId="783" castsShadows="false" receiveShadows="false" materialIds="90"/>
               <Shape name="Cube.067" translation="-2.32416 2.09764 0.579553" rotation="90 -0 0" shapeId="199" nodeId="784" castsShadows="false" receiveShadows="false" materialIds="90"/>
               <Shape name="Cube.068" translation="-2.324 2.098 1.70601" rotation="-90 -1.01563e-05 180" shapeId="199" nodeId="785" castsShadows="false" receiveShadows="false" materialIds="90"/>
-              <Shape name="Cube.008" translation="-4.90861 2.27782 1.70544" rotation="90 8.14222e-13 -6.15707e-14" shapeId="200" nodeId="786" castsShadows="false" receiveShadows="false" materialIds="88"/>
-              <Shape name="Cube.010" translation="-4.90861 2.27782 0.579917" rotation="90 8.14222e-13 -6.15707e-14" shapeId="201" nodeId="787" castsShadows="false" receiveShadows="false" materialIds="88"/>
+              <Shape name="Cube.008" translation="-4.90861 2.27782 1.70544" rotation="90 8.14222e-13 -6.15707e-14" shapeId="200" nodeId="786" castsShadows="false" receiveShadows="false" materialIds="168"/>
+              <Shape name="Cube.010" translation="-4.90861 2.27782 0.579917" rotation="90 8.14222e-13 -6.15707e-14" shapeId="201" nodeId="787" castsShadows="false" receiveShadows="false" materialIds="168"/>
             </TransformGroup>
             <Shape name="headlamplamp_glass_white_b1.000" translation="-1.9063 0.00526023 -0.538767" rotation="-3.99999 1.86693e-05 90" scale="1.03301 1.04381 1.11614" shapeId="202" nodeId="788" castsShadows="true" receiveShadows="true" materialIds="130"/>
             <Shape name="Cube.027" translation="-0.278964 0.000555598 -0.0636189" rotation="9.93777e-06 1.00179e-05 90" scale="1.01788 1.00806 1" shapeId="203" nodeId="789" castsShadows="true" receiveShadows="true" materialIds="90"/>

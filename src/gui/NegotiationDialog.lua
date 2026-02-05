@@ -814,9 +814,12 @@ end
 
 --[[
     Close the dialog
+    v2.11.0: Use closeDialogByName instead of closeDialog(self)
+    closeDialog(self) may fail silently if dialog is in certain state,
+    preventing onClose() from firing and leaving isClosing flag stuck
 ]]
 function NegotiationDialog:close()
-    g_gui:closeDialog(self)
+    g_gui:closeDialogByName("NegotiationDialog")
 end
 
 UsedPlus.logInfo("NegotiationDialog loaded (v2.9.5)")

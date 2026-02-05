@@ -73,6 +73,7 @@ function ServiceTruck.registerFunctions(vehicleType)
     SpecializationUtil.registerFunction(vehicleType, "releaseTarget", ServiceTruck.releaseTarget)
     SpecializationUtil.registerFunction(vehicleType, "openRestorationDialog", ServiceTruck.openRestorationDialog)
     SpecializationUtil.registerFunction(vehicleType, "getRestorationStatus", ServiceTruck.getRestorationStatus)
+    SpecializationUtil.registerFunction(vehicleType, "updateActionEventText", ServiceTruck.updateActionEventText)
 end
 
 function ServiceTruck.registerEventListeners(vehicleType)

@@ -4,6 +4,53 @@ All notable changes to this project are documented here.
 
 ---
 
+## [2.11.1] - 2026-02-04
+
+### Fixed
+
+**Critical Dialog & Stability Fixes:**
+
+**Zombie Dialog Fix (NegotiationDialog)**
+- Fixed "Make an Offer" dialog getting stuck in "already closing" state
+- Changed close method from `g_gui:closeDialog(self)` to `g_gui:closeDialogByName("NegotiationDialog")`
+- Issue: `closeDialog(self)` could fail silently, preventing `onClose()` from firing and leaving `isClosing` flag stuck
+- **Impact**: Dialog now closes reliably on Cancel or Esc keypress
+- File: `src/gui/NegotiationDialog.lua:819`
+
+**Vehicle Deletion Crash Fix**
+- Fixed FSBaseMission.lua crash after accepting vehicle sale offers
+- Deferred vehicle deletion to next frame using `g_currentMission:addUpdateable()`
+- Issue: Vehicle deleted in same tick as GUI close, causing pending mouse events to crash with "attempt to index nil with 'id'"
+- **Impact**: Sale acceptance now completes without crash
+- File: `src/managers/VehicleSaleManager.lua:575-600`
+
+**Service Truck Spawn Fix**
+- Fixed Service Truck failing to spawn from Admin Control Panel
+- Corrected i3d model path from `C7000.i3d` to `vehicles/serviceTruck/C7000.i3d`
+- Issue: Relative path was resolving from mod root instead of XML file location
+- **Impact**: Service Truck now spawns correctly via upAdminCP command
+- File: `vehicles/serviceTruck/serviceTruck.xml:42`
+
+### Changed
+
+**UI Polish:**
+- Adjusted timer icon position in "Buyer Found" dialog (SaleOfferDialog)
+- Shifted timer icon left by 35px (from X=-90px to X=-125px) for better visual alignment
+- File: `gui/SaleOfferDialog.xml:100`
+
+### Work in Progress
+
+**Service Truck Multi-Color Customization (Untested):**
+- Implemented dual-color system for Service Truck (chassis + body)
+- Registered "Doors" TransformGroup as baseColor2Configurations material slot
+- Updated all service body panels to use material 168 (bodyPaintMat with shader 40)
+- Removed test color configurations and test TransformGroup
+- Added 9 SKODA color options for service body (matching chassis colors)
+- **Status**: Implementation complete, in-game testing pending
+- Files: `vehicles/serviceTruck/serviceTruck.xml`, `vehicles/serviceTruck/C7000.i3d`
+
+---
+
 ## [2.11.0] - 2026-02-03
 
 ### Added - Performance & Polish
