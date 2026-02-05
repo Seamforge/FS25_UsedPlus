@@ -27,6 +27,17 @@
 
 ---
 
+<p align="center">
+  <img src="screenshots/used_plus_finances.png" alt="Finance Manager Dashboard - Your Central Hub" width="95%">
+</p>
+
+<p align="center">
+  <strong>🎯 Your Financial Command Center</strong><br>
+  <sub><em>Manage loans, leases, credit score, used vehicle searches, and vehicle sales—all in one unified interface</em></sub>
+</p>
+
+---
+
 > ⚠️ **STATUS: Development Preview** — No official release yet. Core features (vehicle financing, **building financing**, leasing, credit, marketplace, trade-ins) fully functional. **NEW v2.10.0:** First-of-its-kind building/placeable financing! **Work in Progress:** Malfunctions and Service Truck under active development. Try it via `git clone` or download ZIP (see Installation).
 
 ---
