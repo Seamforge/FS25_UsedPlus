@@ -2147,9 +2147,45 @@
         <e k="usedplus_serviceTruck_opportunityExpired" v="A oportunidade do Caminhão de Serviço expirou." eh="a5d3a5fb" />
         <e k="usedplus_serviceTruck_insufficientFunds" v="Fundos insuficientes! Você precisa de $%s em dinheiro." eh="9b84e434" />
         <e k="usedplus_serviceTruck_alreadyOwned" v="Você já possui um Caminhão de Serviço." eh="8d7c53f6" />
+
+        <!-- v2.11.1: Personalização de cor do caminhão -->
+        <e k="configuration_chassisColor" v="Cor do chassi" eh="17d6aa5b" />
+        <e k="configuration_bodyColor" v="Cor da carroceria" eh="e607d9e6" />
+        <e k="usedplus_serviceTruck_stripeColor" v="Cor das faixas" eh="12b22714" />
+
+        <!-- v2.12.0: Fault Tracer Minigame -->
+        <e k="usedplus_ft_title" v="RASTREADOR DE FALHAS" eh="92470a22" />
+        <e k="usedplus_ft_selectComponent" v="Selecione componente para diagnosticar" eh="3fb628e9" />
+        <e k="usedplus_ft_probeMode" v="Sondar" eh="76d16796" />
+        <e k="usedplus_ft_flagMode" v="Marcar" eh="c5836008" />
+        <e k="usedplus_ft_quickScan" v="Varredura rápida (2x custo)" eh="31d0f8fb" />
+        <e k="usedplus_ft_hint" v="Manual de serviço" eh="d96f8735" />
+        <e k="usedplus_ft_beginRepair" v="Iniciar reparo" eh="e792568e" />
+        <e k="usedplus_ft_oilUsed" v="Óleo usado: %.1fL" eh="bccd33a2" />
+        <e k="usedplus_ft_faultsFound" v="Falhas: %d/%d" eh="5abe853a" />
+        <e k="usedplus_ft_corroded" v="Corroído" eh="4b370f36" />
+        <e k="usedplus_ft_cracked" v="Trincado" eh="26d3b853" />
+        <e k="usedplus_ft_seized" v="Travado" eh="04db850b" />
+        <e k="usedplus_ft_selectType" v="Diagnosticar tipo de falha:" eh="bf552726" />
+        <e k="usedplus_ft_probeHit" v="FALHA ENCONTRADA! Vazamento de fluido - 3x custo" eh="21e8a8bf" />
+        <e k="usedplus_ft_correct" v="CORRETO" eh="0d536515" />
+        <e k="usedplus_ft_incorrect" v="INCORRETO" eh="befd188c" />
+        <e k="usedplus_ft_repairResult" v="%s: %s - %s +%.0f%%" eh="ba74960b" />
+        <e k="usedplus_ft_totalGain" v="Total: +%.1f%% confiabilidade, +%.1f%% teto" eh="1da183e9" />
+        <e k="usedplus_ft_totalCost" v="Recursos consumidos: %.1fL óleo" eh="3dd1f971" />
+        <e k="usedplus_ft_hintsRemaining" v="Dicas: %d" eh="c8f080c2" />
+        <e k="usedplus_ft_quickScanCap" v="Qualidade limitada a 60%% (Varredura rápida)" eh="5b519744" />
+        <e k="usedplus_ft_noFaults" v="Sem falhas - sistema saudável!" eh="6bfa5546" />
+        <e k="usedplus_ft_action" v="Rastreador de falhas: %s" eh="c4066687" />
+        <e k="usedplus_ft_corrodedDesc" v="Dano por ferrugem / oxidação" eh="8a01ae60" />
+        <e k="usedplus_ft_crackedDesc" v="Trincas por tensão / fadiga" eh="81d5118b" />
+        <e k="usedplus_ft_seizedDesc" v="Rolamento travado / bloqueado" eh="647b76a9" />
+
         <e k="usedplus_sparePartsPallet_name" v="Palete de Peças de Reposição" eh="9bf39a93" />
         <e k="usedplus_sparePartsPallet_function" v="Peças de reposição consumíveis para restauração do Caminhão de Serviço. Coloque perto do caminhão durante o trabalho de restauração." eh="c90aa3eb" />
         <e k="fillType_spareParts" v="Peças de Reposição" eh="ab6b8ce1" />
+        <e k="fillType_oil" v="[EN] Motor Oil" eh="511aaabd" />
+        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="f9c4d7d9" />
         <e k="unit_pcs" v="pçs" eh="3ecf2642" />
         <e k="usedplus_resto_symptom_engine_knocking_load" v="Batida forte sob carga" eh="fb8c3067" />
         <e k="usedplus_resto_symptom_engine_low_oil_pressure" v="Pressão de óleo criticamente baixa" eh="a3efa42d" />
@@ -2341,6 +2377,9 @@
         <e k="usedplus_admin_btn_rel_10" v="Conf: 10%" eh="54d6e770" />
         <e k="usedplus_admin_btn_reset_hours" v="Zerar Horas" eh="a519e5e1" />
         <e k="usedplus_admin_btn_add_hours" v="+1000 Horas" eh="ef05132d" />
+        <e k="usedplus_admin_btn_dna_lemon" v="[EN] 0.1 Lemon" eh="0047d5bc" />
+        <e k="usedplus_admin_btn_dna_average" v="[EN] 0.5 Average" eh="472d5599" />
+        <e k="usedplus_admin_btn_dna_workhorse" v="[EN] 0.9 Workhorse" eh="b0f0ee0b" />
         <e k="usedplus_admin_btn_dna_desperate" v="Desesperado" eh="97df4642" />
         <e k="usedplus_admin_btn_dna_reasonable" v="Razoável" eh="e485c034" />
         <e k="usedplus_admin_btn_dna_immovable" v="Inflexível" eh="57d0e57c" />

@@ -1574,9 +1574,45 @@
         <e k="usedplus_serviceTruck_opportunityExpired" v="Servis Kamyonu fırsatı sona erdi." eh="a5d3a5fb" />
         <e k="usedplus_serviceTruck_insufficientFunds" v="Yetersiz bakiye! $%s nakit gerekli." eh="9b84e434" />
         <e k="usedplus_serviceTruck_alreadyOwned" v="Zaten bir Servis Kamyonunuz var." eh="8d7c53f6" />
+
+        <!-- v2.11.1: Servis kamyonu renk özelleştirmesi -->
+        <e k="configuration_chassisColor" v="Şasi Rengi" eh="17d6aa5b" />
+        <e k="configuration_bodyColor" v="Gövde Rengi" eh="e607d9e6" />
+        <e k="usedplus_serviceTruck_stripeColor" v="Şerit Rengi" eh="12b22714" />
+
+        <!-- v2.12.0: Fault Tracer Minigame -->
+        <e k="usedplus_ft_title" v="ARIZA İZLEYİCİ" eh="92470a22" />
+        <e k="usedplus_ft_selectComponent" v="Teşhis edilecek bileşeni seçin" eh="3fb628e9" />
+        <e k="usedplus_ft_probeMode" v="Yokla" eh="76d16796" />
+        <e k="usedplus_ft_flagMode" v="İşaretle" eh="c5836008" />
+        <e k="usedplus_ft_quickScan" v="Hızlı tarama (2x maliyet)" eh="31d0f8fb" />
+        <e k="usedplus_ft_hint" v="Servis kılavuzu" eh="d96f8735" />
+        <e k="usedplus_ft_beginRepair" v="Onarıma başla" eh="e792568e" />
+        <e k="usedplus_ft_oilUsed" v="Kullanılan yağ: %.1fL" eh="bccd33a2" />
+        <e k="usedplus_ft_faultsFound" v="Arızalar: %d/%d" eh="5abe853a" />
+        <e k="usedplus_ft_corroded" v="Korozyonlu" eh="4b370f36" />
+        <e k="usedplus_ft_cracked" v="Çatlak" eh="26d3b853" />
+        <e k="usedplus_ft_seized" v="Sıkışmış" eh="04db850b" />
+        <e k="usedplus_ft_selectType" v="Arıza tipini teşhis edin:" eh="bf552726" />
+        <e k="usedplus_ft_probeHit" v="ARIZA BULUNDU! Sıvı kaçağı - 3x maliyet" eh="21e8a8bf" />
+        <e k="usedplus_ft_correct" v="DOĞRU" eh="0d536515" />
+        <e k="usedplus_ft_incorrect" v="YANLIŞ" eh="befd188c" />
+        <e k="usedplus_ft_repairResult" v="%s: %s - %s +%.0f%%" eh="ba74960b" />
+        <e k="usedplus_ft_totalGain" v="Toplam: +%.1f%% güvenilirlik, +%.1f%% tavan" eh="1da183e9" />
+        <e k="usedplus_ft_totalCost" v="Tüketilen kaynaklar: %.1fL yağ" eh="3dd1f971" />
+        <e k="usedplus_ft_hintsRemaining" v="İpuçları: %d" eh="c8f080c2" />
+        <e k="usedplus_ft_quickScanCap" v="Kalite %%60 ile sınırlı (Hızlı tarama)" eh="5b519744" />
+        <e k="usedplus_ft_noFaults" v="Arıza yok - sistem sağlam!" eh="6bfa5546" />
+        <e k="usedplus_ft_action" v="Arıza izleyici: %s" eh="c4066687" />
+        <e k="usedplus_ft_corrodedDesc" v="Pas / oksidasyon hasarı" eh="8a01ae60" />
+        <e k="usedplus_ft_crackedDesc" v="Gerilim çatlakları / yorgunluk" eh="81d5118b" />
+        <e k="usedplus_ft_seizedDesc" v="Sıkışmış / kilitlenmiş yatak" eh="647b76a9" />
+
         <e k="usedplus_sparePartsPallet_name" v="Yedek Parça Paleti" eh="9bf39a93" />
         <e k="usedplus_sparePartsPallet_function" v="Servis Kamyonu restorasyonu için sarf malzemesi yedek parçalar. Restorasyon çalışması sırasında kamyonun yakınına yerleştirin." eh="c90aa3eb" />
         <e k="fillType_spareParts" v="Yedek Parçalar" eh="ab6b8ce1" />
+        <e k="fillType_oil" v="[EN] Motor Oil" eh="511aaabd" />
+        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="f9c4d7d9" />
         <e k="unit_pcs" v="adet" eh="3ecf2642" />
         <e k="usedplus_resto_symptom_engine_knocking_load" v="Yük altında şiddetli vuruntu" eh="fb8c3067" />
         <e k="usedplus_resto_symptom_engine_low_oil_pressure" v="Yağ basıncı kritik düzeyde düşük" eh="a3efa42d" />
@@ -1952,6 +1988,9 @@
         <e k="usedplus_admin_btn_rel_10" v="Güv: %10" eh="54d6e770" />
         <e k="usedplus_admin_btn_reset_hours" v="Saat Sıfırla" eh="a519e5e1" />
         <e k="usedplus_admin_btn_add_hours" v="+1000 Saat" eh="ef05132d" />
+        <e k="usedplus_admin_btn_dna_lemon" v="[EN] 0.1 Lemon" eh="0047d5bc" />
+        <e k="usedplus_admin_btn_dna_average" v="[EN] 0.5 Average" eh="472d5599" />
+        <e k="usedplus_admin_btn_dna_workhorse" v="[EN] 0.9 Workhorse" eh="b0f0ee0b" />
         <e k="usedplus_admin_btn_dna_desperate" v="Umutsuz" eh="97df4642" />
         <e k="usedplus_admin_btn_dna_reasonable" v="Makul" eh="e485c034" />
         <e k="usedplus_admin_btn_dna_immovable" v="Diretken" eh="57d0e57c" />

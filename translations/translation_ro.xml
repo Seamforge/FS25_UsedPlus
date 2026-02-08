@@ -1571,9 +1571,45 @@
         <e k="usedplus_serviceTruck_opportunityExpired" v="Oportunitatea Camion Service a expirat." eh="a5d3a5fb" />
         <e k="usedplus_serviceTruck_insufficientFunds" v="Fonduri insuficiente! Aveți nevoie de $%s numerar." eh="9b84e434" />
         <e k="usedplus_serviceTruck_alreadyOwned" v="Deja dețineți un Camion Service." eh="8d7c53f6" />
+
+        <!-- v2.11.1: Personalizare culoare camion service -->
+        <e k="configuration_chassisColor" v="Culoare șasiu" eh="17d6aa5b" />
+        <e k="configuration_bodyColor" v="Culoare caroserie" eh="e607d9e6" />
+        <e k="usedplus_serviceTruck_stripeColor" v="Culoare dungi" eh="12b22714" />
+
+        <!-- v2.12.0: Fault Tracer Minigame -->
+        <e k="usedplus_ft_title" v="DETECTOR DE DEFECTE" eh="92470a22" />
+        <e k="usedplus_ft_selectComponent" v="Selectați componenta de diagnosticat" eh="3fb628e9" />
+        <e k="usedplus_ft_probeMode" v="Sondare" eh="76d16796" />
+        <e k="usedplus_ft_flagMode" v="Marcare" eh="c5836008" />
+        <e k="usedplus_ft_quickScan" v="Scanare rapidă (2x cost)" eh="31d0f8fb" />
+        <e k="usedplus_ft_hint" v="Manual de service" eh="d96f8735" />
+        <e k="usedplus_ft_beginRepair" v="Începe reparația" eh="e792568e" />
+        <e k="usedplus_ft_oilUsed" v="Ulei utilizat: %.1fL" eh="bccd33a2" />
+        <e k="usedplus_ft_faultsFound" v="Defecte: %d/%d" eh="5abe853a" />
+        <e k="usedplus_ft_corroded" v="Corodat" eh="4b370f36" />
+        <e k="usedplus_ft_cracked" v="Crăpat" eh="26d3b853" />
+        <e k="usedplus_ft_seized" v="Gripat" eh="04db850b" />
+        <e k="usedplus_ft_selectType" v="Diagnosticați tipul defectului:" eh="bf552726" />
+        <e k="usedplus_ft_probeHit" v="DEFECT GĂSIT! Scurgere de fluid - 3x cost" eh="21e8a8bf" />
+        <e k="usedplus_ft_correct" v="CORECT" eh="0d536515" />
+        <e k="usedplus_ft_incorrect" v="INCORECT" eh="befd188c" />
+        <e k="usedplus_ft_repairResult" v="%s: %s - %s +%.0f%%" eh="ba74960b" />
+        <e k="usedplus_ft_totalGain" v="Total: +%.1f%% fiabilitate, +%.1f%% plafon" eh="1da183e9" />
+        <e k="usedplus_ft_totalCost" v="Resurse consumate: %.1fL ulei" eh="3dd1f971" />
+        <e k="usedplus_ft_hintsRemaining" v="Indicii: %d" eh="c8f080c2" />
+        <e k="usedplus_ft_quickScanCap" v="Calitate limitată la 60%% (Scanare rapidă)" eh="5b519744" />
+        <e k="usedplus_ft_noFaults" v="Fără defecte - sistem funcțional!" eh="6bfa5546" />
+        <e k="usedplus_ft_action" v="Detector de defecte: %s" eh="c4066687" />
+        <e k="usedplus_ft_corrodedDesc" v="Deteriorare prin rugină / oxidare" eh="8a01ae60" />
+        <e k="usedplus_ft_crackedDesc" v="Fisuri de tensiune / oboseală" eh="81d5118b" />
+        <e k="usedplus_ft_seizedDesc" v="Rulment gripat / blocat" eh="647b76a9" />
+
         <e k="usedplus_sparePartsPallet_name" v="Palet Piese Schimb" eh="9bf39a93" />
         <e k="usedplus_sparePartsPallet_function" v="Consumable spare parts pentru Service Truck restoration. Place near the truck during restoration work." eh="c90aa3eb" />
         <e k="fillType_spareParts" v="Piese Schimb" eh="ab6b8ce1" />
+        <e k="fillType_oil" v="[EN] Motor Oil" eh="511aaabd" />
+        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="f9c4d7d9" />
         <e k="unit_pcs" v="buc" eh="3ecf2642" />
         <e k="usedplus_resto_symptom_engine_knocking_load" v="Severe knocking under incarca" eh="fb8c3067" />
         <e k="usedplus_resto_symptom_engine_low_oil_pressure" v="Presiunea uleiului critic de scazuta" eh="a3efa42d" />
@@ -1949,6 +1985,9 @@
         <e k="usedplus_admin_btn_rel_10" v="Fiab: 10%" eh="54d6e770" />
         <e k="usedplus_admin_btn_reset_hours" v="Reseteaza Ore" eh="a519e5e1" />
         <e k="usedplus_admin_btn_add_hours" v="+1000 Ore" eh="ef05132d" />
+        <e k="usedplus_admin_btn_dna_lemon" v="[EN] 0.1 Lemon" eh="0047d5bc" />
+        <e k="usedplus_admin_btn_dna_average" v="[EN] 0.5 Average" eh="472d5599" />
+        <e k="usedplus_admin_btn_dna_workhorse" v="[EN] 0.9 Workhorse" eh="b0f0ee0b" />
         <e k="usedplus_admin_btn_dna_desperate" v="Disperat" eh="97df4642" />
         <e k="usedplus_admin_btn_dna_reasonable" v="Rezonabil" eh="e485c034" />
         <e k="usedplus_admin_btn_dna_immovable" v="Inflexibil" eh="57d0e57c" />

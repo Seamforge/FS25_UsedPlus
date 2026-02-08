@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="Smallfueltank.i3d" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+  <Asset>
+    <Export program="GIANTS Editor 64bit" version="10.0.7"/>
+  </Asset>
+
+  <Files>
+    <File fileId="4" filename="textures/dieseltank_diffuse.dds"/>
+    <File fileId="5" filename="textures/dieseltank_normal.dds"/>
+    <File fileId="6" filename="textures/dieseltank_specular.dds"/>
+  </Files>
+
+
+  <Materials>
+    <Material name="Dieseltank" materialId="5">
+      <Texture fileId="4"/>
+      <Normalmap fileId="5"/>
+      <Glossmap fileId="6"/>
+    </Material>
+    <Material name="i3d_default_material" materialId="6" diffuseColor="0.8 0.8 0.8 1" specularColor="0.6 1 0">
+    </Material>
+    <Material name="UnnamedMaterial" materialId="7" diffuseColor="1 1 1 1">
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="Smallfueltank.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="Small fuel tank" nodeId="16">
+      <TransformGroup name="clearAreas" nodeId="17">
+        <TransformGroup name="clearArea01Start" translation="0.983489 0 -0.708843" nodeId="18">
+          <TransformGroup name="clearArea01Height" translation="0 0 1.4506" nodeId="19"/>
+          <TransformGroup name="clearArea01Width" translation="-1.76575 0 0" nodeId="20"/>
+        </TransformGroup>
+      </TransformGroup>
+      <TransformGroup name="collision" nodeId="21">
+        <Shape name="Kolizja" translation="0 0.925807 0" scale="1.44618 2.19739 1.3734" shapeId="1" static="true" collisionFilterGroup="0x3a" collisionFilterMask="0xfffffbff" nodeId="22" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="7"/>
+      </TransformGroup>
+      <TransformGroup name="levelingAreas" nodeId="23">
+        <TransformGroup name="levelingArea01Start" translation="0.983489 0 -1.11319" nodeId="24">
+          <TransformGroup name="levelingArea01Height" translation="-1.96698 0 0" nodeId="25"/>
+          <TransformGroup name="levelingArea01Width" translation="0 0 1.93272" nodeId="26"/>
+        </TransformGroup>
+      </TransformGroup>
+      <TransformGroup name="silo" nodeId="27">
+        <TransformGroup name="aiNode" translation="0 0 2.79465" nodeId="28"/>
+        <TransformGroup name="hotspotNode" nodeId="29"/>
+        <Shape name="infoTrigger" translation="-0.0512185 0 2.35738" shapeId="2" static="true" trigger="true" collisionFilterGroup="0x100000" collisionFilterMask="0x100000" nodeId="30" castsShadows="false" receiveShadows="false" nonRenderable="true" materialIds="6"/>
+        <TransformGroup name="loadingStation" nodeId="31">
+          <TransformGroup name="dischargeNode" nodeId="32"/>
+          <TransformGroup name="loadingMarker" translation="0 0 2.12008" nodeId="33"/>
+          <Shape name="loadingTrigger" translation="-0.0512185 0 3.71913" shapeId="3" static="true" trigger="true" collisionFilterGroup="0x20000000" collisionFilterMask="0x40000000" nodeId="34" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="6"/>
+        </TransformGroup>
+        <Shape name="refillPlayerTrigger" translation="1.34639 -0.180487 -0.00118041" shapeId="4" static="true" trigger="true" collisionFilterGroup="0x20000000" collisionFilterMask="0x100000" nodeId="35" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="6">
+          <TransformGroup name="refillTriggerMarker" translation="0 0.180487 2.38419e-07" nodeId="36"/>
+        </Shape>
+        <TransformGroup name="storage" nodeId="37"/>
+        <TransformGroup name="unloadingStation" nodeId="38">
+          <Shape name="exactFillRootNode" translation="-0.0512185 0 3.71913" shapeId="5" static="true" collisionFilterGroup="0x40000000" collisionFilterMask="0x20000000" nodeId="39" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="6"/>
+        </TransformGroup>
+      </TransformGroup>
+      <TransformGroup name="testAreas" nodeId="40">
+        <TransformGroup name="testArea1Start" translation="-0.983488 0 -1.11319" nodeId="41">
+          <TransformGroup name="testArea1End" translation="1.96698 2.99477 2.22639" nodeId="42"/>
+        </TransformGroup>
+      </TransformGroup>
+      <TransformGroup name="tipCollision" nodeId="43">
+        <Shape name="tipCollider" shapeId="6" visibility="false" static="true" collisionFilterGroup="0x80000" collisionFilterMask="0x80000" nodeId="44" castsShadows="false" receiveShadows="false" nonRenderable="true" materialIds="6"/>
+      </TransformGroup>
+      <TransformGroup name="tipOcclusionUpdateAreas" nodeId="45">
+        <TransformGroup name="tipOcclusionUpdateArea1Start" translation="0 0 -0.712539" nodeId="46">
+          <TransformGroup name="tipOcclusionUpdateArea1End" translation="0 0 1.28756" nodeId="47"/>
+        </TransformGroup>
+      </TransformGroup>
+      <TransformGroup name="visuals" nodeId="48">
+        <Shape name="fuelTank" shapeId="7" clipDistance="300" nodeId="49" castsShadows="true" receiveShadows="true" materialIds="5"/>
+      </TransformGroup>
+      <TransformGroup name="indoorAreas" nodeId="50">
+        <TransformGroup name="indoorAreaStart01" translation="-0.68825 -0.123651 -0.580332" nodeId="51">
+          <TransformGroup name="indoorAreaWidth01" translation="1.35245 0 0" nodeId="52"/>
+          <TransformGroup name="indoorAreaHeight01" translation="0 0 1.13441" nodeId="53"/>
+        </TransformGroup>
+      </TransformGroup>
+    </TransformGroup>
+  </Scene>
+
+</i3D>

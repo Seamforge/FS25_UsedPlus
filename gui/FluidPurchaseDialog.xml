@@ -42,7 +42,7 @@
                 <MultiTextOption profile="fpFluidDropdown" id="fluidTypeOption" position="80px -35px" onClick="onFluidTypeChanged"/>
 
                 <Text profile="fpLabel" id="amountLabel" position="-100px -65px" text="Amount:"/>
-                <Text profile="fpAmountValue" id="amountText" position="100px -65px" text="50 L"/>
+                <MultiTextOption profile="fpAmountDropdown" id="amountOption" position="80px -65px" onClick="onAmountChanged"/>
 
                 <Text profile="fpLabel" id="costLabel" position="-100px -90px" text="Cost:"/>
                 <Text profile="fpCostValue" id="costText" position="100px -90px" text="$250"/>
@@ -121,8 +121,12 @@
             <textAlignment value="left"/>
         </Profile>
 
-        <!-- Dropdown -->
+        <!-- Dropdowns -->
         <Profile name="fpFluidDropdown" extends="fs25_multiTextOption" with="anchorTopCenter">
+            <size value="200px 30px"/>
+        </Profile>
+
+        <Profile name="fpAmountDropdown" extends="fs25_multiTextOption" with="anchorTopCenter">
             <size value="200px 30px"/>
         </Profile>
     </GUIProfiles>

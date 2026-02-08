@@ -119,6 +119,7 @@ UNTERSTÜTZUNG
         <action name="USEDPLUS_ACTIVATE_OBD"/>
         <action name="USEDPLUS_TIRES" category="MENU" axisType="HALF"/>
         <action name="USEDPLUS_SERVICE_TRUCK" category="VEHICLE" axisType="HALF"/>
+        <action name="USEDPLUS_FAULT_TRACER"/>  <!--  v2.12.0: On-foot Fault Tracer minigame -->
     </actions>
 
     <inputBinding>
@@ -139,6 +140,9 @@ UNTERSTÜTZUNG
         </actionBinding>
         <actionBinding action="USEDPLUS_SERVICE_TRUCK">
             <binding device="KB_MOUSE_DEFAULT" input="KEY_r"/>
+        </actionBinding>
+        <actionBinding action="USEDPLUS_FAULT_TRACER">
+            <binding device="KB_MOUSE_DEFAULT" input="KEY_g"/>
         </actionBinding>
     </inputBinding>
 
@@ -289,6 +293,8 @@ UNTERSTÜTZUNG
         <sourceFile filename="src/gui/SearchExpiredDialog.lua"/>       <!--  v1.5.1: Search expiration with renewal option -->
         <sourceFile filename="src/gui/SaleExpiredDialog.lua"/>          <!--  v1.5.1: No buyer found dialog -->
         <sourceFile filename="src/gui/FieldServiceKitDialog.lua"/>    <!--  v1.8.0: Field Service Kit dialog -->
+        <sourceFile filename="src/gui/FaultTracerGrid.lua"/>        <!--  v2.12.0: Fault Tracer grid engine (pure logic) -->
+        <sourceFile filename="src/gui/FaultTracerDialog.lua"/>      <!--  v2.12.0: Fault Tracer minigame dialog -->
         <sourceFile filename="src/gui/ServiceTruckDialog.lua"/>     <!--  v2.9.0: Service Truck restoration dialog -->
         <sourceFile filename="src/gui/ServiceTruckDiscoveryDialog.lua"/>  <!--  v2.9.0: Service Truck discovery popup -->
         <sourceFile filename="src/gui/FluidPurchaseDialog.lua"/>    <!--  v1.9.3: Fluid purchase dialog -->

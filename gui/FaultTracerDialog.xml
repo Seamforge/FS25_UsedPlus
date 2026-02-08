@@ -1,0 +1,680 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<!--
+    FS25_UsedPlus - Fault Tracer Dialog
+    Minesweeper-inspired diagnostic minigame for the Service Truck
+
+    Screens:
+    1. Component Selection - Pick engine/electrical/hydraulic
+    2. Grid - Probe and flag faults on a Minesweeper grid
+    3. Type Selection - Choose fault type when flagging (overlay)
+    4. Results - Show repair outcome and reliability gains
+
+    v2.12.0 - Fault Tracer Minigame
+-->
+<GUI onOpen="onOpen" onClose="onClose" onCreate="onCreate">
+    <GuiElement profile="newLayer" />
+    <Bitmap profile="dialogFullscreenBg" id="dialogBg" />
+
+    <GuiElement profile="dialogBg" id="dialogElement" size="780px 620px">
+        <ThreePartBitmap profile="fs25_dialogBgMiddle" />
+        <ThreePartBitmap profile="fs25_dialogBgTop" />
+        <ThreePartBitmap profile="fs25_dialogBgBottom" />
+
+        <GuiElement profile="fs25_dialogContentContainer">
+
+            <!-- Dialog Title -->
+            <Text profile="ftTitle" id="dialogTitle" position="0px -25px" text="FAULT TRACER"/>
+
+            <!-- ========== SCREEN 1: COMPONENT SELECTION ========== -->
+            <GuiElement profile="ftStepContainer" id="componentContainer" position="0px -55px">
+
+                <!-- Vehicle Info -->
+                <GuiElement profile="ftSection" position="0px 0px">
+                    <Bitmap profile="ftSectionBg" position="0px 0px"/>
+                    <Text profile="ftSectionHeader" position="0px -5px" text="TARGET VEHICLE"/>
+                    <Text profile="ftVehicleName" id="ftVehicleNameText" position="0px -28px" text=""/>
+                    <Text profile="ftSubtext" id="ftCeilingText" position="0px -48px" text=""/>
+                </GuiElement>
+
+                <!-- Component Buttons -->
+                <GuiElement profile="ftSection" position="0px -75px">
+                    <Text profile="ftSectionHeader" position="0px -5px" text="SELECT COMPONENT TO DIAGNOSE"/>
+
+                    <!-- Engine -->
+                    <GuiElement profile="ftComponentBox" position="-220px -35px">
+                        <Bitmap profile="ftComponentBg" id="ftEngineBg" position="0px 0px"/>
+                        <Button profile="ftComponentBtn" id="ftEngineBtn" onClick="onEngineClick" position="0px 0px"/>
+                        <Text profile="ftComponentIcon" position="0px -12px" text="E"/>
+                        <Text profile="ftComponentLabel" position="0px -38px" text="Engine"/>
+                        <Text profile="ftComponentValue" id="ftEngineValue" position="0px -55px" text="100%"/>
+                        <Text profile="ftComponentStatus" id="ftEngineStatus" position="0px -72px" text=""/>
+                    </GuiElement>
+
+                    <!-- Electrical -->
+                    <GuiElement profile="ftComponentBox" position="0px -35px">
+                        <Bitmap profile="ftComponentBg" id="ftElectricalBg" position="0px 0px"/>
+                        <Button profile="ftComponentBtn" id="ftElectricalBtn" onClick="onElectricalClick" position="0px 0px"/>
+                        <Text profile="ftComponentIcon" position="0px -12px" text="V"/>
+                        <Text profile="ftComponentLabel" position="0px -38px" text="Electrical"/>
+                        <Text profile="ftComponentValue" id="ftElectricalValue" position="0px -55px" text="100%"/>
+                        <Text profile="ftComponentStatus" id="ftElectricalStatus" position="0px -72px" text=""/>
+                    </GuiElement>
+
+                    <!-- Hydraulic -->
+                    <GuiElement profile="ftComponentBox" position="220px -35px">
+                        <Bitmap profile="ftComponentBg" id="ftHydraulicBg" position="0px 0px"/>
+                        <Button profile="ftComponentBtn" id="ftHydraulicBtn" onClick="onHydraulicClick" position="0px 0px"/>
+                        <Text profile="ftComponentIcon" position="0px -12px" text="H"/>
+                        <Text profile="ftComponentLabel" position="0px -38px" text="Hydraulic"/>
+                        <Text profile="ftComponentValue" id="ftHydraulicValue" position="0px -55px" text="100%"/>
+                        <Text profile="ftComponentStatus" id="ftHydraulicStatus" position="0px -72px" text=""/>
+                    </GuiElement>
+                </GuiElement>
+
+                <!-- Resources Info -->
+                <GuiElement profile="ftSection" position="0px -195px">
+                    <Bitmap profile="ftInfoBg" position="0px 0px"/>
+                    <Text profile="ftSectionHeader" position="0px -5px" text="SERVICE TRUCK RESOURCES"/>
+                    <Text profile="ftLabel" position="-150px -30px" text="Oil:"/>
+                    <Text profile="ftValue" id="ftOilLevel" position="-60px -30px" text="0L"/>
+                    <Text profile="ftLabel" position="80px -30px" text="Hydraulic:"/>
+                    <Text profile="ftValue" id="ftHydraulicLevel" position="170px -30px" text="0L"/>
+                </GuiElement>
+
+                <!-- Hint text -->
+                <Text profile="ftHintText" id="ftSelectHint" position="0px -260px" text="Select a component below 90% reliability to begin fault tracing."/>
+            </GuiElement>
+
+            <!-- ========== SCREEN 2: FAULT TRACER GRID ========== -->
+            <GuiElement profile="ftStepContainer" id="gridContainer" position="0px -55px" visible="false">
+
+                <!-- Grid Info Bar -->
+                <Text profile="ftGridInfo" id="ftGridTitle" position="-180px -5px" text="ENGINE FAULT TRACER"/>
+                <Text profile="ftGridInfo" id="ftFaultCounter" position="180px -5px" text="Faults: 0/0"/>
+
+                <!-- Grid Area (4 cols x 5 rows max = 20 cells) -->
+                <!-- Each cell: 65x50px with 6px gap. Grid origin at center-top -->
+                <!-- 4-col grid width: 4*65 + 3*6 = 278px. Offset: -139px left -->
+                <!-- Row positions: -30, -86, -142, -198, -254 -->
+
+                <!-- Row 0 -->
+                <Bitmap profile="ftCellBg" id="ftCellBg_0_0" position="-105px -30px"/>
+                <Button profile="ftCellBtn" id="ftCellBtn_0_0" onClick="onCellClick_0_0" position="-105px -30px"/>
+                <Text profile="ftCellNum" id="ftCellNum_0_0" position="-105px -35px" text=""/>
+                <Text profile="ftCellGauge" id="ftCellGauge_0_0" position="-105px -60px" text=""/>
+
+                <Bitmap profile="ftCellBg" id="ftCellBg_0_1" position="-34px -30px"/>
+                <Button profile="ftCellBtn" id="ftCellBtn_0_1" onClick="onCellClick_0_1" position="-34px -30px"/>
+                <Text profile="ftCellNum" id="ftCellNum_0_1" position="-34px -35px" text=""/>
+                <Text profile="ftCellGauge" id="ftCellGauge_0_1" position="-34px -60px" text=""/>
+
+                <Bitmap profile="ftCellBg" id="ftCellBg_0_2" position="37px -30px"/>
+                <Button profile="ftCellBtn" id="ftCellBtn_0_2" onClick="onCellClick_0_2" position="37px -30px"/>
+                <Text profile="ftCellNum" id="ftCellNum_0_2" position="37px -35px" text=""/>
+                <Text profile="ftCellGauge" id="ftCellGauge_0_2" position="37px -60px" text=""/>
+
+                <Bitmap profile="ftCellBg" id="ftCellBg_0_3" position="108px -30px"/>
+                <Button profile="ftCellBtn" id="ftCellBtn_0_3" onClick="onCellClick_0_3" position="108px -30px"/>
+                <Text profile="ftCellNum" id="ftCellNum_0_3" position="108px -35px" text=""/>
+                <Text profile="ftCellGauge" id="ftCellGauge_0_3" position="108px -60px" text=""/>
+
+                <Bitmap profile="ftCellBg" id="ftCellBg_0_4" position="179px -30px"/>
+                <Button profile="ftCellBtn" id="ftCellBtn_0_4" onClick="onCellClick_0_4" position="179px -30px"/>
+                <Text profile="ftCellNum" id="ftCellNum_0_4" position="179px -35px" text=""/>
+                <Text profile="ftCellGauge" id="ftCellGauge_0_4" position="179px -60px" text=""/>
+
+                <!-- Row 1 -->
+                <Bitmap profile="ftCellBg" id="ftCellBg_1_0" position="-105px -86px"/>
+                <Button profile="ftCellBtn" id="ftCellBtn_1_0" onClick="onCellClick_1_0" position="-105px -86px"/>
+                <Text profile="ftCellNum" id="ftCellNum_1_0" position="-105px -91px" text=""/>
+                <Text profile="ftCellGauge" id="ftCellGauge_1_0" position="-105px -116px" text=""/>
+
+                <Bitmap profile="ftCellBg" id="ftCellBg_1_1" position="-34px -86px"/>
+                <Button profile="ftCellBtn" id="ftCellBtn_1_1" onClick="onCellClick_1_1" position="-34px -86px"/>
+                <Text profile="ftCellNum" id="ftCellNum_1_1" position="-34px -91px" text=""/>
+                <Text profile="ftCellGauge" id="ftCellGauge_1_1" position="-34px -116px" text=""/>
+
+                <Bitmap profile="ftCellBg" id="ftCellBg_1_2" position="37px -86px"/>
+                <Button profile="ftCellBtn" id="ftCellBtn_1_2" onClick="onCellClick_1_2" position="37px -86px"/>
+                <Text profile="ftCellNum" id="ftCellNum_1_2" position="37px -91px" text=""/>
+                <Text profile="ftCellGauge" id="ftCellGauge_1_2" position="37px -116px" text=""/>
+
+                <Bitmap profile="ftCellBg" id="ftCellBg_1_3" position="108px -86px"/>
+                <Button profile="ftCellBtn" id="ftCellBtn_1_3" onClick="onCellClick_1_3" position="108px -86px"/>
+                <Text profile="ftCellNum" id="ftCellNum_1_3" position="108px -91px" text=""/>
+                <Text profile="ftCellGauge" id="ftCellGauge_1_3" position="108px -116px" text=""/>
+
+                <Bitmap profile="ftCellBg" id="ftCellBg_1_4" position="179px -86px"/>
+                <Button profile="ftCellBtn" id="ftCellBtn_1_4" onClick="onCellClick_1_4" position="179px -86px"/>
+                <Text profile="ftCellNum" id="ftCellNum_1_4" position="179px -91px" text=""/>
+                <Text profile="ftCellGauge" id="ftCellGauge_1_4" position="179px -116px" text=""/>
+
+                <!-- Row 2 -->
+                <Bitmap profile="ftCellBg" id="ftCellBg_2_0" position="-105px -142px"/>
+                <Button profile="ftCellBtn" id="ftCellBtn_2_0" onClick="onCellClick_2_0" position="-105px -142px"/>
+                <Text profile="ftCellNum" id="ftCellNum_2_0" position="-105px -147px" text=""/>
+                <Text profile="ftCellGauge" id="ftCellGauge_2_0" position="-105px -172px" text=""/>
+
+                <Bitmap profile="ftCellBg" id="ftCellBg_2_1" position="-34px -142px"/>
+                <Button profile="ftCellBtn" id="ftCellBtn_2_1" onClick="onCellClick_2_1" position="-34px -142px"/>
+                <Text profile="ftCellNum" id="ftCellNum_2_1" position="-34px -147px" text=""/>
+                <Text profile="ftCellGauge" id="ftCellGauge_2_1" position="-34px -172px" text=""/>
+
+                <Bitmap profile="ftCellBg" id="ftCellBg_2_2" position="37px -142px"/>
+                <Button profile="ftCellBtn" id="ftCellBtn_2_2" onClick="onCellClick_2_2" position="37px -142px"/>
+                <Text profile="ftCellNum" id="ftCellNum_2_2" position="37px -147px" text=""/>
+                <Text profile="ftCellGauge" id="ftCellGauge_2_2" position="37px -172px" text=""/>
+
+                <Bitmap profile="ftCellBg" id="ftCellBg_2_3" position="108px -142px"/>
+                <Button profile="ftCellBtn" id="ftCellBtn_2_3" onClick="onCellClick_2_3" position="108px -142px"/>
+                <Text profile="ftCellNum" id="ftCellNum_2_3" position="108px -147px" text=""/>
+                <Text profile="ftCellGauge" id="ftCellGauge_2_3" position="108px -172px" text=""/>
+
+                <Bitmap profile="ftCellBg" id="ftCellBg_2_4" position="179px -142px"/>
+                <Button profile="ftCellBtn" id="ftCellBtn_2_4" onClick="onCellClick_2_4" position="179px -142px"/>
+                <Text profile="ftCellNum" id="ftCellNum_2_4" position="179px -147px" text=""/>
+                <Text profile="ftCellGauge" id="ftCellGauge_2_4" position="179px -172px" text=""/>
+
+                <!-- Row 3 -->
+                <Bitmap profile="ftCellBg" id="ftCellBg_3_0" position="-105px -198px"/>
+                <Button profile="ftCellBtn" id="ftCellBtn_3_0" onClick="onCellClick_3_0" position="-105px -198px"/>
+                <Text profile="ftCellNum" id="ftCellNum_3_0" position="-105px -203px" text=""/>
+                <Text profile="ftCellGauge" id="ftCellGauge_3_0" position="-105px -228px" text=""/>
+
+                <Bitmap profile="ftCellBg" id="ftCellBg_3_1" position="-34px -198px"/>
+                <Button profile="ftCellBtn" id="ftCellBtn_3_1" onClick="onCellClick_3_1" position="-34px -198px"/>
+                <Text profile="ftCellNum" id="ftCellNum_3_1" position="-34px -203px" text=""/>
+                <Text profile="ftCellGauge" id="ftCellGauge_3_1" position="-34px -228px" text=""/>
+
+                <Bitmap profile="ftCellBg" id="ftCellBg_3_2" position="37px -198px"/>
+                <Button profile="ftCellBtn" id="ftCellBtn_3_2" onClick="onCellClick_3_2" position="37px -198px"/>
+                <Text profile="ftCellNum" id="ftCellNum_3_2" position="37px -203px" text=""/>
+                <Text profile="ftCellGauge" id="ftCellGauge_3_2" position="37px -228px" text=""/>
+
+                <Bitmap profile="ftCellBg" id="ftCellBg_3_3" position="108px -198px"/>
+                <Button profile="ftCellBtn" id="ftCellBtn_3_3" onClick="onCellClick_3_3" position="108px -198px"/>
+                <Text profile="ftCellNum" id="ftCellNum_3_3" position="108px -203px" text=""/>
+                <Text profile="ftCellGauge" id="ftCellGauge_3_3" position="108px -228px" text=""/>
+
+                <Bitmap profile="ftCellBg" id="ftCellBg_3_4" position="179px -198px"/>
+                <Button profile="ftCellBtn" id="ftCellBtn_3_4" onClick="onCellClick_3_4" position="179px -198px"/>
+                <Text profile="ftCellNum" id="ftCellNum_3_4" position="179px -203px" text=""/>
+                <Text profile="ftCellGauge" id="ftCellGauge_3_4" position="179px -228px" text=""/>
+
+                <!-- Right Panel: Controls + Info -->
+                <Bitmap profile="ftControlsBg" position="305px -30px"/>
+
+                <!-- Mode Toggle -->
+                <Text profile="ftControlLabel" position="305px -35px" text="Mode:"/>
+                <Bitmap profile="ftModeBtnBg" id="ftProbeBtnBg" position="305px -55px"/>
+                <Button profile="ftModeBtn" id="ftProbeBtn" onClick="onProbeModeClick" position="305px -55px"/>
+                <Text profile="ftModeBtnText" id="ftProbeBtnText" position="305px -60px" text="Probe"/>
+
+                <Bitmap profile="ftModeBtnBg" id="ftFlagBtnBg" position="305px -85px"/>
+                <Button profile="ftModeBtn" id="ftFlagBtn" onClick="onFlagModeClick" position="305px -85px"/>
+                <Text profile="ftModeBtnText" id="ftFlagBtnText" position="305px -90px" text="Flag"/>
+
+                <!-- Oil Counter -->
+                <Text profile="ftControlLabel" position="305px -120px" text="Oil Used:"/>
+                <Text profile="ftControlValue" id="ftOilUsedText" position="305px -138px" text="0.0L"/>
+
+                <!-- Hints -->
+                <Bitmap profile="ftActionBtnBg" id="ftHintBtnBg" position="305px -168px"/>
+                <Button profile="ftActionBtn" id="ftHintBtn" onClick="onHintClick" position="305px -168px"/>
+                <Text profile="ftActionBtnText" id="ftHintBtnText" position="305px -173px" text="Hint"/>
+                <Text profile="ftSmallInfo" id="ftHintsRemaining" position="305px -193px" text=""/>
+
+                <!-- Quick Scan -->
+                <Bitmap profile="ftActionBtnBg" id="ftQuickScanBtnBg" position="305px -215px"/>
+                <Button profile="ftActionBtn" id="ftQuickScanBtn" onClick="onQuickScanClick" position="305px -215px"/>
+                <Text profile="ftActionBtnText" id="ftQuickScanBtnText" position="305px -220px" text="Quick Scan"/>
+
+                <!-- Begin Repair -->
+                <Bitmap profile="ftRepairBtnBg" id="ftRepairBtnBg" position="305px -260px"/>
+                <Button profile="ftRepairBtn" id="ftRepairBtn" onClick="onBeginRepairClick" position="305px -260px"/>
+                <Text profile="ftRepairBtnText" id="ftRepairBtnText" position="305px -265px" text="Begin Repair"/>
+
+                <!-- Status message -->
+                <Text profile="ftStatusText" id="ftStatusMsg" position="0px -310px" text=""/>
+
+                <!-- Instructions Panel -->
+                <Bitmap profile="ftInstructionsBg" position="0px -335px"/>
+                <Text profile="ftInstructionsHeader" position="0px -340px" text="HOW TO PLAY"/>
+                <Text profile="ftInstructionsLine" position="0px -358px" text="PROBE mode: Click cells to reveal a number showing how many adjacent cells contain faults."/>
+                <Text profile="ftInstructionsLine" position="0px -372px" text="Gauge colors show fault severity nearby: GREEN = safe area, AMBER = minor fault, RED = critical."/>
+                <Text profile="ftInstructionsLine" position="0px -386px" text="FLAG mode: Click a suspected fault cell to mark it, then choose the type (Corroded/Cracked/Seized)."/>
+                <Text profile="ftInstructionsLine" position="0px -400px" text="Correct diagnoses improve repair quality. Hitting a fault while probing costs 3x oil!"/>
+                <Text profile="ftInstructionsLine" position="0px -414px" text="Flag all faults and click Begin Repair when ready. Use Hints or Quick Scan if you get stuck."/>
+            </GuiElement>
+
+            <!-- ========== SCREEN 3: TYPE SELECTION OVERLAY ========== -->
+            <GuiElement profile="ftStepContainer" id="typeSelectContainer" position="0px -55px" visible="false">
+                <Bitmap profile="ftOverlayBg" position="0px -80px"/>
+                <Text profile="ftOverlayTitle" position="0px -90px" text="DIAGNOSE FAULT TYPE"/>
+                <Text profile="ftSubtext" id="ftTypeSelectCell" position="0px -112px" text="Cell [A1]"/>
+
+                <!-- Corroded -->
+                <Bitmap profile="ftTypeBtnBg" id="ftCorrodedBtnBg" position="0px -145px"/>
+                <Button profile="ftTypeBtn" id="ftCorrodedBtn" onClick="onCorrodedClick" position="0px -145px"/>
+                <Text profile="ftTypeBtnText" id="ftCorrodedText" position="0px -150px" text="Corroded"/>
+                <Text profile="ftTypeDesc" position="0px -170px" text="Rust / oxidation damage"/>
+
+                <!-- Cracked -->
+                <Bitmap profile="ftTypeBtnBg" id="ftCrackedBtnBg" position="0px -195px"/>
+                <Button profile="ftTypeBtn" id="ftCrackedBtn" onClick="onCrackedClick" position="0px -195px"/>
+                <Text profile="ftTypeBtnText" id="ftCrackedText" position="0px -200px" text="Cracked"/>
+                <Text profile="ftTypeDesc" position="0px -220px" text="Stress fractures / fatigue"/>
+
+                <!-- Seized -->
+                <Bitmap profile="ftTypeBtnBg" id="ftSeizedBtnBg" position="0px -245px"/>
+                <Button profile="ftTypeBtn" id="ftSeizedBtn" onClick="onSeizedClick" position="0px -245px"/>
+                <Text profile="ftTypeBtnText" id="ftSeizedText" position="0px -250px" text="Seized"/>
+                <Text profile="ftTypeDesc" position="0px -270px" text="Locked / seized bearing"/>
+
+                <!-- Cancel -->
+                <Bitmap profile="ftCancelBtnBg" position="0px -305px"/>
+                <Button profile="ftCancelBtn" onClick="onTypeCancelClick" position="0px -305px"/>
+                <Text profile="ftCancelBtnText" position="0px -310px" text="Cancel"/>
+            </GuiElement>
+
+            <!-- ========== SCREEN 4: RESULTS ========== -->
+            <GuiElement profile="ftStepContainer" id="resultsContainer" position="0px -55px" visible="false">
+                <Text profile="ftSectionHeader" position="0px -5px" text="REPAIR RESULTS"/>
+
+                <!-- Per-fault results (up to 5 rows) -->
+                <Text profile="ftResultRow" id="ftResult0" position="0px -35px" text=""/>
+                <Text profile="ftResultRow" id="ftResult1" position="0px -55px" text=""/>
+                <Text profile="ftResultRow" id="ftResult2" position="0px -75px" text=""/>
+                <Text profile="ftResultRow" id="ftResult3" position="0px -95px" text=""/>
+                <Text profile="ftResultRow" id="ftResult4" position="0px -115px" text=""/>
+
+                <!-- Summary Section -->
+                <Bitmap profile="ftResultSummaryBg" position="0px -145px"/>
+                <Text profile="ftResultLabel" position="-180px -155px" text="Reliability Gain:"/>
+                <Text profile="ftResultValue" id="ftReliabilityGainText" position="100px -155px" text="+0.0%"/>
+                <Text profile="ftResultLabel" position="-180px -175px" text="Ceiling Restored:"/>
+                <Text profile="ftResultValue" id="ftCeilingGainText" position="100px -175px" text="+0.0%"/>
+                <Text profile="ftResultLabel" position="-180px -195px" text="Diagnosis Accuracy:"/>
+                <Text profile="ftResultValue" id="ftAccuracyText" position="100px -195px" text="0%"/>
+                <Text profile="ftResultLabel" position="-180px -215px" text="Oil Consumed:"/>
+                <Text profile="ftResultValue" id="ftOilConsumedText" position="100px -215px" text="0.0L"/>
+
+                <!-- Quality note -->
+                <Text profile="ftQualityNote" id="ftQualityNote" position="0px -250px" text=""/>
+            </GuiElement>
+
+        </GuiElement>
+
+        <!-- Button box -->
+        <BoxLayout profile="fs25_dialogButtonBox">
+            <Button profile="buttonBack" id="ftBackBtn" text="Back" onClick="onClickBack"/>
+            <Bitmap profile="fs25_dialogButtonBoxSeparator"/>
+            <Button profile="buttonOK" id="ftCloseBtn" text="Close" onClick="onClickClose"/>
+        </BoxLayout>
+    </GuiElement>
+
+    <!-- ========== PROFILE DEFINITIONS ========== -->
+    <GUIProfiles>
+        <!-- Dialog Title -->
+        <Profile name="ftTitle" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="600px 26px"/>
+            <textSize value="20px"/>
+            <textBold value="true"/>
+            <textColor value="0.9 0.75 0.3 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+
+        <!-- Step container (full-width area for each screen) -->
+        <Profile name="ftStepContainer" extends="emptyPanel" with="anchorTopCenter">
+            <size value="720px 460px"/>
+        </Profile>
+
+        <!-- Section backgrounds -->
+        <Profile name="ftSection" extends="emptyPanel" with="anchorTopCenter">
+            <size value="700px 100px"/>
+        </Profile>
+
+        <Profile name="ftSectionBg" extends="baseReference" with="anchorTopCenter">
+            <size value="700px 65px"/>
+            <imageColor value="0.08 0.08 0.12 0.9"/>
+        </Profile>
+
+        <Profile name="ftInfoBg" extends="baseReference" with="anchorTopCenter">
+            <size value="700px 50px"/>
+            <imageColor value="0.08 0.08 0.12 0.9"/>
+        </Profile>
+
+        <Profile name="ftSectionHeader" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="680px 20px"/>
+            <textSize value="12px"/>
+            <textBold value="true"/>
+            <textColor value="0.6 0.6 0.7 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+
+        <Profile name="ftVehicleName" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="680px 22px"/>
+            <textSize value="16px"/>
+            <textBold value="true"/>
+            <textColor value="1 1 1 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+
+        <Profile name="ftSubtext" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="680px 18px"/>
+            <textSize value="11px"/>
+            <textColor value="0.7 0.7 0.8 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+
+        <Profile name="ftHintText" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="680px 18px"/>
+            <textSize value="11px"/>
+            <textColor value="0.5 0.5 0.6 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+
+        <!-- Component selection boxes -->
+        <Profile name="ftComponentBox" extends="emptyPanel" with="anchorTopCenter">
+            <size value="200px 95px"/>
+        </Profile>
+
+        <Profile name="ftComponentBg" extends="baseReference" with="anchorTopCenter">
+            <size value="200px 95px"/>
+            <imageColor value="0.12 0.12 0.16 1"/>
+        </Profile>
+
+        <Profile name="ftComponentBtn" extends="emptyPanel" with="anchorTopCenter">
+            <size value="200px 95px"/>
+            <isFocusable value="true"/>
+        </Profile>
+
+        <Profile name="ftComponentIcon" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="200px 24px"/>
+            <textSize value="18px"/>
+            <textBold value="true"/>
+            <textColor value="0.9 0.75 0.3 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+
+        <Profile name="ftComponentLabel" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="200px 18px"/>
+            <textSize value="12px"/>
+            <textBold value="true"/>
+            <textColor value="1 1 1 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+
+        <Profile name="ftComponentValue" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="200px 18px"/>
+            <textSize value="14px"/>
+            <textBold value="true"/>
+            <textColor value="0.3 1 0.3 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+
+        <Profile name="ftComponentStatus" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="200px 15px"/>
+            <textSize value="10px"/>
+            <textColor value="0.6 0.6 0.7 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+
+        <!-- Resource info labels/values -->
+        <Profile name="ftLabel" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="100px 18px"/>
+            <textSize value="12px"/>
+            <textColor value="0.7 0.7 0.8 1"/>
+            <textAlignment value="left"/>
+        </Profile>
+
+        <Profile name="ftValue" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="100px 18px"/>
+            <textSize value="12px"/>
+            <textBold value="true"/>
+            <textColor value="1 1 1 1"/>
+            <textAlignment value="left"/>
+        </Profile>
+
+        <!-- ===== GRID CELLS ===== -->
+        <Profile name="ftCellBg" extends="baseReference" with="anchorTopCenter">
+            <size value="65px 50px"/>
+            <imageColor value="0.15 0.15 0.2 1"/>
+        </Profile>
+
+        <Profile name="ftCellBtn" extends="emptyPanel" with="anchorTopCenter">
+            <size value="65px 50px"/>
+            <isFocusable value="true"/>
+        </Profile>
+
+        <Profile name="ftCellNum" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="65px 22px"/>
+            <textSize value="18px"/>
+            <textBold value="true"/>
+            <textColor value="1 1 1 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+
+        <Profile name="ftCellGauge" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="65px 16px"/>
+            <textSize value="9px"/>
+            <textColor value="0.5 0.5 0.6 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+
+        <!-- ===== GRID CONTROLS ===== -->
+        <Profile name="ftGridInfo" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="280px 20px"/>
+            <textSize value="13px"/>
+            <textBold value="true"/>
+            <textColor value="0.9 0.75 0.3 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+
+        <Profile name="ftControlsBg" extends="baseReference" with="anchorTopCenter">
+            <size value="120px 280px"/>
+            <imageColor value="0.08 0.08 0.12 0.7"/>
+        </Profile>
+
+        <Profile name="ftControlLabel" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="110px 16px"/>
+            <textSize value="11px"/>
+            <textBold value="true"/>
+            <textColor value="0.7 0.7 0.8 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+
+        <Profile name="ftControlValue" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="110px 18px"/>
+            <textSize value="13px"/>
+            <textBold value="true"/>
+            <textColor value="1 1 1 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+
+        <!-- Mode buttons -->
+        <Profile name="ftModeBtnBg" extends="baseReference" with="anchorTopCenter">
+            <size value="110px 26px"/>
+            <imageColor value="0.15 0.15 0.2 1"/>
+        </Profile>
+
+        <Profile name="ftModeBtn" extends="emptyPanel" with="anchorTopCenter">
+            <size value="110px 26px"/>
+            <isFocusable value="true"/>
+        </Profile>
+
+        <Profile name="ftModeBtnText" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="110px 18px"/>
+            <textSize value="12px"/>
+            <textBold value="true"/>
+            <textColor value="1 1 1 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+
+        <!-- Action buttons (hint, quick scan) -->
+        <Profile name="ftActionBtnBg" extends="baseReference" with="anchorTopCenter">
+            <size value="110px 24px"/>
+            <imageColor value="0.12 0.12 0.18 1"/>
+        </Profile>
+
+        <Profile name="ftActionBtn" extends="emptyPanel" with="anchorTopCenter">
+            <size value="110px 24px"/>
+            <isFocusable value="true"/>
+        </Profile>
+
+        <Profile name="ftActionBtnText" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="110px 16px"/>
+            <textSize value="11px"/>
+            <textBold value="true"/>
+            <textColor value="0.8 0.8 0.9 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+
+        <Profile name="ftSmallInfo" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="110px 14px"/>
+            <textSize value="9px"/>
+            <textColor value="0.5 0.5 0.6 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+
+        <!-- Repair button -->
+        <Profile name="ftRepairBtnBg" extends="baseReference" with="anchorTopCenter">
+            <size value="110px 30px"/>
+            <imageColor value="0.1 0.3 0.1 1"/>
+        </Profile>
+
+        <Profile name="ftRepairBtn" extends="emptyPanel" with="anchorTopCenter">
+            <size value="110px 30px"/>
+            <isFocusable value="true"/>
+        </Profile>
+
+        <Profile name="ftRepairBtnText" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="110px 18px"/>
+            <textSize value="11px"/>
+            <textBold value="true"/>
+            <textColor value="0.3 1.0 0.3 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+
+        <!-- Status bar -->
+        <Profile name="ftStatusText" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="700px 18px"/>
+            <textSize value="11px"/>
+            <textColor value="0.9 0.7 0.3 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+
+        <!-- ===== INSTRUCTIONS PANEL ===== -->
+        <Profile name="ftInstructionsBg" extends="baseReference" with="anchorTopCenter">
+            <size value="700px 110px"/>
+            <imageColor value="0.06 0.06 0.10 0.8"/>
+        </Profile>
+
+        <Profile name="ftInstructionsHeader" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="680px 16px"/>
+            <textSize value="11px"/>
+            <textBold value="true"/>
+            <textColor value="0.7 0.6 0.3 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+
+        <Profile name="ftInstructionsLine" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="680px 13px"/>
+            <textSize value="10px"/>
+            <textColor value="0.55 0.55 0.65 1"/>
+            <textAlignment value="left"/>
+        </Profile>
+
+        <!-- ===== TYPE SELECTION OVERLAY ===== -->
+        <Profile name="ftOverlayBg" extends="baseReference" with="anchorTopCenter">
+            <size value="500px 240px"/>
+            <imageColor value="0.06 0.06 0.1 0.95"/>
+        </Profile>
+
+        <Profile name="ftOverlayTitle" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="480px 22px"/>
+            <textSize value="16px"/>
+            <textBold value="true"/>
+            <textColor value="0.9 0.75 0.3 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+
+        <Profile name="ftTypeBtnBg" extends="baseReference" with="anchorTopCenter">
+            <size value="400px 35px"/>
+            <imageColor value="0.12 0.12 0.16 1"/>
+        </Profile>
+
+        <Profile name="ftTypeBtn" extends="emptyPanel" with="anchorTopCenter">
+            <size value="400px 35px"/>
+            <isFocusable value="true"/>
+        </Profile>
+
+        <Profile name="ftTypeBtnText" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="400px 18px"/>
+            <textSize value="14px"/>
+            <textBold value="true"/>
+            <textColor value="1 1 1 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+
+        <Profile name="ftTypeDesc" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="400px 15px"/>
+            <textSize value="10px"/>
+            <textColor value="0.5 0.5 0.6 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+
+        <Profile name="ftCancelBtnBg" extends="baseReference" with="anchorTopCenter">
+            <size value="200px 28px"/>
+            <imageColor value="0.3 0.1 0.1 1"/>
+        </Profile>
+
+        <Profile name="ftCancelBtn" extends="emptyPanel" with="anchorTopCenter">
+            <size value="200px 28px"/>
+            <isFocusable value="true"/>
+        </Profile>
+
+        <Profile name="ftCancelBtnText" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="200px 18px"/>
+            <textSize value="12px"/>
+            <textBold value="true"/>
+            <textColor value="1 0.5 0.5 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+
+        <!-- ===== RESULTS SCREEN ===== -->
+        <Profile name="ftResultRow" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="680px 18px"/>
+            <textSize value="12px"/>
+            <textColor value="1 1 1 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+
+        <Profile name="ftResultSummaryBg" extends="baseReference" with="anchorTopCenter">
+            <size value="500px 100px"/>
+            <imageColor value="0.08 0.08 0.12 0.9"/>
+        </Profile>
+
+        <Profile name="ftResultLabel" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="250px 18px"/>
+            <textSize value="12px"/>
+            <textColor value="0.7 0.7 0.8 1"/>
+            <textAlignment value="left"/>
+        </Profile>
+
+        <Profile name="ftResultValue" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="150px 18px"/>
+            <textSize value="14px"/>
+            <textBold value="true"/>
+            <textColor value="0.3 1 0.3 1"/>
+            <textAlignment value="left"/>
+        </Profile>
+
+        <Profile name="ftQualityNote" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="680px 18px"/>
+            <textSize value="11px"/>
+            <textColor value="0.9 0.7 0.3 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+    </GUIProfiles>
+</GUI>

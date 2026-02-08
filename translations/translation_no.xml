@@ -1966,10 +1966,45 @@
         <e k="usedplus_serviceTruck_insufficientFunds" v="Utilstrekkelige midler! Du trenger $%s kontant." eh="9b84e434" />
         <e k="usedplus_serviceTruck_alreadyOwned" v="Du eier allerede en servicebil." eh="8d7c53f6" />
 
+        <!-- v2.11.1: Fargetilpasning av servicebil -->
+        <e k="configuration_chassisColor" v="Chassisfarge" eh="17d6aa5b" />
+        <e k="configuration_bodyColor" v="Karosserifarge" eh="e607d9e6" />
+        <e k="usedplus_serviceTruck_stripeColor" v="Stripefarge" eh="12b22714" />
+
+        <!-- v2.12.0: Fault Tracer Minigame -->
+        <e k="usedplus_ft_title" v="FEILSPORING" eh="92470a22" />
+        <e k="usedplus_ft_selectComponent" v="Velg komponent å diagnostisere" eh="3fb628e9" />
+        <e k="usedplus_ft_probeMode" v="Sonder" eh="76d16796" />
+        <e k="usedplus_ft_flagMode" v="Marker" eh="c5836008" />
+        <e k="usedplus_ft_quickScan" v="Hurtigskanning (2x kostnad)" eh="31d0f8fb" />
+        <e k="usedplus_ft_hint" v="Verkstedhåndbok" eh="d96f8735" />
+        <e k="usedplus_ft_beginRepair" v="Start reparasjon" eh="e792568e" />
+        <e k="usedplus_ft_oilUsed" v="Olje brukt: %.1fL" eh="bccd33a2" />
+        <e k="usedplus_ft_faultsFound" v="Feil: %d/%d" eh="5abe853a" />
+        <e k="usedplus_ft_corroded" v="Korrodert" eh="4b370f36" />
+        <e k="usedplus_ft_cracked" v="Sprukket" eh="26d3b853" />
+        <e k="usedplus_ft_seized" v="Gridd" eh="04db850b" />
+        <e k="usedplus_ft_selectType" v="Diagnostiser feiltype:" eh="bf552726" />
+        <e k="usedplus_ft_probeHit" v="FEIL TRUFFET! Væskelekkasje - 3x kostnad" eh="21e8a8bf" />
+        <e k="usedplus_ft_correct" v="KORREKT" eh="0d536515" />
+        <e k="usedplus_ft_incorrect" v="FEIL" eh="befd188c" />
+        <e k="usedplus_ft_repairResult" v="%s: %s - %s +%.0f%%" eh="ba74960b" />
+        <e k="usedplus_ft_totalGain" v="Totalt: +%.1f%% pålitelighet, +%.1f%% tak" eh="1da183e9" />
+        <e k="usedplus_ft_totalCost" v="Forbrukte ressurser: %.1fL olje" eh="3dd1f971" />
+        <e k="usedplus_ft_hintsRemaining" v="Hint: %d" eh="c8f080c2" />
+        <e k="usedplus_ft_quickScanCap" v="Kvalitet begrenset til 60%% (Hurtigskanning)" eh="5b519744" />
+        <e k="usedplus_ft_noFaults" v="Ingen feil - systemet er i orden!" eh="6bfa5546" />
+        <e k="usedplus_ft_action" v="Feilsporing: %s" eh="c4066687" />
+        <e k="usedplus_ft_corrodedDesc" v="Rust- / oksidasjonsskade" eh="8a01ae60" />
+        <e k="usedplus_ft_crackedDesc" v="Spenningssprekker / utmatting" eh="81d5118b" />
+        <e k="usedplus_ft_seizedDesc" v="Gridd / blokkert lager" eh="647b76a9" />
+
         <!-- v2.9.0: Spare Parts Pallet -->
         <e k="usedplus_sparePartsPallet_name" v="Reservedelspall" eh="9bf39a93" />
         <e k="usedplus_sparePartsPallet_function" v="Forbrukbare reservedeler for servicebil-restaurering. Plasser nær lastebilen under restaureringsarbeid." eh="c90aa3eb" />
         <e k="fillType_spareParts" v="Reservedeler" eh="ab6b8ce1" />
+        <e k="fillType_oil" v="[EN] Motor Oil" eh="511aaabd" />
+        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="f9c4d7d9" />
         <e k="unit_pcs" v="pcs" eh="3ecf2642" />
 
         <!-- v2.9.0: Restoration Diagnostic Symptoms - Engine -->
@@ -2481,6 +2516,9 @@
         <e k="usedplus_admin_btn_rel_10" v="Pål: 10%" eh="54d6e770" />
         <e k="usedplus_admin_btn_reset_hours" v="Nullstill timer" eh="a519e5e1" />
         <e k="usedplus_admin_btn_add_hours" v="+1000 timer" eh="ef05132d" />
+        <e k="usedplus_admin_btn_dna_lemon" v="[EN] 0.1 Lemon" eh="0047d5bc" />
+        <e k="usedplus_admin_btn_dna_average" v="[EN] 0.5 Average" eh="472d5599" />
+        <e k="usedplus_admin_btn_dna_workhorse" v="[EN] 0.9 Workhorse" eh="b0f0ee0b" />
         <e k="usedplus_admin_btn_dna_desperate" v="Desperat" eh="97df4642" />
         <e k="usedplus_admin_btn_dna_reasonable" v="Rimelig" eh="e485c034" />
         <e k="usedplus_admin_btn_dna_immovable" v="Uflyttbar" eh="57d0e57c" />

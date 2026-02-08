@@ -1966,10 +1966,45 @@
         <e k="usedplus_serviceTruck_insufficientFunds" v="자금 부족! $%s 현금이 필요합니다." eh="9b84e434" />
         <e k="usedplus_serviceTruck_alreadyOwned" v="이미 서비스 트럭을 소유하고 있습니다." eh="8d7c53f6" />
 
+        <!-- v2.11.1: 서비스 트럭 색상 사용자 지정 -->
+        <e k="configuration_chassisColor" v="섀시 색상" eh="17d6aa5b" />
+        <e k="configuration_bodyColor" v="차체 색상" eh="e607d9e6" />
+        <e k="usedplus_serviceTruck_stripeColor" v="줄무늬 색상" eh="12b22714" />
+
+        <!-- v2.12.0: Fault Tracer Minigame -->
+        <e k="usedplus_ft_title" v="결함 추적기" eh="92470a22" />
+        <e k="usedplus_ft_selectComponent" v="진단할 구성요소 선택" eh="3fb628e9" />
+        <e k="usedplus_ft_probeMode" v="탐색" eh="76d16796" />
+        <e k="usedplus_ft_flagMode" v="표시" eh="c5836008" />
+        <e k="usedplus_ft_quickScan" v="빠른 스캔 (2배 비용)" eh="31d0f8fb" />
+        <e k="usedplus_ft_hint" v="서비스 매뉴얼" eh="d96f8735" />
+        <e k="usedplus_ft_beginRepair" v="수리 시작" eh="e792568e" />
+        <e k="usedplus_ft_oilUsed" v="사용된 오일: %.1fL" eh="bccd33a2" />
+        <e k="usedplus_ft_faultsFound" v="결함: %d/%d" eh="5abe853a" />
+        <e k="usedplus_ft_corroded" v="부식됨" eh="4b370f36" />
+        <e k="usedplus_ft_cracked" v="균열됨" eh="26d3b853" />
+        <e k="usedplus_ft_seized" v="고착됨" eh="04db850b" />
+        <e k="usedplus_ft_selectType" v="결함 유형 진단:" eh="bf552726" />
+        <e k="usedplus_ft_probeHit" v="결함 발견! 유체 누출 - 3배 비용" eh="21e8a8bf" />
+        <e k="usedplus_ft_correct" v="정확" eh="0d536515" />
+        <e k="usedplus_ft_incorrect" v="부정확" eh="befd188c" />
+        <e k="usedplus_ft_repairResult" v="%s: %s - %s +%.0f%%" eh="ba74960b" />
+        <e k="usedplus_ft_totalGain" v="합계: +%.1f%% 신뢰성, +%.1f%% 상한" eh="1da183e9" />
+        <e k="usedplus_ft_totalCost" v="소비된 자원: %.1fL 오일" eh="3dd1f971" />
+        <e k="usedplus_ft_hintsRemaining" v="힌트: %d" eh="c8f080c2" />
+        <e k="usedplus_ft_quickScanCap" v="품질 60%%로 제한 (빠른 스캔)" eh="5b519744" />
+        <e k="usedplus_ft_noFaults" v="결함 없음 - 시스템 정상!" eh="6bfa5546" />
+        <e k="usedplus_ft_action" v="결함 추적기: %s" eh="c4066687" />
+        <e k="usedplus_ft_corrodedDesc" v="녹/산화 손상" eh="8a01ae60" />
+        <e k="usedplus_ft_crackedDesc" v="응력 균열/피로" eh="81d5118b" />
+        <e k="usedplus_ft_seizedDesc" v="고착/잠긴 베어링" eh="647b76a9" />
+
         <!-- v2.9.0: Spare Parts Pallet -->
         <e k="usedplus_sparePartsPallet_name" v="예비 부품 팔레트" eh="9bf39a93" />
         <e k="usedplus_sparePartsPallet_function" v="서비스 트럭 복원용 소모성 예비 부품. 복원 작업 중 트럭 근처에 배치하세요." eh="c90aa3eb" />
         <e k="fillType_spareParts" v="예비 부품" eh="ab6b8ce1" />
+        <e k="fillType_oil" v="[EN] Motor Oil" eh="511aaabd" />
+        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="f9c4d7d9" />
         <e k="unit_pcs" v="개" eh="3ecf2642" />
 
         <!-- v2.9.0: Restoration Diagnostic Symptoms - Engine -->
@@ -2481,6 +2516,9 @@
         <e k="usedplus_admin_btn_rel_10" v="Rel: 10%" eh="54d6e770" />
         <e k="usedplus_admin_btn_reset_hours" v="Reset Hours" eh="a519e5e1" />
         <e k="usedplus_admin_btn_add_hours" v="+1000시간" eh="ef05132d" />
+        <e k="usedplus_admin_btn_dna_lemon" v="[EN] 0.1 Lemon" eh="0047d5bc" />
+        <e k="usedplus_admin_btn_dna_average" v="[EN] 0.5 Average" eh="472d5599" />
+        <e k="usedplus_admin_btn_dna_workhorse" v="[EN] 0.9 Workhorse" eh="b0f0ee0b" />
         <e k="usedplus_admin_btn_dna_desperate" v="절박함" eh="97df4642" />
         <e k="usedplus_admin_btn_dna_reasonable" v="합리적" eh="e485c034" />
         <e k="usedplus_admin_btn_dna_immovable" v="확고함" eh="57d0e57c" />

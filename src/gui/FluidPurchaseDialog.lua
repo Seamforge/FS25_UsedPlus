@@ -17,7 +17,9 @@ FluidPurchaseDialog.INSTANCE = nil
 
 -- Fluid type definitions
 FluidPurchaseDialog.FLUID_TYPES = {"oil", "hydraulic"}
-FluidPurchaseDialog.PURCHASE_AMOUNT = 50  -- Liters per purchase
+
+-- v2.11.1: Selectable purchase amounts (50L increments up to 500L)
+FluidPurchaseDialog.PURCHASE_AMOUNTS = {50, 100, 150, 200, 250, 300, 350, 400, 450, 500}
 
 --[[
     Constructor
@@ -37,6 +39,11 @@ function FluidPurchaseDialog.new(target, customMt)
     self.tankCapacity = 500
     self.tankFluidType = nil
     self.pricePerLiter = 5
+
+    -- v2.11.1: Amount selection (50L-500L)
+    self.selectedAmount = 50
+    self.amountIndex = 1
+    self.availableAmounts = {}
 
     return self
 end
@@ -102,8 +109,9 @@ end
 function FluidPurchaseDialog:onOpen()
     FluidPurchaseDialog:superClass().onOpen(self)
 
-    -- Populate dropdown
+    -- Populate dropdowns
     self:populateFluidTypeOptions()
+    self:populateAmountOptions()
 
     -- Update display
     self:updateDisplay()
@@ -122,6 +130,62 @@ function FluidPurchaseDialog:populateFluidTypeOptions()
 
     self.fluidTypeOption:setTexts({oilName, hydraulicName})
     self.fluidTypeOption:setState(self.fluidTypeIndex)
+end
+
+--[[
+    v2.11.1: Populate amount selection (50L increments, capped at available space)
+]]
+function FluidPurchaseDialog:populateAmountOptions()
+    if self.amountOption == nil then
+        return
+    end
+
+    local spaceAvailable = self.tankCapacity - self.tankLevel
+    self.availableAmounts = {}
+    local texts = {}
+
+    for _, amount in ipairs(FluidPurchaseDialog.PURCHASE_AMOUNTS) do
+        if amount <= spaceAvailable then
+            table.insert(self.availableAmounts, amount)
+            table.insert(texts, string.format("%d L", amount))
+        end
+    end
+
+    -- If space is less than 50L but > 0, offer what's left
+    if #self.availableAmounts == 0 and spaceAvailable > 0 then
+        local remaining = math.floor(spaceAvailable)
+        table.insert(self.availableAmounts, remaining)
+        table.insert(texts, string.format("%d L", remaining))
+    end
+
+    if #texts > 0 then
+        self.amountOption:setTexts(texts)
+        -- Default to the largest amount
+        self.amountIndex = #self.availableAmounts
+        self.amountOption:setState(self.amountIndex)
+        self.selectedAmount = self.availableAmounts[self.amountIndex]
+    else
+        self.amountOption:setTexts({"Tank Full"})
+        self.amountOption:setState(1)
+        self.selectedAmount = 0
+    end
+end
+
+--[[
+    v2.11.1: Amount dropdown changed
+]]
+function FluidPurchaseDialog:onAmountChanged()
+    if self.amountOption == nil then
+        return
+    end
+
+    local state = self.amountOption:getState()
+    if state >= 1 and state <= #self.availableAmounts then
+        self.amountIndex = state
+        self.selectedAmount = self.availableAmounts[state]
+    end
+
+    self:updateDisplay()
 end
 
 --[[
@@ -149,25 +213,14 @@ function FluidPurchaseDialog:updateDisplay()
         end
     end
 
-    -- Calculate purchase details
+    -- v2.11.1: Calculate purchase details using selected amount
     local spaceAvailable = self.tankCapacity - self.tankLevel
-    local purchaseAmount = math.min(FluidPurchaseDialog.PURCHASE_AMOUNT, spaceAvailable)
+    local purchaseAmount = self.selectedAmount or 0
     local cost = purchaseAmount * self.pricePerLiter
-
-    -- Amount text
-    if self.amountText then
-        if spaceAvailable <= 0 then
-            self.amountText:setText("Tank Full!")
-            self.amountText:setTextColor(1, 0.3, 0.3, 1)
-        else
-            self.amountText:setText(string.format("%.0f L", purchaseAmount))
-            self.amountText:setTextColor(0.4, 0.85, 1, 1)
-        end
-    end
 
     -- Cost text
     if self.costText then
-        if spaceAvailable <= 0 then
+        if spaceAvailable <= 0 or purchaseAmount <= 0 then
             self.costText:setText("-")
             self.costText:setTextColor(0.5, 0.5, 0.5, 1)
         else
@@ -177,7 +230,7 @@ function FluidPurchaseDialog:updateDisplay()
     end
 
     -- Check if we can purchase the selected fluid type
-    local canPurchase = spaceAvailable > 0
+    local canPurchase = spaceAvailable > 0 and purchaseAmount > 0
 
     -- Can't mix fluids
     if self.tankFluidType and self.tankLevel > 0 and self.tankFluidType ~= self.selectedFluidType then
@@ -212,6 +265,8 @@ function FluidPurchaseDialog:onFluidTypeChanged()
         self.fluidTypeIndex = 2
     end
 
+    -- v2.11.1: Re-populate amounts (available space may change if mixing is blocked)
+    self:populateAmountOptions()
     self:updateDisplay()
 end
 
@@ -230,9 +285,9 @@ function FluidPurchaseDialog:onClickPurchase()
     UsedPlus.logDebug(string.format("FluidPurchaseDialog:onClickPurchase - servicePoint exists, tankLevel=%.0f, tankCapacity=%.0f",
         self.tankLevel, self.tankCapacity))
 
-    -- Calculate purchase amount
+    -- v2.11.1: Use selected amount from dropdown
     local spaceAvailable = self.tankCapacity - self.tankLevel
-    local purchaseAmount = math.min(FluidPurchaseDialog.PURCHASE_AMOUNT, spaceAvailable)
+    local purchaseAmount = math.min(self.selectedAmount or 50, spaceAvailable)
 
     UsedPlus.logDebug(string.format("FluidPurchaseDialog:onClickPurchase - spaceAvailable=%.0f, purchaseAmount=%.0f",
         spaceAvailable, purchaseAmount))

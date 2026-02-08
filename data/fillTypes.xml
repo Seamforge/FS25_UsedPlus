@@ -4,24 +4,38 @@
 
     USEDPLUS_SPAREPARTS: Consumable parts used during vehicle restoration.
     Purchased as pallets from the shop and consumed by the Service Truck.
+
+    OIL: Motor oil for restoration work and engine maintenance.
+    HYDRAULICOIL: Hydraulic fluid for restoration work and hydraulic system maintenance.
+
+    v2.11.1: Removed broken $data/store/menu/hud_fill_unknown.dds references
+    that caused "Missing dds file" errors and corrupted HUD gauge display.
 -->
 <map xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../shared/xml/schema/fillTypes.xsd">
 
     <fillTypes>
         <!-- Spare Parts for Service Truck restoration system -->
         <fillType name="USEDPLUS_SPAREPARTS" title="$l10n_fillType_spareParts" showOnPriceTable="false" unitShort="$l10n_unit_pcs">
-            <!-- Solid material - no liquid physics -->
             <physics massPerLiter="0.5" maxPhysicalSurfaceAngle="45" />
-            <!-- Simple box icon - we'll use a generic part icon -->
-            <image hud="$data/store/menu/hud_fill_unknown.dds" />
-            <!-- No economy - not sold at selling points -->
             <economy pricePerLiter="5.00" />
+        </fillType>
+
+        <!-- Motor Oil for Service Truck restoration -->
+        <fillType name="OIL" title="$l10n_fillType_oil" showOnPriceTable="false" unitShort="$l10n_unit_literShort">
+            <physics massPerLiter="0.87" maxPhysicalSurfaceAngle="25" />
+            <economy pricePerLiter="3.00" />
+        </fillType>
+
+        <!-- Hydraulic Oil for Service Truck restoration -->
+        <fillType name="HYDRAULICOIL" title="$l10n_fillType_hydraulicOil" showOnPriceTable="false" unitShort="$l10n_unit_literShort">
+            <physics massPerLiter="0.88" maxPhysicalSurfaceAngle="25" />
+            <economy pricePerLiter="4.00" />
         </fillType>
     </fillTypes>
 
     <fillTypeCategories>
         <!-- Spare parts category for easy identification -->
-        <fillTypeCategory name="USEDPLUS_RESTORATION">USEDPLUS_SPAREPARTS</fillTypeCategory>
+        <fillTypeCategory name="USEDPLUS_RESTORATION">USEDPLUS_SPAREPARTS OIL HYDRAULICOIL</fillTypeCategory>
     </fillTypeCategories>
 
 </map>

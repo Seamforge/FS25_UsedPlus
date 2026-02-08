@@ -1966,10 +1966,45 @@
         <e k="usedplus_serviceTruck_insufficientFunds" v="Dana tidak cukup! Anda butuh uang tunai $%s." eh="9b84e434" />
         <e k="usedplus_serviceTruck_alreadyOwned" v="Anda sudah memiliki Truk Servis." eh="8d7c53f6" />
 
+        <!-- v2.11.1: Kustomisasi warna truk servis -->
+        <e k="configuration_chassisColor" v="Warna Sasis" eh="17d6aa5b" />
+        <e k="configuration_bodyColor" v="Warna Bodi" eh="e607d9e6" />
+        <e k="usedplus_serviceTruck_stripeColor" v="Warna Garis" eh="12b22714" />
+
+        <!-- v2.12.0: Fault Tracer Minigame -->
+        <e k="usedplus_ft_title" v="PELACAK KERUSAKAN" eh="92470a22" />
+        <e k="usedplus_ft_selectComponent" v="Pilih komponen untuk didiagnosis" eh="3fb628e9" />
+        <e k="usedplus_ft_probeMode" v="Periksa" eh="76d16796" />
+        <e k="usedplus_ft_flagMode" v="Tandai" eh="c5836008" />
+        <e k="usedplus_ft_quickScan" v="Scan cepat (2x biaya)" eh="31d0f8fb" />
+        <e k="usedplus_ft_hint" v="Manual servis" eh="d96f8735" />
+        <e k="usedplus_ft_beginRepair" v="Mulai perbaikan" eh="e792568e" />
+        <e k="usedplus_ft_oilUsed" v="Oli terpakai: %.1fL" eh="bccd33a2" />
+        <e k="usedplus_ft_faultsFound" v="Kerusakan: %d/%d" eh="5abe853a" />
+        <e k="usedplus_ft_corroded" v="Berkarat" eh="4b370f36" />
+        <e k="usedplus_ft_cracked" v="Retak" eh="26d3b853" />
+        <e k="usedplus_ft_seized" v="Macet" eh="04db850b" />
+        <e k="usedplus_ft_selectType" v="Diagnosis jenis kerusakan:" eh="bf552726" />
+        <e k="usedplus_ft_probeHit" v="KERUSAKAN DITEMUKAN! Kebocoran cairan - 3x biaya" eh="21e8a8bf" />
+        <e k="usedplus_ft_correct" v="BENAR" eh="0d536515" />
+        <e k="usedplus_ft_incorrect" v="SALAH" eh="befd188c" />
+        <e k="usedplus_ft_repairResult" v="%s: %s - %s +%.0f%%" eh="ba74960b" />
+        <e k="usedplus_ft_totalGain" v="Total: +%.1f%% keandalan, +%.1f%% batas" eh="1da183e9" />
+        <e k="usedplus_ft_totalCost" v="Sumber daya terpakai: %.1fL oli" eh="3dd1f971" />
+        <e k="usedplus_ft_hintsRemaining" v="Petunjuk: %d" eh="c8f080c2" />
+        <e k="usedplus_ft_quickScanCap" v="Kualitas dibatasi 60%% (Scan cepat)" eh="5b519744" />
+        <e k="usedplus_ft_noFaults" v="Tidak ada kerusakan - sistem baik!" eh="6bfa5546" />
+        <e k="usedplus_ft_action" v="Pelacak kerusakan: %s" eh="c4066687" />
+        <e k="usedplus_ft_corrodedDesc" v="Kerusakan karat / oksidasi" eh="8a01ae60" />
+        <e k="usedplus_ft_crackedDesc" v="Retakan tekanan / kelelahan" eh="81d5118b" />
+        <e k="usedplus_ft_seizedDesc" v="Bearing macet / terkunci" eh="647b76a9" />
+
         <!-- v2.9.0: Spare Parts Pallet -->
         <e k="usedplus_sparePartsPallet_name" v="Palet Suku Cadang" eh="9bf39a93" />
         <e k="usedplus_sparePartsPallet_function" v="Suku cadang habis pakai untuk restorasi Truk Servis. Tempatkan di dekat truk selama pekerjaan restorasi." eh="c90aa3eb" />
         <e k="fillType_spareParts" v="Suku Cadang" eh="ab6b8ce1" />
+        <e k="fillType_oil" v="[EN] Motor Oil" eh="511aaabd" />
+        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="f9c4d7d9" />
         <e k="unit_pcs" v="pcs" eh="3ecf2642" />
 
         <!-- v2.9.0: Restoration Diagnostic Symptoms - Engine -->
@@ -2481,6 +2516,9 @@
         <e k="usedplus_admin_btn_rel_10" v="Rel: 10%" eh="54d6e770" />
         <e k="usedplus_admin_btn_reset_hours" v="Reset Jam" eh="a519e5e1" />
         <e k="usedplus_admin_btn_add_hours" v="+1000 Jam" eh="ef05132d" />
+        <e k="usedplus_admin_btn_dna_lemon" v="[EN] 0.1 Lemon" eh="0047d5bc" />
+        <e k="usedplus_admin_btn_dna_average" v="[EN] 0.5 Average" eh="472d5599" />
+        <e k="usedplus_admin_btn_dna_workhorse" v="[EN] 0.9 Workhorse" eh="b0f0ee0b" />
         <e k="usedplus_admin_btn_dna_desperate" v="Putus Asa" eh="97df4642" />
         <e k="usedplus_admin_btn_dna_reasonable" v="Wajar" eh="e485c034" />
         <e k="usedplus_admin_btn_dna_immovable" v="Tidak Bergerak" eh="57d0e57c" />

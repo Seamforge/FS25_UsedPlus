@@ -1967,10 +1967,46 @@
         <e k="usedplus_serviceTruck_insufficientFunds" v="Insufficient funds! You need $%s cash." eh="9b84e434" />
         <e k="usedplus_serviceTruck_alreadyOwned" v="You already own a Service Truck." eh="8d7c53f6" />
 
+        <!-- v2.11.1: Service Truck Color Customization -->
+        <e k="configuration_chassisColor" v="Chassis Color" eh="17d6aa5b" />
+        <e k="configuration_bodyColor" v="Body Color" eh="e607d9e6" />
+        <e k="usedplus_serviceTruck_stripeColor" v="Stripe Color" eh="12b22714" />
+
+        <!-- v2.12.0: Fault Tracer Minigame -->
+        <e k="usedplus_ft_title" v="FAULT TRACER" eh="92470a22" />
+        <e k="usedplus_ft_selectComponent" v="Select component to diagnose" eh="3fb628e9" />
+        <e k="usedplus_ft_probeMode" v="Probe" eh="76d16796" />
+        <e k="usedplus_ft_flagMode" v="Flag" eh="c5836008" />
+        <e k="usedplus_ft_quickScan" v="Quick Scan (2x cost)" eh="31d0f8fb" />
+        <e k="usedplus_ft_hint" v="Service Manual" eh="d96f8735" />
+        <e k="usedplus_ft_beginRepair" v="Begin Repair" eh="e792568e" />
+        <e k="usedplus_ft_oilUsed" v="Oil used: %.1fL" eh="bccd33a2" />
+        <e k="usedplus_ft_faultsFound" v="Faults: %d/%d" eh="5abe853a" />
+        <e k="usedplus_ft_corroded" v="Corroded" eh="4b370f36" />
+        <e k="usedplus_ft_cracked" v="Cracked" eh="26d3b853" />
+        <e k="usedplus_ft_seized" v="Seized" eh="04db850b" />
+        <e k="usedplus_ft_selectType" v="Diagnose fault type:" eh="bf552726" />
+        <e k="usedplus_ft_probeHit" v="FAULT HIT! Fluid leak - 3x cost" eh="21e8a8bf" />
+        <e k="usedplus_ft_correct" v="CORRECT" eh="0d536515" />
+        <e k="usedplus_ft_incorrect" v="INCORRECT" eh="befd188c" />
+        <e k="usedplus_ft_repairResult" v="%s: %s - %s +%.0f%%" eh="ba74960b" />
+        <e k="usedplus_ft_totalGain" v="Total: +%.1f%% reliability, +%.1f%% ceiling" eh="1da183e9" />
+        <e k="usedplus_ft_totalCost" v="Resources consumed: %.1fL oil" eh="3dd1f971" />
+        <e k="usedplus_ft_hintsRemaining" v="Hints: %d" eh="c8f080c2" />
+        <e k="usedplus_ft_quickScanCap" v="Quality capped at 60%% (Quick Scan)" eh="5b519744" />
+        <e k="usedplus_ft_noFaults" v="No faults remaining - system healthy!" eh="6bfa5546" />
+        <e k="usedplus_ft_noOil" v="Service Truck has no oil! Fill the oil tank before diagnosing." eh="" />
+        <e k="usedplus_ft_action" v="Fault Tracer: %s" eh="c4066687" />
+        <e k="usedplus_ft_corrodedDesc" v="Rust / oxidation damage" eh="8a01ae60" />
+        <e k="usedplus_ft_crackedDesc" v="Stress fractures / fatigue" eh="81d5118b" />
+        <e k="usedplus_ft_seizedDesc" v="Locked / seized bearing" eh="647b76a9" />
+
         <!-- v2.9.0: Spare Parts Pallet -->
         <e k="usedplus_sparePartsPallet_name" v="Spare Parts Pallet" eh="9bf39a93" />
         <e k="usedplus_sparePartsPallet_function" v="Consumable spare parts for Service Truck restoration. Place near the truck during restoration work." eh="c90aa3eb" />
         <e k="fillType_spareParts" v="Spare Parts" eh="ab6b8ce1" />
+        <e k="fillType_oil" v="Motor Oil" eh="511aaabd" />
+        <e k="fillType_hydraulicOil" v="Hydraulic Oil" eh="f9c4d7d9" />
         <e k="unit_pcs" v="pcs" eh="3ecf2642" />
 
         <!-- v2.9.0: Restoration Diagnostic Symptoms - Engine -->
@@ -2482,9 +2518,9 @@
         <e k="usedplus_admin_btn_rel_10" v="Rel: 10%" eh="54d6e770" />
         <e k="usedplus_admin_btn_reset_hours" v="Reset Hours" eh="a519e5e1" />
         <e k="usedplus_admin_btn_add_hours" v="+1000 Hours" eh="ef05132d" />
-        <e k="usedplus_admin_btn_dna_lemon" v="0.1 Lemon" eh="97df4642" />
-        <e k="usedplus_admin_btn_dna_average" v="0.5 Average" eh="e485c034" />
-        <e k="usedplus_admin_btn_dna_workhorse" v="0.9 Workhorse" eh="57d0e57c" />
+        <e k="usedplus_admin_btn_dna_lemon" v="0.1 Lemon" eh="0047d5bc" />
+        <e k="usedplus_admin_btn_dna_average" v="0.5 Average" eh="472d5599" />
+        <e k="usedplus_admin_btn_dna_workhorse" v="0.9 Workhorse" eh="b0f0ee0b" />
         <e k="usedplus_admin_btn_next_vehicle" v="Next Vehicle" eh="e95e97fa" />
         <e k="usedplus_admin_btn_prev_vehicle" v="Prev Vehicle" eh="69b3a0d0" />
 

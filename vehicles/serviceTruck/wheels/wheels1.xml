@@ -34,6 +34,14 @@
 		<configuration id="dual2" >
             <tire filename="$data/shared/wheels/tires/continental/contiCrossTracHS3/_13R22_5.i3d" nodeLeft="0|0" nodeRight="0|0" maxDeformation="0.02" tireTrackAtlasIndex="4" hasMudMesh="true" />		
         </configuration>
+		<configuration id="rim_Dayton" >
+            <tire filename="$data/shared/wheels/tires/continental/contiCrossTracHS3/_13R22_5.i3d" nodeLeft="0|0" nodeRight="0|0" maxDeformation="0.02" tireTrackAtlasIndex="4" hasMudMesh="true" />
+			<innerRim filename="vehicles/serviceTruck/wheels/wheels1.i3d" nodeLeft="1|9" nodeRight="1|8" />			
+        </configuration>
+		<configuration id="dual_Dayton" >
+            <tire filename="$data/shared/wheels/tires/continental/contiCrossTracHS3/_13R22_5.i3d" nodeLeft="0|0" nodeRight="0|0" maxDeformation="0.02" tireTrackAtlasIndex="4" hasMudMesh="true" />
+			<innerRim filename="vehicles/serviceTruck/wheels/wheels1.i3d" nodeLeft="2|4" nodeRight="2|5" />			
+        </configuration>
     </configurations>
 
 </wheel>

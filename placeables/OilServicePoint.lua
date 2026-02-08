@@ -43,6 +43,7 @@ function OilServicePoint.registerFunctions(placeableType)
     SpecializationUtil.registerFunction(placeableType, "getInteractionPosition", OilServicePoint.getInteractionPosition)
     SpecializationUtil.registerFunction(placeableType, "updatePlayerActions", OilServicePoint.updatePlayerActions)
     SpecializationUtil.registerFunction(placeableType, "updateVehicleActions", OilServicePoint.updateVehicleActions)
+    SpecializationUtil.registerFunction(placeableType, "fillServiceTruckTank", OilServicePoint.fillServiceTruckTank)
     SpecializationUtil.registerFunction(placeableType, "getOilLitersNeeded", OilServicePoint.getOilLitersNeeded)
     SpecializationUtil.registerFunction(placeableType, "getHydraulicLitersNeeded", OilServicePoint.getHydraulicLitersNeeded)
 end
@@ -51,6 +52,7 @@ function OilServicePoint.registerEventListeners(placeableType)
     SpecializationUtil.registerEventListener(placeableType, "onLoad", OilServicePoint)
     SpecializationUtil.registerEventListener(placeableType, "onDelete", OilServicePoint)
     SpecializationUtil.registerEventListener(placeableType, "onUpdate", OilServicePoint)
+    SpecializationUtil.registerEventListener(placeableType, "saveToXMLFile", OilServicePoint)
     SpecializationUtil.registerEventListener(placeableType, "onReadStream", OilServicePoint)
     SpecializationUtil.registerEventListener(placeableType, "onWriteStream", OilServicePoint)
 end
@@ -81,14 +83,10 @@ function OilServicePoint.registerXMLPaths(schema, basePath)
     schema:setXMLSpecializationType()
 end
 
---[[
-    v2.8.0: Register savegame XML paths
-    These are separate from the placeable XML paths - FS25 validates savegame XML strictly!
-]]
-function OilServicePoint.registerSavegameXMLPaths(schema, basePath)
-    schema:register(XMLValueType.FLOAT, basePath .. ".oilServicePoint#currentFluidStorage", "Current fluid storage level in liters")
-    schema:register(XMLValueType.STRING, basePath .. ".oilServicePoint#currentFluidType", "Current fluid type (oil or hydraulic)")
-end
+-- v2.11.1: Removed registerSavegameXMLPaths - PlaceableEmployer pattern uses
+-- setFloat/setString/getFloat/getString which bypass schema validation entirely.
+-- Schema registration at module load time was unreliable (Placeable.xmlSchemaSavegame
+-- may be nil) and caused "Path not registered" errors that blocked data persistence.
 
 function OilServicePoint:onLoad(savegame)
     local spec = self.spec_oilServicePoint
@@ -152,15 +150,15 @@ function OilServicePoint:onLoad(savegame)
         hydraulic = g_i18n:getText("usedplus_fluid_hydraulic") or "Hydraulic Fluid"
     }
 
-    -- Load from savegame
+    -- Load from savegame (v2.11.1: use getFloat/getString like PlaceableEmployer pattern)
+    -- savegame.key = "placeables.placeable(N)" (bare path)
+    -- Must add MOD_NAME.SpecName to match the key used in saveToXMLFile
     if savegame ~= nil and savegame.xmlFile ~= nil then
-        local key = savegame.key .. ".oilServicePoint"
-        spec.currentFluidStorage = savegame.xmlFile:getValue(key .. "#currentFluidStorage", 0) or 0
-        spec.currentFluidType = savegame.xmlFile:getValue(key .. "#currentFluidType", nil)
-        if spec.currentFluidStorage and spec.currentFluidStorage > 0 and spec.currentFluidType then
-            UsedPlus.logDebug(string.format("OilServicePoint: Loaded %.1fL of %s from savegame",
-                spec.currentFluidStorage, spec.currentFluidType))
-        end
+        local key = savegame.key .. "." .. OilServicePoint.MOD_NAME .. ".OilServicePoint"
+        spec.currentFluidStorage = savegame.xmlFile:getFloat(key .. "#currentFluidStorage", 0) or 0
+        spec.currentFluidType = savegame.xmlFile:getString(key .. "#currentFluidType", nil)
+        UsedPlus.logInfo(string.format("OilServicePoint: Savegame load key='%s', storage=%.1f, type=%s",
+            key, spec.currentFluidStorage or 0, tostring(spec.currentFluidType)))
     end
 
     -- Log
@@ -189,15 +187,21 @@ end
 
 --[[
     Save storage state
+    v2.11.1: Use setFloat/setString (PlaceableEmployer pattern) instead of setValue
+    which requires schema registration. This bypasses schema validation entirely.
 ]]
 function OilServicePoint:saveToXMLFile(xmlFile, key, usedModNames)
     local spec = self.spec_oilServicePoint
     if spec == nil then return end
 
-    xmlFile:setValue(key .. ".oilServicePoint#currentFluidStorage", spec.currentFluidStorage)
+    -- key already = "placeables.placeable(N).FS25_UsedPlus.OilServicePoint"
+    -- Just append attributes directly (no extra .oilServicePoint!)
+    xmlFile:setFloat(key .. "#currentFluidStorage", spec.currentFluidStorage or 0)
     if spec.currentFluidType then
-        xmlFile:setValue(key .. ".oilServicePoint#currentFluidType", spec.currentFluidType)
+        xmlFile:setString(key .. "#currentFluidType", spec.currentFluidType)
     end
+    UsedPlus.logInfo(string.format("OilServicePoint: Saved %.1fL of %s (key=%s)",
+        spec.currentFluidStorage or 0, tostring(spec.currentFluidType), key))
 end
 
 --[[
@@ -299,8 +303,8 @@ function OilServicePoint:getVehicleInRange()
         return nil
     end
 
-    -- Check if vehicle has our maintenance spec
-    if controlledVehicle.spec_usedPlusMaintenance == nil then
+    -- Check if vehicle has our maintenance spec or is a Service Truck
+    if controlledVehicle.spec_usedPlusMaintenance == nil and controlledVehicle.spec_serviceTruck == nil then
         return nil
     end
 
@@ -493,49 +497,99 @@ function OilServicePoint:updateVehicleActions(vehicle)
     local canRefill = false
     local refillType = nil
     local actionText = nil
+    local hasEnough = false
 
     if spec.currentFluidStorage > 0 and spec.currentFluidType then
         -- Tank has fluid - check if vehicle needs this type
-        if spec.currentFluidType == "oil" and self:canRefillOil(vehicle) then
-            canRefill = true
-            refillType = "oil"
-            local litersNeeded = self:getOilLitersNeeded(vehicle)
-            local hasEnough = spec.currentFluidStorage >= litersNeeded
 
-            if hasEnough then
-                actionText = string.format("%s (%.1fL from tank)",
-                    spec.refillOilText,
-                    litersNeeded)
-            else
-                actionText = string.format("%s - Need %.1fL, tank has %.1fL",
-                    spec.refillOilText,
-                    litersNeeded,
-                    spec.currentFluidStorage)
+        -- 1) PRIORITY: Check Service Truck fill unit tanks first (work-critical storage)
+        -- These are large tanks (200L) used for restoration - always prioritize over
+        -- small maintenance top-ups that would otherwise steal the action
+        local truckSpec = vehicle.spec_serviceTruck
+        if truckSpec ~= nil and vehicle.getFillUnitFillLevel ~= nil and vehicle.getFillUnitCapacity ~= nil then
+            local fillUnit = nil
+            local fillTypeName = nil
+            local fluidLabel = nil
+
+            if spec.currentFluidType == "oil" and truckSpec.oilFillUnit then
+                fillUnit = truckSpec.oilFillUnit
+                fillTypeName = "OIL"
+                fluidLabel = spec.fluidNames["oil"] or "Engine Oil"
+            elseif spec.currentFluidType == "hydraulic" and truckSpec.hydraulicFillUnit then
+                fillUnit = truckSpec.hydraulicFillUnit
+                fillTypeName = "HYDRAULICOIL"
+                fluidLabel = spec.fluidNames["hydraulic"] or "Hydraulic Fluid"
             end
-        elseif spec.currentFluidType == "hydraulic" and self:canRefillHydraulic(vehicle) then
-            canRefill = true
-            refillType = "hydraulic"
-            local litersNeeded = self:getHydraulicLitersNeeded(vehicle)
-            local hasEnough = spec.currentFluidStorage >= litersNeeded
 
-            if hasEnough then
-                actionText = string.format("%s (%.1fL from tank)",
-                    spec.refillHydraulicText,
-                    litersNeeded)
-            else
-                actionText = string.format("%s - Need %.1fL, tank has %.1fL",
-                    spec.refillHydraulicText,
-                    litersNeeded,
-                    spec.currentFluidStorage)
+            if fillUnit then
+                local currentLevel = vehicle:getFillUnitFillLevel(fillUnit) or 0
+                local capacity = vehicle:getFillUnitCapacity(fillUnit) or 0
+                local spaceInTruck = capacity - currentLevel
+
+                if spaceInTruck > 0.5 then
+                    canRefill = true
+                    refillType = "serviceTruck"
+                    local transferAmount = math.min(spaceInTruck, spec.currentFluidStorage)
+                    hasEnough = true
+
+                    actionText = string.format("Fill %s Tank (%.0f/%.0fL → +%.0fL)",
+                        fluidLabel, currentLevel, capacity, transferAmount)
+                end
+            end
+        end
+
+        -- 2) Fallback: Check maintenance-level oil/hydraulic needs (regular vehicles or if truck tanks are full)
+        if not canRefill then
+            if spec.currentFluidType == "oil" and self:canRefillOil(vehicle) then
+                canRefill = true
+                refillType = "oil"
+                local litersNeeded = self:getOilLitersNeeded(vehicle)
+                hasEnough = spec.currentFluidStorage >= litersNeeded
+
+                if hasEnough then
+                    actionText = string.format("%s (%.1fL from tank)",
+                        spec.refillOilText, litersNeeded)
+                else
+                    actionText = string.format("%s - Need %.1fL, tank has %.1fL",
+                        spec.refillOilText, litersNeeded, spec.currentFluidStorage)
+                end
+            elseif spec.currentFluidType == "hydraulic" and self:canRefillHydraulic(vehicle) then
+                canRefill = true
+                refillType = "hydraulic"
+                local litersNeeded = self:getHydraulicLitersNeeded(vehicle)
+                hasEnough = spec.currentFluidStorage >= litersNeeded
+
+                if hasEnough then
+                    actionText = string.format("%s (%.1fL from tank)",
+                        spec.refillHydraulicText, litersNeeded)
+                else
+                    actionText = string.format("%s - Need %.1fL, tank has %.1fL",
+                        spec.refillHydraulicText, litersNeeded, spec.currentFluidStorage)
+                end
             end
         end
     end
 
     -- If tank is empty or wrong fluid type, show info message
     if not canRefill then
-        -- Check if vehicle needs anything
+        -- Check if vehicle needs anything (maintenance or Service Truck tanks)
         local needsOil = self:canRefillOil(vehicle)
         local needsHydraulic = self:canRefillHydraulic(vehicle)
+
+        -- Also check Service Truck tanks
+        local truckSpec = vehicle.spec_serviceTruck
+        if truckSpec ~= nil and vehicle.getFillUnitFillLevel ~= nil and vehicle.getFillUnitCapacity ~= nil then
+            if truckSpec.oilFillUnit then
+                local lvl = vehicle:getFillUnitFillLevel(truckSpec.oilFillUnit) or 0
+                local cap = vehicle:getFillUnitCapacity(truckSpec.oilFillUnit) or 0
+                if cap - lvl > 0.5 then needsOil = true end
+            end
+            if truckSpec.hydraulicFillUnit then
+                local lvl = vehicle:getFillUnitFillLevel(truckSpec.hydraulicFillUnit) or 0
+                local cap = vehicle:getFillUnitCapacity(truckSpec.hydraulicFillUnit) or 0
+                if cap - lvl > 0.5 then needsHydraulic = true end
+            end
+        end
 
         if needsOil or needsHydraulic then
             local neededType = needsOil and "oil" or "hydraulic"
@@ -572,8 +626,13 @@ function OilServicePoint:updateVehicleActions(vehicle)
     end
 
     -- Can refill - create/update activatable
-    local hasEnough = (refillType == "oil" and spec.currentFluidStorage >= self:getOilLitersNeeded(vehicle)) or
-                      (refillType == "hydraulic" and spec.currentFluidStorage >= self:getHydraulicLitersNeeded(vehicle))
+    if not hasEnough then
+        if refillType == "oil" then
+            hasEnough = spec.currentFluidStorage >= self:getOilLitersNeeded(vehicle)
+        elseif refillType == "hydraulic" then
+            hasEnough = spec.currentFluidStorage >= self:getHydraulicLitersNeeded(vehicle)
+        end
+    end
 
     if spec.vehicleRefillActivatable == nil then
         spec.vehicleRefillActivatable = FluidRefillActivatable.new(self, vehicle, refillType, actionText, hasEnough)
@@ -943,6 +1002,104 @@ function OilServicePoint:refillHydraulic(vehicle, noEventSend)
     return true
 end
 
+--[[
+    Fill a Service Truck's storage tank from the oil service point storage.
+    Transfers fluid from the point's storage into the truck's fill unit.
+]]
+function OilServicePoint:fillServiceTruckTank(vehicle)
+    if vehicle == nil then return false end
+
+    local spec = self.spec_oilServicePoint
+    if spec == nil then return false end
+
+    local truckSpec = vehicle.spec_serviceTruck
+    if truckSpec == nil then return false end
+
+    local vehicleName = vehicle:getName() or "Service Truck"
+
+    -- Determine which fill unit to target
+    local fillUnit = nil
+    local fillTypeName = nil
+    local fluidLabel = nil
+
+    if spec.currentFluidType == "oil" and truckSpec.oilFillUnit then
+        fillUnit = truckSpec.oilFillUnit
+        fillTypeName = "OIL"
+        fluidLabel = spec.fluidNames["oil"] or "Engine Oil"
+    elseif spec.currentFluidType == "hydraulic" and truckSpec.hydraulicFillUnit then
+        fillUnit = truckSpec.hydraulicFillUnit
+        fillTypeName = "HYDRAULICOIL"
+        fluidLabel = spec.fluidNames["hydraulic"] or "Hydraulic Fluid"
+    else
+        g_currentMission:showBlinkingWarning("No matching fluid type for this tank!", 2000)
+        return false
+    end
+
+    -- Calculate transfer amount
+    local currentLevel = vehicle:getFillUnitFillLevel(fillUnit) or 0
+    local capacity = vehicle:getFillUnitCapacity(fillUnit) or 0
+    local spaceInTruck = capacity - currentLevel
+
+    if spaceInTruck <= 0.5 then
+        g_currentMission:showBlinkingWarning(
+            string.format("%s tank is full! (%.0f/%.0fL)", fluidLabel, currentLevel, capacity), 2000)
+        return false
+    end
+
+    local transferAmount = math.min(spaceInTruck, spec.currentFluidStorage)
+    if transferAmount <= 0 then
+        g_currentMission:showBlinkingWarning("Storage tank is empty!", 2000)
+        return false
+    end
+
+    -- Transfer fluid into truck's fill unit
+    local fillTypeIndex = g_fillTypeManager:getFillTypeIndexByName(fillTypeName)
+    UsedPlus.logInfo(string.format("OilServicePoint.fillServiceTruckTank: fillType=%s, fillTypeIndex=%s, fillUnit=%d, before=%.1f/%.1f, transfer=%.1f",
+        fillTypeName, tostring(fillTypeIndex), fillUnit, currentLevel, capacity, transferAmount))
+
+    if fillTypeIndex == nil then
+        UsedPlus.logError(string.format("OilServicePoint: Fill type '%s' NOT FOUND in g_fillTypeManager!", fillTypeName))
+        g_currentMission:showBlinkingWarning("Error: Fill type not registered!", 2000)
+        return false
+    end
+
+    local actualAdded = vehicle:addFillUnitFillLevel(
+        vehicle:getOwnerFarmId(), fillUnit, transferAmount,
+        fillTypeIndex, ToolType.UNDEFINED, nil)
+    actualAdded = actualAdded or 0
+
+    local newLevel = vehicle:getFillUnitFillLevel(fillUnit) or 0
+    UsedPlus.logInfo(string.format("OilServicePoint.fillServiceTruckTank: addFillUnitFillLevel returned=%.1f, newLevel=%.1f/%.1f",
+        actualAdded, newLevel, capacity))
+
+    -- Only consume from storage what was ACTUALLY added to the truck
+    local consumed = math.abs(actualAdded)
+    if consumed < 0.1 then
+        -- Fill was rejected - don't consume storage
+        UsedPlus.logError(string.format("OilServicePoint: addFillUnitFillLevel REJECTED! fillUnit=%d, fillType=%s(%d), amount=%.1f",
+            fillUnit, fillTypeName, fillTypeIndex, transferAmount))
+        g_currentMission:showBlinkingWarning(
+            string.format("Fill failed! %s may not accept %s (fillUnit=%d)", vehicleName, fillTypeName, fillUnit), 3000)
+        return false
+    end
+
+    spec.currentFluidStorage = spec.currentFluidStorage - consumed
+    if spec.currentFluidStorage <= 0 then
+        spec.currentFluidStorage = 0
+        spec.currentFluidType = nil
+    end
+
+    -- Confirmation
+    g_currentMission:showBlinkingWarning(
+        string.format("%s tank filled - +%.0fL (now %.0f/%.0fL)",
+            fluidLabel, consumed, newLevel, capacity), 2000)
+
+    UsedPlus.logInfo(string.format("OilServicePoint: Filled %s %s tank +%.0fL (%.0f/%.0fL, storage: %.0fL left)",
+        vehicleName, fluidLabel, consumed, newLevel, capacity, spec.currentFluidStorage))
+
+    return true
+end
+
 -- Multiplayer sync
 function OilServicePoint:onReadStream(streamId, connection)
     local spec = self.spec_oilServicePoint
@@ -1069,6 +1226,8 @@ function FluidRefillActivatable:run()
         self.servicePoint:refillOil(self.vehicle)
     elseif self.fluidType == "hydraulic" then
         self.servicePoint:refillHydraulic(self.vehicle)
+    elseif self.fluidType == "serviceTruck" then
+        self.servicePoint:fillServiceTruckTank(self.vehicle)
     end
 end
 
@@ -1077,18 +1236,4 @@ function FluidRefillActivatable:getDistance(x, y, z)
 end
 
 
---[[
-    v2.8.0: Register savegame XML paths at load time
-    This MUST happen before savegames are loaded to avoid schema validation errors
-
-    IMPORTANT: Placeable savegame paths include mod name and spec name:
-    placeables.placeable(?).{MOD_NAME}.{SPEC_NAME}.{custom_path}
-]]
-if Placeable and Placeable.xmlSchemaSavegame then
-    -- v2.8.1: Path must match what saveToXMLFile() and onLoad() actually use
-    local savegameBasePath = "placeables.placeable(?)"
-    OilServicePoint.registerSavegameXMLPaths(Placeable.xmlSchemaSavegame, savegameBasePath)
-    UsedPlus.logDebug("OilServicePoint: Registered savegame XML paths at " .. savegameBasePath)
-end
-
-UsedPlus.logInfo("OilServicePoint.lua loaded (v2.8.0 - fixed savegame schema)")
+UsedPlus.logInfo("OilServicePoint.lua loaded (v2.11.1 - PlaceableEmployer save pattern)")

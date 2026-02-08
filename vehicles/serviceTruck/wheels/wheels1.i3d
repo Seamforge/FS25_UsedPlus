@@ -2,7 +2,7 @@
 
 <i3D name="wheels1.i3d" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
   <Asset>
-    <Export program="GIANTS Editor 64bit" version="10.0.4"/>
+    <Export program="GIANTS Editor 64bit" version="10.0.6"/>
   </Asset>
 
   <Files>
@@ -57,14 +57,21 @@
       <Custommap name="detailDiffuse" fileId="19"/>
       <CustomParameter name="colorScale" value="0.012 0.012 0.012"/>
     </Material>
-    <Material name="metalPaintedMat" materialId="8" diffuseColor="0.8 0.8 0.8 1" customShaderId="4">
+    <Material name="metalPaintedMat" materialId="8" diffuseColor="0.0784314 0.0784314 0.0784314 1" customShaderId="4">
       <Normalmap fileId="2"/>
       <Glossmap fileId="24"/>
       <Custommap name="detailSpecular" fileId="18"/>
       <Custommap name="detailNormal" fileId="16"/>
       <Custommap name="detailDiffuse" fileId="19"/>
     </Material>
-    <Material name="metalPaintedMat.001" materialId="9" alphaBlending="true" customShaderId="4">
+    <Material name="metalPaintedMat" materialId="9" diffuseColor="0.8 0.8 0.8 1" customShaderId="4">
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="24"/>
+      <Custommap name="detailSpecular" fileId="18"/>
+      <Custommap name="detailNormal" fileId="16"/>
+      <Custommap name="detailDiffuse" fileId="19"/>
+    </Material>
+    <Material name="metalPaintedMat.001" materialId="10" alphaBlending="true" customShaderId="4">
       <Texture fileId="29"/>
       <Normalmap fileId="2"/>
       <Glossmap fileId="24"/>
@@ -79,14 +86,14 @@
       <Custommap name="detailNormal" fileId="16"/>
       <Custommap name="detailDiffuse" fileId="19"/>
     </Material>
-    <Material name="metalPaintedRed" materialId="10" diffuseColor="0.109804 0 0.00392157 1" customShaderId="4">
+    <Material name="metalPaintedRed" materialId="12" diffuseColor="0.109804 0 0.00392157 1" customShaderId="4">
       <Normalmap fileId="2"/>
       <Glossmap fileId="24"/>
       <Custommap name="detailSpecular" fileId="18"/>
       <Custommap name="detailNormal" fileId="16"/>
       <Custommap name="detailDiffuse" fileId="19"/>
     </Material>
-    <Material name="mud_mat" materialId="12" customShaderId="13">
+    <Material name="mud_mat" materialId="13" customShaderId="13">
       <Texture fileId="10"/>
       <Normalmap fileId="12"/>
       <Glossmap fileId="8"/>
@@ -100,7 +107,7 @@
       <Custommap name="detailDiffuse" fileId="26"/>
       <CustomParameter name="colorScale" value="0.012 0.012 0.012"/>
     </Material>
-    <Material name="plasticPaintedBlackMat" materialId="13" diffuseColor="0.8 0.8 0.8 1" customShaderId="4">
+    <Material name="plasticPaintedBlackMat" materialId="15" diffuseColor="0.8 0.8 0.8 1" customShaderId="4">
       <Normalmap fileId="2"/>
       <Glossmap fileId="23"/>
       <Custommap name="detailSpecular" fileId="25"/>
@@ -108,14 +115,14 @@
       <Custommap name="detailDiffuse" fileId="26"/>
       <CustomParameter name="colorScale" value="0.012 0.012 0.012"/>
     </Material>
-    <Material name="plasticPaintedMat" materialId="15" diffuseColor="0.117647 0 0 1" customShaderId="4">
+    <Material name="plasticPaintedMat" materialId="16" diffuseColor="0.117647 0 0 1" customShaderId="4">
       <Normalmap fileId="2"/>
       <Glossmap fileId="24"/>
       <Custommap name="detailSpecular" fileId="25"/>
       <Custommap name="detailNormal" fileId="16"/>
       <Custommap name="detailDiffuse" fileId="26"/>
     </Material>
-    <Material name="rim" materialId="20" diffuseColor="0.8 0.8 0.8 1" customShaderId="4">
+    <Material name="rim" materialId="17" diffuseColor="0.8 0.8 0.8 1" customShaderId="4">
       <Normalmap fileId="2"/>
       <Glossmap fileId="24"/>
       <Custommap name="detailSpecular" fileId="15"/>
@@ -123,7 +130,7 @@
       <Custommap name="detailDiffuse" fileId="17"/>
       <CustomParameter name="colorScale" value="0.7379 0.7454 0.7529"/>
     </Material>
-    <Material name="rubberBlackMat" materialId="16" diffuseColor="0.8 0.8 0.8 1" customShaderId="4" customShaderVariation="tirePressureDeformation">
+    <Material name="rubberBlackMat" materialId="18" diffuseColor="0.8 0.8 0.8 1" customShaderId="4" customShaderVariation="tirePressureDeformation">
       <Normalmap fileId="2"/>
       <Glossmap fileId="3"/>
       <Custommap name="detailSpecular" fileId="5"/>
@@ -131,21 +138,21 @@
       <Custommap name="detailDiffuse" fileId="7"/>
       <CustomParameter name="porosity" value="0.5"/>
     </Material>
-    <Material name="silverScratchedMat" materialId="17" diffuseColor="0.8 0.8 0.8 1" customShaderId="4">
+    <Material name="silverScratchedMat" materialId="19" diffuseColor="0.8 0.8 0.8 1" customShaderId="4">
       <Normalmap fileId="2"/>
       <Glossmap fileId="24"/>
       <Custommap name="detailSpecular" fileId="21"/>
       <Custommap name="detailNormal" fileId="16"/>
       <Custommap name="detailDiffuse" fileId="22"/>
     </Material>
-    <Material name="silverScratchedMat.001" materialId="18" diffuseColor="0.8 0.8 0.8 1" customShaderId="4">
+    <Material name="silverScratchedMat.001" materialId="20" diffuseColor="0.8 0.8 0.8 1" customShaderId="4">
       <Normalmap fileId="2"/>
       <Glossmap fileId="14"/>
       <Custommap name="detailSpecular" fileId="21"/>
       <Custommap name="detailNormal" fileId="16"/>
       <Custommap name="detailDiffuse" fileId="22"/>
     </Material>
-    <Material name="silverScratchedShinyMat" materialId="19" diffuseColor="0.8 0.8 0.8 1" customShaderId="4">
+    <Material name="silverScratchedShinyMat" materialId="21" diffuseColor="0.8 0.8 0.8 1" customShaderId="4">
       <Normalmap fileId="2"/>
       <Glossmap fileId="23"/>
       <Custommap name="detailSpecular" fileId="15"/>
@@ -153,7 +160,7 @@
       <Custommap name="detailDiffuse" fileId="17"/>
       <CustomParameter name="colorScale" value="0.7379 0.7454 0.7529"/>
     </Material>
-    <Material name="silverScratchedShinyMat.002" materialId="21" diffuseColor="0.8 0.8 0.8 1" customShaderId="4">
+    <Material name="silverScratchedShinyMat.002" materialId="22" diffuseColor="0.8 0.8 0.8 1" customShaderId="4">
       <Normalmap fileId="2"/>
       <Glossmap fileId="14"/>
       <Custommap name="detailSpecular" fileId="15"/>
@@ -168,26 +175,30 @@
   </Shapes>
 
   <Scene>
-    <TransformGroup name="tires" nodeId="37">
-      <Shape name="tire_FL" shapeId="1" clipDistance="300" nodeId="38" castsShadows="true" receiveShadows="true" materialIds="16">
-        <Shape name="mudMesh" shapeId="2" clipDistance="35" nodeId="39" castsShadows="true" receiveShadows="true" materialIds="12"/>
+    <TransformGroup name="tires" nodeId="42">
+      <Shape name="tire_FL" shapeId="1" clipDistance="300" nodeId="43" castsShadows="true" receiveShadows="true" materialIds="18">
+        <Shape name="mudMesh" shapeId="2" clipDistance="35" nodeId="44" castsShadows="true" receiveShadows="true" materialIds="13"/>
       </Shape>
     </TransformGroup>
-    <TransformGroup name="wheels_front" nodeId="40">
-      <Shape name="rim2_FR" shapeId="3" clipDistance="300" nodeId="41" castsShadows="true" receiveShadows="true" materialIds="21,7,11,18"/>
-      <Shape name="rim2_FL" shapeId="4" clipDistance="300" nodeId="42" castsShadows="true" receiveShadows="true" materialIds="21,7,11,18"/>
-      <Shape name="supersingleAlcoa_FR" shapeId="5" clipDistance="300" nodeId="43" castsShadows="true" receiveShadows="true" materialIds="6,20,17,5,14,15"/>
-      <Shape name="supersingleAlcoa_FL" shapeId="6" clipDistance="300" nodeId="44" castsShadows="true" receiveShadows="true" materialIds="6,20,17,5,14,15"/>
-      <Shape name="RImRF" shapeId="7" clipDistance="300" nodeId="45" castsShadows="true" receiveShadows="true" materialIds="5,8"/>
-      <Shape name="RImRF" shapeId="8" clipDistance="300" nodeId="46" castsShadows="true" receiveShadows="true" materialIds="5,8"/>
-      <Shape name="frontalcoa" shapeId="9" clipDistance="300" nodeId="47" castsShadows="true" receiveShadows="true" materialIds="14,5,20,10,9"/>
-      <Shape name="frontalcoa2" shapeId="10" clipDistance="300" nodeId="48" castsShadows="true" receiveShadows="true" materialIds="14,5,20,10,9"/>
+    <TransformGroup name="wheels_front" nodeId="45">
+      <Shape name="rim2_FR" shapeId="3" clipDistance="300" nodeId="46" castsShadows="true" receiveShadows="true" materialIds="22,7,11,20"/>
+      <Shape name="rim2_FL" shapeId="4" clipDistance="300" nodeId="47" castsShadows="true" receiveShadows="true" materialIds="22,7,11,20"/>
+      <Shape name="supersingleAlcoa_FR" shapeId="5" clipDistance="300" nodeId="48" castsShadows="true" receiveShadows="true" materialIds="6,17,19,5,14,16"/>
+      <Shape name="supersingleAlcoa_FL" shapeId="6" clipDistance="300" nodeId="49" castsShadows="true" receiveShadows="true" materialIds="6,17,19,5,14,16"/>
+      <Shape name="RImRF" shapeId="7" clipDistance="300" nodeId="50" castsShadows="true" receiveShadows="true" materialIds="5,9"/>
+      <Shape name="RImRF" shapeId="8" clipDistance="300" nodeId="51" castsShadows="true" receiveShadows="true" materialIds="5,9"/>
+      <Shape name="frontalcoa" shapeId="9" clipDistance="300" nodeId="52" castsShadows="true" receiveShadows="true" materialIds="14,5,17,12,10"/>
+      <Shape name="frontalcoa2" shapeId="10" clipDistance="300" nodeId="53" castsShadows="true" receiveShadows="true" materialIds="14,5,17,12,10"/>
+      <Shape name="Dayton_r" shapeId="11" clipDistance="300" nodeId="54" castsShadows="true" receiveShadows="true" materialIds="8,9,5"/>
+      <Shape name="Dayton_l" shapeId="12" clipDistance="300" nodeId="55" castsShadows="true" receiveShadows="true" materialIds="8,9,5"/>
     </TransformGroup>
-    <TransformGroup name="wheeels_rear" nodeId="49">
-      <Shape name="tenHole_RL" shapeId="11" clipDistance="300" nodeId="50" castsShadows="true" receiveShadows="true" materialIds="19,6,13"/>
-      <Shape name="tenHole_RR" shapeId="12" clipDistance="300" nodeId="51" castsShadows="true" receiveShadows="true" materialIds="19,6,13"/>
-      <Shape name="RimLR" shapeId="13" clipDistance="300" nodeId="52" castsShadows="true" receiveShadows="true" materialIds="5,8"/>
-      <Shape name="RimLR" shapeId="14" clipDistance="300" nodeId="53" castsShadows="true" receiveShadows="true" materialIds="5,8"/>
+    <TransformGroup name="wheeels_rear" nodeId="56">
+      <Shape name="tenHole_RL" shapeId="13" clipDistance="300" nodeId="57" castsShadows="true" receiveShadows="true" materialIds="21,6,15"/>
+      <Shape name="tenHole_RR" shapeId="14" clipDistance="300" nodeId="58" castsShadows="true" receiveShadows="true" materialIds="21,6,15"/>
+      <Shape name="RimLR" shapeId="15" clipDistance="300" nodeId="59" castsShadows="true" receiveShadows="true" materialIds="5,9"/>
+      <Shape name="RimLR" shapeId="16" clipDistance="300" nodeId="60" castsShadows="true" receiveShadows="true" materialIds="5,9"/>
+      <Shape name="wheel_rear_L" shapeId="17" clipDistance="300" nodeId="61" castsShadows="true" receiveShadows="true" materialIds="8,9,5"/>
+      <Shape name="wheel_rear_R" shapeId="18" clipDistance="300" nodeId="62" castsShadows="true" receiveShadows="true" materialIds="8,9,5"/>
     </TransformGroup>
   </Scene>
 

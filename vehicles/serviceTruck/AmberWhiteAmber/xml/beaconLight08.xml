@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<beaconLight xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../shared/xml/schema/beaconLight.xsd">
+    <filename>vehicles/serviceTruck/AmberWhiteAmber/i3d/beaconLight08.i3d</filename>
+
+    <rootNode node="beaconLight08" />
+
+    <variations>
+        <variation name="ROTATE" rootNode="variationRotate">
+            <staticLight node="variationRotate_static" intensity="100"/>
+            <staticLight node="variationRotateDistance_static" intensity="50" minDistance="15"/>
+            <rotator node="variationRotate" speed="0.009" />
+            <realLight node="variationRotate_realLight" />
+            <device mode="ROTATE_RIGHT" rpm="200" numLEDScale="0.4" brightnessScale="1" />
+        </variation>
+    </variations>
+
+    <i3dMappings>
+        <i3dMapping id="beaconLight08" node="0>" />
+        <i3dMapping id="variationRotate" node="0>0" />
+        <i3dMapping id="variationRotate_static" node="0>0|0" />
+        <i3dMapping id="variationRotate_realLight" node="0>0|1" />
+        <i3dMapping id="variationRotateDistance_static" node="0>0|2" />
+
+    </i3dMappings>
+</beaconLight>

@@ -2147,9 +2147,46 @@
         <e k="usedplus_serviceTruck_opportunityExpired" v="Пропозиція на сервісну вантажівку закінчилась." eh="a5d3a5fb" />
         <e k="usedplus_serviceTruck_insufficientFunds" v="Недостатньо коштів! Потрібно $%s готівкою." eh="9b84e434" />
         <e k="usedplus_serviceTruck_alreadyOwned" v="Ви вже маєте сервісну вантажівку." eh="8d7c53f6" />
+
+        <!-- v2.11.1: Налаштування кольору сервісної вантажівки -->
+        <e k="configuration_chassisColor" v="Колір шасі" eh="17d6aa5b" />
+        <e k="configuration_bodyColor" v="Колір кузова" eh="e607d9e6" />
+        <e k="usedplus_serviceTruck_stripeColor" v="Колір смуг" eh="12b22714" />
+
+        <!-- v2.12.0: Fault Tracer Minigame -->
+        <e k="usedplus_ft_title" v="ПОШУК НЕСПРАВНОСТЕЙ" eh="92470a22" />
+        <e k="usedplus_ft_selectComponent" v="Виберіть компонент для діагностики" eh="3fb628e9" />
+        <e k="usedplus_ft_probeMode" v="Зонд" eh="76d16796" />
+        <e k="usedplus_ft_flagMode" v="Позначити" eh="c5836008" />
+        <e k="usedplus_ft_quickScan" v="Швидке сканування (2x вартість)" eh="31d0f8fb" />
+        <e k="usedplus_ft_hint" v="Сервісний посібник" eh="d96f8735" />
+        <e k="usedplus_ft_beginRepair" v="Почати ремонт" eh="e792568e" />
+        <e k="usedplus_ft_oilUsed" v="Використано мастила: %.1fл" eh="bccd33a2" />
+        <e k="usedplus_ft_faultsFound" v="Несправності: %d/%d" eh="5abe853a" />
+        <e k="usedplus_ft_corroded" v="Корозія" eh="4b370f36" />
+        <e k="usedplus_ft_cracked" v="Тріщина" eh="26d3b853" />
+        <e k="usedplus_ft_seized" v="Заклинило" eh="04db850b" />
+        <e k="usedplus_ft_selectType" v="Діагностувати тип несправності:" eh="bf552726" />
+        <e k="usedplus_ft_probeHit" v="НЕСПРАВНІСТЬ! Витік рідини - 3x вартість" eh="21e8a8bf" />
+        <e k="usedplus_ft_correct" v="ВІРНО" eh="0d536515" />
+        <e k="usedplus_ft_incorrect" v="НЕВІРНО" eh="befd188c" />
+        <e k="usedplus_ft_repairResult" v="%s: %s - %s +%.0f%%" eh="ba74960b" />
+        <e k="usedplus_ft_totalGain" v="Всього: +%.1f%% надійність, +%.1f%% стеля" eh="1da183e9" />
+        <e k="usedplus_ft_totalCost" v="Витрачено ресурсів: %.1fл мастила" eh="3dd1f971" />
+        <e k="usedplus_ft_hintsRemaining" v="Підказки: %d" eh="c8f080c2" />
+        <e k="usedplus_ft_quickScanCap" v="Якість обмежена 60%% (Швидке сканування)" eh="5b519744" />
+        <e k="usedplus_ft_noFaults" v="Немає несправностей - система справна!" eh="6bfa5546" />
+        <e k="usedplus_ft_action" v="Пошук несправностей: %s" eh="c4066687" />
+        <e k="usedplus_ft_corrodedDesc" v="Пошкодження іржею / окисленням" eh="8a01ae60" />
+        <e k="usedplus_ft_crackedDesc" v="Тріщини від напруження / втоми" eh="81d5118b" />
+        <e k="usedplus_ft_seizedDesc" v="Заклинений / заблокований підшипник" eh="647b76a9" />
+
+        <!-- v2.9.0: Spare Parts Pallet -->
         <e k="usedplus_sparePartsPallet_name" v="Палета із запчастинами" eh="9bf39a93" />
         <e k="usedplus_sparePartsPallet_function" v="Витратні запчастини для відновлення технікою сервісною вантажівкою. Розмістіть біля вантажівки під час відновлення." eh="c90aa3eb" />
         <e k="fillType_spareParts" v="Запчастини" eh="ab6b8ce1" />
+        <e k="fillType_oil" v="[EN] Motor Oil" eh="511aaabd" />
+        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="f9c4d7d9" />
         <e k="unit_pcs" v="шт" eh="3ecf2642" />
         <e k="usedplus_resto_symptom_engine_knocking_load" v="Сильний стукіт під навантаженням" eh="fb8c3067" />
         <e k="usedplus_resto_symptom_engine_low_oil_pressure" v="Критично низький тиск мастила" eh="a3efa42d" />
@@ -2341,6 +2378,9 @@
         <e k="usedplus_admin_btn_rel_10" v="Над: 10%" eh="54d6e770" />
         <e k="usedplus_admin_btn_reset_hours" v="Скид. години" eh="a519e5e1" />
         <e k="usedplus_admin_btn_add_hours" v="+1000 годин" eh="ef05132d" />
+        <e k="usedplus_admin_btn_dna_lemon" v="[EN] 0.1 Lemon" eh="0047d5bc" />
+        <e k="usedplus_admin_btn_dna_average" v="[EN] 0.5 Average" eh="472d5599" />
+        <e k="usedplus_admin_btn_dna_workhorse" v="[EN] 0.9 Workhorse" eh="b0f0ee0b" />
         <e k="usedplus_admin_btn_dna_desperate" v="Відчайдушний" eh="97df4642" />
         <e k="usedplus_admin_btn_dna_reasonable" v="Розумний" eh="e485c034" />
         <e k="usedplus_admin_btn_dna_immovable" v="Непохитний" eh="57d0e57c" />

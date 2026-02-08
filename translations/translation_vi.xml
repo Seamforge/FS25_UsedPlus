@@ -1764,9 +1764,40 @@
         <e k="usedplus_serviceTruck_opportunityExpired" v="Cơ hội Xe Dịch Vụ đã hết hạn." eh="a5d3a5fb" />
         <e k="usedplus_serviceTruck_insufficientFunds" v="Không đủ tiền! Bạn cần $%s tiền mặt." eh="9b84e434" />
         <e k="usedplus_serviceTruck_alreadyOwned" v="Bạn đã sở hữu Xe Dịch Vụ." eh="8d7c53f6" />
+
+        <!-- v2.12.0: Fault Tracer Minigame -->
+        <e k="usedplus_ft_title" v="TRUY TÌM LỖI" eh="92470a22" />
+        <e k="usedplus_ft_selectComponent" v="Chọn bộ phận để chẩn đoán" eh="3fb628e9" />
+        <e k="usedplus_ft_probeMode" v="Dò tìm" eh="76d16796" />
+        <e k="usedplus_ft_flagMode" v="Đánh dấu" eh="c5836008" />
+        <e k="usedplus_ft_quickScan" v="Quét nhanh (2x chi phí)" eh="31d0f8fb" />
+        <e k="usedplus_ft_hint" v="Sổ tay sửa chữa" eh="d96f8735" />
+        <e k="usedplus_ft_beginRepair" v="Bắt đầu sửa chữa" eh="e792568e" />
+        <e k="usedplus_ft_oilUsed" v="Dầu đã dùng: %.1fL" eh="bccd33a2" />
+        <e k="usedplus_ft_faultsFound" v="Lỗi: %d/%d" eh="5abe853a" />
+        <e k="usedplus_ft_corroded" v="Bị ăn mòn" eh="4b370f36" />
+        <e k="usedplus_ft_cracked" v="Bị nứt" eh="26d3b853" />
+        <e k="usedplus_ft_seized" v="Bị kẹt" eh="04db850b" />
+        <e k="usedplus_ft_selectType" v="Chẩn đoán loại lỗi:" eh="bf552726" />
+        <e k="usedplus_ft_probeHit" v="PHÁT HIỆN LỖI! Rò rỉ dầu - 3x chi phí" eh="21e8a8bf" />
+        <e k="usedplus_ft_correct" v="ĐÚNG" eh="0d536515" />
+        <e k="usedplus_ft_incorrect" v="SAI" eh="befd188c" />
+        <e k="usedplus_ft_repairResult" v="%s: %s - %s +%.0f%%" eh="ba74960b" />
+        <e k="usedplus_ft_totalGain" v="Tổng: +%.1f%% độ tin cậy, +%.1f%% giới hạn" eh="1da183e9" />
+        <e k="usedplus_ft_totalCost" v="Tài nguyên đã dùng: %.1fL dầu" eh="3dd1f971" />
+        <e k="usedplus_ft_hintsRemaining" v="Gợi ý: %d" eh="c8f080c2" />
+        <e k="usedplus_ft_quickScanCap" v="Chất lượng giới hạn 60%% (Quét nhanh)" eh="5b519744" />
+        <e k="usedplus_ft_noFaults" v="Không có lỗi - hệ thống hoạt động tốt!" eh="6bfa5546" />
+        <e k="usedplus_ft_action" v="Truy tìm lỗi: %s" eh="c4066687" />
+        <e k="usedplus_ft_corrodedDesc" v="Hư hại do rỉ sét / oxy hóa" eh="8a01ae60" />
+        <e k="usedplus_ft_crackedDesc" v="Nứt do ứng suất / mỏi" eh="81d5118b" />
+        <e k="usedplus_ft_seizedDesc" v="Bạc đạn bị kẹt / khóa" eh="647b76a9" />
+
         <e k="usedplus_sparePartsPallet_name" v="Pallet Phụ Tùng" eh="9bf39a93" />
         <e k="usedplus_sparePartsPallet_function" v="Phụ tùng tiêu hao cho phục hồi Xe Dịch Vụ. Đặt gần xe trong quá trình phục hồi." eh="c90aa3eb" />
         <e k="fillType_spareParts" v="Phụ Tùng" eh="ab6b8ce1" />
+        <e k="fillType_oil" v="[EN] Motor Oil" eh="511aaabd" />
+        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="f9c4d7d9" />
         <e k="unit_pcs" v="cái" eh="3ecf2642" />
         <e k="usedplus_resto_symptom_engine_knocking_load" v="Tiếng gõ nghiêm trọng khi chịu tải" eh="fb8c3067" />
         <e k="usedplus_resto_symptom_engine_low_oil_pressure" v="Áp suất dầu cực kỳ thấp" eh="a3efa42d" />
@@ -1966,6 +1997,11 @@
         <e k="usedplus_grade_fair" v="Tạm Được" eh="f7f20cf0" />
         <e k="usedplus_grade_poor" v="Kém" eh="0e94d017" />
         <e k="usedplus_grade_critical" v="Nghiêm Trọng" eh="278d01e5" />
+
+        <!-- v2.11.1: Tùy chỉnh màu xe dịch vụ -->
+        <e k="configuration_chassisColor" v="Màu khung gầm" eh="17d6aa5b" />
+        <e k="configuration_bodyColor" v="Màu thân xe" eh="e607d9e6" />
+        <e k="usedplus_serviceTruck_stripeColor" v="Màu sọc" eh="12b22714" />
         <e k="usedplus_button_makeOffer" v="Đưa Ra Giá" eh="4b779fa1" />
         <e k="usedplus_neg_title" v="ĐƯA RA GIÁ" eh="a91f8bed" />
         <e k="usedplus_neg_sectionVehicle" v="XE" eh="e9fa318f" />
@@ -2266,6 +2302,9 @@
         <e k="usedplus_admin_btn_rel_10" v="TC: 10%" eh="54d6e770" />
         <e k="usedplus_admin_btn_reset_hours" v="Reset Giờ" eh="a519e5e1" />
         <e k="usedplus_admin_btn_add_hours" v="+1000 Giờ" eh="ef05132d" />
+        <e k="usedplus_admin_btn_dna_lemon" v="[EN] 0.1 Lemon" eh="0047d5bc" />
+        <e k="usedplus_admin_btn_dna_average" v="[EN] 0.5 Average" eh="472d5599" />
+        <e k="usedplus_admin_btn_dna_workhorse" v="[EN] 0.9 Workhorse" eh="b0f0ee0b" />
         <e k="usedplus_admin_btn_dna_desperate" v="Tuyệt Vọng" eh="97df4642" />
         <e k="usedplus_admin_btn_dna_reasonable" v="Hợp Lý" eh="e485c034" />
         <e k="usedplus_admin_btn_dna_immovable" v="Cứng Đầu" eh="57d0e57c" />

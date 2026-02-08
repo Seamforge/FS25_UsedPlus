@@ -2147,9 +2147,46 @@
         <e k="usedplus_serviceTruck_opportunityExpired" v="Příležitost na servisní vůz vypršela." eh="a5d3a5fb" />
         <e k="usedplus_serviceTruck_insufficientFunds" v="Nedostatek prostředků! Potřebujete %s $ v hotovosti." eh="9b84e434" />
         <e k="usedplus_serviceTruck_alreadyOwned" v="Servisní vůz již vlastníte." eh="8d7c53f6" />
+
+        <!-- v2.11.1: Přizpůsobení barvy servisního vozu -->
+        <e k="configuration_chassisColor" v="Barva podvozku" eh="17d6aa5b" />
+        <e k="configuration_bodyColor" v="Barva karoserie" eh="e607d9e6" />
+        <e k="usedplus_serviceTruck_stripeColor" v="Barva proužků" eh="12b22714" />
+
+        <!-- v2.12.0: Fault Tracer Minigame -->
+        <e k="usedplus_ft_title" v="SLEDOVÁNÍ ZÁVAD" eh="92470a22" />
+        <e k="usedplus_ft_selectComponent" v="Vyberte komponent k diagnostice" eh="3fb628e9" />
+        <e k="usedplus_ft_probeMode" v="Sonda" eh="76d16796" />
+        <e k="usedplus_ft_flagMode" v="Označit" eh="c5836008" />
+        <e k="usedplus_ft_quickScan" v="Rychlý sken (2x náklady)" eh="31d0f8fb" />
+        <e k="usedplus_ft_hint" v="Servisní příručka" eh="d96f8735" />
+        <e k="usedplus_ft_beginRepair" v="Zahájit opravu" eh="e792568e" />
+        <e k="usedplus_ft_oilUsed" v="Spotřeba oleje: %.1fL" eh="bccd33a2" />
+        <e k="usedplus_ft_faultsFound" v="Závady: %d/%d" eh="5abe853a" />
+        <e k="usedplus_ft_corroded" v="Zkorodovaný" eh="4b370f36" />
+        <e k="usedplus_ft_cracked" v="Prasklý" eh="26d3b853" />
+        <e k="usedplus_ft_seized" v="Zadřený" eh="04db850b" />
+        <e k="usedplus_ft_selectType" v="Diagnostikujte typ závady:" eh="bf552726" />
+        <e k="usedplus_ft_probeHit" v="ZÁVADA NALEZENA! Únik kapaliny - 3x náklady" eh="21e8a8bf" />
+        <e k="usedplus_ft_correct" v="SPRÁVNĚ" eh="0d536515" />
+        <e k="usedplus_ft_incorrect" v="NESPRÁVNĚ" eh="befd188c" />
+        <e k="usedplus_ft_repairResult" v="%s: %s - %s +%.0f%%" eh="ba74960b" />
+        <e k="usedplus_ft_totalGain" v="Celkem: +%.1f%% spolehlivost, +%.1f%% strop" eh="1da183e9" />
+        <e k="usedplus_ft_totalCost" v="Spotřebované zdroje: %.1fL oleje" eh="3dd1f971" />
+        <e k="usedplus_ft_hintsRemaining" v="Nápovědy: %d" eh="c8f080c2" />
+        <e k="usedplus_ft_quickScanCap" v="Kvalita omezena na 60%% (Rychlý sken)" eh="5b519744" />
+        <e k="usedplus_ft_noFaults" v="Žádné závady - systém v pořádku!" eh="6bfa5546" />
+        <e k="usedplus_ft_action" v="Sledování závad: %s" eh="c4066687" />
+        <e k="usedplus_ft_corrodedDesc" v="Poškození rzí / oxidací" eh="8a01ae60" />
+        <e k="usedplus_ft_crackedDesc" v="Trhliny z namáhání / únavy" eh="81d5118b" />
+        <e k="usedplus_ft_seizedDesc" v="Zadřené / zablokované ložisko" eh="647b76a9" />
+
+        <!-- v2.9.0: Spare Parts Pallet -->
         <e k="usedplus_sparePartsPallet_name" v="Paleta náhradních dílů" eh="9bf39a93" />
         <e k="usedplus_sparePartsPallet_function" v="Spotřební náhradní díly pro renovaci servisním vozem. Umístěte v blízkosti vozu během renovace." eh="c90aa3eb" />
         <e k="fillType_spareParts" v="Náhradní díly" eh="ab6b8ce1" />
+        <e k="fillType_oil" v="[EN] Motor Oil" eh="511aaabd" />
+        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="f9c4d7d9" />
         <e k="unit_pcs" v="ks" eh="3ecf2642" />
         <e k="usedplus_resto_symptom_engine_knocking_load" v="Silné klepání při zatížení" eh="fb8c3067" />
         <e k="usedplus_resto_symptom_engine_low_oil_pressure" v="Kriticky nízký tlak oleje" eh="a3efa42d" />
@@ -2341,6 +2378,9 @@
         <e k="usedplus_admin_btn_rel_10" v="Spol: 10%" eh="54d6e770" />
         <e k="usedplus_admin_btn_reset_hours" v="Reset hodin" eh="a519e5e1" />
         <e k="usedplus_admin_btn_add_hours" v="+1000 hodin" eh="ef05132d" />
+        <e k="usedplus_admin_btn_dna_lemon" v="[EN] 0.1 Lemon" eh="0047d5bc" />
+        <e k="usedplus_admin_btn_dna_average" v="[EN] 0.5 Average" eh="472d5599" />
+        <e k="usedplus_admin_btn_dna_workhorse" v="[EN] 0.9 Workhorse" eh="b0f0ee0b" />
         <e k="usedplus_admin_btn_dna_desperate" v="Zoufalý" eh="97df4642" />
         <e k="usedplus_admin_btn_dna_reasonable" v="Rozumný" eh="e485c034" />
         <e k="usedplus_admin_btn_dna_immovable" v="Neoblomný" eh="57d0e57c" />

@@ -2182,9 +2182,46 @@
         <e k="usedplus_serviceTruck_opportunityExpired" v="Die Werkstattwagen-Gelegenheit ist abgelaufen." eh="a5d3a5fb" />
         <e k="usedplus_serviceTruck_insufficientFunds" v="Nicht genuegend Geld! Du brauchst %s $ in bar." eh="9b84e434" />
         <e k="usedplus_serviceTruck_alreadyOwned" v="Du besitzt bereits einen Werkstattwagen." eh="8d7c53f6" />
+
+        <!-- v2.11.1: Service Truck Farbanpassung -->
+        <e k="configuration_chassisColor" v="Fahrgestellfarbe" eh="17d6aa5b" />
+        <e k="configuration_bodyColor" v="Aufbaufarbe" eh="e607d9e6" />
+        <e k="usedplus_serviceTruck_stripeColor" v="Streifenfarbe" eh="12b22714" />
+
+        <!-- v2.12.0: Fault Tracer Minigame -->
+        <e k="usedplus_ft_title" v="FEHLERSUCHE" eh="92470a22" />
+        <e k="usedplus_ft_selectComponent" v="Komponente zur Diagnose auswählen" eh="3fb628e9" />
+        <e k="usedplus_ft_probeMode" v="Prüfen" eh="76d16796" />
+        <e k="usedplus_ft_flagMode" v="Markieren" eh="c5836008" />
+        <e k="usedplus_ft_quickScan" v="Schnellscan (2x Kosten)" eh="31d0f8fb" />
+        <e k="usedplus_ft_hint" v="Werkstatthandbuch" eh="d96f8735" />
+        <e k="usedplus_ft_beginRepair" v="Reparatur starten" eh="e792568e" />
+        <e k="usedplus_ft_oilUsed" v="Öl verbraucht: %.1fL" eh="bccd33a2" />
+        <e k="usedplus_ft_faultsFound" v="Fehler: %d/%d" eh="5abe853a" />
+        <e k="usedplus_ft_corroded" v="Korrodiert" eh="4b370f36" />
+        <e k="usedplus_ft_cracked" v="Gerissen" eh="26d3b853" />
+        <e k="usedplus_ft_seized" v="Festgefressen" eh="04db850b" />
+        <e k="usedplus_ft_selectType" v="Fehlertyp diagnostizieren:" eh="bf552726" />
+        <e k="usedplus_ft_probeHit" v="FEHLER GETROFFEN! Flüssigkeitsleck - 3x Kosten" eh="21e8a8bf" />
+        <e k="usedplus_ft_correct" v="RICHTIG" eh="0d536515" />
+        <e k="usedplus_ft_incorrect" v="FALSCH" eh="befd188c" />
+        <e k="usedplus_ft_repairResult" v="%s: %s - %s +%.0f%%" eh="ba74960b" />
+        <e k="usedplus_ft_totalGain" v="Gesamt: +%.1f%% Zuverlässigkeit, +%.1f%% Obergrenze" eh="1da183e9" />
+        <e k="usedplus_ft_totalCost" v="Verbrauchte Ressourcen: %.1fL Öl" eh="3dd1f971" />
+        <e k="usedplus_ft_hintsRemaining" v="Hinweise: %d" eh="c8f080c2" />
+        <e k="usedplus_ft_quickScanCap" v="Qualität begrenzt auf 60%% (Schnellscan)" eh="5b519744" />
+        <e k="usedplus_ft_noFaults" v="Keine Fehler vorhanden - System in Ordnung!" eh="6bfa5546" />
+        <e k="usedplus_ft_action" v="Fehlersuche: %s" eh="c4066687" />
+        <e k="usedplus_ft_corrodedDesc" v="Rost- / Oxidationsschaden" eh="8a01ae60" />
+        <e k="usedplus_ft_crackedDesc" v="Spannungsrisse / Ermüdung" eh="81d5118b" />
+        <e k="usedplus_ft_seizedDesc" v="Festgefressenes / blockiertes Lager" eh="647b76a9" />
+
+        <!-- v2.9.0: Spare Parts Pallet -->
         <e k="usedplus_sparePartsPallet_name" v="Ersatzteilpalette" eh="9bf39a93" />
         <e k="usedplus_sparePartsPallet_function" v="Verbrauchbare Ersatzteile fuer die Werkstattwagen-Restaurierung. Platziere sie in der Naehe des Wagens waehrend der Restaurierungsarbeit." eh="c90aa3eb" />
         <e k="fillType_spareParts" v="Ersatzteile" eh="ab6b8ce1" />
+        <e k="fillType_oil" v="[EN] Motor Oil" eh="511aaabd" />
+        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="f9c4d7d9" />
         <e k="unit_pcs" v="Stk" eh="3ecf2642" />
         <e k="usedplus_resto_symptom_engine_knocking_load" v="Starkes Klopfen unter Last" eh="fb8c3067" />
         <e k="usedplus_resto_symptom_engine_low_oil_pressure" v="Oeldruck kritisch niedrig" eh="a3efa42d" />
@@ -2358,6 +2395,9 @@
         <e k="usedplus_admin_btn_rel_10" v="Zuv: 10%" eh="54d6e770" />
         <e k="usedplus_admin_btn_reset_hours" v="Std. reset" eh="a519e5e1" />
         <e k="usedplus_admin_btn_add_hours" v="+1000 Std." eh="ef05132d" />
+        <e k="usedplus_admin_btn_dna_lemon" v="[EN] 0.1 Lemon" eh="0047d5bc" />
+        <e k="usedplus_admin_btn_dna_average" v="[EN] 0.5 Average" eh="472d5599" />
+        <e k="usedplus_admin_btn_dna_workhorse" v="[EN] 0.9 Workhorse" eh="b0f0ee0b" />
         <e k="usedplus_admin_btn_dna_desperate" v="Verzweifelt" eh="97df4642" />
         <e k="usedplus_admin_btn_dna_reasonable" v="Vernuenftig" eh="e485c034" />
         <e k="usedplus_admin_btn_dna_immovable" v="Unnachgiebig" eh="57d0e57c" />

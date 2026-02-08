@@ -14,6 +14,7 @@
     - ServiceVehicle pattern studied from GtX (Andy)
 
     v2.9.0 - Service Truck System
+    v2.12.0 - Fault Tracer on-foot detection (RVB pattern)
 ]]
 
 ServiceTruck = {}
@@ -25,6 +26,7 @@ local SPEC_NAME = "spec_serviceTruck"
 ServiceTruck.instances = {}
 ServiceTruck.actionEventId = nil
 ServiceTruck.nearestTruck = nil
+ServiceTruck.faultTracerActionEventId = nil  -- v2.12.0: On-foot Fault Tracer
 
 function ServiceTruck.prerequisitesPresent(specializations)
     return SpecializationUtil.hasSpecialization(Motorized, specializations) and
@@ -74,6 +76,12 @@ function ServiceTruck.registerFunctions(vehicleType)
     SpecializationUtil.registerFunction(vehicleType, "openRestorationDialog", ServiceTruck.openRestorationDialog)
     SpecializationUtil.registerFunction(vehicleType, "getRestorationStatus", ServiceTruck.getRestorationStatus)
     SpecializationUtil.registerFunction(vehicleType, "updateActionEventText", ServiceTruck.updateActionEventText)
+    SpecializationUtil.registerFunction(vehicleType, "completeRestoration", ServiceTruck.completeRestoration)
+    SpecializationUtil.registerFunction(vehicleType, "damageTarget", ServiceTruck.damageTarget)
+    SpecializationUtil.registerFunction(vehicleType, "openFaultTracerDialog", ServiceTruck.openFaultTracerDialog)
+    SpecializationUtil.registerFunction(vehicleType, "loadDieselTankVisual", ServiceTruck.loadDieselTankVisual)
+    SpecializationUtil.registerFunction(vehicleType, "loadViseVisual", ServiceTruck.loadViseVisual)
+    SpecializationUtil.registerFunction(vehicleType, "loadToolboxVisual", ServiceTruck.loadToolboxVisual)
 end
 
 function ServiceTruck.registerEventListeners(vehicleType)
@@ -107,6 +115,9 @@ function ServiceTruck:onLoad(savegame)
     spec.dieselFillUnit = self.xmlFile:getValue("vehicle.serviceTruck.fillUnits#diesel", 2)
     spec.oilFillUnit = self.xmlFile:getValue("vehicle.serviceTruck.fillUnits#oil", 3)
     spec.hydraulicFillUnit = self.xmlFile:getValue("vehicle.serviceTruck.fillUnits#hydraulic", 4)
+
+    -- Action events
+    spec.actionEvents = {}
 
     -- State tracking
     spec.nearbyVehicles = {}
@@ -142,7 +153,199 @@ function ServiceTruck:onLoad(savegame)
         spec.savedProgress = savegame.xmlFile:getValue(key .. "#progress")
     end
 
+    -- Load diesel tank visual on truck bed (battery is in i3d directly)
+    self:loadDieselTankVisual()
+    -- Load cast iron vise on truck bed
+    self:loadViseVisual()
+    -- Load Superduty toolbox on truck bed
+    self:loadToolboxVisual()
+
     UsedPlus.logInfo("ServiceTruck loaded - Long-term vehicle restoration ready")
+end
+
+--[[
+    Load the diesel transfer tank 3D model and attach it to the truck bed.
+    Uses the SmallFuelTank model (FS25_Small_fuel_tank), scaled and positioned
+    on the right rear of the service bed.
+]]
+function ServiceTruck:loadDieselTankVisual()
+    local spec = self[SPEC_NAME]
+
+    local tankPath = Utils.getFilename("vehicles/serviceTruck/dieselTank/Smallfueltank.i3d", self.baseDirectory)
+    local tankScene = g_i3DManager:loadSharedI3DFile(tankPath, false, false, false)
+
+    if tankScene == nil or tankScene == 0 then
+        UsedPlus.logError("ServiceTruck: Failed to load diesel tank model from: " .. tostring(tankPath))
+        return
+    end
+
+    -- Navigate to visual mesh: root > "Small fuel tank" > visuals (index 7) > fuelTank (index 0)
+    local tankRoot = getChildAt(tankScene, 0)
+    local visualsNode = getChildAt(tankRoot, 7)
+
+    if visualsNode == nil then
+        UsedPlus.logError("ServiceTruck: Could not find visuals node in diesel tank i3d")
+        delete(tankScene)
+        return
+    end
+
+    local tankMesh = getChildAt(visualsNode, 0)
+    if tankMesh == nil then
+        UsedPlus.logError("ServiceTruck: Could not find fuelTank mesh in diesel tank i3d")
+        delete(tankScene)
+        return
+    end
+
+    -- Clone the visual mesh so we can delete the source scene
+    local clonedTank = clone(tankMesh, true)
+
+    -- Find the serviceVehicle (truck bed) node: 0>0|19
+    local bedNode = I3DUtil.indexToObject(self.components, "0>0|19")
+    if bedNode == nil then
+        UsedPlus.logError("ServiceTruck: Could not find truck bed node (0>0|19)")
+        delete(clonedTank)
+        delete(tankScene)
+        return
+    end
+
+    -- Link tank to truck bed
+    link(bedNode, clonedTank)
+
+    -- Position on center-rear of bed, sitting on the bed floor
+    -- Bed floor Y ≈ 1.08 (matches oilTank, hydraulicTank, deco items)
+    -- Bed extends roughly Z=-0.8 to Z=-4.2, center around Z=-2.5
+    setTranslation(clonedTank, -0.24, 0.52, -3.5)
+
+    -- Rotate 90° clockwise (viewed from above) to sit lengthwise on the bed
+    setRotation(clonedTank, 0, -math.pi / 2, 0)
+
+    -- Scale down to fit truck bed (original model is ~1.4m wide × 2.2m tall × 1.4m deep)
+    -- At 0.45 scale: ~0.65m wide × 1.0m tall × 0.62m deep
+    setScale(clonedTank, 0.648, 0.81, 0.648)
+
+    -- Store reference for cleanup
+    spec.dieselTankVisualNode = clonedTank
+
+    -- Hide the battery charger deco (makes room for the diesel tank)
+    -- deco_batteryCharger is child index 5 of serviceVehicle (0>0|19|5)
+    local batteryChargerNode = I3DUtil.indexToObject(self.components, "0>0|19|5")
+    if batteryChargerNode ~= nil then
+        setVisibility(batteryChargerNode, false)
+        UsedPlus.logDebug("ServiceTruck: Hid battery charger deco to make room for diesel tank")
+    end
+
+    -- Clean up loaded scene (cloned nodes survive)
+    delete(tankScene)
+
+    UsedPlus.logInfo("ServiceTruck: Diesel transfer tank loaded on truck bed")
+end
+
+--[[
+    Load the cast iron bench vise from base game assets and attach it to the truck bed.
+    Uses $data/maps/mapUS/textures/props/vintageTools/castIronVise.i3d
+]]
+function ServiceTruck:loadViseVisual()
+    local spec = self[SPEC_NAME]
+
+    -- Load the entire bootGross i3d which contains the castIronVise with textures
+    -- The vise uses $data/ textures so no extra files needed beyond the i3d+shapes
+    local visePath = Utils.getFilename("vehicles/serviceTruck/vise/id_bootGross.i3d", self.baseDirectory)
+    local viseScene = g_i3DManager:loadSharedI3DFile(visePath, false, false, false)
+    if viseScene == nil or viseScene == 0 then
+        UsedPlus.logError("ServiceTruck: Failed to load vise model from: " .. tostring(visePath))
+        return
+    end
+
+    -- Navigate to castIronVise LOD0 by index path:
+    -- root(0) > id_bootGross > visuals(5) > LOD0(0) > Gamerstube(0) >
+    -- sailingMotorBoatOnTheTable(0) > workBench_PREFAB(4) > castIronVise(1) > LOD0(0)
+    local root = getChildAt(viseScene, 0)           -- id_bootGross
+    local visuals = getChildAt(root, 5)             -- visuals
+    local lod0Group = getChildAt(visuals, 0)        -- LOD0
+    local gamerstube = getChildAt(lod0Group, 0)     -- Gamerstube_8/5
+    local prefab = getChildAt(gamerstube, 0)        -- sailingMotorBoatOnTheTable_PREFAB
+    local workBenchPrefab = getChildAt(prefab, 4)   -- workBench_PREFAB
+    local viseNode = getChildAt(workBenchPrefab, 1) -- castIronVise
+    local viseLod0 = getChildAt(viseNode, 0)        -- LOD0 shape
+
+    if viseLod0 == nil then
+        UsedPlus.logError("ServiceTruck: Could not navigate to castIronVise LOD0 in bootGross i3d")
+        delete(viseScene)
+        return
+    end
+
+    local clonedVise = clone(viseLod0, true)
+
+    local bedNode = I3DUtil.indexToObject(self.components, "0>0|19")
+    if bedNode == nil then
+        UsedPlus.logError("ServiceTruck: Could not find truck bed node for vise")
+        delete(clonedVise)
+        delete(viseScene)
+        return
+    end
+
+    link(bedNode, clonedVise)
+
+    -- Position on rear of bed, near the tailgate area
+    -- Negative X = right side (away from sidewall tools), negative Z = toward rear
+    setTranslation(clonedVise, -1.25, 1.02, -3.725)
+    setRotation(clonedVise, 0, math.pi, 0)
+    setScale(clonedVise, 0.5, 1.0, 1.0)
+
+    spec.viseVisualNode = clonedVise
+
+    delete(viseScene)
+    UsedPlus.logInfo("ServiceTruck: Cast iron vise loaded on truck bed")
+end
+
+--[[
+    Load the portable toolbox from MobileServiceKit and attach to truck bed.
+    Uses toolboxWorkshop.i3d — all textures are $data/ (base game), no local files needed.
+]]
+function ServiceTruck:loadToolboxVisual()
+    local spec = self[SPEC_NAME]
+
+    local tbPath = Utils.getFilename("vehicles/serviceTruck/toolbox/toolboxWorkshop.i3d", self.baseDirectory)
+    local tbScene = g_i3DManager:loadSharedI3DFile(tbPath, false, false, false)
+    if tbScene == nil or tbScene == 0 then
+        UsedPlus.logError("ServiceTruck: Failed to load toolbox model from: " .. tostring(tbPath))
+        return
+    end
+
+    -- Navigate to toolbox_viz by index path:
+    -- root(0) > toolBoxWorkshopMainComponent > visible(3) > toolbox_viz(0)
+    local root = getChildAt(tbScene, 0)       -- toolBoxWorkshopMainComponent
+    local visible = getChildAt(root, 3)       -- visible TransformGroup
+    local toolboxViz = getChildAt(visible, 0) -- toolbox_viz Shape
+
+    if toolboxViz == nil then
+        UsedPlus.logError("ServiceTruck: Could not navigate to toolbox_viz in toolboxWorkshop i3d")
+        delete(tbScene)
+        return
+    end
+
+    local clonedToolbox = clone(toolboxViz, true)
+
+    local bedNode = I3DUtil.indexToObject(self.components, "0>0|19")
+    if bedNode == nil then
+        UsedPlus.logError("ServiceTruck: Could not find truck bed node for toolbox")
+        delete(clonedToolbox)
+        delete(tbScene)
+        return
+    end
+
+    link(bedNode, clonedToolbox)
+
+    -- Position on rear of bed near diesel tank and battery area
+    setTranslation(clonedToolbox, -1.0, 1.08, -3.0)
+    setRotation(clonedToolbox, 0, math.pi / 2, 0)
+    setScale(clonedToolbox, 1.0, 1.0, 1.0)
+    setVisibility(clonedToolbox, true)
+
+    spec.toolboxVisualNode = clonedToolbox
+
+    delete(tbScene)
+    UsedPlus.logInfo("ServiceTruck: Portable toolbox loaded on truck bed")
 end
 
 function ServiceTruck:onDelete()
@@ -165,6 +368,25 @@ function ServiceTruck:onDelete()
     if ServiceTruck.nearestTruck == self then
         ServiceTruck.nearestTruck = nil
     end
+
+    -- Clean up diesel tank visual
+    if spec.dieselTankVisualNode ~= nil then
+        delete(spec.dieselTankVisualNode)
+        spec.dieselTankVisualNode = nil
+    end
+
+    -- Clean up vise visual
+    if spec.viseVisualNode ~= nil then
+        delete(spec.viseVisualNode)
+        spec.viseVisualNode = nil
+    end
+
+    -- Clean up toolbox visual
+    if spec.toolboxVisualNode ~= nil then
+        delete(spec.toolboxVisualNode)
+        spec.toolboxVisualNode = nil
+    end
+
 end
 
 function ServiceTruck:saveToXMLFile(xmlFile, key, usedModNames)
@@ -245,6 +467,8 @@ function ServiceTruck:updateActionEventText()
     if spec.actionEventId == nil then return end
 
     local text
+    local active = true
+
     if spec.isRestoring then
         if spec.isPaused then
             text = g_i18n:getText("usedplus_serviceTruck_resume") or "Resume Restoration"
@@ -256,12 +480,15 @@ function ServiceTruck:updateActionEventText()
             local vehicleName = spec.targetVehicle.vehicle:getName() or "Vehicle"
             text = string.format(g_i18n:getText("usedplus_serviceTruck_inspect") or "Inspect %s", vehicleName)
         else
-            text = g_i18n:getText("usedplus_serviceTruck_noTarget") or "No vehicle nearby"
+            -- No target vehicle and no restoration — hide the action event
+            -- so it doesn't block Oil Service Point or other activatables
+            text = ""
+            active = false
         end
     end
 
     g_inputBinding:setActionEventText(spec.actionEventId, text)
-    g_inputBinding:setActionEventActive(spec.actionEventId, true)
+    g_inputBinding:setActionEventActive(spec.actionEventId, active)
 end
 
 function ServiceTruck.onActionActivate(self, actionName, inputValue, callbackState, isAnalog)
@@ -280,9 +507,6 @@ function ServiceTruck.onActionActivate(self, actionName, inputValue, callbackSta
         -- Start inspection process
         if spec.targetVehicle ~= nil then
             self:openRestorationDialog()
-        else
-            g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_INFO,
-                g_i18n:getText("usedplus_serviceTruck_noVehicle") or "No vehicle nearby to restore")
         end
     end
 
@@ -291,6 +515,9 @@ end
 
 function ServiceTruck:onUpdate(dt, isActiveForInput, isActiveForInputIgnoreSelection, isSelected)
     local spec = self[SPEC_NAME]
+
+    -- v2.12.0: Keep updating for on-foot detection (same pattern as FieldServiceKit)
+    self:raiseActive()
 
     -- Reconnect saved target vehicle after load
     if spec.savedTargetId ~= nil and spec.isRestoring then
@@ -317,9 +544,78 @@ function ServiceTruck:onUpdate(dt, isActiveForInput, isActiveForInputIgnoreSelec
     -- Update nearby pallet detection
     self:findNearbyPallets()
 
-    -- Update action text
+    -- Update action text (in-vehicle R key)
     if isActiveForInputIgnoreSelection then
         self:updateActionEventText()
+    end
+
+    -- v2.12.0: On-foot player proximity detection for Fault Tracer
+    local playerNearby = false
+    local playerDistance = 999999
+    local activationRadius = 3.0  -- meters (slightly larger than OBD Scanner's 2.5m)
+    local isOnFoot = false
+
+    if self.rootNode ~= nil and g_localPlayer ~= nil then
+        isOnFoot = true
+        if g_localPlayer.getIsInVehicle ~= nil then
+            isOnFoot = not g_localPlayer:getIsInVehicle()
+        end
+        if g_currentMission.controlledVehicle ~= nil then
+            isOnFoot = false
+        end
+
+        if isOnFoot then
+            local tx, ty, tz = getWorldTranslation(self.rootNode)
+            local px, py, pz
+            if g_localPlayer.getPosition ~= nil then
+                px, py, pz = g_localPlayer:getPosition()
+            elseif g_localPlayer.rootNode ~= nil then
+                px, py, pz = getWorldTranslation(g_localPlayer.rootNode)
+            end
+
+            if px ~= nil then
+                playerDistance = MathUtil.vector2Length(tx - px, tz - pz)
+                playerNearby = playerDistance <= activationRadius
+            end
+        end
+    end
+
+    -- Track nearest truck for Fault Tracer action event
+    if playerNearby then
+        local currentNearest = ServiceTruck.nearestTruck
+        if currentNearest == nil or currentNearest == self then
+            ServiceTruck.nearestTruck = self
+        else
+            -- Check if we're closer
+            local currentSpec = currentNearest[SPEC_NAME]
+            if currentSpec == nil or playerDistance < (currentSpec.playerDistance or 999999) then
+                ServiceTruck.nearestTruck = self
+            end
+        end
+    else
+        if ServiceTruck.nearestTruck == self then
+            ServiceTruck.nearestTruck = nil
+        end
+    end
+    spec.playerDistance = playerDistance
+
+    -- Update Fault Tracer action event visibility
+    if ServiceTruck.faultTracerActionEventId ~= nil and g_inputBinding ~= nil then
+        local hasTarget = (spec.targetVehicle ~= nil)
+        local shouldShow = playerNearby and isOnFoot and hasTarget and ServiceTruck.nearestTruck == self
+
+        if shouldShow then
+            local vehicleName = spec.targetVehicle.vehicle:getName() or "Vehicle"
+            local promptText = string.format(g_i18n:getText("usedplus_ft_action") or "Fault Tracer: %s", vehicleName)
+
+            g_inputBinding:setActionEventTextPriority(ServiceTruck.faultTracerActionEventId, GS_PRIO_VERY_HIGH)
+            g_inputBinding:setActionEventTextVisibility(ServiceTruck.faultTracerActionEventId, true)
+            g_inputBinding:setActionEventActive(ServiceTruck.faultTracerActionEventId, true)
+            g_inputBinding:setActionEventText(ServiceTruck.faultTracerActionEventId, promptText)
+        else
+            g_inputBinding:setActionEventTextVisibility(ServiceTruck.faultTracerActionEventId, false)
+            g_inputBinding:setActionEventActive(ServiceTruck.faultTracerActionEventId, false)
+        end
     end
 
     -- Process restoration if active
@@ -879,3 +1175,98 @@ function ServiceTruck:getRestorationStatus()
         partsAvailable = spec.totalPartsAvailable
     }
 end
+
+-- ============================================================
+-- v2.12.0: Fault Tracer - On-Foot Activation (RVB Pattern)
+-- ============================================================
+
+--[[
+    Open the Fault Tracer dialog for a target vehicle.
+    Called from the on-foot action event callback.
+]]
+function ServiceTruck:openFaultTracerDialog()
+    local spec = self[SPEC_NAME]
+    if spec.targetVehicle == nil then return end
+
+    local targetVehicle = spec.targetVehicle.vehicle
+    DialogLoader.show("FaultTracerDialog", "setData", targetVehicle, self)
+end
+
+--[[
+    Callback when Fault Tracer action key is pressed (RVB pattern).
+]]
+function ServiceTruck.faultTracerCallback(self, actionName, inputValue, callbackState, isAnalog)
+    if inputValue <= 0 then return end
+
+    local truck = ServiceTruck.nearestTruck
+    if truck ~= nil then
+        local spec = truck[SPEC_NAME]
+        if spec ~= nil and spec.targetVehicle ~= nil then
+            UsedPlus.logInfo("ServiceTruck: Fault Tracer activated for " .. (spec.targetVehicle.vehicle:getName() or "Vehicle"))
+            truck:openFaultTracerDialog()
+        end
+    end
+end
+
+--[[
+    Hook PlayerInputComponent.registerActionEvents for on-foot Fault Tracer.
+    Follows exact RVB pattern from FieldServiceKit v2.0.7.
+]]
+ServiceTruck.originalRegisterActionEventsForFT = nil
+
+function ServiceTruck.hookPlayerInputComponentForFaultTracer()
+    if ServiceTruck.originalRegisterActionEventsForFT ~= nil then
+        return  -- Already hooked
+    end
+
+    if PlayerInputComponent == nil or PlayerInputComponent.registerActionEvents == nil then
+        UsedPlus.logWarn("ServiceTruck: PlayerInputComponent.registerActionEvents not available for Fault Tracer")
+        return
+    end
+
+    -- Store current function (may already be hooked by FieldServiceKit)
+    ServiceTruck.originalRegisterActionEventsForFT = PlayerInputComponent.registerActionEvents
+
+    -- Replace with our version
+    PlayerInputComponent.registerActionEvents = function(inputComponent, ...)
+        -- Call previous (chains with FieldServiceKit hook)
+        ServiceTruck.originalRegisterActionEventsForFT(inputComponent, ...)
+
+        -- Add Fault Tracer action (RVB pattern)
+        if inputComponent.player ~= nil and inputComponent.player.isOwner then
+            local actionId = InputAction.USEDPLUS_FAULT_TRACER
+            if actionId == nil then
+                UsedPlus.logWarn("ServiceTruck: InputAction.USEDPLUS_FAULT_TRACER not found")
+                return
+            end
+
+            g_inputBinding:beginActionEventsModification(PlayerInputComponent.INPUT_CONTEXT_NAME)
+
+            local success, eventId = g_inputBinding:registerActionEvent(
+                actionId,
+                ServiceTruck,
+                ServiceTruck.faultTracerCallback,
+                false,   -- triggerUp
+                true,    -- triggerDown
+                false,   -- triggerAlways
+                false,   -- startActive
+                nil,     -- callbackState
+                true     -- disableConflictingBindings
+            )
+
+            g_inputBinding:endActionEventsModification()
+
+            if success and eventId ~= nil then
+                ServiceTruck.faultTracerActionEventId = eventId
+                UsedPlus.logInfo("ServiceTruck: Fault Tracer action event registered (RVB pattern)")
+            else
+                UsedPlus.logWarn("ServiceTruck: Failed to register Fault Tracer action event")
+            end
+        end
+    end
+
+    UsedPlus.logInfo("ServiceTruck: PlayerInputComponent hooked for Fault Tracer (v2.12.0)")
+end
+
+-- Install hook when this file loads
+ServiceTruck.hookPlayerInputComponentForFaultTracer()

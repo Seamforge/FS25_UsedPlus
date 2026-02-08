@@ -1638,10 +1638,40 @@
         <e k="usedplus_serviceTruck_insufficientFunds" v="不足 funds！ 您 need $%s cash." eh="9b84e434" />
         <e k="usedplus_serviceTruck_alreadyOwned" v="您 已經 own a 服務 Truck." eh="8d7c53f6" />
 
+        <!-- v2.12.0: Fault Tracer Minigame -->
+        <e k="usedplus_ft_title" v="故障追蹤器" eh="92470a22" />
+        <e k="usedplus_ft_selectComponent" v="選擇要診斷的組件" eh="3fb628e9" />
+        <e k="usedplus_ft_probeMode" v="探測" eh="76d16796" />
+        <e k="usedplus_ft_flagMode" v="標記" eh="c5836008" />
+        <e k="usedplus_ft_quickScan" v="快速掃描（2倍成本）" eh="31d0f8fb" />
+        <e k="usedplus_ft_hint" v="維修手冊" eh="d96f8735" />
+        <e k="usedplus_ft_beginRepair" v="開始維修" eh="e792568e" />
+        <e k="usedplus_ft_oilUsed" v="已用機油: %.1fL" eh="bccd33a2" />
+        <e k="usedplus_ft_faultsFound" v="故障: %d/%d" eh="5abe853a" />
+        <e k="usedplus_ft_corroded" v="腐蝕" eh="4b370f36" />
+        <e k="usedplus_ft_cracked" v="裂紋" eh="26d3b853" />
+        <e k="usedplus_ft_seized" v="卡死" eh="04db850b" />
+        <e k="usedplus_ft_selectType" v="診斷故障類型:" eh="bf552726" />
+        <e k="usedplus_ft_probeHit" v="發現故障！液體洩漏 - 3倍成本" eh="21e8a8bf" />
+        <e k="usedplus_ft_correct" v="正確" eh="0d536515" />
+        <e k="usedplus_ft_incorrect" v="錯誤" eh="befd188c" />
+        <e k="usedplus_ft_repairResult" v="%s: %s - %s +%.0f%%" eh="ba74960b" />
+        <e k="usedplus_ft_totalGain" v="合計: +%.1f%%可靠性, +%.1f%%上限" eh="1da183e9" />
+        <e k="usedplus_ft_totalCost" v="消耗資源: %.1fL機油" eh="3dd1f971" />
+        <e k="usedplus_ft_hintsRemaining" v="提示: %d" eh="c8f080c2" />
+        <e k="usedplus_ft_quickScanCap" v="品質限制為60%%（快速掃描）" eh="5b519744" />
+        <e k="usedplus_ft_noFaults" v="無故障 - 系統正常！" eh="6bfa5546" />
+        <e k="usedplus_ft_action" v="故障追蹤器: %s" eh="c4066687" />
+        <e k="usedplus_ft_corrodedDesc" v="鏽蝕/氧化損壞" eh="8a01ae60" />
+        <e k="usedplus_ft_crackedDesc" v="應力裂紋/疲勞" eh="81d5118b" />
+        <e k="usedplus_ft_seizedDesc" v="卡死/鎖死軸承" eh="647b76a9" />
+
         <!-- v2.9.0: Spare Parts Pallet -->
         <e k="usedplus_sparePartsPallet_name" v="Spare Parts Pallet" eh="9bf39a93" />
         <e k="usedplus_sparePartsPallet_function" v="Consumable spare parts for 服務 Truck restoration. Place near the truck 期間 restoration work." eh="c90aa3eb" />
         <e k="fillType_spareParts" v="Spare Parts" eh="ab6b8ce1" />
+        <e k="fillType_oil" v="[EN] Motor Oil" eh="511aaabd" />
+        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="f9c4d7d9" />
         <e k="unit_pcs" v="pcs" eh="3ecf2642" />
 
         <!-- v2.9.0: Restoration Diagnostic Symptoms - Engine -->
@@ -1965,6 +1995,11 @@
         <e k="usedplus_walkaway_workhorse" v="This seller knows exactly what they have - a machine that's been nothing 但reliable. 該y won't entertain lowball offers." eh="dd4d6411" />
         <e k="usedplus_seller_immovable_hint" v="這個賣家很清楚自己有什麼。別指望有議價空間。" eh="afe11ced" />
 
+        <!-- v2.11.1: 服務卡車顏色自訂 -->
+        <e k="configuration_chassisColor" v="底盤顏色" eh="17d6aa5b" />
+        <e k="configuration_bodyColor" v="車身顏色" eh="e607d9e6" />
+        <e k="usedplus_serviceTruck_stripeColor" v="條紋顏色" eh="12b22714" />
+
         <!-- v2.6.2: Settings-based mode disabled messages -->
         <e k="usedplus_mode_finance_disabled" v="融資 (已停用)" eh="a7fe11df" />
         <e k="usedplus_mode_lease_disabled" v="租賃 (已停用)" eh="2c3f5a31" />
@@ -2153,6 +2188,9 @@
         <e k="usedplus_admin_btn_rel_10" v="Rel: 10%" eh="54d6e770" />
         <e k="usedplus_admin_btn_reset_hours" v="Reset 小時" eh="a519e5e1" />
         <e k="usedplus_admin_btn_add_hours" v="+1000 小時" eh="ef05132d" />
+        <e k="usedplus_admin_btn_dna_lemon" v="[EN] 0.1 Lemon" eh="0047d5bc" />
+        <e k="usedplus_admin_btn_dna_average" v="[EN] 0.5 Average" eh="472d5599" />
+        <e k="usedplus_admin_btn_dna_workhorse" v="[EN] 0.9 Workhorse" eh="b0f0ee0b" />
         <e k="usedplus_admin_btn_dna_desperate" v="絕望" eh="97df4642" />
         <e k="usedplus_admin_btn_dna_reasonable" v="合理" eh="e485c034" />
         <e k="usedplus_admin_btn_dna_immovable" v="堅定" eh="57d0e57c" />

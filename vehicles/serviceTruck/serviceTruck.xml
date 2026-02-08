@@ -2,7 +2,7 @@
 <!--
     FS25_UsedPlus - Service Truck for Long-Term Vehicle Restoration
 
-    Based on GMC C7000 81-89 by Canada FS (model only).
+    Based on GMC C7000 81-89 by Canada FS (model only, v2 - Aug 2025).
     Custom specialization for UsedPlus restoration system.
 
     Features:
@@ -11,8 +11,12 @@
     - Requires spare parts pallets nearby
     - Slowly restores reliability AND reliability ceiling
     - Target vehicle is immobilized during restoration
+    - Multi-color customization (chassis, body, stripes)
+    - Interactive compartment doors
+    - Beacon/emergency lights
+    - Passenger seats (3)
 
-    v2.9.0 - Service Truck System
+    v2.11.1 - Service Truck v2 Model Upgrade
 -->
 <vehicle type="usedPlusServiceTruck">
     <annotation>UsedPlus Service Truck - Long-Term Vehicle Restoration</annotation>
@@ -26,7 +30,7 @@
         <functions>
             <function>$l10n_usedplus_serviceTruck_function</function>
         </functions>
-        <image>store.dds</image>
+        <image>vehicles/serviceTruck/store.dds</image>
         <price>75000</price>
         <dailyUpkeep>50</dailyUpkeep>
         <lifetime>600</lifetime>
@@ -49,7 +53,10 @@
         <mapHotspot type="TRUCK"/>
     </base>
 
-    <!-- Configurations preserved from C7000 -->
+    <!-- ============================================================ -->
+    <!-- Design Configurations (from C7000 v2)                        -->
+    <!-- ============================================================ -->
+
     <design2Configurations title="Bumpers">
         <design2Configuration name="Stock1" price="0">
             <objectChange node="0>0|14|0|3|1|0" visibilityActive="true" visibilityInactive="true"/>
@@ -68,41 +75,173 @@
         </design2Configuration>
     </design2Configurations>
 
+    <design3Configurations title="Skins">
+        <design3Configuration name="No Skin" price="0">
+            <objectChange node="0>0|14|0|3|5|0|0" visibilityActive="false" visibilityInactive="false"/>
+            <objectChange node="0>0|14|0|3|5|0|1" visibilityActive="false" visibilityInactive="false"/>
+            <objectChange node="0>0|14|0|3|5|0|2" visibilityActive="false" visibilityInactive="false"/>
+            <objectChange node="0>0|12|0|0|1|2|0" visibilityActive="false" visibilityInactive="false"/>
+            <objectChange node="0>0|12|0|0|1|2|1" visibilityActive="false" visibilityInactive="false"/>
+            <objectChange node="0>0|12|0|0|1|2|2" visibilityActive="false" visibilityInactive="false"/>
+            <objectChange node="0>0|12|0|0|1|3" visibilityActive="false" visibilityInactive="false"/>
+            <objectChange node="0>0|14|0|3|5|1" visibilityActive="false" visibilityInactive="false"/>
+            <objectChange node="0>0|14|2|0|0|3" visibilityActive="false" visibilityInactive="false"/>
+            <objectChange node="0>0|14|2|0|1|3" visibilityActive="false" visibilityInactive="false"/>
+            <objectChange node="0>0|14|2|0|2|3" visibilityActive="false" visibilityInactive="false"/>
+            <objectChange node="0>0|14|2|0|3|3" visibilityActive="false" visibilityInactive="false"/>
+            <objectChange node="0>0|14|2|0|4|3" visibilityActive="false" visibilityInactive="false"/>
+            <objectChange node="0>0|14|2|0|5|3" visibilityActive="false" visibilityInactive="false"/>
+            <objectChange node="0>0|14|2|0|6|3" visibilityActive="false" visibilityInactive="false"/>
+            <objectChange node="0>0|14|2|0|7|3" visibilityActive="false" visibilityInactive="false"/>
+            <objectChange node="0>0|14|3" visibilityActive="false" visibilityInactive="false"/>
+        </design3Configuration>
+        <design3Configuration name="SL Farms" price="1000">
+            <objectChange node="0>0|14|0|3|5|0|0" visibilityActive="true" visibilityInactive="false"/>
+            <objectChange node="0>0|14|0|3|5|0|1" visibilityActive="true" visibilityInactive="false"/>
+            <objectChange node="0>0|14|0|3|5|0|2" visibilityActive="true" visibilityInactive="false"/>
+            <objectChange node="0>0|12|0|0|1|2|0" visibilityActive="true" visibilityInactive="false"/>
+            <objectChange node="0>0|12|0|0|1|2|1" visibilityActive="true" visibilityInactive="false"/>
+            <objectChange node="0>0|12|0|0|1|2|2" visibilityActive="true" visibilityInactive="false"/>
+            <objectChange node="0>0|12|0|0|1|3" visibilityActive="false" visibilityInactive="false"/>
+            <objectChange node="0>0|14|0|3|5|1" visibilityActive="false" visibilityInactive="false"/>
+            <objectChange node="0>0|14|2|0|0|3" visibilityActive="false" visibilityInactive="false"/>
+            <objectChange node="0>0|14|2|0|1|3" visibilityActive="false" visibilityInactive="false"/>
+            <objectChange node="0>0|14|2|0|2|3" visibilityActive="false" visibilityInactive="false"/>
+            <objectChange node="0>0|14|2|0|3|3" visibilityActive="false" visibilityInactive="false"/>
+            <objectChange node="0>0|14|2|0|4|3" visibilityActive="false" visibilityInactive="false"/>
+            <objectChange node="0>0|14|2|0|5|3" visibilityActive="false" visibilityInactive="false"/>
+            <objectChange node="0>0|14|2|0|6|3" visibilityActive="false" visibilityInactive="false"/>
+            <objectChange node="0>0|14|2|0|7|3" visibilityActive="false" visibilityInactive="false"/>
+            <objectChange node="0>0|14|3" visibilityActive="false" visibilityInactive="false"/>
+        </design3Configuration>
+        <design3Configuration name="Wagna" price="1000">
+            <objectChange node="0>0|12|0|0|1|3" visibilityActive="true" visibilityInactive="false"/>
+            <objectChange node="0>0|14|0|3|5|1" visibilityActive="true" visibilityInactive="false"/>
+            <objectChange node="0>0|14|2|0|0|3" visibilityActive="true" visibilityInactive="false"/>
+            <objectChange node="0>0|14|2|0|1|3" visibilityActive="true" visibilityInactive="false"/>
+            <objectChange node="0>0|14|2|0|2|3" visibilityActive="true" visibilityInactive="false"/>
+            <objectChange node="0>0|14|2|0|3|3" visibilityActive="true" visibilityInactive="false"/>
+            <objectChange node="0>0|14|2|0|4|3" visibilityActive="true" visibilityInactive="false"/>
+            <objectChange node="0>0|14|2|0|5|3" visibilityActive="true" visibilityInactive="false"/>
+            <objectChange node="0>0|14|2|0|6|3" visibilityActive="true" visibilityInactive="false"/>
+            <objectChange node="0>0|14|2|0|7|3" visibilityActive="true" visibilityInactive="false"/>
+            <objectChange node="0>0|14|3" visibilityActive="true" visibilityInactive="false"/>
+            <objectChange node="0>0|14|0|3|5|0|0" visibilityActive="false" visibilityInactive="false"/>
+            <objectChange node="0>0|14|0|3|5|0|1" visibilityActive="false" visibilityInactive="false"/>
+            <objectChange node="0>0|14|0|3|5|0|2" visibilityActive="false" visibilityInactive="false"/>
+            <objectChange node="0>0|12|0|0|1|2|0" visibilityActive="false" visibilityInactive="false"/>
+            <objectChange node="0>0|12|0|0|1|2|1" visibilityActive="false" visibilityInactive="false"/>
+            <objectChange node="0>0|12|0|0|1|2|2" visibilityActive="false" visibilityInactive="false"/>
+        </design3Configuration>
+    </design3Configurations>
+
     <designConfigurations title="Grill">
         <designConfiguration name="GMC" price="0">
-            <objectChange node="0>0|12|0|0|1|0" visibilityActive="true" visibilityInactive="true"/>
-            <objectChange node="0>0|14|0|3|3|0" visibilityActive="true" visibilityInactive="true"/>
+            <objectChange node="0>0|12|0|0|1|0" visibilityActive="true" visibilityInactive="false"/>
+            <objectChange node="0>0|14|0|3|3|0" visibilityActive="true" visibilityInactive="false"/>
             <objectChange node="0>0|14|0|3|0|0" visibilityActive="true" visibilityInactive="false"/>
-            <objectChange node="0>0|3|0|5" visibilityActive="true" visibilityInactive="false"/>
-            <objectChange node="0>0|14|0|3|0|1" visibilityActive="false" visibilityInactive="false"/>
-            <objectChange node="0>0|3|0|2" visibilityActive="false" visibilityInactive="false"/>
+            <objectChange node="0>0|3|0|3" visibilityActive="true" visibilityInactive="false"/>
         </designConfiguration>
         <designConfiguration name="Chevy" price="0">
             <objectChange node="0>0|12|0|0|1|1" visibilityActive="true" visibilityInactive="false"/>
             <objectChange node="0>0|14|0|3|0|1" visibilityActive="true" visibilityInactive="false"/>
             <objectChange node="0>0|3|0|2" visibilityActive="true" visibilityInactive="false"/>
-            <objectChange node="0>0|12|0|0|1|0" visibilityActive="false" visibilityInactive="false"/>
-            <objectChange node="0>0|14|0|3|0|0" visibilityActive="false" visibilityInactive="false"/>
-            <objectChange node="0>0|3|0|5" visibilityActive="false" visibilityInactive="false"/>
         </designConfiguration>
     </designConfigurations>
 
+    <design4Configurations title="Extras">
+        <design4Configuration name="Nothing" price="0">
+            <objectChange node="0>0|12|0|0|5|0" visibilityActive="false" visibilityInactive="false"/>
+            <objectChange node="0>0|14|0|3|2" visibilityActive="false" visibilityInactive="false"/>
+        </design4Configuration>
+        <design4Configuration name="Visor" price="700">
+            <objectChange node="0>0|12|0|0|5|0" visibilityActive="true" visibilityInactive="true"/>
+            <objectChange node="0>0|14|0|3|2" visibilityActive="false" visibilityInactive="false"/>
+        </design4Configuration>
+        <design4Configuration name="Visor With Antenna" price="900">
+            <objectChange node="0>0|14|0|3|2" visibilityActive="true" visibilityInactive="false"/>
+            <objectChange node="0>0|12|0|0|5|0" visibilityActive="true" visibilityInactive="false"/>
+        </design4Configuration>
+        <design4Configuration name="Antenna" price="200">
+            <objectChange node="0>0|14|0|3|2" visibilityActive="true" visibilityInactive="false"/>
+            <objectChange node="0>0|12|0|0|5|0" visibilityActive="false" visibilityInactive="false"/>
+        </design4Configuration>
+    </design4Configurations>
+
+    <!-- ============================================================ -->
+    <!-- Wheels (from C7000 v2 - with rotation nodes)                 -->
+    <!-- ============================================================ -->
+
     <wheels>
         <wheelConfigurations>
+            <wheelConfiguration name="Dayton">
+                <wheels autoRotateBackSpeed="2.1">
+                    <wheel filename="vehicles/serviceTruck/wheels/wheels1.xml" configId="rim_Dayton" isLeft="true" hasTireTracks="true" hasParticles="true">
+                        <physics rotSpeed="1" restLoad="2.3" repr="wheelFrontLeftR" driveNode="wheelFrontLeft" forcePointRatio="0.4" initialCompression="35" suspTravel="0.17" spring="25" damper="20" frictionScale="2.0" transRatio="0.65" xOffset="0.03"/>
+                    </wheel>
+                    <wheel filename="vehicles/serviceTruck/wheels/wheels1.xml" configId="rim_Dayton" isLeft="false" hasTireTracks="true" hasParticles="true">
+                        <physics rotSpeed="1" restLoad="2.3" repr="wheelFrontRightR" driveNode="wheelFrontRight" forcePointRatio="0.4" initialCompression="35" suspTravel="0.17" spring="25" damper="20" frictionScale="2.0" transRatio="0.65" xOffset="0.03"/>
+                    </wheel>
+                    <wheel filename="vehicles/serviceTruck/wheels/wheels1.xml" configId="dual_Dayton" isLeft="true" hasTireTracks="true" hasParticles="true">
+                        <physics rotSpeed="0" restLoad="1.1" repr="wheelBackLeft" forcePointRatio="0.2" initialCompression="15" suspTravel="0.35" spring="32" damper="20" frictionScale="2.2"/>
+                        <additionalWheel filename="vehicles/serviceTruck/wheels/wheels1.xml" configId="dual2" isLeft="true" offset="-0.66"/>
+                    </wheel>
+                    <wheel filename="vehicles/serviceTruck/wheels/wheels1.xml" configId="dual_Dayton" isLeft="false" hasTireTracks="true" hasParticles="true">
+                        <physics rotSpeed="0" restLoad="1.1" repr="wheelBackRight" forcePointRatio="0.2" initialCompression="15" suspTravel="0.35" spring="32" damper="20" frictionScale="2.2"/>
+                        <additionalWheel filename="vehicles/serviceTruck/wheels/wheels1.xml" configId="dual2" isLeft="false" offset="-0.67"/>
+                    </wheel>
+                </wheels>
+            </wheelConfiguration>
             <wheelConfiguration name="Stock">
                 <wheels autoRotateBackSpeed="2.1">
                     <wheel filename="vehicles/serviceTruck/wheels/wheels1.xml" configId="rim2Front" isLeft="true" hasTireTracks="true" hasParticles="true">
-                        <physics rotSpeed="1" restLoad="2.3" repr="wheelFrontLeft" forcePointRatio="0.4" initialCompression="35" suspTravel="0.17" spring="35" damper="40" frictionScale="2.0" yOffset="0.0125"/>
+                        <physics rotSpeed="1" restLoad="2.3" repr="wheelFrontLeftR" driveNode="wheelFrontLeft" forcePointRatio="0.4" initialCompression="35" suspTravel="0.17" spring="25" damper="20" frictionScale="2.0" transRatio="0.65" xOffset="0.03"/>
                     </wheel>
                     <wheel filename="vehicles/serviceTruck/wheels/wheels1.xml" configId="rim2Front" isLeft="false" hasTireTracks="true" hasParticles="true">
-                        <physics rotSpeed="1" restLoad="2.3" repr="wheelFrontRight" forcePointRatio="0.4" initialCompression="35" suspTravel="0.17" spring="35" damper="40" frictionScale="2.0" yOffset="0.0125"/>
+                        <physics rotSpeed="1" restLoad="2.3" repr="wheelFrontRightR" driveNode="wheelFrontRight" forcePointRatio="0.4" initialCompression="35" suspTravel="0.17" spring="25" damper="20" frictionScale="2.0" transRatio="0.65" xOffset="0.03"/>
                     </wheel>
                     <wheel filename="vehicles/serviceTruck/wheels/wheels1.xml" configId="dual" isLeft="true" hasTireTracks="true" hasParticles="true">
-                        <physics rotSpeed="0" restLoad="1.1" repr="wheelBackLeft" forcePointRatio="0.2" initialCompression="15" suspTravel="0.08" spring="72" damper="250" frictionScale="2.2" yOffset="-0.041"/>
+                        <physics rotSpeed="0" restLoad="1.1" repr="wheelBackLeft" forcePointRatio="0.2" initialCompression="15" suspTravel="0.35" spring="32" damper="20" frictionScale="2.2"/>
                         <additionalWheel filename="vehicles/serviceTruck/wheels/wheels1.xml" configId="dual2" isLeft="true" offset="-0.66"/>
                     </wheel>
                     <wheel filename="vehicles/serviceTruck/wheels/wheels1.xml" configId="dual" isLeft="false" hasTireTracks="true" hasParticles="true">
-                        <physics rotSpeed="0" restLoad="1.1" repr="wheelBackRight" forcePointRatio="0.2" initialCompression="15" suspTravel="0.08" spring="72" damper="250" frictionScale="2.2" yOffset="-0.041"/>
+                        <physics rotSpeed="0" restLoad="1.1" repr="wheelBackRight" forcePointRatio="0.2" initialCompression="15" suspTravel="0.35" spring="32" damper="20" frictionScale="2.2"/>
+                        <additionalWheel filename="vehicles/serviceTruck/wheels/wheels1.xml" configId="dual2" isLeft="false" offset="-0.67"/>
+                    </wheel>
+                </wheels>
+            </wheelConfiguration>
+            <wheelConfiguration name="Alcoa">
+                <wheels autoRotateBackSpeed="2.1">
+                    <wheel filename="vehicles/serviceTruck/wheels/wheels1.xml" configId="rim4Front" isLeft="true" hasTireTracks="true" hasParticles="true">
+                        <physics rotSpeed="1" restLoad="2.3" repr="wheelFrontLeftR" driveNode="wheelFrontLeft" forcePointRatio="0.4" initialCompression="35" suspTravel="0.17" spring="25" damper="20" frictionScale="2.0" transRatio="0.65" xOffset="0.03"/>
+                    </wheel>
+                    <wheel filename="vehicles/serviceTruck/wheels/wheels1.xml" configId="rim4Front" isLeft="false" hasTireTracks="true" hasParticles="true">
+                        <physics rotSpeed="1" restLoad="2.3" repr="wheelFrontRightR" driveNode="wheelFrontRight" forcePointRatio="0.4" initialCompression="35" suspTravel="0.17" spring="25" damper="20" frictionScale="2.0" transRatio="0.65" xOffset="0.03"/>
+                    </wheel>
+                    <wheel filename="vehicles/serviceTruck/wheels/wheels1.xml" configId="dual" isLeft="true" hasTireTracks="true" hasParticles="true">
+                        <physics rotSpeed="0" restLoad="1.1" repr="wheelBackLeft" forcePointRatio="0.2" initialCompression="15" suspTravel="0.35" spring="32" damper="20" frictionScale="2.2"/>
+                        <additionalWheel filename="vehicles/serviceTruck/wheels/wheels1.xml" configId="dual2" isLeft="true" offset="-0.66"/>
+                    </wheel>
+                    <wheel filename="vehicles/serviceTruck/wheels/wheels1.xml" configId="dual" isLeft="false" hasTireTracks="true" hasParticles="true">
+                        <physics rotSpeed="0" restLoad="1.1" repr="wheelBackRight" forcePointRatio="0.2" initialCompression="15" suspTravel="0.35" spring="32" damper="20" frictionScale="2.2"/>
+                        <additionalWheel filename="vehicles/serviceTruck/wheels/wheels1.xml" configId="dual2" isLeft="false" offset="-0.67"/>
+                    </wheel>
+                </wheels>
+            </wheelConfiguration>
+            <wheelConfiguration name="Steel">
+                <wheels autoRotateBackSpeed="2.1">
+                    <wheel filename="vehicles/serviceTruck/wheels/wheels1.xml" configId="rim3Front" isLeft="true" hasTireTracks="true" hasParticles="true">
+                        <physics rotSpeed="1" restLoad="2.3" repr="wheelFrontLeftR" driveNode="wheelFrontLeft" forcePointRatio="0.4" initialCompression="35" suspTravel="0.17" spring="25" damper="20" frictionScale="2.0" transRatio="0.65" xOffset="0.03"/>
+                    </wheel>
+                    <wheel filename="vehicles/serviceTruck/wheels/wheels1.xml" configId="rim3Front" isLeft="false" hasTireTracks="true" hasParticles="true">
+                        <physics rotSpeed="1" restLoad="2.3" repr="wheelFrontRightR" driveNode="wheelFrontRight" forcePointRatio="0.4" initialCompression="35" suspTravel="0.17" spring="25" damper="20" frictionScale="2.0" transRatio="0.65" xOffset="0.03"/>
+                    </wheel>
+                    <wheel filename="vehicles/serviceTruck/wheels/wheels1.xml" configId="dual" isLeft="true" hasTireTracks="true" hasParticles="true">
+                        <physics rotSpeed="0" restLoad="1.1" repr="wheelBackLeft" forcePointRatio="0.2" initialCompression="15" suspTravel="0.35" spring="32" damper="20" frictionScale="2.2"/>
+                        <additionalWheel filename="vehicles/serviceTruck/wheels/wheels1.xml" configId="dual2" isLeft="true" offset="-0.66"/>
+                    </wheel>
+                    <wheel filename="vehicles/serviceTruck/wheels/wheels1.xml" configId="dual" isLeft="false" hasTireTracks="true" hasParticles="true">
+                        <physics rotSpeed="0" restLoad="1.1" repr="wheelBackRight" forcePointRatio="0.2" initialCompression="15" suspTravel="0.35" spring="32" damper="20" frictionScale="2.2"/>
                         <additionalWheel filename="vehicles/serviceTruck/wheels/wheels1.xml" configId="dual2" isLeft="false" offset="-0.67"/>
                     </wheel>
                 </wheels>
@@ -113,7 +252,18 @@
         </ackermannSteeringConfigurations>
     </wheels>
 
+    <!-- ============================================================ -->
+    <!-- Lights (from C7000 v2 - with spotlights + beacons)           -->
+    <!-- ============================================================ -->
+
     <lights>
+        <sharedLight linkNode="leftFrontSpot" intensity="10" filename="$data/shared/assets/lights/lizard/frontLight11.xml" lightTypes="3">
+            <rotationNode name="rotationNode1" rotation="-90 0 0"/>
+        </sharedLight>
+        <sharedLight linkNode="rightFrontSpot" intensity="10" filename="$data/shared/assets/lights/lizard/frontLight11.xml" lightTypes="3">
+            <rotationNode name="rotationNode1" rotation="-90 0 0"/>
+        </sharedLight>
+        <sharedLight linkNode="0>0|14|2|4|1" filename="$data/shared/assets/lights/lizard/plateNumberLight02.xml"/>
         <sharedLight linkNode="0>0|14|1|0" filename="$data/shared/assets/lights/lizard/rearLight20_left.xml"/>
         <sharedLight linkNode="0>0|14|1|1" filename="$data/shared/assets/lights/lizard/rearLight20_right.xml"/>
         <sharedLight linkNode="0>0|14|1|2" filename="$data/shared/assets/lights/lizard/rearLight20.xml"/>
@@ -144,7 +294,42 @@
                 <turnLightRight node="turnLightRightBack"/>
             </high>
         </realLights>
+        <defaultLights>
+            <defaultLight shaderNode="0>0|14|0|0|6|0|1" lightTypes="0" intensity="3.0"/>
+            <defaultLight shaderNode="0>0|14|0|0|6|2|2" lightTypes="0" intensity="3.0"/>
+            <defaultLight shaderNode="0>0|14|0|0|6|2|3" lightTypes="0" intensity="3.0"/>
+            <defaultLight shaderNode="0>0|14|0|0|6|3|3" lightTypes="0" intensity="3.0"/>
+            <defaultLight shaderNode="0>0|14|0|0|6|4|0" lightTypes="0" intensity="3.0"/>
+            <defaultLight shaderNode="0>0|14|0|0|6|4|1" lightTypes="0" intensity="3.0"/>
+            <defaultLight shaderNode="0>0|14|0|0|6|4|2" lightTypes="0" intensity="3.0"/>
+            <defaultLight shaderNode="0>0|14|0|0|6|5|1" lightTypes="0" intensity="3.0"/>
+            <defaultLight shaderNode="0>0|14|0|0|4|0" lightTypes="0" intensity="20"/>
+            <defaultLight shaderNode="0>0|14|0|0|3|0" lightTypes="0" intensity="9"/>
+            <defaultLight shaderNode="0>0|14|0|0|0|18|4" lightTypes="0"/>
+            <defaultLight shaderNode="0>0|12|0|0|0|1|1" lightTypes="1"/>
+            <defaultLight shaderNode="0>0|12|0|0|0|1|3" lightTypes="1"/>
+            <defaultLight shaderNode="0>0|12|0|0|0|1|0" lightTypes="2"/>
+            <defaultLight shaderNode="0>0|12|0|0|0|1|2" lightTypes="2"/>
+            <defaultLight shaderNode="0>0|14|2|13" lightTypes="4"/>
+        </defaultLights>
+        <staticLightCompounds>
+            <staticLightCompound>
+                <node node="rearLightGlassLeft" intensity="5"/>
+                <node node="rearLightGlassRight" intensity="5"/>
+            </staticLightCompound>
+        </staticLightCompounds>
+        <beaconLights>
+            <beaconLight node="rot1" filename="vehicles/serviceTruck/AmberWhiteAmber/xml/beaconLight08.xml" variationName="ROTATE"/>
+            <beaconLight node="rot2" filename="vehicles/serviceTruck/AmberWhiteAmber/xml/beaconLight08.xml" variationName="ROTATE"/>
+            <beaconLight node="rot3" filename="vehicles/serviceTruck/AmberWhiteAmber/xml/beaconLight08.xml" variationName="ROTATE"/>
+            <beaconLight node="rot4" filename="vehicles/serviceTruck/AmberWhiteAmber/xml/beaconLight08.xml" variationName="ROTATE"/>
+            <beaconLight node="rot5" filename="vehicles/serviceTruck/AmberWhiteAmber/xml/beaconLight08White.xml" variationName="ROTATE"/>
+        </beaconLights>
     </lights>
+
+    <!-- ============================================================ -->
+    <!-- Enterable (from C7000 v2 - with passenger seats + mirrors)   -->
+    <!-- ============================================================ -->
 
     <enterable isTabbable="true">
         <enterReferenceNode node="main_component1"/>
@@ -166,20 +351,66 @@
             <state node="player_rightFootGas" referenceNode="gasPedal"/>
             <state node="player_rightFootBrake" referenceNode="brakePedal"/>
         </characterTargetNodeModifier>
+        <passengerSeats>
+            <passengerSeat node="passengerSeat01" exitPoint="passengerSeat01ExitPoint" outdoorCameraIndex="1">
+                <camera node="passengerSeat01Camera" rotatable="true" limit="true" rotMinX="-1.1" rotMaxX="0.4" transMin="0" transMax="0" useMirror="true" isInside="true" positionSmoothingParameter="0" shadowFocusBox="shadowFocusBox"/>
+                <characterNode node="passengerSeat01PlayerSkin" cameraMinDistance="0.35">
+                    <target ikChain="leftArm" targetNode="passengerSeat01PlayerLeftHand" poseId="flatFingers"/>
+                    <target ikChain="rightArm" targetNode="passengerSeat01PlayerRightHand" poseId="flatFingers"/>
+                    <target ikChain="leftFoot" targetNode="passengerSeat01PlayerLeftFoot"/>
+                    <target ikChain="rightFoot" targetNode="passengerSeat01PlayerRightFoot"/>
+                </characterNode>
+            </passengerSeat>
+            <passengerSeat node="passengerSeat02" exitPoint="passengerSeat02ExitPoint" outdoorCameraIndex="1">
+                <camera node="passengerSeat02Camera" rotatable="true" limit="true" rotMinX="-1.1" rotMaxX="0.4" transMin="0" transMax="0" useMirror="true" isInside="true" positionSmoothingParameter="0" shadowFocusBox="shadowFocusBox"/>
+                <characterNode node="passengerSeat02PlayerSkin" cameraMinDistance="0.35">
+                    <target ikChain="leftArm" targetNode="passengerSeat02PlayerLeftHand" poseId="flatFingers"/>
+                    <target ikChain="rightArm" targetNode="passengerSeat02PlayerRightHand" poseId="flatFingers"/>
+                    <target ikChain="leftFoot" targetNode="passengerSeat02PlayerLeftFoot"/>
+                    <target ikChain="rightFoot" targetNode="passengerSeat02PlayerRightFoot"/>
+                </characterNode>
+            </passengerSeat>
+            <passengerSeat node="passengerSeat03" exitPoint="passengerSeat03ExitPoint" outdoorCameraIndex="1">
+                <camera node="passengerSeat03Camera" rotatable="true" limit="true" rotMinX="-1.1" rotMaxX="0.4" transMin="0" transMax="0" useMirror="true" isInside="true" positionSmoothingParameter="0" shadowFocusBox="shadowFocusBox"/>
+                <characterNode node="passengerSeat03PlayerSkin" cameraMinDistance="0.35">
+                    <target ikChain="leftArm" targetNode="passengerSeat03PlayerLeftHand"/>
+                    <target ikChain="rightArm" targetNode="passengerSeat03PlayerRightHand"/>
+                    <target ikChain="leftFoot" targetNode="passengerSeat03PlayerLeftFoot"/>
+                    <target ikChain="rightFoot" targetNode="passengerSeat03PlayerRightFoot"/>
+                </characterNode>
+            </passengerSeat>
+        </passengerSeats>
+        <mirrors>
+            <mirror node="0>0|6|1|0" prio="1"/>
+            <mirror node="0>0|6|2|0" prio="1"/>
+            <mirror node="0>0|6|3|0" prio="2"/>
+            <mirror node="0>0|6|4|0" prio="2"/>
+        </mirrors>
     </enterable>
 
+    <!-- ============================================================ -->
+    <!-- Attachers + Hoses (from C7000 v2)                            -->
+    <!-- ============================================================ -->
+
     <attacherJoints>
-        <attacherJoint node="0>0|9" jointType="trailer" lowerRotLimit="10 70 50" upperRotationOffset="0" allowsJointLimitMovement="false" canTurnOnImplement="false" comboTime="1">
+        <attacherJoint node="0>0|14|2|12|2|2" jointType="trailer" lowerRotLimit="25 70 50" upperRotationOffset="0" allowsJointLimitMovement="false" canTurnOnImplement="false" comboTime="1">
             <schema position="1 0" rotation="0" invertX="false"/>
         </attacherJoint>
-        <attacherJoint node="0>0|9" jointType="trailerLow" lowerRotLimit="10 70 50" upperRotationOffset="0" allowsJointLimitMovement="false" canTurnOnImplement="false" comboTime="1">
+        <attacherJoint node="0>0|14|2|12|2|2" jointType="trailerLow" lowerRotLimit="25 70 50" upperRotationOffset="0" allowsJointLimitMovement="false" canTurnOnImplement="false" comboTime="1">
+            <schema position="1 0" rotation="0" invertX="false"/>
+        </attacherJoint>
+        <attacherJoint node="0>0|14|2|12|2|2" jointType="trailerCar" lowerRotLimit="25 70 50" upperRotationOffset="0" allowsJointLimitMovement="false" canTurnOnImplement="false" comboTime="1">
             <schema position="1 0" rotation="0" invertX="false"/>
         </attacherJoint>
     </attacherJoints>
 
     <connectionHoses>
-        <target attacherJointIndices="1 2" type="electric" node="electricBack" socket="electric"/>
+        <target attacherJointIndices="1 2 3" type="electric" node="electricBack" socket="electric"/>
     </connectionHoses>
+
+    <!-- ============================================================ -->
+    <!-- Drivable + Motor (our custom tuning preserved)               -->
+    <!-- ============================================================ -->
 
     <drivable>
         <steeringWheel node="steeringWheel" indoorRotation="540" outdoorRotation="60"/>
@@ -189,50 +420,38 @@
         </dashboards>
     </drivable>
 
-    <licensePlates>
-        <licensePlate node="licensePlateNodeBack" position="BACK" preferedType="SQUARISH" placementArea="- 0.21 0.1 0.21"/>
+    <licensePlates defaultPlacement="BOTH">
+        <licensePlate node="0>0|14|0|3|1|2|0|0" position="FRONT" preferedType="SQUARISH" placementArea="0.08 0.16 0.13 0.16"/>
+        <licensePlate node="0>0|14|0|3|1|1|1" position="FRONT" preferedType="SQUARISH" placementArea="0.08 0.16 0.13 0.16"/>
+        <licensePlate node="0>0|14|0|3|1|0|0|0" position="FRONT" preferedType="SQUARISH" placementArea="0.08 0.16 0.13 0.16"/>
+        <licensePlate node="licensePlateNodeBack" position="BACK" preferedType="SQUARISH" placementArea="0.10 0.16 0.11 0.16"/>
     </licensePlates>
 
-    <!-- Fill Units for Service Truck -->
-    <!-- 1: Truck fuel tank (internal) -->
-    <!-- 2: External diesel tank for refueling (original 1500L) -->
-    <!-- 3: Oil tank for restoration (NEW) -->
-    <!-- 4: Hydraulic fluid tank for restoration (NEW) -->
+    <!-- ============================================================ -->
+    <!-- Fill Units (internal diesel + oil + hydraulic tanks)           -->
+    <!-- ============================================================ -->
+
     <fillUnit>
         <fillUnitConfigurations>
             <fillUnitConfiguration>
                 <fillUnits>
-                    <!-- Truck internal fuel -->
-                    <fillUnit unitTextOverride="$l10n_unit_literShort" showOnHud="false" showInShop="false" fillTypes="diesel" capacity="120">
-                        <dashboard displayType="ANIMATION" valueType="fillLevel" animName="loadingBarFuel" minValueAnim="0" maxValueAnim="120" groups="MOTOR_ACTIVE"/>
+                    <!-- Diesel transfer tank (visible on truck bed) -->
+                    <fillUnit unitTextOverride="$l10n_unit_literShort" showOnHud="true" showInShop="true" fillTypes="diesel" capacity="500" startFillLevel="500">
+                        <dashboard displayType="ANIMATION" valueType="fillLevel" animName="loadingBarFuel" minValueAnim="0" maxValueAnim="500" groups="MOTOR_ACTIVE"/>
                         <exactFillRootNode node="0>0|16|0"/>
                     </fillUnit>
-                    <!-- External diesel tank -->
-                    <fillUnit unitTextOverride="$l10n_unit_literShort" showOnHud="true" showInShop="true" fillTypes="diesel" capacity="1500">
-                        <exactFillRootNode node="exactFillRootNode"/>
-                    </fillUnit>
                     <!-- Oil tank for restoration -->
-                    <fillUnit unitTextOverride="$l10n_unit_literShort" showOnHud="true" showInShop="true" fillTypes="OIL" capacity="200" startFillLevel="200"/>
+                    <fillUnit unitTextOverride="$l10n_unit_literShort" showOnHud="true" showInShop="true" fillTypes="OIL" capacity="200" startFillLevel="200">
+                        <exactFillRootNode node="oilExactFillRootNode"/>
+                    </fillUnit>
                     <!-- Hydraulic fluid tank for restoration -->
-                    <fillUnit unitTextOverride="$l10n_unit_literShort" showOnHud="true" showInShop="true" fillTypes="HYDRAULICOIL" capacity="200" startFillLevel="200"/>
+                    <fillUnit unitTextOverride="$l10n_unit_literShort" showOnHud="true" showInShop="true" fillTypes="HYDRAULICOIL" capacity="200" startFillLevel="200">
+                        <exactFillRootNode node="hydraulicExactFillRootNode"/>
+                    </fillUnit>
                 </fillUnits>
             </fillUnitConfiguration>
         </fillUnitConfigurations>
     </fillUnit>
-
-    <!-- Fuel trigger for refueling other vehicles -->
-    <fillTriggerVehicle triggerNode="fuelTrigger" fillUnitIndex="2" litersPerSecond="30"/>
-
-    <dischargeable>
-        <dischargeableConfigurations>
-            <dischargeableConfiguration name="1">
-                <dischargeNode node="dischargeTrigger" emptySpeed="40" fillUnitIndex="2" allowAIDischarge="true">
-                    <info width="1.0" length="0.5" zOffset="0.4"/>
-                    <trigger node="dischargeTrigger"/>
-                </dischargeNode>
-            </dischargeableConfiguration>
-        </dischargeableConfigurations>
-    </dischargeable>
 
     <motorized>
         <consumerConfigurations>
@@ -249,7 +468,7 @@
         </differentialConfigurations>
         <motorConfigurations>
             <motorConfiguration name="C7000 3208" hp="250" price="0">
-                <motor torqueScale="0.829" minRpm="850" maxRpm="2200" maxForwardSpeed="120" maxBackwardSpeed="13" brakeForce="4.5" lowBrakeForceScale="0.1" lowBrakeForceSpeedLimit="3" dampingRateScale="0.7">
+                <motor torqueScale="0.879" minRpm="850" maxRpm="2200" maxForwardSpeed="120" maxBackwardSpeed="13" brakeForce="4.9" lowBrakeForceScale="0.1" lowBrakeForceSpeedLimit="3" dampingRateScale="0.7">
                     <torque rpm="850" torque="0.9"/>
                     <torque rpm="1000" torque="1.0"/>
                     <torque rpm="1450" torque="1.0"/>
@@ -285,9 +504,13 @@
         <motorStartDuration>2500</motorStartDuration>
     </motorized>
 
+    <!-- ============================================================ -->
+    <!-- Animations (from C7000 v2 - all door animations + more)      -->
+    <!-- ============================================================ -->
+
     <animations>
-        <animation name="backDoor">
-            <part node="backDoor" startTime="0.2" endTime="1" startRot="0 0 0" endRot="-100 0 0"/>
+        <animation name="GenY">
+            <part node="0>0|14|2|12|2" startTime="0" endTime="7" startTrans="0 0 0.07" endTrans="0 0 -0.165"/>
         </animation>
         <animation name="rpmDisplay">
             <part node="rpm_indicator" startTime="0" endTime="1" startRot="0 0 0" endRot="0 0 -200"/>
@@ -313,28 +536,79 @@
             <sound template="metalOpen" startTime="0.01" direction="1" volumeScale="3.5" pitchScale="1.5" linkNode="0>0|14|2|0|4"/>
             <sound template="metalClose" startTime="0.02" direction="-1" volumeScale="3.5" pitchScale="1.5" linkNode="0>0|14|2|0|4"/>
         </animation>
+        <animation name="door_service2">
+            <part node="0>0|14|2|0|4" startTime="0.0" endTime="1.2" startRot="0 0 0" endRot="0 90 0"/>
+            <sound template="metalOpen" startTime="0.01" direction="1" volumeScale="3.5" pitchScale="1.5" linkNode="0>0|14|2|0|4"/>
+            <sound template="metalClose" startTime="0.02" direction="-1" volumeScale="3.5" pitchScale="1.5" linkNode="0>0|14|2|0|4"/>
+        </animation>
+        <animation name="door2">
+            <part node="0>0|14|2|0|0" startTime="0.0" endTime="1.2" startRot="0 0 0" endRot="0 -88 0"/>
+            <sound template="metalOpen" startTime="0.01" direction="1" volumeScale="3.5" pitchScale="1.5" linkNode="0>0|14|2|0|0"/>
+            <sound template="metalClose" startTime="0.02" direction="-1" volumeScale="3.5" pitchScale="1.5" linkNode="0>0|14|2|0|0"/>
+        </animation>
+        <animation name="door3">
+            <part node="0>0|14|2|0|1" startTime="0.0" endTime="1.2" startRot="0 0 0" endRot="0 -88 0"/>
+            <sound template="metalOpen" startTime="0.01" direction="1" volumeScale="3.5" pitchScale="1.5" linkNode="0>0|14|2|0|1"/>
+            <sound template="metalClose" startTime="0.02" direction="-1" volumeScale="3.5" pitchScale="1.5" linkNode="0>0|14|2|0|1"/>
+        </animation>
+        <animation name="door4">
+            <part node="0>0|14|2|0|2" startTime="0.0" endTime="1.2" startRot="0 0 0" endRot="0 0 -88"/>
+            <sound template="metalOpen" startTime="0.01" direction="1" volumeScale="3.5" pitchScale="1.5" linkNode="0>0|14|2|0|2"/>
+            <sound template="metalClose" startTime="0.02" direction="-1" volumeScale="3.5" pitchScale="1.5" linkNode="0>0|14|2|0|2"/>
+        </animation>
+        <animation name="door5">
+            <part node="0>0|14|2|0|3" startTime="0.0" endTime="1.2" startRot="0 0 0" endRot="0 -88 0"/>
+            <sound template="metalOpen" startTime="0.01" direction="1" volumeScale="3.5" pitchScale="1.5" linkNode="0>0|14|2|0|3"/>
+            <sound template="metalClose" startTime="0.02" direction="-1" volumeScale="3.5" pitchScale="1.5" linkNode="0>0|14|2|0|3"/>
+        </animation>
+        <animation name="door6">
+            <part node="0>0|14|2|0|5" startTime="0.0" endTime="1.2" startRot="0 0 0" endRot="0 88 0"/>
+            <sound template="metalOpen" startTime="0.01" direction="1" volumeScale="3.5" pitchScale="1.5" linkNode="0>0|14|2|0|5"/>
+            <sound template="metalClose" startTime="0.02" direction="-1" volumeScale="3.5" pitchScale="1.5" linkNode="0>0|14|2|0|5"/>
+        </animation>
+        <animation name="door7">
+            <part node="0>0|14|2|0|6" startTime="0.0" endTime="1.2" startRot="0 0 0" endRot="0 0 88"/>
+            <sound template="metalOpen" startTime="0.01" direction="1" volumeScale="3.5" pitchScale="1.5" linkNode="0>0|14|2|0|6"/>
+            <sound template="metalClose" startTime="0.02" direction="-1" volumeScale="3.5" pitchScale="1.5" linkNode="0>0|14|2|0|6"/>
+        </animation>
+        <animation name="door8">
+            <part node="0>0|14|2|0|7" startTime="0.0" endTime="1.2" startRot="0 0 0" endRot="0 90 0"/>
+            <sound template="metalOpen" startTime="0.01" direction="1" volumeScale="3.5" pitchScale="1.5" linkNode="0>0|14|2|0|7"/>
+            <sound template="metalClose" startTime="0.02" direction="-1" volumeScale="3.5" pitchScale="1.5" linkNode="0>0|14|2|0|7"/>
+        </animation>
     </animations>
+
+    <!-- ============================================================ -->
+    <!-- Physics + Misc                                               -->
+    <!-- ============================================================ -->
 
     <suspensions>
         <suspension useCharacterTorso="true" weight="90" minRotation="0 -5 -5" maxRotation="0 5 5" suspensionParametersY="7 1" suspensionParametersZ="7 1"/>
+        <suspension node="0>0|14|2|6|2|0" weight="5500" minRotation="0 0 -13" maxRotation="0 0 13" suspensionParametersX="50 10" suspensionParametersZ="50 10"/>
     </suspensions>
+
+    <cylindered>
+        <movingParts>
+            <movingPart node="0>0|0|1|2|0" referencePoint="0>0|0|0|2" referenceFrame="0>0|0|0|2" scaleZ="true" isActiveDirty="true" maxUpdateDistance="20"/>
+        </movingParts>
+        <movingTools>
+            <movingTool node="0>0|14|2|12|2" requiresPower="false">
+                <controls axis="AXIS_FRONTLOADER_TOOL4" invertAxis="false" mouseSpeedFactor="1.8" icon="CRANE_ARM1_ROTATE_Y"/>
+                <animation animSpeed="0.4" animAcceleration="5" animName="GenY"/>
+                <attacherJoint jointIndices="1 2 3"/>
+            </movingTool>
+        </movingTools>
+    </cylindered>
 
     <foldable>
         <foldingConfigurations>
             <foldingConfiguration>
                 <foldingParts requiresPower="false">
-                    <foldingPart animationName="backDoor" speedScale="1"/>
+                    <foldingPart animationName="door_service" speedScale="1"/>
                 </foldingParts>
             </foldingConfiguration>
         </foldingConfigurations>
     </foldable>
-
-    <cylindered>
-        <movingTool node="0>0|12|0">
-            <controls axis="AXIS_HYDRAULICATTACHER1" invertAxis="false" mouseSpeedFactor="0.4"/>
-            <rotation rotSpeed="50" rotAcceleration="160" rotMax="90" rotMin="0"/>
-        </movingTool>
-    </cylindered>
 
     <dashboard>
         <groups>
@@ -344,29 +618,65 @@
     </dashboard>
 
     <ai>
-        <collisionTrigger node="aiCollisionTrigger"/>
+        <agent frontWheelNodes="wheelFrontLeft wheelFrontRight"/>
+        <collisionTrigger useSize="true"/>
     </ai>
 
     <foliageBending>
-        <bendingNode minX="-1.15" maxX="1.15" minZ="-2.8" maxZ="2.8" yOffset="0"/>
+        <bendingNode minX="-1.311" maxX="1.311" minZ="-2.378" maxZ="4.188" yOffset="0"/>
     </foliageBending>
 
-    <!-- Service Truck Restoration Configuration -->
+    <!-- ============================================================ -->
+    <!-- Service Workshop (from C7000 v2 - built-in mobile workshop)  -->
+    <!-- ============================================================ -->
+
+    <service>
+        <workshop playerTriggerNode="0>0|19|0|0|0" vehicleTriggerNode="0>0|19|0|0|1|0">
+            <operation animationName="door_service" openSpeedScale="1" closeSpeedScale="-0.8" activateText="$l10n_action_activateService" deactivateText="$l10n_action_deactivateService"/>
+            <infoTexts visibilityNode="0>0|19|0|3|1|0">
+                <headers>
+                    <value node="0>0|19|0|3|0|0|1" textSize="0.012"/>
+                    <age node="0>0|19|0|3|0|0|2" textSize="0.012"/>
+                    <operatingHours node="0>0|19|0|3|0|0|3" textSize="0.012"/>
+                    <condition node="0>0|19|0|3|0|0|4" textSize="0.012"/>
+                    <paintCondition node="0>0|19|0|3|0|0|5" textSize="0.012"/>
+                </headers>
+                <values>
+                    <name node="0>0|19|0|3|0|0|0" textSize="0.016" textColour="0.9301 0.2874 0.0130 1"/>
+                    <value node="0>0|19|0|3|0|1|0" textSize="0.01"/>
+                    <age node="0>0|19|0|3|0|1|1" textSize="0.01"/>
+                    <operatingHours node="0>0|19|0|3|0|1|2" textSize="0.01"/>
+                    <condition node="0>0|19|0|3|0|1|3" textSize="0.01"/>
+                    <paintCondition node="0>0|19|0|3|0|1|4" textSize="0.01"/>
+                </values>
+            </infoTexts>
+            <triggerMarkers hideWhenMoving="true" activateText="$l10n_action_showMarkers" deactivateText="$l10n_action_hideMarkers">
+                <triggerMarker node="0>0|19|0|2|0|0" activeNode="0>0|19|0|1|1" inactiveNode="0>0|19|0|2|0" adjustToGround="true"/>
+                <triggerMarker node="0>0|19|0|2|1|0" activeNode="0>0|19|0|1|2" inactiveNode="0>0|19|0|2|1" adjustToGround="true"/>
+                <triggerMarker node="0>0|19|0|2|2|0" activeNode="0>0|19|0|1|3" inactiveNode="0>0|19|0|2|2" adjustToGround="true"/>
+                <triggerMarker node="0>0|19|0|2|3|0" activeNode="0>0|19|0|1|4" inactiveNode="0>0|19|0|2|3" adjustToGround="true"/>
+            </triggerMarkers>
+        </workshop>
+    </service>
+
+    <!-- ============================================================ -->
+    <!-- UsedPlus Custom: Service Truck Restoration Configuration      -->
+    <!-- ============================================================ -->
+
     <serviceTruck>
-        <!-- Vehicle detection radius for finding restoration targets -->
         <detectionRadius value="15.0"/>
-        <!-- Pallet detection radius for finding spare parts -->
         <palletRadius value="5.0"/>
-        <!-- Fluid consumption rates per game hour during restoration -->
         <consumption diesel="5.0" oil="0.5" hydraulic="0.5" parts="2.0"/>
-        <!-- Restoration rates per game hour -->
         <restoration reliabilityPerHour="0.01" ceilingPerHour="0.0025"/>
-        <!-- Fill unit indices for fluids -->
-        <fillUnits diesel="2" oil="3" hydraulic="4"/>
+        <fillUnits diesel="1" oil="2" hydraulic="3"/>
     </serviceTruck>
 
     <wearable wearDuration="480" workMultiplier="5" fieldMultiplier="2"/>
     <washable dirtDuration="90" washDuration="1" workMultiplier="3" fieldMultiplier="2"/>
+
+    <!-- ============================================================ -->
+    <!-- Color Configurations (from C7000 v2 - chassis + body + stripe) -->
+    <!-- ============================================================ -->
 
     <baseColorConfigurations title="$l10n_configuration_chassisColor" useDefaultColors="true">
         <baseColorConfiguration materialTemplateName="SKODA_ENERGY_BLUE"/>
@@ -381,32 +691,52 @@
         <material materialSlotName="Paint"/>
     </baseColorConfigurations>
 
-    <baseColor2Configurations title="$l10n_configuration_bodyColor" useDefaultColors="true">
-        <baseColor2Configuration materialTemplateName="SKODA_ENERGY_BLUE"/>
-        <baseColor2Configuration materialTemplateName="SKODA_STEEL_GREY"/>
-        <baseColor2Configuration materialTemplateName="SKODA_VELVET_RED_METALLIC"/>
-        <baseColor2Configuration materialTemplateName="SKODA_GRAPHITE_GREY_METALLIC"/>
-        <baseColor2Configuration materialTemplateName="SKODA_BRILLIANT_SILVER_METALLIC"/>
-        <baseColor2Configuration materialTemplateName="SKODA_RACE_BLUE_METALLIC"/>
-        <baseColor2Configuration materialTemplateName="SKODA_GOLD_BRONZE"/>
-        <baseColor2Configuration materialTemplateName="SKODA_BLACK_MAGIC"/>
-        <baseColor2Configuration materialTemplateName="SKODA_MOON_WHITE" isDefault="true"/>
-        <material materialSlotName="Doors"/>
-    </baseColor2Configurations>
+    <designColor2Configurations title="$l10n_configuration_bodyColor" useDefaultColors="true">
+        <designColor2Configuration materialTemplateName="SKODA_ENERGY_BLUE" name="Energy blue"/>
+        <designColor2Configuration materialTemplateName="SKODA_STEEL_GREY" name="Steel gray"/>
+        <designColor2Configuration materialTemplateName="SKODA_VELVET_RED_METALLIC" name="Velvet red"/>
+        <designColor2Configuration materialTemplateName="SKODA_GRAPHITE_GREY_METALLIC" name="Graphite grey"/>
+        <designColor2Configuration materialTemplateName="SKODA_BRILLIANT_SILVER_METALLIC" name="Brilliant silver"/>
+        <designColor2Configuration materialTemplateName="SKODA_RACE_BLUE_METALLIC" name="Race blue"/>
+        <designColor2Configuration materialTemplateName="SKODA_GOLD_BRONZE" name="Gold bronze"/>
+        <designColor2Configuration materialTemplateName="SKODA_BLACK_MAGIC" name="Black magic"/>
+        <designColor2Configuration materialTemplateName="SKODA_MOON_WHITE" name="Moon white" isDefault="true"/>
+        <material materialSlotName="PaintBody"/>
+    </designColor2Configurations>
+
+    <designColor3Configurations title="$l10n_usedplus_serviceTruck_stripeColor" useDefaultColors="true">
+        <designColor3Configuration materialTemplateName="SKODA_ENERGY_BLUE" name="Energy blue"/>
+        <designColor3Configuration materialTemplateName="SKODA_STEEL_GREY" name="Steel gray"/>
+        <designColor3Configuration materialTemplateName="SKODA_VELVET_RED_METALLIC" name="Velvet red" isDefault="true"/>
+        <designColor3Configuration materialTemplateName="SKODA_GRAPHITE_GREY_METALLIC" name="Graphite grey"/>
+        <designColor3Configuration materialTemplateName="SKODA_BRILLIANT_SILVER_METALLIC" name="Brilliant silver"/>
+        <designColor3Configuration materialTemplateName="SKODA_RACE_BLUE_METALLIC" name="Race blue"/>
+        <designColor3Configuration materialTemplateName="SKODA_GOLD_BRONZE" name="Gold bronze"/>
+        <designColor3Configuration materialTemplateName="SKODA_BLACK_MAGIC" name="Black magic"/>
+        <designColor3Configuration materialTemplateName="SKODA_MOON_WHITE" name="Moon white"/>
+        <material materialSlotName="PaintStripe"/>
+    </designColor3Configurations>
 
     <rimColorConfigurations useDefaultColors="true">
         <rimColorConfiguration materialTemplateName="RIM_CONFIGURATION_CHROME" price="1000"/>
         <rimColorConfiguration materialTemplateName="RIM_DEFAULT"/>
-        <rimColorConfiguration materialTemplateName="RIM_CONFIGURATION_SILVER" name="Silver" isDefault="true"/>
+        <rimColorConfiguration materialTemplateName="RAM_SILVER" name="Silver" isDefault="true"/>
         <rimColorConfiguration materialTemplateName="chrome" name="$l10n_ui_colorChrome"/>
+        <rimColorConfiguration materialTemplateName="DARK_CHROME" name="Dark Chrome"/>
         <rimColorConfiguration materialTemplateName="RIM_CONFIGURATION_BLACK"/>
     </rimColorConfigurations>
 
+    <!-- ============================================================ -->
+    <!-- i3d Mappings (from C7000 v2 - all new node paths)            -->
+    <!-- ============================================================ -->
+
     <i3dMappings>
         <i3dMapping id="main_component1" node="0>"/>
-        <i3dMapping id="wheelFrontLeft" node="0>0|0|0"/>
-        <i3dMapping id="wheelBackLeft" node="0>0|0|1"/>
-        <i3dMapping id="wheelFrontRight" node="0>0|0|2"/>
+        <i3dMapping id="wheelFrontLeftR" node="0>0|0|0"/>
+        <i3dMapping id="wheelFrontRightR" node="0>0|0|1"/>
+        <i3dMapping id="wheelFrontLeft" node="0>0|0|0|0"/>
+        <i3dMapping id="wheelFrontRight" node="0>0|0|1|0"/>
+        <i3dMapping id="wheelBackLeft" node="0>0|0|2"/>
         <i3dMapping id="wheelBackRight" node="0>0|0|3"/>
         <i3dMapping id="frontLightHigh" node="0>0|1|0"/>
         <i3dMapping id="highBeamHigh" node="0>0|1|1"/>
@@ -441,11 +771,44 @@
         <i3dMapping id="player_rightFootGas" node="0>0|11|5|0"/>
         <i3dMapping id="brakePedal" node="0>0|11|6"/>
         <i3dMapping id="player_rightFootBrake" node="0>0|11|6|0"/>
-        <i3dMapping id="backDoor" node="0>0|12|0"/>
-        <i3dMapping id="licensePlateNodeBack" node="0>0|22"/>
-        <i3dMapping id="aiCollisionTrigger" node="0>0|13"/>
-        <i3dMapping id="fuelTrigger" node="0>0|19|1|1|0"/>
-        <i3dMapping id="dischargeTrigger" node="0>0|19|1|1|1"/>
-        <i3dMapping id="exactFillRootNode" node="0>0|19|1|1|2"/>
+        <i3dMapping id="licensePlateNodeBack" node="0>0|13"/>
+        <i3dMapping id="oilTank" node="0>0|19|1"/>
+        <i3dMapping id="oilExactFillRootNode" node="0>0|19|1|1|0"/>
+        <i3dMapping id="hydraulicTank" node="0>0|19|2"/>
+        <i3dMapping id="hydraulicExactFillRootNode" node="0>0|19|2|1|0"/>
+        <i3dMapping id="passengerSeat01" node="0>0|21|0"/>
+        <i3dMapping id="passengerSeat01Camera" node="0>0|21|0|0"/>
+        <i3dMapping id="passengerSeat01PlayerSkin" node="0>0|21|0|1"/>
+        <i3dMapping id="passengerSeat01PlayerLeftFoot" node="0>0|21|0|2"/>
+        <i3dMapping id="passengerSeat01PlayerRightFoot" node="0>0|21|0|3"/>
+        <i3dMapping id="passengerSeat01PlayerLeftHand" node="0>0|21|0|4"/>
+        <i3dMapping id="passengerSeat01PlayerRightHand" node="0>0|21|0|5"/>
+        <i3dMapping id="passengerSeat01ExitPoint" node="0>0|21|0|6"/>
+        <i3dMapping id="passengerSeat02" node="0>0|21|1"/>
+        <i3dMapping id="passengerSeat02Camera" node="0>0|21|1|0"/>
+        <i3dMapping id="passengerSeat02PlayerSkin" node="0>0|21|1|1"/>
+        <i3dMapping id="passengerSeat02PlayerLeftFoot" node="0>0|21|1|2"/>
+        <i3dMapping id="passengerSeat02PlayerRightFoot" node="0>0|21|1|3"/>
+        <i3dMapping id="passengerSeat02PlayerLeftHand" node="0>0|21|1|4"/>
+        <i3dMapping id="passengerSeat02PlayerRightHand" node="0>0|21|1|5"/>
+        <i3dMapping id="passengerSeat02ExitPoint" node="0>0|21|1|6"/>
+        <i3dMapping id="passengerSeat03" node="0>0|21|2"/>
+        <i3dMapping id="passengerSeat03Camera" node="0>0|21|2|0"/>
+        <i3dMapping id="passengerSeat03PlayerSkin" node="0>0|21|2|1"/>
+        <i3dMapping id="passengerSeat03PlayerLeftFoot" node="0>0|21|2|2"/>
+        <i3dMapping id="passengerSeat03PlayerRightFoot" node="0>0|21|2|3"/>
+        <i3dMapping id="passengerSeat03PlayerLeftHand" node="0>0|21|2|4"/>
+        <i3dMapping id="passengerSeat03PlayerRightHand" node="0>0|21|2|5"/>
+        <i3dMapping id="passengerSeat03ExitPoint" node="0>0|21|2|6"/>
+        <i3dMapping id="leftFrontSpot" node="0>1|6"/>
+        <i3dMapping id="rotationNode1" node="0>1|6|0"/>
+        <i3dMapping id="rightFrontSpot" node="0>1|7"/>
+        <i3dMapping id="rearLightGlassLeft" node="0>1|8"/>
+        <i3dMapping id="rearLightGlassRight" node="0>1|9"/>
+        <i3dMapping id="rot1" node="0>1|1"/>
+        <i3dMapping id="rot2" node="0>1|2"/>
+        <i3dMapping id="rot3" node="0>1|3"/>
+        <i3dMapping id="rot4" node="0>1|4"/>
+        <i3dMapping id="rot5" node="0>1|5"/>
     </i3dMappings>
 </vehicle>
