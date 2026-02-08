@@ -4,6 +4,37 @@ All notable changes to this project are documented here.
 
 ---
 
+## [2.12.0] - 2026-02-07
+
+### Added
+
+**Service Truck Bed Customization:**
+- Diesel transfer tank (500L, visible on HUD) dynamically loaded from bundled i3d
+- Cast iron bench vise (from FS25_RentYourStable) positioned near battery
+- Portable toolbox (from FS25_MobileServiceKit) on truck bed
+- Tailgate with chrome steering bar handle (nested rotation groups for correct orientation)
+- Battery deco item using existing C7000 shapeId
+- AmberWhiteAmber beacon light assets and glass texture
+- Chassis color customization and wheel configuration options
+
+**Fault Tracer Minigame Foundation:**
+- FaultTracerGrid.lua — Minesweeper-inspired grid engine (pure logic)
+- FaultTracerDialog.lua + XML — Dialog shell for minigame UI
+- USEDPLUS_FAULT_TRACER action with on-foot RVB input hook
+- Fault Tracer translation keys across all 27 languages
+
+**Oil/Fluid System:**
+- Updated fillTypes with oil fill type additions
+- Enhanced OilServicePoint, FluidPurchaseDialog, and DialogLoader
+
+### Changed
+- Repositioned oil bottles (+180° Y rotation to fix backwards lettering)
+- Resized oil and hydraulic tanks for better fit
+- Hidden battery charger deco to make room for diesel tank
+- Repositioned air tank on truck bed
+
+---
+
 ## [2.11.1] - 2026-02-04
 
 ### Fixed
