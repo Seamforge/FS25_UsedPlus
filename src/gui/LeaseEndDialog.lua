@@ -192,14 +192,16 @@ function LeaseEndDialog:onBuyoutVehicle()
 end
 
 --[[
-     Cancel - defaults to return
+     Cancel - defer choice to next month (Issue #5)
+     Player can dismiss the dialog; it will reappear next period.
+     No extra charges are applied while deferred (see FinanceManager guard).
 ]]
 function LeaseEndDialog:onCancel()
-    -- Can't cancel lease end - must choose
     g_currentMission:addIngameNotification(
         FSBaseMission.INGAME_NOTIFICATION_INFO,
-        "You must choose to return or buyout the vehicle."
+        g_i18n:getText("usedplus_lr_deferNotice")
     )
+    self:close()
 end
 
 --[[

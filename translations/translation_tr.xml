@@ -960,6 +960,7 @@
         <e k="usedplus_button_buyout" v="Satın Al" eh="6e052e38" />
         <e k="usedplus_button_renew" v="Yenile" eh="0b9feba3" />
         <e k="usedplus_lr_helpText" v="Bir seçenek seçmelisiniz. İade depozitinizi geri verir. Satın alma sermayenizi satın almaya uygular. Yenileme, sermaye gelecekteki satın almaya uygulanarak kiralamayı uzatır." eh="91673bf9" />
+        <e k="usedplus_lr_deferNotice" v="Bu seçim gelecek ay tekrar görünecektir. Karar verene kadar ek ücret alınmaz." eh="00000000" />
         <e k="usedplus_conf_title" v="Onay" eh="f4d1ea47" />
         <e k="usedplus_cr_title" v="KREDİ RAPORU" eh="3725e302" />
         <e k="usedplus_cr_reportDate" v="Rapor Tarihi:" eh="93ad31a7" />
@@ -1296,7 +1297,12 @@
         <e k="usedplus_info_oil_level" v="Yağ Seviyesi" eh="a6d699fb" />
         <e k="usedplus_info_hydraulic_level" v="Hidrolik Sıvı" eh="f9c4d7d9" />
         <e k="usedplus_info_tire_condition" v="Lastikler" eh="3fe2c06a" />
-        <e k="usedplus_tires_title" v="Lastik Servisi" eh="b0234f4e" />
+
+        <!-- v2.12.0: Finance/Lease Info Box Display -->
+        <e k="usedplus_info_dealType" v="Durum" eh="00000000" />
+        <e k="usedplus_info_leased" v="KİRALIK" eh="00000000" />
+        <e k="usedplus_info_financed" v="FİNANSLI" eh="00000000" />
+        <e k="usedplus_info_monthsRemaining" v="Kalan Aylar" eh="00000000" />        <e k="usedplus_tires_title" v="Lastik Servisi" eh="b0234f4e" />
         <e k="usedplus_tires_sectionStatus" v="ARAÇ &amp;amp; LASTİK DURUMU" eh="c0e3631e" />
         <e k="usedplus_tires_sectionSelect" v="LASTİK KALİTESİ SEÇ" eh="42abee54" />
         <e k="usedplus_tires_sectionPayment" v="ÖDEME ÖZETİ" eh="0dd98605" />
@@ -1603,6 +1609,7 @@
         <e k="usedplus_ft_hintsRemaining" v="İpuçları: %d" eh="c8f080c2" />
         <e k="usedplus_ft_quickScanCap" v="Kalite %%60 ile sınırlı (Hızlı tarama)" eh="5b519744" />
         <e k="usedplus_ft_noFaults" v="Arıza yok - sistem sağlam!" eh="6bfa5546" />
+        <e k="usedplus_ft_noOil" v="[EN] Service Truck has no oil! Fill the oil tank before diagnosing." eh="3cd9a926" />
         <e k="usedplus_ft_action" v="Arıza izleyici: %s" eh="c4066687" />
         <e k="usedplus_ft_corrodedDesc" v="Pas / oksidasyon hasarı" eh="8a01ae60" />
         <e k="usedplus_ft_crackedDesc" v="Gerilim çatlakları / yorgunluk" eh="81d5118b" />
@@ -1612,7 +1619,7 @@
         <e k="usedplus_sparePartsPallet_function" v="Servis Kamyonu restorasyonu için sarf malzemesi yedek parçalar. Restorasyon çalışması sırasında kamyonun yakınına yerleştirin." eh="c90aa3eb" />
         <e k="fillType_spareParts" v="Yedek Parçalar" eh="ab6b8ce1" />
         <e k="fillType_oil" v="[EN] Motor Oil" eh="511aaabd" />
-        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="f9c4d7d9" />
+        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="646d470f" />
         <e k="unit_pcs" v="adet" eh="3ecf2642" />
         <e k="usedplus_resto_symptom_engine_knocking_load" v="Yük altında şiddetli vuruntu" eh="fb8c3067" />
         <e k="usedplus_resto_symptom_engine_low_oil_pressure" v="Yağ basıncı kritik düzeyde düşük" eh="a3efa42d" />

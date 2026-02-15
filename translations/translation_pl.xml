@@ -1205,6 +1205,7 @@
         <e k="usedplus_button_buyout" v="Wykup" eh="6e052e38" />
         <e k="usedplus_button_renew" v="Odnów" eh="0b9feba3" />
         <e k="usedplus_lr_helpText" v="Musisz wybrać opcję. Zwrot daje ci zwrot depozytu. Wykup wykorzystuje twój kapitał na zakup. Odnowienie przedłuża leasing z kapitałem na przyszły wykup." eh="91673bf9" />
+        <e k="usedplus_lr_deferNotice" v="Ten wybór pojawi się ponownie w przyszłym miesiącu. Brak dodatkowych opłat do czasu podjęcia decyzji." eh="00000000" />
 
         <!-- Confirmation Dialog -->
         <e k="usedplus_conf_title" v="Potwierdzenie" eh="f4d1ea47" />
@@ -1606,6 +1607,11 @@
         <e k="usedplus_info_hydraulic_level" v="Płyn hydrauliczny" eh="f9c4d7d9" />
         <e k="usedplus_info_tire_condition" v="Opony" eh="3fe2c06a" />
 
+        <!-- v2.12.0: Finance/Lease Info Box Display -->
+        <e k="usedplus_info_dealType" v="Status" eh="00000000" />
+        <e k="usedplus_info_leased" v="WYNAJĘTY" eh="00000000" />
+        <e k="usedplus_info_financed" v="FINANSOWANY" eh="00000000" />
+        <e k="usedplus_info_monthsRemaining" v="Pozostałe miesiące" eh="00000000" />
         <!-- v1.7.0: Tires Service Dialog -->
         <e k="usedplus_tires_title" v="Serwis opon" eh="b0234f4e" />
         <e k="usedplus_tires_sectionStatus" v="STATUS POJAZDU &amp; OPON" eh="c0e3631e" />
@@ -1894,7 +1900,7 @@
         <e k="usedplus_setting_partialRepair_desc" v="Włącz częściowe naprawy w warsztacie (wyłączenie ukrywa przycisk naprawy)" eh="84fe180c" />
         <e k="usedplus_setting_partialRepaint" v="Częściowe Lakierowanie" eh="3fca656d" />
         <e k="usedplus_setting_partialRepaint_desc" v="Włącz częściowe lakierowanie w warsztacie (wyłączenie ukrywa przycisk lakierowania)" eh="4ca7214a" />
-        <!-- v2.0.0: Farmland Difficulty & Bank Interest -->
+        <!-- v2.0.0: Farmland Difficulty, Bank Interest -->
         <e k="usedplus_setting_farmlandDifficulty" v="Skalowanie Cen Ziemi" eh="9118adb6" />
         <e k="usedplus_setting_farmlandDifficulty_desc" v="Dostosuj ceny ziemi do poziomu trudności (jak pojazdy). Łatwy: 60%, Normalny: 100%, Trudny: 140%" eh="50a435ef" />
         <e k="usedplus_setting_bankInterest" v="Odsetki Bankowe" eh="1267ace4" />
@@ -2176,6 +2182,7 @@
         <e k="usedplus_ft_hintsRemaining" v="Podpowiedzi: %d" eh="c8f080c2" />
         <e k="usedplus_ft_quickScanCap" v="Jakość ograniczona do 60%% (Szybki skan)" eh="5b519744" />
         <e k="usedplus_ft_noFaults" v="Brak usterek - system sprawny!" eh="6bfa5546" />
+        <e k="usedplus_ft_noOil" v="[EN] Service Truck has no oil! Fill the oil tank before diagnosing." eh="3cd9a926" />
         <e k="usedplus_ft_action" v="Wykrywanie usterek: %s" eh="c4066687" />
         <e k="usedplus_ft_corrodedDesc" v="Uszkodzenia korozyjne / utlenianie" eh="8a01ae60" />
         <e k="usedplus_ft_crackedDesc" v="Pęknięcia naprężeniowe / zmęczeniowe" eh="81d5118b" />
@@ -2186,7 +2193,7 @@
         <e k="usedplus_sparePartsPallet_function" v="Części zamienne do renowacji w warsztacie mobilnym. Umieść w pobliżu warsztatu podczas prac renowacyjnych." eh="c90aa3eb" />
         <e k="fillType_spareParts" v="Części zamienne" eh="ab6b8ce1" />
         <e k="fillType_oil" v="[EN] Motor Oil" eh="511aaabd" />
-        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="f9c4d7d9" />
+        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="646d470f" />
         <e k="unit_pcs" v="szt." eh="3ecf2642" />
         <e k="usedplus_resto_symptom_engine_knocking_load" v="Silne stuki pod obciążeniem" eh="fb8c3067" />
         <e k="usedplus_resto_symptom_engine_low_oil_pressure" v="Krytycznie niskie ciśnienie oleju" eh="a3efa42d" />

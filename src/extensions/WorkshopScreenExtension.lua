@@ -189,6 +189,30 @@ function WorkshopScreenExtension:hookSellButton(screen)
                 return
             end
 
+            -- Check financed vehicle
+            if TradeInCalculations and TradeInCalculations.isVehicleFinanced and
+               TradeInCalculations.isVehicleFinanced(vehicle, farmId) then
+                g_currentMission:addIngameNotification(
+                    FSBaseMission.INGAME_NOTIFICATION_INFO,
+                    "Financed vehicles cannot be sold until loan is paid off."
+                )
+                return
+            end
+
+            -- Check pledged as collateral
+            if CollateralUtils and CollateralUtils.isVehiclePledged then
+                local isPledged, deal = CollateralUtils.isVehiclePledged(vehicle)
+                if isPledged then
+                    local loanBalance = deal and deal.currentBalance or 0
+                    g_currentMission:addIngameNotification(
+                        FSBaseMission.INGAME_NOTIFICATION_ERROR,
+                        string.format("This vehicle is pledged as collateral for a %s loan.\nPay off the loan first to sell.",
+                            g_i18n:formatMoney(loanBalance, 0, true, true))
+                    )
+                    return
+                end
+            end
+
             -- Check if already listed
             if g_vehicleSaleManager and g_vehicleSaleManager:isVehicleListed(vehicle) then
                 g_currentMission:addIngameNotification(
@@ -202,6 +226,16 @@ function WorkshopScreenExtension:hookSellButton(screen)
             UsedPlus.logDebug(">>> Showing SellVehicleDialog <<<")
             if VehicleSellingPointExtension and VehicleSellingPointExtension.showSellVehicleDialog then
                 VehicleSellingPointExtension.showSellVehicleDialog(vehicle, farmId)
+            else
+                -- Fallback: use InGameMenuVehiclesFrameExtension or DialogLoader directly
+                UsedPlus.logDebug(">>> VehicleSellingPointExtension not available, using DialogLoader <<<")
+                local callback = function(agentTier, priceTier)
+                    if agentTier ~= nil then
+                        priceTier = priceTier or 2
+                        CreateSaleListingEvent.sendToServer(farmId, vehicle.id, agentTier, priceTier)
+                    end
+                end
+                DialogLoader.show("SellVehicleDialog", "setVehicle", vehicle, farmId, callback)
             end
             return
         end

@@ -1217,6 +1217,7 @@
         <e k="usedplus_button_buyout" v="Lunasta" eh="6e052e38" />
         <e k="usedplus_button_renew" v="Uudista" eh="0b9feba3" />
         <e k="usedplus_lr_helpText" v="Sinun on valittava vaihtoehto. Palautus antaa vakuusmaksusi takaisin. Lunastus käyttää pääomaasi ostoon. Uudistaminen jatkaa vuokraa pääoman kanssa tulevaa lunastusta varten." eh="91673bf9" />
+        <e k="usedplus_lr_deferNotice" v="Tämä valinta tulee uudelleen ensi kuussa. Ei lisämaksuja ennen päätöstäsi." eh="00000000" />
 
         <!-- Confirmation Dialog -->
         <e k="usedplus_conf_title" v="Vahvistus" eh="f4d1ea47" />
@@ -1327,7 +1328,7 @@
         <!-- Finance Manager Frame -->
         <e k="usedplus_fmf_sectionFinances" v="RAHOITUS" eh="15625374" />
         <e k="usedplus_fmf_sectionMarketplace" v="KÄYTETTYJEN MARKKINAPAIKKA" eh="ad2d33e9" />
-        <e k="usedplus_fmf_sectionCredit" v="LUOTTO & TILASTOT" eh="8a71fbbe" />
+        <e k="usedplus_fmf_sectionCredit" v="LUOTTO JA TILASTOT" eh="8a71fbbe" />
         <e k="usedplus_fmf_sectionStatistics" v="TILASTOT" eh="bd71bd5e" />
         <e k="usedplus_fmf_noActiveDeals" v="Ei aktiivisia rahoitussopimuksia" eh="171c5c5d" />
         <e k="usedplus_fmf_financeDisabled" v="Rahoitusjärjestelmä poistettu käytöstä asetuksissa" eh="c29d15b7" />
@@ -1637,9 +1638,14 @@
         <e k="usedplus_info_hydraulic_level" v="Hydraulineste" eh="f9c4d7d9" />
         <e k="usedplus_info_tire_condition" v="Renkaat" eh="3fe2c06a" />
 
+        <!-- v2.12.0: Finance/Lease Info Box Display -->
+        <e k="usedplus_info_dealType" v="Tila" eh="00000000" />
+        <e k="usedplus_info_leased" v="VUOKRATTU" eh="00000000" />
+        <e k="usedplus_info_financed" v="RAHOITETTU" eh="00000000" />
+        <e k="usedplus_info_monthsRemaining" v="Kuukausia jäljellä" eh="00000000" />
         <!-- v1.7.0: Tires Service Dialog -->
         <e k="usedplus_tires_title" v="Rengashuolto" eh="b0234f4e" />
-        <e k="usedplus_tires_sectionStatus" v="AJONEUVON & RENKAIDEN TILA" eh="c0e3631e" />
+        <e k="usedplus_tires_sectionStatus" v="AJONEUVON JA RENKAIDEN TILA" eh="c0e3631e" />
         <e k="usedplus_tires_sectionSelect" v="VALITSE RENKAIDEN LAATU" eh="42abee54" />
         <e k="usedplus_tires_sectionPayment" v="MAKSUN YHTEENVETO" eh="0dd98605" />
         <e k="usedplus_tires_currentQuality" v="Nykyinen laatu:" eh="b46a9180" />
@@ -1666,7 +1672,7 @@
 
         <!-- v1.7.0: Fluids Service Dialog -->
         <e k="usedplus_fluids_title" v="Nestehuolto" eh="7eb767c6" />
-        <e k="usedplus_fluids_sectionStatus" v="AJONEUVON & NESTEIDEN TILA" eh="2fb5c91e" />
+        <e k="usedplus_fluids_sectionStatus" v="AJONEUVON JA NESTEIDEN TILA" eh="2fb5c91e" />
         <e k="usedplus_fluids_sectionService" v="HUOLTOVAIHTOEHDOT" eh="6a49411d" />
         <e k="usedplus_fluids_sectionPayment" v="MAKSUN YHTEENVETO" eh="0dd98605" />
         <e k="usedplus_fluids_oilLevel" v="Moottoriöljy:" eh="2168f846" />
@@ -1994,6 +2000,7 @@
         <e k="usedplus_ft_hintsRemaining" v="Vihjeet: %d" eh="c8f080c2" />
         <e k="usedplus_ft_quickScanCap" v="Laatu rajoitettu 60%% :iin (Pikaskannaus)" eh="5b519744" />
         <e k="usedplus_ft_noFaults" v="Ei vikoja - järjestelmä kunnossa!" eh="6bfa5546" />
+        <e k="usedplus_ft_noOil" v="[EN] Service Truck has no oil! Fill the oil tank before diagnosing." eh="3cd9a926" />
         <e k="usedplus_ft_action" v="Vianhaku: %s" eh="c4066687" />
         <e k="usedplus_ft_corrodedDesc" v="Ruoste- / hapettumisvaurio" eh="8a01ae60" />
         <e k="usedplus_ft_crackedDesc" v="Jännityshalkeamat / väsyminen" eh="81d5118b" />
@@ -2004,7 +2011,7 @@
         <e k="usedplus_sparePartsPallet_function" v="Kulutettavat varaosat huoltoauton entisöintiin. Aseta lähelle autoa entisöinnin aikana." eh="c90aa3eb" />
         <e k="fillType_spareParts" v="Varaosat" eh="ab6b8ce1" />
         <e k="fillType_oil" v="[EN] Motor Oil" eh="511aaabd" />
-        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="f9c4d7d9" />
+        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="646d470f" />
         <e k="unit_pcs" v="kpl" eh="3ecf2642" />
 
         <!-- v2.9.0: Restoration Diagnostic Symptoms - Engine -->
@@ -2135,7 +2142,7 @@
         <e k="usedplus_setting_partialRepair_desc" v="Ota käyttöön osittaiset korjaukset ajoneuvoliikkeessä (poistaminen käytöstä piilottaa korjauspainikkeen)" eh="84fe180c" />
         <e k="usedplus_setting_partialRepaint" v="Osittainen uudelleenmaalaus" eh="3fca656d" />
         <e k="usedplus_setting_partialRepaint_desc" v="Ota käyttöön osittaiset uudelleenmaalaukset ajoneuvoliikkeessä (poistaminen käytöstä piilottaa uudelleenmaalauksen painikkeen)" eh="4ca7214a" />
-        <!-- v2.0.0: NEW - Farmland Difficulty & Bank Interest (GMNGjoy & Evan Kirsch patterns) -->
+        <!-- v2.0.0: NEW - Farmland Difficulty, Bank Interest (GMNGjoy, Evan Kirsch patterns) -->
         <e k="usedplus_setting_farmlandDifficulty" v="Viljelysmaan vaikeusasteen skaalaus" eh="9118adb6" />
         <e k="usedplus_setting_farmlandDifficulty_desc" v="Skaalaa maan hinnat pelin vaikeusasteen mukaan (kuten ajoneuvot). Helppo: 60%, Normaali: 100%, Vaikea: 140%" eh="50a435ef" />
         <e k="usedplus_setting_bankInterest" v="Pankin korko" eh="1267ace4" />
@@ -2165,7 +2172,7 @@
         <e k="usedplus_settings_marketplace" v="Markkinapaikka" eh="675e31b9" />
         <e k="usedplus_settings_condition" v="Kunto ja laatu" eh="0ada4be1" />
 
-        <!-- Economic Settings: Money & Rates -->
+        <!-- Economic Settings: Money, Rates -->
         <!-- v2.0.0: Updated description to clarify scope -->
         <e k="usedplus_setting_interestRate" v="Rahoituksen korkoprosentti" eh="ec5e55f4" />
         <e k="usedplus_setting_interestRate_desc" v="Peruskorko kaikelle rahoitukselle (ajoneuvot, maa, lainat). Luottopistemäärä muokkaa tätä." eh="86443f38" />
@@ -2179,7 +2186,7 @@
         <e k="usedplus_setting_leaseMarkup" v="Leasinglisä %" eh="aac70e2a" />
         <e k="usedplus_setting_leaseMarkup_desc" v="Leasingkoron korotus (÷10 prosenttipisteinä, esim. 15 = +1,5pp)" eh="e27af0b2" />
 
-        <!-- Economic Settings: Forgiveness & Risk -->
+        <!-- Economic Settings: Forgiveness, Risk -->
         <e k="usedplus_setting_missedPayments" v="Maksujen laiminlyönnit ennen maksukyvyttömyyttä" eh="be335e9f" />
         <e k="usedplus_setting_missedPayments_desc" v="Maksujen laiminlyöntien määrä ennen ajoneuvon takaisinottoa" eh="71688a5f" />
         <e k="usedplus_setting_downPayment" v="Vähimmäiskäsiraha %" eh="b70d8e33" />
@@ -2201,7 +2208,7 @@
         <e k="usedplus_setting_commission" v="Agentin provisio %" eh="443d1555" />
         <e k="usedplus_setting_commission_desc" v="Prosentti, jonka myyntiedustajat ottavat" eh="8f42cc9d" />
 
-        <!-- Economic Settings: Condition & Quality -->
+        <!-- Economic Settings: Condition, Quality -->
         <e k="usedplus_setting_conditionMin" v="Käytetyn kunto min." eh="c2725712" />
         <e k="usedplus_setting_conditionMin_desc" v="Vähimmäiskunto käytetyille ajoneuvoille" eh="67ff9bc5" />
         <e k="usedplus_setting_conditionMax" v="Käytetyn kunto maks." eh="ff759d4c" />

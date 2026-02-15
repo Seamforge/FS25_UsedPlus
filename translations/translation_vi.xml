@@ -1005,6 +1005,7 @@
         <e k="usedplus_button_buyout" v="Mua Lại" eh="6e052e38" />
         <e k="usedplus_button_renew" v="Gia Hạn" eh="0b9feba3" />
         <e k="usedplus_lr_helpText" v="Bạn phải chọn một lựa chọn. Trả lại nhận tiền đặt cọc. Mua lại sử dụng vốn tích lũy để mua. Gia hạn kéo dài hợp đồng thuê với vốn áp dụng cho mua lại sau." eh="91673bf9" />
+        <e k="usedplus_lr_deferNotice" v="Lựa chọn này sẽ xuất hiện lại vào tháng sau. Không phát sinh thêm phí cho đến khi bạn quyết định." eh="00000000" />
         <e k="usedplus_conf_title" v="Xác Nhận" eh="f4d1ea47" />
 
         <!--  Multiplayer Messages -->
@@ -1442,6 +1443,11 @@
         <e k="usedplus_info_hydraulic_level" v="Dầu Thủy Lực" eh="f9c4d7d9" />
         <e k="usedplus_info_tire_condition" v="Lốp" eh="3fe2c06a" />
 
+        <!-- v2.12.0: Finance/Lease Info Box Display -->
+        <e k="usedplus_info_dealType" v="Trạng thái" eh="00000000" />
+        <e k="usedplus_info_leased" v="THUÊ" eh="00000000" />
+        <e k="usedplus_info_financed" v="TRẢ GÓP" eh="00000000" />
+        <e k="usedplus_info_monthsRemaining" v="Tháng còn lại" eh="00000000" />
         <!-- v1.7.0: Tires Service Dialog -->
         <e k="usedplus_tires_title" v="Dịch Vụ Lốp" eh="b0234f4e" />
         <e k="usedplus_tires_sectionStatus" v="TÌNH TRẠNG XE &amp; LỐP" eh="c0e3631e" />
@@ -1788,6 +1794,7 @@
         <e k="usedplus_ft_hintsRemaining" v="Gợi ý: %d" eh="c8f080c2" />
         <e k="usedplus_ft_quickScanCap" v="Chất lượng giới hạn 60%% (Quét nhanh)" eh="5b519744" />
         <e k="usedplus_ft_noFaults" v="Không có lỗi - hệ thống hoạt động tốt!" eh="6bfa5546" />
+        <e k="usedplus_ft_noOil" v="[EN] Service Truck has no oil! Fill the oil tank before diagnosing." eh="3cd9a926" />
         <e k="usedplus_ft_action" v="Truy tìm lỗi: %s" eh="c4066687" />
         <e k="usedplus_ft_corrodedDesc" v="Hư hại do rỉ sét / oxy hóa" eh="8a01ae60" />
         <e k="usedplus_ft_crackedDesc" v="Nứt do ứng suất / mỏi" eh="81d5118b" />
@@ -1797,7 +1804,7 @@
         <e k="usedplus_sparePartsPallet_function" v="Phụ tùng tiêu hao cho phục hồi Xe Dịch Vụ. Đặt gần xe trong quá trình phục hồi." eh="c90aa3eb" />
         <e k="fillType_spareParts" v="Phụ Tùng" eh="ab6b8ce1" />
         <e k="fillType_oil" v="[EN] Motor Oil" eh="511aaabd" />
-        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="f9c4d7d9" />
+        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="646d470f" />
         <e k="unit_pcs" v="cái" eh="3ecf2642" />
         <e k="usedplus_resto_symptom_engine_knocking_load" v="Tiếng gõ nghiêm trọng khi chịu tải" eh="fb8c3067" />
         <e k="usedplus_resto_symptom_engine_low_oil_pressure" v="Áp suất dầu cực kỳ thấp" eh="a3efa42d" />

@@ -957,6 +957,7 @@
         <e k="usedplus_button_buyout" v="Cumparare" eh="6e052e38" />
         <e k="usedplus_button_renew" v="Reinnoieste" eh="0b9feba3" />
         <e k="usedplus_lr_helpText" v="You must choose an option. Returning gives you your deposit inapoi. Cumparare uses your equity toward achizitie. Renewing extends the leasing cu equity applied la future cumparare." eh="91673bf9" />
+        <e k="usedplus_lr_deferNotice" v="Această alegere va apărea din nou luna viitoare. Fără costuri suplimentare până la decizia dumneavoastră." eh="00000000" />
         <e k="usedplus_conf_title" v="Confirmare" eh="f4d1ea47" />
         <e k="usedplus_cr_title" v="CREDIT RAPORT" eh="3725e302" />
         <e k="usedplus_cr_reportDate" v="Raport Date:" eh="93ad31a7" />
@@ -1293,7 +1294,12 @@
         <e k="usedplus_info_oil_level" v="Nivel Ulei" eh="a6d699fb" />
         <e k="usedplus_info_hydraulic_level" v="Fluid Hidraulic" eh="f9c4d7d9" />
         <e k="usedplus_info_tire_condition" v="Anvelope" eh="3fe2c06a" />
-        <e k="usedplus_tires_title" v="Service Anvelope" eh="b0234f4e" />
+
+        <!-- v2.12.0: Finance/Lease Info Box Display -->
+        <e k="usedplus_info_dealType" v="Stare" eh="00000000" />
+        <e k="usedplus_info_leased" v="ÎNCHIRIAT" eh="00000000" />
+        <e k="usedplus_info_financed" v="FINANȚAT" eh="00000000" />
+        <e k="usedplus_info_monthsRemaining" v="Luni rămase" eh="00000000" />        <e k="usedplus_tires_title" v="Service Anvelope" eh="b0234f4e" />
         <e k="usedplus_tires_sectionStatus" v="VEHICUL &amp;amp;amp;amp;amp;amp;amp; TIRE STATUS" eh="c0e3631e" />
         <e k="usedplus_tires_sectionSelect" v="SELECTEAZA TIRE QUALITY" eh="42abee54" />
         <e k="usedplus_tires_sectionPayment" v="PLATA SUMAR" eh="0dd98605" />
@@ -1600,6 +1606,7 @@
         <e k="usedplus_ft_hintsRemaining" v="Indicii: %d" eh="c8f080c2" />
         <e k="usedplus_ft_quickScanCap" v="Calitate limitată la 60%% (Scanare rapidă)" eh="5b519744" />
         <e k="usedplus_ft_noFaults" v="Fără defecte - sistem funcțional!" eh="6bfa5546" />
+        <e k="usedplus_ft_noOil" v="[EN] Service Truck has no oil! Fill the oil tank before diagnosing." eh="3cd9a926" />
         <e k="usedplus_ft_action" v="Detector de defecte: %s" eh="c4066687" />
         <e k="usedplus_ft_corrodedDesc" v="Deteriorare prin rugină / oxidare" eh="8a01ae60" />
         <e k="usedplus_ft_crackedDesc" v="Fisuri de tensiune / oboseală" eh="81d5118b" />
@@ -1609,7 +1616,7 @@
         <e k="usedplus_sparePartsPallet_function" v="Consumable spare parts pentru Service Truck restoration. Place near the truck during restoration work." eh="c90aa3eb" />
         <e k="fillType_spareParts" v="Piese Schimb" eh="ab6b8ce1" />
         <e k="fillType_oil" v="[EN] Motor Oil" eh="511aaabd" />
-        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="f9c4d7d9" />
+        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="646d470f" />
         <e k="unit_pcs" v="buc" eh="3ecf2642" />
         <e k="usedplus_resto_symptom_engine_knocking_load" v="Severe knocking under incarca" eh="fb8c3067" />
         <e k="usedplus_resto_symptom_engine_low_oil_pressure" v="Presiunea uleiului critic de scazuta" eh="a3efa42d" />

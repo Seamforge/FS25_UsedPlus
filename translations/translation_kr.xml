@@ -1217,6 +1217,7 @@
         <e k="usedplus_button_buyout" v="인수" eh="6e052e38" />
         <e k="usedplus_button_renew" v="갱신" eh="0b9feba3" />
         <e k="usedplus_lr_helpText" v="옵션을 선택해야 합니다. 반환하면 보증금을 돌려받습니다. 인수는 자기자본을 구매에 사용합니다. 갱신은 자기자본을 향후 인수에 적용하여 임대를 연장합니다." eh="91673bf9" />
+        <e k="usedplus_lr_deferNotice" v="이 선택은 다음 달에 다시 나타납니다. 결정할 때까지 추가 요금이 부과되지 않습니다." eh="00000000" />
 
         <!-- Confirmation Dialog -->
         <e k="usedplus_conf_title" v="확인" eh="f4d1ea47" />
@@ -1637,6 +1638,11 @@
         <e k="usedplus_info_hydraulic_level" v="유압유" eh="f9c4d7d9" />
         <e k="usedplus_info_tire_condition" v="타이어" eh="3fe2c06a" />
 
+        <!-- v2.12.0: Finance/Lease Info Box Display -->
+        <e k="usedplus_info_dealType" v="상태" eh="00000000" />
+        <e k="usedplus_info_leased" v="리스" eh="00000000" />
+        <e k="usedplus_info_financed" v="할부" eh="00000000" />
+        <e k="usedplus_info_monthsRemaining" v="남은 개월" eh="00000000" />
         <!-- v1.7.0: Tires Service Dialog -->
         <e k="usedplus_tires_title" v="타이어 서비스" eh="b0234f4e" />
         <e k="usedplus_tires_sectionStatus" v="차량 및 타이어 상태" eh="c0e3631e" />
@@ -1994,6 +2000,7 @@
         <e k="usedplus_ft_hintsRemaining" v="힌트: %d" eh="c8f080c2" />
         <e k="usedplus_ft_quickScanCap" v="품질 60%%로 제한 (빠른 스캔)" eh="5b519744" />
         <e k="usedplus_ft_noFaults" v="결함 없음 - 시스템 정상!" eh="6bfa5546" />
+        <e k="usedplus_ft_noOil" v="[EN] Service Truck has no oil! Fill the oil tank before diagnosing." eh="3cd9a926" />
         <e k="usedplus_ft_action" v="결함 추적기: %s" eh="c4066687" />
         <e k="usedplus_ft_corrodedDesc" v="녹/산화 손상" eh="8a01ae60" />
         <e k="usedplus_ft_crackedDesc" v="응력 균열/피로" eh="81d5118b" />
@@ -2004,7 +2011,7 @@
         <e k="usedplus_sparePartsPallet_function" v="서비스 트럭 복원용 소모성 예비 부품. 복원 작업 중 트럭 근처에 배치하세요." eh="c90aa3eb" />
         <e k="fillType_spareParts" v="예비 부품" eh="ab6b8ce1" />
         <e k="fillType_oil" v="[EN] Motor Oil" eh="511aaabd" />
-        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="f9c4d7d9" />
+        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="646d470f" />
         <e k="unit_pcs" v="개" eh="3ecf2642" />
 
         <!-- v2.9.0: Restoration Diagnostic Symptoms - Engine -->
@@ -2135,7 +2142,7 @@
         <e k="usedplus_setting_partialRepair_desc" v="차량 상점에서 부분 수리 활성화 (비활성화 시 수리 버튼 숨김)" eh="84fe180c" />
         <e k="usedplus_setting_partialRepaint" v="부분 재도색" eh="3fca656d" />
         <e k="usedplus_setting_partialRepaint_desc" v="차량 상점에서 부분 재도색 활성화 (비활성화 시 재도색 버튼 숨김)" eh="4ca7214a" />
-        <!-- v2.0.0: NEW - Farmland Difficulty & Bank Interest (GMNGjoy & Evan Kirsch patterns) -->
+        <!-- v2.0.0: NEW - Farmland Difficulty, Bank Interest (GMNGjoy, Evan Kirsch patterns) -->
         <e k="usedplus_setting_farmlandDifficulty" v="농지 난이도 조정" eh="9118adb6" />
         <e k="usedplus_setting_farmlandDifficulty_desc" v="게임 난이도에 따라 토지 가격 조정 (차량과 동일). 쉬움: 60%, 보통: 100%, 어려움: 140%" eh="50a435ef" />
         <e k="usedplus_setting_bankInterest" v="은행 이자" eh="1267ace4" />
@@ -2165,7 +2172,7 @@
         <e k="usedplus_settings_marketplace" v="시장" eh="675e31b9" />
         <e k="usedplus_settings_condition" v="상태 및 품질" eh="0ada4be1" />
 
-        <!-- Economic Settings: Money & Rates -->
+        <!-- Economic Settings: Money, Rates -->
         <!-- v2.0.0: Updated description to clarify scope -->
         <e k="usedplus_setting_interestRate" v="융자 이자율" eh="ec5e55f4" />
         <e k="usedplus_setting_interestRate_desc" v="모든 융자에 대한 기본 이자율 (차량, 토지, 대출). 신용 점수가 이를 수정합니다." eh="86443f38" />
@@ -2179,7 +2186,7 @@
         <e k="usedplus_setting_leaseMarkup" v="임대 마크업 %" eh="aac70e2a" />
         <e k="usedplus_setting_leaseMarkup_desc" v="리스 요금 인상률(÷10으로 백분율 포인트, 예: 15=+1.5pp)" eh="e27af0b2" />
 
-        <!-- Economic Settings: Forgiveness & Risk -->
+        <!-- Economic Settings: Forgiveness, Risk -->
         <e k="usedplus_setting_missedPayments" v="채무 불이행까지 연체 횟수" eh="be335e9f" />
         <e k="usedplus_setting_missedPayments_desc" v="차량 회수 전 연체 횟수" eh="71688a5f" />
         <e k="usedplus_setting_downPayment" v="최소 계약금 %" eh="b70d8e33" />
@@ -2201,7 +2208,7 @@
         <e k="usedplus_setting_commission" v="대리인 수수료 %" eh="443d1555" />
         <e k="usedplus_setting_commission_desc" v="판매 대리인이 받는 백분율" eh="8f42cc9d" />
 
-        <!-- Economic Settings: Condition & Quality -->
+        <!-- Economic Settings: Condition, Quality -->
         <e k="usedplus_setting_conditionMin" v="중고 상태 최소" eh="c2725712" />
         <e k="usedplus_setting_conditionMin_desc" v="중고 차량의 최소 상태" eh="67ff9bc5" />
         <e k="usedplus_setting_conditionMax" v="중고 상태 최대" eh="ff759d4c" />

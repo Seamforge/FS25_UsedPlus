@@ -134,9 +134,8 @@
 
         </GuiElement>
 
-        <!-- No cancel button - must choose an option -->
         <BoxLayout profile="fs25_dialogButtonBox">
-            <Button profile="buttonBack" id="cancelButton" text="$l10n_usedplus_button_cancel" onClick="onCancel" visible="false"/>
+            <Button profile="buttonBack" id="cancelButton" text="$l10n_usedplus_button_later" onClick="onCancel"/>
         </BoxLayout>
     </GuiElement>
 </GUI>

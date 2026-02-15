@@ -960,6 +960,7 @@
         <e k="usedplus_button_buyout" v="買い取り" eh="6e052e38" />
         <e k="usedplus_button_renew" v="更新" eh="0b9feba3" />
         <e k="usedplus_lr_helpText" v="オプションを選択してください。返却で保証金が戻ります。買い取りでは純資産が購入に適用されます。更新ではリースが延長され、純資産は将来の買い取りに適用されます。" eh="91673bf9" />
+        <e k="usedplus_lr_deferNotice" v="この選択は来月再び表示されます。決定するまで追加料金はかかりません。" eh="00000000" />
         <e k="usedplus_conf_title" v="確認" eh="f4d1ea47" />
         <e k="usedplus_cr_title" v="信用レポート" eh="3725e302" />
         <e k="usedplus_cr_reportDate" v="レポート日:" eh="93ad31a7" />
@@ -1296,7 +1297,12 @@
         <e k="usedplus_info_oil_level" v="オイルレベル" eh="a6d699fb" />
         <e k="usedplus_info_hydraulic_level" v="作動油" eh="f9c4d7d9" />
         <e k="usedplus_info_tire_condition" v="タイヤ" eh="3fe2c06a" />
-        <e k="usedplus_tires_title" v="タイヤサービス" eh="b0234f4e" />
+
+        <!-- v2.12.0: Finance/Lease Info Box Display -->
+        <e k="usedplus_info_dealType" v="ステータス" eh="00000000" />
+        <e k="usedplus_info_leased" v="リース中" eh="00000000" />
+        <e k="usedplus_info_financed" v="ローン中" eh="00000000" />
+        <e k="usedplus_info_monthsRemaining" v="残り月数" eh="00000000" />        <e k="usedplus_tires_title" v="タイヤサービス" eh="b0234f4e" />
         <e k="usedplus_tires_sectionStatus" v="車両＆タイヤ状態" eh="c0e3631e" />
         <e k="usedplus_tires_sectionSelect" v="タイヤ品質を選択" eh="42abee54" />
         <e k="usedplus_tires_sectionPayment" v="お支払い概要" eh="0dd98605" />
@@ -1603,6 +1609,7 @@
         <e k="usedplus_ft_hintsRemaining" v="ヒント: %d" eh="c8f080c2" />
         <e k="usedplus_ft_quickScanCap" v="品質60%%に制限（クイックスキャン）" eh="5b519744" />
         <e k="usedplus_ft_noFaults" v="故障なし - システム正常！" eh="6bfa5546" />
+        <e k="usedplus_ft_noOil" v="[EN] Service Truck has no oil! Fill the oil tank before diagnosing." eh="3cd9a926" />
         <e k="usedplus_ft_action" v="故障探知: %s" eh="c4066687" />
         <e k="usedplus_ft_corrodedDesc" v="錆び/酸化ダメージ" eh="8a01ae60" />
         <e k="usedplus_ft_crackedDesc" v="応力亀裂/疲労" eh="81d5118b" />
@@ -1612,7 +1619,7 @@
         <e k="usedplus_sparePartsPallet_function" v="サービストラック修復用の消耗スペアパーツ。修復作業中はトラックの近くに配置してください。" eh="c90aa3eb" />
         <e k="fillType_spareParts" v="スペアパーツ" eh="ab6b8ce1" />
         <e k="fillType_oil" v="[EN] Motor Oil" eh="511aaabd" />
-        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="f9c4d7d9" />
+        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="646d470f" />
         <e k="unit_pcs" v="個" eh="3ecf2642" />
         <e k="usedplus_resto_symptom_engine_knocking_load" v="負荷時に激しいノッキング" eh="fb8c3067" />
         <e k="usedplus_resto_symptom_engine_low_oil_pressure" v="油圧が危険なほど低い" eh="a3efa42d" />

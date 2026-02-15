@@ -56,6 +56,8 @@
         </GuiElement>
 
         <BoxLayout profile="fs25_dialogButtonBox">
+            <Button profile="buttonBack" id="cancelButton" text="$l10n_usedplus_button_later" onClick="onCancel"/>
+            <Bitmap profile="fs25_dialogButtonBoxSeparator"/>
             <Button profile="buttonOK" id="returnButton" text="$l10n_usedplus_button_returnVehicle" onClick="onReturnVehicle"/>
             <Bitmap profile="fs25_dialogButtonBoxSeparator"/>
             <Button profile="buttonAccept" id="buyoutButton" text="$l10n_usedplus_button_buyoutVehicle" onClick="onBuyoutVehicle"/>

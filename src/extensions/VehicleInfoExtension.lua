@@ -49,10 +49,54 @@ function VehicleInfoExtension.formatLevel(level)
 end
 
 --[[
-    Hook into Vehicle.showInfo to add our fluid levels
+    Show lease/finance deal info in the vehicle info box
+    Pattern from: FS25_HirePurchasing VehicleExtension.lua
+    @param vehicle - The vehicle object (self from Vehicle.showInfo)
+    @param box - The info display box
+]]
+function VehicleInfoExtension.showFinanceInfo(vehicle, box)
+    if g_financeManager == nil then return end
+
+    local farmId = g_currentMission:getFarmId()
+
+    -- Check for active lease
+    if g_financeManager:hasActiveLease(vehicle) then
+        local deal = g_financeManager:getLeaseDealForVehicle(vehicle)
+        if deal then
+            box:addLine(g_i18n:getText("usedplus_info_dealType"), g_i18n:getText("usedplus_info_leased"))
+            if deal.monthlyPayment then
+                box:addLine(g_i18n:getText("usedplus_lease_monthlyPayment"),
+                    g_i18n:formatMoney(deal.monthlyPayment, 0, true, true))
+            end
+            local remaining = (deal.termMonths or 0) - (deal.monthsPaid or 0)
+            box:addLine(g_i18n:getText("usedplus_info_monthsRemaining"), tostring(remaining))
+        end
+        return
+    end
+
+    -- Check for active finance
+    if g_financeManager:hasActiveFinance(vehicle) then
+        local deal = g_financeManager:getFinanceDealForVehicle(vehicle)
+        if deal then
+            box:addLine(g_i18n:getText("usedplus_info_dealType"), g_i18n:getText("usedplus_info_financed"))
+            if deal.monthlyPayment then
+                box:addLine(g_i18n:getText("usedplus_finance_monthlyPayment"),
+                    g_i18n:formatMoney(deal.monthlyPayment, 0, true, true))
+            end
+            local remaining = (deal.termMonths or 0) - (deal.monthsPaid or 0)
+            box:addLine(g_i18n:getText("usedplus_info_monthsRemaining"), tostring(remaining))
+        end
+    end
+end
+
+--[[
+    Hook into Vehicle.showInfo to add our fluid levels and finance/lease info
     @param box - The info display box
 ]]
 function VehicleInfoExtension:showInfo(box)
+    -- Show lease/finance info (applies to all vehicles, not just those with maintenance spec)
+    VehicleInfoExtension.showFinanceInfo(self, box)
+
     -- Get our maintenance specialization
     local spec = self.spec_usedPlusMaintenance
     if spec == nil then

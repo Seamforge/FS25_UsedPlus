@@ -275,14 +275,8 @@ function LeaseRenewalDialog:updateDisplay()
     -- Renew option
     UIHelper.Element.setText(self.renewEquityText, UIHelper.Text.formatMoney(self.equityAccumulated) .. " applied")
 
-    -- Help text
-    local helpText
-    if self.isLandLease then
-        helpText = "Choose an option. Return gives your deposit back and releases the land. Buyout purchases the land using your accumulated equity. Renew extends the lease."
-    else
-        helpText = "Choose an option. Return gives your deposit back (minus any damage penalty). Buyout purchases the vehicle using your accumulated equity. Renew extends the lease."
-    end
-    UIHelper.Element.setText(self.helpText, helpText)
+    -- Help text (use i18n key from XML, supports all languages)
+    UIHelper.Element.setText(self.helpText, g_i18n:getText("usedplus_lr_helpText"))
 end
 
 --[[
@@ -361,14 +355,16 @@ function LeaseRenewalDialog:onRenew()
 end
 
 --[[
-    Cancel button (hidden by default - must choose option)
+    Cancel button - defer choice to next month (Issue #5)
+    Player can dismiss the dialog; it will reappear next period.
+    No extra charges are applied while deferred (see FinanceManager guard).
 ]]
 function LeaseRenewalDialog:onCancel()
-    -- Force user to make a choice
     g_currentMission:addIngameNotification(
         FSBaseMission.INGAME_NOTIFICATION_INFO,
-        "You must choose an option to continue."
+        g_i18n:getText("usedplus_lr_deferNotice")
     )
+    self:close()
 end
 
 --[[

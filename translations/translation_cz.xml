@@ -1205,6 +1205,7 @@
         <e k="usedplus_button_buyout" v="Odkup" eh="6e052e38" />
         <e k="usedplus_button_renew" v="Obnovit" eh="0b9feba3" />
         <e k="usedplus_lr_helpText" v="Musíte vybrat možnost. Vrácení vám vrátí zálohu. Odkup použije váš kapitál k nákupu. Obnovení prodlouží leasing s kapitálem na budoucí odkup." eh="91673bf9" />
+        <e k="usedplus_lr_deferNotice" v="Tato volba se objeví znovu příští měsíc. Žádné další poplatky, dokud se nerozhodnete." eh="00000000" />
 
         <!-- Confirmation Dialog -->
         <e k="usedplus_conf_title" v="Potvrzení" eh="f4d1ea47" />
@@ -1606,6 +1607,11 @@
         <e k="usedplus_info_hydraulic_level" v="Hydraulická kapalina" eh="f9c4d7d9" />
         <e k="usedplus_info_tire_condition" v="Pneumatiky" eh="3fe2c06a" />
 
+        <!-- v2.12.0: Finance/Lease Info Box Display -->
+        <e k="usedplus_info_dealType" v="Stav" eh="00000000" />
+        <e k="usedplus_info_leased" v="PRONAJATO" eh="00000000" />
+        <e k="usedplus_info_financed" v="FINANCOVÁNO" eh="00000000" />
+        <e k="usedplus_info_monthsRemaining" v="Zbývající měsíce" eh="00000000" />
         <!-- v1.7.0: Tires Service Dialog -->
         <e k="usedplus_tires_title" v="Servis pneumatik" eh="b0234f4e" />
         <e k="usedplus_tires_sectionStatus" v="STAV VOZIDLA &amp; PNEUMATIK" eh="c0e3631e" />
@@ -1894,7 +1900,7 @@
         <e k="usedplus_setting_partialRepair_desc" v="Povolit částečné opravy v dílně (zakázání skryje tlačítko opravy)" eh="84fe180c" />
         <e k="usedplus_setting_partialRepaint" v="Částečné Lakování" eh="3fca656d" />
         <e k="usedplus_setting_partialRepaint_desc" v="Povolit částečné lakování v dílně (zakázání skryje tlačítko lakování)" eh="4ca7214a" />
-        <!-- v2.0.0: Farmland Difficulty & Bank Interest -->
+        <!-- v2.0.0: Farmland Difficulty, Bank Interest -->
         <e k="usedplus_setting_farmlandDifficulty" v="Škálování Cen Pozemků" eh="9118adb6" />
         <e k="usedplus_setting_farmlandDifficulty_desc" v="Upravit ceny pozemků podle obtížnosti (jako vozidla). Lehká: 60%, Normální: 100%, Těžká: 140%" eh="50a435ef" />
         <e k="usedplus_setting_bankInterest" v="Bankovní Úroky" eh="1267ace4" />
@@ -2176,6 +2182,7 @@
         <e k="usedplus_ft_hintsRemaining" v="Nápovědy: %d" eh="c8f080c2" />
         <e k="usedplus_ft_quickScanCap" v="Kvalita omezena na 60%% (Rychlý sken)" eh="5b519744" />
         <e k="usedplus_ft_noFaults" v="Žádné závady - systém v pořádku!" eh="6bfa5546" />
+        <e k="usedplus_ft_noOil" v="[EN] Service Truck has no oil! Fill the oil tank before diagnosing." eh="3cd9a926" />
         <e k="usedplus_ft_action" v="Sledování závad: %s" eh="c4066687" />
         <e k="usedplus_ft_corrodedDesc" v="Poškození rzí / oxidací" eh="8a01ae60" />
         <e k="usedplus_ft_crackedDesc" v="Trhliny z namáhání / únavy" eh="81d5118b" />
@@ -2186,7 +2193,7 @@
         <e k="usedplus_sparePartsPallet_function" v="Spotřební náhradní díly pro renovaci servisním vozem. Umístěte v blízkosti vozu během renovace." eh="c90aa3eb" />
         <e k="fillType_spareParts" v="Náhradní díly" eh="ab6b8ce1" />
         <e k="fillType_oil" v="[EN] Motor Oil" eh="511aaabd" />
-        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="f9c4d7d9" />
+        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="646d470f" />
         <e k="unit_pcs" v="ks" eh="3ecf2642" />
         <e k="usedplus_resto_symptom_engine_knocking_load" v="Silné klepání při zatížení" eh="fb8c3067" />
         <e k="usedplus_resto_symptom_engine_low_oil_pressure" v="Kriticky nízký tlak oleje" eh="a3efa42d" />

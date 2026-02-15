@@ -962,6 +962,7 @@
         <e k="usedplus_button_buyout" v="Uitkopen" eh="6e052e38" />
         <e k="usedplus_button_renew" v="Verlengen" eh="0b9feba3" />
         <e k="usedplus_lr_helpText" v="U moet een optie kiezen. Retourneren geeft u uw borg terug. Uitkopen gebruikt uw eigen vermogen voor aankoop. Verlengen breidt de lease uit met eigen vermogen toegepast op toekomstige uitkoop." eh="91673bf9" />
+        <e k="usedplus_lr_deferNotice" v="Deze keuze verschijnt volgende maand opnieuw. Geen extra kosten tot u beslist." eh="00000000" />
         <e k="usedplus_conf_title" v="Bevestiging" eh="f4d1ea47" />
         <e k="usedplus_cr_title" v="KREDIETRAPPORT" eh="3725e302" />
         <e k="usedplus_cr_reportDate" v="Rapportdatum:" eh="93ad31a7" />
@@ -1298,7 +1299,12 @@
         <e k="usedplus_info_oil_level" v="Olieniveau" eh="a6d699fb" />
         <e k="usedplus_info_hydraulic_level" v="Hydraulische Vloeistof" eh="f9c4d7d9" />
         <e k="usedplus_info_tire_condition" v="Banden" eh="3fe2c06a" />
-        <e k="usedplus_tires_title" v="Bandenservice" eh="b0234f4e" />
+
+        <!-- v2.12.0: Finance/Lease Info Box Display -->
+        <e k="usedplus_info_dealType" v="Status" eh="00000000" />
+        <e k="usedplus_info_leased" v="GELEASED" eh="00000000" />
+        <e k="usedplus_info_financed" v="GEFINANCIERD" eh="00000000" />
+        <e k="usedplus_info_monthsRemaining" v="Resterende maanden" eh="00000000" />        <e k="usedplus_tires_title" v="Bandenservice" eh="b0234f4e" />
         <e k="usedplus_tires_sectionStatus" v="VOERTUIG &amp;amp; BANDENSTATUS" eh="c0e3631e" />
         <e k="usedplus_tires_sectionSelect" v="SELECTEER BANDENKWALITEIT" eh="42abee54" />
         <e k="usedplus_tires_sectionPayment" v="BETALINGSOVERZICHT" eh="0dd98605" />
@@ -1605,6 +1611,7 @@
         <e k="usedplus_ft_hintsRemaining" v="Hints: %d" eh="c8f080c2" />
         <e k="usedplus_ft_quickScanCap" v="Kwaliteit beperkt tot 60%% (Snelle scan)" eh="5b519744" />
         <e k="usedplus_ft_noFaults" v="Geen fouten - systeem in orde!" eh="6bfa5546" />
+        <e k="usedplus_ft_noOil" v="[EN] Service Truck has no oil! Fill the oil tank before diagnosing." eh="3cd9a926" />
         <e k="usedplus_ft_action" v="Foutopsporing: %s" eh="c4066687" />
         <e k="usedplus_ft_corrodedDesc" v="Roest- / oxidatieschade" eh="8a01ae60" />
         <e k="usedplus_ft_crackedDesc" v="Spanningsscheuren / vermoeidheid" eh="81d5118b" />
@@ -1614,7 +1621,7 @@
         <e k="usedplus_sparePartsPallet_function" v="Verbruiksonderdelen voor Servicewagen restauratie. Plaats nabij de truck tijdens restauratiewerkzaamheden." eh="c90aa3eb" />
         <e k="fillType_spareParts" v="Reserveonderdelen" eh="ab6b8ce1" />
         <e k="fillType_oil" v="[EN] Motor Oil" eh="511aaabd" />
-        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="f9c4d7d9" />
+        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="646d470f" />
         <e k="unit_pcs" v="st" eh="3ecf2642" />
         <e k="usedplus_resto_symptom_engine_knocking_load" v="Ernstig kloppen onder belasting" eh="fb8c3067" />
         <e k="usedplus_resto_symptom_engine_low_oil_pressure" v="Oliedruk kritiek laag" eh="a3efa42d" />

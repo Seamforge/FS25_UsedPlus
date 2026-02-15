@@ -36,19 +36,48 @@ function InGameMenuVehiclesFrameExtension:init()
     end
 
     -- Hook InGameMenuVehiclesFrame.onClickSell
-    self:hookSellButton()
+    local sellHooked = self:hookSellButton()
 
     -- Hook vehicle display name to show (LEASED) indicator
     self:hookVehicleDisplayName()
 
     -- Hook menu buttons to add "Maintenance" button
-    self:hookMenuButtons()
+    local menuHooked = self:hookMenuButtons()
 
     -- Hook YesNoDialog to intercept vehicle sell confirmations
     self:hookYesNoDialog()
 
-    self.isInitialized = true
-    UsedPlus.logDebug("InGameMenuVehiclesFrameExtension initialized")
+    -- If sell button wasn't hooked directly, schedule a deferred retry.
+    -- Note: YesNoDialog hook catches sell actions regardless.
+    if not sellHooked then
+        UsedPlus.logDebug("Sell button not hooked directly - scheduling deferred retry in 5 seconds")
+        addTimer(5000, "retryFrameHook", InGameMenuVehiclesFrameExtension)
+    else
+        self.isInitialized = true
+    end
+    UsedPlus.logInfo("InGameMenuVehiclesFrameExtension initialized (sellHooked=" .. tostring(sellHooked) .. ", menuHooked=" .. tostring(menuHooked) .. ")")
+end
+
+--[[
+    Deferred retry for finding the vehicles frame
+    Called via addTimer after mission fully loads
+]]
+function InGameMenuVehiclesFrameExtension:retryFrameHook()
+    if self.isInitialized then return end
+
+    UsedPlus.logDebug("retryFrameHook: Attempting deferred frame lookup...")
+
+    -- The vehicles display is part of g_inGameMenu itself (no separate frame class).
+    -- The sell button is still intercepted via YesNoDialog hook regardless.
+    -- This retry only matters for direct sell button hooking.
+    if InGameMenuVehiclesFrame and InGameMenuVehiclesFrame.onClickSell then
+        self:hookSellButton()
+        self:hookMenuButtons()
+        self.isInitialized = true
+        UsedPlus.logInfo("retryFrameHook: Hooked InGameMenuVehiclesFrame on deferred retry")
+    else
+        UsedPlus.logDebug("retryFrameHook: InGameMenuVehiclesFrame still not available (sell intercepted via YesNoDialog hook)")
+    end
 end
 
 --[[
@@ -118,8 +147,65 @@ function InGameMenuVehiclesFrameExtension:hookYesNoDialog()
             end
 
             if vehicle then
-                UsedPlus.logInfo("Intercepted vehicle sell - showing UsedPlus dialog instead")
                 local farmId = g_currentMission:getFarmId()
+
+                -- Guard: ownership check
+                if vehicle.ownerFarmId ~= farmId then
+                    return InGameMenuVehiclesFrameExtension.originalYesNoDialogShow(callback, target, text, ...)
+                end
+
+                -- Guard: vanilla lease (not owned)
+                if vehicle.propertyState ~= VehiclePropertyState.OWNED then
+                    g_currentMission:addIngameNotification(
+                        FSBaseMission.INGAME_NOTIFICATION_INFO,
+                        "Leased vehicles cannot be sold. Terminate the lease first."
+                    )
+                    return
+                end
+
+                -- Guard: UsedPlus lease
+                if g_financeManager and g_financeManager:hasActiveLease(vehicle) then
+                    g_currentMission:addIngameNotification(
+                        FSBaseMission.INGAME_NOTIFICATION_ERROR,
+                        g_i18n:getText("usedplus_error_cannotSellLeasedVehicle")
+                    )
+                    return
+                end
+
+                -- Guard: financed vehicle
+                if TradeInCalculations and TradeInCalculations.isVehicleFinanced and
+                   TradeInCalculations.isVehicleFinanced(vehicle, farmId) then
+                    g_currentMission:addIngameNotification(
+                        FSBaseMission.INGAME_NOTIFICATION_INFO,
+                        "Financed vehicles cannot be sold until loan is paid off."
+                    )
+                    return
+                end
+
+                -- Guard: pledged as collateral
+                if CollateralUtils and CollateralUtils.isVehiclePledged then
+                    local isPledged, deal = CollateralUtils.isVehiclePledged(vehicle)
+                    if isPledged then
+                        local loanBalance = deal and deal.currentBalance or 0
+                        g_currentMission:addIngameNotification(
+                            FSBaseMission.INGAME_NOTIFICATION_ERROR,
+                            string.format("This vehicle is pledged as collateral for a %s loan.\nPay off the loan first to sell.",
+                                g_i18n:formatMoney(loanBalance, 0, true, true))
+                        )
+                        return
+                    end
+                end
+
+                -- Guard: already listed for sale
+                if g_vehicleSaleManager and g_vehicleSaleManager:isVehicleListed(vehicle) then
+                    g_currentMission:addIngameNotification(
+                        FSBaseMission.INGAME_NOTIFICATION_INFO,
+                        "This vehicle is already listed for sale."
+                    )
+                    return
+                end
+
+                UsedPlus.logInfo("Intercepted vehicle sell - showing UsedPlus dialog instead")
                 InGameMenuVehiclesFrameExtension:showSellDialog(vehicle, farmId, nil)
                 return  -- Don't show the vanilla YesNoDialog
             else
@@ -160,7 +246,6 @@ function InGameMenuVehiclesFrameExtension:hookMenuButtons()
                 InGameMenuVehiclesFrameExtension.lastSelectedFrame = frame
                 if frame and frame.getSelectedVehicle then
                     InGameMenuVehiclesFrameExtension.lastSelectedVehicle = frame:getSelectedVehicle()
-                    UsedPlus.logDebug("Vehicles page opened - stored frame and vehicle")
                 end
             end
         )
@@ -317,7 +402,21 @@ function InGameMenuVehiclesFrameExtension:hookVehicleDisplayName()
 
         -- Check if vehicle is leased via UsedPlus system
         if g_financeManager and g_financeManager:hasActiveLease(vehicle) then
-            name = name .. " (LEASED)"
+            local deal = g_financeManager:getLeaseDealForVehicle(vehicle)
+            if deal and deal.monthlyPayment then
+                name = name .. " (LEASED " .. g_i18n:formatMoney(deal.monthlyPayment, 0, true, true) .. "/mo)"
+            else
+                name = name .. " (LEASED)"
+            end
+
+        -- Check if vehicle is financed via UsedPlus system
+        elseif g_financeManager and g_financeManager:hasActiveFinance(vehicle) then
+            local deal = g_financeManager:getFinanceDealForVehicle(vehicle)
+            if deal and deal.monthlyPayment then
+                name = name .. " (FINANCED " .. g_i18n:formatMoney(deal.monthlyPayment, 0, true, true) .. "/mo)"
+            else
+                name = name .. " (FINANCED)"
+            end
         end
 
         -- Check if vehicle is pledged as collateral for a cash loan
@@ -386,9 +485,10 @@ function InGameMenuVehiclesFrameExtension:hookSellButton()
             self.originalInputEvent = InGameMenuVehiclesFrame.inputEvent
 
             InGameMenuVehiclesFrame.inputEvent = function(frame, action, value, eventUsed)
-                -- Check for sell-related input actions
-                if action == InputAction.MENU_CANCEL or action == InputAction.MENU_EXTRA_2 then
-                    -- This might be the sell keybind - check if we should intercept
+                -- Check for sell keybind (MENU_EXTRA_2 only)
+                -- NOTE: Do NOT intercept MENU_CANCEL (Escape) — it must reach the
+                -- vanilla handler so the player can close the menu (Issue #5)
+                if action == InputAction.MENU_EXTRA_2 then
                     local vehicle = nil
                     if frame and frame.getSelectedVehicle then
                         vehicle = frame:getSelectedVehicle()
@@ -933,19 +1033,23 @@ function InGameMenuVehiclesFrameExtension.onInGameMenuOpen(inGameMenu, superFunc
 
     -- Try to install our hook if not already done
     if not InGameMenuVehiclesFrameExtension.isInitialized then
-        -- Check if InGameMenuVehiclesFrame now exists
+        UsedPlus.logWarn("onInGameMenuOpen: Retrying hook installation...")
+
+        -- Check if InGameMenuVehiclesFrame now exists as global
         if InGameMenuVehiclesFrame and InGameMenuVehiclesFrame.onClickSell then
             InGameMenuVehiclesFrameExtension:hookSellButton()
             InGameMenuVehiclesFrameExtension:hookVehicleDisplayName()
             InGameMenuVehiclesFrameExtension:hookMenuButtons()
+            InGameMenuVehiclesFrameExtension.isInitialized = true
         else
             -- Try to find it via the inGameMenu's pages
-            if inGameMenu and inGameMenu.pageVehicles and inGameMenu.pageVehicles.onClickSell then
-                -- The frame exists as a page - hook it directly
-                local frame = inGameMenu.pageVehicles
-                if not InGameMenuVehiclesFrameExtension.originalOnClickSell then
-                    InGameMenuVehiclesFrameExtension.originalOnClickSell = frame.onClickSell
+            local frame = inGameMenu and inGameMenu.pageVehicles
+            if frame then
+                UsedPlus.logWarn("Found frame via inGameMenu.pageVehicles")
 
+                -- Hook onClickSell
+                if frame.onClickSell and not InGameMenuVehiclesFrameExtension.originalOnClickSell then
+                    InGameMenuVehiclesFrameExtension.originalOnClickSell = frame.onClickSell
                     frame.onClickSell = function(self)
                         if g_vehicleSaleManager and UsedPlus and UsedPlus.instance then
                             InGameMenuVehiclesFrameExtension:onClickSellOverride(self)
@@ -953,27 +1057,151 @@ function InGameMenuVehiclesFrameExtension.onInGameMenuOpen(inGameMenu, superFunc
                             InGameMenuVehiclesFrameExtension.originalOnClickSell(self)
                         end
                     end
+                    UsedPlus.logInfo("Hooked onClickSell via pageVehicles")
+                end
 
-                    InGameMenuVehiclesFrameExtension.isInitialized = true
-                    UsedPlus.logInfo("Hooked InGameMenuVehiclesFrame.onClickSell via InGameMenu.pageVehicles")
+                -- Hook onListSelectionChanged for lease cost display
+                if frame.onListSelectionChanged then
+                    frame.onListSelectionChanged = Utils.appendedFunction(
+                        frame.onListSelectionChanged,
+                        function(frm, ...)
+                            InGameMenuVehiclesFrameExtension.onVehicleSelected(frm)
+                        end
+                    )
+                    UsedPlus.logInfo("Hooked onListSelectionChanged via pageVehicles")
+                end
+
+                InGameMenuVehiclesFrameExtension.isInitialized = true
+            else
+                UsedPlus.logWarn("pageVehicles not found on inGameMenu")
+            end
+        end
+    end
+end
+
+--[[
+    Called when a vehicle is selected in the vehicles list
+    Updates lease/finance cost display
+]]
+function InGameMenuVehiclesFrameExtension.onVehicleSelected(frame)
+    if not frame or not frame.getSelectedVehicle then return end
+
+    local vehicle = frame:getSelectedVehicle()
+    if not vehicle then return end
+
+    InGameMenuVehiclesFrameExtension.lastSelectedVehicle = vehicle
+    InGameMenuVehiclesFrameExtension.lastSelectedFrame = frame
+
+    -- Check for UsedPlus lease/finance
+    if g_financeManager then
+        if g_financeManager:hasActiveLease(vehicle) then
+            local deal = g_financeManager:getLeaseDealForVehicle(vehicle)
+            if deal then
+                UsedPlus.logDebug(string.format("Selected leased vehicle: %s (monthly: %s)",
+                    tostring(vehicle.configFileName),
+                    g_i18n:formatMoney(deal.monthlyPayment or 0, 0, true, true)))
+            end
+        end
+    end
+end
+
+--[[
+    Hook for InGameMenu:populateCellForItemInSection (page tabs list).
+    On first call, discovers the vehicles list delegate and hooks its
+    populateCellForItemInSection to modify vehicle row cells.
+    @param self - The InGameMenu instance (g_inGameMenu)
+    @param list - The list element being populated
+    @param section - Section index (1-based)
+    @param index - Item index within section (1-based)
+    @param cell - The cell GUI element
+]]
+InGameMenuVehiclesFrameExtension.vehiclesListHooked = false
+
+function InGameMenuVehiclesFrameExtension.onPopulateCellHook(self, list, section, index, cell)
+    -- One-time: hook the REAL vehicles list delegate (different from InGameMenu)
+    if not InGameMenuVehiclesFrameExtension.vehiclesListHooked then
+        local vList = self.vehiclesList
+        if vList then
+            local delegate = vList.delegate
+            if delegate and delegate ~= self then
+                local mt = getmetatable(delegate)
+                if mt and mt.populateCellForItemInSection then
+                    mt.populateCellForItemInSection = Utils.appendedFunction(
+                        mt.populateCellForItemInSection,
+                        InGameMenuVehiclesFrameExtension.onVehicleCellPopulated
+                    )
+                    InGameMenuVehiclesFrameExtension.vehiclesListHooked = true
+                    UsedPlus.logInfo("Hooked vehicles list delegate for lease cost display")
                 end
             end
         end
     end
 end
 
--- Try to install hook at load time
--- This runs at script load time, but InGameMenuVehiclesFrame may not exist yet
--- The init() function will also try to install the hook after mission loads
+--[[
+    Called after vanilla populates each cell in the ESC menu lists.
+    The delegate handles multiple lists (finances, vehicles, hand tools, etc.).
+    We filter to only the vehiclesList and modify the "leasing" column
+    for vehicles with active UsedPlus lease or finance deals.
+
+    Architecture (discovered via runtime analysis):
+    - g_inGameMenu.vehiclesList → list widget with separate delegate
+    - delegate.vehicles[] → data array, each entry has .vehicle (actual Vehicle) and .columns
+    - Cell children: name, licensePlate, age, operatingHours, damage, leasing, value
+    - "leasing" element must be found via cell.elements walk (getAttribute doesn't index it)
+]]
+function InGameMenuVehiclesFrameExtension.onVehicleCellPopulated(self, list, section, index, cell)
+    -- Only process the vehicles list (delegate handles finances, stats, prices, etc.)
+    if not self.vehiclesList or list ~= self.vehiclesList then return end
+    if g_financeManager == nil then return end
+
+    -- Get vehicle from data (vehicles are wrapped: entry.vehicle holds actual vehicle)
+    local entry = nil
+    if self.vehicles and type(self.vehicles) == "table" then
+        entry = self.vehicles[index]
+    end
+    if entry == nil then return end
+
+    local vehicle = entry.vehicle or entry
+    if vehicle == nil or vehicle.configFileName == nil then return end
+
+    -- Determine monthly payment from lease or finance deal
+    local monthlyPayment = nil
+
+    if g_financeManager:hasActiveLease(vehicle) then
+        local deal = g_financeManager:getLeaseDealForVehicle(vehicle)
+        if deal then monthlyPayment = deal.monthlyPayment end
+    elseif g_financeManager:hasActiveFinance(vehicle) then
+        local deal = g_financeManager:getFinanceDealForVehicle(vehicle)
+        if deal then monthlyPayment = deal.monthlyPayment end
+    end
+
+    if monthlyPayment == nil then return end
+
+    -- Find the "leasing" column element by walking cell children
+    -- (getAttribute doesn't index all child elements in FS25's vehicle row template)
+    if cell.elements then
+        for _, elem in ipairs(cell.elements) do
+            if elem.name == "leasing" and elem.setText then
+                elem:setText(g_i18n:formatMoney(monthlyPayment, 0, true, true))
+                break
+            end
+        end
+    end
+end
+
+-- ============================================================
+-- LOAD-TIME HOOK INSTALLATION
+-- ============================================================
+
+-- Try to install sell button hook at load time
 if InGameMenuVehiclesFrame and InGameMenuVehiclesFrame.onClickSell then
     InGameMenuVehiclesFrameExtension.originalOnClickSell = InGameMenuVehiclesFrame.onClickSell
 
     InGameMenuVehiclesFrame.onClickSell = function(frame)
-        -- Only use our override if manager is ready
         if g_vehicleSaleManager and UsedPlus and UsedPlus.instance then
             InGameMenuVehiclesFrameExtension:onClickSellOverride(frame)
         elseif InGameMenuVehiclesFrameExtension.originalOnClickSell then
-            -- Fall back to original if not initialized
             InGameMenuVehiclesFrameExtension.originalOnClickSell(frame)
         end
     end
@@ -981,7 +1209,7 @@ if InGameMenuVehiclesFrame and InGameMenuVehiclesFrame.onClickSell then
     InGameMenuVehiclesFrameExtension.isInitialized = true
     UsedPlus.logDebug("InGameMenuVehiclesFrameExtension: Sell button hook installed at load time")
 else
-    UsedPlus.logDebug("InGameMenuVehiclesFrameExtension: Hook will be installed after mission loads or menu opens")
+    UsedPlus.logDebug("InGameMenuVehiclesFrameExtension: Sell hook deferred to mission load")
 
     -- Hook InGameMenu.onOpen to install hooks when menu first opens
     if InGameMenu and InGameMenu.onOpen then
@@ -990,8 +1218,20 @@ else
             InGameMenuVehiclesFrameExtension.onInGameMenuOpen
         )
         InGameMenuVehiclesFrameExtension.inGameMenuHooked = true
-        UsedPlus.logDebug("InGameMenuVehiclesFrameExtension: InGameMenu.onOpen hooked")
     end
+end
+
+-- Hook InGameMenu.populateCellForItemInSection for lease cost display in vehicles list.
+-- This is the method that renders each vehicle row in ESC > Vehicles.
+-- The InGameMenu class IS the vehicles frame (no separate InGameMenuVehiclesFrame for this).
+if InGameMenu and InGameMenu.populateCellForItemInSection then
+    InGameMenu.populateCellForItemInSection = Utils.appendedFunction(
+        InGameMenu.populateCellForItemInSection,
+        InGameMenuVehiclesFrameExtension.onPopulateCellHook
+    )
+    UsedPlus.logInfo("Hooked InGameMenu.populateCellForItemInSection for lease cost display")
+else
+    UsedPlus.logWarn("InGameMenu.populateCellForItemInSection not found - lease cost display unavailable")
 end
 
 UsedPlus.logInfo("InGameMenuVehiclesFrameExtension loaded")

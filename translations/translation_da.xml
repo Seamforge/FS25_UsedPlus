@@ -1217,6 +1217,7 @@
         <e k="usedplus_button_buyout" v="Udkøb" eh="6e052e38" />
         <e k="usedplus_button_renew" v="Forny" eh="0b9feba3" />
         <e k="usedplus_lr_helpText" v="Du skal vælge en mulighed. Returnering giver dig dit depositum tilbage. Udkøb bruger din egenkapital til køb. Fornyelse forlænger leasingen med egenkapital anvendt til fremtidigt udkøb." eh="91673bf9" />
+        <e k="usedplus_lr_deferNotice" v="Dette valg vises igen næste måned. Ingen ekstra gebyrer, før du beslutter dig." eh="00000000" />
 
         <!-- Confirmation Dialog -->
         <e k="usedplus_conf_title" v="Bekræftelse" eh="f4d1ea47" />
@@ -1637,6 +1638,11 @@
         <e k="usedplus_info_hydraulic_level" v="Hydraulikvæske" eh="f9c4d7d9" />
         <e k="usedplus_info_tire_condition" v="Dæk" eh="3fe2c06a" />
 
+        <!-- v2.12.0: Finance/Lease Info Box Display -->
+        <e k="usedplus_info_dealType" v="Status" eh="00000000" />
+        <e k="usedplus_info_leased" v="LEASET" eh="00000000" />
+        <e k="usedplus_info_financed" v="FINANSIERET" eh="00000000" />
+        <e k="usedplus_info_monthsRemaining" v="Måneder tilbage" eh="00000000" />
         <!-- v1.7.0: Tires Service Dialog -->
         <e k="usedplus_tires_title" v="Dækservice" eh="b0234f4e" />
         <e k="usedplus_tires_sectionStatus" v="KØRETØJ &amp; DÆKSTATUS" eh="c0e3631e" />
@@ -1994,6 +2000,7 @@
         <e k="usedplus_ft_hintsRemaining" v="Hints: %d" eh="c8f080c2" />
         <e k="usedplus_ft_quickScanCap" v="Kvalitet begrænset til 60%% (Hurtig scanning)" eh="5b519744" />
         <e k="usedplus_ft_noFaults" v="Ingen fejl - system i orden!" eh="6bfa5546" />
+        <e k="usedplus_ft_noOil" v="[EN] Service Truck has no oil! Fill the oil tank before diagnosing." eh="3cd9a926" />
         <e k="usedplus_ft_action" v="Fejlsporing: %s" eh="c4066687" />
         <e k="usedplus_ft_corrodedDesc" v="Rust- / oxidationsskade" eh="8a01ae60" />
         <e k="usedplus_ft_crackedDesc" v="Spændingsrevner / udmattelse" eh="81d5118b" />
@@ -2004,7 +2011,7 @@
         <e k="usedplus_sparePartsPallet_function" v="Forbrugsreservedele til Service Lastbil gendannelse. Placer tæt på lastbilen under gendannelsesarbejde." eh="c90aa3eb" />
         <e k="fillType_spareParts" v="Reservedele" eh="ab6b8ce1" />
         <e k="fillType_oil" v="[EN] Motor Oil" eh="511aaabd" />
-        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="f9c4d7d9" />
+        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="646d470f" />
         <e k="unit_pcs" v="stk" eh="3ecf2642" />
 
         <!-- v2.9.0: Restoration Diagnostic Symptoms - Engine -->
@@ -2135,7 +2142,7 @@
         <e k="usedplus_setting_partialRepair_desc" v="Aktiver delvise reparationer i køretøjsshop (deaktivering skjuler reparationsknap)" eh="84fe180c" />
         <e k="usedplus_setting_partialRepaint" v="Delvis Omlakering" eh="3fca656d" />
         <e k="usedplus_setting_partialRepaint_desc" v="Aktiver delvise omlakeringer i køretøjsshop (deaktivering skjuler omlakeringsknap)" eh="4ca7214a" />
-        <!-- v2.0.0: NEW - Farmland Difficulty & Bank Interest (GMNGjoy & Evan Kirsch patterns) -->
+        <!-- v2.0.0: NEW - Farmland Difficulty, Bank Interest (GMNGjoy, Evan Kirsch patterns) -->
         <e k="usedplus_setting_farmlandDifficulty" v="Landbrugsland sværhedsgradskalering" eh="9118adb6" />
         <e k="usedplus_setting_farmlandDifficulty_desc" v="Skaler jordpriser med spilsværhedsgrad (som køretøjer). Let: 60%, Normal: 100%, Svær: 140%" eh="50a435ef" />
         <e k="usedplus_setting_bankInterest" v="Bank rente" eh="1267ace4" />
@@ -2165,7 +2172,7 @@
         <e k="usedplus_settings_marketplace" v="Markedsplads" eh="675e31b9" />
         <e k="usedplus_settings_condition" v="Stand &amp; Kvalitet" eh="0ada4be1" />
 
-        <!-- Economic Settings: Money & Rates -->
+        <!-- Economic Settings: Money, Rates -->
         <!-- v2.0.0: Updated description to clarify scope -->
         <e k="usedplus_setting_interestRate" v="Finansieringsrente" eh="ec5e55f4" />
         <e k="usedplus_setting_interestRate_desc" v="Basisrente for al finansiering (køretøjer, jord, lån). Kreditscore ændrer dette." eh="86443f38" />
@@ -2179,7 +2186,7 @@
         <e k="usedplus_setting_leaseMarkup" v="Leasing tillæg %" eh="aac70e2a" />
         <e k="usedplus_setting_leaseMarkup_desc" v="Leasingsats tillæg (÷10 for procentpoint, f.eks. 15 = +1,5pp)" eh="e27af0b2" />
 
-        <!-- Economic Settings: Forgiveness & Risk -->
+        <!-- Economic Settings: Forgiveness, Risk -->
         <e k="usedplus_setting_missedPayments" v="Udeblevet betalinger til misligholdelse" eh="be335e9f" />
         <e k="usedplus_setting_missedPayments_desc" v="Antal udeblevet betalinger før køretøjstilbagetagelse" eh="71688a5f" />
         <e k="usedplus_setting_downPayment" v="Min udbetaling %" eh="b70d8e33" />
@@ -2201,7 +2208,7 @@
         <e k="usedplus_setting_commission" v="Agent kommission %" eh="443d1555" />
         <e k="usedplus_setting_commission_desc" v="Procentdel taget af salgsagenter" eh="8f42cc9d" />
 
-        <!-- Economic Settings: Condition & Quality -->
+        <!-- Economic Settings: Condition, Quality -->
         <e k="usedplus_setting_conditionMin" v="Brugt tilstand min" eh="c2725712" />
         <e k="usedplus_setting_conditionMin_desc" v="Minimum tilstand for brugte køretøjer" eh="67ff9bc5" />
         <e k="usedplus_setting_conditionMax" v="Brugt tilstand maks" eh="ff759d4c" />

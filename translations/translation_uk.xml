@@ -1205,6 +1205,7 @@
         <e k="usedplus_button_buyout" v="Викуп" eh="6e052e38" />
         <e k="usedplus_button_renew" v="Оновити" eh="0b9feba3" />
         <e k="usedplus_lr_helpText" v="Ви повинні вибрати варіант. Повернення повертає ваш депозит. Викуп використовує ваш капітал для покупки. Продовження розширює оренду з капіталом для майбутнього викупу." eh="91673bf9" />
+        <e k="usedplus_lr_deferNotice" v="Цей вибір з'явиться знову наступного місяця. Жодних додаткових витрат до вашого рішення." eh="00000000" />
 
         <!-- Confirmation Dialog -->
         <e k="usedplus_conf_title" v="Підтвердження" eh="f4d1ea47" />
@@ -1606,6 +1607,11 @@
         <e k="usedplus_info_hydraulic_level" v="Гідравлічна рідина" eh="f9c4d7d9" />
         <e k="usedplus_info_tire_condition" v="Шини" eh="3fe2c06a" />
 
+        <!-- v2.12.0: Finance/Lease Info Box Display -->
+        <e k="usedplus_info_dealType" v="Статус" eh="00000000" />
+        <e k="usedplus_info_leased" v="ОРЕНДА" eh="00000000" />
+        <e k="usedplus_info_financed" v="КРЕДИТ" eh="00000000" />
+        <e k="usedplus_info_monthsRemaining" v="Залишилось місяців" eh="00000000" />
         <!-- v1.7.0: Tires Service Dialog -->
         <e k="usedplus_tires_title" v="Шиномонтаж" eh="b0234f4e" />
         <e k="usedplus_tires_sectionStatus" v="СТАТУС ТРАНСПОРТУ &amp; ШИН" eh="c0e3631e" />
@@ -1894,7 +1900,7 @@
         <e k="usedplus_setting_partialRepair_desc" v="Увімкнути частковий ремонт у майстерні (вимкнення приховує кнопку ремонту)" eh="84fe180c" />
         <e k="usedplus_setting_partialRepaint" v="Часткове Фарбування" eh="3fca656d" />
         <e k="usedplus_setting_partialRepaint_desc" v="Увімкнути часткове фарбування у майстерні (вимкнення приховує кнопку фарбування)" eh="4ca7214a" />
-        <!-- v2.0.0: Farmland Difficulty & Bank Interest -->
+        <!-- v2.0.0: Farmland Difficulty, Bank Interest -->
         <e k="usedplus_setting_farmlandDifficulty" v="Масштабування Цін Землі" eh="9118adb6" />
         <e k="usedplus_setting_farmlandDifficulty_desc" v="Масштабувати ціни землі за складністю (як техніку). Легко: 60%, Нормально: 100%, Складно: 140%" eh="50a435ef" />
         <e k="usedplus_setting_bankInterest" v="Банківські Відсотки" eh="1267ace4" />
@@ -2176,6 +2182,7 @@
         <e k="usedplus_ft_hintsRemaining" v="Підказки: %d" eh="c8f080c2" />
         <e k="usedplus_ft_quickScanCap" v="Якість обмежена 60%% (Швидке сканування)" eh="5b519744" />
         <e k="usedplus_ft_noFaults" v="Немає несправностей - система справна!" eh="6bfa5546" />
+        <e k="usedplus_ft_noOil" v="[EN] Service Truck has no oil! Fill the oil tank before diagnosing." eh="3cd9a926" />
         <e k="usedplus_ft_action" v="Пошук несправностей: %s" eh="c4066687" />
         <e k="usedplus_ft_corrodedDesc" v="Пошкодження іржею / окисленням" eh="8a01ae60" />
         <e k="usedplus_ft_crackedDesc" v="Тріщини від напруження / втоми" eh="81d5118b" />
@@ -2186,7 +2193,7 @@
         <e k="usedplus_sparePartsPallet_function" v="Витратні запчастини для відновлення технікою сервісною вантажівкою. Розмістіть біля вантажівки під час відновлення." eh="c90aa3eb" />
         <e k="fillType_spareParts" v="Запчастини" eh="ab6b8ce1" />
         <e k="fillType_oil" v="[EN] Motor Oil" eh="511aaabd" />
-        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="f9c4d7d9" />
+        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="646d470f" />
         <e k="unit_pcs" v="шт" eh="3ecf2642" />
         <e k="usedplus_resto_symptom_engine_knocking_load" v="Сильний стукіт під навантаженням" eh="fb8c3067" />
         <e k="usedplus_resto_symptom_engine_low_oil_pressure" v="Критично низький тиск мастила" eh="a3efa42d" />

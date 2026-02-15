@@ -1217,6 +1217,7 @@
         <e k="usedplus_button_buyout" v="Comprar" eh="6e052e38" />
         <e k="usedplus_button_renew" v="Renovar" eh="0b9feba3" />
         <e k="usedplus_lr_helpText" v="Debes elegir una opción. Devolver te da tu depósito de vuelta. Comprar usa tu patrimonio para la compra. Renovar extiende el arrendamiento con patrimonio aplicado a la futura compra." eh="91673bf9" />
+        <e k="usedplus_lr_deferNotice" v="这个选择将在下个月再次出现。在您做出决定之前不会产生额外费用。" eh="00000000" />
 
         <!-- Confirmation Dialog -->
         <e k="usedplus_conf_title" v="Confirmación" eh="f4d1ea47" />
@@ -1637,6 +1638,11 @@
         <e k="usedplus_info_hydraulic_level" v="Fluido Hidráulico" eh="f9c4d7d9" />
         <e k="usedplus_info_tire_condition" v="Llantas" eh="3fe2c06a" />
 
+        <!-- v2.12.0: Finance/Lease Info Box Display -->
+        <e k="usedplus_info_dealType" v="Estado" eh="00000000" />
+        <e k="usedplus_info_leased" v="ARRENDADO" eh="00000000" />
+        <e k="usedplus_info_financed" v="FINANCIADO" eh="00000000" />
+        <e k="usedplus_info_monthsRemaining" v="Meses Restantes" eh="00000000" />
         <!-- v1.7.0: Tires Service Dialog -->
         <e k="usedplus_tires_title" v="Servicio de Llantas" eh="b0234f4e" />
         <e k="usedplus_tires_sectionStatus" v="ESTADO DEL VEHÍCULO Y LLANTAS" eh="c0e3631e" />
@@ -1994,6 +2000,7 @@
         <e k="usedplus_ft_hintsRemaining" v="Pistas: %d" eh="c8f080c2" />
         <e k="usedplus_ft_quickScanCap" v="Calidad limitada al 60%% (Escaneo rápido)" eh="5b519744" />
         <e k="usedplus_ft_noFaults" v="¡Sin fallas - sistema en buen estado!" eh="6bfa5546" />
+        <e k="usedplus_ft_noOil" v="[EN] Service Truck has no oil! Fill the oil tank before diagnosing." eh="3cd9a926" />
         <e k="usedplus_ft_action" v="Rastreador de fallas: %s" eh="c4066687" />
         <e k="usedplus_ft_corrodedDesc" v="Daño por óxido / oxidación" eh="8a01ae60" />
         <e k="usedplus_ft_crackedDesc" v="Grietas por tensión / fatiga" eh="81d5118b" />
@@ -2004,7 +2011,7 @@
         <e k="usedplus_sparePartsPallet_function" v="Partes de repuesto consumibles para restauración del Camión de Servicio. Coloca cerca del camión durante el trabajo de restauración." eh="c90aa3eb" />
         <e k="fillType_spareParts" v="Partes de Repuesto" eh="ab6b8ce1" />
         <e k="fillType_oil" v="[EN] Motor Oil" eh="511aaabd" />
-        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="f9c4d7d9" />
+        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="646d470f" />
         <e k="unit_pcs" v="pzs" eh="3ecf2642" />
 
         <!-- v2.9.0: Restoration Diagnostic Symptoms - Engine -->
@@ -2135,7 +2142,7 @@
         <e k="usedplus_setting_partialRepair_desc" v="Habilitar reparaciones parciales en tienda de vehículos (deshabilitar oculta botón de reparación)" eh="84fe180c" />
         <e k="usedplus_setting_partialRepaint" v="Repintado Parcial" eh="3fca656d" />
         <e k="usedplus_setting_partialRepaint_desc" v="Habilitar repintados parciales en tienda de vehículos (deshabilitar oculta botón de repintado)" eh="4ca7214a" />
-        <!-- v2.0.0: NEW - Farmland Difficulty & Bank Interest (GMNGjoy & Evan Kirsch patterns) -->
+        <!-- v2.0.0: NEW - Farmland Difficulty, Bank Interest (GMNGjoy, Evan Kirsch patterns) -->
         <e k="usedplus_setting_farmlandDifficulty" v="Escala de Dificultad de Tierras" eh="9118adb6" />
         <e k="usedplus_setting_farmlandDifficulty_desc" v="Escalar precios de tierras con dificultad del juego (como vehículos). Fácil: 60%, Normal: 100%, Difícil: 140%" eh="50a435ef" />
         <e k="usedplus_setting_bankInterest" v="Interés Bancario" eh="1267ace4" />
@@ -2165,7 +2172,7 @@
         <e k="usedplus_settings_marketplace" v="Mercado" eh="675e31b9" />
         <e k="usedplus_settings_condition" v="Condición y Calidad" eh="0ada4be1" />
 
-        <!-- Economic Settings: Money & Rates -->
+        <!-- Economic Settings: Money, Rates -->
         <!-- v2.0.0: Updated description to clarify scope -->
         <e k="usedplus_setting_interestRate" v="Tasa de Interés de Financiamiento" eh="ec5e55f4" />
         <e k="usedplus_setting_interestRate_desc" v="Tasa base para todo financiamiento (vehículos, tierras, préstamos). La puntuación de crédito modifica esto." eh="86443f38" />
@@ -2179,7 +2186,7 @@
         <e k="usedplus_setting_leaseMarkup" v="% de Recargo de Arrendamiento" eh="aac70e2a" />
         <e k="usedplus_setting_leaseMarkup_desc" v="Recargo de tasa de arrendamiento (÷10 para puntos porcentuales, ej: 15 = +1.5pp)" eh="e27af0b2" />
 
-        <!-- Economic Settings: Forgiveness & Risk -->
+        <!-- Economic Settings: Forgiveness, Risk -->
         <e k="usedplus_setting_missedPayments" v="Pagos Perdidos para Incumplimiento" eh="be335e9f" />
         <e k="usedplus_setting_missedPayments_desc" v="Número de pagos perdidos antes de recuperación del vehículo" eh="71688a5f" />
         <e k="usedplus_setting_downPayment" v="% de Enganche Mínimo" eh="b70d8e33" />
@@ -2201,7 +2208,7 @@
         <e k="usedplus_setting_commission" v="% de Comisión del Agente" eh="443d1555" />
         <e k="usedplus_setting_commission_desc" v="Porcentaje tomado por agentes de venta" eh="8f42cc9d" />
 
-        <!-- Economic Settings: Condition & Quality -->
+        <!-- Economic Settings: Condition, Quality -->
         <e k="usedplus_setting_conditionMin" v="Condición Usada Mín" eh="c2725712" />
         <e k="usedplus_setting_conditionMin_desc" v="Condición mínima para vehículos usados" eh="67ff9bc5" />
         <e k="usedplus_setting_conditionMax" v="Condición Usada Máx" eh="ff759d4c" />

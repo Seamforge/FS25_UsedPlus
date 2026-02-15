@@ -679,6 +679,64 @@ function VehicleSellingPointExtension.hookAllDialogs()
                     local farmId = g_currentMission:getFarmId()
                     UsedPlus.logInfo("Successfully found vehicle for SellItemDialog intercept: " .. tostring(vehicle.configFileName))
 
+                    -- Issue #5: Sell guards (must match onClickSellOverride in InGameMenuVehiclesFrameExtension)
+                    -- Guard: ownership
+                    if vehicle.ownerFarmId ~= farmId then
+                        UsedPlus.logDebug("SellItemDialog guard: not owned by player farm, falling back to vanilla")
+                        return VehicleSellingPointExtension.originalShowDialog(guiSelf, name, ...)
+                    end
+
+                    -- Guard: vanilla lease (not owned)
+                    if vehicle.propertyState ~= VehiclePropertyState.OWNED then
+                        g_currentMission:addIngameNotification(
+                            FSBaseMission.INGAME_NOTIFICATION_INFO,
+                            "Leased vehicles cannot be sold. Terminate the lease first."
+                        )
+                        return
+                    end
+
+                    -- Guard: UsedPlus lease
+                    if g_financeManager and g_financeManager:hasActiveLease(vehicle) then
+                        g_currentMission:addIngameNotification(
+                            FSBaseMission.INGAME_NOTIFICATION_ERROR,
+                            g_i18n:getText("usedplus_error_cannotSellLeasedVehicle")
+                        )
+                        return
+                    end
+
+                    -- Guard: financed vehicle
+                    if TradeInCalculations and TradeInCalculations.isVehicleFinanced and
+                       TradeInCalculations.isVehicleFinanced(vehicle, farmId) then
+                        g_currentMission:addIngameNotification(
+                            FSBaseMission.INGAME_NOTIFICATION_INFO,
+                            "Financed vehicles cannot be sold until loan is paid off."
+                        )
+                        return
+                    end
+
+                    -- Guard: pledged as collateral
+                    if CollateralUtils and CollateralUtils.isVehiclePledged then
+                        local isPledged, deal = CollateralUtils.isVehiclePledged(vehicle)
+                        if isPledged then
+                            local loanBalance = deal and deal.currentBalance or 0
+                            g_currentMission:addIngameNotification(
+                                FSBaseMission.INGAME_NOTIFICATION_ERROR,
+                                string.format("This vehicle is pledged as collateral for a %s loan.\nPay off the loan first to sell.",
+                                    g_i18n:formatMoney(loanBalance, 0, true, true))
+                            )
+                            return
+                        end
+                    end
+
+                    -- Guard: already listed for sale
+                    if g_vehicleSaleManager:isVehicleListed(vehicle) then
+                        g_currentMission:addIngameNotification(
+                            FSBaseMission.INGAME_NOTIFICATION_INFO,
+                            "This vehicle is already listed for sale."
+                        )
+                        return
+                    end
+
                     -- Show our dialog instead
                     local callback = function(agentTier, priceTier)
                         if agentTier ~= nil then

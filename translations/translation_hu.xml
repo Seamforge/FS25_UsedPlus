@@ -960,6 +960,7 @@
         <e k="usedplus_button_buyout" v="Kivásárlás" eh="6e052e38" />
         <e k="usedplus_button_renew" v="Megújítás" eh="0b9feba3" />
         <e k="usedplus_lr_helpText" v="Válassz egy opciót. Visszaadáskor kapod a letéted. Kivásárláskor a tőkéd beszámít. Megújításkor a tőke a jövőbeli kivásárláshoz marad." eh="91673bf9" />
+        <e k="usedplus_lr_deferNotice" v="Ez a választás a következő hónapban újra megjelenik. Nincs további díj a döntéséig." eh="00000000" />
         <e k="usedplus_conf_title" v="Megerősítés" eh="f4d1ea47" />
         <e k="usedplus_cr_title" v="HITELJELENTÉS" eh="3725e302" />
         <e k="usedplus_cr_reportDate" v="Jelentés dátuma:" eh="93ad31a7" />
@@ -1296,7 +1297,12 @@
         <e k="usedplus_info_oil_level" v="Olajszint" eh="a6d699fb" />
         <e k="usedplus_info_hydraulic_level" v="Hidraulika folyadék" eh="f9c4d7d9" />
         <e k="usedplus_info_tire_condition" v="Gumik" eh="3fe2c06a" />
-        <e k="usedplus_tires_title" v="Gumiszerviz" eh="b0234f4e" />
+
+        <!-- v2.12.0: Finance/Lease Info Box Display -->
+        <e k="usedplus_info_dealType" v="Állapot" eh="00000000" />
+        <e k="usedplus_info_leased" v="BÉRELT" eh="00000000" />
+        <e k="usedplus_info_financed" v="FINANSZÍROZOTT" eh="00000000" />
+        <e k="usedplus_info_monthsRemaining" v="Hátralévő hónapok" eh="00000000" />        <e k="usedplus_tires_title" v="Gumiszerviz" eh="b0234f4e" />
         <e k="usedplus_tires_sectionStatus" v="JÁRMŰ ÉS GUMI ÁLLAPOT" eh="c0e3631e" />
         <e k="usedplus_tires_sectionSelect" v="GUMI MINŐSÉG KIVÁLASZTÁSA" eh="42abee54" />
         <e k="usedplus_tires_sectionPayment" v="FIZETÉSI ÖSSZEFOGLALÓ" eh="0dd98605" />
@@ -1603,6 +1609,7 @@
         <e k="usedplus_ft_hintsRemaining" v="Tippek: %d" eh="c8f080c2" />
         <e k="usedplus_ft_quickScanCap" v="Minőség 60%% -ra korlátozva (Gyors vizsgálat)" eh="5b519744" />
         <e k="usedplus_ft_noFaults" v="Nincs hiba - rendszer megfelelő!" eh="6bfa5546" />
+        <e k="usedplus_ft_noOil" v="[EN] Service Truck has no oil! Fill the oil tank before diagnosing." eh="3cd9a926" />
         <e k="usedplus_ft_action" v="Hibakereső: %s" eh="c4066687" />
         <e k="usedplus_ft_corrodedDesc" v="Rozsda / oxidáció okozta kár" eh="8a01ae60" />
         <e k="usedplus_ft_crackedDesc" v="Feszültség / fáradás okozta repedések" eh="81d5118b" />
@@ -1613,7 +1620,7 @@
         <e k="usedplus_sparePartsPallet_function" v="Fogyóeszköz alkatrészek a szerviz teherautó helyreállításhoz. Helyezd a teherautó közelébe a helyreállítási munka során." eh="c90aa3eb" />
         <e k="fillType_spareParts" v="Alkatrészek" eh="ab6b8ce1" />
         <e k="fillType_oil" v="[EN] Motor Oil" eh="511aaabd" />
-        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="f9c4d7d9" />
+        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="646d470f" />
         <e k="unit_pcs" v="db" eh="3ecf2642" />
         <e k="usedplus_resto_symptom_engine_knocking_load" v="Súlyos kopogás terhelés alatt" eh="fb8c3067" />
         <e k="usedplus_resto_symptom_engine_low_oil_pressure" v="Olajnyomás kritikusan alacsony" eh="a3efa42d" />

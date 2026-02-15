@@ -422,6 +422,16 @@ function FinanceManager:processMonthlyPaymentsForFarm(farmId, deals)
             -- Check if this is a lease that should show renewal dialog
             local isLease = (deal.dealType == 2) or (deal.itemType == "lease")
 
+            -- Issue #5: Skip payment if lease already completed (deferred by user)
+            -- When the player dismisses the lease renewal dialog with "Later",
+            -- the deal stays active so the dialog re-shows next month.
+            -- But we must NOT process another payment — they've already paid in full.
+            if isLease and deal.monthsPaid >= deal.termMonths then
+                UsedPlus.logDebug(string.format("Lease %s already at term (%d/%d) - re-showing dialog, no payment",
+                    deal.id, deal.monthsPaid, deal.termMonths))
+                self:showLeaseRenewalDialog(deal)
+            else
+
             -- Process monthly payment
             local completed = deal:processMonthlyPayment()
 
@@ -463,7 +473,8 @@ function FinanceManager:processMonthlyPaymentsForFarm(farmId, deals)
                     self.deals[deal.id] = nil
                 end
             end
-        end
+        end  -- Close deferred lease guard (if monthsPaid >= termMonths)
+        end  -- Close status chain (defaulted/expired/terminated/active)
         end  -- Close shouldProcess check
     end
 end
@@ -773,7 +784,23 @@ function FinanceManager:hasActiveLease(vehicle)
 
             -- Fallback: match by config filename and farm
             if deal.vehicleConfig == configFileName and deal.farmId == vehicle.ownerFarmId then
+                -- Cache objectId for future fast lookups
+                if deal.objectId == nil then
+                    deal.objectId = vehicleId
+                end
                 return true
+            end
+
+            -- Fallback 2: normalized path comparison (handle $data vs data prefix differences)
+            if configFileName ~= nil and deal.vehicleConfig ~= nil and deal.farmId == vehicle.ownerFarmId then
+                local normalizedDeal = deal.vehicleConfig:lower():gsub("^%$", "")
+                local normalizedVehicle = configFileName:lower():gsub("^%$", "")
+                if normalizedDeal == normalizedVehicle then
+                    deal.objectId = vehicleId
+                    UsedPlus.logDebug(string.format("Lease match via normalized path: deal='%s' vehicle='%s'",
+                        deal.vehicleConfig, configFileName))
+                    return true
+                end
             end
         end
     end
@@ -846,7 +873,19 @@ function FinanceManager:getLeaseDealForVehicle(vehicle)
                 return deal
             end
             if deal.vehicleConfig == configFileName and deal.farmId == vehicle.ownerFarmId then
+                if deal.objectId == nil then
+                    deal.objectId = vehicleId
+                end
                 return deal
+            end
+            -- Normalized path fallback
+            if configFileName ~= nil and deal.vehicleConfig ~= nil and deal.farmId == vehicle.ownerFarmId then
+                local normalizedDeal = deal.vehicleConfig:lower():gsub("^%$", "")
+                local normalizedVehicle = configFileName:lower():gsub("^%$", "")
+                if normalizedDeal == normalizedVehicle then
+                    deal.objectId = vehicleId
+                    return deal
+                end
             end
         end
     end

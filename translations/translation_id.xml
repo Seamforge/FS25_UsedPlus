@@ -1217,6 +1217,7 @@
         <e k="usedplus_button_buyout" v="Tebus" eh="6e052e38" />
         <e k="usedplus_button_renew" v="Perpanjang" eh="0b9feba3" />
         <e k="usedplus_lr_helpText" v="You must pilih an option. Returning gives you your deposit back. Buyout uses your equity toward purchase. Renewing extends the lease with equity applied to future buyout." eh="91673bf9" />
+        <e k="usedplus_lr_deferNotice" v="Pilihan ini akan muncul lagi bulan depan. Tidak ada biaya tambahan sampai Anda memutuskan." eh="00000000" />
 
         <!-- Confirmation Dialog -->
         <e k="usedplus_conf_title" v="Konfirmasi" eh="f4d1ea47" />
@@ -1637,6 +1638,11 @@
         <e k="usedplus_info_hydraulic_level" v="Cairan Hidrolik" eh="f9c4d7d9" />
         <e k="usedplus_info_tire_condition" v="Ban" eh="3fe2c06a" />
 
+        <!-- v2.12.0: Finance/Lease Info Box Display -->
+        <e k="usedplus_info_dealType" v="Status" eh="00000000" />
+        <e k="usedplus_info_leased" v="DISEWA" eh="00000000" />
+        <e k="usedplus_info_financed" v="DIBIAYAI" eh="00000000" />
+        <e k="usedplus_info_monthsRemaining" v="Bulan Tersisa" eh="00000000" />
         <!-- v1.7.0: Tires Service Dialog -->
         <e k="usedplus_tires_title" v="Layanan Ban" eh="b0234f4e" />
         <e k="usedplus_tires_sectionStatus" v="STATUS KENDARAAN &amp;amp; BAN" eh="c0e3631e" />
@@ -1994,6 +2000,7 @@
         <e k="usedplus_ft_hintsRemaining" v="Petunjuk: %d" eh="c8f080c2" />
         <e k="usedplus_ft_quickScanCap" v="Kualitas dibatasi 60%% (Scan cepat)" eh="5b519744" />
         <e k="usedplus_ft_noFaults" v="Tidak ada kerusakan - sistem baik!" eh="6bfa5546" />
+        <e k="usedplus_ft_noOil" v="[EN] Service Truck has no oil! Fill the oil tank before diagnosing." eh="3cd9a926" />
         <e k="usedplus_ft_action" v="Pelacak kerusakan: %s" eh="c4066687" />
         <e k="usedplus_ft_corrodedDesc" v="Kerusakan karat / oksidasi" eh="8a01ae60" />
         <e k="usedplus_ft_crackedDesc" v="Retakan tekanan / kelelahan" eh="81d5118b" />
@@ -2004,7 +2011,7 @@
         <e k="usedplus_sparePartsPallet_function" v="Suku cadang habis pakai untuk restorasi Truk Servis. Tempatkan di dekat truk selama pekerjaan restorasi." eh="c90aa3eb" />
         <e k="fillType_spareParts" v="Suku Cadang" eh="ab6b8ce1" />
         <e k="fillType_oil" v="[EN] Motor Oil" eh="511aaabd" />
-        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="f9c4d7d9" />
+        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="646d470f" />
         <e k="unit_pcs" v="pcs" eh="3ecf2642" />
 
         <!-- v2.9.0: Restoration Diagnostic Symptoms - Engine -->
@@ -2135,7 +2142,7 @@
         <e k="usedplus_setting_partialRepair_desc" v="Aktifkan perbaikan parsial di toko kendaraan (menonaktifkan menyembunyikan tombol perbaikan)" eh="84fe180c" />
         <e k="usedplus_setting_partialRepaint" v="Cat Ulang Parsial" eh="3fca656d" />
         <e k="usedplus_setting_partialRepaint_desc" v="Aktifkan cat ulang parsial di toko kendaraan (menonaktifkan menyembunyikan tombol cat ulang)" eh="4ca7214a" />
-        <!-- v2.0.0: NEW - Farmland Difficulty & Bank Interest (GMNGjoy & Evan Kirsch patterns) -->
+        <!-- v2.0.0: NEW - Farmland Difficulty, Bank Interest (GMNGjoy, Evan Kirsch patterns) -->
         <e k="usedplus_setting_farmlandDifficulty" v="Skala Kesulitan Lahan Pertanian" eh="9118adb6" />
         <e k="usedplus_setting_farmlandDifficulty_desc" v="Skala harga tanah dengan kesulitan game (seperti kendaraan). Mudah: 60%, Normal: 100%, Sulit: 140%" eh="50a435ef" />
         <e k="usedplus_setting_bankInterest" v="Bunga Bank" eh="1267ace4" />
@@ -2165,7 +2172,7 @@
         <e k="usedplus_settings_marketplace" v="Pasar" eh="675e31b9" />
         <e k="usedplus_settings_condition" v="Kondisi &amp;amp; Kualitas" eh="0ada4be1" />
 
-        <!-- Economic Settings: Money & Rates -->
+        <!-- Economic Settings: Money, Rates -->
         <!-- v2.0.0: Updated description to clarify scope -->
         <e k="usedplus_setting_interestRate" v="Suku Bunga Pembiayaan" eh="ec5e55f4" />
         <e k="usedplus_setting_interestRate_desc" v="Tarif dasar untuk semua pembiayaan (kendaraan, tanah, pinjaman). Skor kredit memodifikasi ini." eh="86443f38" />
@@ -2179,7 +2186,7 @@
         <e k="usedplus_setting_leaseMarkup" v="Markup Sewa %" eh="aac70e2a" />
         <e k="usedplus_setting_leaseMarkup_desc" v="Markup tarif sewa (÷10 untuk poin persentase, mis: 15 = +1,5pp)" eh="e27af0b2" />
 
-        <!-- Economic Settings: Forgiveness & Risk -->
+        <!-- Economic Settings: Forgiveness, Risk -->
         <e k="usedplus_setting_missedPayments" v="Pembayaran Terlewat hingga Gagal Bayar" eh="be335e9f" />
         <e k="usedplus_setting_missedPayments_desc" v="Jumlah pembayaran terlewat sebelum penarikan kendaraan" eh="71688a5f" />
         <e k="usedplus_setting_downPayment" v="Uang Muka Min %" eh="b70d8e33" />
@@ -2201,7 +2208,7 @@
         <e k="usedplus_setting_commission" v="Komisi Agen %" eh="443d1555" />
         <e k="usedplus_setting_commission_desc" v="Persentase diambil oleh agen penjualan" eh="8f42cc9d" />
 
-        <!-- Economic Settings: Condition & Quality -->
+        <!-- Economic Settings: Condition, Quality -->
         <e k="usedplus_setting_conditionMin" v="Kondisi Bekas Min" eh="c2725712" />
         <e k="usedplus_setting_conditionMin_desc" v="Kondisi minimum untuk kendaraan bekas" eh="67ff9bc5" />
         <e k="usedplus_setting_conditionMax" v="Kondisi Bekas Maks" eh="ff759d4c" />
