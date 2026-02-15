@@ -437,7 +437,7 @@ function TradeInVehicleEvent.execute(farmId, vehicleId, tradeInValue)
     local vehicleName = "Unknown"
     if g_currentMission and g_currentMission.vehicleSystem then
         for _, v in pairs(g_currentMission.vehicleSystem.vehicles) do
-            if v.id == vehicleId then
+            if v ~= nil and v.id == vehicleId then
                 vehicle = v
                 -- Get vehicle name for logging/history
                 if v.getName then
@@ -461,25 +461,28 @@ function TradeInVehicleEvent.execute(farmId, vehicleId, tradeInValue)
         return false, "usedplus_mp_error_not_owner"
     end
 
-    -- Credit the farm
-    g_currentMission:addMoney(tradeInValue, farmId, MoneyType.VEHICLE_SELL, true, true)
-
-    -- Delete the vehicle
-    if vehicle.delete then
-        vehicle:delete()
-    elseif g_currentMission.vehicleSystem and g_currentMission.vehicleSystem.removeVehicle then
-        g_currentMission.vehicleSystem:removeVehicle(vehicle)
-    else
-        UsedPlus.logError(string.format("TradeInVehicleEvent - Could not delete vehicle %d", vehicleId))
-        return false, "usedplus_mp_error_delete_failed"
+    -- Credit the farm using changeBalance (bypasses FSBaseMission.addMoney which
+    -- crashes with 'attempt to index nil with id' when called from nested dialog callbacks)
+    local farm = g_farmManager:getFarmById(farmId)
+    if farm == nil then
+        UsedPlus.logError(string.format("TradeInVehicleEvent - Farm %d not found", farmId))
+        return false, "usedplus_mp_error_farm_not_found"
     end
+    farm:changeBalance(tradeInValue, MoneyType.OTHER)
+
+    -- v2.12.1: Do NOT delete vehicle here — just return success.
+    -- The vehicle deletion is handled separately by the caller to avoid
+    -- modifying the vehicle list during FSBaseMission:update() iteration.
+    -- Store vehicle reference for caller to handle deletion.
+    TradeInVehicleEvent._pendingDeleteVehicle = vehicle
+    TradeInVehicleEvent._pendingDeleteVehicleId = vehicleId
 
     -- Record credit event if CreditHistory exists
     if CreditHistory and CreditHistory.recordEvent then
         CreditHistory.recordEvent(farmId, "VEHICLE_TRADE_IN", vehicleName)
     end
 
-    UsedPlus.logInfo(string.format("TradeInVehicleEvent: Traded in '%s' for $%.2f (farm %d)",
+    UsedPlus.logInfo(string.format("TradeInVehicleEvent: Traded in '%s' for $%.2f (farm %d) - deletion deferred to caller",
         vehicleName, tradeInValue, farmId))
 
     return true, nil

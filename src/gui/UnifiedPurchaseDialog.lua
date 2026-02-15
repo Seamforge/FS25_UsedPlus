@@ -1424,7 +1424,45 @@ function UnifiedPurchaseDialog:onConfirmPurchase()
     YesNoDialog.show(
         function(yes)
             if yes then
+                -- v2.12.1: Execute purchase directly from YES callback.
+                -- Trade-in vehicle deletion is deferred to next frame via addUpdateable
+                -- (same proven pattern as VehicleSaleManager.lua:582-597).
+                -- TradeInVehicleEvent.execute() credits money and stores vehicle ref
+                -- in _pendingDeleteVehicle instead of deleting immediately.
+                TradeInVehicleEvent._pendingDeleteVehicle = nil
+                TradeInVehicleEvent._pendingDeleteVehicleId = nil
+
                 self:executeConfirmedPurchase()
+
+                -- Schedule trade-in vehicle deletion for next frame
+                local vehicleToDelete = TradeInVehicleEvent._pendingDeleteVehicle
+                local vehicleIdForLog = TradeInVehicleEvent._pendingDeleteVehicleId
+                TradeInVehicleEvent._pendingDeleteVehicle = nil
+                TradeInVehicleEvent._pendingDeleteVehicleId = nil
+
+                if vehicleToDelete then
+                    UsedPlus.logInfo(string.format("[TRADE-IN] Scheduling vehicle %s deletion for next frame", tostring(vehicleIdForLog)))
+                    g_currentMission:addUpdateable({
+                        _executed = false,
+                        update = function(deleter, dt)
+                            if deleter._executed then
+                                g_currentMission:removeUpdateable(deleter)
+                                return
+                            end
+                            deleter._executed = true
+                            g_currentMission:removeUpdateable(deleter)
+                            local delOk, delErr = pcall(function()
+                                if vehicleToDelete.delete then
+                                    vehicleToDelete:delete()
+                                    UsedPlus.logInfo(string.format("[TRADE-IN] Vehicle %s deleted successfully", tostring(vehicleIdForLog)))
+                                end
+                            end)
+                            if not delOk then
+                                UsedPlus.logError("[TRADE-IN] Vehicle deletion failed: " .. tostring(delErr))
+                            end
+                        end
+                    })
+                end
             else
                 -- User cancelled - clean up pending placeable state
                 UsedPlus.logInfo("Purchase cancelled by user - cleaning up pending state")
@@ -1538,6 +1576,7 @@ end
     Execute the confirmed purchase based on current mode
 ]]
 function UnifiedPurchaseDialog:executeConfirmedPurchase()
+    UsedPlus.logInfo(string.format("executeConfirmedPurchase: mode=%s", tostring(self.currentMode)))
     if self.currentMode == UnifiedPurchaseDialog.MODE_CASH then
         self:executeCashPurchase()
     elseif self.currentMode == UnifiedPurchaseDialog.MODE_FINANCE then
