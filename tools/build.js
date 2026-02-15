@@ -3,11 +3,16 @@
  * UsedPlus ModHub Build Script
  * Creates a clean .zip file ready for ModHub submission
  *
+ * Version format: major.minor.patch.build (e.g., 2.12.1.0)
+ *   - build number auto-increments on every build (no args needed)
+ *   - --patch/--minor/--major bump that component and reset build to 0
+ *
  * Usage:
- *   node build.js              Build with current version
- *   node build.js --patch      Bump patch version (1.2.3 → 1.2.4) then build
- *   node build.js --minor      Bump minor version (1.2.3 → 1.3.0) then build
- *   node build.js --major      Bump major version (1.2.3 → 2.0.0) then build
+ *   node build.js              Auto-increment build number (2.12.0.3 → 2.12.0.4)
+ *   node build.js --patch      Bump patch (2.12.0.3 → 2.12.1.0) then build
+ *   node build.js --minor      Bump minor (2.12.0.3 → 2.13.0.0) then build
+ *   node build.js --major      Bump major (2.12.0.3 → 3.0.0.0) then build
+ *   node build.js --deploy     (Default behavior - always copies to mods folder)
  */
 
 const fs = require('fs');
@@ -92,7 +97,7 @@ function getTimestamp() {
 function parseArgs() {
     const args = process.argv.slice(2);
     const options = {
-        bumpType: null // 'major', 'minor', or 'patch'
+        bumpType: null // 'major', 'minor', 'patch', or null (auto-increment build)
     };
 
     for (const arg of args) {
@@ -103,17 +108,22 @@ function parseArgs() {
             options.bumpType = 'minor';
         } else if (normalized === 'patch') {
             options.bumpType = 'patch';
+        } else if (normalized === 'deploy') {
+            // Always deploys — flag accepted for compatibility
         } else if (normalized === 'help' || normalized === 'h') {
             console.log(`
 Usage: node build.js [options]
 
+Version format: major.minor.patch.build (e.g., 2.12.1.0)
+
 Options:
-  --patch    Bump patch version (1.2.3 → 1.2.4) then build
-  --minor    Bump minor version (1.2.3 → 1.3.0) then build
-  --major    Bump major version (1.2.3 → 2.0.0) then build
+  --patch    Bump patch version (2.12.0.3 → 2.12.1.0) then build
+  --minor    Bump minor version (2.12.0.3 → 2.13.0.0) then build
+  --major    Bump major version (2.12.0.3 → 3.0.0.0) then build
+  --deploy   Copy to mods folder (default behavior, always on)
   --help     Show this help message
 
-If no version option is provided, builds with the current version.
+If no version option is provided, auto-increments the build number.
 `);
             process.exit(0);
         }
@@ -134,30 +144,37 @@ function bumpVersion(bumpType) {
     const currentVersion = match[1];
     const parts = currentVersion.split('.').map(Number);
 
-    // Ensure we have at least 3 parts (major.minor.patch)
-    while (parts.length < 3) {
+    // Ensure we have exactly 4 parts (major.minor.patch.build)
+    while (parts.length < 4) {
         parts.push(0);
     }
 
-    let [major, minor, patch] = parts;
-    const oldVersion = `${major}.${minor}.${patch}`;
+    let [major, minor, patch, build] = parts;
+    const oldVersion = `${major}.${minor}.${patch}.${build}`;
 
     switch (bumpType) {
         case 'major':
             major++;
             minor = 0;
             patch = 0;
+            build = 0;
             break;
         case 'minor':
             minor++;
             patch = 0;
+            build = 0;
             break;
         case 'patch':
             patch++;
+            build = 0;
+            break;
+        default:
+            // No explicit bump — auto-increment build number
+            build++;
             break;
     }
 
-    const newVersion = `${major}.${minor}.${patch}`;
+    const newVersion = `${major}.${minor}.${patch}.${build}`;
 
     // Update modDesc.xml
     content = content.replace(
@@ -166,8 +183,8 @@ function bumpVersion(bumpType) {
     );
     fs.writeFileSync(modDescPath, content, 'utf8');
 
-    // Update README.md version badge
-    updateReadmeVersion(newVersion);
+    // Update README.md version badge (show major.minor.patch for display)
+    updateReadmeVersion(`${major}.${minor}.${patch}`);
 
     return { oldVersion, newVersion };
 }
@@ -236,11 +253,12 @@ async function main() {
     console.log('  UsedPlus ModHub Build Script');
     console.log('============================================');
 
-    // Handle version bumping if requested
-    let versionBumped = null;
+    // Always bump version — auto-increment build number if no explicit bump type
+    const versionBumped = bumpVersion(options.bumpType);
     if (options.bumpType) {
-        versionBumped = bumpVersion(options.bumpType);
         console.log(`  Bumping:   ${options.bumpType} (${versionBumped.oldVersion} → ${versionBumped.newVersion})`);
+    } else {
+        console.log(`  Build:     ${versionBumped.oldVersion} → ${versionBumped.newVersion}`);
     }
 
     const version = getVersion();
@@ -301,8 +319,8 @@ async function main() {
     console.log(`  TestRunner_public.exe "${outputPath}"`);
     console.log('');
 
-    // Remind about CHANGELOG if version was bumped
-    if (versionBumped) {
+    // Remind about CHANGELOG if an explicit version bump was requested
+    if (options.bumpType) {
         console.log('--------------------------------------------');
         console.log('  REMINDER: Update CHANGELOG.md');
         console.log('--------------------------------------------');
