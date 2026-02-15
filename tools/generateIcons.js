@@ -977,6 +977,19 @@ const ICONS = {
                     <line x1="26" y1="32" x2="38" y2="32"/>
                 </g>
             </svg>`
+    },
+
+    // Range marker - yellow downward arrow/triangle (transparent background)
+    // Used in SaleOfferDialog to indicate offer position on range bar
+    range_marker: {
+        name: 'range_marker',
+        bgColor: 'transparent',
+        bgColorDark: 'transparent',
+        svg: (size) => `
+            <svg width="${size}" height="${size}" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="32,58 6,10 58,10" fill="#FFD700"/>
+                <polygon points="32,48 14,16 50,16" fill="#FFA000"/>
+            </svg>`
     }
 };
 

@@ -19,7 +19,9 @@
 ]]
 
 SaleOfferDialog = {}
-local SaleOfferDialog_mt = Class(SaleOfferDialog, MessageDialog)
+-- Use ScreenElement, NOT MessageDialog (MessageDialog lacks registerControls,
+-- and setPosition() breaks element visibility — see UnifiedPurchaseDialog.lua:1076)
+local SaleOfferDialog_mt = Class(SaleOfferDialog, ScreenElement)
 
 -- Deal quality thresholds (position in range 0-1)
 SaleOfferDialog.DEAL_RATINGS = {
@@ -30,10 +32,10 @@ SaleOfferDialog.DEAL_RATINGS = {
 }
 
 --[[
-    Constructor
+    Constructor - extends ScreenElement (pattern from NegotiationDialog)
 ]]
 function SaleOfferDialog.new(target, custom_mt, i18n)
-    local self = MessageDialog.new(target, custom_mt or SaleOfferDialog_mt)
+    local self = ScreenElement.new(target, custom_mt or SaleOfferDialog_mt)
 
     self.i18n = i18n or g_i18n
 
@@ -87,6 +89,24 @@ function SaleOfferDialog:setupSectionIcons()
     if timerIcon ~= nil then
         timerIcon:setImageFilename(self.iconDir .. "timer.png")
     end
+
+    -- Range arrow markers (11 positions: 0% to 100% in 10% steps)
+    -- Load arrow PNG on all, then show/hide in updateDisplay
+    local arrowPath = self.iconDir .. "range_marker.png"
+    self.arrowMarkers = {}
+    local arrowIds = {"arrow0", "arrow5", "arrow10", "arrow15", "arrow20", "arrow25", "arrow30", "arrow35", "arrow40", "arrow45", "arrow50", "arrow55", "arrow60", "arrow65", "arrow70", "arrow75", "arrow80", "arrow85", "arrow90", "arrow95", "arrow100"}
+    for _, id in pairs(arrowIds) do
+        local arrow = self.dialogElement:getDescendantById(id)
+        if arrow ~= nil then
+            arrow:setImageFilename(arrowPath)
+            arrow:setVisible(false)  -- Start hidden, updateDisplay shows the right one
+            table.insert(self.arrowMarkers, { element = arrow, id = id })
+            UsedPlus.logDebug(string.format("SaleOfferDialog: Arrow '%s' loaded + hidden", id))
+        else
+            UsedPlus.logWarn(string.format("SaleOfferDialog: Arrow '%s' not found!", id))
+        end
+    end
+    UsedPlus.logDebug(string.format("SaleOfferDialog: %d arrow markers loaded", #self.arrowMarkers))
 end
 
 --[[
@@ -163,17 +183,34 @@ function SaleOfferDialog:updateDisplay()
     local maxPrice = self.listing.expectedMaxPrice or offer
 
     UIHelper.Element.setText(self.rangeMinText, UIHelper.Text.formatMoney(minPrice))
-    UIHelper.Element.setText(self.rangeOfferText, UIHelper.Text.formatMoney(offer))
     UIHelper.Element.setText(self.rangeMaxText, UIHelper.Text.formatMoney(maxPrice))
 
-    -- Position the range marker (if element exists)
-    -- Bar is 450px wide, position is 0-1
-    -- Marker should move from -225px (left) to +225px (right)
-    if self.rangeMarker then
-        local markerX = -225 + (position * 450)
-        -- Note: We can't easily reposition elements in FS25, so we'll leave this for now
-        -- The text labels provide the information
+    -- Show the arrow marker closest to the offer position
+    -- Markers at 0%, 5%, 10%, ..., 100% — snap to nearest (±2.5% accuracy)
+    local markerPositions = {0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100}
+    local pctOfRange = math.floor(position * 100)
+    local closestIdx = 1
+    local closestDist = 999
+    for i, pct in ipairs(markerPositions) do
+        local dist = math.abs(pctOfRange - pct)
+        if dist < closestDist then
+            closestDist = dist
+            closestIdx = i
+        end
     end
+
+    -- Show closest arrow, hide others
+    if self.arrowMarkers then
+        for i, marker in ipairs(self.arrowMarkers) do
+            if marker.element then
+                marker.element:setVisible(i == closestIdx)
+            end
+        end
+        UsedPlus.logDebug(string.format("SaleOfferDialog: Showing arrow #%d for %d%%", closestIdx, pctOfRange))
+    end
+
+    -- Offer price display
+    UIHelper.Element.setText(self.rangeOfferText, UIHelper.Text.formatMoney(offer))
 
     -- ================================================================
     -- SECTION 4: Your Options (simplified - just show offer amount)

@@ -76,7 +76,9 @@ function VehicleSaleManager:loadMapFinished()
     if self.isServer then
         -- Subscribe to hourly game time for TTL/TTS countdown
         g_messageCenter:subscribe(MessageType.HOUR_CHANGED, self.onHourChanged, self)
-        UsedPlus.logDebug("VehicleSaleManager subscribed to HOUR_CHANGED")
+        -- v2.12.2: Subscribe to sleep state changes to show deferred sale offers on wake (Issue #7)
+        g_messageCenter:subscribe(MessageType.SLEEPING, self.onSleepingStateChanged, self)
+        UsedPlus.logDebug("VehicleSaleManager subscribed to HOUR_CHANGED, SLEEPING")
     end
 
     -- v1.9.7: Check for any pending offers that weren't shown before save
@@ -156,6 +158,18 @@ function VehicleSaleManager:onHourChanged()
                 self:processListingsForFarm(farmId, farm)
             end
         end
+    end
+end
+
+--[[
+    v2.12.2: Handle sleep state changes (Issue #7)
+    When player wakes up, show any sale offers that were deferred during sleep
+]]
+function VehicleSaleManager:onSleepingStateChanged(isSleeping)
+    if not isSleeping then
+        -- Player woke up - show any pending offers that were deferred during sleep
+        UsedPlus.logDebug("VehicleSaleManager: Player woke up, checking for deferred sale offers")
+        self:showNextPendingOffer()
     end
 end
 
@@ -250,8 +264,13 @@ function VehicleSaleManager:onOfferReceived(farmId, listing)
 
     -- Step 3: Use queue-based presentation - showNextPendingOffer checks offerShownToUser flag
     -- This ensures if another dialog is open, this offer waits its turn
+    -- v2.12.2: Also skip dialog during sleep (Issue #7) - offers stay queued
     if shouldShowDialog then
-        self:showNextPendingOffer(farmId)
+        if g_sleepManager ~= nil and g_sleepManager.isSleeping then
+            UsedPlus.logDebug("onOfferReceived: Deferring dialog - player is sleeping")
+        else
+            self:showNextPendingOffer(farmId)
+        end
     end
 end
 
@@ -280,6 +299,13 @@ function VehicleSaleManager:showNextPendingOffer(farmId)
     -- Check if game is ready
     if g_currentMission == nil or g_currentMission.isLoading then
         UsedPlus.logTrace("showNextPendingOffer: Skipping - mission not ready")
+        return false
+    end
+
+    -- v2.12.2: Skip during sleep to prevent modal dialog freeze (Issue #7)
+    -- Offers stay queued (offerShownToUser = false) and show when player wakes up
+    if g_sleepManager ~= nil and g_sleepManager.isSleeping then
+        UsedPlus.logTrace("showNextPendingOffer: Skipping - player is sleeping")
         return false
     end
 
@@ -329,7 +355,15 @@ function VehicleSaleManager:showNextPendingOffer(farmId)
                 UsedPlus.logDebug(string.format("SaleOfferDialog callback: accepted=%s, listingId=%s",
                     tostring(accepted), tostring(listingId)))
                 if accepted then
-                    SaleListingActionEvent.sendToServer(listingId, SaleListingActionEvent.ACTION_ACCEPT)
+                    -- v2.12.2: Defer accept action to next frame to let dialog GUI events
+                    -- fully drain before triggering vehicle deletion chain (Issue #7)
+                    -- Prevents FSBaseMission.lua:2472 "attempt to index nil with 'id'" crash
+                    g_currentMission:addUpdateable({
+                        update = function(self, dt)
+                            SaleListingActionEvent.sendToServer(listingId, SaleListingActionEvent.ACTION_ACCEPT)
+                            g_currentMission:removeUpdateable(self)
+                        end
+                    })
                 else
                     SaleListingActionEvent.sendToServer(listingId, SaleListingActionEvent.ACTION_DECLINE)
                 end
@@ -359,6 +393,17 @@ end
 ]]
 function VehicleSaleManager:onListingExpired(farmId, listing, listingIndex)
     UsedPlus.logDebug(string.format("Listing expired for %s", listing.vehicleName))
+
+    -- v2.13.2: During sleep, only show notification to prevent freeze (Issue #7)
+    if g_sleepManager ~= nil and g_sleepManager.isSleeping then
+        UsedPlus.logDebug(string.format("onListingExpired: Deferring dialog - player is sleeping (%s)", listing.vehicleName))
+        g_currentMission:addIngameNotification(
+            FSBaseMission.INGAME_NOTIFICATION_INFO,
+            string.format("No buyer found for %s. Agent fee ($%d) was non-refundable.",
+                listing.vehicleName, listing.agentFee)
+        )
+        return
+    end
 
     -- Show popup dialog instead of notification
     if SaleExpiredDialog then
@@ -1098,6 +1143,7 @@ function VehicleSaleManager:delete()
     -- Unsubscribe from events
     if self.isServer then
         g_messageCenter:unsubscribe(MessageType.HOUR_CHANGED, self)
+        g_messageCenter:unsubscribe(MessageType.SLEEPING, self)
     end
 
     -- Clear data

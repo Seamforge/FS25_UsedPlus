@@ -56,25 +56,49 @@
             <!-- ================================================================ -->
             <!-- SECTION 3: Expected Range (visual indicator) -->
             <!-- ================================================================ -->
-            <GuiElement profile="soSectionBg" position="0px -275px" size="680px 95px">
+            <GuiElement profile="soSectionBg" position="0px -275px" size="680px 105px">
                 <Text profile="soSectionLabel" position="0px -8px" text="$l10n_usedplus_so_expectedRange"/>
 
-                <!-- Range bar background -->
-                <Bitmap profile="soRangeBarBg" position="0px -38px"/>
-                <!-- Range bar fill (will be sized dynamically in Lua) -->
-                <Bitmap profile="soRangeBarFill" id="rangeBarFill" position="0px -38px"/>
-                <!-- Offer position marker -->
-                <Bitmap profile="soRangeMarker" id="rangeMarker" position="0px -38px"/>
+                <!-- 21 arrow markers at fixed positions (0% to 100% in 5% steps) -->
+                <!-- Pattern: baseReference + noSlice, image loaded via Lua setImageFilename -->
+                <!-- Only the closest to offer position is visible (setVisible) -->
+                <!-- Bar is 450px wide: 0%=-225px, each 5%=+22.5px, 100%=+225px -->
+                <Bitmap profile="soArrowMarker" id="arrow0"   position="-225px -18px"/>
+                <Bitmap profile="soArrowMarker" id="arrow5"   position="-203px -18px"/>
+                <Bitmap profile="soArrowMarker" id="arrow10"  position="-180px -18px"/>
+                <Bitmap profile="soArrowMarker" id="arrow15"  position="-158px -18px"/>
+                <Bitmap profile="soArrowMarker" id="arrow20"  position="-135px -18px"/>
+                <Bitmap profile="soArrowMarker" id="arrow25"  position="-113px -18px"/>
+                <Bitmap profile="soArrowMarker" id="arrow30"  position="-90px -18px"/>
+                <Bitmap profile="soArrowMarker" id="arrow35"  position="-68px -18px"/>
+                <Bitmap profile="soArrowMarker" id="arrow40"  position="-45px -18px"/>
+                <Bitmap profile="soArrowMarker" id="arrow45"  position="-23px -18px"/>
+                <Bitmap profile="soArrowMarker" id="arrow50"  position="0px -18px"/>
+                <Bitmap profile="soArrowMarker" id="arrow55"  position="23px -18px"/>
+                <Bitmap profile="soArrowMarker" id="arrow60"  position="45px -18px"/>
+                <Bitmap profile="soArrowMarker" id="arrow65"  position="68px -18px"/>
+                <Bitmap profile="soArrowMarker" id="arrow70"  position="90px -18px"/>
+                <Bitmap profile="soArrowMarker" id="arrow75"  position="113px -18px"/>
+                <Bitmap profile="soArrowMarker" id="arrow80"  position="135px -18px"/>
+                <Bitmap profile="soArrowMarker" id="arrow85"  position="158px -18px"/>
+                <Bitmap profile="soArrowMarker" id="arrow90"  position="180px -18px"/>
+                <Bitmap profile="soArrowMarker" id="arrow95"  position="203px -18px"/>
+                <Bitmap profile="soArrowMarker" id="arrow100" position="225px -18px"/>
 
-                <!-- Min / Offer / Max labels -->
-                <Text profile="soRangeValue" id="rangeMinText" position="-200px -60px"/>
-                <Text profile="soRangeValueHighlight" id="rangeOfferText" position="0px -60px"/>
-                <Text profile="soRangeValue" id="rangeMaxText" position="200px -60px"/>
+                <!-- Range bar background (no id — renders fine) -->
+                <Bitmap profile="soRangeBarBg" position="0px -38px"/>
+
+                <!-- Offer position as clean text -->
+                <Text profile="soRangeOfferHighlight" id="rangeOfferText" position="0px -56px"/>
+
+                <!-- Min / Max price labels -->
+                <Text profile="soRangeValue" id="rangeMinText" position="-200px -56px"/>
+                <Text profile="soRangeValue" id="rangeMaxText" position="200px -56px"/>
 
                 <!-- Labels below values -->
-                <Text profile="soRangeLabel" position="-200px -78px" text="$l10n_usedplus_so_rangeMin"/>
-                <Text profile="soRangeLabelHighlight" position="0px -78px" text="$l10n_usedplus_so_rangeOffer"/>
-                <Text profile="soRangeLabel" position="200px -78px" text="$l10n_usedplus_so_rangeMax"/>
+                <Text profile="soRangeLabel" position="-200px -72px" text="$l10n_usedplus_so_rangeMin"/>
+                <Text profile="soRangeLabelHighlight" position="0px -72px" text="$l10n_usedplus_so_rangeOffer"/>
+                <Text profile="soRangeLabel" position="200px -72px" text="$l10n_usedplus_so_rangeMax"/>
             </GuiElement>
 
             <!-- ================================================================ -->
@@ -98,8 +122,8 @@
             <!-- ================================================================ -->
             <GuiElement position="0px -480px">
                 <Bitmap profile="soTimerIcon" id="timerIcon" position="-125px -5px"/>
-                <Text profile="soExpirationLabel" position="0px 0px" text="$l10n_usedplus_so_expiresIn"/>
-                <Text profile="soExpirationValue" id="expirationText" position="100px 0px"/>
+                <Text profile="soExpirationLabel" position="20px -5px" text="$l10n_usedplus_so_expiresIn"/>
+                <Text profile="soExpirationValue" id="expirationText" position="110px -5px"/>
             </GuiElement>
 
         </GuiElement>
@@ -177,21 +201,30 @@
         </Profile>
 
         <!-- Range bar background -->
-        <Profile name="soRangeBarBg" extends="fs25_guiElement" with="anchorTopCenter">
+        <Profile name="soRangeBarBg" extends="baseReference" with="anchorTopCenter">
             <size value="450px 12px"/>
-            <bgColor value="0.15 0.15 0.2 1"/>
+            <imageColor value="0.15 0.15 0.2 1"/>
         </Profile>
 
         <!-- Range bar fill (green gradient) -->
-        <Profile name="soRangeBarFill" extends="fs25_guiElement" with="anchorTopCenter">
+        <Profile name="soRangeBarFill" extends="baseReference" with="anchorTopCenter">
             <size value="450px 12px"/>
-            <bgColor value="0.2 0.6 0.3 1"/>
+            <imageColor value="0.2 0.6 0.3 1"/>
         </Profile>
 
-        <!-- Range marker (offer position indicator) -->
-        <Profile name="soRangeMarker" extends="fs25_guiElement" with="anchorTopCenter">
-            <size value="4px 18px"/>
-            <bgColor value="1 1 0 1"/>
+        <!-- Arrow marker icon: same pattern as dialog section icons (CLAUDE.md) -->
+        <!-- baseReference + noSlice + NO imageColor = image loaded via setImageFilename in Lua -->
+        <Profile name="soArrowMarker" extends="baseReference" with="anchorTopCenter">
+            <size value="20px 20px"/>
+            <imageSliceId value="noSlice"/>
+        </Profile>
+
+        <!-- Offer position highlight text -->
+        <Profile name="soRangeOfferHighlight" extends="fs25_textDefault" with="anchorTopCenter">
+            <textSize value="14px"/>
+            <textBold value="true"/>
+            <textColor value="0.3 1 0.3 1"/>
+            <textAlignment value="center"/>
         </Profile>
 
         <!-- Range values (min/max) -->

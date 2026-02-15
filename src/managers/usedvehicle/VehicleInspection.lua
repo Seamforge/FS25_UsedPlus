@@ -190,6 +190,13 @@ function UsedVehicleManager:notifyInspectionComplete(listing, search, farmId)
         message
     )
 
+    -- v2.13.2: Skip modal dialog during sleep to prevent freeze (Issue #7)
+    -- Notification still shows above, player can view report from portfolio after waking
+    if g_sleepManager ~= nil and g_sleepManager.isSleeping then
+        UsedPlus.logDebug(string.format("notifyInspectionComplete: Deferring dialog - player is sleeping (%s)", vehicleName))
+        return
+    end
+
     -- Show popup dialog with option to view report immediately
     -- Store references for the callback
     self.pendingInspectionListing = listing

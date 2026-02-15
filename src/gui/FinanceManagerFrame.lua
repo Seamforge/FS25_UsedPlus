@@ -351,6 +351,14 @@ function FinanceManagerFrame:updateDisplay()
     self:updateSaleListings(farmId)
     self:updateStatsSection(farmId, farm)
 
+    -- v2.13.1: Version & source footer
+    if self.versionFooterText then
+        local version = UsedPlusAPI and UsedPlusAPI.MOD_VERSION or "2.13.1"
+        self.versionFooterText:setText(string.format(
+            "UsedPlus v%s  |  Development Preview  |  github.com/XelaNull/FS25_UsedPlus  |  100%% AI-Authored",
+            version))
+    end
+
     -- Check for ELS data loss (ELS loans exist but mod not installed)
     self:checkForELSDataLoss(farmId, farm)
 end

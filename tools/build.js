@@ -186,6 +186,9 @@ function bumpVersion(bumpType) {
     // Update README.md version badge (show major.minor.patch for display)
     updateReadmeVersion(`${major}.${minor}.${patch}`);
 
+    // Update UsedPlusAPI.MOD_VERSION so in-game display shows full build version
+    updateApiVersion(newVersion);
+
     return { oldVersion, newVersion };
 }
 
@@ -208,6 +211,28 @@ function updateReadmeVersion(newVersion) {
         console.log(`  README:    v${newVersion} (updated)`);
     } else {
         console.log('  Warning: Could not find version badge in README.md');
+    }
+}
+
+function updateApiVersion(newVersion) {
+    const apiPath = path.join(MOD_DIR, 'src', 'utils', 'UsedPlusAPI.lua');
+
+    if (!fs.existsSync(apiPath)) {
+        console.log('  Warning: UsedPlusAPI.lua not found, skipping version update');
+        return;
+    }
+
+    let content = fs.readFileSync(apiPath, 'utf8');
+
+    // Match: UsedPlusAPI.MOD_VERSION = "x.y.z" or "x.y.z.b"
+    const versionRegex = /^(UsedPlusAPI\.MOD_VERSION\s*=\s*")[\d.]+(")$/m;
+
+    if (versionRegex.test(content)) {
+        content = content.replace(versionRegex, `$1${newVersion}$2`);
+        fs.writeFileSync(apiPath, content, 'utf8');
+        console.log(`  API:       v${newVersion} (updated)`);
+    } else {
+        console.log('  Warning: Could not find MOD_VERSION in UsedPlusAPI.lua');
     }
 }
 

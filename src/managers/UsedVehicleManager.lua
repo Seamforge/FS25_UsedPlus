@@ -54,8 +54,10 @@ end
 function UsedVehicleManager:loadMapFinished()
     if self.isServer then
         g_messageCenter:subscribe(MessageType.HOUR_CHANGED, self.onHourChanged, self)
+        -- v2.13.2: Subscribe to sleep state changes (Issue #7)
+        g_messageCenter:subscribe(MessageType.SLEEPING, self.onSleepingStateChanged, self)
         self.lastProcessedDay = g_currentMission.environment.currentDay
-        UsedPlus.logDebug("UsedVehicleManager subscribed to HOUR_CHANGED (v2.7.2 modular)")
+        UsedPlus.logDebug("UsedVehicleManager subscribed to HOUR_CHANGED, SLEEPING (v2.13.2)")
     end
 end
 
@@ -102,6 +104,17 @@ function UsedVehicleManager:onHourChanged()
                 self:processSearchesForFarm(farm.farmId, farm)
             end
         end
+    end
+end
+
+--[[
+    v2.13.2: Handle sleep state changes (Issue #7)
+    When player wakes up, log for debugging. Inspection/search dialogs deferred during sleep
+    are handled via notifications - player can access from portfolio menu.
+]]
+function UsedVehicleManager:onSleepingStateChanged(isSleeping)
+    if not isSleeping then
+        UsedPlus.logDebug("UsedVehicleManager: Player woke up - deferred dialogs available via portfolio")
     end
 end
 
@@ -447,6 +460,7 @@ end
 function UsedVehicleManager:delete()
     if self.isServer then
         g_messageCenter:unsubscribe(MessageType.HOUR_CHANGED, self)
+        g_messageCenter:unsubscribe(MessageType.SLEEPING, self)
     end
     self.activeSearches = {}
     self.pendingUsedPurchases = {}

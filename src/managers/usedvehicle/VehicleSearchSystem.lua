@@ -145,6 +145,16 @@ function UsedVehicleManager:showSellerBackedOutDialog(vehicleName)
         vehicleName or "vehicle"
     )
 
+    -- v2.13.2: During sleep, only show notification to prevent freeze (Issue #7)
+    if g_sleepManager ~= nil and g_sleepManager.isSleeping then
+        UsedPlus.logDebug(string.format("showSellerBackedOutDialog: Using notification only - player is sleeping (%s)", vehicleName or "unknown"))
+        g_currentMission:addIngameNotification(
+            FSBaseMission.INGAME_NOTIFICATION_INFO,
+            message
+        )
+        return
+    end
+
     -- Use DialogLoader to show simple info dialog
     if DialogLoader and DialogLoader.showInfoDialog then
         DialogLoader.showInfoDialog(
@@ -188,8 +198,14 @@ function UsedVehicleManager:notifyVehicleFound(search, listing, farmId)
 
     -- v1.5.0: Show the preview dialog so player can act on it immediately
     -- This is the same dialog as before - lets them Inspect or Buy As-Is
+    -- v2.13.2: Skip dialog during sleep to prevent freeze (Issue #7)
+    -- Notification above still shows, player can view from portfolio after waking
     if listing then
-        self:showSearchResultDialog(listing, farmId)
+        if g_sleepManager ~= nil and g_sleepManager.isSleeping then
+            UsedPlus.logDebug(string.format("notifyVehicleFound: Deferring preview dialog - player is sleeping (%s)", search.storeItemName or "vehicle"))
+        else
+            self:showSearchResultDialog(listing, farmId)
+        end
     end
 end
 
@@ -212,6 +228,18 @@ function UsedVehicleManager:notifySearchComplete(search, farmId)
 
     UsedPlus.logDebug(string.format("Search %s complete with %d vehicles, renewCost=$%d, showing expiration dialog",
         search.id, foundCount, renewCost))
+
+    -- v2.13.2: Skip dialog during sleep to prevent freeze (Issue #7)
+    -- Falls through to notification fallback below
+    if g_sleepManager ~= nil and g_sleepManager.isSleeping then
+        UsedPlus.logDebug(string.format("notifySearchComplete: Deferring dialog - player is sleeping (%s)", search.storeItemName or "vehicle"))
+        g_currentMission:addIngameNotification(
+            foundCount > 0 and FSBaseMission.INGAME_NOTIFICATION_OK or FSBaseMission.INGAME_NOTIFICATION_INFO,
+            string.format(g_i18n:getText("usedplus_notify_searchComplete") or "Search complete: %d vehicle(s) found for %s",
+                foundCount, search.storeItemName or "vehicle")
+        )
+        return
+    end
 
     -- Show the SearchExpiredDialog with renewal option
     local dialogShown = false

@@ -288,6 +288,15 @@ Mission00.onStartMission = Utils.appendedFunction(
         else
             UsedPlus.logError("Failed to create FinanceManagerFrame")
         end
+
+        -- v2.13.1: Show startup notification with version and official source (Issue #7)
+        -- Ensures every player knows the real version and where to get updates,
+        -- regardless of which site they downloaded from
+        local version = UsedPlusAPI and UsedPlusAPI.MOD_VERSION or "2.13.1"
+        g_currentMission:addIngameNotification(
+            FSBaseMission.INGAME_NOTIFICATION_OK,
+            string.format("UsedPlus v%s — Development Preview\nLatest version & support: github.com/XelaNull/FS25_UsedPlus", version)
+        )
     end
 )
 

@@ -158,7 +158,10 @@ function FinanceManager:loadMapFinished()
         -- Pattern from: EnhancedLoanSystem period-based calculations
         g_messageCenter:subscribe(MessageType.PERIOD_CHANGED, self.onPeriodChanged, self)
 
-        UsedPlus.logDebug("FinanceManager subscribed to PERIOD_CHANGED")
+        -- v2.13.2: Subscribe to sleep state changes to show deferred lease dialogs on wake (Issue #7)
+        g_messageCenter:subscribe(MessageType.SLEEPING, self.onSleepingStateChanged, self)
+
+        UsedPlus.logDebug("FinanceManager subscribed to PERIOD_CHANGED, SLEEPING")
     end
 end
 
@@ -391,6 +394,10 @@ function FinanceManager:processMonthlyPaymentsForFarm(farmId, deals)
     local financeEnabled = not UsedPlusSettings or UsedPlusSettings:get("enableFinanceSystem") ~= false
     local leaseEnabled = not UsedPlusSettings or UsedPlusSettings:get("enableLeaseSystem") ~= false
 
+    -- v2.12.2: Track payment counts for summary notification (moved from FarmExtension, Issue #7)
+    local totalPayments = 0
+    local missedPayments = 0
+
     -- Iterate backwards for safe removal
     for i = #deals, 1, -1 do
         local deal = deals[i]
@@ -435,6 +442,13 @@ function FinanceManager:processMonthlyPaymentsForFarm(farmId, deals)
             -- Process monthly payment
             local completed = deal:processMonthlyPayment()
 
+            -- v2.12.2: Track payment result for summary notification
+            if deal.status == "defaulted" or (deal.missedPayments and deal.missedPayments > 0 and not completed) then
+                missedPayments = missedPayments + 1
+            else
+                totalPayments = totalPayments + 1
+            end
+
             -- Check if deal became defaulted during payment processing (repossession/seizure)
             if deal.status == "defaulted" then
                 UsedPlus.logDebug(string.format("Deal %s defaulted during payment: %s", deal.id, deal.itemName))
@@ -477,13 +491,94 @@ function FinanceManager:processMonthlyPaymentsForFarm(farmId, deals)
         end  -- Close status chain (defaulted/expired/terminated/active)
         end  -- Close shouldProcess check
     end
+
+    -- v2.12.2: Send payment summary notification (moved from FarmExtension, Issue #7)
+    if totalPayments > 0 or missedPayments > 0 then
+        UsedPlus.logDebug(string.format("Farm %d: %d payments processed, %d missed",
+            farmId, totalPayments, missedPayments))
+        self:sendPaymentSummaryNotification(farm, totalPayments, missedPayments, deals)
+    end
+
+    -- v2.12.2: Check credit tier change after payments (moved from FarmExtension, Issue #7)
+    if totalPayments > 0 or missedPayments > 0 then
+        self:checkCreditTierChange(farmId)
+    end
+end
+
+--[[
+    v2.12.2: Send consolidated payment summary notification (moved from FarmExtension, Issue #7)
+    Shows total payments made and any missed payments
+]]
+function FinanceManager:sendPaymentSummaryNotification(farm, successCount, missedCount, deals)
+    -- Calculate total amount paid
+    local totalPaid = 0
+    for _, deal in ipairs(deals) do
+        if deal.status == "active" then
+            local payment = deal.monthlyPayment or 0
+            if farm.money >= payment or missedCount == 0 then
+                totalPaid = totalPaid + payment
+            end
+        end
+    end
+
+    local message
+    if missedCount == 0 then
+        message = string.format("Monthly Finance: %d payment%s processed (%s)",
+            successCount,
+            successCount > 1 and "s" or "",
+            g_i18n:formatMoney(totalPaid, 0, true, true))
+        g_currentMission:addIngameNotification(
+            FSBaseMission.INGAME_NOTIFICATION_OK,
+            message
+        )
+    else
+        message = string.format("Monthly Finance: %d paid, %d MISSED! Check Finance Manager.",
+            successCount, missedCount)
+        g_currentMission:addIngameNotification(
+            FSBaseMission.INGAME_NOTIFICATION_CRITICAL,
+            message
+        )
+    end
+end
+
+--[[
+    v2.12.2: Check if credit score tier changed and notify player (moved from FarmExtension, Issue #7)
+    Called after monthly payments are processed
+]]
+function FinanceManager:checkCreditTierChange(farmId)
+    if not CreditScore or not CreditHistory then return end
+
+    local previousScore = self.lastCreditScores and self.lastCreditScores[farmId]
+    local currentScore = CreditScore.calculate(farmId)
+
+    if not self.lastCreditScores then
+        self.lastCreditScores = {}
+    end
+    self.lastCreditScores[farmId] = currentScore
+
+    if previousScore and previousScore ~= currentScore then
+        CreditHistory.checkTierChange(farmId, previousScore, currentScore)
+    end
 end
 
 --[[
     Show lease renewal dialog when lease term completes
+    v2.13.2: Added sleep guard - defer dialog during sleep (Issue #7)
     @param deal - The expired lease deal
 ]]
 function FinanceManager:showLeaseRenewalDialog(deal)
+    -- v2.13.2: Skip dialog during sleep to prevent freeze (Issue #7)
+    -- Deal stays active with monthsPaid >= termMonths, so dialog re-shows next period or on wake
+    if g_sleepManager ~= nil and g_sleepManager.isSleeping then
+        UsedPlus.logDebug(string.format("showLeaseRenewalDialog: Deferring - player is sleeping (deal %s)", deal.id))
+        -- Track deferred lease renewal for wake-up processing
+        if self.deferredLeaseRenewals == nil then
+            self.deferredLeaseRenewals = {}
+        end
+        self.deferredLeaseRenewals[deal.id] = deal
+        return
+    end
+
     -- Create callback to handle user choice
     local callback = function(action, data)
         -- Send event to server for processing
@@ -503,6 +598,24 @@ function FinanceManager:showLeaseRenewalDialog(deal)
         FSBaseMission.INGAME_NOTIFICATION_INFO,
         string.format("Lease term complete for %s! Choose to return, buyout, or renew.", deal.itemName)
     )
+end
+
+--[[
+    v2.13.2: Handle sleep state changes (Issue #7)
+    When player wakes up, show any lease renewal dialogs that were deferred during sleep
+]]
+function FinanceManager:onSleepingStateChanged(isSleeping)
+    if not isSleeping then
+        -- Player woke up - show deferred lease renewal dialogs
+        if self.deferredLeaseRenewals then
+            for dealId, deal in pairs(self.deferredLeaseRenewals) do
+                UsedPlus.logDebug(string.format("FinanceManager: Player woke up, showing deferred lease renewal for %s", dealId))
+                self:showLeaseRenewalDialog(deal)
+                break  -- Show one at a time, next will show when this one closes
+            end
+            self.deferredLeaseRenewals = nil
+        end
+    end
 end
 
 --[[
@@ -1167,11 +1280,14 @@ function FinanceManager:delete()
     -- Unsubscribe from events
     if self.isServer then
         g_messageCenter:unsubscribe(MessageType.PERIOD_CHANGED, self)
+        g_messageCenter:unsubscribe(MessageType.SLEEPING, self)
     end
 
     -- Clear data
     self.deals = {}
     self.dealsByFarm = {}
+    self.lastCreditScores = nil
+    self.deferredLeaseRenewals = nil
 
     -- Clear credit tracking data
     if CreditHistory then

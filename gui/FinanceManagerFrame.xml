@@ -576,6 +576,12 @@
 
         </GuiElement>
 
+        <!-- v2.13.1: Version & Source Footer - ensures players know official source regardless of download origin -->
+        <GuiElement position="25px 45px" size="1640px 30px">
+            <Bitmap profile="baseReference" imageColor="0.04 0.04 0.06 1" size="1640px 30px"/>
+            <Text profile="fs25_textDefault" id="versionFooterText" text="" position="0px 8px" size="1640px 20px" textSize="11px" textColor="0.45 0.45 0.5 1" textAlignment="center"/>
+        </GuiElement>
+
     </GuiElement>
 
     <GUIProfiles>

@@ -43,7 +43,7 @@
 
 ---
 
-> ⚠️ **STATUS: Development Preview** — No official release yet. Core features (vehicle financing, **building financing**, leasing, credit, marketplace, trade-ins) fully functional. **NEW v2.10.0:** First-of-its-kind building/placeable financing! **Work in Progress:** Malfunctions and Service Truck under active development. Try it via `git clone` or download ZIP (see Installation).
+> ⚠️ **STATUS: Development Preview (v2.13.1)** — No official release yet. Core features (vehicle financing, **building financing**, leasing, credit, marketplace, trade-ins) fully functional. **Work in Progress:** Malfunctions and Service Truck under active development. Latest version always at: **[github.com/XelaNull/FS25_UsedPlus](https://github.com/XelaNull/FS25_UsedPlus)**
 
 ---
 
@@ -464,7 +464,7 @@ Built on the shoulders of giants:
 
 ---
 
-**v2.12.1** | **[View Changelog](CHANGELOG.md)** | **[Report Issues](https://github.com/XelaNull/FS25_UsedPlus/issues)**
+**v2.13.1** | **[View Changelog](CHANGELOG.md)** | **[Report Issues](https://github.com/XelaNull/FS25_UsedPlus/issues)**
 
 ---
 
