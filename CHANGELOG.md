@@ -4,6 +4,35 @@ All notable changes to this project are documented here.
 
 ---
 
+## [2.13.1] - 2026-02-15
+
+### Fixed
+
+**Sleep Freeze — 6 Unguarded Modal Dialogs (Issue #7):**
+- Added `g_sleepManager.isSleeping` guards to all dialog calls reachable from `onHourChanged`/`onPeriodChanged`
+- FinanceManager: Lease renewal dialog deferred during sleep with wake-up handler
+- VehicleInspection: Inspection complete YesNoDialog skipped during sleep (notification still fires)
+- VehicleSearchSystem: Seller backed out, vehicle found preview, and search expired dialogs all guarded
+- VehicleSaleManager: Sale listing expired dialog guarded
+- Builds on v2.12.2 sale offer dialog sleep guard — all modal paths now covered
+
+**SaleOfferDialog Range Marker Never Rendering:**
+- Root cause: `setPosition()` kills element visibility in ScreenElement-based dialogs
+- Fix: 21 fixed-position PNG arrow markers at 5% intervals, toggled via `setVisible()`
+- Added `range_marker.png` icon generation (gold downward triangle)
+
+**Version Display:**
+- Build script now syncs full 4-part version (e.g., `2.13.1.18`) to `UsedPlusAPI.MOD_VERSION`
+- Finance Manager footer version text no longer truncated (position fix)
+
+### Changed
+
+- Moved payment summary notification logic from FarmExtension to FinanceManager
+- SaleOfferDialog base class changed from MessageDialog to ScreenElement
+- FinanceManager and UsedVehicleManager now subscribe to `MessageType.SLEEPING`
+
+---
+
 ## [2.12.1] - 2026-02-15
 
 ### Fixed
