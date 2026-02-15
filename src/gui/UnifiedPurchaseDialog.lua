@@ -1936,6 +1936,10 @@ end
     Trade-in and cash back are handled here before sending the event.
 ]]
 function UnifiedPurchaseDialog:executeFinancePurchaseVehicle()
+    UsedPlus.logInfo("╔════════════════════════════════════════════════════════════════")
+    UsedPlus.logInfo("║ executeFinancePurchaseVehicle() ENTRY")
+    UsedPlus.logInfo("╠════════════════════════════════════════════════════════════════")
+
     local farmId = g_currentMission:getFarmId()
     local farm = g_farmManager:getFarmById(farmId)
 
@@ -1968,6 +1972,8 @@ function UnifiedPurchaseDialog:executeFinancePurchaseVehicle()
 
     -- Check if player can afford net due today (down payment minus cashback)
     if netDueToday > farm.money then
+        UsedPlus.logWarn(string.format("Finance rejected: insufficient funds (need %s, have %s)",
+            g_i18n:formatMoney(netDueToday, 0, true, true), g_i18n:formatMoney(farm.money, 0, true, true)))
         g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_CRITICAL,
             string.format(g_i18n:getText("usedplus_error_insufficientFundsDownPayment"), g_i18n:formatMoney(netDueToday, 0, true, true)))
         return
@@ -1985,7 +1991,15 @@ function UnifiedPurchaseDialog:executeFinancePurchaseVehicle()
     -- Trade-in reduces the amount that needs to be financed
     local effectivePrice = self.vehiclePrice - self.tradeInValue
 
-    -- Send finance event to server (creates the deal and handles money)
+    -- Read configurations from shop screen (same pattern as lease path)
+    local configurations = {}
+    if self.shopScreen then
+        configurations = self.shopScreen.configurations or {}
+    elseif g_shopConfigScreen then
+        configurations = g_shopConfigScreen.configurations or {}
+    end
+
+    -- Send finance event to server (creates the deal AND spawns vehicle via BuyVehicleEvent)
     FinanceVehicleEvent.sendToServer(
         farmId,
         "vehicle",           -- itemType
@@ -1995,20 +2009,12 @@ function UnifiedPurchaseDialog:executeFinancePurchaseVehicle()
         downPayment,         -- downPayment
         termYears,           -- termYears
         cashBack,            -- cashBack
-        {}                   -- configurations
+        configurations       -- configurations from shop screen
     )
 
-    -- Spawn the vehicle (FinanceVehicleEvent only creates the deal, not the vehicle)
-    local spawnSuccess = self:spawnVehicle(farmId, 0)  -- Price 0 since it's financed
-
-    if spawnSuccess then
-        -- v2.9.1: Show net due today (down payment minus cashback) not just down payment
-        g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_OK,
-            string.format(g_i18n:getText("usedplus_notify_vehicleFinanced"), self.vehicleName, g_i18n:formatMoney(netDueToday)))
-    else
-        g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_OK,
-            string.format(g_i18n:getText("usedplus_notify_vehicleFinancedShop"), self.vehicleName))
-    end
+    -- v2.9.1: Show net due today (down payment minus cashback) not just down payment
+    g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_OK,
+        string.format(g_i18n:getText("usedplus_notify_vehicleFinanced"), self.vehicleName, g_i18n:formatMoney(netDueToday)))
 
     -- Close dialog
     self:close()
