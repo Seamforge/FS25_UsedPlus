@@ -4,6 +4,45 @@ All notable changes to this project are documented here.
 
 ---
 
+## [2.12.1] - 2026-02-15
+
+### Fixed
+
+**Lease End-of-Term Screen Freeze (Issue #5):**
+- Fixed ESC key trapped on Vehicles page — MENU_CANCEL was intercepted by sell override, preventing menu close
+- Fixed undismissable lease renewal/end dialogs — added "Later" button to defer choice to next month
+- Fixed hardcoded English in lease renewal dialog overwriting i18n translations (affected French and all non-English users)
+- Fixed YesNoDialog sell hook bypassing all guards — added ownership, lease, finance, collateral, and listing checks
+
+**Sell Guard Enforcement (all paths):**
+- VehicleSellingPointExtension: Full sell guards on SellItemDialog intercept
+- WorkshopScreenExtension: Finance/collateral guards on workshop sell button
+- Leased, financed, and collateral-pledged vehicles now blocked from sale across all sell paths
+
+**Vehicle-to-Deal Matching:**
+- Added normalized path fallback in FinanceManager for hasActiveLease/getLeaseDealForVehicle
+- Fixes vehicles not being recognized as leased when config paths differ in prefix format
+
+### Added
+
+**Lease Cost Display in ESC > Vehicles:**
+- Leasing Cost column now shows monthly payment for UsedPlus-leased/financed vehicles instead of "-"
+- Hooks the real vehicles list delegate's populateCellForItemInSection on the ESC menu
+- Vehicle data accessed via wrapped entry.vehicle pattern, leasing element found via cell.elements walk
+
+**Vehicle Info Box (hover) — Lease/Finance Info:**
+- Pointing at a vehicle on foot now shows Deal Type (LEASED/FINANCED), Monthly Payment, and Months Remaining
+- Added via VehicleInfoExtension.showFinanceInfo() hook on Vehicle.showInfo()
+
+**Deferred Lease Payment Guard:**
+- FinanceManager skips payment processing for leases already at term (waiting for user choice)
+- Prevents extra charges when player defers lease end decision via "Later" button
+
+**Translations:**
+- Added 5 new keys to all 26 languages: usedplus_lr_deferNotice, usedplus_info_dealType, usedplus_info_leased, usedplus_info_financed, usedplus_info_monthsRemaining
+
+---
+
 ## [2.12.0] - 2026-02-07
 
 ### Added
