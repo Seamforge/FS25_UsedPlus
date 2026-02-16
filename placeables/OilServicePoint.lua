@@ -133,7 +133,7 @@ function OilServicePoint:onLoad(savegame)
 
     -- Update throttling
     spec.activationTimer = 0
-    spec.updateInterval = 200 -- ms between updates
+    spec.updateInterval = 1000 -- ms between proximity checks (v2.13.3: was 200ms, no need for fast polling)
 
     -- Activatable tracking (to avoid duplicates)
     spec.playerPurchaseActivatable = nil  -- Single activatable for purchase dialog
@@ -346,81 +346,8 @@ function OilServicePoint:onUpdate(dt)
     end
     spec.activationTimer = 0
 
-    -- Trace-level debug: log every few seconds (only visible when DEBUG=true and log level includes TRACE)
-    spec.debugTimer = (spec.debugTimer or 0) + spec.updateInterval
-    if spec.debugTimer >= 3000 then
-        spec.debugTimer = 0
-
-        -- Get local player vehicle status using new API
-        local isInVehicle = false
-        local currentVehicle = nil
-        local vehicleName = "none"
-
-        if g_localPlayer ~= nil then
-            if g_localPlayer.getIsInVehicle ~= nil then
-                isInVehicle = g_localPlayer:getIsInVehicle()
-            end
-            if isInVehicle and g_localPlayer.getCurrentVehicle ~= nil then
-                currentVehicle = g_localPlayer:getCurrentVehicle()
-                if currentVehicle ~= nil then
-                    vehicleName = currentVehicle:getName() or "unnamed"
-                end
-            end
-        end
-
-        -- Fallback check
-        local missionVehicle = g_currentMission.controlledVehicle
-        if currentVehicle == nil and missionVehicle ~= nil then
-            currentVehicle = missionVehicle
-            vehicleName = missionVehicle:getName() or "unnamed"
-            isInVehicle = true
-        end
-
-        -- Check our detection functions
-        local playerInRange = self:isPlayerInRange()
-        local vehicleInRange = self:getVehicleInRange()
-
-        -- Extra debug for vehicle maintenance
-        local vehicleOilInfo = "N/A"
-        if currentVehicle ~= nil then
-            local maintSpec = currentVehicle.spec_usedPlusMaintenance
-            if maintSpec then
-                vehicleOilInfo = string.format("oil=%.0f%%, hasMaint=true", (maintSpec.oilLevel or 1.0) * 100)
-            else
-                vehicleOilInfo = "hasMaint=FALSE (no maintenance spec!)"
-            end
-        end
-
-        -- Calculate distance to interaction point
-        local px, py, pz = self:getInteractionPosition()
-        local distInfo = "N/A"
-        if currentVehicle ~= nil and currentVehicle.rootNode ~= nil then
-            local vx, vy, vz = getWorldTranslation(currentVehicle.rootNode)
-            local dist = MathUtil.vector2Length(px - vx, pz - vz)
-            distInfo = string.format("%.1fm (range=%.1f)", dist, spec.vehicleRange)
-        end
-
-        -- Activatable status
-        local hasPurchaseAct = spec.playerPurchaseActivatable ~= nil
-        local hasVehicleAct = spec.vehicleRefillActivatable ~= nil
-
-        -- Tank status
-        local tankInfo = "empty"
-        if spec.currentFluidStorage > 0 and spec.currentFluidType then
-            tankInfo = string.format("%.0fL %s", spec.currentFluidStorage, spec.currentFluidType)
-        end
-
-        UsedPlus.logTrace(string.format("OilServicePoint: isInVehicle=%s (%s), playerInRange=%s, vehicleInRange=%s, dist=%s, tank=%s, %s, acts=[purchase=%s, veh=%s]",
-            tostring(isInVehicle),
-            vehicleName,
-            tostring(playerInRange),
-            vehicleInRange and "yes" or "no",
-            distInfo,
-            tankInfo,
-            vehicleOilInfo,
-            tostring(hasPurchaseAct),
-            tostring(hasVehicleAct)))
-    end
+    -- v2.13.3: Removed verbose 3-second debug dump (was 70+ lines of vehicle state inspection)
+    -- Use UsedPlus.DEBUG = true in UsedPlusCore.lua if debugging is needed
 
     -- Check for player on foot
     if self:isPlayerInRange() then
@@ -1236,4 +1163,4 @@ function FluidRefillActivatable:getDistance(x, y, z)
 end
 
 
-UsedPlus.logInfo("OilServicePoint.lua loaded (v2.11.1 - PlaceableEmployer save pattern)")
+UsedPlus.logInfo("OilServicePoint loaded")

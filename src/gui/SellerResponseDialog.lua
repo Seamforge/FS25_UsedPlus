@@ -623,4 +623,4 @@ function SellerResponseDialog:close()
     end
 end
 
-UsedPlus.logInfo("SellerResponseDialog loaded (v2.9.5)")
+UsedPlus.logInfo("SellerResponseDialog loaded")

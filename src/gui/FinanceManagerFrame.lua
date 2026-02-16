@@ -353,7 +353,7 @@ function FinanceManagerFrame:updateDisplay()
 
     -- v2.13.1: Version & source footer
     if self.versionFooterText then
-        local version = UsedPlusAPI and UsedPlusAPI.MOD_VERSION or "2.13.1"
+        local version = UsedPlus.VERSION
         self.versionFooterText:setText(string.format(
             "UsedPlus v%s  |  Development Preview  |  github.com/XelaNull/FS25_UsedPlus  |  100%% AI-Authored",
             version))
@@ -687,4 +687,4 @@ function FinanceManagerFrame:onCreditReportClick()
     DialogLoader.show("CreditReportDialog")
 end
 
-UsedPlus.logInfo("FinanceManagerFrame loaded (v2.7.2 modular)")
+UsedPlus.logInfo("FinanceManagerFrame loaded")

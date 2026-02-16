@@ -392,4 +392,4 @@ function SaleOfferDialog.showForListing(listing, callback)
     return DialogLoader.show("SaleOfferDialog", "setListing", listing, callback)
 end
 
-UsedPlus.logInfo("SaleOfferDialog loaded (v2.13.2)")
+UsedPlus.logInfo("SaleOfferDialog loaded")

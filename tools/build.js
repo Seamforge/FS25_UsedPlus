@@ -186,8 +186,8 @@ function bumpVersion(bumpType) {
     // Update README.md version badge (show major.minor.patch for display)
     updateReadmeVersion(`${major}.${minor}.${patch}`);
 
-    // Update UsedPlusAPI.MOD_VERSION so in-game display shows full build version
-    updateApiVersion(newVersion);
+    // Update UsedPlus.VERSION in Core so all runtime code reads it
+    updateCoreVersion(newVersion);
 
     return { oldVersion, newVersion };
 }
@@ -204,35 +204,48 @@ function updateReadmeVersion(newVersion) {
 
     // Match the version badge line: **v1.2.3** | FS25 | ...
     const versionBadgeRegex = /^\*\*v[\d.]+\*\*(\s*\|.*)$/m;
+    // Match the status line: Development Preview (v1.2.3)
+    const statusLineRegex = /(\*\*STATUS: Development Preview \(v)[\d.]+(\)\*\*)/;
+
+    let updated = false;
 
     if (versionBadgeRegex.test(content)) {
         content = content.replace(versionBadgeRegex, `**v${newVersion}**$1`);
+        updated = true;
+    }
+
+    if (statusLineRegex.test(content)) {
+        content = content.replace(statusLineRegex, `$1${newVersion}$2`);
+        updated = true;
+    }
+
+    if (updated) {
         fs.writeFileSync(readmePath, content, 'utf8');
         console.log(`  README:    v${newVersion} (updated)`);
     } else {
-        console.log('  Warning: Could not find version badge in README.md');
+        console.log('  Warning: Could not find version badge or status line in README.md');
     }
 }
 
-function updateApiVersion(newVersion) {
-    const apiPath = path.join(MOD_DIR, 'src', 'utils', 'UsedPlusAPI.lua');
+function updateCoreVersion(newVersion) {
+    const corePath = path.join(MOD_DIR, 'src', 'core', 'UsedPlusCore.lua');
 
-    if (!fs.existsSync(apiPath)) {
-        console.log('  Warning: UsedPlusAPI.lua not found, skipping version update');
+    if (!fs.existsSync(corePath)) {
+        console.log('  Warning: UsedPlusCore.lua not found, skipping version update');
         return;
     }
 
-    let content = fs.readFileSync(apiPath, 'utf8');
+    let content = fs.readFileSync(corePath, 'utf8');
 
-    // Match: UsedPlusAPI.MOD_VERSION = "x.y.z" or "x.y.z.b"
-    const versionRegex = /^(UsedPlusAPI\.MOD_VERSION\s*=\s*")[\d.]+(")$/m;
+    // Match: UsedPlus.VERSION = "x.y.z.b" (with optional trailing comment)
+    const versionRegex = /^(UsedPlus\.VERSION\s*=\s*")[\d.]+(".*)$/m;
 
     if (versionRegex.test(content)) {
         content = content.replace(versionRegex, `$1${newVersion}$2`);
-        fs.writeFileSync(apiPath, content, 'utf8');
-        console.log(`  API:       v${newVersion} (updated)`);
+        fs.writeFileSync(corePath, content, 'utf8');
+        console.log(`  Core:      v${newVersion} (updated)`);
     } else {
-        console.log('  Warning: Could not find MOD_VERSION in UsedPlusAPI.lua');
+        console.log('  Warning: Could not find VERSION in UsedPlusCore.lua');
     }
 }
 

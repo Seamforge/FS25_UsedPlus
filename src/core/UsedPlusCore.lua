@@ -16,7 +16,8 @@ UsedPlus = {}
 -- Mod metadata
 UsedPlus.MOD_NAME = "FS25_UsedPlus"
 UsedPlus.MOD_DIR = g_currentModDirectory
-UsedPlus.DEBUG = true  -- v2.9.5: Enabled for placeable financing debugging
+UsedPlus.VERSION = "2.13.3.6"  -- Synced by build.js from modDesc.xml
+UsedPlus.DEBUG = false  -- v2.13.3: Disabled — set to true for development only
 
 -- Log levels control what gets printed
 UsedPlus.LOG_LEVEL = {
@@ -131,4 +132,4 @@ function UsedPlus.dumpGuiState(context)
     UsedPlus.logInfo("└────────────────────────────────────")
 end
 
-UsedPlus.logInfo("UsedPlusCore loaded (globals and logging initialized)")
+UsedPlus.logInfo("UsedPlusCore loaded")

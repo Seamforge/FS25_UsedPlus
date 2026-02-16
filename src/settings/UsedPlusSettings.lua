@@ -42,7 +42,7 @@ UsedPlusSettings.DEFAULTS = {
     enableTradeInSystem = true,
     enableCreditSystem = true,
     enableTireWearSystem = true,
-    enableMalfunctionsSystem = true,
+    enableMalfunctionsSystem = false,  -- Disabled by default while malfunction system is under development
     malfunctionFrequencyMultiplier = 1.0,  -- v2.8.0: Malfunction frequency (0.25=rare, 1.0=normal, 2.0=frequent)
     enablePartialRepair = true,      -- v2.0.0: Toggle partial repair shop integration
     enablePartialRepaint = true,     -- v2.0.0: Toggle partial repaint shop integration

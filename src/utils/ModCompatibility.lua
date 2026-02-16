@@ -2045,4 +2045,4 @@ function ModCompatibility.applyRVBBreakdownDegradation(vehicle, partKey)
         totalDegradation * 100, partKey or "unknown", vehicle:getName(), dna))
 end
 
-UsedPlus.logInfo("ModCompatibility utility loaded (v2.7.2 - Fixed RVB detection + enhanced fault checking)")
+UsedPlus.logInfo("ModCompatibility loaded")

@@ -565,4 +565,4 @@ else
     UsedPlus.logWarn("UsedVehicleManager: BuyVehicleData.onBought not available for hooking")
 end
 
-UsedPlus.logInfo("UsedVehicleManager CORE loaded (v2.7.2 modular)")
+UsedPlus.logInfo("UsedVehicleManager loaded")

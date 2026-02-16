@@ -822,4 +822,4 @@ function InspectionReportDialog:getConditionColor(condition)
     end
 end
 
-UsedPlus.logInfo("InspectionReportDialog loaded (v2.6.0 - negotiation integration)")
+UsedPlus.logInfo("InspectionReportDialog loaded")

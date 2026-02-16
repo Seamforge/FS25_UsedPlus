@@ -384,4 +384,4 @@ function LeaseRenewalDialog.show(deal, callback)
     DialogLoader.show("LeaseRenewalDialog", "setDeal", deal, callback)
 end
 
-UsedPlus.logInfo("LeaseRenewalDialog loaded (v2.9.5)")
+UsedPlus.logInfo("LeaseRenewalDialog loaded")

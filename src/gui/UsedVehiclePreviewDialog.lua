@@ -711,4 +711,4 @@ function UsedVehiclePreviewDialog:getConditionDescription(value, conditionType)
     end
 end
 
-UsedPlus.logInfo("UsedVehiclePreviewDialog loaded (v2.7.0 - tiered inspection system)")
+UsedPlus.logInfo("UsedVehiclePreviewDialog loaded")

@@ -103,7 +103,7 @@ function FieldServiceKit:onLoad(savegame)
     -- Pattern from: OilServicePoint.lua
     self:raiseActive()
 
-    UsedPlus.logInfo("FieldServiceKit loaded - tier: " .. spec.kitTier .. " (v2.0.4 - direct input polling)")
+    UsedPlus.logInfo("FieldServiceKit loaded - tier: " .. spec.kitTier)
 end
 
 function FieldServiceKit:onDelete()

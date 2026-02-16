@@ -215,4 +215,4 @@ function LeaseEndDialog:onClose()
     LeaseEndDialog:superClass().onClose(self)
 end
 
-UsedPlus.logInfo("LeaseEndDialog loaded (v2.9.5)")
+UsedPlus.logInfo("LeaseEndDialog loaded")

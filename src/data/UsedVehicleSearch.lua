@@ -1505,4 +1505,4 @@ function UsedVehicleSearch:migrateFromOldFormat(xmlFile, key)
         self.monthsElapsed, self.maxMonths, #self.foundListings))
 end
 
-UsedPlus.logInfo("UsedVehicleSearch class loaded (v1.5.0 - Multi-Find Agent Model)")
+UsedPlus.logInfo("UsedVehicleSearch loaded")

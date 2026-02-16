@@ -1622,4 +1622,4 @@ function UsedPlusMaintenance.resetAllMalfunctions(vehicle)
     UsedPlus.logInfo("Admin panel: Reset all active malfunctions on " .. (vehicle:getName() or "vehicle"))
 end
 
-UsedPlus.logDebug("UsedPlusMaintenance CORE module loaded (v2.7.2 modular)")
+UsedPlus.logDebug("UsedPlusMaintenance loaded")

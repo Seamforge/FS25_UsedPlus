@@ -73,7 +73,7 @@ SettingsPresets.balanced = {
     enableTradeInSystem = true,
     enableCreditSystem = true,
     enableTireWearSystem = true,
-    enableMalfunctionsSystem = true,
+    enableMalfunctionsSystem = false,  -- Disabled while malfunction system is under development
     malfunctionFrequencyMultiplier = 1.0,   -- v2.8.0: Normal frequency
     enablePartialRepair = true,
     enablePartialRepaint = true,
@@ -113,7 +113,7 @@ SettingsPresets.challenging = {
     enableTradeInSystem = true,
     enableCreditSystem = true,
     enableTireWearSystem = true,
-    enableMalfunctionsSystem = true,
+    enableMalfunctionsSystem = false,  -- Disabled while malfunction system is under development
     malfunctionFrequencyMultiplier = 1.25,  -- v2.8.0: Slightly more frequent
     enablePartialRepair = true,
     enablePartialRepaint = true,
@@ -154,7 +154,7 @@ SettingsPresets.hardcore = {
     enableTradeInSystem = true,
     enableCreditSystem = true,
     enableTireWearSystem = true,
-    enableMalfunctionsSystem = true,
+    enableMalfunctionsSystem = false,  -- Disabled while malfunction system is under development
     malfunctionFrequencyMultiplier = 2.0,   -- v2.8.0: Double frequency - things break a lot!
     enablePartialRepair = true,
     enablePartialRepaint = true,
@@ -230,7 +230,7 @@ SettingsPresets.immersive = {
     enableTradeInSystem = true,
     enableCreditSystem = true,
     enableTireWearSystem = true,
-    enableMalfunctionsSystem = true,
+    enableMalfunctionsSystem = false,  -- Disabled while malfunction system is under development
     malfunctionFrequencyMultiplier = 1.0,   -- v2.8.0: Normal (RVB handles most failures)
     enablePartialRepair = true,
     enablePartialRepaint = true,
@@ -293,4 +293,4 @@ function SettingsPresets.getDescription(presetKey)
     return descriptions[presetKey] or ""
 end
 
-UsedPlus.logInfo("SettingsPresets loaded (v2.0.0 - 6 presets)")
+UsedPlus.logInfo("SettingsPresets loaded")

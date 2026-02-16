@@ -822,4 +822,4 @@ function NegotiationDialog:close()
     g_gui:closeDialogByName("NegotiationDialog")
 end
 
-UsedPlus.logInfo("NegotiationDialog loaded (v2.9.5)")
+UsedPlus.logInfo("NegotiationDialog loaded")
