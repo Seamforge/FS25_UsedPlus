@@ -256,6 +256,7 @@
         <e k="input_USEDPLUS_ACTIVATE_OBD" v="Use OBD Scanner" eh="9666e26b" />
         <e k="input_USEDPLUS_TIRES" v="Tire Service" eh="b0234f4e" />
         <e k="input_USEDPLUS_SERVICE_TRUCK" v="Service Truck Control" eh="fad0e0f1" />
+        <e k="input_USEDPLUS_FAULT_TRACER" v="Fault Tracer" eh="d1b82197" />
 
         <!--  Tooltips for Finance Dialog -->
         <e k="usedplus_finance_loanTerm_tooltip" v="Spread payments over 1-20 years. Longer terms = smaller monthly payments but more total interest paid." eh="e1170142" />
@@ -1983,7 +1984,7 @@
         <e k="usedplus_serviceTruck_alreadyOwned" v="You already own a Service Truck." eh="8d7c53f6" />
 
         <!-- v2.11.1: Service Truck Color Customization -->
-        <e k="configuration_chassisColor" v="Chassis Color" eh="17d6aa5b" />
+        <!-- configuration_chassisColor removed — duplicates base game key -->
         <e k="configuration_bodyColor" v="Body Color" eh="e607d9e6" />
         <e k="usedplus_serviceTruck_stripeColor" v="Stripe Color" eh="12b22714" />
 
@@ -2020,7 +2021,7 @@
         <e k="usedplus_sparePartsPallet_name" v="Spare Parts Pallet" eh="9bf39a93" />
         <e k="usedplus_sparePartsPallet_function" v="Consumable spare parts for Service Truck restoration. Place near the truck during restoration work." eh="c90aa3eb" />
         <e k="fillType_spareParts" v="Spare Parts" eh="ab6b8ce1" />
-        <e k="fillType_oil" v="Motor Oil" eh="511aaabd" />
+        <!-- fillType_oil removed — duplicates base game key -->
         <e k="fillType_hydraulicOil" v="Hydraulic Oil" eh="646d470f" />
         <e k="unit_pcs" v="pcs" eh="3ecf2642" />
 

@@ -24,7 +24,7 @@ function FinanceVehicleEvent.emptyNew()
     return self
 end
 
-function FinanceVehicleEvent.new(farmId, itemType, itemId, itemName, basePrice, downPayment, termYears, cashBack, configurations)
+function FinanceVehicleEvent.new(farmId, itemType, itemId, itemName, basePrice, downPayment, termYears, cashBack, configurations, configurationData, licensePlateData)
     local self = FinanceVehicleEvent.emptyNew()
     self.farmId = farmId
     self.itemType = itemType
@@ -35,15 +35,19 @@ function FinanceVehicleEvent.new(farmId, itemType, itemId, itemName, basePrice, 
     self.termYears = termYears
     self.cashBack = cashBack or 0
     self.configurations = configurations or {}
+    -- v2.13.2: Custom color RGB data + license plate (Issue #6)
+    self.configurationData = configurationData
+    self.licensePlateData = licensePlateData
     return self
 end
 
-function FinanceVehicleEvent.sendToServer(farmId, itemType, itemId, itemName, basePrice, downPayment, termYears, cashBack, configurations)
+function FinanceVehicleEvent.sendToServer(farmId, itemType, itemId, itemName, basePrice, downPayment, termYears, cashBack, configurations, configurationData, licensePlateData)
     if g_server ~= nil then
-        FinanceVehicleEvent.execute(farmId, itemType, itemId, itemName, basePrice, downPayment, termYears, cashBack, configurations)
+        -- Single-player: pass configurationData directly (no serialization needed)
+        FinanceVehicleEvent.execute(farmId, itemType, itemId, itemName, basePrice, downPayment, termYears, cashBack, configurations, configurationData, licensePlateData)
     else
         g_client:getServerConnection():sendEvent(
-            FinanceVehicleEvent.new(farmId, itemType, itemId, itemName, basePrice, downPayment, termYears, cashBack, configurations)
+            FinanceVehicleEvent.new(farmId, itemType, itemId, itemName, basePrice, downPayment, termYears, cashBack, configurations, configurationData, licensePlateData)
         )
     end
 end
@@ -73,6 +77,45 @@ function FinanceVehicleEvent:writeStream(streamId, connection)
     for configKey, configValue in pairs(self.configurations) do
         streamWriteString(streamId, tostring(configKey))
         streamWriteInt32(streamId, configValue)
+    end
+
+    -- v2.13.2: Serialize configurationData (custom color RGB values) for multiplayer (Issue #6)
+    -- Format: count, then for each entry: key(string), hasColor(bool), r/g/b/a(float32), material(int32)
+    local configDataCount = 0
+    if self.configurationData then
+        for _ in pairs(self.configurationData) do
+            configDataCount = configDataCount + 1
+        end
+    end
+    streamWriteInt32(streamId, configDataCount)
+
+    if self.configurationData then
+        for cdKey, cdValue in pairs(self.configurationData) do
+            streamWriteString(streamId, tostring(cdKey))
+
+            -- Color data: {color = {r, g, b, a}, material = n}
+            local hasColor = (type(cdValue) == "table" and cdValue.color ~= nil)
+            streamWriteBool(streamId, hasColor)
+
+            if hasColor then
+                local c = cdValue.color
+                streamWriteFloat32(streamId, c[1] or 0)
+                streamWriteFloat32(streamId, c[2] or 0)
+                streamWriteFloat32(streamId, c[3] or 0)
+                streamWriteFloat32(streamId, c[4] or 1)
+                streamWriteInt32(streamId, cdValue.material or 1)
+            end
+        end
+    end
+
+    -- v2.13.2: Serialize licensePlateData
+    local hasLicensePlate = (self.licensePlateData ~= nil)
+    streamWriteBool(streamId, hasLicensePlate)
+    if hasLicensePlate then
+        streamWriteString(streamId, self.licensePlateData.characters or "")
+        streamWriteInt32(streamId, self.licensePlateData.colorIndex or 1)
+        streamWriteInt32(streamId, self.licensePlateData.variation or 1)
+        streamWriteInt32(streamId, self.licensePlateData.placementIndex or 1)
     end
 end
 
@@ -116,10 +159,55 @@ function FinanceVehicleEvent:readStream(streamId, connection)
         end
     end
 
+    -- v2.13.2: Deserialize configurationData (custom color RGB values) (Issue #6)
+    self.configurationData = nil
+    local configDataCount = streamReadInt32(streamId)
+    local safeDataCount = math.max(0, math.min(configDataCount, MAX_CONFIGS))
+
+    if safeDataCount > 0 then
+        self.configurationData = {}
+        for i = 1, safeDataCount do
+            local cdKey = streamReadString(streamId)
+            local hasColor = streamReadBool(streamId)
+
+            if hasColor then
+                local r = streamReadFloat32(streamId)
+                local g = streamReadFloat32(streamId)
+                local b = streamReadFloat32(streamId)
+                local a = streamReadFloat32(streamId)
+                local material = streamReadInt32(streamId)
+
+                if cdKey and cdKey ~= "" then
+                    self.configurationData[cdKey] = {
+                        color = {r, g, b, a},
+                        material = material
+                    }
+                end
+            else
+                -- Non-color configurationData entry — skip (read key but store nothing)
+                if cdKey and cdKey ~= "" then
+                    self.configurationData[cdKey] = {}
+                end
+            end
+        end
+    end
+
+    -- v2.13.2: Deserialize licensePlateData
+    self.licensePlateData = nil
+    local hasLicensePlate = streamReadBool(streamId)
+    if hasLicensePlate then
+        self.licensePlateData = {
+            characters = streamReadString(streamId),
+            colorIndex = streamReadInt32(streamId),
+            variation = streamReadInt32(streamId),
+            placementIndex = streamReadInt32(streamId),
+        }
+    end
+
     self:run(connection)
 end
 
-function FinanceVehicleEvent.execute(farmId, itemType, itemId, itemName, basePrice, downPayment, termYears, cashBack, configurations)
+function FinanceVehicleEvent.execute(farmId, itemType, itemId, itemName, basePrice, downPayment, termYears, cashBack, configurations, configurationData, licensePlateData)
     -- v2.6.2: Validate finance system is enabled
     if UsedPlusSettings and UsedPlusSettings:get("enableFinanceSystem") == false then
         UsedPlus.logWarn("FinanceVehicleEvent rejected: Finance system disabled in settings")
@@ -181,7 +269,8 @@ function FinanceVehicleEvent.execute(farmId, itemType, itemId, itemName, basePri
     end
 
     local deal = g_financeManager:createFinanceDeal(
-        farmId, itemType, itemId, itemName, basePrice, downPayment, termYears, cashBack, configurations or {}
+        farmId, itemType, itemId, itemName, basePrice, downPayment, termYears, cashBack, configurations or {},
+        configurationData, licensePlateData
     )
 
     if deal then
@@ -212,7 +301,8 @@ function FinanceVehicleEvent:run(connection)
     -- v2.8.0: Capture result and send response to client
     local success, msgKey = FinanceVehicleEvent.execute(
         self.farmId, self.itemType, self.itemId, self.itemName,
-        self.basePrice, self.downPayment, self.termYears, self.cashBack, self.configurations
+        self.basePrice, self.downPayment, self.termYears, self.cashBack, self.configurations,
+        self.configurationData, self.licensePlateData
     )
     TransactionResponseEvent.sendToClient(connection, self.farmId, success, msgKey)
 end

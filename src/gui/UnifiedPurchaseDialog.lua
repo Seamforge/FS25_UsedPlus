@@ -1991,12 +1991,21 @@ function UnifiedPurchaseDialog:executeFinancePurchaseVehicle()
     -- Trade-in reduces the amount that needs to be financed
     local effectivePrice = self.vehiclePrice - self.tradeInValue
 
-    -- Read configurations from shop screen (same pattern as lease path)
+    -- Read configurations from shop screen (same pattern as cash path)
+    -- v2.13.2: Also capture configurationData (custom RGB colors) and licensePlateData
+    -- Without configurationData, custom colors from Unlimited Color Configurations revert to white (Issue #6)
     local configurations = {}
+    local configurationData = nil
+    local licensePlateData = nil
+
     if self.shopScreen then
         configurations = self.shopScreen.configurations or {}
+        configurationData = self.shopScreen.configurationData
+        licensePlateData = self.shopScreen.licensePlateData
     elseif g_shopConfigScreen then
         configurations = g_shopConfigScreen.configurations or {}
+        configurationData = g_shopConfigScreen.configurationData
+        licensePlateData = g_shopConfigScreen.licensePlateData
     end
 
     -- Send finance event to server (creates the deal AND spawns vehicle via BuyVehicleEvent)
@@ -2009,7 +2018,9 @@ function UnifiedPurchaseDialog:executeFinancePurchaseVehicle()
         downPayment,         -- downPayment
         termYears,           -- termYears
         cashBack,            -- cashBack
-        configurations       -- configurations from shop screen
+        configurations,      -- configurations from shop screen
+        configurationData,   -- v2.13.2: custom color RGB data (Issue #6)
+        licensePlateData     -- v2.13.2: license plate data
     )
 
     -- v2.9.1: Show net due today (down payment minus cashback) not just down payment

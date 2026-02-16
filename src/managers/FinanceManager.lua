@@ -622,7 +622,7 @@ end
     Create new finance deal
     Called from network event (client request → server execution)
 ]]
-function FinanceManager:createFinanceDeal(farmId, itemType, itemId, itemName, price, downPayment, termYears, cashBack, configurations)
+function FinanceManager:createFinanceDeal(farmId, itemType, itemId, itemName, price, downPayment, termYears, cashBack, configurations, configurationData, licensePlateData)
     if not self.isServer then
         UsedPlus.logError("createFinanceDeal must be called on server")
         return nil
@@ -691,6 +691,20 @@ function FinanceManager:createFinanceDeal(farmId, itemType, itemId, itemName, pr
             -- Apply user-selected configurations
             local vehicleConfigs = configurations or {}
             buyData:setConfigurations(vehicleConfigs)
+
+            -- v2.13.2: Apply custom color data (Issue #6 — colors revert to white without this)
+            -- configurationData contains actual RGB values for custom colors (e.g., from Unlimited Color Configurations)
+            if configurationData and buyData.setConfigurationData then
+                buyData:setConfigurationData(configurationData)
+                UsedPlus.logDebug(string.format("Applied configurationData (%d color entries)",
+                    configurationData and #configurationData or 0))
+            end
+
+            -- v2.13.2: Apply license plate data
+            if licensePlateData and buyData.setLicensePlateData then
+                buyData:setLicensePlateData(licensePlateData)
+                UsedPlus.logDebug("Applied licensePlateData")
+            end
 
             -- Debug log configurations being applied
             local configCount = 0

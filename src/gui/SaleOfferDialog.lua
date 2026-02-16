@@ -38,6 +38,34 @@ SaleOfferDialog.DEAL_RATINGS = {
     { threshold = 0.75, starCount = 5, text = "Excellent Deal", color = {0.3, 1.0, 0.3, 1} },
 }
 
+-- v2.13.2: CONTROLS table — binds XML element ids to self.* properties
+-- Required for setText/setImagePath calls in updateDisplay() to work
+-- (Without this, all self.vehicleNameText etc. are nil and silently skip)
+SaleOfferDialog.CONTROLS = {
+    "vehicleNameText",
+    "vehicleImage",
+    "agentTierText",
+    "offerAmountText",
+    "dealRatingText",
+    "rangeMinText",
+    "rangeOfferText",
+    "rangeMaxText",
+    "thisOfferText",
+    "expirationText",
+}
+
+--[[
+    Assign controls from XML to self.* properties
+    Pattern copied from SaleExpiredDialog.lua
+]]
+function SaleOfferDialog:assignControls()
+    for _, name in pairs(SaleOfferDialog.CONTROLS) do
+        if self[name] == nil then
+            self[name] = self.target and self.target[name]
+        end
+    end
+end
+
 --[[
     Constructor - extends ScreenElement (pattern from NegotiationDialog)
 ]]
@@ -74,6 +102,9 @@ end
 ]]
 function SaleOfferDialog:onOpen()
     SaleOfferDialog:superClass().onOpen(self)
+
+    -- v2.13.2: Bind XML elements to self.* properties (MUST be first)
+    self:assignControls()
 
     -- v2.13.2: Reset double-click guard
     self._acceptPending = false
