@@ -979,6 +979,32 @@ const ICONS = {
             </svg>`
     },
 
+    // v2.13.2: Star filled - solid gold star for deal ratings (transparent background)
+    // Used in SaleOfferDialog to replace Unicode ★ that doesn't render in FS25 font
+    star_filled: {
+        name: 'star_filled',
+        bgColor: 'transparent',
+        bgColorDark: 'transparent',
+        svg: (size) => `
+            <svg width="${size}" height="${size}" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="32,4 40,24 62,24 44,38 50,58 32,46 14,58 20,38 2,24 24,24"
+                         fill="#FFD700" stroke="#FFA000" stroke-width="1" stroke-linejoin="round"/>
+            </svg>`
+    },
+
+    // v2.13.2: Star empty - dim gray outlined star for deal ratings (transparent background)
+    // Used in SaleOfferDialog alongside star_filled for unfilled rating positions
+    star_empty: {
+        name: 'star_empty',
+        bgColor: 'transparent',
+        bgColorDark: 'transparent',
+        svg: (size) => `
+            <svg width="${size}" height="${size}" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="32,4 40,24 62,24 44,38 50,58 32,46 14,58 20,38 2,24 24,24"
+                         fill="none" stroke="#555555" stroke-width="2" stroke-linejoin="round"/>
+            </svg>`
+    },
+
     // Range marker - yellow downward arrow/triangle (transparent background)
     // Used in SaleOfferDialog to indicate offer position on range bar
     range_marker: {

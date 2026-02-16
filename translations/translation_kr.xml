@@ -1836,10 +1836,18 @@
         <!-- Result messages -->
         <e k="usedplus_fsk_result_title_perfect" v="수리 성공" eh="cb532e1b" />
         <e k="usedplus_fsk_result_title_good" v="부분 수리" eh="cbba8a69" />
+        <e k="usedplus_fsk_result_title_wrong_system" v="잘못된 시스템" eh="7259aab1" />
         <e k="usedplus_fsk_result_title_poor" v="최소 수리" eh="9d485c84" />
         <e k="usedplus_fsk_result_perfect" v="정확한 진단! 표적 수리가 적용됨." eh="91538006" />
         <e k="usedplus_fsk_result_good" v="시스템은 맞지만 진단이 빗나갔습니다. 일반 수리가 적용됨." eh="47b6188e" />
+        <e k="usedplus_fsk_result_wrong_system" v="좋은 진단입니다! 하지만 실제 문제는 여기에 있었습니다: %s" eh="e3bba502" />
+        <e k="usedplus_fsk_result_wrong_both" v="잘못된 시스템과 잘못된 원인. 최소한의 수리가 적용됨." eh="c22e0ba6" />
         <e k="usedplus_fsk_result_poor" v="잘못된 시스템을 식별함. 기본 유지보수만 적용됨." eh="38caed38" />
+        <e k="usedplus_fsk_reliability_restored" v="신뢰성 복원됨" eh="9cc39e14" />
+        <e k="usedplus_fsk_reliability_partial" v="부분 복원" eh="4f61cd65" />
+        <e k="usedplus_fsk_reliability_minimal" v="최소한의 개선" eh="9ffdf95d" />
+        <e k="usedplus_fsk_flat" v="펑크!" eh="ea13651c" />
+        <e k="usedplus_fsk_seized" v="고착!" eh="0a5c79b9" />
         <e k="usedplus_fsk_results" v="수리 결과" eh="bb6599cb" />
         <e k="usedplus_fsk_before" v="전:" eh="0519a746" />
         <e k="usedplus_fsk_after" v="후:" eh="fdbe650f" />

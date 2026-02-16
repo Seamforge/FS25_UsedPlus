@@ -1836,10 +1836,18 @@
         <!-- Result messages -->
         <e k="usedplus_fsk_result_title_perfect" v="REPARATION VELLYKKET" eh="cb532e1b" />
         <e k="usedplus_fsk_result_title_good" v="DELVIS REPARATION" eh="cbba8a69" />
+        <e k="usedplus_fsk_result_title_wrong_system" v="FORKERT SYSTEM" eh="7259aab1" />
         <e k="usedplus_fsk_result_title_poor" v="MINIMAL REPARATION" eh="9d485c84" />
         <e k="usedplus_fsk_result_perfect" v="Korrekt diagnose! Målrettet reparation anvendt." eh="91538006" />
         <e k="usedplus_fsk_result_good" v="Rigtigt system, men diagnosen var forkert. Generelle reparationer anvendt." eh="47b6188e" />
+        <e k="usedplus_fsk_result_wrong_system" v="God diagnose! Men det faktiske problem var i: %s" eh="e3bba502" />
+        <e k="usedplus_fsk_result_wrong_both" v="Forkert system og forkert årsag. Minimal reparation anvendt." eh="c22e0ba6" />
         <e k="usedplus_fsk_result_poor" v="Forkert system identificeret. Kun grundlæggende vedligeholdelse anvendt." eh="38caed38" />
+        <e k="usedplus_fsk_reliability_restored" v="PÅLIDELIGHED GENDANNET" eh="9cc39e14" />
+        <e k="usedplus_fsk_reliability_partial" v="DELVIS GENDANNELSE" eh="4f61cd65" />
+        <e k="usedplus_fsk_reliability_minimal" v="MINIMAL FORBEDRING" eh="9ffdf95d" />
+        <e k="usedplus_fsk_flat" v="PUNKTERING!" eh="ea13651c" />
+        <e k="usedplus_fsk_seized" v="FASTLÅST!" eh="0a5c79b9" />
         <e k="usedplus_fsk_results" v="REPARATIONSRESULTATER" eh="bb6599cb" />
         <e k="usedplus_fsk_before" v="Før:" eh="0519a746" />
         <e k="usedplus_fsk_after" v="Efter:" eh="fdbe650f" />

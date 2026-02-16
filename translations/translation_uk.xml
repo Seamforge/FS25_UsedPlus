@@ -1801,10 +1801,18 @@
         <!-- Result messages -->
         <e k="usedplus_fsk_result_title_perfect" v="РЕМОНТ УСПІШНИЙ" eh="cb532e1b" />
         <e k="usedplus_fsk_result_title_good" v="ЧАСТКОВИЙ РЕМОНТ" eh="cbba8a69" />
+        <e k="usedplus_fsk_result_title_wrong_system" v="НЕПРАВИЛЬНА СИСТЕМА" eh="7259aab1" />
         <e k="usedplus_fsk_result_title_poor" v="МІНІМАЛЬНИЙ РЕМОНТ" eh="9d485c84" />
         <e k="usedplus_fsk_result_perfect" v="Правильний діагноз! Застосовано цільовий ремонт." eh="91538006" />
         <e k="usedplus_fsk_result_good" v="Правильна система, але діагноз був невірним. Застосовано загальний ремонт." eh="47b6188e" />
+        <e k="usedplus_fsk_result_wrong_system" v="Гарний діагноз! Але справжня проблема була в: %s" eh="e3bba502" />
+        <e k="usedplus_fsk_result_wrong_both" v="Неправильна система і невірна причина. Застосовано мінімальний ремонт." eh="c22e0ba6" />
         <e k="usedplus_fsk_result_poor" v="Визначено неправильну систему. Застосовано лише базове обслуговування." eh="38caed38" />
+        <e k="usedplus_fsk_reliability_restored" v="НАДІЙНІСТЬ ВІДНОВЛЕНО" eh="9cc39e14" />
+        <e k="usedplus_fsk_reliability_partial" v="ЧАСТКОВЕ ВІДНОВЛЕННЯ" eh="4f61cd65" />
+        <e k="usedplus_fsk_reliability_minimal" v="МІНІМАЛЬНЕ ПОКРАЩЕННЯ" eh="9ffdf95d" />
+        <e k="usedplus_fsk_flat" v="ПРОКОЛ!" eh="ea13651c" />
+        <e k="usedplus_fsk_seized" v="ЗАКЛИНИЛО!" eh="0a5c79b9" />
         <e k="usedplus_fsk_results" v="РЕЗУЛЬТАТИ РЕМОНТУ" eh="bb6599cb" />
         <e k="usedplus_fsk_before" v="До:" eh="0519a746" />
         <e k="usedplus_fsk_after" v="Після:" eh="fdbe650f" />

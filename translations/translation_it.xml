@@ -1801,10 +1801,18 @@
         <!-- Result messages -->
         <e k="usedplus_fsk_result_title_perfect" v="RIPARAZIONE RIUSCITA" eh="cb532e1b" />
         <e k="usedplus_fsk_result_title_good" v="RIPARAZIONE PARZIALE" eh="cbba8a69" />
+        <e k="usedplus_fsk_result_title_wrong_system" v="SISTEMA SBAGLIATO" eh="7259aab1" />
         <e k="usedplus_fsk_result_title_poor" v="RIPARAZIONE MINIMA" eh="9d485c84" />
         <e k="usedplus_fsk_result_perfect" v="Diagnosi corretta! Riparazione mirata applicata." eh="91538006" />
         <e k="usedplus_fsk_result_good" v="Sistema giusto, ma la diagnosi era sbagliata. Applicate riparazioni generali." eh="47b6188e" />
+        <e k="usedplus_fsk_result_wrong_system" v="Buona diagnosi! Ma il problema reale era in: %s" eh="e3bba502" />
+        <e k="usedplus_fsk_result_wrong_both" v="Sistema sbagliato e causa errata. Riparazione minima applicata." eh="c22e0ba6" />
         <e k="usedplus_fsk_result_poor" v="Sistema sbagliato identificato. Applicata solo manutenzione base." eh="38caed38" />
+        <e k="usedplus_fsk_reliability_restored" v="AFFIDABILITÀ RIPRISTINATA" eh="9cc39e14" />
+        <e k="usedplus_fsk_reliability_partial" v="RIPRISTINO PARZIALE" eh="4f61cd65" />
+        <e k="usedplus_fsk_reliability_minimal" v="MIGLIORAMENTO MINIMO" eh="9ffdf95d" />
+        <e k="usedplus_fsk_flat" v="A TERRA!" eh="ea13651c" />
+        <e k="usedplus_fsk_seized" v="GRIPPATO!" eh="0a5c79b9" />
         <e k="usedplus_fsk_results" v="RISULTATI RIPARAZIONE" eh="bb6599cb" />
         <e k="usedplus_fsk_before" v="Prima:" eh="0519a746" />
         <e k="usedplus_fsk_after" v="Dopo:" eh="fdbe650f" />

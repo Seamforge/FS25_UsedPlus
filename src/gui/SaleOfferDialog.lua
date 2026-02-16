@@ -11,6 +11,11 @@
     - Removed "Sell Instantly" (no instant sell in UsedPlus)
     - Removed confusing "+X%" bonus display
 
+    v2.13.2: Replace Unicode stars with image icons
+    - Unicode ★☆ (chars 9733/9734) don't render in FS25 font
+    - Now uses star_filled.png / star_empty.png loaded via setImageFilename
+    - DEAL_RATINGS table uses starCount (number) instead of stars (Unicode string)
+
     Features:
     - Shows offer amount prominently with deal quality
     - Visual range bar showing where offer falls
@@ -24,11 +29,13 @@ SaleOfferDialog = {}
 local SaleOfferDialog_mt = Class(SaleOfferDialog, ScreenElement)
 
 -- Deal quality thresholds (position in range 0-1)
+-- v2.13.2: Replaced Unicode stars (★☆) with starCount for image-based rendering
+-- (Unicode chars 9733/9734 don't render in FS25's font)
 SaleOfferDialog.DEAL_RATINGS = {
-    { threshold = 0.00, stars = "★★☆☆☆", text = "Fair Offer",     color = {0.8, 0.8, 0.3, 1} },
-    { threshold = 0.25, stars = "★★★☆☆", text = "Good Deal",      color = {0.7, 0.9, 0.3, 1} },
-    { threshold = 0.50, stars = "★★★★☆", text = "Great Deal",     color = {0.4, 1.0, 0.4, 1} },
-    { threshold = 0.75, stars = "★★★★★", text = "Excellent Deal", color = {0.3, 1.0, 0.3, 1} },
+    { threshold = 0.00, starCount = 2, text = "Fair Offer",     color = {0.8, 0.8, 0.3, 1} },
+    { threshold = 0.25, starCount = 3, text = "Good Deal",      color = {0.7, 0.9, 0.3, 1} },
+    { threshold = 0.50, starCount = 4, text = "Great Deal",     color = {0.4, 1.0, 0.4, 1} },
+    { threshold = 0.75, starCount = 5, text = "Excellent Deal", color = {0.3, 1.0, 0.3, 1} },
 }
 
 --[[
@@ -68,6 +75,9 @@ end
 function SaleOfferDialog:onOpen()
     SaleOfferDialog:superClass().onOpen(self)
 
+    -- v2.13.2: Reset double-click guard
+    self._acceptPending = false
+
     -- v2.9.5: Setup section icons
     self:setupSectionIcons()
 
@@ -78,17 +88,26 @@ end
     v2.9.5: Setup section icons
 ]]
 function SaleOfferDialog:setupSectionIcons()
-    -- Quality star icon
-    local qualityIcon = self.dialogElement:getDescendantById("qualityIcon")
-    if qualityIcon ~= nil then
-        qualityIcon:setImageFilename(self.iconDir .. "quality_star.png")
-    end
-
     -- Timer icon
     local timerIcon = self.dialogElement:getDescendantById("timerIcon")
     if timerIcon ~= nil then
         timerIcon:setImageFilename(self.iconDir .. "timer.png")
     end
+
+    -- v2.13.2: Load star rating icons (replace Unicode ★☆ that don't render in FS25 font)
+    local starFilledPath = self.iconDir .. "star_filled.png"
+    local starEmptyPath = self.iconDir .. "star_empty.png"
+    self.starElements = {}
+    for i = 1, 5 do
+        local star = self.dialogElement:getDescendantById("star" .. i)
+        if star ~= nil then
+            self.starElements[i] = star
+            star:setImageFilename(starEmptyPath)  -- Default to empty
+            UsedPlus.logDebug(string.format("SaleOfferDialog: Star %d loaded", i))
+        end
+    end
+    self.starFilledPath = starFilledPath
+    self.starEmptyPath = starEmptyPath
 
     -- Range arrow markers (11 positions: 0% to 100% in 10% steps)
     -- Load arrow PNG on all, then show/hide in updateDisplay
@@ -111,7 +130,7 @@ end
 
 --[[
     Calculate deal quality rating based on where offer falls in expected range
-    @return rating table with stars, text, color, and position (0-1)
+    @return rating table with starCount, text, color, and position (0-1)
 ]]
 function SaleOfferDialog:calculateDealRating()
     if self.listing == nil then
@@ -170,9 +189,23 @@ function SaleOfferDialog:updateDisplay()
 
     -- Calculate and display deal rating
     local rating, position = self:calculateDealRating()
-    local ratingText = string.format("%s %s", rating.stars, rating.text)
+
+    -- v2.13.2: Set star images (filled/empty) based on rating starCount
+    if self.starElements then
+        for i = 1, 5 do
+            if self.starElements[i] then
+                if i <= rating.starCount then
+                    self.starElements[i]:setImageFilename(self.starFilledPath)
+                else
+                    self.starElements[i]:setImageFilename(self.starEmptyPath)
+                end
+            end
+        end
+    end
+
+    -- Show rating text WITHOUT stars (stars are now images)
     if self.dealRatingText then
-        self.dealRatingText:setText(ratingText)
+        self.dealRatingText:setText(rating.text)
         self.dealRatingText:setTextColor(unpack(rating.color))
     end
 
@@ -230,10 +263,18 @@ end
     which causes errors if dialog is still referencing it
 ]]
 function SaleOfferDialog:onClickAccept()
+    -- v2.13.2: Double-click guard — prevent multiple accept calls
+    if self._acceptPending then
+        return
+    end
+
     if self.listing == nil then
         self:close()
         return
     end
+
+    -- Mark as pending to prevent double-click
+    self._acceptPending = true
 
     -- Cache values before closing (dialog will lose reference to listing)
     local vehicleName = self.listing.vehicleName
@@ -293,6 +334,21 @@ function SaleOfferDialog.showForListing(listing, callback)
         return false
     end
 
+    -- v2.13.2: Contract lifecycle gate — reject completed/cancelled/expired listings
+    -- Once a contract is done, no further actions should be possible
+    if listing.isComplete and listing:isComplete() then
+        UsedPlus.logInfo(string.format("SaleOfferDialog: Blocked — listing %s is already %s (contract complete)",
+            tostring(listing.id), tostring(listing.status)))
+        return false
+    end
+
+    -- v2.13.2: Verify listing is still in OFFER_PENDING status
+    if listing.status ~= VehicleSaleListing.STATUS.OFFER_PENDING then
+        UsedPlus.logInfo(string.format("SaleOfferDialog: Blocked — listing %s status is '%s', not OFFER_PENDING",
+            tostring(listing.id), tostring(listing.status)))
+        return false
+    end
+
     if listing.currentOffer == nil or listing.currentOffer <= 0 then
         UsedPlus.logError("Cannot show offer dialog - no valid offer amount")
         return false
@@ -305,4 +361,4 @@ function SaleOfferDialog.showForListing(listing, callback)
     return DialogLoader.show("SaleOfferDialog", "setListing", listing, callback)
 end
 
-UsedPlus.logInfo("SaleOfferDialog loaded (v2.9.5)")
+UsedPlus.logInfo("SaleOfferDialog loaded (v2.13.2)")

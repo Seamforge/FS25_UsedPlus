@@ -48,16 +48,21 @@
             <GuiElement profile="soSectionBg" position="0px -165px" size="680px 100px">
                 <!-- Large offer amount -->
                 <Text profile="soOfferAmount" id="offerAmountText" position="0px -15px"/>
-                <!-- v2.9.5: Deal quality icon + text -->
-                <Bitmap profile="soQualityIcon" id="qualityIcon" position="-100px -55px"/>
-                <Text profile="soDealRating" id="dealRatingText" position="15px -55px"/>
+                <!-- v2.13.2: Deal rating stars (image icons replace Unicode ★☆ that don't render in FS25 font) -->
+                <Bitmap profile="soStarIcon" id="star1" position="-110px -55px"/>
+                <Bitmap profile="soStarIcon" id="star2" position="-84px -55px"/>
+                <Bitmap profile="soStarIcon" id="star3" position="-58px -55px"/>
+                <Bitmap profile="soStarIcon" id="star4" position="-32px -55px"/>
+                <Bitmap profile="soStarIcon" id="star5" position="-6px -55px"/>
+                <!-- Deal rating text (v2.13.2: text only, stars are now images above) -->
+                <Text profile="soDealRating" id="dealRatingText" position="60px -55px"/>
             </GuiElement>
 
             <!-- ================================================================ -->
             <!-- SECTION 3: Expected Range (visual indicator) -->
             <!-- ================================================================ -->
             <GuiElement profile="soSectionBg" position="0px -275px" size="680px 105px">
-                <Text profile="soSectionLabel" position="0px -8px" text="$l10n_usedplus_so_expectedRange"/>
+                <Text profile="soSectionLabel" position="0px -3px" text="$l10n_usedplus_so_expectedRange"/>
 
                 <!-- 21 arrow markers at fixed positions (0% to 100% in 5% steps) -->
                 <!-- Pattern: baseReference + noSlice, image loaded via Lua setImageFilename -->
@@ -113,8 +118,9 @@
                 <Text profile="soOptionValue" id="thisOfferText" position="100px -35px"/>
 
                 <!-- Row 2: Keep Waiting - label left, note right -->
+                <!-- v2.13.2: Shifted note from 100px to 130px to avoid overlap with wider profile -->
                 <Text profile="soOptionLabel" position="-100px -58px" text="$l10n_usedplus_so_keepWaiting"/>
-                <Text profile="soOptionNote" position="100px -58px" text="$l10n_usedplus_so_keepWaitingNote"/>
+                <Text profile="soOptionNote" position="130px -58px" text="$l10n_usedplus_so_keepWaitingNote"/>
             </GuiElement>
 
             <!-- ================================================================ -->
@@ -123,7 +129,8 @@
             <GuiElement position="0px -480px">
                 <Bitmap profile="soTimerIcon" id="timerIcon" position="-125px -5px"/>
                 <Text profile="soExpirationLabel" position="20px -5px" text="$l10n_usedplus_so_expiresIn"/>
-                <Text profile="soExpirationValue" id="expirationText" position="110px -5px"/>
+                <!-- v2.13.2: Shifted right 10px per user feedback -->
+                <Text profile="soExpirationValue" id="expirationText" position="120px -5px"/>
             </GuiElement>
 
         </GuiElement>
@@ -146,8 +153,8 @@
             <bgColor value="0.05 0.05 0.08 0.9"/>
         </Profile>
 
-        <!-- v2.9.5: Quality star icon -->
-        <Profile name="soQualityIcon" extends="baseReference" with="anchorTopCenter">
+        <!-- v2.13.2: Deal rating star icon (filled or empty, set via Lua setImageFilename) -->
+        <Profile name="soStarIcon" extends="baseReference" with="anchorTopCenter">
             <size value="24px 24px"/>
             <imageSliceId value="noSlice"/>
         </Profile>
@@ -164,14 +171,16 @@
             <imageSliceId value="noSlice"/>
         </Profile>
 
-        <!-- Vehicle name -->
+        <!-- Vehicle name (v2.13.2: explicit width to prevent truncation of long names) -->
         <Profile name="soVehicleName" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="280px 24px"/>
             <textSize value="20px"/>
             <textBold value="true"/>
         </Profile>
 
-        <!-- Agent/tier info (subtle) -->
+        <!-- Agent/tier info (subtle, v2.13.2: explicit width) -->
         <Profile name="soAgentInfo" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="280px 18px"/>
             <textSize value="14px"/>
             <textColor value="0.6 0.6 0.6 1"/>
         </Profile>
@@ -286,8 +295,9 @@
         </Profile>
 
         <!-- Option note (right side, left-aligned, subtle) -->
+        <!-- v2.13.2: Widened from 180px to 240px to prevent truncation of long notes -->
         <Profile name="soOptionNote" extends="fs25_textDefault" with="anchorTopCenter">
-            <size value="180px 20px"/>
+            <size value="240px 20px"/>
             <textSize value="12px"/>
             <textColor value="0.6 0.6 0.6 1"/>
             <textAlignment value="left"/>

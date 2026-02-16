@@ -1801,10 +1801,18 @@
         <!-- Result messages -->
         <e k="usedplus_fsk_result_title_perfect" v="OPRAVA ÚSPĚŠNÁ" eh="cb532e1b" />
         <e k="usedplus_fsk_result_title_good" v="ČÁSTEČNÁ OPRAVA" eh="cbba8a69" />
+        <e k="usedplus_fsk_result_title_wrong_system" v="ŠPATNÝ SYSTÉM" eh="7259aab1" />
         <e k="usedplus_fsk_result_title_poor" v="MINIMÁLNÍ OPRAVA" eh="9d485c84" />
         <e k="usedplus_fsk_result_perfect" v="Správná diagnóza! Cílená oprava provedena." eh="91538006" />
         <e k="usedplus_fsk_result_good" v="Správný systém, ale diagnóza byla chybná. Provedeny obecné opravy." eh="47b6188e" />
+        <e k="usedplus_fsk_result_wrong_system" v="Dobrá diagnóza! Ale skutečný problém byl v: %s" eh="e3bba502" />
+        <e k="usedplus_fsk_result_wrong_both" v="Špatný systém a nesprávná příčina. Provedena minimální oprava." eh="c22e0ba6" />
         <e k="usedplus_fsk_result_poor" v="Identifikován špatný systém. Provedena pouze základní údržba." eh="38caed38" />
+        <e k="usedplus_fsk_reliability_restored" v="SPOLEHLIVOST OBNOVENA" eh="9cc39e14" />
+        <e k="usedplus_fsk_reliability_partial" v="ČÁSTEČNÉ OBNOVENÍ" eh="4f61cd65" />
+        <e k="usedplus_fsk_reliability_minimal" v="MINIMÁLNÍ ZLEPŠENÍ" eh="9ffdf95d" />
+        <e k="usedplus_fsk_flat" v="PRÁZDNÁ!" eh="ea13651c" />
+        <e k="usedplus_fsk_seized" v="ZADŘENÝ!" eh="0a5c79b9" />
         <e k="usedplus_fsk_results" v="VÝSLEDKY OPRAVY" eh="bb6599cb" />
         <e k="usedplus_fsk_before" v="Před:" eh="0519a746" />
         <e k="usedplus_fsk_after" v="Po:" eh="fdbe650f" />

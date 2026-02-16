@@ -1836,10 +1836,18 @@
         <!-- Result messages -->
         <e k="usedplus_fsk_result_title_perfect" v="PERBAIKAN BERHASIL" eh="cb532e1b" />
         <e k="usedplus_fsk_result_title_good" v="PERBAIKAN SEBAGIAN" eh="cbba8a69" />
+        <e k="usedplus_fsk_result_title_wrong_system" v="SISTEM SALAH" eh="7259aab1" />
         <e k="usedplus_fsk_result_title_poor" v="PERBAIKAN MINIMAL" eh="9d485c84" />
         <e k="usedplus_fsk_result_perfect" v="Diagnosis benar! Targeted repair applied." eh="91538006" />
         <e k="usedplus_fsk_result_good" v="Sistem benar, tapi diagnosis meleset. Perbaikan umum diterapkan." eh="47b6188e" />
+        <e k="usedplus_fsk_result_wrong_system" v="Diagnosis bagus! Tapi masalah sebenarnya ada di: %s" eh="e3bba502" />
+        <e k="usedplus_fsk_result_wrong_both" v="Sistem salah dan penyebab tidak tepat. Perbaikan minimal diterapkan." eh="c22e0ba6" />
         <e k="usedplus_fsk_result_poor" v="Sistem salah diidentifikasi. Hanya pemeliharaan dasar diterapkan." eh="38caed38" />
+        <e k="usedplus_fsk_reliability_restored" v="KEANDALAN DIPULIHKAN" eh="9cc39e14" />
+        <e k="usedplus_fsk_reliability_partial" v="PEMULIHAN SEBAGIAN" eh="4f61cd65" />
+        <e k="usedplus_fsk_reliability_minimal" v="PENINGKATAN MINIMAL" eh="9ffdf95d" />
+        <e k="usedplus_fsk_flat" v="KEMPES!" eh="ea13651c" />
+        <e k="usedplus_fsk_seized" v="MACET!" eh="0a5c79b9" />
         <e k="usedplus_fsk_results" v="HASIL PERBAIKAN" eh="bb6599cb" />
         <e k="usedplus_fsk_before" v="Sebelum:" eh="0519a746" />
         <e k="usedplus_fsk_after" v="Setelah:" eh="fdbe650f" />

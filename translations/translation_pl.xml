@@ -1801,10 +1801,18 @@
         <!-- Result messages -->
         <e k="usedplus_fsk_result_title_perfect" v="NAPRAWA UDANA" eh="cb532e1b" />
         <e k="usedplus_fsk_result_title_good" v="CZĘŚCIOWA NAPRAWA" eh="cbba8a69" />
+        <e k="usedplus_fsk_result_title_wrong_system" v="BŁĘDNY SYSTEM" eh="7259aab1" />
         <e k="usedplus_fsk_result_title_poor" v="MINIMALNA NAPRAWA" eh="9d485c84" />
         <e k="usedplus_fsk_result_perfect" v="Prawidłowa diagnoza! Zastosowano ukierunkowaną naprawę." eh="91538006" />
         <e k="usedplus_fsk_result_good" v="Właściwy system, ale diagnoza była błędna. Zastosowano ogólne naprawy." eh="47b6188e" />
+        <e k="usedplus_fsk_result_wrong_system" v="Dobra diagnoza! Ale rzeczywisty problem był w: %s" eh="e3bba502" />
+        <e k="usedplus_fsk_result_wrong_both" v="Błędny system i nieprawidłowa przyczyna. Zastosowano minimalną naprawę." eh="c22e0ba6" />
         <e k="usedplus_fsk_result_poor" v="Zidentyfikowano niewłaściwy system. Zastosowano tylko podstawową konserwację." eh="38caed38" />
+        <e k="usedplus_fsk_reliability_restored" v="NIEZAWODNOŚĆ PRZYWRÓCONA" eh="9cc39e14" />
+        <e k="usedplus_fsk_reliability_partial" v="CZĘŚCIOWE PRZYWRÓCENIE" eh="4f61cd65" />
+        <e k="usedplus_fsk_reliability_minimal" v="MINIMALNA POPRAWA" eh="9ffdf95d" />
+        <e k="usedplus_fsk_flat" v="GUMA!" eh="ea13651c" />
+        <e k="usedplus_fsk_seized" v="ZATARTY!" eh="0a5c79b9" />
         <e k="usedplus_fsk_results" v="WYNIKI NAPRAWY" eh="bb6599cb" />
         <e k="usedplus_fsk_before" v="Przed:" eh="0519a746" />
         <e k="usedplus_fsk_after" v="Po:" eh="fdbe650f" />

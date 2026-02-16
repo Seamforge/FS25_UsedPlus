@@ -1799,12 +1799,20 @@
         <e k="usedplus_fsk_repair_hyd_seals" v="Нанесён аварийный герметик." eh="5fadb7ef" />
 
         <!-- Result messages -->
-        <e k="usedplus_fsk_result_title_perfect" v="РЕМОНТ УСПЕШЕН" eh="cb532e1b" />
-        <e k="usedplus_fsk_result_title_good" v="ЧАСТИЧНЫЙ РЕМОНТ" eh="cbba8a69" />
-        <e k="usedplus_fsk_result_title_poor" v="МИНИМАЛЬНЫЙ РЕМОНТ" eh="9d485c84" />
-        <e k="usedplus_fsk_result_perfect" v="Верный диагноз! Применён целевой ремонт." eh="91538006" />
-        <e k="usedplus_fsk_result_good" v="Правильная система, но диагноз был неверным. Применён общий ремонт." eh="47b6188e" />
+        <e k="usedplus_fsk_result_title_perfect" v="ВЕРНЫЙ ДИАГНОЗ!" eh="cb532e1b" />
+        <e k="usedplus_fsk_result_title_good" v="ЧАСТИЧНОЕ СОВПАДЕНИЕ" eh="cbba8a69" />
+        <e k="usedplus_fsk_result_title_wrong_system" v="НЕВЕРНАЯ СИСТЕМА" eh="7259aab1" />
+        <e k="usedplus_fsk_result_title_poor" v="НЕВЕРНЫЙ ДИАГНОЗ" eh="9d485c84" />
+        <e k="usedplus_fsk_result_perfect" v="Отличная работа! Применён полный ремонтный бонус." eh="91538006" />
+        <e k="usedplus_fsk_result_good" v="Правильная система, но причина определена неверно." eh="47b6188e" />
+        <e k="usedplus_fsk_result_wrong_system" v="Хороший диагноз! Но настоящая проблема была в: %s" eh="e3bba502" />
+        <e k="usedplus_fsk_result_wrong_both" v="Неверная система и неверная причина. Минимальный ремонт." eh="c22e0ba6" />
         <e k="usedplus_fsk_result_poor" v="Определена неправильная система. Применено только базовое обслуживание." eh="38caed38" />
+        <e k="usedplus_fsk_reliability_restored" v="НАДЁЖНОСТЬ ВОССТАНОВЛЕНА" eh="9cc39e14" />
+        <e k="usedplus_fsk_reliability_partial" v="ЧАСТИЧНОЕ ВОССТАНОВЛЕНИЕ" eh="4f61cd65" />
+        <e k="usedplus_fsk_reliability_minimal" v="МИНИМАЛЬНОЕ УЛУЧШЕНИЕ" eh="9ffdf95d" />
+        <e k="usedplus_fsk_flat" v="СПУЩЕНО!" eh="ea13651c" />
+        <e k="usedplus_fsk_seized" v="ЗАКЛИНИЛО!" eh="0a5c79b9" />
         <e k="usedplus_fsk_results" v="РЕЗУЛЬТАТЫ РЕМОНТА" eh="bb6599cb" />
         <e k="usedplus_fsk_before" v="До:" eh="0519a746" />
         <e k="usedplus_fsk_after" v="После:" eh="fdbe650f" />

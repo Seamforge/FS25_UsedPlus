@@ -1466,10 +1466,18 @@
         <e k="usedplus_fsk_repair_hyd_seals" v="緊急シール剤を適用。" eh="5fadb7ef" />
         <e k="usedplus_fsk_result_title_perfect" v="修理成功" eh="cb532e1b" />
         <e k="usedplus_fsk_result_title_good" v="部分修理" eh="cbba8a69" />
+        <e k="usedplus_fsk_result_title_wrong_system" v="システム誤り" eh="7259aab1" />
         <e k="usedplus_fsk_result_title_poor" v="最小限の修理" eh="9d485c84" />
         <e k="usedplus_fsk_result_perfect" v="診断正解！的確な修理を実施しました。" eh="91538006" />
         <e k="usedplus_fsk_result_good" v="システムは正解でしたが、診断がずれていました。一般的な修理を実施。" eh="47b6188e" />
+        <e k="usedplus_fsk_result_wrong_system" v="良い診断です！しかし実際の問題は: %s" eh="e3bba502" />
+        <e k="usedplus_fsk_result_wrong_both" v="システムも原因も不正解。最小限の修理を実施。" eh="c22e0ba6" />
         <e k="usedplus_fsk_result_poor" v="間違ったシステムを特定しました。基本的なメンテナンスのみ実施。" eh="38caed38" />
+        <e k="usedplus_fsk_reliability_restored" v="信頼性回復" eh="9cc39e14" />
+        <e k="usedplus_fsk_reliability_partial" v="部分的回復" eh="4f61cd65" />
+        <e k="usedplus_fsk_reliability_minimal" v="最小限の改善" eh="9ffdf95d" />
+        <e k="usedplus_fsk_flat" v="パンク！" eh="ea13651c" />
+        <e k="usedplus_fsk_seized" v="焼付き！" eh="0a5c79b9" />
         <e k="usedplus_fsk_results" v="修理結果" eh="bb6599cb" />
         <e k="usedplus_fsk_before" v="修理前:" eh="0519a746" />
         <e k="usedplus_fsk_after" v="修理後:" eh="fdbe650f" />

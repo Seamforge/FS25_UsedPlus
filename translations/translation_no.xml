@@ -1836,10 +1836,18 @@
         <!-- Result messages -->
         <e k="usedplus_fsk_result_title_perfect" v="REPARASJON VELLYKKET" eh="cb532e1b" />
         <e k="usedplus_fsk_result_title_good" v="DELVIS REPARASJON" eh="cbba8a69" />
+        <e k="usedplus_fsk_result_title_wrong_system" v="FEIL SYSTEM" eh="7259aab1" />
         <e k="usedplus_fsk_result_title_poor" v="MINIMAL REPARASJON" eh="9d485c84" />
         <e k="usedplus_fsk_result_perfect" v="Korrekt diagnose! Målrettet reparasjon utført." eh="91538006" />
         <e k="usedplus_fsk_result_good" v="Riktig system, men diagnosen var feil. Generelle reparasjoner utført." eh="47b6188e" />
+        <e k="usedplus_fsk_result_wrong_system" v="God diagnose! Men det faktiske problemet var i: %s" eh="e3bba502" />
+        <e k="usedplus_fsk_result_wrong_both" v="Feil system og feil årsak. Minimal reparasjon utført." eh="c22e0ba6" />
         <e k="usedplus_fsk_result_poor" v="Feil system identifisert. Kun grunnleggende vedlikehold utført." eh="38caed38" />
+        <e k="usedplus_fsk_reliability_restored" v="PÅLITELIGHET GJENOPPRETTET" eh="9cc39e14" />
+        <e k="usedplus_fsk_reliability_partial" v="DELVIS GJENOPPRETTELSE" eh="4f61cd65" />
+        <e k="usedplus_fsk_reliability_minimal" v="MINIMAL FORBEDRING" eh="9ffdf95d" />
+        <e k="usedplus_fsk_flat" v="PUNKTERING!" eh="ea13651c" />
+        <e k="usedplus_fsk_seized" v="GRIDD FAST!" eh="0a5c79b9" />
         <e k="usedplus_fsk_results" v="REPARASJONSRESULTATER" eh="bb6599cb" />
         <e k="usedplus_fsk_before" v="Før:" eh="0519a746" />
         <e k="usedplus_fsk_after" v="Etter:" eh="fdbe650f" />

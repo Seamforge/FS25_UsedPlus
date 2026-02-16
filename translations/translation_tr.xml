@@ -1466,10 +1466,18 @@
         <e k="usedplus_fsk_repair_hyd_seals" v="Acil sızdırmazlık bileşiği uygulandı." eh="5fadb7ef" />
         <e k="usedplus_fsk_result_title_perfect" v="ONARIM BAŞARILI" eh="cb532e1b" />
         <e k="usedplus_fsk_result_title_good" v="KISMİ ONARIM" eh="cbba8a69" />
+        <e k="usedplus_fsk_result_title_wrong_system" v="YANLIŞ SİSTEM" eh="7259aab1" />
         <e k="usedplus_fsk_result_title_poor" v="MİNİMAL ONARIM" eh="9d485c84" />
         <e k="usedplus_fsk_result_perfect" v="Doğru teşhis! Hedefli onarım uygulandı." eh="91538006" />
         <e k="usedplus_fsk_result_good" v="Doğru sistem, ancak teşhis yanlıştı. Genel onarımlar uygulandı." eh="47b6188e" />
+        <e k="usedplus_fsk_result_wrong_system" v="İyi teşhis! Ancak asıl sorun şuradaydı: %s" eh="e3bba502" />
+        <e k="usedplus_fsk_result_wrong_both" v="Yanlış sistem ve yanlış neden. Minimal onarım uygulandı." eh="c22e0ba6" />
         <e k="usedplus_fsk_result_poor" v="Yanlış sistem tespit edildi. Sadece temel bakım uygulandı." eh="38caed38" />
+        <e k="usedplus_fsk_reliability_restored" v="GÜVENİLİRLİK GERİ KAZANILDI" eh="9cc39e14" />
+        <e k="usedplus_fsk_reliability_partial" v="KISMİ GERİ KAZANIM" eh="4f61cd65" />
+        <e k="usedplus_fsk_reliability_minimal" v="MİNİMAL İYİLEŞME" eh="9ffdf95d" />
+        <e k="usedplus_fsk_flat" v="PATLAK!" eh="ea13651c" />
+        <e k="usedplus_fsk_seized" v="SIKIŞMIŞ!" eh="0a5c79b9" />
         <e k="usedplus_fsk_results" v="ONARIM SONUÇLARI" eh="bb6599cb" />
         <e k="usedplus_fsk_before" v="Önce:" eh="0519a746" />
         <e k="usedplus_fsk_after" v="Sonra:" eh="fdbe650f" />

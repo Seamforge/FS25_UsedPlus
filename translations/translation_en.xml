@@ -1836,12 +1836,20 @@
         <e k="usedplus_fsk_repair_hyd_seals" v="Applied emergency seal compound." eh="5fadb7ef" />
 
         <!-- Result messages -->
-        <e k="usedplus_fsk_result_title_perfect" v="REPAIR SUCCESSFUL" eh="cb532e1b" />
-        <e k="usedplus_fsk_result_title_good" v="PARTIAL REPAIR" eh="cbba8a69" />
-        <e k="usedplus_fsk_result_title_poor" v="MINIMAL REPAIR" eh="9d485c84" />
-        <e k="usedplus_fsk_result_perfect" v="Correct diagnosis! Targeted repair applied." eh="91538006" />
-        <e k="usedplus_fsk_result_good" v="Right system, but diagnosis was off. General repairs applied." eh="47b6188e" />
+        <e k="usedplus_fsk_result_title_perfect" v="CORRECT DIAGNOSIS!" eh="1455077c" />
+        <e k="usedplus_fsk_result_title_good" v="PARTIAL MATCH" eh="5499883e" />
+        <e k="usedplus_fsk_result_title_wrong_system" v="WRONG SYSTEM" eh="7259aab1" />
+        <e k="usedplus_fsk_result_title_poor" v="WRONG DIAGNOSIS" eh="e10c3aed" />
+        <e k="usedplus_fsk_result_perfect" v="Excellent work! Full repair bonus applied." eh="627b6efd" />
+        <e k="usedplus_fsk_result_good" v="Right system, but incorrect cause identified." eh="2d85e515" />
+        <e k="usedplus_fsk_result_wrong_system" v="Good diagnosis! But the actual problem was in: %s" eh="e3bba502" />
+        <e k="usedplus_fsk_result_wrong_both" v="Wrong system and incorrect cause. Minimal repair applied." eh="c22e0ba6" />
         <e k="usedplus_fsk_result_poor" v="Wrong system identified. Only basic maintenance applied." eh="38caed38" />
+        <e k="usedplus_fsk_reliability_restored" v="RELIABILITY RESTORED" eh="9cc39e14" />
+        <e k="usedplus_fsk_reliability_partial" v="PARTIAL RESTORATION" eh="4f61cd65" />
+        <e k="usedplus_fsk_reliability_minimal" v="MINIMAL IMPROVEMENT" eh="9ffdf95d" />
+        <e k="usedplus_fsk_flat" v="FLAT!" eh="ea13651c" />
+        <e k="usedplus_fsk_seized" v="SEIZED!" eh="0a5c79b9" />
         <e k="usedplus_fsk_results" v="REPAIR RESULTS" eh="bb6599cb" />
         <e k="usedplus_fsk_before" v="Before:" eh="0519a746" />
         <e k="usedplus_fsk_after" v="After:" eh="fdbe650f" />

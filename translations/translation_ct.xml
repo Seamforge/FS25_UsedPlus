@@ -1508,10 +1508,18 @@
         <!-- Result messages -->
         <e k="usedplus_fsk_result_title_perfect" v="REP一個IR SUCCESSFUL" eh="cb532e1b" />
         <e k="usedplus_fsk_result_title_good" v="P一個RTI一個L REP一個IR" eh="cbba8a69" />
-        <e k="usedplus_fsk_result_title_poor" v="MINIM一個L REP一個IR" eh="9d485c84" />
-        <e k="usedplus_fsk_result_perfect" v="Correct diagnosis！ Targeted repair applied." eh="91538006" />
-        <e k="usedplus_fsk_result_good" v="Right system, 但diagnosis was 關閉. General repairs applied." eh="47b6188e" />
-        <e k="usedplus_fsk_result_poor" v="Wrong system identified. 在ly basic maintenance applied." eh="38caed38" />
+        <e k="usedplus_fsk_result_title_wrong_system" v="系統錯誤" eh="7259aab1" />
+        <e k="usedplus_fsk_result_title_poor" v="最低限度維修" eh="e10c3aed" />
+        <e k="usedplus_fsk_result_perfect" v="診斷正確！已進行精準維修。" eh="627b6efd" />
+        <e k="usedplus_fsk_result_good" v="系統正確，但診斷有誤。已進行一般維修。" eh="2d85e515" />
+        <e k="usedplus_fsk_result_wrong_system" v="診斷不錯！但實際問題出在：%s" eh="e3bba502" />
+        <e k="usedplus_fsk_result_wrong_both" v="系統和原因都不正確。已進行最低限度維修。" eh="c22e0ba6" />
+        <e k="usedplus_fsk_result_poor" v="識別了錯誤的系統。僅進行基本保養。" eh="38caed38" />
+        <e k="usedplus_fsk_reliability_restored" v="可靠性已恢復" eh="9cc39e14" />
+        <e k="usedplus_fsk_reliability_partial" v="部分恢復" eh="4f61cd65" />
+        <e k="usedplus_fsk_reliability_minimal" v="最低限度改善" eh="9ffdf95d" />
+        <e k="usedplus_fsk_flat" v="爆胎！" eh="ea13651c" />
+        <e k="usedplus_fsk_seized" v="卡死！" eh="0a5c79b9" />
         <e k="usedplus_fsk_results" v="REP一個IR RESULTS" eh="bb6599cb" />
         <e k="usedplus_fsk_before" v="之前：" eh="0519a746" />
         <e k="usedplus_fsk_after" v="一個fter：" eh="fdbe650f" />

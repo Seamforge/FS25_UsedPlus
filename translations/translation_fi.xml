@@ -1836,10 +1836,18 @@
         <!-- Result messages -->
         <e k="usedplus_fsk_result_title_perfect" v="KORJAUS ONNISTUI" eh="cb532e1b" />
         <e k="usedplus_fsk_result_title_good" v="OSITTAINEN KORJAUS" eh="cbba8a69" />
+        <e k="usedplus_fsk_result_title_wrong_system" v="VÄÄRÄ JÄRJESTELMÄ" eh="7259aab1" />
         <e k="usedplus_fsk_result_title_poor" v="MINIMAALINEN KORJAUS" eh="9d485c84" />
         <e k="usedplus_fsk_result_perfect" v="Oikea diagnoosi! Kohdennettu korjaus tehty." eh="91538006" />
         <e k="usedplus_fsk_result_good" v="Oikea järjestelmä, mutta diagnoosi oli väärä. Yleiset korjaukset tehty." eh="47b6188e" />
+        <e k="usedplus_fsk_result_wrong_system" v="Hyvä diagnoosi! Mutta todellinen ongelma oli: %s" eh="e3bba502" />
+        <e k="usedplus_fsk_result_wrong_both" v="Väärä järjestelmä ja väärä syy. Minimaalinen korjaus tehty." eh="c22e0ba6" />
         <e k="usedplus_fsk_result_poor" v="Väärä järjestelmä tunnistettu. Vain perushuolto tehty." eh="38caed38" />
+        <e k="usedplus_fsk_reliability_restored" v="LUOTETTAVUUS PALAUTETTU" eh="9cc39e14" />
+        <e k="usedplus_fsk_reliability_partial" v="OSITTAINEN PALAUTUS" eh="4f61cd65" />
+        <e k="usedplus_fsk_reliability_minimal" v="MINIMAALINEN PARANNUS" eh="9ffdf95d" />
+        <e k="usedplus_fsk_flat" v="PUHJENNUT!" eh="ea13651c" />
+        <e k="usedplus_fsk_seized" v="JUMISSA!" eh="0a5c79b9" />
         <e k="usedplus_fsk_results" v="KORJAUSTULOKSET" eh="bb6599cb" />
         <e k="usedplus_fsk_before" v="Ennen:" eh="0519a746" />
         <e k="usedplus_fsk_after" v="Jälkeen:" eh="fdbe650f" />

@@ -1468,10 +1468,18 @@
         <e k="usedplus_fsk_repair_hyd_seals" v="Composto de vedante de emergência aplicado." eh="5fadb7ef" />
         <e k="usedplus_fsk_result_title_perfect" v="REPARAÇÃO BEM SUCEDIDA" eh="cb532e1b" />
         <e k="usedplus_fsk_result_title_good" v="REPARAÇÃO PARCIAL" eh="cbba8a69" />
+        <e k="usedplus_fsk_result_title_wrong_system" v="SISTEMA ERRADO" eh="7259aab1" />
         <e k="usedplus_fsk_result_title_poor" v="REPARAÇÃO MÍNIMA" eh="9d485c84" />
         <e k="usedplus_fsk_result_perfect" v="Diagnóstico correto! Reparação direcionada aplicada." eh="91538006" />
         <e k="usedplus_fsk_result_good" v="Sistema correto, mas diagnóstico errado. Reparações gerais aplicadas." eh="47b6188e" />
+        <e k="usedplus_fsk_result_wrong_system" v="Bom diagnóstico! Mas o problema real estava em: %s" eh="e3bba502" />
+        <e k="usedplus_fsk_result_wrong_both" v="Sistema errado e causa incorreta. Reparação mínima aplicada." eh="c22e0ba6" />
         <e k="usedplus_fsk_result_poor" v="Sistema errado identificado. Apenas manutenção básica aplicada." eh="38caed38" />
+        <e k="usedplus_fsk_reliability_restored" v="FIABILIDADE RESTAURADA" eh="9cc39e14" />
+        <e k="usedplus_fsk_reliability_partial" v="RESTAURAÇÃO PARCIAL" eh="4f61cd65" />
+        <e k="usedplus_fsk_reliability_minimal" v="MELHORIA MÍNIMA" eh="9ffdf95d" />
+        <e k="usedplus_fsk_flat" v="VAZIO!" eh="ea13651c" />
+        <e k="usedplus_fsk_seized" v="GRIPADO!" eh="0a5c79b9" />
         <e k="usedplus_fsk_results" v="RESULTADOS DA REPARAÇÃO" eh="bb6599cb" />
         <e k="usedplus_fsk_before" v="Antes:" eh="0519a746" />
         <e k="usedplus_fsk_after" v="Depois:" eh="fdbe650f" />

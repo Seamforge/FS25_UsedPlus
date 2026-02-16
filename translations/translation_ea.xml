@@ -1836,10 +1836,18 @@
         <!-- Result messages -->
         <e k="usedplus_fsk_result_title_perfect" v="REPARACIÓN EXITOSA" eh="cb532e1b" />
         <e k="usedplus_fsk_result_title_good" v="REPARACIÓN PARCIAL" eh="cbba8a69" />
+        <e k="usedplus_fsk_result_title_wrong_system" v="SISTEMA INCORRECTO" eh="7259aab1" />
         <e k="usedplus_fsk_result_title_poor" v="REPARACIÓN MÍNIMA" eh="9d485c84" />
         <e k="usedplus_fsk_result_perfect" v="¡Diagnóstico correcto! Reparación dirigida aplicada." eh="91538006" />
         <e k="usedplus_fsk_result_good" v="Sistema correcto, pero diagnóstico equivocado. Reparaciones generales aplicadas." eh="47b6188e" />
+        <e k="usedplus_fsk_result_wrong_system" v="¡Buen diagnóstico! Pero el problema real estaba en: %s" eh="e3bba502" />
+        <e k="usedplus_fsk_result_wrong_both" v="Sistema incorrecto y causa errónea. Reparación mínima aplicada." eh="c22e0ba6" />
         <e k="usedplus_fsk_result_poor" v="Sistema incorrecto identificado. Solo mantenimiento básico aplicado." eh="38caed38" />
+        <e k="usedplus_fsk_reliability_restored" v="CONFIABILIDAD RESTAURADA" eh="9cc39e14" />
+        <e k="usedplus_fsk_reliability_partial" v="RESTAURACIÓN PARCIAL" eh="4f61cd65" />
+        <e k="usedplus_fsk_reliability_minimal" v="MEJORA MÍNIMA" eh="9ffdf95d" />
+        <e k="usedplus_fsk_flat" v="¡PONCHADO!" eh="ea13651c" />
+        <e k="usedplus_fsk_seized" v="¡AGARROTADO!" eh="0a5c79b9" />
         <e k="usedplus_fsk_results" v="RESULTADOS DE REPARACIÓN" eh="bb6599cb" />
         <e k="usedplus_fsk_before" v="Antes:" eh="0519a746" />
         <e k="usedplus_fsk_after" v="Después:" eh="fdbe650f" />

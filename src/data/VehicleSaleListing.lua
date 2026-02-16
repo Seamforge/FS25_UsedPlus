@@ -259,9 +259,11 @@ end
     @return string - Event that occurred ("offer", "expired", nil)
 ]]
 function VehicleSaleListing:update()
-    -- Don't update if not active
+    -- Don't update if not active or pending
+    -- v2.13.2: Added OFFER_PENDING — was missing, causing offer timers to never count down
     if self.status ~= VehicleSaleListing.STATUS.ACTIVE and
-       self.status ~= VehicleSaleListing.STATUS.DECLINED then
+       self.status ~= VehicleSaleListing.STATUS.DECLINED and
+       self.status ~= VehicleSaleListing.STATUS.OFFER_PENDING then
         return nil
     end
 
@@ -269,7 +271,7 @@ function VehicleSaleListing:update()
     self.ttl = self.ttl - 1
     self.tts = self.tts - 1
 
-    -- Update offer expiration if pending
+    -- Update offer expiration if pending (must run BEFORE tts/offer checks)
     if self.status == VehicleSaleListing.STATUS.OFFER_PENDING then
         self.offerExpiresIn = self.offerExpiresIn - 1
         if self.offerExpiresIn <= 0 then

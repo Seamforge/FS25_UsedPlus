@@ -341,6 +341,25 @@ function VehicleSaleManager:showNextPendingOffer(farmId)
 
     for _, listing in ipairs(farm.vehicleSaleListings) do
         if listing:hasPendingOffer() and not listing.offerShownToUser then
+            -- v2.13.2: Verify the vehicle still exists before showing the offer
+            -- If another listing already sold and deleted this vehicle, auto-cancel
+            local vehicleStillExists = false
+            if listing.vehicleId and g_currentMission and g_currentMission.vehicleSystem then
+                for _, v in pairs(g_currentMission.vehicleSystem.vehicles) do
+                    if tostring(v.id) == tostring(listing.vehicleId) then
+                        vehicleStillExists = true
+                        break
+                    end
+                end
+            end
+
+            if not vehicleStillExists then
+                UsedPlus.logInfo(string.format("v2.13.2: Vehicle gone for listing %s (%s) - auto-cancelling",
+                    listing.id, listing.vehicleName))
+                listing:cancel()
+                self.activeListings[listing.id] = nil
+                -- Continue to next listing (don't show dialog for a ghost vehicle)
+            else
             -- Found an unshown offer - show it now
             UsedPlus.logDebug(string.format("showNextPendingOffer: Showing offer for %s ($%d)",
                 listing.vehicleName, listing.currentOffer))
@@ -355,21 +374,21 @@ function VehicleSaleManager:showNextPendingOffer(farmId)
                 UsedPlus.logDebug(string.format("SaleOfferDialog callback: accepted=%s, listingId=%s",
                     tostring(accepted), tostring(listingId)))
                 if accepted then
-                    -- v2.12.2: Defer accept action to next frame to let dialog GUI events
-                    -- fully drain before triggering vehicle deletion chain (Issue #7)
-                    -- Prevents FSBaseMission.lua:2472 "attempt to index nil with 'id'" crash
-                    g_currentMission:addUpdateable({
-                        update = function(self, dt)
-                            SaleListingActionEvent.sendToServer(listingId, SaleListingActionEvent.ACTION_ACCEPT)
-                            g_currentMission:removeUpdateable(self)
-                        end
-                    })
+                    -- v2.13.2: Call accept directly (no outer deferral needed)
+                    -- Vehicle deletion is already safely deferred inside acceptOffer()
+                    -- Removing the outer deferral eliminates the race condition where the listing
+                    -- stays OFFER_PENDING for one frame, allowing potential re-accept
+                    SaleListingActionEvent.sendToServer(listingId, SaleListingActionEvent.ACTION_ACCEPT)
                 else
                     SaleListingActionEvent.sendToServer(listingId, SaleListingActionEvent.ACTION_DECLINE)
                 end
 
+                -- v2.13.2: Refresh Finance page so stale buttons disappear
+                if FinanceManagerFrame and FinanceManagerFrame.refresh then
+                    FinanceManagerFrame.refresh()
+                end
+
                 -- After handling this offer, check for more pending offers
-                -- Use a small delay to let the UI settle
                 if self_ref then
                     self_ref:showNextPendingOffer(targetFarmId)
                 end
@@ -380,6 +399,7 @@ function VehicleSaleManager:showNextPendingOffer(farmId)
                 DialogLoader.show("SaleOfferDialog", "setListing", listing, callback)
                 return true
             end
+            end -- end of else (vehicle still exists)
         end
     end
 
@@ -597,12 +617,20 @@ function VehicleSaleManager:acceptOffer(listingId)
 
     local listing = self.activeListings[listingId]
     if listing == nil then
-        UsedPlus.logError(string.format("Listing %s not found", listingId))
+        UsedPlus.logError(string.format("acceptOffer: Listing %s not found in activeListings (already completed?)", listingId))
+        return false
+    end
+
+    -- v2.13.2: Contract lifecycle gate — block if contract is already complete
+    if listing:isComplete() then
+        UsedPlus.logInfo(string.format("acceptOffer: Blocked — listing %s is already %s (contract complete)",
+            listingId, listing.status))
         return false
     end
 
     if not listing:hasPendingOffer() then
-        UsedPlus.logError(string.format("Listing %s has no pending offer", listingId))
+        UsedPlus.logError(string.format("acceptOffer: Listing %s has no pending offer (status: %s)",
+            listingId, listing.status))
         return false
     end
 
@@ -623,6 +651,23 @@ function VehicleSaleManager:acceptOffer(listingId)
 
     -- Accept the offer (updates listing status)
     listing:acceptOffer()
+
+    -- v2.13.2: Cancel any OTHER active/pending listings for the same vehicle
+    -- This prevents the duplicate listing bug where a vehicle gets listed twice
+    -- (e.g., from save/load edge cases) and accepting one leaves the other active
+    local farm = g_farmManager:getFarmById(farmId)
+    if farm and farm.vehicleSaleListings then
+        for _, otherListing in ipairs(farm.vehicleSaleListings) do
+            if otherListing.id ~= listingId
+               and otherListing.vehicleId and tostring(otherListing.vehicleId) == tostring(vehicleId)
+               and (otherListing:isActive() or otherListing.status == VehicleSaleListing.STATUS.OFFER_PENDING) then
+                UsedPlus.logInfo(string.format("v2.13.2: Auto-cancelling sibling listing %s for sold vehicle %s",
+                    otherListing.id, vehicleName))
+                otherListing:cancel()
+                self.activeListings[otherListing.id] = nil
+            end
+        end
+    end
 
     -- v2.11.0: Defer vehicle deletion to next frame to prevent GUI event queue conflicts
     -- Issue: If vehicle is deleted immediately, pending mouse events may still reference it
@@ -667,6 +712,11 @@ function VehicleSaleManager:acceptOffer(listingId)
 
     UsedPlus.logDebug(string.format("Sale completed: %s sold for $%d (net $%d after %d%% commission)",
         vehicleName, grossSalePrice, netSalePrice, commissionPercent))
+
+    -- v2.13.2: Force Finance page refresh so stale "Accept" buttons disappear immediately
+    if FinanceManagerFrame and FinanceManagerFrame.refresh then
+        FinanceManagerFrame.refresh()
+    end
 
     -- Check for Service Truck discovery after National Agent sale
     -- agentTier 3 = National
@@ -872,10 +922,25 @@ function VehicleSaleManager:isVehicleListed(vehicle)
 
     local vehicleId = tostring(vehicle.id)
 
+    -- v2.13.2: Check BOTH activeListings hash AND farm.vehicleSaleListings array
+    -- Previously only checked activeListings, which is cleared on accept,
+    -- allowing duplicate listings for the same vehicle after sale
     for _, listing in pairs(self.activeListings) do
         if listing.vehicleId and tostring(listing.vehicleId) == vehicleId then
             if listing:isActive() or listing.status == VehicleSaleListing.STATUS.OFFER_PENDING then
                 return true
+            end
+        end
+    end
+
+    -- Also check farm's listing array (includes sold/completed listings)
+    local farm = g_farmManager:getFarmById(vehicle.ownerFarmId)
+    if farm and farm.vehicleSaleListings then
+        for _, listing in ipairs(farm.vehicleSaleListings) do
+            if listing.vehicleId and tostring(listing.vehicleId) == vehicleId then
+                if listing:isActive() or listing.status == VehicleSaleListing.STATUS.OFFER_PENDING then
+                    return true
+                end
             end
         end
     end

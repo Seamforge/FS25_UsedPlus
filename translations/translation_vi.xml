@@ -1640,10 +1640,18 @@
         <!-- Result messages -->
         <e k="usedplus_fsk_result_title_perfect" v="SỬA CHỮA THÀNH CÔNG" eh="cb532e1b" />
         <e k="usedplus_fsk_result_title_good" v="SỬA CHỮA MỘT PHẦN" eh="cbba8a69" />
+        <e k="usedplus_fsk_result_title_wrong_system" v="SAI HỆ THỐNG" eh="7259aab1" />
         <e k="usedplus_fsk_result_title_poor" v="SỬA CHỮA TỐI THIỂU" eh="9d485c84" />
         <e k="usedplus_fsk_result_perfect" v="Chẩn đoán chính xác! Đã áp dụng sửa chữa mục tiêu." eh="91538006" />
         <e k="usedplus_fsk_result_good" v="Đúng hệ thống, nhưng chẩn đoán sai. Đã áp dụng sửa chữa chung." eh="47b6188e" />
+        <e k="usedplus_fsk_result_wrong_system" v="Chẩn đoán tốt! Nhưng vấn đề thực sự nằm ở: %s" eh="e3bba502" />
+        <e k="usedplus_fsk_result_wrong_both" v="Sai hệ thống và sai nguyên nhân. Đã áp dụng sửa chữa tối thiểu." eh="c22e0ba6" />
         <e k="usedplus_fsk_result_poor" v="Xác định sai hệ thống. Chỉ áp dụng bảo dưỡng cơ bản." eh="38caed38" />
+        <e k="usedplus_fsk_reliability_restored" v="ĐỘ TIN CẬY ĐÃ PHỤC HỒI" eh="9cc39e14" />
+        <e k="usedplus_fsk_reliability_partial" v="PHỤC HỒI MỘT PHẦN" eh="4f61cd65" />
+        <e k="usedplus_fsk_reliability_minimal" v="CẢI THIỆN TỐI THIỂU" eh="9ffdf95d" />
+        <e k="usedplus_fsk_flat" v="XẸP LỐP!" eh="ea13651c" />
+        <e k="usedplus_fsk_seized" v="KẸT MÁY!" eh="0a5c79b9" />
         <e k="usedplus_fsk_results" v="KẾT QUẢ SỬA CHỮA" eh="bb6599cb" />
         <e k="usedplus_fsk_before" v="Trước:" eh="0519a746" />
         <e k="usedplus_fsk_after" v="Sau:" eh="fdbe650f" />

@@ -1806,10 +1806,18 @@
         <!-- Result messages -->
         <e k="usedplus_fsk_result_title_perfect" v="REPARATUR ERFOLGREICH" eh="cb532e1b" />
         <e k="usedplus_fsk_result_title_good" v="TEILREPARATUR" eh="cbba8a69" />
+        <e k="usedplus_fsk_result_title_wrong_system" v="FALSCHES SYSTEM" eh="7259aab1" />
         <e k="usedplus_fsk_result_title_poor" v="MINIMALREPARATUR" eh="9d485c84" />
         <e k="usedplus_fsk_result_perfect" v="Richtige Diagnose! Gezielte Reparatur durchgeführt." eh="91538006" />
         <e k="usedplus_fsk_result_good" v="Richtiges System, aber Diagnose war falsch. Allgemeine Reparaturen durchgeführt." eh="47b6188e" />
+        <e k="usedplus_fsk_result_wrong_system" v="Gute Diagnose! Aber das eigentliche Problem lag in: %s" eh="e3bba502" />
+        <e k="usedplus_fsk_result_wrong_both" v="Falsches System und falsche Ursache. Minimale Reparatur durchgeführt." eh="c22e0ba6" />
         <e k="usedplus_fsk_result_poor" v="Falsches System identifiziert. Nur Grundwartung angewendet." eh="38caed38" />
+        <e k="usedplus_fsk_reliability_restored" v="ZUVERLÄSSIGKEIT WIEDERHERGESTELLT" eh="9cc39e14" />
+        <e k="usedplus_fsk_reliability_partial" v="TEILWEISE WIEDERHERSTELLUNG" eh="4f61cd65" />
+        <e k="usedplus_fsk_reliability_minimal" v="MINIMALE VERBESSERUNG" eh="9ffdf95d" />
+        <e k="usedplus_fsk_flat" v="PLATT!" eh="ea13651c" />
+        <e k="usedplus_fsk_seized" v="FESTGEFRESSEN!" eh="0a5c79b9" />
         <e k="usedplus_fsk_results" v="REPARATURERGEBNISSE" eh="bb6599cb" />
         <e k="usedplus_fsk_before" v="Vorher:" eh="0519a746" />
         <e k="usedplus_fsk_after" v="Nach:" eh="fdbe650f" />

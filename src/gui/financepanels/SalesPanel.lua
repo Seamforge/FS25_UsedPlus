@@ -249,6 +249,31 @@ function FinanceManagerFrame:onAcceptSaleClick(rowIndex)
         return
     end
 
+    -- v2.13.2: Contract lifecycle gate — block if contract is already complete
+    if listing.isComplete and listing:isComplete() then
+        UsedPlus.logInfo(string.format("onAcceptSaleClick: Blocked — listing %s is already %s",
+            tostring(listing.id), tostring(listing.status)))
+        self:updateDisplay()  -- Refresh to remove stale button
+        return
+    end
+
+    -- v2.13.2: Re-validate from LIVE manager data (not cached activeSaleListings array)
+    -- The cached array may be stale if another path already accepted this listing
+    if g_vehicleSaleManager then
+        local liveListing = g_vehicleSaleManager:getListingById(listing.id)
+        if liveListing == nil then
+            -- Listing was already removed from active listings (already sold/cancelled)
+            UsedPlus.logInfo(string.format("onAcceptSaleClick: Listing %s no longer active — already completed",
+                tostring(listing.id)))
+            g_currentMission:addIngameNotification(
+                FSBaseMission.INGAME_NOTIFICATION_INFO,
+                "This listing has already been completed."
+            )
+            self:updateDisplay()  -- Refresh to remove stale button
+            return
+        end
+    end
+
     -- Verify listing has pending offer
     local isPending = (listing.status == "pending" or
                       listing.status == VehicleSaleListing.STATUS.OFFER_PENDING)
@@ -257,6 +282,7 @@ function FinanceManagerFrame:onAcceptSaleClick(rowIndex)
             FSBaseMission.INGAME_NOTIFICATION_INFO,
             g_i18n:getText("usedplus_error_noOfferPending")
         )
+        self:updateDisplay()  -- Refresh to remove stale button
         return
     end
 
