@@ -4,6 +4,39 @@ All notable changes to this project are documented here.
 
 ---
 
+## [2.13.3] - 2026-02-15
+
+### Fixed
+
+**Finance Purchase Missing Custom Colors (Issue #6):**
+- Root cause: Finance path only passed configuration indices (`designColor=30`) but not `configurationData` (actual RGB values from color picker)
+- Custom colors from Unlimited Color Configurations mod reverted to white on financed vehicles
+- Cash and Lease paths were unaffected (they already passed `configurationData`)
+- Fix: `UnifiedPurchaseDialog`, `FinanceVehicleEvent`, and `FinanceManager` now pass `configurationData` and `licensePlateData` through the full finance chain
+- Added multiplayer serialization for custom color RGBA + material data
+
+**SaleOfferDialog Dynamic Content Not Rendering:**
+- Root cause: Missing `CONTROLS` table + `assignControls()` — all `self.*` element references were nil
+- `UIHelper.Element.setText()` silently skips nil elements, so vehicle name, offer amount, deal rating, min/max prices, and expiration text never displayed
+- Fix: Added `SaleOfferDialog.CONTROLS` + `assignControls()` pattern (matching SaleExpiredDialog)
+
+**Duplicate Sale Offer Re-Acceptance:**
+- Added 7 defense-in-depth gates across the sale lifecycle to prevent double-acceptance
+- `acceptOffer()`: Auto-cancel sibling listings for the same vehicle after sale
+- `showNextPendingOffer()`: Vehicle existence check — auto-cancels ghost listings
+- `SaleOfferDialog.showForListing()`: Rejects completed or non-OFFER_PENDING listings
+- `SalesPanel.onAcceptSaleClick()`: Re-validates from live manager data, not cached array
+- Force `FinanceManagerFrame.refresh()` after sale to update UI immediately
+
+**Localization Cleanup:**
+- Removed duplicate l10n keys `configuration_chassisColor` and `fillType_oil` (shadowed base game keys)
+- Added missing `input_USEDPLUS_FAULT_TRACER` keybind display name
+
+### Changed
+- Version bump to 2.13.3
+
+---
+
 ## [2.13.1] - 2026-02-15
 
 ### Fixed
