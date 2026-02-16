@@ -232,16 +232,17 @@ end
     Returns rating string and icon for inspection reports
 ]]
 function UsedPlusMaintenance.getRatingText(reliability)
+    -- v2.13.2: Use ASCII-safe icons — FS25 font lacks Unicode ✓/✗/⚠
     if reliability >= 0.8 then
-        return "Good", "✓"
+        return "Good", "[OK]"
     elseif reliability >= 0.6 then
-        return "Acceptable", "✓"
+        return "Acceptable", "[OK]"
     elseif reliability >= 0.4 then
-        return "Below Average", "⚠"
+        return "Below Average", "[!]"
     elseif reliability >= 0.2 then
-        return "Poor", "⚠"
+        return "Poor", "[!]"
     else
-        return "Critical", "✗"
+        return "Critical", "[!!]"
     end
 end
 

@@ -291,7 +291,7 @@ function FieldServiceKitDialog:displaySystemSelection(vehicleName, maintSpec)
     -- Update reliability displays (with seizure indicators)
     if self.engineRelText ~= nil then
         if seized.engine then
-            self.engineRelText:setText("SEIZED!")
+            self.engineRelText:setText(g_i18n:getText("usedplus_fsk_seized"))
             self.engineRelText:setTextColor(1, 0.1, 0.1, 1)  -- Bright red
         else
             self.engineRelText:setText(string.format("%d%%", engineRel))
@@ -301,7 +301,7 @@ function FieldServiceKitDialog:displaySystemSelection(vehicleName, maintSpec)
 
     if self.electricalRelText ~= nil then
         if seized.electrical then
-            self.electricalRelText:setText("SEIZED!")
+            self.electricalRelText:setText(g_i18n:getText("usedplus_fsk_seized"))
             self.electricalRelText:setTextColor(1, 0.1, 0.1, 1)  -- Bright red
         else
             self.electricalRelText:setText(string.format("%d%%", elecRel))
@@ -311,7 +311,7 @@ function FieldServiceKitDialog:displaySystemSelection(vehicleName, maintSpec)
 
     if self.hydraulicRelText ~= nil then
         if seized.hydraulic then
-            self.hydraulicRelText:setText("SEIZED!")
+            self.hydraulicRelText:setText(g_i18n:getText("usedplus_fsk_seized"))
             self.hydraulicRelText:setTextColor(1, 0.1, 0.1, 1)  -- Bright red
         else
             self.hydraulicRelText:setText(string.format("%d%%", hydRel))
@@ -592,18 +592,28 @@ function FieldServiceKitDialog:displayResults()
     local maintSpec = self.vehicle.spec_usedPlusMaintenance
     local isCorrect = self.repairResult.wasCorrectSystem and self.repairResult.wasCorrectDiagnosis
     local isPartial = self.repairResult.wasCorrectSystem and not self.repairResult.wasCorrectDiagnosis
+    -- v2.13.2: Fix Issue #9 - Add 4th state: wrong system but correct diagnosis
+    -- Previously this fell through to "WRONG DIAGNOSIS" which confused players
+    -- because the "Correct answer" shown matched their answer exactly
+    local isWrongSystem = not self.repairResult.wasCorrectSystem and self.repairResult.wasCorrectDiagnosis
+    local isWrongBoth = not self.repairResult.wasCorrectSystem and not self.repairResult.wasCorrectDiagnosis
 
     -- ========== OUTCOME HEADER ==========
     -- Set icon and background color based on outcome
+    -- v2.13.2: Use ASCII-safe characters — FS25 font lacks Unicode ✓ (U+2713) and ✗ (U+2717)
+    -- Game log: "Character '10007' not found in texture font"
     if self.outcomeIcon ~= nil then
         if isCorrect then
-            self.outcomeIcon:setText("✓")
+            self.outcomeIcon:setText("OK")
             self.outcomeIcon:setTextColor(0.3, 1, 0.4, 1)
         elseif isPartial then
             self.outcomeIcon:setText("~")
             self.outcomeIcon:setTextColor(1, 0.7, 0.2, 1)
+        elseif isWrongSystem then
+            self.outcomeIcon:setText("~")
+            self.outcomeIcon:setTextColor(1, 0.6, 0.2, 1)
         else
-            self.outcomeIcon:setText("✗")
+            self.outcomeIcon:setText("X")
             self.outcomeIcon:setTextColor(1, 0.4, 0.4, 1)
         end
     end
@@ -612,8 +622,8 @@ function FieldServiceKitDialog:displayResults()
         if isCorrect then
             -- Green success background
             self.outcomeBg:setImageColor(nil, 0.08, 0.22, 0.08, 0.95)
-        elseif isPartial then
-            -- Orange partial background
+        elseif isPartial or isWrongSystem then
+            -- Orange partial background (wrong system with right diagnosis is partial success)
             self.outcomeBg:setImageColor(nil, 0.22, 0.16, 0.06, 0.95)
         else
             -- Red failure background
@@ -621,28 +631,36 @@ function FieldServiceKitDialog:displayResults()
         end
     end
 
-    -- Outcome title
+    -- Outcome title (v2.13.2: use i18n instead of hardcoded English)
     if self.resultTitleText ~= nil then
         if isCorrect then
-            self.resultTitleText:setText("CORRECT DIAGNOSIS!")
+            self.resultTitleText:setText(g_i18n:getText("usedplus_fsk_result_title_perfect"))
             self.resultTitleText:setTextColor(0.4, 1, 0.5, 1)
         elseif isPartial then
-            self.resultTitleText:setText("PARTIAL MATCH")
+            self.resultTitleText:setText(g_i18n:getText("usedplus_fsk_result_title_good"))
             self.resultTitleText:setTextColor(1, 0.8, 0.3, 1)
+        elseif isWrongSystem then
+            -- v2.13.2: New state - player got diagnosis right but picked wrong system
+            self.resultTitleText:setText(g_i18n:getText("usedplus_fsk_result_title_wrong_system"))
+            self.resultTitleText:setTextColor(1, 0.7, 0.3, 1)
         else
-            self.resultTitleText:setText("WRONG DIAGNOSIS")
+            self.resultTitleText:setText(g_i18n:getText("usedplus_fsk_result_title_poor"))
             self.resultTitleText:setTextColor(1, 0.5, 0.5, 1)
         end
     end
 
-    -- Outcome subtitle
+    -- Outcome subtitle (v2.13.2: use i18n instead of hardcoded English)
     if self.resultMessageText ~= nil then
         if isCorrect then
-            self.resultMessageText:setText("Excellent work! Full repair bonus applied.")
+            self.resultMessageText:setText(g_i18n:getText("usedplus_fsk_result_perfect"))
         elseif isPartial then
-            self.resultMessageText:setText("Right system, but incorrect cause identified.")
+            self.resultMessageText:setText(g_i18n:getText("usedplus_fsk_result_good"))
+        elseif isWrongSystem then
+            -- v2.13.2: Tell player their diagnosis was correct but system was wrong
+            local actualSystemName = g_i18n:getText("usedplus_fsk_system_" .. (self.actualFailedSystem or "")) or self.actualFailedSystem or "Unknown"
+            self.resultMessageText:setText(string.format(g_i18n:getText("usedplus_fsk_result_wrong_system"), actualSystemName))
         else
-            self.resultMessageText:setText("General maintenance applied with reduced effect.")
+            self.resultMessageText:setText(g_i18n:getText("usedplus_fsk_result_wrong_both"))
         end
     end
 
@@ -655,13 +673,16 @@ function FieldServiceKitDialog:displayResults()
         end
     end
 
-    -- Show correct answer (only if wrong)
+    -- Show correct answer (only when diagnosis was wrong AND system was right)
+    -- v2.13.2: Don't show "Correct answer" when it matches player's answer (wrong system case)
+    -- That was the core Issue #9 bug - "Correct answer: Faulty Seals" shown when player picked "Faulty Seals"
+    local showCorrectAnswer = not isCorrect and not isWrongSystem
     if self.correctDiagLabel ~= nil then
-        self.correctDiagLabel:setVisible(not isCorrect)
+        self.correctDiagLabel:setVisible(showCorrectAnswer)
     end
     if self.correctDiagnosisText ~= nil then
-        self.correctDiagnosisText:setVisible(not isCorrect)
-        if not isCorrect and self.currentScenario ~= nil then
+        self.correctDiagnosisText:setVisible(showCorrectAnswer)
+        if showCorrectAnswer and self.currentScenario ~= nil then
             local correctDiag = self.currentScenario.diagnoses[self.currentScenario.correctDiagnosis]
             if correctDiag ~= nil then
                 self.correctDiagnosisText:setText(g_i18n:getText(correctDiag) or "Unknown")
@@ -670,16 +691,16 @@ function FieldServiceKitDialog:displayResults()
     end
 
     -- ========== RELIABILITY SECTION ==========
-    -- Update header based on outcome
+    -- Update header based on outcome (v2.13.2: use i18n)
     if self.reliabilityHeader ~= nil then
         if isCorrect then
-            self.reliabilityHeader:setText("RELIABILITY RESTORED")
+            self.reliabilityHeader:setText(g_i18n:getText("usedplus_fsk_reliability_restored"))
             self.reliabilityHeader:setTextColor(0.3, 1, 0.4, 1)
-        elseif isPartial then
-            self.reliabilityHeader:setText("PARTIAL RESTORATION")
+        elseif isPartial or isWrongSystem then
+            self.reliabilityHeader:setText(g_i18n:getText("usedplus_fsk_reliability_partial"))
             self.reliabilityHeader:setTextColor(1, 0.8, 0.3, 1)
         else
-            self.reliabilityHeader:setText("MINIMAL IMPROVEMENT")
+            self.reliabilityHeader:setText(g_i18n:getText("usedplus_fsk_reliability_minimal"))
             self.reliabilityHeader:setTextColor(1, 0.5, 0.5, 1)
         end
     end
@@ -757,7 +778,7 @@ function FieldServiceKitDialog:displayTireRepair()
         if slot.text ~= nil then
             local pct = math.floor(slot.condition * 100)
             if pct <= 1 then
-                slot.text:setText("FLAT!")
+                slot.text:setText(g_i18n:getText("usedplus_fsk_flat"))
                 slot.text:setTextColor(1, 0.2, 0.2, 1)  -- Red
             elseif pct <= 25 then
                 slot.text:setText(pct .. "%")
