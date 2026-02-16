@@ -1,5 +1,9 @@
 name: Auto-close fixed issues
 
+permissions:
+  contents: read
+  issues: write
+
 on:
   schedule:
     # Run daily at 8am UTC
