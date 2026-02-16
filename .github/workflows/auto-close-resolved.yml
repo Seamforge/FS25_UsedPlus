@@ -1,0 +1,172 @@
+name: Auto-close fixed issues
+
+on:
+  schedule:
+    # Run daily at 8am UTC
+    - cron: '0 8 * * *'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  close-fixed-issues:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Countdown and close issues in "Fixed" status
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.PROJECT_TOKEN }}
+          script: |
+            const daysBeforeClose = 3;
+            const projectNumber = 3;
+            const fixedStatus = 'Fixed';
+            const MARKER = '<!-- usedplus-auto-close-countdown -->';
+
+            // Step 1: Query project for items in "Fixed" status
+            const query = `query($owner: String!, $projectNumber: Int!) {
+              user(login: $owner) {
+                projectV2(number: $projectNumber) {
+                  items(first: 100) {
+                    nodes {
+                      fieldValueByName(name: "Status") {
+                        ... on ProjectV2ItemFieldSingleSelectValue {
+                          name
+                        }
+                      }
+                      content {
+                        ... on Issue {
+                          number
+                          title
+                          state
+                          updatedAt
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }`;
+
+            const result = await github.graphql(query, {
+              owner: context.repo.owner,
+              projectNumber: projectNumber
+            });
+
+            const items = result.user.projectV2.items.nodes;
+            console.log(`Found ${items.length} items in project`);
+
+            // Step 2: Filter to open issues in "Fixed" status
+            const fixedIssues = items.filter(item =>
+              item.fieldValueByName &&
+              item.fieldValueByName.name === fixedStatus &&
+              item.content &&
+              item.content.state === 'OPEN'
+            );
+
+            console.log(`Found ${fixedIssues.length} open issues in "${fixedStatus}" status`);
+
+            // Step 3: Process each fixed issue
+            for (const item of fixedIssues) {
+              const issueNumber = item.content.number;
+              const issueTitle = item.content.title;
+
+              // Get ALL comments to check for reporter replies and our countdown markers
+              const allComments = await github.rest.issues.listComments({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issueNumber,
+                per_page: 100
+              });
+
+              // Find our first countdown comment (marks when the countdown started)
+              const countdownComments = allComments.data.filter(c =>
+                c.body.includes(MARKER)
+              );
+
+              // Check for reporter replies AFTER our first countdown comment
+              const countdownStartDate = countdownComments.length > 0
+                ? new Date(countdownComments[0].created_at)
+                : null;
+
+              const recentReplies = allComments.data.filter(c =>
+                c.user.login !== context.repo.owner &&
+                !c.user.login.includes('[bot]') &&
+                !c.body.includes(MARKER) &&
+                (countdownStartDate === null || new Date(c.created_at) > countdownStartDate)
+              );
+
+              // If reporter replied after countdown started, skip (issue needs attention)
+              if (countdownStartDate && recentReplies.length > 0) {
+                console.log(`Issue #${issueNumber} has replies after countdown — skipping (needs attention)`);
+                continue;
+              }
+
+              // Calculate days since countdown started
+              let daysSinceCountdown = 0;
+              if (countdownStartDate) {
+                daysSinceCountdown = Math.floor((new Date() - countdownStartDate) / (1000 * 60 * 60 * 24));
+              }
+
+              if (countdownComments.length === 0) {
+                // Day 0: Post first countdown comment (3 days remaining)
+                console.log(`Issue #${issueNumber}: Starting countdown (${daysBeforeClose} days)`);
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issueNumber,
+                  body: `${MARKER}\n\n` +
+                    `**Auto-close notice:** This issue has been marked as **Fixed**.\n\n` +
+                    `If the fix does not resolve your issue, please reply to this ticket within **${daysBeforeClose} days** and we will reopen it.\n\n` +
+                    `If no response is received, this issue will be automatically closed. ` +
+                    `You can always reopen it later if needed.\n\n` +
+                    `\u23f0 **${daysBeforeClose} days remaining**`
+                });
+
+              } else if (daysSinceCountdown >= daysBeforeClose) {
+                // Time's up — close the issue
+                console.log(`Closing issue #${issueNumber}: ${issueTitle} (${daysBeforeClose}-day countdown expired)`);
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issueNumber,
+                  body: `${MARKER}\n\n` +
+                    `This issue has been automatically closed after **${daysBeforeClose} days** in **Fixed** status with no further replies.\n\n` +
+                    `If the issue persists, please feel free to reopen this ticket or create a new one. Thanks!`
+                });
+
+                await github.rest.issues.update({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issueNumber,
+                  state: 'closed',
+                  state_reason: 'completed'
+                });
+
+              } else {
+                // Countdown in progress — post daily reminder
+                const daysRemaining = daysBeforeClose - daysSinceCountdown;
+                const isLastDay = daysRemaining <= 1;
+
+                // Only post if we haven't already posted a reminder today
+                const today = new Date().toISOString().split('T')[0];
+                const alreadyPostedToday = countdownComments.some(c =>
+                  c.created_at.split('T')[0] === today
+                );
+
+                if (!alreadyPostedToday) {
+                  console.log(`Issue #${issueNumber}: ${daysRemaining} day(s) remaining`);
+                  await github.rest.issues.createComment({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: issueNumber,
+                    body: `${MARKER}\n\n` +
+                      (isLastDay
+                        ? `\u26a0\ufe0f **Final notice:** This issue will be **automatically closed tomorrow** if no response is received.\n\n` +
+                          `If the fix does not resolve your issue, please reply now.`
+                        : `\u23f0 **${daysRemaining} day${daysRemaining !== 1 ? 's' : ''} remaining** before this issue is automatically closed.\n\n` +
+                          `If the fix does not resolve your issue, please reply to keep it open.`)
+                  });
+                } else {
+                  console.log(`Issue #${issueNumber}: Already posted today — skipping`);
+                }
+              }
+            }
