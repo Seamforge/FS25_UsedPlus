@@ -15,7 +15,7 @@ All notable changes to this project are documented here.
 - Despite not having any published releases on GitHub, download a .zip of my mod and published it to their site.
 - I apologize to anyone who is caught in the cross-fire in being handed a mod that is not yet complete.
 - FS25.net refuses to approve my comments on their site, prohibiting me from replying to people who have encountered issues with my mod.
-- I gave an analogy like this: You are a painter and have been working on a masterpiece for months. You are nearing completion on your work after all the time, and someone comes by and takes a picture of the painting through a dirty muddy window and then posts it as completed work. They post it in a location where you can hear people commenting on your work but you have no ability to reply. 
+- I gave an analogy like this: You are a painter and have been working on a masterpiece for months. You are nearing completion on your work after all the time, and someone comes by and takes a picture of the painting through a dirty muddy window and then posts it with your name on it, but as completed work. They post it in a location where you can hear people commenting on your work but you have no ability to reply. 
 
 ## [2.13.3] - 2026-02-15
 
