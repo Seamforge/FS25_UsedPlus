@@ -25,7 +25,7 @@
   <a href="https://github.com/XelaNull/FS25_UsedPlus/blob/master/CHANGELOG.md">📝 Changelog</a>
 </p>
 
----23
+---
 
 <p align="center">
   <img src="screenshots/used_plus_finances_zoomed.png" alt="Finance Manager Dashboard - Your Central Hub" width="95%">
