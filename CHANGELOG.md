@@ -8,7 +8,7 @@ All notable changes to this project are documented here.
 
 ### Fixed
 
-** FS.NET dishonestly removed my development preview banner **
+** FS25.NET dishonestly removed my development preview banner **
 
 - Found my unfinished mod on GitHub, set to public as I was seeking to collaborate
 - Posted my mod to their site as a finished product, removing the developmental preview banner where I explicitly said there has been no release as it is unfinished
