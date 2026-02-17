@@ -4,6 +4,18 @@ All notable changes to this project are documented here.
 
 ---
 
+## [2.14.1] - 2026-02-16
+
+### Fixed
+
+** FS.NET disthonestly removed my development preview banner **
+
+- Found my unfinished mod on GitHub, set to public as I was seeking to collaborate
+- posted my mod to their site as a finished product, removing the developmental preview banner where I explicitly said there has been no release as it is unfinished
+- Despite not having any published releases on GitHub, download a .zip of my mod and published it to their site.
+- I apologize to anyone who is caught in the cross-fire in being handed a mod that is not yet complete.
+- FS25.net refuses to approve my comments on their site, prohibiting me from replying to people who have encountered issues with my mod.
+
 ## [2.13.3] - 2026-02-15
 
 ### Fixed
