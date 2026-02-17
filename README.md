@@ -25,7 +25,7 @@
   <a href="https://github.com/XelaNull/FS25_UsedPlus/blob/master/CHANGELOG.md">📝 Changelog</a>
 </p>
 
----
+---23
 
 <p align="center">
   <img src="screenshots/used_plus_finances_zoomed.png" alt="Finance Manager Dashboard - Your Central Hub" width="95%">
@@ -43,7 +43,7 @@
 
 ---
 
-> ⚠️ **STATUS: Development Preview (v2.13.3)** — No official release yet. Core features (vehicle financing, **building financing**, leasing, credit, marketplace, trade-ins) fully functional. **Work in Progress:** Malfunctions and Service Truck under active development. Latest version always at: **[github.com/XelaNull/FS25_UsedPlus](https://github.com/XelaNull/FS25_UsedPlus)**
+> ⚠️ **STATUS: Development Preview (v2.14.1)** — No official release yet. Core features (vehicle financing, **building financing**, leasing, credit, marketplace, trade-ins) fully functional. **Work in Progress:** Malfunctions and Service Truck under active development. Latest version always at: **[github.com/XelaNull/FS25_UsedPlus](https://github.com/XelaNull/FS25_UsedPlus)**
 
 ---
 
