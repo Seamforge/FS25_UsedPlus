@@ -23,7 +23,8 @@
   <a href="https://github.com/XelaNull/FS25_UsedPlus/wiki/Installation">📥 Installation</a> •
   <a href="https://github.com/XelaNull/FS25_UsedPlus/wiki/Quick-Start-Guide">🚀 Quick Start</a> •
   <a href="https://github.com/XelaNull/FS25_UsedPlus/issues">🐛 Report Issues</a> •
-  <a href="https://github.com/XelaNull/FS25_UsedPlus/blob/master/CHANGELOG.md">📝 Changelog</a>
+  <a href="https://github.com/XelaNull/FS25_UsedPlus/blob/master/CHANGELOG.md">📝 Changelog</a> •
+  <a href="https://github.com/XelaNull/FS25_UsedPlus/blob/master/docs/TRAFFIC_DASHBOARD.md">📊 Live Metrics</a>
 </p>
 
 ---
