@@ -59,6 +59,12 @@ end
 ]]
 function ServiceTruckDiscoveryDialog:onCreate()
     ServiceTruckDiscoveryDialog:superClass().onCreate(self)
+
+    -- v2.14.2: Set header icon dynamically (ZIP-safe pattern)
+    local headerIcon = self.dialogElement:getDescendantById("headerIcon")
+    if headerIcon ~= nil then
+        headerIcon:setImageFilename(UsedPlus.MOD_DIR .. "gui/icons/service_truck.png")
+    end
 end
 
 --[[

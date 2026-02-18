@@ -757,6 +757,19 @@ function FaultTracerDialog:displayResults()
         self.ftOilConsumedText:setText(string.format("%.1fL", self.results.totalOilUsed))
     end
 
+    -- v2.14.2: Result outcome icon based on accuracy
+    local outcomeIcon = self.ftResultOutcomeIcon or self.dialogElement:getDescendantById("ftResultOutcomeIcon")
+    if outcomeIcon ~= nil then
+        local iconDir = UsedPlus.MOD_DIR .. "gui/icons/"
+        if self.results.diagnosisAccuracy >= 1.0 then
+            outcomeIcon:setImageFilename(iconDir .. "success.png")
+        elseif self.results.diagnosisAccuracy >= 0.5 then
+            outcomeIcon:setImageFilename(iconDir .. "status_warning.png")
+        else
+            outcomeIcon:setImageFilename(iconDir .. "failure.png")
+        end
+    end
+
     -- Quality note
     if self.ftQualityNote then
         if self.grid.quickScanUsed then

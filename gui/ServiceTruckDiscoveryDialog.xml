@@ -24,7 +24,8 @@
 
         <GuiElement profile="fs25_dialogContentContainer">
 
-            <!-- Title -->
+            <!-- Title with icon -->
+            <Bitmap profile="stdHeaderIcon" id="headerIcon" position="-200px -14px"/>
             <Text profile="stdTitle" id="dialogTitle" position="0px -20px" text="$l10n_usedplus_serviceTruck_discoveryTitle"/>
 
             <!-- Agent Message Section -->
@@ -187,6 +188,12 @@
             <textSize value="11px"/>
             <textColor value="1 0.7 0.3 1"/>
             <textAlignment value="center"/>
+        </Profile>
+
+        <!-- v2.14.2: Header icon -->
+        <Profile name="stdHeaderIcon" extends="baseReference" with="anchorTopCenter">
+            <size value="28px 28px"/>
+            <imageSliceId value="noSlice"/>
         </Profile>
     </GUIProfiles>
 </GUI>

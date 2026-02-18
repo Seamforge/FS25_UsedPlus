@@ -77,10 +77,11 @@ function DealDetailsDialog:setupSectionIcons()
         return
     end
 
-    -- Item section - vehicle icon
+    -- Item section - icon based on deal type (default vehicle)
     if self.itemSectionIcon ~= nil then
         self.itemSectionIcon:setImageFilename(self.iconDir .. "vehicle.png")
     end
+    -- Note: icon is updated to land/loan in updateItemSectionIcon() when deal data is available
 
     -- Terms section - finance icon
     if self.termsSectionIcon ~= nil then
@@ -132,6 +133,18 @@ function DealDetailsDialog:updateDisplay()
                     (deal.itemType == "lease") or
                     (deal.itemType == "land_lease")
     local isDefaulted = deal.status == "defaulted"
+
+    -- Update item section icon based on deal type
+    if self.itemSectionIcon ~= nil and self.iconDir ~= nil then
+        local itemType = deal.itemType or "vehicle"
+        if itemType == "land" or itemType == "land_lease" or deal.dealType == DealUtils.TYPE.LAND_LEASE then
+            self.itemSectionIcon:setImageFilename(self.iconDir .. "land.png")
+        elseif itemType == "loan" then
+            self.itemSectionIcon:setImageFilename(self.iconDir .. "loan.png")
+        else
+            self.itemSectionIcon:setImageFilename(self.iconDir .. "vehicle.png")
+        end
+    end
 
     -- Show/hide sections based on deal status
     self:updateSectionVisibility(isDefaulted)

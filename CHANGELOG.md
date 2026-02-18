@@ -4,6 +4,39 @@ All notable changes to this project are documented here.
 
 ---
 
+## [2.14.2] - 2026-02-18
+
+### Fixed
+
+**Log Warning Cleanup (~32 warnings eliminated):**
+- Removed invalid rim color configs (`RAM_SILVER`, `DARK_CHROME`) from service truck XML — copy-paste artifacts from original C7000 mod causing 2 material template warnings per load
+- Renamed `<Profiles>` to `<GUIProfiles>` and moved after dialog element in LeaseRenewalDialog.xml — eliminates ~30 "Could not retrieve GUI profile" warnings per load
+
+### Added
+
+**Codebase Statistics Tool v2.0** (`tools/codebase_stats.js`):
+- Complete rewrite with mod code vs project support separation
+- Architecture breakdown: managers, events, specializations, extensions, utilities
+- Top 10 largest Lua files with 1500-line limit warnings
+- `--markdown` flag generates README-ready statistics snippet
+
+**Orphan Icon Wiring — 7 icons connected to dialogs:**
+- `land.png` / `loan.png`: DealDetailsDialog now shows context-specific icons for land and loan deals (previously always showed vehicle icon)
+- `service_truck.png`: Added header icon to ServiceTruckDialog and ServiceTruckDiscoveryDialog
+- `success.png` / `failure.png` / `status_warning.png`: FaultTracerDialog results screen shows outcome icon based on diagnosis accuracy (100% = success, 50%+ = warning, <50% = failure)
+
+**FaultTracer Multiplayer Support:**
+- New `FaultTracerResultEvent` for syncing diagnostic results in multiplayer
+- FaultTracerGrid refactored with improved layout and rendering
+
+### Changed
+- README.md statistics updated (139K lines, 350 mod files, 39 GUI screens, 26 languages, 1,998 keys)
+- Removed stale codebase statistics from CLAUDE.md (script is now source of truth)
+- ServiceTruck.lua enhanced with expanded functionality
+- Version bump to 2.14.2
+
+---
+
 ## [2.14.1] - 2026-02-16
 
 ### Fixed

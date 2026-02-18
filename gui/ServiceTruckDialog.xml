@@ -21,7 +21,8 @@
 
         <GuiElement profile="fs25_dialogContentContainer">
 
-            <!-- Title -->
+            <!-- Title with icon -->
+            <Bitmap profile="fskHeaderIcon" id="headerIcon" position="-245px -19px"/>
             <Text profile="fskTitle" id="dialogTitle" position="0px -25px" text="$l10n_usedplus_serviceTruck_dialogTitle"/>
 
             <!-- ========== STEP 1: COMPONENT SELECTION ========== -->
@@ -174,4 +175,12 @@
             <Button profile="buttonOK" id="okButton" onClick="onClickOk" text="$l10n_button_close"/>
         </BoxLayout>
     </GuiElement>
+
+    <GUIProfiles>
+        <!-- v2.14.2: Header icon -->
+        <Profile name="fskHeaderIcon" extends="baseReference" with="anchorTopCenter">
+            <size value="28px 28px"/>
+            <imageSliceId value="noSlice"/>
+        </Profile>
+    </GUIProfiles>
 </GUI>
