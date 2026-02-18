@@ -76,11 +76,14 @@ jobs:
             RT_EXISTING='{}'
           fi
           # Merge current release data into timeline (preserves historical releases)
+          # Also tracks peak download count per release (survives release deletion)
           RT_UPDATED=$(echo "$RELEASES" | jq --argjson existing "$RT_EXISTING" '
             reduce .[] as $r ($existing;
+              ($r.assets | map(.downloads) | add // 0) as $dl |
               .[$r.tag] = {
                 published_at: $r.published_at,
-                tag: $r.tag
+                tag: $r.tag,
+                peak_downloads: ([($dl), (.[$r.tag].peak_downloads // 0)] | max)
               }
             )
           ')
@@ -238,7 +241,7 @@ jobs:
           python3 << 'PYEOF'
           import json
           import os
-          from datetime import datetime
+          from datetime import datetime, timedelta
 
           import matplotlib
           matplotlib.use('Agg')
@@ -310,8 +313,9 @@ jobs:
           dl_file = os.path.join(TRAFFIC_DIR, "downloads.json")
           rt_file = os.path.join(TRAFFIC_DIR, "releases_timeline.json")
 
-          # Load release timeline (tag → publish date)
+          # Load release timeline (tag → publish date + peak downloads)
           release_eras = []
+          rt = {}
           if os.path.exists(rt_file):
               with open(rt_file) as f:
                   rt = json.load(f)
@@ -320,7 +324,8 @@ jobs:
                   if pub:
                       release_eras.append({
                           "tag": tag,
-                          "start": datetime.strptime(pub.split("T")[0], "%Y-%m-%d")
+                          "start": datetime.strptime(pub.split("T")[0], "%Y-%m-%d"),
+                          "peak_downloads": info.get("peak_downloads", 0)
                       })
               release_eras.sort(key=lambda r: r["start"])
 
@@ -368,6 +373,11 @@ jobs:
                   latest = downloads[-1]
                   for rel in (latest.get("per_release") or latest.get("releases", [])):
                       era_downloads[rel["tag"]] = sum(a["downloads"] for a in rel.get("assets", []))
+
+              # Fallback: use peak_downloads from timeline for deleted releases
+              for era in release_eras:
+                  if era["tag"] not in era_downloads and era.get("peak_downloads", 0) > 0:
+                      era_downloads[era["tag"]] = era["peak_downloads"]
 
               # ── Main chart: stacked bars per release era ──
               tags = [era["tag"] for era in release_eras]
@@ -421,7 +431,7 @@ jobs:
                       if i + 1 < len(release_eras):
                           era_end = release_eras[i+1]["start"]
                       else:
-                          era_end = max(date_objs) + __import__('datetime').timedelta(days=1)
+                          era_end = max(date_objs) + timedelta(days=1)
                       color = era_colors[i % len(era_colors)]
                       ax_timeline.axvspan(era_start, era_end, alpha=0.08, color=color)
                       # Label at top of shaded region
