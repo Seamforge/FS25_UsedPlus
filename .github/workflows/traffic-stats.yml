@@ -1,0 +1,137 @@
+name: Traffic Stats Archive
+
+on:
+  schedule:
+    # Run daily at 3:00 AM UTC (before GitHub's 14-day window expires)
+    - cron: '0 3 * * *'
+  workflow_dispatch: # Allow manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  archive-traffic:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout traffic-stats branch
+        uses: actions/checkout@v4
+        with:
+          ref: traffic-stats
+          fetch-depth: 0
+        continue-on-error: true
+
+      - name: Create branch if it doesn't exist
+        run: |
+          if ! git rev-parse --verify traffic-stats >/dev/null 2>&1; then
+            git checkout --orphan traffic-stats
+            git rm -rf . 2>/dev/null || true
+            echo "# Traffic Stats" > README.md
+            echo "This branch contains archived traffic data collected daily by GitHub Actions." >> README.md
+            echo "" >> README.md
+            echo "See [SUMMARY.md](.github/traffic/SUMMARY.md) for the latest overview." >> README.md
+            git add README.md
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git commit -m "chore: Initialize traffic-stats branch"
+            git push origin traffic-stats
+          fi
+
+      - name: Collect traffic stats
+        env:
+          GH_TOKEN: ${{ secrets.PROJECT_TOKEN }}
+        run: |
+          mkdir -p .github/traffic
+
+          DATE=$(date -u +%Y-%m-%d)
+          STATS_FILE=".github/traffic/stats.json"
+
+          # Fetch current traffic data from GitHub API
+          VIEWS=$(gh api repos/${{ github.repository }}/traffic/views 2>/dev/null || echo '{"count":0,"uniques":0,"views":[]}')
+          CLONES=$(gh api repos/${{ github.repository }}/traffic/clones 2>/dev/null || echo '{"count":0,"uniques":0,"clones":[]}')
+          REFERRERS=$(gh api repos/${{ github.repository }}/traffic/popular/referrers 2>/dev/null || echo '[]')
+          PATHS=$(gh api repos/${{ github.repository }}/traffic/popular/paths 2>/dev/null || echo '[]')
+
+          # Fetch release download counts
+          RELEASES=$(gh api repos/${{ github.repository }}/releases --jq '[.[] | {tag: .tag_name, assets: [.assets[] | {name: .name, downloads: .download_count}]}]' 2>/dev/null || echo '[]')
+
+          # Build today's snapshot
+          TODAY_SNAPSHOT=$(jq -n \
+            --arg date "$DATE" \
+            --argjson views "$VIEWS" \
+            --argjson clones "$CLONES" \
+            --argjson referrers "$REFERRERS" \
+            --argjson paths "$PATHS" \
+            --argjson releases "$RELEASES" \
+            '{
+              date: $date,
+              views: { count: $views.count, uniques: $views.uniques },
+              clones: { count: $clones.count, uniques: $clones.uniques },
+              referrers: $referrers,
+              popular_paths: $paths,
+              releases: $releases
+            }')
+
+          # Load existing stats or create new array
+          if [ -f "$STATS_FILE" ]; then
+            EXISTING=$(cat "$STATS_FILE")
+          else
+            EXISTING="[]"
+          fi
+
+          # Remove any existing entry for today (in case of re-run) and append new snapshot
+          UPDATED=$(echo "$EXISTING" | jq --arg date "$DATE" --argjson snapshot "$TODAY_SNAPSHOT" \
+            '[.[] | select(.date != $date)] + [$snapshot] | sort_by(.date)')
+
+          # Write updated stats
+          echo "$UPDATED" > "$STATS_FILE"
+
+          # Generate human-readable summary
+          SUMMARY_FILE=".github/traffic/SUMMARY.md"
+          TOTAL_VIEWS=$(echo "$VIEWS" | jq '.count')
+          UNIQUE_VIEWS=$(echo "$VIEWS" | jq '.uniques')
+          TOTAL_CLONES=$(echo "$CLONES" | jq '.count')
+          UNIQUE_CLONES=$(echo "$CLONES" | jq '.uniques')
+          TOTAL_DOWNLOADS=$(echo "$RELEASES" | jq '[.[].assets[].downloads] | add // 0')
+          DAYS_TRACKED=$(echo "$UPDATED" | jq 'length')
+
+          cat > "$SUMMARY_FILE" << 'SUMMARY_EOF'
+          # Traffic Stats Summary
+          SUMMARY_EOF
+
+          # Build summary with proper formatting (avoid heredoc variable expansion issues)
+          {
+            echo "# Traffic Stats Summary"
+            echo ""
+            echo "**Last updated:** ${DATE}"
+            echo "**Days tracked:** ${DAYS_TRACKED}"
+            echo ""
+            echo "## Current 14-Day Window"
+            echo "| Metric | Total | Unique |"
+            echo "|--------|-------|--------|"
+            echo "| Page Views | ${TOTAL_VIEWS} | ${UNIQUE_VIEWS} |"
+            echo "| Git Clones | ${TOTAL_CLONES} | ${UNIQUE_CLONES} |"
+            echo ""
+            echo "## Release Downloads"
+            echo "**Total downloads (all releases):** ${TOTAL_DOWNLOADS}"
+            echo ""
+            echo "## Top Referrers (14-day)"
+            echo "$REFERRERS" | jq -r '.[:5][] | "- **\(.referrer)** — \(.count) views (\(.uniques) unique)"' 2>/dev/null || echo "- No referrer data"
+            echo ""
+            echo "## Top Pages (14-day)"
+            echo "$PATHS" | jq -r '.[:5][] | "- `\(.path)` — \(.count) views (\(.uniques) unique)"' 2>/dev/null || echo "- No path data"
+            echo ""
+            echo "---"
+            echo "*Auto-generated by traffic-stats.yml*"
+          } > "$SUMMARY_FILE"
+
+      - name: Commit and push stats
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .github/traffic/
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: Archive traffic stats for $(date -u +%Y-%m-%d)"
+            git push origin traffic-stats
+          fi
