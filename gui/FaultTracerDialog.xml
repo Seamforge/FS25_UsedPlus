@@ -72,7 +72,7 @@
                 </GuiElement>
 
                 <!-- Resources Info -->
-                <GuiElement profile="ftSection" position="0px -195px">
+                <GuiElement profile="ftSection" position="0px -215px">
                     <Bitmap profile="ftInfoBg" position="0px 0px"/>
                     <Text profile="ftSectionHeader" position="0px -5px" text="SERVICE TRUCK RESOURCES"/>
                     <Text profile="ftLabel" position="-150px -30px" text="Oil:"/>
@@ -82,7 +82,7 @@
                 </GuiElement>
 
                 <!-- Hint text -->
-                <Text profile="ftHintText" id="ftSelectHint" position="0px -260px" text="Select a component below 90% reliability to begin fault tracing."/>
+                <Text profile="ftHintText" id="ftSelectHint" position="0px -280px" text="Select a component below 90% reliability to begin fault tracing."/>
             </GuiElement>
 
             <!-- ========== SCREEN 2: FAULT TRACER GRID ========== -->
@@ -92,7 +92,7 @@
                 <Text profile="ftGridInfo" id="ftGridTitle" position="-180px -5px" text="ENGINE FAULT TRACER"/>
                 <Text profile="ftGridInfo" id="ftFaultCounter" position="180px -5px" text="Faults: 0/0"/>
 
-                <!-- Grid Area (4 cols x 5 rows max = 20 cells) -->
+                <!-- Grid Area (4 rows x 5 cols max = 20 cells) -->
                 <!-- Each cell: 65x50px with 6px gap. Grid origin at center-top -->
                 <!-- 4-col grid width: 4*65 + 3*6 = 278px. Offset: -139px left -->
                 <!-- Row positions: -30, -86, -142, -198, -254 -->

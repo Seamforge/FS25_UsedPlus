@@ -145,6 +145,7 @@ function FaultTracerGrid.generate(component, reliability)
                 number = 0,
                 gaugeColor = FaultTracerGrid.GAUGE_GREEN,
                 state = FaultTracerGrid.STATE_HIDDEN,
+                previousState = nil,
                 flaggedType = nil,
             }
         end
@@ -246,26 +247,64 @@ function FaultTracerGrid.placeFaults(rows, cols, numFaults)
         end
     end
 
-    -- Fallback: place faults in safe positions (corners/edges of grid)
-    local fallback = {}
-    local used = {}
-    local safeSpots = {}
+    -- Fallback: place faults with deducibility validation via brute-force retry
+    -- On small grids (max 4x5 with 5 faults), this converges quickly
+    for _ = 1, 200 do
+        local fallback = {}
+        local used = {}
+        local allSpots = {}
 
-    -- Prefer edge cells that have plenty of neighbors
-    for r = 1, rows do
-        for c = 1, cols do
-            table.insert(safeSpots, { row = r, col = c })
+        for r = 1, rows do
+            for c = 1, cols do
+                table.insert(allSpots, { row = r, col = c })
+            end
+        end
+
+        -- Shuffle and pick
+        for i = 1, math.min(numFaults, #allSpots) do
+            local idx = math.random(1, #allSpots)
+            local spot = allSpots[idx]
+            used[spot.row .. "_" .. spot.col] = true
+            table.insert(fallback, spot)
+            table.remove(allSpots, idx)
+        end
+
+        if #fallback == numFaults then
+            -- Validate deducibility
+            local valid = true
+            for _, pos in ipairs(fallback) do
+                local hasNonFaultNeighbor = false
+                for dr = -1, 1 do
+                    for dc = -1, 1 do
+                        if dr ~= 0 or dc ~= 0 then
+                            local nr = pos.row + dr
+                            local nc = pos.col + dc
+                            if nr >= 1 and nr <= rows and nc >= 1 and nc <= cols then
+                                if not used[nr .. "_" .. nc] then
+                                    hasNonFaultNeighbor = true
+                                end
+                            end
+                        end
+                    end
+                end
+                if not hasNonFaultNeighbor then
+                    valid = false
+                    break
+                end
+            end
+
+            if valid then
+                return fallback
+            end
         end
     end
 
-    for i = 1, math.min(numFaults, #safeSpots) do
-        local idx = math.random(1, #safeSpots)
-        local spot = safeSpots[idx]
-        table.insert(fallback, spot)
-        table.remove(safeSpots, idx)
+    -- Ultimate fallback: place first fault at (1,1) — always has non-fault neighbors on any grid >= 2x2
+    local lastResort = {}
+    for i = 1, math.min(numFaults, rows) do
+        table.insert(lastResort, { row = i, col = 1 })
     end
-
-    return fallback
+    return lastResort
 end
 
 --[[
@@ -562,6 +601,7 @@ function FaultTracerGrid.flagCell(grid, row, col, faultType)
     if cell.state == FaultTracerGrid.STATE_REVEALED then
         -- Can flag revealed faults (from probe hits)
         if cell.isFault then
+            cell.previousState = FaultTracerGrid.STATE_REVEALED
             cell.flaggedType = faultType
             cell.state = FaultTracerGrid.STATE_FLAGGED
             return true
@@ -570,6 +610,7 @@ function FaultTracerGrid.flagCell(grid, row, col, faultType)
     end
 
     if cell.state == FaultTracerGrid.STATE_HIDDEN then
+        cell.previousState = FaultTracerGrid.STATE_HIDDEN
         cell.flaggedType = faultType
         cell.state = FaultTracerGrid.STATE_FLAGGED
         grid.faultsFound = grid.faultsFound + 1
@@ -604,14 +645,15 @@ function FaultTracerGrid.unflagCell(grid, row, col)
         return false
     end
 
-    -- If this was a revealed fault (hit by probe), go back to revealed
-    if cell.isFault and grid.faultHits > 0 then
-        cell.state = FaultTracerGrid.STATE_REVEALED
-    else
-        cell.state = FaultTracerGrid.STATE_HIDDEN
+    -- Restore to the state before flagging
+    cell.state = cell.previousState or FaultTracerGrid.STATE_HIDDEN
+    cell.previousState = nil
+    cell.flaggedType = nil
+
+    -- Only decrement faultsFound if returning to hidden (not probe-revealed)
+    if cell.state == FaultTracerGrid.STATE_HIDDEN then
         grid.faultsFound = grid.faultsFound - 1
     end
-    cell.flaggedType = nil
 
     return true
 end
@@ -675,6 +717,7 @@ function FaultTracerGrid.quickScan(grid)
             local cell = grid.cells[r][c]
             if cell.state == FaultTracerGrid.STATE_HIDDEN then
                 if cell.isFault then
+                    cell.previousState = FaultTracerGrid.STATE_HIDDEN
                     cell.state = FaultTracerGrid.STATE_FLAGGED
                     cell.flaggedType = cell.faultType  -- Auto-correct type
                     faultCount = faultCount + 1
@@ -706,6 +749,26 @@ function FaultTracerGrid.allFaultsFlagged(grid)
         end
     end
     return true
+end
+
+--[[
+    Calculate total oil used from grid state.
+    Single source of truth for oil display during gameplay and results.
+
+    @param grid table
+    @return number Total oil consumed by probing and hints
+]]
+function FaultTracerGrid.getOilUsed(grid)
+    local safeCells = grid.probeCount - grid.faultHits
+    local probeOil = (safeCells * 0.3) + (grid.faultHits * 0.9)
+    local hintOil = grid.hintsUsed * 0.45
+    local total = probeOil + hintOil
+
+    if grid.quickScanUsed then
+        total = total + probeOil  -- Quick scan doubles probe cost
+    end
+
+    return total
 end
 
 --[[
@@ -759,16 +822,8 @@ function FaultTracerGrid.calculateResults(grid)
         table.insert(results.faultResults, faultResult)
     end
 
-    -- Add probing oil costs
-    local safeCells = grid.probeCount - grid.faultHits
-    local probeOil = (safeCells * 0.3) + (grid.faultHits * 0.9)
-    local hintOil = grid.hintsUsed * 0.45
-    results.totalOilUsed = results.totalOilUsed + probeOil + hintOil
-
-    -- Quick scan doubles total probe cost
-    if grid.quickScanUsed then
-        results.totalOilUsed = results.totalOilUsed + probeOil
-    end
+    -- Add probing/hint oil costs (single source of truth)
+    results.totalOilUsed = results.totalOilUsed + FaultTracerGrid.getOilUsed(grid)
 
     -- Diagnosis accuracy
     local totalFaults = #grid.faultPositions

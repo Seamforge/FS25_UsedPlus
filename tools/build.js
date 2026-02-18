@@ -206,6 +206,8 @@ function updateReadmeVersion(newVersion) {
     const versionBadgeRegex = /^\*\*v[\d.]+\*\*(\s*\|.*)$/m;
     // Match the status line: Development Preview (v1.2.3)
     const statusLineRegex = /(\*\*STATUS: Development Preview \(v)[\d.]+(\)\*\*)/;
+    // Match the shields.io badge: version-1.2.3-green
+    const shieldsBadgeRegex = /(shields\.io\/badge\/version-)[\d.]+(-green)/;
 
     let updated = false;
 
@@ -216,6 +218,11 @@ function updateReadmeVersion(newVersion) {
 
     if (statusLineRegex.test(content)) {
         content = content.replace(statusLineRegex, `$1${newVersion}$2`);
+        updated = true;
+    }
+
+    if (shieldsBadgeRegex.test(content)) {
+        content = content.replace(shieldsBadgeRegex, `$1${newVersion}$2`);
         updated = true;
     }
 

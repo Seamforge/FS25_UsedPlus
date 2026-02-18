@@ -122,6 +122,7 @@ function ServiceTruck:onLoad(savegame)
     -- State tracking
     spec.nearbyVehicles = {}
     spec.targetVehicle = nil
+    spec.faultTracerTarget = nil  -- v2.12.0: Any vehicle with maintenance spec (for Fault Tracer)
     spec.nearbyPallets = {}
 
     -- Restoration state
@@ -600,12 +601,18 @@ function ServiceTruck:onUpdate(dt, isActiveForInput, isActiveForInputIgnoreSelec
     spec.playerDistance = playerDistance
 
     -- Update Fault Tracer action event visibility
+    -- Uses faultTracerTarget (any vehicle with maintenance spec), not targetVehicle (needs restoration)
+    -- Only shows when sidebar doors are open (door_service animation > 50%)
     if ServiceTruck.faultTracerActionEventId ~= nil and g_inputBinding ~= nil then
-        local hasTarget = (spec.targetVehicle ~= nil)
-        local shouldShow = playerNearby and isOnFoot and hasTarget and ServiceTruck.nearestTruck == self
+        local hasTarget = (spec.faultTracerTarget ~= nil)
+        local doorsOpen = false
+        if self.getAnimationTime ~= nil then
+            doorsOpen = self:getAnimationTime("door_service") > 0.5
+        end
+        local shouldShow = playerNearby and isOnFoot and hasTarget and doorsOpen and ServiceTruck.nearestTruck == self
 
         if shouldShow then
-            local vehicleName = spec.targetVehicle.vehicle:getName() or "Vehicle"
+            local vehicleName = spec.faultTracerTarget.vehicle:getName() or "Vehicle"
             local promptText = string.format(g_i18n:getText("usedplus_ft_action") or "Fault Tracer: %s", vehicleName)
 
             g_inputBinding:setActionEventTextPriority(ServiceTruck.faultTracerActionEventId, GS_PRIO_VERY_HIGH)
@@ -660,6 +667,7 @@ function ServiceTruck:findNearbyVehicles()
     local spec = self[SPEC_NAME]
     spec.nearbyVehicles = {}
     spec.targetVehicle = nil
+    spec.faultTracerTarget = nil
 
     if self.rootNode == nil then return end
 
@@ -710,6 +718,15 @@ function ServiceTruck:findNearbyVehicles()
             spec.targetVehicle = entry
             break
         end
+    end
+
+    -- v2.12.0: Track closest diagnosable vehicle for Fault Tracer (any with maintenance spec)
+    -- The Fault Tracer can diagnose any vehicle, not just ones needing restoration.
+    -- The dialog handles showing "system healthy" for components >=90%.
+    if #spec.nearbyVehicles > 0 then
+        spec.faultTracerTarget = spec.nearbyVehicles[1]
+    else
+        spec.faultTracerTarget = nil
     end
 end
 
@@ -1186,9 +1203,24 @@ end
 ]]
 function ServiceTruck:openFaultTracerDialog()
     local spec = self[SPEC_NAME]
-    if spec.targetVehicle == nil then return end
+    if spec.faultTracerTarget == nil then return end
 
-    local targetVehicle = spec.targetVehicle.vehicle
+    -- Check fluid levels before opening
+    local oilLevel = self:getFillUnitFillLevel(spec.oilFillUnit) or 0
+    local hydLevel = self:getFillUnitFillLevel(spec.hydraulicFillUnit) or 0
+
+    if oilLevel < 1.0 and hydLevel < 1.0 then
+        InfoDialog.show("Cannot start Fault Tracer: Service Truck has no oil or hydraulic fluid. Refill both tanks before diagnosing.")
+        return
+    elseif oilLevel < 1.0 then
+        InfoDialog.show("Cannot start Fault Tracer: Service Truck oil tank is empty. Refill oil before diagnosing.")
+        return
+    elseif hydLevel < 1.0 then
+        InfoDialog.show("Cannot start Fault Tracer: Service Truck hydraulic fluid tank is empty. Refill hydraulic fluid before diagnosing.")
+        return
+    end
+
+    local targetVehicle = spec.faultTracerTarget.vehicle
     DialogLoader.show("FaultTracerDialog", "setData", targetVehicle, self)
 end
 
@@ -1201,8 +1233,8 @@ function ServiceTruck.faultTracerCallback(self, actionName, inputValue, callback
     local truck = ServiceTruck.nearestTruck
     if truck ~= nil then
         local spec = truck[SPEC_NAME]
-        if spec ~= nil and spec.targetVehicle ~= nil then
-            UsedPlus.logInfo("ServiceTruck: Fault Tracer activated for " .. (spec.targetVehicle.vehicle:getName() or "Vehicle"))
+        if spec ~= nil and spec.faultTracerTarget ~= nil then
+            UsedPlus.logInfo("ServiceTruck: Fault Tracer activated for " .. (spec.faultTracerTarget.vehicle:getName() or "Vehicle"))
             truck:openFaultTracerDialog()
         end
     end

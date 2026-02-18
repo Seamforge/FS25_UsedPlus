@@ -72,7 +72,6 @@ function FaultTracerDialog.new(target, custom_mt)
     self.selectedComponent = nil
     self.grid = nil
     self.mode = FaultTracerDialog.MODE_PROBE
-    self.totalOilUsed = 0
     self.flaggingCell = nil  -- {row, col} of cell being flagged
     self.results = nil
     self.maxHints = FaultTracerDialog.MAX_HINTS
@@ -119,7 +118,6 @@ function FaultTracerDialog:setData(vehicle, serviceTruck)
     self.selectedComponent = nil
     self.grid = nil
     self.mode = FaultTracerDialog.MODE_PROBE
-    self.totalOilUsed = 0
     self.flaggingCell = nil
     self.results = nil
 
@@ -307,7 +305,6 @@ function FaultTracerDialog:selectComponent(component)
     self.selectedComponent = component
     self.grid = FaultTracerGrid.generate(component, reliability)
     self.mode = FaultTracerDialog.MODE_PROBE
-    self.totalOilUsed = 0
     self.currentScreen = FaultTracerDialog.SCREEN_GRID
 
     UsedPlus.logInfo("FaultTracerDialog: Generated " .. self.grid.rows .. "x" .. self.grid.cols ..
@@ -341,9 +338,9 @@ function FaultTracerDialog:displayGrid()
         self.ftFaultCounter:setText(string.format("Faults: %d/%d", flagged, self.grid.totalFaults))
     end
 
-    -- Update oil counter
+    -- Update oil counter (single source of truth from grid state)
     if self.ftOilUsedText then
-        self.ftOilUsedText:setText(string.format("%.1fL", self.totalOilUsed))
+        self.ftOilUsedText:setText(string.format("%.1fL", FaultTracerGrid.getOilUsed(self.grid)))
     end
 
     -- Update hints remaining
@@ -544,16 +541,14 @@ function FaultTracerDialog:handleProbe(row, col, cell)
     if not result.success then return end
 
     if result.isFault then
-        -- Hit a fault - penalty
-        self.totalOilUsed = self.totalOilUsed + 0.9
+        -- Hit a fault - penalty (oil tracked via FaultTracerGrid.getOilUsed)
         if self.ftStatusMsg then
             self.ftStatusMsg:setText(g_i18n:getText("usedplus_ft_probeHit") or "FAULT HIT! Fluid leak - 3x cost")
         end
         -- Auto-switch to flag mode for convenience
         self.mode = FaultTracerDialog.MODE_FLAG
     else
-        -- Safe probe
-        self.totalOilUsed = self.totalOilUsed + 0.3
+        -- Safe probe (oil tracked via FaultTracerGrid.getOilUsed)
         if self.ftStatusMsg then
             self.ftStatusMsg:setText("")
         end
@@ -664,7 +659,7 @@ function FaultTracerDialog:onHintClick()
         return
     end
 
-    self.totalOilUsed = self.totalOilUsed + 0.45
+    -- Oil tracked via FaultTracerGrid.getOilUsed (hintsUsed incremented in grid engine)
     self:displayGrid()
 end
 
@@ -672,12 +667,9 @@ function FaultTracerDialog:onQuickScanClick()
     if self.grid == nil then return end
     if self.grid.quickScanUsed then return end
 
-    local scanResult = FaultTracerGrid.quickScan(self.grid)
+    FaultTracerGrid.quickScan(self.grid)
 
-    -- Quick scan costs 2x total probe oil
-    local safeCells = scanResult.probedCount - scanResult.faultCount
-    self.totalOilUsed = self.totalOilUsed + (safeCells * 0.3 * 2) + (scanResult.faultCount * 0.9 * 2)
-
+    -- Oil tracked via FaultTracerGrid.getOilUsed (quickScanUsed flag set in grid engine)
     if self.ftStatusMsg then
         self.ftStatusMsg:setText(g_i18n:getText("usedplus_ft_quickScanCap") or "Quality capped at 60% (Quick Scan)")
     end
@@ -695,10 +687,24 @@ function FaultTracerDialog:onBeginRepairClick()
         return
     end
 
+    -- Validate vehicle still exists
+    if self.vehicle == nil or self.vehicle.isDeleted then
+        InfoDialog.show("Vehicle no longer available.")
+        self:close()
+        return
+    end
+
+    -- Validate truck still exists
+    if self.serviceTruck == nil or self.serviceTruck.isDeleted then
+        InfoDialog.show("Service Truck no longer available.")
+        self:close()
+        return
+    end
+
     -- Calculate results
     self.results = FaultTracerGrid.calculateResults(self.grid)
 
-    -- Apply reliability gains to vehicle
+    -- Apply via network event (handles both SP and MP)
     self:applyResults()
 
     -- Show results screen
@@ -768,51 +774,20 @@ function FaultTracerDialog:displayResults()
 end
 
 --[[
-    Apply repair results to the vehicle's maintenance spec.
-    Modifies reliability and ceiling, consumes oil from truck.
+    Apply repair results via network event (handles SP and MP).
+    Server-side event validates and applies reliability/ceiling gains, consumes oil.
 ]]
 function FaultTracerDialog:applyResults()
-    if self.results == nil or self.vehicle == nil then return end
+    if self.results == nil or self.vehicle == nil or self.serviceTruck == nil then return end
 
-    local maintSpec = self.vehicle.spec_usedPlusMaintenance
-    if maintSpec == nil then return end
-
-    local component = self.selectedComponent
-    local gain = self.results.reliabilityGain
-
-    -- Apply reliability gain
-    if component == "engine" then
-        maintSpec.engineReliability = math.min(1.0, (maintSpec.engineReliability or 0) + gain)
-    elseif component == "electrical" then
-        maintSpec.electricalReliability = math.min(1.0, (maintSpec.electricalReliability or 0) + gain)
-    elseif component == "hydraulic" then
-        maintSpec.hydraulicReliability = math.min(1.0, (maintSpec.hydraulicReliability or 0) + gain)
-    end
-
-    -- Apply ceiling restoration
-    maintSpec.maxReliabilityCeiling = math.min(1.0,
-        (maintSpec.maxReliabilityCeiling or 1.0) + self.results.ceilingGain)
-
-    -- Consume oil from service truck
-    if self.serviceTruck ~= nil then
-        local truckSpec = self.serviceTruck.spec_serviceTruck
-        if truckSpec ~= nil then
-            local oilFillType = g_fillTypeManager:getFillTypeIndexByName("OIL")
-            if oilFillType ~= nil then
-                self.serviceTruck:addFillUnitFillLevel(
-                    self.serviceTruck:getOwnerFarmId(),
-                    truckSpec.oilFillUnit,
-                    -self.results.totalOilUsed,
-                    oilFillType,
-                    ToolType.UNDEFINED, nil)
-            end
-        end
-    end
-
-    local vehicleName = self.vehicle:getName() or "Vehicle"
-    UsedPlus.logInfo(string.format("FaultTracer: Applied +%.1f%% reliability, +%.1f%% ceiling to %s (%s). Oil used: %.1fL",
-        self.results.reliabilityGain * 100, self.results.ceilingGain * 100,
-        vehicleName, self.selectedComponent, self.results.totalOilUsed))
+    FaultTracerResultEvent.sendToServer(
+        self.vehicle.id,
+        self.serviceTruck.id,
+        self.selectedComponent,
+        self.results.reliabilityGain,
+        self.results.ceilingGain,
+        self.results.totalOilUsed
+    )
 end
 
 -- ============================================================

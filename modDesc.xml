@@ -7,7 +7,7 @@
     -->
 
     <author>UsedPlus Team</author>
-    <version>2.13.3.6</version>
+    <version>2.14.1.10</version>
 
     <title>
         <en>UsedPlus - Finance &amp; Marketplace System</en>
@@ -119,7 +119,7 @@ UNTERSTÜTZUNG
         <action name="USEDPLUS_ACTIVATE_OBD"/>
         <action name="USEDPLUS_TIRES" category="MENU" axisType="HALF"/>
         <action name="USEDPLUS_SERVICE_TRUCK" category="VEHICLE" axisType="HALF"/>
-        <action name="USEDPLUS_FAULT_TRACER"/>  <!--  v2.12.0: On-foot Fault Tracer minigame -->
+        <action name="USEDPLUS_FAULT_TRACER" category="VEHICLE" axisType="HALF"/>  <!--  v2.12.0: On-foot Fault Tracer minigame -->
     </actions>
 
     <inputBinding>
@@ -226,6 +226,7 @@ UNTERSTÜTZUNG
         <sourceFile filename="src/events/MaintenanceEvents.lua"/> <!-- v2.8.0: FieldRepairEvent, RefillFluidsEvent, ReplaceTiresEvent -->
         <sourceFile filename="src/events/RestorationEvents.lua"/> <!-- v2.9.0: Service Truck restoration sync events -->
         <sourceFile filename="src/events/ServiceTruckDiscoveryEvent.lua"/> <!-- v2.9.0: Service Truck discovery MP sync -->
+        <sourceFile filename="src/events/FaultTracerResultEvent.lua"/> <!-- v2.12.0: Fault Tracer minigame results sync -->
         <sourceFile filename="src/events/RepairVehicleEvent.lua"/>
         <sourceFile filename="src/events/SetPaymentConfigEvent.lua"/>  <!-- Payment configuration sync -->
         <sourceFile filename="src/events/UsedPlusSettingsEvent.lua"/>  <!--  v1.4.0: Settings sync event -->
