@@ -63,8 +63,7 @@ function PurchaseLandCashEvent:readStream(streamId, connection)
 end
 
 function PurchaseLandCashEvent:run(connection)
-    if connection ~= nil and not connection:getIsServer() then
-        UsedPlus.logError("PurchaseLandCashEvent must run on server")
+    if connection ~= nil and connection:getIsServer() then
         return
     end
 
@@ -229,8 +228,7 @@ function LandLeaseEvent:readStream(streamId, connection)
 end
 
 function LandLeaseEvent:run(connection)
-    if connection ~= nil and not connection:getIsServer() then
-        UsedPlus.logError("LandLeaseEvent must run on server")
+    if connection ~= nil and connection:getIsServer() then
         return
     end
 
@@ -416,8 +414,7 @@ function LandLeaseBuyoutEvent:readStream(streamId, connection)
 end
 
 function LandLeaseBuyoutEvent:run(connection)
-    if connection ~= nil and not connection:getIsServer() then
-        UsedPlus.logError("LandLeaseBuyoutEvent must run on server")
+    if connection ~= nil and connection:getIsServer() then
         return
     end
 

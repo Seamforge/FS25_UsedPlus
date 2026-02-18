@@ -109,8 +109,7 @@ end
 function LeaseVehicleEvent:run(connection)
     UsedPlus.logWarn("LeaseVehicleEvent:run() ENTERED")
 
-    if connection ~= nil and not connection:getIsServer() then
-        UsedPlus.logError("LeaseVehicleEvent must run on server")
+    if connection ~= nil and connection:getIsServer() then
         return
     end
 
@@ -309,8 +308,7 @@ function LeaseEndEvent:readStream(streamId, connection)
 end
 
 function LeaseEndEvent:run(connection)
-    if connection ~= nil and not connection:getIsServer() then
-        UsedPlus.logError("LeaseEndEvent must run on server")
+    if connection ~= nil and connection:getIsServer() then
         return
     end
 
@@ -473,8 +471,7 @@ function TerminateLeaseEvent:readStream(streamId, connection)
 end
 
 function TerminateLeaseEvent:run(connection)
-    if connection ~= nil and not connection:getIsServer() then
-        UsedPlus.logError("TerminateLeaseEvent must run on server")
+    if connection ~= nil and connection:getIsServer() then
         return
     end
 
@@ -706,8 +703,7 @@ function LeaseRenewalEvent:readStream(streamId, connection)
 end
 
 function LeaseRenewalEvent:run(connection)
-    if connection ~= nil and not connection:getIsServer() then
-        UsedPlus.logError("LeaseRenewalEvent must run on server")
+    if connection ~= nil and connection:getIsServer() then
         return
     end
 

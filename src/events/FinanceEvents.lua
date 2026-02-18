@@ -283,8 +283,7 @@ function FinanceVehicleEvent.execute(farmId, itemType, itemId, itemName, basePri
 end
 
 function FinanceVehicleEvent:run(connection)
-    if connection ~= nil and not connection:getIsServer() then
-        UsedPlus.logError("FinanceVehicleEvent must run on server")
+    if connection ~= nil and connection:getIsServer() then
         return
     end
 
@@ -354,8 +353,7 @@ function FinancePaymentEvent:readStream(streamId, connection)
 end
 
 function FinancePaymentEvent:run(connection)
-    if connection ~= nil and not connection:getIsServer() then
-        UsedPlus.logError("FinancePaymentEvent must run on server")
+    if connection ~= nil and connection:getIsServer() then
         return
     end
 
@@ -682,8 +680,7 @@ function TakeLoanEvent.execute(farmId, loanAmount, termYears, interestRate, mont
 end
 
 function TakeLoanEvent:run(connection)
-    if connection ~= nil and not connection:getIsServer() then
-        UsedPlus.logError("TakeLoanEvent must run on server")
+    if connection ~= nil and connection:getIsServer() then
         return
     end
 
@@ -809,8 +806,7 @@ end
 
 function VanillaLoanPaymentEvent:run(connection)
     -- Only execute on server
-    if connection ~= nil and not connection:getIsServer() then
-        UsedPlus.logError("VanillaLoanPaymentEvent must run on server")
+    if connection ~= nil and connection:getIsServer() then
         return
     end
 

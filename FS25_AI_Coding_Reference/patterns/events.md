@@ -143,9 +143,9 @@ end
     Called when event is received on server
 ]]
 function MyActionEvent:run(connection)
-    -- Verify this is running on server
-    if not connection:getIsServer() then
-        print("Error: [MyMod] MyActionEvent must run on server")
+    -- Reject if received on a client (connection:getIsServer() == true means
+    -- the other end is the server, so WE are a client - don't execute here)
+    if connection ~= nil and connection:getIsServer() then
         return
     end
 
@@ -269,7 +269,7 @@ function CreateSaleListingEvent.execute(farmId, vehicleId, agentTier)
 end
 
 function CreateSaleListingEvent:run(connection)
-    if not connection:getIsServer() then
+    if connection ~= nil and connection:getIsServer() then
         return
     end
     CreateSaleListingEvent.execute(self.farmId, self.vehicleId, self.agentTier)
@@ -320,7 +320,7 @@ function AcceptSaleOfferEvent.execute(listingId)
 end
 
 function AcceptSaleOfferEvent:run(connection)
-    if not connection:getIsServer() then return end
+    if connection ~= nil and connection:getIsServer() then return end
     AcceptSaleOfferEvent.execute(self.listingId)
 end
 ```
@@ -363,7 +363,9 @@ Events are registered via `<extraSourceFiles>`:
 
 ### 3. Server-Only Execution
 - Always check `g_server ~= nil` in sendToServer
-- Always check `connection:getIsServer()` in run
+- In `run()`, guard with `if connection ~= nil and connection:getIsServer() then return end`
+  - `connection:getIsServer() == true` means the other end IS a server → we are a client → don't execute
+  - `connection:getIsServer() == false` means the other end is a client → we are the server → execute
 - Business logic should be in static `execute()` method
 
 ### 4. Nil Reference Errors

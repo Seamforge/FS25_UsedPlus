@@ -127,8 +127,7 @@ end
     Execute event on server (multiplayer)
 ]]
 function SetPaymentConfigEvent:run(connection)
-    if connection ~= nil and not connection:getIsServer() then
-        UsedPlus.logError("SetPaymentConfigEvent must run on server")
+    if connection ~= nil and connection:getIsServer() then
         return
     end
 
