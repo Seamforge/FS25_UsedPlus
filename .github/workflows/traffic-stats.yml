@@ -2,8 +2,9 @@ name: Traffic Stats Archive
 
 on:
   schedule:
-    # Run daily at 3:00 AM UTC (before GitHub's 14-day window expires)
-    - cron: '0 3 * * *'
+    # Run every 6 hours to capture release download velocity
+    # Views/clones are daily granularity from API, but downloads are cumulative
+    - cron: '0 0,6,12,18 * * *'
   workflow_dispatch: # Allow manual trigger
 
 permissions:
@@ -26,9 +27,11 @@ jobs:
             git checkout --orphan traffic-stats
             git rm -rf . 2>/dev/null || true
             echo "# Traffic Stats" > README.md
-            echo "This branch contains archived traffic data collected daily by GitHub Actions." >> README.md
+            echo "This branch contains archived traffic data for FS25_UsedPlus." >> README.md
             echo "" >> README.md
-            echo "See [SUMMARY.md](.github/traffic/SUMMARY.md) for the latest overview." >> README.md
+            echo "Data collected every 6 hours by GitHub Actions." >> README.md
+            echo "See [SUMMARY.md](.github/traffic/SUMMARY.md) for the latest dashboard." >> README.md
+            echo "See [charts/](.github/traffic/charts/) for visualizations." >> README.md
             git add README.md
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -36,92 +39,391 @@ jobs:
             git push origin traffic-stats
           fi
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install charting dependencies
+        run: pip install matplotlib
+
       - name: Collect traffic stats
         env:
           GH_TOKEN: ${{ secrets.PROJECT_TOKEN }}
         run: |
-          mkdir -p .github/traffic
+          mkdir -p .github/traffic/charts
 
+          TIMESTAMP=$(date -u +%Y-%m-%dT%H:%M:%SZ)
           DATE=$(date -u +%Y-%m-%d)
-          STATS_FILE=".github/traffic/stats.json"
+          HOUR=$(date -u +%H)
 
-          # Fetch current traffic data from GitHub API
+          # ── Fetch API data ──────────────────────────────────────────
           VIEWS=$(gh api repos/${{ github.repository }}/traffic/views 2>/dev/null || echo '{"count":0,"uniques":0,"views":[]}')
           CLONES=$(gh api repos/${{ github.repository }}/traffic/clones 2>/dev/null || echo '{"count":0,"uniques":0,"clones":[]}')
           REFERRERS=$(gh api repos/${{ github.repository }}/traffic/popular/referrers 2>/dev/null || echo '[]')
           PATHS=$(gh api repos/${{ github.repository }}/traffic/popular/paths 2>/dev/null || echo '[]')
-
-          # Fetch release download counts
           RELEASES=$(gh api repos/${{ github.repository }}/releases --jq '[.[] | {tag: .tag_name, assets: [.assets[] | {name: .name, downloads: .download_count}]}]' 2>/dev/null || echo '[]')
+          STARGAZERS=$(gh api repos/${{ github.repository }} --jq '.stargazers_count' 2>/dev/null || echo '0')
+          FORKS=$(gh api repos/${{ github.repository }} --jq '.forks_count' 2>/dev/null || echo '0')
+          WATCHERS=$(gh api repos/${{ github.repository }} --jq '.subscribers_count' 2>/dev/null || echo '0')
+          OPEN_ISSUES=$(gh api repos/${{ github.repository }} --jq '.open_issues_count' 2>/dev/null || echo '0')
 
-          # Build today's snapshot
-          TODAY_SNAPSHOT=$(jq -n \
-            --arg date "$DATE" \
-            --argjson views "$VIEWS" \
-            --argjson clones "$CLONES" \
-            --argjson referrers "$REFERRERS" \
-            --argjson paths "$PATHS" \
-            --argjson releases "$RELEASES" \
-            '{
+          # ── Daily views/clones breakdown (from API's per-day array) ──
+          # The API returns up to 14 days of daily data points
+          DAILY_FILE=".github/traffic/daily.json"
+          if [ -f "$DAILY_FILE" ]; then
+            DAILY_EXISTING=$(cat "$DAILY_FILE")
+          else
+            DAILY_EXISTING='{}'
+          fi
+
+          # Merge API's per-day view data into our historical daily file
+          # Each day gets: views_total, views_unique, clones_total, clones_unique
+          DAILY_UPDATED=$(echo "$VIEWS" | jq --argjson clones "$CLONES" --argjson existing "$DAILY_EXISTING" '
+            # Start with existing data
+            $existing as $base |
+            # Merge in view data from API
+            reduce (.views[]? // empty) as $v ($base;
+              ($v.timestamp | split("T")[0]) as $day |
+              .[$day] = (.[$day] // {}) |
+              .[$day].views_total = $v.count |
+              .[$day].views_unique = $v.uniques
+            ) |
+            # Merge in clone data from API
+            reduce ($clones.clones[]? // empty) as $c (.;
+              ($c.timestamp | split("T")[0]) as $day |
+              .[$day] = (.[$day] // {}) |
+              .[$day].clones_total = $c.count |
+              .[$day].clones_unique = $c.uniques
+            )
+          ')
+          echo "$DAILY_UPDATED" > "$DAILY_FILE"
+
+          # ── Download snapshots (tracked every 6 hours for velocity) ──
+          DOWNLOADS_FILE=".github/traffic/downloads.json"
+          if [ -f "$DOWNLOADS_FILE" ]; then
+            DL_EXISTING=$(cat "$DOWNLOADS_FILE")
+          else
+            DL_EXISTING="[]"
+          fi
+
+          TOTAL_DL=$(echo "$RELEASES" | jq '[.[].assets[].downloads] | add // 0')
+          DL_UPDATED=$(echo "$DL_EXISTING" | jq --arg ts "$TIMESTAMP" --argjson total "$TOTAL_DL" --argjson releases "$RELEASES" \
+            '. + [{timestamp: $ts, total_downloads: $total, releases: $releases}]')
+          echo "$DL_UPDATED" > "$DOWNLOADS_FILE"
+
+          # ── Referrer history (one snapshot per day) ──
+          REFERRER_FILE=".github/traffic/referrers.json"
+          if [ -f "$REFERRER_FILE" ]; then
+            REF_EXISTING=$(cat "$REFERRER_FILE")
+          else
+            REF_EXISTING='{}'
+          fi
+          REF_UPDATED=$(echo "$REF_EXISTING" | jq --arg date "$DATE" --argjson refs "$REFERRERS" \
+            '.[$date] = $refs')
+          echo "$REF_UPDATED" > "$REFERRER_FILE"
+
+          # ── Repo metadata snapshots (stars, forks, watchers) ──
+          META_FILE=".github/traffic/metadata.json"
+          if [ -f "$META_FILE" ]; then
+            META_EXISTING=$(cat "$META_FILE")
+          else
+            META_EXISTING="[]"
+          fi
+
+          # Only add one metadata snapshot per day
+          META_UPDATED=$(echo "$META_EXISTING" | jq --arg date "$DATE" \
+            --argjson stars "$STARGAZERS" --argjson forks "$FORKS" \
+            --argjson watchers "$WATCHERS" --argjson issues "$OPEN_ISSUES" \
+            '[.[] | select(.date != $date)] + [{
               date: $date,
-              views: { count: $views.count, uniques: $views.uniques },
-              clones: { count: $clones.count, uniques: $clones.uniques },
-              referrers: $referrers,
-              popular_paths: $paths,
-              releases: $releases
-            }')
+              stars: $stars,
+              forks: $forks,
+              watchers: $watchers,
+              open_issues: $issues
+            }] | sort_by(.date)')
+          echo "$META_UPDATED" > "$META_FILE"
 
-          # Load existing stats or create new array
+          # ── Legacy stats.json (keep for backwards compatibility) ──
+          STATS_FILE=".github/traffic/stats.json"
           if [ -f "$STATS_FILE" ]; then
             EXISTING=$(cat "$STATS_FILE")
           else
             EXISTING="[]"
           fi
 
-          # Remove any existing entry for today (in case of re-run) and append new snapshot
+          TODAY_SNAPSHOT=$(jq -n \
+            --arg ts "$TIMESTAMP" --arg date "$DATE" \
+            --argjson views "$VIEWS" --argjson clones "$CLONES" \
+            --argjson referrers "$REFERRERS" --argjson paths "$PATHS" \
+            --argjson releases "$RELEASES" --argjson stars "$STARGAZERS" \
+            --argjson forks "$FORKS" --argjson watchers "$WATCHERS" \
+            '{
+              timestamp: $ts, date: $date,
+              views: { count: $views.count, uniques: $views.uniques },
+              clones: { count: $clones.count, uniques: $clones.uniques },
+              referrers: $referrers, popular_paths: $paths,
+              releases: $releases,
+              stars: $stars, forks: $forks, watchers: $watchers
+            }')
+
           UPDATED=$(echo "$EXISTING" | jq --arg date "$DATE" --argjson snapshot "$TODAY_SNAPSHOT" \
             '[.[] | select(.date != $date)] + [$snapshot] | sort_by(.date)')
-
-          # Write updated stats
           echo "$UPDATED" > "$STATS_FILE"
 
-          # Generate human-readable summary
+      - name: Generate charts
+        run: |
+          python3 << 'PYEOF'
+          import json
+          import os
+          from datetime import datetime
+
+          import matplotlib
+          matplotlib.use('Agg')
+          import matplotlib.pyplot as plt
+          import matplotlib.dates as mdates
+
+          TRAFFIC_DIR = ".github/traffic"
+          CHARTS_DIR = os.path.join(TRAFFIC_DIR, "charts")
+          os.makedirs(CHARTS_DIR, exist_ok=True)
+
+          # ── Shared style ────────────────────────────────────────────
+          plt.rcParams.update({
+              'figure.facecolor': '#0d1117',
+              'axes.facecolor': '#161b22',
+              'axes.edgecolor': '#30363d',
+              'axes.labelcolor': '#c9d1d9',
+              'text.color': '#c9d1d9',
+              'xtick.color': '#8b949e',
+              'ytick.color': '#8b949e',
+              'grid.color': '#21262d',
+              'grid.alpha': 0.8,
+              'font.size': 11,
+          })
+
+          # ── Chart 1: Views & Clones over time ──────────────────────
+          daily_file = os.path.join(TRAFFIC_DIR, "daily.json")
+          if os.path.exists(daily_file):
+              with open(daily_file) as f:
+                  daily = json.load(f)
+
+              if daily:
+                  dates = sorted(daily.keys())
+                  date_objs = [datetime.strptime(d, "%Y-%m-%d") for d in dates]
+                  views = [daily[d].get("views_total", 0) or 0 for d in dates]
+                  views_unique = [daily[d].get("views_unique", 0) or 0 for d in dates]
+                  clones = [daily[d].get("clones_total", 0) or 0 for d in dates]
+                  clones_unique = [daily[d].get("clones_unique", 0) or 0 for d in dates]
+
+                  fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 8), sharex=True)
+                  fig.suptitle("FS25_UsedPlus — Traffic Dashboard", fontsize=16, fontweight='bold', color='#58a6ff')
+
+                  # Views
+                  ax1.fill_between(date_objs, views, alpha=0.3, color='#58a6ff')
+                  ax1.plot(date_objs, views, 'o-', color='#58a6ff', linewidth=2, markersize=5, label='Total Views')
+                  ax1.plot(date_objs, views_unique, 's--', color='#3fb950', linewidth=1.5, markersize=4, label='Unique Visitors')
+                  ax1.set_ylabel("Page Views")
+                  ax1.legend(loc='upper left', framealpha=0.8)
+                  ax1.grid(True, linestyle='--')
+                  ax1.set_ylim(bottom=0)
+
+                  # Clones
+                  ax2.fill_between(date_objs, clones, alpha=0.3, color='#d29922')
+                  ax2.plot(date_objs, clones, 'o-', color='#d29922', linewidth=2, markersize=5, label='Total Clones')
+                  ax2.plot(date_objs, clones_unique, 's--', color='#f85149', linewidth=1.5, markersize=4, label='Unique Cloners')
+                  ax2.set_ylabel("Git Clones")
+                  ax2.legend(loc='upper left', framealpha=0.8)
+                  ax2.grid(True, linestyle='--')
+                  ax2.set_ylim(bottom=0)
+
+                  ax2.xaxis.set_major_formatter(mdates.DateFormatter('%b %d'))
+                  ax2.xaxis.set_major_locator(mdates.DayLocator(interval=2))
+                  plt.xticks(rotation=45)
+                  fig.tight_layout()
+                  fig.savefig(os.path.join(CHARTS_DIR, "views_clones.png"), dpi=150, bbox_inches='tight')
+                  plt.close()
+                  print("Generated: views_clones.png")
+
+          # ── Chart 2: Download velocity ──────────────────────────────
+          dl_file = os.path.join(TRAFFIC_DIR, "downloads.json")
+          if os.path.exists(dl_file):
+              with open(dl_file) as f:
+                  downloads = json.load(f)
+
+              if len(downloads) >= 2:
+                  timestamps = [datetime.strptime(d["timestamp"], "%Y-%m-%dT%H:%M:%SZ") for d in downloads]
+                  totals = [d["total_downloads"] for d in downloads]
+
+                  fig, ax = plt.subplots(figsize=(12, 4))
+                  fig.suptitle("Release Downloads Over Time", fontsize=14, fontweight='bold', color='#58a6ff')
+                  ax.fill_between(timestamps, totals, alpha=0.3, color='#3fb950')
+                  ax.plot(timestamps, totals, 'o-', color='#3fb950', linewidth=2, markersize=5)
+                  ax.set_ylabel("Total Downloads")
+                  ax.set_xlabel("")
+                  ax.grid(True, linestyle='--')
+                  ax.set_ylim(bottom=0)
+                  ax.xaxis.set_major_formatter(mdates.DateFormatter('%b %d %H:%M'))
+                  plt.xticks(rotation=45)
+                  fig.tight_layout()
+                  fig.savefig(os.path.join(CHARTS_DIR, "downloads.png"), dpi=150, bbox_inches='tight')
+                  plt.close()
+                  print("Generated: downloads.png")
+              elif len(downloads) == 1:
+                  print("Only 1 download snapshot — need at least 2 for download chart")
+
+          # ── Chart 3: Referrers breakdown (latest snapshot) ─────────
+          ref_file = os.path.join(TRAFFIC_DIR, "referrers.json")
+          if os.path.exists(ref_file):
+              with open(ref_file) as f:
+                  referrers = json.load(f)
+
+              if referrers:
+                  latest_date = sorted(referrers.keys())[-1]
+                  refs = referrers[latest_date]
+
+                  if refs:
+                      names = [r["referrer"] for r in refs]
+                      counts = [r["count"] for r in refs]
+                      colors = ['#58a6ff', '#3fb950', '#d29922', '#f85149', '#bc8cff',
+                                '#79c0ff', '#56d364', '#e3b341', '#ff7b72', '#d2a8ff']
+
+                      fig, ax = plt.subplots(figsize=(8, 5))
+                      fig.suptitle(f"Traffic Referrers ({latest_date})", fontsize=14, fontweight='bold', color='#58a6ff')
+                      bars = ax.barh(names[::-1], counts[::-1], color=colors[:len(names)][::-1])
+                      ax.set_xlabel("Page Views")
+                      ax.grid(True, axis='x', linestyle='--')
+
+                      # Add count labels on bars
+                      for bar, count in zip(bars, counts[::-1]):
+                          ax.text(bar.get_width() + max(counts)*0.02, bar.get_y() + bar.get_height()/2,
+                                  str(count), va='center', color='#c9d1d9', fontsize=10)
+
+                      fig.tight_layout()
+                      fig.savefig(os.path.join(CHARTS_DIR, "referrers.png"), dpi=150, bbox_inches='tight')
+                      plt.close()
+                      print("Generated: referrers.png")
+
+          # ── Chart 4: Stars/Forks/Watchers over time ─────────────────
+          meta_file = os.path.join(TRAFFIC_DIR, "metadata.json")
+          if os.path.exists(meta_file):
+              with open(meta_file) as f:
+                  metadata = json.load(f)
+
+              if len(metadata) >= 2:
+                  dates = [datetime.strptime(m["date"], "%Y-%m-%d") for m in metadata]
+                  stars = [m.get("stars", 0) for m in metadata]
+                  forks = [m.get("forks", 0) for m in metadata]
+
+                  fig, ax = plt.subplots(figsize=(12, 4))
+                  fig.suptitle("Repository Growth", fontsize=14, fontweight='bold', color='#58a6ff')
+                  ax.plot(dates, stars, 'o-', color='#d29922', linewidth=2, markersize=6, label='Stars')
+                  ax.plot(dates, forks, 's-', color='#58a6ff', linewidth=2, markersize=5, label='Forks')
+                  ax.set_ylabel("Count")
+                  ax.legend(loc='upper left', framealpha=0.8)
+                  ax.grid(True, linestyle='--')
+                  ax.set_ylim(bottom=0)
+                  ax.xaxis.set_major_formatter(mdates.DateFormatter('%b %d'))
+                  plt.xticks(rotation=45)
+                  fig.tight_layout()
+                  fig.savefig(os.path.join(CHARTS_DIR, "growth.png"), dpi=150, bbox_inches='tight')
+                  plt.close()
+                  print("Generated: growth.png")
+              elif len(metadata) == 1:
+                  print("Only 1 metadata snapshot — need at least 2 for growth chart")
+
+          print("Chart generation complete!")
+          PYEOF
+
+      - name: Generate summary
+        env:
+          GH_TOKEN: ${{ secrets.PROJECT_TOKEN }}
+        run: |
           SUMMARY_FILE=".github/traffic/SUMMARY.md"
-          TOTAL_VIEWS=$(echo "$VIEWS" | jq '.count')
-          UNIQUE_VIEWS=$(echo "$VIEWS" | jq '.uniques')
-          TOTAL_CLONES=$(echo "$CLONES" | jq '.count')
-          UNIQUE_CLONES=$(echo "$CLONES" | jq '.uniques')
-          TOTAL_DOWNLOADS=$(echo "$RELEASES" | jq '[.[].assets[].downloads] | add // 0')
-          DAYS_TRACKED=$(echo "$UPDATED" | jq 'length')
+          DATE=$(date -u +%Y-%m-%d)
+          TIMESTAMP=$(date -u +%Y-%m-%dT%H:%M:%SZ)
 
-          cat > "$SUMMARY_FILE" << 'SUMMARY_EOF'
-          # Traffic Stats Summary
-          SUMMARY_EOF
+          # Read current data
+          VIEWS=$(gh api repos/${{ github.repository }}/traffic/views 2>/dev/null || echo '{"count":0,"uniques":0}')
+          CLONES=$(gh api repos/${{ github.repository }}/traffic/clones 2>/dev/null || echo '{"count":0,"uniques":0}')
+          REFERRERS=$(gh api repos/${{ github.repository }}/traffic/popular/referrers 2>/dev/null || echo '[]')
+          PATHS=$(gh api repos/${{ github.repository }}/traffic/popular/paths 2>/dev/null || echo '[]')
+          RELEASES=$(gh api repos/${{ github.repository }}/releases --jq '[.[].assets[].downloads] | add // 0' 2>/dev/null || echo '0')
+          STARGAZERS=$(gh api repos/${{ github.repository }} --jq '.stargazers_count' 2>/dev/null || echo '0')
+          FORKS=$(gh api repos/${{ github.repository }} --jq '.forks_count' 2>/dev/null || echo '0')
+          WATCHERS=$(gh api repos/${{ github.repository }} --jq '.subscribers_count' 2>/dev/null || echo '0')
 
-          # Build summary with proper formatting (avoid heredoc variable expansion issues)
+          DAYS_TRACKED=$(jq 'length' .github/traffic/metadata.json 2>/dev/null || echo '1')
+          DL_SNAPSHOTS=$(jq 'length' .github/traffic/downloads.json 2>/dev/null || echo '1')
+
           {
-            echo "# Traffic Stats Summary"
+            echo "# FS25_UsedPlus — Traffic Dashboard"
             echo ""
-            echo "**Last updated:** ${DATE}"
-            echo "**Days tracked:** ${DAYS_TRACKED}"
-            echo ""
-            echo "## Current 14-Day Window"
-            echo "| Metric | Total | Unique |"
-            echo "|--------|-------|--------|"
-            echo "| Page Views | ${TOTAL_VIEWS} | ${UNIQUE_VIEWS} |"
-            echo "| Git Clones | ${TOTAL_CLONES} | ${UNIQUE_CLONES} |"
-            echo ""
-            echo "## Release Downloads"
-            echo "**Total downloads (all releases):** ${TOTAL_DOWNLOADS}"
-            echo ""
-            echo "## Top Referrers (14-day)"
-            echo "$REFERRERS" | jq -r '.[:5][] | "- **\(.referrer)** — \(.count) views (\(.uniques) unique)"' 2>/dev/null || echo "- No referrer data"
-            echo ""
-            echo "## Top Pages (14-day)"
-            echo "$PATHS" | jq -r '.[:5][] | "- `\(.path)` — \(.count) views (\(.uniques) unique)"' 2>/dev/null || echo "- No path data"
+            echo "**Last updated:** ${TIMESTAMP}"
+            echo "**Days tracked:** ${DAYS_TRACKED} | **Download snapshots:** ${DL_SNAPSHOTS}"
             echo ""
             echo "---"
-            echo "*Auto-generated by traffic-stats.yml*"
+            echo ""
+            echo "## Views & Clones (14-day window)"
+            echo ""
+            echo "![Views & Clones](charts/views_clones.png)"
+            echo ""
+            echo "| Metric | Total | Unique |"
+            echo "|--------|-------|--------|"
+            echo "| Page Views | $(echo "$VIEWS" | jq '.count') | $(echo "$VIEWS" | jq '.uniques') |"
+            echo "| Git Clones | $(echo "$CLONES" | jq '.count') | $(echo "$CLONES" | jq '.uniques') |"
+            echo ""
+            echo "---"
+            echo ""
+            echo "## Release Downloads"
+            echo ""
+            echo "![Downloads](charts/downloads.png)"
+            echo ""
+            echo "**Total downloads (all releases):** ${RELEASES}"
+            echo ""
+            echo "---"
+            echo ""
+            echo "## Referrers"
+            echo ""
+            echo "![Referrers](charts/referrers.png)"
+            echo ""
+            echo "| Source | Views | Unique |"
+            echo "|--------|-------|--------|"
+            echo "$REFERRERS" | jq -r '.[] | "| \(.referrer) | \(.count) | \(.uniques) |"' 2>/dev/null || echo "| No data | - | - |"
+            echo ""
+            echo "---"
+            echo ""
+            echo "## Repository Growth"
+            echo ""
+            echo "![Growth](charts/growth.png)"
+            echo ""
+            echo "| Metric | Current |"
+            echo "|--------|---------|"
+            echo "| Stars | ${STARGAZERS} |"
+            echo "| Forks | ${FORKS} |"
+            echo "| Watchers | ${WATCHERS} |"
+            echo ""
+            echo "---"
+            echo ""
+            echo "## Top Pages (14-day)"
+            echo ""
+            echo "| Page | Views | Unique |"
+            echo "|------|-------|--------|"
+            echo "$PATHS" | jq -r '.[:10][] | "| `\(.path)` | \(.count) | \(.uniques) |"' 2>/dev/null || echo "| No data | - | - |"
+            echo ""
+            echo "---"
+            echo ""
+            echo "## Data Files"
+            echo ""
+            echo "| File | Description |"
+            echo "|------|-------------|"
+            echo "| [daily.json](daily.json) | Per-day views & clones (historical, never expires) |"
+            echo "| [downloads.json](downloads.json) | Download snapshots every 6 hours |"
+            echo "| [referrers.json](referrers.json) | Daily referrer snapshots |"
+            echo "| [metadata.json](metadata.json) | Stars, forks, watchers over time |"
+            echo "| [stats.json](stats.json) | Legacy combined snapshots |"
+            echo ""
+            echo "---"
+            echo "*Auto-generated every 6 hours by [traffic-stats.yml](../../.github/workflows/traffic-stats.yml)*"
           } > "$SUMMARY_FILE"
 
       - name: Commit and push stats
@@ -132,6 +434,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "chore: Archive traffic stats for $(date -u +%Y-%m-%d)"
+            git commit -m "chore: Traffic snapshot $(date -u +%Y-%m-%d_%H:%M)"
             git push origin traffic-stats
           fi
