@@ -222,35 +222,39 @@ Every function, every dialog, every network event, every XML layout - all genera
 
 ### Codebase Statistics
 
-- **135,730 lines of code** (60,285 Lua • 69,352 XML • 6,093 JavaScript)
-- **389 total files** (122 Lua • 72 XML • 22 JS tools • 53 textures • 35 icons)
-- **33 custom dialogs** across 6 feature categories
+- **139,779 lines of code** (63,430 Lua • 71,749 XML • 4,600 JavaScript)
+- **350 mod files** (126 Lua • 75 XML • 50 icons • 59 textures • 10 3D models)
+- **39 GUI screens** (35 dialogs, 2 frames, 2 panels)
 - **10 manager classes** orchestrating game systems
-- **12 network events** for multiplayer sync
-- **11 vehicle specializations** for maintenance systems
+- **13 network event modules** for multiplayer sync
+- **11 specialization modules** for maintenance systems
+- **14 extension hooks** into base game systems
 - **13 utility/helper modules** for shared logic
-- **17 development tools** for validation & stats
-- **1,954 localization keys** translated to 25 languages
-- **4 months development** (November 2025 - February 2026)
+- **12 development tools** for build, validation & stats
+- **1,998 localization keys** translated to 26 languages
+- **5 months development** (November 2025 - present)
 
 <details>
 <summary><b>📊 Detailed Architecture Breakdown</b></summary>
 
-**Manager Layer** (4,832 lines):
-- FinanceManager (967) • VehicleSaleManager (931) • VehicleSpawning (592) • VehicleSearchSystem (475)
+**Manager Layer** (5,150 lines):
+- FinanceManager (1,119) • VehicleSaleManager (1,048) • VehicleSpawning (596) • VehicleSearchSystem (501)
 
-**Network Events** (4,604 lines):
-- LeaseEvents (791) • FinanceEvents (625) • UsedMarketEvents (532) • MaintenanceEvents (473)
+**Network Events** (4,818 lines):
+- LeaseEvents (787) • FinanceEvents (701) • UsedMarketEvents (528) • MaintenanceEvents (470)
 
-**Specializations** (5,358 lines):
-- UsedPlusMaintenance (1,221) • MaintenanceHydraulics (819) • MaintenanceReliability (782)
+**Specializations** (5,549 lines):
+- UsedPlusMaintenance (1,359) • MaintenanceHydraulics (831) • MaintenanceReliability (805) • MaintenanceConfig (536)
 
-**Utilities** (6,763 lines):
+**Extensions** (6,669 lines):
+- RVBWorkshopIntegration (1,581) • InGameMenuVehiclesFrameExtension (1,064) • VehicleSellingPointExtension (901) • ShopConfigScreenExtension (664)
+
+**Utilities** (6,785 lines):
 - ModCompatibility (1,711) • UsedPlusAPI (854) • UIHelper (756) • UsedPlusUI (647)
 
 **Dialog Categories**:
-- Finance System (7) • Marketplace - Buying (8) • Marketplace - Selling (5)
-- Maintenance & Repair (6) • Service Truck (2) • Purchase System (3)
+- Finance System (9) • Marketplace - Buying (7) • Marketplace - Selling (6)
+- Maintenance & Repair (7) • Service Truck (2) • Purchase System (3)
 
 </details>
 
@@ -311,7 +315,7 @@ We believe this is one of the most ambitious AI-human collaborative software pro
 
 ## 🌍 Languages
 
-UsedPlus supports **25 languages** with **1,954 translation keys** each:
+UsedPlus supports **26 languages** with **1,998 translation keys** each:
 
 English (en) • German (de) • French (fr) • French Canadian (fc) • Spanish (es) • Spanish LatAm (ea) • Italian (it) • Portuguese (pt) • Portuguese BR (br) • Polish (pl) • Czech (cz) • Russian (ru) • Ukrainian (uk) • Dutch (nl) • Hungarian (hu) • Turkish (tr) • Japanese (jp) • Korean (kr) • Danish (da) • Indonesian (id) • Norwegian (no) • Romanian (ro) • Swedish (sv) • Vietnamese (vi) • Finnish (fi) • Chinese Traditional (ct)
 
@@ -464,7 +468,7 @@ Built on the shoulders of giants:
 
 ---
 
-**v2.13.3** | **[View Changelog](CHANGELOG.md)** | **[Report Issues](https://github.com/XelaNull/FS25_UsedPlus/issues)**
+**v2.14.1** | **[View Changelog](CHANGELOG.md)** | **[Report Issues](https://github.com/XelaNull/FS25_UsedPlus/issues)**
 
 ---
 

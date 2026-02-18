@@ -6,45 +6,6 @@
     Options: Return (get deposit back), Buyout (purchase asset), Renew (extend lease)
 -->
 <GUI>
-    <Profiles>
-        <Profile name="lrTitle" extends="fs25_headline" with="anchorTopCenter">
-            <Value name="fontSize" value="22px"/>
-        </Profile>
-        <Profile name="lrSubtitle" extends="fs25_textDefault" with="anchorTopCenter">
-            <Value name="fontSize" value="14px"/>
-            <Value name="textColor" value="0.7 0.7 0.7 1"/>
-        </Profile>
-        <Profile name="lrSectionHeader" extends="fs25_textDefault" with="anchorTopLeft">
-            <Value name="fontSize" value="16px"/>
-            <Value name="textBold" value="true"/>
-            <Value name="textColor" value="1 0.8 0.2 1"/>
-        </Profile>
-        <Profile name="lrLabel" extends="fs25_textDefault" with="anchorTopLeft">
-            <Value name="fontSize" value="14px"/>
-            <Value name="textColor" value="0.8 0.8 0.8 1"/>
-        </Profile>
-        <Profile name="lrValue" extends="fs25_textDefault" with="anchorTopLeft">
-            <Value name="fontSize" value="14px"/>
-            <Value name="textColor" value="1 1 1 1"/>
-        </Profile>
-        <Profile name="lrMoneyGreen" extends="fs25_textDefault" with="anchorTopLeft">
-            <Value name="fontSize" value="14px"/>
-            <Value name="textColor" value="0.2 0.8 0.2 1"/>
-        </Profile>
-        <Profile name="lrMoneyRed" extends="fs25_textDefault" with="anchorTopLeft">
-            <Value name="fontSize" value="14px"/>
-            <Value name="textColor" value="0.9 0.2 0.2 1"/>
-        </Profile>
-        <Profile name="lrOptionButton" extends="buttonActivate">
-            <Value name="fontSize" value="14px"/>
-        </Profile>
-        <!-- v2.9.5: Option icons -->
-        <Profile name="lrOptionIcon" extends="baseReference" with="anchorTopLeft">
-            <size value="28px 28px"/>
-            <imageSliceId value="noSlice"/>
-        </Profile>
-    </Profiles>
-
     <GuiElement profile="newLayer"/>
     <Bitmap profile="dialogFullscreenBg" id="dialogBg"/>
 
@@ -138,4 +99,43 @@
             <Button profile="buttonBack" id="cancelButton" text="$l10n_usedplus_button_later" onClick="onCancel"/>
         </BoxLayout>
     </GuiElement>
+
+    <GUIProfiles>
+        <Profile name="lrTitle" extends="fs25_headline" with="anchorTopCenter">
+            <Value name="fontSize" value="22px"/>
+        </Profile>
+        <Profile name="lrSubtitle" extends="fs25_textDefault" with="anchorTopCenter">
+            <Value name="fontSize" value="14px"/>
+            <Value name="textColor" value="0.7 0.7 0.7 1"/>
+        </Profile>
+        <Profile name="lrSectionHeader" extends="fs25_textDefault" with="anchorTopLeft">
+            <Value name="fontSize" value="16px"/>
+            <Value name="textBold" value="true"/>
+            <Value name="textColor" value="1 0.8 0.2 1"/>
+        </Profile>
+        <Profile name="lrLabel" extends="fs25_textDefault" with="anchorTopLeft">
+            <Value name="fontSize" value="14px"/>
+            <Value name="textColor" value="0.8 0.8 0.8 1"/>
+        </Profile>
+        <Profile name="lrValue" extends="fs25_textDefault" with="anchorTopLeft">
+            <Value name="fontSize" value="14px"/>
+            <Value name="textColor" value="1 1 1 1"/>
+        </Profile>
+        <Profile name="lrMoneyGreen" extends="fs25_textDefault" with="anchorTopLeft">
+            <Value name="fontSize" value="14px"/>
+            <Value name="textColor" value="0.2 0.8 0.2 1"/>
+        </Profile>
+        <Profile name="lrMoneyRed" extends="fs25_textDefault" with="anchorTopLeft">
+            <Value name="fontSize" value="14px"/>
+            <Value name="textColor" value="0.9 0.2 0.2 1"/>
+        </Profile>
+        <Profile name="lrOptionButton" extends="buttonActivate">
+            <Value name="fontSize" value="14px"/>
+        </Profile>
+        <!-- v2.9.5: Option icons -->
+        <Profile name="lrOptionIcon" extends="baseReference" with="anchorTopLeft">
+            <size value="28px 28px"/>
+            <imageSliceId value="noSlice"/>
+        </Profile>
+    </GUIProfiles>
 </GUI>

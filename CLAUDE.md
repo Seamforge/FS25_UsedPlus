@@ -432,20 +432,6 @@ X position = element CENTER, not left edge. Calculate: `X ± (width/2)` must sta
 
 ### Current Version: 2.12.1
 
-### Codebase Statistics
-
-**Scale:** 135,730 lines of code across 389 files
-- **Code:** 60,285 Lua • 69,352 XML • 6,093 JavaScript (tools)
-- **Assets:** 53 textures (DDS) • 35 icons (PNG) • 5 3D models (I3D)
-- **Architecture:** 33 dialogs • 10 managers • 12 network events • 11 specializations • 13 utilities
-- **Localization:** 1,954 keys translated to 26 languages
-- **Development:** 4 months (Nov 2025 - Feb 2026) • 100% AI-authored
-
-**Largest Components:**
-- ModCompatibility (1,711 lines) • UsedPlusMaintenance (1,221) • FinanceManager (967) • VehicleSaleManager (931)
-
-Run `node tools/codebase_stats.js` for detailed breakdown.
-
 ### Features
 - Vehicle/equipment financing (1-15 years) and land financing (1-20 years) with dynamic credit scoring (300-850)
 - General cash loans against collateral
@@ -628,6 +614,58 @@ end
 
 **Reference:** `vehicles/FieldServiceKit.lua` (OBD Scanner) - v2.0.7
 **Debug Log:** `docs/OBD_SCANNER_DEBUG.md` - full debug journey with failed patterns
+
+---
+
+## GitHub Issue Workflow
+
+### Language: Match the Reporter
+
+**RULE**: Always reply to GitHub issues in the **same language** the person used to submit the issue. If they filed in French, reply in French. If in German, reply in German. Put the primary response in their language first, then add an English recap in a collapsible `<details>` block at the bottom for other readers.
+
+```markdown
+## Corrigé dans le commit abc1234 🔧
+[Full response in reporter's language]
+
+---
+<details>
+<summary>🇬🇧 English recap</summary>
+[Brief English summary]
+</details>
+```
+
+### Project Status: Use "Fixed" (Not "Done")
+
+When closing a bug fix issue, set the GitHub Project status to **"Fixed"**, not "Done". "Done" is for completed feature work. "Fixed" is for resolved bugs.
+
+**Project Board IDs (FS25_UsedPlus):**
+- Project ID: `PVT_kwHOAsLCS84BOmS4`
+- Status Field ID: `PVTSSF_lAHOAsLCS84BOmS4zg9QNkQ`
+- Status Options:
+  - Todo: `f75ad846`
+  - In Progress: `47fc9ee4`
+  - **Fixed: `03c6ab73`** ← use this for bug fixes
+  - Done: `98236657` ← use this for features/enhancements
+
+**To set status to Fixed:**
+```bash
+# 1. Find the issue's project item ID
+gh project item-list 3 --owner XelaNull --format json --jq '.items[] | select(.content.number == ISSUE_NUM)'
+
+# 2. Set status to Fixed
+gh project item-edit \
+  --project-id PVT_kwHOAsLCS84BOmS4 \
+  --id ITEM_ID_HERE \
+  --field-id PVTSSF_lAHOAsLCS84BOmS4zg9QNkQ \
+  --single-select-option-id 03c6ab73
+```
+
+**Note:** Requires `project` scope on the gh token. If you get a scope error, ask the user to run: `gh auth refresh -s project -h github.com`
+
+### Issue Close Checklist
+1. ✅ Comment on the issue with fix details (in reporter's language + English recap)
+2. ✅ Commit with `Closes #N` in message (auto-closes the issue)
+3. ✅ Set project status to **Fixed** (for bugs) or **Done** (for features)
 
 ---
 

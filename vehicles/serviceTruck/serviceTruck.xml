@@ -719,10 +719,8 @@
 
     <rimColorConfigurations useDefaultColors="true">
         <rimColorConfiguration materialTemplateName="RIM_CONFIGURATION_CHROME" price="1000"/>
-        <rimColorConfiguration materialTemplateName="RIM_DEFAULT"/>
-        <rimColorConfiguration materialTemplateName="RAM_SILVER" name="Silver" isDefault="true"/>
+        <rimColorConfiguration materialTemplateName="RIM_DEFAULT" isDefault="true"/>
         <rimColorConfiguration materialTemplateName="chrome" name="$l10n_ui_colorChrome"/>
-        <rimColorConfiguration materialTemplateName="DARK_CHROME" name="Dark Chrome"/>
         <rimColorConfiguration materialTemplateName="RIM_CONFIGURATION_BLACK"/>
     </rimColorConfigurations>
 
