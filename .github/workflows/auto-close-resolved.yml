@@ -24,6 +24,7 @@ jobs:
             const projectNumber = 3;
             const fixedStatus = 'Fixed';
             const MARKER = '<!-- usedplus-auto-close-countdown -->';
+            const RESET_MARKER = '<!-- usedplus-countdown-reset -->';
 
             // Step 1: Query project for items in "Fixed" status
             const query = `query($owner: String!, $projectNumber: Int!) {
@@ -81,21 +82,40 @@ jobs:
                 per_page: 100
               });
 
-              // Find our first countdown comment (marks when the countdown started)
+              // Find all countdown comments and reset markers
               const countdownComments = allComments.data.filter(c =>
                 c.body.includes(MARKER)
               );
+              const resetComments = allComments.data.filter(c =>
+                c.body.includes(RESET_MARKER)
+              );
 
-              // Check for reporter replies AFTER our first countdown comment
-              const countdownStartDate = countdownComments.length > 0
-                ? new Date(countdownComments[0].created_at)
+              // Determine last reset date (from most recent reset marker)
+              const lastResetDate = resetComments.length > 0
+                ? new Date(resetComments[resetComments.length - 1].created_at)
                 : null;
+
+              // Filter to active countdown comments (only those AFTER last reset)
+              const activeCountdownComments = lastResetDate
+                ? countdownComments.filter(c => new Date(c.created_at) > lastResetDate)
+                : countdownComments;
+
+              // Check for reporter replies AFTER the active countdown started
+              // (also ignore any replies from before the last reset)
+              const countdownStartDate = activeCountdownComments.length > 0
+                ? new Date(activeCountdownComments[0].created_at)
+                : null;
+
+              const cutoffDate = lastResetDate && countdownStartDate
+                ? (countdownStartDate > lastResetDate ? countdownStartDate : lastResetDate)
+                : countdownStartDate || lastResetDate;
 
               const recentReplies = allComments.data.filter(c =>
                 c.user.login !== context.repo.owner &&
                 !c.user.login.includes('[bot]') &&
                 !c.body.includes(MARKER) &&
-                (countdownStartDate === null || new Date(c.created_at) > countdownStartDate)
+                !c.body.includes(RESET_MARKER) &&
+                (cutoffDate === null || new Date(c.created_at) > cutoffDate)
               );
 
               // If reporter replied after countdown started, skip (issue needs attention)
@@ -104,13 +124,13 @@ jobs:
                 continue;
               }
 
-              // Calculate days since countdown started
+              // Calculate days since active countdown started
               let daysSinceCountdown = 0;
               if (countdownStartDate) {
                 daysSinceCountdown = Math.floor((new Date() - countdownStartDate) / (1000 * 60 * 60 * 24));
               }
 
-              if (countdownComments.length === 0) {
+              if (activeCountdownComments.length === 0) {
                 // Day 0: Post first countdown comment (3 days remaining)
                 console.log(`Issue #${issueNumber}: Starting countdown (${daysBeforeClose} days)`);
                 await github.rest.issues.createComment({
@@ -152,7 +172,7 @@ jobs:
 
                 // Only post if we haven't already posted a reminder today
                 const today = new Date().toISOString().split('T')[0];
-                const alreadyPostedToday = countdownComments.some(c =>
+                const alreadyPostedToday = activeCountdownComments.some(c =>
                   c.created_at.split('T')[0] === today
                 );
 

@@ -1,0 +1,81 @@
+name: Bug Report
+description: Report a bug or issue with FS25_UsedPlus
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug! Please fill out the information below to help us investigate.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What happened? What did you expect to happen instead?
+      placeholder: "When I tried to finance a vehicle, the dialog showed $0 for the monthly payment..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: How can we reproduce this bug?
+      placeholder: |
+        1. Go to the vehicle shop
+        2. Select a tractor
+        3. Click "Finance"
+        4. See incorrect payment amount
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: UsedPlus Version
+      description: "Check your game log for the line containing `FS25_UsedPlus` (e.g., `v2.12.1`)"
+      placeholder: "v2.12.1"
+    validations:
+      required: true
+
+  - type: input
+    id: other-mods
+    attributes:
+      label: Other Mods Installed
+      description: "List other mods you have active, or at least a count (e.g., '12 mods' or 'none')"
+      placeholder: "FS25_Courseplay, FS25_AutoDrive, plus 8 others"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: multiplayer
+    attributes:
+      label: Game Mode
+      options:
+        - Singleplayer
+        - Multiplayer (host)
+        - Multiplayer (client)
+        - Both
+    validations:
+      required: true
+
+  - type: textarea
+    id: log
+    attributes:
+      label: Log File
+      description: |
+        Upload or paste the relevant section of your log file.
+        Location: `Documents/My Games/FarmingSimulator2025/log.txt`
+        Tip: Search for "UsedPlus" or "Error" in the log to find relevant lines.
+      render: text
+    validations:
+      required: false
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: "If applicable, add screenshots to help explain the problem."
+    validations:
+      required: false

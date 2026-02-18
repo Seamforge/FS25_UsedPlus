@@ -1,0 +1,44 @@
+name: Feature Request
+description: Suggest a new feature or improvement for FS25_UsedPlus
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Have an idea for UsedPlus? We'd love to hear it! Please describe what you'd like and why it would be useful.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What feature or improvement would you like to see?
+      placeholder: "It would be great if the finance dialog showed a comparison between different loan terms side by side..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: use-case
+    attributes:
+      label: Use Case
+      description: Why would this be helpful? What problem does it solve?
+      placeholder: "When I'm deciding between a 5-year and 10-year loan, I have to go back and forth to compare payments..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: workaround
+    attributes:
+      label: Current Workaround
+      description: "Is there anything you're doing today to work around this? (Optional)"
+      placeholder: "I write down the numbers on paper and compare manually"
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: "Any other context, mockups, or examples that might help. (Optional)"
+    validations:
+      required: false
