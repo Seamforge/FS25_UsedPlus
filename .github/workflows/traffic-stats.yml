@@ -546,6 +546,8 @@ jobs:
                   ax.grid(True, linestyle='--')
                   ax.set_ylim(bottom=0)
                   ax.xaxis.set_major_formatter(mdates.DateFormatter('%b %d'))
+                  # Explicitly set ticks to actual dates (auto-locator misses with few points)
+                  ax.set_xticks(dates)
                   plt.xticks(rotation=45)
 
                   # Value labels at each point
