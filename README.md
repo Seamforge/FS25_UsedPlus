@@ -43,7 +43,15 @@
 
 ---
 
-> ⚠️ **STATUS: Development Preview (v2.14.2)** — No official release yet. Core features (vehicle financing, **building financing**, leasing, credit, marketplace, trade-ins) fully functional. **Work in Progress:** Malfunctions and Service Truck under active development. Latest version always at: **[github.com/XelaNull/FS25_UsedPlus](https://github.com/XelaNull/FS25_UsedPlus)**
+> ## ⚠️ DEVELOPMENT PREVIEW — THIS MOD IS NOT FINISHED
+>
+> **This is an active work-in-progress.** You are welcome to download and try it, but expect bugs, incomplete features, and breaking changes between versions. **Do not treat this as a stable release.**
+>
+> **What works:** Vehicle financing, building financing, leasing, credit scoring, used marketplace, trade-ins, land financing, OBD Scanner.
+>
+> **What's still in progress:** Malfunctions system, Service Truck restoration, multiplayer edge cases, balance tuning.
+>
+> **Report issues:** [github.com/XelaNull/FS25_UsedPlus/issues](https://github.com/XelaNull/FS25_UsedPlus/issues) — Latest version always at: **[github.com/XelaNull/FS25_UsedPlus](https://github.com/XelaNull/FS25_UsedPlus)**
 
 ---
 
