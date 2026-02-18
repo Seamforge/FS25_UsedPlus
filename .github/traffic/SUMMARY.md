@@ -1,7 +1,7 @@
 # FS25_UsedPlus — Traffic Dashboard
 
-**Last updated:** 2026-02-18T23:15:18Z
-**Days tracked:** 1 | **Download snapshots:** 3 (hourly)
+**Last updated:** 2026-02-18T23:28:08Z
+**Days tracked:** 1 | **Download snapshots:** 4 (hourly)
 
 ---
 
@@ -48,11 +48,11 @@
 
 ---
 
-## Download Activity (Hourly + Monthly)
+## Download Activity
 
 ![Download Activity](charts/download_activity.png)
 
-> **Top:** Hourly download rate for the most recent day with activity. **Bottom:** Monthly download totals with cumulative trend line.
+> **Top:** Hourly download rate for the most recent day with activity. **Bottom:** Daily downloads within the current month with cumulative trend line.
 
 ---
 
