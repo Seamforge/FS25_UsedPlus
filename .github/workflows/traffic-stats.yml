@@ -401,6 +401,66 @@ jobs:
               else:
                   print(f"Only {len(metadata)} metadata snapshot(s) — need 2+ for chart")
 
+          # ── Chart 5: Engagement (pages per visitor) ──
+          if os.path.exists(daily_file):
+              with open(daily_file) as f:
+                  daily = json.load(f)
+
+              if daily:
+                  dates = sorted(daily.keys())
+                  date_objs = [datetime.strptime(d, "%Y-%m-%d") for d in dates]
+                  views = [daily[d].get("views_total", 0) or 0 for d in dates]
+                  uniques = [daily[d].get("views_unique", 0) or 0 for d in dates]
+                  pages_per_visitor = [v / u if u > 0 else 0 for v, u in zip(views, uniques)]
+
+                  fig, ax1 = plt.subplots(figsize=(12, 6))
+                  fig.suptitle("Visitor Engagement — Are People Exploring?",
+                               fontsize=15, fontweight='bold', color='#58a6ff')
+
+                  # Stacked area: unique visitors vs total views
+                  ax1.fill_between(date_objs, uniques, alpha=0.4, color='#3fb950', label='Unique Visitors')
+                  ax1.fill_between(date_objs, views, alpha=0.2, color='#58a6ff', label='Total Page Views')
+                  ax1.plot(date_objs, views, '-', color='#58a6ff', linewidth=1.5, alpha=0.7)
+                  ax1.plot(date_objs, uniques, '-', color='#3fb950', linewidth=1.5, alpha=0.7)
+                  ax1.set_ylabel("Count", color='#c9d1d9')
+                  ax1.set_ylim(bottom=0)
+                  ax1.grid(True, linestyle='--')
+
+                  # Pages per visitor on secondary axis
+                  ax2 = ax1.twinx()
+                  ax2.plot(date_objs, pages_per_visitor, 'D-', color='#d29922', linewidth=2.5,
+                           markersize=7, label='Pages / Visitor', zorder=5)
+                  ax2.set_ylabel("Avg Pages per Visitor", color='#d29922')
+                  ax2.set_ylim(bottom=0)
+
+                  # Add value labels on the engagement line
+                  for i, (d, ppv) in enumerate(zip(date_objs, pages_per_visitor)):
+                      if ppv > 0:
+                          ax2.annotate(f'{ppv:.1f}', (d, ppv),
+                                       textcoords="offset points", xytext=(0, 10),
+                                       ha='center', fontsize=9, color='#d29922', fontweight='bold')
+
+                  # Average engagement line
+                  valid_ppv = [p for p in pages_per_visitor if p > 0]
+                  if valid_ppv:
+                      avg_ppv = sum(valid_ppv) / len(valid_ppv)
+                      ax2.axhline(y=avg_ppv, color='#d29922', linestyle=':', alpha=0.5, linewidth=1)
+                      ax2.text(date_objs[-1], avg_ppv, f'  avg: {avg_ppv:.1f}',
+                               va='bottom', color='#d29922', fontsize=9, alpha=0.7)
+
+                  # Combine legends
+                  lines1, labels1 = ax1.get_legend_handles_labels()
+                  lines2, labels2 = ax2.get_legend_handles_labels()
+                  ax1.legend(lines1 + lines2, labels1 + labels2, loc='upper left', framealpha=0.8)
+
+                  ax1.xaxis.set_major_formatter(mdates.DateFormatter('%b %d'))
+                  ax1.xaxis.set_major_locator(mdates.DayLocator(interval=2))
+                  plt.xticks(rotation=45)
+                  fig.tight_layout()
+                  fig.savefig(os.path.join(CHARTS_DIR, "engagement.png"), dpi=150, bbox_inches='tight')
+                  plt.close()
+                  print(f"Generated: engagement.png (avg {avg_ppv:.1f} pages/visitor)" if valid_ppv else "Generated: engagement.png")
+
           print("Chart generation complete!")
           PYEOF
 
@@ -442,6 +502,21 @@ jobs:
             echo "|--------|-------------|--------|"
             echo "| Page Views | $(echo "$VIEWS" | jq '.count') | $(echo "$VIEWS" | jq '.uniques') |"
             echo "| Git Clones | $(echo "$CLONES" | jq '.count') | $(echo "$CLONES" | jq '.uniques') |"
+            echo ""
+            TOTAL_VIEWS=$(echo "$VIEWS" | jq '.count')
+            UNIQUE_VISITORS=$(echo "$VIEWS" | jq '.uniques')
+            if [ "$UNIQUE_VISITORS" -gt 0 ] 2>/dev/null; then
+              AVG_PAGES=$(echo "scale=1; $TOTAL_VIEWS / $UNIQUE_VISITORS" | bc)
+              echo "> **Engagement:** ${AVG_PAGES} pages per visitor (14-day avg)"
+              echo ""
+            fi
+            echo "---"
+            echo ""
+            echo "## Visitor Engagement"
+            echo ""
+            echo "![Engagement](charts/engagement.png)"
+            echo ""
+            echo "> Higher = visitors exploring more pages. 1.0 = bounce. 3.0+ = deeply engaged."
             echo ""
             echo "---"
             echo ""
@@ -494,7 +569,7 @@ jobs:
             echo "| [stats.json](stats.json) | Combined legacy snapshots | 6-hourly |"
             echo ""
             echo "---"
-            echo "*Hourly download tracking + full dashboard every 6 hours*"
+            echo "*Hourly download tracking + full dashboard with engagement metrics every 6 hours*"
             echo "*Auto-generated by [traffic-stats.yml](../../.github/workflows/traffic-stats.yml)*"
           } > "$SUMMARY_FILE"
 
