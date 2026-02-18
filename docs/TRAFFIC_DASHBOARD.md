@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="../icon.png" alt="UsedPlus Logo" width="64" height="64">
+  <img src="../icon.png" alt="UsedPlus Logo" width="128" height="128">
 </p>
 
-<h1 align="center">UsedPlus — Live Analytics Dashboard</h1>
+<h1 align="center">UsedPlus — Live Analytics</h1>
 
 <p align="center">
   <strong>Real-time traffic, downloads, and engagement metrics</strong><br>
@@ -10,17 +10,18 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/github/downloads/XelaNull/FS25_UsedPlus/total?label=total%20downloads&color=brightgreen" alt="Downloads">
-  <img src="https://img.shields.io/github/stars/XelaNull/FS25_UsedPlus?style=flat&color=gold" alt="Stars">
+  <img src="https://img.shields.io/github/downloads/XelaNull/FS25_UsedPlus/total?label=downloads&color=brightgreen" alt="Downloads">
+  <img src="https://img.shields.io/github/stars/XelaNull/FS25_UsedPlus?style=flat&color=yellow" alt="Stars">
   <img src="https://img.shields.io/github/forks/XelaNull/FS25_UsedPlus?style=flat&color=blue" alt="Forks">
   <img src="https://img.shields.io/github/watchers/XelaNull/FS25_UsedPlus?style=flat&color=green" alt="Watchers">
+  <img src="https://img.shields.io/badge/AI--authored-Claude-purple" alt="AI Authored">
 </p>
 
 <p align="center">
-  <a href="https://github.com/XelaNull/FS25_UsedPlus">Back to Main Repo</a> •
-  <a href="https://github.com/XelaNull/FS25_UsedPlus/releases">Releases</a> •
-  <a href="https://github.com/XelaNull/FS25_UsedPlus/blob/traffic-stats/.github/traffic/SUMMARY.md">Raw Data Dashboard</a> •
-  <a href="https://github.com/XelaNull/FS25_UsedPlus/tree/traffic-stats/.github/traffic">Data Files</a>
+  <a href="https://github.com/XelaNull/FS25_UsedPlus">🏠 Main Repo</a> •
+  <a href="https://github.com/XelaNull/FS25_UsedPlus/releases">📥 Releases</a> •
+  <a href="https://github.com/XelaNull/FS25_UsedPlus/blob/traffic-stats/.github/traffic/SUMMARY.md">📋 Raw Data</a> •
+  <a href="https://github.com/XelaNull/FS25_UsedPlus/tree/traffic-stats/.github/traffic">📂 Data Files</a>
 </p>
 
 ---
@@ -51,13 +52,13 @@ Every release gets its own "era." Git clones that occur while a release is curre
 
 ---
 
-## Download Activity — Hourly Rate + Monthly Trends
+## Download Activity — Hourly Rate + Daily This Month
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/XelaNull/FS25_UsedPlus/traffic-stats/.github/traffic/charts/download_activity.png" alt="Download Activity" width="100%">
 </p>
 
-**Top panel:** Hourly download rate for the most recent day with activity. See exactly when downloads spike — release announcements, Reddit posts, ModHub features all show up as distinct peaks. **Bottom panel:** Monthly download totals with a cumulative trend line. Track long-term adoption and seasonal patterns.
+**Top panel:** Hourly download rate for the most recent day with activity. See exactly when downloads spike — release announcements, Reddit posts, ModHub features all show up as distinct peaks. **Bottom panel:** Daily downloads within the current month, with a cumulative trend line showing how the month is tracking.
 
 ---
 

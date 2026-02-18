@@ -491,7 +491,7 @@ jobs:
                   plt.close()
                   print(f"Generated: downloads.png (single snapshot: {total})")
 
-          # ── Chart 2b: Hourly Download Rate + Monthly Trends ──
+          # ── Chart 2b: Hourly Download Rate + Daily Downloads This Month ──
           # Two-panel chart: today's hourly activity + monthly download history
           if os.path.exists(dl_file):
               with open(dl_file) as f:
@@ -529,43 +529,50 @@ jobs:
                           today_deltas = [(ts, d) for ts, d in dl_deltas if ts.strftime("%Y-%m-%d") == latest_day]
                           today_str = latest_day
 
-                  # ── Bottom panel: Monthly download totals ──
-                  monthly = {}
+                  # ── Bottom panel: Daily downloads within the current month ──
+                  # Aggregate deltas by day
+                  daily_downloads = {}
                   for ts, delta in dl_deltas:
-                      month_key = ts.strftime("%Y-%m")
-                      monthly[month_key] = monthly.get(month_key, 0) + delta
+                      day_key = ts.strftime("%Y-%m-%d")
+                      daily_downloads[day_key] = daily_downloads.get(day_key, 0) + delta
 
-                  # Also compute monthly totals from first/last snapshot per month (more accurate)
-                  monthly_from_cumulative = {}
-                  month_snapshots = {}
+                  # Also compute daily totals from cumulative snapshots (more accurate)
+                  day_snapshots = {}
                   for ts, total in dl_points:
-                      mk = ts.strftime("%Y-%m")
-                      if mk not in month_snapshots:
-                          month_snapshots[mk] = {"first": total, "last": total}
+                      dk = ts.strftime("%Y-%m-%d")
+                      if dk not in day_snapshots:
+                          day_snapshots[dk] = {"first": total, "last": total}
                       else:
-                          month_snapshots[mk]["last"] = total
-                  for mk, vals in month_snapshots.items():
-                      monthly_from_cumulative[mk] = max(0, vals["last"] - vals["first"])
+                          day_snapshots[dk]["last"] = total
 
-                  # Use cumulative method (more reliable for months with sparse data)
-                  # But also add carry-over from previous month's last to this month's first
-                  sorted_months = sorted(month_snapshots.keys())
-                  monthly_totals = {}
-                  for i, mk in enumerate(sorted_months):
-                      intra = monthly_from_cumulative.get(mk, 0)
+                  # Build daily new-downloads using first/last per day + cross-day carry
+                  sorted_days = sorted(day_snapshots.keys())
+                  daily_new = {}
+                  for i, dk in enumerate(sorted_days):
+                      intra = max(0, day_snapshots[dk]["last"] - day_snapshots[dk]["first"])
                       if i > 0:
-                          prev_mk = sorted_months[i-1]
-                          cross_month = max(0, month_snapshots[mk]["first"] - month_snapshots[prev_mk]["last"])
-                          monthly_totals[mk] = intra + cross_month
+                          prev_dk = sorted_days[i-1]
+                          cross_day = max(0, day_snapshots[dk]["first"] - day_snapshots[prev_dk]["last"])
+                          daily_new[dk] = intra + cross_day
                       else:
-                          monthly_totals[mk] = intra
+                          daily_new[dk] = intra
+
+                  # Filter to current month (or most recent month with data)
+                  current_month = datetime.utcnow().strftime("%Y-%m")
+                  month_days = {dk: v for dk, v in daily_new.items() if dk.startswith(current_month)}
+                  if not month_days:
+                      # Fall back to most recent month with data
+                      all_months = sorted(set(dk[:7] for dk in daily_new.keys()), reverse=True)
+                      if all_months:
+                          current_month = all_months[0]
+                          month_days = {dk: v for dk, v in daily_new.items() if dk.startswith(current_month)}
 
                   # ── Render chart ──
                   has_today = len(today_deltas) > 0
-                  has_monthly = len(monthly_totals) > 0
+                  has_month = len(month_days) > 0
 
-                  if has_today or has_monthly:
-                      n_panels = (1 if has_today else 0) + (1 if has_monthly else 0)
+                  if has_today or has_month:
+                      n_panels = (1 if has_today else 0) + (1 if has_month else 0)
                       fig, axes = plt.subplots(n_panels, 1, figsize=(12, 4 * n_panels))
                       if n_panels == 1:
                           axes = [axes]
@@ -606,49 +613,61 @@ jobs:
                                   color='#3fb950', bbox=dict(boxstyle='round,pad=0.3',
                                   facecolor='#161b22', edgecolor='#3fb950', alpha=0.8))
 
-                      # Monthly trends
-                      if has_monthly:
+                      # Daily downloads within current month
+                      if has_month:
                           ax = axes[ax_idx]
 
-                          months = sorted(monthly_totals.keys())
-                          month_labels = [datetime.strptime(m + "-01", "%Y-%m-%d").strftime("%b '%y") for m in months]
-                          month_vals = [monthly_totals[m] for m in months]
+                          sorted_days = sorted(month_days.keys())
+                          day_labels = [datetime.strptime(d, "%Y-%m-%d").strftime("%b %d") for d in sorted_days]
+                          day_vals = [month_days[d] for d in sorted_days]
 
                           # Also show cumulative line
                           cumulative = []
                           running = 0
-                          for v in month_vals:
+                          for v in day_vals:
                               running += v
                               cumulative.append(running)
 
-                          # Bars for monthly new downloads
-                          bars = ax.bar(range(len(months)), month_vals, color='#d29922', alpha=0.8, label='New Downloads')
+                          # Bars for daily new downloads
+                          x_pos = range(len(sorted_days))
+                          bars = ax.bar(x_pos, day_vals, color='#d29922', alpha=0.8, label='New Downloads')
 
-                          # Value labels on bars
-                          for i, v in enumerate(month_vals):
+                          # Value labels on non-zero bars
+                          max_val = max(day_vals) if day_vals else 1
+                          for i, v in enumerate(day_vals):
                               if v > 0:
-                                  ax.text(i, v + max(month_vals) * 0.03 if max(month_vals) > 0 else v + 0.5,
-                                          f'+{v}', ha='center', fontsize=10, fontweight='bold', color='#d29922')
+                                  ax.text(i, v + max_val * 0.03, f'+{v}', ha='center',
+                                          fontsize=9, fontweight='bold', color='#d29922')
 
                           # Cumulative line on secondary axis
                           ax2 = ax.twinx()
-                          ax2.plot(range(len(months)), cumulative, 'D-', color='#58a6ff',
-                                   linewidth=2, markersize=6, label='Cumulative', zorder=5)
+                          ax2.plot(list(x_pos), cumulative, 'D-', color='#58a6ff',
+                                   linewidth=2, markersize=5, label='Cumulative', zorder=5)
                           ax2.set_ylabel("Cumulative Downloads", color='#58a6ff')
                           ax2.set_ylim(bottom=0)
 
                           # Cumulative value labels
                           for i, c in enumerate(cumulative):
                               ax2.annotate(str(c), (i, c), textcoords="offset points",
-                                          xytext=(0, 10), ha='center', fontsize=9,
+                                          xytext=(0, 10), ha='center', fontsize=8,
                                           color='#58a6ff', fontweight='bold')
 
-                          ax.set_xticks(range(len(months)))
-                          ax.set_xticklabels(month_labels, rotation=45, ha='right')
-                          ax.set_ylabel("New Downloads This Month")
-                          ax.set_title("Monthly Download Trends", fontsize=12, color='#c9d1d9')
+                          # Month title from current_month
+                          month_title = datetime.strptime(current_month + "-01", "%Y-%m-%d").strftime("%B %Y")
+
+                          ax.set_xticks(list(x_pos))
+                          ax.set_xticklabels(day_labels, rotation=45, ha='right', fontsize=8)
+                          ax.set_ylabel("New Downloads")
+                          ax.set_title(f"Daily Downloads — {month_title}", fontsize=12, color='#c9d1d9')
                           ax.set_ylim(bottom=0)
                           ax.grid(True, axis='y', linestyle='--')
+
+                          # Month total annotation
+                          month_total = sum(day_vals)
+                          ax.text(0.98, 0.95, f'Month total: +{month_total}', transform=ax.transAxes,
+                                  ha='right', va='top', fontsize=12, fontweight='bold',
+                                  color='#d29922', bbox=dict(boxstyle='round,pad=0.3',
+                                  facecolor='#161b22', edgecolor='#d29922', alpha=0.8))
 
                           # Combined legend
                           lines1, labels1 = ax.get_legend_handles_labels()
@@ -658,7 +677,7 @@ jobs:
                       fig.tight_layout()
                       fig.savefig(os.path.join(CHARTS_DIR, "download_activity.png"), dpi=150, bbox_inches='tight')
                       plt.close()
-                      print(f"Generated: download_activity.png (today: {len(today_deltas)} points, months: {len(monthly_totals)})")
+                      print(f"Generated: download_activity.png (today: {len(today_deltas)} points, days: {len(month_days)})")
 
           # ── Chart 3: Referrers ──
           ref_file = os.path.join(TRAFFIC_DIR, "referrers.json")
@@ -974,11 +993,11 @@ jobs:
             echo ""
             echo "---"
             echo ""
-            echo "## Download Activity (Hourly + Monthly)"
+            echo "## Download Activity"
             echo ""
             echo "![Download Activity](charts/download_activity.png)"
             echo ""
-            echo "> **Top:** Hourly download rate for the most recent day with activity. **Bottom:** Monthly download totals with cumulative trend line."
+            echo "> **Top:** Hourly download rate for the most recent day with activity. **Bottom:** Daily downloads within the current month with cumulative trend line."
             echo ""
             echo "---"
             echo ""
