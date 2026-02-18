@@ -1,6 +1,6 @@
 # FS25_UsedPlus — Traffic Dashboard
 
-**Last updated:** 2026-02-18T20:40:46Z
+**Last updated:** 2026-02-18T20:45:06Z
 **Days tracked:** 1 | **Download snapshots:** 1 (hourly)
 
 ---
@@ -23,6 +23,16 @@
 ![Engagement](charts/engagement.png)
 
 > Higher = visitors exploring more pages. 1.0 = bounce. 3.0+ = deeply engaged.
+
+---
+
+## Conversion Funnel
+
+![Conversion](charts/conversion.png)
+
+> **14-day conversion:** 140 of 177 visitors cloned or downloaded (**79.0%**)
+>
+> Unique cloners: 140 | Release downloads: 0
 
 ---
 
