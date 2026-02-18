@@ -1,0 +1,110 @@
+name: Label issues by last reply
+
+permissions:
+  contents: read
+  issues: write
+
+on:
+  schedule:
+    # Run every 15 minutes
+    - cron: '*/15 * * * *'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  label-last-reply:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Label issues with owner-replied or user-replied
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.PROJECT_TOKEN }}
+          script: |
+            const OWNER_LABEL = 'owner-replied';
+            const USER_LABEL = 'user-replied';
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+
+            // Ensure both labels exist (create if missing)
+            for (const label of [
+              { name: OWNER_LABEL, color: '0e8a16', description: 'Last reply was from the repo owner' },
+              { name: USER_LABEL, color: 'e4e669', description: 'Last reply was from a user (awaiting owner response)' }
+            ]) {
+              try {
+                await github.rest.issues.getLabel({ owner, repo, name: label.name });
+              } catch (e) {
+                if (e.status === 404) {
+                  await github.rest.issues.createLabel({ owner, repo, ...label });
+                  console.log(`Created label: ${label.name}`);
+                }
+              }
+            }
+
+            // Fetch all open issues
+            const issues = await github.paginate(github.rest.issues.listForRepo, {
+              owner, repo, state: 'open', per_page: 100
+            });
+
+            // Filter out pull requests (GitHub API includes PRs in issues endpoint)
+            const realIssues = issues.filter(i => !i.pull_request);
+            console.log(`Processing ${realIssues.length} open issues`);
+
+            for (const issue of realIssues) {
+              const issueNumber = issue.number;
+              const currentLabels = issue.labels.map(l => l.name);
+
+              // Get the most recent comments (newest last)
+              const comments = await github.rest.issues.listComments({
+                owner, repo, issue_number: issueNumber, per_page: 100
+              });
+
+              // Find the last non-bot comment
+              let lastHumanComment = null;
+              for (let i = comments.data.length - 1; i >= 0; i--) {
+                const c = comments.data[i];
+                if (c.user.type !== 'Bot' && !c.user.login.includes('[bot]')) {
+                  lastHumanComment = c;
+                  break;
+                }
+              }
+
+              // Determine who replied last
+              let lastReplier;
+              if (lastHumanComment) {
+                lastReplier = lastHumanComment.user.login;
+              } else {
+                // No comments — the issue author is the last "speaker"
+                lastReplier = issue.user.login;
+              }
+
+              const isOwner = lastReplier === owner;
+              const wantLabel = isOwner ? OWNER_LABEL : USER_LABEL;
+              const removeLabel = isOwner ? USER_LABEL : OWNER_LABEL;
+
+              // Skip if already correctly labeled
+              if (currentLabels.includes(wantLabel) && !currentLabels.includes(removeLabel)) {
+                continue;
+              }
+
+              // Remove the wrong label if present
+              if (currentLabels.includes(removeLabel)) {
+                try {
+                  await github.rest.issues.removeLabel({
+                    owner, repo, issue_number: issueNumber, name: removeLabel
+                  });
+                } catch (e) {
+                  // Label might already be removed
+                }
+              }
+
+              // Add the correct label if missing
+              if (!currentLabels.includes(wantLabel)) {
+                await github.rest.issues.addLabels({
+                  owner, repo, issue_number: issueNumber, labels: [wantLabel]
+                });
+              }
+
+              console.log(`#${issueNumber}: ${wantLabel} (last reply: ${lastReplier})`);
+            }
+
+            console.log('Done');
