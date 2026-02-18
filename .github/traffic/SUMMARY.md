@@ -1,6 +1,6 @@
 # FS25_UsedPlus — Traffic Dashboard
 
-**Last updated:** 2026-02-18T20:48:36Z
+**Last updated:** 2026-02-18T20:53:10Z
 **Days tracked:** 1 | **Download snapshots:** 1 (hourly)
 
 ---
@@ -36,11 +36,15 @@
 
 ---
 
-## Release Downloads (hourly tracking)
+## Total Acquisition per Release (Downloads + Clones)
 
-![Downloads](charts/downloads.png)
+![Acquisition](charts/downloads.png)
 
-**Total downloads (all releases):** 11
+| Channel | Count |
+|---------|-------|
+| Zip Downloads | 11 |
+| Git Clones (14-day) | 469 |
+| **Total Acquisitions** | **480** |
 
 ---
 
