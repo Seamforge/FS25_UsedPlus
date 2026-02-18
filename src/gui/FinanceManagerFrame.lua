@@ -560,20 +560,6 @@ function FinanceManagerFrame:updateStatsSection(farmId, farm)
             self.lifetimeSuccessRateText:setText("N/A")
         end
     end
-    if self.lifetimeSavingsText then
-        -- Calculate combined "Marketplace Value" - net benefit from using the marketplace
-        -- Only includes actual value creation (savings), minus fees paid
-        -- Note: totalSaleProceeds excluded - selling converts asset to cash, doesn't create value
-        -- Note: totalAgentCommissions excluded - already factored into savings calculations
-        local totalValue = math.max(0,
-            (stats.totalSavingsFromUsed or 0)        -- Buying used vs new price
-          + (stats.totalNegotiationSavings or 0)     -- Negotiating price down
-          + (stats.totalSavingsFromLand or 0)        -- Credit discounts on land
-          - (stats.totalSearchFees or 0)             -- Search fees paid
-          - (stats.totalInspectionFees or 0)         -- Inspection fees paid
-        )
-        self.lifetimeSavingsText:setText(g_i18n:formatMoney(totalValue, 0, true, true))
-    end
 
     -- Credit history summary
     if creditEnabled and CreditHistory then

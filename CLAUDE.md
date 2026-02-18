@@ -345,9 +345,8 @@ git status translations/translation_sv.xml translations/translation_no.xml trans
 - 0 untranslated entries
 - 0 placeholder entries
 
-**Current Status (v2.12.1):**
-- 21 languages at 100% ✅
-- 3 languages in progress (Swedish, Norwegian, Vietnamese)
+**Current Status (v2.14.2):**
+- 25 languages at 100% ✅
 - 1 language planned (Korean - future community contribution)
 
 ### Post-Translation Checklist
@@ -430,7 +429,7 @@ X position = element CENTER, not left edge. Calculate: `X ± (width/2)` must sta
 
 ## Project: FS25_UsedPlus
 
-### Current Version: 2.12.1
+### Current Version: 2.14.2
 
 ### Features
 - Vehicle/equipment financing (1-15 years) and land financing (1-20 years) with dynamic credit scoring (300-850)

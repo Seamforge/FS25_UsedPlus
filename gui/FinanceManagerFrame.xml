@@ -522,11 +522,6 @@
 
                     <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_successRate" position="260px 85px" textSize="13px" textColor="0.6 0.6 0.6 1"/>
                     <Text profile="fs25_textDefault" id="lifetimeSuccessRateText" text="" position="380px 85px" textSize="13px" textBold="true" textColor="0.5 1 0.5 1"/>
-
-                    <!-- Summary - Compact height to reduce gap below value -->
-                    <Bitmap profile="baseReference" imageColor="0.15 0.15 0.15 1" position="12px 5px" size="486px 60px"/>
-                    <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_totalSaved" position="20px 45px" textSize="13px" textColor="0.6 0.6 0.6 1"/>
-                    <Text profile="fs25_textDefault" id="lifetimeSavingsText" text="" position="20px 15px" textSize="26px" textBold="true" textColor="0.5 1 0.5 1"/>
                 </GuiElement>
 
                 <!-- Credit Score Box (hidden when credit system disabled) -->

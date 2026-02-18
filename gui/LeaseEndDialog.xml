@@ -32,7 +32,7 @@
             <Text profile="leaseEndPenalty" id="penaltyText" position="0px -180px" text=""/>
 
             <!-- Separator -->
-            <Bitmap profile="fs25_dialogSeparator" position="0px -220px"/>
+            <Bitmap profile="baseReference" position="0px -220px" size="660px 1px" imageColor="0.3 0.3 0.3 1"/>
 
             <!-- Options Section -->
             <Text profile="leaseEndSectionTitle" position="0px -250px" text="$l10n_usedplus_le_chooseOption"/>
@@ -60,7 +60,7 @@
             <Bitmap profile="fs25_dialogButtonBoxSeparator"/>
             <Button profile="buttonOK" id="returnButton" text="$l10n_usedplus_button_returnVehicle" onClick="onReturnVehicle"/>
             <Bitmap profile="fs25_dialogButtonBoxSeparator"/>
-            <Button profile="buttonAccept" id="buyoutButton" text="$l10n_usedplus_button_buyoutVehicle" onClick="onBuyoutVehicle"/>
+            <Button profile="buttonOK" id="buyoutButton" text="$l10n_usedplus_button_buyoutVehicle" onClick="onBuyoutVehicle"/>
         </BoxLayout>
 
     </GuiElement>

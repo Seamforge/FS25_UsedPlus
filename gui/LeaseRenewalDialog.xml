@@ -101,36 +101,37 @@
     </GuiElement>
 
     <GUIProfiles>
-        <Profile name="lrTitle" extends="fs25_headline" with="anchorTopCenter">
-            <Value name="fontSize" value="22px"/>
+        <Profile name="lrTitle" extends="fs25_textDefault" with="anchorTopCenter">
+            <textSize value="22px"/>
+            <textBold value="true"/>
         </Profile>
         <Profile name="lrSubtitle" extends="fs25_textDefault" with="anchorTopCenter">
-            <Value name="fontSize" value="14px"/>
-            <Value name="textColor" value="0.7 0.7 0.7 1"/>
+            <textSize value="14px"/>
+            <textColor value="0.7 0.7 0.7 1"/>
         </Profile>
         <Profile name="lrSectionHeader" extends="fs25_textDefault" with="anchorTopLeft">
-            <Value name="fontSize" value="16px"/>
-            <Value name="textBold" value="true"/>
-            <Value name="textColor" value="1 0.8 0.2 1"/>
+            <textSize value="16px"/>
+            <textBold value="true"/>
+            <textColor value="1 0.8 0.2 1"/>
         </Profile>
         <Profile name="lrLabel" extends="fs25_textDefault" with="anchorTopLeft">
-            <Value name="fontSize" value="14px"/>
-            <Value name="textColor" value="0.8 0.8 0.8 1"/>
+            <textSize value="14px"/>
+            <textColor value="0.8 0.8 0.8 1"/>
         </Profile>
         <Profile name="lrValue" extends="fs25_textDefault" with="anchorTopLeft">
-            <Value name="fontSize" value="14px"/>
-            <Value name="textColor" value="1 1 1 1"/>
+            <textSize value="14px"/>
+            <textColor value="1 1 1 1"/>
         </Profile>
         <Profile name="lrMoneyGreen" extends="fs25_textDefault" with="anchorTopLeft">
-            <Value name="fontSize" value="14px"/>
-            <Value name="textColor" value="0.2 0.8 0.2 1"/>
+            <textSize value="14px"/>
+            <textColor value="0.2 0.8 0.2 1"/>
         </Profile>
         <Profile name="lrMoneyRed" extends="fs25_textDefault" with="anchorTopLeft">
-            <Value name="fontSize" value="14px"/>
-            <Value name="textColor" value="0.9 0.2 0.2 1"/>
+            <textSize value="14px"/>
+            <textColor value="0.9 0.2 0.2 1"/>
         </Profile>
         <Profile name="lrOptionButton" extends="buttonActivate">
-            <Value name="fontSize" value="14px"/>
+            <textSize value="14px"/>
         </Profile>
         <!-- v2.9.5: Option icons -->
         <Profile name="lrOptionIcon" extends="baseReference" with="anchorTopLeft">

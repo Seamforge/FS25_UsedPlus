@@ -10,10 +10,10 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-2.14.1-green" alt="Version">
+  <img src="https://img.shields.io/badge/version-2.14.2-green" alt="Version">
   <img src="https://img.shields.io/badge/game-FS25-blue" alt="FS25">
   <img src="https://img.shields.io/badge/multiplayer-ready-brightgreen" alt="Multiplayer Ready">
-  <img src="https://img.shields.io/badge/languages-25-orange" alt="25 Languages">
+  <img src="https://img.shields.io/badge/languages-26-orange" alt="26 Languages">
   <img src="https://img.shields.io/badge/AI--authored-Claude-purple" alt="AI Authored">
 </p>
 
@@ -43,7 +43,7 @@
 
 ---
 
-> ⚠️ **STATUS: Development Preview (v2.14.1)** — No official release yet. Core features (vehicle financing, **building financing**, leasing, credit, marketplace, trade-ins) fully functional. **Work in Progress:** Malfunctions and Service Truck under active development. Latest version always at: **[github.com/XelaNull/FS25_UsedPlus](https://github.com/XelaNull/FS25_UsedPlus)**
+> ⚠️ **STATUS: Development Preview (v2.14.2)** — No official release yet. Core features (vehicle financing, **building financing**, leasing, credit, marketplace, trade-ins) fully functional. **Work in Progress:** Malfunctions and Service Truck under active development. Latest version always at: **[github.com/XelaNull/FS25_UsedPlus](https://github.com/XelaNull/FS25_UsedPlus)**
 
 ---
 
@@ -468,7 +468,7 @@ Built on the shoulders of giants:
 
 ---
 
-**v2.14.1** | **[View Changelog](CHANGELOG.md)** | **[Report Issues](https://github.com/XelaNull/FS25_UsedPlus/issues)**
+**v2.14.2** | **[View Changelog](CHANGELOG.md)** | **[Report Issues](https://github.com/XelaNull/FS25_UsedPlus/issues)**
 
 ---
 
