@@ -97,32 +97,20 @@ jobs:
             DL_EXISTING="[]"
           fi
 
-          # Only append if total changed (avoid duplicate flat-line entries)
+          # Always save hourly snapshot (enables hourly download rate charts)
+          # Data growth: ~3KB/day, ~1MB/year — manageable
           LAST_TOTAL=$(echo "$DL_EXISTING" | jq '.[-1].total_downloads // -1')
+          DL_UPDATED=$(echo "$DL_EXISTING" | jq \
+            --arg ts "$TIMESTAMP" \
+            --argjson total "$TOTAL_DL" \
+            --argjson releases "$RELEASES" \
+            '. + [{timestamp: $ts, total_downloads: $total, per_release: $releases}]')
+          echo "$DL_UPDATED" > "$DOWNLOADS_FILE"
 
-          if [ "$TOTAL_DL" != "$LAST_TOTAL" ] || [ "$DL_EXISTING" = "[]" ]; then
-            DL_UPDATED=$(echo "$DL_EXISTING" | jq \
-              --arg ts "$TIMESTAMP" \
-              --argjson total "$TOTAL_DL" \
-              --argjson releases "$RELEASES" \
-              '. + [{timestamp: $ts, total_downloads: $total, per_release: $releases}]')
-            echo "$DL_UPDATED" > "$DOWNLOADS_FILE"
+          if [ "$TOTAL_DL" != "$LAST_TOTAL" ]; then
             echo "Download snapshot saved: $TOTAL_DL total (changed from $LAST_TOTAL)"
           else
-            # Still save a heartbeat entry every 6 hours even if unchanged
-            HOUR=$(date -u +%H)
-            if [ "$HOUR" = "00" ] || [ "$HOUR" = "06" ] || \
-               [ "$HOUR" = "12" ] || [ "$HOUR" = "18" ]; then
-              DL_UPDATED=$(echo "$DL_EXISTING" | jq \
-                --arg ts "$TIMESTAMP" \
-                --argjson total "$TOTAL_DL" \
-                --argjson releases "$RELEASES" \
-                '. + [{timestamp: $ts, total_downloads: $total, per_release: $releases}]')
-              echo "$DL_UPDATED" > "$DOWNLOADS_FILE"
-              echo "Heartbeat snapshot saved: $TOTAL_DL total (unchanged, 6hr checkpoint)"
-            else
-              echo "No change in downloads ($TOTAL_DL) — skipping snapshot"
-            fi
+            echo "Download snapshot saved: $TOTAL_DL total (unchanged)"
           fi
 
       # ── Full collection: every 6 hours ──────────────────────────
@@ -503,6 +491,175 @@ jobs:
                   plt.close()
                   print(f"Generated: downloads.png (single snapshot: {total})")
 
+          # ── Chart 2b: Hourly Download Rate + Monthly Trends ──
+          # Two-panel chart: today's hourly activity + monthly download history
+          if os.path.exists(dl_file):
+              with open(dl_file) as f:
+                  all_dl = json.load(f)
+
+              if len(all_dl) >= 2:
+                  # Parse all snapshots into (datetime, total) pairs
+                  dl_points = []
+                  for snap in all_dl:
+                      try:
+                          ts = datetime.strptime(snap["timestamp"], "%Y-%m-%dT%H:%M:%SZ")
+                          dl_points.append((ts, snap["total_downloads"]))
+                      except (KeyError, ValueError):
+                          pass
+
+                  dl_points.sort(key=lambda x: x[0])
+
+                  # Compute deltas between consecutive snapshots
+                  dl_deltas = []
+                  for i in range(1, len(dl_points)):
+                      prev_ts, prev_total = dl_points[i-1]
+                      curr_ts, curr_total = dl_points[i]
+                      delta = max(0, curr_total - prev_total)
+                      dl_deltas.append((curr_ts, delta))
+
+                  # ── Top panel: Today's hourly download rate ──
+                  today_str = datetime.utcnow().strftime("%Y-%m-%d")
+                  today_deltas = [(ts, d) for ts, d in dl_deltas if ts.strftime("%Y-%m-%d") == today_str]
+
+                  # If no today data, use the most recent day that has data
+                  if not today_deltas:
+                      recent_dates = sorted(set(ts.strftime("%Y-%m-%d") for ts, _ in dl_deltas), reverse=True)
+                      if recent_dates:
+                          latest_day = recent_dates[0]
+                          today_deltas = [(ts, d) for ts, d in dl_deltas if ts.strftime("%Y-%m-%d") == latest_day]
+                          today_str = latest_day
+
+                  # ── Bottom panel: Monthly download totals ──
+                  monthly = {}
+                  for ts, delta in dl_deltas:
+                      month_key = ts.strftime("%Y-%m")
+                      monthly[month_key] = monthly.get(month_key, 0) + delta
+
+                  # Also compute monthly totals from first/last snapshot per month (more accurate)
+                  monthly_from_cumulative = {}
+                  month_snapshots = {}
+                  for ts, total in dl_points:
+                      mk = ts.strftime("%Y-%m")
+                      if mk not in month_snapshots:
+                          month_snapshots[mk] = {"first": total, "last": total}
+                      else:
+                          month_snapshots[mk]["last"] = total
+                  for mk, vals in month_snapshots.items():
+                      monthly_from_cumulative[mk] = max(0, vals["last"] - vals["first"])
+
+                  # Use cumulative method (more reliable for months with sparse data)
+                  # But also add carry-over from previous month's last to this month's first
+                  sorted_months = sorted(month_snapshots.keys())
+                  monthly_totals = {}
+                  for i, mk in enumerate(sorted_months):
+                      intra = monthly_from_cumulative.get(mk, 0)
+                      if i > 0:
+                          prev_mk = sorted_months[i-1]
+                          cross_month = max(0, month_snapshots[mk]["first"] - month_snapshots[prev_mk]["last"])
+                          monthly_totals[mk] = intra + cross_month
+                      else:
+                          monthly_totals[mk] = intra
+
+                  # ── Render chart ──
+                  has_today = len(today_deltas) > 0
+                  has_monthly = len(monthly_totals) > 0
+
+                  if has_today or has_monthly:
+                      n_panels = (1 if has_today else 0) + (1 if has_monthly else 0)
+                      fig, axes = plt.subplots(n_panels, 1, figsize=(12, 4 * n_panels))
+                      if n_panels == 1:
+                          axes = [axes]
+                      fig.suptitle("Download Activity", fontsize=16, fontweight='bold', color='#58a6ff')
+
+                      ax_idx = 0
+
+                      # Today's hourly rate
+                      if has_today:
+                          ax = axes[ax_idx]
+                          ax_idx += 1
+
+                          hours = [ts.hour + ts.minute/60 for ts, _ in today_deltas]
+                          deltas = [d for _, d in today_deltas]
+
+                          # Bar chart for hourly downloads
+                          ax.bar(hours, deltas, width=0.8, color='#3fb950', alpha=0.8, edgecolor='#3fb950')
+                          ax.fill_between(hours, deltas, alpha=0.15, color='#3fb950', step='mid')
+
+                          # Value labels on non-zero bars
+                          for h, d in zip(hours, deltas):
+                              if d > 0:
+                                  ax.text(h, d + max(deltas) * 0.03, str(d), ha='center',
+                                          fontsize=10, fontweight='bold', color='#3fb950')
+
+                          ax.set_xlabel("Hour (UTC)")
+                          ax.set_ylabel("New Downloads")
+                          ax.set_title(f"Hourly Download Rate — {today_str}", fontsize=12, color='#c9d1d9')
+                          ax.set_xlim(-0.5, 23.5)
+                          ax.set_xticks(range(0, 24))
+                          ax.set_xticklabels([f'{h:02d}' for h in range(24)], fontsize=8)
+                          ax.set_ylim(bottom=0)
+                          ax.grid(True, axis='y', linestyle='--')
+
+                          total_today = sum(deltas)
+                          ax.text(0.98, 0.95, f'Today: +{total_today}', transform=ax.transAxes,
+                                  ha='right', va='top', fontsize=12, fontweight='bold',
+                                  color='#3fb950', bbox=dict(boxstyle='round,pad=0.3',
+                                  facecolor='#161b22', edgecolor='#3fb950', alpha=0.8))
+
+                      # Monthly trends
+                      if has_monthly:
+                          ax = axes[ax_idx]
+
+                          months = sorted(monthly_totals.keys())
+                          month_labels = [datetime.strptime(m + "-01", "%Y-%m-%d").strftime("%b '%y") for m in months]
+                          month_vals = [monthly_totals[m] for m in months]
+
+                          # Also show cumulative line
+                          cumulative = []
+                          running = 0
+                          for v in month_vals:
+                              running += v
+                              cumulative.append(running)
+
+                          # Bars for monthly new downloads
+                          bars = ax.bar(range(len(months)), month_vals, color='#d29922', alpha=0.8, label='New Downloads')
+
+                          # Value labels on bars
+                          for i, v in enumerate(month_vals):
+                              if v > 0:
+                                  ax.text(i, v + max(month_vals) * 0.03 if max(month_vals) > 0 else v + 0.5,
+                                          f'+{v}', ha='center', fontsize=10, fontweight='bold', color='#d29922')
+
+                          # Cumulative line on secondary axis
+                          ax2 = ax.twinx()
+                          ax2.plot(range(len(months)), cumulative, 'D-', color='#58a6ff',
+                                   linewidth=2, markersize=6, label='Cumulative', zorder=5)
+                          ax2.set_ylabel("Cumulative Downloads", color='#58a6ff')
+                          ax2.set_ylim(bottom=0)
+
+                          # Cumulative value labels
+                          for i, c in enumerate(cumulative):
+                              ax2.annotate(str(c), (i, c), textcoords="offset points",
+                                          xytext=(0, 10), ha='center', fontsize=9,
+                                          color='#58a6ff', fontweight='bold')
+
+                          ax.set_xticks(range(len(months)))
+                          ax.set_xticklabels(month_labels, rotation=45, ha='right')
+                          ax.set_ylabel("New Downloads This Month")
+                          ax.set_title("Monthly Download Trends", fontsize=12, color='#c9d1d9')
+                          ax.set_ylim(bottom=0)
+                          ax.grid(True, axis='y', linestyle='--')
+
+                          # Combined legend
+                          lines1, labels1 = ax.get_legend_handles_labels()
+                          lines2, labels2 = ax2.get_legend_handles_labels()
+                          ax.legend(lines1 + lines2, labels1 + labels2, loc='upper left', framealpha=0.8)
+
+                      fig.tight_layout()
+                      fig.savefig(os.path.join(CHARTS_DIR, "download_activity.png"), dpi=150, bbox_inches='tight')
+                      plt.close()
+                      print(f"Generated: download_activity.png (today: {len(today_deltas)} points, months: {len(monthly_totals)})")
+
           # ── Chart 3: Referrers ──
           ref_file = os.path.join(TRAFFIC_DIR, "referrers.json")
           if os.path.exists(ref_file):
@@ -814,6 +971,14 @@ jobs:
             echo "| Zip Downloads | ${TOTAL_DL} |"
             echo "| Git Clones (14-day) | ${TOTAL_CLONES_14D} |"
             echo "| **Total Acquisitions** | **${TOTAL_ACQUIRED}** |"
+            echo ""
+            echo "---"
+            echo ""
+            echo "## Download Activity (Hourly + Monthly)"
+            echo ""
+            echo "![Download Activity](charts/download_activity.png)"
+            echo ""
+            echo "> **Top:** Hourly download rate for the most recent day with activity. **Bottom:** Monthly download totals with cumulative trend line."
             echo ""
             echo "---"
             echo ""

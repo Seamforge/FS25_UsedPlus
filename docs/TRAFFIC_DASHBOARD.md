@@ -51,6 +51,16 @@ Every release gets its own "era." Git clones that occur while a release is curre
 
 ---
 
+## Download Activity — Hourly Rate + Monthly Trends
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/XelaNull/FS25_UsedPlus/traffic-stats/.github/traffic/charts/download_activity.png" alt="Download Activity" width="100%">
+</p>
+
+**Top panel:** Hourly download rate for the most recent day with activity. See exactly when downloads spike — release announcements, Reddit posts, ModHub features all show up as distinct peaks. **Bottom panel:** Monthly download totals with a cumulative trend line. Track long-term adoption and seasonal patterns.
+
+---
+
 ## Visitor Engagement — Are People Exploring?
 
 <p align="center">
