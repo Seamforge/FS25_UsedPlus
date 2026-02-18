@@ -10,11 +10,11 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/github/downloads/XelaNull/FS25_UsedPlus/total?label=downloads&color=brightgreen" alt="Downloads">
-  <img src="https://img.shields.io/github/stars/XelaNull/FS25_UsedPlus?style=flat&color=yellow" alt="Stars">
-  <img src="https://img.shields.io/github/forks/XelaNull/FS25_UsedPlus?style=flat&color=blue" alt="Forks">
-  <img src="https://img.shields.io/github/watchers/XelaNull/FS25_UsedPlus?style=flat&color=green" alt="Watchers">
-  <img src="https://img.shields.io/badge/AI--authored-Claude-purple" alt="AI Authored">
+  <img src="https://img.shields.io/github/downloads/XelaNull/FS25_UsedPlus/total?label=downloads&style=flat-square&color=brightgreen" alt="Downloads">
+  <img src="https://img.shields.io/github/stars/XelaNull/FS25_UsedPlus?style=flat-square&color=yellow" alt="Stars">
+  <img src="https://img.shields.io/github/forks/XelaNull/FS25_UsedPlus?style=flat-square&color=blue" alt="Forks">
+  <img src="https://img.shields.io/github/watchers/XelaNull/FS25_UsedPlus?style=flat-square&color=green" alt="Watchers">
+  <img src="https://img.shields.io/badge/AI--authored-Claude-purple?style=flat-square" alt="AI Authored">
 </p>
 
 <p align="center">
