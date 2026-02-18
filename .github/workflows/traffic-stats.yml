@@ -2,16 +2,15 @@ name: Traffic Stats Archive
 
 on:
   schedule:
-    # Run every 6 hours to capture release download velocity
-    # Views/clones are daily granularity from API, but downloads are cumulative
-    - cron: '0 0,6,12,18 * * *'
-  workflow_dispatch: # Allow manual trigger
+    # Hourly: lightweight download snapshot
+    - cron: '0 * * * *'
+  workflow_dispatch: # Allow manual trigger (runs full collection)
 
 permissions:
   contents: write
 
 jobs:
-  archive-traffic:
+  collect-stats:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout traffic-stats branch
@@ -29,9 +28,8 @@ jobs:
             echo "# Traffic Stats" > README.md
             echo "This branch contains archived traffic data for FS25_UsedPlus." >> README.md
             echo "" >> README.md
-            echo "Data collected every 6 hours by GitHub Actions." >> README.md
+            echo "Hourly download tracking + full dashboard every 6 hours." >> README.md
             echo "See [SUMMARY.md](.github/traffic/SUMMARY.md) for the latest dashboard." >> README.md
-            echo "See [charts/](.github/traffic/charts/) for visualizations." >> README.md
             git add README.md
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -39,25 +37,83 @@ jobs:
             git push origin traffic-stats
           fi
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
+      - name: Determine collection mode
+        id: mode
+        run: |
+          HOUR=$(date -u +%H)
+          # Full collection at 00, 06, 12, 18 UTC and on manual trigger
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] || \
+             [ "$HOUR" = "00" ] || [ "$HOUR" = "06" ] || \
+             [ "$HOUR" = "12" ] || [ "$HOUR" = "18" ]; then
+            echo "full=true" >> $GITHUB_OUTPUT
+            echo "Mode: FULL collection (hour=$HOUR)"
+          else
+            echo "full=false" >> $GITHUB_OUTPUT
+            echo "Mode: DOWNLOAD-ONLY snapshot (hour=$HOUR)"
+          fi
 
-      - name: Install charting dependencies
-        run: pip install matplotlib
-
-      - name: Collect traffic stats
+      # ── Always: Hourly download snapshot ────────────────────────
+      - name: Snapshot release downloads
         env:
           GH_TOKEN: ${{ secrets.PROJECT_TOKEN }}
         run: |
           mkdir -p .github/traffic/charts
 
           TIMESTAMP=$(date -u +%Y-%m-%dT%H:%M:%SZ)
-          DATE=$(date -u +%Y-%m-%d)
-          HOUR=$(date -u +%H)
 
-          # ── Fetch API data ──────────────────────────────────────────
+          # Fetch release download counts
+          RELEASES=$(gh api repos/${{ github.repository }}/releases \
+            --jq '[.[] | {tag: .tag_name, assets: [.assets[] | {name: .name, downloads: .download_count}]}]' \
+            2>/dev/null || echo '[]')
+
+          TOTAL_DL=$(echo "$RELEASES" | jq '[.[].assets[].downloads] | add // 0')
+
+          # Append to downloads timeline
+          DOWNLOADS_FILE=".github/traffic/downloads.json"
+          if [ -f "$DOWNLOADS_FILE" ]; then
+            DL_EXISTING=$(cat "$DOWNLOADS_FILE")
+          else
+            DL_EXISTING="[]"
+          fi
+
+          # Only append if total changed (avoid duplicate flat-line entries)
+          LAST_TOTAL=$(echo "$DL_EXISTING" | jq '.[-1].total_downloads // -1')
+
+          if [ "$TOTAL_DL" != "$LAST_TOTAL" ] || [ "$DL_EXISTING" = "[]" ]; then
+            DL_UPDATED=$(echo "$DL_EXISTING" | jq \
+              --arg ts "$TIMESTAMP" \
+              --argjson total "$TOTAL_DL" \
+              --argjson releases "$RELEASES" \
+              '. + [{timestamp: $ts, total_downloads: $total, per_release: $releases}]')
+            echo "$DL_UPDATED" > "$DOWNLOADS_FILE"
+            echo "Download snapshot saved: $TOTAL_DL total (changed from $LAST_TOTAL)"
+          else
+            # Still save a heartbeat entry every 6 hours even if unchanged
+            HOUR=$(date -u +%H)
+            if [ "$HOUR" = "00" ] || [ "$HOUR" = "06" ] || \
+               [ "$HOUR" = "12" ] || [ "$HOUR" = "18" ]; then
+              DL_UPDATED=$(echo "$DL_EXISTING" | jq \
+                --arg ts "$TIMESTAMP" \
+                --argjson total "$TOTAL_DL" \
+                --argjson releases "$RELEASES" \
+                '. + [{timestamp: $ts, total_downloads: $total, per_release: $releases}]')
+              echo "$DL_UPDATED" > "$DOWNLOADS_FILE"
+              echo "Heartbeat snapshot saved: $TOTAL_DL total (unchanged, 6hr checkpoint)"
+            else
+              echo "No change in downloads ($TOTAL_DL) — skipping snapshot"
+            fi
+          fi
+
+      # ── Full collection: every 6 hours ──────────────────────────
+      - name: Collect full traffic stats
+        if: steps.mode.outputs.full == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.PROJECT_TOKEN }}
+        run: |
+          TIMESTAMP=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+          DATE=$(date -u +%Y-%m-%d)
+
+          # ── Fetch all API data ──
           VIEWS=$(gh api repos/${{ github.repository }}/traffic/views 2>/dev/null || echo '{"count":0,"uniques":0,"views":[]}')
           CLONES=$(gh api repos/${{ github.repository }}/traffic/clones 2>/dev/null || echo '{"count":0,"uniques":0,"clones":[]}')
           REFERRERS=$(gh api repos/${{ github.repository }}/traffic/popular/referrers 2>/dev/null || echo '[]')
@@ -68,8 +124,7 @@ jobs:
           WATCHERS=$(gh api repos/${{ github.repository }} --jq '.subscribers_count' 2>/dev/null || echo '0')
           OPEN_ISSUES=$(gh api repos/${{ github.repository }} --jq '.open_issues_count' 2>/dev/null || echo '0')
 
-          # ── Daily views/clones breakdown (from API's per-day array) ──
-          # The API returns up to 14 days of daily data points
+          # ── Daily views/clones (preserved beyond 14-day window) ──
           DAILY_FILE=".github/traffic/daily.json"
           if [ -f "$DAILY_FILE" ]; then
             DAILY_EXISTING=$(cat "$DAILY_FILE")
@@ -77,19 +132,14 @@ jobs:
             DAILY_EXISTING='{}'
           fi
 
-          # Merge API's per-day view data into our historical daily file
-          # Each day gets: views_total, views_unique, clones_total, clones_unique
           DAILY_UPDATED=$(echo "$VIEWS" | jq --argjson clones "$CLONES" --argjson existing "$DAILY_EXISTING" '
-            # Start with existing data
             $existing as $base |
-            # Merge in view data from API
             reduce (.views[]? // empty) as $v ($base;
               ($v.timestamp | split("T")[0]) as $day |
               .[$day] = (.[$day] // {}) |
               .[$day].views_total = $v.count |
               .[$day].views_unique = $v.uniques
             ) |
-            # Merge in clone data from API
             reduce ($clones.clones[]? // empty) as $c (.;
               ($c.timestamp | split("T")[0]) as $day |
               .[$day] = (.[$day] // {}) |
@@ -99,19 +149,6 @@ jobs:
           ')
           echo "$DAILY_UPDATED" > "$DAILY_FILE"
 
-          # ── Download snapshots (tracked every 6 hours for velocity) ──
-          DOWNLOADS_FILE=".github/traffic/downloads.json"
-          if [ -f "$DOWNLOADS_FILE" ]; then
-            DL_EXISTING=$(cat "$DOWNLOADS_FILE")
-          else
-            DL_EXISTING="[]"
-          fi
-
-          TOTAL_DL=$(echo "$RELEASES" | jq '[.[].assets[].downloads] | add // 0')
-          DL_UPDATED=$(echo "$DL_EXISTING" | jq --arg ts "$TIMESTAMP" --argjson total "$TOTAL_DL" --argjson releases "$RELEASES" \
-            '. + [{timestamp: $ts, total_downloads: $total, releases: $releases}]')
-          echo "$DL_UPDATED" > "$DOWNLOADS_FILE"
-
           # ── Referrer history (one snapshot per day) ──
           REFERRER_FILE=".github/traffic/referrers.json"
           if [ -f "$REFERRER_FILE" ]; then
@@ -119,11 +156,10 @@ jobs:
           else
             REF_EXISTING='{}'
           fi
-          REF_UPDATED=$(echo "$REF_EXISTING" | jq --arg date "$DATE" --argjson refs "$REFERRERS" \
-            '.[$date] = $refs')
+          REF_UPDATED=$(echo "$REF_EXISTING" | jq --arg date "$DATE" --argjson refs "$REFERRERS" '.[$date] = $refs')
           echo "$REF_UPDATED" > "$REFERRER_FILE"
 
-          # ── Repo metadata snapshots (stars, forks, watchers) ──
+          # ── Repo metadata (one snapshot per day) ──
           META_FILE=".github/traffic/metadata.json"
           if [ -f "$META_FILE" ]; then
             META_EXISTING=$(cat "$META_FILE")
@@ -131,20 +167,16 @@ jobs:
             META_EXISTING="[]"
           fi
 
-          # Only add one metadata snapshot per day
           META_UPDATED=$(echo "$META_EXISTING" | jq --arg date "$DATE" \
             --argjson stars "$STARGAZERS" --argjson forks "$FORKS" \
             --argjson watchers "$WATCHERS" --argjson issues "$OPEN_ISSUES" \
             '[.[] | select(.date != $date)] + [{
-              date: $date,
-              stars: $stars,
-              forks: $forks,
-              watchers: $watchers,
-              open_issues: $issues
+              date: $date, stars: $stars, forks: $forks,
+              watchers: $watchers, open_issues: $issues
             }] | sort_by(.date)')
           echo "$META_UPDATED" > "$META_FILE"
 
-          # ── Legacy stats.json (keep for backwards compatibility) ──
+          # ── Legacy combined snapshot ──
           STATS_FILE=".github/traffic/stats.json"
           if [ -f "$STATS_FILE" ]; then
             EXISTING=$(cat "$STATS_FILE")
@@ -171,7 +203,19 @@ jobs:
             '[.[] | select(.date != $date)] + [$snapshot] | sort_by(.date)')
           echo "$UPDATED" > "$STATS_FILE"
 
+      # ── Charts: only on full collection ─────────────────────────
+      - name: Set up Python
+        if: steps.mode.outputs.full == 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install charting dependencies
+        if: steps.mode.outputs.full == 'true'
+        run: pip install matplotlib
+
       - name: Generate charts
+        if: steps.mode.outputs.full == 'true'
         run: |
           python3 << 'PYEOF'
           import json
@@ -187,7 +231,7 @@ jobs:
           CHARTS_DIR = os.path.join(TRAFFIC_DIR, "charts")
           os.makedirs(CHARTS_DIR, exist_ok=True)
 
-          # ── Shared style ────────────────────────────────────────────
+          # ── Shared dark theme (GitHub style) ──
           plt.rcParams.update({
               'figure.facecolor': '#0d1117',
               'axes.facecolor': '#161b22',
@@ -201,7 +245,7 @@ jobs:
               'font.size': 11,
           })
 
-          # ── Chart 1: Views & Clones over time ──────────────────────
+          # ── Chart 1: Views & Clones ──
           daily_file = os.path.join(TRAFFIC_DIR, "daily.json")
           if os.path.exists(daily_file):
               with open(daily_file) as f:
@@ -211,26 +255,24 @@ jobs:
                   dates = sorted(daily.keys())
                   date_objs = [datetime.strptime(d, "%Y-%m-%d") for d in dates]
                   views = [daily[d].get("views_total", 0) or 0 for d in dates]
-                  views_unique = [daily[d].get("views_unique", 0) or 0 for d in dates]
+                  views_uniq = [daily[d].get("views_unique", 0) or 0 for d in dates]
                   clones = [daily[d].get("clones_total", 0) or 0 for d in dates]
-                  clones_unique = [daily[d].get("clones_unique", 0) or 0 for d in dates]
+                  clones_uniq = [daily[d].get("clones_unique", 0) or 0 for d in dates]
 
                   fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 8), sharex=True)
                   fig.suptitle("FS25_UsedPlus — Traffic Dashboard", fontsize=16, fontweight='bold', color='#58a6ff')
 
-                  # Views
                   ax1.fill_between(date_objs, views, alpha=0.3, color='#58a6ff')
                   ax1.plot(date_objs, views, 'o-', color='#58a6ff', linewidth=2, markersize=5, label='Total Views')
-                  ax1.plot(date_objs, views_unique, 's--', color='#3fb950', linewidth=1.5, markersize=4, label='Unique Visitors')
+                  ax1.plot(date_objs, views_uniq, 's--', color='#3fb950', linewidth=1.5, markersize=4, label='Unique Visitors')
                   ax1.set_ylabel("Page Views")
                   ax1.legend(loc='upper left', framealpha=0.8)
                   ax1.grid(True, linestyle='--')
                   ax1.set_ylim(bottom=0)
 
-                  # Clones
                   ax2.fill_between(date_objs, clones, alpha=0.3, color='#d29922')
                   ax2.plot(date_objs, clones, 'o-', color='#d29922', linewidth=2, markersize=5, label='Total Clones')
-                  ax2.plot(date_objs, clones_unique, 's--', color='#f85149', linewidth=1.5, markersize=4, label='Unique Cloners')
+                  ax2.plot(date_objs, clones_uniq, 's--', color='#f85149', linewidth=1.5, markersize=4, label='Unique Cloners')
                   ax2.set_ylabel("Git Clones")
                   ax2.legend(loc='upper left', framealpha=0.8)
                   ax2.grid(True, linestyle='--')
@@ -244,7 +286,7 @@ jobs:
                   plt.close()
                   print("Generated: views_clones.png")
 
-          # ── Chart 2: Download velocity ──────────────────────────────
+          # ── Chart 2: Download velocity (hourly resolution) ──
           dl_file = os.path.join(TRAFFIC_DIR, "downloads.json")
           if os.path.exists(dl_file):
               with open(dl_file) as f:
@@ -254,24 +296,53 @@ jobs:
                   timestamps = [datetime.strptime(d["timestamp"], "%Y-%m-%dT%H:%M:%SZ") for d in downloads]
                   totals = [d["total_downloads"] for d in downloads]
 
-                  fig, ax = plt.subplots(figsize=(12, 4))
-                  fig.suptitle("Release Downloads Over Time", fontsize=14, fontweight='bold', color='#58a6ff')
-                  ax.fill_between(timestamps, totals, alpha=0.3, color='#3fb950')
-                  ax.plot(timestamps, totals, 'o-', color='#3fb950', linewidth=2, markersize=5)
-                  ax.set_ylabel("Total Downloads")
-                  ax.set_xlabel("")
-                  ax.grid(True, linestyle='--')
-                  ax.set_ylim(bottom=0)
-                  ax.xaxis.set_major_formatter(mdates.DateFormatter('%b %d %H:%M'))
+                  # Calculate hourly deltas for bar chart overlay
+                  deltas = [0] + [max(0, totals[i] - totals[i-1]) for i in range(1, len(totals))]
+
+                  fig, ax1 = plt.subplots(figsize=(12, 5))
+                  fig.suptitle("Release Downloads — Hourly Tracking", fontsize=14, fontweight='bold', color='#58a6ff')
+
+                  # Cumulative line
+                  ax1.fill_between(timestamps, totals, alpha=0.2, color='#3fb950')
+                  ax1.plot(timestamps, totals, 'o-', color='#3fb950', linewidth=2, markersize=4, label='Cumulative Downloads')
+                  ax1.set_ylabel("Total Downloads", color='#3fb950')
+                  ax1.set_ylim(bottom=0)
+                  ax1.grid(True, linestyle='--')
+
+                  # Delta bars on secondary axis
+                  if any(d > 0 for d in deltas):
+                      ax2 = ax1.twinx()
+                      bar_width = min(0.03, 0.8 / len(timestamps)) if len(timestamps) > 1 else 0.03
+                      ax2.bar(timestamps, deltas, width=bar_width, alpha=0.5, color='#58a6ff', label='New Downloads')
+                      ax2.set_ylabel("New Downloads (per snapshot)", color='#58a6ff')
+                      ax2.set_ylim(bottom=0)
+                      # Combine legends
+                      lines1, labels1 = ax1.get_legend_handles_labels()
+                      lines2, labels2 = ax2.get_legend_handles_labels()
+                      ax1.legend(lines1 + lines2, labels1 + labels2, loc='upper left', framealpha=0.8)
+                  else:
+                      ax1.legend(loc='upper left', framealpha=0.8)
+
+                  # Smart x-axis formatting based on time span
+                  span_hours = (timestamps[-1] - timestamps[0]).total_seconds() / 3600
+                  if span_hours <= 48:
+                      ax1.xaxis.set_major_formatter(mdates.DateFormatter('%b %d %H:%M'))
+                  elif span_hours <= 168:  # 1 week
+                      ax1.xaxis.set_major_formatter(mdates.DateFormatter('%b %d %H:%M'))
+                      ax1.xaxis.set_major_locator(mdates.HourLocator(interval=6))
+                  else:
+                      ax1.xaxis.set_major_formatter(mdates.DateFormatter('%b %d'))
+                      ax1.xaxis.set_major_locator(mdates.DayLocator())
+
                   plt.xticks(rotation=45)
                   fig.tight_layout()
                   fig.savefig(os.path.join(CHARTS_DIR, "downloads.png"), dpi=150, bbox_inches='tight')
                   plt.close()
-                  print("Generated: downloads.png")
-              elif len(downloads) == 1:
-                  print("Only 1 download snapshot — need at least 2 for download chart")
+                  print(f"Generated: downloads.png ({len(downloads)} snapshots)")
+              else:
+                  print(f"Only {len(downloads)} download snapshot(s) — need 2+ for chart")
 
-          # ── Chart 3: Referrers breakdown (latest snapshot) ─────────
+          # ── Chart 3: Referrers ──
           ref_file = os.path.join(TRAFFIC_DIR, "referrers.json")
           if os.path.exists(ref_file):
               with open(ref_file) as f:
@@ -293,7 +364,6 @@ jobs:
                       ax.set_xlabel("Page Views")
                       ax.grid(True, axis='x', linestyle='--')
 
-                      # Add count labels on bars
                       for bar, count in zip(bars, counts[::-1]):
                           ax.text(bar.get_width() + max(counts)*0.02, bar.get_y() + bar.get_height()/2,
                                   str(count), va='center', color='#c9d1d9', fontsize=10)
@@ -303,7 +373,7 @@ jobs:
                       plt.close()
                       print("Generated: referrers.png")
 
-          # ── Chart 4: Stars/Forks/Watchers over time ─────────────────
+          # ── Chart 4: Stars/Forks growth ──
           meta_file = os.path.join(TRAFFIC_DIR, "metadata.json")
           if os.path.exists(meta_file):
               with open(meta_file) as f:
@@ -328,13 +398,15 @@ jobs:
                   fig.savefig(os.path.join(CHARTS_DIR, "growth.png"), dpi=150, bbox_inches='tight')
                   plt.close()
                   print("Generated: growth.png")
-              elif len(metadata) == 1:
-                  print("Only 1 metadata snapshot — need at least 2 for growth chart")
+              else:
+                  print(f"Only {len(metadata)} metadata snapshot(s) — need 2+ for chart")
 
           print("Chart generation complete!")
           PYEOF
 
-      - name: Generate summary
+      # ── Summary: only on full collection ────────────────────────
+      - name: Generate summary dashboard
+        if: steps.mode.outputs.full == 'true'
         env:
           GH_TOKEN: ${{ secrets.PROJECT_TOKEN }}
         run: |
@@ -342,12 +414,11 @@ jobs:
           DATE=$(date -u +%Y-%m-%d)
           TIMESTAMP=$(date -u +%Y-%m-%dT%H:%M:%SZ)
 
-          # Read current data
           VIEWS=$(gh api repos/${{ github.repository }}/traffic/views 2>/dev/null || echo '{"count":0,"uniques":0}')
           CLONES=$(gh api repos/${{ github.repository }}/traffic/clones 2>/dev/null || echo '{"count":0,"uniques":0}')
           REFERRERS=$(gh api repos/${{ github.repository }}/traffic/popular/referrers 2>/dev/null || echo '[]')
           PATHS=$(gh api repos/${{ github.repository }}/traffic/popular/paths 2>/dev/null || echo '[]')
-          RELEASES=$(gh api repos/${{ github.repository }}/releases --jq '[.[].assets[].downloads] | add // 0' 2>/dev/null || echo '0')
+          TOTAL_DL=$(gh api repos/${{ github.repository }}/releases --jq '[.[].assets[].downloads] | add // 0' 2>/dev/null || echo '0')
           STARGAZERS=$(gh api repos/${{ github.repository }} --jq '.stargazers_count' 2>/dev/null || echo '0')
           FORKS=$(gh api repos/${{ github.repository }} --jq '.forks_count' 2>/dev/null || echo '0')
           WATCHERS=$(gh api repos/${{ github.repository }} --jq '.subscribers_count' 2>/dev/null || echo '0')
@@ -359,26 +430,26 @@ jobs:
             echo "# FS25_UsedPlus — Traffic Dashboard"
             echo ""
             echo "**Last updated:** ${TIMESTAMP}"
-            echo "**Days tracked:** ${DAYS_TRACKED} | **Download snapshots:** ${DL_SNAPSHOTS}"
+            echo "**Days tracked:** ${DAYS_TRACKED} | **Download snapshots:** ${DL_SNAPSHOTS} (hourly)"
             echo ""
             echo "---"
             echo ""
-            echo "## Views & Clones (14-day window)"
+            echo "## Views & Clones (14-day window, preserved forever)"
             echo ""
             echo "![Views & Clones](charts/views_clones.png)"
             echo ""
-            echo "| Metric | Total | Unique |"
-            echo "|--------|-------|--------|"
+            echo "| Metric | 14-Day Total | Unique |"
+            echo "|--------|-------------|--------|"
             echo "| Page Views | $(echo "$VIEWS" | jq '.count') | $(echo "$VIEWS" | jq '.uniques') |"
             echo "| Git Clones | $(echo "$CLONES" | jq '.count') | $(echo "$CLONES" | jq '.uniques') |"
             echo ""
             echo "---"
             echo ""
-            echo "## Release Downloads"
+            echo "## Release Downloads (hourly tracking)"
             echo ""
             echo "![Downloads](charts/downloads.png)"
             echo ""
-            echo "**Total downloads (all releases):** ${RELEASES}"
+            echo "**Total downloads (all releases):** ${TOTAL_DL}"
             echo ""
             echo "---"
             echo ""
@@ -414,19 +485,21 @@ jobs:
             echo ""
             echo "## Data Files"
             echo ""
-            echo "| File | Description |"
-            echo "|------|-------------|"
-            echo "| [daily.json](daily.json) | Per-day views & clones (historical, never expires) |"
-            echo "| [downloads.json](downloads.json) | Download snapshots every 6 hours |"
-            echo "| [referrers.json](referrers.json) | Daily referrer snapshots |"
-            echo "| [metadata.json](metadata.json) | Stars, forks, watchers over time |"
-            echo "| [stats.json](stats.json) | Legacy combined snapshots |"
+            echo "| File | Description | Granularity |"
+            echo "|------|-------------|-------------|"
+            echo "| [daily.json](daily.json) | Views & clones per day (never expires) | Daily |"
+            echo "| [downloads.json](downloads.json) | Release download snapshots | Hourly |"
+            echo "| [referrers.json](referrers.json) | Referrer snapshots | Daily |"
+            echo "| [metadata.json](metadata.json) | Stars, forks, watchers | Daily |"
+            echo "| [stats.json](stats.json) | Combined legacy snapshots | 6-hourly |"
             echo ""
             echo "---"
-            echo "*Auto-generated every 6 hours by [traffic-stats.yml](../../.github/workflows/traffic-stats.yml)*"
+            echo "*Hourly download tracking + full dashboard every 6 hours*"
+            echo "*Auto-generated by [traffic-stats.yml](../../.github/workflows/traffic-stats.yml)*"
           } > "$SUMMARY_FILE"
 
-      - name: Commit and push stats
+      # ── Commit ──────────────────────────────────────────────────
+      - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -434,6 +507,11 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "chore: Traffic snapshot $(date -u +%Y-%m-%d_%H:%M)"
+            MODE="${{ steps.mode.outputs.full }}"
+            if [ "$MODE" = "true" ]; then
+              git commit -m "chore: Full traffic snapshot $(date -u +%Y-%m-%d_%H:%M)"
+            else
+              git commit -m "chore: Download snapshot $(date -u +%Y-%m-%d_%H:%M)"
+            fi
             git push origin traffic-stats
           fi
