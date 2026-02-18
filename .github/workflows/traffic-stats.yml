@@ -316,7 +316,6 @@ jobs:
                       ax2.bar(timestamps, deltas, width=bar_width, alpha=0.5, color='#58a6ff', label='New Downloads')
                       ax2.set_ylabel("New Downloads (per snapshot)", color='#58a6ff')
                       ax2.set_ylim(bottom=0)
-                      # Combine legends
                       lines1, labels1 = ax1.get_legend_handles_labels()
                       lines2, labels2 = ax2.get_legend_handles_labels()
                       ax1.legend(lines1 + lines2, labels1 + labels2, loc='upper left', framealpha=0.8)
@@ -339,8 +338,42 @@ jobs:
                   fig.savefig(os.path.join(CHARTS_DIR, "downloads.png"), dpi=150, bbox_inches='tight')
                   plt.close()
                   print(f"Generated: downloads.png ({len(downloads)} snapshots)")
-              else:
-                  print(f"Only {len(downloads)} download snapshot(s) — need 2+ for chart")
+
+              elif len(downloads) == 1:
+                  # Single snapshot — show bar chart of per-release totals
+                  d = downloads[0]
+                  total = d["total_downloads"]
+                  ts = d["timestamp"].replace("T", " ").replace("Z", " UTC")
+                  releases = d.get("per_release") or d.get("releases", [])
+
+                  labels = []
+                  values = []
+                  for rel in releases:
+                      tag = rel.get("tag", "unknown")
+                      for asset in rel.get("assets", []):
+                          labels.append(f'{tag}\n{asset["name"]}')
+                          values.append(asset["downloads"])
+
+                  if not labels:
+                      labels = ["Total"]
+                      values = [total]
+
+                  fig, ax = plt.subplots(figsize=(8, 4))
+                  fig.suptitle(f"Release Downloads (as of {ts.split(' ')[0]})",
+                               fontsize=14, fontweight='bold', color='#58a6ff')
+                  bars = ax.bar(labels, values, color='#3fb950', width=0.4)
+                  ax.set_ylabel("Downloads")
+                  ax.grid(True, axis='y', linestyle='--')
+                  ax.set_ylim(bottom=0)
+
+                  for bar, val in zip(bars, values):
+                      ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.3,
+                              str(val), ha='center', fontsize=14, fontweight='bold', color='#3fb950')
+
+                  fig.tight_layout()
+                  fig.savefig(os.path.join(CHARTS_DIR, "downloads.png"), dpi=150, bbox_inches='tight')
+                  plt.close()
+                  print(f"Generated: downloads.png (single snapshot: {total} total)")
 
           # ── Chart 3: Referrers ──
           ref_file = os.path.join(TRAFFIC_DIR, "referrers.json")
@@ -593,7 +626,8 @@ jobs:
           CLONES=$(gh api repos/${{ github.repository }}/traffic/clones 2>/dev/null || echo '{"count":0,"uniques":0}')
           REFERRERS=$(gh api repos/${{ github.repository }}/traffic/popular/referrers 2>/dev/null || echo '[]')
           PATHS=$(gh api repos/${{ github.repository }}/traffic/popular/paths 2>/dev/null || echo '[]')
-          TOTAL_DL=$(gh api repos/${{ github.repository }}/releases --jq '[.[].assets[].downloads] | add // 0' 2>/dev/null || echo '0')
+          # Read download total from our own data (gh api --jq has issues with nested arrays)
+          TOTAL_DL=$(jq '.[-1].total_downloads // 0' .github/traffic/downloads.json 2>/dev/null || echo '0')
           STARGAZERS=$(gh api repos/${{ github.repository }} --jq '.stargazers_count' 2>/dev/null || echo '0')
           FORKS=$(gh api repos/${{ github.repository }} --jq '.forks_count' 2>/dev/null || echo '0')
           WATCHERS=$(gh api repos/${{ github.repository }} --jq '.subscribers_count' 2>/dev/null || echo '0')
