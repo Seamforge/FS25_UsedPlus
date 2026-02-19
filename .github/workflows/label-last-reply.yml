@@ -15,20 +15,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Label issues with owner-replied or user-replied
+      - name: Label issues with owner-replied or user-replied + sync fixed label
         uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.PROJECT_TOKEN }}
           script: |
             const OWNER_LABEL = 'owner-replied';
             const USER_LABEL = 'user-replied';
+            const FIXED_LABEL = 'fixed';
             const owner = context.repo.owner;
             const repo = context.repo.repo;
+            const projectNumber = 3;
 
-            // Ensure both labels exist (create if missing)
+            // Ensure labels exist (create if missing)
             for (const label of [
               { name: OWNER_LABEL, color: '0e8a16', description: 'Last reply was from the repo owner' },
-              { name: USER_LABEL, color: 'e4e669', description: 'Last reply was from a user (awaiting owner response)' }
+              { name: USER_LABEL, color: 'e4e669', description: 'Last reply was from a user (awaiting owner response)' },
+              { name: FIXED_LABEL, color: '0e8a16', description: 'Issue has been fixed (from project board)' }
             ]) {
               try {
                 await github.rest.issues.getLabel({ owner, repo, name: label.name });
@@ -38,6 +41,32 @@ jobs:
                   console.log(`Created label: ${label.name}`);
                 }
               }
+            }
+
+            // Query project board for all items and their statuses
+            let projectItems = [];
+            try {
+              const query = `query($owner: String!, $projectNumber: Int!) {
+                user(login: $owner) {
+                  projectV2(number: $projectNumber) {
+                    items(first: 100) {
+                      nodes {
+                        fieldValueByName(name: "Status") {
+                          ... on ProjectV2ItemFieldSingleSelectValue { name }
+                        }
+                        content {
+                          ... on Issue { number }
+                        }
+                      }
+                    }
+                  }
+                }
+              }`;
+              const result = await github.graphql(query, { owner, projectNumber });
+              projectItems = result.user.projectV2.items.nodes;
+              console.log(`Loaded ${projectItems.length} project items`);
+            } catch (e) {
+              console.log(`Could not load project board: ${e.message}`);
             }
 
             // Fetch all open issues
@@ -53,12 +82,11 @@ jobs:
               const issueNumber = issue.number;
               const currentLabels = issue.labels.map(l => l.name);
 
-              // Get the most recent comments (newest last)
+              // ── Reply label ──
               const comments = await github.rest.issues.listComments({
                 owner, repo, issue_number: issueNumber, per_page: 100
               });
 
-              // Find the last non-bot comment
               let lastHumanComment = null;
               for (let i = comments.data.length - 1; i >= 0; i--) {
                 const c = comments.data[i];
@@ -68,43 +96,59 @@ jobs:
                 }
               }
 
-              // Determine who replied last
-              let lastReplier;
-              if (lastHumanComment) {
-                lastReplier = lastHumanComment.user.login;
-              } else {
-                // No comments — the issue author is the last "speaker"
-                lastReplier = issue.user.login;
-              }
+              const lastReplier = lastHumanComment
+                ? lastHumanComment.user.login
+                : issue.user.login;
 
               const isOwner = lastReplier === owner;
               const wantLabel = isOwner ? OWNER_LABEL : USER_LABEL;
               const removeLabel = isOwner ? USER_LABEL : OWNER_LABEL;
 
-              // Skip if already correctly labeled
-              if (currentLabels.includes(wantLabel) && !currentLabels.includes(removeLabel)) {
-                continue;
+              let changed = false;
+
+              if (!(currentLabels.includes(wantLabel) && !currentLabels.includes(removeLabel))) {
+                if (currentLabels.includes(removeLabel)) {
+                  try {
+                    await github.rest.issues.removeLabel({
+                      owner, repo, issue_number: issueNumber, name: removeLabel
+                    });
+                  } catch (e) { /* already removed */ }
+                }
+                if (!currentLabels.includes(wantLabel)) {
+                  await github.rest.issues.addLabels({
+                    owner, repo, issue_number: issueNumber, labels: [wantLabel]
+                  });
+                }
+                changed = true;
               }
 
-              // Remove the wrong label if present
-              if (currentLabels.includes(removeLabel)) {
-                try {
-                  await github.rest.issues.removeLabel({
-                    owner, repo, issue_number: issueNumber, name: removeLabel
+              // ── Sync "fixed" label from project board status ──
+              const projectItem = projectItems.find(i =>
+                i.content && i.content.number === issueNumber
+              );
+              const projectStatus = projectItem?.fieldValueByName?.name;
+
+              if (projectStatus === 'Fixed') {
+                if (!currentLabels.includes(FIXED_LABEL)) {
+                  await github.rest.issues.addLabels({
+                    owner, repo, issue_number: issueNumber, labels: [FIXED_LABEL]
                   });
-                } catch (e) {
-                  // Label might already be removed
+                  changed = true;
+                }
+              } else {
+                if (currentLabels.includes(FIXED_LABEL)) {
+                  try {
+                    await github.rest.issues.removeLabel({
+                      owner, repo, issue_number: issueNumber, name: FIXED_LABEL
+                    });
+                    changed = true;
+                  } catch (e) { /* already removed */ }
                 }
               }
 
-              // Add the correct label if missing
-              if (!currentLabels.includes(wantLabel)) {
-                await github.rest.issues.addLabels({
-                  owner, repo, issue_number: issueNumber, labels: [wantLabel]
-                });
+              if (changed) {
+                console.log(`#${issueNumber}: ${wantLabel} (last reply: ${lastReplier})${projectStatus === 'Fixed' ? ' [fixed]' : ''}`);
               }
-
-              console.log(`#${issueNumber}: ${wantLabel} (last reply: ${lastReplier})`);
             }
 
             console.log('Done');

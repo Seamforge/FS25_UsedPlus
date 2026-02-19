@@ -241,24 +241,26 @@ jobs:
 
             console.log(`Posted reset marker on issue #${issueNumber}`);
 
-  # Job 3: Update owner-replied / user-replied label on every comment
+  # Job 3: Update reply label + sync "Fixed" label from project status
   update-reply-label:
     if: github.event_name == 'issue_comment'
     runs-on: ubuntu-latest
 
     steps:
-      - name: Label issue by last replier
+      - name: Label issue by last replier and project status
         uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.PROJECT_TOKEN }}
           script: |
             const OWNER_LABEL = 'owner-replied';
             const USER_LABEL = 'user-replied';
+            const FIXED_LABEL = 'fixed';
             const owner = context.repo.owner;
             const repo = context.repo.repo;
             const issueNumber = context.payload.issue.number;
             const commenter = context.payload.comment.user.login;
             const commenterType = context.payload.comment.user.type;
+            const projectNumber = 3;
 
             // Skip bot comments
             if (commenterType === 'Bot' || commenter.includes('[bot]')) {
@@ -272,31 +274,88 @@ jobs:
 
             console.log(`#${issueNumber}: Last reply by ${commenter} (${isOwner ? 'owner' : 'user'})`);
 
-            // Get current labels
+            // Get current labels from event payload
             const currentLabels = context.payload.issue.labels.map(l => l.name);
 
-            // Skip if already correctly labeled
+            // ── Reply label ──
             if (currentLabels.includes(wantLabel) && !currentLabels.includes(removeLabel)) {
-              console.log(`#${issueNumber}: Already labeled ${wantLabel} — no change`);
-              return;
-            }
-
-            // Remove the wrong label if present
-            if (currentLabels.includes(removeLabel)) {
-              try {
-                await github.rest.issues.removeLabel({
-                  owner, repo, issue_number: issueNumber, name: removeLabel
-                });
-              } catch (e) {
-                // Label might already be removed
+              console.log(`#${issueNumber}: Already labeled ${wantLabel}`);
+            } else {
+              if (currentLabels.includes(removeLabel)) {
+                try {
+                  await github.rest.issues.removeLabel({
+                    owner, repo, issue_number: issueNumber, name: removeLabel
+                  });
+                } catch (e) { /* already removed */ }
               }
+              if (!currentLabels.includes(wantLabel)) {
+                await github.rest.issues.addLabels({
+                  owner, repo, issue_number: issueNumber, labels: [wantLabel]
+                });
+              }
+              console.log(`#${issueNumber}: Labeled ${wantLabel}`);
             }
 
-            // Add the correct label if missing
-            if (!currentLabels.includes(wantLabel)) {
-              await github.rest.issues.addLabels({
-                owner, repo, issue_number: issueNumber, labels: [wantLabel]
+            // ── Sync "fixed" label from project board status ──
+            try {
+              const query = `query($owner: String!, $projectNumber: Int!) {
+                user(login: $owner) {
+                  projectV2(number: $projectNumber) {
+                    items(first: 100) {
+                      nodes {
+                        fieldValueByName(name: "Status") {
+                          ... on ProjectV2ItemFieldSingleSelectValue { name }
+                        }
+                        content {
+                          ... on Issue { number }
+                        }
+                      }
+                    }
+                  }
+                }
+              }`;
+
+              const result = await github.graphql(query, {
+                owner, projectNumber
               });
-            }
 
-            console.log(`#${issueNumber}: Labeled ${wantLabel}`);
+              const item = result.user.projectV2.items.nodes.find(i =>
+                i.content && i.content.number === issueNumber
+              );
+
+              const projectStatus = item?.fieldValueByName?.name;
+              console.log(`#${issueNumber}: Project status: ${projectStatus || 'not found'}`);
+
+              // Ensure the "fixed" label exists
+              try {
+                await github.rest.issues.getLabel({ owner, repo, name: FIXED_LABEL });
+              } catch (e) {
+                if (e.status === 404) {
+                  await github.rest.issues.createLabel({
+                    owner, repo, name: FIXED_LABEL,
+                    color: '0e8a16', description: 'Issue has been fixed (from project board)'
+                  });
+                  console.log(`Created label: ${FIXED_LABEL}`);
+                }
+              }
+
+              if (projectStatus === 'Fixed') {
+                if (!currentLabels.includes(FIXED_LABEL)) {
+                  await github.rest.issues.addLabels({
+                    owner, repo, issue_number: issueNumber, labels: [FIXED_LABEL]
+                  });
+                  console.log(`#${issueNumber}: Added "${FIXED_LABEL}" label (project status is Fixed)`);
+                }
+              } else {
+                if (currentLabels.includes(FIXED_LABEL)) {
+                  try {
+                    await github.rest.issues.removeLabel({
+                      owner, repo, issue_number: issueNumber, name: FIXED_LABEL
+                    });
+                    console.log(`#${issueNumber}: Removed "${FIXED_LABEL}" label (project status is ${projectStatus})`);
+                  } catch (e) { /* already removed */ }
+                }
+              }
+            } catch (e) {
+              console.log(`#${issueNumber}: Could not check project status: ${e.message}`);
+            }
