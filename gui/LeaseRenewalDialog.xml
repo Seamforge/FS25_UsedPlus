@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <!--
     FS25_UsedPlus - Lease Renewal Dialog
+    v2.15.0 - Full redesign following FieldServiceKit section pattern
 
     Unified dialog for lease expiration handling (both vehicles and land)
     Options: Return (get deposit back), Buyout (purchase asset), Renew (extend lease)
+
+    Layout: Title + two-column info section + three clickable option cards + help text
+    Button pattern: Three-layer custom buttons (Bitmap bg + invisible Button hit + Text labels)
 -->
-<GUI>
+<GUI onOpen="onOpen" onClose="onClose" onCreate="onCreate">
     <GuiElement profile="newLayer"/>
     <Bitmap profile="dialogFullscreenBg" id="dialogBg"/>
 
@@ -15,128 +19,234 @@
         <ThreePartBitmap profile="fs25_dialogBgBottom"/>
 
         <GuiElement profile="fs25_dialogContentContainer">
+
             <!-- Title -->
-            <Text profile="lrTitle" id="titleText" position="0px -20px" text="$l10n_usedplus_lr_title"/>
-            <Text profile="lrSubtitle" id="assetNameText" position="0px -45px" text=""/>
+            <Text profile="lrTitle" id="titleText" position="0px -18px" text="$l10n_usedplus_lr_title"/>
+            <Text profile="lrSubtitle" id="assetNameText" position="0px -42px" text=""/>
 
-            <!-- Lease Summary Section -->
-            <GuiElement position="-330px -80px" size="320px 120px">
-                <Text profile="lrSectionHeader" position="0px 0px" text="$l10n_usedplus_lr_sectionSummary"/>
+            <!-- ========== SECTION: Lease Summary + Deposit Status (Two Columns) ========== -->
+            <GuiElement profile="lrInfoSection" position="0px -65px">
+                <Bitmap profile="lrInfoBg" position="0px 0px"/>
 
-                <Text profile="lrLabel" position="0px -25px" text="$l10n_usedplus_lr_term"/>
-                <Text profile="lrValue" id="termText" position="120px -25px" text=""/>
+                <!-- Left Column: LEASE SUMMARY -->
+                <Text profile="lrColumnHeader" position="-165px -8px" text="$l10n_usedplus_lr_sectionSummary"/>
 
-                <Text profile="lrLabel" position="0px -45px" text="$l10n_usedplus_lr_paymentsMade"/>
-                <Text profile="lrValue" id="paymentsMadeText" position="120px -45px" text=""/>
+                <Text profile="lrLabel" position="-300px -30px" text="$l10n_usedplus_lr_term"/>
+                <Text profile="lrValue" id="termText" position="-165px -30px" text=""/>
 
-                <Text profile="lrLabel" position="0px -65px" text="$l10n_usedplus_lr_totalPaid"/>
-                <Text profile="lrMoneyGreen" id="totalPaidText" position="120px -65px" text=""/>
+                <Text profile="lrLabel" position="-300px -50px" text="$l10n_usedplus_lr_paymentsMade"/>
+                <Text profile="lrValue" id="paymentsMadeText" position="-165px -50px" text=""/>
 
-                <Text profile="lrLabel" position="0px -85px" text="$l10n_usedplus_lr_equityBuilt"/>
-                <Text profile="lrMoneyGreen" id="equityText" position="120px -85px" text=""/>
-            </GuiElement>
+                <Text profile="lrLabel" position="-300px -70px" text="$l10n_usedplus_lr_totalPaid"/>
+                <Text profile="lrMoneyGreen" id="totalPaidText" position="-165px -70px" text=""/>
 
-            <!-- Deposit & Condition Section -->
-            <GuiElement position="10px -80px" size="320px 120px">
-                <Text profile="lrSectionHeader" position="0px 0px" text="$l10n_usedplus_lr_sectionDeposit"/>
+                <Text profile="lrLabel" position="-300px -90px" text="$l10n_usedplus_lr_equityBuilt"/>
+                <Text profile="lrMoneyGreen" id="equityText" position="-165px -90px" text=""/>
 
-                <Text profile="lrLabel" position="0px -25px" text="$l10n_usedplus_lr_securityDeposit"/>
-                <Text profile="lrValue" id="depositText" position="140px -25px" text=""/>
+                <!-- Right Column: DEPOSIT STATUS -->
+                <Text profile="lrColumnHeader" position="165px -8px" text="$l10n_usedplus_lr_sectionDeposit"/>
 
-                <Text profile="lrLabel" position="0px -45px" text="$l10n_usedplus_lr_deductions"/>
-                <Text profile="lrValue" id="deductionsText" position="140px -45px" text=""/>
+                <Text profile="lrLabel" position="35px -30px" text="$l10n_usedplus_lr_securityDeposit"/>
+                <Text profile="lrValue" id="depositText" position="175px -30px" text=""/>
 
-                <Text profile="lrLabel" position="0px -65px" text="$l10n_usedplus_lr_refundAmount"/>
-                <Text profile="lrMoneyGreen" id="refundText" position="140px -65px" text=""/>
+                <Text profile="lrLabel" position="35px -50px" text="$l10n_usedplus_lr_deductions"/>
+                <Text profile="lrValue" id="deductionsText" position="175px -50px" text=""/>
+
+                <Text profile="lrLabel" position="35px -70px" text="$l10n_usedplus_lr_refundAmount"/>
+                <Text profile="lrMoneyGreen" id="refundText" position="175px -70px" text=""/>
 
                 <!-- Vehicle condition (hidden for land) -->
-                <Text profile="lrLabel" id="conditionLabel" position="0px -85px" text="$l10n_usedplus_lr_vehicleCondition"/>
-                <Text profile="lrValue" id="conditionText" position="140px -85px" text=""/>
+                <Text profile="lrLabel" id="conditionLabel" position="35px -90px" text="$l10n_usedplus_lr_vehicleCondition"/>
+                <Text profile="lrValue" id="conditionText" position="175px -90px" text=""/>
             </GuiElement>
 
-            <!-- Options Section -->
-            <GuiElement position="-330px -220px" size="660px 160px">
-                <Text profile="lrSectionHeader" position="0px 0px" text="$l10n_usedplus_lr_sectionOptions"/>
+            <!-- ========== SECTION: Options (Three clickable cards) ========== -->
+            <GuiElement profile="lrOptionsSection" position="0px -190px">
+                <Bitmap profile="lrOptionsBg" position="0px 0px"/>
+                <Text profile="lrSectionHeader" position="0px -8px" text="$l10n_usedplus_lr_sectionOptions"/>
 
-                <!-- Option 1: Return (v2.9.5: added icon) -->
-                <GuiElement position="0px -30px" size="200px 100px">
-                    <Bitmap profile="lrOptionIcon" id="returnIcon" position="0px 10px"/>
-                    <Text profile="lrLabel" position="35px 0px" text="$l10n_usedplus_lr_optionReturn"/>
-                    <Text profile="lrLabel" position="0px -18px" text="$l10n_usedplus_lr_optionReturnDesc"/>
-                    <Text profile="lrLabel" position="0px -36px" text="$l10n_usedplus_lr_youReceive"/>
-                    <Text profile="lrMoneyGreen" id="returnRefundText" position="0px -54px" text=""/>
-                    <Button profile="lrOptionButton" id="returnButton" position="0px -80px" size="180px 30px" text="$l10n_usedplus_button_return" onClick="onReturn"/>
+                <!-- Option 1: RETURN (triple-element button pattern) -->
+                <GuiElement profile="lrOptionCard" position="-210px -32px">
+                    <Bitmap profile="lrOptionCardBg" id="returnBg" position="0px 0px"/>
+                    <Button profile="lrOptionBtn" id="returnButton" text="" onClick="onReturn"
+                            onHighlight="onOptionHighlight" onHighlightRemove="onOptionUnhighlight" position="0px 0px"/>
+                    <Bitmap profile="lrOptionIcon" id="returnIcon" position="0px -10px"/>
+                    <Text profile="lrOptionTitle" position="0px -42px" text="$l10n_usedplus_lr_optionReturn"/>
+                    <Text profile="lrOptionDesc" position="0px -60px" text="$l10n_usedplus_lr_optionReturnDesc"/>
+                    <Text profile="lrOptionLabel" position="0px -78px" text="$l10n_usedplus_lr_youReceive"/>
+                    <Text profile="lrOptionValueGreen" id="returnRefundText" position="0px -94px" text=""/>
                 </GuiElement>
 
-                <!-- Option 2: Buyout (v2.9.5: added icon) -->
-                <GuiElement position="220px -30px" size="200px 100px">
-                    <Bitmap profile="lrOptionIcon" id="buyoutIcon" position="0px 10px"/>
-                    <Text profile="lrLabel" position="35px 0px" text="$l10n_usedplus_lr_optionBuyout"/>
-                    <Text profile="lrLabel" position="0px -18px" text="$l10n_usedplus_lr_optionBuyoutDesc"/>
-                    <Text profile="lrLabel" position="0px -36px" text="$l10n_usedplus_lr_youPay"/>
-                    <Text profile="lrMoneyRed" id="buyoutPriceText" position="0px -54px" text=""/>
-                    <Button profile="lrOptionButton" id="buyoutButton" position="0px -80px" size="180px 30px" text="$l10n_usedplus_button_buyout" onClick="onBuyout"/>
+                <!-- Option 2: BUYOUT (triple-element button pattern) -->
+                <GuiElement profile="lrOptionCard" position="0px -32px">
+                    <Bitmap profile="lrOptionCardBg" id="buyoutBg" position="0px 0px"/>
+                    <Button profile="lrOptionBtn" id="buyoutButton" text="" onClick="onBuyout"
+                            onHighlight="onOptionHighlight" onHighlightRemove="onOptionUnhighlight" position="0px 0px"/>
+                    <Bitmap profile="lrOptionIcon" id="buyoutIcon" position="0px -10px"/>
+                    <Text profile="lrOptionTitle" position="0px -42px" text="$l10n_usedplus_lr_optionBuyout"/>
+                    <Text profile="lrOptionDesc" position="0px -60px" text="$l10n_usedplus_lr_optionBuyoutDesc"/>
+                    <Text profile="lrOptionLabel" position="0px -78px" text="$l10n_usedplus_lr_youPay"/>
+                    <Text profile="lrOptionValueRed" id="buyoutPriceText" position="0px -94px" text=""/>
                 </GuiElement>
 
-                <!-- Option 3: Renew (v2.9.5: added icon) -->
-                <GuiElement position="440px -30px" size="200px 100px">
-                    <Bitmap profile="lrOptionIcon" id="renewIcon" position="0px 10px"/>
-                    <Text profile="lrLabel" position="35px 0px" text="$l10n_usedplus_lr_optionRenew"/>
-                    <Text profile="lrLabel" position="0px -18px" text="$l10n_usedplus_lr_optionRenewDesc"/>
-                    <Text profile="lrLabel" position="0px -36px" text="$l10n_usedplus_lr_equityCarries"/>
-                    <Text profile="lrMoneyGreen" id="renewEquityText" position="0px -54px" text=""/>
-                    <Button profile="lrOptionButton" id="renewButton" position="0px -80px" size="180px 30px" text="$l10n_usedplus_button_renew" onClick="onRenew"/>
+                <!-- Option 3: RENEW (triple-element button pattern) -->
+                <GuiElement profile="lrOptionCard" position="210px -32px">
+                    <Bitmap profile="lrOptionCardBg" id="renewBg" position="0px 0px"/>
+                    <Button profile="lrOptionBtn" id="renewButton" text="" onClick="onRenew"
+                            onHighlight="onOptionHighlight" onHighlightRemove="onOptionUnhighlight" position="0px 0px"/>
+                    <Bitmap profile="lrOptionIcon" id="renewIcon" position="0px -10px"/>
+                    <Text profile="lrOptionTitle" position="0px -42px" text="$l10n_usedplus_lr_optionRenew"/>
+                    <Text profile="lrOptionDesc" position="0px -60px" text="$l10n_usedplus_lr_optionRenewDesc"/>
+                    <Text profile="lrOptionLabel" position="0px -78px" text="$l10n_usedplus_lr_equityCarries"/>
+                    <Text profile="lrOptionValueGreen" id="renewEquityText" position="0px -94px" text=""/>
                 </GuiElement>
             </GuiElement>
 
             <!-- Help Text -->
-            <Text profile="lrLabel" id="helpText" position="0px -390px" size="660px 40px"
-                  text="$l10n_usedplus_lr_helpText"/>
+            <Text profile="lrHelpText" id="helpText" position="0px -350px" text="$l10n_usedplus_lr_helpText"/>
 
         </GuiElement>
 
+        <!-- Button Box (Later only — actions via option cards above) -->
         <BoxLayout profile="fs25_dialogButtonBox">
             <Button profile="buttonBack" id="cancelButton" text="$l10n_usedplus_button_later" onClick="onCancel"/>
         </BoxLayout>
     </GuiElement>
 
     <GUIProfiles>
+        <!-- ========== TITLE ========== -->
         <Profile name="lrTitle" extends="fs25_textDefault" with="anchorTopCenter">
-            <textSize value="22px"/>
+            <size value="660px 28px"/>
+            <textSize value="20px"/>
             <textBold value="true"/>
+            <textColor value="0.5 0.8 1 1"/>
+            <textAlignment value="center"/>
         </Profile>
         <Profile name="lrSubtitle" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="660px 20px"/>
             <textSize value="14px"/>
             <textColor value="0.7 0.7 0.7 1"/>
+            <textAlignment value="center"/>
         </Profile>
-        <Profile name="lrSectionHeader" extends="fs25_textDefault" with="anchorTopLeft">
-            <textSize value="16px"/>
+
+        <!-- ========== INFO SECTION (two-column container) ========== -->
+        <Profile name="lrInfoSection" extends="emptyPanel" with="anchorTopCenter">
+            <size value="660px 110px"/>
+        </Profile>
+        <Profile name="lrInfoBg" extends="baseReference" with="anchorTopCenter">
+            <size value="660px 110px"/>
+            <imageColor value="0.08 0.08 0.12 0.9"/>
+        </Profile>
+
+        <!-- Column headers (gold, centered over each column) -->
+        <Profile name="lrColumnHeader" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="300px 18px"/>
+            <textSize value="11px"/>
             <textBold value="true"/>
             <textColor value="1 0.8 0.2 1"/>
+            <textAlignment value="center"/>
         </Profile>
+
+        <!-- Labels (dim gray, left-aligned) -->
         <Profile name="lrLabel" extends="fs25_textDefault" with="anchorTopLeft">
-            <textSize value="14px"/>
-            <textColor value="0.8 0.8 0.8 1"/>
+            <size value="130px 18px"/>
+            <textSize value="12px"/>
+            <textColor value="0.7 0.7 0.7 1"/>
         </Profile>
+
+        <!-- Values (white, left-aligned) -->
         <Profile name="lrValue" extends="fs25_textDefault" with="anchorTopLeft">
-            <textSize value="14px"/>
+            <size value="150px 18px"/>
+            <textSize value="12px"/>
             <textColor value="1 1 1 1"/>
         </Profile>
+
+        <!-- Money values -->
         <Profile name="lrMoneyGreen" extends="fs25_textDefault" with="anchorTopLeft">
-            <textSize value="14px"/>
+            <size value="150px 18px"/>
+            <textSize value="12px"/>
+            <textBold value="true"/>
             <textColor value="0.2 0.8 0.2 1"/>
         </Profile>
-        <Profile name="lrMoneyRed" extends="fs25_textDefault" with="anchorTopLeft">
-            <textSize value="14px"/>
-            <textColor value="0.9 0.2 0.2 1"/>
+
+        <!-- ========== OPTIONS SECTION ========== -->
+        <Profile name="lrSectionHeader" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="640px 20px"/>
+            <textSize value="11px"/>
+            <textBold value="true"/>
+            <textColor value="1 0.8 0.2 1"/>
+            <textAlignment value="center"/>
         </Profile>
-        <Profile name="lrOptionButton" extends="buttonActivate">
-            <textSize value="14px"/>
+        <Profile name="lrOptionsSection" extends="emptyPanel" with="anchorTopCenter">
+            <size value="660px 148px"/>
         </Profile>
-        <!-- v2.9.5: Option icons -->
-        <Profile name="lrOptionIcon" extends="baseReference" with="anchorTopLeft">
+        <Profile name="lrOptionsBg" extends="baseReference" with="anchorTopCenter">
+            <size value="660px 148px"/>
+            <imageColor value="0.06 0.06 0.10 0.9"/>
+        </Profile>
+
+        <!-- Option card (container) -->
+        <Profile name="lrOptionCard" extends="emptyPanel" with="anchorTopCenter">
+            <size value="192px 110px"/>
+        </Profile>
+        <!-- Option card background (visible, changes on hover) -->
+        <Profile name="lrOptionCardBg" extends="baseReference" with="anchorTopCenter">
+            <size value="192px 110px"/>
+            <imageColor value="0.10 0.10 0.14 0.9"/>
+        </Profile>
+        <!-- Option card hit target (invisible, focusable) -->
+        <Profile name="lrOptionBtn" extends="emptyPanel" with="anchorTopCenter">
+            <size value="192px 110px"/>
+            <isFocusable value="true"/>
+        </Profile>
+
+        <!-- Option icon (set via Lua setImageFilename) -->
+        <Profile name="lrOptionIcon" extends="baseReference" with="anchorTopCenter">
             <size value="28px 28px"/>
             <imageSliceId value="noSlice"/>
+        </Profile>
+
+        <!-- Option text styles -->
+        <Profile name="lrOptionTitle" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="180px 18px"/>
+            <textSize value="13px"/>
+            <textBold value="true"/>
+            <textColor value="1 1 1 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+        <Profile name="lrOptionDesc" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="180px 16px"/>
+            <textSize value="10px"/>
+            <textColor value="0.7 0.7 0.7 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+        <Profile name="lrOptionLabel" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="180px 14px"/>
+            <textSize value="10px"/>
+            <textColor value="0.6 0.6 0.6 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+        <Profile name="lrOptionValueGreen" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="180px 18px"/>
+            <textSize value="13px"/>
+            <textBold value="true"/>
+            <textColor value="0.2 0.8 0.2 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+        <Profile name="lrOptionValueRed" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="180px 18px"/>
+            <textSize value="13px"/>
+            <textBold value="true"/>
+            <textColor value="0.9 0.2 0.2 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+
+        <!-- ========== HELP TEXT ========== -->
+        <Profile name="lrHelpText" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="660px 36px"/>
+            <textSize value="11px"/>
+            <textColor value="0.5 0.5 0.5 1"/>
+            <textAlignment value="center"/>
         </Profile>
     </GUIProfiles>
 </GUI>

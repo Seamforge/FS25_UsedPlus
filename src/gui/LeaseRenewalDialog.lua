@@ -46,10 +46,22 @@ function LeaseRenewalDialog.new(target, customMt)
 end
 
 --[[
-    Called when GUI elements are ready
+    Called when GUI is created - set up icons via Lua (only method that works for mod images in ZIP)
 ]]
-function LeaseRenewalDialog:onGuiSetupFinished()
-    LeaseRenewalDialog:superClass().onGuiSetupFinished(self)
+function LeaseRenewalDialog:onCreate()
+    LeaseRenewalDialog:superClass().onCreate(self)
+
+    local iconDir = self.iconDir
+
+    if self.returnIcon ~= nil then
+        self.returnIcon:setImageFilename(iconDir .. "arrow_left.png")
+    end
+    if self.buyoutIcon ~= nil then
+        self.buyoutIcon:setImageFilename(iconDir .. "cash.png")
+    end
+    if self.renewIcon ~= nil then
+        self.renewIcon:setImageFilename(iconDir .. "lease.png")
+    end
 end
 
 --[[
@@ -175,34 +187,7 @@ end
 ]]
 function LeaseRenewalDialog:onOpen()
     LeaseRenewalDialog:superClass().onOpen(self)
-
-    -- v2.9.5: Setup option icons
-    self:setupOptionIcons()
-
     self:updateDisplay()
-end
-
---[[
-    v2.9.5: Setup option icons
-]]
-function LeaseRenewalDialog:setupOptionIcons()
-    -- Return icon (arrow_left)
-    local returnIcon = self.dialogElement:getDescendantById("returnIcon")
-    if returnIcon ~= nil then
-        returnIcon:setImageFilename(self.iconDir .. "arrow_left.png")
-    end
-
-    -- Buyout icon (cash)
-    local buyoutIcon = self.dialogElement:getDescendantById("buyoutIcon")
-    if buyoutIcon ~= nil then
-        buyoutIcon:setImageFilename(self.iconDir .. "cash.png")
-    end
-
-    -- Renew icon (lease)
-    local renewIcon = self.dialogElement:getDescendantById("renewIcon")
-    if renewIcon ~= nil then
-        renewIcon:setImageFilename(self.iconDir .. "lease.png")
-    end
 end
 
 --[[
@@ -270,6 +255,14 @@ function LeaseRenewalDialog:updateDisplay()
     local canAffordBuyout = farm and farm.money >= self.buyoutPrice
     if self.buyoutButton then
         self.buyoutButton:setDisabled(not canAffordBuyout)
+    end
+    -- Dim buyout card when unaffordable (three-layer button visual feedback)
+    if self.buyoutBg then
+        if canAffordBuyout then
+            self.buyoutBg:setImageColor(nil, 0.10, 0.10, 0.14, 0.9)  -- Normal
+        else
+            self.buyoutBg:setImageColor(nil, 0.06, 0.06, 0.08, 0.5)  -- Dimmed
+        end
     end
 
     -- Renew option
@@ -365,6 +358,49 @@ function LeaseRenewalDialog:onCancel()
         g_i18n:getText("usedplus_lr_deferNotice")
     )
     self:close()
+end
+
+--[[
+    Hover effect handler for option card buttons (three-layer pattern)
+    Changes background color when mouse hovers over card
+]]
+function LeaseRenewalDialog:onOptionHighlight(element)
+    if element ~= nil and element.id ~= nil then
+        -- Don't highlight disabled buttons (e.g. unaffordable buyout)
+        if element.getIsDisabled and element:getIsDisabled() then return end
+
+        local bgMapping = {
+            returnButton = "returnBg",
+            buyoutButton = "buyoutBg",
+            renewButton = "renewBg"
+        }
+        local bgId = bgMapping[element.id]
+        local bg = self[bgId]
+        if bg ~= nil then
+            bg:setImageColor(nil, 0.18, 0.22, 0.30, 0.95)
+        end
+    end
+end
+
+function LeaseRenewalDialog:onOptionUnhighlight(element)
+    if element ~= nil and element.id ~= nil then
+        local bgMapping = {
+            returnButton = "returnBg",
+            buyoutButton = "buyoutBg",
+            renewButton = "renewBg"
+        }
+        local bgId = bgMapping[element.id]
+        local bg = self[bgId]
+        if bg ~= nil then
+            -- Keep dimmed state for disabled buyout card
+            if element.id == "buyoutButton" and element.getIsDisabled and element:getIsDisabled() then
+                bg:setImageColor(nil, 0.06, 0.06, 0.08, 0.5)  -- Stay dimmed
+            else
+                -- Restore normal color (matches lrOptionCardBg profile)
+                bg:setImageColor(nil, 0.10, 0.10, 0.14, 0.9)
+            end
+        end
+    end
 end
 
 --[[
