@@ -663,8 +663,9 @@ gh project item-edit \
 
 ### Issue Close Checklist
 1. ✅ Comment on the issue with fix details (in reporter's language + English recap)
-2. ✅ Commit with `Closes #N` in message (auto-closes the issue)
+2. ✅ Reference the issue in commit message with `#N` (e.g., `fix(shop): Defensive hardening (Issue #16)`) — but **DO NOT** use `Closes #N` or `Fixes #N` which auto-close the issue before the reporter can verify
 3. ✅ Set project status to **Fixed** (for bugs) or **Done** (for features)
+4. ✅ Post auto-close countdown comment (3 days for reporter to confirm before closing)
 
 ---
 
