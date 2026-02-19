@@ -199,6 +199,9 @@ function FieldRepairEvent:run(connection)
     local success = FieldRepairEvent.execute(self.farmId, self.vehicleId, self.component, self.cost)
     if success then
         TransactionResponseEvent.sendToClient(connection, self.farmId, true, "usedplus_mp_success_field_repair")
+
+        -- v2.15.0: Broadcast statistics sync to all clients
+        SyncStatisticsEvent.broadcastForFarm(self.farmId)
     else
         TransactionResponseEvent.sendToClient(connection, self.farmId, false, "usedplus_mp_error_field_repair_failed")
     end
@@ -371,6 +374,9 @@ function RefillFluidsEvent:run(connection)
     local success = RefillFluidsEvent.execute(self.farmId, self.vehicleId, self.fluidType, self.cost)
     if success then
         TransactionResponseEvent.sendToClient(connection, self.farmId, true, "usedplus_mp_success_refill_fluids")
+
+        -- v2.15.0: Broadcast statistics sync to all clients
+        SyncStatisticsEvent.broadcastForFarm(self.farmId)
     else
         TransactionResponseEvent.sendToClient(connection, self.farmId, false, "usedplus_mp_error_refill_fluids_failed")
     end
@@ -539,6 +545,9 @@ function ReplaceTiresEvent:run(connection)
     local success = ReplaceTiresEvent.execute(self.farmId, self.vehicleId, self.tireType, self.cost)
     if success then
         TransactionResponseEvent.sendToClient(connection, self.farmId, true, "usedplus_mp_success_replace_tires")
+
+        -- v2.15.0: Broadcast statistics sync to all clients
+        SyncStatisticsEvent.broadcastForFarm(self.farmId)
     else
         TransactionResponseEvent.sendToClient(connection, self.farmId, false, "usedplus_mp_error_replace_tires_failed")
     end

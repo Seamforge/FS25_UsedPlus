@@ -326,6 +326,12 @@ function VehicleSellingPointExtension.hookShowYesNoDialog()
         return
     end
 
+    -- Guard against double-hooking (same pattern as hookAllDialogs)
+    if VehicleSellingPointExtension.originalShowYesNoDialog ~= nil then
+        UsedPlus.logTrace("showYesNoDialog already hooked")
+        return
+    end
+
     -- Save original function
     VehicleSellingPointExtension.originalShowYesNoDialog = g_gui.showYesNoDialog
 
@@ -338,6 +344,7 @@ function VehicleSellingPointExtension.hookShowYesNoDialog()
             return VehicleSellingPointExtension.originalShowYesNoDialog(guiSelf, args)
         end
 
+        local ok, handled = pcall(function()
         local text = args.text or ""
         local callback = args.callback
         local target = args.target
@@ -448,7 +455,7 @@ function VehicleSellingPointExtension.hookShowYesNoDialog()
 
                 if success then
                     UsedPlus.logDebug("Intercepted and replaced repair dialog with custom dialog")
-                    return -- Don't show the original dialog
+                    return true -- Don't show the original dialog
                 else
                     UsedPlus.logDebug("Failed to show custom dialog, falling back to vanilla")
                 end
@@ -457,7 +464,15 @@ function VehicleSellingPointExtension.hookShowYesNoDialog()
             end
         end
 
-        -- If not intercepted, call original
+        return false
+        end)
+
+        if not ok then
+            UsedPlus.logError("showYesNoDialog wrapper error: " .. tostring(handled) .. " — passing through to original")
+        end
+        if ok and handled then return end
+
+        -- If not intercepted or error, call original
         VehicleSellingPointExtension.originalShowYesNoDialog(guiSelf, args)
     end
 
@@ -554,6 +569,9 @@ function VehicleSellingPointExtension.hookAllDialogs()
                 UsedPlus.logTrace("Bypassing interception for our own dialog")
                 return VehicleSellingPointExtension.originalShowDialog(guiSelf, name, ...)
             end
+
+            local args = {...}
+            local ok, handled = pcall(function()
 
             -- Intercept SellItemDialog (ESC -> Vehicles -> Sell)
             -- v2.6.2: Only intercept if vehicle sale system is enabled
@@ -683,7 +701,7 @@ function VehicleSellingPointExtension.hookAllDialogs()
                     -- Guard: ownership
                     if vehicle.ownerFarmId ~= farmId then
                         UsedPlus.logDebug("SellItemDialog guard: not owned by player farm, falling back to vanilla")
-                        return VehicleSellingPointExtension.originalShowDialog(guiSelf, name, ...)
+                        return false
                     end
 
                     -- Guard: vanilla lease (not owned)
@@ -692,7 +710,7 @@ function VehicleSellingPointExtension.hookAllDialogs()
                             FSBaseMission.INGAME_NOTIFICATION_INFO,
                             "Leased vehicles cannot be sold. Terminate the lease first."
                         )
-                        return
+                        return true
                     end
 
                     -- Guard: UsedPlus lease
@@ -701,7 +719,7 @@ function VehicleSellingPointExtension.hookAllDialogs()
                             FSBaseMission.INGAME_NOTIFICATION_ERROR,
                             g_i18n:getText("usedplus_error_cannotSellLeasedVehicle")
                         )
-                        return
+                        return true
                     end
 
                     -- Guard: financed vehicle
@@ -711,7 +729,7 @@ function VehicleSellingPointExtension.hookAllDialogs()
                             FSBaseMission.INGAME_NOTIFICATION_INFO,
                             "Financed vehicles cannot be sold until loan is paid off."
                         )
-                        return
+                        return true
                     end
 
                     -- Guard: pledged as collateral
@@ -724,7 +742,7 @@ function VehicleSellingPointExtension.hookAllDialogs()
                                 string.format("This vehicle is pledged as collateral for a %s loan.\nPay off the loan first to sell.",
                                     g_i18n:formatMoney(loanBalance, 0, true, true))
                             )
-                            return
+                            return true
                         end
                     end
 
@@ -734,7 +752,7 @@ function VehicleSellingPointExtension.hookAllDialogs()
                             FSBaseMission.INGAME_NOTIFICATION_INFO,
                             "This vehicle is already listed for sale."
                         )
-                        return
+                        return true
                     end
 
                     -- Show our dialog instead
@@ -752,7 +770,7 @@ function VehicleSellingPointExtension.hookAllDialogs()
                     DialogLoader.show("SellVehicleDialog", "setVehicle", vehicle, farmId, callback)
 
                     -- DON'T show the vanilla dialog
-                    return
+                    return true
                 else
                     UsedPlus.logDebug("Could not find vehicle for SellItemDialog intercept, falling back to vanilla")
                 end
@@ -923,7 +941,7 @@ function VehicleSellingPointExtension.hookAllDialogs()
                             local success = VehicleSellingPointExtension.showRepairDialog(vehicle, mode)
                             if success then
                                 UsedPlus.logDebug("Intercepted YesNoDialog and showed custom repair dialog")
-                                return -- Don't show the original YesNoDialog
+                                return true -- Don't show the original YesNoDialog
                             end
                         else
                             UsedPlus.logTrace("Could not find vehicle, showing vanilla dialog")
@@ -932,8 +950,16 @@ function VehicleSellingPointExtension.hookAllDialogs()
                 end
             end
 
+            return false
+            end)
+
+            if not ok then
+                UsedPlus.logError("showDialog wrapper error: " .. tostring(handled) .. " — passing through to original")
+            end
+            if ok and handled then return end
+
             -- Call original for non-repair dialogs or if we couldn't intercept
-            return VehicleSellingPointExtension.originalShowDialog(guiSelf, name, ...)
+            return VehicleSellingPointExtension.originalShowDialog(guiSelf, name, unpack(args))
         end
         UsedPlus.logDebug("showDialog hooked for YesNoDialog interception")
     end
@@ -1001,6 +1027,37 @@ function VehicleSellingPointExtension.hookSellButton()
     end
 end
 
+--[[
+    Reset state on mission delete for clean session transitions (Issue #16, Fix 5)
+    CRITICAL: Must restore original g_gui functions BEFORE nil'ing references.
+    If we only nil, the next hookAllDialogs() stores our wrapper as the "original" → infinite recursion.
+    NOTE: sellButtonHooked is NOT reset — hookSellButton() captures originalOnClickSell
+    as a local in a closure, so it can't be restored. Re-hooking would cause infinite recursion.
+]]
+function VehicleSellingPointExtension.onMissionDelete()
+    -- Restore original g_gui functions before clearing references
+    if g_gui ~= nil then
+        if VehicleSellingPointExtension.originalShowDialog ~= nil then
+            g_gui.showDialog = VehicleSellingPointExtension.originalShowDialog
+            VehicleSellingPointExtension.originalShowDialog = nil
+        end
+        if VehicleSellingPointExtension.originalShowYesNoDialog ~= nil then
+            g_gui.showYesNoDialog = VehicleSellingPointExtension.originalShowYesNoDialog
+            VehicleSellingPointExtension.originalShowYesNoDialog = nil
+        end
+    end
+
+    -- Clear operational state (stale references to previous mission's objects)
+    VehicleSellingPointExtension.currentVehicle = nil
+    VehicleSellingPointExtension.currentWorkshopScreen = nil
+    VehicleSellingPointExtension.pendingRepairCallback = nil
+    VehicleSellingPointExtension.pendingRepairVehicle = nil
+    VehicleSellingPointExtension.pendingSellCallback = nil
+    VehicleSellingPointExtension.bypassInterception = false
+
+    UsedPlus.logDebug("VehicleSellingPointExtension: Reset state for new mission")
+end
+
 -- Install hooks at load time
 if g_gui ~= nil then
     VehicleSellingPointExtension.hookAllDialogs()
@@ -1029,6 +1086,7 @@ if Mission00 ~= nil then
         function(self)
             UsedPlus.logDebug("Mission started - ensuring hooks are installed")
             VehicleSellingPointExtension.hookAllDialogs()
+            VehicleSellingPointExtension.hookShowYesNoDialog()
             VehicleSellingPointExtension.hookSellButton()
         end
     )

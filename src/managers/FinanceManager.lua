@@ -225,6 +225,15 @@ function FinanceManager:onPeriodChanged()
     -- v2.8.1: Safety check for stale placeable finance pending state
     -- If temp money was injected but placement never completed/cancelled, reclaim it
     self:checkStalePlaceableFinance()
+
+    -- v2.15.0: Broadcast updated deal state to all clients after monthly processing
+    if g_server ~= nil then
+        for farmId, _ in pairs(self.dealsByFarm) do
+            SyncFinanceDealsEvent.broadcastAddForFarm(farmId)
+            SyncStatisticsEvent.broadcastForFarm(farmId)
+            SyncPaymentTrackerEvent.broadcastForFarm(farmId)
+        end
+    end
 end
 
 --[[

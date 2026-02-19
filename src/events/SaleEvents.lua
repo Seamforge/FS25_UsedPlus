@@ -123,6 +123,9 @@ function CreateSaleListingEvent:run(connection)
     local success = CreateSaleListingEvent.execute(self.farmId, self.vehicleId, self.agentTier, self.priceTier)
     if success then
         TransactionResponseEvent.sendToClient(connection, self.farmId, true, "usedplus_mp_success_listed")
+
+        -- v2.15.0: Broadcast sale listings sync to all clients
+        SyncSaleListingsEvent.broadcastFullForFarm(self.farmId)
     else
         TransactionResponseEvent.sendToClient(connection, self.farmId, false, "usedplus_mp_error_failed")
     end
@@ -267,6 +270,9 @@ function SaleListingActionEvent:run(connection)
     local actionName = SaleListingActionEvent.ACTION_NAMES[self.actionType] or "Action"
     if success then
         TransactionResponseEvent.sendToClient(connection, listing.farmId, true, "usedplus_mp_success_sale_action")
+
+        -- v2.15.0: Broadcast sale listings sync to all clients
+        SyncSaleListingsEvent.broadcastFullForFarm(listing.farmId)
     end
     -- Note: execute() handles errors internally with logging
 end
@@ -377,6 +383,9 @@ function ModifyListingPriceEvent:run(connection)
     local success = ModifyListingPriceEvent.execute(self.listingId, self.newPrice)
     if success then
         TransactionResponseEvent.sendToClient(connection, listing.farmId, true, "usedplus_mp_success_price_modified")
+
+        -- v2.15.0: Broadcast sale listings sync to all clients
+        SyncSaleListingsEvent.broadcastFullForFarm(listing.farmId)
     else
         TransactionResponseEvent.sendToClient(connection, listing.farmId, false, "usedplus_mp_error_failed")
     end
@@ -516,6 +525,9 @@ function TradeInVehicleEvent:run(connection)
     local success, failureKey = TradeInVehicleEvent.execute(self.farmId, self.vehicleId, self.tradeInValue)
     if success then
         TransactionResponseEvent.sendToClient(connection, self.farmId, true, "usedplus_mp_success_trade_in")
+
+        -- v2.15.0: Broadcast statistics sync to all clients
+        SyncStatisticsEvent.broadcastForFarm(self.farmId)
     else
         TransactionResponseEvent.sendToClient(connection, self.farmId, false, failureKey or "usedplus_mp_error_failed")
     end

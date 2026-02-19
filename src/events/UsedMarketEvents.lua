@@ -179,6 +179,9 @@ function RequestUsedItemEvent:run(connection)
     )
     if success then
         TransactionResponseEvent.sendToClient(connection, self.farmId, true, "usedplus_mp_success_search_started")
+
+        -- v2.15.0: Broadcast searches sync to all clients
+        SyncSearchesEvent.broadcastFullForFarm(self.farmId)
     else
         TransactionResponseEvent.sendToClient(connection, self.farmId, false, "usedplus_mp_error_search_failed")
     end
@@ -367,8 +370,19 @@ function CancelSearchEvent:run(connection)
         end
     end
 
+    -- Get the farm ID before cancelling (search may be removed)
+    local searchFarmId = nil
+    if g_usedVehicleManager then
+        local search = g_usedVehicleManager:getSearchById(self.searchId)
+        if search then searchFarmId = search.farmId end
+    end
+
     local success = CancelSearchEvent.execute(self.searchId)
-    -- success/failure is handled by manager, response optional
+
+    -- v2.15.0: Broadcast searches sync to all clients
+    if success and searchFarmId then
+        SyncSearchesEvent.broadcastFullForFarm(searchFarmId)
+    end
 end
 
 --============================================================================
@@ -488,6 +502,14 @@ function DeclineListingEvent:run(connection)
     end
 
     DeclineListingEvent.execute(self.searchId, self.listingId)
+
+    -- v2.15.0: Broadcast searches sync to all clients
+    if g_usedVehicleManager then
+        local search = g_usedVehicleManager:getSearchById(self.searchId)
+        if search then
+            SyncSearchesEvent.broadcastFullForFarm(search.farmId)
+        end
+    end
 end
 
 --============================================================================
@@ -610,6 +632,10 @@ function PurchaseUsedVehicleEvent:run(connection)
     local success = PurchaseUsedVehicleEvent.execute(self.farmId, self.searchId, self.listingId)
     if success then
         TransactionResponseEvent.sendToClient(connection, self.farmId, true, "usedplus_mp_success_vehicle_purchased")
+
+        -- v2.15.0: Broadcast searches and statistics sync to all clients
+        SyncSearchesEvent.broadcastFullForFarm(self.farmId)
+        SyncStatisticsEvent.broadcastForFarm(self.farmId)
     else
         TransactionResponseEvent.sendToClient(connection, self.farmId, false, "usedplus_mp_error_purchase_failed")
     end

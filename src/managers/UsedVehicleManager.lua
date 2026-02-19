@@ -97,12 +97,23 @@ function UsedVehicleManager:onHourChanged()
         daysJumped, lastProcessedDay, currentDay))
 
     -- Process each skipped day
+    -- v2.15.0: Track which farms had changes for sync
+    local farmsWithChanges = {}
+
     for dayOffset = 1, daysJumped do
         for _, farm in pairs(g_farmManager:getFarms()) do
             if farm.usedVehicleSearches and #farm.usedVehicleSearches > 0 then
                 -- Calls into VehicleSearchSystem module
                 self:processSearchesForFarm(farm.farmId, farm)
+                farmsWithChanges[farm.farmId] = true
             end
+        end
+    end
+
+    -- v2.15.0: Broadcast updated search state to all clients
+    if g_server ~= nil then
+        for farmId, _ in pairs(farmsWithChanges) do
+            SyncSearchesEvent.broadcastFullForFarm(farmId)
         end
     end
 end

@@ -13,6 +13,7 @@
 ]]
 
 InGameMenuMapFrameExtension = {}
+InGameMenuMapFrameExtension.actionsShifted = false
 
 -- Dialog loading now handled by DialogLoader utility
 
@@ -47,8 +48,10 @@ function InGameMenuMapFrameExtension.onLoadMapFinished(self, superFunc)
 
     -- Override the BUY action callback to open our dialog for farmland
     if InGameMenuMapFrame.ACTIONS.BUY and self.contextActions[InGameMenuMapFrame.ACTIONS.BUY] then
-        -- Store original callback
-        InGameMenuMapFrameExtension.originalBuyCallback = self.contextActions[InGameMenuMapFrame.ACTIONS.BUY].callback
+        -- Store original callback (only on first call to prevent infinite recursion)
+        if InGameMenuMapFrameExtension.originalBuyCallback == nil then
+            InGameMenuMapFrameExtension.originalBuyCallback = self.contextActions[InGameMenuMapFrame.ACTIONS.BUY].callback
+        end
         -- Replace with our callback
         self.contextActions[InGameMenuMapFrame.ACTIONS.BUY].callback = InGameMenuMapFrameExtension.onBuyFarmland
         UsedPlus.logDebug("Intercepted BUY action callback (ID=" .. tostring(InGameMenuMapFrame.ACTIONS.BUY) .. ")")
@@ -59,29 +62,34 @@ function InGameMenuMapFrameExtension.onLoadMapFinished(self, superFunc)
         local financeId = buyId + 1
         local leaseId = buyId + 2
 
-        -- Collect all actions that need to be shifted (ID > buyId)
-        local actionsToShift = {}
-        for actionName, actionId in pairs(InGameMenuMapFrame.ACTIONS) do
-            if type(actionId) == "number" and actionId > buyId then
-                table.insert(actionsToShift, {name = actionName, oldId = actionId})
-            end
-        end
+        -- Only shift actions once (re-entrancy guard to prevent double-shifting IDs)
+        if not InGameMenuMapFrameExtension.actionsShifted then
+            InGameMenuMapFrameExtension.actionsShifted = true
 
-        -- Sort by ID descending so we shift highest first (avoid collisions)
-        table.sort(actionsToShift, function(a, b) return a.oldId > b.oldId end)
-
-        -- Shift each action's ID up by 2
-        for _, action in ipairs(actionsToShift) do
-            local newId = action.oldId + 2
-            InGameMenuMapFrame.ACTIONS[action.name] = newId
-
-            -- Also move the contextAction entry
-            if self.contextActions[action.oldId] then
-                self.contextActions[newId] = self.contextActions[action.oldId]
-                self.contextActions[action.oldId] = nil
+            -- Collect all actions that need to be shifted (ID > buyId)
+            local actionsToShift = {}
+            for actionName, actionId in pairs(InGameMenuMapFrame.ACTIONS) do
+                if type(actionId) == "number" and actionId > buyId then
+                    table.insert(actionsToShift, {name = actionName, oldId = actionId})
+                end
             end
 
-            UsedPlus.logDebug("Shifted action " .. action.name .. " from ID " .. action.oldId .. " to " .. newId)
+            -- Sort by ID descending so we shift highest first (avoid collisions)
+            table.sort(actionsToShift, function(a, b) return a.oldId > b.oldId end)
+
+            -- Shift each action's ID up by 2
+            for _, action in ipairs(actionsToShift) do
+                local newId = action.oldId + 2
+                InGameMenuMapFrame.ACTIONS[action.name] = newId
+
+                -- Also move the contextAction entry
+                if self.contextActions[action.oldId] then
+                    self.contextActions[newId] = self.contextActions[action.oldId]
+                    self.contextActions[action.oldId] = nil
+                end
+
+                UsedPlus.logDebug("Shifted action " .. action.name .. " from ID " .. action.oldId .. " to " .. newId)
+            end
         end
 
         -- Now register our actions in the gap we created
@@ -369,6 +377,15 @@ function InGameMenuMapFrameExtension.onBuyFarmland(inGameMenuMapFrame, element)
     end
 
     return true
+end
+
+--[[
+    Reset state on mission delete to prevent stale data in new sessions
+]]
+function InGameMenuMapFrameExtension.onMissionDelete()
+    InGameMenuMapFrameExtension.actionsShifted = false
+    InGameMenuMapFrameExtension.originalBuyCallback = nil
+    UsedPlus.logDebug("InGameMenuMapFrameExtension: Reset state for new mission")
 end
 
 UsedPlus.logInfo("InGameMenuMapFrameExtension loaded")

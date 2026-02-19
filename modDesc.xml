@@ -7,7 +7,7 @@
     -->
 
     <author>UsedPlus Team</author>
-    <version>2.14.2.4</version>
+    <version>2.15.0.6</version>
 
     <title>
         <en>UsedPlus - Finance &amp; Marketplace System</en>
@@ -230,6 +230,8 @@ UNTERSTÜTZUNG
         <sourceFile filename="src/events/RepairVehicleEvent.lua"/>
         <sourceFile filename="src/events/SetPaymentConfigEvent.lua"/>  <!-- Payment configuration sync -->
         <sourceFile filename="src/events/UsedPlusSettingsEvent.lua"/>  <!--  v1.4.0: Settings sync event -->
+        <sourceFile filename="src/events/SyncEvents.lua"/>         <!-- v2.15.0: Multiplayer state sync events -->
+        <sourceFile filename="src/events/BulkSyncHandler.lua"/>    <!-- v2.15.0: Join-time bulk sync -->
 
         <!-- Manager classes (depend on data classes, utils, events) -->
         <sourceFile filename="src/managers/FinanceManager.lua"/>

@@ -345,6 +345,9 @@ function RepairVehicleEvent:run(connection)
     )
     if success then
         TransactionResponseEvent.sendToClient(connection, self.farmId, true, "usedplus_mp_success_repair")
+
+        -- v2.15.0: Broadcast statistics sync to all clients
+        SyncStatisticsEvent.broadcastForFarm(self.farmId)
     else
         TransactionResponseEvent.sendToClient(connection, self.farmId, false, "usedplus_mp_error_repair_failed")
     end

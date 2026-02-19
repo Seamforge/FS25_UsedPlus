@@ -269,6 +269,11 @@ Mission00.onStartMission = Utils.appendedFunction(
             UsedPlus.logDebug("BankInterestManager initialized")
         end
 
+        -- v2.15.0: Install multiplayer bulk sync handler (Issue #17)
+        if BulkSyncHandler and BulkSyncHandler.install then
+            BulkSyncHandler.install()
+        end
+
         -- ESC InGameMenu integration using EnhancedLoanSystem pattern
         UsedPlus.logDebug("Adding InGameMenu (ESC) integration...")
 
@@ -690,6 +695,14 @@ Mission00.delete = Utils.prependedFunction(
         if g_vehicleSaleManager then
             g_vehicleSaleManager:delete()
             g_vehicleSaleManager = nil
+        end
+
+        -- Reset extension state for clean session transition (Issue #16)
+        if InGameMenuMapFrameExtension and InGameMenuMapFrameExtension.onMissionDelete then
+            InGameMenuMapFrameExtension.onMissionDelete()
+        end
+        if VehicleSellingPointExtension and VehicleSellingPointExtension.onMissionDelete then
+            VehicleSellingPointExtension.onMissionDelete()
         end
 
         if UsedPlus.instance then

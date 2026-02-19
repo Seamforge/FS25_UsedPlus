@@ -4,6 +4,40 @@ All notable changes to this project are documented here.
 
 ---
 
+## [2.15.0] - 2026-02-18
+
+### Added
+
+**Multiplayer State Sync System (Issue #17):**
+- New `SyncEvents.lua` — 5 server→client sync event classes with inverted guard logic (sync events execute on client, opposite of mutating events which execute on server):
+  - `SyncFinanceDealsEvent` — finance/lease/loan deals (supports FULL_SYNC, ADD, REMOVE, UPDATE modes)
+  - `SyncSaleListingsEvent` — vehicle sale listings (FULL_SYNC)
+  - `SyncSearchesEvent` — used vehicle searches + found listings (FULL_SYNC)
+  - `SyncStatisticsEvent` — per-farm statistics counters (FULL_SYNC)
+  - `SyncPaymentTrackerEvent` — credit/payment history (FULL_SYNC)
+- New `BulkSyncHandler.lua` — hooks `FSBaseMission.onConnectionFinishedLoading` to send all mod state to joining clients via targeted `connection:sendEvent()` (not broadcast)
+- `FinanceDeal.fromSyncData()` factory method — reconstructs deals from network data without calling `calculatePayment()` or reading `g_currentMission` dates (safe for client-side reconstruction)
+- Sync broadcasts wired into **all 17+ mutating events** across finance, lease, land, sale, maintenance, repair, and used market flows — every server-side state change now propagates to all connected clients
+- Manager monthly processing (`FinanceManager.onPeriodChanged`, `UsedVehicleManager.onHourChanged`, `VehicleSaleManager.onHourChanged`) now broadcasts updated state to all clients after processing
+- `modDesc.xml` updated with new source file entries for `SyncEvents.lua` and `BulkSyncHandler.lua`
+
+### Fixed
+
+**Defensive Hardening Round 1 — Session Stability (Issue #16, Fixes 1–4):**
+- **Fix 1: Double-hook prevention** — Added `originalShowYesNoDialog ~= nil` guard to `hookShowYesNoDialog()`, matching the existing pattern in `hookAllDialogs()`. Without this, reloading a mission could layer wrappers on wrappers, causing unpredictable dialog behavior.
+- **Fix 2: Action ID re-entrancy guard** — Added `actionsShifted` flag to `InGameMenuMapFrameExtension.onLoadMapFinished()` to prevent double-shifting map frame action IDs. On mission reload, `onLoadMapFinished` fires again — without this guard, Finance Land/Lease Land action IDs would shift a second time, breaking the map context menu.
+- **Fix 3: Original callback preservation** — Wrapped `originalBuyCallback` storage in `if originalBuyCallback == nil` guard. On second mission load, `g_gui.showDialog` IS our wrapper — storing it as the "original" would create infinite recursion when the Buy button falls through to the original handler.
+- **Fix 4: InGameMenuMapFrameExtension mission delete reset** — New `onMissionDelete()` function resets `actionsShifted` and `originalBuyCallback` so hooks reinstall cleanly on next mission load.
+
+**Defensive Hardening Round 2 — Session Stability (Issue #16, Fixes 5–6):**
+- **Fix 5: VehicleSellingPointExtension mission delete reset** — New `onMissionDelete()` function that **restores** original `g_gui.showDialog` and `g_gui.showYesNoDialog` functions BEFORE nil'ing stored references. Critical ordering: if we only nil'd references, the next `hookAllDialogs()` call would store our wrapper as the "original" → infinite recursion. Also clears all operational state (`currentVehicle`, `pendingRepairCallback`, `pendingSellCallback`, `bypassInterception`). Deliberately does NOT reset `sellButtonHooked` — `hookSellButton()` captures `originalOnClickSell` as a local in a closure that cannot be restored.
+- **Fix 6: hookShowYesNoDialog dead code path** — Added `hookShowYesNoDialog()` call to the `Mission00.onStartMission` hook. Previously only callable from `VehicleSellingPointExtension.init()` which was never invoked. With Fix 5 nil'ing `originalShowYesNoDialog` on mission delete, this ensures the showYesNoDialog wrapper is reinstalled on the next mission load. Existing double-hook guard from Fix 1 prevents re-wrapping if already installed.
+
+### Changed
+- Version bump to 2.15.0
+
+---
+
 ## [2.14.2] - 2026-02-18
 
 ### Fixed

@@ -171,6 +171,9 @@ function LeaseVehicleEvent:run(connection)
         UsedPlus.logWarn(string.format("LeaseVehicleEvent:run() - deal created: %s (ID: %s)", self.vehicleName, deal.id))
         TransactionResponseEvent.sendToClient(connection, self.farmId, true, "usedplus_mp_success_leased")
 
+        -- v2.15.0: Broadcast deal sync to all clients
+        SyncFinanceDealsEvent.broadcastAddForFarm(self.farmId)
+
         local storeItem = g_storeManager:getItemByXMLFilename(self.vehicleConfig)
         UsedPlus.logWarn(string.format("LeaseVehicleEvent:run() - storeItem=%s for config=%s", tostring(storeItem ~= nil), self.vehicleConfig))
 
@@ -390,6 +393,10 @@ function LeaseEndEvent:processReturn(deal, farm, connection)
         string.format("Lease ended. %s returned to dealer.", deal.itemName)
     )
     TransactionResponseEvent.sendToClient(connection, deal.farmId, true, "usedplus_mp_success_lease_returned")
+
+    -- v2.15.0: Broadcast deal removal to all clients
+    SyncFinanceDealsEvent.broadcastAddForFarm(deal.farmId)
+
     UsedPlus.logDebug(string.format("Lease returned: %s (penalty: $%.2f)", deal.itemName, self.amount))
 end
 
@@ -421,6 +428,9 @@ function LeaseEndEvent:processBuyout(deal, farm, connection)
             deal.itemName, g_i18n:formatMoney(self.amount, 0, true, true))
     )
     TransactionResponseEvent.sendToClient(connection, deal.farmId, true, "usedplus_mp_success_lease_buyout")
+
+    -- v2.15.0: Broadcast deal removal to all clients
+    SyncFinanceDealsEvent.broadcastAddForFarm(deal.farmId)
 
     if CreditHistory then
         CreditHistory.recordEvent(deal.farmId, "DEAL_PAID_OFF", deal.itemName)
@@ -541,6 +551,9 @@ function TerminateLeaseEvent:run(connection)
             string.format("Land lease terminated: %s has been returned", deal.landName or deal.itemName or "Field")
         )
         TransactionResponseEvent.sendToClient(connection, self.farmId, true, "usedplus_mp_success_lease_terminated")
+
+        -- v2.15.0: Broadcast deal removal to all clients
+        SyncFinanceDealsEvent.broadcastAddForFarm(self.farmId)
         return
     end
 
@@ -604,6 +617,10 @@ function TerminateLeaseEvent:run(connection)
 
     g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_OK, notificationText)
     TransactionResponseEvent.sendToClient(connection, self.farmId, true, "usedplus_mp_success_lease_terminated")
+
+    -- v2.15.0: Broadcast deal removal to all clients
+    SyncFinanceDealsEvent.broadcastAddForFarm(self.farmId)
+
     UsedPlus.logDebug(string.format("Lease terminated: %s (penalty: $%.2f)", deal.vehicleName, totalPenalty))
 end
 
@@ -801,6 +818,10 @@ function LeaseRenewalEvent:processReturn(deal, farm, isLandLease, connection)
     end
 
     TransactionResponseEvent.sendToClient(connection, deal.farmId, true, "usedplus_mp_success_lease_returned")
+
+    -- v2.15.0: Broadcast deal removal to all clients
+    SyncFinanceDealsEvent.broadcastAddForFarm(deal.farmId)
+
     UsedPlus.logDebug(string.format("Lease returned: %s (refund: $%d)", deal.itemName, depositRefund))
 end
 
@@ -866,6 +887,10 @@ function LeaseRenewalEvent:processBuyout(deal, farm, isLandLease, connection)
     end
 
     TransactionResponseEvent.sendToClient(connection, deal.farmId, true, "usedplus_mp_success_lease_buyout")
+
+    -- v2.15.0: Broadcast deal removal to all clients
+    SyncFinanceDealsEvent.broadcastAddForFarm(deal.farmId)
+
     UsedPlus.logDebug(string.format("Lease bought out: %s (price: $%d, equity: $%d)",
         deal.itemName, buyoutPrice, equityApplied))
 end
@@ -911,6 +936,10 @@ function LeaseRenewalEvent:processRenew(deal, farm, isLandLease, connection)
     end
 
     TransactionResponseEvent.sendToClient(connection, deal.farmId, true, "usedplus_mp_success_lease_renewed")
+
+    -- v2.15.0: Broadcast deal update (renewal) to all clients
+    SyncFinanceDealsEvent.broadcastAddForFarm(deal.farmId)
+
     UsedPlus.logDebug(string.format("Lease renewed: %s (equity rollover: $%d, new residual: $%d)",
         deal.itemName, equityRollover, newResidualValue))
 end

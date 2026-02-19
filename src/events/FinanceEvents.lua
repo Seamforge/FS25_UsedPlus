@@ -304,6 +304,11 @@ function FinanceVehicleEvent:run(connection)
         self.configurationData, self.licensePlateData
     )
     TransactionResponseEvent.sendToClient(connection, self.farmId, success, msgKey)
+
+    -- v2.15.0: Broadcast deal sync to all clients
+    if success then
+        SyncFinanceDealsEvent.broadcastAddForFarm(self.farmId)
+    end
 end
 
 --============================================================================
@@ -444,6 +449,9 @@ function FinancePaymentEvent:run(connection)
         -- v2.8.0: Send response to multiplayer client
         TransactionResponseEvent.sendToClient(connection, self.farmId, true, "usedplus_mp_success_payment")
 
+        -- v2.15.0: Broadcast deal removal to all clients
+        SyncFinanceDealsEvent.broadcastAddForFarm(self.farmId)
+
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_OK,
             string.format(g_i18n:getText("usedplus_notification_dealPaidOff"), deal.itemName)
@@ -463,6 +471,9 @@ function FinancePaymentEvent:run(connection)
 
         -- v2.8.0: Send response to multiplayer client
         TransactionResponseEvent.sendToClient(connection, self.farmId, true, "usedplus_mp_success_payment")
+
+        -- v2.15.0: Broadcast deal update to all clients
+        SyncFinanceDealsEvent.broadcastUpdateDeal(self.farmId, self.dealId)
 
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_OK,
@@ -699,6 +710,9 @@ function TakeLoanEvent:run(connection)
     local success = TakeLoanEvent.execute(self.farmId, self.loanAmount, self.termYears, self.interestRate, self.monthlyPayment, self.collateralItems)
     if success then
         TransactionResponseEvent.sendToClient(connection, self.farmId, true, "usedplus_mp_success_loan")
+
+        -- v2.15.0: Broadcast deal sync to all clients
+        SyncFinanceDealsEvent.broadcastAddForFarm(self.farmId)
     else
         TransactionResponseEvent.sendToClient(connection, self.farmId, false, "usedplus_mp_error_failed")
     end

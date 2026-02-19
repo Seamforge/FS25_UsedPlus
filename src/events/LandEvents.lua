@@ -148,6 +148,9 @@ function PurchaseLandCashEvent:run(connection)
     -- Send success response
     TransactionResponseEvent.sendToClient(connection, self.farmId, true, "usedplus_mp_success_land_purchased")
 
+    -- v2.15.0: Broadcast statistics sync to all clients
+    SyncStatisticsEvent.broadcastForFarm(self.farmId)
+
     -- Notification
     g_currentMission:addIngameNotification(
         FSBaseMission.INGAME_NOTIFICATION_OK,
@@ -351,6 +354,9 @@ function LandLeaseEvent:run(connection)
 
     TransactionResponseEvent.sendToClient(connection, self.farmId, true, "usedplus_mp_success_land_leased")
 
+    -- v2.15.0: Broadcast deal sync to all clients
+    SyncFinanceDealsEvent.broadcastAddForFarm(self.farmId)
+
     -- Format term display for notification
     local termDisplay
     if self.termMonths < 12 then
@@ -483,6 +489,9 @@ function LandLeaseBuyoutEvent:run(connection)
     end
 
     TransactionResponseEvent.sendToClient(connection, deal.farmId, true, "usedplus_mp_success_land_buyout")
+
+    -- v2.15.0: Broadcast deal removal to all clients
+    SyncFinanceDealsEvent.broadcastAddForFarm(deal.farmId)
 
     g_currentMission:addIngameNotification(
         FSBaseMission.INGAME_NOTIFICATION_OK,

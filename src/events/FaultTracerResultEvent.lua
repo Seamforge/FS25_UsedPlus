@@ -70,7 +70,24 @@ function FaultTracerResultEvent:readStream(streamId, connection)
 end
 
 function FaultTracerResultEvent:run(connection)
-    FaultTracerResultEvent.execute(self.vehicleId, self.truckId, self.component, self.reliabilityGain, self.ceilingGain, self.oilUsed)
+    local success = FaultTracerResultEvent.execute(self.vehicleId, self.truckId, self.component, self.reliabilityGain, self.ceilingGain, self.oilUsed)
+
+    -- v2.15.0: Broadcast statistics sync to all clients
+    if success and g_server ~= nil then
+        -- Extract farmId from vehicle for stats sync
+        local vehicle = nil
+        if g_currentMission and g_currentMission.vehicleSystem then
+            for _, v in pairs(g_currentMission.vehicleSystem.vehicles) do
+                if v.id == self.vehicleId then
+                    vehicle = v
+                    break
+                end
+            end
+        end
+        if vehicle and vehicle:getOwnerFarmId() then
+            SyncStatisticsEvent.broadcastForFarm(vehicle:getOwnerFarmId())
+        end
+    end
 end
 
 --[[

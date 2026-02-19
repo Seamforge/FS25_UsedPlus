@@ -147,7 +147,15 @@ function SetPaymentConfigEvent:run(connection)
     end
 
     -- Delegate to static execute method
-    SetPaymentConfigEvent.execute(self.dealId, self.paymentMode, self.customAmount, self.multiplier)
+    local success = SetPaymentConfigEvent.execute(self.dealId, self.paymentMode, self.customAmount, self.multiplier)
+
+    -- v2.15.0: Broadcast deal update to all clients
+    if success then
+        local deal = g_financeManager and g_financeManager:getDealById(self.dealId)
+        if deal then
+            SyncFinanceDealsEvent.broadcastUpdateDeal(deal.farmId, self.dealId)
+        end
+    end
 end
 
 UsedPlus.logInfo("SetPaymentConfigEvent loaded")

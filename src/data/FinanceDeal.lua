@@ -84,6 +84,76 @@ function FinanceDeal.new(farmId, itemType, itemId, itemName, price, downPayment,
 end
 
 --[[
+    Factory method to reconstruct a deal from network sync data.
+    Does NOT call calculatePayment() or read g_currentMission dates.
+    All fields are set directly from the provided data table.
+    Used by SyncFinanceDealsEvent to reconstruct deals on clients.
+    v2.15.0 - Multiplayer sync support
+]]
+function FinanceDeal.fromSyncData(data)
+    if data == nil or data.id == nil or data.id == "" then
+        return nil
+    end
+
+    local self = setmetatable({}, FinanceDeal_mt)
+
+    -- Identity
+    self.id = data.id
+    self.dealType = data.dealType or DealUtils.TYPE.FINANCE
+    self.farmId = data.farmId or 0
+
+    -- Item information
+    self.itemType = data.itemType or ""
+    self.itemId = data.itemId or ""
+    self.itemName = data.itemName or ""
+    self.objectId = data.objectId
+
+    -- Financial terms (already calculated on server)
+    self.originalPrice = data.originalPrice or 0
+    self.downPayment = data.downPayment or 0
+    self.cashBack = data.cashBack or 0
+    self.amountFinanced = data.amountFinanced or 0
+    self.termMonths = data.termMonths or 12
+    self.interestRate = data.interestRate or 0
+    self.monthlyPayment = data.monthlyPayment or 0
+
+    -- Payment status
+    self.currentBalance = data.currentBalance or 0
+    self.monthsPaid = data.monthsPaid or 0
+    self.totalInterestPaid = data.totalInterestPaid or 0
+    self.status = data.status or "active"
+
+    -- Tracking
+    self.createdDate = data.createdDate or 0
+    self.createdMonth = data.createdMonth or 1
+    self.createdYear = data.createdYear or 2025
+    self.missedPayments = data.missedPayments or 0
+
+    -- Payment configuration
+    self.paymentMode = data.paymentMode or FinanceDeal.PAYMENT_MODE.STANDARD
+    self.paymentMultiplier = data.paymentMultiplier or 1.0
+    self.configuredPayment = data.configuredPayment or 0
+    self.lastPaymentAmount = data.lastPaymentAmount or 0
+    self.accruedInterest = data.accruedInterest or 0
+
+    -- Lease-specific fields
+    self.residualValue = data.residualValue or 0
+    self.securityDeposit = data.securityDeposit or 0
+    self.depreciation = data.depreciation or 0
+    self.tradeInValue = data.tradeInValue or 0
+
+    -- Land lease fields
+    self.farmlandId = data.farmlandId
+    self.landName = data.landName
+
+    -- Collateral and repossession data (v2.15.0: now synced)
+    self.collateralItems = data.collateralItems or {}
+    self.repossessedItems = data.repossessedItems or {}
+
+    return self
+end
+
+--[[
     Calculate monthly payment using amortization formula
     Formula: M = P × [r(1 + r)^n] / [(1 + r)^n - 1]
     Where P = principal, r = monthly rate, n = number of months

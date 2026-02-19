@@ -146,6 +146,9 @@ function VehicleSaleManager:onHourChanged()
     end
 
     -- v2.7.0: Process each jumped hour to ensure proper TTL/TTS countdown
+    -- v2.15.0: Track which farms had changes for sync
+    local farmsWithChanges = {}
+
     for hourIteration = 1, hoursToProcess do
         -- Process all active listings for this hour
         for _, farm in pairs(g_farmManager:getFarms()) do
@@ -156,7 +159,15 @@ function VehicleSaleManager:onHourChanged()
                         hoursToProcess, farmId, #farm.vehicleSaleListings))
                 end
                 self:processListingsForFarm(farmId, farm)
+                farmsWithChanges[farmId] = true
             end
+        end
+    end
+
+    -- v2.15.0: Broadcast updated listing state to all clients
+    if g_server ~= nil then
+        for farmId, _ in pairs(farmsWithChanges) do
+            SyncSaleListingsEvent.broadcastFullForFarm(farmId)
         end
     end
 end
