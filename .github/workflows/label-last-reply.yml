@@ -5,9 +5,11 @@ permissions:
   issues: write
 
 on:
+  issue_comment:
+    types: [created]
   schedule:
-    # Run every 15 minutes
-    - cron: '*/15 * * * *'
+    # Run every 5 minutes as fallback
+    - cron: '*/5 * * * *'
   workflow_dispatch: # Allow manual trigger
 
 jobs:
