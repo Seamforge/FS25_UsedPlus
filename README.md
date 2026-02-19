@@ -10,11 +10,11 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-2.15.0-green" alt="Version">
+  <img src="https://img.shields.io/badge/version-2.14.2-green" alt="Version">
+  <img src="https://img.shields.io/github/downloads/XelaNull/FS25_UsedPlus/total?label=downloads&color=brightgreen" alt="Downloads">
   <img src="https://img.shields.io/badge/game-FS25-blue" alt="FS25">
   <img src="https://img.shields.io/badge/multiplayer-ready-brightgreen" alt="Multiplayer Ready">
   <img src="https://img.shields.io/badge/languages-26-orange" alt="26 Languages">
-  <img src="https://img.shields.io/github/downloads/XelaNull/FS25_UsedPlus/total?label=downloads&color=brightgreen" alt="Downloads">
   <img src="https://img.shields.io/badge/AI--authored-Claude-purple" alt="AI Authored">
 </p>
 
@@ -301,7 +301,7 @@ We believe this is one of the most ambitious AI-human collaborative software pro
 
 | Action | Shortcut |
 |--------|----------|
-| **Finance Manager** | **Shift+F** anywhere |
+| **Finance Manager** | **Esc** → Finance Manager |
 | **Repair/Repaint Vehicle** | Click owned vehicle on map |
 | **Finance/Lease Land** | Click unowned field on map |
 
@@ -472,7 +472,7 @@ Built on the shoulders of giants:
 
 ---
 
-**v2.15.0** | **[View Changelog](CHANGELOG.md)** | **[Report Issues](https://github.com/XelaNull/FS25_UsedPlus/issues)**
+**v2.14.2** | **[View Changelog](CHANGELOG.md)** | **[Report Issues](https://github.com/XelaNull/FS25_UsedPlus/issues)**
 
 ---
 

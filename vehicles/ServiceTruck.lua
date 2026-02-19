@@ -90,15 +90,6 @@ function ServiceTruck.registerEventListeners(vehicleType)
     SpecializationUtil.registerEventListener(vehicleType, "onReadStream", ServiceTruck)
     SpecializationUtil.registerEventListener(vehicleType, "onWriteStream", ServiceTruck)
     SpecializationUtil.registerEventListener(vehicleType, "onRegisterActionEvents", ServiceTruck)
-    SpecializationUtil.registerEventListener(vehicleType, "onLeaveVehicle", ServiceTruck)
-end
-
--- Track engine state when player exits (isMotorStarted unreliable from on-foot context)
-function ServiceTruck:onLeaveVehicle()
-    local spec = self[SPEC_NAME]
-    if spec ~= nil and self.spec_motorized ~= nil then
-        spec.engineRunningOnExit = self.spec_motorized.isMotorStarted
-    end
 end
 
 function ServiceTruck:onLoad(savegame)
@@ -316,11 +307,6 @@ function ServiceTruck:onUpdate(dt, isActiveForInput, isActiveForInputIgnoreSelec
 
     -- v2.12.0: Keep updating for on-foot detection (same pattern as FieldServiceKit)
     self:raiseActive()
-
-    -- Track engine state while player is inside (for on-foot Fault Tracer check)
-    if self.getIsEntered ~= nil and self:getIsEntered() and self.spec_motorized ~= nil then
-        spec.engineRunningOnExit = self.spec_motorized.isMotorStarted
-    end
 
     -- Reconnect saved target vehicle after load
     if spec.savedTargetId ~= nil and spec.isRestoring then
@@ -1008,22 +994,10 @@ function ServiceTruck:openFaultTracerDialog()
     if spec.faultTracerTarget == nil then return end
 
     -- Check service truck engine is running (powers diagnostic equipment)
-    -- Debug: log all motor state values to find the reliable one
+    -- Note: isMotorStarted is unreliable from on-foot context, use multiple detection methods
     local motorSpec = self.spec_motorized
+    local engineRunning = false
     if motorSpec ~= nil then
-        local props = string.format(
-            "MOTOR DEBUG: isMotorStarted=%s, engineRunningOnExit=%s, getIsMotorStarted=%s, motorRpm=%s",
-            tostring(motorSpec.isMotorStarted),
-            tostring(spec.engineRunningOnExit),
-            tostring(self.getIsMotorStarted ~= nil and self:getIsMotorStarted() or "NO_FUNC"),
-            tostring(motorSpec.motor ~= nil and motorSpec.motor.lastMotorRpm or "NO_MOTOR")
-        )
-        UsedPlus.logInfo(props)
-    end
-
-    local engineRunning = spec.engineRunningOnExit
-    if motorSpec ~= nil then
-        -- Try multiple detection methods
         if motorSpec.isMotorStarted then
             engineRunning = true
         elseif self.getIsMotorStarted ~= nil and self:getIsMotorStarted() then
