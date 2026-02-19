@@ -283,10 +283,20 @@ function DealDetailsDialog:updateDisplay()
     -- Payment Multiplier section
     self:updateMultiplierDisplay()
 
-    -- Payoff amount (balance plus any accrued interest)
-    local payoffAmount = deal.currentBalance or 0
-    if deal.accruedInterest then
-        payoffAmount = payoffAmount + deal.accruedInterest
+    -- Payoff / Buyout amount
+    local payoffAmount
+    if isLease then
+        -- Calculate proper lease buyout: residual - equity
+        local depreciation = (deal.originalPrice or deal.baseCost or 0) - (deal.residualValue or 0)
+        local equity = FinanceCalculations.calculateLeaseEquity(
+            deal.monthlyPayment, deal.monthsPaid, depreciation, deal.termMonths)
+        local residualValue = deal.residualValue or deal.originalPrice or 0
+        payoffAmount = FinanceCalculations.calculateLeaseBuyout(residualValue, equity)
+    else
+        payoffAmount = deal.currentBalance or 0
+        if deal.accruedInterest then
+            payoffAmount = payoffAmount + deal.accruedInterest
+        end
     end
 
     if self.payoffAmountText then
@@ -531,27 +541,52 @@ function DealDetailsDialog:onEarlyPayoff()
     if self.deal == nil then return end
 
     local deal = self.deal
-    local isLease = (deal.dealType == 2) or (deal.itemType == "lease")
-    local payoffAmount = deal.currentBalance or 0
-    if deal.accruedInterest then
-        payoffAmount = payoffAmount + deal.accruedInterest
+    local isLease = (deal.dealType == DealUtils.TYPE.LEASE) or
+                    (deal.dealType == DealUtils.TYPE.LAND_LEASE) or
+                    (deal.itemType == "lease") or
+                    (deal.itemType == "land_lease")
+
+    if isLease then
+        -- Calculate proper lease buyout values
+        local depreciation = (deal.originalPrice or deal.baseCost or 0) - (deal.residualValue or 0)
+        local equity = FinanceCalculations.calculateLeaseEquity(
+            deal.monthlyPayment, deal.monthsPaid, depreciation, deal.termMonths)
+        local residualValue = deal.residualValue or deal.originalPrice or 0
+        local buyoutPrice = FinanceCalculations.calculateLeaseBuyout(residualValue, equity)
+
+        -- Deposit refund (no vehicle damage assessment from this path)
+        local securityDeposit = deal.securityDeposit or 0
+        local depositRefund = securityDeposit
+
+        -- Store for use in buyout callback
+        self.leaseBuyoutData = {
+            buyoutPrice = buyoutPrice,
+            equityApplied = equity,
+            depositRefund = depositRefund
+        }
+
+        local netCost = buyoutPrice - depositRefund
+        local message = string.format(
+            "Buy out this lease for %s?\n\nBuyout price: %s\nEquity applied: -%s\nDeposit refund: +%s\nNet cost: %s",
+            g_i18n:formatMoney(buyoutPrice, 0, true, true),
+            g_i18n:formatMoney(residualValue, 0, true, true),
+            g_i18n:formatMoney(equity, 0, true, true),
+            g_i18n:formatMoney(depositRefund, 0, true, true),
+            g_i18n:formatMoney(netCost, 0, true, true))
+
+        YesNoDialog.show(self.onLeaseBuyoutConfirm, self, message, "Buyout Lease")
+    else
+        -- Finance payoff (unchanged)
+        local payoffAmount = deal.currentBalance or 0
+        if deal.accruedInterest then
+            payoffAmount = payoffAmount + deal.accruedInterest
+        end
+
+        local message = string.format("Are you sure you want to pay off this loan for %s?",
+            g_i18n:formatMoney(payoffAmount, 0, true, true))
+
+        YesNoDialog.show(self.onPayoffConfirm, self, message, "Early Payoff")
     end
-
-    local actionText = isLease and "buyout" or "pay off"
-    local message = string.format("Are you sure you want to %s this %s for %s?",
-        actionText,
-        isLease and "lease" or "loan",
-        g_i18n:formatMoney(payoffAmount, 0, true, true))
-
-    -- Use YesNoDialog.show() - correct FS25 pattern
-    -- Signature: YesNoDialog.show(callback, target, text, title, yesText, noText)
-    local title = isLease and "Buyout Lease" or "Early Payoff"
-    YesNoDialog.show(
-        self.onPayoffConfirm,
-        self,
-        message,
-        title
-    )
 end
 
 --[[
@@ -560,6 +595,36 @@ end
 function DealDetailsDialog:onPayoffConfirm(yes)
     if yes then
         self:executePayoff()
+    end
+end
+
+--[[
+    Callback for lease buyout confirmation dialog
+    Routes to LeaseRenewalEvent which handles vehicle ownership, deposit refund, etc.
+]]
+function DealDetailsDialog:onLeaseBuyoutConfirm(yes)
+    if not yes or self.deal == nil or self.leaseBuyoutData == nil then return end
+
+    -- Send LeaseRenewalEvent with ACTION_BUYOUT (uses proven buyout logic)
+    LeaseRenewalEvent.sendToServer(
+        self.deal.id,
+        LeaseRenewalEvent.ACTION_BUYOUT,
+        self.leaseBuyoutData
+    )
+
+    -- Store callback before closing
+    local refreshCallback = self.onCloseCallback
+
+    -- Close dialog
+    g_gui:closeDialogByName("DealDetailsDialog")
+
+    -- Refresh finance frame
+    if refreshCallback then
+        refreshCallback()
+    elseif FinanceManagerFrame and FinanceManagerFrame.refresh then
+        FinanceManagerFrame.refresh()
+    elseif g_usedPlusFinanceFrame and g_usedPlusFinanceFrame.updateDisplay then
+        g_usedPlusFinanceFrame:updateDisplay()
     end
 end
 
@@ -644,6 +709,7 @@ function DealDetailsDialog:onClose()
 
     self.deal = nil
     self.onCloseCallback = nil
+    self.leaseBuyoutData = nil
 end
 
 --[[
