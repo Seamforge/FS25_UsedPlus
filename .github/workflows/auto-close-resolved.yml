@@ -25,6 +25,7 @@ jobs:
             const fixedStatus = 'Fixed';
             const MARKER = '<!-- usedplus-auto-close-countdown -->';
             const RESET_MARKER = '<!-- usedplus-countdown-reset -->';
+            const AUTOCLOSE_PHRASE = 'automatically closed after';
 
             // Step 1: Query project for items in "Fixed" status
             const query = `query($owner: String!, $projectNumber: Int!) {
@@ -96,9 +97,22 @@ jobs:
                 : null;
 
               // Filter to active countdown comments (only those AFTER last reset)
-              const activeCountdownComments = lastResetDate
+              let activeCountdownComments = lastResetDate
                 ? countdownComments.filter(c => new Date(c.created_at) > lastResetDate)
                 : countdownComments;
+
+              // Defense-in-depth: Detect stale countdown from a previous auto-close cycle.
+              // If the most recent active countdown comment is an auto-close message,
+              // the issue was previously closed and then reopened without a reset marker
+              // (e.g., reopen workflow failed, or user reopened via GitHub UI before
+              // the reset-on-reopen job could fire). Treat as fresh — start new countdown.
+              if (activeCountdownComments.length > 0) {
+                const lastActive = activeCountdownComments[activeCountdownComments.length - 1];
+                if (lastActive.body.includes(AUTOCLOSE_PHRASE)) {
+                  console.log(`Issue #${issueNumber}: Previous auto-close detected but issue is open — resetting countdown`);
+                  activeCountdownComments = [];  // Treat as fresh (will start new countdown)
+                }
+              }
 
               // Check for reporter replies AFTER the active countdown started
               // (also ignore any replies from before the last reset)

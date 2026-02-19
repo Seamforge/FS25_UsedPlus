@@ -7,23 +7,27 @@ permissions:
 on:
   issue_comment:
     types: [created]
+  issues:
+    types: [reopened]
 
 jobs:
-  reopen-on-reply:
-    # Skip if commenter is the repo owner, a bot, or the issue is closed
+  # Job 1: Handle user comments on "Fixed" issues (open or closed)
+  reopen-on-comment:
+    # Only run on issue_comment events, skip owner and bots
     if: >-
+      github.event_name == 'issue_comment' &&
       github.event.comment.user.login != github.repository_owner &&
-      !contains(github.event.comment.user.login, '[bot]') &&
-      github.event.issue.state == 'open'
+      !contains(github.event.comment.user.login, '[bot]')
     runs-on: ubuntu-latest
 
     steps:
-      - name: Move "Fixed" issues back to "In Progress"
+      - name: Handle user reply on "Fixed" issue
         uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.PROJECT_TOKEN }}
           script: |
             const issueNumber = context.payload.issue.number;
+            const issueState = context.payload.issue.state;
             const commenter = context.payload.comment.user.login;
             const projectNumber = 3;
             const RESET_MARKER = '<!-- usedplus-countdown-reset -->';
@@ -33,7 +37,7 @@ jobs:
             const STATUS_FIELD_ID = 'PVTSSF_lAHOAsLCS84BOmS4zg9QNkQ';
             const IN_PROGRESS_OPTION_ID = '47fc9ee4';
 
-            console.log(`Comment on issue #${issueNumber} by ${commenter}`);
+            console.log(`Comment on issue #${issueNumber} by ${commenter} (state: ${issueState})`);
 
             // Step 1: Query project to find this issue and its status
             const query = `query($owner: String!, $projectNumber: Int!) {
@@ -81,7 +85,18 @@ jobs:
               return;
             }
 
-            // Step 2: Move to "In Progress"
+            // Step 2: If issue is closed, reopen it first
+            if (issueState === 'closed') {
+              console.log(`Reopening closed issue #${issueNumber}`);
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issueNumber,
+                state: 'open'
+              });
+            }
+
+            // Step 3: Move to "In Progress"
             const mutation = `mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $optionId: String!) {
               updateProjectV2ItemFieldValue(input: {
                 projectId: $projectId
@@ -102,15 +117,125 @@ jobs:
 
             console.log(`Moved issue #${issueNumber} from "Fixed" to "In Progress"`);
 
-            // Step 3: Post reset marker comment
+            // Step 4: Post reset marker comment
+            const wasClosedNote = issueState === 'closed'
+              ? ' This issue was closed and has been **automatically reopened**.'
+              : '';
+
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: issueNumber,
               body: `${RESET_MARKER}\n\n` +
-                `**Status reopened:** @${commenter} replied while this issue was in **Fixed** status.\n\n` +
+                `**Status reopened:** @${commenter} replied while this issue was in **Fixed** status.${wasClosedNote}\n\n` +
                 `Moving back to **In Progress** for further investigation. ` +
                 `The auto-close countdown has been cancelled.\n\n` +
+                `If this issue is resolved again, the countdown will restart fresh.`
+            });
+
+            console.log(`Posted reset marker on issue #${issueNumber}`);
+
+  # Job 2: Handle manual reopening of issues (via GitHub UI "Reopen" button)
+  reset-on-reopen:
+    # Only run on issues reopened events
+    if: github.event_name == 'issues'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Reset countdown on reopened "Fixed" issue
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.PROJECT_TOKEN }}
+          script: |
+            const issueNumber = context.payload.issue.number;
+            const reopener = context.payload.sender.login;
+            const projectNumber = 3;
+            const RESET_MARKER = '<!-- usedplus-countdown-reset -->';
+
+            // Known project board IDs (FS25_UsedPlus project #3)
+            const PROJECT_ID = 'PVT_kwHOAsLCS84BOmS4';
+            const STATUS_FIELD_ID = 'PVTSSF_lAHOAsLCS84BOmS4zg9QNkQ';
+            const IN_PROGRESS_OPTION_ID = '47fc9ee4';
+
+            console.log(`Issue #${issueNumber} reopened by ${reopener}`);
+
+            // Step 1: Query project to find this issue and its status
+            const query = `query($owner: String!, $projectNumber: Int!) {
+              user(login: $owner) {
+                projectV2(number: $projectNumber) {
+                  items(first: 100) {
+                    nodes {
+                      id
+                      fieldValueByName(name: "Status") {
+                        ... on ProjectV2ItemFieldSingleSelectValue {
+                          name
+                        }
+                      }
+                      content {
+                        ... on Issue {
+                          number
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }`;
+
+            const result = await github.graphql(query, {
+              owner: context.repo.owner,
+              projectNumber: projectNumber
+            });
+
+            const items = result.user.projectV2.items.nodes;
+            const projectItem = items.find(item =>
+              item.content && item.content.number === issueNumber
+            );
+
+            if (!projectItem) {
+              console.log(`Issue #${issueNumber} not found in project — skipping`);
+              return;
+            }
+
+            const currentStatus = projectItem.fieldValueByName?.name;
+            console.log(`Issue #${issueNumber} current status: ${currentStatus}`);
+
+            // Only act on "Fixed" or "Done" issues that are reopened
+            if (currentStatus !== 'Fixed' && currentStatus !== 'Done') {
+              console.log(`Issue #${issueNumber} is in "${currentStatus}" — no reset needed`);
+              return;
+            }
+
+            // Step 2: Move to "In Progress"
+            const mutation = `mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $optionId: String!) {
+              updateProjectV2ItemFieldValue(input: {
+                projectId: $projectId
+                itemId: $itemId
+                fieldId: $fieldId
+                value: { singleSelectOptionId: $optionId }
+              }) {
+                projectV2Item { id }
+              }
+            }`;
+
+            await github.graphql(mutation, {
+              projectId: PROJECT_ID,
+              itemId: projectItem.id,
+              fieldId: STATUS_FIELD_ID,
+              optionId: IN_PROGRESS_OPTION_ID
+            });
+
+            console.log(`Moved issue #${issueNumber} from "${currentStatus}" to "In Progress"`);
+
+            // Step 3: Post reset marker (cancels any active countdown)
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber,
+              body: `${RESET_MARKER}\n\n` +
+                `**Issue reopened** by @${reopener} — status was **${currentStatus}**.\n\n` +
+                `Moving back to **In Progress**. ` +
+                `Any auto-close countdown has been cancelled.\n\n` +
                 `If this issue is resolved again, the countdown will restart fresh.`
             });
 
