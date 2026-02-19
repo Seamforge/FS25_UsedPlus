@@ -10,11 +10,13 @@
     - Immobilizes target vehicle during restoration
 
     Credits:
-    - GMC C7000 model by Canada FS
-    - ServiceVehicle pattern studied from GtX (Andy)
+    - GMC C7000 model by Canada FS (community-rebuilt v1.3)
+    - Service bed props (oil tank, hydraulic tank, air tank, battery charger,
+      bottle jack, oiler, fuel can, coolant bottles, laptop) built into service.i3d
 
     v2.9.0 - Service Truck System
     v2.12.0 - Fault Tracer on-foot detection (RVB pattern)
+    v2.15.0 - Community-rebuilt model integration (props in i3d, 4 fill units)
 ]]
 
 ServiceTruck = {}
@@ -79,9 +81,6 @@ function ServiceTruck.registerFunctions(vehicleType)
     SpecializationUtil.registerFunction(vehicleType, "completeRestoration", ServiceTruck.completeRestoration)
     SpecializationUtil.registerFunction(vehicleType, "damageTarget", ServiceTruck.damageTarget)
     SpecializationUtil.registerFunction(vehicleType, "openFaultTracerDialog", ServiceTruck.openFaultTracerDialog)
-    SpecializationUtil.registerFunction(vehicleType, "loadDieselTankVisual", ServiceTruck.loadDieselTankVisual)
-    SpecializationUtil.registerFunction(vehicleType, "loadViseVisual", ServiceTruck.loadViseVisual)
-    SpecializationUtil.registerFunction(vehicleType, "loadToolboxVisual", ServiceTruck.loadToolboxVisual)
 end
 
 function ServiceTruck.registerEventListeners(vehicleType)
@@ -91,6 +90,15 @@ function ServiceTruck.registerEventListeners(vehicleType)
     SpecializationUtil.registerEventListener(vehicleType, "onReadStream", ServiceTruck)
     SpecializationUtil.registerEventListener(vehicleType, "onWriteStream", ServiceTruck)
     SpecializationUtil.registerEventListener(vehicleType, "onRegisterActionEvents", ServiceTruck)
+    SpecializationUtil.registerEventListener(vehicleType, "onLeaveVehicle", ServiceTruck)
+end
+
+-- Track engine state when player exits (isMotorStarted unreliable from on-foot context)
+function ServiceTruck:onLeaveVehicle()
+    local spec = self[SPEC_NAME]
+    if spec ~= nil and self.spec_motorized ~= nil then
+        spec.engineRunningOnExit = self.spec_motorized.isMotorStarted
+    end
 end
 
 function ServiceTruck:onLoad(savegame)
@@ -154,199 +162,7 @@ function ServiceTruck:onLoad(savegame)
         spec.savedProgress = savegame.xmlFile:getValue(key .. "#progress")
     end
 
-    -- Load diesel tank visual on truck bed (battery is in i3d directly)
-    self:loadDieselTankVisual()
-    -- Load cast iron vise on truck bed
-    self:loadViseVisual()
-    -- Load Superduty toolbox on truck bed
-    self:loadToolboxVisual()
-
     UsedPlus.logInfo("ServiceTruck loaded - Long-term vehicle restoration ready")
-end
-
---[[
-    Load the diesel transfer tank 3D model and attach it to the truck bed.
-    Uses the SmallFuelTank model (FS25_Small_fuel_tank), scaled and positioned
-    on the right rear of the service bed.
-]]
-function ServiceTruck:loadDieselTankVisual()
-    local spec = self[SPEC_NAME]
-
-    local tankPath = Utils.getFilename("vehicles/serviceTruck/dieselTank/Smallfueltank.i3d", self.baseDirectory)
-    local tankScene = g_i3DManager:loadSharedI3DFile(tankPath, false, false, false)
-
-    if tankScene == nil or tankScene == 0 then
-        UsedPlus.logError("ServiceTruck: Failed to load diesel tank model from: " .. tostring(tankPath))
-        return
-    end
-
-    -- Navigate to visual mesh: root > "Small fuel tank" > visuals (index 7) > fuelTank (index 0)
-    local tankRoot = getChildAt(tankScene, 0)
-    local visualsNode = getChildAt(tankRoot, 7)
-
-    if visualsNode == nil then
-        UsedPlus.logError("ServiceTruck: Could not find visuals node in diesel tank i3d")
-        delete(tankScene)
-        return
-    end
-
-    local tankMesh = getChildAt(visualsNode, 0)
-    if tankMesh == nil then
-        UsedPlus.logError("ServiceTruck: Could not find fuelTank mesh in diesel tank i3d")
-        delete(tankScene)
-        return
-    end
-
-    -- Clone the visual mesh so we can delete the source scene
-    local clonedTank = clone(tankMesh, true)
-
-    -- Find the serviceVehicle (truck bed) node: 0>0|19
-    local bedNode = I3DUtil.indexToObject(self.components, "0>0|19")
-    if bedNode == nil then
-        UsedPlus.logError("ServiceTruck: Could not find truck bed node (0>0|19)")
-        delete(clonedTank)
-        delete(tankScene)
-        return
-    end
-
-    -- Link tank to truck bed
-    link(bedNode, clonedTank)
-
-    -- Position on center-rear of bed, sitting on the bed floor
-    -- Bed floor Y ≈ 1.08 (matches oilTank, hydraulicTank, deco items)
-    -- Bed extends roughly Z=-0.8 to Z=-4.2, center around Z=-2.5
-    setTranslation(clonedTank, -0.24, 0.52, -3.5)
-
-    -- Rotate 90° clockwise (viewed from above) to sit lengthwise on the bed
-    setRotation(clonedTank, 0, -math.pi / 2, 0)
-
-    -- Scale down to fit truck bed (original model is ~1.4m wide × 2.2m tall × 1.4m deep)
-    -- At 0.45 scale: ~0.65m wide × 1.0m tall × 0.62m deep
-    setScale(clonedTank, 0.648, 0.81, 0.648)
-
-    -- Store reference for cleanup
-    spec.dieselTankVisualNode = clonedTank
-
-    -- Hide the battery charger deco (makes room for the diesel tank)
-    -- deco_batteryCharger is child index 5 of serviceVehicle (0>0|19|5)
-    local batteryChargerNode = I3DUtil.indexToObject(self.components, "0>0|19|5")
-    if batteryChargerNode ~= nil then
-        setVisibility(batteryChargerNode, false)
-        UsedPlus.logDebug("ServiceTruck: Hid battery charger deco to make room for diesel tank")
-    end
-
-    -- Clean up loaded scene (cloned nodes survive)
-    delete(tankScene)
-
-    UsedPlus.logInfo("ServiceTruck: Diesel transfer tank loaded on truck bed")
-end
-
---[[
-    Load the cast iron bench vise from base game assets and attach it to the truck bed.
-    Uses $data/maps/mapUS/textures/props/vintageTools/castIronVise.i3d
-]]
-function ServiceTruck:loadViseVisual()
-    local spec = self[SPEC_NAME]
-
-    -- Load the entire bootGross i3d which contains the castIronVise with textures
-    -- The vise uses $data/ textures so no extra files needed beyond the i3d+shapes
-    local visePath = Utils.getFilename("vehicles/serviceTruck/vise/id_bootGross.i3d", self.baseDirectory)
-    local viseScene = g_i3DManager:loadSharedI3DFile(visePath, false, false, false)
-    if viseScene == nil or viseScene == 0 then
-        UsedPlus.logError("ServiceTruck: Failed to load vise model from: " .. tostring(visePath))
-        return
-    end
-
-    -- Navigate to castIronVise LOD0 by index path:
-    -- root(0) > id_bootGross > visuals(5) > LOD0(0) > Gamerstube(0) >
-    -- sailingMotorBoatOnTheTable(0) > workBench_PREFAB(4) > castIronVise(1) > LOD0(0)
-    local root = getChildAt(viseScene, 0)           -- id_bootGross
-    local visuals = getChildAt(root, 5)             -- visuals
-    local lod0Group = getChildAt(visuals, 0)        -- LOD0
-    local gamerstube = getChildAt(lod0Group, 0)     -- Gamerstube_8/5
-    local prefab = getChildAt(gamerstube, 0)        -- sailingMotorBoatOnTheTable_PREFAB
-    local workBenchPrefab = getChildAt(prefab, 4)   -- workBench_PREFAB
-    local viseNode = getChildAt(workBenchPrefab, 1) -- castIronVise
-    local viseLod0 = getChildAt(viseNode, 0)        -- LOD0 shape
-
-    if viseLod0 == nil then
-        UsedPlus.logError("ServiceTruck: Could not navigate to castIronVise LOD0 in bootGross i3d")
-        delete(viseScene)
-        return
-    end
-
-    local clonedVise = clone(viseLod0, true)
-
-    local bedNode = I3DUtil.indexToObject(self.components, "0>0|19")
-    if bedNode == nil then
-        UsedPlus.logError("ServiceTruck: Could not find truck bed node for vise")
-        delete(clonedVise)
-        delete(viseScene)
-        return
-    end
-
-    link(bedNode, clonedVise)
-
-    -- Position on rear of bed, near the tailgate area
-    -- Negative X = right side (away from sidewall tools), negative Z = toward rear
-    setTranslation(clonedVise, -1.25, 1.02, -3.725)
-    setRotation(clonedVise, 0, math.pi, 0)
-    setScale(clonedVise, 0.5, 1.0, 1.0)
-
-    spec.viseVisualNode = clonedVise
-
-    delete(viseScene)
-    UsedPlus.logInfo("ServiceTruck: Cast iron vise loaded on truck bed")
-end
-
---[[
-    Load the portable toolbox from MobileServiceKit and attach to truck bed.
-    Uses toolboxWorkshop.i3d — all textures are $data/ (base game), no local files needed.
-]]
-function ServiceTruck:loadToolboxVisual()
-    local spec = self[SPEC_NAME]
-
-    local tbPath = Utils.getFilename("vehicles/serviceTruck/toolbox/toolboxWorkshop.i3d", self.baseDirectory)
-    local tbScene = g_i3DManager:loadSharedI3DFile(tbPath, false, false, false)
-    if tbScene == nil or tbScene == 0 then
-        UsedPlus.logError("ServiceTruck: Failed to load toolbox model from: " .. tostring(tbPath))
-        return
-    end
-
-    -- Navigate to toolbox_viz by index path:
-    -- root(0) > toolBoxWorkshopMainComponent > visible(3) > toolbox_viz(0)
-    local root = getChildAt(tbScene, 0)       -- toolBoxWorkshopMainComponent
-    local visible = getChildAt(root, 3)       -- visible TransformGroup
-    local toolboxViz = getChildAt(visible, 0) -- toolbox_viz Shape
-
-    if toolboxViz == nil then
-        UsedPlus.logError("ServiceTruck: Could not navigate to toolbox_viz in toolboxWorkshop i3d")
-        delete(tbScene)
-        return
-    end
-
-    local clonedToolbox = clone(toolboxViz, true)
-
-    local bedNode = I3DUtil.indexToObject(self.components, "0>0|19")
-    if bedNode == nil then
-        UsedPlus.logError("ServiceTruck: Could not find truck bed node for toolbox")
-        delete(clonedToolbox)
-        delete(tbScene)
-        return
-    end
-
-    link(bedNode, clonedToolbox)
-
-    -- Position on rear of bed near diesel tank and battery area
-    setTranslation(clonedToolbox, -1.0, 1.08, -3.0)
-    setRotation(clonedToolbox, 0, math.pi / 2, 0)
-    setScale(clonedToolbox, 1.0, 1.0, 1.0)
-    setVisibility(clonedToolbox, true)
-
-    spec.toolboxVisualNode = clonedToolbox
-
-    delete(tbScene)
-    UsedPlus.logInfo("ServiceTruck: Portable toolbox loaded on truck bed")
 end
 
 function ServiceTruck:onDelete()
@@ -369,25 +185,6 @@ function ServiceTruck:onDelete()
     if ServiceTruck.nearestTruck == self then
         ServiceTruck.nearestTruck = nil
     end
-
-    -- Clean up diesel tank visual
-    if spec.dieselTankVisualNode ~= nil then
-        delete(spec.dieselTankVisualNode)
-        spec.dieselTankVisualNode = nil
-    end
-
-    -- Clean up vise visual
-    if spec.viseVisualNode ~= nil then
-        delete(spec.viseVisualNode)
-        spec.viseVisualNode = nil
-    end
-
-    -- Clean up toolbox visual
-    if spec.toolboxVisualNode ~= nil then
-        delete(spec.toolboxVisualNode)
-        spec.toolboxVisualNode = nil
-    end
-
 end
 
 function ServiceTruck:saveToXMLFile(xmlFile, key, usedModNames)
@@ -520,6 +317,11 @@ function ServiceTruck:onUpdate(dt, isActiveForInput, isActiveForInputIgnoreSelec
     -- v2.12.0: Keep updating for on-foot detection (same pattern as FieldServiceKit)
     self:raiseActive()
 
+    -- Track engine state while player is inside (for on-foot Fault Tracer check)
+    if self.getIsEntered ~= nil and self:getIsEntered() and self.spec_motorized ~= nil then
+        spec.engineRunningOnExit = self.spec_motorized.isMotorStarted
+    end
+
     -- Reconnect saved target vehicle after load
     if spec.savedTargetId ~= nil and spec.isRestoring then
         for _, vehicle in ipairs(g_currentMission.vehicleSystem.vehicles) do
@@ -607,7 +409,7 @@ function ServiceTruck:onUpdate(dt, isActiveForInput, isActiveForInputIgnoreSelec
         local hasTarget = (spec.faultTracerTarget ~= nil)
         local doorsOpen = false
         if self.getAnimationTime ~= nil then
-            doorsOpen = self:getAnimationTime("door_service") > 0.5
+            doorsOpen = self:getAnimationTime("door_service") > 0.5 or self:getAnimationTime("door_service_fold") > 0.5
         end
         local shouldShow = playerNearby and isOnFoot and hasTarget and doorsOpen and ServiceTruck.nearestTruck == self
 
@@ -1205,6 +1007,36 @@ function ServiceTruck:openFaultTracerDialog()
     local spec = self[SPEC_NAME]
     if spec.faultTracerTarget == nil then return end
 
+    -- Check service truck engine is running (powers diagnostic equipment)
+    -- Debug: log all motor state values to find the reliable one
+    local motorSpec = self.spec_motorized
+    if motorSpec ~= nil then
+        local props = string.format(
+            "MOTOR DEBUG: isMotorStarted=%s, engineRunningOnExit=%s, getIsMotorStarted=%s, motorRpm=%s",
+            tostring(motorSpec.isMotorStarted),
+            tostring(spec.engineRunningOnExit),
+            tostring(self.getIsMotorStarted ~= nil and self:getIsMotorStarted() or "NO_FUNC"),
+            tostring(motorSpec.motor ~= nil and motorSpec.motor.lastMotorRpm or "NO_MOTOR")
+        )
+        UsedPlus.logInfo(props)
+    end
+
+    local engineRunning = spec.engineRunningOnExit
+    if motorSpec ~= nil then
+        -- Try multiple detection methods
+        if motorSpec.isMotorStarted then
+            engineRunning = true
+        elseif self.getIsMotorStarted ~= nil and self:getIsMotorStarted() then
+            engineRunning = true
+        elseif motorSpec.motor ~= nil and motorSpec.motor.lastMotorRpm ~= nil and motorSpec.motor.lastMotorRpm > 0 then
+            engineRunning = true
+        end
+    end
+    if not engineRunning then
+        InfoDialog.show("Cannot start Fault Tracer: Service Truck engine must be running to power diagnostic equipment.")
+        return
+    end
+
     -- Check fluid levels before opening
     local oilLevel = self:getFillUnitFillLevel(spec.oilFillUnit) or 0
     local hydLevel = self:getFillUnitFillLevel(spec.hydraulicFillUnit) or 0
@@ -1221,6 +1053,26 @@ function ServiceTruck:openFaultTracerDialog()
     end
 
     local targetVehicle = spec.faultTracerTarget.vehicle
+
+    -- Check target vehicle engine is running (sensors need power)
+    -- Note: isMotorStarted is unreliable when player is on foot, use multiple detection methods
+    local targetMotor = targetVehicle.spec_motorized
+    local targetEngineRunning = false
+    if targetMotor ~= nil then
+        if targetMotor.isMotorStarted then
+            targetEngineRunning = true
+        elseif targetVehicle.getIsMotorStarted ~= nil and targetVehicle:getIsMotorStarted() then
+            targetEngineRunning = true
+        elseif targetMotor.motor ~= nil and targetMotor.motor.lastMotorRpm ~= nil and targetMotor.motor.lastMotorRpm > 0 then
+            targetEngineRunning = true
+        end
+    else
+        targetEngineRunning = true  -- Non-motorized vehicles (trailers etc.) pass by default
+    end
+    if not targetEngineRunning then
+        InfoDialog.show("Cannot start Fault Tracer: Target vehicle engine must be running for sensor diagnostics.")
+        return
+    end
     DialogLoader.show("FaultTracerDialog", "setData", targetVehicle, self)
 end
 

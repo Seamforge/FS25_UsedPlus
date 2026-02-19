@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="service.i3d" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+  <Asset>
+    <Export program="GIANTS Editor 64bit" version="10.0.11"/>
+  </Asset>
+
+  <Files>
+    <File fileId="10" filename="textures/vehicleShader.xml"/>
+    <File fileId="27" filename="$data/maps/mapAS/textures/props/canister_diffuse.png"/>
+    <File fileId="28" filename="$data/maps/mapAS/textures/props/canister_normal.png"/>
+    <File fileId="29" filename="$data/maps/mapAS/textures/props/canister_specular.png"/>
+    <File fileId="4" filename="$data/maps/mapUS/textures/props/connectedPylons_diffuse.png"/>
+    <File fileId="5" filename="$data/maps/mapUS/textures/props/connectedPylons_normal.png"/>
+    <File fileId="6" filename="$data/maps/mapUS/textures/props/connectedPylons_specular.png"/>
+    <File fileId="24" filename="$data/placeables/mapEU/pianoFactory/props/batteryCharger_diffuse.dds"/>
+    <File fileId="25" filename="$data/placeables/mapEU/pianoFactory/props/batteryCharger_normal.dds"/>
+    <File fileId="26" filename="$data/placeables/mapEU/pianoFactory/props/batteryCharger_specular.dds"/>
+    <File fileId="30" filename="$data/placeables/mapEU/pianoFactory/props/oiler_diffuse.dds"/>
+    <File fileId="31" filename="$data/placeables/mapEU/pianoFactory/props/oiler_normal.dds"/>
+    <File fileId="32" filename="$data/placeables/mapEU/pianoFactory/props/oiler_specular.dds"/>
+    <File fileId="3" filename="$data/shaders/glowShader.xml"/>
+    <File fileId="7" filename="$data/shaders/placeableShader.xml"/>
+    <File fileId="13" filename="$data/shaders/vehicleShader.xml"/>
+    <File fileId="12" filename="$data/shared/default_normal.png"/>
+    <File fileId="21" filename="$data/shared/default_specular.png"/>
+    <File fileId="15" filename="$data/shared/detailLibrary/flat_normal.png"/>
+    <File fileId="38" filename="$data/shared/detailLibrary/metallic/clear_diffuse.dds"/>
+    <File fileId="37" filename="$data/shared/detailLibrary/metallic/clear_specular.dds"/>
+    <File fileId="16" filename="$data/shared/detailLibrary/metallic/scratched_diffuse.png"/>
+    <File fileId="14" filename="$data/shared/detailLibrary/metallic/scratched_specular.png"/>
+    <File fileId="36" filename="$data/shared/detailLibrary/nonMetallic/metal/metalPainted_diffuse.png"/>
+    <File fileId="35" filename="$data/shared/detailLibrary/nonMetallic/metal/metalPainted_specular.png"/>
+    <File fileId="2" filename="$data/shared/materialHolders/defaultGlow_diffuse.dds"/>
+    <File fileId="22" filename="$data/shared/window02_diffuse.png"/>
+    <File fileId="23" filename="$data/shared/window02_specular.png"/>
+  </Files>
+
+
+  <Materials>
+    <Material name="batteryCharger_mat" materialId="9">
+      <Texture fileId="24"/>
+      <Normalmap fileId="25"/>
+      <Glossmap fileId="26"/>
+    </Material>
+    <Material name="bmw3_spec" materialId="13">
+    </Material>
+    <Material name="canister_mat" materialId="15">
+      <Texture fileId="27"/>
+      <Normalmap fileId="28"/>
+      <Glossmap fileId="29"/>
+    </Material>
+    <Material name="chromeMat" materialId="18" diffuseColor="0.8 0.8 0.8 1" customShaderId="13">
+      <Normalmap fileId="12"/>
+      <Custommap name="detailSpecular" fileId="37"/>
+      <Custommap name="detailNormal" fileId="15"/>
+      <Custommap name="detailDiffuse" fileId="38"/>
+    </Material>
+    <Material name="connectedPylons_mat" materialId="23" customShaderId="7">
+      <Texture fileId="4"/>
+      <Normalmap fileId="5"/>
+      <Glossmap fileId="6"/>
+    </Material>
+    <Material name="defaultGlow_mat" materialId="26" alphaBlending="true" customShaderId="3" customShaderVariation="additive_colorScale_fresnel_pulsating">
+      <Emissivemap fileId="2"/>
+      <CustomParameter name="colorScale" value="0 0 1"/>
+    </Material>
+    <Material name="dieselTank_mat" materialId="27" customShaderId="10">
+    </Material>
+    <Material name="FuelCan" materialId="35" diffuseColor="1 0 0 1" customShaderId="10">
+      <Normalmap fileId="12"/>
+      <Glossmap fileId="21"/>
+    </Material>
+    <Material name="lambert1" materialId="43" diffuseColor="0.501961 0.501961 0.501961 1">
+    </Material>
+    <Material name="metalPaintedBlackMat" materialId="137" diffuseColor="0.8 0.8 0.8 1" customShaderId="13">
+      <Normalmap fileId="12"/>
+      <Custommap name="detailSpecular" fileId="35"/>
+      <Custommap name="detailNormal" fileId="15"/>
+      <Custommap name="detailDiffuse" fileId="36"/>
+      <CustomParameter name="colorScale" value="0.012 0.012 0.012"/>
+    </Material>
+    <Material name="oiler_mat" materialId="140">
+      <Texture fileId="30"/>
+      <Normalmap fileId="31"/>
+      <Glossmap fileId="32"/>
+    </Material>
+    <Material name="phong1" materialId="142" diffuseColor="0.564706 0.564706 0.564706 1">
+    </Material>
+    <Material name="silverScratchedShinyMat" materialId="155" diffuseColor="1 1 1 1" customShaderId="13">
+      <Normalmap fileId="12"/>
+      <Custommap name="detailSpecular" fileId="14"/>
+      <Custommap name="detailNormal" fileId="15"/>
+      <Custommap name="detailDiffuse" fileId="16"/>
+      <CustomParameter name="colorScale" value="0.7379 0.7454 0.7529"/>
+    </Material>
+    <Material name="window02_mat" materialId="158">
+      <Texture fileId="22"/>
+      <Normalmap fileId="12"/>
+      <Glossmap fileId="23"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="service.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="serviceVehicle" translation="0.814307 -1.2198 0.0469201" nodeId="798">
+      <TransformGroup name="workshop" nodeId="799">
+        <TransformGroup name="workshopTriggers" nodeId="800">
+          <Shape name="sellTrigger" translation="-2.74248 0.112362 -2.61823" shapeId="1" kinematic="true" compound="true" trigger="true" collisionFilterGroup="0x20000000" collisionFilterMask="0x100000" nodeId="801" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="43"/>
+          <TransformGroup name="sellAreaTriggerAnimation" translation="-7.76157 0 3.08015" nodeId="802">
+            <Shape name="sellAreaTrigger" translation="-1.68479 0 0" shapeId="2" kinematic="true" compound="true" trigger="true" collisionFilterGroup="0x20000000" collisionFilterMask="0x10000" nodeId="803" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="43"/>
+          </TransformGroup>
+        </TransformGroup>
+        <TransformGroup name="workshopMarkersActive" translation="-4.486 0 -2.208" nodeId="804">
+          <TransformGroup name="workshopMarkerGlowConfig" nodeId="805">
+            <Shape name="workshopMarkerGlow" shapeId="3" visibility="false" clipDistance="200" nodeId="806" castsShadows="true" receiveShadows="true" materialIds="26"/>
+          </TransformGroup>
+          <TransformGroup name="workshopMarkerActive1" translation="-2.689 0 4.067" nodeId="807">
+            <TransformGroup name="workshopMarkerLinkNode1" nodeId="808"/>
+          </TransformGroup>
+          <TransformGroup name="workshopMarkerActive2" translation="1.376 0 4.067" nodeId="809">
+            <TransformGroup name="workshopMarkerLinkNode2" nodeId="810"/>
+          </TransformGroup>
+          <TransformGroup name="workshopMarkerActive3" translation="-2.689 0 -5.333" nodeId="811">
+            <TransformGroup name="workshopMarkerLinkNode3" nodeId="812"/>
+          </TransformGroup>
+          <TransformGroup name="workshopMarkerActive4" translation="1.376 0 -5.333" nodeId="813">
+            <TransformGroup name="workshopMarkerLinkNode4" nodeId="814"/>
+          </TransformGroup>
+        </TransformGroup>
+        <TransformGroup name="workshopMarkersInactive" translation="-1.36928 1.02838 -1.92398" scale="0.9 0.9 0.9" nodeId="815">
+          <TransformGroup name="transform" nodeId="816">
+            <Shape name="cone1" shapeId="4" clipDistance="75" nodeId="817" castsShadows="true" receiveShadows="true" materialIds="23"/>
+          </TransformGroup>
+          <TransformGroup name="transform" translation="0 0.1 0" nodeId="818">
+            <Shape name="cone2" shapeId="4" clipDistance="75" nodeId="819" castsShadows="true" receiveShadows="true" materialIds="23"/>
+          </TransformGroup>
+          <TransformGroup name="transform" translation="0 0.2 0" nodeId="820">
+            <Shape name="cone3" shapeId="4" clipDistance="75" nodeId="821" castsShadows="true" receiveShadows="true" materialIds="23"/>
+          </TransformGroup>
+          <TransformGroup name="transform" translation="0 0.3 0" nodeId="822">
+            <Shape name="cone4" shapeId="4" clipDistance="75" nodeId="823" castsShadows="true" receiveShadows="true" materialIds="23"/>
+          </TransformGroup>
+        </TransformGroup>
+        <Shape name="laptop" translation="-1.75832 1.14734 -2.94357" rotation="3.29904e-07 3.79987 3.66546e-06" shapeId="5" clipDistance="75" nodeId="824" castsShadows="true" receiveShadows="true" materialIds="13">
+          <Shape name="laptopScreen" rotation="0 0 100" shapeId="6" clipDistance="75" nodeId="825" castsShadows="true" receiveShadows="true" materialIds="13">
+            <TransformGroup name="headers" rotation="-9.239 -90 0" clipDistance="75" nodeId="826">
+              <TransformGroup name="vehicleNameText" translation="-0.17 0.219 -0.011" nodeId="827"/>
+              <TransformGroup name="valueHeader" translation="-0.17 0.195246 -0.0105477" nodeId="828"/>
+              <TransformGroup name="ageHeader" translation="-0.17 0.160633 -0.00992486" nodeId="829"/>
+              <TransformGroup name="operatingHoursHeader" translation="-0.17 0.122398 -0.0105219" nodeId="830"/>
+              <TransformGroup name="conditionHeader" translation="-0.17 0.0839716 -0.00823145" nodeId="831"/>
+              <TransformGroup name="paintConditionHeader" translation="-0.17 0.0445514 -0.00760074" nodeId="832"/>
+              <TransformGroup name="numOfExtraVehicles" translation="0.138537 0.219 -0.0075988" rotation="0 0.0279765 1.06722e-07" nodeId="833"/>
+            </TransformGroup>
+            <TransformGroup name="texts" rotation="-9.239 -90 0" clipDistance="75" nodeId="834">
+              <TransformGroup name="valueText" translation="-0.158972 0.181617 -0.0105477" nodeId="835"/>
+              <TransformGroup name="ageText" translation="-0.158972 0.14458 -0.0102851" nodeId="836"/>
+              <TransformGroup name="operatingHoursText" translation="-0.158972 0.10671 -0.00848851" nodeId="837"/>
+              <TransformGroup name="conditionText" translation="-0.158972 0.0688119 -0.0076291" nodeId="838"/>
+              <TransformGroup name="paintConditionText" translation="-0.158972 0.0300484 -0.00731814" nodeId="839"/>
+            </TransformGroup>
+          </Shape>
+          <TransformGroup name="laptopScreenBacklight_01" nodeId="840">
+            <Light name="laptopScreenBacklight_02" translation="-0.146989 0.11908 -0.0110972" visibility="false" nodeId="841" type="point" color="0.5 0.6 0.85" emitDiffuse="true" emitSpecular="true" range="0.3"/>
+          </TransformGroup>
+        </Shape>
+      </TransformGroup>
+      <TransformGroup name="oilTank" translation="-1.15 1.07938 -1.6" nodeId="842">
+        <Shape name="oilTank_vis" translation="0.343834 0.00272163 0.530506" scale="1.129 0.816 0.941" shapeId="7" clipDistance="300" nodeId="843" castsShadows="true" receiveShadows="true" materialIds="27"/>
+        <TransformGroup name="oilTrigg" nodeId="844">
+          <Shape name="oilExactFillRootNode" translation="0.5 0.5 0" shapeId="8" kinematic="true" compound="true" collisionFilterGroup="0x40000000" collisionFilterMask="0x20000000" nodeId="845" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="43"/>
+        </TransformGroup>
+      </TransformGroup>
+      <TransformGroup name="hydraulicTank" translation="-1.15 1.07938 -2" nodeId="846">
+        <Shape name="hydraulicTank_vis" translation="0.343834 0.00272163 0.530506" scale="1.129 0.816 0.941" shapeId="7" clipDistance="300" nodeId="847" castsShadows="true" receiveShadows="true" materialIds="27"/>
+        <TransformGroup name="hydraulicTrigg" nodeId="848">
+          <Shape name="hydraulicExactFillRootNode" translation="0.5 0.5 0" shapeId="8" kinematic="true" compound="true" collisionFilterGroup="0x40000000" collisionFilterMask="0x20000000" nodeId="849" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="43"/>
+        </TransformGroup>
+      </TransformGroup>
+      <TransformGroup name="airTank" translation="-1.5 1.44 -2.6" nodeId="850">
+        <Shape name="airTank_vis" rotation="180 -90 0" scale="0.45 0.45 0.45" shapeId="9" clipDistance="300" nodeId="851" castsShadows="true" receiveShadows="true" materialIds="155"/>
+      </TransformGroup>
+      <TransformGroup name="deco_bottleJack" translation="-0.8 1.025 -1.8" rotation="0 -25 0" scale="0.0165 0.0165 0.0165" nodeId="852">
+        <Shape name="deco_bottleJack_vis" shapeId="10" clipDistance="50" nodeId="853" castsShadows="true" receiveShadows="true" materialIds="35"/>
+      </TransformGroup>
+      <TransformGroup name="deco_batteryCharger" translation="-0.6 1 -2.3" rotation="0 12 0" scale="0.75 0.75 0.75" nodeId="854">
+        <Shape name="deco_charger_glass" shapeId="11" clipDistance="10" nodeId="855" castsShadows="true" receiveShadows="true" materialIds="158"/>
+        <Shape name="deco_charger_body" shapeId="12" clipDistance="50" nodeId="856" castsShadows="true" receiveShadows="true" materialIds="9"/>
+      </TransformGroup>
+      <TransformGroup name="deco_fuelCan" translation="0.1 1.025 -2.3" rotation="0 252 0" nodeId="857">
+        <Shape name="deco_fuelCan_vis" shapeId="13" clipDistance="50" nodeId="858" castsShadows="true" receiveShadows="true" materialIds="15"/>
+      </TransformGroup>
+      <TransformGroup name="deco_oiler" translation="-0.5 1.025 -1.9" rotation="0 231 0" scale="0.8 0.8 0.8" nodeId="859">
+        <Shape name="deco_oiler_vis" shapeId="14" clipDistance="20" nodeId="860" castsShadows="true" receiveShadows="true" materialIds="140"/>
+      </TransformGroup>
+      <TransformGroup name="deco_coolant1" translation="-0.3 1.025 -2.1" rotation="0 180 0" scale="0.5 0.54 0.58" nodeId="861">
+        <Shape name="deco_coolant1_vis" shapeId="15" clipDistance="50" nodeId="862" castsShadows="true" receiveShadows="true" materialIds="13"/>
+      </TransformGroup>
+      <TransformGroup name="deco_coolant2" translation="-0.45 1.025 -2.15" rotation="0 200 0" scale="0.5 0.54 0.58" nodeId="863">
+        <Shape name="deco_coolant2_vis" shapeId="15" clipDistance="50" nodeId="864" castsShadows="true" receiveShadows="true" materialIds="13"/>
+      </TransformGroup>
+      <TransformGroup name="deco_battery" translation="-1.44 1.08 -3.5" rotation="0 90 0" scale="0.61 2.4 1.5" nodeId="865">
+        <Shape name="deco_battery_vis" shapeId="16" clipDistance="200" nodeId="866" castsShadows="true" receiveShadows="true" materialIds="13,142"/>
+      </TransformGroup>
+      <TransformGroup name="deco_tailgate" translation="-0.842 1.225 -3.956" nodeId="867">
+        <Shape name="deco_tailgate_vis" scale="1.626 0.35 0.04" shapeId="17" clipDistance="300" nodeId="868" castsShadows="true" receiveShadows="true" materialIds="137"/>
+        <TransformGroup name="deco_handle_tilt" translation="0.72 0.1 0" rotation="90 0 0" nodeId="869">
+          <Shape name="deco_tailgate_handle" rotation="0 -90 0" scale="1 1 0.9" shapeId="18" clipDistance="300" nodeId="870" castsShadows="true" receiveShadows="true" materialIds="18"/>
+        </TransformGroup>
+      </TransformGroup>
+    </TransformGroup>
+  </Scene>
+
+</i3D>

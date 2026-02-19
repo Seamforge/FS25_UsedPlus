@@ -53,7 +53,7 @@
 >
 > **What's still in progress:** Malfunctions system, Service Truck restoration, multiplayer edge cases, balance tuning.
 >
-> **Report issues:** [github.com/XelaNull/FS25_UsedPlus/issues](https://github.com/XelaNull/FS25_UsedPlus/issues) — Latest version always at: **[github.com/XelaNull/FS25_UsedPlus](https://github.com/XelaNull/FS25_UsedPlus)**
+> **Download latest:** [github.com/XelaNull/FS25_UsedPlus/releases](https://github.com/XelaNull/FS25_UsedPlus/releases) — **Report issues:** [github.com/XelaNull/FS25_UsedPlus/issues](https://github.com/XelaNull/FS25_UsedPlus/issues)
 
 ---
 
@@ -274,20 +274,14 @@ We believe this is one of the most ambitious AI-human collaborative software pro
 
 ## 📥 Installation
 
-> ⚠️ **Work in Progress:** No official release yet. Core features work, but some systems (malfunctions, Service Truck) are under active development. To try it now:
-> - **Option 1:** `git clone https://github.com/XelaNull/FS25_UsedPlus.git` then copy folder to mods
-> - **Option 2:** Download ZIP from GitHub → Extract → Copy `FS25_UsedPlus` folder to mods
-
-**When Official Release is Available:**
-
-1. **Download** `FS25_UsedPlus.zip` from [Releases](https://github.com/XelaNull/FS25_UsedPlus/releases) or [ModHub](https://www.farming-simulator.com) *(pending approval)*
-2. **Place** in your mods folder:
+1. **Download** `FS25_UsedPlus.zip` from [**GitHub Releases**](https://github.com/XelaNull/FS25_UsedPlus/releases)
+2. **Place** the ZIP (do not extract!) in your mods folder:
    - Windows: `Documents\My Games\FarmingSimulator2025\mods\`
    - Mac: `~/Library/Application Support/FarmingSimulator2025/mods/`
-3. **Enable** in mod selection screen
-4. **Start** a new game or continue existing save
+3. **Enable** "UsedPlus" in the mod selection screen
+4. **Start** a new game or continue an existing save
 
-> ⚠️ Keep either the folder OR the ZIP, not both.
+> 💡 **Updating?** Remove the old `FS25_UsedPlus.zip` first, then add the new version. Your savegame data (loans, credit score, etc.) will be preserved.
 
 **[Detailed Installation Guide →](https://github.com/XelaNull/FS25_UsedPlus/wiki/Installation)**
 

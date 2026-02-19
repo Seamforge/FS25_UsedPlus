@@ -42,8 +42,6 @@ FaultTracerDialog.COLOR_FLAGGED = { 0.20, 0.10, 0.30, 1 }
 FaultTracerDialog.COLOR_MODE_ACTIVE = { 0.15, 0.30, 0.15, 1 }
 FaultTracerDialog.COLOR_MODE_INACTIVE = { 0.15, 0.15, 0.20, 1 }
 
--- Max hints per game
-FaultTracerDialog.MAX_HINTS = 3
 
 --[[
     Register the dialog with g_gui (lazy loading pattern).
@@ -74,7 +72,6 @@ function FaultTracerDialog.new(target, custom_mt)
     self.mode = FaultTracerDialog.MODE_PROBE
     self.flaggingCell = nil  -- {row, col} of cell being flagged
     self.results = nil
-    self.maxHints = FaultTracerDialog.MAX_HINTS
 
     -- Cell element references (populated in onCreate)
     self.cellElements = {}
@@ -343,12 +340,6 @@ function FaultTracerDialog:displayGrid()
         self.ftOilUsedText:setText(string.format("%.1fL", FaultTracerGrid.getOilUsed(self.grid)))
     end
 
-    -- Update hints remaining
-    if self.ftHintsRemaining then
-        local remaining = self.maxHints - self.grid.hintsUsed
-        self.ftHintsRemaining:setText(string.format("%d left", remaining))
-    end
-
     -- Update mode buttons
     self:updateModeButtons()
 
@@ -597,14 +588,58 @@ function FaultTracerDialog:displayTypeSelection()
     if self.typeSelectContainer then
         self.typeSelectContainer:setVisible(true)
     end
-    -- Also keep grid visible behind overlay
-    if self.gridContainer then
-        self.gridContainer:setVisible(true)
-    end
 
     if self.ftTypeSelectCell and self.flaggingCell then
         local colLetter = string.char(64 + self.flaggingCell.col)  -- A, B, C, D, E
         self.ftTypeSelectCell:setText(string.format("Cell [%s%d]", colLetter, self.flaggingCell.row))
+    end
+
+    -- Dynamic gauge hint: scan neighbors for gauge color clues
+    if self.ftGaugeHint and self.flaggingCell and self.grid then
+        local row = self.flaggingCell.row
+        local col = self.flaggingCell.col
+        local worstGauge = nil
+        local hasProbed = false
+
+        for dr = -1, 1 do
+            for dc = -1, 1 do
+                if dr ~= 0 or dc ~= 0 then
+                    local nr = row + dr
+                    local nc = col + dc
+                    if nr >= 1 and nr <= self.grid.rows and nc >= 1 and nc <= self.grid.cols then
+                        local neighbor = self.grid.cells[nr][nc]
+                        if neighbor.state == FaultTracerGrid.STATE_REVEALED and not neighbor.isFault then
+                            hasProbed = true
+                            if neighbor.gaugeColor == FaultTracerGrid.GAUGE_RED then
+                                worstGauge = FaultTracerGrid.GAUGE_RED
+                            elseif neighbor.gaugeColor == FaultTracerGrid.GAUGE_AMBER then
+                                if worstGauge ~= FaultTracerGrid.GAUGE_RED then
+                                    worstGauge = FaultTracerGrid.GAUGE_AMBER
+                                end
+                            elseif neighbor.gaugeColor == FaultTracerGrid.GAUGE_GREEN then
+                                if worstGauge == nil then
+                                    worstGauge = FaultTracerGrid.GAUGE_GREEN
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+        end
+
+        if not hasProbed then
+            self.ftGaugeHint:setText("No probed cells nearby — use gauge colors as clues")
+            self.ftGaugeHint:setTextColor(0.5, 0.5, 0.6, 1)
+        elseif worstGauge == FaultTracerGrid.GAUGE_RED then
+            self.ftGaugeHint:setText("Nearby gauges show RED — likely Seized")
+            self.ftGaugeHint:setTextColor(1, 0.3, 0.3, 1)
+        elseif worstGauge == FaultTracerGrid.GAUGE_AMBER then
+            self.ftGaugeHint:setText("Nearby gauges show AMBER — likely Cracked")
+            self.ftGaugeHint:setTextColor(1, 0.8, 0.2, 1)
+        else
+            self.ftGaugeHint:setText("Nearby gauges show GREEN — likely Corroded")
+            self.ftGaugeHint:setTextColor(0.3, 1, 0.3, 1)
+        end
     end
 end
 
@@ -639,29 +674,6 @@ end
 -- ============================================================
 -- Action Buttons
 -- ============================================================
-
-function FaultTracerDialog:onHintClick()
-    if self.grid == nil then return end
-
-    if self.grid.hintsUsed >= self.maxHints then
-        if self.ftStatusMsg then
-            self.ftStatusMsg:setText("No hints remaining!")
-        end
-        return
-    end
-
-    local hintResult = FaultTracerGrid.revealHint(self.grid)
-
-    if hintResult == nil then
-        if self.ftStatusMsg then
-            self.ftStatusMsg:setText("No safe cells to reveal!")
-        end
-        return
-    end
-
-    -- Oil tracked via FaultTracerGrid.getOilUsed (hintsUsed incremented in grid engine)
-    self:displayGrid()
-end
 
 function FaultTracerDialog:onQuickScanClick()
     if self.grid == nil then return end

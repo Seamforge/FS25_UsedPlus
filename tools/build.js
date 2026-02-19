@@ -50,6 +50,7 @@ const EXCLUDE_PATTERNS = [
     /package-lock\.json$/,
     /\.translation-sync\.json$/,
     /icon_old\.dds\.bak$/,
+    /serviceTruck_backup\//,
 ];
 
 function shouldExclude(relativePath) {

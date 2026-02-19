@@ -814,7 +814,7 @@ function FaultTracerGrid.calculateResults(grid)
             faultResult.oilCost = baseCost
             results.correctCount = results.correctCount + 1
         else
-            faultResult.oilCost = baseCost * 1.5
+            faultResult.oilCost = baseCost * 3.0
             results.incorrectCount = results.incorrectCount + 1
         end
 

@@ -7,7 +7,7 @@
     -->
 
     <author>UsedPlus Team</author>
-    <version>2.15.0.6</version>
+    <version>2.15.0.35</version>
 
     <title>
         <en>UsedPlus - Finance &amp; Marketplace System</en>
@@ -98,7 +98,18 @@ UNTERSTÜTZUNG
          Localization files loaded via prefix pattern
          Game looks for translation_en.xml, translation_de.xml, etc.
     -->
-    <l10n filenamePrefix="translations/translation"/>
+    <l10n filenamePrefix="translations/translation">
+        <text name="action_activateService">
+            <en>Open Service Doors</en>
+            <de>Servicetüren öffnen</de>
+            <fr>Ouvrir les portes de service</fr>
+        </text>
+        <text name="action_deactivateService">
+            <en>Close Service Doors</en>
+            <de>Servicetüren schließen</de>
+            <fr>Fermer les portes de service</fr>
+        </text>
+    </l10n>
 
     <!--
          Custom fill types for Service Truck restoration system
@@ -343,8 +354,19 @@ UNTERSTÜTZUNG
         </type>
         <type name="usedPlusServiceTruck" parent="carFillable" filename="$dataS/scripts/vehicles/Vehicle.lua">
             <specialization name="ServiceTruck"/>
+            <specialization name="fillTriggerVehicle"/>
         </type>
     </vehicleTypes>
+
+    <!-- Material templates for Service Truck rim colors (RAM_SILVER, DARK_CHROME, etc.) -->
+    <materialTemplates id="brandColor" name="Brand Material" parentTemplateFilename="$data/shared/detailLibrary/materialTemplates.xml">
+        <template name="RAM_SILVER" title="Silver" usage="2" colorScale="1 1 1" parentTemplate="silverScratched"/>
+        <template name="RIM_DARK_STEEL" title="Dark Steel" usage="2" colorScale="0.35 0.35 0.40" parentTemplate="silverScratched"/>
+        <template name="RIM_ALU" title="Aluminium" usage="2" colorScale="0.65 0.65 0.75" parentTemplate="copperScratched"/>
+        <template name="DARK_CHROME" title="Dark Chrome" usage="2" colorScale=".65 .65 .65" parentTemplate="chrome"/>
+        <template name="PLAST1" title="Dark plastik" usage="2" colorScale="0.02 0.02 0.02" parentTemplate="plasticPaintedBlack"/>
+        <template name="PLAST2" title="Dark plastik2" usage="2" colorScale="0.03 0.03 0.03" parentTemplate="plasticPaintedShinyBlack"/>
+    </materialTemplates>
 
     <!-- Placeable Specializations -->
     <placeableSpecializations>

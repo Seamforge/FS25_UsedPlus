@@ -286,12 +286,17 @@ function DealDetailsDialog:updateDisplay()
     -- Payoff / Buyout amount
     local payoffAmount
     if isLease then
-        -- Calculate proper lease buyout: residual - equity
-        local depreciation = (deal.originalPrice or deal.baseCost or 0) - (deal.residualValue or 0)
-        local equity = FinanceCalculations.calculateLeaseEquity(
-            deal.monthlyPayment, deal.monthsPaid, depreciation, deal.termMonths)
-        local residualValue = deal.residualValue or deal.originalPrice or 0
-        payoffAmount = FinanceCalculations.calculateLeaseBuyout(residualValue, equity)
+        if deal.calculateBuyoutPrice then
+            -- Land lease: use deal's own buyout calculation
+            payoffAmount = deal:calculateBuyoutPrice()
+        else
+            -- Vehicle lease: residual - equity
+            local depreciation = (deal.originalPrice or deal.baseCost or 0) - (deal.residualValue or 0)
+            local equity = FinanceCalculations.calculateLeaseEquity(
+                deal.monthlyPayment, deal.monthsPaid, depreciation, deal.termMonths)
+            local residualValue = deal.residualValue or deal.originalPrice or 0
+            payoffAmount = FinanceCalculations.calculateLeaseBuyout(residualValue, equity)
+        end
     else
         payoffAmount = deal.currentBalance or 0
         if deal.accruedInterest then
@@ -547,32 +552,51 @@ function DealDetailsDialog:onEarlyPayoff()
                     (deal.itemType == "land_lease")
 
     if isLease then
-        -- Calculate proper lease buyout values
-        local depreciation = (deal.originalPrice or deal.baseCost or 0) - (deal.residualValue or 0)
-        local equity = FinanceCalculations.calculateLeaseEquity(
-            deal.monthlyPayment, deal.monthsPaid, depreciation, deal.termMonths)
-        local residualValue = deal.residualValue or deal.originalPrice or 0
-        local buyoutPrice = FinanceCalculations.calculateLeaseBuyout(residualValue, equity)
+        local buyoutPrice, message
 
-        -- Deposit refund (no vehicle damage assessment from this path)
-        local securityDeposit = deal.securityDeposit or 0
-        local depositRefund = securityDeposit
+        if deal.calculateBuyoutPrice then
+            -- Land lease: use deal's own buyout calculation
+            buyoutPrice = deal:calculateBuyoutPrice()
+            local savings = (deal.landPrice or 0) - buyoutPrice
 
-        -- Store for use in buyout callback
-        self.leaseBuyoutData = {
-            buyoutPrice = buyoutPrice,
-            equityApplied = equity,
-            depositRefund = depositRefund
-        }
+            self.leaseBuyoutData = {
+                buyoutPrice = buyoutPrice,
+                equityApplied = 0,
+                depositRefund = 0
+            }
 
-        local netCost = buyoutPrice - depositRefund
-        local message = string.format(
-            "Buy out this lease for %s?\n\nBuyout price: %s\nEquity applied: -%s\nDeposit refund: +%s\nNet cost: %s",
-            g_i18n:formatMoney(buyoutPrice, 0, true, true),
-            g_i18n:formatMoney(residualValue, 0, true, true),
-            g_i18n:formatMoney(equity, 0, true, true),
-            g_i18n:formatMoney(depositRefund, 0, true, true),
-            g_i18n:formatMoney(netCost, 0, true, true))
+            message = string.format(
+                "Buy out this land lease for %s?\n\nOriginal land price: %s\nLease progress savings: -%s\nBuyout price: %s",
+                g_i18n:formatMoney(buyoutPrice, 0, true, true),
+                g_i18n:formatMoney(deal.landPrice or 0, 0, true, true),
+                g_i18n:formatMoney(savings, 0, true, true),
+                g_i18n:formatMoney(buyoutPrice, 0, true, true))
+        else
+            -- Vehicle lease: residual - equity
+            local depreciation = (deal.originalPrice or deal.baseCost or 0) - (deal.residualValue or 0)
+            local equity = FinanceCalculations.calculateLeaseEquity(
+                deal.monthlyPayment, deal.monthsPaid, depreciation, deal.termMonths)
+            local residualValue = deal.residualValue or deal.originalPrice or 0
+            buyoutPrice = FinanceCalculations.calculateLeaseBuyout(residualValue, equity)
+
+            local securityDeposit = deal.securityDeposit or 0
+            local depositRefund = securityDeposit
+
+            self.leaseBuyoutData = {
+                buyoutPrice = buyoutPrice,
+                equityApplied = equity,
+                depositRefund = depositRefund
+            }
+
+            local netCost = buyoutPrice - depositRefund
+            message = string.format(
+                "Buy out this lease for %s?\n\nBuyout price: %s\nEquity applied: -%s\nDeposit refund: +%s\nNet cost: %s",
+                g_i18n:formatMoney(buyoutPrice, 0, true, true),
+                g_i18n:formatMoney(residualValue, 0, true, true),
+                g_i18n:formatMoney(equity, 0, true, true),
+                g_i18n:formatMoney(depositRefund, 0, true, true),
+                g_i18n:formatMoney(netCost, 0, true, true))
+        end
 
         YesNoDialog.show(self.onLeaseBuyoutConfirm, self, message, "Buyout Lease")
     else
