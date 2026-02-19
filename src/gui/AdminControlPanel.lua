@@ -870,9 +870,7 @@ function AdminControlPanel:onDlgHistoryClick()
         if deals and #deals > 0 then
             DialogLoader.show("PaymentHistoryDialog", "setDeal", deals[1])
         else
-            g_gui:showInfoDialog({
-                text = "No active deals to show history for"
-            })
+            g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_INFO, "No active deals to show history for")
         end
     end
 end
@@ -896,13 +894,13 @@ function AdminControlPanel:onDlgSearchClick()
             end
         end
     end
-    g_gui:showInfoDialog({text = "No store items found"})
+    g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_INFO, "No store items found")
 end
 
 function AdminControlPanel:onDlgPurchaseClick()
     self:close()
     if not self.vehicle then
-        g_gui:showInfoDialog({text = "Need to be in a vehicle"})
+        g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_INFO, "Need to be in a vehicle")
         return
     end
 
@@ -925,7 +923,7 @@ function AdminControlPanel:onDlgPurchaseClick()
             DialogLoader.show("UnifiedPurchaseDialog", "setVehicleData", storeItem, price, saleItem, nil)
         end
     else
-        g_gui:showInfoDialog({text = "Could not find store item for current vehicle"})
+        g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_INFO, "Could not find store item for current vehicle")
     end
 end
 
@@ -933,13 +931,13 @@ function AdminControlPanel:onDlgNegotiateClick()
     self:close()
     -- Would need mock listing data
     self:setStatus("Negotiate Dialog: Requires active search result")
-    g_gui:showInfoDialog({text = "Negotiate Dialog requires an active search with found vehicles"})
+    g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_INFO, "Negotiate Dialog requires an active search with found vehicles")
 end
 
 function AdminControlPanel:onDlgSellerClick()
     self:close()
     -- Would need mock response data
-    g_gui:showInfoDialog({text = "Seller Response Dialog requires negotiation context"})
+    g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_INFO, "Seller Response Dialog requires negotiation context")
 end
 
 function AdminControlPanel:onDlgObdClick()
@@ -947,20 +945,20 @@ function AdminControlPanel:onDlgObdClick()
     if self.vehicle then
         DialogLoader.show("FieldServiceKitDialog", "setData", self.vehicle, nil, "master")
     else
-        g_gui:showInfoDialog({text = "Need to be in a vehicle"})
+        g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_INFO, "Need to be in a vehicle")
     end
 end
 
 function AdminControlPanel:onDlgServiceClick()
     self:close()
     -- Service truck dialog needs service truck context
-    g_gui:showInfoDialog({text = "Service Truck Dialog requires Service Truck context"})
+    g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_INFO, "Service Truck Dialog requires Service Truck context")
 end
 
 function AdminControlPanel:onDlgInspectClick()
     self:close()
     if not self.vehicle then
-        g_gui:showInfoDialog({text = "Need to be in a vehicle"})
+        g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_INFO, "Need to be in a vehicle")
         return
     end
 
@@ -971,22 +969,20 @@ function AdminControlPanel:onDlgInspectClick()
         InspectionReportDialog.show(self.vehicle)
     else
         -- Show placeholder message for now
-        g_gui:showInfoDialog({
-            text = "Inspect Dialog requires inspection listing data. Use the used vehicle search system to generate a proper inspection report, or this test launcher needs a mock listing builder."
-        })
+        g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_INFO, "Inspect Dialog requires inspection listing data. Use the used vehicle search system.")
     end
 end
 
 function AdminControlPanel:onDlgLeaseEndClick()
     self:close()
     -- Need active lease
-    g_gui:showInfoDialog({text = "Lease End Dialog requires an active lease"})
+    g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_INFO, "Lease End Dialog requires an active lease")
 end
 
 function AdminControlPanel:onDlgLeaseRenewClick()
     self:close()
     -- Need active lease
-    g_gui:showInfoDialog({text = "Lease Renewal Dialog requires an active lease"})
+    g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_INFO, "Lease Renewal Dialog requires an active lease")
 end
 
 -- ========== TAB 5: STATE HANDLERS ==========

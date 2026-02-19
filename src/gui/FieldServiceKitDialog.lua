@@ -1789,12 +1789,18 @@ function FieldServiceKitDialog:checkAndOfferSeizureRepair(component)
     -- Store component for callback
     self.pendingSeizureRepair = component
 
-    g_gui:showYesNoDialog({
-        text = text,
-        title = title,
-        callback = self.onSeizureRepairConfirm,
-        target = self
-    })
+    -- Set bypass flag so VehicleSellingPointExtension doesn't intercept this dialog
+    if VehicleSellingPointExtension then
+        VehicleSellingPointExtension.bypassInterception = true
+    end
+
+    -- Show confirmation dialog using proper FS25 pattern (g_gui:showDialog, not showYesNoDialog)
+    local dialog = g_gui:showDialog("YesNoDialog")
+    if dialog and dialog.target then
+        dialog.target:setTitle(title)
+        dialog.target:setText(text)
+        dialog.target:setCallback(self.onSeizureRepairConfirm, self)
+    end
 
     return true  -- Seizure repair offered
 end

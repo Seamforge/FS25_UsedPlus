@@ -461,17 +461,17 @@ function FinanceManagerFrame:onEditSaleClick(rowIndex)
     local currentPrice = listing.askingPrice or 0
     local vehicleName = listing.vehicleName or "Unknown"
 
-    g_gui:showTextInputDialog({
-        callback = function(text, args)
-            self:onEditPriceInputComplete(text)
-        end,
-        target = self,
-        dialogPrompt = string.format("Enter new asking price for %s\n(Current: %s)",
-            vehicleName, g_i18n:formatMoney(currentPrice, 0, true, true)),
-        defaultText = tostring(math.floor(currentPrice)),
-        maxCharacters = 10,
-        confirmText = "Update Price"
-    })
+    -- Use proper FS25 showDialog pattern (not showTextInputDialog convenience method)
+    local dialog = g_gui:showDialog("TextInputDialog")
+    if dialog and dialog.target then
+        dialog.target:setText(string.format("Enter new asking price for %s\n(Current: %s)",
+            vehicleName, g_i18n:formatMoney(currentPrice, 0, true, true)))
+        dialog.target:setCallback(function(text, confirmed)
+            if confirmed then
+                self:onEditPriceInputComplete(text)
+            end
+        end, self, tostring(math.floor(currentPrice)))
+    end
 end
 
 --[[

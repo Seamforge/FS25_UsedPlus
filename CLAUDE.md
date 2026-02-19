@@ -633,6 +633,23 @@ end
 </details>
 ```
 
+### Tone: Humble Certainty
+
+**RULE**: Never claim a fix is definitive until the reporter confirms it works. We can't test every user's environment, mod list, or exact reproduction steps. Use language that conveys confidence in our analysis while acknowledging we need their verification.
+
+**❌ DON'T say:**
+- "Fixed", "Corrected", "Resolved", "The problem is fixed"
+- "This will fix your issue"
+- "The crash is eliminated"
+
+**✅ DO say:**
+- "We believe this should resolve the issue"
+- "We've identified what we think is the cause and applied a fix"
+- "This should fix the crash you reported — please let us know if it persists"
+- "We're confident this addresses the root cause, but please verify on your end"
+
+**Why:** We develop without access to the reporter's save, mod list, or hardware. Our fix may address the wrong code path, or there may be a second bug with similar symptoms. Stating certainty before confirmation is dishonest and erodes trust if the fix doesn't work.
+
 ### Project Status: Use "Fixed" (Not "Done")
 
 When closing a bug fix issue, set the GitHub Project status to **"Fixed"**, not "Done". "Done" is for completed feature work. "Fixed" is for resolved bugs.
