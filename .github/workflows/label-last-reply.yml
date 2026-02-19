@@ -5,11 +5,9 @@ permissions:
   issues: write
 
 on:
-  issue_comment:
-    types: [created]
   schedule:
-    # Run every 5 minutes as fallback
-    - cron: '*/5 * * * *'
+    # Hourly catch-all fallback (real-time labeling handled by auto-reopen-on-reply.yml)
+    - cron: '0 * * * *'
   workflow_dispatch: # Allow manual trigger
 
 jobs:

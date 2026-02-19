@@ -240,3 +240,63 @@ jobs:
             });
 
             console.log(`Posted reset marker on issue #${issueNumber}`);
+
+  # Job 3: Update owner-replied / user-replied label on every comment
+  update-reply-label:
+    if: github.event_name == 'issue_comment'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Label issue by last replier
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.PROJECT_TOKEN }}
+          script: |
+            const OWNER_LABEL = 'owner-replied';
+            const USER_LABEL = 'user-replied';
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const issueNumber = context.payload.issue.number;
+            const commenter = context.payload.comment.user.login;
+            const commenterType = context.payload.comment.user.type;
+
+            // Skip bot comments
+            if (commenterType === 'Bot' || commenter.includes('[bot]')) {
+              console.log(`#${issueNumber}: Bot comment by ${commenter} — skipping`);
+              return;
+            }
+
+            const isOwner = commenter === owner;
+            const wantLabel = isOwner ? OWNER_LABEL : USER_LABEL;
+            const removeLabel = isOwner ? USER_LABEL : OWNER_LABEL;
+
+            console.log(`#${issueNumber}: Last reply by ${commenter} (${isOwner ? 'owner' : 'user'})`);
+
+            // Get current labels
+            const currentLabels = context.payload.issue.labels.map(l => l.name);
+
+            // Skip if already correctly labeled
+            if (currentLabels.includes(wantLabel) && !currentLabels.includes(removeLabel)) {
+              console.log(`#${issueNumber}: Already labeled ${wantLabel} — no change`);
+              return;
+            }
+
+            // Remove the wrong label if present
+            if (currentLabels.includes(removeLabel)) {
+              try {
+                await github.rest.issues.removeLabel({
+                  owner, repo, issue_number: issueNumber, name: removeLabel
+                });
+              } catch (e) {
+                // Label might already be removed
+              }
+            }
+
+            // Add the correct label if missing
+            if (!currentLabels.includes(wantLabel)) {
+              await github.rest.issues.addLabels({
+                owner, repo, issue_number: issueNumber, labels: [wantLabel]
+              });
+            }
+
+            console.log(`#${issueNumber}: Labeled ${wantLabel}`);
