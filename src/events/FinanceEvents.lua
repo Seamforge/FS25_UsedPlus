@@ -112,7 +112,16 @@ function FinanceVehicleEvent:writeStream(streamId, connection)
     local hasLicensePlate = (self.licensePlateData ~= nil)
     streamWriteBool(streamId, hasLicensePlate)
     if hasLicensePlate then
-        streamWriteString(streamId, self.licensePlateData.characters or "")
+        -- v2.15.1: licensePlateData.characters is a table of single-char strings from ShopConfigScreen
+        -- Must convert to flat string for serialization (Issue #17)
+        local chars = self.licensePlateData.characters
+        local charsStr = ""
+        if type(chars) == "table" then
+            charsStr = table.concat(chars, "")
+        elseif type(chars) == "string" then
+            charsStr = chars
+        end
+        streamWriteString(streamId, charsStr)
         streamWriteInt32(streamId, self.licensePlateData.colorIndex or 1)
         streamWriteInt32(streamId, self.licensePlateData.variation or 1)
         streamWriteInt32(streamId, self.licensePlateData.placementIndex or 1)
@@ -196,8 +205,14 @@ function FinanceVehicleEvent:readStream(streamId, connection)
     self.licensePlateData = nil
     local hasLicensePlate = streamReadBool(streamId)
     if hasLicensePlate then
+        -- v2.15.1: Convert flat string back to char table for vanilla API compatibility (Issue #17)
+        local charsStr = streamReadString(streamId)
+        local charsTable = {}
+        for i = 1, #charsStr do
+            charsTable[i] = charsStr:sub(i, i)
+        end
         self.licensePlateData = {
-            characters = streamReadString(streamId),
+            characters = charsTable,
             colorIndex = streamReadInt32(streamId),
             variation = streamReadInt32(streamId),
             placementIndex = streamReadInt32(streamId),

@@ -673,4 +673,56 @@ function FinanceManagerFrame:onCreditReportClick()
     DialogLoader.show("CreditReportDialog")
 end
 
+-- ========== ADMIN PANEL BUTTON (v2.15.1) ==========
+
+function FinanceManagerFrame:onAdminPanelClick()
+    -- Multi-method vehicle detection (ESC menu may clear controlledVehicle)
+    local vehicle = nil
+
+    -- Method 1: HUD controlled vehicle
+    if g_currentMission.hud and g_currentMission.hud.controlledVehicle then
+        vehicle = g_currentMission.hud.controlledVehicle
+    end
+
+    -- Method 2: Standard controlledVehicle
+    if vehicle == nil and g_currentMission.controlledVehicle then
+        vehicle = g_currentMission.controlledVehicle
+    end
+
+    -- Method 3: Find entered vehicle (most reliable in ESC menu context)
+    if vehicle == nil and g_currentMission.vehicles then
+        for _, v in pairs(g_currentMission.vehicles) do
+            if v.getIsEntered and v:getIsEntered() then
+                vehicle = v
+                break
+            end
+        end
+    end
+
+    if vehicle == nil then
+        InfoDialog.show(g_i18n:getText("usedplus_admin_no_vehicle_warning"))
+        return
+    end
+
+    DialogLoader.show("AdminControlPanel", "setVehicle", vehicle)
+end
+
+function FinanceManagerFrame:onAdminBtnHighlight()
+    if self.adminPanelBtnBg then
+        self.adminPanelBtnBg:setImageColor(nil, 0.28, 0.35, 0.55, 1)
+    end
+    if self.adminPanelBtnText then
+        self.adminPanelBtnText:setTextColor(1, 1, 1, 1)
+    end
+end
+
+function FinanceManagerFrame:onAdminBtnUnhighlight()
+    if self.adminPanelBtnBg then
+        self.adminPanelBtnBg:setImageColor(nil, 0.18, 0.22, 0.35, 1)
+    end
+    if self.adminPanelBtnText then
+        self.adminPanelBtnText:setTextColor(0.6, 0.8, 1, 1)
+    end
+end
+
 UsedPlus.logInfo("FinanceManagerFrame loaded")

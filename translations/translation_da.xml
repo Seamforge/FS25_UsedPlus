@@ -257,7 +257,7 @@
         <e k="input_USEDPLUS_ACTIVATE_OBD" v="Brug OBD Scanner" eh="9666e26b" />
         <e k="input_USEDPLUS_TIRES" v="Dækservice" eh="b0234f4e" />
         <e k="input_USEDPLUS_SERVICE_TRUCK" v="Servicebil Kontrol" eh="fad0e0f1" />
-        <e k="input_USEDPLUS_FAULT_TRACER" v="[EN] Fault Tracer" eh="d1b82197" />
+        <e k="input_USEDPLUS_FAULT_TRACER" v="Fejlsporing" eh="d1b82197" />
 
         <!--  Tooltips for Finance Dialog -->
         <e k="usedplus_finance_loanTerm_tooltip" v="Spred betalinger over 1-20 år. Længere perioder = mindre månedlige betalinger men mere samlet rente." eh="e1170142" />
@@ -1218,7 +1218,7 @@
         <e k="usedplus_button_buyout" v="Udkøb" eh="6e052e38" />
         <e k="usedplus_button_renew" v="Forny" eh="0b9feba3" />
         <e k="usedplus_lr_helpText" v="Du skal vælge en mulighed. Returnering giver dig dit depositum tilbage. Udkøb bruger din egenkapital til køb. Fornyelse forlænger leasingen med egenkapital anvendt til fremtidigt udkøb." eh="91673bf9" />
-        <e k="usedplus_lr_deferNotice" v="Dette valg vises igen næste måned. Ingen ekstra gebyrer, før du beslutter dig." eh="00000000" />
+        <e k="usedplus_lr_deferNotice" v="Dette valg vises igen næste måned. Ingen ekstra gebyrer, før du beslutter dig." eh="9382457d" />
 
         <!-- Confirmation Dialog -->
         <e k="usedplus_conf_title" v="Bekræftelse" eh="f4d1ea47" />
@@ -1403,6 +1403,8 @@
         <e k="usedplus_fmf_quickRef" v="HURTIG REFERENCE" eh="011d2c62" />
         <e k="usedplus_fmf_quickRefLine1" v="Butik → Finansier/Leas/Søg Brugt | Garage → Annoncér til Salg" eh="426419c9" />
         <e k="usedplus_fmf_quickRefLine2" v="Månedlige betalinger auto-trækkes. Tidlig indfrielse sparer renter." eh="73cd35d9" />
+        <e k="usedplus_btn_admin_panel" v="[EN] Admin Panel" eh="a0e0d3f0" />
+        <e k="usedplus_admin_no_vehicle_warning" v="[EN] You must be in a vehicle to use the Admin Panel. Enter a vehicle first, then press ESC." eh="abe11d3f" />
 
         <!-- Land Lease Dialog -->
         <e k="usedplus_ll_title" v="Leas Jord" eh="ec34a2a6" />
@@ -1640,10 +1642,10 @@
         <e k="usedplus_info_tire_condition" v="Dæk" eh="3fe2c06a" />
 
         <!-- v2.12.0: Finance/Lease Info Box Display -->
-        <e k="usedplus_info_dealType" v="Status" eh="00000000" />
-        <e k="usedplus_info_leased" v="LEASET" eh="00000000" />
-        <e k="usedplus_info_financed" v="FINANSIERET" eh="00000000" />
-        <e k="usedplus_info_monthsRemaining" v="Måneder tilbage" eh="00000000" />
+        <e k="usedplus_info_dealType" v="Status" eh="ec53a8c4" />
+        <e k="usedplus_info_leased" v="LEASET" eh="a33a1186" />
+        <e k="usedplus_info_financed" v="FINANSIERET" eh="6f9a4a90" />
+        <e k="usedplus_info_monthsRemaining" v="Måneder tilbage" eh="b375dcc1" />
         <!-- v1.7.0: Tires Service Dialog -->
         <e k="usedplus_tires_title" v="Dækservice" eh="b0234f4e" />
         <e k="usedplus_tires_sectionStatus" v="KØRETØJ &amp; DÆKSTATUS" eh="c0e3631e" />
@@ -1835,12 +1837,12 @@
         <e k="usedplus_fsk_repair_hyd_seals" v="Anvendte nødtætningsblandning." eh="5fadb7ef" />
 
         <!-- Result messages -->
-        <e k="usedplus_fsk_result_title_perfect" v="REPARATION VELLYKKET" eh="cb532e1b" />
-        <e k="usedplus_fsk_result_title_good" v="DELVIS REPARATION" eh="cbba8a69" />
+        <e k="usedplus_fsk_result_title_perfect" v="KORREKT DIAGNOSE!" eh="1455077c" />
+        <e k="usedplus_fsk_result_title_good" v="DELVIS MATCH" eh="5499883e" />
         <e k="usedplus_fsk_result_title_wrong_system" v="FORKERT SYSTEM" eh="7259aab1" />
-        <e k="usedplus_fsk_result_title_poor" v="MINIMAL REPARATION" eh="9d485c84" />
-        <e k="usedplus_fsk_result_perfect" v="Korrekt diagnose! Målrettet reparation anvendt." eh="91538006" />
-        <e k="usedplus_fsk_result_good" v="Rigtigt system, men diagnosen var forkert. Generelle reparationer anvendt." eh="47b6188e" />
+        <e k="usedplus_fsk_result_title_poor" v="FORKERT DIAGNOSE" eh="e10c3aed" />
+        <e k="usedplus_fsk_result_perfect" v="Fremragende arbejde! Fuld reparationsbonus anvendt." eh="627b6efd" />
+        <e k="usedplus_fsk_result_good" v="Rigtigt system, men forkert årsag identificeret." eh="2d85e515" />
         <e k="usedplus_fsk_result_wrong_system" v="God diagnose! Men det faktiske problem var i: %s" eh="e3bba502" />
         <e k="usedplus_fsk_result_wrong_both" v="Forkert system og forkert årsag. Minimal reparation anvendt." eh="c22e0ba6" />
         <e k="usedplus_fsk_result_poor" v="Forkert system identificeret. Kun grundlæggende vedligeholdelse anvendt." eh="38caed38" />
@@ -2005,10 +2007,10 @@
         <e k="usedplus_ft_repairResult" v="%s: %s - %s +%.0f%%" eh="ba74960b" />
         <e k="usedplus_ft_totalGain" v="Total: +%.1f%% pålidelighed, +%.1f%% loft" eh="1da183e9" />
         <e k="usedplus_ft_totalCost" v="Forbrugte ressourcer: %.1fL olie" eh="3dd1f971" />
-        <e k="usedplus_ft_hintsRemaining" v="Hints: %d" eh="c8f080c2" />
+        <e k="usedplus_ft_hintsRemaining" v="Vink: %d" eh="c8f080c2" />
         <e k="usedplus_ft_quickScanCap" v="Kvalitet begrænset til 60%% (Hurtig scanning)" eh="5b519744" />
         <e k="usedplus_ft_noFaults" v="Ingen fejl - system i orden!" eh="6bfa5546" />
-        <e k="usedplus_ft_noOil" v="[EN] Service Truck has no oil! Fill the oil tank before diagnosing." eh="3cd9a926" />
+        <e k="usedplus_ft_noOil" v="Servicebilen har ingen olie! Fyld olietanken, inden du diagnosticerer." eh="3cd9a926" />
         <e k="usedplus_ft_action" v="Fejlsporing: %s" eh="c4066687" />
         <e k="usedplus_ft_corrodedDesc" v="Rust- / oxidationsskade" eh="8a01ae60" />
         <e k="usedplus_ft_crackedDesc" v="Spændingsrevner / udmattelse" eh="81d5118b" />
@@ -2018,7 +2020,7 @@
         <e k="usedplus_sparePartsPallet_name" v="Reservedels Palle" eh="9bf39a93" />
         <e k="usedplus_sparePartsPallet_function" v="Forbrugsreservedele til Service Lastbil gendannelse. Placer tæt på lastbilen under gendannelsesarbejde." eh="c90aa3eb" />
         <e k="fillType_spareParts" v="Reservedele" eh="ab6b8ce1" />
-        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="646d470f" />
+        <e k="fillType_hydraulicOil" v="Hydraulikolie" eh="646d470f" />
         <e k="unit_pcs" v="stk" eh="3ecf2642" />
 
         <!-- v2.9.0: Restoration Diagnostic Symptoms - Engine -->
@@ -2465,10 +2467,8 @@ Fortsæt med reparation?" eh="bf702608" />
         <e k="usedplus_admin_section_lease_dialogs" v="LEASING DIALOGER" eh="479e552e" />
 
         <!-- Section Headers - Tab 5 (State) -->
-        <e k="usedplus_admin_section_debug" v="DEBUG TILSTAND" eh="c7ee79cd" />
-        <e k="usedplus_admin_section_vehicle_state" v="KØRETØJSTILSTAND" eh="c077f4be" />
-        <e k="usedplus_admin_section_dna" v="SÆLGER DNA (Næste Søgning)" eh="0e284459" />
-        <e k="usedplus_admin_section_quick_vehicle" v="HURTIG KØRETØJSSKIFT" eh="01242f7d" />
+
+
 
         <!-- Buttons - Tab 1 (Malfunctions) -->
         <e k="usedplus_admin_btn_stall" v="Motor Stop" eh="a0f50ad4" />
@@ -2481,9 +2481,8 @@ Fortsæt med reparation?" eh="bf702608" />
         <e k="usedplus_admin_btn_surge_r" v="Surge (H)" eh="f9261697" />
         <e k="usedplus_admin_btn_flat_l" v="Fladt (V)" eh="427238a9" />
         <e k="usedplus_admin_btn_flat_r" v="Fladt (H)" eh="5a2301a8" />
-        <e k="usedplus_admin_btn_reset_cooldown" v="Nulstil CD" eh="d2165eba" />
-        <e k="usedplus_admin_btn_malf_info" v="Fejl info" eh="92badb26" />
-        <e k="usedplus_admin_btn_fix_all" v="Fix alle" eh="1c7feed4" />
+
+
 
         <!-- Buttons - Tab 2 (Spawning) -->
         <e k="usedplus_admin_btn_spawn_obd" v="Spawn OBD" eh="96023669" />
@@ -2505,11 +2504,11 @@ Fortsæt med reparation?" eh="bf702608" />
         <e k="usedplus_admin_btn_add_100k" v="+$100.000" eh="860860a5" />
         <e k="usedplus_admin_btn_add_1m" v="+$1.000.000" eh="8946b435" />
         <e k="usedplus_admin_btn_set_zero" v="Sæt $0" eh="ca8864ed" />
-        <e k="usedplus_admin_btn_list_deals" v="List aftaler" eh="936e496b" />
+
+
         <e k="usedplus_admin_btn_payoff_all" v="Betal Alle" eh="3817edc8" />
-        <e k="usedplus_admin_btn_create_loan" v="Test lån" eh="06cb7221" />
-        <e k="usedplus_admin_btn_create_lease" v="Test lease" eh="d653ef32" />
-        <e k="usedplus_admin_btn_missed_payment" v="Miss betaling" eh="4890557c" />
+
+
 
         <!-- Buttons - Tab 4 (Dialogs) -->
         <e k="usedplus_admin_btn_dlg_loan" v="Tag lån" eh="40fe67fa" />
@@ -2526,26 +2525,35 @@ Fortsæt med reparation?" eh="bf702608" />
         <e k="usedplus_admin_btn_dlg_inspect" v="Inspektion" eh="35a9dbe6" />
         <e k="usedplus_admin_btn_dlg_lease_end" v="Lease slut" eh="da7801f1" />
         <e k="usedplus_admin_btn_dlg_lease_renew" v="Forny lease" eh="7a794930" />
+        <e k="usedplus_admin_btn_dlg_fault_tracer" v="[EN] Fault Tracer" eh="d1b82197" />
+        <e k="usedplus_admin_btn_dlg_portfolio" v="[EN] Portfolio" eh="d4f859a9" />
 
         <!-- Buttons - Tab 5 (State) -->
-        <e k="usedplus_admin_btn_toggle_debug" v="Toggle debug" eh="e69cb6a0" />
-        <e k="usedplus_admin_btn_rel_100" v="Pålid: 100%" eh="dfdb79d3" />
-        <e k="usedplus_admin_btn_rel_50" v="Pålid: 50%" eh="9ce7a0a2" />
-        <e k="usedplus_admin_btn_rel_10" v="Pålid: 10%" eh="54d6e770" />
+
+
         <e k="usedplus_admin_btn_reset_hours" v="Nulstil timer" eh="a519e5e1" />
         <e k="usedplus_admin_btn_add_hours" v="+1000 timer" eh="ef05132d" />
-        <e k="usedplus_admin_btn_dna_lemon" v="[EN] 0.1 Lemon" eh="0047d5bc" />
-        <e k="usedplus_admin_btn_dna_average" v="[EN] 0.5 Average" eh="472d5599" />
-        <e k="usedplus_admin_btn_dna_workhorse" v="[EN] 0.9 Workhorse" eh="b0f0ee0b" />
-        <e k="usedplus_admin_btn_dna_desperate" v="Desperat" eh="97df4642" />
-        <e k="usedplus_admin_btn_dna_reasonable" v="Rimelig" eh="e485c034" />
-        <e k="usedplus_admin_btn_dna_immovable" v="Stivsindet" eh="57d0e57c" />
-        <e k="usedplus_admin_btn_next_vehicle" v="Næste køretøj" eh="e95e97fa" />
-        <e k="usedplus_admin_btn_prev_vehicle" v="Forrige køretøj" eh="69b3a0d0" />
+        <e k="usedplus_admin_btn_dna_lemon" v="0.1 Skrotbunke" eh="0047d5bc" />
+        <e k="usedplus_admin_btn_dna_average" v="0.5 Gennemsnitlig" eh="472d5599" />
+        <e k="usedplus_admin_btn_dna_workhorse" v="0.9 Arbejdshest" eh="b0f0ee0b" />
+        <e k="usedplus_admin_btn_refill_oil" v="Fyld olie op" eh="07a47687" />
+        <e k="usedplus_admin_btn_refill_hyd" v="Fyld hyd. op" eh="77663dd6" />
+        <e k="usedplus_admin_btn_fix_tires" v="Reparer dæk" eh="959a0c0e" />
+        <e k="usedplus_admin_btn_fix_all_malf" v="Ret alle fejl" eh="a14746fb" />
 
-        <!-- Info Labels -->
-        <e k="usedplus_admin_current_balance" v="Nuværende saldo:" eh="473e7f9e" />
-        <e k="usedplus_admin_current_credit" v="Kredit Score:" eh="0199e1a3" />
+
+        <e k="usedplus_admin_action_reliability" v="Pålidelighed" eh="820b8f74" />
+        <e k="usedplus_admin_action_condition" v="Tilstand" eh="9e2941b3" />
+        <e k="usedplus_admin_action_hours" v="Timer" eh="6a7e7316" />
+        <e k="usedplus_admin_action_dna" v="Køretøjs-DNA" eh="0ce6fbcf" />
+        <e k="usedplus_admin_action_maintenance" v="Vedligeholdelse" eh="10d0de28" />
+        <e k="usedplus_admin_action_money" v="Penge" eh="a9331282" />
+        <e k="usedplus_admin_action_credit" v="Kreditscore" eh="ae61b052" />
+        <e k="usedplus_admin_btn_repair" v="Reparér" eh="0493d27e" />
+        <e k="usedplus_admin_btn_paint" v="Mal" eh="4802a5ac" />
+        <e k="usedplus_admin_btn_fix_leaks" v="Rep. Lækager" eh="e0140cbb" />
+
+
 
         <!-- Status Messages -->
         <e k="usedplus_admin_status_ready" v="Klar. Vælg en handling." eh="1ef35a42" />

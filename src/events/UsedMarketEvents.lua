@@ -46,7 +46,7 @@ end
 
 function RequestUsedItemEvent:writeStream(streamId, connection)
     NetworkUtil.writeNodeObjectId(streamId, self.farmId)
-    streamWriteInt32(streamId, self.storeItemIndex)
+    streamWriteString(streamId, self.storeItemIndex or "")
     streamWriteString(streamId, self.storeItemName)
     streamWriteFloat32(streamId, self.basePrice)
     streamWriteInt32(streamId, self.searchLevel)
@@ -55,7 +55,7 @@ end
 
 function RequestUsedItemEvent:readStream(streamId, connection)
     self.farmId = NetworkUtil.readNodeObjectId(streamId)
-    self.storeItemIndex = streamReadInt32(streamId)
+    self.storeItemIndex = streamReadString(streamId)
     self.storeItemName = streamReadString(streamId)
     self.basePrice = streamReadFloat32(streamId)
     self.searchLevel = streamReadInt32(streamId)

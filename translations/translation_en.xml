@@ -1402,6 +1402,8 @@
         <e k="usedplus_fmf_quickRef" v="QUICK REFERENCE" eh="011d2c62" />
         <e k="usedplus_fmf_quickRefLine1" v="Shop → Finance/Lease/Search Used | Garage → List for Sale" eh="426419c9" />
         <e k="usedplus_fmf_quickRefLine2" v="Monthly payments auto-deduct. Early payoff saves interest." eh="73cd35d9" />
+        <e k="usedplus_btn_admin_panel" v="Admin Panel" eh="a0e0d3f0" />
+        <e k="usedplus_admin_no_vehicle_warning" v="You must be in a vehicle to use the UsedPlus Admin Panel. Enter a vehicle first, then press ESC." eh="abe11d3f" />
 
         <!-- Land Lease Dialog -->
         <e k="usedplus_ll_title" v="Lease Land" eh="ec34a2a6" />
@@ -2464,11 +2466,7 @@
         <e k="usedplus_admin_section_service_dialogs" v="SERVICE DIALOGS" eh="e407aa85" />
         <e k="usedplus_admin_section_lease_dialogs" v="LEASE DIALOGS" eh="479e552e" />
 
-        <!-- Section Headers - Tab 5 (State) -->
-        <e k="usedplus_admin_section_debug" v="DEBUG MODE" eh="c7ee79cd" />
-        <e k="usedplus_admin_section_vehicle_state" v="VEHICLE STATE" eh="c077f4be" />
-        <e k="usedplus_admin_section_dna" v="SELLER DNA (Next Search)" eh="0e284459" />
-        <e k="usedplus_admin_section_quick_vehicle" v="QUICK VEHICLE SWAP" eh="01242f7d" />
+        <!-- Section Headers - Tab 5 (State) — old sections removed in v2.15.0 -->
 
         <!-- Buttons - Tab 1 (Malfunctions) -->
         <e k="usedplus_admin_btn_stall" v="Stall" eh="a0f50ad4" />
@@ -2481,9 +2479,7 @@
         <e k="usedplus_admin_btn_surge_r" v="Surge (R)" eh="f9261697" />
         <e k="usedplus_admin_btn_flat_l" v="Flat (L)" eh="427238a9" />
         <e k="usedplus_admin_btn_flat_r" v="Flat (R)" eh="5a2301a8" />
-        <e k="usedplus_admin_btn_reset_cooldown" v="Reset CD" eh="d2165eba" />
-        <e k="usedplus_admin_btn_malf_info" v="Malf Info" eh="92badb26" />
-        <e k="usedplus_admin_btn_fix_all" v="Fix All" eh="1c7feed4" />
+        <!-- btn_reset_cooldown, btn_malf_info, btn_fix_all removed in v2.15.0 -->
 
         <!-- Buttons - Tab 2 (Spawning) -->
         <e k="usedplus_admin_btn_spawn_obd" v="OBD Scanner" eh="96023669" />
@@ -2505,11 +2501,8 @@
         <e k="usedplus_admin_btn_add_100k" v="+$100,000" eh="860860a5" />
         <e k="usedplus_admin_btn_add_1m" v="+$1,000,000" eh="8946b435" />
         <e k="usedplus_admin_btn_set_zero" v="Set $0" eh="ca8864ed" />
-        <e k="usedplus_admin_btn_list_deals" v="List Deals" eh="936e496b" />
+        <!-- btn_list_deals, btn_create_loan, btn_create_lease, btn_missed_payment removed in v2.15.0 -->
         <e k="usedplus_admin_btn_payoff_all" v="Pay Off All" eh="3817edc8" />
-        <e k="usedplus_admin_btn_create_loan" v="Test Loan" eh="06cb7221" />
-        <e k="usedplus_admin_btn_create_lease" v="Test Lease" eh="d653ef32" />
-        <e k="usedplus_admin_btn_missed_payment" v="Miss Payment" eh="4890557c" />
 
         <!-- Buttons - Tab 4 (Dialogs) -->
         <e k="usedplus_admin_btn_dlg_loan" v="Take Loan" eh="40fe67fa" />
@@ -2526,23 +2519,34 @@
         <e k="usedplus_admin_btn_dlg_inspect" v="Inspect" eh="35a9dbe6" />
         <e k="usedplus_admin_btn_dlg_lease_end" v="Lease End" eh="da7801f1" />
         <e k="usedplus_admin_btn_dlg_lease_renew" v="Lease Renew" eh="7a794930" />
+        <e k="usedplus_admin_btn_dlg_fault_tracer" v="Fault Tracer" eh="d1b82197" />
+        <e k="usedplus_admin_btn_dlg_portfolio" v="Portfolio" eh="d4f859a9" />
 
         <!-- Buttons - Tab 5 (State) -->
-        <e k="usedplus_admin_btn_toggle_debug" v="Toggle Debug" eh="e69cb6a0" />
-        <e k="usedplus_admin_btn_rel_100" v="Rel: 100%" eh="dfdb79d3" />
-        <e k="usedplus_admin_btn_rel_50" v="Rel: 50%" eh="9ce7a0a2" />
-        <e k="usedplus_admin_btn_rel_10" v="Rel: 10%" eh="54d6e770" />
+        <!-- btn_toggle_debug, btn_rel_100/50/10 removed in v2.15.0 (replaced by per-system reliability) -->
         <e k="usedplus_admin_btn_reset_hours" v="Reset Hours" eh="a519e5e1" />
         <e k="usedplus_admin_btn_add_hours" v="+1000 Hours" eh="ef05132d" />
         <e k="usedplus_admin_btn_dna_lemon" v="0.1 Lemon" eh="0047d5bc" />
         <e k="usedplus_admin_btn_dna_average" v="0.5 Average" eh="472d5599" />
         <e k="usedplus_admin_btn_dna_workhorse" v="0.9 Workhorse" eh="b0f0ee0b" />
-        <e k="usedplus_admin_btn_next_vehicle" v="Next Vehicle" eh="e95e97fa" />
-        <e k="usedplus_admin_btn_prev_vehicle" v="Prev Vehicle" eh="69b3a0d0" />
+        <e k="usedplus_admin_btn_refill_oil" v="Refill Oil" eh="07a47687" />
+        <e k="usedplus_admin_btn_refill_hyd" v="Refill Hyd" eh="77663dd6" />
+        <e k="usedplus_admin_btn_fix_tires" v="Fix Tires" eh="959a0c0e" />
+        <e k="usedplus_admin_btn_fix_all_malf" v="Fix All Malf" eh="a14746fb" />
 
-        <!-- Info Labels -->
-        <e k="usedplus_admin_current_balance" v="Current Balance:" eh="473e7f9e" />
-        <e k="usedplus_admin_current_credit" v="Credit Score:" eh="0199e1a3" />
+        <!-- Action Panel Section Headers -->
+        <e k="usedplus_admin_action_reliability" v="Reliability" eh="820b8f74" />
+        <e k="usedplus_admin_action_condition" v="Condition" eh="9e2941b3" />
+        <e k="usedplus_admin_action_hours" v="Hours" eh="6a7e7316" />
+        <e k="usedplus_admin_action_dna" v="Vehicle DNA" eh="0ce6fbcf" />
+        <e k="usedplus_admin_action_maintenance" v="Maintenance" eh="10d0de28" />
+        <e k="usedplus_admin_action_money" v="Money" eh="a9331282" />
+        <e k="usedplus_admin_action_credit" v="Credit Score" eh="ae61b052" />
+
+        <!-- New buttons added in v2.15.0 -->
+        <e k="usedplus_admin_btn_repair" v="Repair" eh="0493d27e" />
+        <e k="usedplus_admin_btn_paint" v="Paint" eh="4802a5ac" />
+        <e k="usedplus_admin_btn_fix_leaks" v="Fix Leaks" eh="e0140cbb" />
 
         <!-- Status Messages -->
         <e k="usedplus_admin_status_ready" v="Ready. Select an action." eh="1ef35a42" />

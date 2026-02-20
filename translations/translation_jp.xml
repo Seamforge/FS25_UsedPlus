@@ -207,7 +207,7 @@
         <e k="input_USEDPLUS_ACTIVATE_OBD" v="OBDスキャナーを使用" eh="9666e26b" />
         <e k="input_USEDPLUS_TIRES" v="タイヤサービス" eh="b0234f4e" />
         <e k="input_USEDPLUS_SERVICE_TRUCK" v="サービストラック操作" eh="fad0e0f1" />
-        <e k="input_USEDPLUS_FAULT_TRACER" v="[EN] Fault Tracer" eh="d1b82197" />
+        <e k="input_USEDPLUS_FAULT_TRACER" v="故障診断ツール" eh="d1b82197" />
         <e k="usedplus_finance_loanTerm_tooltip" v="1-20年で分割払い。期間が長い = 月々の支払いは少ないが総利息は増加。" eh="e1170142" />
         <e k="usedplus_finance_downPayment_tooltip" v="前払いで借入額を減らす。頭金が多い = 金利と月々の支払いが低下。範囲: 0-50%。" eh="cb530b47" />
         <e k="usedplus_finance_cashBack_tooltip" v="即時に現金を受け取る（ローンに追加）。運転資金に便利ですが、月々の支払いと総費用が増加します。" eh="dc2693cd" />
@@ -961,7 +961,7 @@
         <e k="usedplus_button_buyout" v="買い取り" eh="6e052e38" />
         <e k="usedplus_button_renew" v="更新" eh="0b9feba3" />
         <e k="usedplus_lr_helpText" v="オプションを選択してください。返却で保証金が戻ります。買い取りでは純資産が購入に適用されます。更新ではリースが延長され、純資産は将来の買い取りに適用されます。" eh="91673bf9" />
-        <e k="usedplus_lr_deferNotice" v="この選択は来月再び表示されます。決定するまで追加料金はかかりません。" eh="00000000" />
+        <e k="usedplus_lr_deferNotice" v="この選択は来月再び表示されます。決定するまで追加料金はかかりません。" eh="9382457d" />
         <e k="usedplus_conf_title" v="確認" eh="f4d1ea47" />
         <e k="usedplus_cr_title" v="信用レポート" eh="3725e302" />
         <e k="usedplus_cr_reportDate" v="レポート日:" eh="93ad31a7" />
@@ -1130,6 +1130,8 @@
         <e k="usedplus_fmf_quickRef" v="クイックリファレンス" eh="011d2c62" />
         <e k="usedplus_fmf_quickRefLine1" v="ショップ→融資/リース/中古を検索 | ガレージ→販売リスト" eh="426419c9" />
         <e k="usedplus_fmf_quickRefLine2" v="月々の支払いは自動引き落とし。早期返済で利息を節約。" eh="73cd35d9" />
+        <e k="usedplus_btn_admin_panel" v="[EN] Admin Panel" eh="a0e0d3f0" />
+        <e k="usedplus_admin_no_vehicle_warning" v="[EN] You must be in a vehicle to use the Admin Panel. Enter a vehicle first, then press ESC." eh="abe11d3f" />
         <e k="usedplus_ll_title" v="土地リース" eh="ec34a2a6" />
         <e k="usedplus_ll_sectionDetails" v="圃場詳細" eh="9550d705" />
         <e k="usedplus_ll_field" v="圃場:" eh="af9b2925" />
@@ -1300,10 +1302,10 @@
         <e k="usedplus_info_tire_condition" v="タイヤ" eh="3fe2c06a" />
 
         <!-- v2.12.0: Finance/Lease Info Box Display -->
-        <e k="usedplus_info_dealType" v="ステータス" eh="00000000" />
-        <e k="usedplus_info_leased" v="リース中" eh="00000000" />
-        <e k="usedplus_info_financed" v="ローン中" eh="00000000" />
-        <e k="usedplus_info_monthsRemaining" v="残り月数" eh="00000000" />        <e k="usedplus_tires_title" v="タイヤサービス" eh="b0234f4e" />
+        <e k="usedplus_info_dealType" v="ステータス" eh="ec53a8c4" />
+        <e k="usedplus_info_leased" v="リース中" eh="a33a1186" />
+        <e k="usedplus_info_financed" v="ローン中" eh="6f9a4a90" />
+        <e k="usedplus_info_monthsRemaining" v="残り月数" eh="b375dcc1" />        <e k="usedplus_tires_title" v="タイヤサービス" eh="b0234f4e" />
         <e k="usedplus_tires_sectionStatus" v="車両＆タイヤ状態" eh="c0e3631e" />
         <e k="usedplus_tires_sectionSelect" v="タイヤ品質を選択" eh="42abee54" />
         <e k="usedplus_tires_sectionPayment" v="お支払い概要" eh="0dd98605" />
@@ -1465,12 +1467,12 @@
         <e k="usedplus_fsk_repair_hyd_bleed" v="油圧ラインのエア抜き完了。" eh="df37c387" />
         <e k="usedplus_fsk_repair_hyd_pump" v="ポンプシール処理剤を一時的に適用。" eh="89e6edb3" />
         <e k="usedplus_fsk_repair_hyd_seals" v="緊急シール剤を適用。" eh="5fadb7ef" />
-        <e k="usedplus_fsk_result_title_perfect" v="修理成功" eh="cb532e1b" />
-        <e k="usedplus_fsk_result_title_good" v="部分修理" eh="cbba8a69" />
+        <e k="usedplus_fsk_result_title_perfect" v="診断正解！" eh="1455077c" />
+        <e k="usedplus_fsk_result_title_good" v="部分一致" eh="5499883e" />
         <e k="usedplus_fsk_result_title_wrong_system" v="システム誤り" eh="7259aab1" />
-        <e k="usedplus_fsk_result_title_poor" v="最小限の修理" eh="9d485c84" />
-        <e k="usedplus_fsk_result_perfect" v="診断正解！的確な修理を実施しました。" eh="91538006" />
-        <e k="usedplus_fsk_result_good" v="システムは正解でしたが、診断がずれていました。一般的な修理を実施。" eh="47b6188e" />
+        <e k="usedplus_fsk_result_title_poor" v="診断不正解" eh="e10c3aed" />
+        <e k="usedplus_fsk_result_perfect" v="素晴らしい仕事です！完全な修理ボーナスが適用されました。" eh="627b6efd" />
+        <e k="usedplus_fsk_result_good" v="システムは正解でしたが、原因の特定が誤っていました。" eh="2d85e515" />
         <e k="usedplus_fsk_result_wrong_system" v="良い診断です！しかし実際の問題は: %s" eh="e3bba502" />
         <e k="usedplus_fsk_result_wrong_both" v="システムも原因も不正解。最小限の修理を実施。" eh="c22e0ba6" />
         <e k="usedplus_fsk_result_poor" v="間違ったシステムを特定しました。基本的なメンテナンスのみ実施。" eh="38caed38" />
@@ -1617,7 +1619,7 @@
         <e k="usedplus_ft_hintsRemaining" v="ヒント: %d" eh="c8f080c2" />
         <e k="usedplus_ft_quickScanCap" v="品質60%%に制限（クイックスキャン）" eh="5b519744" />
         <e k="usedplus_ft_noFaults" v="故障なし - システム正常！" eh="6bfa5546" />
-        <e k="usedplus_ft_noOil" v="[EN] Service Truck has no oil! Fill the oil tank before diagnosing." eh="3cd9a926" />
+        <e k="usedplus_ft_noOil" v="サービストラックにオイルがありません！診断前にオイルタンクを補充してください。" eh="3cd9a926" />
         <e k="usedplus_ft_action" v="故障探知: %s" eh="c4066687" />
         <e k="usedplus_ft_corrodedDesc" v="錆び/酸化ダメージ" eh="8a01ae60" />
         <e k="usedplus_ft_crackedDesc" v="応力亀裂/疲労" eh="81d5118b" />
@@ -1626,7 +1628,7 @@
         <e k="usedplus_sparePartsPallet_name" v="スペアパーツパレット" eh="9bf39a93" />
         <e k="usedplus_sparePartsPallet_function" v="サービストラック修復用の消耗スペアパーツ。修復作業中はトラックの近くに配置してください。" eh="c90aa3eb" />
         <e k="fillType_spareParts" v="スペアパーツ" eh="ab6b8ce1" />
-        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="646d470f" />
+        <e k="fillType_hydraulicOil" v="作動油" eh="646d470f" />
         <e k="unit_pcs" v="個" eh="3ecf2642" />
         <e k="usedplus_resto_symptom_engine_knocking_load" v="負荷時に激しいノッキング" eh="fb8c3067" />
         <e k="usedplus_resto_symptom_engine_low_oil_pressure" v="油圧が危険なほど低い" eh="a3efa42d" />
@@ -1943,10 +1945,6 @@
         <e k="usedplus_admin_section_market_dialogs" v="マーケットダイアログ" eh="4c8988f5" />
         <e k="usedplus_admin_section_service_dialogs" v="サービスダイアログ" eh="e407aa85" />
         <e k="usedplus_admin_section_lease_dialogs" v="リースダイアログ" eh="479e552e" />
-        <e k="usedplus_admin_section_debug" v="デバッグモード" eh="c7ee79cd" />
-        <e k="usedplus_admin_section_vehicle_state" v="車両状態" eh="c077f4be" />
-        <e k="usedplus_admin_section_dna" v="売り手DNA（次の検索）" eh="0e284459" />
-        <e k="usedplus_admin_section_quick_vehicle" v="クイック車両切り替え" eh="01242f7d" />
         <e k="usedplus_admin_btn_stall" v="ストール" eh="a0f50ad4" />
         <e k="usedplus_admin_btn_misfire" v="失火" eh="9b9bd091" />
         <e k="usedplus_admin_btn_overheat" v="過熱" eh="5d266c94" />
@@ -1957,9 +1955,6 @@
         <e k="usedplus_admin_btn_surge_r" v="サージ (右)" eh="f9261697" />
         <e k="usedplus_admin_btn_flat_l" v="パンク (左)" eh="427238a9" />
         <e k="usedplus_admin_btn_flat_r" v="パンク (右)" eh="5a2301a8" />
-        <e k="usedplus_admin_btn_reset_cooldown" v="CD リセット" eh="d2165eba" />
-        <e k="usedplus_admin_btn_malf_info" v="故障情報" eh="92badb26" />
-        <e k="usedplus_admin_btn_fix_all" v="全て修理" eh="1c7feed4" />
         <e k="usedplus_admin_btn_spawn_obd" v="OBDスキャナー" eh="96023669" />
         <e k="usedplus_admin_btn_spawn_truck" v="サービストラック" eh="083ff302" />
         <e k="usedplus_admin_btn_spawn_parts" v="パーツパレット" eh="ca04c55a" />
@@ -1977,11 +1972,7 @@
         <e k="usedplus_admin_btn_add_100k" v="+$100,000" eh="860860a5" />
         <e k="usedplus_admin_btn_add_1m" v="+$1,000,000" eh="8946b435" />
         <e k="usedplus_admin_btn_set_zero" v="$0に設定" eh="ca8864ed" />
-        <e k="usedplus_admin_btn_list_deals" v="取引一覧" eh="936e496b" />
         <e k="usedplus_admin_btn_payoff_all" v="全て完済" eh="3817edc8" />
-        <e k="usedplus_admin_btn_create_loan" v="テストローン" eh="06cb7221" />
-        <e k="usedplus_admin_btn_create_lease" v="テストリース" eh="d653ef32" />
-        <e k="usedplus_admin_btn_missed_payment" v="支払い漏れ" eh="4890557c" />
         <e k="usedplus_admin_btn_dlg_loan" v="ローン取得" eh="40fe67fa" />
         <e k="usedplus_admin_btn_dlg_approved" v="承認済み" eh="6f806341" />
         <e k="usedplus_admin_btn_dlg_credit" v="信用" eh="0a90b1bc" />
@@ -1996,21 +1987,26 @@
         <e k="usedplus_admin_btn_dlg_inspect" v="点検" eh="35a9dbe6" />
         <e k="usedplus_admin_btn_dlg_lease_end" v="リース終了" eh="da7801f1" />
         <e k="usedplus_admin_btn_dlg_lease_renew" v="リース更新" eh="7a794930" />
-        <e k="usedplus_admin_btn_toggle_debug" v="デバッグ切替" eh="e69cb6a0" />
-        <e k="usedplus_admin_btn_rel_100" v="信頼性: 100%" eh="dfdb79d3" />
-        <e k="usedplus_admin_btn_rel_50" v="信頼性: 50%" eh="9ce7a0a2" />
-        <e k="usedplus_admin_btn_rel_10" v="信頼性: 10%" eh="54d6e770" />
+        <e k="usedplus_admin_btn_dlg_fault_tracer" v="[EN] Fault Tracer" eh="d1b82197" />
+        <e k="usedplus_admin_btn_dlg_portfolio" v="[EN] Portfolio" eh="d4f859a9" />
         <e k="usedplus_admin_btn_reset_hours" v="時間リセット" eh="a519e5e1" />
         <e k="usedplus_admin_btn_add_hours" v="+1000時間" eh="ef05132d" />
-        <e k="usedplus_admin_btn_dna_lemon" v="[EN] 0.1 Lemon" eh="0047d5bc" />
-        <e k="usedplus_admin_btn_dna_average" v="[EN] 0.5 Average" eh="472d5599" />
-        <e k="usedplus_admin_btn_dna_workhorse" v="[EN] 0.9 Workhorse" eh="b0f0ee0b" />
-        <e k="usedplus_admin_btn_dna_desperate" v="必死" eh="97df4642" />
-        <e k="usedplus_admin_btn_dna_reasonable" v="妥当" eh="e485c034" />
-        <e k="usedplus_admin_btn_dna_immovable" v="動かない" eh="57d0e57c" />
-        <e k="usedplus_admin_btn_next_vehicle" v="次の車両" eh="e95e97fa" />
-        <e k="usedplus_admin_btn_prev_vehicle" v="前の車両" eh="69b3a0d0" />
-        <e k="usedplus_admin_current_balance" v="現在の残高:" eh="473e7f9e" />
-        <e k="usedplus_admin_current_credit" v="信用スコア:" eh="0199e1a3" />
+        <e k="usedplus_admin_btn_dna_lemon" v="0.1 ポンコツ" eh="0047d5bc" />
+        <e k="usedplus_admin_btn_dna_average" v="0.5 普通" eh="472d5599" />
+        <e k="usedplus_admin_btn_dna_workhorse" v="0.9 働き者" eh="b0f0ee0b" />
+        <e k="usedplus_admin_btn_refill_oil" v="オイル補充" eh="07a47687" />
+        <e k="usedplus_admin_btn_refill_hyd" v="油圧補充" eh="77663dd6" />
+        <e k="usedplus_admin_btn_fix_tires" v="タイヤ修理" eh="959a0c0e" />
+        <e k="usedplus_admin_btn_fix_all_malf" v="全故障修理" eh="a14746fb" />
+        <e k="usedplus_admin_action_reliability" v="信頼性" eh="820b8f74" />
+        <e k="usedplus_admin_action_condition" v="状態" eh="9e2941b3" />
+        <e k="usedplus_admin_action_hours" v="稼働時間" eh="6a7e7316" />
+        <e k="usedplus_admin_action_dna" v="車両DNA" eh="0ce6fbcf" />
+        <e k="usedplus_admin_action_maintenance" v="メンテナンス" eh="10d0de28" />
+        <e k="usedplus_admin_action_money" v="お金" eh="a9331282" />
+        <e k="usedplus_admin_action_credit" v="信用スコア" eh="ae61b052" />
+        <e k="usedplus_admin_btn_repair" v="修理" eh="0493d27e" />
+        <e k="usedplus_admin_btn_paint" v="塗装" eh="4802a5ac" />
+        <e k="usedplus_admin_btn_fix_leaks" v="漏れ修理" eh="e0140cbb" />
         <e k="usedplus_admin_status_ready" v="準備完了。アクションを選択してください。" eh="1ef35a42" /></elements>
 </l10n>

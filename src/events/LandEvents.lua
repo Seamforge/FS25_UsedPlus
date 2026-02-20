@@ -349,7 +349,7 @@ function LandLeaseEvent:run(connection)
     g_messageCenter:publish(MessageType.FARM_PROPERTY_CHANGED, self.farmId)
 
     if CreditHistory then
-        CreditHistory.recordEvent(self.farmId, "LAND_LEASE_STARTED", self.fieldName)
+        CreditHistory.recordEvent(self.farmId, "LAND_LEASE_CREATED", self.fieldName)
     end
 
     TransactionResponseEvent.sendToClient(connection, self.farmId, true, "usedplus_mp_success_land_leased")

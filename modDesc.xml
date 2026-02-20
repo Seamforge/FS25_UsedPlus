@@ -7,7 +7,7 @@
     -->
 
     <author>UsedPlus Team</author>
-    <version>2.15.0.36</version>
+    <version>2.15.1.14</version>
 
     <title>
         <en>UsedPlus - Finance &amp; Marketplace System</en>
@@ -330,7 +330,12 @@ UNTERSTÜTZUNG
         <sourceFile filename="src/extensions/VehicleSellingPointExtension.lua"/>
         <sourceFile filename="src/extensions/InGameMenuVehiclesFrameExtension.lua"/>  <!--  Hook ESC Vehicles Sell button -->
         <sourceFile filename="src/extensions/WorkshopScreenExtension.lua"/>  <!--  Hook Workshop Inspect button -->
-        <sourceFile filename="src/extensions/RVBWorkshopIntegration.lua"/>  <!--  v2.1.0: RVB Workshop cross-mod integration -->
+        <!-- v2.15.0: RVB Workshop integration (sub-modules load before coordinator) -->
+        <sourceFile filename="src/extensions/rvb/RVBRepairButton.lua"/>
+        <sourceFile filename="src/extensions/rvb/RVBButtonInjection.lua"/>
+        <sourceFile filename="src/extensions/rvb/RVBServiceHooks.lua"/>
+        <sourceFile filename="src/extensions/rvb/RVBDiagnostics.lua"/>
+        <sourceFile filename="src/extensions/RVBWorkshopIntegration.lua"/>  <!--  v2.1.0: RVB Workshop coordinator -->
         <sourceFile filename="src/extensions/VehicleInfoExtension.lua"/>  <!--  v2.8.0: Oil/Hydraulic fluid in vehicle info box -->
         <sourceFile filename="src/extensions/FinanceMenuExtension.lua"/>  <!--  Disable vanilla borrow, require credit-based loans -->
 

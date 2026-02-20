@@ -204,7 +204,7 @@
         <e k="input_USEDPLUS_ACTIVATE_OBD" v="Utilizeaza Scanner OBD" eh="9666e26b" />
         <e k="input_USEDPLUS_TIRES" v="Service Anvelope" eh="b0234f4e" />
         <e k="input_USEDPLUS_SERVICE_TRUCK" v="Control Camion Service" eh="fad0e0f1" />
-        <e k="input_USEDPLUS_FAULT_TRACER" v="[EN] Fault Tracer" eh="d1b82197" />
+        <e k="input_USEDPLUS_FAULT_TRACER" v="Detector de Defecte" eh="d1b82197" />
         <e k="usedplus_finance_loanTerm_tooltip" v="Spread payments over 1-20 ani. Longer terms = smaller lunar payments but more total dobanda paid." eh="e1170142" />
         <e k="usedplus_finance_downPayment_tooltip" v="Pay upfront la reduce imprumut suma. Higher Avans = lower dobanda rata si lunar plata. Range: 0-50%." eh="cb530b47" />
         <e k="usedplus_finance_cashBack_tooltip" v="Receive cash immediately (added la your imprumut). Useful pentru operating expenses, but increases lunar payments si total cost." eh="dc2693cd" />
@@ -958,7 +958,7 @@
         <e k="usedplus_button_buyout" v="Cumparare" eh="6e052e38" />
         <e k="usedplus_button_renew" v="Reinnoieste" eh="0b9feba3" />
         <e k="usedplus_lr_helpText" v="You must choose an option. Returning gives you your deposit inapoi. Cumparare uses your equity toward achizitie. Renewing extends the leasing cu equity applied la future cumparare." eh="91673bf9" />
-        <e k="usedplus_lr_deferNotice" v="Această alegere va apărea din nou luna viitoare. Fără costuri suplimentare până la decizia dumneavoastră." eh="00000000" />
+        <e k="usedplus_lr_deferNotice" v="Această alegere va apărea din nou luna viitoare. Fără costuri suplimentare până la decizia dumneavoastră." eh="9382457d" />
         <e k="usedplus_conf_title" v="Confirmare" eh="f4d1ea47" />
         <e k="usedplus_cr_title" v="CREDIT RAPORT" eh="3725e302" />
         <e k="usedplus_cr_reportDate" v="Raport Date:" eh="93ad31a7" />
@@ -1127,6 +1127,8 @@
         <e k="usedplus_fmf_quickRef" v="REFERINTA RAPIDA" eh="011d2c62" />
         <e k="usedplus_fmf_quickRefLine1" v="Shop → Finantare/Leasing/Cauta Uzat | Garage → List pentru Sale" eh="426419c9" />
         <e k="usedplus_fmf_quickRefLine2" v="Lunar payments auto-deduct. Early payoff saves dobanda." eh="73cd35d9" />
+        <e k="usedplus_btn_admin_panel" v="[EN] Admin Panel" eh="a0e0d3f0" />
+        <e k="usedplus_admin_no_vehicle_warning" v="[EN] You must be in a vehicle to use the Admin Panel. Enter a vehicle first, then press ESC." eh="abe11d3f" />
         <e k="usedplus_ll_title" v="Leasing Teren" eh="ec34a2a6" />
         <e k="usedplus_ll_sectionDetails" v="CAMP DETALII" eh="9550d705" />
         <e k="usedplus_ll_field" v="Camp:" eh="af9b2925" />
@@ -1297,10 +1299,10 @@
         <e k="usedplus_info_tire_condition" v="Anvelope" eh="3fe2c06a" />
 
         <!-- v2.12.0: Finance/Lease Info Box Display -->
-        <e k="usedplus_info_dealType" v="Stare" eh="00000000" />
-        <e k="usedplus_info_leased" v="ÎNCHIRIAT" eh="00000000" />
-        <e k="usedplus_info_financed" v="FINANȚAT" eh="00000000" />
-        <e k="usedplus_info_monthsRemaining" v="Luni rămase" eh="00000000" />        <e k="usedplus_tires_title" v="Service Anvelope" eh="b0234f4e" />
+        <e k="usedplus_info_dealType" v="Stare" eh="ec53a8c4" />
+        <e k="usedplus_info_leased" v="ÎNCHIRIAT" eh="a33a1186" />
+        <e k="usedplus_info_financed" v="FINANȚAT" eh="6f9a4a90" />
+        <e k="usedplus_info_monthsRemaining" v="Luni rămase" eh="b375dcc1" />        <e k="usedplus_tires_title" v="Service Anvelope" eh="b0234f4e" />
         <e k="usedplus_tires_sectionStatus" v="VEHICUL &amp;amp;amp;amp;amp;amp;amp; TIRE STATUS" eh="c0e3631e" />
         <e k="usedplus_tires_sectionSelect" v="SELECTEAZA TIRE QUALITY" eh="42abee54" />
         <e k="usedplus_tires_sectionPayment" v="PLATA SUMAR" eh="0dd98605" />
@@ -1462,12 +1464,12 @@
         <e k="usedplus_fsk_repair_hyd_bleed" v="Bled air de la hydraulic lines." eh="df37c387" />
         <e k="usedplus_fsk_repair_hyd_pump" v="Tratament temporar etanșare pompă aplicat." eh="89e6edb3" />
         <e k="usedplus_fsk_repair_hyd_seals" v="Compus etanșare urgență aplicat." eh="5fadb7ef" />
-        <e k="usedplus_fsk_result_title_perfect" v="REPARATIE SUCCESSFUL" eh="cb532e1b" />
-        <e k="usedplus_fsk_result_title_good" v="PARTIAL REPARATIE" eh="cbba8a69" />
+        <e k="usedplus_fsk_result_title_perfect" v="DIAGNOSTIC CORECT!" eh="1455077c" />
+        <e k="usedplus_fsk_result_title_good" v="POTRIVIRE PARȚIALĂ" eh="5499883e" />
         <e k="usedplus_fsk_result_title_wrong_system" v="SISTEM GREȘIT" eh="7259aab1" />
-        <e k="usedplus_fsk_result_title_poor" v="MINIMAL REPARATIE" eh="9d485c84" />
-        <e k="usedplus_fsk_result_perfect" v="Correct diagnosis! Targeted reparatie applied." eh="91538006" />
-        <e k="usedplus_fsk_result_good" v="Sistem corect, dar diagnosticul a fost greșit. Reparații generale aplicate." eh="47b6188e" />
+        <e k="usedplus_fsk_result_title_poor" v="DIAGNOSTIC GREȘIT" eh="e10c3aed" />
+        <e k="usedplus_fsk_result_perfect" v="Muncă excelentă! Bonus de reparație complet aplicat." eh="627b6efd" />
+        <e k="usedplus_fsk_result_good" v="Sistem corect, dar cauza incorectă identificată." eh="2d85e515" />
         <e k="usedplus_fsk_result_wrong_system" v="Diagnostic bun! Dar problema reală era în: %s" eh="e3bba502" />
         <e k="usedplus_fsk_result_wrong_both" v="Sistem greșit și cauză incorectă. Reparație minimă aplicată." eh="c22e0ba6" />
         <e k="usedplus_fsk_result_poor" v="Sistem greșit identificat. Doar întreținere de bază aplicată." eh="38caed38" />
@@ -1614,7 +1616,7 @@
         <e k="usedplus_ft_hintsRemaining" v="Indicii: %d" eh="c8f080c2" />
         <e k="usedplus_ft_quickScanCap" v="Calitate limitată la 60%% (Scanare rapidă)" eh="5b519744" />
         <e k="usedplus_ft_noFaults" v="Fără defecte - sistem funcțional!" eh="6bfa5546" />
-        <e k="usedplus_ft_noOil" v="[EN] Service Truck has no oil! Fill the oil tank before diagnosing." eh="3cd9a926" />
+        <e k="usedplus_ft_noOil" v="Camionul de service nu are ulei! Umpleți rezervorul de ulei înainte de diagnosticare." eh="3cd9a926" />
         <e k="usedplus_ft_action" v="Detector de defecte: %s" eh="c4066687" />
         <e k="usedplus_ft_corrodedDesc" v="Deteriorare prin rugină / oxidare" eh="8a01ae60" />
         <e k="usedplus_ft_crackedDesc" v="Fisuri de tensiune / oboseală" eh="81d5118b" />
@@ -1623,7 +1625,7 @@
         <e k="usedplus_sparePartsPallet_name" v="Palet Piese Schimb" eh="9bf39a93" />
         <e k="usedplus_sparePartsPallet_function" v="Consumable spare parts pentru Service Truck restoration. Place near the truck during restoration work." eh="c90aa3eb" />
         <e k="fillType_spareParts" v="Piese Schimb" eh="ab6b8ce1" />
-        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="646d470f" />
+        <e k="fillType_hydraulicOil" v="Ulei Hidraulic" eh="646d470f" />
         <e k="unit_pcs" v="buc" eh="3ecf2642" />
         <e k="usedplus_resto_symptom_engine_knocking_load" v="Severe knocking under incarca" eh="fb8c3067" />
         <e k="usedplus_resto_symptom_engine_low_oil_pressure" v="Presiunea uleiului critic de scazuta" eh="a3efa42d" />
@@ -1940,10 +1942,6 @@
         <e k="usedplus_admin_section_market_dialogs" v="PIATA DIALOGS" eh="4c8988f5" />
         <e k="usedplus_admin_section_service_dialogs" v="DIALOGURI SERVICE" eh="e407aa85" />
         <e k="usedplus_admin_section_lease_dialogs" v="LEASING DIALOGS" eh="479e552e" />
-        <e k="usedplus_admin_section_debug" v="MOD DEBUG" eh="c7ee79cd" />
-        <e k="usedplus_admin_section_vehicle_state" v="VEHICUL STATE" eh="c077f4be" />
-        <e k="usedplus_admin_section_dna" v="VANZATOR DNA (Urmator Cauta)" eh="0e284459" />
-        <e k="usedplus_admin_section_quick_vehicle" v="QUICK VEHICUL SWAP" eh="01242f7d" />
         <e k="usedplus_admin_btn_stall" v="Oprire" eh="a0f50ad4" />
         <e k="usedplus_admin_btn_misfire" v="Rateuri" eh="9b9bd091" />
         <e k="usedplus_admin_btn_overheat" v="Supraîncălz" eh="5d266c94" />
@@ -1954,9 +1952,6 @@
         <e k="usedplus_admin_btn_surge_r" v="Avarie (D)" eh="f9261697" />
         <e k="usedplus_admin_btn_flat_l" v="Dezumflat (S)" eh="427238a9" />
         <e k="usedplus_admin_btn_flat_r" v="Dezumflat (D)" eh="5a2301a8" />
-        <e k="usedplus_admin_btn_reset_cooldown" v="Reseteaza CD" eh="d2165eba" />
-        <e k="usedplus_admin_btn_malf_info" v="Info Defect" eh="92badb26" />
-        <e k="usedplus_admin_btn_fix_all" v="Fix Toate" eh="1c7feed4" />
         <e k="usedplus_admin_btn_spawn_obd" v="Scanner OBD" eh="96023669" />
         <e k="usedplus_admin_btn_spawn_truck" v="Camion Srv" eh="083ff302" />
         <e k="usedplus_admin_btn_spawn_parts" v="Palet Piese" eh="ca04c55a" />
@@ -1974,11 +1969,7 @@
         <e k="usedplus_admin_btn_add_100k" v="+$100.000" eh="860860a5" />
         <e k="usedplus_admin_btn_add_1m" v="+$1.000.000" eh="8946b435" />
         <e k="usedplus_admin_btn_set_zero" v="Setează $0" eh="ca8864ed" />
-        <e k="usedplus_admin_btn_list_deals" v="Listă Oferte" eh="936e496b" />
         <e k="usedplus_admin_btn_payoff_all" v="Pay Off Toate" eh="3817edc8" />
-        <e k="usedplus_admin_btn_create_loan" v="Test Imprumut" eh="06cb7221" />
-        <e k="usedplus_admin_btn_create_lease" v="Test Leasing" eh="d653ef32" />
-        <e k="usedplus_admin_btn_missed_payment" v="Miss Plata" eh="4890557c" />
         <e k="usedplus_admin_btn_dlg_loan" v="Take Imprumut" eh="40fe67fa" />
         <e k="usedplus_admin_btn_dlg_approved" v="Aprobat" eh="6f806341" />
         <e k="usedplus_admin_btn_dlg_credit" v="Raport Credit" eh="0a90b1bc" />
@@ -1993,22 +1984,27 @@
         <e k="usedplus_admin_btn_dlg_inspect" v="Inspectie" eh="35a9dbe6" />
         <e k="usedplus_admin_btn_dlg_lease_end" v="Leasing End" eh="da7801f1" />
         <e k="usedplus_admin_btn_dlg_lease_renew" v="Leasing Renew" eh="7a794930" />
-        <e k="usedplus_admin_btn_toggle_debug" v="Comută Debug" eh="e69cb6a0" />
-        <e k="usedplus_admin_btn_rel_100" v="Fiab: 100%" eh="dfdb79d3" />
-        <e k="usedplus_admin_btn_rel_50" v="Fiab: 50%" eh="9ce7a0a2" />
-        <e k="usedplus_admin_btn_rel_10" v="Fiab: 10%" eh="54d6e770" />
+        <e k="usedplus_admin_btn_dlg_fault_tracer" v="[EN] Fault Tracer" eh="d1b82197" />
+        <e k="usedplus_admin_btn_dlg_portfolio" v="[EN] Portfolio" eh="d4f859a9" />
         <e k="usedplus_admin_btn_reset_hours" v="Reseteaza Ore" eh="a519e5e1" />
         <e k="usedplus_admin_btn_add_hours" v="+1000 Ore" eh="ef05132d" />
-        <e k="usedplus_admin_btn_dna_lemon" v="[EN] 0.1 Lemon" eh="0047d5bc" />
-        <e k="usedplus_admin_btn_dna_average" v="[EN] 0.5 Average" eh="472d5599" />
-        <e k="usedplus_admin_btn_dna_workhorse" v="[EN] 0.9 Workhorse" eh="b0f0ee0b" />
-        <e k="usedplus_admin_btn_dna_desperate" v="Disperat" eh="97df4642" />
-        <e k="usedplus_admin_btn_dna_reasonable" v="Rezonabil" eh="e485c034" />
-        <e k="usedplus_admin_btn_dna_immovable" v="Inflexibil" eh="57d0e57c" />
-        <e k="usedplus_admin_btn_next_vehicle" v="Urmator Vehicul" eh="e95e97fa" />
-        <e k="usedplus_admin_btn_prev_vehicle" v="Prev Vehicul" eh="69b3a0d0" />
-        <e k="usedplus_admin_current_balance" v="Current Sold:" eh="473e7f9e" />
-        <e k="usedplus_admin_current_credit" v="Scor de Credit:" eh="0199e1a3" />
+        <e k="usedplus_admin_btn_dna_lemon" v="0.1 Lămâie" eh="0047d5bc" />
+        <e k="usedplus_admin_btn_dna_average" v="0.5 Mediu" eh="472d5599" />
+        <e k="usedplus_admin_btn_dna_workhorse" v="0.9 Cal de muncă" eh="b0f0ee0b" />
+        <e k="usedplus_admin_btn_refill_oil" v="Reumple ulei" eh="07a47687" />
+        <e k="usedplus_admin_btn_refill_hyd" v="Reumple hid" eh="77663dd6" />
+        <e k="usedplus_admin_btn_fix_tires" v="Repară anvelope" eh="959a0c0e" />
+        <e k="usedplus_admin_btn_fix_all_malf" v="Repară toate defecțiunile" eh="a14746fb" />
+        <e k="usedplus_admin_action_reliability" v="Fiabilitate" eh="820b8f74" />
+        <e k="usedplus_admin_action_condition" v="Stare" eh="9e2941b3" />
+        <e k="usedplus_admin_action_hours" v="Ore" eh="6a7e7316" />
+        <e k="usedplus_admin_action_dna" v="ADN Vehicul" eh="0ce6fbcf" />
+        <e k="usedplus_admin_action_maintenance" v="Întreținere" eh="10d0de28" />
+        <e k="usedplus_admin_action_money" v="Bani" eh="a9331282" />
+        <e k="usedplus_admin_action_credit" v="Scor de credit" eh="ae61b052" />
+        <e k="usedplus_admin_btn_repair" v="Repară" eh="0493d27e" />
+        <e k="usedplus_admin_btn_paint" v="Vopsea" eh="4802a5ac" />
+        <e k="usedplus_admin_btn_fix_leaks" v="Repară Scurgeri" eh="e0140cbb" />
         <e k="usedplus_admin_status_ready" v="Ready. Selecteaza an action." eh="1ef35a42" />
     </elements>
     </texts>

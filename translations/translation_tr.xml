@@ -207,7 +207,7 @@
         <e k="input_USEDPLUS_ACTIVATE_OBD" v="OBD Tarayıcı Kullan" eh="9666e26b" />
         <e k="input_USEDPLUS_TIRES" v="Lastik Servisi" eh="b0234f4e" />
         <e k="input_USEDPLUS_SERVICE_TRUCK" v="Servis Kamyonu Kontrolü" eh="fad0e0f1" />
-        <e k="input_USEDPLUS_FAULT_TRACER" v="[EN] Fault Tracer" eh="d1b82197" />
+        <e k="input_USEDPLUS_FAULT_TRACER" v="Arıza İzleyici" eh="d1b82197" />
         <e k="usedplus_finance_loanTerm_tooltip" v="Ödemeleri 1-20 yıla yayın. Uzun vadeler = küçük aylık ödemeler ama daha fazla toplam faiz." eh="e1170142" />
         <e k="usedplus_finance_downPayment_tooltip" v="Kredi tutarını azaltmak için peşin ödeyin. Yüksek peşinat = düşük faiz oranı ve aylık ödeme. Aralık: %0-50." eh="cb530b47" />
         <e k="usedplus_finance_cashBack_tooltip" v="Hemen nakit alın (kredinize eklenir). İşletme giderleri için kullanışlı, ancak aylık ödemeleri ve toplam maliyeti artırır." eh="dc2693cd" />
@@ -961,7 +961,7 @@
         <e k="usedplus_button_buyout" v="Satın Al" eh="6e052e38" />
         <e k="usedplus_button_renew" v="Yenile" eh="0b9feba3" />
         <e k="usedplus_lr_helpText" v="Bir seçenek seçmelisiniz. İade depozitinizi geri verir. Satın alma sermayenizi satın almaya uygular. Yenileme, sermaye gelecekteki satın almaya uygulanarak kiralamayı uzatır." eh="91673bf9" />
-        <e k="usedplus_lr_deferNotice" v="Bu seçim gelecek ay tekrar görünecektir. Karar verene kadar ek ücret alınmaz." eh="00000000" />
+        <e k="usedplus_lr_deferNotice" v="Bu seçim gelecek ay yeniden görünecektir. Karar verene kadar ek ücret alınmaz." eh="9382457d" />
         <e k="usedplus_conf_title" v="Onay" eh="f4d1ea47" />
         <e k="usedplus_cr_title" v="KREDİ RAPORU" eh="3725e302" />
         <e k="usedplus_cr_reportDate" v="Rapor Tarihi:" eh="93ad31a7" />
@@ -1130,6 +1130,8 @@
         <e k="usedplus_fmf_quickRef" v="HIZLI REFERANS" eh="011d2c62" />
         <e k="usedplus_fmf_quickRefLine1" v="Mağaza → Finanse Et/Kirala/İkinci El Ara | Garaj → Satışa Çıkar" eh="426419c9" />
         <e k="usedplus_fmf_quickRefLine2" v="Aylık ödemeler otomatik kesilir. Erken ödeme faizden tasarruf sağlar." eh="73cd35d9" />
+        <e k="usedplus_btn_admin_panel" v="[EN] Admin Panel" eh="a0e0d3f0" />
+        <e k="usedplus_admin_no_vehicle_warning" v="[EN] You must be in a vehicle to use the Admin Panel. Enter a vehicle first, then press ESC." eh="abe11d3f" />
         <e k="usedplus_ll_title" v="Arazi Kirala" eh="ec34a2a6" />
         <e k="usedplus_ll_sectionDetails" v="TARLA DETAYLARI" eh="9550d705" />
         <e k="usedplus_ll_field" v="Tarla:" eh="af9b2925" />
@@ -1300,10 +1302,11 @@
         <e k="usedplus_info_tire_condition" v="Lastikler" eh="3fe2c06a" />
 
         <!-- v2.12.0: Finance/Lease Info Box Display -->
-        <e k="usedplus_info_dealType" v="Durum" eh="00000000" />
-        <e k="usedplus_info_leased" v="KİRALIK" eh="00000000" />
-        <e k="usedplus_info_financed" v="FİNANSLI" eh="00000000" />
-        <e k="usedplus_info_monthsRemaining" v="Kalan Aylar" eh="00000000" />        <e k="usedplus_tires_title" v="Lastik Servisi" eh="b0234f4e" />
+        <e k="usedplus_info_dealType" v="Durum" eh="ec53a8c4" />
+        <e k="usedplus_info_leased" v="KİRALIK" eh="a33a1186" />
+        <e k="usedplus_info_financed" v="FİNANSLI" eh="6f9a4a90" />
+        <e k="usedplus_info_monthsRemaining" v="Kalan Aylar" eh="b375dcc1" />
+        <e k="usedplus_tires_title" v="Lastik Servisi" eh="b0234f4e" />
         <e k="usedplus_tires_sectionStatus" v="ARAÇ &amp;amp; LASTİK DURUMU" eh="c0e3631e" />
         <e k="usedplus_tires_sectionSelect" v="LASTİK KALİTESİ SEÇ" eh="42abee54" />
         <e k="usedplus_tires_sectionPayment" v="ÖDEME ÖZETİ" eh="0dd98605" />
@@ -1465,12 +1468,12 @@
         <e k="usedplus_fsk_repair_hyd_bleed" v="Hidrolik hatlardan hava boşaltıldı." eh="df37c387" />
         <e k="usedplus_fsk_repair_hyd_pump" v="Geçici pompa sızdırmazlık işlemi uygulandı." eh="89e6edb3" />
         <e k="usedplus_fsk_repair_hyd_seals" v="Acil sızdırmazlık bileşiği uygulandı." eh="5fadb7ef" />
-        <e k="usedplus_fsk_result_title_perfect" v="ONARIM BAŞARILI" eh="cb532e1b" />
-        <e k="usedplus_fsk_result_title_good" v="KISMİ ONARIM" eh="cbba8a69" />
+        <e k="usedplus_fsk_result_title_perfect" v="DOĞRU TEŞHİS!" eh="1455077c" />
+        <e k="usedplus_fsk_result_title_good" v="KISMİ EŞLEŞİM" eh="5499883e" />
         <e k="usedplus_fsk_result_title_wrong_system" v="YANLIŞ SİSTEM" eh="7259aab1" />
-        <e k="usedplus_fsk_result_title_poor" v="MİNİMAL ONARIM" eh="9d485c84" />
-        <e k="usedplus_fsk_result_perfect" v="Doğru teşhis! Hedefli onarım uygulandı." eh="91538006" />
-        <e k="usedplus_fsk_result_good" v="Doğru sistem, ancak teşhis yanlıştı. Genel onarımlar uygulandı." eh="47b6188e" />
+        <e k="usedplus_fsk_result_title_poor" v="YANLIŞ TEŞHİS" eh="e10c3aed" />
+        <e k="usedplus_fsk_result_perfect" v="Mükemmel iş! Tam onarım bonusu uygulandı." eh="627b6efd" />
+        <e k="usedplus_fsk_result_good" v="Doğru sistem, ancak yanlış neden belirlendi." eh="2d85e515" />
         <e k="usedplus_fsk_result_wrong_system" v="İyi teşhis! Ancak asıl sorun şuradaydı: %s" eh="e3bba502" />
         <e k="usedplus_fsk_result_wrong_both" v="Yanlış sistem ve yanlış neden. Minimal onarım uygulandı." eh="c22e0ba6" />
         <e k="usedplus_fsk_result_poor" v="Yanlış sistem tespit edildi. Sadece temel bakım uygulandı." eh="38caed38" />
@@ -1617,7 +1620,7 @@
         <e k="usedplus_ft_hintsRemaining" v="İpuçları: %d" eh="c8f080c2" />
         <e k="usedplus_ft_quickScanCap" v="Kalite %%60 ile sınırlı (Hızlı tarama)" eh="5b519744" />
         <e k="usedplus_ft_noFaults" v="Arıza yok - sistem sağlam!" eh="6bfa5546" />
-        <e k="usedplus_ft_noOil" v="[EN] Service Truck has no oil! Fill the oil tank before diagnosing." eh="3cd9a926" />
+        <e k="usedplus_ft_noOil" v="Servis Kamyonunda yağ yok! Teşhis koymadan önce yağ deposunu doldurun." eh="3cd9a926" />
         <e k="usedplus_ft_action" v="Arıza izleyici: %s" eh="c4066687" />
         <e k="usedplus_ft_corrodedDesc" v="Pas / oksidasyon hasarı" eh="8a01ae60" />
         <e k="usedplus_ft_crackedDesc" v="Gerilim çatlakları / yorgunluk" eh="81d5118b" />
@@ -1626,7 +1629,7 @@
         <e k="usedplus_sparePartsPallet_name" v="Yedek Parça Paleti" eh="9bf39a93" />
         <e k="usedplus_sparePartsPallet_function" v="Servis Kamyonu restorasyonu için sarf malzemesi yedek parçalar. Restorasyon çalışması sırasında kamyonun yakınına yerleştirin." eh="c90aa3eb" />
         <e k="fillType_spareParts" v="Yedek Parçalar" eh="ab6b8ce1" />
-        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="646d470f" />
+        <e k="fillType_hydraulicOil" v="Hidrolik Yağ" eh="646d470f" />
         <e k="unit_pcs" v="adet" eh="3ecf2642" />
         <e k="usedplus_resto_symptom_engine_knocking_load" v="Yük altında şiddetli vuruntu" eh="fb8c3067" />
         <e k="usedplus_resto_symptom_engine_low_oil_pressure" v="Yağ basıncı kritik düzeyde düşük" eh="a3efa42d" />
@@ -1943,10 +1946,6 @@
         <e k="usedplus_admin_section_market_dialogs" v="PAZAR YERİ DİYALOGLARI" eh="4c8988f5" />
         <e k="usedplus_admin_section_service_dialogs" v="SERVİS DİYALOGLARI" eh="e407aa85" />
         <e k="usedplus_admin_section_lease_dialogs" v="KİRALAMA DİYALOGLARI" eh="479e552e" />
-        <e k="usedplus_admin_section_debug" v="HATA AYIKLAMA MODU" eh="c7ee79cd" />
-        <e k="usedplus_admin_section_vehicle_state" v="ARAÇ DURUMU" eh="c077f4be" />
-        <e k="usedplus_admin_section_dna" v="SATICI DNA (Sonraki Arama)" eh="0e284459" />
-        <e k="usedplus_admin_section_quick_vehicle" v="HIZLI ARAÇ DEĞİŞİMİ" eh="01242f7d" />
         <e k="usedplus_admin_btn_stall" v="Stop" eh="a0f50ad4" />
         <e k="usedplus_admin_btn_misfire" v="Ateşleme" eh="9b9bd091" />
         <e k="usedplus_admin_btn_overheat" v="Aşırı Isı" eh="5d266c94" />
@@ -1957,9 +1956,6 @@
         <e k="usedplus_admin_btn_surge_r" v="Dalgalanma (Sa)" eh="f9261697" />
         <e k="usedplus_admin_btn_flat_l" v="Patlak (S)" eh="427238a9" />
         <e k="usedplus_admin_btn_flat_r" v="Patlak (Sa)" eh="5a2301a8" />
-        <e k="usedplus_admin_btn_reset_cooldown" v="Bekleme Sıfırla" eh="d2165eba" />
-        <e k="usedplus_admin_btn_malf_info" v="Arıza Bilgisi" eh="92badb26" />
-        <e k="usedplus_admin_btn_fix_all" v="Hepsini Onar" eh="1c7feed4" />
         <e k="usedplus_admin_btn_spawn_obd" v="OBD Tarayıcı" eh="96023669" />
         <e k="usedplus_admin_btn_spawn_truck" v="Servis Kam." eh="083ff302" />
         <e k="usedplus_admin_btn_spawn_parts" v="Parça Paleti" eh="ca04c55a" />
@@ -1977,11 +1973,7 @@
         <e k="usedplus_admin_btn_add_100k" v="+100.000 $" eh="860860a5" />
         <e k="usedplus_admin_btn_add_1m" v="+1.000.000 $" eh="8946b435" />
         <e k="usedplus_admin_btn_set_zero" v="0 $ Yap" eh="ca8864ed" />
-        <e k="usedplus_admin_btn_list_deals" v="Anlaşma Listele" eh="936e496b" />
         <e k="usedplus_admin_btn_payoff_all" v="Tümünü Öde" eh="3817edc8" />
-        <e k="usedplus_admin_btn_create_loan" v="Test Kredi" eh="06cb7221" />
-        <e k="usedplus_admin_btn_create_lease" v="Test Kiralama" eh="d653ef32" />
-        <e k="usedplus_admin_btn_missed_payment" v="Ödeme Atla" eh="4890557c" />
         <e k="usedplus_admin_btn_dlg_loan" v="Kredi Al" eh="40fe67fa" />
         <e k="usedplus_admin_btn_dlg_approved" v="Onaylandı" eh="6f806341" />
         <e k="usedplus_admin_btn_dlg_credit" v="Kredi" eh="0a90b1bc" />
@@ -1996,21 +1988,27 @@
         <e k="usedplus_admin_btn_dlg_inspect" v="İncele" eh="35a9dbe6" />
         <e k="usedplus_admin_btn_dlg_lease_end" v="Kira Sonu" eh="da7801f1" />
         <e k="usedplus_admin_btn_dlg_lease_renew" v="Kira Yenile" eh="7a794930" />
-        <e k="usedplus_admin_btn_toggle_debug" v="Debug Aç/Kapa" eh="e69cb6a0" />
-        <e k="usedplus_admin_btn_rel_100" v="Güv: %100" eh="dfdb79d3" />
-        <e k="usedplus_admin_btn_rel_50" v="Güv: %50" eh="9ce7a0a2" />
-        <e k="usedplus_admin_btn_rel_10" v="Güv: %10" eh="54d6e770" />
+        <e k="usedplus_admin_btn_dlg_fault_tracer" v="[EN] Fault Tracer" eh="d1b82197" />
+        <e k="usedplus_admin_btn_dlg_portfolio" v="[EN] Portfolio" eh="d4f859a9" />
         <e k="usedplus_admin_btn_reset_hours" v="Saat Sıfırla" eh="a519e5e1" />
         <e k="usedplus_admin_btn_add_hours" v="+1000 Saat" eh="ef05132d" />
-        <e k="usedplus_admin_btn_dna_lemon" v="[EN] 0.1 Lemon" eh="0047d5bc" />
-        <e k="usedplus_admin_btn_dna_average" v="[EN] 0.5 Average" eh="472d5599" />
-        <e k="usedplus_admin_btn_dna_workhorse" v="[EN] 0.9 Workhorse" eh="b0f0ee0b" />
-        <e k="usedplus_admin_btn_dna_desperate" v="Umutsuz" eh="97df4642" />
-        <e k="usedplus_admin_btn_dna_reasonable" v="Makul" eh="e485c034" />
-        <e k="usedplus_admin_btn_dna_immovable" v="Diretken" eh="57d0e57c" />
-        <e k="usedplus_admin_btn_next_vehicle" v="Sonraki Araç" eh="e95e97fa" />
-        <e k="usedplus_admin_btn_prev_vehicle" v="Önceki Araç" eh="69b3a0d0" />
-        <e k="usedplus_admin_current_balance" v="Mevcut Bakiye:" eh="473e7f9e" />
-        <e k="usedplus_admin_current_credit" v="Kredi Puanı:" eh="0199e1a3" />
-        <e k="usedplus_admin_status_ready" v="Hazır. Bir işlem seçin." eh="1ef35a42" /></elements>
+        <e k="usedplus_admin_btn_dna_lemon" v="0.1 Limon" eh="0047d5bc" />
+        <e k="usedplus_admin_btn_dna_average" v="0.5 Ortalama" eh="472d5599" />
+        <e k="usedplus_admin_btn_dna_workhorse" v="0.9 Çalışkan" eh="b0f0ee0b" />
+        <e k="usedplus_admin_btn_refill_oil" v="Yağ Doldur" eh="07a47687" />
+        <e k="usedplus_admin_btn_refill_hyd" v="Hid. Doldur" eh="77663dd6" />
+        <e k="usedplus_admin_btn_fix_tires" v="Lastik Onar" eh="959a0c0e" />
+        <e k="usedplus_admin_btn_fix_all_malf" v="Tüm Arız. Onar" eh="a14746fb" />
+        <e k="usedplus_admin_action_reliability" v="Güvenilirlik" eh="820b8f74" />
+        <e k="usedplus_admin_action_condition" v="Durum" eh="9e2941b3" />
+        <e k="usedplus_admin_action_hours" v="Saatler" eh="6a7e7316" />
+        <e k="usedplus_admin_action_dna" v="Araç DNA" eh="0ce6fbcf" />
+        <e k="usedplus_admin_action_maintenance" v="Bakım" eh="10d0de28" />
+        <e k="usedplus_admin_action_money" v="Para" eh="a9331282" />
+        <e k="usedplus_admin_action_credit" v="Kredi Puanı" eh="ae61b052" />
+        <e k="usedplus_admin_btn_repair" v="Onar" eh="0493d27e" />
+        <e k="usedplus_admin_btn_paint" v="Boya" eh="4802a5ac" />
+        <e k="usedplus_admin_btn_fix_leaks" v="Sızıntı Onar" eh="e0140cbb" />
+        <e k="usedplus_admin_status_ready" v="Hazır. Bir işlem seçin." eh="1ef35a42" />
+    </elements>
 </l10n>

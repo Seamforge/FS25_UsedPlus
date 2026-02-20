@@ -257,7 +257,7 @@
         <e k="input_USEDPLUS_ACTIVATE_OBD" v="Anvand OBD-skanner" eh="9666e26b" />
         <e k="input_USEDPLUS_TIRES" v="Dackservice" eh="b0234f4e" />
         <e k="input_USEDPLUS_SERVICE_TRUCK" v="Servicebilskontroll" eh="fad0e0f1" />
-        <e k="input_USEDPLUS_FAULT_TRACER" v="[EN] Fault Tracer" eh="d1b82197" />
+        <e k="input_USEDPLUS_FAULT_TRACER" v="Felspårare" eh="d1b82197" />
 
         <!--  Tooltips for Finance Dialog -->
         <e k="usedplus_finance_loanTerm_tooltip" v="Fördela betalningar over 1-20 ar. Langre lopperiod = lagre manadsbetalningar men mer total ranta." eh="e1170142" />
@@ -1218,7 +1218,7 @@
         <e k="usedplus_button_buyout" v="Köp ut" eh="6e052e38" />
         <e k="usedplus_button_renew" v="Förnya" eh="0b9feba3" />
         <e k="usedplus_lr_helpText" v="Du måste välja ett alternativ. Återlämning ger dig depositionen tillbaka. Utköp använder ditt eget kapital för köp. Förnyelse förlänger leasingen med eget kapital tillämpat på framtida utköp." eh="91673bf9" />
-        <e k="usedplus_lr_deferNotice" v="Detta val visas igen nästa månad. Inga extra avgifter tills du bestämmer dig." eh="00000000" />
+        <e k="usedplus_lr_deferNotice" v="Det här valet visas igen nästa månad. Inga extra avgifter tills du bestämmer dig." eh="9382457d" />
 
         <!-- Confirmation Dialog -->
         <e k="usedplus_conf_title" v="Bekräftelse" eh="f4d1ea47" />
@@ -1403,6 +1403,8 @@
         <e k="usedplus_fmf_quickRef" v="SNABBREFERENS" eh="011d2c62" />
         <e k="usedplus_fmf_quickRefLine1" v="Butik → Finansiera/Leasa/Sök begagnat | Garage → Annonsera till salu" eh="426419c9" />
         <e k="usedplus_fmf_quickRefLine2" v="Månadsbetalningar dras automatiskt. Tidig återbetalning sparar ränta." eh="73cd35d9" />
+        <e k="usedplus_btn_admin_panel" v="[EN] Admin Panel" eh="a0e0d3f0" />
+        <e k="usedplus_admin_no_vehicle_warning" v="[EN] You must be in a vehicle to use the Admin Panel. Enter a vehicle first, then press ESC." eh="abe11d3f" />
 
         <!-- Land Lease Dialog -->
         <e k="usedplus_ll_title" v="Leasa mark" eh="ec34a2a6" />
@@ -1640,10 +1642,10 @@
         <e k="usedplus_info_tire_condition" v="Däck" eh="3fe2c06a" />
 
         <!-- v2.12.0: Finance/Lease Info Box Display -->
-        <e k="usedplus_info_dealType" v="Status" eh="00000000" />
-        <e k="usedplus_info_leased" v="LEASAD" eh="00000000" />
-        <e k="usedplus_info_financed" v="FINANSIERAD" eh="00000000" />
-        <e k="usedplus_info_monthsRemaining" v="Månader kvar" eh="00000000" />
+        <e k="usedplus_info_dealType" v="Status" eh="ec53a8c4" />
+        <e k="usedplus_info_leased" v="LEASAD" eh="a33a1186" />
+        <e k="usedplus_info_financed" v="FINANSIERAD" eh="6f9a4a90" />
+        <e k="usedplus_info_monthsRemaining" v="Månader kvar" eh="b375dcc1" />
         <!-- v1.7.0: Tires Service Dialog -->
         <e k="usedplus_tires_title" v="Däckservice" eh="b0234f4e" />
         <e k="usedplus_tires_sectionStatus" v="FORDON &amp; DÄCKSTATUS" eh="c0e3631e" />
@@ -1835,12 +1837,12 @@
         <e k="usedplus_fsk_repair_hyd_seals" v="Applicerat nödtätningsmedel." eh="5fadb7ef" />
 
         <!-- Result messages -->
-        <e k="usedplus_fsk_result_title_perfect" v="REPARATION LYCKAD" eh="cb532e1b" />
-        <e k="usedplus_fsk_result_title_good" v="DELREPARATION" eh="cbba8a69" />
+        <e k="usedplus_fsk_result_title_perfect" v="KORREKT DIAGNOS!" eh="1455077c" />
+        <e k="usedplus_fsk_result_title_good" v="DELVIS TRÄFF" eh="5499883e" />
         <e k="usedplus_fsk_result_title_wrong_system" v="FEL SYSTEM" eh="7259aab1" />
-        <e k="usedplus_fsk_result_title_poor" v="MINIMAL REPARATION" eh="9d485c84" />
-        <e k="usedplus_fsk_result_perfect" v="Korrekt diagnos! Riktad reparation utförd." eh="91538006" />
-        <e k="usedplus_fsk_result_good" v="Rätt system, men diagnosen var fel. Generella reparationer utförda." eh="47b6188e" />
+        <e k="usedplus_fsk_result_title_poor" v="FEL DIAGNOS" eh="e10c3aed" />
+        <e k="usedplus_fsk_result_perfect" v="Utmärkt arbete! Fullt reparationsbonus tillämpat." eh="627b6efd" />
+        <e k="usedplus_fsk_result_good" v="Rätt system, men felaktig orsak identifierad." eh="2d85e515" />
         <e k="usedplus_fsk_result_wrong_system" v="Bra diagnos! Men det verkliga problemet var i: %s" eh="e3bba502" />
         <e k="usedplus_fsk_result_wrong_both" v="Fel system och felaktig orsak. Minimal reparation utförd." eh="c22e0ba6" />
         <e k="usedplus_fsk_result_poor" v="Fel system identifierat. Endast grundläggande underhåll utfört." eh="38caed38" />
@@ -2008,7 +2010,7 @@
         <e k="usedplus_ft_hintsRemaining" v="Ledtrådar: %d" eh="c8f080c2" />
         <e k="usedplus_ft_quickScanCap" v="Kvalitet begränsad till 60%% (Snabbskanning)" eh="5b519744" />
         <e k="usedplus_ft_noFaults" v="Inga fel - systemet är i ordning!" eh="6bfa5546" />
-        <e k="usedplus_ft_noOil" v="[EN] Service Truck has no oil! Fill the oil tank before diagnosing." eh="3cd9a926" />
+        <e k="usedplus_ft_noOil" v="Servicebilen har inget olja! Fyll på oljetanken innan du diagnostiserar." eh="3cd9a926" />
         <e k="usedplus_ft_action" v="Felspårning: %s" eh="c4066687" />
         <e k="usedplus_ft_corrodedDesc" v="Rost- / oxidationsskada" eh="8a01ae60" />
         <e k="usedplus_ft_crackedDesc" v="Spänningssprickor / utmattning" eh="81d5118b" />
@@ -2018,7 +2020,7 @@
         <e k="usedplus_sparePartsPallet_name" v="Reservdelspalett" eh="9bf39a93" />
         <e k="usedplus_sparePartsPallet_function" v="Förbrukningsbara reservdelar för servicebilsrestaurering. Placera nära lastbilen under restaureringsarbete." eh="c90aa3eb" />
         <e k="fillType_spareParts" v="Reservdelar" eh="ab6b8ce1" />
-        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="646d470f" />
+        <e k="fillType_hydraulicOil" v="Hydraulolja" eh="646d470f" />
         <e k="unit_pcs" v="st" eh="3ecf2642" />
 
         <!-- v2.9.0: Restoration Diagnostic Symptoms - Engine -->
@@ -2461,10 +2463,6 @@
         <e k="usedplus_admin_section_lease_dialogs" v="LEASINGDIALOG" eh="479e552e" />
 
         <!-- Section Headers - Tab 5 (State) -->
-        <e k="usedplus_admin_section_debug" v="FELSÖKNINGSLÄGE" eh="c7ee79cd" />
-        <e k="usedplus_admin_section_vehicle_state" v="FORDONSSTATUS" eh="c077f4be" />
-        <e k="usedplus_admin_section_dna" v="SÄLJARE DNA (Nästa sökning)" eh="0e284459" />
-        <e k="usedplus_admin_section_quick_vehicle" v="SNABB FORDONSBYTE" eh="01242f7d" />
 
         <!-- Buttons - Tab 1 (Malfunctions) -->
         <e k="usedplus_admin_btn_stall" v="Stannat" eh="a0f50ad4" />
@@ -2477,9 +2475,6 @@
         <e k="usedplus_admin_btn_surge_r" v="Spänning (H)" eh="f9261697" />
         <e k="usedplus_admin_btn_flat_l" v="Punktering (V)" eh="427238a9" />
         <e k="usedplus_admin_btn_flat_r" v="Punktering (H)" eh="5a2301a8" />
-        <e k="usedplus_admin_btn_reset_cooldown" v="Återställ CD" eh="d2165eba" />
-        <e k="usedplus_admin_btn_malf_info" v="Funkfel info" eh="92badb26" />
-        <e k="usedplus_admin_btn_fix_all" v="Fixa allt" eh="1c7feed4" />
 
         <!-- Buttons - Tab 2 (Spawning) -->
         <e k="usedplus_admin_btn_spawn_obd" v="OBD-skanner" eh="96023669" />
@@ -2501,11 +2496,7 @@
         <e k="usedplus_admin_btn_add_100k" v="+100 000 kr" eh="860860a5" />
         <e k="usedplus_admin_btn_add_1m" v="+1 000 000 kr" eh="8946b435" />
         <e k="usedplus_admin_btn_set_zero" v="Ange 0 kr" eh="ca8864ed" />
-        <e k="usedplus_admin_btn_list_deals" v="Lista affärer" eh="936e496b" />
         <e k="usedplus_admin_btn_payoff_all" v="Betala av allt" eh="3817edc8" />
-        <e k="usedplus_admin_btn_create_loan" v="Testlån" eh="06cb7221" />
-        <e k="usedplus_admin_btn_create_lease" v="Testleasing" eh="d653ef32" />
-        <e k="usedplus_admin_btn_missed_payment" v="Missa betalning" eh="4890557c" />
 
         <!-- Buttons - Tab 4 (Dialogs) -->
         <e k="usedplus_admin_btn_dlg_loan" v="Ta lån" eh="40fe67fa" />
@@ -2522,26 +2513,31 @@
         <e k="usedplus_admin_btn_dlg_inspect" v="Inspektera" eh="35a9dbe6" />
         <e k="usedplus_admin_btn_dlg_lease_end" v="Leasingslut" eh="da7801f1" />
         <e k="usedplus_admin_btn_dlg_lease_renew" v="Förnya leasing" eh="7a794930" />
+        <e k="usedplus_admin_btn_dlg_fault_tracer" v="[EN] Fault Tracer" eh="d1b82197" />
+        <e k="usedplus_admin_btn_dlg_portfolio" v="[EN] Portfolio" eh="d4f859a9" />
 
         <!-- Buttons - Tab 5 (State) -->
-        <e k="usedplus_admin_btn_toggle_debug" v="Växla felsökning" eh="e69cb6a0" />
-        <e k="usedplus_admin_btn_rel_100" v="Tillf: 100%" eh="dfdb79d3" />
-        <e k="usedplus_admin_btn_rel_50" v="Tillf: 50%" eh="9ce7a0a2" />
-        <e k="usedplus_admin_btn_rel_10" v="Tillf: 10%" eh="54d6e770" />
         <e k="usedplus_admin_btn_reset_hours" v="Återställ timmar" eh="a519e5e1" />
         <e k="usedplus_admin_btn_add_hours" v="+1000 timmar" eh="ef05132d" />
-        <e k="usedplus_admin_btn_dna_lemon" v="[EN] 0.1 Lemon" eh="0047d5bc" />
-        <e k="usedplus_admin_btn_dna_average" v="[EN] 0.5 Average" eh="472d5599" />
-        <e k="usedplus_admin_btn_dna_workhorse" v="[EN] 0.9 Workhorse" eh="b0f0ee0b" />
-        <e k="usedplus_admin_btn_dna_desperate" v="Desperat" eh="97df4642" />
-        <e k="usedplus_admin_btn_dna_reasonable" v="Rimlig" eh="e485c034" />
-        <e k="usedplus_admin_btn_dna_immovable" v="Orubblig" eh="57d0e57c" />
-        <e k="usedplus_admin_btn_next_vehicle" v="Nästa fordon" eh="e95e97fa" />
-        <e k="usedplus_admin_btn_prev_vehicle" v="Förra fordon" eh="69b3a0d0" />
+        <e k="usedplus_admin_btn_dna_lemon" v="0.1 Citron" eh="0047d5bc" />
+        <e k="usedplus_admin_btn_dna_average" v="0.5 Medel" eh="472d5599" />
+        <e k="usedplus_admin_btn_dna_workhorse" v="0.9 Arbetshäst" eh="b0f0ee0b" />
+        <e k="usedplus_admin_btn_refill_oil" v="Fyll olja" eh="07a47687" />
+        <e k="usedplus_admin_btn_refill_hyd" v="Fyll hyd." eh="77663dd6" />
+        <e k="usedplus_admin_btn_fix_tires" v="Fixa däck" eh="959a0c0e" />
+        <e k="usedplus_admin_btn_fix_all_malf" v="Åtg. alla fel" eh="a14746fb" />
+        <e k="usedplus_admin_action_reliability" v="Tillförlitlighet" eh="820b8f74" />
+        <e k="usedplus_admin_action_condition" v="Skick" eh="9e2941b3" />
+        <e k="usedplus_admin_action_hours" v="Timmar" eh="6a7e7316" />
+        <e k="usedplus_admin_action_dna" v="Fordons-DNA" eh="0ce6fbcf" />
+        <e k="usedplus_admin_action_maintenance" v="Underhåll" eh="10d0de28" />
+        <e k="usedplus_admin_action_money" v="Pengar" eh="a9331282" />
+        <e k="usedplus_admin_action_credit" v="Kreditpoäng" eh="ae61b052" />
+        <e k="usedplus_admin_btn_repair" v="Reparera" eh="0493d27e" />
+        <e k="usedplus_admin_btn_paint" v="Måla" eh="4802a5ac" />
+        <e k="usedplus_admin_btn_fix_leaks" v="Rep. Läckor" eh="e0140cbb" />
 
         <!-- Info Labels -->
-        <e k="usedplus_admin_current_balance" v="Nuvarande saldo:" eh="473e7f9e" />
-        <e k="usedplus_admin_current_credit" v="Kreditvärdighet:" eh="0199e1a3" />
 
         <!-- Status Messages -->
         <e k="usedplus_admin_status_ready" v="Redo. Välj en åtgärd." eh="1ef35a42" />

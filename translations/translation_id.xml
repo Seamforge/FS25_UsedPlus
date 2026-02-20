@@ -257,7 +257,7 @@
         <e k="input_USEDPLUS_ACTIVATE_OBD" v="Gunakan OBD Scanner" eh="9666e26b" />
         <e k="input_USEDPLUS_TIRES" v="Layanan Ban" eh="b0234f4e" />
         <e k="input_USEDPLUS_SERVICE_TRUCK" v="Kontrol Truk Servis" eh="fad0e0f1" />
-        <e k="input_USEDPLUS_FAULT_TRACER" v="[EN] Fault Tracer" eh="d1b82197" />
+        <e k="input_USEDPLUS_FAULT_TRACER" v="Pelacak Kesalahan" eh="d1b82197" />
 
         <!--  Tooltips for Finance Dialog -->
         <e k="usedplus_finance_loanTerm_tooltip" v="Sebarkan pembayaran selama 1-20 tahun. Jangka lebih lama = cicilan bulanan lebih kecil tapi total bunga lebih banyak." eh="e1170142" />
@@ -1218,7 +1218,7 @@
         <e k="usedplus_button_buyout" v="Tebus" eh="6e052e38" />
         <e k="usedplus_button_renew" v="Perpanjang" eh="0b9feba3" />
         <e k="usedplus_lr_helpText" v="You must pilih an option. Returning gives you your deposit back. Buyout uses your equity toward purchase. Renewing extends the lease with equity applied to future buyout." eh="91673bf9" />
-        <e k="usedplus_lr_deferNotice" v="Pilihan ini akan muncul lagi bulan depan. Tidak ada biaya tambahan sampai Anda memutuskan." eh="00000000" />
+        <e k="usedplus_lr_deferNotice" v="Pilihan ini akan muncul lagi bulan depan. Tidak ada biaya tambahan sampai Anda memutuskan." eh="9382457d" />
 
         <!-- Confirmation Dialog -->
         <e k="usedplus_conf_title" v="Konfirmasi" eh="f4d1ea47" />
@@ -1403,6 +1403,8 @@
         <e k="usedplus_fmf_quickRef" v="REFERENSI CEPAT" eh="011d2c62" />
         <e k="usedplus_fmf_quickRefLine1" v="Toko → Biaya/Sewa/Cari Bekas | Garasi → Daftar untuk Dijual" eh="426419c9" />
         <e k="usedplus_fmf_quickRefLine2" v="Pembayaran bulanan otomatis dipotong. Pelunasan awal menghemat bunga." eh="73cd35d9" />
+        <e k="usedplus_btn_admin_panel" v="[EN] Admin Panel" eh="a0e0d3f0" />
+        <e k="usedplus_admin_no_vehicle_warning" v="[EN] You must be in a vehicle to use the Admin Panel. Enter a vehicle first, then press ESC." eh="abe11d3f" />
 
         <!-- Land Lease Dialog -->
         <e k="usedplus_ll_title" v="Sewa Tanah" eh="ec34a2a6" />
@@ -1640,10 +1642,10 @@
         <e k="usedplus_info_tire_condition" v="Ban" eh="3fe2c06a" />
 
         <!-- v2.12.0: Finance/Lease Info Box Display -->
-        <e k="usedplus_info_dealType" v="Status" eh="00000000" />
-        <e k="usedplus_info_leased" v="DISEWA" eh="00000000" />
-        <e k="usedplus_info_financed" v="DIBIAYAI" eh="00000000" />
-        <e k="usedplus_info_monthsRemaining" v="Bulan Tersisa" eh="00000000" />
+        <e k="usedplus_info_dealType" v="Status" eh="ec53a8c4" />
+        <e k="usedplus_info_leased" v="DISEWA" eh="a33a1186" />
+        <e k="usedplus_info_financed" v="DIBIAYAI" eh="6f9a4a90" />
+        <e k="usedplus_info_monthsRemaining" v="Bulan Tersisa" eh="b375dcc1" />
         <!-- v1.7.0: Tires Service Dialog -->
         <e k="usedplus_tires_title" v="Layanan Ban" eh="b0234f4e" />
         <e k="usedplus_tires_sectionStatus" v="STATUS KENDARAAN &amp;amp; BAN" eh="c0e3631e" />
@@ -1835,12 +1837,12 @@
         <e k="usedplus_fsk_repair_hyd_seals" v="Menerapkan senyawa segel darurat." eh="5fadb7ef" />
 
         <!-- Result messages -->
-        <e k="usedplus_fsk_result_title_perfect" v="PERBAIKAN BERHASIL" eh="cb532e1b" />
-        <e k="usedplus_fsk_result_title_good" v="PERBAIKAN SEBAGIAN" eh="cbba8a69" />
+        <e k="usedplus_fsk_result_title_perfect" v="DIAGNOSIS BENAR!" eh="1455077c" />
+        <e k="usedplus_fsk_result_title_good" v="KECOCOKAN SEBAGIAN" eh="5499883e" />
         <e k="usedplus_fsk_result_title_wrong_system" v="SISTEM SALAH" eh="7259aab1" />
-        <e k="usedplus_fsk_result_title_poor" v="PERBAIKAN MINIMAL" eh="9d485c84" />
-        <e k="usedplus_fsk_result_perfect" v="Diagnosis benar! Targeted repair applied." eh="91538006" />
-        <e k="usedplus_fsk_result_good" v="Sistem benar, tapi diagnosis meleset. Perbaikan umum diterapkan." eh="47b6188e" />
+        <e k="usedplus_fsk_result_title_poor" v="DIAGNOSIS SALAH" eh="e10c3aed" />
+        <e k="usedplus_fsk_result_perfect" v="Kerja bagus! Bonus perbaikan penuh diterapkan." eh="627b6efd" />
+        <e k="usedplus_fsk_result_good" v="Sistem benar, tetapi penyebab yang salah teridentifikasi." eh="2d85e515" />
         <e k="usedplus_fsk_result_wrong_system" v="Diagnosis bagus! Tapi masalah sebenarnya ada di: %s" eh="e3bba502" />
         <e k="usedplus_fsk_result_wrong_both" v="Sistem salah dan penyebab tidak tepat. Perbaikan minimal diterapkan." eh="c22e0ba6" />
         <e k="usedplus_fsk_result_poor" v="Sistem salah diidentifikasi. Hanya pemeliharaan dasar diterapkan." eh="38caed38" />
@@ -2008,7 +2010,7 @@
         <e k="usedplus_ft_hintsRemaining" v="Petunjuk: %d" eh="c8f080c2" />
         <e k="usedplus_ft_quickScanCap" v="Kualitas dibatasi 60%% (Scan cepat)" eh="5b519744" />
         <e k="usedplus_ft_noFaults" v="Tidak ada kerusakan - sistem baik!" eh="6bfa5546" />
-        <e k="usedplus_ft_noOil" v="[EN] Service Truck has no oil! Fill the oil tank before diagnosing." eh="3cd9a926" />
+        <e k="usedplus_ft_noOil" v="Truk Servis tidak memiliki oli! Isi tangki oli sebelum mendiagnosis." eh="3cd9a926" />
         <e k="usedplus_ft_action" v="Pelacak kerusakan: %s" eh="c4066687" />
         <e k="usedplus_ft_corrodedDesc" v="Kerusakan karat / oksidasi" eh="8a01ae60" />
         <e k="usedplus_ft_crackedDesc" v="Retakan tekanan / kelelahan" eh="81d5118b" />
@@ -2018,7 +2020,7 @@
         <e k="usedplus_sparePartsPallet_name" v="Palet Suku Cadang" eh="9bf39a93" />
         <e k="usedplus_sparePartsPallet_function" v="Suku cadang habis pakai untuk restorasi Truk Servis. Tempatkan di dekat truk selama pekerjaan restorasi." eh="c90aa3eb" />
         <e k="fillType_spareParts" v="Suku Cadang" eh="ab6b8ce1" />
-        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="646d470f" />
+        <e k="fillType_hydraulicOil" v="Oli Hidrolik" eh="646d470f" />
         <e k="unit_pcs" v="pcs" eh="3ecf2642" />
 
         <!-- v2.9.0: Restoration Diagnostic Symptoms - Engine -->
@@ -2461,10 +2463,8 @@
         <e k="usedplus_admin_section_lease_dialogs" v="DIALOG SEWA" eh="479e552e" />
 
         <!-- Section Headers - Tab 5 (State) -->
-        <e k="usedplus_admin_section_debug" v="MODE DEBUG" eh="c7ee79cd" />
-        <e k="usedplus_admin_section_vehicle_state" v="STATE KENDARAAN" eh="c077f4be" />
-        <e k="usedplus_admin_section_dna" v="DNA PENJUAL (Pencarian Berikutnya)" eh="0e284459" />
-        <e k="usedplus_admin_section_quick_vehicle" v="TUKAR KENDARAAN CEPAT" eh="01242f7d" />
+
+
 
         <!-- Buttons - Tab 1 (Malfunctions) -->
         <e k="usedplus_admin_btn_stall" v="Mati" eh="a0f50ad4" />
@@ -2477,9 +2477,8 @@
         <e k="usedplus_admin_btn_surge_r" v="Surge (R)" eh="f9261697" />
         <e k="usedplus_admin_btn_flat_l" v="Kempes (L)" eh="427238a9" />
         <e k="usedplus_admin_btn_flat_r" v="Kempes (R)" eh="5a2301a8" />
-        <e k="usedplus_admin_btn_reset_cooldown" v="Reset CD" eh="d2165eba" />
-        <e k="usedplus_admin_btn_malf_info" v="Info Malf" eh="92badb26" />
-        <e k="usedplus_admin_btn_fix_all" v="Perbaiki Semua" eh="1c7feed4" />
+
+
 
         <!-- Buttons - Tab 2 (Spawning) -->
         <e k="usedplus_admin_btn_spawn_obd" v="Pemindai OBD" eh="96023669" />
@@ -2501,11 +2500,11 @@
         <e k="usedplus_admin_btn_add_100k" v="+$100.000" eh="860860a5" />
         <e k="usedplus_admin_btn_add_1m" v="+$1.000.000" eh="8946b435" />
         <e k="usedplus_admin_btn_set_zero" v="Set $0" eh="ca8864ed" />
-        <e k="usedplus_admin_btn_list_deals" v="Daftar Transaksi" eh="936e496b" />
+
+
         <e k="usedplus_admin_btn_payoff_all" v="Lunasi Semua" eh="3817edc8" />
-        <e k="usedplus_admin_btn_create_loan" v="Pinjaman Tes" eh="06cb7221" />
-        <e k="usedplus_admin_btn_create_lease" v="Sewa Tes" eh="d653ef32" />
-        <e k="usedplus_admin_btn_missed_payment" v="Lewati Pembayaran" eh="4890557c" />
+
+
 
         <!-- Buttons - Tab 4 (Dialogs) -->
         <e k="usedplus_admin_btn_dlg_loan" v="Ambil Pinjaman" eh="40fe67fa" />
@@ -2522,26 +2521,37 @@
         <e k="usedplus_admin_btn_dlg_inspect" v="Inspeksi" eh="35a9dbe6" />
         <e k="usedplus_admin_btn_dlg_lease_end" v="Akhir Sewa" eh="da7801f1" />
         <e k="usedplus_admin_btn_dlg_lease_renew" v="Perpanjang Sewa" eh="7a794930" />
+        <e k="usedplus_admin_btn_dlg_fault_tracer" v="[EN] Fault Tracer" eh="d1b82197" />
+        <e k="usedplus_admin_btn_dlg_portfolio" v="[EN] Portfolio" eh="d4f859a9" />
 
         <!-- Buttons - Tab 5 (State) -->
-        <e k="usedplus_admin_btn_toggle_debug" v="Toggle Debug" eh="e69cb6a0" />
-        <e k="usedplus_admin_btn_rel_100" v="Rel: 100%" eh="dfdb79d3" />
-        <e k="usedplus_admin_btn_rel_50" v="Rel: 50%" eh="9ce7a0a2" />
-        <e k="usedplus_admin_btn_rel_10" v="Rel: 10%" eh="54d6e770" />
+
+
         <e k="usedplus_admin_btn_reset_hours" v="Reset Jam" eh="a519e5e1" />
         <e k="usedplus_admin_btn_add_hours" v="+1000 Jam" eh="ef05132d" />
-        <e k="usedplus_admin_btn_dna_lemon" v="[EN] 0.1 Lemon" eh="0047d5bc" />
-        <e k="usedplus_admin_btn_dna_average" v="[EN] 0.5 Average" eh="472d5599" />
-        <e k="usedplus_admin_btn_dna_workhorse" v="[EN] 0.9 Workhorse" eh="b0f0ee0b" />
-        <e k="usedplus_admin_btn_dna_desperate" v="Putus Asa" eh="97df4642" />
-        <e k="usedplus_admin_btn_dna_reasonable" v="Wajar" eh="e485c034" />
-        <e k="usedplus_admin_btn_dna_immovable" v="Tidak Bergerak" eh="57d0e57c" />
-        <e k="usedplus_admin_btn_next_vehicle" v="Kendaraan Berikut" eh="e95e97fa" />
-        <e k="usedplus_admin_btn_prev_vehicle" v="Kendaraan Sebelum" eh="69b3a0d0" />
+        <e k="usedplus_admin_btn_dna_lemon" v="0.1 Lemon" eh="0047d5bc" />
+        <e k="usedplus_admin_btn_dna_average" v="0.5 Rata-rata" eh="472d5599" />
+        <e k="usedplus_admin_btn_dna_workhorse" v="0.9 Pekerja Keras" eh="b0f0ee0b" />
+        <e k="usedplus_admin_btn_refill_oil" v="Isi Ulang Oli" eh="07a47687" />
+        <e k="usedplus_admin_btn_refill_hyd" v="Isi Ulang Hid" eh="77663dd6" />
+        <e k="usedplus_admin_btn_fix_tires" v="Perbaiki Ban" eh="959a0c0e" />
+        <e k="usedplus_admin_btn_fix_all_malf" v="Perbaiki Semua" eh="a14746fb" />
+
+
+        <e k="usedplus_admin_action_reliability" v="Keandalan" eh="820b8f74" />
+        <e k="usedplus_admin_action_condition" v="Kondisi" eh="9e2941b3" />
+        <e k="usedplus_admin_action_hours" v="Jam" eh="6a7e7316" />
+        <e k="usedplus_admin_action_dna" v="DNA Kendaraan" eh="0ce6fbcf" />
+        <e k="usedplus_admin_action_maintenance" v="Perawatan" eh="10d0de28" />
+        <e k="usedplus_admin_action_money" v="Uang" eh="a9331282" />
+        <e k="usedplus_admin_action_credit" v="Skor Kredit" eh="ae61b052" />
+        <e k="usedplus_admin_btn_repair" v="Perbaiki" eh="0493d27e" />
+        <e k="usedplus_admin_btn_paint" v="Cat" eh="4802a5ac" />
+        <e k="usedplus_admin_btn_fix_leaks" v="Perbaiki Bocor" eh="e0140cbb" />
+
+
 
         <!-- Info Labels -->
-        <e k="usedplus_admin_current_balance" v="Saldo Saat Ini:" eh="473e7f9e" />
-        <e k="usedplus_admin_current_credit" v="Skor Kredit:" eh="0199e1a3" />
 
         <!-- Status Messages -->
         <e k="usedplus_admin_status_ready" v="Ready. Pilih an action." eh="1ef35a42" />

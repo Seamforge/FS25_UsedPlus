@@ -257,7 +257,7 @@
         <e k="input_USEDPLUS_ACTIVATE_OBD" v="OBD 스캐너 사용" eh="9666e26b" />
         <e k="input_USEDPLUS_TIRES" v="타이어 서비스" eh="b0234f4e" />
         <e k="input_USEDPLUS_SERVICE_TRUCK" v="서비스 트럭 제어" eh="fad0e0f1" />
-        <e k="input_USEDPLUS_FAULT_TRACER" v="[EN] Fault Tracer" eh="d1b82197" />
+        <e k="input_USEDPLUS_FAULT_TRACER" v="결함 추적기" eh="d1b82197" />
 
         <!--  Tooltips for Finance Dialog -->
         <e k="usedplus_finance_loanTerm_tooltip" v="1-20년에 걸쳐 납부를 분산하세요. 긴 기간 = 작은 월 납부액이지만 더 많은 총 이자 납부." eh="e1170142" />
@@ -1218,7 +1218,7 @@
         <e k="usedplus_button_buyout" v="인수" eh="6e052e38" />
         <e k="usedplus_button_renew" v="갱신" eh="0b9feba3" />
         <e k="usedplus_lr_helpText" v="옵션을 선택해야 합니다. 반환하면 보증금을 돌려받습니다. 인수는 자기자본을 구매에 사용합니다. 갱신은 자기자본을 향후 인수에 적용하여 임대를 연장합니다." eh="91673bf9" />
-        <e k="usedplus_lr_deferNotice" v="이 선택은 다음 달에 다시 나타납니다. 결정할 때까지 추가 요금이 부과되지 않습니다." eh="00000000" />
+        <e k="usedplus_lr_deferNotice" v="이 선택은 다음 달에 다시 나타납니다. 결정할 때까지 추가 요금이 부과되지 않습니다." eh="9382457d" />
 
         <!-- Confirmation Dialog -->
         <e k="usedplus_conf_title" v="확인" eh="f4d1ea47" />
@@ -1403,6 +1403,8 @@
         <e k="usedplus_fmf_quickRef" v="빠른 참조" eh="011d2c62" />
         <e k="usedplus_fmf_quickRefLine1" v="상점 → 융자/임대/중고 검색 | 차고 → 판매 등록" eh="426419c9" />
         <e k="usedplus_fmf_quickRefLine2" v="월 납부액은 자동으로 차감됩니다. 조기 상환은 이자를 절약합니다." eh="73cd35d9" />
+        <e k="usedplus_btn_admin_panel" v="[EN] Admin Panel" eh="a0e0d3f0" />
+        <e k="usedplus_admin_no_vehicle_warning" v="[EN] You must be in a vehicle to use the Admin Panel. Enter a vehicle first, then press ESC." eh="abe11d3f" />
 
         <!-- Land Lease Dialog -->
         <e k="usedplus_ll_title" v="토지 임대" eh="ec34a2a6" />
@@ -1640,10 +1642,10 @@
         <e k="usedplus_info_tire_condition" v="타이어" eh="3fe2c06a" />
 
         <!-- v2.12.0: Finance/Lease Info Box Display -->
-        <e k="usedplus_info_dealType" v="상태" eh="00000000" />
-        <e k="usedplus_info_leased" v="리스" eh="00000000" />
-        <e k="usedplus_info_financed" v="할부" eh="00000000" />
-        <e k="usedplus_info_monthsRemaining" v="남은 개월" eh="00000000" />
+        <e k="usedplus_info_dealType" v="상태" eh="ec53a8c4" />
+        <e k="usedplus_info_leased" v="리스" eh="a33a1186" />
+        <e k="usedplus_info_financed" v="할부" eh="6f9a4a90" />
+        <e k="usedplus_info_monthsRemaining" v="남은 개월" eh="b375dcc1" />
         <!-- v1.7.0: Tires Service Dialog -->
         <e k="usedplus_tires_title" v="타이어 서비스" eh="b0234f4e" />
         <e k="usedplus_tires_sectionStatus" v="차량 및 타이어 상태" eh="c0e3631e" />
@@ -1835,12 +1837,12 @@
         <e k="usedplus_fsk_repair_hyd_seals" v="비상 실 화합물 적용함." eh="5fadb7ef" />
 
         <!-- Result messages -->
-        <e k="usedplus_fsk_result_title_perfect" v="수리 성공" eh="cb532e1b" />
-        <e k="usedplus_fsk_result_title_good" v="부분 수리" eh="cbba8a69" />
+        <e k="usedplus_fsk_result_title_perfect" v="정확한 진단!" eh="1455077c" />
+        <e k="usedplus_fsk_result_title_good" v="부분 일치" eh="5499883e" />
         <e k="usedplus_fsk_result_title_wrong_system" v="잘못된 시스템" eh="7259aab1" />
-        <e k="usedplus_fsk_result_title_poor" v="최소 수리" eh="9d485c84" />
-        <e k="usedplus_fsk_result_perfect" v="정확한 진단! 표적 수리가 적용됨." eh="91538006" />
-        <e k="usedplus_fsk_result_good" v="시스템은 맞지만 진단이 빗나갔습니다. 일반 수리가 적용됨." eh="47b6188e" />
+        <e k="usedplus_fsk_result_title_poor" v="잘못된 진단" eh="e10c3aed" />
+        <e k="usedplus_fsk_result_perfect" v="훌륭한 작업입니다! 완전한 수리 보너스가 적용되었습니다." eh="627b6efd" />
+        <e k="usedplus_fsk_result_good" v="시스템은 맞지만 잘못된 원인이 식별되었습니다." eh="2d85e515" />
         <e k="usedplus_fsk_result_wrong_system" v="좋은 진단입니다! 하지만 실제 문제는 여기에 있었습니다: %s" eh="e3bba502" />
         <e k="usedplus_fsk_result_wrong_both" v="잘못된 시스템과 잘못된 원인. 최소한의 수리가 적용됨." eh="c22e0ba6" />
         <e k="usedplus_fsk_result_poor" v="잘못된 시스템을 식별함. 기본 유지보수만 적용됨." eh="38caed38" />
@@ -2008,7 +2010,7 @@
         <e k="usedplus_ft_hintsRemaining" v="힌트: %d" eh="c8f080c2" />
         <e k="usedplus_ft_quickScanCap" v="품질 60%%로 제한 (빠른 스캔)" eh="5b519744" />
         <e k="usedplus_ft_noFaults" v="결함 없음 - 시스템 정상!" eh="6bfa5546" />
-        <e k="usedplus_ft_noOil" v="[EN] Service Truck has no oil! Fill the oil tank before diagnosing." eh="3cd9a926" />
+        <e k="usedplus_ft_noOil" v="서비스 트럭에 오일이 없습니다! 진단 전에 오일 탱크를 채우십시오." eh="3cd9a926" />
         <e k="usedplus_ft_action" v="결함 추적기: %s" eh="c4066687" />
         <e k="usedplus_ft_corrodedDesc" v="녹/산화 손상" eh="8a01ae60" />
         <e k="usedplus_ft_crackedDesc" v="응력 균열/피로" eh="81d5118b" />
@@ -2018,7 +2020,7 @@
         <e k="usedplus_sparePartsPallet_name" v="예비 부품 팔레트" eh="9bf39a93" />
         <e k="usedplus_sparePartsPallet_function" v="서비스 트럭 복원용 소모성 예비 부품. 복원 작업 중 트럭 근처에 배치하세요." eh="c90aa3eb" />
         <e k="fillType_spareParts" v="예비 부품" eh="ab6b8ce1" />
-        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="646d470f" />
+        <e k="fillType_hydraulicOil" v="유압 오일" eh="646d470f" />
         <e k="unit_pcs" v="개" eh="3ecf2642" />
 
         <!-- v2.9.0: Restoration Diagnostic Symptoms - Engine -->
@@ -2461,10 +2463,6 @@
         <e k="usedplus_admin_section_lease_dialogs" v="LEASE DIALOGS" eh="479e552e" />
 
         <!-- Section Headers - Tab 5 (State) -->
-        <e k="usedplus_admin_section_debug" v="DEBUG MODE" eh="c7ee79cd" />
-        <e k="usedplus_admin_section_vehicle_state" v="VEHICLE STATE" eh="c077f4be" />
-        <e k="usedplus_admin_section_dna" v="SELLER DNA (Next Search)" eh="0e284459" />
-        <e k="usedplus_admin_section_quick_vehicle" v="QUICK VEHICLE SWAP" eh="01242f7d" />
 
         <!-- Buttons - Tab 1 (Malfunctions) -->
         <e k="usedplus_admin_btn_stall" v="정지" eh="a0f50ad4" />
@@ -2477,9 +2475,6 @@
         <e k="usedplus_admin_btn_surge_r" v="Surge (R)" eh="f9261697" />
         <e k="usedplus_admin_btn_flat_l" v="Flat (L)" eh="427238a9" />
         <e k="usedplus_admin_btn_flat_r" v="Flat (R)" eh="5a2301a8" />
-        <e k="usedplus_admin_btn_reset_cooldown" v="Reset CD" eh="d2165eba" />
-        <e k="usedplus_admin_btn_malf_info" v="Malf Info" eh="92badb26" />
-        <e k="usedplus_admin_btn_fix_all" v="Fix All" eh="1c7feed4" />
 
         <!-- Buttons - Tab 2 (Spawning) -->
         <e k="usedplus_admin_btn_spawn_obd" v="OBD 스캐너" eh="96023669" />
@@ -2501,11 +2496,7 @@
         <e k="usedplus_admin_btn_add_100k" v="+$100,000" eh="860860a5" />
         <e k="usedplus_admin_btn_add_1m" v="+$1,000,000" eh="8946b435" />
         <e k="usedplus_admin_btn_set_zero" v="Set $0" eh="ca8864ed" />
-        <e k="usedplus_admin_btn_list_deals" v="List Deals" eh="936e496b" />
         <e k="usedplus_admin_btn_payoff_all" v="Pay Off All" eh="3817edc8" />
-        <e k="usedplus_admin_btn_create_loan" v="Test Loan" eh="06cb7221" />
-        <e k="usedplus_admin_btn_create_lease" v="Test Lease" eh="d653ef32" />
-        <e k="usedplus_admin_btn_missed_payment" v="Miss Payment" eh="4890557c" />
 
         <!-- Buttons - Tab 4 (Dialogs) -->
         <e k="usedplus_admin_btn_dlg_loan" v="대출 받기" eh="40fe67fa" />
@@ -2522,26 +2513,31 @@
         <e k="usedplus_admin_btn_dlg_inspect" v="검사" eh="35a9dbe6" />
         <e k="usedplus_admin_btn_dlg_lease_end" v="Lease End" eh="da7801f1" />
         <e k="usedplus_admin_btn_dlg_lease_renew" v="Lease Renew" eh="7a794930" />
+        <e k="usedplus_admin_btn_dlg_fault_tracer" v="[EN] Fault Tracer" eh="d1b82197" />
+        <e k="usedplus_admin_btn_dlg_portfolio" v="[EN] Portfolio" eh="d4f859a9" />
 
         <!-- Buttons - Tab 5 (State) -->
-        <e k="usedplus_admin_btn_toggle_debug" v="디버그 토글" eh="e69cb6a0" />
-        <e k="usedplus_admin_btn_rel_100" v="Rel: 100%" eh="dfdb79d3" />
-        <e k="usedplus_admin_btn_rel_50" v="Rel: 50%" eh="9ce7a0a2" />
-        <e k="usedplus_admin_btn_rel_10" v="Rel: 10%" eh="54d6e770" />
         <e k="usedplus_admin_btn_reset_hours" v="Reset Hours" eh="a519e5e1" />
         <e k="usedplus_admin_btn_add_hours" v="+1000시간" eh="ef05132d" />
-        <e k="usedplus_admin_btn_dna_lemon" v="[EN] 0.1 Lemon" eh="0047d5bc" />
-        <e k="usedplus_admin_btn_dna_average" v="[EN] 0.5 Average" eh="472d5599" />
-        <e k="usedplus_admin_btn_dna_workhorse" v="[EN] 0.9 Workhorse" eh="b0f0ee0b" />
-        <e k="usedplus_admin_btn_dna_desperate" v="절박함" eh="97df4642" />
-        <e k="usedplus_admin_btn_dna_reasonable" v="합리적" eh="e485c034" />
-        <e k="usedplus_admin_btn_dna_immovable" v="확고함" eh="57d0e57c" />
-        <e k="usedplus_admin_btn_next_vehicle" v="Next Vehicle" eh="e95e97fa" />
-        <e k="usedplus_admin_btn_prev_vehicle" v="Prev Vehicle" eh="69b3a0d0" />
+        <e k="usedplus_admin_btn_dna_lemon" v="0.1 레몬" eh="0047d5bc" />
+        <e k="usedplus_admin_btn_dna_average" v="0.5 보통" eh="472d5599" />
+        <e k="usedplus_admin_btn_dna_workhorse" v="0.9 일꾼" eh="b0f0ee0b" />
+        <e k="usedplus_admin_btn_refill_oil" v="오일 보충" eh="07a47687" />
+        <e k="usedplus_admin_btn_refill_hyd" v="유압 보충" eh="77663dd6" />
+        <e k="usedplus_admin_btn_fix_tires" v="타이어 수리" eh="959a0c0e" />
+        <e k="usedplus_admin_btn_fix_all_malf" v="전체 결함 수리" eh="a14746fb" />
+        <e k="usedplus_admin_action_reliability" v="신뢰성" eh="820b8f74" />
+        <e k="usedplus_admin_action_condition" v="상태" eh="9e2941b3" />
+        <e k="usedplus_admin_action_hours" v="사용 시간" eh="6a7e7316" />
+        <e k="usedplus_admin_action_dna" v="차량 DNA" eh="0ce6fbcf" />
+        <e k="usedplus_admin_action_maintenance" v="정비" eh="10d0de28" />
+        <e k="usedplus_admin_action_money" v="돈" eh="a9331282" />
+        <e k="usedplus_admin_action_credit" v="신용 점수" eh="ae61b052" />
+        <e k="usedplus_admin_btn_repair" v="수리" eh="0493d27e" />
+        <e k="usedplus_admin_btn_paint" v="도장" eh="4802a5ac" />
+        <e k="usedplus_admin_btn_fix_leaks" v="누유 수리" eh="e0140cbb" />
 
         <!-- Info Labels -->
-        <e k="usedplus_admin_current_balance" v="Current Balance:" eh="473e7f9e" />
-        <e k="usedplus_admin_current_credit" v="신용 점수:" eh="0199e1a3" />
 
         <!-- Status Messages -->
         <e k="usedplus_admin_status_ready" v="준비됨. 작업을 선택하세요." eh="1ef35a42" />

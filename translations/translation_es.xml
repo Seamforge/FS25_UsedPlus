@@ -256,7 +256,7 @@
         <e k="input_USEDPLUS_ACTIVATE_OBD" v="Usar escáner OBD" eh="9666e26b" />
         <e k="input_USEDPLUS_TIRES" v="Servicio de neumáticos" eh="b0234f4e" />
         <e k="input_USEDPLUS_SERVICE_TRUCK" v="Control del camion de servicio" eh="fad0e0f1" />
-        <e k="input_USEDPLUS_FAULT_TRACER" v="[EN] Fault Tracer" eh="d1b82197" />
+        <e k="input_USEDPLUS_FAULT_TRACER" v="Rastreador de Fallos" eh="d1b82197" />
 
         <!--  Tooltips for Finance Dialog -->
         <e k="usedplus_finance_loanTerm_tooltip" v="Distribuya los pagos entre 1 y 20 años. Plazos más largos = pagos mensuales más pequeños pero más intereses totales pagados." eh="e1170142" />
@@ -1206,7 +1206,7 @@
         <e k="usedplus_button_buyout" v="Compra" eh="6e052e38" />
         <e k="usedplus_button_renew" v="Renovar" eh="0b9feba3" />
         <e k="usedplus_lr_helpText" v="Debes elegir una opción. La devolución le devuelve su depósito. La compra utiliza su capital para la compra. La renovación extiende el contrato de arrendamiento con capital aplicado a la compra futura." eh="91673bf9" />
-        <e k="usedplus_lr_deferNotice" v="Esta opción aparecerá de nuevo el próximo mes. Sin cargos adicionales hasta que decida." eh="00000000" />
+        <e k="usedplus_lr_deferNotice" v="Esta elección volverá a aparecer el próximo mes. Sin cargos adicionales hasta que decidas." eh="9382457d" />
 
         <!-- Confirmation Dialog -->
         <e k="usedplus_conf_title" v="Confirmación" eh="f4d1ea47" />
@@ -1391,6 +1391,8 @@
         <e k="usedplus_fmf_quickRef" v="REFERENCIA RÁPIDA" eh="011d2c62" />
         <e k="usedplus_fmf_quickRefLine1" v="Comprar → Financiar/Arrendar/Buscar Usado | Garaje → Listado en Venta" eh="426419c9" />
         <e k="usedplus_fmf_quickRefLine2" v="Autodeducción de pagos mensuales. El pago anticipado ahorra intereses." eh="73cd35d9" />
+        <e k="usedplus_btn_admin_panel" v="[EN] Admin Panel" eh="a0e0d3f0" />
+        <e k="usedplus_admin_no_vehicle_warning" v="[EN] You must be in a vehicle to use the Admin Panel. Enter a vehicle first, then press ESC." eh="abe11d3f" />
 
         <!-- Land Lease Dialog -->
         <e k="usedplus_ll_title" v="Arrendamiento de terrenos" eh="ec34a2a6" />
@@ -1609,10 +1611,10 @@
         <e k="usedplus_info_tire_condition" v="Neumáticos" eh="3fe2c06a" />
 
         <!-- v2.12.0: Finance/Lease Info Box Display -->
-        <e k="usedplus_info_dealType" v="Estado" eh="00000000" />
-        <e k="usedplus_info_leased" v="ARRENDADO" eh="00000000" />
-        <e k="usedplus_info_financed" v="FINANCIADO" eh="00000000" />
-        <e k="usedplus_info_monthsRemaining" v="Meses Restantes" eh="00000000" />
+        <e k="usedplus_info_dealType" v="Estado" eh="ec53a8c4" />
+        <e k="usedplus_info_leased" v="ARRENDADO" eh="a33a1186" />
+        <e k="usedplus_info_financed" v="FINANCIADO" eh="6f9a4a90" />
+        <e k="usedplus_info_monthsRemaining" v="Meses Restantes" eh="b375dcc1" />
         <!-- v1.7.0: Tires Service Dialog -->
         <e k="usedplus_tires_title" v="Servicio de llantas" eh="b0234f4e" />
         <e k="usedplus_tires_sectionStatus" v="VEHÍCULO &amp; ESTADO DE LOS NEUMÁTICOS" eh="c0e3631e" />
@@ -1800,12 +1802,12 @@
         <e k="usedplus_fsk_repair_hyd_seals" v="Compuesto de sellado de emergencia aplicado." eh="5fadb7ef" />
 
         <!-- Result messages -->
-        <e k="usedplus_fsk_result_title_perfect" v="REPARACIÓN EXITOSA" eh="cb532e1b" />
-        <e k="usedplus_fsk_result_title_good" v="REPARACIÓN PARCIAL" eh="cbba8a69" />
+        <e k="usedplus_fsk_result_title_perfect" v="¡DIAGNÓSTICO CORRECTO!" eh="1455077c" />
+        <e k="usedplus_fsk_result_title_good" v="COINCIDENCIA PARCIAL" eh="5499883e" />
         <e k="usedplus_fsk_result_title_wrong_system" v="SISTEMA INCORRECTO" eh="7259aab1" />
-        <e k="usedplus_fsk_result_title_poor" v="REPARACIÓN MÍNIMA" eh="9d485c84" />
-        <e k="usedplus_fsk_result_perfect" v="¡Diagnóstico correcto! Se aplicó reparación dirigida." eh="91538006" />
-        <e k="usedplus_fsk_result_good" v="Sistema correcto, pero el diagnóstico estaba equivocado. Se aplicaron reparaciones generales." eh="47b6188e" />
+        <e k="usedplus_fsk_result_title_poor" v="DIAGNÓSTICO INCORRECTO" eh="e10c3aed" />
+        <e k="usedplus_fsk_result_perfect" v="¡Excelente trabajo! Bono de reparación completo aplicado." eh="627b6efd" />
+        <e k="usedplus_fsk_result_good" v="Sistema correcto, pero causa incorrecta identificada." eh="2d85e515" />
         <e k="usedplus_fsk_result_wrong_system" v="¡Buen diagnóstico! Pero el problema real estaba en: %s" eh="e3bba502" />
         <e k="usedplus_fsk_result_wrong_both" v="Sistema incorrecto y causa errónea. Reparación mínima aplicada." eh="c22e0ba6" />
         <e k="usedplus_fsk_result_poor" v="Se identificó un sistema incorrecto. Sólo se aplica mantenimiento básico." eh="38caed38" />
@@ -2190,7 +2192,7 @@
         <e k="usedplus_ft_hintsRemaining" v="Pistas: %d" eh="c8f080c2" />
         <e k="usedplus_ft_quickScanCap" v="Calidad limitada al 60%% (Escaneo rápido)" eh="5b519744" />
         <e k="usedplus_ft_noFaults" v="¡Sin fallos - sistema en buen estado!" eh="6bfa5546" />
-        <e k="usedplus_ft_noOil" v="[EN] Service Truck has no oil! Fill the oil tank before diagnosing." eh="3cd9a926" />
+        <e k="usedplus_ft_noOil" v="¡El Camión de Servicio no tiene aceite! Llene el depósito de aceite antes de diagnosticar." eh="3cd9a926" />
         <e k="usedplus_ft_action" v="Rastreador de fallos: %s" eh="c4066687" />
         <e k="usedplus_ft_corrodedDesc" v="Daño por óxido / oxidación" eh="8a01ae60" />
         <e k="usedplus_ft_crackedDesc" v="Grietas por tensión / fatiga" eh="81d5118b" />
@@ -2200,7 +2202,7 @@
         <e k="usedplus_sparePartsPallet_name" v="Pallet de Repuestos" eh="9bf39a93" />
         <e k="usedplus_sparePartsPallet_function" v="Repuestos consumibles para la restauración del camión de servicio. Colócalo cerca del camión durante el trabajo de restauración." eh="c90aa3eb" />
         <e k="fillType_spareParts" v="Repuestos" eh="ab6b8ce1" />
-        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="646d470f" />
+        <e k="fillType_hydraulicOil" v="Aceite Hidráulico" eh="646d470f" />
         <e k="unit_pcs" v="uds" eh="3ecf2642" />
         <e k="usedplus_resto_symptom_engine_knocking_load" v="Golpeteo severo bajo carga" eh="fb8c3067" />
         <e k="usedplus_resto_symptom_engine_low_oil_pressure" v="Presión de aceite críticamente baja" eh="a3efa42d" />
@@ -2333,10 +2335,8 @@
         <e k="usedplus_admin_section_market_dialogs" v="DIÁLOGOS MERCADO" eh="4c8988f5" />
         <e k="usedplus_admin_section_service_dialogs" v="DIÁLOGOS SERVICIO" eh="e407aa85" />
         <e k="usedplus_admin_section_lease_dialogs" v="DIÁLOGOS ARRIENDO" eh="479e552e" />
-        <e k="usedplus_admin_section_debug" v="MODO DEPURACIÓN" eh="c7ee79cd" />
-        <e k="usedplus_admin_section_vehicle_state" v="ESTADO VEHÍCULO" eh="c077f4be" />
-        <e k="usedplus_admin_section_dna" v="ADN VENDEDOR (Próxima Búsqueda)" eh="0e284459" />
-        <e k="usedplus_admin_section_quick_vehicle" v="CAMBIO RÁPIDO VEHÍCULO" eh="01242f7d" />
+
+
         <e k="usedplus_admin_btn_stall" v="Calado" eh="a0f50ad4" />
         <e k="usedplus_admin_btn_misfire" v="Fallo Enc." eh="9b9bd091" />
         <e k="usedplus_admin_btn_overheat" v="Sobrec." eh="5d266c94" />
@@ -2347,9 +2347,8 @@
         <e k="usedplus_admin_btn_surge_r" v="Pico (D)" eh="f9261697" />
         <e k="usedplus_admin_btn_flat_l" v="Pinch (I)" eh="427238a9" />
         <e k="usedplus_admin_btn_flat_r" v="Pinch (D)" eh="5a2301a8" />
-        <e k="usedplus_admin_btn_reset_cooldown" v="Reset CD" eh="d2165eba" />
-        <e k="usedplus_admin_btn_malf_info" v="Info Avería" eh="92badb26" />
-        <e k="usedplus_admin_btn_fix_all" v="Reparar Todo" eh="1c7feed4" />
+
+
         <e k="usedplus_admin_btn_spawn_obd" v="Escáner OBD" eh="96023669" />
         <e k="usedplus_admin_btn_spawn_truck" v="Cam. Serv." eh="083ff302" />
         <e k="usedplus_admin_btn_spawn_parts" v="Pallet Rep." eh="ca04c55a" />
@@ -2367,11 +2366,11 @@
         <e k="usedplus_admin_btn_add_100k" v="+$100,000" eh="860860a5" />
         <e k="usedplus_admin_btn_add_1m" v="+$1,000,000" eh="8946b435" />
         <e k="usedplus_admin_btn_set_zero" v="Poner $0" eh="ca8864ed" />
-        <e k="usedplus_admin_btn_list_deals" v="Listar Tratos" eh="936e496b" />
+
+
         <e k="usedplus_admin_btn_payoff_all" v="Pagar Todo" eh="3817edc8" />
-        <e k="usedplus_admin_btn_create_loan" v="Prést. Prueba" eh="06cb7221" />
-        <e k="usedplus_admin_btn_create_lease" v="Arriendo Prueba" eh="d653ef32" />
-        <e k="usedplus_admin_btn_missed_payment" v="Perder Pago" eh="4890557c" />
+
+
         <e k="usedplus_admin_btn_dlg_loan" v="Préstamo" eh="40fe67fa" />
         <e k="usedplus_admin_btn_dlg_approved" v="Aprobado" eh="6f806341" />
         <e k="usedplus_admin_btn_dlg_credit" v="Crédito" eh="0a90b1bc" />
@@ -2386,22 +2385,33 @@
         <e k="usedplus_admin_btn_dlg_inspect" v="Inspección" eh="35a9dbe6" />
         <e k="usedplus_admin_btn_dlg_lease_end" v="Fin Arriendo" eh="da7801f1" />
         <e k="usedplus_admin_btn_dlg_lease_renew" v="Renovar Arriendo" eh="7a794930" />
-        <e k="usedplus_admin_btn_toggle_debug" v="Alternar Debug" eh="e69cb6a0" />
-        <e k="usedplus_admin_btn_rel_100" v="Fiab: 100%" eh="dfdb79d3" />
-        <e k="usedplus_admin_btn_rel_50" v="Fiab: 50%" eh="9ce7a0a2" />
-        <e k="usedplus_admin_btn_rel_10" v="Fiab: 10%" eh="54d6e770" />
+        <e k="usedplus_admin_btn_dlg_fault_tracer" v="[EN] Fault Tracer" eh="d1b82197" />
+        <e k="usedplus_admin_btn_dlg_portfolio" v="[EN] Portfolio" eh="d4f859a9" />
+
+
         <e k="usedplus_admin_btn_reset_hours" v="Reset Horas" eh="a519e5e1" />
         <e k="usedplus_admin_btn_add_hours" v="+1000 Horas" eh="ef05132d" />
-        <e k="usedplus_admin_btn_dna_lemon" v="[EN] 0.1 Lemon" eh="0047d5bc" />
-        <e k="usedplus_admin_btn_dna_average" v="[EN] 0.5 Average" eh="472d5599" />
-        <e k="usedplus_admin_btn_dna_workhorse" v="[EN] 0.9 Workhorse" eh="b0f0ee0b" />
-        <e k="usedplus_admin_btn_dna_desperate" v="Desesperado" eh="97df4642" />
-        <e k="usedplus_admin_btn_dna_reasonable" v="Razonable" eh="e485c034" />
-        <e k="usedplus_admin_btn_dna_immovable" v="Inflexible" eh="57d0e57c" />
-        <e k="usedplus_admin_btn_next_vehicle" v="Sig. Vehículo" eh="e95e97fa" />
-        <e k="usedplus_admin_btn_prev_vehicle" v="Veh. Anterior" eh="69b3a0d0" />
-        <e k="usedplus_admin_current_balance" v="Saldo Actual:" eh="473e7f9e" />
-        <e k="usedplus_admin_current_credit" v="Puntaje Crediticio:" eh="0199e1a3" />
+        <e k="usedplus_admin_btn_dna_lemon" v="0.1 Limón" eh="0047d5bc" />
+        <e k="usedplus_admin_btn_dna_average" v="0.5 Promedio" eh="472d5599" />
+        <e k="usedplus_admin_btn_dna_workhorse" v="0.9 Caballo de Batalla" eh="b0f0ee0b" />
+        <e k="usedplus_admin_btn_refill_oil" v="Rellenar Aceite" eh="07a47687" />
+        <e k="usedplus_admin_btn_refill_hyd" v="Rellenar Hid." eh="77663dd6" />
+        <e k="usedplus_admin_btn_fix_tires" v="Reparar Neumáticos" eh="959a0c0e" />
+        <e k="usedplus_admin_btn_fix_all_malf" v="Corregir Todas Averías" eh="a14746fb" />
+
+
+        <e k="usedplus_admin_action_reliability" v="Fiabilidad" eh="820b8f74" />
+        <e k="usedplus_admin_action_condition" v="Condición" eh="9e2941b3" />
+        <e k="usedplus_admin_action_hours" v="Horas" eh="6a7e7316" />
+        <e k="usedplus_admin_action_dna" v="ADN del Vehículo" eh="0ce6fbcf" />
+        <e k="usedplus_admin_action_maintenance" v="Mantenimiento" eh="10d0de28" />
+        <e k="usedplus_admin_action_money" v="Dinero" eh="a9331282" />
+        <e k="usedplus_admin_action_credit" v="Puntuación Crediticia" eh="ae61b052" />
+        <e k="usedplus_admin_btn_repair" v="Reparar" eh="0493d27e" />
+        <e k="usedplus_admin_btn_paint" v="Pintar" eh="4802a5ac" />
+        <e k="usedplus_admin_btn_fix_leaks" v="Rep. Fugas" eh="e0140cbb" />
+
+
         <e k="usedplus_admin_status_ready" v="Listo. Selecciona una acción." eh="1ef35a42" />
 
     </elements>

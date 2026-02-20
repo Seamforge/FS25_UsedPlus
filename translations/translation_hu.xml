@@ -207,7 +207,7 @@
         <e k="input_USEDPLUS_ACTIVATE_OBD" v="OBD szkenner használata" eh="9666e26b" />
         <e k="input_USEDPLUS_TIRES" v="Gumiabroncs szerviz" eh="b0234f4e" />
         <e k="input_USEDPLUS_SERVICE_TRUCK" v="Szerviz teherautó vezérlés" eh="fad0e0f1" />
-        <e k="input_USEDPLUS_FAULT_TRACER" v="[EN] Fault Tracer" eh="d1b82197" />
+        <e k="input_USEDPLUS_FAULT_TRACER" v="Hibakereső" eh="d1b82197" />
         <e k="usedplus_finance_loanTerm_tooltip" v="Törlesztés elosztása 1-20 év között. Hosszabb futamidő = kisebb havi törlesztés, de több összes kamat." eh="e1170142" />
         <e k="usedplus_finance_downPayment_tooltip" v="Fizessen előre a hitelösszeg csökkentéséhez. Magasabb előleg = alacsonyabb kamat és havi törlesztés. Tartomány: 0-50%." eh="cb530b47" />
         <e k="usedplus_finance_cashBack_tooltip" v="Készpénz azonnali átvétele (hozzáadva a hitelhez). Hasznos működési költségekre, de növeli a havi törlesztést és az összes költséget." eh="dc2693cd" />
@@ -961,7 +961,7 @@
         <e k="usedplus_button_buyout" v="Kivásárlás" eh="6e052e38" />
         <e k="usedplus_button_renew" v="Megújítás" eh="0b9feba3" />
         <e k="usedplus_lr_helpText" v="Válassz egy opciót. Visszaadáskor kapod a letéted. Kivásárláskor a tőkéd beszámít. Megújításkor a tőke a jövőbeli kivásárláshoz marad." eh="91673bf9" />
-        <e k="usedplus_lr_deferNotice" v="Ez a választás a következő hónapban újra megjelenik. Nincs további díj a döntéséig." eh="00000000" />
+        <e k="usedplus_lr_deferNotice" v="Ez a választás jövő hónapban újra megjelenik. Döntéséig nem kerül felszámításra további díj." eh="9382457d" />
         <e k="usedplus_conf_title" v="Megerősítés" eh="f4d1ea47" />
         <e k="usedplus_cr_title" v="HITELJELENTÉS" eh="3725e302" />
         <e k="usedplus_cr_reportDate" v="Jelentés dátuma:" eh="93ad31a7" />
@@ -1130,6 +1130,8 @@
         <e k="usedplus_fmf_quickRef" v="GYORS ÚTMUTATÓ" eh="011d2c62" />
         <e k="usedplus_fmf_quickRefLine1" v="Bolt → Finanszírozás/Lízing/Használt keresése | Garázs → Eladásra hirdetés" eh="426419c9" />
         <e k="usedplus_fmf_quickRefLine2" v="Havi törlesztések automatikusan levonódnak. Előtörlesztés kamatot takarít meg." eh="73cd35d9" />
+        <e k="usedplus_btn_admin_panel" v="[EN] Admin Panel" eh="a0e0d3f0" />
+        <e k="usedplus_admin_no_vehicle_warning" v="[EN] You must be in a vehicle to use the Admin Panel. Enter a vehicle first, then press ESC." eh="abe11d3f" />
         <e k="usedplus_ll_title" v="Föld bérlése" eh="ec34a2a6" />
         <e k="usedplus_ll_sectionDetails" v="MEZŐ RÉSZLETEI" eh="9550d705" />
         <e k="usedplus_ll_field" v="Mező:" eh="af9b2925" />
@@ -1300,10 +1302,10 @@
         <e k="usedplus_info_tire_condition" v="Gumik" eh="3fe2c06a" />
 
         <!-- v2.12.0: Finance/Lease Info Box Display -->
-        <e k="usedplus_info_dealType" v="Állapot" eh="00000000" />
-        <e k="usedplus_info_leased" v="BÉRELT" eh="00000000" />
-        <e k="usedplus_info_financed" v="FINANSZÍROZOTT" eh="00000000" />
-        <e k="usedplus_info_monthsRemaining" v="Hátralévő hónapok" eh="00000000" />        <e k="usedplus_tires_title" v="Gumiszerviz" eh="b0234f4e" />
+        <e k="usedplus_info_dealType" v="Státusz" eh="ec53a8c4" />
+        <e k="usedplus_info_leased" v="BÉRELT" eh="a33a1186" />
+        <e k="usedplus_info_financed" v="FINANSZÍROZOTT" eh="6f9a4a90" />
+        <e k="usedplus_info_monthsRemaining" v="Hátralévő hónapok" eh="b375dcc1" />        <e k="usedplus_tires_title" v="Gumiszerviz" eh="b0234f4e" />
         <e k="usedplus_tires_sectionStatus" v="JÁRMŰ ÉS GUMI ÁLLAPOT" eh="c0e3631e" />
         <e k="usedplus_tires_sectionSelect" v="GUMI MINŐSÉG KIVÁLASZTÁSA" eh="42abee54" />
         <e k="usedplus_tires_sectionPayment" v="FIZETÉSI ÖSSZEFOGLALÓ" eh="0dd98605" />
@@ -1465,12 +1467,12 @@
         <e k="usedplus_fsk_repair_hyd_bleed" v="Levegő kiengedve a hidraulika vezetékekből." eh="df37c387" />
         <e k="usedplus_fsk_repair_hyd_pump" v="Ideiglenes szivattyú tömítés kezelés alkalmazva." eh="89e6edb3" />
         <e k="usedplus_fsk_repair_hyd_seals" v="Vészhelyzeti tömítő anyag alkalmazva." eh="5fadb7ef" />
-        <e k="usedplus_fsk_result_title_perfect" v="JAVÍTÁS SIKERES" eh="cb532e1b" />
-        <e k="usedplus_fsk_result_title_good" v="RÉSZLEGES JAVÍTÁS" eh="cbba8a69" />
+        <e k="usedplus_fsk_result_title_perfect" v="HELYES DIAGNÓZIS!" eh="1455077c" />
+        <e k="usedplus_fsk_result_title_good" v="RÉSZLEGES EGYEZÉS" eh="5499883e" />
         <e k="usedplus_fsk_result_title_wrong_system" v="ROSSZ RENDSZER" eh="7259aab1" />
-        <e k="usedplus_fsk_result_title_poor" v="MINIMÁLIS JAVÍTÁS" eh="9d485c84" />
-        <e k="usedplus_fsk_result_perfect" v="Helyes diagnózis! Célzott javítás végrehajtva." eh="91538006" />
-        <e k="usedplus_fsk_result_good" v="Jó rendszer, de a diagnózis téves volt. Általános javítások végrehajtva." eh="47b6188e" />
+        <e k="usedplus_fsk_result_title_poor" v="HELYTELEN DIAGNÓZIS" eh="e10c3aed" />
+        <e k="usedplus_fsk_result_perfect" v="Kiváló munka! Teljes javítási bónusz alkalmazva." eh="627b6efd" />
+        <e k="usedplus_fsk_result_good" v="Helyes rendszer, de a hiba okát tévesen azonosítottuk." eh="2d85e515" />
         <e k="usedplus_fsk_result_wrong_system" v="Jó diagnózis! De a valódi probléma itt volt: %s" eh="e3bba502" />
         <e k="usedplus_fsk_result_wrong_both" v="Rossz rendszer és helytelen ok. Minimális javítás végrehajtva." eh="c22e0ba6" />
         <e k="usedplus_fsk_result_poor" v="Rossz rendszer azonosítva. Csak alap karbantartás végrehajtva." eh="38caed38" />
@@ -1617,7 +1619,7 @@
         <e k="usedplus_ft_hintsRemaining" v="Tippek: %d" eh="c8f080c2" />
         <e k="usedplus_ft_quickScanCap" v="Minőség 60%% -ra korlátozva (Gyors vizsgálat)" eh="5b519744" />
         <e k="usedplus_ft_noFaults" v="Nincs hiba - rendszer megfelelő!" eh="6bfa5546" />
-        <e k="usedplus_ft_noOil" v="[EN] Service Truck has no oil! Fill the oil tank before diagnosing." eh="3cd9a926" />
+        <e k="usedplus_ft_noOil" v="A szervizjárműnek nincs olaja! Töltse fel az olajtartályt a diagnosztizálás előtt." eh="3cd9a926" />
         <e k="usedplus_ft_action" v="Hibakereső: %s" eh="c4066687" />
         <e k="usedplus_ft_corrodedDesc" v="Rozsda / oxidáció okozta kár" eh="8a01ae60" />
         <e k="usedplus_ft_crackedDesc" v="Feszültség / fáradás okozta repedések" eh="81d5118b" />
@@ -1627,7 +1629,7 @@
         <e k="usedplus_sparePartsPallet_name" v="Alkatrész Raklap" eh="9bf39a93" />
         <e k="usedplus_sparePartsPallet_function" v="Fogyóeszköz alkatrészek a szerviz teherautó helyreállításhoz. Helyezd a teherautó közelébe a helyreállítási munka során." eh="c90aa3eb" />
         <e k="fillType_spareParts" v="Alkatrészek" eh="ab6b8ce1" />
-        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="646d470f" />
+        <e k="fillType_hydraulicOil" v="Hidraulikaolaj" eh="646d470f" />
         <e k="unit_pcs" v="db" eh="3ecf2642" />
         <e k="usedplus_resto_symptom_engine_knocking_load" v="Súlyos kopogás terhelés alatt" eh="fb8c3067" />
         <e k="usedplus_resto_symptom_engine_low_oil_pressure" v="Olajnyomás kritikusan alacsony" eh="a3efa42d" />
@@ -1944,10 +1946,8 @@
         <e k="usedplus_admin_section_market_dialogs" v="PIACTÉR PÁRBESZÉDEK" eh="4c8988f5" />
         <e k="usedplus_admin_section_service_dialogs" v="SZERVIZ PÁRBESZÉDEK" eh="e407aa85" />
         <e k="usedplus_admin_section_lease_dialogs" v="LÍZING PÁRBESZÉDEK" eh="479e552e" />
-        <e k="usedplus_admin_section_debug" v="DEBUG MÓD" eh="c7ee79cd" />
-        <e k="usedplus_admin_section_vehicle_state" v="JÁRMŰ ÁLLAPOT" eh="c077f4be" />
-        <e k="usedplus_admin_section_dna" v="ELADÓ DNS (Következő keresés)" eh="0e284459" />
-        <e k="usedplus_admin_section_quick_vehicle" v="GYORS JÁRMŰ CSERE" eh="01242f7d" />
+
+
         <e k="usedplus_admin_btn_stall" v="Leáll" eh="a0f50ad4" />
         <e k="usedplus_admin_btn_misfire" v="Bedurran" eh="9b9bd091" />
         <e k="usedplus_admin_btn_overheat" v="Túlhevül" eh="5d266c94" />
@@ -1958,9 +1958,8 @@
         <e k="usedplus_admin_btn_surge_r" v="Lökés (J)" eh="f9261697" />
         <e k="usedplus_admin_btn_flat_l" v="Defekt (B)" eh="427238a9" />
         <e k="usedplus_admin_btn_flat_r" v="Defekt (J)" eh="5a2301a8" />
-        <e k="usedplus_admin_btn_reset_cooldown" v="CD törlés" eh="d2165eba" />
-        <e k="usedplus_admin_btn_malf_info" v="Hiba info" eh="92badb26" />
-        <e k="usedplus_admin_btn_fix_all" v="Mindent javít" eh="1c7feed4" />
+
+
         <e k="usedplus_admin_btn_spawn_obd" v="OBD szkenner" eh="96023669" />
         <e k="usedplus_admin_btn_spawn_truck" v="Szerviz autó" eh="083ff302" />
         <e k="usedplus_admin_btn_spawn_parts" v="Alkatrész raklap" eh="ca04c55a" />
@@ -1978,11 +1977,11 @@
         <e k="usedplus_admin_btn_add_100k" v="+$100,000" eh="860860a5" />
         <e k="usedplus_admin_btn_add_1m" v="+$1,000,000" eh="8946b435" />
         <e k="usedplus_admin_btn_set_zero" v="$0 beállít" eh="ca8864ed" />
-        <e k="usedplus_admin_btn_list_deals" v="Üzletek listája" eh="936e496b" />
+
+
         <e k="usedplus_admin_btn_payoff_all" v="Mind kifizet" eh="3817edc8" />
-        <e k="usedplus_admin_btn_create_loan" v="Teszt hitel" eh="06cb7221" />
-        <e k="usedplus_admin_btn_create_lease" v="Teszt lízing" eh="d653ef32" />
-        <e k="usedplus_admin_btn_missed_payment" v="Fizetés kihagy" eh="4890557c" />
+
+
         <e k="usedplus_admin_btn_dlg_loan" v="Hitel felvét" eh="40fe67fa" />
         <e k="usedplus_admin_btn_dlg_approved" v="Jóváhagyva" eh="6f806341" />
         <e k="usedplus_admin_btn_dlg_credit" v="Hitel" eh="0a90b1bc" />
@@ -1997,21 +1996,32 @@
         <e k="usedplus_admin_btn_dlg_inspect" v="Vizsgálat" eh="35a9dbe6" />
         <e k="usedplus_admin_btn_dlg_lease_end" v="Lízing vége" eh="da7801f1" />
         <e k="usedplus_admin_btn_dlg_lease_renew" v="Lízing meghossz." eh="7a794930" />
-        <e k="usedplus_admin_btn_toggle_debug" v="Debug kapcsol" eh="e69cb6a0" />
-        <e k="usedplus_admin_btn_rel_100" v="Megb: 100%" eh="dfdb79d3" />
-        <e k="usedplus_admin_btn_rel_50" v="Megb: 50%" eh="9ce7a0a2" />
-        <e k="usedplus_admin_btn_rel_10" v="Megb: 10%" eh="54d6e770" />
+        <e k="usedplus_admin_btn_dlg_fault_tracer" v="[EN] Fault Tracer" eh="d1b82197" />
+        <e k="usedplus_admin_btn_dlg_portfolio" v="[EN] Portfolio" eh="d4f859a9" />
+
+
         <e k="usedplus_admin_btn_reset_hours" v="Órák törlése" eh="a519e5e1" />
         <e k="usedplus_admin_btn_add_hours" v="+1000 óra" eh="ef05132d" />
-        <e k="usedplus_admin_btn_dna_lemon" v="[EN] 0.1 Lemon" eh="0047d5bc" />
-        <e k="usedplus_admin_btn_dna_average" v="[EN] 0.5 Average" eh="472d5599" />
-        <e k="usedplus_admin_btn_dna_workhorse" v="[EN] 0.9 Workhorse" eh="b0f0ee0b" />
-        <e k="usedplus_admin_btn_dna_desperate" v="Kétségbeesett" eh="97df4642" />
-        <e k="usedplus_admin_btn_dna_reasonable" v="Ésszerű" eh="e485c034" />
-        <e k="usedplus_admin_btn_dna_immovable" v="Mozdíthatatlan" eh="57d0e57c" />
-        <e k="usedplus_admin_btn_next_vehicle" v="Köv. jármű" eh="e95e97fa" />
-        <e k="usedplus_admin_btn_prev_vehicle" v="Előző jármű" eh="69b3a0d0" />
-        <e k="usedplus_admin_current_balance" v="Jelenlegi egyenleg:" eh="473e7f9e" />
-        <e k="usedplus_admin_current_credit" v="Hitelpontszám:" eh="0199e1a3" />
+        <e k="usedplus_admin_btn_dna_lemon" v="0.1 Citrom" eh="0047d5bc" />
+        <e k="usedplus_admin_btn_dna_average" v="0.5 Átlagos" eh="472d5599" />
+        <e k="usedplus_admin_btn_dna_workhorse" v="0.9 Munkásló" eh="b0f0ee0b" />
+        <e k="usedplus_admin_btn_refill_oil" v="Olaj feltöltés" eh="07a47687" />
+        <e k="usedplus_admin_btn_refill_hyd" v="Hid. feltöltés" eh="77663dd6" />
+        <e k="usedplus_admin_btn_fix_tires" v="Gumik javítása" eh="959a0c0e" />
+        <e k="usedplus_admin_btn_fix_all_malf" v="Összes hiba jav." eh="a14746fb" />
+
+
+        <e k="usedplus_admin_action_reliability" v="Megbízhatóság" eh="820b8f74" />
+        <e k="usedplus_admin_action_condition" v="Állapot" eh="9e2941b3" />
+        <e k="usedplus_admin_action_hours" v="Üzemórák" eh="6a7e7316" />
+        <e k="usedplus_admin_action_dna" v="Jármű DNS" eh="0ce6fbcf" />
+        <e k="usedplus_admin_action_maintenance" v="Karbantartás" eh="10d0de28" />
+        <e k="usedplus_admin_action_money" v="Pénz" eh="a9331282" />
+        <e k="usedplus_admin_action_credit" v="Hitelpontszám" eh="ae61b052" />
+        <e k="usedplus_admin_btn_repair" v="Javítás" eh="0493d27e" />
+        <e k="usedplus_admin_btn_paint" v="Festés" eh="4802a5ac" />
+        <e k="usedplus_admin_btn_fix_leaks" v="Szivárgás jav." eh="e0140cbb" />
+
+
         <e k="usedplus_admin_status_ready" v="Kész. Válassz egy műveletet." eh="1ef35a42" /></elements>
 </l10n>

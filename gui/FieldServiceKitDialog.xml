@@ -23,7 +23,7 @@
     <Bitmap profile="dialogFullscreenBg" id="dialogBg" />
 
     <!-- v2.8.0: Increased height for redesigned tire repair layout -->
-    <GuiElement profile="dialogBg" id="dialogElement" size="720px 620px">
+    <GuiElement profile="dialogBg" id="dialogElement" size="720px 570px">
         <ThreePartBitmap profile="fs25_dialogBgMiddle" />
         <ThreePartBitmap profile="fs25_dialogBgTop" />
         <ThreePartBitmap profile="fs25_dialogBgBottom" />
@@ -257,7 +257,7 @@
                 <!-- SECTION: One-Time Diagnosis Notice (v2.8.0: Corrected messaging) -->
                 <GuiElement profile="fskTempWarningSection" position="0px -220px">
                     <Bitmap profile="fskTempWarningBg" position="0px 0px"/>
-                    <Text profile="fskTempWarningIcon" position="-290px -18px" text="ℹ"/>
+                    <Text profile="fskTempWarningIcon" position="-290px -18px" text="[i]"/>
                     <Text profile="fskTempWarningTitle" position="0px -10px" text="$l10n_usedplus_fsk_onetime_title"/>
                     <Text profile="fskTempWarningDesc" position="0px -32px" text="$l10n_usedplus_fsk_onetime_desc"/>
                 </GuiElement>
@@ -279,7 +279,7 @@
                     <Text profile="fskTireDiagramLabel" position="0px -10px" text="TIRE STATUS"/>
 
                     <!-- Vehicle Image (centered, 140x140) -->
-                    <Bitmap profile="fskTireVehicleImage" id="tireVehicleImage" position="0px -100px"/>
+                    <Bitmap profile="fskTireVehicleImage" id="tireVehicleImage" position="0px -30px"/>
 
                     <!-- Tire diagram - 2x2 grid centered below vehicle -->
                     <!-- Front Left -->

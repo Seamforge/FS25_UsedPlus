@@ -80,6 +80,12 @@ function RepairVehicleEvent.sendToServer(vehicle, farmId, repairPercent, repaint
         return
     end
 
+    -- v2.15.1: Diagnostic logging for dedicated server repair investigation (Issue #17)
+    local vehName = "unknown"
+    if vehicle and vehicle.getName then vehName = vehicle:getName() or "unknown" end
+    UsedPlus.logDebug(string.format("[REPAIR-DIAG] sendToServer: vehicle=%s, networkId=%s, farm=%d, cost=$%.0f, financed=%s, repair=%.0f%%, repaint=%.0f%%",
+        vehName, tostring(vehicleId), farmId, totalCost or 0, tostring(isFinanced), (repairPercent or 0) * 100, (repaintPercent or 0) * 100))
+
     if g_server ~= nil then
         -- Single-player or server - execute directly
         RepairVehicleEvent.execute(vehicleId, farmId, repairPercent, repaintPercent, totalCost, isFinanced, termMonths, monthlyPayment, downPayment)
@@ -162,6 +168,11 @@ function RepairVehicleEvent.execute(vehicleId, farmId, repairPercent, repaintPer
 
     -- Get vehicle from network ID
     local vehicle = NetworkUtil.getObject(vehicleId)
+
+    -- v2.15.1: Diagnostic logging for dedicated server repair investigation (Issue #17)
+    UsedPlus.logDebug(string.format("[REPAIR-DIAG] execute: vehicleId=%s, found=%s, farm=%d",
+        tostring(vehicleId), tostring(vehicle ~= nil), farmId or 0))
+
     if vehicle == nil then
         UsedPlus.logError("RepairVehicleEvent - Vehicle not found")
         return false
@@ -300,6 +311,33 @@ function RepairVehicleEvent.execute(vehicleId, farmId, repairPercent, repaintPer
         end
     end
 
+    -- v2.15.0: Workshop repair clears steering pull
+    if repairPercent > 0 then
+        local spec = vehicle.spec_usedPlusMaintenance
+        if spec then
+            spec.steeringPullDirection = 0
+            spec.steeringPullInitialized = false
+            spec.steeringPullSurgeActive = false
+            spec.steeringPullSurgeTimer = 0
+            spec.hasShownPullWarning = false
+            UsedPlus.logDebug("Workshop repair: Steering pull cleared")
+        end
+    end
+
+    -- v2.15.1: Workshop repair includes fluid service (oil + hydraulic)
+    -- Without this, low fluid multiplies malfunction chance up to 2.8x
+    -- and players leave the workshop with the same fluid deficit (Issue #20)
+    if repairPercent > 0 and UsedPlusMaintenance then
+        if UsedPlusMaintenance.refillOil then
+            UsedPlusMaintenance.refillOil(vehicle, true)
+            UsedPlus.logDebug("Workshop repair: Oil refilled")
+        end
+        if UsedPlusMaintenance.refillHydraulicFluid then
+            UsedPlusMaintenance.refillHydraulicFluid(vehicle, true)
+            UsedPlus.logDebug("Workshop repair: Hydraulic fluid refilled")
+        end
+    end
+
     -- v2.7.0: Update vehicle reliability via UsedPlusMaintenance
     -- This applies repair degradation (lemons degrade faster) and repair bonuses
     if repairPercent > 0 and UsedPlusMaintenance and UsedPlusMaintenance.onVehicleRepaired then
@@ -317,6 +355,11 @@ end
     Execute event on server (called after readStream in multiplayer)
 ]]
 function RepairVehicleEvent:run(connection)
+    -- v2.15.1: Diagnostic logging for dedicated server repair investigation (Issue #17)
+    UsedPlus.logDebug(string.format("[REPAIR-DIAG] run: vehicleId=%s, farm=%d, cost=$%.0f, financed=%s, repair=%.0f%%, repaint=%.0f%%",
+        tostring(self.vehicleId), self.farmId or 0, self.totalCost or 0, tostring(self.isFinanced),
+        (self.repairPercent or 0) * 100, (self.repaintPercent or 0) * 100))
+
     if connection ~= nil and connection:getIsServer() then
         return
     end

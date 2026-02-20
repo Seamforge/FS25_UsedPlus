@@ -207,7 +207,7 @@
         <e k="input_USEDPLUS_ACTIVATE_OBD" v="OBD Scanner Gebruiken" eh="9666e26b" />
         <e k="input_USEDPLUS_TIRES" v="Bandenservice" eh="b0234f4e" />
         <e k="input_USEDPLUS_SERVICE_TRUCK" v="Servicewagen Bediening" eh="fad0e0f1" />
-        <e k="input_USEDPLUS_FAULT_TRACER" v="[EN] Fault Tracer" eh="d1b82197" />
+        <e k="input_USEDPLUS_FAULT_TRACER" v="Foutopsporing" eh="d1b82197" />
         <e k="usedplus_finance_loanTerm_tooltip" v="Spreid betalingen over 1-20 jaar. Langere looptijd = lagere maandlasten maar meer totale rente." eh="e1170142" />
         <e k="usedplus_finance_downPayment_tooltip" v="Betaal vooraf om het leningbedrag te verlagen. Hogere aanbetaling = lager rentepercentage en maandlasten. Bereik: 0-50%." eh="cb530b47" />
         <e k="usedplus_finance_cashBack_tooltip" v="Ontvang direct contant geld (wordt bij uw lening opgeteld). Handig voor bedrijfskosten, maar verhoogt maandlasten en totale kosten." eh="dc2693cd" />
@@ -963,7 +963,7 @@
         <e k="usedplus_button_buyout" v="Uitkopen" eh="6e052e38" />
         <e k="usedplus_button_renew" v="Verlengen" eh="0b9feba3" />
         <e k="usedplus_lr_helpText" v="U moet een optie kiezen. Retourneren geeft u uw borg terug. Uitkopen gebruikt uw eigen vermogen voor aankoop. Verlengen breidt de lease uit met eigen vermogen toegepast op toekomstige uitkoop." eh="91673bf9" />
-        <e k="usedplus_lr_deferNotice" v="Deze keuze verschijnt volgende maand opnieuw. Geen extra kosten tot u beslist." eh="00000000" />
+        <e k="usedplus_lr_deferNotice" v="Deze keuze verschijnt volgende maand opnieuw. Geen extra kosten totdat u een beslissing neemt." eh="9382457d" />
         <e k="usedplus_conf_title" v="Bevestiging" eh="f4d1ea47" />
         <e k="usedplus_cr_title" v="KREDIETRAPPORT" eh="3725e302" />
         <e k="usedplus_cr_reportDate" v="Rapportdatum:" eh="93ad31a7" />
@@ -1132,6 +1132,8 @@
         <e k="usedplus_fmf_quickRef" v="SNELLE REFERENTIE" eh="011d2c62" />
         <e k="usedplus_fmf_quickRefLine1" v="Winkel → Financieren/Leasen/Zoek Gebruikt | Garage → Te Koop Zetten" eh="426419c9" />
         <e k="usedplus_fmf_quickRefLine2" v="Maandelijkse betalingen worden automatisch afgeschreven. Vervroegd aflossen bespaart rente." eh="73cd35d9" />
+        <e k="usedplus_btn_admin_panel" v="[EN] Admin Panel" eh="a0e0d3f0" />
+        <e k="usedplus_admin_no_vehicle_warning" v="[EN] You must be in a vehicle to use the Admin Panel. Enter a vehicle first, then press ESC." eh="abe11d3f" />
         <e k="usedplus_ll_title" v="Grond Leasen" eh="ec34a2a6" />
         <e k="usedplus_ll_sectionDetails" v="VELDDETAILS" eh="9550d705" />
         <e k="usedplus_ll_field" v="Veld:" eh="af9b2925" />
@@ -1302,10 +1304,10 @@
         <e k="usedplus_info_tire_condition" v="Banden" eh="3fe2c06a" />
 
         <!-- v2.12.0: Finance/Lease Info Box Display -->
-        <e k="usedplus_info_dealType" v="Status" eh="00000000" />
-        <e k="usedplus_info_leased" v="GELEASED" eh="00000000" />
-        <e k="usedplus_info_financed" v="GEFINANCIERD" eh="00000000" />
-        <e k="usedplus_info_monthsRemaining" v="Resterende maanden" eh="00000000" />        <e k="usedplus_tires_title" v="Bandenservice" eh="b0234f4e" />
+        <e k="usedplus_info_dealType" v="Status" eh="ec53a8c4" />
+        <e k="usedplus_info_leased" v="GELEASED" eh="a33a1186" />
+        <e k="usedplus_info_financed" v="GEFINANCIERD" eh="6f9a4a90" />
+        <e k="usedplus_info_monthsRemaining" v="Resterende maanden" eh="b375dcc1" />        <e k="usedplus_tires_title" v="Bandenservice" eh="b0234f4e" />
         <e k="usedplus_tires_sectionStatus" v="VOERTUIG &amp;amp; BANDENSTATUS" eh="c0e3631e" />
         <e k="usedplus_tires_sectionSelect" v="SELECTEER BANDENKWALITEIT" eh="42abee54" />
         <e k="usedplus_tires_sectionPayment" v="BETALINGSOVERZICHT" eh="0dd98605" />
@@ -1467,12 +1469,12 @@
         <e k="usedplus_fsk_repair_hyd_bleed" v="Lucht uit hydraulische leidingen ontlucht." eh="df37c387" />
         <e k="usedplus_fsk_repair_hyd_pump" v="Tijdelijke pomp afdichtingsbehandeling toegepast." eh="89e6edb3" />
         <e k="usedplus_fsk_repair_hyd_seals" v="Nood afdichtingscompound toegepast." eh="5fadb7ef" />
-        <e k="usedplus_fsk_result_title_perfect" v="REPARATIE GESLAAGD" eh="cb532e1b" />
-        <e k="usedplus_fsk_result_title_good" v="GEDEELTELIJKE REPARATIE" eh="cbba8a69" />
+        <e k="usedplus_fsk_result_title_perfect" v="JUISTE DIAGNOSE!" eh="1455077c" />
+        <e k="usedplus_fsk_result_title_good" v="GEDEELTELIJKE OVEREENKOMST" eh="5499883e" />
         <e k="usedplus_fsk_result_title_wrong_system" v="VERKEERD SYSTEEM" eh="7259aab1" />
-        <e k="usedplus_fsk_result_title_poor" v="MINIMALE REPARATIE" eh="9d485c84" />
-        <e k="usedplus_fsk_result_perfect" v="Correcte diagnose! Gerichte reparatie toegepast." eh="91538006" />
-        <e k="usedplus_fsk_result_good" v="Juiste systeem, maar diagnose was onjuist. Algemene reparaties toegepast." eh="47b6188e" />
+        <e k="usedplus_fsk_result_title_poor" v="ONJUISTE DIAGNOSE" eh="e10c3aed" />
+        <e k="usedplus_fsk_result_perfect" v="Uitstekend werk! Volledige reparatiebonus toegepast." eh="627b6efd" />
+        <e k="usedplus_fsk_result_good" v="Juist systeem, maar onjuiste oorzaak vastgesteld." eh="2d85e515" />
         <e k="usedplus_fsk_result_wrong_system" v="Goede diagnose! Maar het werkelijke probleem zat in: %s" eh="e3bba502" />
         <e k="usedplus_fsk_result_wrong_both" v="Verkeerd systeem en onjuiste oorzaak. Minimale reparatie toegepast." eh="c22e0ba6" />
         <e k="usedplus_fsk_result_poor" v="Verkeerd systeem geidentificeerd. Alleen basisonderhoud toegepast." eh="38caed38" />
@@ -1616,10 +1618,10 @@
         <e k="usedplus_ft_repairResult" v="%s: %s - %s +%.0f%%" eh="ba74960b" />
         <e k="usedplus_ft_totalGain" v="Totaal: +%.1f%% betrouwbaarheid, +%.1f%% plafond" eh="1da183e9" />
         <e k="usedplus_ft_totalCost" v="Verbruikte middelen: %.1fL olie" eh="3dd1f971" />
-        <e k="usedplus_ft_hintsRemaining" v="Hints: %d" eh="c8f080c2" />
+        <e k="usedplus_ft_hintsRemaining" v="Aanwijzingen: %d" eh="c8f080c2" />
         <e k="usedplus_ft_quickScanCap" v="Kwaliteit beperkt tot 60%% (Snelle scan)" eh="5b519744" />
         <e k="usedplus_ft_noFaults" v="Geen fouten - systeem in orde!" eh="6bfa5546" />
-        <e k="usedplus_ft_noOil" v="[EN] Service Truck has no oil! Fill the oil tank before diagnosing." eh="3cd9a926" />
+        <e k="usedplus_ft_noOil" v="Servicewagen heeft geen olie! Vul de olietank bij voor het diagnosticeren." eh="3cd9a926" />
         <e k="usedplus_ft_action" v="Foutopsporing: %s" eh="c4066687" />
         <e k="usedplus_ft_corrodedDesc" v="Roest- / oxidatieschade" eh="8a01ae60" />
         <e k="usedplus_ft_crackedDesc" v="Spanningsscheuren / vermoeidheid" eh="81d5118b" />
@@ -1628,7 +1630,7 @@
         <e k="usedplus_sparePartsPallet_name" v="Reserveonderdelenpallet" eh="9bf39a93" />
         <e k="usedplus_sparePartsPallet_function" v="Verbruiksonderdelen voor Servicewagen restauratie. Plaats nabij de truck tijdens restauratiewerkzaamheden." eh="c90aa3eb" />
         <e k="fillType_spareParts" v="Reserveonderdelen" eh="ab6b8ce1" />
-        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="646d470f" />
+        <e k="fillType_hydraulicOil" v="Hydraulische Olie" eh="646d470f" />
         <e k="unit_pcs" v="st" eh="3ecf2642" />
         <e k="usedplus_resto_symptom_engine_knocking_load" v="Ernstig kloppen onder belasting" eh="fb8c3067" />
         <e k="usedplus_resto_symptom_engine_low_oil_pressure" v="Oliedruk kritiek laag" eh="a3efa42d" />
@@ -1945,10 +1947,6 @@
         <e k="usedplus_admin_section_market_dialogs" v="MARKTPLAATS DIALOGEN" eh="4c8988f5" />
         <e k="usedplus_admin_section_service_dialogs" v="SERVICE DIALOGEN" eh="e407aa85" />
         <e k="usedplus_admin_section_lease_dialogs" v="LEASE DIALOGEN" eh="479e552e" />
-        <e k="usedplus_admin_section_debug" v="DEBUG MODUS" eh="c7ee79cd" />
-        <e k="usedplus_admin_section_vehicle_state" v="VOERTUIG STATUS" eh="c077f4be" />
-        <e k="usedplus_admin_section_dna" v="VERKOPER DNA (Volgende Zoekopdracht)" eh="0e284459" />
-        <e k="usedplus_admin_section_quick_vehicle" v="SNEL VOERTUIG WISSEL" eh="01242f7d" />
         <e k="usedplus_admin_btn_stall" v="Afslaan" eh="a0f50ad4" />
         <e k="usedplus_admin_btn_misfire" v="Misslag" eh="9b9bd091" />
         <e k="usedplus_admin_btn_overheat" v="Oververhit" eh="5d266c94" />
@@ -1959,9 +1957,6 @@
         <e k="usedplus_admin_btn_surge_r" v="Piek (R)" eh="f9261697" />
         <e k="usedplus_admin_btn_flat_l" v="Lek (L)" eh="427238a9" />
         <e k="usedplus_admin_btn_flat_r" v="Lek (R)" eh="5a2301a8" />
-        <e k="usedplus_admin_btn_reset_cooldown" v="Reset CD" eh="d2165eba" />
-        <e k="usedplus_admin_btn_malf_info" v="Stor Info" eh="92badb26" />
-        <e k="usedplus_admin_btn_fix_all" v="Herstel Alles" eh="1c7feed4" />
         <e k="usedplus_admin_btn_spawn_obd" v="OBD Scanner" eh="96023669" />
         <e k="usedplus_admin_btn_spawn_truck" v="Svc Truck" eh="083ff302" />
         <e k="usedplus_admin_btn_spawn_parts" v="Onderdelen" eh="ca04c55a" />
@@ -1979,11 +1974,7 @@
         <e k="usedplus_admin_btn_add_100k" v="+$100.000" eh="860860a5" />
         <e k="usedplus_admin_btn_add_1m" v="+$1.000.000" eh="8946b435" />
         <e k="usedplus_admin_btn_set_zero" v="Zet $0" eh="ca8864ed" />
-        <e k="usedplus_admin_btn_list_deals" v="Lijst Deals" eh="936e496b" />
         <e k="usedplus_admin_btn_payoff_all" v="Alles Afbetalen" eh="3817edc8" />
-        <e k="usedplus_admin_btn_create_loan" v="Test Lening" eh="06cb7221" />
-        <e k="usedplus_admin_btn_create_lease" v="Test Lease" eh="d653ef32" />
-        <e k="usedplus_admin_btn_missed_payment" v="Mis Betaling" eh="4890557c" />
         <e k="usedplus_admin_btn_dlg_loan" v="Neem Lening" eh="40fe67fa" />
         <e k="usedplus_admin_btn_dlg_approved" v="Goedgekeurd" eh="6f806341" />
         <e k="usedplus_admin_btn_dlg_credit" v="Krediet" eh="0a90b1bc" />
@@ -1998,21 +1989,26 @@
         <e k="usedplus_admin_btn_dlg_inspect" v="Inspecteer" eh="35a9dbe6" />
         <e k="usedplus_admin_btn_dlg_lease_end" v="Lease Einde" eh="da7801f1" />
         <e k="usedplus_admin_btn_dlg_lease_renew" v="Lease Verlengen" eh="7a794930" />
-        <e k="usedplus_admin_btn_toggle_debug" v="Toggle Debug" eh="e69cb6a0" />
-        <e k="usedplus_admin_btn_rel_100" v="Betr: 100%" eh="dfdb79d3" />
-        <e k="usedplus_admin_btn_rel_50" v="Betr: 50%" eh="9ce7a0a2" />
-        <e k="usedplus_admin_btn_rel_10" v="Betr: 10%" eh="54d6e770" />
+        <e k="usedplus_admin_btn_dlg_fault_tracer" v="[EN] Fault Tracer" eh="d1b82197" />
+        <e k="usedplus_admin_btn_dlg_portfolio" v="[EN] Portfolio" eh="d4f859a9" />
         <e k="usedplus_admin_btn_reset_hours" v="Reset Uren" eh="a519e5e1" />
         <e k="usedplus_admin_btn_add_hours" v="+1000 Uren" eh="ef05132d" />
-        <e k="usedplus_admin_btn_dna_lemon" v="[EN] 0.1 Lemon" eh="0047d5bc" />
-        <e k="usedplus_admin_btn_dna_average" v="[EN] 0.5 Average" eh="472d5599" />
-        <e k="usedplus_admin_btn_dna_workhorse" v="[EN] 0.9 Workhorse" eh="b0f0ee0b" />
-        <e k="usedplus_admin_btn_dna_desperate" v="Wanhopig" eh="97df4642" />
-        <e k="usedplus_admin_btn_dna_reasonable" v="Redelijk" eh="e485c034" />
-        <e k="usedplus_admin_btn_dna_immovable" v="Onverzettelijk" eh="57d0e57c" />
-        <e k="usedplus_admin_btn_next_vehicle" v="Volgend Voertuig" eh="e95e97fa" />
-        <e k="usedplus_admin_btn_prev_vehicle" v="Vorig Voertuig" eh="69b3a0d0" />
-        <e k="usedplus_admin_current_balance" v="Huidig Saldo:" eh="473e7f9e" />
-        <e k="usedplus_admin_current_credit" v="Kredietscore:" eh="0199e1a3" />
+        <e k="usedplus_admin_btn_dna_lemon" v="0.1 Citroen" eh="0047d5bc" />
+        <e k="usedplus_admin_btn_dna_average" v="0.5 Gemiddeld" eh="472d5599" />
+        <e k="usedplus_admin_btn_dna_workhorse" v="0.9 Werkpaard" eh="b0f0ee0b" />
+        <e k="usedplus_admin_btn_refill_oil" v="Olie bijvullen" eh="07a47687" />
+        <e k="usedplus_admin_btn_refill_hyd" v="Hyd bijvullen" eh="77663dd6" />
+        <e k="usedplus_admin_btn_fix_tires" v="Banden herstellen" eh="959a0c0e" />
+        <e k="usedplus_admin_btn_fix_all_malf" v="Alle storingen verhelpen" eh="a14746fb" />
+        <e k="usedplus_admin_action_reliability" v="Betrouwbaarheid" eh="820b8f74" />
+        <e k="usedplus_admin_action_condition" v="Conditie" eh="9e2941b3" />
+        <e k="usedplus_admin_action_hours" v="Uren" eh="6a7e7316" />
+        <e k="usedplus_admin_action_dna" v="Voertuig-DNA" eh="0ce6fbcf" />
+        <e k="usedplus_admin_action_maintenance" v="Onderhoud" eh="10d0de28" />
+        <e k="usedplus_admin_action_money" v="Geld" eh="a9331282" />
+        <e k="usedplus_admin_action_credit" v="Kredietscore" eh="ae61b052" />
+        <e k="usedplus_admin_btn_repair" v="Repareren" eh="0493d27e" />
+        <e k="usedplus_admin_btn_paint" v="Verven" eh="4802a5ac" />
+        <e k="usedplus_admin_btn_fix_leaks" v="Lekken rep." eh="e0140cbb" />
         <e k="usedplus_admin_status_ready" v="Gereed. Selecteer een actie." eh="1ef35a42" /></elements>
 </l10n>

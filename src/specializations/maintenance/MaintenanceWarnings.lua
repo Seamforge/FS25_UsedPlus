@@ -329,6 +329,13 @@ function UsedPlusMaintenance.onVehicleRepaired(vehicle, repairCost)
     spec.hasShownDriftMidpointWarning = false
     spec.speedWarningTimer = 0
 
+    -- v2.15.0: Reset steering pull state - workshop repair clears steering issues
+    spec.steeringPullDirection = 0
+    spec.steeringPullInitialized = false
+    spec.steeringPullSurgeActive = false
+    spec.steeringPullSurgeTimer = 0
+    spec.hasShownPullWarning = false
+
     UsedPlus.logDebug(string.format("Vehicle repaired: %s - ceiling=%.1f%%, engine=%.2f (cap %.2f), hydraulic=%.2f (cap %.2f), electrical=%.2f (cap %.2f)",
         vehicle:getName(),
         (spec.maxReliabilityCeiling or 1.0) * 100,

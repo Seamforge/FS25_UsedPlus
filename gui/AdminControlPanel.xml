@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <!--
     AdminControlPanel.xml - UsedPlus Admin Control Panel
-    v2.9.5: Comprehensive admin/testing panel with 5 tabs
+    v2.15.1: Hover effects on all buttons/tabs, status color-coding,
+             separator lines, Fault Tracer + Portfolio buttons
 
-    Tabs:
-    1. Malfunctions - Force engine, hydraulic, electrical issues on current vehicle
-    2. Spawning - Spawn items, trigger discovery, create test vehicles
-    3. Finance - Manipulate money, credit score, deals
-    4. Dialogs - Open any dialog directly for testing
-    5. State - Debug mode, vehicle state manipulation, time controls
+    Tabs (reordered):
+    1. State - Vehicle diagnostics (left) + actions (right) — shown on open
+    2. Malfunctions - Force engine, hydraulic, electrical issues on current vehicle
+    3. Spawning - Spawn items, trigger discovery, create test vehicles
+    4. Finance - Manipulate money, credit score, deals
+    5. Dialogs - Open any dialog directly for testing
 -->
 <GUI onOpen="onOpen" onClose="onClose" onCreate="onCreate">
     <GuiElement profile="newLayer" />
     <Bitmap profile="dialogFullscreenBg" id="dialogBg" />
 
-    <GuiElement profile="dialogBg" id="dialogElement" size="720px 620px">
+    <GuiElement profile="dialogBg" id="dialogElement" size="880px 700px">
         <ThreePartBitmap profile="fs25_dialogBgMiddle" />
         <ThreePartBitmap profile="fs25_dialogBgTop" />
         <ThreePartBitmap profile="fs25_dialogBgBottom" />
@@ -25,448 +26,502 @@
             <Text profile="fs25_dialogTitle" id="dialogTitleElement" position="0px -30px" text="$l10n_usedplus_admin_title"/>
 
             <!-- ===== TAB BAR ===== -->
-            <!-- 5 tabs across the top, clickable -->
+            <!-- 5 tabs, 155px each, spaced 168px apart -->
             <GuiElement profile="acpTabBar" position="0px -70px">
-                <!-- Tab backgrounds (highlight for active) -->
-                <Bitmap profile="acpTabBg" id="tabBg1" position="-280px 0px"/>
-                <Bitmap profile="acpTabBg" id="tabBg2" position="-140px 0px"/>
+                <!-- Tab backgrounds -->
+                <Bitmap profile="acpTabBg" id="tabBg1" position="-336px 0px"/>
+                <Bitmap profile="acpTabBg" id="tabBg2" position="-168px 0px"/>
                 <Bitmap profile="acpTabBg" id="tabBg3" position="0px 0px"/>
-                <Bitmap profile="acpTabBg" id="tabBg4" position="140px 0px"/>
-                <Bitmap profile="acpTabBg" id="tabBg5" position="280px 0px"/>
+                <Bitmap profile="acpTabBg" id="tabBg4" position="168px 0px"/>
+                <Bitmap profile="acpTabBg" id="tabBg5" position="336px 0px"/>
 
                 <!-- Tab labels -->
-                <Text profile="acpTabText" id="tabText1" position="-280px -7px" text="$l10n_usedplus_admin_tab_malfunctions"/>
-                <Text profile="acpTabText" id="tabText2" position="-140px -7px" text="$l10n_usedplus_admin_tab_spawning"/>
-                <Text profile="acpTabText" id="tabText3" position="0px -7px" text="$l10n_usedplus_admin_tab_finance"/>
-                <Text profile="acpTabText" id="tabText4" position="140px -7px" text="$l10n_usedplus_admin_tab_dialogs"/>
-                <Text profile="acpTabText" id="tabText5" position="280px -7px" text="$l10n_usedplus_admin_tab_state"/>
+                <Text profile="acpTabText" id="tabText1" position="-336px -7px" text="$l10n_usedplus_admin_tab_state"/>
+                <Text profile="acpTabText" id="tabText2" position="-168px -7px" text="$l10n_usedplus_admin_tab_malfunctions"/>
+                <Text profile="acpTabText" id="tabText3" position="0px -7px" text="$l10n_usedplus_admin_tab_spawning"/>
+                <Text profile="acpTabText" id="tabText4" position="168px -7px" text="$l10n_usedplus_admin_tab_finance"/>
+                <Text profile="acpTabText" id="tabText5" position="336px -7px" text="$l10n_usedplus_admin_tab_dialogs"/>
 
-                <!-- Tab hit targets (invisible buttons) -->
-                <Button profile="acpTabHit" id="tabBtn1" position="-280px 0px" onClick="onTab1Click"/>
-                <Button profile="acpTabHit" id="tabBtn2" position="-140px 0px" onClick="onTab2Click"/>
-                <Button profile="acpTabHit" id="tabBtn3" position="0px 0px" onClick="onTab3Click"/>
-                <Button profile="acpTabHit" id="tabBtn4" position="140px 0px" onClick="onTab4Click"/>
-                <Button profile="acpTabHit" id="tabBtn5" position="280px 0px" onClick="onTab5Click"/>
+                <!-- Tab hit targets -->
+                <Button profile="acpTabHit" id="tabBtn1" position="-336px 0px" onClick="onTab1Click" onHighlight="onTabHighlight" onHighlightRemove="onTabUnhighlight"/>
+                <Button profile="acpTabHit" id="tabBtn2" position="-168px 0px" onClick="onTab2Click" onHighlight="onTabHighlight" onHighlightRemove="onTabUnhighlight"/>
+                <Button profile="acpTabHit" id="tabBtn3" position="0px 0px" onClick="onTab3Click" onHighlight="onTabHighlight" onHighlightRemove="onTabUnhighlight"/>
+                <Button profile="acpTabHit" id="tabBtn4" position="168px 0px" onClick="onTab4Click" onHighlight="onTabHighlight" onHighlightRemove="onTabUnhighlight"/>
+                <Button profile="acpTabHit" id="tabBtn5" position="336px 0px" onClick="onTab5Click" onHighlight="onTabHighlight" onHighlightRemove="onTabUnhighlight"/>
             </GuiElement>
 
-            <!-- ===== TAB CONTENT AREA ===== -->
-            <!-- Starts at -105px (after tabs) -->
-            <!-- Each tab content container is shown/hidden via Lua -->
+            <!-- Separator: tab bar → content -->
+            <Bitmap profile="acpSeparator" position="0px -100px"/>
 
-            <!-- ===== TAB 1: MALFUNCTIONS ===== -->
+            <!-- ===== TAB CONTENT AREA ===== -->
+
+            <!-- ===== TAB 1: STATE (Split Layout) ===== -->
             <GuiElement profile="acpTabContent" id="tabContent1" position="0px -105px">
+
+                <!-- LEFT PANEL: Vehicle Diagnostics (25 label/value rows) -->
+                <GuiElement profile="acpDiagPanel" id="diagPanel" position="-175px 0px">
+                    <Text profile="acpDiagLabel" id="diagLabel1" position="-110px 0px"/>
+                    <Text profile="acpDiagValue" id="diagValue1" position="110px 0px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel2" position="-110px -16px"/>
+                    <Text profile="acpDiagValue" id="diagValue2" position="110px -16px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel3" position="-110px -32px"/>
+                    <Text profile="acpDiagValue" id="diagValue3" position="110px -32px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel4" position="-110px -48px"/>
+                    <Text profile="acpDiagValue" id="diagValue4" position="110px -48px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel5" position="-110px -64px"/>
+                    <Text profile="acpDiagValue" id="diagValue5" position="110px -64px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel6" position="-110px -80px"/>
+                    <Text profile="acpDiagValue" id="diagValue6" position="110px -80px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel7" position="-110px -96px"/>
+                    <Text profile="acpDiagValue" id="diagValue7" position="110px -96px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel8" position="-110px -112px"/>
+                    <Text profile="acpDiagValue" id="diagValue8" position="110px -112px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel9" position="-110px -128px"/>
+                    <Text profile="acpDiagValue" id="diagValue9" position="110px -128px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel10" position="-110px -144px"/>
+                    <Text profile="acpDiagValue" id="diagValue10" position="110px -144px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel11" position="-110px -160px"/>
+                    <Text profile="acpDiagValue" id="diagValue11" position="110px -160px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel12" position="-110px -176px"/>
+                    <Text profile="acpDiagValue" id="diagValue12" position="110px -176px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel13" position="-110px -192px"/>
+                    <Text profile="acpDiagValue" id="diagValue13" position="110px -192px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel14" position="-110px -208px"/>
+                    <Text profile="acpDiagValue" id="diagValue14" position="110px -208px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel15" position="-110px -224px"/>
+                    <Text profile="acpDiagValue" id="diagValue15" position="110px -224px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel16" position="-110px -240px"/>
+                    <Text profile="acpDiagValue" id="diagValue16" position="110px -240px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel17" position="-110px -256px"/>
+                    <Text profile="acpDiagValue" id="diagValue17" position="110px -256px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel18" position="-110px -272px"/>
+                    <Text profile="acpDiagValue" id="diagValue18" position="110px -272px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel19" position="-110px -288px"/>
+                    <Text profile="acpDiagValue" id="diagValue19" position="110px -288px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel20" position="-110px -304px"/>
+                    <Text profile="acpDiagValue" id="diagValue20" position="110px -304px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel21" position="-110px -320px"/>
+                    <Text profile="acpDiagValue" id="diagValue21" position="110px -320px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel22" position="-110px -336px"/>
+                    <Text profile="acpDiagValue" id="diagValue22" position="110px -336px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel23" position="-110px -352px"/>
+                    <Text profile="acpDiagValue" id="diagValue23" position="110px -352px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel24" position="-110px -368px"/>
+                    <Text profile="acpDiagValue" id="diagValue24" position="110px -368px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel25" position="-110px -384px"/>
+                    <Text profile="acpDiagValue" id="diagValue25" position="110px -384px"/>
+                </GuiElement>
+
+                <!-- RIGHT PANEL: Action Buttons -->
+                <GuiElement profile="acpActionPanel" id="actionPanel" position="250px 0px">
+                    <!-- Reliability (per-system) -->
+                    <Text profile="acpActionSectionHeader" position="0px -5px" text="$l10n_usedplus_admin_action_reliability"/>
+
+                    <Bitmap profile="acpActionBtn3" id="bgEngRel100" position="-75px -25px"/>
+                    <Text profile="acpActionBtn3Text" position="-75px -33px" text="Eng 100%"/>
+                    <Button profile="acpActionBtn3Hit" id="btnEngRel100" position="-75px -25px" onClick="onEngRel100Click" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+                    <Bitmap profile="acpActionBtn3" id="bgEngRel50" position="0px -25px"/>
+                    <Text profile="acpActionBtn3Text" position="0px -33px" text="Eng 50%"/>
+                    <Button profile="acpActionBtn3Hit" id="btnEngRel50" position="0px -25px" onClick="onEngRel50Click" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+                    <Bitmap profile="acpActionBtn3" id="bgEngRel10" position="75px -25px"/>
+                    <Text profile="acpActionBtn3Text" position="75px -33px" text="Eng 10%"/>
+                    <Button profile="acpActionBtn3Hit" id="btnEngRel10" position="75px -25px" onClick="onEngRel10Click" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+
+                    <Bitmap profile="acpActionBtn3" id="bgHydRel100" position="-75px -55px"/>
+                    <Text profile="acpActionBtn3Text" position="-75px -63px" text="Hyd 100%"/>
+                    <Button profile="acpActionBtn3Hit" id="btnHydRel100" position="-75px -55px" onClick="onHydRel100Click" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+                    <Bitmap profile="acpActionBtn3" id="bgHydRel50" position="0px -55px"/>
+                    <Text profile="acpActionBtn3Text" position="0px -63px" text="Hyd 50%"/>
+                    <Button profile="acpActionBtn3Hit" id="btnHydRel50" position="0px -55px" onClick="onHydRel50Click" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+                    <Bitmap profile="acpActionBtn3" id="bgHydRel10" position="75px -55px"/>
+                    <Text profile="acpActionBtn3Text" position="75px -63px" text="Hyd 10%"/>
+                    <Button profile="acpActionBtn3Hit" id="btnHydRel10" position="75px -55px" onClick="onHydRel10Click" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+
+                    <Bitmap profile="acpActionBtn3" id="bgElecRel100" position="-75px -85px"/>
+                    <Text profile="acpActionBtn3Text" position="-75px -93px" text="Elec 100%"/>
+                    <Button profile="acpActionBtn3Hit" id="btnElecRel100" position="-75px -85px" onClick="onElecRel100Click" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+                    <Bitmap profile="acpActionBtn3" id="bgElecRel50" position="0px -85px"/>
+                    <Text profile="acpActionBtn3Text" position="0px -93px" text="Elec 50%"/>
+                    <Button profile="acpActionBtn3Hit" id="btnElecRel50" position="0px -85px" onClick="onElecRel50Click" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+                    <Bitmap profile="acpActionBtn3" id="bgElecRel10" position="75px -85px"/>
+                    <Text profile="acpActionBtn3Text" position="75px -93px" text="Elec 10%"/>
+                    <Button profile="acpActionBtn3Hit" id="btnElecRel10" position="75px -85px" onClick="onElecRel10Click" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+
+                    <!-- Condition -->
+                    <Text profile="acpActionSectionHeader" position="0px -115px" text="$l10n_usedplus_admin_action_condition"/>
+
+                    <Bitmap profile="acpActionBtn2" id="bgRepairDamage" position="-55px -135px"/>
+                    <Text profile="acpActionBtn2Text" position="-55px -143px" text="$l10n_usedplus_admin_btn_repair"/>
+                    <Button profile="acpActionBtn2Hit" id="btnRepairDamage" position="-55px -135px" onClick="onRepairDamageClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+
+                    <Bitmap profile="acpActionBtn2" id="bgPaintWear" position="55px -135px"/>
+                    <Text profile="acpActionBtn2Text" position="55px -143px" text="$l10n_usedplus_admin_btn_paint"/>
+                    <Button profile="acpActionBtn2Hit" id="btnPaintWear" position="55px -135px" onClick="onPaintWearClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+
+                    <!-- Hours -->
+                    <Text profile="acpActionSectionHeader" position="0px -165px" text="$l10n_usedplus_admin_action_hours"/>
+
+                    <Bitmap profile="acpActionBtn2" id="bgResetHours" position="-55px -185px"/>
+                    <Text profile="acpActionBtn2Text" position="-55px -193px" text="$l10n_usedplus_admin_btn_reset_hours"/>
+                    <Button profile="acpActionBtn2Hit" id="btnResetHours" position="-55px -185px" onClick="onResetHoursClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+
+                    <Bitmap profile="acpActionBtn2" id="bgAddHours" position="55px -185px"/>
+                    <Text profile="acpActionBtn2Text" position="55px -193px" text="$l10n_usedplus_admin_btn_add_hours"/>
+                    <Button profile="acpActionBtn2Hit" id="btnAddHours" position="55px -185px" onClick="onAddHoursClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+
+                    <!-- Vehicle DNA -->
+                    <Text profile="acpActionSectionHeader" position="0px -215px" text="$l10n_usedplus_admin_action_dna"/>
+
+                    <Bitmap profile="acpActionBtn3" id="bgDnaLemon" position="-75px -235px"/>
+                    <Text profile="acpActionBtn3Text" position="-75px -243px" text="$l10n_usedplus_admin_btn_dna_lemon"/>
+                    <Button profile="acpActionBtn3Hit" id="btnDnaLemon" position="-75px -235px" onClick="onDnaLemonClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+                    <Bitmap profile="acpActionBtn3" id="bgDnaAverage" position="0px -235px"/>
+                    <Text profile="acpActionBtn3Text" position="0px -243px" text="$l10n_usedplus_admin_btn_dna_average"/>
+                    <Button profile="acpActionBtn3Hit" id="btnDnaAverage" position="0px -235px" onClick="onDnaAverageClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+                    <Bitmap profile="acpActionBtn3" id="bgDnaWorkhorse" position="75px -235px"/>
+                    <Text profile="acpActionBtn3Text" position="75px -243px" text="$l10n_usedplus_admin_btn_dna_workhorse"/>
+                    <Button profile="acpActionBtn3Hit" id="btnDnaWorkhorse" position="75px -235px" onClick="onDnaWorkhorseClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+
+                    <!-- Maintenance -->
+                    <Text profile="acpActionSectionHeader" position="0px -265px" text="$l10n_usedplus_admin_action_maintenance"/>
+
+                    <Bitmap profile="acpActionBtn2" id="bgRefillOil" position="-55px -285px"/>
+                    <Text profile="acpActionBtn2Text" position="-55px -293px" text="$l10n_usedplus_admin_btn_refill_oil"/>
+                    <Button profile="acpActionBtn2Hit" id="btnRefillOil" position="-55px -285px" onClick="onRefillOilClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+                    <Bitmap profile="acpActionBtn2" id="bgRefillHyd" position="55px -285px"/>
+                    <Text profile="acpActionBtn2Text" position="55px -293px" text="$l10n_usedplus_admin_btn_refill_hyd"/>
+                    <Button profile="acpActionBtn2Hit" id="btnRefillHyd" position="55px -285px" onClick="onRefillHydClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+
+                    <Bitmap profile="acpActionBtn2" id="bgFixTires" position="-55px -315px"/>
+                    <Text profile="acpActionBtn2Text" position="-55px -323px" text="$l10n_usedplus_admin_btn_fix_tires"/>
+                    <Button profile="acpActionBtn2Hit" id="btnFixTires" position="-55px -315px" onClick="onFixTiresClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+                    <Bitmap profile="acpActionBtn2" id="bgFixLeaks" position="55px -315px"/>
+                    <Text profile="acpActionBtn2Text" position="55px -323px" text="$l10n_usedplus_admin_btn_fix_leaks"/>
+                    <Button profile="acpActionBtn2Hit" id="btnFixLeaks" position="55px -315px" onClick="onFixLeaksClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+
+                    <Bitmap profile="acpActionBtnWide" id="bgFixAllMalf" position="0px -345px"/>
+                    <Text profile="acpActionBtnWideText" position="0px -353px" text="$l10n_usedplus_admin_btn_fix_all_malf"/>
+                    <Button profile="acpActionBtnWideHit" id="btnFixAllMalf" position="0px -345px" onClick="onFixAllMalfClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+                </GuiElement>
+            </GuiElement>
+
+            <!-- ===== TAB 2: MALFUNCTIONS ===== -->
+            <GuiElement profile="acpTabContent" id="tabContent2" position="0px -105px">
                 <!-- Engine Section Header -->
-                <Text profile="acpSectionHeader" position="-230px -5px" text="$l10n_usedplus_admin_section_engine"/>
+                <Text profile="acpSectionHeader" position="-310px -5px" text="$l10n_usedplus_admin_section_engine"/>
 
                 <!-- Engine Row (5 buttons) -->
                 <GuiElement profile="acpButtonRow" position="0px -25px">
-                    <Bitmap profile="acpButtonBg" position="-260px 0px"/>
-                    <Text profile="acpButtonText" position="-260px -8px" text="$l10n_usedplus_admin_btn_stall"/>
-                    <Button profile="acpButtonHit" id="btnStall" position="-260px 0px" onClick="onStallClick"/>
+                    <Bitmap profile="acpButtonBg" id="bgStall" position="-320px 0px"/>
+                    <Text profile="acpButtonText" position="-320px -8px" text="$l10n_usedplus_admin_btn_stall"/>
+                    <Button profile="acpButtonHit" id="btnStall" position="-320px 0px" onClick="onStallClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
 
-                    <Bitmap profile="acpButtonBg" position="-130px 0px"/>
-                    <Text profile="acpButtonText" position="-130px -8px" text="$l10n_usedplus_admin_btn_misfire"/>
-                    <Button profile="acpButtonHit" id="btnMisfire" position="-130px 0px" onClick="onMisfireClick"/>
+                    <Bitmap profile="acpButtonBg" id="bgMisfire" position="-190px 0px"/>
+                    <Text profile="acpButtonText" position="-190px -8px" text="$l10n_usedplus_admin_btn_misfire"/>
+                    <Button profile="acpButtonHit" id="btnMisfire" position="-190px 0px" onClick="onMisfireClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
 
-                    <Bitmap profile="acpButtonBg" position="0px 0px"/>
-                    <Text profile="acpButtonText" position="0px -8px" text="$l10n_usedplus_admin_btn_overheat"/>
-                    <Button profile="acpButtonHit" id="btnOverheat" position="0px 0px" onClick="onOverheatClick"/>
+                    <Bitmap profile="acpButtonBg" id="bgOverheat" position="-60px 0px"/>
+                    <Text profile="acpButtonText" position="-60px -8px" text="$l10n_usedplus_admin_btn_overheat"/>
+                    <Button profile="acpButtonHit" id="btnOverheat" position="-60px 0px" onClick="onOverheatClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
 
-                    <Bitmap profile="acpButtonBg" position="130px 0px"/>
-                    <Text profile="acpButtonText" position="130px -8px" text="$l10n_usedplus_admin_btn_runaway"/>
-                    <Button profile="acpButtonHit" id="btnRunaway" position="130px 0px" onClick="onRunawayClick"/>
+                    <Bitmap profile="acpButtonBg" id="bgRunaway" position="70px 0px"/>
+                    <Text profile="acpButtonText" position="70px -8px" text="$l10n_usedplus_admin_btn_runaway"/>
+                    <Button profile="acpButtonHit" id="btnRunaway" position="70px 0px" onClick="onRunawayClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
 
-                    <Bitmap profile="acpButtonBg" position="260px 0px"/>
-                    <Text profile="acpButtonText" position="260px -8px" text="$l10n_usedplus_admin_btn_seizure"/>
-                    <Button profile="acpButtonHit" id="btnSeizure" position="260px 0px" onClick="onSeizureClick"/>
+                    <Bitmap profile="acpButtonBg" id="bgSeizure" position="200px 0px"/>
+                    <Text profile="acpButtonText" position="200px -8px" text="$l10n_usedplus_admin_btn_seizure"/>
+                    <Button profile="acpButtonHit" id="btnSeizure" position="200px 0px" onClick="onSeizureClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
                 </GuiElement>
 
                 <!-- Electrical Section Header -->
-                <Text profile="acpSectionHeader" position="-230px -65px" text="$l10n_usedplus_admin_section_electrical"/>
+                <Text profile="acpSectionHeader" position="-310px -65px" text="$l10n_usedplus_admin_section_electrical"/>
 
                 <!-- Electrical Row -->
                 <GuiElement profile="acpButtonRow" position="0px -85px">
-                    <Bitmap profile="acpButtonBg" position="-260px 0px"/>
-                    <Text profile="acpButtonText" position="-260px -8px" text="$l10n_usedplus_admin_btn_cutout"/>
-                    <Button profile="acpButtonHit" id="btnCutout" position="-260px 0px" onClick="onCutoutClick"/>
+                    <Bitmap profile="acpButtonBg" id="bgCutout" position="-320px 0px"/>
+                    <Text profile="acpButtonText" position="-320px -8px" text="$l10n_usedplus_admin_btn_cutout"/>
+                    <Button profile="acpButtonHit" id="btnCutout" position="-320px 0px" onClick="onCutoutClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
                 </GuiElement>
 
                 <!-- Hydraulic Section Header -->
-                <Text profile="acpSectionHeader" position="-230px -125px" text="$l10n_usedplus_admin_section_hydraulic"/>
+                <Text profile="acpSectionHeader" position="-310px -125px" text="$l10n_usedplus_admin_section_hydraulic"/>
 
                 <!-- Hydraulic Row -->
                 <GuiElement profile="acpButtonRow" position="0px -145px">
-                    <Bitmap profile="acpButtonBg" position="-260px 0px"/>
-                    <Text profile="acpButtonText" position="-260px -8px" text="$l10n_usedplus_admin_btn_surge_l"/>
-                    <Button profile="acpButtonHit" id="btnSurgeL" position="-260px 0px" onClick="onSurgeLClick"/>
+                    <Bitmap profile="acpButtonBg" id="bgSurgeL" position="-320px 0px"/>
+                    <Text profile="acpButtonText" position="-320px -8px" text="$l10n_usedplus_admin_btn_surge_l"/>
+                    <Button profile="acpButtonHit" id="btnSurgeL" position="-320px 0px" onClick="onSurgeLClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
 
-                    <Bitmap profile="acpButtonBg" position="-130px 0px"/>
-                    <Text profile="acpButtonText" position="-130px -8px" text="$l10n_usedplus_admin_btn_surge_r"/>
-                    <Button profile="acpButtonHit" id="btnSurgeR" position="-130px 0px" onClick="onSurgeRClick"/>
+                    <Bitmap profile="acpButtonBg" id="bgSurgeR" position="-190px 0px"/>
+                    <Text profile="acpButtonText" position="-190px -8px" text="$l10n_usedplus_admin_btn_surge_r"/>
+                    <Button profile="acpButtonHit" id="btnSurgeR" position="-190px 0px" onClick="onSurgeRClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
                 </GuiElement>
 
                 <!-- Tire Section Header -->
-                <Text profile="acpSectionHeader" position="-230px -185px" text="$l10n_usedplus_admin_section_tires"/>
+                <Text profile="acpSectionHeader" position="-310px -185px" text="$l10n_usedplus_admin_section_tires"/>
 
                 <!-- Tire Row -->
                 <GuiElement profile="acpButtonRow" position="0px -205px">
-                    <Bitmap profile="acpButtonBg" position="-260px 0px"/>
-                    <Text profile="acpButtonText" position="-260px -8px" text="$l10n_usedplus_admin_btn_flat_l"/>
-                    <Button profile="acpButtonHit" id="btnFlatL" position="-260px 0px" onClick="onFlatLClick"/>
+                    <Bitmap profile="acpButtonBg" id="bgFlatL" position="-320px 0px"/>
+                    <Text profile="acpButtonText" position="-320px -8px" text="$l10n_usedplus_admin_btn_flat_l"/>
+                    <Button profile="acpButtonHit" id="btnFlatL" position="-320px 0px" onClick="onFlatLClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
 
-                    <Bitmap profile="acpButtonBg" position="-130px 0px"/>
-                    <Text profile="acpButtonText" position="-130px -8px" text="$l10n_usedplus_admin_btn_flat_r"/>
-                    <Button profile="acpButtonHit" id="btnFlatR" position="-130px 0px" onClick="onFlatRClick"/>
+                    <Bitmap profile="acpButtonBg" id="bgFlatR" position="-190px 0px"/>
+                    <Text profile="acpButtonText" position="-190px -8px" text="$l10n_usedplus_admin_btn_flat_r"/>
+                    <Button profile="acpButtonHit" id="btnFlatR" position="-190px 0px" onClick="onFlatRClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
                 </GuiElement>
-
-                <!-- Utility Section Header -->
-                <Text profile="acpSectionHeader" position="-230px -245px" text="$l10n_usedplus_admin_section_utility"/>
-
-                <!-- Utility Row -->
-                <GuiElement profile="acpButtonRow" position="0px -265px">
-                    <Bitmap profile="acpButtonBg" position="-260px 0px"/>
-                    <Text profile="acpButtonText" position="-260px -8px" text="$l10n_usedplus_admin_btn_reset_cooldown"/>
-                    <Button profile="acpButtonHit" id="btnResetCooldown" position="-260px 0px" onClick="onResetCooldownClick"/>
-
-                    <Bitmap profile="acpButtonBg" position="-130px 0px"/>
-                    <Text profile="acpButtonText" position="-130px -8px" text="$l10n_usedplus_admin_btn_malf_info"/>
-                    <Button profile="acpButtonHit" id="btnMalfInfo" position="-130px 0px" onClick="onMalfInfoClick"/>
-
-                    <Bitmap profile="acpButtonBg" position="0px 0px"/>
-                    <Text profile="acpButtonText" position="0px -8px" text="$l10n_usedplus_admin_btn_fix_all"/>
-                    <Button profile="acpButtonHit" id="btnFixAll" position="0px 0px" onClick="onFixAllClick"/>
-                </GuiElement>
-
-                <!-- Vehicle Info -->
-                <Text profile="acpVehicleInfo" id="vehicleInfoText1" position="0px -310px" text=""/>
             </GuiElement>
 
-            <!-- ===== TAB 2: SPAWNING ===== -->
-            <GuiElement profile="acpTabContent" id="tabContent2" position="0px -105px">
+            <!-- ===== TAB 3: SPAWNING ===== -->
+            <GuiElement profile="acpTabContent" id="tabContent3" position="0px -105px">
                 <!-- Items Section Header -->
-                <Text profile="acpSectionHeader" position="-230px -5px" text="$l10n_usedplus_admin_section_items"/>
+                <Text profile="acpSectionHeader" position="-310px -5px" text="$l10n_usedplus_admin_section_items"/>
 
                 <!-- Items Row -->
                 <GuiElement profile="acpButtonRow" position="0px -25px">
-                    <Bitmap profile="acpButtonBg" position="-260px 0px"/>
-                    <Text profile="acpButtonText" position="-260px -8px" text="$l10n_usedplus_admin_btn_spawn_obd"/>
-                    <Button profile="acpButtonHit" id="btnSpawnObd" position="-260px 0px" onClick="onSpawnObdClick"/>
+                    <Bitmap profile="acpButtonBg" id="bgSpawnObd" position="-320px 0px"/>
+                    <Text profile="acpButtonText" position="-320px -8px" text="$l10n_usedplus_admin_btn_spawn_obd"/>
+                    <Button profile="acpButtonHit" id="btnSpawnObd" position="-320px 0px" onClick="onSpawnObdClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
 
-                    <Bitmap profile="acpButtonBg" position="-130px 0px"/>
-                    <Text profile="acpButtonText" position="-130px -8px" text="$l10n_usedplus_admin_btn_spawn_truck"/>
-                    <Button profile="acpButtonHit" id="btnSpawnTruck" position="-130px 0px" onClick="onSpawnTruckClick"/>
+                    <Bitmap profile="acpButtonBg" id="bgSpawnTruck" position="-190px 0px"/>
+                    <Text profile="acpButtonText" position="-190px -8px" text="$l10n_usedplus_admin_btn_spawn_truck"/>
+                    <Button profile="acpButtonHit" id="btnSpawnTruck" position="-190px 0px" onClick="onSpawnTruckClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
 
-                    <Bitmap profile="acpButtonBg" position="0px 0px"/>
-                    <Text profile="acpButtonText" position="0px -8px" text="$l10n_usedplus_admin_btn_spawn_parts"/>
-                    <Button profile="acpButtonHit" id="btnSpawnParts" position="0px 0px" onClick="onSpawnPartsClick"/>
+                    <Bitmap profile="acpButtonBg" id="bgSpawnParts" position="-60px 0px"/>
+                    <Text profile="acpButtonText" position="-60px -8px" text="$l10n_usedplus_admin_btn_spawn_parts"/>
+                    <Button profile="acpButtonHit" id="btnSpawnParts" position="-60px 0px" onClick="onSpawnPartsClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
                 </GuiElement>
 
                 <!-- Discovery Section Header -->
-                <Text profile="acpSectionHeader" position="-230px -65px" text="$l10n_usedplus_admin_section_discovery"/>
+                <Text profile="acpSectionHeader" position="-310px -65px" text="$l10n_usedplus_admin_section_discovery"/>
 
                 <!-- Discovery Row -->
                 <GuiElement profile="acpButtonRow" position="0px -85px">
-                    <Bitmap profile="acpButtonBg" position="-260px 0px"/>
-                    <Text profile="acpButtonText" position="-260px -8px" text="$l10n_usedplus_admin_btn_trigger_discovery"/>
-                    <Button profile="acpButtonHit" id="btnTriggerDiscovery" position="-260px 0px" onClick="onTriggerDiscoveryClick"/>
+                    <Bitmap profile="acpButtonBg" id="bgTriggerDiscovery" position="-320px 0px"/>
+                    <Text profile="acpButtonText" position="-320px -8px" text="$l10n_usedplus_admin_btn_trigger_discovery"/>
+                    <Button profile="acpButtonHit" id="btnTriggerDiscovery" position="-320px 0px" onClick="onTriggerDiscoveryClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
 
-                    <Bitmap profile="acpButtonBg" position="-130px 0px"/>
-                    <Text profile="acpButtonText" position="-130px -8px" text="$l10n_usedplus_admin_btn_reset_discovery"/>
-                    <Button profile="acpButtonHit" id="btnResetDiscovery" position="-130px 0px" onClick="onResetDiscoveryClick"/>
+                    <Bitmap profile="acpButtonBg" id="bgResetDiscovery" position="-190px 0px"/>
+                    <Text profile="acpButtonText" position="-190px -8px" text="$l10n_usedplus_admin_btn_reset_discovery"/>
+                    <Button profile="acpButtonHit" id="btnResetDiscovery" position="-190px 0px" onClick="onResetDiscoveryClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
 
-                    <Bitmap profile="acpButtonBg" position="0px 0px"/>
-                    <Text profile="acpButtonText" position="0px -8px" text="$l10n_usedplus_admin_btn_discovery_status"/>
-                    <Button profile="acpButtonHit" id="btnDiscoveryStatus" position="0px 0px" onClick="onDiscoveryStatusClick"/>
+                    <Bitmap profile="acpButtonBg" id="bgDiscoveryStatus" position="-60px 0px"/>
+                    <Text profile="acpButtonText" position="-60px -8px" text="$l10n_usedplus_admin_btn_discovery_status"/>
+                    <Button profile="acpButtonHit" id="btnDiscoveryStatus" position="-60px 0px" onClick="onDiscoveryStatusClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
                 </GuiElement>
 
                 <!-- Test Vehicles Section Header -->
-                <Text profile="acpSectionHeader" position="-230px -125px" text="$l10n_usedplus_admin_section_test_vehicles"/>
+                <Text profile="acpSectionHeader" position="-310px -125px" text="$l10n_usedplus_admin_section_test_vehicles"/>
 
                 <!-- Test Vehicles Row -->
                 <GuiElement profile="acpButtonRow" position="0px -145px">
-                    <Bitmap profile="acpButtonBg" position="-260px 0px"/>
-                    <Text profile="acpButtonText" position="-260px -8px" text="$l10n_usedplus_admin_btn_spawn_lemon"/>
-                    <Button profile="acpButtonHit" id="btnSpawnLemon" position="-260px 0px" onClick="onSpawnLemonClick"/>
+                    <Bitmap profile="acpButtonBg" id="bgSpawnLemon" position="-320px 0px"/>
+                    <Text profile="acpButtonText" position="-320px -8px" text="$l10n_usedplus_admin_btn_spawn_lemon"/>
+                    <Button profile="acpButtonHit" id="btnSpawnLemon" position="-320px 0px" onClick="onSpawnLemonClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
 
-                    <Bitmap profile="acpButtonBg" position="-130px 0px"/>
-                    <Text profile="acpButtonText" position="-130px -8px" text="$l10n_usedplus_admin_btn_spawn_workhorse"/>
-                    <Button profile="acpButtonHit" id="btnSpawnWorkhorse" position="-130px 0px" onClick="onSpawnWorkhorseClick"/>
+                    <Bitmap profile="acpButtonBg" id="bgSpawnWorkhorse" position="-190px 0px"/>
+                    <Text profile="acpButtonText" position="-190px -8px" text="$l10n_usedplus_admin_btn_spawn_workhorse"/>
+                    <Button profile="acpButtonHit" id="btnSpawnWorkhorse" position="-190px 0px" onClick="onSpawnWorkhorseClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
 
-                    <Bitmap profile="acpButtonBg" position="0px 0px"/>
-                    <Text profile="acpButtonText" position="0px -8px" text="$l10n_usedplus_admin_btn_spawn_damaged"/>
-                    <Button profile="acpButtonHit" id="btnSpawnDamaged" position="0px 0px" onClick="onSpawnDamagedClick"/>
+                    <Bitmap profile="acpButtonBg" id="bgSpawnDamaged" position="-60px 0px"/>
+                    <Text profile="acpButtonText" position="-60px -8px" text="$l10n_usedplus_admin_btn_spawn_damaged"/>
+                    <Button profile="acpButtonHit" id="btnSpawnDamaged" position="-60px 0px" onClick="onSpawnDamagedClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
                 </GuiElement>
 
                 <!-- Condition Painter Section Header -->
-                <Text profile="acpSectionHeader" position="-230px -185px" text="$l10n_usedplus_admin_section_condition"/>
+                <Text profile="acpSectionHeader" position="-310px -185px" text="$l10n_usedplus_admin_section_condition"/>
 
                 <!-- Condition Row -->
                 <GuiElement profile="acpButtonRow" position="0px -205px">
-                    <Bitmap profile="acpButtonBg" position="-260px 0px"/>
-                    <Text profile="acpButtonText" position="-260px -8px" text="$l10n_usedplus_admin_btn_paint_pristine"/>
-                    <Button profile="acpButtonHit" id="btnPaintPristine" position="-260px 0px" onClick="onPaintPristineClick"/>
+                    <Bitmap profile="acpButtonBg" id="bgPaintPristine" position="-320px 0px"/>
+                    <Text profile="acpButtonText" position="-320px -8px" text="$l10n_usedplus_admin_btn_paint_pristine"/>
+                    <Button profile="acpButtonHit" id="btnPaintPristine" position="-320px 0px" onClick="onPaintPristineClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
 
-                    <Bitmap profile="acpButtonBg" position="-130px 0px"/>
-                    <Text profile="acpButtonText" position="-130px -8px" text="$l10n_usedplus_admin_btn_paint_worn"/>
-                    <Button profile="acpButtonHit" id="btnPaintWorn" position="-130px 0px" onClick="onPaintWornClick"/>
+                    <Bitmap profile="acpButtonBg" id="bgPaintWorn" position="-190px 0px"/>
+                    <Text profile="acpButtonText" position="-190px -8px" text="$l10n_usedplus_admin_btn_paint_worn"/>
+                    <Button profile="acpButtonHit" id="btnPaintWorn" position="-190px 0px" onClick="onPaintWornClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
 
-                    <Bitmap profile="acpButtonBg" position="0px 0px"/>
-                    <Text profile="acpButtonText" position="0px -8px" text="$l10n_usedplus_admin_btn_paint_beaten"/>
-                    <Button profile="acpButtonHit" id="btnPaintBeaten" position="0px 0px" onClick="onPaintBeatenClick"/>
+                    <Bitmap profile="acpButtonBg" id="bgPaintBeaten" position="-60px 0px"/>
+                    <Text profile="acpButtonText" position="-60px -8px" text="$l10n_usedplus_admin_btn_paint_beaten"/>
+                    <Button profile="acpButtonHit" id="btnPaintBeaten" position="-60px 0px" onClick="onPaintBeatenClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
 
-                    <Bitmap profile="acpButtonBg" position="130px 0px"/>
-                    <Text profile="acpButtonText" position="130px -8px" text="$l10n_usedplus_admin_btn_paint_destroyed"/>
-                    <Button profile="acpButtonHit" id="btnPaintDestroyed" position="130px 0px" onClick="onPaintDestroyedClick"/>
+                    <Bitmap profile="acpButtonBg" id="bgPaintDestroyed" position="70px 0px"/>
+                    <Text profile="acpButtonText" position="70px -8px" text="$l10n_usedplus_admin_btn_paint_destroyed"/>
+                    <Button profile="acpButtonHit" id="btnPaintDestroyed" position="70px 0px" onClick="onPaintDestroyedClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
                 </GuiElement>
             </GuiElement>
 
-            <!-- ===== TAB 3: FINANCE ===== -->
-            <GuiElement profile="acpTabContent" id="tabContent3" position="0px -105px">
-                <!-- Money Section Header -->
-                <Text profile="acpSectionHeader" position="-230px -5px" text="$l10n_usedplus_admin_section_money"/>
-
-                <!-- Money Row -->
-                <GuiElement profile="acpButtonRow" position="0px -25px">
-                    <Bitmap profile="acpButtonBg" position="-260px 0px"/>
-                    <Text profile="acpButtonText" position="-260px -8px" text="$l10n_usedplus_admin_btn_add_10k"/>
-                    <Button profile="acpButtonHit" id="btnAdd10k" position="-260px 0px" onClick="onAdd10kClick"/>
-
-                    <Bitmap profile="acpButtonBg" position="-130px 0px"/>
-                    <Text profile="acpButtonText" position="-130px -8px" text="$l10n_usedplus_admin_btn_add_100k"/>
-                    <Button profile="acpButtonHit" id="btnAdd100k" position="-130px 0px" onClick="onAdd100kClick"/>
-
-                    <Bitmap profile="acpButtonBg" position="0px 0px"/>
-                    <Text profile="acpButtonText" position="0px -8px" text="$l10n_usedplus_admin_btn_add_1m"/>
-                    <Button profile="acpButtonHit" id="btnAdd1m" position="0px 0px" onClick="onAdd1mClick"/>
-
-                    <Bitmap profile="acpButtonBg" position="130px 0px"/>
-                    <Text profile="acpButtonText" position="130px -8px" text="$l10n_usedplus_admin_btn_set_zero"/>
-                    <Button profile="acpButtonHit" id="btnSetZero" position="130px 0px" onClick="onSetZeroClick"/>
-                </GuiElement>
-
-                <!-- Credit Section Header -->
-                <Text profile="acpSectionHeader" position="-230px -65px" text="$l10n_usedplus_admin_section_credit"/>
-
-                <!-- Credit Row -->
-                <GuiElement profile="acpButtonRow" position="0px -85px">
-                    <Bitmap profile="acpButtonBg" position="-260px 0px"/>
-                    <Text profile="acpButtonText" position="-260px -8px" text="850"/>
-                    <Button profile="acpButtonHit" id="btnCredit850" position="-260px 0px" onClick="onCredit850Click"/>
-
-                    <Bitmap profile="acpButtonBg" position="-130px 0px"/>
-                    <Text profile="acpButtonText" position="-130px -8px" text="700"/>
-                    <Button profile="acpButtonHit" id="btnCredit700" position="-130px 0px" onClick="onCredit700Click"/>
-
-                    <Bitmap profile="acpButtonBg" position="0px 0px"/>
-                    <Text profile="acpButtonText" position="0px -8px" text="550"/>
-                    <Button profile="acpButtonHit" id="btnCredit550" position="0px 0px" onClick="onCredit550Click"/>
-
-                    <Bitmap profile="acpButtonBg" position="130px 0px"/>
-                    <Text profile="acpButtonText" position="130px -8px" text="400"/>
-                    <Button profile="acpButtonHit" id="btnCredit400" position="130px 0px" onClick="onCredit400Click"/>
-
-                    <Bitmap profile="acpButtonBg" position="260px 0px"/>
-                    <Text profile="acpButtonText" position="260px -8px" text="300"/>
-                    <Button profile="acpButtonHit" id="btnCredit300" position="260px 0px" onClick="onCredit300Click"/>
-                </GuiElement>
-
-                <!-- Deals Section Header -->
-                <Text profile="acpSectionHeader" position="-230px -125px" text="$l10n_usedplus_admin_section_deals"/>
-
-                <!-- Deals Row -->
-                <GuiElement profile="acpButtonRow" position="0px -145px">
-                    <Bitmap profile="acpButtonBg" position="-260px 0px"/>
-                    <Text profile="acpButtonText" position="-260px -8px" text="$l10n_usedplus_admin_btn_list_deals"/>
-                    <Button profile="acpButtonHit" id="btnListDeals" position="-260px 0px" onClick="onListDealsClick"/>
-
-                    <Bitmap profile="acpButtonBg" position="-130px 0px"/>
-                    <Text profile="acpButtonText" position="-130px -8px" text="$l10n_usedplus_admin_btn_payoff_all"/>
-                    <Button profile="acpButtonHit" id="btnPayoffAll" position="-130px 0px" onClick="onPayoffAllClick"/>
-
-                    <Bitmap profile="acpButtonBg" position="0px 0px"/>
-                    <Text profile="acpButtonText" position="0px -8px" text="$l10n_usedplus_admin_btn_create_loan"/>
-                    <Button profile="acpButtonHit" id="btnCreateLoan" position="0px 0px" onClick="onCreateLoanClick"/>
-
-                    <Bitmap profile="acpButtonBg" position="130px 0px"/>
-                    <Text profile="acpButtonText" position="130px -8px" text="$l10n_usedplus_admin_btn_create_lease"/>
-                    <Button profile="acpButtonHit" id="btnCreateLease" position="130px 0px" onClick="onCreateLeaseClick"/>
-                </GuiElement>
-
-                <!-- Deals Row 2 -->
-                <GuiElement profile="acpButtonRow" position="0px -185px">
-                    <Bitmap profile="acpButtonBg" position="-260px 0px"/>
-                    <Text profile="acpButtonText" position="-260px -8px" text="$l10n_usedplus_admin_btn_missed_payment"/>
-                    <Button profile="acpButtonHit" id="btnMissedPayment" position="-260px 0px" onClick="onMissedPaymentClick"/>
-                </GuiElement>
-
-                <!-- Current Balance Display -->
-                <Text profile="acpInfoLabel" position="-200px -230px" text="$l10n_usedplus_admin_current_balance"/>
-                <Text profile="acpInfoValue" id="balanceText" position="0px -230px" text=""/>
-
-                <Text profile="acpInfoLabel" position="-200px -250px" text="$l10n_usedplus_admin_current_credit"/>
-                <Text profile="acpInfoValue" id="creditText" position="0px -250px" text=""/>
-            </GuiElement>
-
-            <!-- ===== TAB 4: DIALOGS ===== -->
+            <!-- ===== TAB 4: FINANCE (Split Layout) ===== -->
             <GuiElement profile="acpTabContent" id="tabContent4" position="0px -105px">
+
+                <!-- LEFT PANEL: Financial Info -->
+                <GuiElement profile="acpDiagPanel" id="financePanel" position="-175px 0px">
+                    <Text profile="acpDiagLabel" id="finLabel1" position="-110px -10px"/>
+                    <Text profile="acpDiagValue" id="finValue1" position="110px -10px"/>
+                    <Text profile="acpDiagLabel" id="finLabel2" position="-110px -34px"/>
+                    <Text profile="acpDiagValue" id="finValue2" position="110px -34px"/>
+                    <Text profile="acpDiagLabel" id="finLabel3" position="-110px -58px"/>
+                    <Text profile="acpDiagValue" id="finValue3" position="110px -58px"/>
+                    <Text profile="acpDiagLabel" id="finLabel4" position="-110px -82px"/>
+                    <Text profile="acpDiagValue" id="finValue4" position="110px -82px"/>
+                    <Text profile="acpDiagLabel" id="finLabel5" position="-110px -106px"/>
+                    <Text profile="acpDiagValue" id="finValue5" position="110px -106px"/>
+                </GuiElement>
+
+                <!-- RIGHT PANEL: Action Buttons -->
+                <GuiElement profile="acpActionPanel" id="financeActionPanel" position="250px 0px">
+                    <!-- Money -->
+                    <Text profile="acpActionSectionHeader" position="0px -5px" text="$l10n_usedplus_admin_action_money"/>
+
+                    <Bitmap profile="acpActionBtn2" id="bgAdd10k" position="-55px -25px"/>
+                    <Text profile="acpActionBtn2Text" position="-55px -33px" text="+$10k"/>
+                    <Button profile="acpActionBtn2Hit" id="btnAdd10k" position="-55px -25px" onClick="onAdd10kClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+
+                    <Bitmap profile="acpActionBtn2" id="bgAdd100k" position="55px -25px"/>
+                    <Text profile="acpActionBtn2Text" position="55px -33px" text="+$100k"/>
+                    <Button profile="acpActionBtn2Hit" id="btnAdd100k" position="55px -25px" onClick="onAdd100kClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+
+                    <Bitmap profile="acpActionBtn2" id="bgAdd1m" position="-55px -60px"/>
+                    <Text profile="acpActionBtn2Text" position="-55px -68px" text="+$1M"/>
+                    <Button profile="acpActionBtn2Hit" id="btnAdd1m" position="-55px -60px" onClick="onAdd1mClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+
+                    <Bitmap profile="acpActionBtn2" id="bgSetZero" position="55px -60px"/>
+                    <Text profile="acpActionBtn2Text" position="55px -68px" text="Set $0"/>
+                    <Button profile="acpActionBtn2Hit" id="btnSetZero" position="55px -60px" onClick="onSetZeroClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+
+                    <Bitmap profile="acpActionBtnWide" id="bgPayoffAll" position="0px -95px"/>
+                    <Text profile="acpActionBtnWideText" position="0px -103px" text="$l10n_usedplus_admin_btn_payoff_all"/>
+                    <Button profile="acpActionBtnWideHit" id="btnPayoffAll" position="0px -95px" onClick="onPayoffAllClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+
+                    <!-- Credit Score -->
+                    <Text profile="acpActionSectionHeader" position="0px -135px" text="$l10n_usedplus_admin_action_credit"/>
+
+                    <Bitmap profile="acpActionBtn3" id="bgCredit850" position="-75px -155px"/>
+                    <Text profile="acpActionBtn3Text" position="-75px -163px" text="850"/>
+                    <Button profile="acpActionBtn3Hit" id="btnCredit850" position="-75px -155px" onClick="onCredit850Click" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+
+                    <Bitmap profile="acpActionBtn3" id="bgCredit700" position="0px -155px"/>
+                    <Text profile="acpActionBtn3Text" position="0px -163px" text="700"/>
+                    <Button profile="acpActionBtn3Hit" id="btnCredit700" position="0px -155px" onClick="onCredit700Click" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+
+                    <Bitmap profile="acpActionBtn3" id="bgCredit550" position="75px -155px"/>
+                    <Text profile="acpActionBtn3Text" position="75px -163px" text="550"/>
+                    <Button profile="acpActionBtn3Hit" id="btnCredit550" position="75px -155px" onClick="onCredit550Click" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+
+                    <Bitmap profile="acpActionBtn3" id="bgCredit400" position="-75px -190px"/>
+                    <Text profile="acpActionBtn3Text" position="-75px -198px" text="400"/>
+                    <Button profile="acpActionBtn3Hit" id="btnCredit400" position="-75px -190px" onClick="onCredit400Click" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+
+                    <Bitmap profile="acpActionBtn3" id="bgCredit300" position="0px -190px"/>
+                    <Text profile="acpActionBtn3Text" position="0px -198px" text="300"/>
+                    <Button profile="acpActionBtn3Hit" id="btnCredit300" position="0px -190px" onClick="onCredit300Click" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+
+                    <Bitmap profile="acpActionBtn2" id="bgCreditUp" position="-55px -230px"/>
+                    <Text profile="acpActionBtn2Text" position="-55px -238px" text="+50"/>
+                    <Button profile="acpActionBtn2Hit" id="btnCreditUp" position="-55px -230px" onClick="onCreditUpClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+
+                    <Bitmap profile="acpActionBtn2" id="bgCreditDown" position="55px -230px"/>
+                    <Text profile="acpActionBtn2Text" position="55px -238px" text="-50"/>
+                    <Button profile="acpActionBtn2Hit" id="btnCreditDown" position="55px -230px" onClick="onCreditDownClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+                </GuiElement>
+            </GuiElement>
+
+            <!-- ===== TAB 5: DIALOGS ===== -->
+            <GuiElement profile="acpTabContent" id="tabContent5" position="0px -105px">
                 <!-- Finance Dialogs Section Header -->
-                <Text profile="acpSectionHeader" position="-230px -5px" text="$l10n_usedplus_admin_section_finance_dialogs"/>
+                <Text profile="acpSectionHeader" position="-310px -5px" text="$l10n_usedplus_admin_section_finance_dialogs"/>
 
                 <!-- Finance Dialogs Row -->
                 <GuiElement profile="acpButtonRow" position="0px -25px">
-                    <Bitmap profile="acpButtonBg" position="-260px 0px"/>
-                    <Text profile="acpButtonText" position="-260px -8px" text="$l10n_usedplus_admin_btn_dlg_loan"/>
-                    <Button profile="acpButtonHit" id="btnDlgLoan" position="-260px 0px" onClick="onDlgLoanClick"/>
+                    <Bitmap profile="acpButtonBg" id="bgDlgLoan" position="-320px 0px"/>
+                    <Text profile="acpButtonText" position="-320px -8px" text="$l10n_usedplus_admin_btn_dlg_loan"/>
+                    <Button profile="acpButtonHit" id="btnDlgLoan" position="-320px 0px" onClick="onDlgLoanClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
 
-                    <Bitmap profile="acpButtonBg" position="-130px 0px"/>
-                    <Text profile="acpButtonText" position="-130px -8px" text="$l10n_usedplus_admin_btn_dlg_approved"/>
-                    <Button profile="acpButtonHit" id="btnDlgApproved" position="-130px 0px" onClick="onDlgApprovedClick"/>
+                    <Bitmap profile="acpButtonBg" id="bgDlgApproved" position="-190px 0px"/>
+                    <Text profile="acpButtonText" position="-190px -8px" text="$l10n_usedplus_admin_btn_dlg_approved"/>
+                    <Button profile="acpButtonHit" id="btnDlgApproved" position="-190px 0px" onClick="onDlgApprovedClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
 
-                    <Bitmap profile="acpButtonBg" position="0px 0px"/>
-                    <Text profile="acpButtonText" position="0px -8px" text="$l10n_usedplus_admin_btn_dlg_credit"/>
-                    <Button profile="acpButtonHit" id="btnDlgCredit" position="0px 0px" onClick="onDlgCreditClick"/>
+                    <Bitmap profile="acpButtonBg" id="bgDlgCredit" position="-60px 0px"/>
+                    <Text profile="acpButtonText" position="-60px -8px" text="$l10n_usedplus_admin_btn_dlg_credit"/>
+                    <Button profile="acpButtonHit" id="btnDlgCredit" position="-60px 0px" onClick="onDlgCreditClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
 
-                    <Bitmap profile="acpButtonBg" position="130px 0px"/>
-                    <Text profile="acpButtonText" position="130px -8px" text="$l10n_usedplus_admin_btn_dlg_history"/>
-                    <Button profile="acpButtonHit" id="btnDlgHistory" position="130px 0px" onClick="onDlgHistoryClick"/>
+                    <Bitmap profile="acpButtonBg" id="bgDlgHistory" position="70px 0px"/>
+                    <Text profile="acpButtonText" position="70px -8px" text="$l10n_usedplus_admin_btn_dlg_history"/>
+                    <Button profile="acpButtonHit" id="btnDlgHistory" position="70px 0px" onClick="onDlgHistoryClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
 
-                    <Bitmap profile="acpButtonBg" position="260px 0px"/>
-                    <Text profile="acpButtonText" position="260px -8px" text="$l10n_usedplus_admin_btn_dlg_repo"/>
-                    <Button profile="acpButtonHit" id="btnDlgRepo" position="260px 0px" onClick="onDlgRepoClick"/>
+                    <Bitmap profile="acpButtonBg" id="bgDlgRepo" position="200px 0px"/>
+                    <Text profile="acpButtonText" position="200px -8px" text="$l10n_usedplus_admin_btn_dlg_repo"/>
+                    <Button profile="acpButtonHit" id="btnDlgRepo" position="200px 0px" onClick="onDlgRepoClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+
+                    <Bitmap profile="acpButtonBg" id="bgDlgPortfolio" position="330px 0px"/>
+                    <Text profile="acpButtonText" position="330px -8px" text="$l10n_usedplus_admin_btn_dlg_portfolio"/>
+                    <Button profile="acpButtonHit" id="btnDlgPortfolio" position="330px 0px" onClick="onDlgPortfolioClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
                 </GuiElement>
 
                 <!-- Marketplace Dialogs Section Header -->
-                <Text profile="acpSectionHeader" position="-230px -65px" text="$l10n_usedplus_admin_section_market_dialogs"/>
+                <Text profile="acpSectionHeader" position="-310px -65px" text="$l10n_usedplus_admin_section_market_dialogs"/>
 
                 <!-- Marketplace Row 1 -->
                 <GuiElement profile="acpButtonRow" position="0px -85px">
-                    <Bitmap profile="acpButtonBg" position="-260px 0px"/>
-                    <Text profile="acpButtonText" position="-260px -8px" text="$l10n_usedplus_admin_btn_dlg_search"/>
-                    <Button profile="acpButtonHit" id="btnDlgSearch" position="-260px 0px" onClick="onDlgSearchClick"/>
+                    <Bitmap profile="acpButtonBg" id="bgDlgSearch" position="-320px 0px"/>
+                    <Text profile="acpButtonText" position="-320px -8px" text="$l10n_usedplus_admin_btn_dlg_search"/>
+                    <Button profile="acpButtonHit" id="btnDlgSearch" position="-320px 0px" onClick="onDlgSearchClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
 
-                    <Bitmap profile="acpButtonBg" position="-130px 0px"/>
-                    <Text profile="acpButtonText" position="-130px -8px" text="$l10n_usedplus_admin_btn_dlg_purchase"/>
-                    <Button profile="acpButtonHit" id="btnDlgPurchase" position="-130px 0px" onClick="onDlgPurchaseClick"/>
+                    <Bitmap profile="acpButtonBg" id="bgDlgPurchase" position="-190px 0px"/>
+                    <Text profile="acpButtonText" position="-190px -8px" text="$l10n_usedplus_admin_btn_dlg_purchase"/>
+                    <Button profile="acpButtonHit" id="btnDlgPurchase" position="-190px 0px" onClick="onDlgPurchaseClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
 
-                    <Bitmap profile="acpButtonBg" position="0px 0px"/>
-                    <Text profile="acpButtonText" position="0px -8px" text="$l10n_usedplus_admin_btn_dlg_negotiate"/>
-                    <Button profile="acpButtonHit" id="btnDlgNegotiate" position="0px 0px" onClick="onDlgNegotiateClick"/>
+                    <Bitmap profile="acpButtonBg" id="bgDlgNegotiate" position="-60px 0px"/>
+                    <Text profile="acpButtonText" position="-60px -8px" text="$l10n_usedplus_admin_btn_dlg_negotiate"/>
+                    <Button profile="acpButtonHit" id="btnDlgNegotiate" position="-60px 0px" onClick="onDlgNegotiateClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
 
-                    <Bitmap profile="acpButtonBg" position="130px 0px"/>
-                    <Text profile="acpButtonText" position="130px -8px" text="$l10n_usedplus_admin_btn_dlg_seller"/>
-                    <Button profile="acpButtonHit" id="btnDlgSeller" position="130px 0px" onClick="onDlgSellerClick"/>
+                    <Bitmap profile="acpButtonBg" id="bgDlgSeller" position="70px 0px"/>
+                    <Text profile="acpButtonText" position="70px -8px" text="$l10n_usedplus_admin_btn_dlg_seller"/>
+                    <Button profile="acpButtonHit" id="btnDlgSeller" position="70px 0px" onClick="onDlgSellerClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
                 </GuiElement>
 
                 <!-- Service Dialogs Section Header -->
-                <Text profile="acpSectionHeader" position="-230px -125px" text="$l10n_usedplus_admin_section_service_dialogs"/>
+                <Text profile="acpSectionHeader" position="-310px -125px" text="$l10n_usedplus_admin_section_service_dialogs"/>
 
                 <!-- Service Dialogs Row -->
                 <GuiElement profile="acpButtonRow" position="0px -145px">
-                    <Bitmap profile="acpButtonBg" position="-260px 0px"/>
-                    <Text profile="acpButtonText" position="-260px -8px" text="$l10n_usedplus_admin_btn_dlg_obd"/>
-                    <Button profile="acpButtonHit" id="btnDlgObd" position="-260px 0px" onClick="onDlgObdClick"/>
+                    <Bitmap profile="acpButtonBg" id="bgDlgObd" position="-320px 0px"/>
+                    <Text profile="acpButtonText" position="-320px -8px" text="$l10n_usedplus_admin_btn_dlg_obd"/>
+                    <Button profile="acpButtonHit" id="btnDlgObd" position="-320px 0px" onClick="onDlgObdClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
 
-                    <Bitmap profile="acpButtonBg" position="-130px 0px"/>
-                    <Text profile="acpButtonText" position="-130px -8px" text="$l10n_usedplus_admin_btn_dlg_service"/>
-                    <Button profile="acpButtonHit" id="btnDlgService" position="-130px 0px" onClick="onDlgServiceClick"/>
+                    <Bitmap profile="acpButtonBg" id="bgDlgService" position="-190px 0px"/>
+                    <Text profile="acpButtonText" position="-190px -8px" text="$l10n_usedplus_admin_btn_dlg_service"/>
+                    <Button profile="acpButtonHit" id="btnDlgService" position="-190px 0px" onClick="onDlgServiceClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
 
-                    <Bitmap profile="acpButtonBg" position="0px 0px"/>
-                    <Text profile="acpButtonText" position="0px -8px" text="$l10n_usedplus_admin_btn_dlg_inspect"/>
-                    <Button profile="acpButtonHit" id="btnDlgInspect" position="0px 0px" onClick="onDlgInspectClick"/>
+                    <Bitmap profile="acpButtonBg" id="bgDlgInspect" position="-60px 0px"/>
+                    <Text profile="acpButtonText" position="-60px -8px" text="$l10n_usedplus_admin_btn_dlg_inspect"/>
+                    <Button profile="acpButtonHit" id="btnDlgInspect" position="-60px 0px" onClick="onDlgInspectClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+
+                    <Bitmap profile="acpButtonBg" id="bgDlgFaultTracer" position="70px 0px"/>
+                    <Text profile="acpButtonText" position="70px -8px" text="$l10n_usedplus_admin_btn_dlg_fault_tracer"/>
+                    <Button profile="acpButtonHit" id="btnDlgFaultTracer" position="70px 0px" onClick="onDlgFaultTracerClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
                 </GuiElement>
 
                 <!-- Lease Dialogs Section Header -->
-                <Text profile="acpSectionHeader" position="-230px -185px" text="$l10n_usedplus_admin_section_lease_dialogs"/>
+                <Text profile="acpSectionHeader" position="-310px -185px" text="$l10n_usedplus_admin_section_lease_dialogs"/>
 
                 <!-- Lease Dialogs Row -->
                 <GuiElement profile="acpButtonRow" position="0px -205px">
-                    <Bitmap profile="acpButtonBg" position="-260px 0px"/>
-                    <Text profile="acpButtonText" position="-260px -8px" text="$l10n_usedplus_admin_btn_dlg_lease_end"/>
-                    <Button profile="acpButtonHit" id="btnDlgLeaseEnd" position="-260px 0px" onClick="onDlgLeaseEndClick"/>
+                    <Bitmap profile="acpButtonBg" id="bgDlgLeaseEnd" position="-320px 0px"/>
+                    <Text profile="acpButtonText" position="-320px -8px" text="$l10n_usedplus_admin_btn_dlg_lease_end"/>
+                    <Button profile="acpButtonHit" id="btnDlgLeaseEnd" position="-320px 0px" onClick="onDlgLeaseEndClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
 
-                    <Bitmap profile="acpButtonBg" position="-130px 0px"/>
-                    <Text profile="acpButtonText" position="-130px -8px" text="$l10n_usedplus_admin_btn_dlg_lease_renew"/>
-                    <Button profile="acpButtonHit" id="btnDlgLeaseRenew" position="-130px 0px" onClick="onDlgLeaseRenewClick"/>
+                    <Bitmap profile="acpButtonBg" id="bgDlgLeaseRenew" position="-190px 0px"/>
+                    <Text profile="acpButtonText" position="-190px -8px" text="$l10n_usedplus_admin_btn_dlg_lease_renew"/>
+                    <Button profile="acpButtonHit" id="btnDlgLeaseRenew" position="-190px 0px" onClick="onDlgLeaseRenewClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
                 </GuiElement>
             </GuiElement>
 
-            <!-- ===== TAB 5: STATE ===== -->
-            <GuiElement profile="acpTabContent" id="tabContent5" position="0px -105px">
-                <!-- Debug Section Header -->
-                <Text profile="acpSectionHeader" position="-230px -5px" text="$l10n_usedplus_admin_section_debug"/>
-
-                <!-- Debug Row -->
-                <GuiElement profile="acpButtonRow" position="0px -25px">
-                    <Bitmap profile="acpButtonBg" position="-260px 0px"/>
-                    <Text profile="acpButtonText" id="btnDebugText" position="-260px -8px" text="$l10n_usedplus_admin_btn_toggle_debug"/>
-                    <Button profile="acpButtonHit" id="btnToggleDebug" position="-260px 0px" onClick="onToggleDebugClick"/>
-                </GuiElement>
-
-                <!-- Vehicle State Section Header -->
-                <Text profile="acpSectionHeader" position="-230px -65px" text="$l10n_usedplus_admin_section_vehicle_state"/>
-
-                <!-- Reliability Row -->
-                <GuiElement profile="acpButtonRow" position="0px -85px">
-                    <Bitmap profile="acpButtonBg" position="-260px 0px"/>
-                    <Text profile="acpButtonText" position="-260px -8px" text="$l10n_usedplus_admin_btn_rel_100"/>
-                    <Button profile="acpButtonHit" id="btnRel100" position="-260px 0px" onClick="onRel100Click"/>
-
-                    <Bitmap profile="acpButtonBg" position="-130px 0px"/>
-                    <Text profile="acpButtonText" position="-130px -8px" text="$l10n_usedplus_admin_btn_rel_50"/>
-                    <Button profile="acpButtonHit" id="btnRel50" position="-130px 0px" onClick="onRel50Click"/>
-
-                    <Bitmap profile="acpButtonBg" position="0px 0px"/>
-                    <Text profile="acpButtonText" position="0px -8px" text="$l10n_usedplus_admin_btn_rel_10"/>
-                    <Button profile="acpButtonHit" id="btnRel10" position="0px 0px" onClick="onRel10Click"/>
-                </GuiElement>
-
-                <!-- Hours Row -->
-                <GuiElement profile="acpButtonRow" position="0px -125px">
-                    <Bitmap profile="acpButtonBg" position="-260px 0px"/>
-                    <Text profile="acpButtonText" position="-260px -8px" text="$l10n_usedplus_admin_btn_reset_hours"/>
-                    <Button profile="acpButtonHit" id="btnResetHours" position="-260px 0px" onClick="onResetHoursClick"/>
-
-                    <Bitmap profile="acpButtonBg" position="-130px 0px"/>
-                    <Text profile="acpButtonText" position="-130px -8px" text="$l10n_usedplus_admin_btn_add_hours"/>
-                    <Button profile="acpButtonHit" id="btnAddHours" position="-130px 0px" onClick="onAddHoursClick"/>
-                </GuiElement>
-
-                <!-- DNA Section Header -->
-                <Text profile="acpSectionHeader" position="-230px -165px" text="$l10n_usedplus_admin_section_dna"/>
-
-                <!-- DNA Row -->
-                <GuiElement profile="acpButtonRow" position="0px -185px">
-                    <Bitmap profile="acpButtonBg" position="-260px 0px"/>
-                    <Text profile="acpButtonText" position="-260px -8px" text="$l10n_usedplus_admin_btn_dna_lemon"/>
-                    <Button profile="acpButtonHit" id="btnDnaLemon" position="-260px 0px" onClick="onDnaLemonClick"/>
-
-                    <Bitmap profile="acpButtonBg" position="-130px 0px"/>
-                    <Text profile="acpButtonText" position="-130px -8px" text="$l10n_usedplus_admin_btn_dna_average"/>
-                    <Button profile="acpButtonHit" id="btnDnaAverage" position="-130px 0px" onClick="onDnaAverageClick"/>
-
-                    <Bitmap profile="acpButtonBg" position="0px 0px"/>
-                    <Text profile="acpButtonText" position="0px -8px" text="$l10n_usedplus_admin_btn_dna_workhorse"/>
-                    <Button profile="acpButtonHit" id="btnDnaWorkhorse" position="0px 0px" onClick="onDnaWorkhorseClick"/>
-                </GuiElement>
-
-                <!-- Quick Vehicle Section Header -->
-                <Text profile="acpSectionHeader" position="-230px -225px" text="$l10n_usedplus_admin_section_quick_vehicle"/>
-
-                <!-- Quick Vehicle Row -->
-                <GuiElement profile="acpButtonRow" position="0px -245px">
-                    <Bitmap profile="acpButtonBg" position="-260px 0px"/>
-                    <Text profile="acpButtonText" position="-260px -8px" text="$l10n_usedplus_admin_btn_next_vehicle"/>
-                    <Button profile="acpButtonHit" id="btnNextVehicle" position="-260px 0px" onClick="onNextVehicleClick"/>
-
-                    <Bitmap profile="acpButtonBg" position="-130px 0px"/>
-                    <Text profile="acpButtonText" position="-130px -8px" text="$l10n_usedplus_admin_btn_prev_vehicle"/>
-                    <Button profile="acpButtonHit" id="btnPrevVehicle" position="-130px 0px" onClick="onPrevVehicleClick"/>
-                </GuiElement>
-            </GuiElement>
+            <!-- Separator: content → status bar -->
+            <Bitmap profile="acpSeparator" position="0px -527px"/>
 
             <!-- ===== STATUS BAR ===== -->
-            <!-- At bottom of content area -->
-            <GuiElement profile="acpStatusBar" position="0px -430px">
+            <GuiElement profile="acpStatusBar" position="0px -530px">
                 <Bitmap profile="acpStatusBg" position="0px 0px"/>
                 <Text profile="acpStatusText" id="statusText" position="0px -8px" text="$l10n_usedplus_admin_status_ready"/>
             </GuiElement>
@@ -482,21 +537,21 @@
     <GUIProfiles>
         <!-- ========== TAB BAR ========== -->
         <Profile name="acpTabBar" extends="emptyPanel" with="anchorTopCenter">
-            <size value="700px 30px"/>
+            <size value="840px 30px"/>
         </Profile>
 
         <Profile name="acpTabBg" extends="baseReference" with="anchorTopCenter">
-            <size value="120px 28px"/>
+            <size value="155px 28px"/>
             <imageColor value="0.1 0.1 0.15 0.9"/>
         </Profile>
 
         <Profile name="acpTabBgActive" extends="baseReference" with="anchorTopCenter">
-            <size value="120px 28px"/>
+            <size value="155px 28px"/>
             <imageColor value="0.2 0.3 0.5 1"/>
         </Profile>
 
         <Profile name="acpTabText" extends="fs25_textDefault" with="anchorTopCenter">
-            <size value="116px 20px"/>
+            <size value="150px 20px"/>
             <textSize value="11px"/>
             <textBold value="true"/>
             <textColor value="0.7 0.7 0.7 1"/>
@@ -504,7 +559,7 @@
         </Profile>
 
         <Profile name="acpTabTextActive" extends="fs25_textDefault" with="anchorTopCenter">
-            <size value="116px 20px"/>
+            <size value="150px 20px"/>
             <textSize value="11px"/>
             <textBold value="true"/>
             <textColor value="1 0.9 0.3 1"/>
@@ -512,19 +567,25 @@
         </Profile>
 
         <Profile name="acpTabHit" extends="emptyPanel" with="anchorTopCenter">
-            <size value="120px 28px"/>
+            <size value="155px 28px"/>
             <isFocusable value="true"/>
+        </Profile>
+
+        <!-- ========== SEPARATOR ========== -->
+        <Profile name="acpSeparator" extends="baseReference" with="anchorTopCenter">
+            <size value="840px 1px"/>
+            <imageColor value="0.25 0.28 0.35 0.6"/>
         </Profile>
 
         <!-- ========== TAB CONTENT ========== -->
         <Profile name="acpTabContent" extends="emptyPanel" with="anchorTopCenter">
-            <size value="680px 320px"/>
+            <size value="840px 420px"/>
         </Profile>
 
         <!-- ========== SECTION HEADERS ========== -->
         <Profile name="acpSectionHeader" extends="fs25_textDefault" with="anchorTopCenter">
             <size value="200px 18px"/>
-            <textSize value="12px"/>
+            <textSize value="13px"/>
             <textBold value="true"/>
             <textColor value="1 0.8 0.2 1"/>
             <textAlignment value="left"/>
@@ -532,44 +593,120 @@
 
         <!-- ========== BUTTON ROW ========== -->
         <Profile name="acpButtonRow" extends="emptyPanel" with="anchorTopCenter">
-            <size value="680px 35px"/>
+            <size value="840px 35px"/>
         </Profile>
 
-        <!-- ========== BUTTONS ========== -->
+        <!-- ========== BUTTONS (standard tab buttons) ========== -->
         <Profile name="acpButtonBg" extends="baseReference" with="anchorTopCenter">
-            <size value="115px 32px"/>
+            <size value="120px 32px"/>
             <imageColor value="0.12 0.15 0.2 0.95"/>
         </Profile>
 
-        <Profile name="acpButtonBgHover" extends="baseReference" with="anchorTopCenter">
-            <size value="115px 32px"/>
-            <imageColor value="0.2 0.25 0.35 1"/>
-        </Profile>
-
         <Profile name="acpButtonText" extends="fs25_textDefault" with="anchorTopCenter">
-            <size value="110px 18px"/>
+            <size value="115px 18px"/>
             <textSize value="10px"/>
             <textColor value="0.9 0.9 0.9 1"/>
             <textAlignment value="center"/>
         </Profile>
 
         <Profile name="acpButtonHit" extends="emptyPanel" with="anchorTopCenter">
-            <size value="115px 32px"/>
+            <size value="120px 32px"/>
+            <isFocusable value="true"/>
+        </Profile>
+
+        <!-- ========== DIAGNOSTICS PANEL (State tab, left side) ========== -->
+        <Profile name="acpDiagPanel" extends="emptyPanel" with="anchorTopCenter">
+            <size value="480px 400px"/>
+        </Profile>
+
+        <Profile name="acpDiagLabel" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="200px 15px"/>
+            <textSize value="10px"/>
+            <textColor value="0.65 0.65 0.65 1"/>
+            <textAlignment value="right"/>
+        </Profile>
+
+        <Profile name="acpDiagValue" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="240px 15px"/>
+            <textSize value="10px"/>
+            <textBold value="true"/>
+            <textColor value="0.9 0.9 0.9 1"/>
+            <textAlignment value="left"/>
+        </Profile>
+
+        <!-- ========== ACTION PANEL (State tab, right side) ========== -->
+        <Profile name="acpActionPanel" extends="emptyPanel" with="anchorTopCenter">
+            <size value="240px 400px"/>
+        </Profile>
+
+        <Profile name="acpActionSectionHeader" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="200px 16px"/>
+            <textSize value="12px"/>
+            <textBold value="true"/>
+            <textColor value="1 0.8 0.2 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+
+        <!-- Wide action button (debug toggle, 200px) -->
+        <Profile name="acpActionBtnWide" extends="baseReference" with="anchorTopCenter">
+            <size value="200px 28px"/>
+            <imageColor value="0.12 0.15 0.2 0.95"/>
+        </Profile>
+        <Profile name="acpActionBtnWideText" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="195px 16px"/>
+            <textSize value="10px"/>
+            <textColor value="0.9 0.9 0.9 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+        <Profile name="acpActionBtnWideHit" extends="emptyPanel" with="anchorTopCenter">
+            <size value="200px 28px"/>
+            <isFocusable value="true"/>
+        </Profile>
+
+        <!-- 3-across action button (70px each) -->
+        <Profile name="acpActionBtn3" extends="baseReference" with="anchorTopCenter">
+            <size value="68px 28px"/>
+            <imageColor value="0.12 0.15 0.2 0.95"/>
+        </Profile>
+        <Profile name="acpActionBtn3Text" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="65px 16px"/>
+            <textSize value="9px"/>
+            <textColor value="0.9 0.9 0.9 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+        <Profile name="acpActionBtn3Hit" extends="emptyPanel" with="anchorTopCenter">
+            <size value="68px 28px"/>
+            <isFocusable value="true"/>
+        </Profile>
+
+        <!-- 2-across action button (100px each) -->
+        <Profile name="acpActionBtn2" extends="baseReference" with="anchorTopCenter">
+            <size value="100px 28px"/>
+            <imageColor value="0.12 0.15 0.2 0.95"/>
+        </Profile>
+        <Profile name="acpActionBtn2Text" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="95px 16px"/>
+            <textSize value="9px"/>
+            <textColor value="0.9 0.9 0.9 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+        <Profile name="acpActionBtn2Hit" extends="emptyPanel" with="anchorTopCenter">
+            <size value="100px 28px"/>
             <isFocusable value="true"/>
         </Profile>
 
         <!-- ========== STATUS BAR ========== -->
         <Profile name="acpStatusBar" extends="emptyPanel" with="anchorTopCenter">
-            <size value="680px 35px"/>
+            <size value="840px 35px"/>
         </Profile>
 
         <Profile name="acpStatusBg" extends="baseReference" with="anchorTopCenter">
-            <size value="680px 30px"/>
+            <size value="840px 30px"/>
             <imageColor value="0.05 0.08 0.05 0.9"/>
         </Profile>
 
         <Profile name="acpStatusText" extends="fs25_textDefault" with="anchorTopCenter">
-            <size value="670px 20px"/>
+            <size value="830px 20px"/>
             <textSize value="11px"/>
             <textColor value="0.5 0.9 0.5 1"/>
             <textAlignment value="center"/>
@@ -593,7 +730,7 @@
 
         <!-- ========== VEHICLE INFO ========== -->
         <Profile name="acpVehicleInfo" extends="fs25_textDefault" with="anchorTopCenter">
-            <size value="660px 20px"/>
+            <size value="820px 20px"/>
             <textSize value="12px"/>
             <textColor value="0.6 0.8 1 1"/>
             <textAlignment value="center"/>

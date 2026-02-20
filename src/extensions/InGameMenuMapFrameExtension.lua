@@ -312,7 +312,7 @@ function InGameMenuMapFrameExtension.onRepairVehicle(inGameMenuMapFrame, element
     end
 
     -- Use DialogLoader for centralized lazy loading
-    local shown = DialogLoader.show("RepairDialog", "setVehicle", vehicle, farmId)
+    local shown = DialogLoader.show("RepairDialog", "setVehicle", vehicle, farmId, RepairDialog.MODE_REPAIR)
 
     if shown then
         -- Hide context boxes after opening dialog

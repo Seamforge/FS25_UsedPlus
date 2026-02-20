@@ -257,7 +257,7 @@
         <e k="input_USEDPLUS_ACTIVATE_OBD" v="Sử Dụng Máy Quét OBD" eh="9666e26b" />
         <e k="input_USEDPLUS_TIRES" v="Dịch Vụ Lốp" eh="b0234f4e" />
         <e k="input_USEDPLUS_SERVICE_TRUCK" v="Điều Khiển Xe Dịch Vụ" eh="fad0e0f1" />
-        <e k="input_USEDPLUS_FAULT_TRACER" v="[EN] Fault Tracer" eh="d1b82197" />
+        <e k="input_USEDPLUS_FAULT_TRACER" v="Truy Tìm Lỗi" eh="d1b82197" />
 
         <!--  Tooltips for Finance Dialog -->
         <e k="usedplus_finance_loanTerm_tooltip" v="Phân bổ thanh toán trong 1-20 năm. Kỳ hạn dài hơn = thanh toán hàng tháng nhỏ hơn nhưng tổng lãi cao hơn." eh="e1170142" />
@@ -1006,7 +1006,7 @@
         <e k="usedplus_button_buyout" v="Mua Lại" eh="6e052e38" />
         <e k="usedplus_button_renew" v="Gia Hạn" eh="0b9feba3" />
         <e k="usedplus_lr_helpText" v="Bạn phải chọn một lựa chọn. Trả lại nhận tiền đặt cọc. Mua lại sử dụng vốn tích lũy để mua. Gia hạn kéo dài hợp đồng thuê với vốn áp dụng cho mua lại sau." eh="91673bf9" />
-        <e k="usedplus_lr_deferNotice" v="Lựa chọn này sẽ xuất hiện lại vào tháng sau. Không phát sinh thêm phí cho đến khi bạn quyết định." eh="00000000" />
+        <e k="usedplus_lr_deferNotice" v="Lựa chọn này sẽ xuất hiện lại vào tháng sau. Không phát sinh thêm phí cho đến khi bạn quyết định." eh="9382457d" />
         <e k="usedplus_conf_title" v="Xác Nhận" eh="f4d1ea47" />
 
         <!--  Multiplayer Messages -->
@@ -1212,6 +1212,8 @@
         <e k="usedplus_fmf_quickRef" v="THAM KHẢO NHANH" eh="011d2c62" />
         <e k="usedplus_fmf_quickRefLine1" v="Cửa hàng → Vay/Thuê/Tìm Hàng Cũ | Ga-ra → Đăng Bán" eh="426419c9" />
         <e k="usedplus_fmf_quickRefLine2" v="Thanh toán hàng tháng tự động trừ. Trả sớm tiết kiệm lãi." eh="73cd35d9" />
+        <e k="usedplus_btn_admin_panel" v="[EN] Admin Panel" eh="a0e0d3f0" />
+        <e k="usedplus_admin_no_vehicle_warning" v="[EN] You must be in a vehicle to use the Admin Panel. Enter a vehicle first, then press ESC." eh="abe11d3f" />
 
         <!-- Land Lease Dialog -->
         <e k="usedplus_ll_title" v="Thuê Đất" eh="ec34a2a6" />
@@ -1445,10 +1447,10 @@
         <e k="usedplus_info_tire_condition" v="Lốp" eh="3fe2c06a" />
 
         <!-- v2.12.0: Finance/Lease Info Box Display -->
-        <e k="usedplus_info_dealType" v="Trạng thái" eh="00000000" />
-        <e k="usedplus_info_leased" v="THUÊ" eh="00000000" />
-        <e k="usedplus_info_financed" v="TRẢ GÓP" eh="00000000" />
-        <e k="usedplus_info_monthsRemaining" v="Tháng còn lại" eh="00000000" />
+        <e k="usedplus_info_dealType" v="Trạng thái" eh="ec53a8c4" />
+        <e k="usedplus_info_leased" v="THUÊ" eh="a33a1186" />
+        <e k="usedplus_info_financed" v="TRẢ GÓP" eh="6f9a4a90" />
+        <e k="usedplus_info_monthsRemaining" v="Tháng còn lại" eh="b375dcc1" />
         <!-- v1.7.0: Tires Service Dialog -->
         <e k="usedplus_tires_title" v="Dịch Vụ Lốp" eh="b0234f4e" />
         <e k="usedplus_tires_sectionStatus" v="TÌNH TRẠNG XE &amp; LỐP" eh="c0e3631e" />
@@ -1639,12 +1641,12 @@
         <e k="usedplus_fsk_repair_hyd_seals" v="Đã áp dụng hợp chất gioăng khẩn cấp." eh="5fadb7ef" />
 
         <!-- Result messages -->
-        <e k="usedplus_fsk_result_title_perfect" v="SỬA CHỮA THÀNH CÔNG" eh="cb532e1b" />
-        <e k="usedplus_fsk_result_title_good" v="SỬA CHỮA MỘT PHẦN" eh="cbba8a69" />
+        <e k="usedplus_fsk_result_title_perfect" v="CHẨN ĐOÁN CHÍNH XÁC!" eh="1455077c" />
+        <e k="usedplus_fsk_result_title_good" v="KHỚP MỘT PHẦN" eh="5499883e" />
         <e k="usedplus_fsk_result_title_wrong_system" v="SAI HỆ THỐNG" eh="7259aab1" />
-        <e k="usedplus_fsk_result_title_poor" v="SỬA CHỮA TỐI THIỂU" eh="9d485c84" />
-        <e k="usedplus_fsk_result_perfect" v="Chẩn đoán chính xác! Đã áp dụng sửa chữa mục tiêu." eh="91538006" />
-        <e k="usedplus_fsk_result_good" v="Đúng hệ thống, nhưng chẩn đoán sai. Đã áp dụng sửa chữa chung." eh="47b6188e" />
+        <e k="usedplus_fsk_result_title_poor" v="CHẨN ĐOÁN SAI" eh="e10c3aed" />
+        <e k="usedplus_fsk_result_perfect" v="Xuất sắc! Đã áp dụng toàn bộ phần thưởng sửa chữa." eh="627b6efd" />
+        <e k="usedplus_fsk_result_good" v="Đúng hệ thống, nhưng xác định sai nguyên nhân." eh="2d85e515" />
         <e k="usedplus_fsk_result_wrong_system" v="Chẩn đoán tốt! Nhưng vấn đề thực sự nằm ở: %s" eh="e3bba502" />
         <e k="usedplus_fsk_result_wrong_both" v="Sai hệ thống và sai nguyên nhân. Đã áp dụng sửa chữa tối thiểu." eh="c22e0ba6" />
         <e k="usedplus_fsk_result_poor" v="Xác định sai hệ thống. Chỉ áp dụng bảo dưỡng cơ bản." eh="38caed38" />
@@ -1803,7 +1805,7 @@
         <e k="usedplus_ft_hintsRemaining" v="Gợi ý: %d" eh="c8f080c2" />
         <e k="usedplus_ft_quickScanCap" v="Chất lượng giới hạn 60%% (Quét nhanh)" eh="5b519744" />
         <e k="usedplus_ft_noFaults" v="Không có lỗi - hệ thống hoạt động tốt!" eh="6bfa5546" />
-        <e k="usedplus_ft_noOil" v="[EN] Service Truck has no oil! Fill the oil tank before diagnosing." eh="3cd9a926" />
+        <e k="usedplus_ft_noOil" v="Xe Dịch Vụ không có dầu! Đổ đầy bình dầu trước khi chẩn đoán." eh="3cd9a926" />
         <e k="usedplus_ft_action" v="Truy tìm lỗi: %s" eh="c4066687" />
         <e k="usedplus_ft_corrodedDesc" v="Hư hại do rỉ sét / oxy hóa" eh="8a01ae60" />
         <e k="usedplus_ft_crackedDesc" v="Nứt do ứng suất / mỏi" eh="81d5118b" />
@@ -1812,7 +1814,7 @@
         <e k="usedplus_sparePartsPallet_name" v="Pallet Phụ Tùng" eh="9bf39a93" />
         <e k="usedplus_sparePartsPallet_function" v="Phụ tùng tiêu hao cho phục hồi Xe Dịch Vụ. Đặt gần xe trong quá trình phục hồi." eh="c90aa3eb" />
         <e k="fillType_spareParts" v="Phụ Tùng" eh="ab6b8ce1" />
-        <e k="fillType_hydraulicOil" v="[EN] Hydraulic Fluid" eh="646d470f" />
+        <e k="fillType_hydraulicOil" v="Dầu Thủy Lực" eh="646d470f" />
         <e k="unit_pcs" v="cái" eh="3ecf2642" />
         <e k="usedplus_resto_symptom_engine_knocking_load" v="Tiếng gõ nghiêm trọng khi chịu tải" eh="fb8c3067" />
         <e k="usedplus_resto_symptom_engine_low_oil_pressure" v="Áp suất dầu cực kỳ thấp" eh="a3efa42d" />
@@ -2247,10 +2249,6 @@
         <e k="usedplus_admin_section_lease_dialogs" v="HỘP THOẠI THUÊ" eh="479e552e" />
 
         <!-- Section Headers - Tab 5 (State) -->
-        <e k="usedplus_admin_section_debug" v="CHẾ ĐỘ DEBUG" eh="c7ee79cd" />
-        <e k="usedplus_admin_section_vehicle_state" v="TRẠNG THÁI XE" eh="c077f4be" />
-        <e k="usedplus_admin_section_dna" v="DNA NGƯỜI BÁN (Tìm Tiếp)" eh="0e284459" />
-        <e k="usedplus_admin_section_quick_vehicle" v="CHUYỂN XE NHANH" eh="01242f7d" />
 
         <!-- Buttons - Tab 1 (Malfunctions) -->
         <e k="usedplus_admin_btn_stall" v="Chết Máy" eh="a0f50ad4" />
@@ -2263,9 +2261,6 @@
         <e k="usedplus_admin_btn_surge_r" v="Giật (P)" eh="f9261697" />
         <e k="usedplus_admin_btn_flat_l" v="Xẹp (T)" eh="427238a9" />
         <e k="usedplus_admin_btn_flat_r" v="Xẹp (P)" eh="5a2301a8" />
-        <e k="usedplus_admin_btn_reset_cooldown" v="Reset CD" eh="d2165eba" />
-        <e k="usedplus_admin_btn_malf_info" v="Thông Tin SC" eh="92badb26" />
-        <e k="usedplus_admin_btn_fix_all" v="Sửa Tất Cả" eh="1c7feed4" />
 
         <!-- Buttons - Tab 2 (Spawning) -->
         <e k="usedplus_admin_btn_spawn_obd" v="Máy Quét OBD" eh="96023669" />
@@ -2287,11 +2282,7 @@
         <e k="usedplus_admin_btn_add_100k" v="+$100,000" eh="860860a5" />
         <e k="usedplus_admin_btn_add_1m" v="+$1,000,000" eh="8946b435" />
         <e k="usedplus_admin_btn_set_zero" v="Đặt $0" eh="ca8864ed" />
-        <e k="usedplus_admin_btn_list_deals" v="DS Giao Dịch" eh="936e496b" />
         <e k="usedplus_admin_btn_payoff_all" v="Trả Hết Tất Cả" eh="3817edc8" />
-        <e k="usedplus_admin_btn_create_loan" v="Vay Thử" eh="06cb7221" />
-        <e k="usedplus_admin_btn_create_lease" v="Thuê Thử" eh="d653ef32" />
-        <e k="usedplus_admin_btn_missed_payment" v="Bỏ Lỡ TT" eh="4890557c" />
 
         <!-- Buttons - Tab 4 (Dialogs) -->
         <e k="usedplus_admin_btn_dlg_loan" v="Vay Tiền" eh="40fe67fa" />
@@ -2308,26 +2299,29 @@
         <e k="usedplus_admin_btn_dlg_inspect" v="Kiểm Tra" eh="35a9dbe6" />
         <e k="usedplus_admin_btn_dlg_lease_end" v="Hết Thuê" eh="da7801f1" />
         <e k="usedplus_admin_btn_dlg_lease_renew" v="Gia Hạn Thuê" eh="7a794930" />
+        <e k="usedplus_admin_btn_dlg_fault_tracer" v="[EN] Fault Tracer" eh="d1b82197" />
+        <e k="usedplus_admin_btn_dlg_portfolio" v="[EN] Portfolio" eh="d4f859a9" />
 
         <!-- Buttons - Tab 5 (State) -->
-        <e k="usedplus_admin_btn_toggle_debug" v="Bật/Tắt Debug" eh="e69cb6a0" />
-        <e k="usedplus_admin_btn_rel_100" v="TC: 100%" eh="dfdb79d3" />
-        <e k="usedplus_admin_btn_rel_50" v="TC: 50%" eh="9ce7a0a2" />
-        <e k="usedplus_admin_btn_rel_10" v="TC: 10%" eh="54d6e770" />
         <e k="usedplus_admin_btn_reset_hours" v="Reset Giờ" eh="a519e5e1" />
         <e k="usedplus_admin_btn_add_hours" v="+1000 Giờ" eh="ef05132d" />
-        <e k="usedplus_admin_btn_dna_lemon" v="[EN] 0.1 Lemon" eh="0047d5bc" />
-        <e k="usedplus_admin_btn_dna_average" v="[EN] 0.5 Average" eh="472d5599" />
-        <e k="usedplus_admin_btn_dna_workhorse" v="[EN] 0.9 Workhorse" eh="b0f0ee0b" />
-        <e k="usedplus_admin_btn_dna_desperate" v="Tuyệt Vọng" eh="97df4642" />
-        <e k="usedplus_admin_btn_dna_reasonable" v="Hợp Lý" eh="e485c034" />
-        <e k="usedplus_admin_btn_dna_immovable" v="Cứng Đầu" eh="57d0e57c" />
-        <e k="usedplus_admin_btn_next_vehicle" v="Xe Tiếp" eh="e95e97fa" />
-        <e k="usedplus_admin_btn_prev_vehicle" v="Xe Trước" eh="69b3a0d0" />
-
-        <!-- Info Labels -->
-        <e k="usedplus_admin_current_balance" v="Số Dư Hiện Tại:" eh="473e7f9e" />
-        <e k="usedplus_admin_current_credit" v="Điểm Tín Dụng:" eh="0199e1a3" />
+        <e k="usedplus_admin_btn_dna_lemon" v="0.1 Cà Phổng" eh="0047d5bc" />
+        <e k="usedplus_admin_btn_dna_average" v="0.5 Trung Bình" eh="472d5599" />
+        <e k="usedplus_admin_btn_dna_workhorse" v="0.9 Ngựa Thồ" eh="b0f0ee0b" />
+        <e k="usedplus_admin_btn_refill_oil" v="Đổ Dầu" eh="07a47687" />
+        <e k="usedplus_admin_btn_refill_hyd" v="Đổ Thủy Lực" eh="77663dd6" />
+        <e k="usedplus_admin_btn_fix_tires" v="Sửa Lốp" eh="959a0c0e" />
+        <e k="usedplus_admin_btn_fix_all_malf" v="Sửa Tất Cả Hỏng" eh="a14746fb" />
+        <e k="usedplus_admin_action_reliability" v="Độ Tin Cậy" eh="820b8f74" />
+        <e k="usedplus_admin_action_condition" v="Tình trạng" eh="9e2941b3" />
+        <e k="usedplus_admin_action_hours" v="Giờ" eh="6a7e7316" />
+        <e k="usedplus_admin_action_dna" v="DNA Xe" eh="0ce6fbcf" />
+        <e k="usedplus_admin_action_maintenance" v="Bảo Dưỡng" eh="10d0de28" />
+        <e k="usedplus_admin_action_money" v="Tiền" eh="a9331282" />
+        <e k="usedplus_admin_action_credit" v="Điểm Tín Dụng" eh="ae61b052" />
+        <e k="usedplus_admin_btn_repair" v="Sửa chữa" eh="0493d27e" />
+        <e k="usedplus_admin_btn_paint" v="Sơn" eh="4802a5ac" />
+        <e k="usedplus_admin_btn_fix_leaks" v="Sửa rò rỉ" eh="e0140cbb" />
 
         <!-- Status Messages -->
         <e k="usedplus_admin_status_ready" v="Sẵn sàng. Chọn hành động." eh="1ef35a42" />

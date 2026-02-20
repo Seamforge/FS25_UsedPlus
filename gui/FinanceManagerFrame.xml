@@ -574,7 +574,12 @@
         <!-- v2.13.1: Version & Source Footer - ensures players know official source regardless of download origin -->
         <GuiElement position="25px 45px" size="1640px 30px">
             <Bitmap profile="baseReference" imageColor="0.04 0.04 0.06 1" size="1640px 30px"/>
-            <Text profile="fs25_textDefault" id="versionFooterText" text="" position="0px 8px" size="1640px 20px" textSize="11px" textColor="0.45 0.45 0.5 1" textAlignment="center"/>
+            <Text profile="fs25_textDefault" id="versionFooterText" text="" position="0px 8px" size="1440px 20px" textSize="11px" textColor="0.45 0.45 0.5 1" textAlignment="center"/>
+
+            <!-- Admin Panel Button (v2.15.1) — opens debug/QA panel with current vehicle context -->
+            <Bitmap profile="baseReference" id="adminPanelBtnBg" position="1440px 3px" size="190px 24px" imageColor="0.18 0.22 0.35 1"/>
+            <Button profile="financeActionBtn" id="adminPanelBtn" text="" onClick="onAdminPanelClick" onHighlight="onAdminBtnHighlight" onHighlightRemove="onAdminBtnUnhighlight" position="1440px 3px" size="190px 24px"/>
+            <Text profile="fs25_textDefault" id="adminPanelBtnText" text="$l10n_usedplus_btn_admin_panel" position="1440px 7px" size="190px 18px" textSize="12px" textBold="true" textColor="0.6 0.8 1 1" textAlignment="center"/>
         </GuiElement>
 
     </GuiElement>

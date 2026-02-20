@@ -732,6 +732,66 @@ function UsedPlus:isAdmin()
     return false
 end
 
+-- Help command (available to everyone — just informational)
+addConsoleCommand("upHelp", "List all UsedPlus console commands", "consoleCommandHelp", UsedPlus)
+
+function UsedPlus.consoleCommandHelp(self)
+    local lines = {}
+    table.insert(lines, "")
+    table.insert(lines, "=== UsedPlus Console Commands ===")
+    table.insert(lines, "")
+
+    -- Admin commands (always registered)
+    table.insert(lines, "  ADMIN COMMANDS (server owner / master user):")
+    table.insert(lines, "    upHelp                         List all UsedPlus console commands")
+    table.insert(lines, "    upAddMoney <amount>             Add money to your farm")
+    table.insert(lines, "    upSetMoney <amount>             Set farm money to exact amount")
+    table.insert(lines, "    upSetCredit info                Display credit score report")
+    table.insert(lines, "    upPayoffAll                     Pay off all finance deals instantly")
+    table.insert(lines, "    upAdminCP                       Open Admin Control Panel (in vehicle)")
+    table.insert(lines, "")
+
+    -- Debug commands (always registered, gated on runtime DEBUG toggle)
+    local debugLabel = UsedPlus.DEBUG
+        and "  DEBUG COMMANDS (DEBUG mode is ON):"
+        or "  DEBUG COMMANDS (requires Debug mode — enable via upAdminCP > State):"
+    table.insert(lines, debugLabel)
+    table.insert(lines, "    upCreditScore                   Display credit score")
+    table.insert(lines, "    upListDeals                     List all active finance/lease deals")
+    table.insert(lines, "    upListSearches                  List all active used vehicle searches")
+    table.insert(lines, "")
+    table.insert(lines, "  MALFUNCTION TRIGGERS (requires vehicle):")
+    table.insert(lines, "    upStall                         Force engine stall")
+    table.insert(lines, "    upMisfire                       Force engine misfire")
+    table.insert(lines, "    upSurge                         Force hydraulic surge")
+    table.insert(lines, "    upOverheat                      Force engine overheating")
+    table.insert(lines, "    upCutout                        Force electrical cutout")
+    table.insert(lines, "    upFlatTire                      Force flat tire")
+    table.insert(lines, "    upRunaway                       Force engine runaway")
+    table.insert(lines, "    upSeizure                       Force engine seizure (PERMANENT)")
+    table.insert(lines, "")
+    table.insert(lines, "  DIAGNOSTICS:")
+    table.insert(lines, "    upMalfInfo                      Show malfunction state for vehicle")
+    table.insert(lines, "    upResetCooldown                 Reset malfunction cooldown")
+    table.insert(lines, "    upResetSteering                 Reset steering pull/wander")
+    table.insert(lines, "    upResetVehicle                  Factory reset maintenance state")
+    table.insert(lines, "")
+    table.insert(lines, "  SERVICE TRUCK:")
+    table.insert(lines, "    upDiscoverServiceTruck          Trigger Service Truck discovery")
+    table.insert(lines, "    upResetServiceTruck             Reset discovery state")
+    table.insert(lines, "    upServiceTruckStatus            Show discovery prerequisites")
+
+    table.insert(lines, "")
+    table.insert(lines, "=================================")
+
+    for _, line in ipairs(lines) do
+        print(line)
+    end
+
+    return string.format("UsedPlus: 20 commands available (debug %s). See console for full list.",
+        UsedPlus.DEBUG and "ON" or "OFF")
+end
+
 -- Add money console command
 -- NOTE: Console commands use UsedPlus table directly (not instance) because addConsoleCommand
 -- is called at load time before instance exists. We use UsedPlus.isAdmin() as static function.
@@ -938,14 +998,16 @@ function UsedPlus.consoleCommandAdminCP(self)
 end
 
 --[[
-    Debug console commands (if DEBUG mode enabled)
-    Useful for testing and troubleshooting
+    Debug console commands
+    Always registered so tab-complete works and AdminCP buttons can call them.
+    Execution gated on UsedPlus.DEBUG (toggle via Admin Control Panel > State)
 ]]
-if UsedPlus.DEBUG then
+local DEBUG_OFF_MSG = "Error: Enable debug mode first (upAdminCP > State > Toggle Debug)"
     -- Add console command to check credit score
     addConsoleCommand("upCreditScore", "Display current farm's credit score", "consoleCommandCreditScore", UsedPlus)
 
     function UsedPlus:consoleCommandCreditScore()
+        if not UsedPlus.DEBUG then return DEBUG_OFF_MSG end
         local farmId = g_currentMission.player.farmId
         local score = CreditScore.calculate(farmId)
         local rating, level = CreditScore.getRating(score)
@@ -959,6 +1021,7 @@ if UsedPlus.DEBUG then
     addConsoleCommand("upListDeals", "List all active finance/lease deals", "consoleCommandListDeals", UsedPlus)
 
     function UsedPlus:consoleCommandListDeals()
+        if not UsedPlus.DEBUG then return DEBUG_OFF_MSG end
         if g_financeManager == nil then
             UsedPlus.logWarn("FinanceManager not initialized")
             return "FinanceManager not initialized"
@@ -985,6 +1048,7 @@ if UsedPlus.DEBUG then
     addConsoleCommand("upListSearches", "List all active used vehicle searches", "consoleCommandListSearches", UsedPlus)
 
     function UsedPlus:consoleCommandListSearches()
+        if not UsedPlus.DEBUG then return DEBUG_OFF_MSG end
         if g_usedVehicleManager == nil then
             UsedPlus.logWarn("UsedVehicleManager not initialized")
             return "UsedVehicleManager not initialized"
@@ -1013,6 +1077,7 @@ if UsedPlus.DEBUG then
     addConsoleCommand("upStall", "Force engine stall on current vehicle", "consoleCommandStall", UsedPlus)
 
     function UsedPlus:consoleCommandStall()
+        if not UsedPlus.DEBUG then return DEBUG_OFF_MSG end
         local vehicle = g_currentMission.controlledVehicle
         if not vehicle then
             return "Error: Not in a vehicle"
@@ -1034,6 +1099,7 @@ if UsedPlus.DEBUG then
     addConsoleCommand("upMisfire", "Force engine misfire on current vehicle", "consoleCommandMisfire", UsedPlus)
 
     function UsedPlus:consoleCommandMisfire()
+        if not UsedPlus.DEBUG then return DEBUG_OFF_MSG end
         local vehicle = g_currentMission.controlledVehicle
         if not vehicle then
             return "Error: Not in a vehicle"
@@ -1056,6 +1122,7 @@ if UsedPlus.DEBUG then
     addConsoleCommand("upSurge", "Force hydraulic surge on current vehicle", "consoleCommandSurge", UsedPlus)
 
     function UsedPlus:consoleCommandSurge()
+        if not UsedPlus.DEBUG then return DEBUG_OFF_MSG end
         local vehicle = g_currentMission.controlledVehicle
         if not vehicle then
             return "Error: Not in a vehicle"
@@ -1082,6 +1149,7 @@ if UsedPlus.DEBUG then
     addConsoleCommand("upOverheat", "Force overheating on current vehicle", "consoleCommandOverheat", UsedPlus)
 
     function UsedPlus:consoleCommandOverheat()
+        if not UsedPlus.DEBUG then return DEBUG_OFF_MSG end
         local vehicle = g_currentMission.controlledVehicle
         if not vehicle then
             return "Error: Not in a vehicle"
@@ -1104,6 +1172,7 @@ if UsedPlus.DEBUG then
     addConsoleCommand("upCutout", "Force electrical cutout on current vehicle", "consoleCommandCutout", UsedPlus)
 
     function UsedPlus:consoleCommandCutout()
+        if not UsedPlus.DEBUG then return DEBUG_OFF_MSG end
         local vehicle = g_currentMission.controlledVehicle
         if not vehicle then
             return "Error: Not in a vehicle"
@@ -1125,6 +1194,7 @@ if UsedPlus.DEBUG then
     addConsoleCommand("upFlatTire", "Force flat tire on current vehicle", "consoleCommandFlatTire", UsedPlus)
 
     function UsedPlus:consoleCommandFlatTire()
+        if not UsedPlus.DEBUG then return DEBUG_OFF_MSG end
         local vehicle = g_currentMission.controlledVehicle
         if not vehicle then
             return "Error: Not in a vehicle"
@@ -1148,6 +1218,7 @@ if UsedPlus.DEBUG then
     addConsoleCommand("upRunaway", "Force engine runaway on current vehicle", "consoleCommandRunaway", UsedPlus)
 
     function UsedPlus:consoleCommandRunaway()
+        if not UsedPlus.DEBUG then return DEBUG_OFF_MSG end
         local vehicle = g_currentMission.controlledVehicle
         if not vehicle then
             return "Error: Not in a vehicle"
@@ -1174,6 +1245,7 @@ if UsedPlus.DEBUG then
     addConsoleCommand("upSeizure", "Force engine seizure on current vehicle (PERMANENT)", "consoleCommandSeizure", UsedPlus)
 
     function UsedPlus:consoleCommandSeizure()
+        if not UsedPlus.DEBUG then return DEBUG_OFF_MSG end
         local vehicle = g_currentMission.controlledVehicle
         if not vehicle then
             return "Error: Not in a vehicle"
@@ -1195,6 +1267,7 @@ if UsedPlus.DEBUG then
     addConsoleCommand("upMalfInfo", "Show malfunction state for current vehicle", "consoleCommandMalfInfo", UsedPlus)
 
     function UsedPlus:consoleCommandMalfInfo()
+        if not UsedPlus.DEBUG then return DEBUG_OFF_MSG end
         local vehicle = g_currentMission.controlledVehicle
         if not vehicle then
             return "Error: Not in a vehicle"
@@ -1250,6 +1323,7 @@ if UsedPlus.DEBUG then
     addConsoleCommand("upResetCooldown", "Reset malfunction cooldown for current vehicle", "consoleCommandResetCooldown", UsedPlus)
 
     function UsedPlus:consoleCommandResetCooldown()
+        if not UsedPlus.DEBUG then return DEBUG_OFF_MSG end
         local vehicle = g_currentMission.controlledVehicle
         if not vehicle then
             return "Error: Not in a vehicle"
@@ -1264,10 +1338,191 @@ if UsedPlus.DEBUG then
         return "Reset malfunction cooldown for " .. (vehicle:getName() or "vehicle")
     end
 
+    -- v2.15.0: Reset steering pull for current vehicle
+    addConsoleCommand("upResetSteering", "Reset steering pull/wander for current vehicle", "consoleCommandResetSteering", UsedPlus)
+
+    function UsedPlus:consoleCommandResetSteering()
+        if not UsedPlus.DEBUG then return DEBUG_OFF_MSG end
+        local vehicle = g_currentMission.controlledVehicle
+        if not vehicle then
+            return "Error: Not in a vehicle"
+        end
+
+        local spec = vehicle.spec_usedPlusMaintenance
+        if not spec then
+            return "Error: Vehicle has no UsedPlus maintenance data"
+        end
+
+        spec.steeringPullDirection = 0
+        spec.steeringPullInitialized = false
+        spec.steeringPullSurgeActive = false
+        spec.steeringPullSurgeTimer = 0
+        spec.steeringWanderTarget = 0
+        spec.steeringWanderCurrent = 0
+        spec.steeringWander = 0
+        spec.steeringPullActive = false
+        spec.steeringPullStrength = 0
+        spec.hasShownPullWarning = false
+
+        return "Reset steering pull/wander for " .. (vehicle:getName() or "vehicle")
+    end
+
+    -- v2.15.0: Nuclear factory reset for current vehicle
+    addConsoleCommand("upResetVehicle", "Factory reset all UsedPlus maintenance state for current vehicle (preserves DNA & history)", "consoleCommandResetVehicle", UsedPlus)
+
+    function UsedPlus:consoleCommandResetVehicle()
+        if not UsedPlus.DEBUG then return DEBUG_OFF_MSG end
+        local vehicle = g_currentMission.controlledVehicle
+        if not vehicle then
+            return "Error: Not in a vehicle"
+        end
+
+        local spec = vehicle.spec_usedPlusMaintenance
+        if not spec then
+            return "Error: Vehicle has no UsedPlus maintenance data"
+        end
+
+        local lemonScale = spec.workhorseLemonScale or 0.5
+
+        -- Category 1: Reliability & Durability Caps (all -> 1.0)
+        spec.engineReliability = 1.0
+        spec.hydraulicReliability = 1.0
+        spec.electricalReliability = 1.0
+        spec.maxReliabilityCeiling = 1.0
+        spec.maxEngineDurability = 1.0
+        spec.maxHydraulicDurability = 1.0
+        spec.maxElectricalDurability = 1.0
+        spec.engineReliabilityCeiling = 1.0
+        spec.hydraulicReliabilityCeiling = 1.0
+
+        -- Category 2: Fluid Levels (all -> 1.0, leaks cleared)
+        spec.oilLevel = 1.0
+        spec.hasOilLeak = false
+        spec.oilLeakSeverity = 0
+        spec.wasLowOil = false
+        spec.hydraulicFluidLevel = 1.0
+        spec.hasHydraulicLeak = false
+        spec.hydraulicLeakSeverity = 0
+        spec.wasLowHydraulicFluid = false
+        spec.hasFuelLeak = false
+        spec.fuelLeakMultiplier = 1.0
+
+        -- Category 3: Tires (restored)
+        spec.tireCondition = 1.0
+        spec.hasFlatTire = false
+        spec.flatTireSide = 0
+        spec.distanceTraveled = 0
+        if spec.wheelDistances then
+            for i = 1, #spec.wheelDistances do
+                spec.wheelDistances[i] = 0
+            end
+        end
+        if spec.wheelConditions then
+            for i = 1, #spec.wheelConditions do
+                spec.wheelConditions[i] = 1.0
+            end
+        end
+
+        -- Category 4: Engine Malfunctions (all cleared)
+        spec.isStalled = false
+        spec.stallCooldown = 0
+        spec.stallRecoveryEndTime = 0
+        spec.misfireActive = false
+        spec.misfireTimer = 0
+        spec.misfireEndTime = 0
+        spec.misfireBurstRemaining = 0
+        spec.engineTemperature = 0
+        spec.isOverheated = false
+        spec.overheatCooldownEndTime = 0
+        spec.engineSeized = false
+        spec.engineSeizedTime = 0
+        spec.runawayActive = false
+        spec.runawayStartTime = 0
+        spec.runawayPreviousSpeed = 0
+        spec.runawayPreviousDamage = 0
+        spec.maxSpeedFactor = 1.0
+        spec.governorPulseTimer = 0
+
+        -- Category 5: Steering (all cleared)
+        spec.steeringPullDirection = 0
+        spec.steeringPullInitialized = false
+        spec.steeringPullSurgeActive = false
+        spec.steeringPullSurgeTimer = 0
+        spec.steeringPullSurgeEndTime = 0
+        spec.steeringWanderTarget = 0
+        spec.steeringWanderCurrent = 0
+        spec.steeringPullActive = false
+        spec.steeringPullStrength = 0
+
+        -- Category 6: Hydraulic Malfunctions (all cleared)
+        spec.hydraulicSurgeActive = false
+        spec.hydraulicSurgeEndTime = 0
+        spec.hydraulicSurgeFadeStartTime = 0
+        spec.hydraulicSurgeDirection = 0
+        spec.hydraulicSurgeCooldownEnd = 0
+        spec.implementStuckDown = false
+        spec.implementStuckDownEndTime = 0
+        spec.implementStuckUp = false
+        spec.implementStuckUpEndTime = 0
+        spec.implementPullActive = false
+        spec.implementPullEndTime = 0
+        spec.implementPullDirection = 0
+        spec.implementDragActive = false
+        spec.implementDragEndTime = 0
+        spec.reducedTurningActive = false
+        spec.reducedTurningEndTime = 0
+        spec.hydraulicsSeized = false
+        spec.hydraulicsSeizedTime = 0
+        spec.isDrifting = false
+
+        -- Category 7: Electrical Malfunctions (cleared)
+        spec.isCutout = false
+        spec.cutoutTimer = 0
+        spec.cutoutEndTime = 0
+        spec.electricalSeized = false
+        spec.electricalSeizedTime = 0
+
+        -- Category 8: Cooldowns & Warning Flags (all cleared)
+        spec.lastMalfunctionTime = 0
+        spec.implementMalfunctionTimer = 0
+        spec.speedWarningTimer = 0
+        spec.hasShownMisfireWarning = false
+        spec.hasShownOverheatWarning = false
+        spec.hasShownOverheatCritical = false
+        spec.hasShownPullWarning = false
+        spec.hasShownSteeringWarning = false
+        spec.hasShownDriftWarning = false
+        spec.hasShownDriftMidpointWarning = false
+        spec.hasShownSpeedWarning = false
+        spec.hasShownGovernorWarning = false
+        spec.hasShownOilWarnWarning = false
+        spec.hasShownOilCriticalWarning = false
+        spec.hasShownOilLeakWarning = false
+        spec.hasShownHydraulicWarnWarning = false
+        spec.hasShownHydraulicCriticalWarning = false
+        spec.hasShownHydraulicLeakWarning = false
+        spec.hasShownTireWarnWarning = false
+        spec.hasShownTireCriticalWarning = false
+        spec.hasShownFlatTireWarning = false
+        spec.hasShownLowTractionWarning = false
+        spec.hasShownSurgeWarning = false
+        spec.hasShownDropWarning = false
+        spec.hasShownPTOWarning = false
+        spec.hasShownHitchWarning = false
+
+        -- NOT reset (preserved): workhorseLemonScale, repairCount, totalRepairCost,
+        -- failureCount, purchasedUsed, purchaseDate, purchasePrice, wasInspected,
+        -- inspectionCache, RVB/UYT integration data, OBD diagnoses
+
+        return string.format("Reset vehicle: %s — all components 100%%, all malfunctions cleared (DNA preserved: %.2f)",
+            vehicle:getName() or "vehicle", lemonScale)
+    end
+
     -- Service Truck Discovery commands (v2.9.0)
     addConsoleCommand("upDiscoverServiceTruck", "Trigger Service Truck discovery (bypasses prerequisites)", "consoleCommandDiscoverServiceTruck", UsedPlus)
 
     function UsedPlus:consoleCommandDiscoverServiceTruck()
+        if not UsedPlus.DEBUG then return DEBUG_OFF_MSG end
         local farmId = g_currentMission:getFarmId()
         if not farmId or farmId == 0 then
             return "Error: No valid farm"
@@ -1285,6 +1540,7 @@ if UsedPlus.DEBUG then
     addConsoleCommand("upResetServiceTruck", "Reset Service Truck discovery state (for retesting)", "consoleCommandResetServiceTruck", UsedPlus)
 
     function UsedPlus:consoleCommandResetServiceTruck()
+        if not UsedPlus.DEBUG then return DEBUG_OFF_MSG end
         local farmId = g_currentMission:getFarmId()
         if not farmId or farmId == 0 then
             return "Error: No valid farm"
@@ -1301,6 +1557,7 @@ if UsedPlus.DEBUG then
     addConsoleCommand("upServiceTruckStatus", "Show Service Truck discovery prerequisites status", "consoleCommandServiceTruckStatus", UsedPlus)
 
     function UsedPlus:consoleCommandServiceTruckStatus()
+        if not UsedPlus.DEBUG then return DEBUG_OFF_MSG end
         local farmId = g_currentMission:getFarmId()
         if not farmId or farmId == 0 then
             return "Error: No valid farm"
@@ -1336,6 +1593,5 @@ if UsedPlus.DEBUG then
 
         return "Status printed to console"
     end
-end
 
 UsedPlus.logInfo("Main initialization loaded")

@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-2.14.2-green" alt="Version">
+  <img src="https://img.shields.io/badge/version-2.15.1-green" alt="Version">
   <img src="https://img.shields.io/github/downloads/XelaNull/FS25_UsedPlus/total?label=downloads&color=brightgreen" alt="Downloads">
   <img src="https://img.shields.io/badge/game-FS25-blue" alt="FS25">
   <img src="https://img.shields.io/badge/multiplayer-ready-brightgreen" alt="Multiplayer Ready">
@@ -472,7 +472,7 @@ Built on the shoulders of giants:
 
 ---
 
-**v2.14.2** | **[View Changelog](CHANGELOG.md)** | **[Report Issues](https://github.com/XelaNull/FS25_UsedPlus/issues)**
+**v2.15.1** | **[View Changelog](CHANGELOG.md)** | **[Report Issues](https://github.com/XelaNull/FS25_UsedPlus/issues)**
 
 ---
 
