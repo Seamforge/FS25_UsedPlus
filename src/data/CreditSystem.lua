@@ -891,6 +891,18 @@ CreditHistory.EVENT_TYPES = {
     PAYMENT_MINIMUM = { name = "Minimum Payment", change = 0 },
     PAYMENT_STANDARD = { name = "Standard Payment", change = 2 },
     PAYMENT_EXTRA = { name = "Extra Payment", change = 3 },
+
+    -- Vehicle trade/sale events
+    VEHICLE_TRADE_IN = { name = "Vehicle Trade-In", change = 2 },
+
+    -- Land cash purchase
+    LAND_CASH_PURCHASE = { name = "Land Cash Purchase", change = 3 },
+
+    -- Lease lifecycle events
+    LEASE_RETURNED = { name = "Lease Returned", change = 5 },
+    LEASE_BOUGHT_OUT = { name = "Lease Bought Out", change = 10 },
+    LEASE_RENEWED = { name = "Lease Renewed", change = -2 },
+    LEASE_PAYMENT_MISSED = { name = "Missed Lease Payment", change = -50 },
 }
 
 -- Maximum history entries per farm (for performance)

@@ -52,15 +52,17 @@ function ServiceTruck.initSpecialization()
     schema:register(XMLValueType.INT, "vehicle.serviceTruck.fillUnits#oil", "Fill unit index for oil", 3)
     schema:register(XMLValueType.INT, "vehicle.serviceTruck.fillUnits#hydraulic", "Fill unit index for hydraulic", 4)
 
-    -- Savegame schema
-    local schemaSavegame = Vehicle.xmlSchemaSavegame
-    schemaSavegame:register(XMLValueType.BOOL, "vehicles.vehicle(?).serviceTruck#isRestoring", "Is currently restoring a vehicle")
-    schemaSavegame:register(XMLValueType.INT, "vehicles.vehicle(?).serviceTruck#targetVehicleId", "ID of vehicle being restored")
-    schemaSavegame:register(XMLValueType.STRING, "vehicles.vehicle(?).serviceTruck#component", "Component being restored")
-    schemaSavegame:register(XMLValueType.FLOAT, "vehicles.vehicle(?).serviceTruck#startReliability", "Reliability when started")
-    schemaSavegame:register(XMLValueType.FLOAT, "vehicles.vehicle(?).serviceTruck#progress", "Current progress 0-1")
-
     schema:setXMLSpecializationType()
+
+    -- Savegame schema (MUST be outside setXMLSpecializationType scope)
+    -- Pattern from: UsedPlusMaintenance.initSpecialization
+    local schemaSavegame = Vehicle.xmlSchemaSavegame
+    local saveKey = "vehicles.vehicle(?)." .. ServiceTruck.MOD_NAME .. ".ServiceTruck"
+    schemaSavegame:register(XMLValueType.BOOL, saveKey .. ".isRestoring", "Is currently restoring a vehicle")
+    schemaSavegame:register(XMLValueType.INT, saveKey .. ".targetVehicleId", "ID of vehicle being restored")
+    schemaSavegame:register(XMLValueType.STRING, saveKey .. ".component", "Component being restored")
+    schemaSavegame:register(XMLValueType.FLOAT, saveKey .. ".startReliability", "Reliability when started")
+    schemaSavegame:register(XMLValueType.FLOAT, saveKey .. ".progress", "Current progress 0-1")
 end
 
 function ServiceTruck.registerFunctions(vehicleType)
@@ -90,6 +92,7 @@ function ServiceTruck.registerEventListeners(vehicleType)
     SpecializationUtil.registerEventListener(vehicleType, "onReadStream", ServiceTruck)
     SpecializationUtil.registerEventListener(vehicleType, "onWriteStream", ServiceTruck)
     SpecializationUtil.registerEventListener(vehicleType, "onRegisterActionEvents", ServiceTruck)
+    SpecializationUtil.registerEventListener(vehicleType, "saveToXMLFile", ServiceTruck)
 end
 
 function ServiceTruck:onLoad(savegame)
@@ -144,13 +147,14 @@ function ServiceTruck:onLoad(savegame)
     table.insert(ServiceTruck.instances, self)
 
     -- Load from savegame
+    -- Pattern from: UsedPlusMaintenance.onLoad (uses MOD_NAME prefix + dot notation)
     if savegame ~= nil and savegame.xmlFile ~= nil then
-        local key = savegame.key .. ".serviceTruck"
-        spec.isRestoring = savegame.xmlFile:getValue(key .. "#isRestoring", false)
-        spec.savedTargetId = savegame.xmlFile:getValue(key .. "#targetVehicleId")
-        spec.savedComponent = savegame.xmlFile:getValue(key .. "#component")
-        spec.savedStartReliability = savegame.xmlFile:getValue(key .. "#startReliability")
-        spec.savedProgress = savegame.xmlFile:getValue(key .. "#progress")
+        local key = savegame.key .. "." .. ServiceTruck.MOD_NAME .. ".ServiceTruck"
+        spec.isRestoring = savegame.xmlFile:getValue(key .. ".isRestoring", false)
+        spec.savedTargetId = savegame.xmlFile:getValue(key .. ".targetVehicleId")
+        spec.savedComponent = savegame.xmlFile:getValue(key .. ".component")
+        spec.savedStartReliability = savegame.xmlFile:getValue(key .. ".startReliability")
+        spec.savedProgress = savegame.xmlFile:getValue(key .. ".progress")
     end
 
     UsedPlus.logInfo("ServiceTruck loaded - Long-term vehicle restoration ready")
@@ -180,8 +184,9 @@ end
 
 function ServiceTruck:saveToXMLFile(xmlFile, key, usedModNames)
     local spec = self[SPEC_NAME]
+    if spec == nil then return end
 
-    xmlFile:setValue(key .. "#isRestoring", spec.isRestoring)
+    xmlFile:setValue(key .. ".isRestoring", spec.isRestoring)
 
     if spec.restorationData ~= nil then
         local targetId = nil
@@ -189,22 +194,25 @@ function ServiceTruck:saveToXMLFile(xmlFile, key, usedModNames)
             targetId = spec.restorationData.targetVehicle.id
         end
         if targetId ~= nil then
-            xmlFile:setValue(key .. "#targetVehicleId", targetId)
+            xmlFile:setValue(key .. ".targetVehicleId", targetId)
         end
         if spec.restorationData.component ~= nil then
-            xmlFile:setValue(key .. "#component", spec.restorationData.component)
+            xmlFile:setValue(key .. ".component", spec.restorationData.component)
         end
         if spec.restorationData.startReliability ~= nil then
-            xmlFile:setValue(key .. "#startReliability", spec.restorationData.startReliability)
+            xmlFile:setValue(key .. ".startReliability", spec.restorationData.startReliability)
         end
         if spec.restorationData.progress ~= nil then
-            xmlFile:setValue(key .. "#progress", spec.restorationData.progress)
+            xmlFile:setValue(key .. ".progress", spec.restorationData.progress)
         end
     end
+
+    UsedPlus.logTrace("ServiceTruck: Saved state for " .. (self.getName and self:getName() or "vehicle"))
 end
 
 function ServiceTruck:onReadStream(streamId, connection)
     local spec = self[SPEC_NAME]
+    if spec == nil then return end
     if connection:getIsServer() then
         spec.isRestoring = streamReadBool(streamId)
         spec.isPaused = streamReadBool(streamId)
@@ -219,17 +227,24 @@ end
 
 function ServiceTruck:onWriteStream(streamId, connection)
     local spec = self[SPEC_NAME]
+    if spec == nil then return end
     if not connection:getIsServer() then
         streamWriteBool(streamId, spec.isRestoring)
         streamWriteBool(streamId, spec.isPaused)
-        if spec.isRestoring and spec.restorationData ~= nil then
+        if spec.isRestoring then
             local targetId = 0
-            if spec.restorationData.targetVehicle ~= nil then
-                targetId = spec.restorationData.targetVehicle.id or 0
+            local component = ""
+            local progress = 0
+            if spec.restorationData ~= nil then
+                if spec.restorationData.targetVehicle ~= nil then
+                    targetId = spec.restorationData.targetVehicle.id or 0
+                end
+                component = spec.restorationData.component or ""
+                progress = spec.restorationData.progress or 0
             end
             streamWriteInt32(streamId, targetId)
-            streamWriteString(streamId, spec.restorationData.component or "")
-            streamWriteFloat32(streamId, spec.restorationData.progress or 0)
+            streamWriteString(streamId, component)
+            streamWriteFloat32(streamId, progress)
         end
     end
 end
@@ -266,7 +281,8 @@ function ServiceTruck:updateActionEventText()
         end
     else
         if spec.targetVehicle ~= nil then
-            local vehicleName = spec.targetVehicle.vehicle:getName() or "Vehicle"
+            local vehicle = spec.targetVehicle.vehicle
+            local vehicleName = (vehicle ~= nil and vehicle.getName ~= nil) and vehicle:getName() or "Vehicle"
             text = string.format(g_i18n:getText("usedplus_serviceTruck_inspect") or "Inspect %s", vehicleName)
         else
             -- No target vehicle and no restoration — hide the action event
@@ -290,7 +306,7 @@ function ServiceTruck.onActionActivate(self, actionName, inputValue, callbackSta
             g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_INFO,
                 g_i18n:getText("usedplus_serviceTruck_resumed") or "Restoration resumed")
         else
-            self:stopRestoration(false)  -- false = don't release target, just pause
+            self:pauseRestoration("manual")
         end
     else
         -- Start inspection process
@@ -312,6 +328,12 @@ function ServiceTruck:onUpdate(dt, isActiveForInput, isActiveForInputIgnoreSelec
     if spec.savedTargetId ~= nil and spec.isRestoring then
         for _, vehicle in ipairs(g_currentMission.vehicleSystem.vehicles) do
             if vehicle.id == spec.savedTargetId then
+                if vehicle.spec_usedPlusMaintenance == nil then
+                    UsedPlus.logWarn("ServiceTruck: Saved target vehicle no longer has maintenance spec, cancelling restoration")
+                    spec.isRestoring = false
+                    spec.savedTargetId = nil
+                    break
+                end
                 spec.restorationData = {
                     targetVehicle = vehicle,
                     component = spec.savedComponent,
@@ -400,7 +422,8 @@ function ServiceTruck:onUpdate(dt, isActiveForInput, isActiveForInputIgnoreSelec
         local shouldShow = playerNearby and isOnFoot and hasTarget and doorsOpen and ServiceTruck.nearestTruck == self
 
         if shouldShow then
-            local vehicleName = spec.faultTracerTarget.vehicle:getName() or "Vehicle"
+            local vehicle = spec.faultTracerTarget.vehicle
+            local vehicleName = (vehicle ~= nil and vehicle.getName ~= nil) and vehicle:getName() or "Vehicle"
             local promptText = string.format(g_i18n:getText("usedplus_ft_action") or "Fault Tracer: %s", vehicleName)
 
             g_inputBinding:setActionEventTextPriority(ServiceTruck.faultTracerActionEventId, GS_PRIO_VERY_HIGH)
@@ -582,7 +605,10 @@ end
 ]]
 function ServiceTruck:openRestorationDialog()
     local spec = self[SPEC_NAME]
-    if spec.targetVehicle == nil then return end
+    if spec.targetVehicle == nil or spec.targetVehicle.vehicle == nil then
+        UsedPlus.logWarn("ServiceTruck: No valid target vehicle for restoration dialog")
+        return
+    end
 
     -- Ensure dialog is registered
     if ServiceTruckDialog ~= nil and ServiceTruckDialog.register ~= nil then
@@ -643,7 +669,7 @@ function ServiceTruck:startRestoration(targetVehicle, component)
     self:immobilizeTarget(targetVehicle)
 
     -- Notification
-    local vehicleName = targetVehicle:getName() or "Vehicle"
+    local vehicleName = (targetVehicle ~= nil and targetVehicle.getName ~= nil) and targetVehicle:getName() or "Vehicle"
     g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_INFO,
         string.format(g_i18n:getText("usedplus_serviceTruck_started") or "Started restoration of %s", vehicleName))
 
@@ -830,8 +856,12 @@ function ServiceTruck:progressRestoration(hoursPassed)
         currentReliability = maintSpec.hydraulicReliability
     end
 
-    spec.restorationData.progress = (currentReliability - spec.restorationData.startReliability) /
-                                     (1.0 - spec.restorationData.startReliability)
+    local denominator = 1.0 - spec.restorationData.startReliability
+    if denominator > 0 then
+        spec.restorationData.progress = (currentReliability - spec.restorationData.startReliability) / denominator
+    else
+        spec.restorationData.progress = 1.0
+    end
 
     -- Check for completion
     if currentReliability >= 0.99 and maintSpec.maxReliabilityCeiling >= 0.99 then
@@ -1060,7 +1090,9 @@ function ServiceTruck.faultTracerCallback(self, actionName, inputValue, callback
     if truck ~= nil then
         local spec = truck[SPEC_NAME]
         if spec ~= nil and spec.faultTracerTarget ~= nil then
-            UsedPlus.logInfo("ServiceTruck: Fault Tracer activated for " .. (spec.faultTracerTarget.vehicle:getName() or "Vehicle"))
+            local vehicle = spec.faultTracerTarget.vehicle
+            local vehicleName = (vehicle ~= nil and vehicle.getName ~= nil) and vehicle:getName() or "Vehicle"
+            UsedPlus.logInfo("ServiceTruck: Fault Tracer activated for " .. vehicleName)
             truck:openFaultTracerDialog()
         end
     end

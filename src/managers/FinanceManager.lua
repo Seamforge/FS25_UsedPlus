@@ -91,7 +91,12 @@ function FinanceManager:getStatistics(farmId)
             negotiationsWon = 0,            -- Accepted at offered price
             negotiationsCountered = 0,      -- Accepted at counter price
             negotiationsRejected = 0,       -- Walked away or paid full
-            totalNegotiationSavings = 0     -- Money saved through negotiation
+            totalNegotiationSavings = 0,    -- Money saved through negotiation
+
+            -- v2.15.2: Missing statistics (Issue #21)
+            vehiclesFound = 0,             -- Vehicles found by search agents
+            listingsDeclined = 0,          -- Used vehicle listings declined
+            negotiationsWalkaway = 0       -- Negotiations where player walked away
         }
     end
     return self.statisticsByFarm[farmId]
@@ -1141,6 +1146,10 @@ function FinanceManager:saveToXMLFile(missionInfo)
             xmlFile:setInt(statsKey .. "#negotiationsCountered", stats.negotiationsCountered or 0)
             xmlFile:setInt(statsKey .. "#negotiationsRejected", stats.negotiationsRejected or 0)
             xmlFile:setFloat(statsKey .. "#totalNegotiationSavings", stats.totalNegotiationSavings or 0)
+            -- v2.15.2: New statistics (Issue #21)
+            xmlFile:setInt(statsKey .. "#vehiclesFound", stats.vehiclesFound or 0)
+            xmlFile:setInt(statsKey .. "#listingsDeclined", stats.listingsDeclined or 0)
+            xmlFile:setInt(statsKey .. "#negotiationsWalkaway", stats.negotiationsWalkaway or 0)
             statsIndex = statsIndex + 1
         end
 
@@ -1264,6 +1273,10 @@ function FinanceManager:loadFromXMLFile(missionInfo)
                 stats.negotiationsCountered = xmlFile:getInt(statsKey .. "#negotiationsCountered", 0)
                 stats.negotiationsRejected = xmlFile:getInt(statsKey .. "#negotiationsRejected", 0)
                 stats.totalNegotiationSavings = xmlFile:getFloat(statsKey .. "#totalNegotiationSavings", 0)
+                -- v2.15.2: New statistics (Issue #21)
+                stats.vehiclesFound = xmlFile:getInt(statsKey .. "#vehiclesFound", 0)
+                stats.listingsDeclined = xmlFile:getInt(statsKey .. "#listingsDeclined", 0)
+                stats.negotiationsWalkaway = xmlFile:getInt(statsKey .. "#negotiationsWalkaway", 0)
             end
         end)
 
