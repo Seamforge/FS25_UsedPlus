@@ -1301,20 +1301,21 @@ function ModCompatibility.getBCFarmlandDiscount(farmland, farmId)
     local jobs = farm.stats.npcJobs or {}
     local jobCount = jobs[npcIndex] or 0
 
-    if jobCount <= 0 then
-        return 0, 0, 0, 0
-    end
-
     -- Calculate discount (matches BC's formula exactly)
     -- Safety cap: floor(0.5/discPerJob) ensures discount can never exceed 50%
-    local effectiveJobs = math.min(jobCount, discMaxJobs, math.floor(0.5 / discPerJob))
-    local discountPercent = math.floor(effectiveJobs * 100 * discPerJob)
-    local discountAmount = farmland.price * effectiveJobs * discPerJob
+    local discountAmount = 0
+    local discountPercent = 0
+    if jobCount > 0 then
+        local effectiveJobs = math.min(jobCount, discMaxJobs, math.floor(0.5 / discPerJob))
+        discountPercent = math.floor(effectiveJobs * 100 * discPerJob)
+        discountAmount = farmland.price * effectiveJobs * discPerJob
+    end
 
     UsedPlus.logWarn(string.format(
         "BC farmland discount: NPC=%d, jobs=%d/%d, discount=%d%% ($%d)",
         npcIndex, jobCount, discMaxJobs, discountPercent, discountAmount))
 
+    -- Always return maxJobs when BC discountMode is active (signals integration is live)
     return discountAmount, discountPercent, jobCount, discMaxJobs
 end
 

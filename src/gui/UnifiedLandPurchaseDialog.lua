@@ -492,13 +492,24 @@ function UnifiedLandPurchaseDialog:updateDisplay()
     end
 
     -- v2.15.2: Better Contracts discount row + dynamic layout
-    local bcVisible = self.bcDiscountAmount > 0
+    -- Show row whenever BC discountMode is active (bcMaxJobs > 0), even with 0 jobs
+    local bcVisible = self.bcMaxJobs > 0
     if self.bcDiscountText then
         if bcVisible then
-            local discText = string.format("-%s (%d%% - %d/%d jobs)",
-                UIHelper.Text.formatMoney(self.bcDiscountAmount),
-                self.bcDiscountPercent, self.bcJobCount, self.bcMaxJobs)
-            UIHelper.Element.setTextWithColor(self.bcDiscountText, discText, UIHelper.Colors.MONEY_GREEN)
+            local discText
+            local discColor
+            if self.bcDiscountAmount > 0 then
+                -- Earned discount: green text with amount
+                discText = string.format("-%s (%d%% - %d/%d jobs)",
+                    UIHelper.Text.formatMoney(self.bcDiscountAmount),
+                    self.bcDiscountPercent, self.bcJobCount, self.bcMaxJobs)
+                discColor = UIHelper.Colors.MONEY_GREEN
+            else
+                -- No discount yet: neutral text showing progress
+                discText = string.format("0%% (0/%d jobs)", self.bcMaxJobs)
+                discColor = UIHelper.Colors.GRAY
+            end
+            UIHelper.Element.setTextWithColor(self.bcDiscountText, discText, discColor)
             UIHelper.Element.setVisible(self.bcDiscountText, true)
             UIHelper.Element.setVisible(self.bcDiscountLabel, true)
         else
