@@ -1212,8 +1212,8 @@
         <e k="usedplus_fmf_quickRef" v="THAM KHẢO NHANH" eh="011d2c62" />
         <e k="usedplus_fmf_quickRefLine1" v="Cửa hàng → Vay/Thuê/Tìm Hàng Cũ | Ga-ra → Đăng Bán" eh="426419c9" />
         <e k="usedplus_fmf_quickRefLine2" v="Thanh toán hàng tháng tự động trừ. Trả sớm tiết kiệm lãi." eh="73cd35d9" />
-        <e k="usedplus_btn_admin_panel" v="[EN] Admin Panel" eh="a0e0d3f0" />
-        <e k="usedplus_admin_no_vehicle_warning" v="[EN] You must be in a vehicle to use the Admin Panel. Enter a vehicle first, then press ESC." eh="abe11d3f" />
+        <e k="usedplus_btn_admin_panel" v="Bảng Quản Trị" eh="a0e0d3f0" />
+        <e k="usedplus_admin_no_vehicle_warning" v="Bạn phải ở trong phương tiện để sử dụng Bảng Quản Trị. Hãy lên phương tiện trước, sau đó nhấn ESC." eh="abe11d3f" />
 
         <!-- Land Lease Dialog -->
         <e k="usedplus_ll_title" v="Thuê Đất" eh="ec34a2a6" />
@@ -1917,6 +1917,8 @@
         <e k="usedplus_setting_malfunctions_desc" v="Bật sự cố ngẫu nhiên và hỏng hóc bộ phận" eh="fbbe01f9" />
         <e k="usedplus_setting_malfunctionFrequency" v="Tần Suất Sự Cố" eh="6bf458c7" />
         <e k="usedplus_setting_malfunctionFrequency_desc" v="Sự cố xảy ra bao lâu một lần. 100% = bình thường, 50% = ít hơn một nửa, 200% = gấp đôi" eh="4ab011c4" />
+        <e k="usedplus_setting_fluidDrainRate" v="Tốc Độ Tiêu Hao Chất Lỏng" eh="3fd9b024" />
+        <e k="usedplus_setting_fluidDrainRate_desc" v="Tốc độ tiêu hao dầu và dầu thủy lực. 100% = bình thường, 50% = chậm gấp đôi, 200% = nhanh gấp đôi. Không ảnh hưởng đến tốc độ rò rỉ." eh="2ed81274" />
         <e k="usedplus_setting_partialRepair" v="Sửa Chữa Một Phần" eh="dc6b627a" />
         <e k="usedplus_setting_partialRepair_desc" v="Bật sửa chữa một phần trong cửa hàng xe (tắt sẽ ẩn nút sửa chữa)" eh="84fe180c" />
         <e k="usedplus_setting_partialRepaint" v="Sơn Một Phần" eh="3fca656d" />
@@ -2299,8 +2301,8 @@
         <e k="usedplus_admin_btn_dlg_inspect" v="Kiểm Tra" eh="35a9dbe6" />
         <e k="usedplus_admin_btn_dlg_lease_end" v="Hết Thuê" eh="da7801f1" />
         <e k="usedplus_admin_btn_dlg_lease_renew" v="Gia Hạn Thuê" eh="7a794930" />
-        <e k="usedplus_admin_btn_dlg_fault_tracer" v="[EN] Fault Tracer" eh="d1b82197" />
-        <e k="usedplus_admin_btn_dlg_portfolio" v="[EN] Portfolio" eh="d4f859a9" />
+        <e k="usedplus_admin_btn_dlg_fault_tracer" v="Truy Tìm Lỗi" eh="d1b82197" />
+        <e k="usedplus_admin_btn_dlg_portfolio" v="Danh Mục Đầu Tư" eh="d4f859a9" />
 
         <!-- Buttons - Tab 5 (State) -->
         <e k="usedplus_admin_btn_reset_hours" v="Reset Giờ" eh="a519e5e1" />

@@ -160,6 +160,7 @@ ModCompatibility.advancedMaintenanceInstalled = false
 ModCompatibility.hirePurchasingInstalled = false
 ModCompatibility.buyUsedEquipmentInstalled = false
 ModCompatibility.enhancedLoanSystemInstalled = false
+ModCompatibility.betterContractsInstalled = false  -- v2.16.0: BC farmland discounts
 
 -- v2.6.2: Raw detection flags (for UI display - shows toggle even when disabled)
 ModCompatibility.rvbDetected = false
@@ -168,6 +169,7 @@ ModCompatibility.amDetected = false
 ModCompatibility.hpDetected = false
 ModCompatibility.bueDetected = false
 ModCompatibility.elsDetected = false
+ModCompatibility.bcDetected = false  -- v2.16.0: Better Contracts
 
 ModCompatibility.initialized = false
 
@@ -297,23 +299,33 @@ function ModCompatibility.init()
         UsedPlus.logDebug("ELS detected via ELS_loan class")
     end
 
+    -- Detect Better Contracts - checks for BetterContracts global (farmland discounts)
+    local bcDetected = false
+    if BetterContracts ~= nil then
+        bcDetected = true
+        UsedPlus.logDebug("BC detected via BetterContracts global")
+    end
+
     -- v2.6.2: Check integration settings for compatible mods
     local amSettingEnabled = not UsedPlusSettings or UsedPlusSettings:get("enableAMIntegration") ~= false
     local hpSettingEnabled = not UsedPlusSettings or UsedPlusSettings:get("enableHPIntegration") ~= false
     local bueSettingEnabled = not UsedPlusSettings or UsedPlusSettings:get("enableBUEIntegration") ~= false
     local elsSettingEnabled = not UsedPlusSettings or UsedPlusSettings:get("enableELSIntegration") ~= false
+    local bcSettingEnabled = not UsedPlusSettings or UsedPlusSettings:get("enableBCIntegration") ~= false
 
     -- Combine detection with settings
     ModCompatibility.advancedMaintenanceInstalled = amDetected and amSettingEnabled
     ModCompatibility.hirePurchasingInstalled = hpDetected and hpSettingEnabled
     ModCompatibility.buyUsedEquipmentInstalled = bueDetected and bueSettingEnabled
     ModCompatibility.enhancedLoanSystemInstalled = elsDetected and elsSettingEnabled
+    ModCompatibility.betterContractsInstalled = bcDetected and bcSettingEnabled
 
     -- Store raw detection for UI display
     ModCompatibility.amDetected = amDetected
     ModCompatibility.hpDetected = hpDetected
     ModCompatibility.bueDetected = bueDetected
     ModCompatibility.elsDetected = elsDetected
+    ModCompatibility.bcDetected = bcDetected
 
     -- ========================================================================
     -- LOG DETECTION RESULTS
@@ -383,6 +395,15 @@ function ModCompatibility.init()
         end
     end
 
+    if ModCompatibility.bcDetected then
+        if ModCompatibility.betterContractsInstalled then
+            UsedPlus.logInfo("  [COMPATIBLE] Better Contracts DETECTED")
+            UsedPlus.logInfo("    -> Farmland discounts from completed contracts applied")
+        else
+            UsedPlus.logInfo("  [DISABLED] Better Contracts detected but INTEGRATION DISABLED in settings")
+        end
+    end
+
     -- Special combined modes
     if ModCompatibility.rvbInstalled and ModCompatibility.uytInstalled then
         UsedPlus.logInfo("  [FULL STACK] RVB + UYT + UsedPlus = Best experience!")
@@ -393,7 +414,8 @@ function ModCompatibility.init()
                         ModCompatibility.advancedMaintenanceInstalled or
                         ModCompatibility.hirePurchasingInstalled or
                         ModCompatibility.buyUsedEquipmentInstalled or
-                        ModCompatibility.enhancedLoanSystemInstalled
+                        ModCompatibility.enhancedLoanSystemInstalled or
+                        ModCompatibility.betterContractsInstalled
 
     if not anyDetected then
         UsedPlus.logInfo("  No compatible mods detected - standalone mode")
@@ -418,6 +440,7 @@ function ModCompatibility.refreshIntegrationSettings()
     local hpSettingEnabled = not UsedPlusSettings or UsedPlusSettings:get("enableHPIntegration") ~= false
     local bueSettingEnabled = not UsedPlusSettings or UsedPlusSettings:get("enableBUEIntegration") ~= false
     local elsSettingEnabled = not UsedPlusSettings or UsedPlusSettings:get("enableELSIntegration") ~= false
+    local bcSettingEnabled = not UsedPlusSettings or UsedPlusSettings:get("enableBCIntegration") ~= false
 
     -- Store old values
     local oldRVB = ModCompatibility.rvbInstalled
@@ -426,6 +449,7 @@ function ModCompatibility.refreshIntegrationSettings()
     local oldHP = ModCompatibility.hirePurchasingInstalled
     local oldBUE = ModCompatibility.buyUsedEquipmentInstalled
     local oldELS = ModCompatibility.enhancedLoanSystemInstalled
+    local oldBC = ModCompatibility.betterContractsInstalled
 
     -- Update installed flags (detection AND setting)
     ModCompatibility.rvbInstalled = ModCompatibility.rvbDetected and rvbSettingEnabled
@@ -434,6 +458,7 @@ function ModCompatibility.refreshIntegrationSettings()
     ModCompatibility.hirePurchasingInstalled = ModCompatibility.hpDetected and hpSettingEnabled
     ModCompatibility.buyUsedEquipmentInstalled = ModCompatibility.bueDetected and bueSettingEnabled
     ModCompatibility.enhancedLoanSystemInstalled = ModCompatibility.elsDetected and elsSettingEnabled
+    ModCompatibility.betterContractsInstalled = ModCompatibility.bcDetected and bcSettingEnabled
 
     -- Log changes
     if oldRVB ~= ModCompatibility.rvbInstalled then
@@ -453,6 +478,9 @@ function ModCompatibility.refreshIntegrationSettings()
     end
     if oldELS ~= ModCompatibility.enhancedLoanSystemInstalled then
         UsedPlus.logInfo(ModCompatibility.enhancedLoanSystemInstalled and "ELS Integration ENABLED" or "ELS Integration DISABLED")
+    end
+    if oldBC ~= ModCompatibility.betterContractsInstalled then
+        UsedPlus.logInfo(ModCompatibility.betterContractsInstalled and "BC Integration ENABLED" or "BC Integration DISABLED")
     end
 end
 
@@ -1166,6 +1194,75 @@ function ModCompatibility.applyOBDRepairToRVB(vehicle, system, hoursReduction, c
 end
 
 --============================================================================
+-- BETTER CONTRACTS INTEGRATION
+--============================================================================
+
+--[[
+    Get farmland discount from Better Contracts based on completed NPC jobs
+    Replicates BC's local getDiscountPrice() using accessible globals
+
+    BC stores job counts on farm.stats.npcJobs[npcIndex] (integer)
+    Each farmland has farmland.npcIndex identifying the NPC seller
+    Discount = min(jobCount, maxJobs, floor(0.5/discPerJob)) * discPerJob * farmlandPrice
+
+    @param farmland - The farmland object (from g_farmlandManager)
+    @param farmId - The farm ID of the buyer
+    @return discountAmount, discountPercent, jobCount, maxJobs
+            Returns 0,0,0,0 if BC not installed, not enabled, or no discount
+]]
+function ModCompatibility.getBCFarmlandDiscount(farmland, farmId)
+    if not ModCompatibility.betterContractsInstalled then
+        return 0, 0, 0, 0
+    end
+
+    -- Validate inputs
+    if farmland == nil or farmId == nil then
+        return 0, 0, 0, 0
+    end
+
+    -- Check BC global exists and discountMode is enabled
+    if BetterContracts == nil or not BetterContracts.config or not BetterContracts.config.discountMode then
+        return 0, 0, 0, 0
+    end
+
+    -- Get BC config values
+    local discPerJob = BetterContracts.config.discPerJob or 0.05
+    local discMaxJobs = BetterContracts.config.discMaxJobs or 5
+
+    -- Get farm and NPC job counts
+    local farm = g_farmManager:getFarmById(farmId)
+    if farm == nil or farm.stats == nil then
+        return 0, 0, 0, 0
+    end
+
+    -- Get NPC index for this farmland
+    local npcIndex = farmland.npcIndex
+    if npcIndex == nil then
+        return 0, 0, 0, 0
+    end
+
+    -- Read job count from BC's data on farm stats
+    local jobs = farm.stats.npcJobs or {}
+    local jobCount = jobs[npcIndex] or 0
+
+    if jobCount <= 0 then
+        return 0, 0, 0, 0
+    end
+
+    -- Calculate discount (matches BC's formula exactly)
+    -- Safety cap: floor(0.5/discPerJob) ensures discount can never exceed 50%
+    local effectiveJobs = math.min(jobCount, discMaxJobs, math.floor(0.5 / discPerJob))
+    local discountPercent = math.floor(effectiveJobs * 100 * discPerJob)
+    local discountAmount = farmland.price * effectiveJobs * discPerJob
+
+    UsedPlus.logDebug(string.format(
+        "BC farmland discount: NPC=%d, jobs=%d, effective=%d, discount=%d%% ($%d)",
+        npcIndex, jobCount, effectiveJobs, discountPercent, discountAmount))
+
+    return discountAmount, discountPercent, jobCount, discMaxJobs
+end
+
+--============================================================================
 -- FEATURE AVAILABILITY QUERIES
 -- Used by UI and managers to determine which features to enable/show
 --============================================================================
@@ -1275,6 +1372,9 @@ function ModCompatibility.getStatusString()
     end
     if ModCompatibility.enhancedLoanSystemInstalled then
         table.insert(parts, "ELS")
+    end
+    if ModCompatibility.betterContractsInstalled then
+        table.insert(parts, "BC")
     end
 
     if #parts == 0 then

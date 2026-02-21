@@ -1396,8 +1396,8 @@
         <e k="usedplus_fmf_quickRef" v="KURZE REFERENZ" eh="011d2c62" />
         <e k="usedplus_fmf_quickRefLine1" v="Shop → Finanzen/Leasing/Gebrauchtsuche | Garage → Verkaufsliste" eh="426419c9" />
         <e k="usedplus_fmf_quickRefLine2" v="Monatliche Zahlungen werden automatisch abgezogen. Eine vorzeitige Rückzahlung spart Zinsen." eh="73cd35d9" />
-        <e k="usedplus_btn_admin_panel" v="[EN] Admin Panel" eh="a0e0d3f0" />
-        <e k="usedplus_admin_no_vehicle_warning" v="[EN] You must be in a vehicle to use the Admin Panel. Enter a vehicle first, then press ESC." eh="abe11d3f" />
+        <e k="usedplus_btn_admin_panel" v="Admin-Panel" eh="a0e0d3f0" />
+        <e k="usedplus_admin_no_vehicle_warning" v="Sie müssen sich in einem Fahrzeug befinden, um das UsedPlus Admin-Panel zu verwenden. Steigen Sie zuerst in ein Fahrzeug ein und drücken Sie dann ESC." eh="abe11d3f" />
 
         <!-- Land Lease Dialog -->
         <e k="usedplus_ll_title" v="Land verpachten" eh="ec34a2a6" />
@@ -1913,6 +1913,8 @@
         <e k="usedplus_setting_malfunctions_desc" v="Zufällige Pannen und Komponentenausfälle aktivieren" eh="fbbe01f9" />
         <e k="usedplus_setting_malfunctionFrequency" v="Pannenhäufigkeit" eh="6bf458c7" />
         <e k="usedplus_setting_malfunctionFrequency_desc" v="Wie oft Pannen auftreten. 100% = normal, 50% = halb so oft, 200% = doppelt so oft" eh="4ab011c4" />
+        <e k="usedplus_setting_fluidDrainRate" v="Flüssigkeitsverbrauchsrate" eh="3fd9b024" />
+        <e k="usedplus_setting_fluidDrainRate_desc" v="Wie schnell Öl und Hydraulikflüssigkeit verbraucht werden. 100% = normal, 50% = halbe Geschwindigkeit, 200% = doppelt. Beeinflusst nicht die Leckage-Verbrauchsraten." eh="2ed81274" />
         <e k="usedplus_setting_partialRepair" v="Teilreparatur" eh="dc6b627a" />
         <e k="usedplus_setting_partialRepair_desc" v="Teilreparaturen in Werkstatt aktivieren (Deaktivierung versteckt Reparatur-Button)" eh="84fe180c" />
         <e k="usedplus_setting_partialRepaint" v="Teillackierung" eh="3fca656d" />
@@ -2402,8 +2404,8 @@
         <e k="usedplus_admin_btn_dlg_inspect" v="Inspektion" eh="35a9dbe6" />
         <e k="usedplus_admin_btn_dlg_lease_end" v="Leasingende" eh="da7801f1" />
         <e k="usedplus_admin_btn_dlg_lease_renew" v="Leasing verl." eh="7a794930" />
-        <e k="usedplus_admin_btn_dlg_fault_tracer" v="[EN] Fault Tracer" eh="d1b82197" />
-        <e k="usedplus_admin_btn_dlg_portfolio" v="[EN] Portfolio" eh="d4f859a9" />
+        <e k="usedplus_admin_btn_dlg_fault_tracer" v="Fehlersuche" eh="d1b82197" />
+        <e k="usedplus_admin_btn_dlg_portfolio" v="Portfolio" eh="d4f859a9" />
 
 
         <e k="usedplus_admin_btn_reset_hours" v="Std. reset" eh="a519e5e1" />

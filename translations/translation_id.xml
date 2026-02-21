@@ -1403,8 +1403,8 @@
         <e k="usedplus_fmf_quickRef" v="REFERENSI CEPAT" eh="011d2c62" />
         <e k="usedplus_fmf_quickRefLine1" v="Toko → Biaya/Sewa/Cari Bekas | Garasi → Daftar untuk Dijual" eh="426419c9" />
         <e k="usedplus_fmf_quickRefLine2" v="Pembayaran bulanan otomatis dipotong. Pelunasan awal menghemat bunga." eh="73cd35d9" />
-        <e k="usedplus_btn_admin_panel" v="[EN] Admin Panel" eh="a0e0d3f0" />
-        <e k="usedplus_admin_no_vehicle_warning" v="[EN] You must be in a vehicle to use the Admin Panel. Enter a vehicle first, then press ESC." eh="abe11d3f" />
+        <e k="usedplus_btn_admin_panel" v="Panel Admin" eh="a0e0d3f0" />
+        <e k="usedplus_admin_no_vehicle_warning" v="Anda harus berada di dalam kendaraan untuk menggunakan Panel Admin. Masuk ke kendaraan terlebih dahulu, lalu tekan ESC." eh="abe11d3f" />
 
         <!-- Land Lease Dialog -->
         <e k="usedplus_ll_title" v="Sewa Tanah" eh="ec34a2a6" />
@@ -2146,6 +2146,8 @@
         <!-- v2.8.0: Malfunction Frequency slider -->
         <e k="usedplus_setting_malfunctionFrequency" v="Frekuensi Kerusakan" eh="6bf458c7" />
         <e k="usedplus_setting_malfunctionFrequency_desc" v="Seberapa sering kerusakan terjadi. 100% = normal, 50% = setengah sering, 200% = dua kali lebih sering" eh="4ab011c4" />
+        <e k="usedplus_setting_fluidDrainRate" v="Laju Pengurasan Cairan" eh="3fd9b024" />
+        <e k="usedplus_setting_fluidDrainRate_desc" v="Seberapa cepat oli dan cairan hidrolik habis. 100% = normal, 50% = setengah kecepatan, 200% = dua kali lipat. Tidak memengaruhi laju pengurasan kebocoran." eh="2ed81274" />
         <!-- v2.0.0: NEW - Partial Repair/Repaint toggles -->
         <e k="usedplus_setting_partialRepair" v="Perbaikan Parsial" eh="dc6b627a" />
         <e k="usedplus_setting_partialRepair_desc" v="Aktifkan perbaikan parsial di toko kendaraan (menonaktifkan menyembunyikan tombol perbaikan)" eh="84fe180c" />
@@ -2521,15 +2523,15 @@
         <e k="usedplus_admin_btn_dlg_inspect" v="Inspeksi" eh="35a9dbe6" />
         <e k="usedplus_admin_btn_dlg_lease_end" v="Akhir Sewa" eh="da7801f1" />
         <e k="usedplus_admin_btn_dlg_lease_renew" v="Perpanjang Sewa" eh="7a794930" />
-        <e k="usedplus_admin_btn_dlg_fault_tracer" v="[EN] Fault Tracer" eh="d1b82197" />
-        <e k="usedplus_admin_btn_dlg_portfolio" v="[EN] Portfolio" eh="d4f859a9" />
+        <e k="usedplus_admin_btn_dlg_fault_tracer" v="Pelacak Kerusakan" eh="d1b82197" />
+        <e k="usedplus_admin_btn_dlg_portfolio" v="Portofolio" eh="d4f859a9" />
 
         <!-- Buttons - Tab 5 (State) -->
 
 
         <e k="usedplus_admin_btn_reset_hours" v="Reset Jam" eh="a519e5e1" />
         <e k="usedplus_admin_btn_add_hours" v="+1000 Jam" eh="ef05132d" />
-        <e k="usedplus_admin_btn_dna_lemon" v="0.1 Lemon" eh="0047d5bc" />
+        <e k="usedplus_admin_btn_dna_lemon" v="0,1 Lemon" eh="0047d5bc" />
         <e k="usedplus_admin_btn_dna_average" v="0.5 Rata-rata" eh="472d5599" />
         <e k="usedplus_admin_btn_dna_workhorse" v="0.9 Pekerja Keras" eh="b0f0ee0b" />
         <e k="usedplus_admin_btn_refill_oil" v="Isi Ulang Oli" eh="07a47687" />

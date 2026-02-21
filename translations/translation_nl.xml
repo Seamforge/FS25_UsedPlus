@@ -1132,8 +1132,8 @@
         <e k="usedplus_fmf_quickRef" v="SNELLE REFERENTIE" eh="011d2c62" />
         <e k="usedplus_fmf_quickRefLine1" v="Winkel → Financieren/Leasen/Zoek Gebruikt | Garage → Te Koop Zetten" eh="426419c9" />
         <e k="usedplus_fmf_quickRefLine2" v="Maandelijkse betalingen worden automatisch afgeschreven. Vervroegd aflossen bespaart rente." eh="73cd35d9" />
-        <e k="usedplus_btn_admin_panel" v="[EN] Admin Panel" eh="a0e0d3f0" />
-        <e k="usedplus_admin_no_vehicle_warning" v="[EN] You must be in a vehicle to use the Admin Panel. Enter a vehicle first, then press ESC." eh="abe11d3f" />
+        <e k="usedplus_btn_admin_panel" v="Beheerderspaneel" eh="a0e0d3f0" />
+        <e k="usedplus_admin_no_vehicle_warning" v="Je moet in een voertuig zitten om het UsedPlus Beheerderspaneel te gebruiken. Stap eerst in een voertuig en druk dan op ESC." eh="abe11d3f" />
         <e k="usedplus_ll_title" v="Grond Leasen" eh="ec34a2a6" />
         <e k="usedplus_ll_sectionDetails" v="VELDDETAILS" eh="9550d705" />
         <e k="usedplus_ll_field" v="Veld:" eh="af9b2925" />
@@ -1733,6 +1733,8 @@
         <e k="usedplus_setting_malfunctions_desc" v="Schakel willekeurige defecten en componentfouten in" eh="fbbe01f9" />
         <e k="usedplus_setting_malfunctionFrequency" v="Storingsfrequentie" eh="6bf458c7" />
         <e k="usedplus_setting_malfunctionFrequency_desc" v="Hoe vaak storingen optreden. 100% = normaal, 50% = half zo vaak, 200% = dubbel zo vaak" eh="4ab011c4" />
+        <e k="usedplus_setting_fluidDrainRate" v="Vloeistofverbruik" eh="3fd9b024" />
+        <e k="usedplus_setting_fluidDrainRate_desc" v="Hoe snel olie en hydraulische vloeistof opraken. 100% = normaal, 50% = halve snelheid, 200% = dubbel. Heeft geen invloed op leksnelheden." eh="2ed81274" />
         <e k="usedplus_setting_partialRepair" v="Gedeeltelijke Reparatie" eh="dc6b627a" />
         <e k="usedplus_setting_partialRepair_desc" v="Schakel gedeeltelijke reparaties in bij voertuigwinkel (uitschakelen verbergt reparatieknop)" eh="84fe180c" />
         <e k="usedplus_setting_partialRepaint" v="Gedeeltelijk Overschilderen" eh="3fca656d" />
@@ -1989,8 +1991,8 @@
         <e k="usedplus_admin_btn_dlg_inspect" v="Inspecteer" eh="35a9dbe6" />
         <e k="usedplus_admin_btn_dlg_lease_end" v="Lease Einde" eh="da7801f1" />
         <e k="usedplus_admin_btn_dlg_lease_renew" v="Lease Verlengen" eh="7a794930" />
-        <e k="usedplus_admin_btn_dlg_fault_tracer" v="[EN] Fault Tracer" eh="d1b82197" />
-        <e k="usedplus_admin_btn_dlg_portfolio" v="[EN] Portfolio" eh="d4f859a9" />
+        <e k="usedplus_admin_btn_dlg_fault_tracer" v="Foutopsporing" eh="d1b82197" />
+        <e k="usedplus_admin_btn_dlg_portfolio" v="Portefeuille" eh="d4f859a9" />
         <e k="usedplus_admin_btn_reset_hours" v="Reset Uren" eh="a519e5e1" />
         <e k="usedplus_admin_btn_add_hours" v="+1000 Uren" eh="ef05132d" />
         <e k="usedplus_admin_btn_dna_lemon" v="0.1 Citroen" eh="0047d5bc" />

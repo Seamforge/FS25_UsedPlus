@@ -1130,8 +1130,8 @@
         <e k="usedplus_fmf_quickRef" v="HIZLI REFERANS" eh="011d2c62" />
         <e k="usedplus_fmf_quickRefLine1" v="Mağaza → Finanse Et/Kirala/İkinci El Ara | Garaj → Satışa Çıkar" eh="426419c9" />
         <e k="usedplus_fmf_quickRefLine2" v="Aylık ödemeler otomatik kesilir. Erken ödeme faizden tasarruf sağlar." eh="73cd35d9" />
-        <e k="usedplus_btn_admin_panel" v="[EN] Admin Panel" eh="a0e0d3f0" />
-        <e k="usedplus_admin_no_vehicle_warning" v="[EN] You must be in a vehicle to use the Admin Panel. Enter a vehicle first, then press ESC." eh="abe11d3f" />
+        <e k="usedplus_btn_admin_panel" v="Yönetici Paneli" eh="a0e0d3f0" />
+        <e k="usedplus_admin_no_vehicle_warning" v="Yönetici Panelini kullanmak için bir araçta olmalısınız. Önce bir araca binin, ardından ESC tuşuna basın." eh="abe11d3f" />
         <e k="usedplus_ll_title" v="Arazi Kirala" eh="ec34a2a6" />
         <e k="usedplus_ll_sectionDetails" v="TARLA DETAYLARI" eh="9550d705" />
         <e k="usedplus_ll_field" v="Tarla:" eh="af9b2925" />
@@ -1732,6 +1732,8 @@
         <e k="usedplus_setting_malfunctions_desc" v="Rastgele arızaları ve parça bozulmalarını etkinleştir" eh="fbbe01f9" />
         <e k="usedplus_setting_malfunctionFrequency" v="Arıza Sıklığı" eh="6bf458c7" />
         <e k="usedplus_setting_malfunctionFrequency_desc" v="Arızaların ne sıklıkta oluşacağı. %100 = normal, %50 = yarısı kadar, %200 = iki katı" eh="4ab011c4" />
+        <e k="usedplus_setting_fluidDrainRate" v="Sıvı Tüketim Hızı" eh="3fd9b024" />
+        <e k="usedplus_setting_fluidDrainRate_desc" v="Yağ ve hidrolik sıvının ne kadar hızlı tükendiğini belirler. 100% = normal, 50% = yarı hız, 200% = iki katı. Sızıntı hızlarını etkilemez." eh="2ed81274" />
         <e k="usedplus_setting_partialRepair" v="Kısmi Onarım" eh="dc6b627a" />
         <e k="usedplus_setting_partialRepair_desc" v="Araç mağazasında kısmi onarımları etkinleştir (devre dışı bırakılırsa onarım düğmesi gizlenir)" eh="84fe180c" />
         <e k="usedplus_setting_partialRepaint" v="Kısmi Boyama" eh="3fca656d" />
@@ -1988,8 +1990,8 @@
         <e k="usedplus_admin_btn_dlg_inspect" v="İncele" eh="35a9dbe6" />
         <e k="usedplus_admin_btn_dlg_lease_end" v="Kira Sonu" eh="da7801f1" />
         <e k="usedplus_admin_btn_dlg_lease_renew" v="Kira Yenile" eh="7a794930" />
-        <e k="usedplus_admin_btn_dlg_fault_tracer" v="[EN] Fault Tracer" eh="d1b82197" />
-        <e k="usedplus_admin_btn_dlg_portfolio" v="[EN] Portfolio" eh="d4f859a9" />
+        <e k="usedplus_admin_btn_dlg_fault_tracer" v="Arıza Takipçisi" eh="d1b82197" />
+        <e k="usedplus_admin_btn_dlg_portfolio" v="Portföy" eh="d4f859a9" />
         <e k="usedplus_admin_btn_reset_hours" v="Saat Sıfırla" eh="a519e5e1" />
         <e k="usedplus_admin_btn_add_hours" v="+1000 Saat" eh="ef05132d" />
         <e k="usedplus_admin_btn_dna_lemon" v="0.1 Limon" eh="0047d5bc" />

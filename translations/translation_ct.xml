@@ -1074,8 +1074,8 @@
         <e k="usedplus_fmf_quickRef" v="QUICK REFERENCE" eh="011d2c62" />
         <e k="usedplus_fmf_quickRefLine1" v="Shop → 融資/租賃/搜尋 二手 | Garage → List for 銷售" eh="426419c9" />
         <e k="usedplus_fmf_quickRefLine2" v="月付款 payments auto-deduct. 提前 payoff saves interest." eh="73cd35d9" />
-        <e k="usedplus_btn_admin_panel" v="[EN] Admin Panel" eh="a0e0d3f0" />
-        <e k="usedplus_admin_no_vehicle_warning" v="[EN] You must be in a vehicle to use the Admin Panel. Enter a vehicle first, then press ESC." eh="abe11d3f" />
+        <e k="usedplus_btn_admin_panel" v="管理面板" eh="a0e0d3f0" />
+        <e k="usedplus_admin_no_vehicle_warning" v="您必須在車輛中才能使用 UsedPlus 管理面板。請先進入車輛，然後按 ESC。" eh="abe11d3f" />
         <e k="usedplus_ll_title" v="租賃 土地" eh="ec34a2a6" />
 
         <!-- Land Lease Dialog -->
@@ -1814,6 +1814,8 @@
         <!-- v2.8.0: Malfunction Frequency slider -->
         <e k="usedplus_setting_malfunctionFrequency" v="失靈 Frequency" eh="6bf458c7" />
         <e k="usedplus_setting_malfunctionFrequency_desc" v="故障發生頻率。100% = 正常，50% = 一半頻率，200% = 兩倍頻率" eh="4ab011c4" />
+        <e k="usedplus_setting_fluidDrainRate" v="液體消耗速率" eh="3fd9b024" />
+        <e k="usedplus_setting_fluidDrainRate_desc" v="機油和液壓油的消耗速度。100% = 正常，50% = 半速，200% = 兩倍速。不影響洩漏消耗速率。" eh="2ed81274" />
         <!-- v2.0.0: NEW - Partial Repair/Repaint toggles -->
         <e k="usedplus_setting_partialRepair" v="Partial 維修" eh="dc6b627a" />
         <e k="usedplus_setting_partialRepair_desc" v="在車輛商店啟用部分維修（停用會隱藏維修按鈕）" eh="84fe180c" />
@@ -2193,8 +2195,8 @@
         <e k="usedplus_admin_btn_dlg_inspect" v="檢查" eh="35a9dbe6" />
         <e k="usedplus_admin_btn_dlg_lease_end" v="租賃 End" eh="da7801f1" />
         <e k="usedplus_admin_btn_dlg_lease_renew" v="租賃 Renew" eh="7a794930" />
-        <e k="usedplus_admin_btn_dlg_fault_tracer" v="[EN] Fault Tracer" eh="d1b82197" />
-        <e k="usedplus_admin_btn_dlg_portfolio" v="[EN] Portfolio" eh="d4f859a9" />
+        <e k="usedplus_admin_btn_dlg_fault_tracer" v="故障追蹤器" eh="d1b82197" />
+        <e k="usedplus_admin_btn_dlg_portfolio" v="資產組合" eh="d4f859a9" />
 
         <!-- Buttons - Tab 5 (State) -->
 

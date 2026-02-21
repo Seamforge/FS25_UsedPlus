@@ -1403,8 +1403,8 @@
         <e k="usedplus_fmf_quickRef" v="빠른 참조" eh="011d2c62" />
         <e k="usedplus_fmf_quickRefLine1" v="상점 → 융자/임대/중고 검색 | 차고 → 판매 등록" eh="426419c9" />
         <e k="usedplus_fmf_quickRefLine2" v="월 납부액은 자동으로 차감됩니다. 조기 상환은 이자를 절약합니다." eh="73cd35d9" />
-        <e k="usedplus_btn_admin_panel" v="[EN] Admin Panel" eh="a0e0d3f0" />
-        <e k="usedplus_admin_no_vehicle_warning" v="[EN] You must be in a vehicle to use the Admin Panel. Enter a vehicle first, then press ESC." eh="abe11d3f" />
+        <e k="usedplus_btn_admin_panel" v="관리 패널" eh="a0e0d3f0" />
+        <e k="usedplus_admin_no_vehicle_warning" v="관리 패널을 사용하려면 차량에 탑승해야 합니다. 먼저 차량에 탑승한 후 ESC를 누르세요." eh="abe11d3f" />
 
         <!-- Land Lease Dialog -->
         <e k="usedplus_ll_title" v="토지 임대" eh="ec34a2a6" />
@@ -2146,6 +2146,8 @@
         <!-- v2.8.0: Malfunction Frequency slider -->
         <e k="usedplus_setting_malfunctionFrequency" v="고장 빈도" eh="6bf458c7" />
         <e k="usedplus_setting_malfunctionFrequency_desc" v="고장이 발생하는 빈도. 100% = 정상, 50% = 절반 빈도, 200% = 두 배 빈도" eh="4ab011c4" />
+        <e k="usedplus_setting_fluidDrainRate" v="유체 소모 속도" eh="3fd9b024" />
+        <e k="usedplus_setting_fluidDrainRate_desc" v="오일과 유압유가 소모되는 속도. 100% = 정상, 50% = 절반 속도, 200% = 두 배. 누출 소모 속도에는 영향을 미치지 않습니다." eh="2ed81274" />
         <!-- v2.0.0: NEW - Partial Repair/Repaint toggles -->
         <e k="usedplus_setting_partialRepair" v="부분 수리" eh="dc6b627a" />
         <e k="usedplus_setting_partialRepair_desc" v="차량 상점에서 부분 수리 활성화 (비활성화 시 수리 버튼 숨김)" eh="84fe180c" />
@@ -2513,8 +2515,8 @@
         <e k="usedplus_admin_btn_dlg_inspect" v="검사" eh="35a9dbe6" />
         <e k="usedplus_admin_btn_dlg_lease_end" v="Lease End" eh="da7801f1" />
         <e k="usedplus_admin_btn_dlg_lease_renew" v="Lease Renew" eh="7a794930" />
-        <e k="usedplus_admin_btn_dlg_fault_tracer" v="[EN] Fault Tracer" eh="d1b82197" />
-        <e k="usedplus_admin_btn_dlg_portfolio" v="[EN] Portfolio" eh="d4f859a9" />
+        <e k="usedplus_admin_btn_dlg_fault_tracer" v="결함 추적기" eh="d1b82197" />
+        <e k="usedplus_admin_btn_dlg_portfolio" v="포트폴리오" eh="d4f859a9" />
 
         <!-- Buttons - Tab 5 (State) -->
         <e k="usedplus_admin_btn_reset_hours" v="Reset Hours" eh="a519e5e1" />

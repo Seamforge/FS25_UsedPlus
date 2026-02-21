@@ -134,8 +134,11 @@ function UsedPlusMaintenance.updateOilSystem(vehicle, dt)
         end
     end
 
+    -- v2.15.1: Apply user-configurable drain rate multiplier
+    local drainMult = UsedPlusSettings and UsedPlusSettings:get("fluidDrainRateMultiplier") or 1.0
+
     -- Apply depletion
-    local depletion = baseRate * leakMult * (dt / 1000)  -- dt is in ms
+    local depletion = baseRate * leakMult * drainMult * (dt / 1000)  -- dt is in ms
     spec.oilLevel = math.max(0, (spec.oilLevel or 1.0) - depletion)
 
     -- Check for low oil damage
@@ -241,13 +244,16 @@ function UsedPlusMaintenance.updateHydraulicFluidSystem(vehicle, dt)
         end
     end
 
+    -- v2.15.1: Apply user-configurable drain rate multiplier
+    local drainMult = UsedPlusSettings and UsedPlusSettings:get("fluidDrainRateMultiplier") or 1.0
+
     -- Apply depletion
     local depletion = 0
     if isUsingHydraulics then
-        depletion = config.hydraulicFluidDepletionPerAction * leakMult
+        depletion = config.hydraulicFluidDepletionPerAction * leakMult * drainMult
     elseif spec.hasHydraulicLeak and malfunctionsEnabled then
         -- Passive leak depletion (slower than active use)
-        depletion = config.hydraulicFluidDepletionPerAction * 0.1 * leakMult
+        depletion = config.hydraulicFluidDepletionPerAction * 0.1 * leakMult * drainMult
     end
 
     if depletion > 0 then

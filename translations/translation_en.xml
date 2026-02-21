@@ -2150,6 +2150,9 @@
         <!-- v2.8.0: Malfunction Frequency slider -->
         <e k="usedplus_setting_malfunctionFrequency" v="Malfunction Frequency" eh="6bf458c7" />
         <e k="usedplus_setting_malfunctionFrequency_desc" v="How often malfunctions occur. 100% = normal, 50% = half as often, 200% = twice as often" eh="4ab011c4" />
+        <!-- v2.15.1: Fluid Drain Rate slider -->
+        <e k="usedplus_setting_fluidDrainRate" v="Fluid Drain Rate" eh="3fd9b024" />
+        <e k="usedplus_setting_fluidDrainRate_desc" v="How fast oil and hydraulic fluid deplete. 100% = normal, 50% = half speed, 200% = double. Does not affect leak drain rates." eh="2ed81274" />
         <!-- v2.0.0: NEW - Partial Repair/Repaint toggles -->
         <e k="usedplus_setting_partialRepair" v="Partial Repair" eh="dc6b627a" />
         <e k="usedplus_setting_partialRepair_desc" v="Enable partial repairs in vehicle shop (disabling hides repair button)" eh="84fe180c" />

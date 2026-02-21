@@ -1127,8 +1127,8 @@
         <e k="usedplus_fmf_quickRef" v="REFERINTA RAPIDA" eh="011d2c62" />
         <e k="usedplus_fmf_quickRefLine1" v="Shop → Finantare/Leasing/Cauta Uzat | Garage → List pentru Sale" eh="426419c9" />
         <e k="usedplus_fmf_quickRefLine2" v="Lunar payments auto-deduct. Early payoff saves dobanda." eh="73cd35d9" />
-        <e k="usedplus_btn_admin_panel" v="[EN] Admin Panel" eh="a0e0d3f0" />
-        <e k="usedplus_admin_no_vehicle_warning" v="[EN] You must be in a vehicle to use the Admin Panel. Enter a vehicle first, then press ESC." eh="abe11d3f" />
+        <e k="usedplus_btn_admin_panel" v="Panou Administrator" eh="a0e0d3f0" />
+        <e k="usedplus_admin_no_vehicle_warning" v="Trebuie să fii într-un vehicul pentru a folosi Panoul Administrator UsedPlus. Intră mai întâi într-un vehicul, apoi apasă ESC." eh="abe11d3f" />
         <e k="usedplus_ll_title" v="Leasing Teren" eh="ec34a2a6" />
         <e k="usedplus_ll_sectionDetails" v="CAMP DETALII" eh="9550d705" />
         <e k="usedplus_ll_field" v="Camp:" eh="af9b2925" />
@@ -1728,6 +1728,8 @@
         <e k="usedplus_setting_malfunctions_desc" v="Enable random breakdowns si component failures" eh="fbbe01f9" />
         <e k="usedplus_setting_malfunctionFrequency" v="Frecvență Defecțiuni" eh="6bf458c7" />
         <e k="usedplus_setting_malfunctionFrequency_desc" v="Cât de des apar defecțiuni. 100% = normal, 50% = jumătate mai rar, 200% = de 2 ori mai des" eh="4ab011c4" />
+        <e k="usedplus_setting_fluidDrainRate" v="Rata Consum Fluide" eh="3fd9b024" />
+        <e k="usedplus_setting_fluidDrainRate_desc" v="Cât de repede se consumă uleiul și lichidul hidraulic. 100% = normal, 50% = jumătate din viteză, 200% = dublu. Nu afectează ratele de scurgere." eh="2ed81274" />
         <e k="usedplus_setting_partialRepair" v="Partial Reparatie" eh="dc6b627a" />
         <e k="usedplus_setting_partialRepair_desc" v="Enable partial repairs in vehicul shop (disabling hides reparatie button)" eh="84fe180c" />
         <e k="usedplus_setting_partialRepaint" v="Partial Revopsire" eh="3fca656d" />
@@ -1984,8 +1986,8 @@
         <e k="usedplus_admin_btn_dlg_inspect" v="Inspectie" eh="35a9dbe6" />
         <e k="usedplus_admin_btn_dlg_lease_end" v="Leasing End" eh="da7801f1" />
         <e k="usedplus_admin_btn_dlg_lease_renew" v="Leasing Renew" eh="7a794930" />
-        <e k="usedplus_admin_btn_dlg_fault_tracer" v="[EN] Fault Tracer" eh="d1b82197" />
-        <e k="usedplus_admin_btn_dlg_portfolio" v="[EN] Portfolio" eh="d4f859a9" />
+        <e k="usedplus_admin_btn_dlg_fault_tracer" v="Urmărire Defecte" eh="d1b82197" />
+        <e k="usedplus_admin_btn_dlg_portfolio" v="Portofoliu" eh="d4f859a9" />
         <e k="usedplus_admin_btn_reset_hours" v="Reseteaza Ore" eh="a519e5e1" />
         <e k="usedplus_admin_btn_add_hours" v="+1000 Ore" eh="ef05132d" />
         <e k="usedplus_admin_btn_dna_lemon" v="0.1 Lămâie" eh="0047d5bc" />

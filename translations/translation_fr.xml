@@ -1391,8 +1391,8 @@
         <e k="usedplus_fmf_quickRef" v="RÉFÉRENCE RAPIDE" eh="011d2c62" />
         <e k="usedplus_fmf_quickRefLine1" v="Boutique → Financer/Louer/Chercher occasion | Garage → Mettre en vente" eh="426419c9" />
         <e k="usedplus_fmf_quickRefLine2" v="Paiements mensuels déduits auto. Remboursement anticipé économise intérêts." eh="73cd35d9" />
-        <e k="usedplus_btn_admin_panel" v="[EN] Admin Panel" eh="a0e0d3f0" />
-        <e k="usedplus_admin_no_vehicle_warning" v="[EN] You must be in a vehicle to use the Admin Panel. Enter a vehicle first, then press ESC." eh="abe11d3f" />
+        <e k="usedplus_btn_admin_panel" v="Panneau d'administration" eh="a0e0d3f0" />
+        <e k="usedplus_admin_no_vehicle_warning" v="Vous devez être dans un véhicule pour utiliser le panneau d'administration. Montez dans un véhicule d'abord, puis appuyez sur Échap." eh="abe11d3f" />
 
         <!-- Land Lease Dialog -->
         <e k="usedplus_ll_title" v="Louer un terrain" eh="ec34a2a6" />
@@ -1907,6 +1907,8 @@
         <e k="usedplus_setting_malfunctions_desc" v="Activer les pannes aléatoires et défaillances de composants" eh="fbbe01f9" />
         <e k="usedplus_setting_malfunctionFrequency" v="Fréquence des pannes" eh="6bf458c7" />
         <e k="usedplus_setting_malfunctionFrequency_desc" v="Fréquence des pannes. 100% = normal, 50% = deux fois moins, 200% = deux fois plus" eh="4ab011c4" />
+        <e k="usedplus_setting_fluidDrainRate" v="Taux de consommation des fluides" eh="3fd9b024" />
+        <e k="usedplus_setting_fluidDrainRate_desc" v="Vitesse à laquelle l'huile et le fluide hydraulique s'épuisent. 100% = normal, 50% = moitié, 200% = double. N'affecte pas les taux de drainage des fuites." eh="2ed81274" />
         <e k="usedplus_setting_partialRepair" v="Réparation Partielle" eh="dc6b627a" />
         <e k="usedplus_setting_partialRepair_desc" v="Activer les réparations partielles en atelier (désactiver masque le bouton réparation)" eh="84fe180c" />
         <e k="usedplus_setting_partialRepaint" v="Peinture Partielle" eh="3fca656d" />
@@ -2385,8 +2387,8 @@
         <e k="usedplus_admin_btn_dlg_inspect" v="Inspecter" eh="35a9dbe6" />
         <e k="usedplus_admin_btn_dlg_lease_end" v="Fin Location" eh="da7801f1" />
         <e k="usedplus_admin_btn_dlg_lease_renew" v="Renouveler Location" eh="7a794930" />
-        <e k="usedplus_admin_btn_dlg_fault_tracer" v="[EN] Fault Tracer" eh="d1b82197" />
-        <e k="usedplus_admin_btn_dlg_portfolio" v="[EN] Portfolio" eh="d4f859a9" />
+        <e k="usedplus_admin_btn_dlg_fault_tracer" v="Traceur de pannes" eh="d1b82197" />
+        <e k="usedplus_admin_btn_dlg_portfolio" v="Portefeuille" eh="d4f859a9" />
 
 
         <e k="usedplus_admin_btn_reset_hours" v="Réinit Heures" eh="a519e5e1" />
@@ -2401,10 +2403,10 @@
 
 
         <e k="usedplus_admin_action_reliability" v="Fiabilité" eh="820b8f74" />
-        <e k="usedplus_admin_action_condition" v="Condition" eh="9e2941b3" />
+        <e k="usedplus_admin_action_condition" v="État" eh="9e2941b3" />
         <e k="usedplus_admin_action_hours" v="Heures" eh="6a7e7316" />
         <e k="usedplus_admin_action_dna" v="ADN du Véhicule" eh="0ce6fbcf" />
-        <e k="usedplus_admin_action_maintenance" v="Maintenance" eh="10d0de28" />
+        <e k="usedplus_admin_action_maintenance" v="Entretien" eh="10d0de28" />
         <e k="usedplus_admin_action_money" v="Argent" eh="a9331282" />
         <e k="usedplus_admin_action_credit" v="Score de Crédit" eh="ae61b052" />
         <e k="usedplus_admin_btn_repair" v="Réparer" eh="0493d27e" />

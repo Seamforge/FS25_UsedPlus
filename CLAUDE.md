@@ -618,6 +618,10 @@ end
 
 ## GitHub Issue Workflow
 
+### Follow-Up = Edit, Don't Comment
+
+**RULE**: When the user provides follow-up instructions for a comment that was **just posted** (e.g., "add this to the message", "also mention X", "let them know Y"), **edit the existing comment** using the GitHub API (`gh api ... -X PATCH --field body=...`) instead of posting a new comment. Multiple rapid-fire comments on the same issue look unprofessional and clutter the thread. Keep it to one clean, comprehensive comment.
+
 ### Language: Match the Reporter
 
 **RULE**: Always reply to GitHub issues in the **same language** the person used to submit the issue. If they filed in French, reply in French. If in German, reply in German. Put the primary response in their language first, then add an English recap in a collapsible `<details>` block at the bottom for other readers.
@@ -649,6 +653,22 @@ end
 - "We're confident this addresses the root cause, but please verify on your end"
 
 **Why:** We develop without access to the reporter's save, mod list, or hardware. Our fix may address the wrong code path, or there may be a second bug with similar symptoms. Stating certainty before confirmation is dishonest and erodes trust if the fix doesn't work.
+
+### Tone: Be Polite
+
+**RULE**: Always use "please" and "thank you" when asking users to test, provide logs, or take any action. These people are volunteering their time to help us improve the mod — politeness goes a long way.
+
+**❌ DON'T say:**
+- "Could you try re-enabling the mod and test again?"
+- "Make sure you're on the latest version."
+- "Share your log file."
+
+**✅ DO say:**
+- "Could you **please** try re-enabling the mod and test again?"
+- "**Please** make sure you're on the latest version."
+- "Would you mind sharing your log file?"
+
+**Why:** Bug reporters and testers are doing us a favor. A little courtesy builds goodwill, encourages future reports, and reflects well on the project.
 
 ### Project Status: Use "Fixed" (Not "Done")
 

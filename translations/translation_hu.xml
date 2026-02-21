@@ -1130,8 +1130,8 @@
         <e k="usedplus_fmf_quickRef" v="GYORS ÚTMUTATÓ" eh="011d2c62" />
         <e k="usedplus_fmf_quickRefLine1" v="Bolt → Finanszírozás/Lízing/Használt keresése | Garázs → Eladásra hirdetés" eh="426419c9" />
         <e k="usedplus_fmf_quickRefLine2" v="Havi törlesztések automatikusan levonódnak. Előtörlesztés kamatot takarít meg." eh="73cd35d9" />
-        <e k="usedplus_btn_admin_panel" v="[EN] Admin Panel" eh="a0e0d3f0" />
-        <e k="usedplus_admin_no_vehicle_warning" v="[EN] You must be in a vehicle to use the Admin Panel. Enter a vehicle first, then press ESC." eh="abe11d3f" />
+        <e k="usedplus_btn_admin_panel" v="Admin Panel" eh="a0e0d3f0" />
+        <e k="usedplus_admin_no_vehicle_warning" v="Az Admin Panel használatához járműben kell lenned. Először szállj be egy járműbe, majd nyomd meg az ESC-t." eh="abe11d3f" />
         <e k="usedplus_ll_title" v="Föld bérlése" eh="ec34a2a6" />
         <e k="usedplus_ll_sectionDetails" v="MEZŐ RÉSZLETEI" eh="9550d705" />
         <e k="usedplus_ll_field" v="Mező:" eh="af9b2925" />
@@ -1732,6 +1732,8 @@
         <e k="usedplus_setting_malfunctions_desc" v="Véletlenszerű meghibásodások és alkatrész hibák engedélyezése" eh="fbbe01f9" />
         <e k="usedplus_setting_malfunctionFrequency" v="Meghibásodás gyakoriság" eh="6bf458c7" />
         <e k="usedplus_setting_malfunctionFrequency_desc" v="Milyen gyakran fordulnak elő meghibásodások. 100% = normál, 50% = fele olyan gyakori, 200% = kétszer olyan gyakori" eh="4ab011c4" />
+        <e k="usedplus_setting_fluidDrainRate" v="Folyadék fogyási sebesség" eh="3fd9b024" />
+        <e k="usedplus_setting_fluidDrainRate_desc" v="Az olaj és hidraulikafolyadék fogyási sebessége. 100% = normál, 50% = fele sebesség, 200% = dupla. Nem befolyásolja a szivárgási sebességet." eh="2ed81274" />
         <e k="usedplus_setting_partialRepair" v="Részleges javítás" eh="dc6b627a" />
         <e k="usedplus_setting_partialRepair_desc" v="Részleges javítás engedélyezése a járműboltban (kikapcsolva elrejti a javítás gombot)" eh="84fe180c" />
         <e k="usedplus_setting_partialRepaint" v="Részleges újrafestés" eh="3fca656d" />
@@ -1996,8 +1998,8 @@
         <e k="usedplus_admin_btn_dlg_inspect" v="Vizsgálat" eh="35a9dbe6" />
         <e k="usedplus_admin_btn_dlg_lease_end" v="Lízing vége" eh="da7801f1" />
         <e k="usedplus_admin_btn_dlg_lease_renew" v="Lízing meghossz." eh="7a794930" />
-        <e k="usedplus_admin_btn_dlg_fault_tracer" v="[EN] Fault Tracer" eh="d1b82197" />
-        <e k="usedplus_admin_btn_dlg_portfolio" v="[EN] Portfolio" eh="d4f859a9" />
+        <e k="usedplus_admin_btn_dlg_fault_tracer" v="Hibakereső" eh="d1b82197" />
+        <e k="usedplus_admin_btn_dlg_portfolio" v="Portfólió" eh="d4f859a9" />
 
 
         <e k="usedplus_admin_btn_reset_hours" v="Órák törlése" eh="a519e5e1" />

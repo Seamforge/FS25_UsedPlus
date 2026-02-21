@@ -86,6 +86,10 @@ UsedPlusSettingsMenuExtension.ranges = {
     -- v2.8.0: Malfunction Frequency multiplier
     malfunctionFrequency = {"25%", "50%", "75%", "100%", "125%", "150%", "175%", "200%"},
     malfunctionFrequencyValues = {0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0},
+
+    -- v2.15.1: Fluid Drain Rate multiplier
+    fluidDrainRate = {"25%", "50%", "75%", "100%", "125%", "150%", "175%", "200%"},
+    fluidDrainRateValues = {0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0},
 }
 
 --[[
@@ -199,6 +203,13 @@ function UsedPlusSettingsMenuExtension:addSettingsElements(frame)
         frame, "onMalfunctionFrequencyChanged", ranges.malfunctionFrequency,
         g_i18n:getText("usedplus_setting_malfunctionFrequency") or "Malfunction Frequency",
         g_i18n:getText("usedplus_setting_malfunctionFrequency_desc") or "How often malfunctions occur. 100% = normal, 50% = half as often, 200% = twice as often"
+    )
+
+    -- v2.15.1: Fluid Drain Rate slider
+    frame.usedplus_fluidDrainRate = UsedPlusSettingsMenuExtension:addMultiTextOption(
+        frame, "onFluidDrainRateChanged", ranges.fluidDrainRate,
+        g_i18n:getText("usedplus_setting_fluidDrainRate") or "Fluid Drain Rate",
+        g_i18n:getText("usedplus_setting_fluidDrainRate_desc") or "How fast oil and hydraulic fluid deplete. 100% = normal, 50% = half speed, 200% = double speed"
     )
 
     -- v2.0.0: NEW - Partial Repair toggle
@@ -606,6 +617,7 @@ function UsedPlusSettingsMenuExtension:updateSettingsUI(frame)
     setState(frame.usedplus_brandBonus, ranges.brandBonusValues, "brandLoyaltyBonus")
     setState(frame.usedplus_bankInterestRate, ranges.bankInterestRateValues, "bankInterestRate") -- v2.0.0
     setState(frame.usedplus_malfunctionFrequency, ranges.malfunctionFrequencyValues, "malfunctionFrequencyMultiplier") -- v2.8.0
+    setState(frame.usedplus_fluidDrainRate, ranges.fluidDrainRateValues, "fluidDrainRateMultiplier") -- v2.15.1
 
     -- Preset selector defaults to first option
     if frame.usedplus_presetOption then
@@ -694,6 +706,14 @@ function UsedPlusSettingsMenuExtension:onMalfunctionFrequencyChanged(state)
         local values = UsedPlusSettingsMenuExtension.ranges.malfunctionFrequencyValues
         local value = values[state] or 1.0
         UsedPlusSettings:set("malfunctionFrequencyMultiplier", value)
+    end
+end
+
+-- v2.15.1: Fluid Drain Rate slider
+function UsedPlusSettingsMenuExtension:onFluidDrainRateChanged(state)
+    if UsedPlusSettings then
+        local value = UsedPlusSettingsMenuExtension.ranges.fluidDrainRateValues[state]
+        UsedPlusSettings:set("fluidDrainRateMultiplier", value)
     end
 end
 

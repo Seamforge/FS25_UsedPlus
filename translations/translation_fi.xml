@@ -1403,8 +1403,8 @@
         <e k="usedplus_fmf_quickRef" v="PIKAOHJE" eh="011d2c62" />
         <e k="usedplus_fmf_quickRefLine1" v="Kauppa → Rahoita/Vuokraa/Etsi käytetty | Autohalli → Listaa myyntiin" eh="426419c9" />
         <e k="usedplus_fmf_quickRefLine2" v="Kuukausimaksut vähennetään automaattisesti. Aikainen maksu säästää korkoja." eh="73cd35d9" />
-        <e k="usedplus_btn_admin_panel" v="[EN] Admin Panel" eh="a0e0d3f0" />
-        <e k="usedplus_admin_no_vehicle_warning" v="[EN] You must be in a vehicle to use the Admin Panel. Enter a vehicle first, then press ESC." eh="abe11d3f" />
+        <e k="usedplus_btn_admin_panel" v="Hallintapaneeli" eh="a0e0d3f0" />
+        <e k="usedplus_admin_no_vehicle_warning" v="Sinun täytyy olla ajoneuvossa käyttääksesi hallintapaneelia. Mene ensin ajoneuvoon ja paina sitten ESC." eh="abe11d3f" />
 
         <!-- Land Lease Dialog -->
         <e k="usedplus_ll_title" v="Vuokraa maata" eh="ec34a2a6" />
@@ -2146,6 +2146,8 @@
         <!-- v2.8.0: Malfunction Frequency slider -->
         <e k="usedplus_setting_malfunctionFrequency" v="Toimintahäiriön taajuus" eh="6bf458c7" />
         <e k="usedplus_setting_malfunctionFrequency_desc" v="Kuinka usein toimintahäiriöitä tapahtuu. 100% = normaali, 50% = puolet harvemmin, 200% = kaksi kertaa useammin" eh="4ab011c4" />
+        <e k="usedplus_setting_fluidDrainRate" v="Nesteiden kulutusnopeus" eh="3fd9b024" />
+        <e k="usedplus_setting_fluidDrainRate_desc" v="Kuinka nopeasti öljy ja hydraulineste kuluvat. 100% = normaali, 50% = puolinopeus, 200% = kaksinkertainen. Ei vaikuta vuotojen kulutusnopeuksiin." eh="2ed81274" />
         <!-- v2.0.0: NEW - Partial Repair/Repaint toggles -->
         <e k="usedplus_setting_partialRepair" v="Osittainen korjaus" eh="dc6b627a" />
         <e k="usedplus_setting_partialRepair_desc" v="Ota käyttöön osittaiset korjaukset ajoneuvoliikkeessä (poistaminen käytöstä piilottaa korjauspainikkeen)" eh="84fe180c" />
@@ -2521,8 +2523,8 @@
         <e k="usedplus_admin_btn_dlg_inspect" v="Tarkasta" eh="35a9dbe6" />
         <e k="usedplus_admin_btn_dlg_lease_end" v="Leasingin loppu" eh="da7801f1" />
         <e k="usedplus_admin_btn_dlg_lease_renew" v="Leasingin uusinta" eh="7a794930" />
-        <e k="usedplus_admin_btn_dlg_fault_tracer" v="[EN] Fault Tracer" eh="d1b82197" />
-        <e k="usedplus_admin_btn_dlg_portfolio" v="[EN] Portfolio" eh="d4f859a9" />
+        <e k="usedplus_admin_btn_dlg_fault_tracer" v="Vianetsintä" eh="d1b82197" />
+        <e k="usedplus_admin_btn_dlg_portfolio" v="Portfolio" eh="d4f859a9" />
 
         <!-- Buttons - Tab 5 (State) -->
 

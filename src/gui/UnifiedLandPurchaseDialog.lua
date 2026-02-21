@@ -125,6 +125,13 @@ function UnifiedLandPurchaseDialog.new(target, custom_mt)
     self.creditRating = "Fair"
     self.interestRate = 0.06  -- Land loans typically have lower rates
 
+    -- v2.16.0: Better Contracts farmland discount
+    self.bcDiscountAmount = 0
+    self.bcDiscountPercent = 0
+    self.bcJobCount = 0
+    self.bcMaxJobs = 0
+    self.bcDiscountedPrice = 0
+
     return self
 end
 
@@ -242,6 +249,17 @@ function UnifiedLandPurchaseDialog:setLandData(farmlandId, farmland, price)
         self.soilQuality = "Unknown"
     end
 
+    -- v2.16.0: Check for Better Contracts farmland discount
+    self.bcDiscountAmount, self.bcDiscountPercent, self.bcJobCount, self.bcMaxJobs = 0, 0, 0, 0
+    if ModCompatibility and ModCompatibility.betterContractsInstalled and self.farmland then
+        self.bcDiscountAmount, self.bcDiscountPercent, self.bcJobCount, self.bcMaxJobs =
+            ModCompatibility.getBCFarmlandDiscount(self.farmland, g_currentMission:getFarmId())
+    end
+
+    -- Apply BC discount to base price BEFORE credit adjustment
+    -- BC discount = vendor loyalty discount, credit = bank risk assessment
+    self.bcDiscountedPrice = self.baseLandPrice - self.bcDiscountAmount
+
     -- Calculate credit parameters (this also calculates adjusted price)
     self:calculateCreditParameters()
 
@@ -302,17 +320,19 @@ function UnifiedLandPurchaseDialog:calculateCreditParameters()
     end
 
     -- Calculate credit-adjusted land price (only if credit enabled)
-    if creditEnabled and FinanceCalculations and self.baseLandPrice > 0 then
+    -- v2.16.0: Use BC-discounted price as input (vendor discount applied first, then bank risk)
+    local priceForCredit = self.bcDiscountedPrice or self.baseLandPrice
+    if creditEnabled and FinanceCalculations and priceForCredit > 0 then
         self.landPrice, self.creditAdjustment, self.creditModifierPct, _ =
-            FinanceCalculations.calculateAdjustedLandPrice(self.baseLandPrice, self.creditScore)
+            FinanceCalculations.calculateAdjustedLandPrice(priceForCredit, self.creditScore)
 
         UsedPlus.logDebug(string.format(
-            "Credit price adjustment: Base=$%d, Adjusted=$%d, Modifier=%d%%, Score=%d (%s)",
-            self.baseLandPrice, self.landPrice, self.creditModifierPct,
+            "Credit price adjustment: Base=$%d, BC=$%d, Adjusted=$%d, Modifier=%d%%, Score=%d (%s)",
+            self.baseLandPrice, priceForCredit, self.landPrice, self.creditModifierPct,
             self.creditScore, self.creditRating))
     else
         -- No credit adjustment
-        self.landPrice = self.baseLandPrice
+        self.landPrice = priceForCredit
         self.creditAdjustment = 0
         self.creditModifierPct = 0
     end
@@ -469,6 +489,21 @@ function UnifiedLandPurchaseDialog:updateDisplay()
     -- Update credit adjustment display elements (if they exist in XML)
     if self.basePriceText then
         UIHelper.Element.setText(self.basePriceText, UIHelper.Text.formatMoney(self.baseLandPrice))
+    end
+
+    -- v2.16.0: Better Contracts discount row
+    if self.bcDiscountText then
+        if self.bcDiscountAmount > 0 then
+            local discText = string.format("-%s (%d%% - %d/%d jobs)",
+                UIHelper.Text.formatMoney(self.bcDiscountAmount),
+                self.bcDiscountPercent, self.bcJobCount, self.bcMaxJobs)
+            UIHelper.Element.setTextWithColor(self.bcDiscountText, discText, UIHelper.Colors.MONEY_GREEN)
+            UIHelper.Element.setVisible(self.bcDiscountText, true)
+            UIHelper.Element.setVisible(self.bcDiscountLabel, true)
+        else
+            UIHelper.Element.setVisible(self.bcDiscountText, false)
+            UIHelper.Element.setVisible(self.bcDiscountLabel, false)
+        end
     end
 
     if self.creditAdjustmentText then

@@ -1403,8 +1403,8 @@
         <e k="usedplus_fmf_quickRef" v="HURTIG REFERENCE" eh="011d2c62" />
         <e k="usedplus_fmf_quickRefLine1" v="Butik → Finansier/Leas/Søg Brugt | Garage → Annoncér til Salg" eh="426419c9" />
         <e k="usedplus_fmf_quickRefLine2" v="Månedlige betalinger auto-trækkes. Tidlig indfrielse sparer renter." eh="73cd35d9" />
-        <e k="usedplus_btn_admin_panel" v="[EN] Admin Panel" eh="a0e0d3f0" />
-        <e k="usedplus_admin_no_vehicle_warning" v="[EN] You must be in a vehicle to use the Admin Panel. Enter a vehicle first, then press ESC." eh="abe11d3f" />
+        <e k="usedplus_btn_admin_panel" v="Adminpanel" eh="a0e0d3f0" />
+        <e k="usedplus_admin_no_vehicle_warning" v="Du skal være i et køretøj for at bruge UsedPlus Adminpanelet. Sæt dig ind i et køretøj først, og tryk derefter på ESC." eh="abe11d3f" />
 
         <!-- Land Lease Dialog -->
         <e k="usedplus_ll_title" v="Leas Jord" eh="ec34a2a6" />
@@ -2146,6 +2146,8 @@
         <!-- v2.8.0: Malfunction Frequency slider -->
         <e k="usedplus_setting_malfunctionFrequency" v="Fejlfrekvens" eh="6bf458c7" />
         <e k="usedplus_setting_malfunctionFrequency_desc" v="Hvor ofte fejl forekommer. 100% = normalt, 50% = halvt så ofte, 200% = dobbelt så ofte" eh="4ab011c4" />
+        <e k="usedplus_setting_fluidDrainRate" v="Væskeforbrugshastighed" eh="3fd9b024" />
+        <e k="usedplus_setting_fluidDrainRate_desc" v="Hvor hurtigt olie og hydraulikvæske forbruges. 100% = normalt, 50% = halv hastighed, 200% = dobbelt. Påvirker ikke lækageforbrugshastigheder." eh="2ed81274" />
         <!-- v2.0.0: NEW - Partial Repair/Repaint toggles -->
         <e k="usedplus_setting_partialRepair" v="Delvis Reparation" eh="dc6b627a" />
         <e k="usedplus_setting_partialRepair_desc" v="Aktiver delvise reparationer i køretøjsshop (deaktivering skjuler reparationsknap)" eh="84fe180c" />
@@ -2525,8 +2527,8 @@ Fortsæt med reparation?" eh="bf702608" />
         <e k="usedplus_admin_btn_dlg_inspect" v="Inspektion" eh="35a9dbe6" />
         <e k="usedplus_admin_btn_dlg_lease_end" v="Lease slut" eh="da7801f1" />
         <e k="usedplus_admin_btn_dlg_lease_renew" v="Forny lease" eh="7a794930" />
-        <e k="usedplus_admin_btn_dlg_fault_tracer" v="[EN] Fault Tracer" eh="d1b82197" />
-        <e k="usedplus_admin_btn_dlg_portfolio" v="[EN] Portfolio" eh="d4f859a9" />
+        <e k="usedplus_admin_btn_dlg_fault_tracer" v="Fejlsporing" eh="d1b82197" />
+        <e k="usedplus_admin_btn_dlg_portfolio" v="Portefølje" eh="d4f859a9" />
 
         <!-- Buttons - Tab 5 (State) -->
 

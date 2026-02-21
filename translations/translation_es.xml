@@ -1391,8 +1391,8 @@
         <e k="usedplus_fmf_quickRef" v="REFERENCIA RÁPIDA" eh="011d2c62" />
         <e k="usedplus_fmf_quickRefLine1" v="Comprar → Financiar/Arrendar/Buscar Usado | Garaje → Listado en Venta" eh="426419c9" />
         <e k="usedplus_fmf_quickRefLine2" v="Autodeducción de pagos mensuales. El pago anticipado ahorra intereses." eh="73cd35d9" />
-        <e k="usedplus_btn_admin_panel" v="[EN] Admin Panel" eh="a0e0d3f0" />
-        <e k="usedplus_admin_no_vehicle_warning" v="[EN] You must be in a vehicle to use the Admin Panel. Enter a vehicle first, then press ESC." eh="abe11d3f" />
+        <e k="usedplus_btn_admin_panel" v="Panel de Administración" eh="a0e0d3f0" />
+        <e k="usedplus_admin_no_vehicle_warning" v="Debes estar en un vehículo para usar el Panel de Administración. Entra en un vehículo primero y luego pulsa ESC." eh="abe11d3f" />
 
         <!-- Land Lease Dialog -->
         <e k="usedplus_ll_title" v="Arrendamiento de terrenos" eh="ec34a2a6" />
@@ -1907,6 +1907,8 @@
         <e k="usedplus_setting_malfunctions_desc" v="Habilitar averías aleatorias y fallos de componentes" eh="fbbe01f9" />
         <e k="usedplus_setting_malfunctionFrequency" v="Frecuencia de Averías" eh="6bf458c7" />
         <e k="usedplus_setting_malfunctionFrequency_desc" v="Frecuencia de averías. 100% = normal, 50% = la mitad, 200% = el doble" eh="4ab011c4" />
+        <e k="usedplus_setting_fluidDrainRate" v="Tasa de Consumo de Fluidos" eh="3fd9b024" />
+        <e k="usedplus_setting_fluidDrainRate_desc" v="Velocidad a la que se agotan el aceite y el fluido hidráulico. 100% = normal, 50% = mitad de velocidad, 200% = doble. No afecta las tasas de drenaje por fugas." eh="2ed81274" />
         <e k="usedplus_setting_partialRepair" v="Reparación Parcial" eh="dc6b627a" />
         <e k="usedplus_setting_partialRepair_desc" v="Habilitar reparaciones parciales en taller (desactivar oculta botón de reparación)" eh="84fe180c" />
         <e k="usedplus_setting_partialRepaint" v="Pintura Parcial" eh="3fca656d" />
@@ -2385,8 +2387,8 @@
         <e k="usedplus_admin_btn_dlg_inspect" v="Inspección" eh="35a9dbe6" />
         <e k="usedplus_admin_btn_dlg_lease_end" v="Fin Arriendo" eh="da7801f1" />
         <e k="usedplus_admin_btn_dlg_lease_renew" v="Renovar Arriendo" eh="7a794930" />
-        <e k="usedplus_admin_btn_dlg_fault_tracer" v="[EN] Fault Tracer" eh="d1b82197" />
-        <e k="usedplus_admin_btn_dlg_portfolio" v="[EN] Portfolio" eh="d4f859a9" />
+        <e k="usedplus_admin_btn_dlg_fault_tracer" v="Rastreador de Fallos" eh="d1b82197" />
+        <e k="usedplus_admin_btn_dlg_portfolio" v="Portafolio" eh="d4f859a9" />
 
 
         <e k="usedplus_admin_btn_reset_hours" v="Reset Horas" eh="a519e5e1" />

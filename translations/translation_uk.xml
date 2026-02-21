@@ -1391,8 +1391,8 @@
         <e k="usedplus_fmf_quickRef" v="КОРОТКИЙ ДОВІДНИК" eh="011d2c62" />
         <e k="usedplus_fmf_quickRefLine1" v="Магазин → Фінансувати/Оренда/Шукати вживане | Гараж → Виставити на продаж" eh="426419c9" />
         <e k="usedplus_fmf_quickRefLine2" v="Щомісячні платежі списуються автоматично. Дострокове погашення економить відсотки." eh="73cd35d9" />
-        <e k="usedplus_btn_admin_panel" v="[EN] Admin Panel" eh="a0e0d3f0" />
-        <e k="usedplus_admin_no_vehicle_warning" v="[EN] You must be in a vehicle to use the Admin Panel. Enter a vehicle first, then press ESC." eh="abe11d3f" />
+        <e k="usedplus_btn_admin_panel" v="Панель адміністратора" eh="a0e0d3f0" />
+        <e k="usedplus_admin_no_vehicle_warning" v="Ви повинні бути в транспортному засобі, щоб використовувати панель адміністратора. Спочатку сядьте в транспортний засіб, потім натисніть ESC." eh="abe11d3f" />
 
         <!-- Land Lease Dialog -->
         <e k="usedplus_ll_title" v="Оренда землі" eh="ec34a2a6" />
@@ -1907,6 +1907,8 @@
         <e k="usedplus_setting_malfunctions_desc" v="Увімкнути випадкові поломки та відмови компонентів" eh="fbbe01f9" />
         <e k="usedplus_setting_malfunctionFrequency" v="Частота поломок" eh="6bf458c7" />
         <e k="usedplus_setting_malfunctionFrequency_desc" v="Як часто виникають поломки. 100% = нормально, 50% = вдвічі рідше, 200% = вдвічі частіше" eh="4ab011c4" />
+        <e k="usedplus_setting_fluidDrainRate" v="Швидкість витрати рідин" eh="3fd9b024" />
+        <e k="usedplus_setting_fluidDrainRate_desc" v="Швидкість витрати оливи та гідравлічної рідини. 100% = нормальна, 50% = вдвічі повільніше, 200% = вдвічі швидше. Не впливає на швидкість витоків." eh="2ed81274" />
         <e k="usedplus_setting_partialRepair" v="Частковий Ремонт" eh="dc6b627a" />
         <e k="usedplus_setting_partialRepair_desc" v="Увімкнути частковий ремонт у майстерні (вимкнення приховує кнопку ремонту)" eh="84fe180c" />
         <e k="usedplus_setting_partialRepaint" v="Часткове Фарбування" eh="3fca656d" />
@@ -2377,8 +2379,8 @@
         <e k="usedplus_admin_btn_dlg_inspect" v="Огляд" eh="35a9dbe6" />
         <e k="usedplus_admin_btn_dlg_lease_end" v="Кінець лізингу" eh="da7801f1" />
         <e k="usedplus_admin_btn_dlg_lease_renew" v="Подовж. лізинг" eh="7a794930" />
-        <e k="usedplus_admin_btn_dlg_fault_tracer" v="[EN] Fault Tracer" eh="d1b82197" />
-        <e k="usedplus_admin_btn_dlg_portfolio" v="[EN] Portfolio" eh="d4f859a9" />
+        <e k="usedplus_admin_btn_dlg_fault_tracer" v="Відстеження несправностей" eh="d1b82197" />
+        <e k="usedplus_admin_btn_dlg_portfolio" v="Портфоліо" eh="d4f859a9" />
         <e k="usedplus_admin_btn_reset_hours" v="Скид. години" eh="a519e5e1" />
         <e k="usedplus_admin_btn_add_hours" v="+1000 годин" eh="ef05132d" />
         <e k="usedplus_admin_btn_dna_lemon" v="0.1 Мотлох" eh="0047d5bc" />

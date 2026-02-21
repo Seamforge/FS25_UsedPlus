@@ -1130,8 +1130,8 @@
         <e k="usedplus_fmf_quickRef" v="クイックリファレンス" eh="011d2c62" />
         <e k="usedplus_fmf_quickRefLine1" v="ショップ→融資/リース/中古を検索 | ガレージ→販売リスト" eh="426419c9" />
         <e k="usedplus_fmf_quickRefLine2" v="月々の支払いは自動引き落とし。早期返済で利息を節約。" eh="73cd35d9" />
-        <e k="usedplus_btn_admin_panel" v="[EN] Admin Panel" eh="a0e0d3f0" />
-        <e k="usedplus_admin_no_vehicle_warning" v="[EN] You must be in a vehicle to use the Admin Panel. Enter a vehicle first, then press ESC." eh="abe11d3f" />
+        <e k="usedplus_btn_admin_panel" v="管理パネル" eh="a0e0d3f0" />
+        <e k="usedplus_admin_no_vehicle_warning" v="管理パネルを使用するには車両に乗っている必要があります。まず車両に乗り、ESCキーを押してください。" eh="abe11d3f" />
         <e k="usedplus_ll_title" v="土地リース" eh="ec34a2a6" />
         <e k="usedplus_ll_sectionDetails" v="圃場詳細" eh="9550d705" />
         <e k="usedplus_ll_field" v="圃場:" eh="af9b2925" />
@@ -1731,6 +1731,8 @@
         <e k="usedplus_setting_malfunctions_desc" v="ランダムな故障とコンポーネント不良を有効化" eh="fbbe01f9" />
         <e k="usedplus_setting_malfunctionFrequency" v="故障頻度" eh="6bf458c7" />
         <e k="usedplus_setting_malfunctionFrequency_desc" v="故障の発生頻度。100% = 通常、50% = 半分、200% = 2倍" eh="4ab011c4" />
+        <e k="usedplus_setting_fluidDrainRate" v="流体消費速度" eh="3fd9b024" />
+        <e k="usedplus_setting_fluidDrainRate_desc" v="オイルと作動油の消費速度。100% = 通常、50% = 半分の速度、200% = 2倍。漏れの消費速度には影響しません。" eh="2ed81274" />
         <e k="usedplus_setting_partialRepair" v="部分修理" eh="dc6b627a" />
         <e k="usedplus_setting_partialRepair_desc" v="車両ショップでの部分修理を有効化（無効にすると修理ボタン非表示）" eh="84fe180c" />
         <e k="usedplus_setting_partialRepaint" v="部分再塗装" eh="3fca656d" />
@@ -1987,8 +1989,8 @@
         <e k="usedplus_admin_btn_dlg_inspect" v="点検" eh="35a9dbe6" />
         <e k="usedplus_admin_btn_dlg_lease_end" v="リース終了" eh="da7801f1" />
         <e k="usedplus_admin_btn_dlg_lease_renew" v="リース更新" eh="7a794930" />
-        <e k="usedplus_admin_btn_dlg_fault_tracer" v="[EN] Fault Tracer" eh="d1b82197" />
-        <e k="usedplus_admin_btn_dlg_portfolio" v="[EN] Portfolio" eh="d4f859a9" />
+        <e k="usedplus_admin_btn_dlg_fault_tracer" v="故障トレーサー" eh="d1b82197" />
+        <e k="usedplus_admin_btn_dlg_portfolio" v="ポートフォリオ" eh="d4f859a9" />
         <e k="usedplus_admin_btn_reset_hours" v="時間リセット" eh="a519e5e1" />
         <e k="usedplus_admin_btn_add_hours" v="+1000時間" eh="ef05132d" />
         <e k="usedplus_admin_btn_dna_lemon" v="0.1 ポンコツ" eh="0047d5bc" />

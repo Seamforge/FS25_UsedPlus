@@ -1391,8 +1391,8 @@
         <e k="usedplus_fmf_quickRef" v="RYCHLÝ PŘEHLED" eh="011d2c62" />
         <e k="usedplus_fmf_quickRefLine1" v="Obchod → Financovat/Leasing/Hledat použité | Garáž → Nabídnout k prodeji" eh="426419c9" />
         <e k="usedplus_fmf_quickRefLine2" v="Měsíční platby auto-odečteny. Předčasné splacení šetří úroky." eh="73cd35d9" />
-        <e k="usedplus_btn_admin_panel" v="[EN] Admin Panel" eh="a0e0d3f0" />
-        <e k="usedplus_admin_no_vehicle_warning" v="[EN] You must be in a vehicle to use the Admin Panel. Enter a vehicle first, then press ESC." eh="abe11d3f" />
+        <e k="usedplus_btn_admin_panel" v="Administrátorský panel" eh="a0e0d3f0" />
+        <e k="usedplus_admin_no_vehicle_warning" v="Musíte být ve vozidle, abyste mohli používat Administrátorský panel UsedPlus. Nejprve nasedněte do vozidla a poté stiskněte ESC." eh="abe11d3f" />
 
         <!-- Land Lease Dialog -->
         <e k="usedplus_ll_title" v="Pronájem pozemku" eh="ec34a2a6" />
@@ -1907,6 +1907,8 @@
         <e k="usedplus_setting_malfunctions_desc" v="Povolit náhodné poruchy a selhání komponentů" eh="fbbe01f9" />
         <e k="usedplus_setting_malfunctionFrequency" v="Frekvence poruch" eh="6bf458c7" />
         <e k="usedplus_setting_malfunctionFrequency_desc" v="Jak často dochází k poruchám. 100% = normálně, 50% = poloviční frekvence, 200% = dvojnásobná frekvence" eh="4ab011c4" />
+        <e k="usedplus_setting_fluidDrainRate" v="Rychlost spotřeby kapalin" eh="3fd9b024" />
+        <e k="usedplus_setting_fluidDrainRate_desc" v="Rychlost spotřeby oleje a hydraulické kapaliny. 100% = normální, 50% = poloviční rychlost, 200% = dvojnásobná. Neovlivňuje rychlost úniku." eh="2ed81274" />
         <e k="usedplus_setting_partialRepair" v="Částečná Oprava" eh="dc6b627a" />
         <e k="usedplus_setting_partialRepair_desc" v="Povolit částečné opravy v dílně (zakázání skryje tlačítko opravy)" eh="84fe180c" />
         <e k="usedplus_setting_partialRepaint" v="Částečné Lakování" eh="3fca656d" />
@@ -2385,8 +2387,8 @@
         <e k="usedplus_admin_btn_dlg_inspect" v="Kontrola" eh="35a9dbe6" />
         <e k="usedplus_admin_btn_dlg_lease_end" v="Konec pronájmu" eh="da7801f1" />
         <e k="usedplus_admin_btn_dlg_lease_renew" v="Prodloužit" eh="7a794930" />
-        <e k="usedplus_admin_btn_dlg_fault_tracer" v="[EN] Fault Tracer" eh="d1b82197" />
-        <e k="usedplus_admin_btn_dlg_portfolio" v="[EN] Portfolio" eh="d4f859a9" />
+        <e k="usedplus_admin_btn_dlg_fault_tracer" v="Sledování závad" eh="d1b82197" />
+        <e k="usedplus_admin_btn_dlg_portfolio" v="Portfolio" eh="d4f859a9" />
 
 
         <e k="usedplus_admin_btn_reset_hours" v="Reset hodin" eh="a519e5e1" />

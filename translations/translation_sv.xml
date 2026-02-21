@@ -1403,8 +1403,8 @@
         <e k="usedplus_fmf_quickRef" v="SNABBREFERENS" eh="011d2c62" />
         <e k="usedplus_fmf_quickRefLine1" v="Butik → Finansiera/Leasa/Sök begagnat | Garage → Annonsera till salu" eh="426419c9" />
         <e k="usedplus_fmf_quickRefLine2" v="Månadsbetalningar dras automatiskt. Tidig återbetalning sparar ränta." eh="73cd35d9" />
-        <e k="usedplus_btn_admin_panel" v="[EN] Admin Panel" eh="a0e0d3f0" />
-        <e k="usedplus_admin_no_vehicle_warning" v="[EN] You must be in a vehicle to use the Admin Panel. Enter a vehicle first, then press ESC." eh="abe11d3f" />
+        <e k="usedplus_btn_admin_panel" v="Adminpanel" eh="a0e0d3f0" />
+        <e k="usedplus_admin_no_vehicle_warning" v="Du måste sitta i ett fordon för att använda adminpanelen. Sätt dig i ett fordon först och tryck sedan på ESC." eh="abe11d3f" />
 
         <!-- Land Lease Dialog -->
         <e k="usedplus_ll_title" v="Leasa mark" eh="ec34a2a6" />
@@ -2146,6 +2146,8 @@
         <!-- v2.8.0: Malfunction Frequency slider -->
         <e k="usedplus_setting_malfunctionFrequency" v="Funktionsfelfrekvens" eh="6bf458c7" />
         <e k="usedplus_setting_malfunctionFrequency_desc" v="Hur ofta funktionsfel inträffar. 100% = normal, 50% = hälften så ofta, 200% = dubbelt så ofta" eh="4ab011c4" />
+        <e k="usedplus_setting_fluidDrainRate" v="Vätskeförbrukning" eh="3fd9b024" />
+        <e k="usedplus_setting_fluidDrainRate_desc" v="Hur snabbt olja och hydraulvätska förbrukas. 100% = normal, 50% = halv hastighet, 200% = dubbel. Påverkar inte läckagehastigheter." eh="2ed81274" />
         <!-- v2.0.0: NEW - Partial Repair/Repaint toggles -->
         <e k="usedplus_setting_partialRepair" v="Delreparation" eh="dc6b627a" />
         <e k="usedplus_setting_partialRepair_desc" v="Aktivera delreparationer i fordonsaffären (inaktivering döljer reparationsknapp)" eh="84fe180c" />
@@ -2513,8 +2515,8 @@
         <e k="usedplus_admin_btn_dlg_inspect" v="Inspektera" eh="35a9dbe6" />
         <e k="usedplus_admin_btn_dlg_lease_end" v="Leasingslut" eh="da7801f1" />
         <e k="usedplus_admin_btn_dlg_lease_renew" v="Förnya leasing" eh="7a794930" />
-        <e k="usedplus_admin_btn_dlg_fault_tracer" v="[EN] Fault Tracer" eh="d1b82197" />
-        <e k="usedplus_admin_btn_dlg_portfolio" v="[EN] Portfolio" eh="d4f859a9" />
+        <e k="usedplus_admin_btn_dlg_fault_tracer" v="Felspårare" eh="d1b82197" />
+        <e k="usedplus_admin_btn_dlg_portfolio" v="Portfölj" eh="d4f859a9" />
 
         <!-- Buttons - Tab 5 (State) -->
         <e k="usedplus_admin_btn_reset_hours" v="Återställ timmar" eh="a519e5e1" />
