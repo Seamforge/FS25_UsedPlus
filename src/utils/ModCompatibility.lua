@@ -160,7 +160,7 @@ ModCompatibility.advancedMaintenanceInstalled = false
 ModCompatibility.hirePurchasingInstalled = false
 ModCompatibility.buyUsedEquipmentInstalled = false
 ModCompatibility.enhancedLoanSystemInstalled = false
-ModCompatibility.betterContractsInstalled = false  -- v2.16.0: BC farmland discounts
+ModCompatibility.betterContractsInstalled = false  -- v2.15.2: BC farmland discounts
 
 -- v2.6.2: Raw detection flags (for UI display - shows toggle even when disabled)
 ModCompatibility.rvbDetected = false
@@ -169,7 +169,7 @@ ModCompatibility.amDetected = false
 ModCompatibility.hpDetected = false
 ModCompatibility.bueDetected = false
 ModCompatibility.elsDetected = false
-ModCompatibility.bcDetected = false  -- v2.16.0: Better Contracts
+ModCompatibility.bcDetected = false  -- v2.15.2: Better Contracts
 
 ModCompatibility.initialized = false
 
@@ -299,11 +299,15 @@ function ModCompatibility.init()
         UsedPlus.logDebug("ELS detected via ELS_loan class")
     end
 
-    -- Detect Better Contracts - checks for BetterContracts global (farmland discounts)
+    -- Detect Better Contracts via g_modIsLoaded (mod sandbox prevents direct global access)
+    -- BC uses RoyalMod framework which creates BetterContracts in its sandboxed environment
+    -- Data access uses getmetatable(_G).__index to reach across the sandbox boundary
     local bcDetected = false
-    if BetterContracts ~= nil then
+    if g_modIsLoaded and g_modIsLoaded["FS25_BetterContracts"] then
         bcDetected = true
-        UsedPlus.logDebug("BC detected via BetterContracts global")
+        UsedPlus.logWarn("BC: Better Contracts DETECTED via g_modIsLoaded")
+    else
+        UsedPlus.logWarn("BC: Better Contracts not found in g_modIsLoaded")
     end
 
     -- v2.6.2: Check integration settings for compatible mods
@@ -1198,8 +1202,59 @@ end
 --============================================================================
 
 --[[
+    Read Better Contracts config from savegame XML file
+    Bypasses mod sandbox entirely - reads directly from BC's saved config
+
+    BC saves to: {savegameDir}/FS25_BetterContracts.xml
+    XML format:
+      <BetterContracts discount="true">
+        <discount perJob="0.05" maxJobs="5" />
+      </BetterContracts>
+
+    @return table {discountMode, discPerJob, discMaxJobs} or nil
+]]
+function ModCompatibility.readBCConfig()
+    -- Get savegame directory
+    local savegameDir = nil
+    if g_currentMission and g_currentMission.missionInfo then
+        savegameDir = g_currentMission.missionInfo.savegameDirectory
+    end
+    if savegameDir == nil then
+        UsedPlus.logWarn("BC config: Cannot determine savegame directory")
+        return nil
+    end
+
+    local xmlPath = savegameDir .. "/FS25_BetterContracts.xml"
+
+    -- Load BC config XML (old-style API for maximum compatibility)
+    local xmlId = loadXMLFile("BCConfig", xmlPath)
+    if xmlId == nil or xmlId == 0 then
+        UsedPlus.logWarn("BC config: No config file at " .. xmlPath .. " (BC using defaults, discountMode=false)")
+        return { discountMode = false, discPerJob = 0.05, discMaxJobs = 5 }
+    end
+
+    local config = {}
+    config.discountMode = Utils.getNoNil(getXMLBool(xmlId, "BetterContracts#discount"), false)
+    if config.discountMode then
+        config.discPerJob = Utils.getNoNil(getXMLFloat(xmlId, "BetterContracts.discount#perJob"), 0.05)
+        config.discMaxJobs = Utils.getNoNil(getXMLInt(xmlId, "BetterContracts.discount#maxJobs"), 5)
+    else
+        config.discPerJob = 0.05
+        config.discMaxJobs = 5
+    end
+
+    delete(xmlId)
+
+    UsedPlus.logWarn(string.format("BC config loaded: discountMode=%s, perJob=%.2f, maxJobs=%d",
+        tostring(config.discountMode), config.discPerJob, config.discMaxJobs))
+
+    return config
+end
+
+--[[
     Get farmland discount from Better Contracts based on completed NPC jobs
-    Replicates BC's local getDiscountPrice() using accessible globals
+    Reads BC config from savegame XML (bypasses mod sandbox)
+    Reads job counts from farm.stats.npcJobs (shared game object, populated by BC)
 
     BC stores job counts on farm.stats.npcJobs[npcIndex] (integer)
     Each farmland has farmland.npcIndex identifying the NPC seller
@@ -1220,16 +1275,16 @@ function ModCompatibility.getBCFarmlandDiscount(farmland, farmId)
         return 0, 0, 0, 0
     end
 
-    -- Check BC global exists and discountMode is enabled
-    if BetterContracts == nil or not BetterContracts.config or not BetterContracts.config.discountMode then
+    -- Read BC config from savegame XML (no sandbox issues)
+    local bcConfig = ModCompatibility.readBCConfig()
+    if bcConfig == nil or not bcConfig.discountMode then
         return 0, 0, 0, 0
     end
 
-    -- Get BC config values
-    local discPerJob = BetterContracts.config.discPerJob or 0.05
-    local discMaxJobs = BetterContracts.config.discMaxJobs or 5
+    local discPerJob = bcConfig.discPerJob
+    local discMaxJobs = bcConfig.discMaxJobs
 
-    -- Get farm and NPC job counts
+    -- Get farm and NPC job counts (shared game object, populated by BC)
     local farm = g_farmManager:getFarmById(farmId)
     if farm == nil or farm.stats == nil then
         return 0, 0, 0, 0
@@ -1242,6 +1297,7 @@ function ModCompatibility.getBCFarmlandDiscount(farmland, farmId)
     end
 
     -- Read job count from BC's data on farm stats
+    -- BC appends to FarmStats:loadFromXMLFile() to populate npcJobs on the shared farm object
     local jobs = farm.stats.npcJobs or {}
     local jobCount = jobs[npcIndex] or 0
 
@@ -1255,9 +1311,9 @@ function ModCompatibility.getBCFarmlandDiscount(farmland, farmId)
     local discountPercent = math.floor(effectiveJobs * 100 * discPerJob)
     local discountAmount = farmland.price * effectiveJobs * discPerJob
 
-    UsedPlus.logDebug(string.format(
-        "BC farmland discount: NPC=%d, jobs=%d, effective=%d, discount=%d%% ($%d)",
-        npcIndex, jobCount, effectiveJobs, discountPercent, discountAmount))
+    UsedPlus.logWarn(string.format(
+        "BC farmland discount: NPC=%d, jobs=%d/%d, discount=%d%% ($%d)",
+        npcIndex, jobCount, discMaxJobs, discountPercent, discountAmount))
 
     return discountAmount, discountPercent, jobCount, discMaxJobs
 end

@@ -1051,6 +1051,7 @@
         <e k="usedplus_lp_size" v="크기:" eh="af645946" />
         <e k="usedplus_lp_perHa" v="헥타르당:" eh="ddf262a0" />
         <e k="usedplus_lp_basePrice" v="기본 가격:" eh="74e3d937" />
+        <e k="usedplus_lp_bcDiscount" v="계약 할인:" eh="77ad5271" />
         <e k="usedplus_lp_creditAdjust" v="신용 조정:" eh="f7acd3c7" />
         <e k="usedplus_lp_yourPrice" v="귀하의 가격:" eh="1d387415" />
         <e k="usedplus_lp_methodHelp" v="납부 방법을 선택하세요: 현금 선불, 융자로 분할 납부, 또는 토지 임대." eh="57d0bf21" />
@@ -1167,6 +1168,7 @@
         <e k="usedplus_so_expiresIn" v="제안 만료 시간:" eh="ca2ce4a5" />
         <e k="usedplus_so_acceptOffer" v="제안 수락" eh="93a5776a" />
         <e k="usedplus_so_keepWaitingBtn" v="계속 기다리기" eh="addcd152" />
+        <e k="usedplus_so_previousOffers" v="[EN] Previous Offers:" eh="0a8e474c" />
         <!-- Deal quality ratings (set dynamically in Lua) -->
         <!-- Legacy keys kept for compatibility -->
         <e k="usedplus_so_title" v="판매 제안 수신됨!" eh="1596a2b0" />
@@ -2175,6 +2177,8 @@
         <e k="usedplus_setting_bueIntegration_desc" v="BuyUsedEquipment 통합 활성화. UsedPlus 검색 버튼 숨김 (BUE가 중고 검색 처리)." eh="0216f3ab" />
         <e k="usedplus_setting_elsIntegration" v="ELS 통합" eh="1b5ac55a" />
         <e k="usedplus_setting_elsIntegration_desc" v="EnhancedLoanSystem 통합 활성화. UsedPlus 대출 비활성화 (ELS가 처리)." eh="1594da56" />
+        <e k="usedplus_setting_bcIntegration" v="Better Contracts" eh="66a6ff26" />
+        <e k="usedplus_setting_bcIntegration_desc" v="Better Contracts 통합을 활성화합니다. 완료된 계약에서 획득한 농지 할인을 적용합니다." eh="d4e02c7b" />
 
         <!-- Section Headers -->
         <e k="usedplus_settings_toggles" v="기능 토글" eh="2aa7da8d" />

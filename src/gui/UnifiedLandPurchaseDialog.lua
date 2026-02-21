@@ -125,7 +125,7 @@ function UnifiedLandPurchaseDialog.new(target, custom_mt)
     self.creditRating = "Fair"
     self.interestRate = 0.06  -- Land loans typically have lower rates
 
-    -- v2.16.0: Better Contracts farmland discount
+    -- v2.15.2: Better Contracts farmland discount
     self.bcDiscountAmount = 0
     self.bcDiscountPercent = 0
     self.bcJobCount = 0
@@ -249,7 +249,7 @@ function UnifiedLandPurchaseDialog:setLandData(farmlandId, farmland, price)
         self.soilQuality = "Unknown"
     end
 
-    -- v2.16.0: Check for Better Contracts farmland discount
+    -- v2.15.2: Check for Better Contracts farmland discount
     self.bcDiscountAmount, self.bcDiscountPercent, self.bcJobCount, self.bcMaxJobs = 0, 0, 0, 0
     if ModCompatibility and ModCompatibility.betterContractsInstalled and self.farmland then
         self.bcDiscountAmount, self.bcDiscountPercent, self.bcJobCount, self.bcMaxJobs =
@@ -320,7 +320,7 @@ function UnifiedLandPurchaseDialog:calculateCreditParameters()
     end
 
     -- Calculate credit-adjusted land price (only if credit enabled)
-    -- v2.16.0: Use BC-discounted price as input (vendor discount applied first, then bank risk)
+    -- v2.15.2: Use BC-discounted price as input (vendor discount applied first, then bank risk)
     local priceForCredit = self.bcDiscountedPrice or self.baseLandPrice
     if creditEnabled and FinanceCalculations and priceForCredit > 0 then
         self.landPrice, self.creditAdjustment, self.creditModifierPct, _ =
@@ -491,9 +491,10 @@ function UnifiedLandPurchaseDialog:updateDisplay()
         UIHelper.Element.setText(self.basePriceText, UIHelper.Text.formatMoney(self.baseLandPrice))
     end
 
-    -- v2.16.0: Better Contracts discount row
+    -- v2.15.2: Better Contracts discount row + dynamic layout
+    local bcVisible = self.bcDiscountAmount > 0
     if self.bcDiscountText then
-        if self.bcDiscountAmount > 0 then
+        if bcVisible then
             local discText = string.format("-%s (%d%% - %d/%d jobs)",
                 UIHelper.Text.formatMoney(self.bcDiscountAmount),
                 self.bcDiscountPercent, self.bcJobCount, self.bcMaxJobs)
@@ -504,6 +505,11 @@ function UnifiedLandPurchaseDialog:updateDisplay()
             UIHelper.Element.setVisible(self.bcDiscountText, false)
             UIHelper.Element.setVisible(self.bcDiscountLabel, false)
         end
+    end
+
+    -- Shift credit/price group down when BC row is visible (fills gap when hidden)
+    if self.creditPriceGroup then
+        self.creditPriceGroup:setPosition(0, bcVisible and -80 or -55)
     end
 
     if self.creditAdjustmentText then

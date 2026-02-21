@@ -817,6 +817,7 @@
         <e k="usedplus_lp_size" v="サイズ:" eh="af645946" />
         <e k="usedplus_lp_perHa" v="1haあたり:" eh="ddf262a0" />
         <e k="usedplus_lp_basePrice" v="基本価格:" eh="74e3d937" />
+        <e k="usedplus_lp_bcDiscount" v="契約割引：" eh="77ad5271" />
         <e k="usedplus_lp_creditAdjust" v="信用調整:" eh="f7acd3c7" />
         <e k="usedplus_lp_yourPrice" v="あなたの価格:" eh="1d387415" />
         <e k="usedplus_lp_methodHelp" v="支払い方法を選択: 現金一括、分割払い、または土地のリース。" eh="57d0bf21" />
@@ -918,6 +919,7 @@
         <e k="usedplus_so_expiresIn" v="オファー期限:" eh="ca2ce4a5" />
         <e k="usedplus_so_acceptOffer" v="オファーを承諾" eh="93a5776a" />
         <e k="usedplus_so_keepWaitingBtn" v="待ち続ける" eh="addcd152" />
+        <e k="usedplus_so_previousOffers" v="[EN] Previous Offers:" eh="0a8e474c" />
         <e k="usedplus_so_title" v="販売オファーを受信しました！" eh="1596a2b0" />
         <e k="usedplus_button_acceptOffer" v="オファーを承諾" eh="93a5776a" />
         <e k="usedplus_pc_title" v="ローン支払い設定" eh="07beb52e" />
@@ -1756,6 +1758,8 @@
         <e k="usedplus_setting_bueIntegration_desc" v="BuyUsedEquipment連携を有効化。UsedPlus検索ボタンを非表示（BUEが中古検索を処理）。" eh="0216f3ab" />
         <e k="usedplus_setting_elsIntegration" v="ELS連携" eh="1b5ac55a" />
         <e k="usedplus_setting_elsIntegration_desc" v="EnhancedLoanSystem連携を有効化。UsedPlusローンを無効化（ELSが処理）。" eh="1594da56" />
+        <e k="usedplus_setting_bcIntegration" v="Better Contracts" eh="66a6ff26" />
+        <e k="usedplus_setting_bcIntegration_desc" v="Better Contracts連携を有効にする。完了した契約から獲得した農地割引を適用します。" eh="d4e02c7b" />
         <e k="usedplus_settings_toggles" v="機能切り替え" eh="2aa7da8d" />
         <e k="usedplus_settings_money" v="お金＆レート" eh="e0d1b0db" />
         <e k="usedplus_settings_risk" v="寛容度＆リスク" eh="c57ae16a" />

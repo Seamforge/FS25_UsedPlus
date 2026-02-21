@@ -1051,6 +1051,7 @@
         <e k="usedplus_lp_size" v="Storlek:" eh="af645946" />
         <e k="usedplus_lp_perHa" v="Per ha:" eh="ddf262a0" />
         <e k="usedplus_lp_basePrice" v="Grundpris:" eh="74e3d937" />
+        <e k="usedplus_lp_bcDiscount" v="Kontraktsrabatt:" eh="77ad5271" />
         <e k="usedplus_lp_creditAdjust" v="Kreditjustering:" eh="f7acd3c7" />
         <e k="usedplus_lp_yourPrice" v="Ditt pris:" eh="1d387415" />
         <e k="usedplus_lp_methodHelp" v="Välj hur du vill betala: kontant, finansiera över tid eller leasa marken." eh="57d0bf21" />
@@ -1167,6 +1168,7 @@
         <e k="usedplus_so_expiresIn" v="Erbjudandet går ut om:" eh="ca2ce4a5" />
         <e k="usedplus_so_acceptOffer" v="Acceptera erbjudande" eh="93a5776a" />
         <e k="usedplus_so_keepWaitingBtn" v="Fortsätt vänta" eh="addcd152" />
+        <e k="usedplus_so_previousOffers" v="[EN] Previous Offers:" eh="0a8e474c" />
         <!-- Deal quality ratings (set dynamically in Lua) -->
         <!-- Legacy keys kept for compatibility -->
         <e k="usedplus_so_title" v="FÖRSÄLJNINGSERBJUDANDE MOTTAGET!" eh="1596a2b0" />
@@ -2175,6 +2177,8 @@
         <e k="usedplus_setting_bueIntegration_desc" v="Aktivera BuyUsedEquipment-integration. Döljer UsedPlus sökknapp (BUE hanterar begagnad sökning)." eh="0216f3ab" />
         <e k="usedplus_setting_elsIntegration" v="ELS-integration" eh="1b5ac55a" />
         <e k="usedplus_setting_elsIntegration_desc" v="Aktivera EnhancedLoanSystem-integration. Inaktiverar UsedPlus lån (ELS hanterar dem)." eh="1594da56" />
+        <e k="usedplus_setting_bcIntegration" v="Better Contracts" eh="66a6ff26" />
+        <e k="usedplus_setting_bcIntegration_desc" v="Aktivera Better Contracts-integration. Tillämpar intjänade markrabatter från avslutade kontrakt." eh="d4e02c7b" />
 
         <!-- Section Headers -->
         <e k="usedplus_settings_toggles" v="Funktionsväxlar" eh="2aa7da8d" />

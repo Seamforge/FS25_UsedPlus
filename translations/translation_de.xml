@@ -1044,6 +1044,7 @@
         <e k="usedplus_lp_size" v="Größe:" eh="af645946" />
         <e k="usedplus_lp_perHa" v="Pro ha:" eh="ddf262a0" />
         <e k="usedplus_lp_basePrice" v="Grundpreis:" eh="74e3d937" />
+        <e k="usedplus_lp_bcDiscount" v="Auftragsrabatt:" eh="77ad5271" />
         <e k="usedplus_lp_creditAdjust" v="Kreditanpassung:" eh="f7acd3c7" />
         <e k="usedplus_lp_yourPrice" v="Ihr Preis:" eh="1d387415" />
         <e k="usedplus_lp_methodHelp" v="Wählen Sie, wie Sie bezahlen möchten: Barzahlung im Voraus, Finanzierung über einen längeren Zeitraum oder Pacht des Grundstücks." eh="57d0bf21" />
@@ -1160,6 +1161,7 @@
         <e k="usedplus_so_expiresIn" v="Das Angebot läuft ab:" eh="ca2ce4a5" />
         <e k="usedplus_so_acceptOffer" v="Angebot annehmen" eh="93a5776a" />
         <e k="usedplus_so_keepWaitingBtn" v="Warten Sie weiter" eh="addcd152" />
+        <e k="usedplus_so_previousOffers" v="[EN] Previous Offers:" eh="0a8e474c" />
         <!-- Deal quality ratings (set dynamically in Lua) -->
         <!-- Legacy keys kept for compatibility -->
         <e k="usedplus_so_title" v="VERKAUFSANGEBOT ERHALTEN!" eh="1596a2b0" />
@@ -1939,6 +1941,8 @@
     <e k="usedplus_setting_bueIntegration_desc" v="Aktiviert die BuyUsedEquipment Integration. Blendet die UsedPlus-Suchschaltfläche aus (BUE übernimmt die Gebrauchtsuche)." eh="0216f3ab" />
     <e k="usedplus_setting_elsIntegration" v="ELS-Integration" eh="1b5ac55a" />
     <e k="usedplus_setting_elsIntegration_desc" v="Aktiviert die EnhancedLoanSystem Integration. Deaktiviert UsedPlus-Kredite (ELS übernimmt diese)." eh="1594da56" />
+        <e k="usedplus_setting_bcIntegration" v="Better Contracts" eh="66a6ff26" />
+        <e k="usedplus_setting_bcIntegration_desc" v="Better Contracts-Integration aktivieren. Wendet verdiente Farmland-Rabatte aus abgeschlossenen Aufträgen an." eh="d4e02c7b" />
     <e k="usedplus_settings_toggles" v="Funktionsschalter" eh="2aa7da8d" />
     <e k="usedplus_settings_money" v="Geld &amp;amp; Zinssätze" eh="e0d1b0db" />
     <e k="usedplus_settings_risk" v="Nachsicht &amp;amp; Risiko" eh="c57ae16a" />

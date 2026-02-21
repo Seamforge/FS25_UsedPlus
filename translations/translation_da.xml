@@ -1051,6 +1051,7 @@
         <e k="usedplus_lp_size" v="Størrelse:" eh="af645946" />
         <e k="usedplus_lp_perHa" v="Per ha:" eh="ddf262a0" />
         <e k="usedplus_lp_basePrice" v="Basispris:" eh="74e3d937" />
+        <e k="usedplus_lp_bcDiscount" v="Kontraktrabat:" eh="77ad5271" />
         <e k="usedplus_lp_creditAdjust" v="Kreditjustering:" eh="f7acd3c7" />
         <e k="usedplus_lp_yourPrice" v="Din Pris:" eh="1d387415" />
         <e k="usedplus_lp_methodHelp" v="Vælg hvordan du vil betale: kontant, finansiering over tid, eller leas jorden." eh="57d0bf21" />
@@ -1167,6 +1168,7 @@
         <e k="usedplus_so_expiresIn" v="Tilbuddet udløber om:" eh="ca2ce4a5" />
         <e k="usedplus_so_acceptOffer" v="Accepter Tilbud" eh="93a5776a" />
         <e k="usedplus_so_keepWaitingBtn" v="Vent Videre" eh="addcd152" />
+        <e k="usedplus_so_previousOffers" v="[EN] Previous Offers:" eh="0a8e474c" />
         <!-- Deal quality ratings (set dynamically in Lua) -->
         <!-- Legacy keys kept for compatibility -->
         <e k="usedplus_so_title" v="SALGSTILBUD MODTAGET!" eh="1596a2b0" />
@@ -2175,6 +2177,8 @@
         <e k="usedplus_setting_bueIntegration_desc" v="Aktiver BuyUsedEquipment integration. Skjuler UsedPlus Search knap (BUE håndterer brugt søgning)." eh="0216f3ab" />
         <e k="usedplus_setting_elsIntegration" v="ELS Integration" eh="1b5ac55a" />
         <e k="usedplus_setting_elsIntegration_desc" v="Aktiver EnhancedLoanSystem integration. Deaktiverer UsedPlus lån (ELS håndterer dem)." eh="1594da56" />
+        <e k="usedplus_setting_bcIntegration" v="Better Contracts" eh="66a6ff26" />
+        <e k="usedplus_setting_bcIntegration_desc" v="Aktivér Better Contracts-integration. Anvender optjente jordrabatter fra afsluttede kontrakter." eh="d4e02c7b" />
 
         <!-- Section Headers -->
         <e k="usedplus_settings_toggles" v="Funktions Kontakter" eh="2aa7da8d" />

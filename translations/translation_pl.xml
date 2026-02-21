@@ -1039,6 +1039,7 @@
         <e k="usedplus_lp_size" v="Rozmiar:" eh="af645946" />
         <e k="usedplus_lp_perHa" v="Na Ha:" eh="ddf262a0" />
         <e k="usedplus_lp_basePrice" v="Cena bazowa:" eh="74e3d937" />
+        <e k="usedplus_lp_bcDiscount" v="Zniżka kontraktowa:" eh="77ad5271" />
         <e k="usedplus_lp_creditAdjust" v="Korekta kredytowa:" eh="f7acd3c7" />
         <e k="usedplus_lp_yourPrice" v="Twoja cena:" eh="1d387415" />
         <e k="usedplus_lp_methodHelp" v="Wybierz sposób płatności: gotówka z góry, finansowanie w czasie lub dzierżawa ziemi." eh="57d0bf21" />
@@ -1155,6 +1156,7 @@
         <e k="usedplus_so_expiresIn" v="Oferta wygasa za:" eh="ca2ce4a5" />
         <e k="usedplus_so_acceptOffer" v="Zaakceptuj ofertę" eh="93a5776a" />
         <e k="usedplus_so_keepWaitingBtn" v="Czekaj dalej" eh="addcd152" />
+        <e k="usedplus_so_previousOffers" v="[EN] Previous Offers:" eh="0a8e474c" />
         <!-- Deal quality ratings (set dynamically in Lua) -->
         <!-- Legacy keys kept for compatibility -->
         <e k="usedplus_so_title" v="OTRZYMANO OFERTĘ SPRZEDAŻY!" eh="1596a2b0" />
@@ -1933,6 +1935,8 @@
     <e k="usedplus_setting_bueIntegration_desc" v="Wlacz integracje z BuyUsedEquipment. Ukrywa przycisk Szukaj UsedPlus (BUE obsluguje wyszukiwanie uzywanych)." eh="0216f3ab" />
     <e k="usedplus_setting_elsIntegration" v="Integracja ELS" eh="1b5ac55a" />
     <e k="usedplus_setting_elsIntegration_desc" v="Wlacz integracje z EnhancedLoanSystem. Wylacza pozyczki UsedPlus (ELS je obsluguje)." eh="1594da56" />
+        <e k="usedplus_setting_bcIntegration" v="Better Contracts" eh="66a6ff26" />
+        <e k="usedplus_setting_bcIntegration_desc" v="Włącz integrację Better Contracts. Stosuje zniżki na grunty uzyskane za ukończone kontrakty." eh="d4e02c7b" />
     <e k="usedplus_settings_toggles" v="Przelaczniki funkcji" eh="2aa7da8d" />
     <e k="usedplus_settings_money" v="Pieniadze i stawki" eh="e0d1b0db" />
     <e k="usedplus_settings_risk" v="Wybaczanie i ryzyko" eh="c57ae16a" />

@@ -297,6 +297,15 @@ function UsedPlusSettingsMenuExtension:addSettingsElements(frame)
         )
     end
 
+    -- v2.15.2: BC Integration toggle (only show if BC detected)
+    if ModCompatibility and ModCompatibility.bcDetected then
+        frame.usedplus_bcIntegrationToggle = UsedPlusSettingsMenuExtension:addBinaryOption(
+            frame, "onBCIntegrationToggleChanged",
+            g_i18n:getText("usedplus_setting_bcIntegration") or "Better Contracts",
+            g_i18n:getText("usedplus_setting_bcIntegration_desc") or "Enable Better Contracts integration. Applies earned farmland discounts from completed contracts."
+        )
+    end
+
     -- v2.7.0: Shop Buy/Lease override toggle (always shown)
     frame.usedplus_overrideShopBuyLeaseToggle = UsedPlusSettingsMenuExtension:addBinaryOption(
         frame, "onOverrideShopBuyLeaseToggleChanged",
@@ -594,6 +603,7 @@ function UsedPlusSettingsMenuExtension:updateSettingsUI(frame)
     setChecked(frame.usedplus_hpIntegrationToggle, "enableHPIntegration") -- v2.6.2
     setChecked(frame.usedplus_bueIntegrationToggle, "enableBUEIntegration") -- v2.6.2
     setChecked(frame.usedplus_elsIntegrationToggle, "enableELSIntegration") -- v2.6.2
+    setChecked(frame.usedplus_bcIntegrationToggle, "enableBCIntegration") -- v2.15.2
     setChecked(frame.usedplus_overrideShopBuyLeaseToggle, "overrideShopBuyLease") -- v2.7.0
     setChecked(frame.usedplus_overrideRVBRepairToggle, "overrideRVBRepair") -- v2.7.0
 
@@ -804,6 +814,17 @@ end
 function UsedPlusSettingsMenuExtension:onELSIntegrationToggleChanged(state)
     if UsedPlusSettings then
         UsedPlusSettings:set("enableELSIntegration", state == BinaryOptionElement.STATE_RIGHT)
+        -- Refresh ModCompatibility flags
+        if ModCompatibility and ModCompatibility.refreshIntegrationSettings then
+            ModCompatibility.refreshIntegrationSettings()
+        end
+    end
+end
+
+-- v2.15.2: NEW - Better Contracts Integration toggle
+function UsedPlusSettingsMenuExtension:onBCIntegrationToggleChanged(state)
+    if UsedPlusSettings then
+        UsedPlusSettings:set("enableBCIntegration", state == BinaryOptionElement.STATE_RIGHT)
         -- Refresh ModCompatibility flags
         if ModCompatibility and ModCompatibility.refreshIntegrationSettings then
             ModCompatibility.refreshIntegrationSettings()

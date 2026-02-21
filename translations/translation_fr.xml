@@ -1039,6 +1039,7 @@
         <e k="usedplus_lp_size" v="Taille:" eh="af645946" />
         <e k="usedplus_lp_perHa" v="Par Ha:" eh="ddf262a0" />
         <e k="usedplus_lp_basePrice" v="Prix de base:" eh="74e3d937" />
+        <e k="usedplus_lp_bcDiscount" v="Remise de contrat :" eh="77ad5271" />
         <e k="usedplus_lp_creditAdjust" v="Ajustement crédit:" eh="f7acd3c7" />
         <e k="usedplus_lp_yourPrice" v="Votre prix:" eh="1d387415" />
         <e k="usedplus_lp_methodHelp" v="Choisissez comment payer: comptant d'avance, financer dans le temps, ou louer le terrain." eh="57d0bf21" />
@@ -1155,6 +1156,7 @@
         <e k="usedplus_so_expiresIn" v="L'offre expire dans:" eh="ca2ce4a5" />
         <e k="usedplus_so_acceptOffer" v="Accepter l'offre" eh="93a5776a" />
         <e k="usedplus_so_keepWaitingBtn" v="Continuer à attendre" eh="addcd152" />
+        <e k="usedplus_so_previousOffers" v="[EN] Previous Offers:" eh="0a8e474c" />
         <!-- Deal quality ratings (set dynamically in Lua) -->
         <!-- Legacy keys kept for compatibility -->
         <e k="usedplus_so_title" v="OFFRE DE VENTE REÇUE!" eh="1596a2b0" />
@@ -1933,6 +1935,8 @@
     <e k="usedplus_setting_bueIntegration_desc" v="Activer l'intégration BuyUsedEquipment. Masque le bouton Recherche UsedPlus (BUE gère la recherche)." eh="0216f3ab" />
     <e k="usedplus_setting_elsIntegration" v="Intégration ELS" eh="1b5ac55a" />
     <e k="usedplus_setting_elsIntegration_desc" v="Activer l'intégration EnhancedLoanSystem. Désactive les prêts UsedPlus (ELS les gère)." eh="1594da56" />
+        <e k="usedplus_setting_bcIntegration" v="Better Contracts" eh="66a6ff26" />
+        <e k="usedplus_setting_bcIntegration_desc" v="Activer l'intégration Better Contracts. Applique les remises sur les terrains gagnées grâce aux contrats terminés." eh="d4e02c7b" />
     <e k="usedplus_settings_toggles" v="Options de fonctionnalités" eh="2aa7da8d" />
     <e k="usedplus_settings_money" v="Argent &amp;amp; Taux" eh="e0d1b0db" />
     <e k="usedplus_settings_risk" v="Tolérance &amp;amp; Risque" eh="c57ae16a" />

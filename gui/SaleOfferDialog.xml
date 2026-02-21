@@ -19,7 +19,7 @@
     <GuiElement profile="newLayer" />
     <Bitmap profile="dialogFullscreenBg" id="dialogBg" />
 
-    <GuiElement profile="dialogBg" id="dialogElement" size="720px 615px">
+    <GuiElement profile="dialogBg" id="dialogElement" size="720px 656px">
         <ThreePartBitmap profile="fs25_dialogBgMiddle" />
         <ThreePartBitmap profile="fs25_dialogBgTop" />
         <ThreePartBitmap profile="fs25_dialogBgBottom" />
@@ -61,7 +61,7 @@
             <!-- ================================================================ -->
             <!-- SECTION 3: Expected Range (visual indicator) -->
             <!-- ================================================================ -->
-            <GuiElement profile="soSectionBg" position="0px -275px" size="680px 105px">
+            <GuiElement profile="soSectionBg" position="0px -275px" size="680px 123px">
                 <Text profile="soSectionLabel" position="0px -3px" text="$l10n_usedplus_so_expectedRange"/>
 
                 <!-- 21 arrow markers at fixed positions (0% to 100% in 5% steps) -->
@@ -93,23 +93,37 @@
                 <!-- Range bar background (no id — renders fine) -->
                 <Bitmap profile="soRangeBarBg" position="0px -38px"/>
 
-                <!-- Offer position as clean text -->
-                <Text profile="soRangeOfferHighlight" id="rangeOfferText" position="0px -56px"/>
+                <!-- v2.16.0: Previous offer history markers (gray ▲ below bar, shown for declined offers) -->
+                <!-- 11 positions at 10% intervals: 0%=-225, 10%=-180, 20%=-135, etc. -->
+                <Bitmap profile="soHistoryMarker" id="histMarker0"   position="-225px -52px"/>
+                <Bitmap profile="soHistoryMarker" id="histMarker10"  position="-180px -52px"/>
+                <Bitmap profile="soHistoryMarker" id="histMarker20"  position="-135px -52px"/>
+                <Bitmap profile="soHistoryMarker" id="histMarker30"  position="-90px -52px"/>
+                <Bitmap profile="soHistoryMarker" id="histMarker40"  position="-45px -52px"/>
+                <Bitmap profile="soHistoryMarker" id="histMarker50"  position="0px -52px"/>
+                <Bitmap profile="soHistoryMarker" id="histMarker60"  position="45px -52px"/>
+                <Bitmap profile="soHistoryMarker" id="histMarker70"  position="90px -52px"/>
+                <Bitmap profile="soHistoryMarker" id="histMarker80"  position="135px -52px"/>
+                <Bitmap profile="soHistoryMarker" id="histMarker90"  position="180px -52px"/>
+                <Bitmap profile="soHistoryMarker" id="histMarker100" position="225px -52px"/>
 
-                <!-- Min / Max price labels -->
-                <Text profile="soRangeValue" id="rangeMinText" position="-200px -56px"/>
-                <Text profile="soRangeValue" id="rangeMaxText" position="200px -56px"/>
+                <!-- Offer position as clean text (shifted down 18px for history row) -->
+                <Text profile="soRangeOfferHighlight" id="rangeOfferText" position="0px -74px"/>
 
-                <!-- Labels below values -->
-                <Text profile="soRangeLabel" position="-200px -72px" text="$l10n_usedplus_so_rangeMin"/>
-                <Text profile="soRangeLabelHighlight" position="0px -72px" text="$l10n_usedplus_so_rangeOffer"/>
-                <Text profile="soRangeLabel" position="200px -72px" text="$l10n_usedplus_so_rangeMax"/>
+                <!-- Min / Max price labels (shifted down 18px) -->
+                <Text profile="soRangeValue" id="rangeMinText" position="-200px -74px"/>
+                <Text profile="soRangeValue" id="rangeMaxText" position="200px -74px"/>
+
+                <!-- Labels below values (shifted down 18px) -->
+                <Text profile="soRangeLabel" position="-200px -90px" text="$l10n_usedplus_so_rangeMin"/>
+                <Text profile="soRangeLabelHighlight" position="0px -90px" text="$l10n_usedplus_so_rangeOffer"/>
+                <Text profile="soRangeLabel" position="200px -90px" text="$l10n_usedplus_so_rangeMax"/>
             </GuiElement>
 
             <!-- ================================================================ -->
             <!-- SECTION 4: Your Options (simplified layout like LoanApprovedDialog) -->
             <!-- ================================================================ -->
-            <GuiElement profile="soOptionsSection" position="0px -380px">
+            <GuiElement profile="soOptionsSection" position="0px -398px">
                 <Bitmap profile="soOptionsBg" position="0px 0px"/>
                 <Text profile="soSectionLabel" position="0px -8px" text="$l10n_usedplus_so_yourOptions"/>
 
@@ -121,12 +135,16 @@
                 <!-- v2.13.2: Shifted note from 100px to 130px to avoid overlap with wider profile -->
                 <Text profile="soOptionLabel" position="-100px -58px" text="$l10n_usedplus_so_keepWaiting"/>
                 <Text profile="soOptionNote" position="130px -58px" text="$l10n_usedplus_so_keepWaitingNote"/>
+
+                <!-- v2.16.0: Previous offers summary (only shown when history exists) -->
+                <Text profile="soOptionLabel" id="prevOffersLabel" position="-100px -81px" text="$l10n_usedplus_so_previousOffers"/>
+                <Text profile="soOptionNote" id="prevOffersText" position="130px -81px"/>
             </GuiElement>
 
             <!-- ================================================================ -->
             <!-- SECTION 5: Expiration Warning (v2.9.5: timer icon) -->
             <!-- ================================================================ -->
-            <GuiElement position="0px -480px">
+            <GuiElement position="0px -521px">
                 <Bitmap profile="soTimerIcon" id="timerIcon" position="-125px -5px"/>
                 <Text profile="soExpirationLabel" position="20px -5px" text="$l10n_usedplus_so_expiresIn"/>
                 <!-- v2.13.2: Shifted right 10px per user feedback -->
@@ -228,6 +246,12 @@
             <imageSliceId value="noSlice"/>
         </Profile>
 
+        <!-- v2.16.0: History offer marker - gray upward triangle below range bar -->
+        <Profile name="soHistoryMarker" extends="baseReference" with="anchorTopCenter">
+            <size value="16px 16px"/>
+            <imageSliceId value="noSlice"/>
+        </Profile>
+
         <!-- Offer position highlight text -->
         <Profile name="soRangeOfferHighlight" extends="fs25_textDefault" with="anchorTopCenter">
             <textSize value="14px"/>
@@ -266,14 +290,14 @@
             <textAlignment value="center"/>
         </Profile>
 
-        <!-- Options section container -->
+        <!-- Options section container (v2.16.0: expanded for previous offers row) -->
         <Profile name="soOptionsSection" extends="emptyPanel" with="anchorTopCenter">
-            <size value="680px 85px"/>
+            <size value="680px 108px"/>
         </Profile>
 
-        <!-- Options section background -->
+        <!-- Options section background (v2.16.0: expanded for previous offers row) -->
         <Profile name="soOptionsBg" extends="baseReference" with="anchorTopCenter">
-            <size value="680px 85px"/>
+            <size value="680px 108px"/>
             <imageColor value="0.05 0.05 0.08 0.9"/>
         </Profile>
 

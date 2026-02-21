@@ -1051,6 +1051,7 @@
         <e k="usedplus_lp_size" v="Size:" eh="af645946" />
         <e k="usedplus_lp_perHa" v="Par ha :" eh="ddf262a0" />
         <e k="usedplus_lp_basePrice" v="Prix de base :" eh="74e3d937" />
+        <e k="usedplus_lp_bcDiscount" v="Rabais de contrat :" eh="77ad5271" />
         <e k="usedplus_lp_creditAdjust" v="Ajustement crédit :" eh="f7acd3c7" />
         <e k="usedplus_lp_yourPrice" v="Votre prix :" eh="1d387415" />
         <e k="usedplus_lp_methodHelp" v="Choisissez comment vous voulez payer : comptant immédiat, financement échelonné, ou location du terrain." eh="57d0bf21" />
@@ -1167,6 +1168,7 @@
         <e k="usedplus_so_expiresIn" v="Offer expires in:" eh="ca2ce4a5" />
         <e k="usedplus_so_acceptOffer" v="Accepter l'offre" eh="93a5776a" />
         <e k="usedplus_so_keepWaitingBtn" v="Continuer d'attendre" eh="addcd152" />
+        <e k="usedplus_so_previousOffers" v="[EN] Previous Offers:" eh="0a8e474c" />
         <!-- Deal quality ratings (set dynamically in Lua) -->
         <!-- Legacy keys kept for compatibility -->
         <e k="usedplus_so_title" v="SALE OFFER RECEIVED!" eh="1596a2b0" />
@@ -2175,6 +2177,8 @@
         <e k="usedplus_setting_bueIntegration_desc" v="Activer l'intégration BuyUsedEquipment. Masque le bouton Recherche d'UsedPlus (BUE gère la recherche d'occasion)." eh="0216f3ab" />
         <e k="usedplus_setting_elsIntegration" v="ELS Integration" eh="1b5ac55a" />
         <e k="usedplus_setting_elsIntegration_desc" v="Activer l'intégration EnhancedLoanSystem. Désactive les prêts UsedPlus (ELS les gère)." eh="1594da56" />
+        <e k="usedplus_setting_bcIntegration" v="Better Contracts" eh="66a6ff26" />
+        <e k="usedplus_setting_bcIntegration_desc" v="Activer l'intégration Better Contracts. Applique les rabais sur les terres gagnés grâce aux contrats terminés." eh="d4e02c7b" />
 
         <!-- Section Headers -->
         <e k="usedplus_settings_toggles" v="Activation des fonctions" eh="2aa7da8d" />

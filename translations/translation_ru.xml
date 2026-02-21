@@ -1039,6 +1039,7 @@
         <e k="usedplus_lp_size" v="Размер:" eh="af645946" />
         <e k="usedplus_lp_perHa" v="Пер Ха:" eh="ddf262a0" />
         <e k="usedplus_lp_basePrice" v="Базовая цена:" eh="74e3d937" />
+        <e k="usedplus_lp_bcDiscount" v="Скидка по контракту:" eh="77ad5271" />
         <e k="usedplus_lp_creditAdjust" v="Кредитная корректировка:" eh="f7acd3c7" />
         <e k="usedplus_lp_yourPrice" v="Ваша цена:" eh="1d387415" />
         <e k="usedplus_lp_methodHelp" v="Выберите способ оплаты: наличными авансом, постепенным финансированием или арендой земли." eh="57d0bf21" />
@@ -1155,6 +1156,7 @@
         <e k="usedplus_so_expiresIn" v="Предложение истекает через:" eh="ca2ce4a5" />
         <e k="usedplus_so_acceptOffer" v="Принять предложение" eh="93a5776a" />
         <e k="usedplus_so_keepWaitingBtn" v="Продолжить ждать" eh="addcd152" />
+        <e k="usedplus_so_previousOffers" v="[EN] Previous Offers:" eh="0a8e474c" />
         <!-- Deal quality ratings (set dynamically in Lua) -->
         <!-- Legacy keys kept for compatibility -->
         <e k="usedplus_so_title" v="ПОЛУЧЕНО ПРЕДЛОЖЕНИЕ О ПРОДАЖЕ!" eh="1596a2b0" />
@@ -1933,6 +1935,8 @@
     <e k="usedplus_setting_bueIntegration_desc" v="Включить интеграцию BuyUsedEquipment. Скрывает кнопку Поиск UsedPlus (BUE управляет поиском б/у)." eh="0216f3ab" />
     <e k="usedplus_setting_elsIntegration" v="Интеграция ELS" eh="1b5ac55a" />
     <e k="usedplus_setting_elsIntegration_desc" v="Включить интеграцию EnhancedLoanSystem. Отключает кредиты UsedPlus (ELS управляет ими)." eh="1594da56" />
+        <e k="usedplus_setting_bcIntegration" v="Better Contracts" eh="66a6ff26" />
+        <e k="usedplus_setting_bcIntegration_desc" v="Включить интеграцию Better Contracts. Применяет заработанные скидки на землю за выполненные контракты." eh="d4e02c7b" />
     <e k="usedplus_settings_toggles" v="Переключатели функций" eh="2aa7da8d" />
     <e k="usedplus_settings_money" v="Деньги и ставки" eh="e0d1b0db" />
     <e k="usedplus_settings_risk" v="Снисходительность и риск" eh="c57ae16a" />

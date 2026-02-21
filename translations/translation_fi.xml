@@ -1051,6 +1051,7 @@
         <e k="usedplus_lp_size" v="Koko:" eh="af645946" />
         <e k="usedplus_lp_perHa" v="Per ha:" eh="ddf262a0" />
         <e k="usedplus_lp_basePrice" v="Perushinta:" eh="74e3d937" />
+        <e k="usedplus_lp_bcDiscount" v="Sopimusalennus:" eh="77ad5271" />
         <e k="usedplus_lp_creditAdjust" v="Luottotarkistus:" eh="f7acd3c7" />
         <e k="usedplus_lp_yourPrice" v="Sinun hintasi:" eh="1d387415" />
         <e k="usedplus_lp_methodHelp" v="Valitse maksutapa: käteisellä heti, rahoituksella ajan myötä tai vuokraa maa." eh="57d0bf21" />
@@ -1167,6 +1168,7 @@
         <e k="usedplus_so_expiresIn" v="Tarjous vanhenee:" eh="ca2ce4a5" />
         <e k="usedplus_so_acceptOffer" v="Hyväksy tarjous" eh="93a5776a" />
         <e k="usedplus_so_keepWaitingBtn" v="Jatka odotusta" eh="addcd152" />
+        <e k="usedplus_so_previousOffers" v="[EN] Previous Offers:" eh="0a8e474c" />
         <!-- Deal quality ratings (set dynamically in Lua) -->
         <!-- Legacy keys kept for compatibility -->
         <e k="usedplus_so_title" v="MYYNTITARJOUS VASTAANOTETTU!" eh="1596a2b0" />
@@ -2175,6 +2177,8 @@
         <e k="usedplus_setting_bueIntegration_desc" v="Ota käyttöön BuyUsedEquipment-integraatio. Piilottaa UsedPlus-hakupainikkeen (BUE hoitaa käytettyjen haun)." eh="0216f3ab" />
         <e k="usedplus_setting_elsIntegration" v="ELS-integraatio" eh="1b5ac55a" />
         <e k="usedplus_setting_elsIntegration_desc" v="Ota käyttöön EnhancedLoanSystem-integraatio. Poistaa UsedPlus-lainat käytöstä (ELS hoitaa ne)." eh="1594da56" />
+        <e k="usedplus_setting_bcIntegration" v="Better Contracts" eh="66a6ff26" />
+        <e k="usedplus_setting_bcIntegration_desc" v="Ota Better Contracts -integraatio käyttöön. Käyttää ansaitut maaalennukset suoritetuista sopimuksista." eh="d4e02c7b" />
 
         <!-- Section Headers -->
         <e k="usedplus_settings_toggles" v="Ominaisuuskytkimet" eh="2aa7da8d" />

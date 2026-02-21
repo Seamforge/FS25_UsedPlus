@@ -1051,6 +1051,7 @@
         <e k="usedplus_lp_size" v="Ukuran:" eh="af645946" />
         <e k="usedplus_lp_perHa" v="Per Ha:" eh="ddf262a0" />
         <e k="usedplus_lp_basePrice" v="Harga Dasar:" eh="74e3d937" />
+        <e k="usedplus_lp_bcDiscount" v="Diskon kontrak:" eh="77ad5271" />
         <e k="usedplus_lp_creditAdjust" v="Penyesuaian Kredit:" eh="f7acd3c7" />
         <e k="usedplus_lp_yourPrice" v="Harga Anda:" eh="1d387415" />
         <e k="usedplus_lp_methodHelp" v="Pilih cara pembayaran: tunai di muka, pembiayaan bertahap, atau sewa lahan." eh="57d0bf21" />
@@ -1167,6 +1168,7 @@
         <e k="usedplus_so_expiresIn" v="Penawaran berakhir dalam:" eh="ca2ce4a5" />
         <e k="usedplus_so_acceptOffer" v="Terima Penawaran" eh="93a5776a" />
         <e k="usedplus_so_keepWaitingBtn" v="Tetap Tunggu" eh="addcd152" />
+        <e k="usedplus_so_previousOffers" v="[EN] Previous Offers:" eh="0a8e474c" />
         <!-- Deal quality ratings (set dynamically in Lua) -->
         <!-- Legacy keys kept for compatibility -->
         <e k="usedplus_so_title" v="PENAWARAN PENJUALAN DITERIMA!" eh="1596a2b0" />
@@ -2175,6 +2177,8 @@
         <e k="usedplus_setting_bueIntegration_desc" v="Aktifkan integrasi BuyUsedEquipment. Menyembunyikan tombol Cari UsedPlus (BUE menangani pencarian bekas)." eh="0216f3ab" />
         <e k="usedplus_setting_elsIntegration" v="Integrasi ELS" eh="1b5ac55a" />
         <e k="usedplus_setting_elsIntegration_desc" v="Aktifkan integrasi EnhancedLoanSystem. Menonaktifkan pinjaman UsedPlus (ELS menangani mereka)." eh="1594da56" />
+        <e k="usedplus_setting_bcIntegration" v="Better Contracts" eh="66a6ff26" />
+        <e k="usedplus_setting_bcIntegration_desc" v="Aktifkan integrasi Better Contracts. Menerapkan diskon lahan yang diperoleh dari kontrak yang diselesaikan." eh="d4e02c7b" />
 
         <!-- Section Headers -->
         <e k="usedplus_settings_toggles" v="Pengalihan Fitur" eh="2aa7da8d" />

@@ -11,7 +11,7 @@
     <GuiElement profile="newLayer" />
     <Bitmap profile="dialogFullscreenBg" id="dialogBg" />
 
-    <GuiElement profile="dialogBg" id="dialogElement" size="720px 580px">
+    <GuiElement profile="dialogBg" id="dialogElement" size="720px 605px">
         <ThreePartBitmap profile="fs25_dialogBgMiddle" />
         <ThreePartBitmap profile="fs25_dialogBgTop" />
         <ThreePartBitmap profile="fs25_dialogBgBottom" />
@@ -43,16 +43,23 @@
                 <Text profile="lpDetailLabel" position="100px -30px" text="$l10n_usedplus_lp_basePrice"/>
                 <Text profile="lpBasePrice" id="basePriceText" position="250px -30px" text=""/>
 
-                <Text profile="lpDetailLabel" position="100px -55px" text="$l10n_usedplus_lp_creditAdjust"/>
-                <Text profile="lpCreditAdjust" id="creditAdjustmentText" position="250px -55px" text=""/>
+                <!-- v2.15.2: Better Contracts discount row (hidden when no discount) -->
+                <Text profile="lpDetailLabel" id="bcDiscountLabel" position="100px -55px" text="$l10n_usedplus_lp_bcDiscount" visible="false"/>
+                <Text profile="lpBCDiscount" id="bcDiscountText" position="250px -55px" text="" visible="false"/>
 
-                <Text profile="lpDetailLabel" position="100px -80px" text="$l10n_usedplus_lp_yourPrice"/>
-                <Text profile="lpYourPrice" id="landPriceText" position="250px -80px" text=""/>
+                <!-- Credit Adjust + Your Price group: shifts down 25px when BC row is visible -->
+                <GuiElement id="creditPriceGroup" position="0px -55px">
+                    <Text profile="lpDetailLabel" id="creditAdjustLabel" position="100px 0px" text="$l10n_usedplus_lp_creditAdjust"/>
+                    <Text profile="lpCreditAdjust" id="creditAdjustmentText" position="250px 0px" text=""/>
+
+                    <Text profile="lpDetailLabel" id="yourPriceLabel" position="100px -25px" text="$l10n_usedplus_lp_yourPrice"/>
+                    <Text profile="lpYourPrice" id="landPriceText" position="250px -25px" text=""/>
+                </GuiElement>
             </GuiElement>
 
             <!-- ========== SECTION 2: Purchase Mode Selector ========== -->
-            <!-- 10px gap after Land Details (105px) = -55 - 105 - 10 = -170 -->
-            <GuiElement profile="lpModeSection" position="0px -170px">
+            <!-- 10px gap after Land Details (130px) = -55 - 130 - 10 = -195 -->
+            <GuiElement profile="lpModeSection" position="0px -195px">
                 <Bitmap profile="lpModeSectionBg" position="0px 0px"/>
                 <Text profile="lpSectionHeader" position="0px -5px" text="$l10n_usedplus_land_purchaseMethod"/>
                 <Text profile="lpHelpText" id="modeHelpText" position="0px -23px" text="$l10n_usedplus_lp_methodHelp"/>
@@ -60,8 +67,8 @@
             </GuiElement>
 
             <!-- ========== SECTION 3A: Cash Mode ========== -->
-            <!-- 10px gap after Mode Section (85px) = -170 - 85 - 10 = -265 -->
-            <GuiElement profile="lpPaymentSection" id="cashSection" position="0px -265px" visible="true">
+            <!-- 10px gap after Mode Section (85px) = -195 - 85 - 10 = -290 -->
+            <GuiElement profile="lpPaymentSection" id="cashSection" position="0px -290px" visible="true">
                 <Bitmap profile="lpPaymentSectionBg" position="0px 0px"/>
                 <Text profile="lpSectionHeader" position="0px -5px" text="$l10n_usedplus_land_paymentSummary"/>
                 <Text profile="lpHelpText" id="cashHelpText" position="0px -23px" text="$l10n_usedplus_lp_cashHelp"/>
@@ -80,7 +87,7 @@
             </GuiElement>
 
             <!-- ========== SECTION 3B: Finance Mode ========== -->
-            <GuiElement profile="lpPaymentSectionLarge" id="financeSection" position="0px -265px" visible="false">
+            <GuiElement profile="lpPaymentSectionLarge" id="financeSection" position="0px -290px" visible="false">
                 <Bitmap profile="lpPaymentSectionLargeBg" position="0px 0px"/>
                 <Text profile="lpSectionHeader" position="0px -5px" text="$l10n_usedplus_land_financeTerms"/>
                 <Text profile="lpHelpText" id="financeHelpText" position="0px -23px" text="$l10n_usedplus_lp_financeHelp"/>
@@ -112,7 +119,7 @@
             </GuiElement>
 
             <!-- ========== SECTION 3C: Lease Mode ========== -->
-            <GuiElement profile="lpPaymentSectionLarge" id="leaseSection" position="0px -265px" visible="false">
+            <GuiElement profile="lpPaymentSectionLarge" id="leaseSection" position="0px -290px" visible="false">
                 <Bitmap profile="lpPaymentSectionLargeBg" position="0px 0px"/>
                 <Text profile="lpSectionHeader" position="0px -5px" text="$l10n_usedplus_land_leaseTerms"/>
                 <Text profile="lpHelpText" id="leaseHelpText" position="0px -23px" text="$l10n_usedplus_lp_leaseHelp"/>
@@ -166,7 +173,7 @@
     <GUIProfiles>
         <!-- ========== SECTION CONTAINERS ========== -->
         <Profile name="lpLandSection" extends="emptyPanel" with="anchorTopCenter">
-            <size value="680px 105px"/>
+            <size value="680px 130px"/>
         </Profile>
 
         <Profile name="lpModeSection" extends="emptyPanel" with="anchorTopCenter">
@@ -184,7 +191,7 @@
         <!-- ========== SECTION BACKGROUNDS ========== -->
         <!-- Land details: dark blue-tinted background -->
         <Profile name="lpLandSectionBg" extends="baseReference" with="anchorTopCenter">
-            <size value="680px 105px"/>
+            <size value="680px 130px"/>
             <imageColor value="0.08 0.1 0.12 0.9"/>
         </Profile>
 
@@ -264,6 +271,13 @@
             <textSize value="13px"/>
             <textBold value="true"/>
             <!-- Color set dynamically via Lua based on adjustment direction -->
+        </Profile>
+
+        <!-- v2.15.2: Better Contracts discount (color set dynamically in Lua) -->
+        <Profile name="lpBCDiscount" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="200px 18px"/>
+            <textSize value="13px"/>
+            <textBold value="true"/>
         </Profile>
 
         <Profile name="lpYourPrice" extends="fs25_textDefault" with="anchorTopCenter">

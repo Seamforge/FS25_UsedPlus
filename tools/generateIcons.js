@@ -1005,6 +1005,20 @@ const ICONS = {
             </svg>`
     },
 
+    // v2.16.0: Range marker history - gray upward arrow/triangle (transparent background)
+    // Used in SaleOfferDialog BELOW range bar to show previous declined offer positions
+    // Mirrors range_marker (gold ▼ above bar) but gray ▲ below bar
+    range_marker_history: {
+        name: 'range_marker_history',
+        bgColor: 'transparent',
+        bgColorDark: 'transparent',
+        svg: (size) => `
+            <svg width="${size}" height="${size}" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="32,6 6,54 58,54" fill="#888888"/>
+                <polygon points="32,16 14,48 50,48" fill="#666666"/>
+            </svg>`
+    },
+
     // Range marker - yellow downward arrow/triangle (transparent background)
     // Used in SaleOfferDialog to indicate offer position on range bar
     range_marker: {

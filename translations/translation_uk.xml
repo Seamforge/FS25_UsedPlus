@@ -1039,6 +1039,7 @@
         <e k="usedplus_lp_size" v="Розмір:" eh="af645946" />
         <e k="usedplus_lp_perHa" v="За Га:" eh="ddf262a0" />
         <e k="usedplus_lp_basePrice" v="Базова ціна:" eh="74e3d937" />
+        <e k="usedplus_lp_bcDiscount" v="Знижка за контракт:" eh="77ad5271" />
         <e k="usedplus_lp_creditAdjust" v="Коригування кредиту:" eh="f7acd3c7" />
         <e k="usedplus_lp_yourPrice" v="Ваша ціна:" eh="1d387415" />
         <e k="usedplus_lp_methodHelp" v="Виберіть спосіб оплати: готівкою наперед, фінансування в розстрочку або оренда землі." eh="57d0bf21" />
@@ -1155,6 +1156,7 @@
         <e k="usedplus_so_expiresIn" v="Пропозиція закінчується через:" eh="ca2ce4a5" />
         <e k="usedplus_so_acceptOffer" v="Прийняти пропозицію" eh="93a5776a" />
         <e k="usedplus_so_keepWaitingBtn" v="Продовжувати чекати" eh="addcd152" />
+        <e k="usedplus_so_previousOffers" v="[EN] Previous Offers:" eh="0a8e474c" />
         <!-- Deal quality ratings (set dynamically in Lua) -->
         <!-- Legacy keys kept for compatibility -->
         <e k="usedplus_so_title" v="ОТРИМАНО ПРОПОЗИЦІЮ ПРОДАЖУ!" eh="1596a2b0" />
@@ -1933,6 +1935,8 @@
     <e k="usedplus_setting_bueIntegration_desc" v="Увімкнути інтеграцію BuyUsedEquipment. Приховує кнопку Пошук UsedPlus (BUE обробляє пошук б/в)." eh="0216f3ab" />
     <e k="usedplus_setting_elsIntegration" v="Інтеграція ELS" eh="1b5ac55a" />
     <e k="usedplus_setting_elsIntegration_desc" v="Увімкнути інтеграцію EnhancedLoanSystem. Вимикає кредити UsedPlus (ELS їх обробляє)." eh="1594da56" />
+        <e k="usedplus_setting_bcIntegration" v="Better Contracts" eh="66a6ff26" />
+        <e k="usedplus_setting_bcIntegration_desc" v="Увімкнути інтеграцію Better Contracts. Застосовує зароблені знижки на землю за виконані контракти." eh="d4e02c7b" />
     <e k="usedplus_settings_toggles" v="Перемикачі функцій" eh="2aa7da8d" />
     <e k="usedplus_settings_money" v="Гроші та ставки" eh="e0d1b0db" />
     <e k="usedplus_settings_risk" v="Прощення та ризик" eh="c57ae16a" />

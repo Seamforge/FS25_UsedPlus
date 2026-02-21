@@ -819,6 +819,7 @@
         <e k="usedplus_lp_size" v="Tamanho:" eh="af645946" />
         <e k="usedplus_lp_perHa" v="Por Ha:" eh="ddf262a0" />
         <e k="usedplus_lp_basePrice" v="Preço Base:" eh="74e3d937" />
+        <e k="usedplus_lp_bcDiscount" v="Desconto de contrato:" eh="77ad5271" />
         <e k="usedplus_lp_creditAdjust" v="Ajuste de Crédito:" eh="f7acd3c7" />
         <e k="usedplus_lp_yourPrice" v="O Seu Preço:" eh="1d387415" />
         <e k="usedplus_lp_methodHelp" v="Escolha como quer pagar: a pronto, financiar ao longo do tempo, ou arrendar o terreno." eh="57d0bf21" />
@@ -920,6 +921,7 @@
         <e k="usedplus_so_expiresIn" v="Oferta expira em:" eh="ca2ce4a5" />
         <e k="usedplus_so_acceptOffer" v="Aceitar Oferta" eh="93a5776a" />
         <e k="usedplus_so_keepWaitingBtn" v="Continuar a Esperar" eh="addcd152" />
+        <e k="usedplus_so_previousOffers" v="[EN] Previous Offers:" eh="0a8e474c" />
         <e k="usedplus_so_title" v="OFERTA DE VENDA RECEBIDA!" eh="1596a2b0" />
         <e k="usedplus_button_acceptOffer" v="Aceitar Oferta" eh="93a5776a" />
         <e k="usedplus_pc_title" v="Configurar Pagamentos do Empréstimo" eh="07beb52e" />
@@ -1759,6 +1761,8 @@
         <e k="usedplus_setting_bueIntegration_desc" v="Ativar integração BuyUsedEquipment. Oculta botão Pesquisar do UsedPlus (BUE trata da pesquisa)." eh="0216f3ab" />
         <e k="usedplus_setting_elsIntegration" v="Integração ELS" eh="1b5ac55a" />
         <e k="usedplus_setting_elsIntegration_desc" v="Ativar integração EnhancedLoanSystem. Desativa empréstimos UsedPlus (ELS trata deles)." eh="1594da56" />
+        <e k="usedplus_setting_bcIntegration" v="Better Contracts" eh="66a6ff26" />
+        <e k="usedplus_setting_bcIntegration_desc" v="Ativar a integração do Better Contracts. Aplica descontos em terrenos obtidos por contratos concluídos." eh="d4e02c7b" />
         <e k="usedplus_settings_toggles" v="Alternadores de Funcionalidades" eh="2aa7da8d" />
         <e k="usedplus_settings_money" v="Dinheiro &amp;amp; Taxas" eh="e0d1b0db" />
         <e k="usedplus_settings_risk" v="Tolerância &amp;amp; Risco" eh="c57ae16a" />

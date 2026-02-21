@@ -722,6 +722,7 @@
         <e k="usedplus_lp_size" v="Size：" eh="af645946" />
         <e k="usedplus_lp_perHa" v="每Ha：" eh="ddf262a0" />
         <e k="usedplus_lp_basePrice" v="Base 價格：" eh="74e3d937" />
+        <e k="usedplus_lp_bcDiscount" v="合約折扣：" eh="77ad5271" />
         <e k="usedplus_lp_creditAdjust" v="信用 調整：" eh="f7acd3c7" />
         <e k="usedplus_lp_yourPrice" v="您的 價格：" eh="1d387415" />
         <e k="usedplus_lp_methodHelp" v="選擇付款方式：現金預付、分期融資或租賃土地。" eh="57d0bf21" />
@@ -838,6 +839,7 @@
         <e k="usedplus_so_expiresIn" v="報價 expires in：" eh="ca2ce4a5" />
         <e k="usedplus_so_acceptOffer" v="接受 報價" eh="93a5776a" />
         <e k="usedplus_so_keepWaitingBtn" v="保持 等待ing" eh="addcd152" />
+        <e k="usedplus_so_previousOffers" v="[EN] Previous Offers:" eh="0a8e474c" />
         <!-- Deal quality ratings (set dynamically in Lua) -->
         <!-- Legacy keys kept for compatibility -->
         <e k="usedplus_so_title" v="S一個LE OFFER RECEIVED！" eh="1596a2b0" />
@@ -1843,6 +1845,8 @@
         <e k="usedplus_setting_bueIntegration_desc" v="Enable Buy使用dEquipment integration. Hides 使用dPlus 搜尋 button (BUE handles used search)." eh="0216f3ab" />
         <e k="usedplus_setting_elsIntegration" v="ELS 在tegration" eh="1b5ac55a" />
         <e k="usedplus_setting_elsIntegration_desc" v="Enable EnhancedLoanSystem integration. Disables 使用dPlus loans (ELS handles them)." eh="1594da56" />
+        <e k="usedplus_setting_bcIntegration" v="Better Contracts" eh="66a6ff26" />
+        <e k="usedplus_setting_bcIntegration_desc" v="啟用 Better Contracts 整合。套用從已完成合約中獲得的農地折扣。" eh="d4e02c7b" />
 
         <!-- Section Headers -->
         <e k="usedplus_settings_toggles" v="Feature 至ggles" eh="2aa7da8d" />

@@ -173,6 +173,7 @@ function VehicleSaleListing.new(farmId, vehicle, vehicleData, saleTier, priceTie
     self.offersReceived = 0        -- Number of offers received so far
     self.offersDeclined = 0        -- Number of offers declined
     self.offerShownToUser = false  -- Has the popup been shown for this offer? (prevents race condition)
+    self.offerHistory = {}         -- v2.16.0: Array of previous declined offer amounts (max 3, FIFO)
 
     -- Status
     self.status = VehicleSaleListing.STATUS.ACTIVE
@@ -372,6 +373,15 @@ function VehicleSaleListing:declineOffer()
     end
 
     self.offersDeclined = self.offersDeclined + 1
+
+    -- v2.16.0: Store declined offer in history before clearing (cap at 3, FIFO)
+    if self.currentOffer ~= nil then
+        table.insert(self.offerHistory, self.currentOffer)
+        while #self.offerHistory > 3 do
+            table.remove(self.offerHistory, 1)
+        end
+    end
+
     self.currentOffer = nil
     self.offerExpiresIn = 0
     self.offerShownToUser = false  -- Reset for potential future offer
@@ -622,6 +632,13 @@ function VehicleSaleListing:saveToXMLFile(xmlFile, key)
     xmlFile:setInt(key .. "#offersDeclined", self.offersDeclined)
     xmlFile:setBool(key .. "#offerShownToUser", self.offerShownToUser or false)
 
+    -- v2.16.0: Save offer history
+    local historyCount = #(self.offerHistory or {})
+    xmlFile:setInt(key .. "#offerHistoryCount", historyCount)
+    for i, amount in ipairs(self.offerHistory or {}) do
+        xmlFile:setFloat(key .. string.format("#offerHistory%d", i), amount)
+    end
+
     -- Status
     xmlFile:setString(key .. "#status", self.status)
     xmlFile:setInt(key .. "#createdAt", self.createdAt)
@@ -675,6 +692,16 @@ function VehicleSaleListing:loadFromXMLFile(xmlFile, key)
     self.offersReceived = xmlFile:getInt(key .. "#offersReceived", 0)
     self.offersDeclined = xmlFile:getInt(key .. "#offersDeclined", 0)
     self.offerShownToUser = xmlFile:getBool(key .. "#offerShownToUser", false)
+
+    -- v2.16.0: Load offer history (max 3)
+    self.offerHistory = {}
+    local historyCount = xmlFile:getInt(key .. "#offerHistoryCount", 0)
+    for i = 1, math.min(historyCount, 3) do
+        local amount = xmlFile:getFloat(key .. string.format("#offerHistory%d", i), 0)
+        if amount > 0 then
+            table.insert(self.offerHistory, amount)
+        end
+    end
 
     -- Status
     self.status = xmlFile:getString(key .. "#status", VehicleSaleListing.STATUS.ACTIVE)

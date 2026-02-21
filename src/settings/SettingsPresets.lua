@@ -43,6 +43,7 @@ SettingsPresets.easy = {
     enablePartialRepaint = true,
     enableFarmlandDifficultyScaling = true,  -- v2.0.0: Scale land with difficulty
     enableBankInterest = true,               -- v2.0.0: Earn interest on cash
+    enableBCIntegration = true,              -- v2.15.2: BC farmland discounts
 
     -- Very forgiving economics
     baseInterestRate = 0.04,            -- 4% (very low)
@@ -81,6 +82,7 @@ SettingsPresets.balanced = {
     enablePartialRepaint = true,
     enableFarmlandDifficultyScaling = true,  -- v2.0.0: Scale land with difficulty
     enableBankInterest = true,               -- v2.0.0: Earn interest on cash
+    enableBCIntegration = true,              -- v2.15.2: BC farmland discounts
 
     -- Default economics
     baseInterestRate = 0.08,            -- 8%
@@ -122,6 +124,7 @@ SettingsPresets.challenging = {
     enablePartialRepaint = true,
     enableFarmlandDifficultyScaling = true,  -- v2.0.0: Scale land with difficulty
     enableBankInterest = true,               -- v2.0.0: Minimal interest
+    enableBCIntegration = true,              -- v2.15.2: BC farmland discounts
 
     -- Tighter economics
     baseInterestRate = 0.10,            -- 10%
@@ -164,6 +167,7 @@ SettingsPresets.hardcore = {
     enablePartialRepaint = true,
     enableFarmlandDifficultyScaling = true,  -- v2.0.0: Scale land with difficulty
     enableBankInterest = false,              -- v2.0.0: No free money!
+    enableBCIntegration = true,              -- v2.15.2: BC farmland discounts
 
     -- Punishing economics
     baseInterestRate = 0.12,            -- 12%
@@ -206,6 +210,7 @@ SettingsPresets.streamlined = {
     enablePartialRepaint = false,       -- No partial repaint
     enableFarmlandDifficultyScaling = false, -- v2.0.0: Keep vanilla land prices
     enableBankInterest = false,              -- v2.0.0: No extras
+    enableBCIntegration = true,              -- v2.15.2: BC farmland discounts
 
     -- Relaxed economics
     baseInterestRate = 0.06,            -- 6%
@@ -242,6 +247,7 @@ SettingsPresets.immersive = {
     enablePartialRepaint = true,
     enableFarmlandDifficultyScaling = true,  -- v2.0.0: Scale land with difficulty
     enableBankInterest = true,               -- v2.0.0: Realistic interest
+    enableBCIntegration = true,              -- v2.15.2: BC farmland discounts
 
     -- Realistic economics
     baseInterestRate = 0.08,            -- 8%

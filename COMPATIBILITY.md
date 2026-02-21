@@ -1,7 +1,7 @@
 # FS25_UsedPlus - Cross-Mod Compatibility Guide
 
-**Last Updated:** 2026-01-17
-**Version:** 2.6.3
+**Last Updated:** 2026-02-21
+**Version:** 2.15.2
 
 This document analyzes compatibility between UsedPlus and popular FS25 mods that players commonly run together.
 
@@ -16,6 +16,7 @@ This document analyzes compatibility between UsedPlus and popular FS25 mods that
 | **Real Vehicle Breakdowns** | DEEPLY INTEGRATED | DNA affects part lifetimes, workshop injection, OBD display |
 | **Use Up Your Tyres** | DEEPLY INTEGRATED | Quality/DNA affects wear rate, two-way sync, per-wheel display |
 | **EnhancedLoanSystem** | INTEGRATED | ELS loans display in Finance Manager with Pay Early support |
+| **Better Contracts** | INTEGRATED | BC farmland discounts applied in purchase dialog |
 | **BuyUsedEquipment** | COMPATIBLE | UsedPlus hides search button when BUE detected |
 | **HirePurchasing** | INTEGRATED | HP leases display in Finance Manager |
 | **AdvancedMaintenance** | NOT RECOMMENDED | Conflicts with UsedPlus maintenance systems |
@@ -240,6 +241,34 @@ These mods are fully compatible with UsedPlus automatically deferring specific f
 
 ---
 
+### Better Contracts (BC)
+**Author:** Mmtrx
+
+**Status:** INTEGRATED (v2.15.2+)
+
+**What it does:** Enhanced contract management with farmland purchase discounts. Players who complete contracts for NPCs earn cumulative discounts on that NPC's farmland (default: 5% per job, up to 25% max).
+
+**How UsedPlus integrates:**
+- **Detection:** `BetterContracts ~= nil`
+- **Farmland Discounts** - Reads BC's earned discount data (`farm.stats.npcJobs[npcIndex]`)
+- **Purchase Dialog** - Shows "Contract Discount" row with amount, percentage, and jobs completed
+- **Price Flow** - BC discount applied FIRST (vendor loyalty), then credit adjustment (bank risk)
+- **Respects BC Config** - Uses BC's `discountMode`, `discPerJob`, and `discMaxJobs` settings
+
+**Feature Responsibility:**
+| Feature | Who Handles It |
+|---------|---------------|
+| Contract management | BC |
+| NPC job tracking | BC (persists on `farm.stats.npcJobs`) |
+| Farmland discount calculation | BC (config) + UsedPlus (applies in dialog) |
+| Land purchase dialog | UsedPlus |
+| Land financing/leasing | UsedPlus |
+| Credit score adjustment | UsedPlus |
+
+**Note:** When UsedPlus's shop override is disabled (`overrideShopBuyLease=false`), BC's own discount logic handles the vanilla buy button directly. The integration only matters when UsedPlus intercepts the farmland buy flow.
+
+---
+
 ### BuyUsedEquipment (BUE)
 
 **Status:** COMPATIBLE (v1.8.1+)
@@ -331,6 +360,7 @@ ModCompatibility.uytInstalled = UseYourTyres ~= nil
 ModCompatibility.hirePurchasingInstalled = g_currentMission.LeasingOptions ~= nil
 ModCompatibility.buyUsedEquipmentInstalled = BuyUsedEquipment ~= nil
 ModCompatibility.enhancedLoanSystemInstalled = g_els_loanManager ~= nil
+ModCompatibility.betterContractsInstalled = BetterContracts ~= nil
 ModCompatibility.employmentInstalled = g_currentMission.employmentSystem ~= nil
 ```
 
@@ -353,6 +383,9 @@ ModCompatibility.payELSLoan(pseudoDeal, amt)
 -- HP Integration
 ModCompatibility.getHPLeases(farmId)
 ModCompatibility.settleHPLease(pseudoDeal)
+
+-- BC Integration (v2.15.2)
+ModCompatibility.getBCFarmlandDiscount(farmland, farmId)
 
 -- Employment Integration
 ModCompatibility.getEmploymentMonthlyCost(playerId)
@@ -377,8 +410,9 @@ ModCompatibility.getExternalTotalDebt(farmId)
 - **Employment** (worker management with wages in Finance Manager)
 
 ### Full Financial Suite
-- **UsedPlus** + **EnhancedLoanSystem** + **HirePurchasing** + **Employment**
+- **UsedPlus** + **EnhancedLoanSystem** + **HirePurchasing** + **Better Contracts** + **Employment**
 - Unified Financial Dashboard showing all obligations
+- BC farmland discounts applied in UsedPlus purchase dialog
 - Each mod handles its specialty, UsedPlus provides the unified view
 
 ### Production Focus
@@ -396,6 +430,13 @@ All mod integrations can be individually toggled in:
 ---
 
 ## Version History
+
+**2026-02-21 (v2.15.2)** - Better Contracts Integration
+- Added Better Contracts (BC) farmland discount integration
+- BC discounts applied in land purchase dialog before credit adjustment
+- Shows discount amount, percentage, and jobs completed in dialog
+- Integration toggle in Settings > Mod Compatibility
+- Respects BC's discountMode, discPerJob, and discMaxJobs config
 
 **2026-01-17 (v2.6.3)** - Documentation Update
 - Updated OBD Scanner multi-mode integration details

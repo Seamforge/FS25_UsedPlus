@@ -52,6 +52,8 @@ SaleOfferDialog.CONTROLS = {
     "rangeMaxText",
     "thisOfferText",
     "expirationText",
+    "prevOffersLabel",
+    "prevOffersText",
 }
 
 --[[
@@ -157,6 +159,20 @@ function SaleOfferDialog:setupSectionIcons()
         end
     end
     UsedPlus.logDebug(string.format("SaleOfferDialog: %d arrow markers loaded", #self.arrowMarkers))
+
+    -- v2.16.0: Previous offer history markers (gray ▲ below range bar)
+    local historyMarkerPath = self.iconDir .. "range_marker_history.png"
+    self.historyMarkers = {}
+    local histMarkerIds = {"histMarker0", "histMarker10", "histMarker20", "histMarker30", "histMarker40", "histMarker50", "histMarker60", "histMarker70", "histMarker80", "histMarker90", "histMarker100"}
+    for _, id in pairs(histMarkerIds) do
+        local marker = self.dialogElement:getDescendantById(id)
+        if marker ~= nil then
+            marker:setImageFilename(historyMarkerPath)
+            marker:setVisible(false)
+            table.insert(self.historyMarkers, { element = marker, id = id })
+        end
+    end
+    UsedPlus.logDebug(string.format("SaleOfferDialog: %d history markers loaded", #self.historyMarkers))
 end
 
 --[[
@@ -273,6 +289,45 @@ function SaleOfferDialog:updateDisplay()
         UsedPlus.logDebug(string.format("SaleOfferDialog: Showing arrow #%d for %d%%", closestIdx, pctOfRange))
     end
 
+    -- v2.16.0: Show history markers for previously declined offers (below bar)
+    if self.historyMarkers then
+        -- First hide all history markers
+        for _, marker in ipairs(self.historyMarkers) do
+            if marker.element then
+                marker.element:setVisible(false)
+            end
+        end
+
+        -- Show markers for each historical offer
+        local history = self.listing.offerHistory or {}
+        local range = maxPrice - minPrice
+        if #history > 0 then
+            local histPositions = {0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100}
+            for _, prevOffer in ipairs(history) do
+                local prevPos = 0
+                if range > 0 then
+                    prevPos = math.max(0, math.min(1, (prevOffer - minPrice) / range))
+                end
+                local prevPct = math.floor(prevPos * 100)
+
+                -- Snap to nearest 10%
+                local closestHistIdx = 1
+                local closestHistDist = 999
+                for i, pct in ipairs(histPositions) do
+                    local dist = math.abs(prevPct - pct)
+                    if dist < closestHistDist then
+                        closestHistDist = dist
+                        closestHistIdx = i
+                    end
+                end
+
+                if self.historyMarkers[closestHistIdx] and self.historyMarkers[closestHistIdx].element then
+                    self.historyMarkers[closestHistIdx].element:setVisible(true)
+                end
+            end
+        end
+    end
+
     -- Offer price display
     UIHelper.Element.setText(self.rangeOfferText, UIHelper.Text.formatMoney(offer))
 
@@ -280,6 +335,25 @@ function SaleOfferDialog:updateDisplay()
     -- SECTION 4: Your Options (simplified - just show offer amount)
     -- ================================================================
     UIHelper.Element.setText(self.thisOfferText, UIHelper.Text.formatMoney(offer))
+
+    -- v2.16.0: Show previous offers text summary
+    local history = self.listing.offerHistory or {}
+    if #history > 0 and self.prevOffersLabel then
+        self.prevOffersLabel:setVisible(true)
+        if self.prevOffersText then
+            self.prevOffersText:setVisible(true)
+        end
+        local parts = {}
+        for _, amt in ipairs(history) do
+            table.insert(parts, UIHelper.Text.formatMoney(amt))
+        end
+        UIHelper.Element.setText(self.prevOffersText, table.concat(parts, " · "))
+    elseif self.prevOffersLabel then
+        self.prevOffersLabel:setVisible(false)
+        if self.prevOffersText then
+            self.prevOffersText:setVisible(false)
+        end
+    end
 
     -- ================================================================
     -- SECTION 5: Expiration

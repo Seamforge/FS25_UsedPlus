@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-2.15.1-green" alt="Version">
+  <img src="https://img.shields.io/badge/version-2.15.2-green" alt="Version">
   <img src="https://img.shields.io/github/downloads/XelaNull/FS25_UsedPlus/total?label=downloads&color=brightgreen" alt="Downloads">
   <img src="https://img.shields.io/badge/game-FS25-blue" alt="FS25">
   <img src="https://img.shields.io/badge/multiplayer-ready-brightgreen" alt="Multiplayer Ready">
@@ -336,6 +336,7 @@ UsedPlus **plays nice** with these financial and marketplace mods through featur
 | 💰 **[EnhancedLoanSystem](https://www.farming-simulator.com/mod.php?mod_id=314906&title=fs2025)** | ELS handles general cash loans, UsedPlus handles purchase financing. Finance Manager shows both. |
 | 📋 **[HirePurchasing](https://www.farming-simulator.com/mod.php?mod_id=327821&title=fs2025)** | HP handles its financing system, UsedPlus hides duplicate buttons. Finance Manager shows HP + UsedPlus leases together. |
 | 🛒 **[BuyUsedEquipment](https://www.farming-simulator.com/mod.php?mod_id=312631&title=fs2025)** | BUE handles used marketplace, UsedPlus defers (hides Search button). Use BUE to find, UsedPlus to finance/maintain. |
+| 📝 **[Better Contracts](https://www.farming-simulator.com/mod.php?mod_id=312492&title=fs2025)** | BC farmland discounts from completed contracts applied in UsedPlus land purchase dialog. Shows discount amount, percentage, and jobs completed. |
 
 **Integration Strategy:** When UsedPlus detects these mods, it automatically hides overlapping features to prevent conflicts. You get the best of both worlds - use each mod for what it does best.
 
@@ -472,7 +473,7 @@ Built on the shoulders of giants:
 
 ---
 
-**v2.15.1** | **[View Changelog](CHANGELOG.md)** | **[Report Issues](https://github.com/XelaNull/FS25_UsedPlus/issues)**
+**v2.15.2** | **[View Changelog](CHANGELOG.md)** | **[Report Issues](https://github.com/XelaNull/FS25_UsedPlus/issues)**
 
 ---
 

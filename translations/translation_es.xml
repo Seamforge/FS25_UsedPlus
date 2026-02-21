@@ -1039,6 +1039,7 @@
         <e k="usedplus_lp_size" v="Tamaño:" eh="af645946" />
         <e k="usedplus_lp_perHa" v="Por ha:" eh="ddf262a0" />
         <e k="usedplus_lp_basePrice" v="Precio base:" eh="74e3d937" />
+        <e k="usedplus_lp_bcDiscount" v="Descuento por contrato:" eh="77ad5271" />
         <e k="usedplus_lp_creditAdjust" v="Ajuste de crédito:" eh="f7acd3c7" />
         <e k="usedplus_lp_yourPrice" v="Su precio:" eh="1d387415" />
         <e k="usedplus_lp_methodHelp" v="Elija cómo desea pagar: efectivo por adelantado, financiación a plazo o arrendamiento del terreno." eh="57d0bf21" />
@@ -1155,6 +1156,7 @@
         <e k="usedplus_so_expiresIn" v="La oferta vence en:" eh="ca2ce4a5" />
         <e k="usedplus_so_acceptOffer" v="Aceptar oferta" eh="93a5776a" />
         <e k="usedplus_so_keepWaitingBtn" v="Entretener" eh="addcd152" />
+        <e k="usedplus_so_previousOffers" v="[EN] Previous Offers:" eh="0a8e474c" />
         <!-- Deal quality ratings (set dynamically in Lua) -->
         <!-- Legacy keys kept for compatibility -->
         <e k="usedplus_so_title" v="¡OFERTA DE VENTA RECIBIDA!" eh="1596a2b0" />
@@ -1933,6 +1935,8 @@
     <e k="usedplus_setting_bueIntegration_desc" v="Habilitar integración con BuyUsedEquipment. Oculta el botón Buscar de UsedPlus (BUE gestiona la búsqueda de usados)." eh="0216f3ab" />
     <e k="usedplus_setting_elsIntegration" v="Integración ELS" eh="1b5ac55a" />
     <e k="usedplus_setting_elsIntegration_desc" v="Habilitar integración con EnhancedLoanSystem. Desactiva préstamos de UsedPlus (ELS los gestiona)." eh="1594da56" />
+        <e k="usedplus_setting_bcIntegration" v="Better Contracts" eh="66a6ff26" />
+        <e k="usedplus_setting_bcIntegration_desc" v="Activar la integración de Better Contracts. Aplica descuentos en terrenos obtenidos por contratos completados." eh="d4e02c7b" />
     <e k="usedplus_settings_toggles" v="Opciones de Funciones" eh="2aa7da8d" />
     <e k="usedplus_settings_money" v="Dinero y Tasas" eh="e0d1b0db" />
     <e k="usedplus_settings_risk" v="Tolerancia y Riesgo" eh="c57ae16a" />

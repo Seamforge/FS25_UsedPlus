@@ -1039,6 +1039,7 @@
         <e k="usedplus_lp_size" v="Velikost:" eh="af645946" />
         <e k="usedplus_lp_perHa" v="Za Ha:" eh="ddf262a0" />
         <e k="usedplus_lp_basePrice" v="Základní cena:" eh="74e3d937" />
+        <e k="usedplus_lp_bcDiscount" v="Smluvní sleva:" eh="77ad5271" />
         <e k="usedplus_lp_creditAdjust" v="Úprava kreditu:" eh="f7acd3c7" />
         <e k="usedplus_lp_yourPrice" v="Vaše cena:" eh="1d387415" />
         <e k="usedplus_lp_methodHelp" v="Vyberte způsob platby: hotově předem, financování v čase, nebo pronájem pozemku." eh="57d0bf21" />
@@ -1155,6 +1156,7 @@
         <e k="usedplus_so_expiresIn" v="Nabídka vyprší za:" eh="ca2ce4a5" />
         <e k="usedplus_so_acceptOffer" v="Přijměte nabídku" eh="93a5776a" />
         <e k="usedplus_so_keepWaitingBtn" v="Pokračovat v čekání" eh="addcd152" />
+        <e k="usedplus_so_previousOffers" v="[EN] Previous Offers:" eh="0a8e474c" />
         <!-- Deal quality ratings (set dynamically in Lua) -->
         <!-- Legacy keys kept for compatibility -->
         <e k="usedplus_so_title" v="NABÍDKA PRODEJE PŘIJATA!" eh="1596a2b0" />
@@ -1933,6 +1935,8 @@
     <e k="usedplus_setting_bueIntegration_desc" v="Povolit integraci BuyUsedEquipment. Skryje tlačítko Hledat v UsedPlus (BUE zajišťuje vyhledávání ojetin)." eh="0216f3ab" />
     <e k="usedplus_setting_elsIntegration" v="Integrace ELS" eh="1b5ac55a" />
     <e k="usedplus_setting_elsIntegration_desc" v="Povolit integraci EnhancedLoanSystem. Deaktivuje půjčky UsedPlus (ELS je zajišťuje)." eh="1594da56" />
+        <e k="usedplus_setting_bcIntegration" v="Better Contracts" eh="66a6ff26" />
+        <e k="usedplus_setting_bcIntegration_desc" v="Povolit integraci Better Contracts. Uplatňuje získané slevy na pozemky z dokončených zakázek." eh="d4e02c7b" />
     <e k="usedplus_settings_toggles" v="Přepínače funkcí" eh="2aa7da8d" />
     <e k="usedplus_settings_money" v="Peníze a sazby" eh="e0d1b0db" />
     <e k="usedplus_settings_risk" v="Tolerance a riziko" eh="c57ae16a" />
