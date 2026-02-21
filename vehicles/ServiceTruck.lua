@@ -52,15 +52,22 @@ function ServiceTruck.initSpecialization()
     schema:register(XMLValueType.INT, "vehicle.serviceTruck.fillUnits#oil", "Fill unit index for oil", 3)
     schema:register(XMLValueType.INT, "vehicle.serviceTruck.fillUnits#hydraulic", "Fill unit index for hydraulic", 4)
 
-    -- Savegame schema
-    local schemaSavegame = Vehicle.xmlSchemaSavegame
-    schemaSavegame:register(XMLValueType.BOOL, "vehicles.vehicle(?).serviceTruck#isRestoring", "Is currently restoring a vehicle")
-    schemaSavegame:register(XMLValueType.INT, "vehicles.vehicle(?).serviceTruck#targetVehicleId", "ID of vehicle being restored")
-    schemaSavegame:register(XMLValueType.STRING, "vehicles.vehicle(?).serviceTruck#component", "Component being restored")
-    schemaSavegame:register(XMLValueType.FLOAT, "vehicles.vehicle(?).serviceTruck#startReliability", "Reliability when started")
-    schemaSavegame:register(XMLValueType.FLOAT, "vehicles.vehicle(?).serviceTruck#progress", "Current progress 0-1")
-
     schema:setXMLSpecializationType()
+
+    -- Fix #21: Savegame schema MUST be registered outside the setXMLSpecializationType scope.
+    -- Pattern from UsedPlusMaintenance.initSpecialization (working reference).
+    -- Keys must include the mod name prefix (FS25_UsedPlus.ServiceTruck) to match what
+    -- the game passes as `key` to saveToXMLFile — previously used bare "serviceTruck"
+    -- which caused "Path not registered" validation errors on every save, locking the
+    -- game in an infinite saving loop.
+    -- Child element notation (dot) is used throughout to be consistent with schema validation.
+    local schemaSavegame = Vehicle.xmlSchemaSavegame
+    local saveKey = "vehicles.vehicle(?)." .. ServiceTruck.MOD_NAME .. ".ServiceTruck"
+    schemaSavegame:register(XMLValueType.BOOL,   saveKey .. ".isRestoring",      "Is currently restoring a vehicle", false)
+    schemaSavegame:register(XMLValueType.INT,    saveKey .. ".targetVehicleId",  "ID of vehicle being restored", 0)
+    schemaSavegame:register(XMLValueType.STRING, saveKey .. ".component",        "Component being restored", "")
+    schemaSavegame:register(XMLValueType.FLOAT,  saveKey .. ".startReliability", "Reliability when started", 0)
+    schemaSavegame:register(XMLValueType.FLOAT,  saveKey .. ".progress",         "Current progress 0-1", 0)
 end
 
 function ServiceTruck.registerFunctions(vehicleType)
@@ -89,6 +96,7 @@ function ServiceTruck.registerEventListeners(vehicleType)
     SpecializationUtil.registerEventListener(vehicleType, "onUpdate", ServiceTruck)
     SpecializationUtil.registerEventListener(vehicleType, "onReadStream", ServiceTruck)
     SpecializationUtil.registerEventListener(vehicleType, "onWriteStream", ServiceTruck)
+    SpecializationUtil.registerEventListener(vehicleType, "saveToXMLFile", ServiceTruck)  -- Fix #21: was missing, caused schema validation errors on every save
     SpecializationUtil.registerEventListener(vehicleType, "onRegisterActionEvents", ServiceTruck)
 end
 
@@ -145,12 +153,13 @@ function ServiceTruck:onLoad(savegame)
 
     -- Load from savegame
     if savegame ~= nil and savegame.xmlFile ~= nil then
-        local key = savegame.key .. ".serviceTruck"
-        spec.isRestoring = savegame.xmlFile:getValue(key .. "#isRestoring", false)
-        spec.savedTargetId = savegame.xmlFile:getValue(key .. "#targetVehicleId")
-        spec.savedComponent = savegame.xmlFile:getValue(key .. "#component")
-        spec.savedStartReliability = savegame.xmlFile:getValue(key .. "#startReliability")
-        spec.savedProgress = savegame.xmlFile:getValue(key .. "#progress")
+        -- Fix #21: key must include MOD_NAME prefix to match schema registration path
+        local key = savegame.key .. "." .. ServiceTruck.MOD_NAME .. ".ServiceTruck"
+        spec.isRestoring = savegame.xmlFile:getValue(key .. ".isRestoring", false)
+        spec.savedTargetId = savegame.xmlFile:getValue(key .. ".targetVehicleId")
+        spec.savedComponent = savegame.xmlFile:getValue(key .. ".component")
+        spec.savedStartReliability = savegame.xmlFile:getValue(key .. ".startReliability")
+        spec.savedProgress = savegame.xmlFile:getValue(key .. ".progress")
     end
 
     UsedPlus.logInfo("ServiceTruck loaded - Long-term vehicle restoration ready")
@@ -181,7 +190,8 @@ end
 function ServiceTruck:saveToXMLFile(xmlFile, key, usedModNames)
     local spec = self[SPEC_NAME]
 
-    xmlFile:setValue(key .. "#isRestoring", spec.isRestoring)
+    -- Fix #21: Use dot (child element) notation to match registered schema paths
+    xmlFile:setValue(key .. ".isRestoring", spec.isRestoring)
 
     if spec.restorationData ~= nil then
         local targetId = nil
@@ -189,16 +199,16 @@ function ServiceTruck:saveToXMLFile(xmlFile, key, usedModNames)
             targetId = spec.restorationData.targetVehicle.id
         end
         if targetId ~= nil then
-            xmlFile:setValue(key .. "#targetVehicleId", targetId)
+            xmlFile:setValue(key .. ".targetVehicleId", targetId)
         end
         if spec.restorationData.component ~= nil then
-            xmlFile:setValue(key .. "#component", spec.restorationData.component)
+            xmlFile:setValue(key .. ".component", spec.restorationData.component)
         end
         if spec.restorationData.startReliability ~= nil then
-            xmlFile:setValue(key .. "#startReliability", spec.restorationData.startReliability)
+            xmlFile:setValue(key .. ".startReliability", spec.restorationData.startReliability)
         end
         if spec.restorationData.progress ~= nil then
-            xmlFile:setValue(key .. "#progress", spec.restorationData.progress)
+            xmlFile:setValue(key .. ".progress", spec.restorationData.progress)
         end
     end
 end

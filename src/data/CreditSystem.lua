@@ -891,6 +891,9 @@ CreditHistory.EVENT_TYPES = {
     PAYMENT_MINIMUM = { name = "Minimum Payment", change = 0 },
     PAYMENT_STANDARD = { name = "Standard Payment", change = 2 },
     PAYMENT_EXTRA = { name = "Extra Payment", change = 3 },
+
+    -- Trade-in / sale events
+    VEHICLE_TRADE_IN = { name = "Vehicle Trade-In", change = 2 },     -- Small positive: responsible asset management
 }
 
 -- Maximum history entries per farm (for performance)

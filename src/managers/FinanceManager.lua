@@ -91,7 +91,10 @@ function FinanceManager:getStatistics(farmId)
             negotiationsWon = 0,            -- Accepted at offered price
             negotiationsCountered = 0,      -- Accepted at counter price
             negotiationsRejected = 0,       -- Walked away or paid full
-            totalNegotiationSavings = 0     -- Money saved through negotiation
+            totalNegotiationSavings = 0,    -- Money saved through negotiation
+
+            -- v2.15.2: Used vehicle search tracking (fix: was missing, caused Unknown statistic warns)
+            vehiclesFound = 0               -- Total vehicles found by agent searches
         }
     end
     return self.statisticsByFarm[farmId]
