@@ -42,6 +42,9 @@ FaultTracerDialog.COLOR_FLAGGED = { 0.20, 0.10, 0.30, 1 }
 FaultTracerDialog.COLOR_MODE_ACTIVE = { 0.15, 0.30, 0.15, 1 }
 FaultTracerDialog.COLOR_MODE_INACTIVE = { 0.15, 0.15, 0.20, 1 }
 
+-- Hover brighten amount (matches FinancesPanel +0.08 pattern)
+FaultTracerDialog.HOVER_BRIGHTEN = 0.08
+
 
 --[[
     Register the dialog with g_gui (lazy loading pattern).
@@ -813,6 +816,203 @@ function FaultTracerDialog:applyResults()
         self.results.ceilingGain,
         self.results.totalOilUsed
     )
+end
+
+-- ============================================================
+-- Hover Effects
+-- ============================================================
+
+function FaultTracerDialog.brightenColor(color)
+    local b = FaultTracerDialog.HOVER_BRIGHTEN
+    return { math.min(color[1] + b, 1.0), math.min(color[2] + b, 1.0), math.min(color[3] + b, 1.0), color[4] }
+end
+
+function FaultTracerDialog:getCellBaseColor(cell)
+    if cell.state == FaultTracerGrid.STATE_HIDDEN then
+        return FaultTracerDialog.COLOR_HIDDEN
+    elseif cell.state == FaultTracerGrid.STATE_FLAGGED then
+        return FaultTracerDialog.COLOR_FLAGGED
+    elseif cell.state == FaultTracerGrid.STATE_REVEALED then
+        if cell.isFault then
+            return FaultTracerDialog.COLOR_FAULT_HIT
+        elseif cell.number == 0 then
+            return FaultTracerDialog.COLOR_REVEALED_ZERO
+        elseif cell.gaugeColor == FaultTracerGrid.GAUGE_RED then
+            return FaultTracerDialog.COLOR_REVEALED_RED
+        elseif cell.gaugeColor == FaultTracerGrid.GAUGE_AMBER then
+            return FaultTracerDialog.COLOR_REVEALED_AMBER
+        else
+            return FaultTracerDialog.COLOR_REVEALED_GREEN
+        end
+    end
+    return FaultTracerDialog.COLOR_HIDDEN
+end
+
+-- Screen 1: Component buttons (ftEngineBtn → ftEngineBg)
+function FaultTracerDialog:onComponentHighlight(element)
+    if element == nil or element.id == nil then return end
+    local bgId = element.id:gsub("Btn$", "Bg")
+    local bg = self[bgId]
+    if bg == nil or bg.setImageColor == nil then return end
+
+    local maintSpec = self.vehicle and self.vehicle.spec_usedPlusMaintenance
+    if maintSpec == nil then return end
+
+    local percent = 100
+    if element.id == "ftEngineBtn" then
+        percent = (maintSpec.engineReliability or 1.0) * 100
+    elseif element.id == "ftElectricalBtn" then
+        percent = (maintSpec.electricalReliability or 1.0) * 100
+    elseif element.id == "ftHydraulicBtn" then
+        percent = (maintSpec.hydraulicReliability or 1.0) * 100
+    end
+
+    local base
+    if percent >= 90 then
+        base = { 0.12, 0.12, 0.16, 1 }
+    elseif percent >= 70 then
+        base = { 0.10, 0.15, 0.10, 1 }
+    elseif percent >= 50 then
+        base = { 0.18, 0.15, 0.08, 1 }
+    else
+        base = { 0.20, 0.08, 0.08, 1 }
+    end
+    local bright = FaultTracerDialog.brightenColor(base)
+    bg:setImageColor(nil, bright[1], bright[2], bright[3], bright[4])
+end
+
+function FaultTracerDialog:onComponentUnhighlight(element)
+    if element == nil or element.id == nil then return end
+    local bgId = element.id:gsub("Btn$", "Bg")
+    local bg = self[bgId]
+    if bg == nil or bg.setImageColor == nil then return end
+
+    local maintSpec = self.vehicle and self.vehicle.spec_usedPlusMaintenance
+    if maintSpec == nil then return end
+
+    local percent = 100
+    if element.id == "ftEngineBtn" then
+        percent = (maintSpec.engineReliability or 1.0) * 100
+    elseif element.id == "ftElectricalBtn" then
+        percent = (maintSpec.electricalReliability or 1.0) * 100
+    elseif element.id == "ftHydraulicBtn" then
+        percent = (maintSpec.hydraulicReliability or 1.0) * 100
+    end
+    self:setComponentBgColor(bg, percent)
+end
+
+-- Screen 2: Grid cell hover (ftCellBtn_R_C → ftCellBg_R_C)
+function FaultTracerDialog:onCellHighlight(element)
+    if element == nil or element.id == nil or self.grid == nil then return end
+    local r, c = element.id:match("ftCellBtn_(%d+)_(%d+)")
+    if r == nil then return end
+    r, c = tonumber(r), tonumber(c)
+    local elems = self.cellElements[r] and self.cellElements[r][c]
+    if elems == nil or elems.bg == nil then return end
+
+    local gridRow, gridCol = r + 1, c + 1
+    if gridRow > self.grid.rows or gridCol > self.grid.cols then return end
+
+    local cell = self.grid.cells[gridRow][gridCol]
+    local base = self:getCellBaseColor(cell)
+    local bright = FaultTracerDialog.brightenColor(base)
+    elems.bg:setImageColor(nil, bright[1], bright[2], bright[3], bright[4])
+end
+
+function FaultTracerDialog:onCellUnhighlight(element)
+    if element == nil or element.id == nil or self.grid == nil then return end
+    local r, c = element.id:match("ftCellBtn_(%d+)_(%d+)")
+    if r == nil then return end
+    r, c = tonumber(r), tonumber(c)
+    local elems = self.cellElements[r] and self.cellElements[r][c]
+    if elems == nil then return end
+
+    local gridRow, gridCol = r + 1, c + 1
+    if gridRow > self.grid.rows or gridCol > self.grid.cols then return end
+
+    local cell = self.grid.cells[gridRow][gridCol]
+    self:renderCell(elems, cell, gridRow, gridCol)
+end
+
+-- Screen 2: Mode buttons (ftProbeBtn/ftFlagBtn → ftProbeBtnBg/ftFlagBtnBg)
+function FaultTracerDialog:onModeHighlight(element)
+    if element == nil or element.id == nil then return end
+    local bg = self[element.id .. "Bg"]
+    if bg == nil or bg.setImageColor == nil then return end
+
+    local isActive = (element.id == "ftProbeBtn" and self.mode == FaultTracerDialog.MODE_PROBE) or
+                     (element.id == "ftFlagBtn" and self.mode == FaultTracerDialog.MODE_FLAG)
+    local base = isActive and FaultTracerDialog.COLOR_MODE_ACTIVE or FaultTracerDialog.COLOR_MODE_INACTIVE
+    local bright = FaultTracerDialog.brightenColor(base)
+    bg:setImageColor(nil, bright[1], bright[2], bright[3], bright[4])
+end
+
+function FaultTracerDialog:onModeUnhighlight(element)
+    if element == nil or element.id == nil then return end
+    self:updateModeButtons()
+end
+
+-- Screen 2: Action buttons (ftQuickScanBtn/ftRepairBtn → ftQuickScanBtnBg/ftRepairBtnBg)
+function FaultTracerDialog:onActionHighlight(element)
+    if element == nil or element.id == nil then return end
+    local bg = self[element.id .. "Bg"]
+    if bg == nil or bg.setImageColor == nil then return end
+
+    local base
+    if element.id == "ftQuickScanBtn" then
+        base = { 0.12, 0.12, 0.18, 1 }
+    elseif element.id == "ftRepairBtn" then
+        local allFlagged = self.grid ~= nil and FaultTracerGrid.allFaultsFlagged(self.grid)
+        base = { allFlagged and 0.1 or 0.05, allFlagged and 0.3 or 0.1, allFlagged and 0.1 or 0.05, 1 }
+    else
+        return
+    end
+    local bright = FaultTracerDialog.brightenColor(base)
+    bg:setImageColor(nil, bright[1], bright[2], bright[3], bright[4])
+end
+
+function FaultTracerDialog:onActionUnhighlight(element)
+    if element == nil or element.id == nil then return end
+    local bg = self[element.id .. "Bg"]
+    if bg == nil or bg.setImageColor == nil then return end
+
+    if element.id == "ftQuickScanBtn" then
+        bg:setImageColor(nil, 0.12, 0.12, 0.18, 1)
+    elseif element.id == "ftRepairBtn" then
+        local allFlagged = self.grid ~= nil and FaultTracerGrid.allFaultsFlagged(self.grid)
+        bg:setImageColor(nil,
+            allFlagged and 0.1 or 0.05,
+            allFlagged and 0.3 or 0.1,
+            allFlagged and 0.1 or 0.05, 1)
+    end
+end
+
+-- Screen 3: Type selection buttons (ftCorrodedBtn → ftCorrodedBtnBg, ftCancelBtn → ftCancelBtnBg)
+function FaultTracerDialog:onTypeHighlight(element)
+    if element == nil or element.id == nil then return end
+    local bg = self[element.id .. "Bg"]
+    if bg == nil or bg.setImageColor == nil then return end
+
+    local base
+    if element.id == "ftCancelBtn" then
+        base = { 0.3, 0.1, 0.1, 1 }
+    else
+        base = { 0.12, 0.12, 0.16, 1 }
+    end
+    local bright = FaultTracerDialog.brightenColor(base)
+    bg:setImageColor(nil, bright[1], bright[2], bright[3], bright[4])
+end
+
+function FaultTracerDialog:onTypeUnhighlight(element)
+    if element == nil or element.id == nil then return end
+    local bg = self[element.id .. "Bg"]
+    if bg == nil or bg.setImageColor == nil then return end
+
+    if element.id == "ftCancelBtn" then
+        bg:setImageColor(nil, 0.3, 0.1, 0.1, 1)
+    else
+        bg:setImageColor(nil, 0.12, 0.12, 0.16, 1)
+    end
 end
 
 -- ============================================================

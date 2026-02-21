@@ -43,7 +43,7 @@
                     <!-- Engine -->
                     <GuiElement profile="ftComponentBox" position="-220px -35px">
                         <Bitmap profile="ftComponentBg" id="ftEngineBg" position="0px 0px"/>
-                        <Button profile="ftComponentBtn" id="ftEngineBtn" onClick="onEngineClick" position="0px 0px"/>
+                        <Button profile="ftComponentBtn" id="ftEngineBtn" onClick="onEngineClick" onHighlight="onComponentHighlight" onHighlightRemove="onComponentUnhighlight" position="0px 0px"/>
                         <Text profile="ftComponentIcon" position="0px -12px" text="E"/>
                         <Text profile="ftComponentLabel" position="0px -38px" text="Engine"/>
                         <Text profile="ftComponentValue" id="ftEngineValue" position="0px -55px" text="100%"/>
@@ -53,7 +53,7 @@
                     <!-- Electrical -->
                     <GuiElement profile="ftComponentBox" position="0px -35px">
                         <Bitmap profile="ftComponentBg" id="ftElectricalBg" position="0px 0px"/>
-                        <Button profile="ftComponentBtn" id="ftElectricalBtn" onClick="onElectricalClick" position="0px 0px"/>
+                        <Button profile="ftComponentBtn" id="ftElectricalBtn" onClick="onElectricalClick" onHighlight="onComponentHighlight" onHighlightRemove="onComponentUnhighlight" position="0px 0px"/>
                         <Text profile="ftComponentIcon" position="0px -12px" text="V"/>
                         <Text profile="ftComponentLabel" position="0px -38px" text="Electrical"/>
                         <Text profile="ftComponentValue" id="ftElectricalValue" position="0px -55px" text="100%"/>
@@ -63,7 +63,7 @@
                     <!-- Hydraulic -->
                     <GuiElement profile="ftComponentBox" position="220px -35px">
                         <Bitmap profile="ftComponentBg" id="ftHydraulicBg" position="0px 0px"/>
-                        <Button profile="ftComponentBtn" id="ftHydraulicBtn" onClick="onHydraulicClick" position="0px 0px"/>
+                        <Button profile="ftComponentBtn" id="ftHydraulicBtn" onClick="onHydraulicClick" onHighlight="onComponentHighlight" onHighlightRemove="onComponentUnhighlight" position="0px 0px"/>
                         <Text profile="ftComponentIcon" position="0px -12px" text="H"/>
                         <Text profile="ftComponentLabel" position="0px -38px" text="Hydraulic"/>
                         <Text profile="ftComponentValue" id="ftHydraulicValue" position="0px -55px" text="100%"/>
@@ -99,105 +99,105 @@
 
                 <!-- Row 0 -->
                 <Bitmap profile="ftCellBg" id="ftCellBg_0_0" position="-105px -30px"/>
-                <Button profile="ftCellBtn" id="ftCellBtn_0_0" onClick="onCellClick_0_0" position="-105px -30px"/>
+                <Button profile="ftCellBtn" id="ftCellBtn_0_0" onClick="onCellClick_0_0" onHighlight="onCellHighlight" onHighlightRemove="onCellUnhighlight" position="-105px -30px"/>
                 <Text profile="ftCellNum" id="ftCellNum_0_0" position="-105px -35px" text=""/>
                 <Text profile="ftCellGauge" id="ftCellGauge_0_0" position="-105px -60px" text=""/>
 
                 <Bitmap profile="ftCellBg" id="ftCellBg_0_1" position="-34px -30px"/>
-                <Button profile="ftCellBtn" id="ftCellBtn_0_1" onClick="onCellClick_0_1" position="-34px -30px"/>
+                <Button profile="ftCellBtn" id="ftCellBtn_0_1" onClick="onCellClick_0_1" onHighlight="onCellHighlight" onHighlightRemove="onCellUnhighlight" position="-34px -30px"/>
                 <Text profile="ftCellNum" id="ftCellNum_0_1" position="-34px -35px" text=""/>
                 <Text profile="ftCellGauge" id="ftCellGauge_0_1" position="-34px -60px" text=""/>
 
                 <Bitmap profile="ftCellBg" id="ftCellBg_0_2" position="37px -30px"/>
-                <Button profile="ftCellBtn" id="ftCellBtn_0_2" onClick="onCellClick_0_2" position="37px -30px"/>
+                <Button profile="ftCellBtn" id="ftCellBtn_0_2" onClick="onCellClick_0_2" onHighlight="onCellHighlight" onHighlightRemove="onCellUnhighlight" position="37px -30px"/>
                 <Text profile="ftCellNum" id="ftCellNum_0_2" position="37px -35px" text=""/>
                 <Text profile="ftCellGauge" id="ftCellGauge_0_2" position="37px -60px" text=""/>
 
                 <Bitmap profile="ftCellBg" id="ftCellBg_0_3" position="108px -30px"/>
-                <Button profile="ftCellBtn" id="ftCellBtn_0_3" onClick="onCellClick_0_3" position="108px -30px"/>
+                <Button profile="ftCellBtn" id="ftCellBtn_0_3" onClick="onCellClick_0_3" onHighlight="onCellHighlight" onHighlightRemove="onCellUnhighlight" position="108px -30px"/>
                 <Text profile="ftCellNum" id="ftCellNum_0_3" position="108px -35px" text=""/>
                 <Text profile="ftCellGauge" id="ftCellGauge_0_3" position="108px -60px" text=""/>
 
                 <Bitmap profile="ftCellBg" id="ftCellBg_0_4" position="179px -30px"/>
-                <Button profile="ftCellBtn" id="ftCellBtn_0_4" onClick="onCellClick_0_4" position="179px -30px"/>
+                <Button profile="ftCellBtn" id="ftCellBtn_0_4" onClick="onCellClick_0_4" onHighlight="onCellHighlight" onHighlightRemove="onCellUnhighlight" position="179px -30px"/>
                 <Text profile="ftCellNum" id="ftCellNum_0_4" position="179px -35px" text=""/>
                 <Text profile="ftCellGauge" id="ftCellGauge_0_4" position="179px -60px" text=""/>
 
                 <!-- Row 1 -->
                 <Bitmap profile="ftCellBg" id="ftCellBg_1_0" position="-105px -86px"/>
-                <Button profile="ftCellBtn" id="ftCellBtn_1_0" onClick="onCellClick_1_0" position="-105px -86px"/>
+                <Button profile="ftCellBtn" id="ftCellBtn_1_0" onClick="onCellClick_1_0" onHighlight="onCellHighlight" onHighlightRemove="onCellUnhighlight" position="-105px -86px"/>
                 <Text profile="ftCellNum" id="ftCellNum_1_0" position="-105px -91px" text=""/>
                 <Text profile="ftCellGauge" id="ftCellGauge_1_0" position="-105px -116px" text=""/>
 
                 <Bitmap profile="ftCellBg" id="ftCellBg_1_1" position="-34px -86px"/>
-                <Button profile="ftCellBtn" id="ftCellBtn_1_1" onClick="onCellClick_1_1" position="-34px -86px"/>
+                <Button profile="ftCellBtn" id="ftCellBtn_1_1" onClick="onCellClick_1_1" onHighlight="onCellHighlight" onHighlightRemove="onCellUnhighlight" position="-34px -86px"/>
                 <Text profile="ftCellNum" id="ftCellNum_1_1" position="-34px -91px" text=""/>
                 <Text profile="ftCellGauge" id="ftCellGauge_1_1" position="-34px -116px" text=""/>
 
                 <Bitmap profile="ftCellBg" id="ftCellBg_1_2" position="37px -86px"/>
-                <Button profile="ftCellBtn" id="ftCellBtn_1_2" onClick="onCellClick_1_2" position="37px -86px"/>
+                <Button profile="ftCellBtn" id="ftCellBtn_1_2" onClick="onCellClick_1_2" onHighlight="onCellHighlight" onHighlightRemove="onCellUnhighlight" position="37px -86px"/>
                 <Text profile="ftCellNum" id="ftCellNum_1_2" position="37px -91px" text=""/>
                 <Text profile="ftCellGauge" id="ftCellGauge_1_2" position="37px -116px" text=""/>
 
                 <Bitmap profile="ftCellBg" id="ftCellBg_1_3" position="108px -86px"/>
-                <Button profile="ftCellBtn" id="ftCellBtn_1_3" onClick="onCellClick_1_3" position="108px -86px"/>
+                <Button profile="ftCellBtn" id="ftCellBtn_1_3" onClick="onCellClick_1_3" onHighlight="onCellHighlight" onHighlightRemove="onCellUnhighlight" position="108px -86px"/>
                 <Text profile="ftCellNum" id="ftCellNum_1_3" position="108px -91px" text=""/>
                 <Text profile="ftCellGauge" id="ftCellGauge_1_3" position="108px -116px" text=""/>
 
                 <Bitmap profile="ftCellBg" id="ftCellBg_1_4" position="179px -86px"/>
-                <Button profile="ftCellBtn" id="ftCellBtn_1_4" onClick="onCellClick_1_4" position="179px -86px"/>
+                <Button profile="ftCellBtn" id="ftCellBtn_1_4" onClick="onCellClick_1_4" onHighlight="onCellHighlight" onHighlightRemove="onCellUnhighlight" position="179px -86px"/>
                 <Text profile="ftCellNum" id="ftCellNum_1_4" position="179px -91px" text=""/>
                 <Text profile="ftCellGauge" id="ftCellGauge_1_4" position="179px -116px" text=""/>
 
                 <!-- Row 2 -->
                 <Bitmap profile="ftCellBg" id="ftCellBg_2_0" position="-105px -142px"/>
-                <Button profile="ftCellBtn" id="ftCellBtn_2_0" onClick="onCellClick_2_0" position="-105px -142px"/>
+                <Button profile="ftCellBtn" id="ftCellBtn_2_0" onClick="onCellClick_2_0" onHighlight="onCellHighlight" onHighlightRemove="onCellUnhighlight" position="-105px -142px"/>
                 <Text profile="ftCellNum" id="ftCellNum_2_0" position="-105px -147px" text=""/>
                 <Text profile="ftCellGauge" id="ftCellGauge_2_0" position="-105px -172px" text=""/>
 
                 <Bitmap profile="ftCellBg" id="ftCellBg_2_1" position="-34px -142px"/>
-                <Button profile="ftCellBtn" id="ftCellBtn_2_1" onClick="onCellClick_2_1" position="-34px -142px"/>
+                <Button profile="ftCellBtn" id="ftCellBtn_2_1" onClick="onCellClick_2_1" onHighlight="onCellHighlight" onHighlightRemove="onCellUnhighlight" position="-34px -142px"/>
                 <Text profile="ftCellNum" id="ftCellNum_2_1" position="-34px -147px" text=""/>
                 <Text profile="ftCellGauge" id="ftCellGauge_2_1" position="-34px -172px" text=""/>
 
                 <Bitmap profile="ftCellBg" id="ftCellBg_2_2" position="37px -142px"/>
-                <Button profile="ftCellBtn" id="ftCellBtn_2_2" onClick="onCellClick_2_2" position="37px -142px"/>
+                <Button profile="ftCellBtn" id="ftCellBtn_2_2" onClick="onCellClick_2_2" onHighlight="onCellHighlight" onHighlightRemove="onCellUnhighlight" position="37px -142px"/>
                 <Text profile="ftCellNum" id="ftCellNum_2_2" position="37px -147px" text=""/>
                 <Text profile="ftCellGauge" id="ftCellGauge_2_2" position="37px -172px" text=""/>
 
                 <Bitmap profile="ftCellBg" id="ftCellBg_2_3" position="108px -142px"/>
-                <Button profile="ftCellBtn" id="ftCellBtn_2_3" onClick="onCellClick_2_3" position="108px -142px"/>
+                <Button profile="ftCellBtn" id="ftCellBtn_2_3" onClick="onCellClick_2_3" onHighlight="onCellHighlight" onHighlightRemove="onCellUnhighlight" position="108px -142px"/>
                 <Text profile="ftCellNum" id="ftCellNum_2_3" position="108px -147px" text=""/>
                 <Text profile="ftCellGauge" id="ftCellGauge_2_3" position="108px -172px" text=""/>
 
                 <Bitmap profile="ftCellBg" id="ftCellBg_2_4" position="179px -142px"/>
-                <Button profile="ftCellBtn" id="ftCellBtn_2_4" onClick="onCellClick_2_4" position="179px -142px"/>
+                <Button profile="ftCellBtn" id="ftCellBtn_2_4" onClick="onCellClick_2_4" onHighlight="onCellHighlight" onHighlightRemove="onCellUnhighlight" position="179px -142px"/>
                 <Text profile="ftCellNum" id="ftCellNum_2_4" position="179px -147px" text=""/>
                 <Text profile="ftCellGauge" id="ftCellGauge_2_4" position="179px -172px" text=""/>
 
                 <!-- Row 3 -->
                 <Bitmap profile="ftCellBg" id="ftCellBg_3_0" position="-105px -198px"/>
-                <Button profile="ftCellBtn" id="ftCellBtn_3_0" onClick="onCellClick_3_0" position="-105px -198px"/>
+                <Button profile="ftCellBtn" id="ftCellBtn_3_0" onClick="onCellClick_3_0" onHighlight="onCellHighlight" onHighlightRemove="onCellUnhighlight" position="-105px -198px"/>
                 <Text profile="ftCellNum" id="ftCellNum_3_0" position="-105px -203px" text=""/>
                 <Text profile="ftCellGauge" id="ftCellGauge_3_0" position="-105px -228px" text=""/>
 
                 <Bitmap profile="ftCellBg" id="ftCellBg_3_1" position="-34px -198px"/>
-                <Button profile="ftCellBtn" id="ftCellBtn_3_1" onClick="onCellClick_3_1" position="-34px -198px"/>
+                <Button profile="ftCellBtn" id="ftCellBtn_3_1" onClick="onCellClick_3_1" onHighlight="onCellHighlight" onHighlightRemove="onCellUnhighlight" position="-34px -198px"/>
                 <Text profile="ftCellNum" id="ftCellNum_3_1" position="-34px -203px" text=""/>
                 <Text profile="ftCellGauge" id="ftCellGauge_3_1" position="-34px -228px" text=""/>
 
                 <Bitmap profile="ftCellBg" id="ftCellBg_3_2" position="37px -198px"/>
-                <Button profile="ftCellBtn" id="ftCellBtn_3_2" onClick="onCellClick_3_2" position="37px -198px"/>
+                <Button profile="ftCellBtn" id="ftCellBtn_3_2" onClick="onCellClick_3_2" onHighlight="onCellHighlight" onHighlightRemove="onCellUnhighlight" position="37px -198px"/>
                 <Text profile="ftCellNum" id="ftCellNum_3_2" position="37px -203px" text=""/>
                 <Text profile="ftCellGauge" id="ftCellGauge_3_2" position="37px -228px" text=""/>
 
                 <Bitmap profile="ftCellBg" id="ftCellBg_3_3" position="108px -198px"/>
-                <Button profile="ftCellBtn" id="ftCellBtn_3_3" onClick="onCellClick_3_3" position="108px -198px"/>
+                <Button profile="ftCellBtn" id="ftCellBtn_3_3" onClick="onCellClick_3_3" onHighlight="onCellHighlight" onHighlightRemove="onCellUnhighlight" position="108px -198px"/>
                 <Text profile="ftCellNum" id="ftCellNum_3_3" position="108px -203px" text=""/>
                 <Text profile="ftCellGauge" id="ftCellGauge_3_3" position="108px -228px" text=""/>
 
                 <Bitmap profile="ftCellBg" id="ftCellBg_3_4" position="179px -198px"/>
-                <Button profile="ftCellBtn" id="ftCellBtn_3_4" onClick="onCellClick_3_4" position="179px -198px"/>
+                <Button profile="ftCellBtn" id="ftCellBtn_3_4" onClick="onCellClick_3_4" onHighlight="onCellHighlight" onHighlightRemove="onCellUnhighlight" position="179px -198px"/>
                 <Text profile="ftCellNum" id="ftCellNum_3_4" position="179px -203px" text=""/>
                 <Text profile="ftCellGauge" id="ftCellGauge_3_4" position="179px -228px" text=""/>
 
@@ -207,11 +207,11 @@
                 <!-- Mode Toggle -->
                 <Text profile="ftControlLabel" position="305px -35px" text="Mode:"/>
                 <Bitmap profile="ftModeBtnBg" id="ftProbeBtnBg" position="305px -55px"/>
-                <Button profile="ftModeBtn" id="ftProbeBtn" onClick="onProbeModeClick" position="305px -55px"/>
+                <Button profile="ftModeBtn" id="ftProbeBtn" onClick="onProbeModeClick" onHighlight="onModeHighlight" onHighlightRemove="onModeUnhighlight" position="305px -55px"/>
                 <Text profile="ftModeBtnText" id="ftProbeBtnText" position="305px -60px" text="Probe"/>
 
                 <Bitmap profile="ftModeBtnBg" id="ftFlagBtnBg" position="305px -85px"/>
-                <Button profile="ftModeBtn" id="ftFlagBtn" onClick="onFlagModeClick" position="305px -85px"/>
+                <Button profile="ftModeBtn" id="ftFlagBtn" onClick="onFlagModeClick" onHighlight="onModeHighlight" onHighlightRemove="onModeUnhighlight" position="305px -85px"/>
                 <Text profile="ftModeBtnText" id="ftFlagBtnText" position="305px -90px" text="Flag"/>
 
                 <!-- Oil Counter -->
@@ -220,12 +220,12 @@
 
                 <!-- Quick Scan -->
                 <Bitmap profile="ftActionBtnBg" id="ftQuickScanBtnBg" position="305px -168px"/>
-                <Button profile="ftActionBtn" id="ftQuickScanBtn" onClick="onQuickScanClick" position="305px -168px"/>
+                <Button profile="ftActionBtn" id="ftQuickScanBtn" onClick="onQuickScanClick" onHighlight="onActionHighlight" onHighlightRemove="onActionUnhighlight" position="305px -168px"/>
                 <Text profile="ftActionBtnText" id="ftQuickScanBtnText" position="305px -173px" text="Quick Scan"/>
 
                 <!-- Begin Repair -->
                 <Bitmap profile="ftRepairBtnBg" id="ftRepairBtnBg" position="305px -210px"/>
-                <Button profile="ftRepairBtn" id="ftRepairBtn" onClick="onBeginRepairClick" position="305px -210px"/>
+                <Button profile="ftRepairBtn" id="ftRepairBtn" onClick="onBeginRepairClick" onHighlight="onActionHighlight" onHighlightRemove="onActionUnhighlight" position="305px -210px"/>
                 <Text profile="ftRepairBtnText" id="ftRepairBtnText" position="305px -215px" text="Begin Repair"/>
 
                 <!-- Status message -->
@@ -250,25 +250,25 @@
 
                 <!-- Corroded -->
                 <Bitmap profile="ftTypeBtnBg" id="ftCorrodedBtnBg" position="0px -155px"/>
-                <Button profile="ftTypeBtn" id="ftCorrodedBtn" onClick="onCorrodedClick" position="0px -155px"/>
+                <Button profile="ftTypeBtn" id="ftCorrodedBtn" onClick="onCorrodedClick" onHighlight="onTypeHighlight" onHighlightRemove="onTypeUnhighlight" position="0px -155px"/>
                 <Text profile="ftTypeBtnText" id="ftCorrodedText" position="0px -160px" text="Corroded"/>
                 <Text profile="ftTypeDesc" position="0px -180px" text="Rust / oxidation damage — Green gauge"/>
 
                 <!-- Cracked -->
                 <Bitmap profile="ftTypeBtnBg" id="ftCrackedBtnBg" position="0px -205px"/>
-                <Button profile="ftTypeBtn" id="ftCrackedBtn" onClick="onCrackedClick" position="0px -205px"/>
+                <Button profile="ftTypeBtn" id="ftCrackedBtn" onClick="onCrackedClick" onHighlight="onTypeHighlight" onHighlightRemove="onTypeUnhighlight" position="0px -205px"/>
                 <Text profile="ftTypeBtnText" id="ftCrackedText" position="0px -210px" text="Cracked"/>
                 <Text profile="ftTypeDesc" position="0px -230px" text="Stress fractures / fatigue — Amber gauge"/>
 
                 <!-- Seized -->
                 <Bitmap profile="ftTypeBtnBg" id="ftSeizedBtnBg" position="0px -255px"/>
-                <Button profile="ftTypeBtn" id="ftSeizedBtn" onClick="onSeizedClick" position="0px -255px"/>
+                <Button profile="ftTypeBtn" id="ftSeizedBtn" onClick="onSeizedClick" onHighlight="onTypeHighlight" onHighlightRemove="onTypeUnhighlight" position="0px -255px"/>
                 <Text profile="ftTypeBtnText" id="ftSeizedText" position="0px -260px" text="Seized"/>
                 <Text profile="ftTypeDesc" position="0px -280px" text="Locked / seized bearing — Red gauge"/>
 
                 <!-- Cancel -->
-                <Bitmap profile="ftCancelBtnBg" position="0px -315px"/>
-                <Button profile="ftCancelBtn" onClick="onTypeCancelClick" position="0px -315px"/>
+                <Bitmap profile="ftCancelBtnBg" id="ftCancelBtnBg" position="0px -315px"/>
+                <Button profile="ftCancelBtn" id="ftCancelBtn" onClick="onTypeCancelClick" onHighlight="onTypeHighlight" onHighlightRemove="onTypeUnhighlight" position="0px -315px"/>
                 <Text profile="ftCancelBtnText" position="0px -320px" text="Cancel"/>
             </GuiElement>
 
