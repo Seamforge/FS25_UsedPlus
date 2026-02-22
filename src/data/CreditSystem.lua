@@ -422,33 +422,33 @@ end
 function CreditScore.getFinanceRequirements(financeType)
     local requirements = {
         REPAIR = {
-            name = "Repair/Repaint Financing",
+            name = g_i18n:getText("usedplus_dealType_repair"),
             minScore = 500,
-            description = "Finance vehicle repairs and repaints over time.",
+            description = g_i18n:getText("usedplus_dealType_repairDesc"),
             tips = {"Smallest credit requirement", "Good way to start building credit history"}
         },
         VEHICLE_FINANCE = {
-            name = "Vehicle Financing",
+            name = g_i18n:getText("usedplus_dealType_vehicleFinance"),
             minScore = 550,
-            description = "Purchase vehicles with monthly payments.",
+            description = g_i18n:getText("usedplus_dealType_vehicleFinanceDesc"),
             tips = {"Vehicle serves as collateral", "Miss 3 payments and vehicle is repossessed"}
         },
         VEHICLE_LEASE = {
-            name = "Vehicle Leasing",
+            name = g_i18n:getText("usedplus_dealType_vehicleLease"),
             minScore = 600,
-            description = "Lease vehicles with option to buy at end of term.",
+            description = g_i18n:getText("usedplus_dealType_vehicleLeaseDesc"),
             tips = {"Requires better credit than financing", "Security deposit based on credit tier"}
         },
         LAND_FINANCE = {
-            name = "Land Financing",
+            name = g_i18n:getText("usedplus_dealType_landFinance"),
             minScore = 600,
-            description = "Purchase farmland with mortgage payments.",
+            description = g_i18n:getText("usedplus_dealType_landFinanceDesc"),
             tips = {"Land serves as collateral", "Lower interest rates than vehicle loans"}
         },
         CASH_LOAN = {
-            name = "Cash Loan",
+            name = g_i18n:getText("usedplus_dealType_cashLoan"),
             minScore = 550,
-            description = "Borrow against your assets for immediate cash.",
+            description = g_i18n:getText("usedplus_dealType_cashLoanDesc"),
             tips = {"Requires pledging collateral", "Higher interest due to flexibility"}
         }
     }
@@ -1077,7 +1077,7 @@ function CreditHistory.checkTierChange(farmId, oldScore, newScore)
 
         -- Notify player of improvement
         if g_currentMission then
-            local message = string.format("Credit Improved! Your credit is now %s (%d)",
+            local message = string.format(g_i18n:getText("usedplus_notification_creditImproved"),
                 newRating, newScore)
             g_currentMission:addIngameNotification(
                 FSBaseMission.INGAME_NOTIFICATION_OK,
@@ -1089,7 +1089,7 @@ function CreditHistory.checkTierChange(farmId, oldScore, newScore)
     elseif newLevel > oldLevel then
         -- Notify player of decline
         if g_currentMission then
-            local message = string.format("Credit Warning: Your credit dropped to %s (%d)",
+            local message = string.format(g_i18n:getText("usedplus_notification_creditDropped"),
                 newRating, newScore)
             g_currentMission:addIngameNotification(
                 FSBaseMission.INGAME_NOTIFICATION_CRITICAL,

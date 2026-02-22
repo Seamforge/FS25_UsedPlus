@@ -158,7 +158,7 @@ function InGameMenuVehiclesFrameExtension:hookYesNoDialog()
                 if vehicle.propertyState ~= VehiclePropertyState.OWNED then
                     g_currentMission:addIngameNotification(
                         FSBaseMission.INGAME_NOTIFICATION_INFO,
-                        "Leased vehicles cannot be sold. Terminate the lease first."
+                        g_i18n:getText("usedplus_error_cannotSellLeased")
                     )
                     return
                 end
@@ -177,7 +177,7 @@ function InGameMenuVehiclesFrameExtension:hookYesNoDialog()
                    TradeInCalculations.isVehicleFinanced(vehicle, farmId) then
                     g_currentMission:addIngameNotification(
                         FSBaseMission.INGAME_NOTIFICATION_INFO,
-                        "Financed vehicles cannot be sold until loan is paid off."
+                        g_i18n:getText("usedplus_error_cannotSellFinanced")
                     )
                     return
                 end
@@ -189,7 +189,7 @@ function InGameMenuVehiclesFrameExtension:hookYesNoDialog()
                         local loanBalance = deal and deal.currentBalance or 0
                         g_currentMission:addIngameNotification(
                             FSBaseMission.INGAME_NOTIFICATION_ERROR,
-                            string.format("This vehicle is pledged as collateral for a %s loan.\nPay off the loan first to sell.",
+                            string.format(g_i18n:getText("usedplus_error_vehicleIsCollateral"),
                                 g_i18n:formatMoney(loanBalance, 0, true, true))
                         )
                         return
@@ -200,7 +200,7 @@ function InGameMenuVehiclesFrameExtension:hookYesNoDialog()
                 if g_vehicleSaleManager and g_vehicleSaleManager:isVehicleListed(vehicle) then
                     g_currentMission:addIngameNotification(
                         FSBaseMission.INGAME_NOTIFICATION_INFO,
-                        "This vehicle is already listed for sale."
+                        g_i18n:getText("usedplus_error_alreadyListedForSale")
                     )
                     return
                 end
@@ -234,7 +234,7 @@ function InGameMenuVehiclesFrameExtension:hookMenuButtons()
     local targetClass = InGameMenuVehiclesFrame
 
     if targetClass == nil then
-        UsedPlus.logWarn("InGameMenuVehiclesFrame not found")
+        UsedPlus.logDebug("InGameMenuVehiclesFrame not found")
         return false
     end
 
@@ -553,7 +553,7 @@ function InGameMenuVehiclesFrameExtension:hookSellButton()
         return true
     end
 
-    UsedPlus.logWarn("InGameMenuVehiclesFrame not found, cannot hook sell button (will retry on menu open)")
+    UsedPlus.logDebug("InGameMenuVehiclesFrame not found, cannot hook sell button (will retry on menu open)")
     return false
 end
 
@@ -587,7 +587,7 @@ function InGameMenuVehiclesFrameExtension:onClickSellOverride(frame)
     if vehicle.ownerFarmId ~= farmId then
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_INFO,
-            "You do not own this vehicle."
+            g_i18n:getText("usedplus_error_notYourVehicle")
         )
         return
     end
@@ -596,7 +596,7 @@ function InGameMenuVehiclesFrameExtension:onClickSellOverride(frame)
     if vehicle.propertyState ~= VehiclePropertyState.OWNED then
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_INFO,
-            "Leased vehicles cannot be sold. Terminate the lease first."
+            g_i18n:getText("usedplus_error_cannotSellLeased")
         )
         return
     end
@@ -615,7 +615,7 @@ function InGameMenuVehiclesFrameExtension:onClickSellOverride(frame)
         if TradeInCalculations.isVehicleFinanced(vehicle, farmId) then
             g_currentMission:addIngameNotification(
                 FSBaseMission.INGAME_NOTIFICATION_INFO,
-                "Financed vehicles cannot be sold until loan is paid off."
+                g_i18n:getText("usedplus_error_cannotSellFinanced")
             )
             return
         end
@@ -628,7 +628,7 @@ function InGameMenuVehiclesFrameExtension:onClickSellOverride(frame)
             local loanBalance = deal and deal.currentBalance or 0
             g_currentMission:addIngameNotification(
                 FSBaseMission.INGAME_NOTIFICATION_ERROR,
-                string.format("This vehicle is pledged as collateral for a %s loan.\nPay off the loan first to sell.",
+                string.format(g_i18n:getText("usedplus_error_vehicleIsCollateral"),
                     g_i18n:formatMoney(loanBalance, 0, true, true))
             )
             return
@@ -639,7 +639,7 @@ function InGameMenuVehiclesFrameExtension:onClickSellOverride(frame)
     if g_vehicleSaleManager and g_vehicleSaleManager:isVehicleListed(vehicle) then
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_INFO,
-            "This vehicle is already listed for sale."
+            g_i18n:getText("usedplus_error_alreadyListedForSale")
         )
         return
     end
@@ -684,7 +684,7 @@ function InGameMenuVehiclesFrameExtension:createSaleListing(vehicle, farmId, age
         UsedPlus.logError("VehicleSaleManager not initialized")
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_INFO,
-            "Sale system error. Please try again."
+            g_i18n:getText("usedplus_error_saleSystemError")
         )
         return
     end
@@ -986,7 +986,7 @@ function InGameMenuVehiclesFrameExtension.showMaintenanceReportForSelected(frame
     else
         UsedPlus.logDebug("showMaintenanceReportForSelected: No vehicle selected")
         if not g_dedicatedServer then
-            g_currentMission:showBlinkingWarning("No vehicle selected", 2000)
+            g_currentMission:showBlinkingWarning(g_i18n:getText("usedplus_error_noVehicleSelected"), 2000)
         end
     end
 end
@@ -1033,7 +1033,7 @@ function InGameMenuVehiclesFrameExtension.onInGameMenuOpen(inGameMenu, superFunc
 
     -- Try to install our hook if not already done
     if not InGameMenuVehiclesFrameExtension.isInitialized then
-        UsedPlus.logWarn("onInGameMenuOpen: Retrying hook installation...")
+        UsedPlus.logDebug("onInGameMenuOpen: Retrying hook installation...")
 
         -- Check if InGameMenuVehiclesFrame now exists as global
         if InGameMenuVehiclesFrame and InGameMenuVehiclesFrame.onClickSell then
@@ -1045,7 +1045,7 @@ function InGameMenuVehiclesFrameExtension.onInGameMenuOpen(inGameMenu, superFunc
             -- Try to find it via the inGameMenu's pages
             local frame = inGameMenu and inGameMenu.pageVehicles
             if frame then
-                UsedPlus.logWarn("Found frame via inGameMenu.pageVehicles")
+                UsedPlus.logDebug("Found frame via inGameMenu.pageVehicles")
 
                 -- Hook onClickSell
                 if frame.onClickSell and not InGameMenuVehiclesFrameExtension.originalOnClickSell then
@@ -1073,7 +1073,7 @@ function InGameMenuVehiclesFrameExtension.onInGameMenuOpen(inGameMenu, superFunc
 
                 InGameMenuVehiclesFrameExtension.isInitialized = true
             else
-                UsedPlus.logWarn("pageVehicles not found on inGameMenu")
+                UsedPlus.logDebug("pageVehicles not found on inGameMenu")
             end
         end
     end

@@ -334,7 +334,7 @@ function FieldServiceKit:getActivatePromptText()
     local spec = self[SPEC_NAME]
 
     -- Base text (NO key prefix - game renders that automatically)
-    local baseText = "OBD Scanner"
+    local baseText = g_i18n:getText("usedplus_action_obdScanner")
 
     -- Add vehicle info if we have a target
     if spec.targetVehicle ~= nil then
@@ -342,26 +342,26 @@ function FieldServiceKit:getActivatePromptText()
         local target = spec.targetVehicle
 
         if target.isDisabled then
-            baseText = string.format("OBD Scanner: %s (DISABLED)", vehicleName)
+            baseText = string.format(g_i18n:getText("usedplus_action_obdDisabled"), vehicleName)
         elseif target.needsService then
             local warnings = {}
             if target.hasRVBIssue then table.insert(warnings, "RVB") end
-            if target.hasUYTIssue then table.insert(warnings, "Tires") end
+            if target.hasUYTIssue then table.insert(warnings, g_i18n:getText("usedplus_component_tires") or "Tires") end
             if target.hasMaintenance then
                 local maintSpec = target.vehicle.spec_usedPlusMaintenance
                 if maintSpec then
-                    if maintSpec.engineReliability < 0.5 then table.insert(warnings, "Engine") end
-                    if maintSpec.electricalReliability < 0.5 then table.insert(warnings, "Electrical") end
-                    if maintSpec.hydraulicReliability < 0.5 then table.insert(warnings, "Hydraulic") end
+                    if maintSpec.engineReliability < 0.5 then table.insert(warnings, g_i18n:getText("usedplus_component_engine") or "Engine") end
+                    if maintSpec.electricalReliability < 0.5 then table.insert(warnings, g_i18n:getText("usedplus_component_electrical") or "Electrical") end
+                    if maintSpec.hydraulicReliability < 0.5 then table.insert(warnings, g_i18n:getText("usedplus_component_hydraulic") or "Hydraulic") end
                 end
             end
             if #warnings > 0 then
-                baseText = string.format("OBD Scanner: %s (%s)", vehicleName, table.concat(warnings, ", "))
+                baseText = string.format(g_i18n:getText("usedplus_action_obdWithWarnings"), vehicleName, table.concat(warnings, ", "))
             else
-                baseText = string.format("OBD Scanner: %s", vehicleName)
+                baseText = string.format(g_i18n:getText("usedplus_action_obdNormal"), vehicleName)
             end
         else
-            baseText = string.format("OBD Scanner: %s", vehicleName)
+            baseText = string.format(g_i18n:getText("usedplus_action_obdNormal"), vehicleName)
         end
     end
 

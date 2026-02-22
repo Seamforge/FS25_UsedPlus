@@ -305,9 +305,9 @@ function ModCompatibility.init()
     local bcDetected = false
     if g_modIsLoaded and g_modIsLoaded["FS25_BetterContracts"] then
         bcDetected = true
-        UsedPlus.logWarn("BC: Better Contracts DETECTED via g_modIsLoaded")
+        UsedPlus.logInfo("BC: Better Contracts DETECTED via g_modIsLoaded")
     else
-        UsedPlus.logWarn("BC: Better Contracts not found in g_modIsLoaded")
+        UsedPlus.logDebug("BC: Better Contracts not found in g_modIsLoaded")
     end
 
     -- v2.6.2: Check integration settings for compatible mods
@@ -1229,7 +1229,7 @@ function ModCompatibility.readBCConfig()
     -- Load BC config XML (old-style API for maximum compatibility)
     local xmlId = loadXMLFile("BCConfig", xmlPath)
     if xmlId == nil or xmlId == 0 then
-        UsedPlus.logWarn("BC config: No config file at " .. xmlPath .. " (BC using defaults, discountMode=false)")
+        UsedPlus.logInfo("BC config: No config file at " .. xmlPath .. " (BC using defaults, discountMode=false)")
         return { discountMode = false, discPerJob = 0.05, discMaxJobs = 5 }
     end
 
@@ -1245,7 +1245,7 @@ function ModCompatibility.readBCConfig()
 
     delete(xmlId)
 
-    UsedPlus.logWarn(string.format("BC config loaded: discountMode=%s, perJob=%.2f, maxJobs=%d",
+    UsedPlus.logInfo(string.format("BC config loaded: discountMode=%s, perJob=%.2f, maxJobs=%d",
         tostring(config.discountMode), config.discPerJob, config.discMaxJobs))
 
     return config
@@ -1311,7 +1311,7 @@ function ModCompatibility.getBCFarmlandDiscount(farmland, farmId)
         discountAmount = farmland.price * effectiveJobs * discPerJob
     end
 
-    UsedPlus.logWarn(string.format(
+    UsedPlus.logInfo(string.format(
         "BC farmland discount: NPC=%d, jobs=%d/%d, discount=%d%% ($%d)",
         npcIndex, jobCount, discMaxJobs, discountPercent, discountAmount))
 
@@ -1701,7 +1701,7 @@ function ModCompatibility.payHPLease(pseudoDeal, amount)
     UsedPlus.logInfo("HP lease payments are managed automatically by HirePurchasing mod")
     g_currentMission:addIngameNotification(
         FSBaseMission.INGAME_NOTIFICATION_INFO,
-        "HP lease payments are automatic - managed by HirePurchasing"
+        g_i18n:getText("usedplus_notification_hpAutoPayments")
     )
 
     return false

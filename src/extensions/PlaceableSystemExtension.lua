@@ -174,7 +174,7 @@ function PlaceableSystemExtension.onPlaceableFinalized(placeable, ...)
     -- Custom notification explaining the finance mechanics
     UsedPlus.logInfo("  → Showing user notification")
     local notifText = string.format(
-        "%s FINANCED! Temp credit: %s (loan) | Full price: %s | Your cost today: %s down | Monthly: %s for %d years",
+        g_i18n:getText("usedplus_notification_placeableFinanced"),
         pending.itemName,
         g_i18n:formatMoney(pending.tempMoneyInjected),
         g_i18n:formatMoney(pending.price),
@@ -359,7 +359,7 @@ function PlaceableSystemExtension.onPlacementCancelled(placeable, ...)
                 g_i18n:formatMoney(balanceAfterReclaim)))
         end
     else
-        UsedPlus.logWarn("  No temp money to reclaim (tempMoneyInjected = 0)")
+        UsedPlus.logInfo("  No temp money to reclaim (tempMoneyInjected = 0)")
     end
 
     UsedPlus.logDebug("  Net result: Player back to original balance (~%s)",
@@ -374,7 +374,7 @@ function PlaceableSystemExtension.onPlacementCancelled(placeable, ...)
     UsedPlus.logDebug("  → Showing cancellation notification")
     g_currentMission:addIngameNotification(
         FSBaseMission.INGAME_NOTIFICATION_INFO,
-        "Placement cancelled"
+        g_i18n:getText("usedplus_notification_placementCancelled")
     )
 
     UsedPlus.logInfo("║ PlaceableSystemExtension.onPlacementCancelled() EXIT - SUCCESS")

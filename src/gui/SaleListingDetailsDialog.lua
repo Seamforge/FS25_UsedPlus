@@ -228,16 +228,16 @@ function SaleListingDetailsDialog:updateDisplay()
 
     -- Info text - tips based on status
     if self.infoText then
-        local tipText = "Higher agent tiers have wider reach but longer wait times."
+        local tipText = g_i18n:getText("usedplus_sld_tipDefault")
 
         if listing.status == VehicleSaleListing.STATUS.OFFER_PENDING then
-            tipText = "You have a pending offer! Accept from the Finance Manager."
+            tipText = g_i18n:getText("usedplus_sld_tipPendingOffer")
         elseif listing.offersDeclined and listing.offersDeclined > 0 then
-            tipText = "Declining offers reduces remaining time for new offers."
+            tipText = g_i18n:getText("usedplus_sld_tipDeclined")
         elseif listing.priceTier == 3 then
-            tipText = "Premium pricing requires patience - fewer buyers can afford it."
+            tipText = g_i18n:getText("usedplus_sld_tipPremium")
         elseif listing.priceTier == 1 then
-            tipText = "Quick sale pricing attracts buyers fast but at a discount."
+            tipText = g_i18n:getText("usedplus_sld_tipQuickSale")
         end
 
         self.infoText:setText(tipText)

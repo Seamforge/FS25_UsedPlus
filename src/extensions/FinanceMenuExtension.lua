@@ -56,7 +56,7 @@ function FinanceMenuExtension.install()
             UsedPlus.logWarn("InGameMenuStatisticsFrame.hasPlayerLoanPermission not found")
         end
     else
-        UsedPlus.logWarn("InGameMenuStatisticsFrame not available at load time")
+        UsedPlus.logDebug("InGameMenuStatisticsFrame not available at load time")
     end
 end
 

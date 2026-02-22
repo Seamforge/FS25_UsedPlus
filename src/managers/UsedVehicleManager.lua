@@ -176,8 +176,7 @@ function UsedVehicleManager:registerSearch(search)
             farm.usedVehicleSearches = {}
         end
         table.insert(farm.usedVehicleSearches, search)
-        -- v2.8.0: WARN level for persistence debugging
-        UsedPlus.logWarn(string.format("registerSearch: Added %s to farm %d (now %d searches)",
+        UsedPlus.logInfo(string.format("registerSearch: Added %s to farm %d (now %d searches)",
             search.id, search.farmId, #farm.usedVehicleSearches))
     else
         UsedPlus.logError(string.format("Could not find farm %d to register search", search.farmId))
@@ -351,7 +350,7 @@ function UsedVehicleManager:completePurchaseFromSearch(search, listing, farmId)
 
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_OK,
-            string.format("Search complete! Your %s has been delivered.", search.storeItemName or "vehicle")
+            string.format(g_i18n:getText("usedplus_notification_searchDelivered"), search.storeItemName or "vehicle")
         )
     end
 
@@ -482,57 +481,57 @@ end
     Hook for BuyVehicleData.onBought - applies used condition to purchased vehicles
 ]]
 function UsedVehicleManager.onVehicleBought(buyVehicleData, loadedVehicles, loadingState, callbackArguments)
-    UsedPlus.logInfo(string.format("SPAWN DEBUG: onVehicleBought called - loadingState: %s, vehicles: %d",
+    UsedPlus.logDebug(string.format("onVehicleBought called - loadingState: %s, vehicles: %d",
         tostring(loadingState), loadedVehicles and #loadedVehicles or 0))
 
     if loadingState ~= VehicleLoadingState.OK then
-        UsedPlus.logWarn(string.format("SPAWN DEBUG: Loading state not OK: %s", tostring(loadingState)))
+        UsedPlus.logDebug(string.format("Loading state not OK: %s", tostring(loadingState)))
         return
     end
 
     if g_usedVehicleManager == nil then
-        UsedPlus.logWarn("SPAWN DEBUG: g_usedVehicleManager is nil")
+        UsedPlus.logDebug("g_usedVehicleManager is nil")
         return
     end
 
     if g_usedVehicleManager.pendingUsedPurchases == nil or
        next(g_usedVehicleManager.pendingUsedPurchases) == nil then
-        UsedPlus.logDebug("SPAWN DEBUG: No pending used purchases")
+        UsedPlus.logDebug("No pending used purchases")
         return
     end
 
     local storeItem = buyVehicleData.storeItem
     if storeItem == nil then
-        UsedPlus.logWarn("SPAWN DEBUG: storeItem is nil in buyVehicleData")
+        UsedPlus.logDebug("storeItem is nil in buyVehicleData")
         return
     end
 
     local xmlFilename = storeItem.xmlFilename
     local farmId = buyVehicleData.ownerFarmId
 
-    UsedPlus.logInfo(string.format("SPAWN DEBUG: Looking for pending purchase - xml: %s, farmId: %d",
+    UsedPlus.logDebug(string.format("Looking for pending purchase - xml: %s, farmId: %s",
         tostring(xmlFilename), tostring(farmId)))
 
     -- Find matching pending purchase
     local matchedKey = nil
     local pendingData = nil
 
-    UsedPlus.logInfo(string.format("SPAWN DEBUG: Searching %d pending purchases...",
+    UsedPlus.logDebug(string.format("Searching %d pending purchases...",
         table.getn(g_usedVehicleManager.pendingUsedPurchases) or 0))
 
     for key, data in pairs(g_usedVehicleManager.pendingUsedPurchases) do
-        UsedPlus.logInfo(string.format("SPAWN DEBUG: Checking pending: %s (xml: %s, farmId: %d, name: %s)",
+        UsedPlus.logDebug(string.format("Checking pending: %s (xml: %s, farmId: %s, name: %s)",
             key, tostring(data.xmlFilename), tostring(data.farmId), tostring(data.storeItemName)))
         if data.xmlFilename == xmlFilename and data.farmId == farmId then
             matchedKey = key
             pendingData = data
-            UsedPlus.logInfo(string.format("SPAWN DEBUG: MATCH FOUND: %s", key))
+            UsedPlus.logDebug(string.format("Match found: %s", key))
             break
         end
     end
 
     if matchedKey == nil then
-        UsedPlus.logWarn(string.format("SPAWN DEBUG: NO MATCH FOUND for xml: %s, farmId: %d",
+        UsedPlus.logDebug(string.format("No match found for xml: %s, farmId: %s",
             tostring(xmlFilename), tostring(farmId)))
         return
     end

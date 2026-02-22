@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <!--
-    FS25_UsedPlus - Service Truck Dialog
-    Long-term vehicle restoration inspection minigame
-
-    v2.9.0 - Service Truck System
+    FS25_UsedPlus - Service Truck Dialog ("The Workshop Order")
+    Full redesign v2.15.0 - Warm amber mechanic aesthetic
 
     Steps:
     1. Component Selection - View reliabilities, pick component to restore
@@ -14,173 +12,499 @@
     <GuiElement profile="newLayer" />
     <Bitmap profile="dialogFullscreenBg" id="dialogBg" />
 
-    <GuiElement profile="dialogBg" id="dialogElement" size="750px 580px">
+    <GuiElement profile="dialogBg" id="dialogElement" size="780px 620px">
         <ThreePartBitmap profile="fs25_dialogBgMiddle" />
         <ThreePartBitmap profile="fs25_dialogBgTop" />
         <ThreePartBitmap profile="fs25_dialogBgBottom" />
 
         <GuiElement profile="fs25_dialogContentContainer">
 
-            <!-- Title with icon -->
-            <Bitmap profile="fskHeaderIcon" id="headerIcon" position="-245px -19px"/>
-            <Text profile="fskTitle" id="dialogTitle" position="0px -25px" text="$l10n_usedplus_serviceTruck_dialogTitle"/>
+            <!-- Title bar with icon -->
+            <Bitmap profile="stHeaderIcon" id="headerIcon" position="-260px -19px"/>
+            <Text profile="stTitle" id="dialogTitle" position="0px -22px" text="$l10n_usedplus_st_title"/>
 
             <!-- ========== STEP 1: COMPONENT SELECTION ========== -->
-            <GuiElement profile="fskStepContainer" id="componentContainer" position="0px -55px">
+            <GuiElement profile="stStepContainer" id="componentContainer" position="0px -55px">
 
                 <!-- Vehicle Info Section -->
-                <GuiElement profile="fskVehicleSection" position="0px 0px">
-                    <Bitmap profile="fskVehicleBg" position="0px 0px"/>
-                    <Text profile="fskSectionHeader" position="0px -5px" text="TARGET VEHICLE"/>
-                    <Text profile="fskVehicleName" id="vehicleNameText" position="0px -28px" text=""/>
-                    <Text profile="fskSubtitle" id="ceilingText" position="0px -48px" text="Max Potential: 100%"/>
+                <GuiElement profile="stVehicleSection" position="0px 0px">
+                    <Bitmap profile="stVehicleBg" position="0px 0px"/>
+                    <Text profile="stVehicleName" id="vehicleNameText" position="0px -10px" text=""/>
+                    <Text profile="stVehicleSubtext" id="ceilingText" position="-100px -33px" text="$l10n_usedplus_st_maxPotential"/>
+                    <Text profile="stVehicleSubtext" id="degradedCountText" position="100px -33px" text=""/>
                 </GuiElement>
 
-                <!-- Component Buttons Section -->
-                <GuiElement profile="fskSystemSection" position="0px -75px">
-                    <Text profile="fskSectionHeader" position="0px -5px" text="SELECT COMPONENT TO RESTORE"/>
+                <!-- Section Header -->
+                <Text profile="stSectionHeader" position="0px -65px" text="$l10n_usedplus_st_selectComponent"/>
+
+                <!-- Component Boxes (3 across, 200x110 each) -->
+                <GuiElement profile="stComponentSection" position="0px -85px">
 
                     <!-- Engine -->
-                    <GuiElement profile="fskSystemBox" position="-220px -35px">
-                        <Bitmap profile="fskSystemBg" id="engineBg" position="0px 0px"/>
-                        <Button profile="fskSystemBtn" id="engineButton" onClick="onEngineClick" position="0px 0px"/>
-                        <Text profile="fskSystemIcon" position="0px -12px" text="⚙"/>
-                        <Text profile="fskSystemLabel" position="0px -38px" text="$l10n_usedplus_component_engine"/>
-                        <Text profile="fskSystemValue" id="engineReliabilityText" position="0px -55px" text="100%"/>
-                        <Text profile="fskSystemStatus" id="engineStatusText" position="0px -72px" text=""/>
+                    <GuiElement profile="stComponentBox" position="-230px 0px">
+                        <Bitmap profile="stComponentBg" id="engineBg" position="0px 0px"/>
+                        <Button profile="stComponentBtn" id="engineBtn" onClick="onEngineClick" onHighlight="onComponentHighlight" onHighlightRemove="onComponentUnhighlight" position="0px 0px"/>
+                        <Bitmap profile="stComponentIcon" id="engineIcon" position="0px -10px"/>
+                        <Text profile="stComponentLabel" position="0px -55px" text="$l10n_usedplus_st_engine"/>
+                        <Text profile="stComponentValue" id="engineReliabilityText" position="0px -73px" text="100%"/>
+                        <Text profile="stComponentStatus" id="engineStatusText" position="0px -91px" text=""/>
                     </GuiElement>
 
                     <!-- Electrical -->
-                    <GuiElement profile="fskSystemBox" position="0px -35px">
-                        <Bitmap profile="fskSystemBg" id="electricalBg" position="0px 0px"/>
-                        <Button profile="fskSystemBtn" id="electricalButton" onClick="onElectricalClick" position="0px 0px"/>
-                        <Text profile="fskSystemIcon" position="0px -12px" text="⚡"/>
-                        <Text profile="fskSystemLabel" position="0px -38px" text="$l10n_usedplus_component_electrical"/>
-                        <Text profile="fskSystemValue" id="electricalReliabilityText" position="0px -55px" text="100%"/>
-                        <Text profile="fskSystemStatus" id="electricalStatusText" position="0px -72px" text=""/>
+                    <GuiElement profile="stComponentBox" position="0px 0px">
+                        <Bitmap profile="stComponentBg" id="electricalBg" position="0px 0px"/>
+                        <Button profile="stComponentBtn" id="electricalBtn" onClick="onElectricalClick" onHighlight="onComponentHighlight" onHighlightRemove="onComponentUnhighlight" position="0px 0px"/>
+                        <Bitmap profile="stComponentIcon" id="electricalIcon" position="0px -10px"/>
+                        <Text profile="stComponentLabel" position="0px -55px" text="$l10n_usedplus_st_electrical"/>
+                        <Text profile="stComponentValue" id="electricalReliabilityText" position="0px -73px" text="100%"/>
+                        <Text profile="stComponentStatus" id="electricalStatusText" position="0px -91px" text=""/>
                     </GuiElement>
 
                     <!-- Hydraulic -->
-                    <GuiElement profile="fskSystemBox" position="220px -35px">
-                        <Bitmap profile="fskSystemBg" id="hydraulicBg" position="0px 0px"/>
-                        <Button profile="fskSystemBtn" id="hydraulicButton" onClick="onHydraulicClick" position="0px 0px"/>
-                        <Text profile="fskSystemIcon" position="0px -12px" text="💧"/>
-                        <Text profile="fskSystemLabel" position="0px -38px" text="$l10n_usedplus_component_hydraulic"/>
-                        <Text profile="fskSystemValue" id="hydraulicReliabilityText" position="0px -55px" text="100%"/>
-                        <Text profile="fskSystemStatus" id="hydraulicStatusText" position="0px -72px" text=""/>
+                    <GuiElement profile="stComponentBox" position="230px 0px">
+                        <Bitmap profile="stComponentBg" id="hydraulicBg" position="0px 0px"/>
+                        <Button profile="stComponentBtn" id="hydraulicBtn" onClick="onHydraulicClick" onHighlight="onComponentHighlight" onHighlightRemove="onComponentUnhighlight" position="0px 0px"/>
+                        <Bitmap profile="stComponentIcon" id="hydraulicIcon" position="0px -10px"/>
+                        <Text profile="stComponentLabel" position="0px -55px" text="$l10n_usedplus_st_hydraulic"/>
+                        <Text profile="stComponentValue" id="hydraulicReliabilityText" position="0px -73px" text="100%"/>
+                        <Text profile="stComponentStatus" id="hydraulicStatusText" position="0px -91px" text=""/>
                     </GuiElement>
+
                 </GuiElement>
 
                 <!-- Resources Section -->
-                <GuiElement profile="fskInfoSection" position="0px -195px">
-                    <Bitmap profile="fskInfoBg" position="0px 0px"/>
-                    <Text profile="fskSectionHeader" position="0px -5px" text="SERVICE TRUCK RESOURCES"/>
+                <GuiElement profile="stResourceSection" position="0px -205px">
+                    <Bitmap profile="stResourceBg" position="0px 0px"/>
+                    <Text profile="stResourceLabel" position="-250px -8px" text="$l10n_usedplus_st_diesel"/>
+                    <Text profile="stResourceValue" id="dieselLevelText" position="-175px -8px" text="0L"/>
 
-                    <Text profile="fskLabel" position="-150px -30px" text="Diesel:"/>
-                    <Text profile="fskValue" id="dieselLevelText" position="-60px -30px" text="0L"/>
+                    <Text profile="stResourceLabel" position="-90px -8px" text="$l10n_usedplus_st_oil"/>
+                    <Text profile="stResourceValue" id="oilLevelText" position="-45px -8px" text="0L"/>
 
-                    <Text profile="fskLabel" position="20px -30px" text="Oil:"/>
-                    <Text profile="fskValue" id="oilLevelText" position="80px -30px" text="0L"/>
+                    <Text profile="stResourceLabel" position="40px -8px" text="$l10n_usedplus_st_hydraulicFluid"/>
+                    <Text profile="stResourceValue" id="hydraulicLevelText" position="130px -8px" text="0L"/>
 
-                    <Text profile="fskLabel" position="-150px -50px" text="Hydraulic:"/>
-                    <Text profile="fskValue" id="hydraulicLevelText" position="-60px -50px" text="0L"/>
-
-                    <Text profile="fskLabel" position="20px -50px" text="Spare Parts:"/>
-                    <Text profile="fskValue" id="partsLevelText" position="120px -50px" text="0"/>
+                    <Text profile="stResourceLabel" position="-250px -30px" text="$l10n_usedplus_st_spareParts"/>
+                    <Text profile="stResourceValue" id="partsLevelText" position="-155px -30px" text="0"/>
                 </GuiElement>
 
-                <!-- Info text -->
-                <Text profile="fskInfoText" position="0px -280px" text="$l10n_usedplus_serviceTruck_selectInfo"/>
+                <!-- Hint text -->
+                <Text profile="stHintText" position="0px -270px" text="$l10n_usedplus_st_selectHint"/>
+
             </GuiElement>
 
             <!-- ========== STEP 2: INSPECTION ========== -->
-            <GuiElement profile="fskStepContainer" id="inspectionContainer" position="0px -55px" visible="false">
+            <GuiElement profile="stStepContainer" id="inspectionContainer" position="0px -55px" visible="false">
 
                 <!-- Inspecting Header -->
-                <GuiElement profile="fskHeaderSection" position="0px 0px">
-                    <Bitmap profile="fskHeaderBg" position="0px 0px"/>
-                    <Text profile="fskHeaderTitle" id="inspectingText" position="0px -12px" text="Inspecting: Engine"/>
-                    <Text profile="fskSubtitle" id="estimatedTimeText" position="0px -32px" text="Estimated time: 48 hours"/>
+                <GuiElement profile="stInspectSection" position="0px 0px">
+                    <Bitmap profile="stInspectBg" position="0px 0px"/>
+                    <Bitmap profile="stInspectIcon" id="inspectComponentIcon" position="-280px -10px"/>
+                    <Text profile="stInspectTitle" id="inspectingText" position="0px -10px" text="$l10n_usedplus_st_inspecting"/>
+                    <Text profile="stInspectSubtext" id="estimatedTimeText" position="0px -32px" text="$l10n_usedplus_st_estimatedTime"/>
                 </GuiElement>
 
-                <!-- Symptoms Section -->
-                <GuiElement profile="fskSymptomsSection" position="0px -60px">
-                    <Bitmap profile="fskTerminalBg" position="0px 0px"/>
-                    <Text profile="fskTerminalHeader" position="0px -8px" text="DIAGNOSTIC READOUT"/>
-                    <Text profile="fskTerminalText" id="symptom1Text" position="-180px -30px" text=""/>
-                    <Text profile="fskTerminalText" id="symptom2Text" position="-180px -48px" text=""/>
-                    <Text profile="fskTerminalText" id="symptom3Text" position="-180px -66px" text=""/>
-                    <Text profile="fskHintText" id="hint1Text" position="-180px -90px" text=""/>
-                    <Text profile="fskHintText" id="hint2Text" position="-180px -108px" text=""/>
+                <!-- Diagnostic Readout (Terminal) -->
+                <GuiElement profile="stTerminalSection" position="0px -60px">
+                    <Bitmap profile="stTerminalBg" position="0px 0px"/>
+                    <Text profile="stTerminalHeader" position="0px -8px" text="$l10n_usedplus_st_diagnosticReadout"/>
+                    <Text profile="stTerminalText" id="symptom1Text" position="0px -32px" text=""/>
+                    <Text profile="stTerminalText" id="symptom2Text" position="0px -50px" text=""/>
+                    <Text profile="stTerminalText" id="symptom3Text" position="0px -68px" text=""/>
+                    <Text profile="stTerminalHint" id="hint1Text" position="0px -94px" text=""/>
+                    <Text profile="stTerminalHint" id="hint2Text" position="0px -112px" text=""/>
                 </GuiElement>
 
-                <!-- Diagnosis Options -->
-                <GuiElement profile="fskDiagnosisSection" position="0px -195px">
-                    <Text profile="fskSectionHeader" position="0px -5px" text="SELECT DIAGNOSIS"/>
+                <!-- Diagnosis Options Header -->
+                <Text profile="stSectionHeader" position="0px -200px" text="$l10n_usedplus_st_chooseDiagnosis"/>
 
-                    <!-- Option 1 -->
-                    <GuiElement profile="fskDiagOption" position="-165px -35px">
-                        <Bitmap profile="fskDiagBg" id="diag1Bg" position="0px 0px"/>
-                        <Button profile="fskDiagBtn" id="diagnosisButton1" onClick="onDiagnosis1Click" position="0px 0px"/>
-                        <Text profile="fskDiagText" id="diagnosisText1" position="0px -20px" text="Option 1"/>
+                <!-- Diagnosis Options (2x2 grid) -->
+                <GuiElement profile="stDiagSection" position="0px -222px">
+
+                    <!-- Option 1 (top-left) -->
+                    <GuiElement profile="stDiagOption" position="-170px 0px">
+                        <Bitmap profile="stDiagBg" id="diag1Bg" position="0px 0px"/>
+                        <Button profile="stDiagBtn" id="diag1Btn" onClick="onDiagnosis1Click" onHighlight="onDiagHighlight" onHighlightRemove="onDiagUnhighlight" position="0px 0px"/>
+                        <Text profile="stDiagText" id="diagnosisText1" position="0px -17px" text="$l10n_usedplus_st_option1"/>
                     </GuiElement>
 
-                    <!-- Option 2 -->
-                    <GuiElement profile="fskDiagOption" position="165px -35px">
-                        <Bitmap profile="fskDiagBg" id="diag2Bg" position="0px 0px"/>
-                        <Button profile="fskDiagBtn" id="diagnosisButton2" onClick="onDiagnosis2Click" position="0px 0px"/>
-                        <Text profile="fskDiagText" id="diagnosisText2" position="0px -20px" text="Option 2"/>
+                    <!-- Option 2 (top-right) -->
+                    <GuiElement profile="stDiagOption" position="170px 0px">
+                        <Bitmap profile="stDiagBg" id="diag2Bg" position="0px 0px"/>
+                        <Button profile="stDiagBtn" id="diag2Btn" onClick="onDiagnosis2Click" onHighlight="onDiagHighlight" onHighlightRemove="onDiagUnhighlight" position="0px 0px"/>
+                        <Text profile="stDiagText" id="diagnosisText2" position="0px -17px" text="$l10n_usedplus_st_option2"/>
                     </GuiElement>
 
-                    <!-- Option 3 -->
-                    <GuiElement profile="fskDiagOption" position="-165px -90px">
-                        <Bitmap profile="fskDiagBg" id="diag3Bg" position="0px 0px"/>
-                        <Button profile="fskDiagBtn" id="diagnosisButton3" onClick="onDiagnosis3Click" position="0px 0px"/>
-                        <Text profile="fskDiagText" id="diagnosisText3" position="0px -20px" text="Option 3"/>
+                    <!-- Option 3 (bottom-left) -->
+                    <GuiElement profile="stDiagOption" position="-170px -55px">
+                        <Bitmap profile="stDiagBg" id="diag3Bg" position="0px 0px"/>
+                        <Button profile="stDiagBtn" id="diag3Btn" onClick="onDiagnosis3Click" onHighlight="onDiagHighlight" onHighlightRemove="onDiagUnhighlight" position="0px 0px"/>
+                        <Text profile="stDiagText" id="diagnosisText3" position="0px -17px" text="$l10n_usedplus_st_option3"/>
                     </GuiElement>
 
-                    <!-- Option 4 -->
-                    <GuiElement profile="fskDiagOption" position="165px -90px">
-                        <Bitmap profile="fskDiagBg" id="diag4Bg" position="0px 0px"/>
-                        <Button profile="fskDiagBtn" id="diagnosisButton4" onClick="onDiagnosis4Click" position="0px 0px"/>
-                        <Text profile="fskDiagText" id="diagnosisText4" position="0px -20px" text="Option 4"/>
+                    <!-- Option 4 (bottom-right) -->
+                    <GuiElement profile="stDiagOption" position="170px -55px">
+                        <Bitmap profile="stDiagBg" id="diag4Bg" position="0px 0px"/>
+                        <Button profile="stDiagBtn" id="diag4Btn" onClick="onDiagnosis4Click" onHighlight="onDiagHighlight" onHighlightRemove="onDiagUnhighlight" position="0px 0px"/>
+                        <Text profile="stDiagText" id="diagnosisText4" position="0px -17px" text="$l10n_usedplus_st_option4"/>
                     </GuiElement>
+
                 </GuiElement>
+
             </GuiElement>
 
             <!-- ========== STEP 3: RESULTS ========== -->
-            <GuiElement profile="fskStepContainer" id="resultsContainer" position="0px -55px" visible="false">
+            <GuiElement profile="stStepContainer" id="resultsContainer" position="0px -55px" visible="false">
 
-                <!-- Result Banner -->
-                <GuiElement profile="fskResultSection" position="0px 0px">
-                    <Bitmap profile="fskResultBg" position="0px 0px"/>
-                    <Text profile="fskResultHeader" id="resultHeaderText" position="0px -30px" text="INSPECTION RESULT"/>
-                    <Text profile="fskResultMessage" id="resultMessageText" position="0px -70px" text=""/>
-                    <Text profile="fskResultCooldown" id="cooldownText" position="0px -100px" text="" visible="false"/>
+                <!-- Result Banner (success/failure) -->
+                <GuiElement profile="stResultSection" position="0px 0px">
+                    <Bitmap profile="stResultBg" id="resultBannerBg" position="0px 0px"/>
+                    <Text profile="stResultIcon" id="resultIconText" position="0px -15px" text=""/>
+                    <Text profile="stResultTitle" id="resultHeaderText" position="0px -38px" text="$l10n_usedplus_st_inspectionResult"/>
+                    <Text profile="stResultMessage" id="resultMessageText" position="0px -62px" text=""/>
                 </GuiElement>
 
-                <!-- Start Restoration Button (only visible on success) -->
-                <GuiElement profile="fskStartButtonBox" id="startRestorationButton" position="0px -180px" visible="false">
-                    <Bitmap profile="fskStartBtnBg" position="0px 0px"/>
-                    <Button profile="fskStartBtn" onClick="onStartRestorationClick" position="0px 0px"/>
-                    <Text profile="fskStartBtnText" position="0px -20px" text="$l10n_usedplus_serviceTruck_startRestoration"/>
+                <!-- Component Detail (shown on success) -->
+                <GuiElement profile="stDetailSection" id="detailSection" position="0px -105px" visible="false">
+                    <Bitmap profile="stDetailBg" position="0px 0px"/>
+                    <Bitmap profile="stDetailIcon" id="detailComponentIcon" position="-290px -12px"/>
+                    <Text profile="stDetailLabel" id="detailComponentName" position="-120px -10px" text="$l10n_usedplus_st_engine"/>
+                    <Text profile="stDetailValue" id="detailCurrentText" position="-120px -30px" text="$l10n_usedplus_st_currentTarget"/>
+                    <Text profile="stDetailValue" id="detailVehicleText" position="120px -10px" text=""/>
                 </GuiElement>
+
+                <!-- Requirements (shown on success) -->
+                <GuiElement profile="stReqSection" id="requirementsSection" position="0px -180px" visible="false">
+                    <Bitmap profile="stReqBg" position="0px 0px"/>
+                    <Text profile="stReqText" id="reqPartsText" position="0px -10px" text="$l10n_usedplus_st_sparePartsAvailable"/>
+                    <Text profile="stReqText" id="reqFluidsText" position="0px -30px" text="$l10n_usedplus_st_fluidsConsumed"/>
+                </GuiElement>
+
+                <!-- Start Restoration Button (in-body, shown on success) -->
+                <GuiElement profile="stStartBox" id="startRestorationBox" position="0px -250px" visible="false">
+                    <Bitmap profile="stStartBg" id="startBtnBg" position="0px 0px"/>
+                    <Button profile="stStartBtn" id="startBtn" onClick="onStartRestorationClick" onHighlight="onStartHighlight" onHighlightRemove="onStartUnhighlight" position="0px 0px"/>
+                    <Text profile="stStartText" position="0px -17px" text="$l10n_usedplus_st_startRestoration"/>
+                </GuiElement>
+
+                <!-- Cooldown Section (shown on failure) -->
+                <GuiElement profile="stCooldownSection" id="cooldownSection" position="0px -110px" visible="false">
+                    <Bitmap profile="stCooldownBg" position="0px 0px"/>
+                    <Text profile="stCooldownText" id="cooldownText" position="0px -12px" text=""/>
+                    <Text profile="stCooldownHint" position="0px -35px" text="$l10n_usedplus_st_cooldownHint"/>
+                </GuiElement>
+
             </GuiElement>
 
         </GuiElement>
 
-        <!-- Button Box -->
+        <!-- Button Box: single buttonBack = ESC keybind -->
         <BoxLayout profile="fs25_dialogButtonBox">
-            <Button profile="buttonBack" id="backButton" onClick="onClickBack"/>
-            <Button profile="buttonOK" id="okButton" onClick="onClickOk" text="$l10n_button_close"/>
+            <Button profile="buttonBack" id="okButton" onClick="onClickOk" text="$l10n_usedplus_btn_close"/>
         </BoxLayout>
     </GuiElement>
 
     <GUIProfiles>
-        <!-- v2.14.2: Header icon -->
-        <Profile name="fskHeaderIcon" extends="baseReference" with="anchorTopCenter">
+        <!-- ========== TITLE ========== -->
+        <Profile name="stHeaderIcon" extends="baseReference" with="anchorTopCenter">
             <size value="28px 28px"/>
             <imageSliceId value="noSlice"/>
+        </Profile>
+        <Profile name="stTitle" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="500px 28px"/>
+            <textSize value="20px"/>
+            <textBold value="true"/>
+            <textColor value="0.9 0.65 0.2 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+
+        <!-- ========== STEP CONTAINER ========== -->
+        <Profile name="stStepContainer" extends="emptyPanel" with="anchorTopCenter">
+            <size value="700px 480px"/>
+        </Profile>
+
+        <!-- ========== VEHICLE INFO ========== -->
+        <Profile name="stVehicleSection" extends="emptyPanel" with="anchorTopCenter">
+            <size value="700px 55px"/>
+        </Profile>
+        <Profile name="stVehicleBg" extends="baseReference" with="anchorTopCenter">
+            <size value="700px 55px"/>
+            <imageColor value="0.08 0.08 0.10 0.9"/>
+        </Profile>
+        <Profile name="stVehicleName" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="660px 20px"/>
+            <textSize value="15px"/>
+            <textBold value="true"/>
+            <textColor value="1 1 1 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+        <Profile name="stVehicleSubtext" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="300px 16px"/>
+            <textSize value="12px"/>
+            <textColor value="0.6 0.6 0.6 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+
+        <!-- ========== SECTION HEADER ========== -->
+        <Profile name="stSectionHeader" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="680px 20px"/>
+            <textSize value="12px"/>
+            <textBold value="true"/>
+            <textColor value="0.9 0.65 0.2 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+
+        <!-- ========== COMPONENT BOXES ========== -->
+        <Profile name="stComponentSection" extends="emptyPanel" with="anchorTopCenter">
+            <size value="700px 115px"/>
+        </Profile>
+        <Profile name="stComponentBox" extends="emptyPanel" with="anchorTopCenter">
+            <size value="200px 110px"/>
+        </Profile>
+        <Profile name="stComponentBg" extends="baseReference" with="anchorTopCenter">
+            <size value="200px 110px"/>
+            <imageColor value="0.08 0.08 0.10 0.9"/>
+        </Profile>
+        <Profile name="stComponentBtn" extends="emptyPanel" with="anchorTopCenter">
+            <size value="200px 110px"/>
+            <isFocusable value="true"/>
+        </Profile>
+        <Profile name="stComponentIcon" extends="baseReference" with="anchorTopCenter">
+            <size value="40px 40px"/>
+            <imageSliceId value="noSlice"/>
+        </Profile>
+        <Profile name="stComponentLabel" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="180px 18px"/>
+            <textSize value="13px"/>
+            <textBold value="true"/>
+            <textColor value="1 1 1 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+        <Profile name="stComponentValue" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="180px 16px"/>
+            <textSize value="14px"/>
+            <textBold value="true"/>
+            <textColor value="0.3 1.0 0.3 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+        <Profile name="stComponentStatus" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="180px 14px"/>
+            <textSize value="10px"/>
+            <textColor value="0.6 0.6 0.6 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+
+        <!-- ========== RESOURCES ========== -->
+        <Profile name="stResourceSection" extends="emptyPanel" with="anchorTopCenter">
+            <size value="700px 50px"/>
+        </Profile>
+        <Profile name="stResourceBg" extends="baseReference" with="anchorTopCenter">
+            <size value="700px 50px"/>
+            <imageColor value="0.12 0.10 0.06 0.9"/>
+        </Profile>
+        <Profile name="stResourceLabel" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="80px 16px"/>
+            <textSize value="11px"/>
+            <textColor value="0.6 0.6 0.6 1"/>
+        </Profile>
+        <Profile name="stResourceValue" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="80px 16px"/>
+            <textSize value="12px"/>
+            <textBold value="true"/>
+            <textColor value="1 1 1 1"/>
+        </Profile>
+
+        <!-- ========== HINT TEXT ========== -->
+        <Profile name="stHintText" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="660px 18px"/>
+            <textSize value="12px"/>
+            <textColor value="0.5 0.5 0.5 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+
+        <!-- ========== INSPECTION HEADER ========== -->
+        <Profile name="stInspectSection" extends="emptyPanel" with="anchorTopCenter">
+            <size value="700px 50px"/>
+        </Profile>
+        <Profile name="stInspectBg" extends="baseReference" with="anchorTopCenter">
+            <size value="700px 50px"/>
+            <imageColor value="0.08 0.08 0.10 0.9"/>
+        </Profile>
+        <Profile name="stInspectIcon" extends="baseReference" with="anchorTopCenter">
+            <size value="32px 32px"/>
+            <imageSliceId value="noSlice"/>
+        </Profile>
+        <Profile name="stInspectTitle" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="500px 20px"/>
+            <textSize value="16px"/>
+            <textBold value="true"/>
+            <textColor value="1 1 1 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+        <Profile name="stInspectSubtext" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="500px 16px"/>
+            <textSize value="12px"/>
+            <textColor value="0.6 0.6 0.6 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+
+        <!-- ========== TERMINAL / DIAGNOSTIC READOUT ========== -->
+        <Profile name="stTerminalSection" extends="emptyPanel" with="anchorTopCenter">
+            <size value="700px 130px"/>
+        </Profile>
+        <Profile name="stTerminalBg" extends="baseReference" with="anchorTopCenter">
+            <size value="700px 130px"/>
+            <imageColor value="0.02 0.04 0.02 0.98"/>
+        </Profile>
+        <Profile name="stTerminalHeader" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="660px 20px"/>
+            <textSize value="13px"/>
+            <textBold value="true"/>
+            <textColor value="0.2 1 0.4 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+        <Profile name="stTerminalText" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="640px 16px"/>
+            <textSize value="12px"/>
+            <textColor value="0.2 0.9 0.3 1"/>
+        </Profile>
+        <Profile name="stTerminalHint" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="640px 16px"/>
+            <textSize value="12px"/>
+            <textColor value="0.3 1 0.5 1"/>
+        </Profile>
+
+        <!-- ========== DIAGNOSIS OPTIONS ========== -->
+        <Profile name="stDiagSection" extends="emptyPanel" with="anchorTopCenter">
+            <size value="700px 110px"/>
+        </Profile>
+        <Profile name="stDiagOption" extends="emptyPanel" with="anchorTopCenter">
+            <size value="330px 48px"/>
+        </Profile>
+        <Profile name="stDiagBg" extends="baseReference" with="anchorTopCenter">
+            <size value="330px 48px"/>
+            <imageColor value="0.12 0.12 0.16 1"/>
+        </Profile>
+        <Profile name="stDiagBtn" extends="emptyPanel" with="anchorTopCenter">
+            <size value="330px 48px"/>
+            <isFocusable value="true"/>
+        </Profile>
+        <Profile name="stDiagText" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="310px 22px"/>
+            <textSize value="13px"/>
+            <textBold value="true"/>
+            <textColor value="1 1 1 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+
+        <!-- ========== RESULTS ========== -->
+        <Profile name="stResultSection" extends="emptyPanel" with="anchorTopCenter">
+            <size value="700px 90px"/>
+        </Profile>
+        <Profile name="stResultBg" extends="baseReference" with="anchorTopCenter">
+            <size value="700px 90px"/>
+            <imageColor value="0.08 0.20 0.08 0.95"/>
+        </Profile>
+        <Profile name="stResultIcon" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="660px 20px"/>
+            <textSize value="16px"/>
+            <textBold value="true"/>
+            <textColor value="0.3 1.0 0.3 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+        <Profile name="stResultTitle" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="660px 20px"/>
+            <textSize value="14px"/>
+            <textBold value="true"/>
+            <textColor value="1 1 1 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+        <Profile name="stResultMessage" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="660px 18px"/>
+            <textSize value="12px"/>
+            <textColor value="0.8 0.8 0.8 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+
+        <!-- ========== COMPONENT DETAIL (success) ========== -->
+        <Profile name="stDetailSection" extends="emptyPanel" with="anchorTopCenter">
+            <size value="700px 55px"/>
+        </Profile>
+        <Profile name="stDetailBg" extends="baseReference" with="anchorTopCenter">
+            <size value="700px 55px"/>
+            <imageColor value="0.08 0.08 0.10 0.9"/>
+        </Profile>
+        <Profile name="stDetailIcon" extends="baseReference" with="anchorTopCenter">
+            <size value="32px 32px"/>
+            <imageSliceId value="noSlice"/>
+        </Profile>
+        <Profile name="stDetailLabel" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="250px 18px"/>
+            <textSize value="14px"/>
+            <textBold value="true"/>
+            <textColor value="0.9 0.65 0.2 1"/>
+        </Profile>
+        <Profile name="stDetailValue" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="250px 16px"/>
+            <textSize value="12px"/>
+            <textColor value="0.8 0.8 0.8 1"/>
+        </Profile>
+
+        <!-- ========== REQUIREMENTS (success) ========== -->
+        <Profile name="stReqSection" extends="emptyPanel" with="anchorTopCenter">
+            <size value="700px 50px"/>
+        </Profile>
+        <Profile name="stReqBg" extends="baseReference" with="anchorTopCenter">
+            <size value="700px 50px"/>
+            <imageColor value="0.12 0.10 0.06 0.9"/>
+        </Profile>
+        <Profile name="stReqText" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="660px 16px"/>
+            <textSize value="12px"/>
+            <textColor value="0.8 0.8 0.8 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+
+        <!-- ========== START RESTORATION BUTTON ========== -->
+        <Profile name="stStartBox" extends="emptyPanel" with="anchorTopCenter">
+            <size value="600px 50px"/>
+        </Profile>
+        <Profile name="stStartBg" extends="baseReference" with="anchorTopCenter">
+            <size value="600px 50px"/>
+            <imageColor value="0.12 0.30 0.12 0.95"/>
+        </Profile>
+        <Profile name="stStartBtn" extends="emptyPanel" with="anchorTopCenter">
+            <size value="600px 50px"/>
+            <isFocusable value="true"/>
+        </Profile>
+        <Profile name="stStartText" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="580px 22px"/>
+            <textSize value="15px"/>
+            <textBold value="true"/>
+            <textColor value="1 1 1 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+
+        <!-- ========== COOLDOWN (failure) ========== -->
+        <Profile name="stCooldownSection" extends="emptyPanel" with="anchorTopCenter">
+            <size value="700px 55px"/>
+        </Profile>
+        <Profile name="stCooldownBg" extends="baseReference" with="anchorTopCenter">
+            <size value="700px 55px"/>
+            <imageColor value="0.08 0.08 0.10 0.9"/>
+        </Profile>
+        <Profile name="stCooldownText" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="660px 18px"/>
+            <textSize value="13px"/>
+            <textBold value="true"/>
+            <textColor value="0.9 0.6 0.15 1"/>
+            <textAlignment value="center"/>
+        </Profile>
+        <Profile name="stCooldownHint" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="660px 16px"/>
+            <textSize value="12px"/>
+            <textColor value="0.5 0.5 0.5 1"/>
+            <textAlignment value="center"/>
         </Profile>
     </GUIProfiles>
 </GUI>

@@ -43,36 +43,44 @@ local VehicleSaleListing_mt = Class(VehicleSaleListing)
 VehicleSaleListing.AGENT_TIERS = {
     [0] = {  -- Private Sale (no agent)
         name = "Private Sale",
+        nameKey = "usedplus_agent_privateSale",
         feePercent = 0.00,          -- No fee - you're doing the work
         minMonths = 3,              -- 3-6 months (longer without professional help)
         maxMonths = 6,
         baseSuccessRate = 0.50,     -- 50% base success (no marketing reach)
         noPremium = true,           -- Private buyers won't pay premium prices
-        description = "No agent fee, but longer time and lower success rate."
+        description = "No agent fee, but longer time and lower success rate.",
+        descriptionKey = "usedplus_agent_privateSaleDesc"
     },
     [1] = {  -- Local Agent
         name = "Local Agent",
+        nameKey = "usedplus_agent_local",
         feePercent = 0.02,          -- 2% base fee
         minMonths = 1,              -- 1-2 months
         maxMonths = 2,
         baseSuccessRate = 0.70,     -- 70% base success (limited reach)
-        description = "Quick turnaround, limited buyer pool."
+        description = "Quick turnaround, limited buyer pool.",
+        descriptionKey = "usedplus_agent_localDesc"
     },
     [2] = {  -- Regional Agent
         name = "Regional Agent",
+        nameKey = "usedplus_agent_regional",
         feePercent = 0.04,          -- 4% base fee
         minMonths = 2,              -- 2-4 months
         maxMonths = 4,
         baseSuccessRate = 0.85,     -- 85% base success
-        description = "Balanced reach and timing."
+        description = "Balanced reach and timing.",
+        descriptionKey = "usedplus_agent_regionalDesc"
     },
     [3] = {  -- National Agent
         name = "National Agent",
+        nameKey = "usedplus_agent_national",
         feePercent = 0.06,          -- 6% base fee
         minMonths = 4,              -- 4-6 months
         maxMonths = 6,
         baseSuccessRate = 0.95,     -- 95% base success (wide reach)
-        description = "Maximum exposure, longest wait."
+        description = "Maximum exposure, longest wait.",
+        descriptionKey = "usedplus_agent_nationalDesc"
     }
 }
 
@@ -83,30 +91,36 @@ VehicleSaleListing.AGENT_TIERS = {
 VehicleSaleListing.PRICE_TIERS = {
     [1] = {  -- Quick Sale (Fire Sale)
         name = "Quick Sale",
+        nameKey = "usedplus_price_quickSale",
         priceMultiplierMin = 0.75,  -- 75-85% of FMV
         priceMultiplierMax = 0.85,
         successModifier = 0.15,     -- +15% success (easy to sell cheap)
         requiresCondition = 0,      -- No condition requirement
         requiresPaint = 0,          -- No paint requirement
-        description = "Fire sale pricing. Easy to find buyers."
+        description = "Fire sale pricing. Easy to find buyers.",
+        descriptionKey = "usedplus_price_quickSaleDesc"
     },
     [2] = {  -- Market Price (Fair Value)
         name = "Market Price",
+        nameKey = "usedplus_price_market",
         priceMultiplierMin = 0.95,  -- 95-105% of FMV
         priceMultiplierMax = 1.05,
         successModifier = 0.00,     -- Baseline success
         requiresCondition = 0,      -- No condition requirement
         requiresPaint = 0,          -- No paint requirement
-        description = "Fair market value. Standard odds."
+        description = "Fair market value. Standard odds.",
+        descriptionKey = "usedplus_price_marketDesc"
     },
     [3] = {  -- Premium Price (Top Dollar)
         name = "Premium Price",
+        nameKey = "usedplus_price_premium",
         priceMultiplierMin = 1.15,  -- 115-130% of FMV
         priceMultiplierMax = 1.30,
         successModifier = -0.20,    -- -20% success (hard to sell expensive)
         requiresCondition = 95,     -- Must be ≥95% repaired
         requiresPaint = 80,         -- Must be ≥80% paint condition
-        description = "Premium pricing. Requires pristine condition."
+        description = "Premium pricing. Requires pristine condition.",
+        descriptionKey = "usedplus_price_premiumDesc"
     }
 }
 
@@ -454,7 +468,9 @@ end
 function VehicleSaleListing:getTierName()
     local agentTier = self:getAgentTierConfig()
     local priceTier = self:getPriceTierConfig()
-    return string.format("%s / %s", agentTier.name, priceTier.name)
+    local agentName = agentTier.nameKey and g_i18n:getText(agentTier.nameKey) or agentTier.name
+    local priceName = priceTier.nameKey and g_i18n:getText(priceTier.nameKey) or priceTier.name
+    return string.format("%s / %s", agentName, priceName)
 end
 
 --[[
@@ -462,7 +478,7 @@ end
 ]]
 function VehicleSaleListing:getAgentTierName()
     local tier = self:getAgentTierConfig()
-    return tier.name
+    return tier.nameKey and g_i18n:getText(tier.nameKey) or tier.name
 end
 
 --[[
@@ -470,7 +486,7 @@ end
 ]]
 function VehicleSaleListing:getPriceTierName()
     local tier = self:getPriceTierConfig()
-    return tier.name
+    return tier.nameKey and g_i18n:getText(tier.nameKey) or tier.name
 end
 
 --[[
@@ -555,16 +571,16 @@ VehicleSaleListing.canUseTier = VehicleSaleListing.canUsePriceTier
 ]]
 function VehicleSaleListing:getStatusText()
     if self.status == VehicleSaleListing.STATUS.ACTIVE then
-        return "Searching for buyer..."
+        return g_i18n:getText("usedplus_vsl_statusSearching")
     elseif self.status == VehicleSaleListing.STATUS.OFFER_PENDING then
-        return string.format("OFFER: %s (expires in %d hrs)",
+        return string.format(g_i18n:getText("usedplus_vsl_statusOffer"),
             g_i18n:formatMoney(self.currentOffer, 0, true, true), self.offerExpiresIn)
     elseif self.status == VehicleSaleListing.STATUS.SOLD then
-        return string.format("SOLD for %s", g_i18n:formatMoney(self.finalSalePrice, 0, true, true))
+        return string.format(g_i18n:getText("usedplus_vsl_statusSold"), g_i18n:formatMoney(self.finalSalePrice, 0, true, true))
     elseif self.status == VehicleSaleListing.STATUS.EXPIRED then
-        return "Expired - No buyer found"
+        return g_i18n:getText("usedplus_vsl_statusExpired")
     elseif self.status == VehicleSaleListing.STATUS.CANCELLED then
-        return "Cancelled"
+        return g_i18n:getText("usedplus_vsl_statusCancelled")
     else
         return self.status
     end

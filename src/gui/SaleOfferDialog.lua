@@ -32,10 +32,10 @@ local SaleOfferDialog_mt = Class(SaleOfferDialog, ScreenElement)
 -- v2.13.2: Replaced Unicode stars (★☆) with starCount for image-based rendering
 -- (Unicode chars 9733/9734 don't render in FS25's font)
 SaleOfferDialog.DEAL_RATINGS = {
-    { threshold = 0.00, starCount = 2, text = "Fair Offer",     color = {0.8, 0.8, 0.3, 1} },
-    { threshold = 0.25, starCount = 3, text = "Good Deal",      color = {0.7, 0.9, 0.3, 1} },
-    { threshold = 0.50, starCount = 4, text = "Great Deal",     color = {0.4, 1.0, 0.4, 1} },
-    { threshold = 0.75, starCount = 5, text = "Excellent Deal", color = {0.3, 1.0, 0.3, 1} },
+    { threshold = 0.00, starCount = 2, textKey = "usedplus_deal_fairOffer",     color = {0.8, 0.8, 0.3, 1} },
+    { threshold = 0.25, starCount = 3, textKey = "usedplus_deal_goodDeal",      color = {0.7, 0.9, 0.3, 1} },
+    { threshold = 0.50, starCount = 4, textKey = "usedplus_deal_greatDeal",     color = {0.4, 1.0, 0.4, 1} },
+    { threshold = 0.75, starCount = 5, textKey = "usedplus_deal_excellentDeal", color = {0.3, 1.0, 0.3, 1} },
 }
 
 -- v2.13.2: CONTROLS table — binds XML element ids to self.* properties
@@ -124,12 +124,12 @@ function SaleOfferDialog:setupSectionIcons()
     -- Timer icon
     local timerIcon = self.dialogElement:getDescendantById("timerIcon")
     if timerIcon ~= nil then
-        timerIcon:setImageFilename(self.iconDir .. "timer.png")
+        timerIcon:setImageFilename(self.iconDir .. "timer.dds")
     end
 
     -- v2.13.2: Load star rating icons (replace Unicode ★☆ that don't render in FS25 font)
-    local starFilledPath = self.iconDir .. "star_filled.png"
-    local starEmptyPath = self.iconDir .. "star_empty.png"
+    local starFilledPath = self.iconDir .. "star_filled.dds"
+    local starEmptyPath = self.iconDir .. "star_empty.dds"
     self.starElements = {}
     for i = 1, 5 do
         local star = self.dialogElement:getDescendantById("star" .. i)
@@ -144,7 +144,7 @@ function SaleOfferDialog:setupSectionIcons()
 
     -- Range arrow markers (11 positions: 0% to 100% in 10% steps)
     -- Load arrow PNG on all, then show/hide in updateDisplay
-    local arrowPath = self.iconDir .. "range_marker.png"
+    local arrowPath = self.iconDir .. "range_marker.dds"
     self.arrowMarkers = {}
     local arrowIds = {"arrow0", "arrow5", "arrow10", "arrow15", "arrow20", "arrow25", "arrow30", "arrow35", "arrow40", "arrow45", "arrow50", "arrow55", "arrow60", "arrow65", "arrow70", "arrow75", "arrow80", "arrow85", "arrow90", "arrow95", "arrow100"}
     for _, id in pairs(arrowIds) do
@@ -161,7 +161,7 @@ function SaleOfferDialog:setupSectionIcons()
     UsedPlus.logDebug(string.format("SaleOfferDialog: %d arrow markers loaded", #self.arrowMarkers))
 
     -- v2.16.0: Previous offer history markers (gray ▲ below range bar)
-    local historyMarkerPath = self.iconDir .. "range_marker_history.png"
+    local historyMarkerPath = self.iconDir .. "range_marker_history.dds"
     self.historyMarkers = {}
     local histMarkerIds = {"histMarker0", "histMarker10", "histMarker20", "histMarker30", "histMarker40", "histMarker50", "histMarker60", "histMarker70", "histMarker80", "histMarker90", "histMarker100"}
     for _, id in pairs(histMarkerIds) do
@@ -252,7 +252,7 @@ function SaleOfferDialog:updateDisplay()
 
     -- Show rating text WITHOUT stars (stars are now images)
     if self.dealRatingText then
-        self.dealRatingText:setText(rating.text)
+        self.dealRatingText:setText(g_i18n:getText(rating.textKey))
         self.dealRatingText:setTextColor(unpack(rating.color))
     end
 

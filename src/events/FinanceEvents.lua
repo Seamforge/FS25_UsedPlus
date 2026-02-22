@@ -820,13 +820,13 @@ function VanillaLoanPaymentEvent.execute(farmId, paymentAmount)
     if farm.loan <= 0 then
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_OK,
-            string.format("Loan paid off! Total paid: %s", paidStr)
+            string.format(g_i18n:getText("usedplus_notification_loanPaidOffTotal"), paidStr)
         )
     else
         local newBalanceStr = g_i18n:formatMoney(farm.loan, 0, true, true)
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_OK,
-            string.format("Payment processed: %s. Remaining balance: %s", paidStr, newBalanceStr)
+            string.format(g_i18n:getText("usedplus_notification_loanPaymentProcessed"), paidStr, newBalanceStr)
         )
     end
 

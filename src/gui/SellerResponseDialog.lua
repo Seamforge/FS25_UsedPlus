@@ -141,7 +141,7 @@ function SellerResponseDialog:displayAccept()
 
     -- Icon - v2.9.5: Use image icon instead of text
     if self.responseIconImage then
-        self.responseIconImage:setImageFilename(self.iconDir .. "status_good.png")
+        self.responseIconImage:setImageFilename(self.iconDir .. "status_good.dds")
     end
 
     -- Response text
@@ -168,7 +168,7 @@ function SellerResponseDialog:displayAccept()
     local savings = self.askingPrice - self.playerOffer
     if self.savingsText then
         if savings > 0 then
-            self.savingsText:setText(string.format("You saved %s!", g_i18n:formatMoney(savings, 0, true, true)))
+            self.savingsText:setText(string.format(g_i18n:getText("usedplus_sr_youSaved"), g_i18n:formatMoney(savings, 0, true, true)))
         else
             self.savingsText:setText("")
         end
@@ -209,7 +209,7 @@ function SellerResponseDialog:displayCounter()
 
     -- Icon - v2.9.5: Use image icon instead of text
     if self.responseIconImage then
-        self.responseIconImage:setImageFilename(self.iconDir .. "handshake.png")
+        self.responseIconImage:setImageFilename(self.iconDir .. "handshake.dds")
     end
 
     -- Response text
@@ -277,7 +277,7 @@ function SellerResponseDialog:displayReject()
 
     -- Icon - v2.9.5: Use image icon instead of text
     if self.responseIconImage then
-        self.responseIconImage:setImageFilename(self.iconDir .. "status_bad.png")
+        self.responseIconImage:setImageFilename(self.iconDir .. "status_bad.dds")
     end
 
     -- Response text

@@ -220,7 +220,7 @@ if ShopConfigScreen ~= nil and ShopConfigScreen.setStoreItem ~= nil then
     )
     UsedPlus.logDebug("ShopConfigScreenExtension setStoreItem hook installed")
 else
-    UsedPlus.logWarn("ShopConfigScreen not available at load time")
+    UsedPlus.logDebug("ShopConfigScreen not available at load time")
 end
 
 --[[
@@ -647,19 +647,19 @@ end
     Refactored to use DialogLoader for centralized loading
 ]]
 function ShopConfigScreenExtension.onUnifiedBuyClick(shopScreen, storeItem, initialMode)
-    UsedPlus.logWarn("========================================")
-    UsedPlus.logWarn("UNIFIED BUY CLICKED")
-    UsedPlus.logWarn("  Item: " .. tostring(storeItem.name))
-    UsedPlus.logWarn("  Species: " .. tostring(storeItem.species))
-    UsedPlus.logWarn("  Category: " .. tostring(storeItem.categoryName))
-    UsedPlus.logWarn("  Mode: " .. tostring(initialMode))
-    UsedPlus.logWarn("========================================")
+    UsedPlus.logDebug("========================================")
+    UsedPlus.logDebug("UNIFIED BUY CLICKED")
+    UsedPlus.logDebug("  Item: " .. tostring(storeItem.name))
+    UsedPlus.logDebug("  Species: " .. tostring(storeItem.species))
+    UsedPlus.logDebug("  Category: " .. tostring(storeItem.categoryName))
+    UsedPlus.logDebug("  Mode: " .. tostring(initialMode))
+    UsedPlus.logDebug("========================================")
 
     g_shopConfigScreen:playSample(GuiSoundPlayer.SOUND_SAMPLES.CLICK)
 
     -- v2.8.0: Choose dialog based on item type (species 2 = placeable)
     local dialogName = (storeItem and storeItem.species == 2) and "UnifiedPurchaseDialogPlaceable" or "UnifiedPurchaseDialog"
-    UsedPlus.logWarn(string.format("Loading dialog: %s (species=%s)", dialogName, tostring(storeItem.species)))
+    UsedPlus.logDebug(string.format("Loading dialog: %s (species=%s)", dialogName, tostring(storeItem.species)))
 
     -- Use DialogLoader for lazy loading (need to call two methods)
     if not DialogLoader.ensureLoaded(dialogName) then
@@ -668,7 +668,7 @@ function ShopConfigScreenExtension.onUnifiedBuyClick(shopScreen, storeItem, init
     end
 
     local dialog = DialogLoader.getDialog(dialogName)
-    UsedPlus.logWarn("Dialog retrieved: " .. tostring(dialog ~= nil))
+    UsedPlus.logDebug("Dialog retrieved: " .. tostring(dialog ~= nil))
 
     if dialog then
         -- Get the configured price for the item
@@ -677,14 +677,14 @@ function ShopConfigScreenExtension.onUnifiedBuyClick(shopScreen, storeItem, init
             price = shopScreen.totalPrice
         end
 
-        UsedPlus.logWarn("Calling setVehicleData on " .. dialogName)
+        UsedPlus.logDebug("Calling setVehicleData on " .. dialogName)
         -- Pass shopScreen reference so dialog can use vanilla buy flow for cash purchases
         dialog:setVehicleData(storeItem, price, nil, shopScreen)
         dialog:setInitialMode(initialMode or UnifiedPurchaseDialog.MODE_CASH)
 
-        UsedPlus.logWarn("Calling g_gui:showDialog('" .. dialogName .. "')")
+        UsedPlus.logDebug("Calling g_gui:showDialog('" .. dialogName .. "')")
         g_gui:showDialog(dialogName)
-        UsedPlus.logWarn("Dialog shown successfully")
+        UsedPlus.logDebug("Dialog shown successfully")
     end
 end
 

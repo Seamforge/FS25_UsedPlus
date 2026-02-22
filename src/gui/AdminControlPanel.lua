@@ -147,12 +147,30 @@ function AdminControlPanel:onOpen()
     -- Show the State tab first (vehicle diagnostics)
     self:switchToTab(AdminControlPanel.TAB.STATE)
 
+    -- Load vehicle preview image
+    self:updateVehicleImage()
+
     -- Update all tab-specific displays
     self:updateDiagnostics()
     self:updateFinanceInfo()
 
     -- Set initial status
     self:setStatus(g_i18n:getText("usedplus_admin_status_ready"))
+end
+
+function AdminControlPanel:updateVehicleImage()
+    if self.vehicleImage == nil then return end
+
+    if self.vehicle ~= nil then
+        local storeItem = g_storeManager:getItemByXMLFilename(self.vehicle.configFileName)
+        if storeItem ~= nil and storeItem.imageFilename ~= nil then
+            self.vehicleImage:setImageFilename(storeItem.imageFilename)
+            self.vehicleImage:setVisible(true)
+            return
+        end
+    end
+
+    self.vehicleImage:setVisible(false)
 end
 
 function AdminControlPanel:update(dt)
@@ -227,7 +245,7 @@ function AdminControlPanel:updateFinanceInfo()
 
     -- Row 1: Balance
     if self.finLabel1 then
-        self.finLabel1:setText("Balance:")
+        self.finLabel1:setText(g_i18n:getText("usedplus_acp_balance"))
         self.finLabel1:setTextColor(0.65, 0.65, 0.65, 1)
     end
     if self.finValue1 and farm then
@@ -238,7 +256,7 @@ function AdminControlPanel:updateFinanceInfo()
 
     -- Row 2: Credit Score
     if self.finLabel2 then
-        self.finLabel2:setText("Credit Score:")
+        self.finLabel2:setText(g_i18n:getText("usedplus_acp_creditScore"))
         self.finLabel2:setTextColor(0.65, 0.65, 0.65, 1)
     end
     if self.finValue2 and CreditScore then
@@ -251,7 +269,7 @@ function AdminControlPanel:updateFinanceInfo()
 
     -- Row 3: Active Deals
     if self.finLabel3 then
-        self.finLabel3:setText("Active Deals:")
+        self.finLabel3:setText(g_i18n:getText("usedplus_acp_activeDeals"))
         self.finLabel3:setTextColor(0.65, 0.65, 0.65, 1)
     end
     if self.finValue3 and g_financeManager then
@@ -264,7 +282,7 @@ function AdminControlPanel:updateFinanceInfo()
 
     -- Row 4: Total Debt
     if self.finLabel4 then
-        self.finLabel4:setText("Total Debt:")
+        self.finLabel4:setText(g_i18n:getText("usedplus_acp_totalDebt"))
         self.finLabel4:setTextColor(0.65, 0.65, 0.65, 1)
     end
     if self.finValue4 and g_financeManager then
@@ -1235,6 +1253,22 @@ function AdminControlPanel:onRefillHydClick()
     self:updateDiagnostics()
 end
 
+function AdminControlPanel:onEmptyOilClick()
+    if not self:requireVehicle() then return end
+    local spec = self.vehicle.spec_usedPlusMaintenance
+    spec.oilLevel = 0
+    self:setStatus(string.format("Emptied oil on %s", self.vehicle:getName() or "vehicle"))
+    self:updateDiagnostics()
+end
+
+function AdminControlPanel:onEmptyHydClick()
+    if not self:requireVehicle() then return end
+    local spec = self.vehicle.spec_usedPlusMaintenance
+    spec.hydraulicFluidLevel = 0
+    self:setStatus(string.format("Emptied hydraulic fluid on %s", self.vehicle:getName() or "vehicle"))
+    self:updateDiagnostics()
+end
+
 function AdminControlPanel:onFixTiresClick()
     if not self:requireVehicle() then return end
 
@@ -1271,6 +1305,84 @@ function AdminControlPanel:onFixAllMalfClick()
         self:setStatus("Error: resetAllMalfunctions not found", nil, "error")
     end
     self:updateDiagnostics()
+end
+
+function AdminControlPanel:findServiceTrucks()
+    local trucks = {}
+    local seen = {}
+
+    -- 1. Check current vehicle first (most likely — user is sitting in it)
+    if self.vehicle and self.vehicle.configFileName then
+        local lower = string.lower(self.vehicle.configFileName)
+        if string.find(lower, "servicetruck") then
+            table.insert(trucks, self.vehicle)
+            seen[self.vehicle] = true
+        end
+    end
+
+    -- 2. Search all vehicles in the world as fallback
+    local allVehicles = g_currentMission.vehicles
+        or (g_currentMission.vehicleSystem and g_currentMission.vehicleSystem.vehicles)
+    if allVehicles then
+        for _, vehicle in ipairs(allVehicles) do
+            if not seen[vehicle] and vehicle.configFileName then
+                local lower = string.lower(vehicle.configFileName)
+                if string.find(lower, "servicetruck") then
+                    table.insert(trucks, vehicle)
+                end
+            end
+        end
+    end
+
+    return trucks
+end
+
+function AdminControlPanel:drainServiceTruckFillUnit(fillUnitIndex, label)
+    local trucks = self:findServiceTrucks()
+
+    if #trucks == 0 then
+        self:setStatus("No Service Truck found in game world", nil, "error")
+        return
+    end
+
+    local drained = 0
+    for _, truck in ipairs(trucks) do
+        local fillSpec = truck.spec_fillUnit
+        if fillSpec and fillSpec.fillUnits and fillSpec.fillUnits[fillUnitIndex] then
+            local fu = fillSpec.fillUnits[fillUnitIndex]
+            local currentLevel = fu.fillLevel or 0
+            if currentLevel > 0 then
+                truck:addFillUnitFillLevel(truck:getOwnerFarmId(), fillUnitIndex, -currentLevel, fu.fillType, ToolType.UNDEFINED)
+                drained = drained + 1
+            end
+        end
+    end
+
+    if drained > 0 then
+        self:setStatus(string.format("Drained %s from %d Service Truck(s)", label, drained))
+    else
+        self:setStatus(string.format("Service Truck %s already empty", label), nil, "warn")
+    end
+end
+
+function AdminControlPanel:onDrainSTOilClick()
+    self:drainServiceTruckFillUnit(3, "oil tank")
+end
+
+function AdminControlPanel:onDrainSTHydClick()
+    self:drainServiceTruckFillUnit(4, "hydraulic tank")
+end
+
+function AdminControlPanel:onResetCooldownsClick()
+    if not self:requireVehicle() then return end
+
+    local spec = self.vehicle.spec_usedPlusMaintenance
+    if spec then
+        spec.restorationCooldowns = {}
+        self:setStatus(string.format("Cleared restoration cooldowns on %s", self.vehicle:getName() or "vehicle"))
+    else
+        self:setStatus("Error: No maintenance data", nil, "error")
+    end
 end
 
 -- ========== DIAGNOSTICS SYSTEM (State tab, left panel) ==========

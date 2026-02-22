@@ -1,6 +1,6 @@
 # CLAUDE.md - FS25 Modding Workspace Guide
 
-**Last Updated:** 2026-01-31 | **Active Project:** FS25_UsedPlus (Finance & Marketplace System)
+**Last Updated:** 2026-02-22 | **Active Project:** FS25_UsedPlus (Finance & Marketplace System)
 
 ---
 
@@ -80,6 +80,7 @@ At these stages, Claude and Samantha MUST have explicit dialog:
 | **GIANTS TestRunner** | `%USERPROFILE%\Downloads\TestRunner_FS25\TestRunner_public.exe` |
 | **GIANTS Editor** | `C:\Program Files\GIANTS Software\GIANTS_Editor_10.0.11\editor.exe` |
 | **GIANTS Texture Tool** | `C:\Program Files\GIANTS Software\GIANTS_Editor_10.0.11\tools\textureTool.exe` |
+| **Google Cloud CLI** | `"C:/Users/mrath/AppData/Local/Google/Cloud SDK/google-cloud-sdk/bin/gcloud.cmd"` ← Must use `.cmd` (bundled Python) |
 | **Documentation** | `FS25_AI_Coding_Reference/README.md` ← **START HERE for all patterns** |
 | **Build Script** | `tools/build.js` ← **USE THIS to create zip for testing/distribution** |
 
@@ -193,173 +194,21 @@ Untranslated entries (224):
   ...
 ```
 
-### How to Request Translation Work
+### Translation Workflow
 
-**❌ WRONG WAY (Inefficient):**
-> "Complete Swedish, Norwegian, and Vietnamese translations"
+**CRITICAL:** Always use `translation_sync.js` — never create temporary scripts or JSON files.
 
-**Problems:**
-- Agents don't know which entries need translation
-- Agents create temporary scripts to find untranslated entries
-- Agents waste time building infrastructure instead of translating
-- Leaves junk files in `tools/` and `translations/` folders
+**Workflow:**
+1. `node translation_sync.js report` → get list of untranslated entries per language
+2. Edit `translation_[CODE].xml` directly (Edit tool, batches of 50-100)
+3. Preserve format specifiers exactly (`%s`, `%d`, `%.1f`, `%.2f`)
+4. `node translation_sync.js sync` → update hashes after edits
+5. `node translation_sync.js status` → verify 1954/1954 translated
+6. `node translation_sync.js validate` → check format specifiers
 
-**✅ RIGHT WAY (Efficient):**
+**Rules:** DO NOT create temp files/scripts. Edit XML directly. Only `translation_sync.js`, `build.js`, `generateIcons.js`, `deploy-gcp.js` belong in `tools/`.
 
-```
-Complete the following language translations using translation_sync.js:
-- Swedish (sv): 224 entries remaining
-- Norwegian (no): 537 entries remaining
-- Vietnamese (vi): 416 entries remaining
-
-CRITICAL WORKFLOW - Follow these steps EXACTLY:
-
-Step 1: Get the untranslated entries list
-  cd translations && node translation_sync.js report | grep -A 500 "Swedish"
-  (This shows you EXACTLY which keys need translation)
-
-Step 2: Edit the XML file directly
-  - Open translations/translation_sv.xml
-  - Find each untranslated entry (search for the key from Step 1)
-  - Translate the text (keep format specifiers like %s, %d, %.1f intact)
-  - DO NOT modify the hash attribute - translation_sync.js will update it
-
-Step 3: Sync hashes after your edits
-  cd translations && node translation_sync.js sync
-
-Step 4: Verify your work
-  cd translations && node translation_sync.js status | grep "Swedish"
-  (Should show 1954 translated, 0 untranslated)
-
-CRITICAL RULES:
-- DO NOT create any temporary files, scripts, or JSON files
-- DO NOT create find_untranslated_*.js or apply_*_translations.js scripts
-- Use translation_sync.js report command to get the list - don't build your own
-- Edit the XML file directly using the Edit tool
-- Work in batches of 50-100 entries, then sync hashes
-- Keep format specifiers intact (%s, %d, %.1f, etc.)
-- Maintain XML structure (no syntax errors)
-
-CLEANUP:
-- DO NOT leave any temporary files in tools/ or translations/
-- Only translation_sync.js, build.js, and generateIcons.js belong in tools/
-```
-
-### Sub-Agent Instructions Template
-
-When delegating translation work to sub-agents, use this template:
-
-```
-Complete [LANGUAGE] translations ([N] entries remaining from [CURRENT]/1954)
-
-WORKFLOW (follow EXACTLY):
-
-Step 1: Get untranslated entries list
-  cd translations && node translation_sync.js report | grep -A 500 "[LANGUAGE]"
-
-Step 2: Edit translation_[CODE].xml directly
-  - Use Edit tool to update entries in batches of 50-100
-  - Translate text while preserving format specifiers (%s, %d, %.1f)
-  - Keep XML structure intact
-  - DO NOT modify hash attributes
-
-Step 3: Sync hashes after each batch
-  cd translations && node translation_sync.js sync
-
-Step 4: Verify progress
-  cd translations && node translation_sync.js status | grep "[LANGUAGE]"
-
-CRITICAL RULES:
-- DO NOT create ANY files (no scripts, no JSON, no temp files)
-- Use translation_sync.js report command - don't build alternatives
-- Edit XML directly using Edit tool
-- Work in batches, sync after each batch
-- Preserve format specifiers EXACTLY
-- When done: verify 1954/1954 translated
-
-CLEANUP:
-- DO NOT leave temporary files in tools/ or translations/
-- Verify clean workspace: ls -la tools/ translations/
-```
-
-### Monitoring Translation Progress
-
-**Check Status Periodically:**
-```bash
-cd translations && node translation_sync.js status | grep -E "Swedish|Norwegian|Vietnamese"
-```
-
-**Check for Unauthorized Files:**
-```bash
-# Should return EMPTY (no temp files)
-ls -la tools/ | grep -E "(find_|apply_|temp|_to_translate)"
-ls -la translations/ | grep -E "(_untranslated|_to_translate|\.json)"
-
-# Should only see legitimate scripts in tools/
-ls -la tools/*.js
-# Expected: build.js, generateIcons.js, translation_sync.js, (courseplay_translation_helper.js, find_unused.js)
-```
-
-**Check Git Status (verify files being edited):**
-```bash
-git status translations/translation_sv.xml translations/translation_no.xml translations/translation_vi.xml --short
-# Should show "M" (modified) for files being worked on
-```
-
-### Common Pitfalls
-
-| Pitfall | Why It Happens | Solution |
-|---------|----------------|----------|
-| Agents create temp scripts | Instructions don't mention translation_sync.js | Explicitly tell them to use `node translation_sync.js report` |
-| Slow progress | Agents build infrastructure | Tell them to edit XML directly, not build tools |
-| Format specifier errors | Missing spaces before % symbols | Hungarian fix: `30%-os` → `30% -os` |
-| Stale hashes | Manual edits without sync | Run `node translation_sync.js sync` after edits |
-| Files littered everywhere | No cleanup instructions | Explicitly forbid file creation, verify workspace |
-| Duplicate work | Multiple agents editing same file | Assign different languages to different agents |
-
-### Translation Quality Guidelines
-
-**Format Specifiers (CRITICAL):**
-- `%s` = string, `%d` = integer, `%.1f` = decimal (1 place), `%.2f` = decimal (2 places)
-- Preserve count and order: "Price: $%.2f" → German: "Preis: %.2f $"
-- Hungarian spacing: Add space before `%` in compound words: `30%-os` → `30% -os`
-
-**Cultural Adaptation:**
-- Currency symbols: Adapt to local conventions (€ 1.234,56 vs $1,234.56)
-- Date formats: DD.MM.YYYY (EU) vs MM/DD/YYYY (US)
-- Unit systems: Keep metric for EU, note imperial conversions if relevant
-- Formality: Match FS25's tone (professional but friendly)
-
-**Testing Translations:**
-1. Run validation: `node translation_sync.js validate`
-2. Build mod: `cd tools && node build.js`
-3. Test in-game: Check dialogs, tooltips, buttons
-4. Verify no crashes on format specifiers
-
-### Success Metrics
-
-**Target:**
-- 25 languages at 1954/1954 (100% translated)
-- 0 stale hashes
-- 0 format errors
-- 0 untranslated entries
-- 0 placeholder entries
-
-**Current Status (v2.14.2):**
-- 25 languages at 100% ✅
-- 1 language planned (Korean - future community contribution)
-
-### Post-Translation Checklist
-
-After completing translation work:
-
-1. ✅ Verify counts: `node translation_sync.js status`
-2. ✅ Validate format: `node translation_sync.js validate`
-3. ✅ Check for junk files: `ls -la tools/ translations/`
-4. ✅ Clean up any temp files: `rm tools/temp*.js translations/*_untranslated*.json`
-5. ✅ Update CHANGELOG.md with translation counts
-6. ✅ Commit with message: `feat(i18n): Complete [languages] translations - [N] languages at 100%`
-7. ✅ Build and test: `cd tools && node build.js` then in-game verification
+**Current Status:** 25 languages at 100% ✅
 
 ---
 
@@ -429,7 +278,7 @@ X position = element CENTER, not left edge. Calculate: `X ± (width/2)` must sta
 
 ## Project: FS25_UsedPlus
 
-### Current Version: 2.14.2
+### Current Version: 2.15.2
 
 ### Features
 - Vehicle/equipment financing (1-15 years) and land financing (1-20 years) with dynamic credit scoring (300-850)
@@ -706,6 +555,180 @@ gh project item-edit \
 
 ---
 
+## GCP Dedicated Server (FS25 Testing)
+
+### Infrastructure Summary
+
+| Resource | Value |
+|----------|-------|
+| **GCP Project** | `fs25-dedicated` |
+| **Billing Account** | `017B40-04F445-C6229C` |
+| **VM** | `fs25-server` (e2-medium, 2 vCPU, 4GB RAM) |
+| **Zone** | `us-east1-b` |
+| **OS** | Debian 12 (bookworm) |
+| **Disk** | 150GB standard persistent |
+| **Static IP** | `35.229.101.149` |
+| **Docker Image** | `toetje585/arch-fs25server:latest` (Wine-based FS25 container) |
+| **VM Username** | `shouden` |
+| **Monthly Cost** | ~$35 |
+| **FS25 Version** | 1.16.0.3 (GIANTS license, NOT Steam) |
+| **Status** | Fully operational (as of 2026-02-22) |
+
+### Access Points
+
+| Service | URL / Command |
+|---------|---------------|
+| **Game Server** | `35.229.101.149:10823` (connect with FS25 game client) |
+| **SSH (direct)** | `ssh -i ~/.ssh/google_compute_engine shouden@35.229.101.149` |
+| **SSH (gcloud)** | `gcloud compute ssh fs25-server --zone=us-east1-b --project=fs25-dedicated` |
+| **VNC** | `http://35.229.101.149:6080/vnc.html` (password: `UsedPlusDev2026`) — for manual setup/debugging only |
+
+### Firewall Rules
+
+| Rule | Ports | Source |
+|------|-------|--------|
+| `fs25-game-port` | TCP/UDP 10823 | `0.0.0.0/0` (public) |
+| `fs25-web-admin` | TCP 7999, 8443 | Your IP only |
+| `fs25-vnc-setup` | TCP 5900, 6080, 7999 | Your IP only |
+| `fs25-iap-ssh` | TCP 22 | `35.235.240.0/20` (Google IAP) |
+| `fs25-ssh-whitelist` | TCP 22 | Your IP only |
+
+Only game port (10823) is public. If your IP changes:
+```bash
+for RULE in fs25-ssh-whitelist fs25-vnc-setup fs25-web-admin; do
+  "C:/Users/mrath/AppData/Local/Google/Cloud SDK/google-cloud-sdk/bin/gcloud.cmd" compute firewall-rules update $RULE --source-ranges=NEW_IP/32 --project=fs25-dedicated
+done
+```
+
+### GIANTS License (NOT Steam)
+
+The server uses a **GIANTS-purchased license** (not Steam). Steam's DRM prevents dedicated server use.
+
+- **Key format:** `DSR23-XXXXX-XXXXX-XXXXX` (purchased from `eshop.giants-software.com`)
+- **License files:** `config/FarmingSimulator2025/AHC_63805.dat` + `AHT_63805.dat`
+- **Activation:** Run `FarmingSimulator2025.exe` via VNC → GIANTS launcher prompts for key
+- **Product ID:** B7094197 (base game)
+- **Steam App ID:** 2300320 (for reference only — NOT usable for dedicated server without Steam client)
+
+**If re-activation is needed:** Open VNC, run the GIANTS launcher, enter the key.
+
+### Server Architecture
+
+```
+~/fs25-server/                           (on GCP VM)
+├── docker-compose.yml                   (AUTOSTART_SERVER=true)
+├── config/ → /opt/fs25/config           (server config, savegames, mods, logs)
+│   └── FarmingSimulator2025/
+│       ├── mods/FS25_UsedPlus.zip       (deployed mod)
+│       ├── AHC_63805.dat, AHT_63805.dat (GIANTS license)
+│       └── log_YYYY-MM-DD_HH-MM-SS.txt (game logs — timestamped, NOT log.txt)
+├── game/ → /opt/fs25/game               (FS25 game files, ~55GB)
+│   └── Farming Simulator 2025/
+│       ├── FarmingSimulator2025.exe      (GIANTS launcher, 9.6MB)
+│       ├── x64/FarmingSimulator2025Game.exe (game engine, 19MB)
+│       └── dedicatedServer.exe          (web admin → launches game engine)
+├── dlc/ → /opt/fs25/dlc
+└── installer/ → /opt/fs25/installer
+```
+
+**How the container works:** Creates fresh Wine prefix on each start → symlinks game/config directories → runs `dedicatedServer.exe` via Wine → web admin on port 7999 → auto-starts game engine with `-server` flag.
+
+### gcloud CLI Quoting (CRITICAL)
+
+The gcloud path has spaces: `"C:/Users/mrath/AppData/Local/Google/Cloud SDK/google-cloud-sdk/bin/gcloud.cmd"`. Double-quoted flag values conflict with the outer path quotes.
+
+**Solution:** Use direct SSH for commands with spaces:
+```bash
+ssh -i ~/.ssh/google_compute_engine shouden@35.229.101.149 "any command with spaces"
+```
+
+For gcloud commands, use single-quoted or `=`-joined flag values (no spaces).
+
+### Server Management
+
+```bash
+# Docker management (via SSH)
+ssh -i ~/.ssh/google_compute_engine shouden@35.229.101.149 "cd ~/fs25-server && docker compose restart"
+ssh -i ~/.ssh/google_compute_engine shouden@35.229.101.149 "cd ~/fs25-server && docker compose down"
+ssh -i ~/.ssh/google_compute_engine shouden@35.229.101.149 "cd ~/fs25-server && docker compose up -d"
+ssh -i ~/.ssh/google_compute_engine shouden@35.229.101.149 "docker logs arch-fs25server --tail=50"
+```
+
+### Uploading Mods
+
+Mods go in `config/FarmingSimulator2025/mods/` (NOT top-level `mods/`).
+```bash
+scp -i ~/.ssh/google_compute_engine "C:/path/to/mod.zip" shouden@35.229.101.149:~/fs25-server/config/FarmingSimulator2025/mods/
+```
+
+### Shutting Down (Save Money)
+
+```bash
+# Stop VM (disk still charges ~$6/mo for 150GB)
+"C:/Users/mrath/AppData/Local/Google/Cloud SDK/google-cloud-sdk/bin/gcloud.cmd" compute instances stop fs25-server --zone=us-east1-b --project=fs25-dedicated
+
+# Start VM back up
+"C:/Users/mrath/AppData/Local/Google/Cloud SDK/google-cloud-sdk/bin/gcloud.cmd" compute instances start fs25-server --zone=us-east1-b --project=fs25-dedicated
+```
+
+### Local Reference Server
+
+A working FS25 dedicated server also exists on the local network at `interstitch.shouden.us` (192.168.88.150), RHEL/CentOS 9, same Docker container. SSH: `ssh mrathbone@192.168.88.150`. Game files were originally rsync'd from here to GCP.
+
+---
+
+## Dev Iteration Workflow (GCP Server)
+
+### One-Command Build + Deploy
+
+```bash
+# Build mod, deploy locally, upload to GCP, restart server — all in one:
+node tools/build.js --gcp
+
+# Combine with version bump:
+node tools/build.js --patch --gcp
+```
+
+### Individual Deploy Commands
+
+```bash
+# Upload latest mod zip + restart server (uses local mods folder build)
+node tools/deploy-gcp.js
+
+# Just restart the server (no re-upload — useful after config changes)
+node tools/deploy-gcp.js --restart
+
+# Tail the server log in real-time (Ctrl+C to stop)
+node tools/deploy-gcp.js --log
+
+# Check server status (process, container, disk, mod info)
+node tools/deploy-gcp.js --status
+
+# Clear the server log (fresh start for next test session)
+node tools/deploy-gcp.js --log-clear
+```
+
+### Typical Dev Session
+
+1. Edit code locally
+2. `node tools/build.js --gcp` (builds + deploys + restarts)
+3. Connect with game client to `35.229.101.149:10823`
+4. `node tools/deploy-gcp.js --log` in a second terminal (monitor logs)
+5. Test, find issues, `Ctrl+C` the log tail
+6. Edit code, repeat from step 2
+
+### Troubleshooting
+
+| Issue | Fix |
+|-------|-----|
+| "Cannot connect" | VM may be stopped — start it with gcloud |
+| "SSH key not found" | Run `gcloud compute ssh fs25-server ...` once to generate keys |
+| Server won't start | Check `--log` for Wine/crash errors |
+| Mod not loading | Check `--status` to verify mod zip was uploaded |
+| Stale log | Run `--log-clear` before testing for clean output |
+
+---
+
 ## Session Reminders
 
 1. Read this file first, then `FS25_AI_Coding_Reference/README.md`
@@ -723,4 +746,4 @@ gh project item-edit \
 
 See **[FS25_UsedPlus/CHANGELOG.md](FS25_UsedPlus/CHANGELOG.md)** for full version history.
 
-**Recent:** v2.7.1 (2026-01-17) - Inspection completion popup, showInfoDialog fixes, UYT detection fix
+**Recent:** v2.15.2 (2026-02-22) - Gradual oil/hydraulic fill, laptop animation fix, GCP server setup

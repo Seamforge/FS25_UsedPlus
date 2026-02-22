@@ -30,11 +30,11 @@ local UsedVehicleSearch_mt = Class(UsedVehicleSearch)
     Must match UsedSearchDialog.CREDIT_FEE_MODIFIERS!
 ]]
 UsedVehicleSearch.CREDIT_FEE_MODIFIERS = {
-    {minScore = 750, modifier = -0.15, name = "Excellent"},  -- 15% discount
-    {minScore = 700, modifier = -0.08, name = "Good"},       -- 8% discount
-    {minScore = 650, modifier = 0.00,  name = "Fair"},       -- No change
-    {minScore = 600, modifier = 0.10,  name = "Poor"},       -- 10% surcharge
-    {minScore = 300, modifier = 0.20,  name = "Very Poor"}   -- 20% surcharge
+    {minScore = 750, modifier = -0.15, name = "Excellent", nameKey = "usedplus_creditRating_excellent"},  -- 15% discount
+    {minScore = 700, modifier = -0.08, name = "Good",      nameKey = "usedplus_creditRating_good"},       -- 8% discount
+    {minScore = 650, modifier = 0.00,  name = "Fair",      nameKey = "usedplus_creditRating_fair"},       -- No change
+    {minScore = 600, modifier = 0.10,  name = "Poor",      nameKey = "usedplus_creditRating_poor"},       -- 10% surcharge
+    {minScore = 300, modifier = 0.20,  name = "Very Poor", nameKey = "usedplus_creditRating_veryPoor"}   -- 20% surcharge
 }
 
 --[[
@@ -53,6 +53,8 @@ UsedVehicleSearch.CREDIT_FEE_MODIFIERS = {
 UsedVehicleSearch.SEARCH_TIERS = {
     {  -- Local Search: Quick, cheap, low odds
         name = "Local Search",
+        nameKey = "usedplus_searchTier_local",
+        descriptionKey = "usedplus_searchTier_localDesc",
         retainerFlat = 500,           -- $500 flat retainer
         retainerPercent = 0,          -- No percentage
         commissionPercent = 0.06,     -- 6% added to vehicle price
@@ -64,6 +66,8 @@ UsedVehicleSearch.SEARCH_TIERS = {
     },
     {  -- Regional Search: Balanced, best value
         name = "Regional Search",
+        nameKey = "usedplus_searchTier_regional",
+        descriptionKey = "usedplus_searchTier_regionalDesc",
         retainerFlat = 1000,          -- $1000 base
         retainerPercent = 0.005,      -- Plus 0.5% of vehicle price
         commissionPercent = 0.08,     -- 8% commission
@@ -75,6 +79,8 @@ UsedVehicleSearch.SEARCH_TIERS = {
     },
     {  -- National Search: Premium, high certainty
         name = "National Search",
+        nameKey = "usedplus_searchTier_national",
+        descriptionKey = "usedplus_searchTier_nationalDesc",
         retainerFlat = 2000,          -- $2000 base
         retainerPercent = 0.008,      -- Plus 0.8% of vehicle price
         commissionPercent = 0.10,     -- 10% commission
@@ -97,6 +103,7 @@ UsedVehicleSearch.SEARCH_TIERS = {
 UsedVehicleSearch.QUALITY_TIERS = {
     {  -- Any Condition: Catch-all with widest variance
         name = "Any Condition",
+        nameKey = "usedplus_quality_any",
         priceRangeMin = 0.30,            -- 30% of new (70% off)
         priceRangeMax = 0.50,            -- 50% of new (50% off)
         damageRange = { 0.35, 0.60 },    -- 35-60% damage
@@ -104,10 +111,12 @@ UsedVehicleSearch.QUALITY_TIERS = {
         hoursRange = { 300, 4000 },      -- 300-4000 operating hours
         ageRange = { 2, 8 },             -- 2-8 years old
         successModifier = 0.08,          -- +8% easier to find rough equipment
-        description = "Wildcard - high variance in quality and price"
+        description = "Wildcard - high variance in quality and price",
+        descriptionKey = "usedplus_quality_anyDesc"
     },
     {  -- Poor Condition: Fixer-upper - highest repair costs
         name = "Poor Condition",
+        nameKey = "usedplus_quality_poor",
         priceRangeMin = 0.22,            -- 22% of new (78% off)
         priceRangeMax = 0.38,            -- 38% of new (62% off)
         damageRange = { 0.55, 0.80 },    -- 55-80% damage
@@ -115,10 +124,12 @@ UsedVehicleSearch.QUALITY_TIERS = {
         hoursRange = { 2000, 6000 },     -- 2000-6000 hours (well used!)
         ageRange = { 5, 12 },            -- 5-12 years old
         successModifier = 0.15,          -- +15% easier to find junk
-        description = "Bargain bin - extensive repairs needed"
+        description = "Bargain bin - extensive repairs needed",
+        descriptionKey = "usedplus_quality_poorDesc"
     },
     {  -- Fair Condition: Middle ground
         name = "Fair Condition",
+        nameKey = "usedplus_quality_fair",
         priceRangeMin = 0.50,            -- 50% of new (50% off)
         priceRangeMax = 0.68,            -- 68% of new (32% off)
         damageRange = { 0.18, 0.35 },    -- 18-35% damage
@@ -126,10 +137,12 @@ UsedVehicleSearch.QUALITY_TIERS = {
         hoursRange = { 800, 2500 },      -- 800-2500 hours
         ageRange = { 2, 6 },             -- 2-6 years old
         successModifier = 0.00,          -- Baseline (no modifier)
-        description = "Moderate wear - some repairs likely"
+        description = "Moderate wear - some repairs likely",
+        descriptionKey = "usedplus_quality_fairDesc"
     },
     {  -- Good Condition: Well maintained
         name = "Good Condition",
+        nameKey = "usedplus_quality_good",
         priceRangeMin = 0.68,            -- 68% of new (32% off)
         priceRangeMax = 0.80,            -- 80% of new (20% off)
         damageRange = { 0.06, 0.18 },    -- 6-18% damage
@@ -137,10 +150,12 @@ UsedVehicleSearch.QUALITY_TIERS = {
         hoursRange = { 200, 1200 },      -- 200-1200 hours (lightly used)
         ageRange = { 1, 4 },             -- 1-4 years old
         successModifier = -0.08,         -- -8% harder to find well-maintained
-        description = "Well maintained - minimal repairs"
+        description = "Well maintained - minimal repairs",
+        descriptionKey = "usedplus_quality_goodDesc"
     },
     {  -- Excellent Condition: Like new
         name = "Excellent Condition",
+        nameKey = "usedplus_quality_excellent",
         priceRangeMin = 0.80,            -- 80% of new (20% off)
         priceRangeMax = 0.94,            -- 94% of new (6% off)
         damageRange = { 0.00, 0.06 },    -- 0-6% damage
@@ -148,7 +163,8 @@ UsedVehicleSearch.QUALITY_TIERS = {
         hoursRange = { 50, 500 },        -- 50-500 hours (barely used)
         ageRange = { 0, 2 },             -- 0-2 years old
         successModifier = -0.15,         -- -15% harder to find pristine
-        description = "Like new - ready to work immediately"
+        description = "Like new - ready to work immediately",
+        descriptionKey = "usedplus_quality_excellentDesc"
     }
 }
 
@@ -480,7 +496,7 @@ function UsedVehicleSearch:processMonthlyCheck()
         if g_currentMission and not g_currentMission.isLoading then
             g_currentMission:addIngameNotification(
                 FSBaseMission.INGAME_NOTIFICATION_INFO,
-                string.format("%d vehicle offer(s) expired - sellers found other buyers", normalExpired)
+                string.format(g_i18n:getText("usedplus_notification_offersExpired"), normalExpired)
             )
         end
     end
@@ -892,7 +908,7 @@ end
 function UsedVehicleSearch:getQualityName()
     local qualityTier = UsedVehicleSearch.QUALITY_TIERS[self.qualityLevel]
     if qualityTier then
-        return qualityTier.name
+        return qualityTier.nameKey and g_i18n:getText(qualityTier.nameKey) or qualityTier.name
     end
     return "Unknown"
 end
@@ -903,7 +919,7 @@ end
 function UsedVehicleSearch:getTierName()
     local tier = UsedVehicleSearch.SEARCH_TIERS[self.searchLevel]
     if tier then
-        return tier.name
+        return tier.nameKey and g_i18n:getText(tier.nameKey) or tier.name
     end
     return "Unknown"
 end
@@ -914,11 +930,11 @@ end
 function UsedVehicleSearch:getRemainingTime()
     local monthsRemaining = self.maxMonths - self.monthsElapsed
     if monthsRemaining > 1 then
-        return string.format("%d months", monthsRemaining)
+        return string.format(g_i18n:getText("usedplus_time_months"), monthsRemaining)
     elseif monthsRemaining == 1 then
-        return "1 month"
+        return g_i18n:getText("usedplus_time_1month")
     else
-        return "Complete"
+        return g_i18n:getText("usedplus_time_complete")
     end
 end
 

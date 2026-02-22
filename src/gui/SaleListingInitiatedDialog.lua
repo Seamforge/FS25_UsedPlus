@@ -62,7 +62,7 @@ function SaleListingInitiatedDialog:setupSectionIcons()
     -- Header icon (sale icon)
     local headerIcon = self.dialogElement:getDescendantById("headerIcon")
     if headerIcon ~= nil then
-        headerIcon:setImageFilename(self.iconDir .. "sale.png")
+        headerIcon:setImageFilename(self.iconDir .. "sale.dds")
     end
 end
 
@@ -118,7 +118,7 @@ function SaleListingInitiatedDialog:updateDisplay(details)
     -- Agent fee (or "No Fee" for Private Sale)
     if self.agentFeeText then
         if details.isPrivateSale or details.agentFee == 0 then
-            self.agentFeeText:setText("No Fee")
+            self.agentFeeText:setText(g_i18n:getText("usedplus_sli_noFee"))
             self.agentFeeText:setTextColor(0.3, 1, 0.4, 1)  -- Green
         else
             local feeStr = g_i18n:formatMoney(details.agentFee, 0, true, true)
@@ -129,7 +129,7 @@ function SaleListingInitiatedDialog:updateDisplay(details)
 
     -- Price tier
     if self.priceTierText then
-        self.priceTierText:setText(details.priceTierName or "Market Price")
+        self.priceTierText:setText(details.priceTierName or g_i18n:getText("usedplus_sli_defaultPriceTier"))
     end
 
     -- Expected price range
@@ -146,9 +146,9 @@ function SaleListingInitiatedDialog:updateDisplay(details)
         local minMonths = details.minMonths or 1
         local maxMonths = details.maxMonths or 3
         if minMonths == maxMonths then
-            self.timelineText:setText(string.format("%d month(s)", minMonths))
+            self.timelineText:setText(string.format(g_i18n:getText("usedplus_sli_durationMonths"), minMonths))
         else
-            self.timelineText:setText(string.format("%d - %d months", minMonths, maxMonths))
+            self.timelineText:setText(string.format(g_i18n:getText("usedplus_sli_durationRange"), minMonths, maxMonths))
         end
     end
 

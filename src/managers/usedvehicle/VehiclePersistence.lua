@@ -78,8 +78,7 @@ function UsedVehicleManager:saveToXMLFile(missionInfo)
         xmlFile:save()
         xmlFile:delete()
 
-        -- v2.8.0: WARN level for persistence debugging
-        UsedPlus.logWarn(string.format("VehiclePersistence: Saved %d searches across %d farms to %s",
+        UsedPlus.logInfo(string.format("VehiclePersistence: Saved %d searches across %d farms to %s",
             self:getTotalSearchCount(), farmIndex, filePath))
     end
 end
@@ -210,8 +209,7 @@ function UsedVehicleManager:loadFromXMLFile(missionInfo)
 
         xmlFile:delete()
 
-        -- v2.8.0: WARN level so it always shows for persistence debugging
-        UsedPlus.logWarn(string.format("VehiclePersistence: Loaded %d searches, %d listings from %d farms",
+        UsedPlus.logInfo(string.format("VehiclePersistence: Loaded %d searches, %d listings from %d farms",
             searchCount, listingCount, farmCount))
 
         -- Verify what's in memory after load
@@ -221,8 +219,7 @@ function UsedVehicleManager:loadFromXMLFile(missionInfo)
         end
         UsedPlus.logDebug(string.format("  Verification: %d searches in activeSearches table", verifyCount))
     else
-        -- v2.8.0: WARN level so it always shows for persistence debugging
-        UsedPlus.logWarn(string.format("VehiclePersistence: No file found at %s (new game or first run)", filePath))
+        UsedPlus.logInfo(string.format("VehiclePersistence: No file found at %s (new game or first run)", filePath))
     end
 end
 

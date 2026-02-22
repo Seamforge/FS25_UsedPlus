@@ -48,7 +48,7 @@ function FinanceManagerFrame:updateSearchesSection(farmId)
     -- Show empty state initially
     if self.searchEmptyText then
         self.searchEmptyText:setVisible(true)
-        self.searchEmptyText:setText(string.format("No searches (0/%d). Start from Shop.", maxSearches))
+        self.searchEmptyText:setText(string.format(g_i18n:getText("usedplus_srp_noSearches"), maxSearches))
     end
 
     -- Store ordered list for button handlers
@@ -380,7 +380,7 @@ function FinanceManagerFrame:onCancelSearchClick(rowIndex)
                 else
                     g_currentMission:addIngameNotification(
                         FSBaseMission.INGAME_NOTIFICATION_CRITICAL,
-                        "Error: CancelSearchEvent not available"
+                        g_i18n:getText("usedplus_error_cancelSearchUnavailable")
                     )
                 end
                 self:updateDisplay()

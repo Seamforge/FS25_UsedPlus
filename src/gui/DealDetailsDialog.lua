@@ -79,23 +79,23 @@ function DealDetailsDialog:setupSectionIcons()
 
     -- Item section - icon based on deal type (default vehicle)
     if self.itemSectionIcon ~= nil then
-        self.itemSectionIcon:setImageFilename(self.iconDir .. "vehicle.png")
+        self.itemSectionIcon:setImageFilename(self.iconDir .. "vehicle.dds")
     end
     -- Note: icon is updated to land/loan in updateItemSectionIcon() when deal data is available
 
     -- Terms section - finance icon
     if self.termsSectionIcon ~= nil then
-        self.termsSectionIcon:setImageFilename(self.iconDir .. "finance.png")
+        self.termsSectionIcon:setImageFilename(self.iconDir .. "finance.dds")
     end
 
     -- Progress section - calendar icon
     if self.progressSectionIcon ~= nil then
-        self.progressSectionIcon:setImageFilename(self.iconDir .. "calendar.png")
+        self.progressSectionIcon:setImageFilename(self.iconDir .. "calendar.dds")
     end
 
     -- Summary section - percentage icon
     if self.summarySectionIcon ~= nil then
-        self.summarySectionIcon:setImageFilename(self.iconDir .. "percentage.png")
+        self.summarySectionIcon:setImageFilename(self.iconDir .. "percentage.dds")
     end
 end
 
@@ -138,11 +138,11 @@ function DealDetailsDialog:updateDisplay()
     if self.itemSectionIcon ~= nil and self.iconDir ~= nil then
         local itemType = deal.itemType or "vehicle"
         if itemType == "land" or itemType == "land_lease" or deal.dealType == DealUtils.TYPE.LAND_LEASE then
-            self.itemSectionIcon:setImageFilename(self.iconDir .. "land.png")
+            self.itemSectionIcon:setImageFilename(self.iconDir .. "land.dds")
         elseif itemType == "loan" then
-            self.itemSectionIcon:setImageFilename(self.iconDir .. "loan.png")
+            self.itemSectionIcon:setImageFilename(self.iconDir .. "loan.dds")
         else
-            self.itemSectionIcon:setImageFilename(self.iconDir .. "vehicle.png")
+            self.itemSectionIcon:setImageFilename(self.iconDir .. "vehicle.dds")
         end
     end
 
@@ -162,7 +162,7 @@ function DealDetailsDialog:updateDisplay()
 
     -- Item Info
     if self.itemNameText then
-        self.itemNameText:setText(deal.itemName or "Unknown")
+        self.itemNameText:setText(deal.itemName or g_i18n:getText("usedplus_common_unknown"))
     end
     if self.itemTypeText then
         local typeText = deal.itemType or "vehicle"
@@ -247,7 +247,7 @@ function DealDetailsDialog:updateDisplay()
     if self.paymentsMadeText then
         local made = deal.monthsPaid or 0
         local total = deal.termMonths or 0
-        self.paymentsMadeText:setText(string.format("%d of %d", made, total))
+        self.paymentsMadeText:setText(string.format(g_i18n:getText("usedplus_dd_paymentsOfTotal"), made, total))
     end
 
     if self.monthsRemainingText then
@@ -822,7 +822,7 @@ function DealDetailsDialog:updateRepossessedItemsDisplay()
         local remaining = #items - 3
         local itemElement = self.repossessedItem4
         if itemElement then
-            itemElement:setText(string.format("...and %d more item(s)", remaining))
+            itemElement:setText(string.format(g_i18n:getText("usedplus_dd_moreItems"), remaining))
             itemElement:setVisible(true)
         end
 
@@ -835,13 +835,13 @@ function DealDetailsDialog:updateRepossessedItemsDisplay()
 
     -- Update total value text
     if self.repossessedTotalText then
-        self.repossessedTotalText:setText(string.format("Total value repossessed: %s",
+        self.repossessedTotalText:setText(string.format(g_i18n:getText("usedplus_dd_totalRepossessed"),
             g_i18n:formatMoney(totalValue, 0, true, true)))
     end
 
     -- Update info text
     if self.repossessedInfoText then
-        local infoText = string.format("The following %d item(s) were repossessed due to missed payments:",
+        local infoText = string.format(g_i18n:getText("usedplus_dd_repossessionInfo"),
             #items)
         self.repossessedInfoText:setText(infoText)
     end

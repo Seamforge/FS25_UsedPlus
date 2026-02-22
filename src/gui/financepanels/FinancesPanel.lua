@@ -123,15 +123,15 @@ function FinanceManagerFrame:updateFinancesSection(farmId, farm)
         local row = self.financeRows[rowIndex]
         if row then
             if row.row then row.row:setVisible(true) end
-            if row.type then row.type:setText("CREDIT") end
+            if row.type then row.type:setText(g_i18n:getText("usedplus_fp_creditType")) end
             if row.item then row.item:setText(vanillaLoanDeal.itemName) end
             if row.balance then row.balance:setText(g_i18n:formatMoney(vanillaLoanAmount, 0, true, true)) end
             if row.monthly then
                 row.monthly:setText("~" .. g_i18n:formatMoney(monthlyInterestCost, 0, true, true))
                 row.monthly:setTextColor(1, 0.6, 0.3, 1)
             end
-            if row.progress then row.progress:setText("Revolving") end
-            if row.remaining then row.remaining:setText("Open") end
+            if row.progress then row.progress:setText(g_i18n:getText("usedplus_fp_revolving")) end
+            if row.remaining then row.remaining:setText(g_i18n:getText("usedplus_fp_open")) end
         end
 
         totalFinanced = totalFinanced + vanillaLoanAmount
@@ -1082,7 +1082,7 @@ function FinanceManagerFrame:showELSPaymentDialog(pseudoDeal, farm)
     else
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_INFO,
-            "Insufficient funds for ELS loan payment"
+            g_i18n:getText("usedplus_error_insufficientFundsELS")
         )
     end
 end
@@ -1095,7 +1095,7 @@ function FinanceManagerFrame:onELSPaymentConfirm()
             if success then
                 g_currentMission:addIngameNotification(
                     FSBaseMission.INGAME_NOTIFICATION_OK,
-                    string.format("ELS loan payment processed: %s", g_i18n:formatMoney(self.pendingELSMonthlyAmount, 0, true, true))
+                    string.format(g_i18n:getText("usedplus_notification_elsPaymentProcessed"), g_i18n:formatMoney(self.pendingELSMonthlyAmount, 0, true, true))
                 )
             end
         end
@@ -1114,7 +1114,7 @@ function FinanceManagerFrame:onELSPayoffConfirm()
             if success then
                 g_currentMission:addIngameNotification(
                     FSBaseMission.INGAME_NOTIFICATION_OK,
-                    string.format("ELS loan paid off: %s", g_i18n:formatMoney(amount, 0, true, true))
+                    string.format(g_i18n:getText("usedplus_notification_elsPaidOff"), g_i18n:formatMoney(amount, 0, true, true))
                 )
             end
         end
@@ -1162,7 +1162,7 @@ function FinanceManagerFrame:onHPPaymentConfirm()
             if success then
                 g_currentMission:addIngameNotification(
                     FSBaseMission.INGAME_NOTIFICATION_OK,
-                    string.format("HP lease payment processed: %s", g_i18n:formatMoney(self.pendingHPMonthlyAmount, 0, true, true))
+                    string.format(g_i18n:getText("usedplus_notification_hpPaymentProcessed"), g_i18n:formatMoney(self.pendingHPMonthlyAmount, 0, true, true))
                 )
             end
         end
@@ -1178,7 +1178,7 @@ function FinanceManagerFrame:onHPSettleConfirm()
         if success then
             g_currentMission:addIngameNotification(
                 FSBaseMission.INGAME_NOTIFICATION_OK,
-                "HP lease settled successfully"
+                g_i18n:getText("usedplus_notification_hpSettled")
             )
         end
     end
@@ -1223,7 +1223,7 @@ function FinanceManagerFrame:showVanillaLoanPaymentDialog(deal, farm)
     if #paymentOptions == 0 and not canPayFull then
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_INFO,
-            string.format("Insufficient funds. Minimum payment: %s, You have: %s",
+            string.format(g_i18n:getText("usedplus_error_insufficientFundsMinPayment"),
                 g_i18n:formatMoney(math.min(10000, currentBalance), 0, true, true),
                 moneyStr)
         )
@@ -1274,7 +1274,7 @@ function FinanceManagerFrame:showVanillaLoanPaymentDialog(deal, farm)
     else
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_INFO,
-            "No payment options available"
+            g_i18n:getText("usedplus_error_noPaymentOptions")
         )
     end
 end
@@ -1306,7 +1306,7 @@ function FinanceManagerFrame:processVanillaLoanPayment(amount)
     if currentLoan <= 0 then
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_INFO,
-            "No vanilla loan balance to pay"
+            g_i18n:getText("usedplus_error_noVanillaLoanBalance")
         )
         return
     end

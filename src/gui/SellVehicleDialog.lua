@@ -22,8 +22,9 @@ local SellVehicleDialog_mt = Class(SellVehicleDialog, MessageDialog)
 SellVehicleDialog.AGENT_OPTIONS = {
     {
         tier = 0,
-        label = "Private Sale (3-6 mo)",
+        labelKey = "usedplus_sell_privateSale",
         name = "Private Sale",
+        nameKey = "usedplus_agent_privateSale",
         feePercent = 0.00,
         minMonths = 3,
         maxMonths = 6,
@@ -32,8 +33,9 @@ SellVehicleDialog.AGENT_OPTIONS = {
     },
     {
         tier = 1,
-        label = "Local Agent (1-2 mo)",
+        labelKey = "usedplus_sell_localAgent",
         name = "Local Agent",
+        nameKey = "usedplus_agent_local",
         feePercent = 0.02,
         minMonths = 1,
         maxMonths = 2,
@@ -41,8 +43,9 @@ SellVehicleDialog.AGENT_OPTIONS = {
     },
     {
         tier = 2,
-        label = "Regional Agent (2-4 mo)",
+        labelKey = "usedplus_sell_regionalAgent",
         name = "Regional Agent",
+        nameKey = "usedplus_agent_regional",
         feePercent = 0.04,
         minMonths = 2,
         maxMonths = 4,
@@ -50,8 +53,9 @@ SellVehicleDialog.AGENT_OPTIONS = {
     },
     {
         tier = 3,
-        label = "National Agent (4-6 mo)",
+        labelKey = "usedplus_sell_nationalAgent",
         name = "National Agent",
+        nameKey = "usedplus_agent_national",
         feePercent = 0.06,
         minMonths = 4,
         maxMonths = 6,
@@ -63,8 +67,9 @@ SellVehicleDialog.AGENT_OPTIONS = {
 SellVehicleDialog.PRICE_OPTIONS = {
     {
         tier = 1,
-        label = "Quick Sale (75-85%)",
+        labelKey = "usedplus_sell_quickSale",
         name = "Quick Sale",
+        nameKey = "usedplus_price_quickSale",
         priceMultiplierMin = 0.75,
         priceMultiplierMax = 0.85,
         successModifier = 0.15,
@@ -73,8 +78,9 @@ SellVehicleDialog.PRICE_OPTIONS = {
     },
     {
         tier = 2,
-        label = "Market Price (95-105%)",
+        labelKey = "usedplus_sell_marketPrice",
         name = "Market Price",
+        nameKey = "usedplus_price_market",
         priceMultiplierMin = 0.95,
         priceMultiplierMax = 1.05,
         successModifier = 0.00,
@@ -83,8 +89,9 @@ SellVehicleDialog.PRICE_OPTIONS = {
     },
     {
         tier = 3,
-        label = "Premium (115-130%)",
+        labelKey = "usedplus_sell_premium",
         name = "Premium Price",
+        nameKey = "usedplus_price_premium",
         priceMultiplierMin = 1.15,
         priceMultiplierMax = 1.30,
         successModifier = -0.20,
@@ -168,7 +175,7 @@ function SellVehicleDialog:onOpen()
     if self.agentTierSlider then
         local agentTexts = {}
         for _, option in ipairs(SellVehicleDialog.AGENT_OPTIONS) do
-            table.insert(agentTexts, option.label)
+            table.insert(agentTexts, g_i18n:getText(option.labelKey))
         end
         self.agentTierSlider:setTexts(agentTexts)
         self.agentTierSlider:setState(3)  -- Default to Regional (index 3: Private=1, Local=2, Regional=3, National=4)
@@ -178,7 +185,7 @@ function SellVehicleDialog:onOpen()
     if self.tierSlider and not self.agentTierSlider then
         local agentTexts = {}
         for _, option in ipairs(SellVehicleDialog.AGENT_OPTIONS) do
-            table.insert(agentTexts, option.label)
+            table.insert(agentTexts, g_i18n:getText(option.labelKey))
         end
         self.tierSlider:setTexts(agentTexts)
         self.tierSlider:setState(3)
@@ -277,10 +284,11 @@ function SellVehicleDialog:updatePriceTierDropdown(agentIndex)
     for i, option in ipairs(SellVehicleDialog.PRICE_OPTIONS) do
         -- Check if price tier is available (considering agent selection)
         local canUse, reason = self:canUsePriceTier(i, agentIndex)
+        local labelText = g_i18n:getText(option.labelKey)
         if canUse then
-            table.insert(priceTexts, option.label)
+            table.insert(priceTexts, labelText)
         else
-            table.insert(priceTexts, option.label .. " (LOCKED)")
+            table.insert(priceTexts, labelText .. " (LOCKED)")
         end
     end
 
@@ -374,8 +382,10 @@ function SellVehicleDialog:updatePreview()
         agentOption.baseSuccessRate + (priceOption.successModifier or 0)))
 
     -- Update selected agent tier display
+    local agentDisplayName = agentOption.nameKey and g_i18n:getText(agentOption.nameKey) or agentOption.name
+    local priceDisplayName = priceOption.nameKey and g_i18n:getText(priceOption.nameKey) or priceOption.name
     UIHelper.Element.setText(self.selectedTierText,
-        string.format("%s + %s", agentOption.name, priceOption.name))
+        string.format("%s + %s", agentDisplayName, priceDisplayName))
 
     -- Update expected return range
     UIHelper.Element.setText(self.expectedRangeText,
@@ -520,7 +530,7 @@ function SellVehicleDialog:onClickConfirm()
     if not agentOption or not priceOption then
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_INFO,
-            "Please select a sales option and price tier."
+            g_i18n:getText("usedplus_error_selectSaleOption")
         )
         return
     end
@@ -530,7 +540,7 @@ function SellVehicleDialog:onClickConfirm()
     if not canUsePriceTier then
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_INFO,
-            lockReason or "Premium pricing requires better vehicle condition."
+            lockReason or g_i18n:getText("usedplus_error_premiumConditionRequired")
         )
         return
     end
@@ -550,7 +560,7 @@ function SellVehicleDialog:onClickConfirm()
         if farm and farm.money < agentFee then
             g_currentMission:addIngameNotification(
                 FSBaseMission.INGAME_NOTIFICATION_INFO,
-                string.format("Insufficient funds. Agent fee: %s",
+                string.format(g_i18n:getText("usedplus_error_insufficientFundsAgentFee"),
                     UIHelper.Text.formatMoney(agentFee))
             )
             return

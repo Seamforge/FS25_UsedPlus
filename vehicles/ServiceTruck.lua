@@ -11,8 +11,8 @@
 
     Credits:
     - GMC C7000 model by Canada FS (community-rebuilt v1.3)
-    - Service bed props (oil tank, hydraulic tank, air tank, battery charger,
-      bottle jack, oiler, fuel can, coolant bottles, laptop) built into service.i3d
+    - Service bed with props (oil tank, hydraulic tank, air tank, battery charger,
+      bottle jack, oiler, fuel can, coolant bottles, laptop) built into C7000.i3d
 
     v2.9.0 - Service Truck System
     v2.12.0 - Fault Tracer on-foot detection (RVB pattern)
@@ -555,6 +555,47 @@ function ServiceTruck:findNearbyPallets()
     local radius = spec.palletRadius
     local radiusSq = radius * radius
 
+    -- Debug diagnostic: log once every 5 seconds (300 frames at 60fps), only when DEBUG=true
+    spec._palletDiagTimer = (spec._palletDiagTimer or 0) + 1
+    local doDiag = (spec._palletDiagTimer % 300 == 1)
+
+    local sparePartsFillType = g_fillTypeManager:getFillTypeIndexByName("USEDPLUS_SPAREPARTS")
+    if doDiag then
+        UsedPlus.logDebug(string.format("ServiceTruck PALLET DIAG: radius=%.1f, fillTypeIndex=%s, totalVehicles=%d",
+            radius, tostring(sparePartsFillType),
+            (g_currentMission and g_currentMission.vehicleSystem) and #g_currentMission.vehicleSystem.vehicles or 0))
+    end
+
+    -- One-time dump: verify fill type registry contains our custom types
+    if not spec._fillTypeDiagDone then
+        spec._fillTypeDiagDone = true
+        local ftManager = g_fillTypeManager
+        if ftManager ~= nil then
+            local totalTypes = 0
+            local customTypes = {}
+            if ftManager.nameToFillType ~= nil then
+                for name, ft in pairs(ftManager.nameToFillType) do
+                    totalTypes = totalTypes + 1
+                    if string.find(name, "SPARE") or string.find(name, "USED") or string.find(name, "OIL") or string.find(name, "HYDRAULIC") then
+                        table.insert(customTypes, string.format("  %s -> idx=%s", name, tostring(ft.index)))
+                    end
+                end
+            end
+            UsedPlus.logDebug(string.format("FILL TYPE REGISTRY: %d total types", totalTypes))
+            for _, line in ipairs(customTypes) do
+                UsedPlus.logDebug(line)
+            end
+            UsedPlus.logDebug(string.format("FillType.UNKNOWN=%s", tostring(FillType.UNKNOWN)))
+            if FillType.USEDPLUS_SPAREPARTS ~= nil then
+                UsedPlus.logDebug(string.format("FillType.USEDPLUS_SPAREPARTS=%s", tostring(FillType.USEDPLUS_SPAREPARTS)))
+            else
+                UsedPlus.logDebug("FillType.USEDPLUS_SPAREPARTS is NIL in FillType constants!")
+            end
+        end
+    end
+
+    if sparePartsFillType == nil then return end
+
     -- Check all objects in mission
     if g_currentMission ~= nil and g_currentMission.vehicleSystem ~= nil then
         for _, vehicle in ipairs(g_currentMission.vehicleSystem.vehicles) do
@@ -563,17 +604,49 @@ function ServiceTruck:findNearbyPallets()
                 local distSq = (x - vx)^2 + (y - vy)^2 + (z - vz)^2
 
                 if distSq <= radiusSq then
+                    local vName = (vehicle.getName and vehicle:getName()) or "unknown"
+
                     -- Check if this is a pallet with spare parts
                     if vehicle.getFillUnitFillLevel ~= nil and vehicle.getFillUnitFillType ~= nil then
-                        local sparePartsFillType = g_fillTypeManager:getFillTypeIndexByName("USEDPLUS_SPAREPARTS")
-                        if sparePartsFillType ~= nil then
-                            -- Check all fill units
-                            local fillUnitsSpec = vehicle.spec_fillUnit
-                            if fillUnitsSpec ~= nil and fillUnitsSpec.fillUnits ~= nil then
-                                for i, fillUnit in ipairs(fillUnitsSpec.fillUnits) do
-                                    local level = vehicle:getFillUnitFillLevel(i)
-                                    local fillType = vehicle:getFillUnitFillType(i)
-                                    if fillType == sparePartsFillType and level > 0 then
+                        local fillUnitsSpec = vehicle.spec_fillUnit
+                        if fillUnitsSpec ~= nil and fillUnitsSpec.fillUnits ~= nil then
+                            if doDiag then
+                                local cfgName = vehicle.configFileName or "nil"
+                                UsedPlus.logDebug(string.format("  NEARBY: %s (dist=%.1fm, fillUnits=%d, xml=%s)",
+                                    vName, math.sqrt(distSq), #fillUnitsSpec.fillUnits, cfgName))
+                            end
+                            for i, fillUnit in ipairs(fillUnitsSpec.fillUnits) do
+                                local level = vehicle:getFillUnitFillLevel(i)
+                                local fillType = vehicle:getFillUnitFillType(i)
+                                local capacity = fillUnit.capacity or 0
+                                -- Check supportedFillTypes table
+                                local supportsSpare = fillUnit.supportedFillTypes and fillUnit.supportedFillTypes[sparePartsFillType] or false
+                                -- Also list all supported fill type indices
+                                local supportedList = ""
+                                if fillUnit.supportedFillTypes then
+                                    for ftIdx, _ in pairs(fillUnit.supportedFillTypes) do
+                                        supportedList = supportedList .. tostring(ftIdx) .. ","
+                                    end
+                                end
+                                if doDiag then
+                                    UsedPlus.logDebug(string.format("    FillUnit[%d]: type=%s (want=%s), level=%.0f, cap=%.0f, supportsSpare=%s, supported=[%s]",
+                                        i, tostring(fillType), tostring(sparePartsFillType), level, capacity, tostring(supportsSpare), supportedList))
+                                end
+                                -- Match by fill type OR by supportedFillTypes
+                                local isMatch = (fillType == sparePartsFillType) or supportsSpare
+                                if isMatch then
+                                    -- If pallet supports spare parts but is empty, try to fill it
+                                    if level <= 0 and supportsSpare and capacity > 0 then
+                                        if doDiag then
+                                            UsedPlus.logDebug(string.format("    -> Pallet supports SPAREPARTS but empty! Attempting fill to capacity %.0f", capacity))
+                                        end
+                                        vehicle:addFillUnitFillLevel(self:getOwnerFarmId(), i, capacity, sparePartsFillType, ToolType.UNDEFINED, nil)
+                                        level = vehicle:getFillUnitFillLevel(i)
+                                        if doDiag then
+                                            UsedPlus.logDebug(string.format("    -> After fill attempt: level=%.0f", level))
+                                        end
+                                    end
+                                    if level > 0 then
                                         table.insert(spec.nearbyPallets, {
                                             vehicle = vehicle,
                                             fillUnitIndex = i,
@@ -584,6 +657,15 @@ function ServiceTruck:findNearbyPallets()
                                     end
                                 end
                             end
+                        else
+                            if doDiag then
+                                UsedPlus.logDebug(string.format("  NEARBY: %s (dist=%.1fm) - NO fillUnits spec", vName, math.sqrt(distSq)))
+                            end
+                        end
+                    else
+                        if doDiag then
+                            local vName2 = (vehicle.getName and vehicle:getName()) or "unknown"
+                            UsedPlus.logDebug(string.format("  NEARBY: %s (dist=%.1fm) - no getFillUnit methods", vName2, math.sqrt(distSq)))
                         end
                     end
                 end
@@ -593,6 +675,11 @@ function ServiceTruck:findNearbyPallets()
 
     -- Sort by distance
     table.sort(spec.nearbyPallets, function(a, b) return a.distance < b.distance end)
+
+    if doDiag then
+        UsedPlus.logDebug(string.format("ServiceTruck PALLET DIAG: totalPartsAvailable=%.0f, pallets=%d",
+            spec.totalPartsAvailable, #spec.nearbyPallets))
+    end
 end
 
 function ServiceTruck:getTargetVehicle()

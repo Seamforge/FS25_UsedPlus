@@ -18,19 +18,19 @@
 
         <GuiElement profile="fs25_dialogContentContainer">
             <!-- Title -->
-            <Text profile="vpfTitle" id="titleText" position="0px -25px" text="Found Vehicles"/>
+            <Text profile="vpfTitle" id="titleText" position="0px -25px" text="$l10n_usedplus_vpf_title"/>
 
             <!-- Navigation Bar with Prev/Next buttons -->
             <GuiElement profile="vpfNavBar" position="0px -55px">
-                <Button profile="vpfNavButton" id="prevButton" position="-120px 0px" text="&lt; Prev" onClick="onClickPrev"/>
+                <Button profile="vpfNavButton" id="prevButton" position="-120px 0px" text="$l10n_usedplus_vpf_prev" onClick="onClickPrev"/>
                 <Text profile="vpfNavCounter" id="navCounterText" position="0px -8px" text="1 of 3"/>
-                <Button profile="vpfNavButton" id="nextButton" position="120px 0px" text="Next &gt;" onClick="onClickNext"/>
+                <Button profile="vpfNavButton" id="nextButton" position="120px 0px" text="$l10n_usedplus_vpf_next" onClick="onClickNext"/>
             </GuiElement>
 
             <!-- ========== VEHICLE INFO SECTION ========== -->
             <GuiElement profile="vpfSectionContainer" position="0px -90px">
                 <Bitmap profile="vpfSectionBg" position="0px 0px"/>
-                <Text profile="vpfSectionHeader" position="0px -5px" text="VEHICLE"/>
+                <Text profile="vpfSectionHeader" position="0px -5px" text="$l10n_usedplus_vpf_vehicle"/>
 
                 <!-- Two-column layout: Image left, Info right -->
                 <GuiElement position="0px -28px">
@@ -41,32 +41,32 @@
                     <Text profile="vpfVehicleName" id="vehicleNameText" position="120px -5px" text=""/>
 
                     <!-- Quality tier -->
-                    <Text profile="vpfLabel" position="120px -30px" text="Quality:"/>
+                    <Text profile="vpfLabel" position="120px -30px" text="$l10n_usedplus_vpf_quality"/>
                     <Text profile="vpfQualityValue" id="qualityText" position="210px -30px" text=""/>
 
                     <!-- Condition -->
-                    <Text profile="vpfLabel" position="120px -55px" text="Condition:"/>
+                    <Text profile="vpfLabel" position="120px -55px" text="$l10n_usedplus_vpf_condition"/>
                     <Text profile="vpfConditionValue" id="conditionText" position="210px -55px" text=""/>
 
                     <!-- Inspected status -->
-                    <Text profile="vpfLabel" position="120px -80px" text="Inspected:"/>
-                    <Text profile="vpfInspectedValue" id="inspectedText" position="210px -80px" text="No"/>
+                    <Text profile="vpfLabel" position="120px -80px" text="$l10n_usedplus_vpf_inspected"/>
+                    <Text profile="vpfInspectedValue" id="inspectedText" position="210px -80px" text="$l10n_usedplus_vpf_no"/>
                 </GuiElement>
             </GuiElement>
 
             <!-- ========== PRICING SECTION ========== -->
             <GuiElement profile="vpfSectionContainerMed" position="0px -235px">
                 <Bitmap profile="vpfSectionBgGreen" position="0px 0px"/>
-                <Text profile="vpfSectionHeader" position="0px -5px" text="PRICING"/>
+                <Text profile="vpfSectionHeader" position="0px -5px" text="$l10n_usedplus_vpf_pricing"/>
 
                 <!-- Price breakdown -->
-                <Text profile="vpfLabel" position="-250px -32px" text="Base Price:"/>
+                <Text profile="vpfLabel" position="-250px -32px" text="$l10n_usedplus_vpf_basePrice"/>
                 <Text profile="vpfPriceValue" id="basePriceText" position="-120px -32px" text=""/>
 
-                <Text profile="vpfLabel" position="30px -32px" text="Commission:"/>
+                <Text profile="vpfLabel" position="30px -32px" text="$l10n_usedplus_vpf_commission"/>
                 <Text profile="vpfCommissionValue" id="commissionText" position="160px -32px" text=""/>
 
-                <Text profile="vpfLabelBold" position="-250px -60px" text="Asking Price:"/>
+                <Text profile="vpfLabelBold" position="-250px -60px" text="$l10n_usedplus_vpf_askingPrice"/>
                 <Text profile="vpfAskingPrice" id="askingPriceText" position="-120px -60px" text=""/>
             </GuiElement>
 
@@ -74,19 +74,19 @@
             <GuiElement profile="vpfWarningSection" id="expirationSection" position="0px -340px">
                 <Bitmap profile="vpfWarningBg" position="0px 0px"/>
                 <Text profile="vpfWarningIcon" position="-280px 3px" text="!"/>
-                <Text profile="vpfWarningText" id="expirationText" position="0px -22px" text="Offer expires in 2 months"/>
+                <Text profile="vpfWarningText" id="expirationText" position="0px -22px" text="$l10n_usedplus_vpf_offerExpires"/>
             </GuiElement>
 
             <!-- ========== INFO TEXT ========== -->
-            <Text profile="vpfInfoText" id="infoText" position="0px -400px" text="View details to inspect. Decline to remove from portfolio."/>
+            <Text profile="vpfInfoText" id="infoText" position="0px -400px" text="$l10n_usedplus_vpf_infoText"/>
 
         </GuiElement>
 
         <!-- Button Box - Action buttons only (Prev/Next moved to nav bar above) -->
         <BoxLayout profile="fs25_dialogButtonBox">
-            <Button id="viewDetailsButton" profile="vpfButtonOK" text="View Details" onClick="onClickViewDetails"/>
+            <Button id="viewDetailsButton" profile="vpfButtonOK" text="$l10n_usedplus_vpf_viewDetails" onClick="onClickViewDetails"/>
             <Bitmap profile="fs25_dialogButtonBoxSeparator"/>
-            <Button id="declineButton" profile="vpfButtonActivate" text="Decline Offer" onClick="onClickDecline"/>
+            <Button id="declineButton" profile="vpfButtonActivate" text="$l10n_usedplus_vpf_declineOffer" onClick="onClickDecline"/>
             <Bitmap profile="fs25_dialogButtonBoxSeparator"/>
             <Button id="closeButton" profile="vpfButtonBack" text="$l10n_button_close" onClick="onClickClose"/>
         </BoxLayout>

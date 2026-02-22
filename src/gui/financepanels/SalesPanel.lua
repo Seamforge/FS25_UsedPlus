@@ -50,7 +50,7 @@ function FinanceManagerFrame:updateSaleListings(farmId)
     -- Show empty state initially
     if self.saleEmptyText then
         self.saleEmptyText:setVisible(true)
-        self.saleEmptyText:setText(string.format("No listings (0/%d). Sell from Garage menu.", maxSales))
+        self.saleEmptyText:setText(string.format(g_i18n:getText("usedplus_sp_noListings"), maxSales))
     end
 
     -- Clear active listings for button handlers
@@ -102,10 +102,10 @@ function FinanceManagerFrame:updateSaleListings(farmId)
                     local statusText
                     if hasPendingOffer then
                         local offerAmount = listing.currentOffer or 0
-                        statusText = string.format("OFFER: %s", g_i18n:formatMoney(offerAmount, 0, true, true))
+                        statusText = string.format(g_i18n:getText("usedplus_sp_offerStatus"), g_i18n:formatMoney(offerAmount, 0, true, true))
                         pendingOffers = pendingOffers + 1
                     else
-                        statusText = "Searching..."
+                        statusText = g_i18n:getText("usedplus_sp_searching")
                     end
 
                     listingCount = listingCount + 1
@@ -180,7 +180,7 @@ function FinanceManagerFrame:updateSaleListings(farmId)
     -- Update listings count text
     if self.saleListingsCountText then
         if pendingOffers > 0 then
-            self.saleListingsCountText:setText(string.format("%d/%d (%d offers!)", listingCount, maxSales, pendingOffers))
+            self.saleListingsCountText:setText(string.format(g_i18n:getText("usedplus_sp_listingsWithOffers"), listingCount, maxSales, pendingOffers))
             self.saleListingsCountText:setTextColor(0.4, 1, 0.4, 1)
         else
             self.saleListingsCountText:setText(string.format("%d/%d", listingCount, maxSales))
@@ -267,7 +267,7 @@ function FinanceManagerFrame:onAcceptSaleClick(rowIndex)
                 tostring(listing.id)))
             g_currentMission:addIngameNotification(
                 FSBaseMission.INGAME_NOTIFICATION_INFO,
-                "This listing has already been completed."
+                g_i18n:getText("usedplus_error_listingCompleted")
             )
             self:updateDisplay()  -- Refresh to remove stale button
             return
@@ -464,7 +464,7 @@ function FinanceManagerFrame:onEditSaleClick(rowIndex)
     -- Use proper FS25 showDialog pattern (not showTextInputDialog convenience method)
     local dialog = g_gui:showDialog("TextInputDialog")
     if dialog and dialog.target then
-        dialog.target:setText(string.format("Enter new asking price for %s\n(Current: %s)",
+        dialog.target:setText(string.format(g_i18n:getText("usedplus_sp_editPricePrompt"),
             vehicleName, g_i18n:formatMoney(currentPrice, 0, true, true)))
         dialog.target:setCallback(function(text, confirmed)
             if confirmed then
@@ -500,7 +500,7 @@ function FinanceManagerFrame:onEditPriceInputComplete(text)
     else
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_CRITICAL,
-            "Error: ModifyListingPriceEvent not available"
+            g_i18n:getText("usedplus_error_modifyPriceUnavailable")
         )
     end
 end

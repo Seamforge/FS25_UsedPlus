@@ -134,7 +134,7 @@ function RequestUsedItemEvent.execute(farmId, storeItemIndex, storeItemName, bas
         UsedPlus.logError(string.format("Maximum active searches reached (%d/%d)", activeCount, MAX_ACTIVE_SEARCHES))
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_CRITICAL,
-            string.format("Maximum %d active searches allowed.", MAX_ACTIVE_SEARCHES)
+            string.format(g_i18n:getText("usedplus_error_maxActiveSearches"), MAX_ACTIVE_SEARCHES)
         )
         return false
     end

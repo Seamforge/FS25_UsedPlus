@@ -300,7 +300,7 @@ function UsedPlusUI.Table.populateFinanceDealRow(row, deal, columnIds)
     local paymentElement = row:getDescendantByName(columnIds.payment)
 
     if nameElement then
-        nameElement:setText(deal.itemName or "Unknown")
+        nameElement:setText(deal.itemName or g_i18n:getText("usedplus_common_unknown"))
     end
 
     if balanceElement then
@@ -497,14 +497,14 @@ function UsedPlusUI.Comparison.displayPriceComparison(elements, vanilla, offer, 
     showDifference = showDifference ~= false
 
     if elements.vanillaLabel then
-        elements.vanillaLabel:setText("Vanilla Sell Price:")
+        elements.vanillaLabel:setText(g_i18n:getText("usedplus_ui_vanillaSellPrice"))
     end
     if elements.vanillaValue then
         elements.vanillaValue:setText(UIHelper.Text.formatMoney(vanilla))
     end
 
     if elements.offerLabel then
-        elements.offerLabel:setText("This Offer:")
+        elements.offerLabel:setText(g_i18n:getText("usedplus_ui_thisOffer"))
     end
     if elements.offerValue then
         elements.offerValue:setText(UIHelper.Text.formatMoney(offer))
@@ -625,7 +625,7 @@ function UsedPlusUI.VehicleCard.display(elements, storeItem, options)
 
     -- Name
     if elements.nameElement then
-        elements.nameElement:setText(storeItem.name or "Unknown")
+        elements.nameElement:setText(storeItem.name or g_i18n:getText("usedplus_common_unknown"))
         UIHelper.Element.setVisible(elements.nameElement, true)
     end
 
@@ -652,7 +652,7 @@ function UsedPlusUI.VehicleCard.display(elements, storeItem, options)
 
     -- Condition (for used vehicles)
     if elements.conditionElement and options.condition then
-        elements.conditionElement:setText(string.format("Condition: %d%%", options.condition))
+        elements.conditionElement:setText(string.format(g_i18n:getText("usedplus_ui_conditionPercent"), options.condition))
         UIHelper.Element.setVisible(elements.conditionElement, true)
     end
 

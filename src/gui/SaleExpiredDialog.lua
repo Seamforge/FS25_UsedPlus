@@ -110,7 +110,7 @@ function SaleExpiredDialog:updateDisplay()
 
     -- Vehicle name
     if self.vehicleNameText then
-        self.vehicleNameText:setText(listing.vehicleName or "Unknown Vehicle")
+        self.vehicleNameText:setText(listing.vehicleName or g_i18n:getText("usedplus_common_unknownVehicle"))
     end
 
     -- Agent tier
@@ -136,10 +136,10 @@ function SaleExpiredDialog:updateDisplay()
         local offers = listing.offersReceived or 0
         local declined = listing.offersDeclined or 0
         if offers > 0 then
-            self.offersReceivedText:setText(string.format("%d (%d declined)", offers, declined))
+            self.offersReceivedText:setText(string.format(g_i18n:getText("usedplus_se_offersDeclined"), offers, declined))
             self.offersReceivedText:setTextColor(1, 0.85, 0.2, 1)  -- Gold
         else
-            self.offersReceivedText:setText("None")
+            self.offersReceivedText:setText(g_i18n:getText("usedplus_se_noOffers"))
             self.offersReceivedText:setTextColor(0.6, 0.6, 0.6, 1)  -- Gray
         end
     end
@@ -148,10 +148,10 @@ function SaleExpiredDialog:updateDisplay()
     if self.feePaidText then
         local fee = listing.agentFee or 0
         if fee > 0 then
-            self.feePaidText:setText(UIHelper.Text.formatMoney(fee) .. " (non-refundable)")
+            self.feePaidText:setText(UIHelper.Text.formatMoney(fee) .. g_i18n:getText("usedplus_se_nonRefundable"))
             self.feePaidText:setTextColor(1, 0.4, 0.4, 1)  -- Red
         else
-            self.feePaidText:setText("No fee (Private Sale)")
+            self.feePaidText:setText(g_i18n:getText("usedplus_se_noFeePrivate"))
             self.feePaidText:setTextColor(0.3, 1, 0.4, 1)  -- Green
         end
     end

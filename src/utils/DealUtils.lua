@@ -154,17 +154,17 @@ function DealUtils.getStatusDisplay(deal)
     local status = deal.status or "unknown"
 
     if status == DealUtils.STATUS.ACTIVE then
-        return "Active", "neutral"
+        return g_i18n:getText("usedplus_status_active"), "neutral"
     elseif status == DealUtils.STATUS.PAID_OFF then
-        return "Paid Off", "success"
+        return g_i18n:getText("usedplus_status_paidOff"), "success"
     elseif status == DealUtils.STATUS.COMPLETED then
-        return "Completed", "success"
+        return g_i18n:getText("usedplus_status_completed"), "success"
     elseif status == DealUtils.STATUS.TERMINATED then
-        return "Terminated", "warning"
+        return g_i18n:getText("usedplus_status_terminated"), "warning"
     elseif status == DealUtils.STATUS.EXPIRED then
-        return "Expired", "warning"
+        return g_i18n:getText("usedplus_status_expired"), "warning"
     elseif status == DealUtils.STATUS.DEFAULTED then
-        return "Defaulted", "error"
+        return g_i18n:getText("usedplus_status_defaulted"), "error"
     else
         return status, "neutral"
     end

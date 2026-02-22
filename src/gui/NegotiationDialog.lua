@@ -114,25 +114,25 @@ function NegotiationDialog:setupSectionIcons()
     -- Vehicle section icon
     local vehicleSectionIcon = self.dialogElement:getDescendantById("vehicleSectionIcon")
     if vehicleSectionIcon ~= nil then
-        vehicleSectionIcon:setImageFilename(self.iconDir .. "vehicle.png")
+        vehicleSectionIcon:setImageFilename(self.iconDir .. "vehicle.dds")
     end
 
     -- Whisper section icon (lightbulb)
     local whisperSectionIcon = self.dialogElement:getDescendantById("whisperSectionIcon")
     if whisperSectionIcon ~= nil then
-        whisperSectionIcon:setImageFilename(self.iconDir .. "lightbulb.png")
+        whisperSectionIcon:setImageFilename(self.iconDir .. "lightbulb.dds")
     end
 
     -- Whisper inline icon (also lightbulb for the quote area)
     local whisperIcon = self.dialogElement:getDescendantById("whisperIcon")
     if whisperIcon ~= nil then
-        whisperIcon:setImageFilename(self.iconDir .. "lightbulb.png")
+        whisperIcon:setImageFilename(self.iconDir .. "lightbulb.dds")
     end
 
     -- Offer section icon
     local offerSectionIcon = self.dialogElement:getDescendantById("offerSectionIcon")
     if offerSectionIcon ~= nil then
-        offerSectionIcon:setImageFilename(self.iconDir .. "offer.png")
+        offerSectionIcon:setImageFilename(self.iconDir .. "offer.dds")
     end
 end
 
@@ -197,7 +197,7 @@ function NegotiationDialog:updateWhisperDisplay()
 
     -- Fallback if translation missing
     if whisperText == whisperKey then
-        whisperText = "Between you and me... seems like a straightforward seller."
+        whisperText = g_i18n:getText("usedplus_neg_whisperDefault")
     end
 
     if self.whisperText1 then
@@ -272,13 +272,13 @@ function NegotiationDialog:getWeatherWhisperText(favorable)
         local key = whisperKeys[weatherType] or "usedplus_whisper_weather_storm"
         local text = g_i18n:getText(key)
         if text == key then
-            text = "Plus, with this weather, they might want to close quick."
+            text = g_i18n:getText("usedplus_neg_whisperWeatherGood")
         end
         return text
     else
         local text = g_i18n:getText("usedplus_whisper_weather_perfect")
         if text == "usedplus_whisper_weather_perfect" then
-            text = "Beautiful day like this though... don't expect any favors."
+            text = g_i18n:getText("usedplus_neg_whisperWeatherBad")
         end
         return text
     end
@@ -313,11 +313,11 @@ function NegotiationDialog:updateOfferDisplay()
     -- Note: At 100%, always show "Full price" regardless of rounding effects
     if self.savingsText then
         if self.selectedPercent >= 100 then
-            self.savingsText:setText("Full price")
+            self.savingsText:setText(g_i18n:getText("usedplus_neg_fullPrice"))
         else
             local savings = self.askingPrice - self.offerAmount
             local savingsPercent = 100 - self.selectedPercent
-            self.savingsText:setText(string.format("%s (%d%% off)",
+            self.savingsText:setText(string.format(g_i18n:getText("usedplus_neg_savingsFormat"),
                 g_i18n:formatMoney(savings, 0, true, true), savingsPercent))
         end
     end

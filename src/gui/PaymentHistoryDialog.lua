@@ -194,7 +194,7 @@ function PaymentHistoryDialog:updateDisplay()
 
     -- Update summary section
     if self.itemNameText then
-        self.itemNameText:setText(deal.itemName or "Unknown")
+        self.itemNameText:setText(deal.itemName or g_i18n:getText("usedplus_common_unknown"))
     end
 
     if self.originalAmountText then
@@ -219,7 +219,7 @@ function PaymentHistoryDialog:updateDisplay()
     end
 
     if self.progressText then
-        self.progressText:setText(string.format("%d of %d payments (%d%%)", monthsPaid, termMonths, percentComplete))
+        self.progressText:setText(string.format(g_i18n:getText("usedplus_ph_progressFormat"), monthsPaid, termMonths, percentComplete))
     end
 
     if self.balanceText then
@@ -296,11 +296,11 @@ function PaymentHistoryDialog:updatePaymentRows()
                 local iconEl = row.icon or self["paymentRow" .. i .. "Icon"]
                 if iconEl and self.iconDir then
                     if entry.status == "PAID" then
-                        iconEl:setImageFilename(self.iconDir .. "status_good.png")
+                        iconEl:setImageFilename(self.iconDir .. "status_good.dds")
                     elseif entry.status == "DUE" then
-                        iconEl:setImageFilename(self.iconDir .. "calendar.png")
+                        iconEl:setImageFilename(self.iconDir .. "calendar.dds")
                     else
-                        iconEl:setImageFilename(self.iconDir .. "status_pending.png")
+                        iconEl:setImageFilename(self.iconDir .. "status_pending.dds")
                     end
                 end
 
@@ -334,7 +334,7 @@ function PaymentHistoryDialog:updatePagination()
     local endIndex = math.min(startIndex + PaymentHistoryDialog.MAX_ROWS - 1, #self.schedule)
 
     if self.pageInfoText then
-        self.pageInfoText:setText(string.format("Showing payments %d-%d of %d", startIndex, endIndex, #self.schedule))
+        self.pageInfoText:setText(string.format(g_i18n:getText("usedplus_ph_pageInfo"), startIndex, endIndex, #self.schedule))
     end
 
     if self.prevButton then

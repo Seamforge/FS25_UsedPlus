@@ -36,17 +36,17 @@ function LeaseVehicleEvent.new(farmId, vehicleConfig, vehicleName, basePrice, do
 end
 
 function LeaseVehicleEvent.sendToServer(farmId, vehicleConfig, vehicleName, basePrice, downPayment, termYears, configurations)
-    UsedPlus.logWarn(string.format("LeaseVehicleEvent.sendToServer: farmId=%s, vehicle=%s, price=%.0f, down=%.0f, years=%.2f",
+    UsedPlus.logDebug(string.format("LeaseVehicleEvent.sendToServer: farmId=%s, vehicle=%s, price=%.0f, down=%.0f, years=%.2f",
         tostring(farmId), tostring(vehicleName), basePrice or 0, downPayment or 0, termYears or 0))
 
     local event = LeaseVehicleEvent.new(farmId, vehicleConfig, vehicleName, basePrice, downPayment, termYears)
     event.configurations = configurations or {}
 
     if g_server ~= nil then
-        UsedPlus.logWarn("LeaseVehicleEvent: Running on server directly")
+        UsedPlus.logDebug("LeaseVehicleEvent: Running on server directly")
         event:run(nil)  -- v2.9.1: Server doesn't need connection
     else
-        UsedPlus.logWarn("LeaseVehicleEvent: Sending to server from client")
+        UsedPlus.logDebug("LeaseVehicleEvent: Sending to server from client")
         g_client:getServerConnection():sendEvent(event)
     end
 end
@@ -107,13 +107,13 @@ function LeaseVehicleEvent:readStream(streamId, connection)
 end
 
 function LeaseVehicleEvent:run(connection)
-    UsedPlus.logWarn("LeaseVehicleEvent:run() ENTERED")
+    UsedPlus.logDebug("LeaseVehicleEvent:run() ENTERED")
 
     if connection ~= nil and connection:getIsServer() then
         return
     end
 
-    UsedPlus.logWarn("LeaseVehicleEvent:run() - passed connection check")
+    UsedPlus.logDebug("LeaseVehicleEvent:run() - passed connection check")
 
     -- v2.7.2: Validate farm ownership to prevent multiplayer exploits
     local isAuthorized, errorMsg = NetworkSecurity.validateFarmOwnership(connection, self.farmId)
@@ -125,7 +125,7 @@ function LeaseVehicleEvent:run(connection)
         return
     end
 
-    UsedPlus.logWarn("LeaseVehicleEvent:run() - passed security check")
+    UsedPlus.logDebug("LeaseVehicleEvent:run() - passed security check")
 
     -- v2.6.2: Validate lease system is enabled
     if UsedPlusSettings and UsedPlusSettings:get("enableLeaseSystem") == false then
@@ -134,7 +134,7 @@ function LeaseVehicleEvent:run(connection)
         return
     end
 
-    UsedPlus.logWarn("LeaseVehicleEvent:run() - lease system enabled")
+    UsedPlus.logDebug("LeaseVehicleEvent:run() - lease system enabled")
 
     if g_financeManager == nil then
         UsedPlus.logError("FinanceManager not initialized")
@@ -142,7 +142,7 @@ function LeaseVehicleEvent:run(connection)
         return
     end
 
-    UsedPlus.logWarn("LeaseVehicleEvent:run() - g_financeManager exists")
+    UsedPlus.logDebug("LeaseVehicleEvent:run() - g_financeManager exists")
 
     local farm = g_farmManager:getFarmById(self.farmId)
     if farm == nil then
@@ -151,7 +151,7 @@ function LeaseVehicleEvent:run(connection)
         return
     end
 
-    UsedPlus.logWarn(string.format("LeaseVehicleEvent:run() - farm found, money=%.0f, downPayment=%.0f", farm.money, self.downPayment))
+    UsedPlus.logDebug(string.format("LeaseVehicleEvent:run() - farm found, money=%.0f, downPayment=%.0f", farm.money, self.downPayment))
 
     if farm.money < self.downPayment then
         UsedPlus.logError(string.format("Insufficient funds for down payment ($%.2f required, $%.2f available)",
@@ -160,7 +160,7 @@ function LeaseVehicleEvent:run(connection)
         return
     end
 
-    UsedPlus.logWarn("LeaseVehicleEvent:run() - calling createLeaseDeal")
+    UsedPlus.logDebug("LeaseVehicleEvent:run() - calling createLeaseDeal")
 
     local deal = g_financeManager:createLeaseDeal(
         self.farmId, self.vehicleConfig, self.vehicleName,
@@ -168,33 +168,33 @@ function LeaseVehicleEvent:run(connection)
     )
 
     if deal then
-        UsedPlus.logWarn(string.format("LeaseVehicleEvent:run() - deal created: %s (ID: %s)", self.vehicleName, deal.id))
+        UsedPlus.logInfo(string.format("LeaseVehicleEvent:run() - deal created: %s (ID: %s)", self.vehicleName, deal.id))
         TransactionResponseEvent.sendToClient(connection, self.farmId, true, "usedplus_mp_success_leased")
 
         -- v2.15.0: Broadcast deal sync to all clients
         SyncFinanceDealsEvent.broadcastAddForFarm(self.farmId)
 
         local storeItem = g_storeManager:getItemByXMLFilename(self.vehicleConfig)
-        UsedPlus.logWarn(string.format("LeaseVehicleEvent:run() - storeItem=%s for config=%s", tostring(storeItem ~= nil), self.vehicleConfig))
+        UsedPlus.logDebug(string.format("LeaseVehicleEvent:run() - storeItem=%s for config=%s", tostring(storeItem ~= nil), self.vehicleConfig))
 
         if storeItem then
             -- Spawn the vehicle using the game's proper API
-            UsedPlus.logWarn("LeaseVehicleEvent:run() - calling spawnLeasedVehicle")
+            UsedPlus.logDebug("LeaseVehicleEvent:run() - calling spawnLeasedVehicle")
             local success = self:spawnLeasedVehicle(storeItem, self.farmId, self.configurations or {}, deal)
-            UsedPlus.logWarn(string.format("LeaseVehicleEvent:run() - spawnLeasedVehicle returned: %s", tostring(success)))
+            UsedPlus.logDebug(string.format("LeaseVehicleEvent:run() - spawnLeasedVehicle returned: %s", tostring(success)))
 
             if success then
-                UsedPlus.logWarn(string.format("Spawned leased vehicle: %s", self.vehicleName))
+                UsedPlus.logInfo(string.format("Spawned leased vehicle: %s", self.vehicleName))
 
                 g_currentMission:addIngameNotification(
                     FSBaseMission.INGAME_NOTIFICATION_OK,
-                    string.format("Lease signed! %s for %s/month", self.vehicleName, g_i18n:formatMoney(deal.monthlyPayment, 0, true, true))
+                    string.format(g_i18n:getText("usedplus_notification_leaseSigned"), self.vehicleName, g_i18n:formatMoney(deal.monthlyPayment, 0, true, true))
                 )
             else
                 UsedPlus.logError(string.format("Failed to spawn leased vehicle: %s", self.vehicleName))
                 g_currentMission:addIngameNotification(
                     FSBaseMission.INGAME_NOTIFICATION_OK,
-                    string.format("Lease signed! %s - Visit shop to collect vehicle", self.vehicleName)
+                    string.format(g_i18n:getText("usedplus_notification_leaseSignedCollect"), self.vehicleName)
                 )
             end
         else
@@ -246,7 +246,7 @@ function LeaseVehicleEvent:spawnLeasedVehicle(storeItem, farmId, configurations,
     -- This is how the normal shop flow works - BuyVehicleEvent:run() expects a real connection
     local buyEvent = BuyVehicleEvent.new(buyData)
 
-    UsedPlus.logWarn("spawnLeasedVehicle: Sending BuyVehicleEvent via client connection")
+    UsedPlus.logDebug("spawnLeasedVehicle: Sending BuyVehicleEvent via client connection")
     g_client:getServerConnection():sendEvent(buyEvent)
 
     return true
@@ -367,7 +367,7 @@ function LeaseEndEvent:processReturn(deal, farm, connection)
         if farm.money < self.amount then
             g_currentMission:addIngameNotification(
                 FSBaseMission.INGAME_NOTIFICATION_ERROR,
-                string.format("Insufficient funds for damage penalty. Need %s",
+                string.format(g_i18n:getText("usedplus_notification_insufficientDamagePenalty"),
                     g_i18n:formatMoney(self.amount, 0, true, true))
             )
             TransactionResponseEvent.sendToClient(connection, deal.farmId, false, "usedplus_mp_error_insufficient_funds")
@@ -376,7 +376,7 @@ function LeaseEndEvent:processReturn(deal, farm, connection)
         g_currentMission:addMoney(-self.amount, deal.farmId, MoneyType.OTHER, true, true)
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_INFO,
-            string.format("Damage penalty paid: %s", g_i18n:formatMoney(self.amount, 0, true, true))
+            string.format(g_i18n:getText("usedplus_notification_damagePenaltyPaid"), g_i18n:formatMoney(self.amount, 0, true, true))
         )
     end
 
@@ -390,7 +390,7 @@ function LeaseEndEvent:processReturn(deal, farm, connection)
 
     g_currentMission:addIngameNotification(
         FSBaseMission.INGAME_NOTIFICATION_OK,
-        string.format("Lease ended. %s returned to dealer.", deal.itemName)
+        string.format(g_i18n:getText("usedplus_notification_leaseReturnComplete"), deal.itemName)
     )
     TransactionResponseEvent.sendToClient(connection, deal.farmId, true, "usedplus_mp_success_lease_returned")
 
@@ -404,7 +404,7 @@ function LeaseEndEvent:processBuyout(deal, farm, connection)
     if farm.money < self.amount then
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_ERROR,
-            string.format("Insufficient funds for buyout. Need %s",
+            string.format(g_i18n:getText("usedplus_notification_insufficientBuyout"),
                 g_i18n:formatMoney(self.amount, 0, true, true))
         )
         TransactionResponseEvent.sendToClient(connection, deal.farmId, false, "usedplus_mp_error_insufficient_funds")
@@ -424,7 +424,7 @@ function LeaseEndEvent:processBuyout(deal, farm, connection)
 
     g_currentMission:addIngameNotification(
         FSBaseMission.INGAME_NOTIFICATION_OK,
-        string.format("Congratulations! %s is now yours for %s",
+        string.format(g_i18n:getText("usedplus_notification_leaseBuyoutComplete"),
             deal.itemName, g_i18n:formatMoney(self.amount, 0, true, true))
     )
     TransactionResponseEvent.sendToClient(connection, deal.farmId, true, "usedplus_mp_success_lease_buyout")
@@ -548,7 +548,7 @@ function TerminateLeaseEvent:run(connection)
 
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_INFO,
-            string.format("Land lease terminated: %s has been returned", deal.landName or deal.itemName or "Field")
+            string.format(g_i18n:getText("usedplus_notification_landLeaseTerminatedReturned"), deal.landName or deal.itemName or "Field")
         )
         TransactionResponseEvent.sendToClient(connection, self.farmId, true, "usedplus_mp_success_lease_terminated")
 
@@ -791,7 +791,7 @@ function LeaseRenewalEvent:processReturn(deal, farm, isLandLease, connection)
 
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_OK,
-            string.format("Land lease returned: %s. Deposit refund: %s",
+            string.format(g_i18n:getText("usedplus_notification_landLeaseReturned"),
                 deal.itemName, UIHelper.Text.formatMoney(depositRefund))
         )
     else
@@ -803,7 +803,7 @@ function LeaseRenewalEvent:processReturn(deal, farm, isLandLease, connection)
 
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_OK,
-            string.format("Vehicle returned: %s. Deposit refund: %s",
+            string.format(g_i18n:getText("usedplus_notification_vehicleReturned"),
                 deal.itemName, UIHelper.Text.formatMoney(depositRefund))
         )
     end
@@ -838,7 +838,7 @@ function LeaseRenewalEvent:processBuyout(deal, farm, isLandLease, connection)
     if netCost > farm.money then
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_ERROR,
-            string.format("Insufficient funds for buyout. Need %s",
+            string.format(g_i18n:getText("usedplus_notification_insufficientBuyout"),
                 UIHelper.Text.formatMoney(netCost))
         )
         TransactionResponseEvent.sendToClient(connection, deal.farmId, false, "usedplus_mp_error_insufficient_funds")
@@ -859,7 +859,7 @@ function LeaseRenewalEvent:processBuyout(deal, farm, isLandLease, connection)
         -- Land is already owned - just remove the lease
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_OK,
-            string.format("Land purchased! %s is now yours. Equity applied: %s",
+            string.format(g_i18n:getText("usedplus_notification_landPurchasedEquity"),
                 deal.itemName, UIHelper.Text.formatMoney(equityApplied))
         )
     else
@@ -872,7 +872,7 @@ function LeaseRenewalEvent:processBuyout(deal, farm, isLandLease, connection)
 
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_OK,
-            string.format("Vehicle purchased! %s is now yours. Equity applied: %s",
+            string.format(g_i18n:getText("usedplus_notification_vehiclePurchasedEquity"),
                 deal.itemName, UIHelper.Text.formatMoney(equityApplied))
         )
     end
@@ -926,7 +926,7 @@ function LeaseRenewalEvent:processRenew(deal, farm, isLandLease, connection)
 
     g_currentMission:addIngameNotification(
         FSBaseMission.INGAME_NOTIFICATION_OK,
-        string.format("Lease renewed: %s. Equity of %s applied to future buyout!",
+        string.format(g_i18n:getText("usedplus_notification_leaseRenewed"),
             deal.itemName, UIHelper.Text.formatMoney(equityRollover))
     )
 

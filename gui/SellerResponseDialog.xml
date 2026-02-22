@@ -15,7 +15,7 @@
 
         <GuiElement profile="fs25_dialogContentContainer">
             <!-- Title (changes based on response type) -->
-            <Text profile="srTitle" id="titleText" position="0px -25px" text="OFFER RESPONSE"/>
+            <Text profile="srTitle" id="titleText" position="0px -25px" text="$l10n_usedplus_sr_title"/>
 
             <!-- ========== RESPONSE SECTION ========== -->
             <GuiElement profile="srResponseSection" position="0px -60px">
@@ -30,7 +30,7 @@
                 <Text profile="srResponseText" id="responseText" position="20px -35px" text=""/>
 
                 <!-- Price details row -->
-                <Text profile="srPriceLabel" id="priceLabel1" position="-120px -70px" text="Your Offer:"/>
+                <Text profile="srPriceLabel" id="priceLabel1" position="-120px -70px" text="$l10n_usedplus_sr_yourOffer"/>
                 <Text profile="srPriceValue" id="priceValue1" position="0px -70px" text="$0"/>
 
                 <Text profile="srPriceLabel" id="priceLabel2" position="-120px -95px" text=""/>
@@ -47,11 +47,11 @@
             <!-- Accept mode: [Complete Purchase] [Cancel] -->
             <!-- Counter mode: [Accept Counter] [Stand Firm] [Walk Away] -->
             <!-- Reject mode: [Pay Full Price] [Walk Away] -->
-            <Button id="primaryButton" profile="buttonOK" text="OK" onClick="onClickPrimary"/>
+            <Button id="primaryButton" profile="buttonOK" text="$l10n_usedplus_btn_ok" onClick="onClickPrimary"/>
             <Bitmap profile="fs25_dialogButtonBoxSeparator" id="separator1"/>
             <Button id="secondaryButton" profile="buttonActivate" text="" onClick="onClickSecondary" visible="false"/>
             <Bitmap profile="fs25_dialogButtonBoxSeparator" id="separator2" visible="false"/>
-            <Button id="tertiaryButton" profile="buttonBack" text="Cancel" onClick="onClickTertiary"/>
+            <Button id="tertiaryButton" profile="buttonBack" text="$l10n_usedplus_btn_cancel" onClick="onClickTertiary"/>
         </BoxLayout>
     </GuiElement>
 

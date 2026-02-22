@@ -43,10 +43,10 @@
             <!-- Vehicle Info Box -->
             <GuiElement profile="stdVehicleInfoSection" position="0px -145px">
                 <Bitmap profile="stdVehicleInfoBg" position="0px 0px"/>
-                <Text profile="stdVehicleName" id="vehicleNameText" position="0px -12px" text="GMC C7000 Service Truck"/>
-                <Text profile="stdFeatureHeader" position="0px -35px" text="SPECIAL CAPABILITIES:"/>
-                <Text profile="stdFeatureItem" position="0px -52px" text="Long-term vehicle restoration"/>
-                <Text profile="stdFeatureItem" position="0px -68px" text="Ceiling repair capability (restore beyond 100%)"/>
+                <Text profile="stdVehicleName" id="vehicleNameText" position="0px -12px" text="$l10n_usedplus_std_vehicleName"/>
+                <Text profile="stdFeatureHeader" position="0px -35px" text="$l10n_usedplus_std_specialCapabilities"/>
+                <Text profile="stdFeatureItem" position="0px -52px" text="$l10n_usedplus_std_featureRestoration"/>
+                <Text profile="stdFeatureItem" position="0px -68px" text="$l10n_usedplus_std_featureCeiling"/>
             </GuiElement>
 
             <!-- Price Section -->
@@ -54,15 +54,15 @@
                 <Bitmap profile="stdPriceBg" position="0px 0px"/>
 
                 <!-- Original Price (crossed out) -->
-                <Text profile="stdPriceLabel" position="-120px -12px" text="Original:"/>
+                <Text profile="stdPriceLabel" position="-120px -12px" text="$l10n_usedplus_std_originalPrice"/>
                 <Text profile="stdPriceOriginal" id="originalPriceText" position="0px -12px" text="$75,000"/>
 
                 <!-- Your Price (prominent) -->
-                <Text profile="stdPriceLabel" position="-120px -38px" text="YOUR PRICE:"/>
+                <Text profile="stdPriceLabel" position="-120px -38px" text="$l10n_usedplus_std_yourPrice"/>
                 <Text profile="stdPriceYours" id="yourPriceText" position="30px -38px" text="$67,500"/>
 
                 <!-- Cash Only Warning -->
-                <Text profile="stdCashOnly" position="180px -38px" text="CASH ONLY"/>
+                <Text profile="stdCashOnly" position="180px -38px" text="$l10n_usedplus_std_cashOnly"/>
             </GuiElement>
 
             <!-- Expiry Notice -->

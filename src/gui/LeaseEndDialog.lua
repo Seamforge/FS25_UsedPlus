@@ -63,13 +63,13 @@ function LeaseEndDialog:setupOptionIcons()
     -- Return icon (arrow_left)
     local returnIcon = self.dialogElement:getDescendantById("returnIcon")
     if returnIcon ~= nil then
-        returnIcon:setImageFilename(self.iconDir .. "arrow_left.png")
+        returnIcon:setImageFilename(self.iconDir .. "arrow_left.dds")
     end
 
     -- Buyout icon (cash)
     local buyoutIcon = self.dialogElement:getDescendantById("buyoutIcon")
     if buyoutIcon ~= nil then
-        buyoutIcon:setImageFilename(self.iconDir .. "cash.png")
+        buyoutIcon:setImageFilename(self.iconDir .. "cash.dds")
     end
 end
 
@@ -179,7 +179,7 @@ function LeaseEndDialog:onBuyoutVehicle()
     if farm and farm.money < self.buyoutPrice then
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_ERROR,
-            string.format("Insufficient funds for buyout. Need %s",
+            string.format(g_i18n:getText("usedplus_notification_insufficientBuyout"),
                 UIHelper.Text.formatMoney(self.buyoutPrice))
         )
         return

@@ -36,7 +36,7 @@
                     <Text profile="uvpPriceValue" id="priceText" position="150px -35px" text="$0"/>
 
                     <!-- v2.10.0: Expiration info -->
-                    <Text profile="uvpConditionLabel" position="50px -58px" text="Available"/>
+                    <Text profile="uvpConditionLabel" position="50px -58px" text="$l10n_usedplus_uvp_available"/>
                     <Text profile="uvpExpirationValue" id="expirationText" position="175px -58px" text=""/>
                 </GuiElement>
             </GuiElement>
@@ -89,13 +89,13 @@
             <GuiElement profile="uvpProgressSection" id="progressSection" position="0px -325px" visible="false">
                 <Bitmap profile="uvpProgressBg" position="0px 0px"/>
                 <Text profile="uvpProgressIcon" position="-280px -28px" text="..."/>
-                <Text profile="uvpProgressText" id="progressText" position="0px -28px" text="Inspection in progress..."/>
+                <Text profile="uvpProgressText" id="progressText" position="0px -28px" text="$l10n_usedplus_uvp_inspectionProgress"/>
             </GuiElement>
 
             <!-- ========== SECTION 3 ALT: Already Inspected Box (hidden by default) ========== -->
             <GuiElement profile="uvpInspectedSection" id="inspectedSection" position="0px -325px" visible="false">
                 <Bitmap profile="uvpInspectedBg" position="0px 0px"/>
-                <Text profile="uvpInspectedIcon" position="-280px -28px" text="OK"/>
+                <Text profile="uvpInspectedIcon" position="-280px -28px" text="$l10n_usedplus_uvp_ok"/>
                 <Text profile="uvpInspectedText" id="inspectedText" position="0px -28px" text="$l10n_usedplus_uvp_inspectedText"/>
             </GuiElement>
 

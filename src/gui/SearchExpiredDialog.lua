@@ -141,16 +141,16 @@ function SearchExpiredDialog:updateDisplay()
     if self.durationText then
         local tierInfo = UsedVehicleSearch.SEARCH_TIERS[search.searchLevel] or {}
         local months = tierInfo.maxMonths or 1
-        self.durationText:setText(string.format("%d month%s", months, months == 1 and "" or "s"))
+        self.durationText:setText(string.format(g_i18n:getText("usedplus_se_durationFormat"), months, months == 1 and "" or "s"))
     end
 
     -- Results
     if self.resultsText then
         if self.foundCount > 0 then
-            self.resultsText:setText(string.format("%d vehicle%s found", self.foundCount, self.foundCount == 1 and "" or "s"))
+            self.resultsText:setText(string.format(g_i18n:getText("usedplus_se_vehiclesFoundCount"), self.foundCount, self.foundCount == 1 and "" or "s"))
             self.resultsText:setTextColor(0.3, 1, 0.4, 1)  -- Green
         else
-            self.resultsText:setText("No vehicles found")
+            self.resultsText:setText(g_i18n:getText("usedplus_se_noVehiclesFound"))
             self.resultsText:setTextColor(1, 0.6, 0.4, 1)  -- Orange/red
         end
     end
@@ -172,7 +172,7 @@ function SearchExpiredDialog:onClickRenew()
     if farm.money < self.renewCost then
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_CRITICAL,
-            "Insufficient funds to renew search."
+            g_i18n:getText("usedplus_notification_insufficientFundsRenew")
         )
         return
     end

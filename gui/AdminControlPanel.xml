@@ -15,7 +15,7 @@
     <GuiElement profile="newLayer" />
     <Bitmap profile="dialogFullscreenBg" id="dialogBg" />
 
-    <GuiElement profile="dialogBg" id="dialogElement" size="880px 700px">
+    <GuiElement profile="dialogBg" id="dialogElement" size="880px 760px">
         <ThreePartBitmap profile="fs25_dialogBgMiddle" />
         <ThreePartBitmap profile="fs25_dialogBgTop" />
         <ThreePartBitmap profile="fs25_dialogBgBottom" />
@@ -58,93 +58,96 @@
             <!-- ===== TAB 1: STATE (Split Layout) ===== -->
             <GuiElement profile="acpTabContent" id="tabContent1" position="0px -105px">
 
+                <!-- Vehicle Preview Image (top-right, above action buttons) -->
+                <Bitmap profile="acpVehicleImage" id="vehicleImage" position="40px -10px"/>
+
                 <!-- LEFT PANEL: Vehicle Diagnostics (25 label/value rows) -->
-                <GuiElement profile="acpDiagPanel" id="diagPanel" position="-175px 0px">
-                    <Text profile="acpDiagLabel" id="diagLabel1" position="-110px 0px"/>
-                    <Text profile="acpDiagValue" id="diagValue1" position="110px 0px"/>
-                    <Text profile="acpDiagLabel" id="diagLabel2" position="-110px -16px"/>
-                    <Text profile="acpDiagValue" id="diagValue2" position="110px -16px"/>
-                    <Text profile="acpDiagLabel" id="diagLabel3" position="-110px -32px"/>
-                    <Text profile="acpDiagValue" id="diagValue3" position="110px -32px"/>
-                    <Text profile="acpDiagLabel" id="diagLabel4" position="-110px -48px"/>
-                    <Text profile="acpDiagValue" id="diagValue4" position="110px -48px"/>
-                    <Text profile="acpDiagLabel" id="diagLabel5" position="-110px -64px"/>
-                    <Text profile="acpDiagValue" id="diagValue5" position="110px -64px"/>
-                    <Text profile="acpDiagLabel" id="diagLabel6" position="-110px -80px"/>
-                    <Text profile="acpDiagValue" id="diagValue6" position="110px -80px"/>
-                    <Text profile="acpDiagLabel" id="diagLabel7" position="-110px -96px"/>
-                    <Text profile="acpDiagValue" id="diagValue7" position="110px -96px"/>
-                    <Text profile="acpDiagLabel" id="diagLabel8" position="-110px -112px"/>
-                    <Text profile="acpDiagValue" id="diagValue8" position="110px -112px"/>
-                    <Text profile="acpDiagLabel" id="diagLabel9" position="-110px -128px"/>
-                    <Text profile="acpDiagValue" id="diagValue9" position="110px -128px"/>
-                    <Text profile="acpDiagLabel" id="diagLabel10" position="-110px -144px"/>
-                    <Text profile="acpDiagValue" id="diagValue10" position="110px -144px"/>
-                    <Text profile="acpDiagLabel" id="diagLabel11" position="-110px -160px"/>
-                    <Text profile="acpDiagValue" id="diagValue11" position="110px -160px"/>
-                    <Text profile="acpDiagLabel" id="diagLabel12" position="-110px -176px"/>
-                    <Text profile="acpDiagValue" id="diagValue12" position="110px -176px"/>
-                    <Text profile="acpDiagLabel" id="diagLabel13" position="-110px -192px"/>
-                    <Text profile="acpDiagValue" id="diagValue13" position="110px -192px"/>
-                    <Text profile="acpDiagLabel" id="diagLabel14" position="-110px -208px"/>
-                    <Text profile="acpDiagValue" id="diagValue14" position="110px -208px"/>
-                    <Text profile="acpDiagLabel" id="diagLabel15" position="-110px -224px"/>
-                    <Text profile="acpDiagValue" id="diagValue15" position="110px -224px"/>
-                    <Text profile="acpDiagLabel" id="diagLabel16" position="-110px -240px"/>
-                    <Text profile="acpDiagValue" id="diagValue16" position="110px -240px"/>
-                    <Text profile="acpDiagLabel" id="diagLabel17" position="-110px -256px"/>
-                    <Text profile="acpDiagValue" id="diagValue17" position="110px -256px"/>
-                    <Text profile="acpDiagLabel" id="diagLabel18" position="-110px -272px"/>
-                    <Text profile="acpDiagValue" id="diagValue18" position="110px -272px"/>
-                    <Text profile="acpDiagLabel" id="diagLabel19" position="-110px -288px"/>
-                    <Text profile="acpDiagValue" id="diagValue19" position="110px -288px"/>
-                    <Text profile="acpDiagLabel" id="diagLabel20" position="-110px -304px"/>
-                    <Text profile="acpDiagValue" id="diagValue20" position="110px -304px"/>
-                    <Text profile="acpDiagLabel" id="diagLabel21" position="-110px -320px"/>
-                    <Text profile="acpDiagValue" id="diagValue21" position="110px -320px"/>
-                    <Text profile="acpDiagLabel" id="diagLabel22" position="-110px -336px"/>
-                    <Text profile="acpDiagValue" id="diagValue22" position="110px -336px"/>
-                    <Text profile="acpDiagLabel" id="diagLabel23" position="-110px -352px"/>
-                    <Text profile="acpDiagValue" id="diagValue23" position="110px -352px"/>
-                    <Text profile="acpDiagLabel" id="diagLabel24" position="-110px -368px"/>
-                    <Text profile="acpDiagValue" id="diagValue24" position="110px -368px"/>
-                    <Text profile="acpDiagLabel" id="diagLabel25" position="-110px -384px"/>
-                    <Text profile="acpDiagValue" id="diagValue25" position="110px -384px"/>
+                <GuiElement profile="acpDiagPanel" id="diagPanel" position="-255px 0px">
+                    <Text profile="acpDiagLabel" id="diagLabel1" position="-90px 0px"/>
+                    <Text profile="acpDiagValue" id="diagValue1" position="75px 0px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel2" position="-90px -16px"/>
+                    <Text profile="acpDiagValue" id="diagValue2" position="75px -16px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel3" position="-90px -32px"/>
+                    <Text profile="acpDiagValue" id="diagValue3" position="75px -32px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel4" position="-90px -48px"/>
+                    <Text profile="acpDiagValue" id="diagValue4" position="75px -48px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel5" position="-90px -64px"/>
+                    <Text profile="acpDiagValue" id="diagValue5" position="75px -64px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel6" position="-90px -80px"/>
+                    <Text profile="acpDiagValue" id="diagValue6" position="75px -80px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel7" position="-90px -96px"/>
+                    <Text profile="acpDiagValue" id="diagValue7" position="75px -96px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel8" position="-90px -112px"/>
+                    <Text profile="acpDiagValue" id="diagValue8" position="75px -112px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel9" position="-90px -128px"/>
+                    <Text profile="acpDiagValue" id="diagValue9" position="75px -128px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel10" position="-90px -144px"/>
+                    <Text profile="acpDiagValue" id="diagValue10" position="75px -144px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel11" position="-90px -160px"/>
+                    <Text profile="acpDiagValue" id="diagValue11" position="75px -160px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel12" position="-90px -176px"/>
+                    <Text profile="acpDiagValue" id="diagValue12" position="75px -176px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel13" position="-90px -192px"/>
+                    <Text profile="acpDiagValue" id="diagValue13" position="75px -192px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel14" position="-90px -208px"/>
+                    <Text profile="acpDiagValue" id="diagValue14" position="75px -208px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel15" position="-90px -224px"/>
+                    <Text profile="acpDiagValue" id="diagValue15" position="75px -224px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel16" position="-90px -240px"/>
+                    <Text profile="acpDiagValue" id="diagValue16" position="75px -240px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel17" position="-90px -256px"/>
+                    <Text profile="acpDiagValue" id="diagValue17" position="75px -256px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel18" position="-90px -272px"/>
+                    <Text profile="acpDiagValue" id="diagValue18" position="75px -272px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel19" position="-90px -288px"/>
+                    <Text profile="acpDiagValue" id="diagValue19" position="75px -288px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel20" position="-90px -304px"/>
+                    <Text profile="acpDiagValue" id="diagValue20" position="75px -304px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel21" position="-90px -320px"/>
+                    <Text profile="acpDiagValue" id="diagValue21" position="75px -320px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel22" position="-90px -336px"/>
+                    <Text profile="acpDiagValue" id="diagValue22" position="75px -336px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel23" position="-90px -352px"/>
+                    <Text profile="acpDiagValue" id="diagValue23" position="75px -352px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel24" position="-90px -368px"/>
+                    <Text profile="acpDiagValue" id="diagValue24" position="75px -368px"/>
+                    <Text profile="acpDiagLabel" id="diagLabel25" position="-90px -384px"/>
+                    <Text profile="acpDiagValue" id="diagValue25" position="75px -384px"/>
                 </GuiElement>
 
                 <!-- RIGHT PANEL: Action Buttons -->
-                <GuiElement profile="acpActionPanel" id="actionPanel" position="250px 0px">
+                <GuiElement profile="acpActionPanel" id="actionPanel" position="285px 0px">
                     <!-- Reliability (per-system) -->
                     <Text profile="acpActionSectionHeader" position="0px -5px" text="$l10n_usedplus_admin_action_reliability"/>
 
                     <Bitmap profile="acpActionBtn3" id="bgEngRel100" position="-75px -25px"/>
-                    <Text profile="acpActionBtn3Text" position="-75px -33px" text="Eng 100%"/>
+                    <Text profile="acpActionBtn3Text" position="-75px -33px" text="$l10n_usedplus_acp_eng100"/>
                     <Button profile="acpActionBtn3Hit" id="btnEngRel100" position="-75px -25px" onClick="onEngRel100Click" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
                     <Bitmap profile="acpActionBtn3" id="bgEngRel50" position="0px -25px"/>
-                    <Text profile="acpActionBtn3Text" position="0px -33px" text="Eng 50%"/>
+                    <Text profile="acpActionBtn3Text" position="0px -33px" text="$l10n_usedplus_acp_eng50"/>
                     <Button profile="acpActionBtn3Hit" id="btnEngRel50" position="0px -25px" onClick="onEngRel50Click" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
                     <Bitmap profile="acpActionBtn3" id="bgEngRel10" position="75px -25px"/>
-                    <Text profile="acpActionBtn3Text" position="75px -33px" text="Eng 10%"/>
+                    <Text profile="acpActionBtn3Text" position="75px -33px" text="$l10n_usedplus_acp_eng10"/>
                     <Button profile="acpActionBtn3Hit" id="btnEngRel10" position="75px -25px" onClick="onEngRel10Click" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
 
                     <Bitmap profile="acpActionBtn3" id="bgHydRel100" position="-75px -55px"/>
-                    <Text profile="acpActionBtn3Text" position="-75px -63px" text="Hyd 100%"/>
+                    <Text profile="acpActionBtn3Text" position="-75px -63px" text="$l10n_usedplus_acp_hyd100"/>
                     <Button profile="acpActionBtn3Hit" id="btnHydRel100" position="-75px -55px" onClick="onHydRel100Click" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
                     <Bitmap profile="acpActionBtn3" id="bgHydRel50" position="0px -55px"/>
-                    <Text profile="acpActionBtn3Text" position="0px -63px" text="Hyd 50%"/>
+                    <Text profile="acpActionBtn3Text" position="0px -63px" text="$l10n_usedplus_acp_hyd50"/>
                     <Button profile="acpActionBtn3Hit" id="btnHydRel50" position="0px -55px" onClick="onHydRel50Click" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
                     <Bitmap profile="acpActionBtn3" id="bgHydRel10" position="75px -55px"/>
-                    <Text profile="acpActionBtn3Text" position="75px -63px" text="Hyd 10%"/>
+                    <Text profile="acpActionBtn3Text" position="75px -63px" text="$l10n_usedplus_acp_hyd10"/>
                     <Button profile="acpActionBtn3Hit" id="btnHydRel10" position="75px -55px" onClick="onHydRel10Click" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
 
                     <Bitmap profile="acpActionBtn3" id="bgElecRel100" position="-75px -85px"/>
-                    <Text profile="acpActionBtn3Text" position="-75px -93px" text="Elec 100%"/>
+                    <Text profile="acpActionBtn3Text" position="-75px -93px" text="$l10n_usedplus_acp_elec100"/>
                     <Button profile="acpActionBtn3Hit" id="btnElecRel100" position="-75px -85px" onClick="onElecRel100Click" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
                     <Bitmap profile="acpActionBtn3" id="bgElecRel50" position="0px -85px"/>
-                    <Text profile="acpActionBtn3Text" position="0px -93px" text="Elec 50%"/>
+                    <Text profile="acpActionBtn3Text" position="0px -93px" text="$l10n_usedplus_acp_elec50"/>
                     <Button profile="acpActionBtn3Hit" id="btnElecRel50" position="0px -85px" onClick="onElecRel50Click" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
                     <Bitmap profile="acpActionBtn3" id="bgElecRel10" position="75px -85px"/>
-                    <Text profile="acpActionBtn3Text" position="75px -93px" text="Elec 10%"/>
+                    <Text profile="acpActionBtn3Text" position="75px -93px" text="$l10n_usedplus_acp_elec10"/>
                     <Button profile="acpActionBtn3Hit" id="btnElecRel10" position="75px -85px" onClick="onElecRel10Click" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
 
                     <!-- Condition -->
@@ -192,16 +195,38 @@
                     <Text profile="acpActionBtn2Text" position="55px -293px" text="$l10n_usedplus_admin_btn_refill_hyd"/>
                     <Button profile="acpActionBtn2Hit" id="btnRefillHyd" position="55px -285px" onClick="onRefillHydClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
 
-                    <Bitmap profile="acpActionBtn2" id="bgFixTires" position="-55px -315px"/>
-                    <Text profile="acpActionBtn2Text" position="-55px -323px" text="$l10n_usedplus_admin_btn_fix_tires"/>
-                    <Button profile="acpActionBtn2Hit" id="btnFixTires" position="-55px -315px" onClick="onFixTiresClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
-                    <Bitmap profile="acpActionBtn2" id="bgFixLeaks" position="55px -315px"/>
-                    <Text profile="acpActionBtn2Text" position="55px -323px" text="$l10n_usedplus_admin_btn_fix_leaks"/>
-                    <Button profile="acpActionBtn2Hit" id="btnFixLeaks" position="55px -315px" onClick="onFixLeaksClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+                    <Bitmap profile="acpActionBtn2" id="bgEmptyOil" position="-55px -315px"/>
+                    <Text profile="acpActionBtn2Text" position="-55px -323px" text="$l10n_usedplus_acp_emptyOil"/>
+                    <Button profile="acpActionBtn2Hit" id="btnEmptyOil" position="-55px -315px" onClick="onEmptyOilClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+                    <Bitmap profile="acpActionBtn2" id="bgEmptyHyd" position="55px -315px"/>
+                    <Text profile="acpActionBtn2Text" position="55px -323px" text="$l10n_usedplus_acp_emptyHyd"/>
+                    <Button profile="acpActionBtn2Hit" id="btnEmptyHyd" position="55px -315px" onClick="onEmptyHydClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
 
-                    <Bitmap profile="acpActionBtnWide" id="bgFixAllMalf" position="0px -345px"/>
-                    <Text profile="acpActionBtnWideText" position="0px -353px" text="$l10n_usedplus_admin_btn_fix_all_malf"/>
-                    <Button profile="acpActionBtnWideHit" id="btnFixAllMalf" position="0px -345px" onClick="onFixAllMalfClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+                    <Bitmap profile="acpActionBtn2" id="bgFixTires" position="-55px -345px"/>
+                    <Text profile="acpActionBtn2Text" position="-55px -353px" text="$l10n_usedplus_admin_btn_fix_tires"/>
+                    <Button profile="acpActionBtn2Hit" id="btnFixTires" position="-55px -345px" onClick="onFixTiresClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+                    <Bitmap profile="acpActionBtn2" id="bgFixLeaks" position="55px -345px"/>
+                    <Text profile="acpActionBtn2Text" position="55px -353px" text="$l10n_usedplus_admin_btn_fix_leaks"/>
+                    <Button profile="acpActionBtn2Hit" id="btnFixLeaks" position="55px -345px" onClick="onFixLeaksClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+
+                    <Bitmap profile="acpActionBtnWide" id="bgFixAllMalf" position="0px -375px"/>
+                    <Text profile="acpActionBtnWideText" position="0px -383px" text="$l10n_usedplus_admin_btn_fix_all_malf"/>
+                    <Button profile="acpActionBtnWideHit" id="btnFixAllMalf" position="0px -375px" onClick="onFixAllMalfClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+
+                    <!-- Restoration Cooldowns -->
+                    <Bitmap profile="acpActionBtnWide" id="bgResetCooldowns" position="0px -410px"/>
+                    <Text profile="acpActionBtnWideText" position="0px -418px" text="$l10n_usedplus_acp_resetCooldowns"/>
+                    <Button profile="acpActionBtnWideHit" id="btnResetCooldowns" position="0px -410px" onClick="onResetCooldownsClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+
+                    <!-- Service Truck Tanks -->
+                    <Text profile="acpActionSectionHeader" position="0px -440px" text="$l10n_usedplus_acp_serviceTruckTanks"/>
+
+                    <Bitmap profile="acpActionBtn2" id="bgDrainSTOil" position="-55px -460px"/>
+                    <Text profile="acpActionBtn2Text" position="-55px -468px" text="$l10n_usedplus_acp_drainOil"/>
+                    <Button profile="acpActionBtn2Hit" id="btnDrainSTOil" position="-55px -460px" onClick="onDrainSTOilClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+                    <Bitmap profile="acpActionBtn2" id="bgDrainSTHyd" position="55px -460px"/>
+                    <Text profile="acpActionBtn2Text" position="55px -468px" text="$l10n_usedplus_acp_drainHyd"/>
+                    <Button profile="acpActionBtn2Hit" id="btnDrainSTHyd" position="55px -460px" onClick="onDrainSTHydClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
                 </GuiElement>
             </GuiElement>
 
@@ -355,21 +380,21 @@
             <GuiElement profile="acpTabContent" id="tabContent4" position="0px -105px">
 
                 <!-- LEFT PANEL: Financial Info -->
-                <GuiElement profile="acpDiagPanel" id="financePanel" position="-175px 0px">
-                    <Text profile="acpDiagLabel" id="finLabel1" position="-110px -10px"/>
-                    <Text profile="acpDiagValue" id="finValue1" position="110px -10px"/>
-                    <Text profile="acpDiagLabel" id="finLabel2" position="-110px -34px"/>
-                    <Text profile="acpDiagValue" id="finValue2" position="110px -34px"/>
-                    <Text profile="acpDiagLabel" id="finLabel3" position="-110px -58px"/>
-                    <Text profile="acpDiagValue" id="finValue3" position="110px -58px"/>
-                    <Text profile="acpDiagLabel" id="finLabel4" position="-110px -82px"/>
-                    <Text profile="acpDiagValue" id="finValue4" position="110px -82px"/>
-                    <Text profile="acpDiagLabel" id="finLabel5" position="-110px -106px"/>
-                    <Text profile="acpDiagValue" id="finValue5" position="110px -106px"/>
+                <GuiElement profile="acpDiagPanel" id="financePanel" position="-255px 0px">
+                    <Text profile="acpDiagLabel" id="finLabel1" position="-90px -10px"/>
+                    <Text profile="acpDiagValue" id="finValue1" position="75px -10px"/>
+                    <Text profile="acpDiagLabel" id="finLabel2" position="-90px -34px"/>
+                    <Text profile="acpDiagValue" id="finValue2" position="75px -34px"/>
+                    <Text profile="acpDiagLabel" id="finLabel3" position="-90px -58px"/>
+                    <Text profile="acpDiagValue" id="finValue3" position="75px -58px"/>
+                    <Text profile="acpDiagLabel" id="finLabel4" position="-90px -82px"/>
+                    <Text profile="acpDiagValue" id="finValue4" position="75px -82px"/>
+                    <Text profile="acpDiagLabel" id="finLabel5" position="-90px -106px"/>
+                    <Text profile="acpDiagValue" id="finValue5" position="75px -106px"/>
                 </GuiElement>
 
                 <!-- RIGHT PANEL: Action Buttons -->
-                <GuiElement profile="acpActionPanel" id="financeActionPanel" position="250px 0px">
+                <GuiElement profile="acpActionPanel" id="financeActionPanel" position="285px 0px">
                     <!-- Money -->
                     <Text profile="acpActionSectionHeader" position="0px -5px" text="$l10n_usedplus_admin_action_money"/>
 
@@ -386,7 +411,7 @@
                     <Button profile="acpActionBtn2Hit" id="btnAdd1m" position="-55px -60px" onClick="onAdd1mClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
 
                     <Bitmap profile="acpActionBtn2" id="bgSetZero" position="55px -60px"/>
-                    <Text profile="acpActionBtn2Text" position="55px -68px" text="Set $0"/>
+                    <Text profile="acpActionBtn2Text" position="55px -68px" text="$l10n_usedplus_acp_setZero"/>
                     <Button profile="acpActionBtn2Hit" id="btnSetZero" position="55px -60px" onClick="onSetZeroClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
 
                     <Bitmap profile="acpActionBtnWide" id="bgPayoffAll" position="0px -95px"/>
@@ -518,10 +543,10 @@
             </GuiElement>
 
             <!-- Separator: content → status bar -->
-            <Bitmap profile="acpSeparator" position="0px -527px"/>
+            <Bitmap profile="acpSeparator" position="0px -602px"/>
 
             <!-- ===== STATUS BAR ===== -->
-            <GuiElement profile="acpStatusBar" position="0px -530px">
+            <GuiElement profile="acpStatusBar" position="0px -605px">
                 <Bitmap profile="acpStatusBg" position="0px 0px"/>
                 <Text profile="acpStatusText" id="statusText" position="0px -8px" text="$l10n_usedplus_admin_status_ready"/>
             </GuiElement>
@@ -579,7 +604,7 @@
 
         <!-- ========== TAB CONTENT ========== -->
         <Profile name="acpTabContent" extends="emptyPanel" with="anchorTopCenter">
-            <size value="840px 420px"/>
+            <size value="840px 480px"/>
         </Profile>
 
         <!-- ========== SECTION HEADERS ========== -->
@@ -616,18 +641,18 @@
 
         <!-- ========== DIAGNOSTICS PANEL (State tab, left side) ========== -->
         <Profile name="acpDiagPanel" extends="emptyPanel" with="anchorTopCenter">
-            <size value="480px 400px"/>
+            <size value="320px 480px"/>
         </Profile>
 
         <Profile name="acpDiagLabel" extends="fs25_textDefault" with="anchorTopCenter">
-            <size value="200px 15px"/>
+            <size value="140px 15px"/>
             <textSize value="10px"/>
             <textColor value="0.65 0.65 0.65 1"/>
             <textAlignment value="right"/>
         </Profile>
 
         <Profile name="acpDiagValue" extends="fs25_textDefault" with="anchorTopCenter">
-            <size value="240px 15px"/>
+            <size value="170px 15px"/>
             <textSize value="10px"/>
             <textBold value="true"/>
             <textColor value="0.9 0.9 0.9 1"/>
@@ -636,7 +661,7 @@
 
         <!-- ========== ACTION PANEL (State tab, right side) ========== -->
         <Profile name="acpActionPanel" extends="emptyPanel" with="anchorTopCenter">
-            <size value="240px 400px"/>
+            <size value="240px 480px"/>
         </Profile>
 
         <Profile name="acpActionSectionHeader" extends="fs25_textDefault" with="anchorTopCenter">
@@ -726,6 +751,12 @@
             <textBold value="true"/>
             <textColor value="0.3 1 0.4 1"/>
             <textAlignment value="left"/>
+        </Profile>
+
+        <!-- ========== VEHICLE IMAGE (State tab, top-right) ========== -->
+        <Profile name="acpVehicleImage" extends="baseReference" with="anchorTopCenter">
+            <size value="280px 280px"/>
+            <imageSliceId value="noSlice"/>
         </Profile>
 
         <!-- ========== VEHICLE INFO ========== -->

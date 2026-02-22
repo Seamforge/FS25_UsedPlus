@@ -23,7 +23,7 @@
         <GuiElement profile="fs25_dialogContentContainer">
 
             <!-- Dialog Title -->
-            <Text profile="ftTitle" id="dialogTitle" position="0px -25px" text="FAULT TRACER"/>
+            <Text profile="ftTitle" id="dialogTitle" position="0px -25px" text="$l10n_usedplus_ft_title"/>
 
             <!-- ========== SCREEN 1: COMPONENT SELECTION ========== -->
             <GuiElement profile="ftStepContainer" id="componentContainer" position="0px -55px">
@@ -31,21 +31,21 @@
                 <!-- Vehicle Info -->
                 <GuiElement profile="ftSection" position="0px 0px">
                     <Bitmap profile="ftSectionBg" position="0px 0px"/>
-                    <Text profile="ftSectionHeader" position="0px -5px" text="TARGET VEHICLE"/>
+                    <Text profile="ftSectionHeader" position="0px -5px" text="$l10n_usedplus_ft_targetVehicle"/>
                     <Text profile="ftVehicleName" id="ftVehicleNameText" position="0px -28px" text=""/>
                     <Text profile="ftSubtext" id="ftCeilingText" position="0px -48px" text=""/>
                 </GuiElement>
 
                 <!-- Component Buttons -->
                 <GuiElement profile="ftSection" position="0px -75px">
-                    <Text profile="ftSectionHeader" position="0px -5px" text="SELECT COMPONENT TO DIAGNOSE"/>
+                    <Text profile="ftSectionHeader" position="0px -5px" text="$l10n_usedplus_ft_selectComponent"/>
 
                     <!-- Engine -->
                     <GuiElement profile="ftComponentBox" position="-220px -35px">
                         <Bitmap profile="ftComponentBg" id="ftEngineBg" position="0px 0px"/>
                         <Button profile="ftComponentBtn" id="ftEngineBtn" onClick="onEngineClick" onHighlight="onComponentHighlight" onHighlightRemove="onComponentUnhighlight" position="0px 0px"/>
                         <Text profile="ftComponentIcon" position="0px -12px" text="E"/>
-                        <Text profile="ftComponentLabel" position="0px -38px" text="Engine"/>
+                        <Text profile="ftComponentLabel" position="0px -38px" text="$l10n_usedplus_ft_engine"/>
                         <Text profile="ftComponentValue" id="ftEngineValue" position="0px -55px" text="100%"/>
                         <Text profile="ftComponentStatus" id="ftEngineStatus" position="0px -72px" text=""/>
                     </GuiElement>
@@ -55,7 +55,7 @@
                         <Bitmap profile="ftComponentBg" id="ftElectricalBg" position="0px 0px"/>
                         <Button profile="ftComponentBtn" id="ftElectricalBtn" onClick="onElectricalClick" onHighlight="onComponentHighlight" onHighlightRemove="onComponentUnhighlight" position="0px 0px"/>
                         <Text profile="ftComponentIcon" position="0px -12px" text="V"/>
-                        <Text profile="ftComponentLabel" position="0px -38px" text="Electrical"/>
+                        <Text profile="ftComponentLabel" position="0px -38px" text="$l10n_usedplus_ft_electrical"/>
                         <Text profile="ftComponentValue" id="ftElectricalValue" position="0px -55px" text="100%"/>
                         <Text profile="ftComponentStatus" id="ftElectricalStatus" position="0px -72px" text=""/>
                     </GuiElement>
@@ -65,7 +65,7 @@
                         <Bitmap profile="ftComponentBg" id="ftHydraulicBg" position="0px 0px"/>
                         <Button profile="ftComponentBtn" id="ftHydraulicBtn" onClick="onHydraulicClick" onHighlight="onComponentHighlight" onHighlightRemove="onComponentUnhighlight" position="0px 0px"/>
                         <Text profile="ftComponentIcon" position="0px -12px" text="H"/>
-                        <Text profile="ftComponentLabel" position="0px -38px" text="Hydraulic"/>
+                        <Text profile="ftComponentLabel" position="0px -38px" text="$l10n_usedplus_ft_hydraulic"/>
                         <Text profile="ftComponentValue" id="ftHydraulicValue" position="0px -55px" text="100%"/>
                         <Text profile="ftComponentStatus" id="ftHydraulicStatus" position="0px -72px" text=""/>
                     </GuiElement>
@@ -74,23 +74,23 @@
                 <!-- Resources Info -->
                 <GuiElement profile="ftSection" position="0px -215px">
                     <Bitmap profile="ftInfoBg" position="0px 0px"/>
-                    <Text profile="ftSectionHeader" position="0px -5px" text="SERVICE TRUCK RESOURCES"/>
-                    <Text profile="ftLabel" position="-150px -30px" text="Oil:"/>
+                    <Text profile="ftSectionHeader" position="0px -5px" text="$l10n_usedplus_ft_resources"/>
+                    <Text profile="ftLabel" position="-150px -30px" text="$l10n_usedplus_ft_oilColon"/>
                     <Text profile="ftValue" id="ftOilLevel" position="-60px -30px" text="0L"/>
-                    <Text profile="ftLabel" position="80px -30px" text="Hydraulic:"/>
+                    <Text profile="ftLabel" position="80px -30px" text="$l10n_usedplus_ft_hydraulicColon"/>
                     <Text profile="ftValue" id="ftHydraulicLevel" position="170px -30px" text="0L"/>
                 </GuiElement>
 
                 <!-- Hint text -->
-                <Text profile="ftHintText" id="ftSelectHint" position="0px -280px" text="Select a component below 90% reliability to begin fault tracing."/>
+                <Text profile="ftHintText" id="ftSelectHint" position="0px -280px" text="$l10n_usedplus_ft_selectHint"/>
             </GuiElement>
 
             <!-- ========== SCREEN 2: FAULT TRACER GRID ========== -->
             <GuiElement profile="ftStepContainer" id="gridContainer" position="0px -55px" visible="false">
 
                 <!-- Grid Info Bar -->
-                <Text profile="ftGridInfo" id="ftGridTitle" position="-180px -5px" text="ENGINE FAULT TRACER"/>
-                <Text profile="ftGridInfo" id="ftFaultCounter" position="180px -5px" text="Faults: 0/0"/>
+                <Text profile="ftGridInfo" id="ftGridTitle" position="-180px -5px" text="$l10n_usedplus_ft_engineFaultTracer"/>
+                <Text profile="ftGridInfo" id="ftFaultCounter" position="180px -5px" text="$l10n_usedplus_ft_faultCounter"/>
 
                 <!-- Grid Area (4 rows x 5 cols max = 20 cells) -->
                 <!-- Each cell: 65x50px with 6px gap. Grid origin at center-top -->
@@ -205,77 +205,77 @@
                 <Bitmap profile="ftControlsBg" position="305px -30px"/>
 
                 <!-- Mode Toggle -->
-                <Text profile="ftControlLabel" position="305px -35px" text="Mode:"/>
+                <Text profile="ftControlLabel" position="305px -35px" text="$l10n_usedplus_ft_modeLabel"/>
                 <Bitmap profile="ftModeBtnBg" id="ftProbeBtnBg" position="305px -55px"/>
                 <Button profile="ftModeBtn" id="ftProbeBtn" onClick="onProbeModeClick" onHighlight="onModeHighlight" onHighlightRemove="onModeUnhighlight" position="305px -55px"/>
-                <Text profile="ftModeBtnText" id="ftProbeBtnText" position="305px -60px" text="Probe"/>
+                <Text profile="ftModeBtnText" id="ftProbeBtnText" position="305px -60px" text="$l10n_usedplus_ft_probe"/>
 
                 <Bitmap profile="ftModeBtnBg" id="ftFlagBtnBg" position="305px -85px"/>
                 <Button profile="ftModeBtn" id="ftFlagBtn" onClick="onFlagModeClick" onHighlight="onModeHighlight" onHighlightRemove="onModeUnhighlight" position="305px -85px"/>
-                <Text profile="ftModeBtnText" id="ftFlagBtnText" position="305px -90px" text="Flag"/>
+                <Text profile="ftModeBtnText" id="ftFlagBtnText" position="305px -90px" text="$l10n_usedplus_ft_flag"/>
 
                 <!-- Oil Counter -->
-                <Text profile="ftControlLabel" position="305px -120px" text="Oil Used:"/>
+                <Text profile="ftControlLabel" position="305px -120px" text="$l10n_usedplus_ft_oilUsed"/>
                 <Text profile="ftControlValue" id="ftOilUsedText" position="305px -138px" text="0.0L"/>
 
                 <!-- Quick Scan -->
                 <Bitmap profile="ftActionBtnBg" id="ftQuickScanBtnBg" position="305px -168px"/>
                 <Button profile="ftActionBtn" id="ftQuickScanBtn" onClick="onQuickScanClick" onHighlight="onActionHighlight" onHighlightRemove="onActionUnhighlight" position="305px -168px"/>
-                <Text profile="ftActionBtnText" id="ftQuickScanBtnText" position="305px -173px" text="Quick Scan"/>
+                <Text profile="ftActionBtnText" id="ftQuickScanBtnText" position="305px -173px" text="$l10n_usedplus_ft_quickScan"/>
 
                 <!-- Begin Repair -->
                 <Bitmap profile="ftRepairBtnBg" id="ftRepairBtnBg" position="305px -210px"/>
                 <Button profile="ftRepairBtn" id="ftRepairBtn" onClick="onBeginRepairClick" onHighlight="onActionHighlight" onHighlightRemove="onActionUnhighlight" position="305px -210px"/>
-                <Text profile="ftRepairBtnText" id="ftRepairBtnText" position="305px -215px" text="Begin Repair"/>
+                <Text profile="ftRepairBtnText" id="ftRepairBtnText" position="305px -215px" text="$l10n_usedplus_ft_beginRepair"/>
 
                 <!-- Status message -->
                 <Text profile="ftStatusText" id="ftStatusMsg" position="0px -310px" text=""/>
 
                 <!-- Instructions Panel -->
                 <Bitmap profile="ftInstructionsBg" position="0px -335px"/>
-                <Text profile="ftInstructionsHeader" position="0px -340px" text="HOW TO PLAY"/>
-                <Text profile="ftInstructionsLine" position="0px -358px" text="PROBE mode: Click cells to reveal a number showing how many adjacent cells contain faults."/>
-                <Text profile="ftInstructionsLine" position="0px -372px" text="Gauge colors hint at fault TYPE nearby: GREEN = Corroded, AMBER = Cracked, RED = Seized."/>
-                <Text profile="ftInstructionsLine" position="0px -386px" text="FLAG mode: Click a suspected fault cell to mark it, then choose the type (Corroded/Cracked/Seized)."/>
-                <Text profile="ftInstructionsLine" position="0px -400px" text="Correct diagnoses improve repair quality. Hitting a fault while probing costs 3x oil!"/>
-                <Text profile="ftInstructionsLine" position="0px -414px" text="Flag all faults and click Begin Repair when ready. Use Quick Scan if you get stuck."/>
+                <Text profile="ftInstructionsHeader" position="0px -340px" text="$l10n_usedplus_ft_howToPlay"/>
+                <Text profile="ftInstructionsLine" position="0px -358px" text="$l10n_usedplus_ft_howToPlayLine1"/>
+                <Text profile="ftInstructionsLine" position="0px -372px" text="$l10n_usedplus_ft_howToPlayLine2"/>
+                <Text profile="ftInstructionsLine" position="0px -386px" text="$l10n_usedplus_ft_howToPlayLine3"/>
+                <Text profile="ftInstructionsLine" position="0px -400px" text="$l10n_usedplus_ft_howToPlayLine4"/>
+                <Text profile="ftInstructionsLine" position="0px -414px" text="$l10n_usedplus_ft_howToPlayLine5"/>
             </GuiElement>
 
             <!-- ========== SCREEN 3: TYPE SELECTION OVERLAY ========== -->
             <GuiElement profile="ftStepContainer" id="typeSelectContainer" position="0px -55px" visible="false">
                 <Bitmap profile="ftOverlayBg" position="0px 0px"/>
-                <Text profile="ftOverlayTitle" position="0px -90px" text="DIAGNOSE FAULT TYPE"/>
-                <Text profile="ftSubtext" id="ftTypeSelectCell" position="0px -112px" text="Cell [A1]"/>
+                <Text profile="ftOverlayTitle" position="0px -90px" text="$l10n_usedplus_ft_diagnoseFaultType"/>
+                <Text profile="ftSubtext" id="ftTypeSelectCell" position="0px -112px" text="$l10n_usedplus_ft_cellLabel"/>
                 <Text profile="ftSubtext" id="ftGaugeHint" position="0px -128px" text=""/>
 
                 <!-- Corroded -->
                 <Bitmap profile="ftTypeBtnBg" id="ftCorrodedBtnBg" position="0px -155px"/>
                 <Button profile="ftTypeBtn" id="ftCorrodedBtn" onClick="onCorrodedClick" onHighlight="onTypeHighlight" onHighlightRemove="onTypeUnhighlight" position="0px -155px"/>
-                <Text profile="ftTypeBtnText" id="ftCorrodedText" position="0px -160px" text="Corroded"/>
-                <Text profile="ftTypeDesc" position="0px -180px" text="Rust / oxidation damage — Green gauge"/>
+                <Text profile="ftTypeBtnText" id="ftCorrodedText" position="0px -160px" text="$l10n_usedplus_ft_corroded"/>
+                <Text profile="ftTypeDesc" position="0px -180px" text="$l10n_usedplus_ft_corrodedDesc"/>
 
                 <!-- Cracked -->
                 <Bitmap profile="ftTypeBtnBg" id="ftCrackedBtnBg" position="0px -205px"/>
                 <Button profile="ftTypeBtn" id="ftCrackedBtn" onClick="onCrackedClick" onHighlight="onTypeHighlight" onHighlightRemove="onTypeUnhighlight" position="0px -205px"/>
-                <Text profile="ftTypeBtnText" id="ftCrackedText" position="0px -210px" text="Cracked"/>
-                <Text profile="ftTypeDesc" position="0px -230px" text="Stress fractures / fatigue — Amber gauge"/>
+                <Text profile="ftTypeBtnText" id="ftCrackedText" position="0px -210px" text="$l10n_usedplus_ft_cracked"/>
+                <Text profile="ftTypeDesc" position="0px -230px" text="$l10n_usedplus_ft_crackedDesc"/>
 
                 <!-- Seized -->
                 <Bitmap profile="ftTypeBtnBg" id="ftSeizedBtnBg" position="0px -255px"/>
                 <Button profile="ftTypeBtn" id="ftSeizedBtn" onClick="onSeizedClick" onHighlight="onTypeHighlight" onHighlightRemove="onTypeUnhighlight" position="0px -255px"/>
-                <Text profile="ftTypeBtnText" id="ftSeizedText" position="0px -260px" text="Seized"/>
-                <Text profile="ftTypeDesc" position="0px -280px" text="Locked / seized bearing — Red gauge"/>
+                <Text profile="ftTypeBtnText" id="ftSeizedText" position="0px -260px" text="$l10n_usedplus_ft_seized"/>
+                <Text profile="ftTypeDesc" position="0px -280px" text="$l10n_usedplus_ft_seizedDesc"/>
 
                 <!-- Cancel -->
                 <Bitmap profile="ftCancelBtnBg" id="ftCancelBtnBg" position="0px -315px"/>
                 <Button profile="ftCancelBtn" id="ftCancelBtn" onClick="onTypeCancelClick" onHighlight="onTypeHighlight" onHighlightRemove="onTypeUnhighlight" position="0px -315px"/>
-                <Text profile="ftCancelBtnText" position="0px -320px" text="Cancel"/>
+                <Text profile="ftCancelBtnText" position="0px -320px" text="$l10n_usedplus_btn_cancel"/>
             </GuiElement>
 
             <!-- ========== SCREEN 4: RESULTS ========== -->
             <GuiElement profile="ftStepContainer" id="resultsContainer" position="0px -55px" visible="false">
                 <Bitmap profile="ftResultOutcomeIcon" id="ftResultOutcomeIcon" position="-160px -2px"/>
-                <Text profile="ftSectionHeader" position="0px -5px" text="REPAIR RESULTS"/>
+                <Text profile="ftSectionHeader" position="0px -5px" text="$l10n_usedplus_ft_repairResults"/>
 
                 <!-- Per-fault results (up to 5 rows, 25px gaps) -->
                 <Text profile="ftResultRow" id="ftResult0" position="0px -35px" text=""/>
@@ -286,13 +286,13 @@
 
                 <!-- Summary Section -->
                 <Bitmap profile="ftResultSummaryBg" position="0px -170px"/>
-                <Text profile="ftResultLabel" position="-120px -180px" text="Reliability Gain:"/>
+                <Text profile="ftResultLabel" position="-120px -180px" text="$l10n_usedplus_ft_reliabilityGain"/>
                 <Text profile="ftResultValue" id="ftReliabilityGainText" position="100px -180px" text="+0.0%"/>
-                <Text profile="ftResultLabel" position="-120px -200px" text="Ceiling Restored:"/>
+                <Text profile="ftResultLabel" position="-120px -200px" text="$l10n_usedplus_ft_ceilingRestored"/>
                 <Text profile="ftResultValue" id="ftCeilingGainText" position="100px -200px" text="+0.0%"/>
-                <Text profile="ftResultLabel" position="-120px -220px" text="Diagnosis Accuracy:"/>
+                <Text profile="ftResultLabel" position="-120px -220px" text="$l10n_usedplus_ft_diagnosisAccuracy"/>
                 <Text profile="ftResultValue" id="ftAccuracyText" position="100px -220px" text="0%"/>
-                <Text profile="ftResultLabel" position="-120px -240px" text="Oil Consumed:"/>
+                <Text profile="ftResultLabel" position="-120px -240px" text="$l10n_usedplus_ft_oilConsumed"/>
                 <Text profile="ftResultValue" id="ftOilConsumedText" position="100px -240px" text="0.0L"/>
 
                 <!-- Quality note -->
@@ -303,9 +303,9 @@
 
         <!-- Button box -->
         <BoxLayout profile="fs25_dialogButtonBox">
-            <Button profile="buttonBack" id="ftBackBtn" text="Back" onClick="onClickBack"/>
+            <Button profile="buttonBack" id="ftBackBtn" text="$l10n_usedplus_btn_back" onClick="onClickBack"/>
             <Bitmap profile="fs25_dialogButtonBoxSeparator"/>
-            <Button profile="buttonOK" id="ftCloseBtn" text="Close" onClick="onClickClose"/>
+            <Button profile="buttonOK" id="ftCloseBtn" text="$l10n_usedplus_btn_close" onClick="onClickClose"/>
         </BoxLayout>
     </GuiElement>
 

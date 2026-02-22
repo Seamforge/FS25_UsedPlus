@@ -63,7 +63,7 @@ function ServiceTruckDiscoveryDialog:onCreate()
     -- v2.14.2: Set header icon dynamically (ZIP-safe pattern)
     local headerIcon = self.dialogElement:getDescendantById("headerIcon")
     if headerIcon ~= nil then
-        headerIcon:setImageFilename(UsedPlus.MOD_DIR .. "gui/icons/service_truck.png")
+        headerIcon:setImageFilename(UsedPlus.MOD_DIR .. "gui/icons/service_truck.dds")
     end
 end
 
@@ -156,7 +156,7 @@ function ServiceTruckDiscoveryDialog:updateDisplay()
         local farmId = g_currentMission:getFarmId()
         local farm = g_farmManager:getFarmById(farmId)
         local currentCash = farm and farm.money or 0
-        self.currentCashText:setText(string.format("Your Cash: %s", g_i18n:formatMoney(currentCash, 0, true, true)))
+        self.currentCashText:setText(string.format(g_i18n:getText("usedplus_std_yourCash"), g_i18n:formatMoney(currentCash, 0, true, true)))
 
         -- Color based on affordability
         if currentCash >= self.price then

@@ -403,11 +403,11 @@
                             <!-- Accept button (green, for pending offers) - right aligned -->
                             <Bitmap profile="baseReference" id="saleRow0AcceptBtnBg" position="410px 1px" size="36px 22px" imageColor="0.15 0.25 0.15 1" visible="false"/>
                             <Button profile="financeActionBtn" id="saleRow0AcceptBtn" text="" onClick="onAcceptSale0" position="410px 1px" size="36px 22px" visible="false"/>
-                            <Text profile="fs25_textDefault" id="saleRow0AcceptBtnText" text="VIEW" position="410px 4px" size="36px 18px" textSize="10px" textBold="true" textAlignment="center" textColor="0.4 1 0.4 1" visible="false"/>
+                            <Text profile="fs25_textDefault" id="saleRow0AcceptBtnText" text="$l10n_usedplus_fm_view" position="410px 4px" size="36px 18px" textSize="10px" textBold="true" textAlignment="center" textColor="0.4 1 0.4 1" visible="false"/>
                             <!-- Decline button (red, for pending offers) - right aligned -->
                             <Bitmap profile="baseReference" id="saleRow0DeclineBtnBg" position="450px 1px" size="36px 22px" imageColor="0.25 0.15 0.15 1" visible="false"/>
                             <Button profile="financeActionBtn" id="saleRow0DeclineBtn" text="" onClick="onDeclineSale0" position="450px 1px" size="36px 22px" visible="false"/>
-                            <Text profile="fs25_textDefault" id="saleRow0DeclineBtnText" text="SKIP" position="450px 4px" size="36px 18px" textSize="10px" textBold="true" textAlignment="center" textColor="1 0.5 0.5 1" visible="false"/>
+                            <Text profile="fs25_textDefault" id="saleRow0DeclineBtnText" text="$l10n_usedplus_fm_skip" position="450px 4px" size="36px 18px" textSize="10px" textBold="true" textAlignment="center" textColor="1 0.5 0.5 1" visible="false"/>
                             <!-- Info button - right aligned -->
                             <Bitmap profile="baseReference" id="saleRow0InfoBtnBg" position="440px 1px" size="26px 22px" imageColor="0.18 0.18 0.18 1"/>
                             <Button profile="financeActionBtn" id="saleRow0InfoBtn" text="" onClick="onInfoSale0" position="440px 1px" size="26px 22px"/>
@@ -429,11 +429,11 @@
                             <!-- Accept button (green, for pending offers) - right aligned -->
                             <Bitmap profile="baseReference" id="saleRow1AcceptBtnBg" position="410px 1px" size="36px 22px" imageColor="0.15 0.25 0.15 1" visible="false"/>
                             <Button profile="financeActionBtn" id="saleRow1AcceptBtn" text="" onClick="onAcceptSale1" position="410px 1px" size="36px 22px" visible="false"/>
-                            <Text profile="fs25_textDefault" id="saleRow1AcceptBtnText" text="VIEW" position="410px 4px" size="36px 18px" textSize="10px" textBold="true" textAlignment="center" textColor="0.4 1 0.4 1" visible="false"/>
+                            <Text profile="fs25_textDefault" id="saleRow1AcceptBtnText" text="$l10n_usedplus_fm_view" position="410px 4px" size="36px 18px" textSize="10px" textBold="true" textAlignment="center" textColor="0.4 1 0.4 1" visible="false"/>
                             <!-- Decline button (red, for pending offers) - right aligned -->
                             <Bitmap profile="baseReference" id="saleRow1DeclineBtnBg" position="450px 1px" size="36px 22px" imageColor="0.25 0.15 0.15 1" visible="false"/>
                             <Button profile="financeActionBtn" id="saleRow1DeclineBtn" text="" onClick="onDeclineSale1" position="450px 1px" size="36px 22px" visible="false"/>
-                            <Text profile="fs25_textDefault" id="saleRow1DeclineBtnText" text="SKIP" position="450px 4px" size="36px 18px" textSize="10px" textBold="true" textAlignment="center" textColor="1 0.5 0.5 1" visible="false"/>
+                            <Text profile="fs25_textDefault" id="saleRow1DeclineBtnText" text="$l10n_usedplus_fm_skip" position="450px 4px" size="36px 18px" textSize="10px" textBold="true" textAlignment="center" textColor="1 0.5 0.5 1" visible="false"/>
                             <!-- Info button - right aligned -->
                             <Bitmap profile="baseReference" id="saleRow1InfoBtnBg" position="440px 1px" size="26px 22px" imageColor="0.18 0.18 0.18 1"/>
                             <Button profile="financeActionBtn" id="saleRow1InfoBtn" text="" onClick="onInfoSale1" position="440px 1px" size="26px 22px"/>
@@ -455,11 +455,11 @@
                             <!-- Accept button (green, for pending offers) - right aligned -->
                             <Bitmap profile="baseReference" id="saleRow2AcceptBtnBg" position="410px 1px" size="36px 22px" imageColor="0.15 0.25 0.15 1" visible="false"/>
                             <Button profile="financeActionBtn" id="saleRow2AcceptBtn" text="" onClick="onAcceptSale2" position="410px 1px" size="36px 22px" visible="false"/>
-                            <Text profile="fs25_textDefault" id="saleRow2AcceptBtnText" text="VIEW" position="410px 4px" size="36px 18px" textSize="10px" textBold="true" textAlignment="center" textColor="0.4 1 0.4 1" visible="false"/>
+                            <Text profile="fs25_textDefault" id="saleRow2AcceptBtnText" text="$l10n_usedplus_fm_view" position="410px 4px" size="36px 18px" textSize="10px" textBold="true" textAlignment="center" textColor="0.4 1 0.4 1" visible="false"/>
                             <!-- Decline button (red, for pending offers) - right aligned -->
                             <Bitmap profile="baseReference" id="saleRow2DeclineBtnBg" position="450px 1px" size="36px 22px" imageColor="0.25 0.15 0.15 1" visible="false"/>
                             <Button profile="financeActionBtn" id="saleRow2DeclineBtn" text="" onClick="onDeclineSale2" position="450px 1px" size="36px 22px" visible="false"/>
-                            <Text profile="fs25_textDefault" id="saleRow2DeclineBtnText" text="SKIP" position="450px 4px" size="36px 18px" textSize="10px" textBold="true" textAlignment="center" textColor="1 0.5 0.5 1" visible="false"/>
+                            <Text profile="fs25_textDefault" id="saleRow2DeclineBtnText" text="$l10n_usedplus_fm_skip" position="450px 4px" size="36px 18px" textSize="10px" textBold="true" textAlignment="center" textColor="1 0.5 0.5 1" visible="false"/>
                             <!-- Info button - right aligned -->
                             <Bitmap profile="baseReference" id="saleRow2InfoBtnBg" position="440px 1px" size="26px 22px" imageColor="0.18 0.18 0.18 1"/>
                             <Button profile="financeActionBtn" id="saleRow2InfoBtn" text="" onClick="onInfoSale2" position="440px 1px" size="26px 22px"/>

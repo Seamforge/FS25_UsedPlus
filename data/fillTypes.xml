@@ -24,12 +24,14 @@
         <fillType name="OIL" title="$l10n_fillType_oil" showOnPriceTable="false" unitShort="$l10n_unit_literShort">
             <physics massPerLiter="0.87" maxPhysicalSurfaceAngle="25" />
             <economy pricePerLiter="3.00" />
+            <image hud="gui/icons/oil.dds" />
         </fillType>
 
         <!-- Hydraulic Oil for Service Truck restoration -->
         <fillType name="HYDRAULICOIL" title="$l10n_fillType_hydraulicOil" showOnPriceTable="false" unitShort="$l10n_unit_literShort">
             <physics massPerLiter="0.88" maxPhysicalSurfaceAngle="25" />
             <economy pricePerLiter="4.00" />
+            <image hud="gui/icons/sys_hydraulic.dds" />
         </fillType>
     </fillTypes>
 

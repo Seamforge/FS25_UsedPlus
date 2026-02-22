@@ -79,27 +79,27 @@ function CreditReportDialog:setupSectionIcons()
 
     -- Credit Score section - gold star
     if self.scoreHeaderIcon ~= nil then
-        self.scoreHeaderIcon:setImageFilename(self.iconDir .. "credit_score.png")
+        self.scoreHeaderIcon:setImageFilename(self.iconDir .. "credit_score.dds")
     end
 
     -- Factors section - percentage
     if self.factorsHeaderIcon ~= nil then
-        self.factorsHeaderIcon:setImageFilename(self.iconDir .. "percentage.png")
+        self.factorsHeaderIcon:setImageFilename(self.iconDir .. "percentage.dds")
     end
 
     -- Tips section - lightbulb
     if self.tipsHeaderIcon ~= nil then
-        self.tipsHeaderIcon:setImageFilename(self.iconDir .. "lightbulb.png")
+        self.tipsHeaderIcon:setImageFilename(self.iconDir .. "lightbulb.dds")
     end
 
     -- Account Summary section - finance
     if self.accountHeaderIcon ~= nil then
-        self.accountHeaderIcon:setImageFilename(self.iconDir .. "finance.png")
+        self.accountHeaderIcon:setImageFilename(self.iconDir .. "finance.dds")
     end
 
     -- Payment History section - calendar
     if self.paymentHeaderIcon ~= nil then
-        self.paymentHeaderIcon:setImageFilename(self.iconDir .. "calendar.png")
+        self.paymentHeaderIcon:setImageFilename(self.iconDir .. "calendar.dds")
     end
 end
 
@@ -251,7 +251,7 @@ function CreditReportDialog:updateHeader()
     -- Report date (current in-game date) - Format: "Report Date: Mon YY"
     if self.reportDateText then
         local dateStr = self:formatDate()
-        self.reportDateText:setText("Report Date: " .. dateStr)
+        self.reportDateText:setText(g_i18n:getText("usedplus_cr_reportDate") .. dateStr)
     end
 end
 
@@ -289,7 +289,7 @@ function CreditReportDialog:updateScoreSection()
 
     -- Score range indicator (300-850)
     if self.scoreRangeText then
-        self.scoreRangeText:setText("Score Range: 300-850")
+        self.scoreRangeText:setText(g_i18n:getText("usedplus_cr_scoreRange"))
     end
 
     -- Interest rate impact
@@ -320,7 +320,7 @@ function CreditReportDialog:updateScoreTrend()
 
     local trendText = "No History"
     local trendColor = {0.6, 0.6, 0.6, 1}
-    local trendIconFile = "trend_flat.png"  -- Default icon
+    local trendIconFile = "trend_flat.dds"  -- Default icon
 
     if PaymentTracker then
         local stats = PaymentTracker.getStats(self.farmId)
@@ -332,23 +332,23 @@ function CreditReportDialog:updateScoreTrend()
             if streak >= 6 and onTimeRate >= 0.95 then
                 trendText = "Excellent - Strong Growth"
                 trendColor = {0.2, 0.9, 0.3, 1}
-                trendIconFile = "trend_up.png"
+                trendIconFile = "trend_up.dds"
             elseif streak >= 3 and onTimeRate >= 0.85 then
                 trendText = "Good - Positive Momentum"
                 trendColor = {0.5, 0.9, 0.4, 1}
-                trendIconFile = "trend_up.png"
+                trendIconFile = "trend_up.dds"
             elseif onTimeRate >= 0.70 then
                 trendText = "Stable - Maintaining"
                 trendColor = {0.8, 0.8, 0.4, 1}
-                trendIconFile = "trend_flat.png"
+                trendIconFile = "trend_flat.dds"
             elseif onTimeRate >= 0.50 then
                 trendText = "Declining - Needs Attention"
                 trendColor = {1, 0.6, 0.3, 1}
-                trendIconFile = "trend_down.png"
+                trendIconFile = "trend_down.dds"
             else
                 trendText = "Poor - Immediate Action Needed"
                 trendColor = {1, 0.3, 0.3, 1}
-                trendIconFile = "trend_down.png"
+                trendIconFile = "trend_down.dds"
             end
         end
     end
@@ -585,9 +585,9 @@ function CreditReportDialog:updateActiveAccountsSection()
     local vanillaLoan = self.farm.loan or 0
     if vanillaLoan > 0 then
         table.insert(accounts, {
-            name = "Bank Credit Line",
-            typeLabel = "Bank Loan",
-            startDate = "Active",
+            name = g_i18n:getText("usedplus_cr_bankCreditLine"),
+            typeLabel = g_i18n:getText("usedplus_cr_bankLoan"),
+            startDate = g_i18n:getText("usedplus_cr_statusActive"),
             balance = vanillaLoan,
             createdYear = 9999,  -- Sort to top as "most important"
             createdMonth = 1
@@ -601,17 +601,17 @@ function CreditReportDialog:updateActiveAccountsSection()
             for _, deal in ipairs(deals) do
                 if deal.status == "active" then
                     -- Determine deal type label
-                    local typeLabel = "Loan"
+                    local typeLabel = g_i18n:getText("usedplus_cr_typeLoan")
                     if deal.dealType == DealUtils.TYPE.LEASE then
-                        typeLabel = "Lease"
+                        typeLabel = g_i18n:getText("usedplus_cr_typeLease")
                     elseif deal.dealType == DealUtils.TYPE.FINANCE then
-                        typeLabel = "Finance"
+                        typeLabel = g_i18n:getText("usedplus_cr_typeFinance")
                     elseif deal.dealType == DealUtils.TYPE.LOAN then
-                        typeLabel = "Cash Loan"
+                        typeLabel = g_i18n:getText("usedplus_cr_typeCashLoan")
                     end
 
                     -- Get item name (truncate if too long)
-                    local itemName = deal.itemName or deal.vehicleName or "Unknown"
+                    local itemName = deal.itemName or deal.vehicleName or g_i18n:getText("usedplus_common_unknown")
                     if #itemName > 18 then
                         itemName = itemName:sub(1, 15) .. "..."
                     end
@@ -663,7 +663,7 @@ function CreditReportDialog:updateActiveAccountsSection()
                 lineElement:setText(lineText)
                 lineElement:setVisible(true)
             else
-                lineElement:setText("No active accounts")
+                lineElement:setText(g_i18n:getText("usedplus_cr_noActiveAccounts"))
                 lineElement:setVisible(i == 1 and #accounts == 0)  -- Only show "No accounts" on first line
             end
         end
@@ -698,10 +698,10 @@ function CreditReportDialog:updatePaymentHistorySection()
             UsedPlus.logDebug("CreditReportDialog: WARNING - missedPaymentsText is nil")
         end
         if self.currentStreakText then
-            self.currentStreakText:setText("N/A")
+            self.currentStreakText:setText(g_i18n:getText("usedplus_cr_notAvailable"))
         end
         if self.longestStreakText then
-            self.longestStreakText:setText("N/A")
+            self.longestStreakText:setText(g_i18n:getText("usedplus_cr_notAvailable"))
         end
         return
     end
@@ -775,9 +775,9 @@ function CreditReportDialog:updatePaymentHistogram(stats)
     UsedPlus.logDebug("CreditReportDialog: Histogram data - total=" .. total .. ", onTime=" .. onTime .. ", missed=" .. missed .. ", late=" .. late)
 
     if total == 0 then
-        self.histogramText:setText("No payment history yet")
+        self.histogramText:setText(g_i18n:getText("usedplus_cr_noPaymentHistory"))
         if self.histogramLegendText then
-            self.histogramLegendText:setText("Make payments to build credit history")
+            self.histogramLegendText:setText(g_i18n:getText("usedplus_cr_makePayments"))
         end
         UsedPlus.logDebug("CreditReportDialog: No payment history to display")
         return

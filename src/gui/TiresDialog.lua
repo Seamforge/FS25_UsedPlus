@@ -231,7 +231,7 @@ function TiresDialog:updateDisplay()
         -- Show worst tire indicator in a separate element if available
         if self.worstTireText then
             if self.worstWheel then
-                self.worstTireText:setText(string.format("Worst: %s %.0f%%", self.worstWheel, self.worstCondition * 100))
+                self.worstTireText:setText(string.format(g_i18n:getText("usedplus_tires_worstFormat"), self.worstWheel, self.worstCondition * 100))
                 self.worstTireText:setVisible(true)
             else
                 self.worstTireText:setVisible(false)

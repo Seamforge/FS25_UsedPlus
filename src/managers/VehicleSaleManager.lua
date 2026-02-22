@@ -295,7 +295,7 @@ function VehicleSaleManager:onOfferExpired(farmId, listing)
     -- Send notification
     g_currentMission:addIngameNotification(
         FSBaseMission.INGAME_NOTIFICATION_INFO,
-        string.format("Offer expired for %s. Agent continues searching...", listing.vehicleName)
+        string.format(g_i18n:getText("usedplus_notification_saleOfferExpired"), listing.vehicleName)
     )
 end
 
@@ -430,7 +430,7 @@ function VehicleSaleManager:onListingExpired(farmId, listing, listingIndex)
         UsedPlus.logDebug(string.format("onListingExpired: Deferring dialog - player is sleeping (%s)", listing.vehicleName))
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_INFO,
-            string.format("No buyer found for %s. Agent fee ($%d) was non-refundable.",
+            string.format(g_i18n:getText("usedplus_notification_noBuyerFound"),
                 listing.vehicleName, listing.agentFee)
         )
         return
@@ -458,7 +458,7 @@ function VehicleSaleManager:onListingExpired(farmId, listing, listingIndex)
                     -- Vehicle not available, just show notification
                     g_currentMission:addIngameNotification(
                         FSBaseMission.INGAME_NOTIFICATION_INFO,
-                        "Vehicle no longer available to relist."
+                        g_i18n:getText("usedplus_notification_vehicleNotAvailableRelist")
                     )
                 end
             end
@@ -470,7 +470,7 @@ function VehicleSaleManager:onListingExpired(farmId, listing, listingIndex)
         -- Fallback to notification if dialog not loaded
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_INFO,
-            string.format("No buyer found for %s. Agent fee ($%d) was non-refundable.",
+            string.format(g_i18n:getText("usedplus_notification_noBuyerFound"),
                 listing.vehicleName, listing.agentFee)
         )
     end
@@ -771,13 +771,13 @@ function VehicleSaleManager:declineOffer(listingId)
     if listing:isActive() then
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_INFO,
-            string.format("Declined %s offer for %s. Agent continues searching...",
+            string.format(g_i18n:getText("usedplus_notification_offerDeclinedContinue"),
                 g_i18n:formatMoney(declinedAmount, 0, true, true), listing.vehicleName)
         )
     else
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_INFO,
-            string.format("Declined offer for %s. Listing has expired.", listing.vehicleName)
+            string.format(g_i18n:getText("usedplus_notification_offerDeclinedExpired"), listing.vehicleName)
         )
     end
 
@@ -824,7 +824,7 @@ function VehicleSaleManager:cancelListing(listingId)
     -- Send notification
     g_currentMission:addIngameNotification(
         FSBaseMission.INGAME_NOTIFICATION_INFO,
-        string.format("Cancelled sale listing for %s. Agent fee ($%d) was non-refundable.",
+        string.format(g_i18n:getText("usedplus_notification_saleListingCancelled"),
             listing.vehicleName, listing.agentFee)
     )
 
@@ -885,7 +885,7 @@ function VehicleSaleManager:modifyAskingPrice(listingId, newPrice)
     -- Send notification
     g_currentMission:addIngameNotification(
         FSBaseMission.INGAME_NOTIFICATION_OK,
-        string.format("Updated asking price for %s: %s -> %s",
+        string.format(g_i18n:getText("usedplus_notification_askingPriceUpdated"),
             listing.vehicleName,
             g_i18n:formatMoney(oldPrice, 0, true, true),
             g_i18n:formatMoney(newPrice, 0, true, true))

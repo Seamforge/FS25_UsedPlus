@@ -2,29 +2,47 @@
 <!--
     FS25_UsedPlus - Service Truck for Long-Term Vehicle Restoration
 
-    Based on GMC C7000 81-89 by Canada FS (community-rebuilt model v1.3).
-    Service bed with built-in props (oil tank, hydraulic tank, air tank,
-    battery charger, bottle jack, oiler, fuel can, coolant bottles, laptop).
+    UPSTREAM BASE: GMC C7000 81-89 by Canada FS — v1.3.0.0
+    Last synced:   2026-02-21
+    Tracking doc:  vehicles/serviceTruck/UPSTREAM.md
 
-    Features:
+    All i3D and binary assets are unmodified vanilla v1.3.
+    All customization lives in THIS file (serviceTruck.xml) only.
+    Asset paths use "vehicles/serviceTruck/" prefix (our mod directory).
+    Vanilla C7000 uses "$moddir$" or relative paths — adjust when diffing.
+
+    Sections marked UPSTREAM are vanilla C7000 v1.3 (unmodified).
+    Sections marked CUSTOM are UsedPlus additions.
+    Search for "CUSTOM:" to find all our additions quickly.
+
+    UsedPlus Features (on top of vanilla C7000):
     - Park near damaged vehicles to begin restoration
     - Consumes diesel, oil, and hydraulic fluid during restoration
     - Requires spare parts pallets nearby
     - Slowly restores reliability AND reliability ceiling
     - Target vehicle is immobilized during restoration
+    - Oil + Hydraulic fluid tanks (fill units 3-4)
+    - Unified door animations (all-doors-open for service/fold)
+    - X-key foldable door control while driving
+    - Fault Tracer minigame (on-foot, G key)
+
+    Vanilla C7000 v1.3 Features (unchanged):
     - Multi-color customization (chassis, body, stripes)
     - Interactive compartment doors (8 doors)
     - Beacon/emergency lights (5 beacons)
     - Passenger seats (3)
     - Built-in mobile workshop (Service spec)
     - Diesel fill/discharge triggers (1500L transfer tank)
-    - Fault Tracer minigame (on-foot, G key)
 
     v2.15.0 - Community-rebuilt model integration
 -->
 <vehicle type="usedPlusServiceTruck">
     <annotation>UsedPlus Service Truck - Long-Term Vehicle Restoration</annotation>
 
+    <!-- ══════════════════════════════════════════════════════════════
+         CUSTOM: UsedPlus — Store Data (price, dailyUpkeep, showInStore, l10n)
+         Vanilla has different price/name/function, showInStore=true, no l10n keys.
+         ══════════════════════════════════════════════════════════════ -->
     <storeData>
         <name>$l10n_usedplus_serviceTruck_name</name>
         <specs>
@@ -45,6 +63,10 @@
         <showInStore>false</showInStore>
     </storeData>
 
+    <!-- ══════════════════════════════════════════════════════════════
+         UPSTREAM: C7000 v1.3 — Base, Design Configs, Wheels
+         (typeDesc uses our l10n key; paths use our prefix — otherwise vanilla)
+         ══════════════════════════════════════════════════════════════ -->
     <base>
         <typeDesc>$l10n_usedplus_serviceTruck_typeDesc</typeDesc>
         <filename>vehicles/serviceTruck/C7000.i3d</filename>
@@ -58,7 +80,7 @@
     </base>
 
     <!-- ============================================================ -->
-    <!-- Design Configurations                                        -->
+    <!-- UPSTREAM: C7000 v1.3 — Design Configurations                 -->
     <!-- ============================================================ -->
 
     <design2Configurations title="Bumpers">
@@ -173,7 +195,7 @@
     </design4Configurations>
 
     <!-- ============================================================ -->
-    <!-- Wheels (5 options including Wide super single)                -->
+    <!-- UPSTREAM: C7000 v1.3 — Wheels (5 options incl. Wide)         -->
     <!-- ============================================================ -->
 
     <wheels>
@@ -275,7 +297,7 @@
     </wheels>
 
     <!-- ============================================================ -->
-    <!-- Lights (spotlights + beacons with local textures)            -->
+    <!-- UPSTREAM: C7000 v1.3 — Lights (spots + beacons)              -->
     <!-- ============================================================ -->
 
     <lights>
@@ -355,7 +377,7 @@
     </lights>
 
     <!-- ============================================================ -->
-    <!-- Enterable (driver + 3 passenger seats + mirrors)             -->
+    <!-- UPSTREAM: C7000 v1.3 — Enterable (driver + 3 passengers)     -->
     <!-- ============================================================ -->
 
     <enterable isTabbable="true">
@@ -421,7 +443,7 @@
     </enterable>
 
     <!-- ============================================================ -->
-    <!-- Cylindered (driveshaft + gooseneck moving tool)              -->
+    <!-- UPSTREAM: C7000 v1.3 — Cylindered (driveshaft + gooseneck)   -->
     <!-- ============================================================ -->
 
     <cylindered>
@@ -438,7 +460,7 @@
     </cylindered>
 
     <!-- ============================================================ -->
-    <!-- Attachers + Hoses (gooseneck trailer hitch)                  -->
+    <!-- UPSTREAM: C7000 v1.3 — Attachers + Hoses (gooseneck hitch)   -->
     <!-- ============================================================ -->
 
     <attacherJoints>
@@ -458,7 +480,7 @@
     </connectionHoses>
 
     <!-- ============================================================ -->
-    <!-- Drivable + Motor                                             -->
+    <!-- UPSTREAM: C7000 v1.3 — Drivable + Motor                      -->
     <!-- ============================================================ -->
 
     <drivable>
@@ -477,28 +499,29 @@
     </licensePlates>
 
     <!-- ============================================================ -->
-    <!-- Fill Units (4 tanks: engine diesel, transfer diesel, oil,    -->
-    <!-- hydraulic fluid)                                             -->
+    <!-- Fill Units                                                    -->
+    <!-- UPSTREAM: FU 1-2 (engine diesel 120L, transfer diesel 1500L) -->
+    <!-- CUSTOM:   FU 3-4 (oil 200L, hydraulic 200L for restoration)  -->
     <!-- ============================================================ -->
 
     <fillUnit>
         <fillUnitConfigurations>
             <fillUnitConfiguration>
                 <fillUnits>
-                    <!-- FU 1: Engine diesel (120L, dashboard gauge, not on HUD) -->
+                    <!-- UPSTREAM: FU 1 — Engine diesel (120L, dashboard gauge, not on HUD) -->
                     <fillUnit unitTextOverride="$l10n_unit_literShort" showOnHud="false" showInShop="false" fillTypes="diesel" capacity="120">
                         <dashboard displayType="ANIMATION" valueType="fillLevel" animName="loadingBarFuel" minValueAnim="0" maxValueAnim="120" groups="MOTOR_ACTIVE"/>
                         <exactFillRootNode node="0>0|16|0"/>
                     </fillUnit>
-                    <!-- FU 2: Transfer diesel (1500L, fill trigger) -->
-                    <fillUnit unitTextOverride="$l10n_unit_literShort" showOnHud="true" showInShop="true" fillTypes="diesel" capacity="1500">
+                    <!-- UPSTREAM: FU 2 — Transfer diesel (1500L, fill trigger) -->
+                    <fillUnit unitTextOverride="$l10n_unit_literShort" showOnHud="false" showInShop="true" fillTypes="diesel" capacity="1500">
                         <exactFillRootNode node="exactFillRootNode"/>
                     </fillUnit>
-                    <!-- FU 3: Oil tank for restoration -->
-                    <fillUnit unitTextOverride="$l10n_unit_literShort" showOnHud="true" showInShop="true" fillTypes="OIL" capacity="200" startFillLevel="200">
+                    <!-- CUSTOM: FU 3 — Oil tank for restoration (UsedPlus) -->
+                    <fillUnit unitTextOverride="$l10n_unit_literShort" showOnHud="true" showInShop="true" fillTypes="OIL" capacity="50" startFillLevel="50">
                         <exactFillRootNode node="oilExactFillRootNode"/>
                     </fillUnit>
-                    <!-- FU 4: Hydraulic fluid tank for restoration -->
+                    <!-- CUSTOM: FU 4 — Hydraulic fluid tank for restoration (UsedPlus) -->
                     <fillUnit unitTextOverride="$l10n_unit_literShort" showOnHud="true" showInShop="true" fillTypes="HYDRAULICOIL" capacity="200" startFillLevel="200">
                         <exactFillRootNode node="hydraulicExactFillRootNode"/>
                     </fillUnit>
@@ -507,10 +530,10 @@
         </fillUnitConfigurations>
     </fillUnit>
 
-    <!-- Diesel fill trigger (fill FU 2 from fuel stations) -->
+    <!-- UPSTREAM: Diesel fill trigger (fill FU 2 from fuel stations) -->
     <fillTriggerVehicle triggerNode="fuelTrigger" fillUnitIndex="2" litersPerSecond="30"/>
 
-    <!-- Diesel discharge (dispense from FU 2 to other vehicles) -->
+    <!-- UPSTREAM: Diesel discharge (dispense from FU 2 to other vehicles) -->
     <dischargeable>
         <dischargeableConfigurations>
             <dischargeableConfiguration name="1">
@@ -580,10 +603,14 @@
     </motorized>
 
     <!-- ============================================================ -->
-    <!-- Animations (all door animations + dashboard gauges)          -->
+    <!-- Animations                                                    -->
+    <!-- UPSTREAM: GenY, gauges, Hood, door2-door8 (individual doors)  -->
+    <!-- CUSTOM:   door_service (all doors + laptop, on-foot trigger)  -->
+    <!-- CUSTOM:   door_service_fold (all doors, no laptop, X-key)     -->
     <!-- ============================================================ -->
 
     <animations>
+        <!-- UPSTREAM: Gooseneck + dashboard gauge animations -->
         <animation name="GenY">
             <part node="0>0|14|2|12|2" startTime="0" endTime="7" startTrans="0 0 0.07" endTrans="0 0 -0.165"/>
         </animation>
@@ -599,12 +626,13 @@
         <animation name="loadingBarFuel">
             <part node="fuel_indicator" startTime="0" endTime="1" startRot="0 0 0" endRot="0 0 -73"/>
         </animation>
+        <!-- UPSTREAM: Hood animation -->
         <animation name="Hood">
             <part node="0>0|12|0" startTime="0.5" endTime="1.7" startRot="0 0 0" endRot="65 0 0"/>
         </animation>
 
+        <!-- CUSTOM: door_service — Opens ALL 6 service doors + laptop (on-foot trigger) -->
         <animation name="door_service">
-            <!-- Service operation (on-foot trigger) — left side + laptop only -->
             <part node="0>0|14|2|0|4" startTime="0.0" endTime="1.2" startRot="0 0 0" endRot="0 90 0"/>
             <part node="0>0|14|2|0|5" startTime="0.0" endTime="1.2" startRot="0 0 0" endRot="0 88 0"/>
             <part node="0>0|14|2|0|6" startTime="0.0" endTime="1.2" startRot="0 0 0" endRot="0 0 88"/>
@@ -617,17 +645,21 @@
             <sound template="metalOpen" startTime="0.01" direction="1" volumeScale="3.5" pitchScale="1.5" linkNode="0>0|14|2|0|4"/>
             <sound template="metalClose" startTime="0.02" direction="-1" volumeScale="3.5" pitchScale="1.5" linkNode="0>0|14|2|0|4"/>
         </animation>
+        <!-- CUSTOM: door_service_fold — Opens ALL 6 doors + laptop (X-key while driving) -->
         <animation name="door_service_fold">
-            <!-- Foldable (X key while driving) — both sides, no laptop -->
             <part node="0>0|14|2|0|4" startTime="0.0" endTime="1.2" startRot="0 0 0" endRot="0 90 0"/>
             <part node="0>0|14|2|0|5" startTime="0.0" endTime="1.2" startRot="0 0 0" endRot="0 88 0"/>
             <part node="0>0|14|2|0|6" startTime="0.0" endTime="1.2" startRot="0 0 0" endRot="0 0 88"/>
             <part node="0>0|14|2|0|0" startTime="0.0" endTime="1.2" startRot="0 0 0" endRot="0 -90 0"/>
             <part node="0>0|14|2|0|1" startTime="0.0" endTime="1.2" startRot="0 0 0" endRot="0 -88 0"/>
             <part node="0>0|14|2|0|2" startTime="0.0" endTime="1.2" startRot="0 0 0" endRot="0 0 -88"/>
+            <part node="0>0|19|0|3|0" startTime="2.0" endTime="3.0" startRot="0 0 100" endRot="0 0 -10"/>
+            <part node="0>0|19|0|3|1" startTime="0.0" endTime="3.1" visibility="false"/>
+            <part node="0>0|19|0|3|1" startTime="3.1" endTime="3.2" visibility="true"/>
             <sound template="metalOpen" startTime="0.01" direction="1" volumeScale="3.5" pitchScale="1.5" linkNode="0>0|14|2|0|4"/>
             <sound template="metalClose" startTime="0.02" direction="-1" volumeScale="3.5" pitchScale="1.5" linkNode="0>0|14|2|0|4"/>
         </animation>
+        <!-- UPSTREAM: Individual door animations (door_service2 through door8) -->
         <animation name="door_service2">
             <part node="0>0|14|2|0|4" startTime="0.0" endTime="1.2" startRot="0 0 0" endRot="0 90 0"/>
             <sound template="metalOpen" startTime="0.01" direction="1" volumeScale="3.5" pitchScale="1.5" linkNode="0>0|14|2|0|4"/>
@@ -670,9 +702,10 @@
         </animation>
     </animations>
 
-    <!-- ============================================================ -->
-    <!-- Folding: X key opens/closes service doors while driving      -->
-    <!-- ============================================================ -->
+    <!-- ══════════════════════════════════════════════════════════════
+         CUSTOM: UsedPlus — Foldable (X-key door control while driving)
+         NOT in vanilla C7000. Uses door_service_fold animation.
+         ══════════════════════════════════════════════════════════════ -->
 
     <foldable>
         <foldingConfigurations>
@@ -685,7 +718,7 @@
     </foldable>
 
     <!-- ============================================================ -->
-    <!-- Interactive Controls (8 doors + hood)                        -->
+    <!-- UPSTREAM: C7000 v1.3 — Interactive Controls (8 doors + hood) -->
     <!-- ============================================================ -->
 
     <interactiveControl>
@@ -735,7 +768,7 @@
     </interactiveControl>
 
     <!-- ============================================================ -->
-    <!-- Physics + Misc                                               -->
+    <!-- UPSTREAM: C7000 v1.3 — Physics + Misc                        -->
     <!-- ============================================================ -->
 
     <suspensions>
@@ -760,7 +793,7 @@
     </foliageBending>
 
     <!-- ============================================================ -->
-    <!-- Service Workshop (built-in mobile workshop)                  -->
+    <!-- UPSTREAM: C7000 v1.3 — Service Workshop (mobile workshop)    -->
     <!-- ============================================================ -->
 
     <service>
@@ -792,9 +825,10 @@
         </workshop>
     </service>
 
-    <!-- ============================================================ -->
-    <!-- UsedPlus: Service Truck Restoration Configuration             -->
-    <!-- ============================================================ -->
+    <!-- ══════════════════════════════════════════════════════════════
+         CUSTOM: UsedPlus — Service Truck Restoration Configuration
+         NOT in vanilla C7000. Drives the restoration specialization.
+         ══════════════════════════════════════════════════════════════ -->
 
     <serviceTruck>
         <detectionRadius value="15.0"/>
@@ -804,11 +838,12 @@
         <fillUnits diesel="2" oil="3" hydraulic="4"/>
     </serviceTruck>
 
+    <!-- UPSTREAM: Wear + wash settings -->
     <wearable wearDuration="480" workMultiplier="5" fieldMultiplier="2"/>
     <washable dirtDuration="90" washDuration="1" workMultiplier="3" fieldMultiplier="2"/>
 
     <!-- ============================================================ -->
-    <!-- Color Configurations (chassis + body + stripe + rim)         -->
+    <!-- UPSTREAM: C7000 v1.3 — Color Configurations                  -->
     <!-- ============================================================ -->
 
     <baseColorConfigurations title="$l10n_configuration_chassisColor" useDefaultColors="true">
@@ -860,7 +895,10 @@
     </rimColorConfigurations>
 
     <!-- ============================================================ -->
-    <!-- i3d Mappings (all node paths for the new model)              -->
+    <!-- i3D Mappings                                                  -->
+    <!-- UPSTREAM: All vanilla node mappings                           -->
+    <!-- CUSTOM:   oilTank, oilExactFillRootNode,                      -->
+    <!--           hydraulicTank, hydraulicExactFillRootNode (4 nodes)  -->
     <!-- ============================================================ -->
 
     <i3dMappings>
@@ -946,6 +984,7 @@
         <i3dMapping id="rot4" node="0>1|4"/>
         <i3dMapping id="rot5" node="0>1|5"/>
 
+        <!-- CUSTOM: UsedPlus restoration tank nodes -->
         <i3dMapping id="oilTank" node="0>0|19|2"/>
         <i3dMapping id="oilExactFillRootNode" node="0>0|19|2|1|0"/>
         <i3dMapping id="hydraulicTank" node="0>0|19|3"/>

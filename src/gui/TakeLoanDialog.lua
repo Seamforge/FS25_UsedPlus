@@ -164,8 +164,7 @@ function TakeLoanDialog:onGuiSetupFinished()
     -- Setup pagination button hover effects (3-layer buttons)
     self:setupPaginationButtonHoverEffects()
 
-    -- Diagnostic logging (using logWarn so it always shows)
-    UsedPlus.logWarn(string.format("TakeLoanDialog:onGuiSetupFinished - pageIndicatorText=%s, prevPageBtn=%s, nextPageBtn=%s",
+    UsedPlus.logDebug(string.format("TakeLoanDialog:onGuiSetupFinished - pageIndicatorText=%s, prevPageBtn=%s, nextPageBtn=%s",
         tostring(self.pageIndicatorText ~= nil),
         tostring(self.prevPageBtn ~= nil),
         tostring(self.nextPageBtn ~= nil)))
@@ -182,22 +181,22 @@ function TakeLoanDialog:setupSectionIcons()
 
     -- Credit section - credit score icon
     if self.creditSectionIcon ~= nil then
-        self.creditSectionIcon:setImageFilename(self.iconDir .. "credit_score.png")
+        self.creditSectionIcon:setImageFilename(self.iconDir .. "credit_score.dds")
     end
 
     -- Collateral section - shield/collateral icon
     if self.collateralSectionIcon ~= nil then
-        self.collateralSectionIcon:setImageFilename(self.iconDir .. "collateral.png")
+        self.collateralSectionIcon:setImageFilename(self.iconDir .. "collateral.dds")
     end
 
     -- Config section - percentage/settings icon
     if self.configSectionIcon ~= nil then
-        self.configSectionIcon:setImageFilename(self.iconDir .. "percentage.png")
+        self.configSectionIcon:setImageFilename(self.iconDir .. "percentage.dds")
     end
 
     -- Payment section - calendar icon
     if self.paymentSectionIcon ~= nil then
-        self.paymentSectionIcon:setImageFilename(self.iconDir .. "calendar.png")
+        self.paymentSectionIcon:setImageFilename(self.iconDir .. "calendar.dds")
     end
 end
 
@@ -781,13 +780,12 @@ function TakeLoanDialog:populateAssetList()
 
     -- Update page indicator
     local pageText = string.format("%d / %d", currentPage, totalPages)
-    -- TEMP: Using logWarn so it always shows (remove after fix)
-    UsedPlus.logWarn(string.format("TakeLoanDialog pagination: offset=%d, page=%d/%d, text='%s'", self.pageOffset, currentPage, totalPages, pageText))
+    UsedPlus.logDebug(string.format("TakeLoanDialog pagination: offset=%d, page=%d/%d, text='%s'", self.pageOffset, currentPage, totalPages, pageText))
     if self.pageIndicatorText then
         self.pageIndicatorText:setText(pageText)
-        UsedPlus.logWarn("TakeLoanDialog: pageIndicatorText:setText() called successfully")
+        UsedPlus.logDebug("TakeLoanDialog: pageIndicatorText:setText() called successfully")
     else
-        UsedPlus.logWarn("TakeLoanDialog: pageIndicatorText element is nil!")
+        UsedPlus.logDebug("TakeLoanDialog: pageIndicatorText element is nil!")
     end
 
     -- Enable/disable pagination buttons
@@ -864,14 +862,13 @@ function TakeLoanDialog:onNextPage()
     local totalPages = math.max(1, math.ceil(totalAssets / self.maxDisplayRows))
     -- For PAGING (not scrolling), maxOffset must allow jumping by full pages
     local maxOffset = (totalPages - 1) * self.maxDisplayRows
-    -- TEMP: Using logWarn so it always shows
-    UsedPlus.logWarn(string.format("TakeLoanDialog:onNextPage() - current offset=%d, maxOffset=%d, totalPages=%d", self.pageOffset, maxOffset, totalPages))
+    UsedPlus.logDebug(string.format("TakeLoanDialog:onNextPage() - current offset=%d, maxOffset=%d, totalPages=%d", self.pageOffset, maxOffset, totalPages))
     if self.pageOffset < maxOffset then
         self.pageOffset = math.min(maxOffset, self.pageOffset + self.maxDisplayRows)
-        UsedPlus.logWarn(string.format("TakeLoanDialog:onNextPage() - new offset=%d, calling populateAssetList", self.pageOffset))
+        UsedPlus.logDebug(string.format("TakeLoanDialog:onNextPage() - new offset=%d, calling populateAssetList", self.pageOffset))
         self:populateAssetList()
     else
-        UsedPlus.logWarn("TakeLoanDialog:onNextPage() - already at last page, not advancing")
+        UsedPlus.logDebug("TakeLoanDialog:onNextPage() - already at last page, not advancing")
     end
 end
 

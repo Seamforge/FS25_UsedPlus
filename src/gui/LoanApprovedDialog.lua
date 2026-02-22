@@ -64,7 +64,7 @@ function LoanApprovedDialog:setupHeaderIcon()
     -- Get the header icon element
     local headerIcon = self.dialogElement:getDescendantById("headerIcon")
     if headerIcon ~= nil then
-        headerIcon:setImageFilename(self.iconDir .. "status_good.png")
+        headerIcon:setImageFilename(self.iconDir .. "status_good.dds")
     end
 end
 
@@ -112,7 +112,7 @@ function LoanApprovedDialog:updateDisplay()
 
     -- Loan terms
     if self.termText then
-        self.termText:setText(string.format("%d years", d.termYears))
+        self.termText:setText(string.format(g_i18n:getText("usedplus_la_termYears"), d.termYears))
     end
 
     if self.rateText then

@@ -190,7 +190,7 @@ function VehicleSellingPointExtension.createSaleListing(vehicle, farmId, agentTi
         UsedPlus.logError("VehicleSaleManager not initialized")
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_INFO,
-            "Sale system error. Please try again."
+            g_i18n:getText("usedplus_error_saleSystemError")
         )
         return
     end
@@ -708,7 +708,7 @@ function VehicleSellingPointExtension.hookAllDialogs()
                     if vehicle.propertyState ~= VehiclePropertyState.OWNED then
                         g_currentMission:addIngameNotification(
                             FSBaseMission.INGAME_NOTIFICATION_INFO,
-                            "Leased vehicles cannot be sold. Terminate the lease first."
+                            g_i18n:getText("usedplus_error_cannotSellLeased")
                         )
                         return true
                     end
@@ -727,7 +727,7 @@ function VehicleSellingPointExtension.hookAllDialogs()
                        TradeInCalculations.isVehicleFinanced(vehicle, farmId) then
                         g_currentMission:addIngameNotification(
                             FSBaseMission.INGAME_NOTIFICATION_INFO,
-                            "Financed vehicles cannot be sold until loan is paid off."
+                            g_i18n:getText("usedplus_error_cannotSellFinanced")
                         )
                         return true
                     end
@@ -739,7 +739,7 @@ function VehicleSellingPointExtension.hookAllDialogs()
                             local loanBalance = deal and deal.currentBalance or 0
                             g_currentMission:addIngameNotification(
                                 FSBaseMission.INGAME_NOTIFICATION_ERROR,
-                                string.format("This vehicle is pledged as collateral for a %s loan.\nPay off the loan first to sell.",
+                                string.format(g_i18n:getText("usedplus_error_vehicleIsCollateral"),
                                     g_i18n:formatMoney(loanBalance, 0, true, true))
                             )
                             return true
@@ -750,7 +750,7 @@ function VehicleSellingPointExtension.hookAllDialogs()
                     if g_vehicleSaleManager:isVehicleListed(vehicle) then
                         g_currentMission:addIngameNotification(
                             FSBaseMission.INGAME_NOTIFICATION_INFO,
-                            "This vehicle is already listed for sale."
+                            g_i18n:getText("usedplus_error_alreadyListedForSale")
                         )
                         return true
                     end
@@ -987,7 +987,7 @@ function VehicleSellingPointExtension.hookSellButton()
                 if vehicle.propertyState ~= VehiclePropertyState.OWNED then
                     g_currentMission:addIngameNotification(
                         FSBaseMission.INGAME_NOTIFICATION_INFO,
-                        "Leased vehicles cannot be sold."
+                        g_i18n:getText("usedplus_error_cannotSellLeasedShort")
                     )
                     return
                 end
@@ -1005,7 +1005,7 @@ function VehicleSellingPointExtension.hookSellButton()
                 if g_vehicleSaleManager and g_vehicleSaleManager:isVehicleListed(vehicle) then
                     g_currentMission:addIngameNotification(
                         FSBaseMission.INGAME_NOTIFICATION_INFO,
-                        "This vehicle is already listed for sale."
+                        g_i18n:getText("usedplus_error_alreadyListedForSale")
                     )
                     return
                 end

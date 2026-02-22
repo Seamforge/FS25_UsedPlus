@@ -31,7 +31,7 @@
                 <!-- Time remaining and Status row -->
                 <Text profile="sldLabel" position="-200px -78px" text="$l10n_usedplus_sld_timeLeft"/>
                 <Text profile="sldTimeValue" id="timeRemainingText" position="-100px -78px" text=""/>
-                <Text profile="sldLabel" position="50px -78px" text="Status:"/>
+                <Text profile="sldLabel" position="50px -78px" text="$l10n_usedplus_sld_status"/>
                 <Text profile="sldStatusValue" id="statusText" position="180px -78px" text=""/>
             </GuiElement>
 

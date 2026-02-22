@@ -56,7 +56,7 @@ function SearchInitiatedDialog:setupSectionIcons()
     -- Header icon (search icon)
     local headerIcon = self.dialogElement:getDescendantById("headerIcon")
     if headerIcon ~= nil then
-        headerIcon:setImageFilename(self.iconDir .. "search.png")
+        headerIcon:setImageFilename(self.iconDir .. "search.dds")
     end
 end
 
@@ -97,28 +97,28 @@ end
 function SearchInitiatedDialog:updateDisplay(details)
     -- Vehicle name
     if self.vehicleNameText then
-        self.vehicleNameText:setText(details.vehicleName or "Unknown Vehicle")
+        self.vehicleNameText:setText(details.vehicleName or g_i18n:getText("usedplus_common_unknownVehicle"))
     end
 
     -- Search tier
     if self.tierText then
-        self.tierText:setText(details.tierName or "Regional")
+        self.tierText:setText(details.tierName or g_i18n:getText("usedplus_si_defaultTier"))
     end
 
     -- Duration
     if self.durationText then
-        self.durationText:setText(details.duration or "3 months")
+        self.durationText:setText(details.duration or g_i18n:getText("usedplus_si_defaultDuration"))
     end
 
     -- Quality target
     if self.qualityText then
-        self.qualityText:setText(details.qualityName or "Any Condition")
+        self.qualityText:setText(details.qualityName or g_i18n:getText("usedplus_si_defaultQuality"))
     end
 
     -- Max finds
     if self.maxFindsText then
         local maxListings = details.maxListings or 6
-        self.maxFindsText:setText(string.format("Up to %d finds", maxListings))
+        self.maxFindsText:setText(string.format(g_i18n:getText("usedplus_si_maxFinds"), maxListings))
     end
 
     -- Retainer fee (already formatted or raw number)

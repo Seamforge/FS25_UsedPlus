@@ -20,7 +20,7 @@
             <Bitmap profile="siHeaderIcon" id="headerIcon" position="0px -10px"/>
 
             <!-- Title -->
-            <Text profile="siTitle" position="0px -50px" text="Search Initiated"/>
+            <Text profile="siTitle" position="0px -50px" text="$l10n_usedplus_si_title"/>
 
             <!-- ========== SECTION 1: Vehicle Being Searched ========== -->
             <GuiElement profile="siSectionContainer" position="0px -85px">
@@ -31,14 +31,14 @@
             <!-- ========== SECTION 2: Search Configuration ========== -->
             <GuiElement profile="siSectionContainerTall" position="0px -145px">
                 <Bitmap profile="siSectionBg" position="0px 0px"/>
-                <Text profile="siSectionHeader" position="0px -8px" text="SEARCH CONFIGURATION"/>
+                <Text profile="siSectionHeader" position="0px -8px" text="$l10n_usedplus_si_searchConfig"/>
 
                 <!-- Two columns: Search Tier | Quality Target -->
-                <Text profile="siLabel" position="-150px -32px" text="Search Tier"/>
+                <Text profile="siLabel" position="-150px -32px" text="$l10n_usedplus_si_searchTier"/>
                 <Text profile="siValueTier" id="tierText" position="-150px -50px" text=""/>
                 <Text profile="siDuration" id="durationText" position="-150px -66px" text=""/>
 
-                <Text profile="siLabel" position="150px -32px" text="Quality Target"/>
+                <Text profile="siLabel" position="150px -32px" text="$l10n_usedplus_si_qualityTarget"/>
                 <Text profile="siValueQuality" id="qualityText" position="150px -50px" text=""/>
                 <Text profile="siMaxFinds" id="maxFindsText" position="150px -66px" text=""/>
             </GuiElement>
@@ -46,37 +46,37 @@
             <!-- ========== SECTION 3: Agent Fees ========== -->
             <GuiElement profile="siSectionContainerMed" position="0px -240px">
                 <Bitmap profile="siSectionBgFee" position="0px 0px"/>
-                <Text profile="siSectionHeader" position="0px -8px" text="AGENT FEES"/>
+                <Text profile="siSectionHeader" position="0px -8px" text="$l10n_usedplus_si_agentFees"/>
 
                 <!-- Two columns: Retainer | Commission -->
-                <Text profile="siLabel" position="-150px -32px" text="Retainer (Paid Now)"/>
+                <Text profile="siLabel" position="-150px -32px" text="$l10n_usedplus_si_retainer"/>
                 <Text profile="siValueFee" id="retainerText" position="-150px -52px" text=""/>
 
-                <Text profile="siLabel" position="150px -32px" text="Commission Rate"/>
+                <Text profile="siLabel" position="150px -32px" text="$l10n_usedplus_si_commissionRate"/>
                 <Text profile="siValueCommission" id="commissionText" position="150px -52px" text=""/>
             </GuiElement>
 
             <!-- ========== SECTION 4: Expected Pricing ========== -->
             <GuiElement profile="siSectionContainerMed" position="0px -325px">
                 <Bitmap profile="siSectionBgGreen" position="0px 0px"/>
-                <Text profile="siSectionHeader" position="0px -8px" text="EXPECTED PRICING"/>
+                <Text profile="siSectionHeader" position="0px -8px" text="$l10n_usedplus_si_expectedPricing"/>
 
                 <!-- Three columns: Base Price | Commission | Asking Price -->
-                <Text profile="siLabel" position="-180px -32px" text="Est. Base"/>
+                <Text profile="siLabel" position="-180px -32px" text="$l10n_usedplus_si_estBase"/>
                 <Text profile="siValue" id="basePriceText" position="-180px -52px" text=""/>
 
-                <Text profile="siLabel" position="0px -32px" text="Est. Commission"/>
+                <Text profile="siLabel" position="0px -32px" text="$l10n_usedplus_si_estCommission"/>
                 <Text profile="siValueFeeSmall" id="commissionAmtText" position="0px -52px" text=""/>
 
-                <Text profile="siLabel" position="180px -32px" text="Est. Asking"/>
+                <Text profile="siLabel" position="180px -32px" text="$l10n_usedplus_si_estAsking"/>
                 <Text profile="siValueGreen" id="askingPriceText" position="180px -52px" text=""/>
             </GuiElement>
 
             <!-- ========== Info Text ========== -->
             <Text profile="siInfoText" id="infoText" position="0px -420px"
-                text="Your agent will search monthly and notify you when vehicles are found."/>
+                text="$l10n_usedplus_si_agentInfo1"/>
             <Text profile="siInfoTextSub" position="0px -442px"
-                text="Check Used Marketplace in ESC menu to view search progress."/>
+                text="$l10n_usedplus_si_agentInfo2"/>
 
         </GuiElement>
 

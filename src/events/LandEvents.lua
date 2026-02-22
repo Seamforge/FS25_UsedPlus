@@ -154,7 +154,7 @@ function PurchaseLandCashEvent:run(connection)
     -- Notification
     g_currentMission:addIngameNotification(
         FSBaseMission.INGAME_NOTIFICATION_OK,
-        string.format("Purchased %s for %s",
+        string.format(g_i18n:getText("usedplus_notification_landPurchased"),
             self.landName,
             g_i18n:formatMoney(self.landPrice, 0, true, true))
     )
@@ -289,7 +289,7 @@ function LandLeaseEvent:run(connection)
     if currentOwner ~= 0 and currentOwner ~= FarmlandManager.NO_OWNER_FARM_ID then
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_CRITICAL,
-            "This land is already owned and cannot be leased."
+            g_i18n:getText("usedplus_notification_landAlreadyOwned")
         )
         TransactionResponseEvent.sendToClient(connection, self.farmId, false, "usedplus_mp_error_land_owned")
         return
@@ -308,7 +308,7 @@ function LandLeaseEvent:run(connection)
         if deal.dealType == 3 and deal.farmlandId == self.farmlandId then
             g_currentMission:addIngameNotification(
                 FSBaseMission.INGAME_NOTIFICATION_INFO,
-                "You already have a lease on this land."
+                g_i18n:getText("usedplus_notification_landAlreadyLeased")
             )
             TransactionResponseEvent.sendToClient(connection, self.farmId, false, "usedplus_mp_error_already_leased")
             return
@@ -360,16 +360,16 @@ function LandLeaseEvent:run(connection)
     -- Format term display for notification
     local termDisplay
     if self.termMonths < 12 then
-        termDisplay = string.format("%d months", self.termMonths)
+        termDisplay = string.format(g_i18n:getText("usedplus_term_months"), self.termMonths)
     elseif self.termMonths == 12 then
-        termDisplay = "1 year"
+        termDisplay = g_i18n:getText("usedplus_term_1year")
     else
-        termDisplay = string.format("%d years", termYears)
+        termDisplay = string.format(g_i18n:getText("usedplus_term_years"), termYears)
     end
 
     g_currentMission:addIngameNotification(
         FSBaseMission.INGAME_NOTIFICATION_OK,
-        string.format("Land lease started! %s for %s at %s/month",
+        string.format(g_i18n:getText("usedplus_notification_landLeaseStarted"),
             self.fieldName, termDisplay,
             g_i18n:formatMoney(deal.monthlyPayment, 0, true, true))
     )
@@ -472,7 +472,7 @@ function LandLeaseBuyoutEvent:run(connection)
     if farm.money < buyoutPrice then
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_ERROR,
-            string.format("Insufficient funds for buyout. Need %s",
+            string.format(g_i18n:getText("usedplus_notification_insufficientBuyout"),
                 g_i18n:formatMoney(buyoutPrice, 0, true, true))
         )
         TransactionResponseEvent.sendToClient(connection, deal.farmId, false, "usedplus_mp_error_insufficient_funds")
@@ -495,7 +495,7 @@ function LandLeaseBuyoutEvent:run(connection)
 
     g_currentMission:addIngameNotification(
         FSBaseMission.INGAME_NOTIFICATION_OK,
-        string.format("Congratulations! %s is now fully yours for %s",
+        string.format(g_i18n:getText("usedplus_notification_landBuyoutComplete"),
             deal.landName, g_i18n:formatMoney(buyoutPrice, 0, true, true))
     )
 

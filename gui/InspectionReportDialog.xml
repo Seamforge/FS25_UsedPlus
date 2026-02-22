@@ -56,9 +56,9 @@
 
                 <!-- Engine sub-components (shown when RVB data exists) -->
                 <GuiElement id="engineSubComponentsContainer" position="0px 0px">
-                    <Text profile="irpSubLabel" position="-205px -48px" text="Engine Core"/>
+                    <Text profile="irpSubLabel" position="-205px -48px" text="$l10n_usedplus_irp_engineCore"/>
                     <Text profile="irpSubValue" id="engineCoreText" position="-110px -48px" text="--"/>
-                    <Text profile="irpSubLabel" position="-205px -63px" text="Thermostat"/>
+                    <Text profile="irpSubLabel" position="-205px -63px" text="$l10n_usedplus_irp_thermostat"/>
                     <Text profile="irpSubValue" id="thermostatText" position="-110px -63px" text="--"/>
                 </GuiElement>
 
@@ -77,13 +77,13 @@
                 <!-- Electrical sub-components (shown when RVB data exists) -->
                 <!-- Column 1: Generator/Starter, Column 2: Battery/Glow Plug (spaced apart) -->
                 <GuiElement id="electricalSubComponentsContainer" position="0px 0px">
-                    <Text profile="irpSubLabel" position="-205px -128px" text="Generator"/>
+                    <Text profile="irpSubLabel" position="-205px -128px" text="$l10n_usedplus_irp_generator"/>
                     <Text profile="irpSubValue" id="generatorText" position="-115px -128px" text="--"/>
-                    <Text profile="irpSubLabel" position="-15px -128px" text="Battery"/>
+                    <Text profile="irpSubLabel" position="-15px -128px" text="$l10n_usedplus_irp_battery"/>
                     <Text profile="irpSubValue" id="batteryText" position="75px -128px" text="--"/>
-                    <Text profile="irpSubLabel" position="-205px -143px" text="Starter"/>
+                    <Text profile="irpSubLabel" position="-205px -143px" text="$l10n_usedplus_irp_starter"/>
                     <Text profile="irpSubValue" id="starterText" position="-115px -143px" text="--"/>
-                    <Text profile="irpSubLabel" position="-15px -143px" text="Glow Plug"/>
+                    <Text profile="irpSubLabel" position="-15px -143px" text="$l10n_usedplus_irp_glowPlug"/>
                     <Text profile="irpSubValue" id="glowPlugText" position="75px -143px" text="--"/>
                 </GuiElement>
 
@@ -113,16 +113,16 @@
                 <Text profile="irpSectionHeaderWithIcon" position="10px -5px" text="$l10n_usedplus_irp_sectionTires"/>
 
                 <!-- 4 tires in a row -->
-                <Text profile="irpTireLabel" position="-230px -30px" text="FL"/>
+                <Text profile="irpTireLabel" position="-230px -30px" text="$l10n_usedplus_irp_fl"/>
                 <Text profile="irpTireValue" id="tireFLText" position="-230px -48px" text="--"/>
 
-                <Text profile="irpTireLabel" position="-80px -30px" text="FR"/>
+                <Text profile="irpTireLabel" position="-80px -30px" text="$l10n_usedplus_irp_fr"/>
                 <Text profile="irpTireValue" id="tireFRText" position="-80px -48px" text="--"/>
 
-                <Text profile="irpTireLabel" position="70px -30px" text="RL"/>
+                <Text profile="irpTireLabel" position="70px -30px" text="$l10n_usedplus_irp_rl"/>
                 <Text profile="irpTireValue" id="tireRLText" position="70px -48px" text="--"/>
 
-                <Text profile="irpTireLabel" position="220px -30px" text="RR"/>
+                <Text profile="irpTireLabel" position="220px -30px" text="$l10n_usedplus_irp_rr"/>
                 <Text profile="irpTireValue" id="tireRRText" position="220px -48px" text="--"/>
 
                 <!-- Worst tire indicator -->

@@ -72,7 +72,7 @@ function VehiclePortfolioDialog:show(search)
         UsedPlus.logWarn("VehiclePortfolioDialog:show called but no listings found")
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_INFO,
-            "No vehicles in portfolio. Check back next month!"
+            g_i18n:getText("usedplus_error_noVehiclesInPortfolio")
         )
         return
     end
@@ -114,12 +114,12 @@ function VehiclePortfolioDialog:updateDisplay()
 
     -- Title
     if self.titleText then
-        self.titleText:setText("Found Vehicles")
+        self.titleText:setText(g_i18n:getText("usedplus_vpf_title"))
     end
 
     -- Navigation counter
     if self.navCounterText then
-        self.navCounterText:setText(string.format("%d of %d", self.currentIndex, foundCount))
+        self.navCounterText:setText(string.format(g_i18n:getText("usedplus_vpf_navFormat"), self.currentIndex, foundCount))
     end
 
     -- Update nav button states
@@ -212,10 +212,10 @@ function VehiclePortfolioDialog:updateDisplay()
         local monthsRemaining = self.search:getListingMonthsRemaining(listing)
 
         if monthsRemaining <= 1 then
-            self.expirationText:setText("Offer expires NEXT MONTH!")
+            self.expirationText:setText(g_i18n:getText("usedplus_vpf_expiresNextMonth"))
             self.expirationText:setTextColor(1, 0.4, 0.3, 1)  -- Red - urgent
         elseif monthsRemaining == 2 then
-            self.expirationText:setText("Offer expires in 2 months")
+            self.expirationText:setText(g_i18n:getText("usedplus_vpf_expires2Months"))
             self.expirationText:setTextColor(1, 0.7, 0.3, 1)  -- Orange - warning
         else
             self.expirationText:setText(string.format("Offer valid for %d months", monthsRemaining))
@@ -226,9 +226,9 @@ function VehiclePortfolioDialog:updateDisplay()
     -- Info text with tip
     if self.infoText then
         if foundCount > 1 then
-            self.infoText:setText("Use Prev/Next to browse. View Details to inspect or buy.")
+            self.infoText:setText(g_i18n:getText("usedplus_vpf_browseInstructions"))
         else
-            self.infoText:setText("View Details to inspect condition or purchase this vehicle.")
+            self.infoText:setText(g_i18n:getText("usedplus_vpf_viewDetailsInstruction"))
         end
     end
 end
@@ -361,7 +361,7 @@ function VehiclePortfolioDialog:onClickDecline()
     -- Notify player
     g_currentMission:addIngameNotification(
         FSBaseMission.INGAME_NOTIFICATION_INFO,
-        "Offer declined. Seller has been notified."
+        g_i18n:getText("usedplus_notification_offerDeclinedSeller")
     )
 
     -- Update display (will close if no listings left)

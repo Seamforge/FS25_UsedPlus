@@ -177,10 +177,10 @@ function UsedVehiclePreviewDialog:updateDisplay()
             local monthIndex = ((expireMonth - 1) % 12) + 1
             local monthName = UsedVehiclePreviewDialog.MONTH_NAMES[monthIndex] or "Jan"
 
-            self.expirationText:setText(string.format("%d month%s (expires %s)",
+            self.expirationText:setText(string.format(g_i18n:getText("usedplus_uvp_expiresFormat"),
                 remaining, remaining == 1 and "" or "s", monthName))
         else
-            self.expirationText:setText("Expired")
+            self.expirationText:setText(g_i18n:getText("usedplus_uvp_expired"))
         end
     end
 
@@ -558,7 +558,7 @@ function UsedVehiclePreviewDialog:requestInspectionTier(tierIndex)
     local listing = self.listing
 
     if g_usedVehicleManager == nil then
-        g_currentMission:showBlinkingWarning("Used vehicle system not available!", 3000)
+        g_currentMission:showBlinkingWarning(g_i18n:getText("usedplus_error_systemUnavailable"), 3000)
         return
     end
 
@@ -692,22 +692,22 @@ function UsedVehiclePreviewDialog:getConditionDescription(value, conditionType)
 
     if value <= 0.05 then
         -- Nearly perfect
-        return isMechanical and "Excellent" or "Like new"
+        return isMechanical and g_i18n:getText("usedplus_cond_excellent") or g_i18n:getText("usedplus_cond_likeNew")
     elseif value <= 0.15 then
         -- Very good
-        return isMechanical and "Very good" or "Minor scratches"
+        return isMechanical and g_i18n:getText("usedplus_cond_veryGood") or g_i18n:getText("usedplus_cond_minorScratches")
     elseif value <= 0.30 then
         -- Good
-        return isMechanical and "Good condition" or "Some wear visible"
+        return isMechanical and g_i18n:getText("usedplus_cond_goodCondition") or g_i18n:getText("usedplus_cond_someWearVisible")
     elseif value <= 0.50 then
         -- Fair
-        return isMechanical and "Fair, shows use" or "Faded, needs touch-up"
+        return isMechanical and g_i18n:getText("usedplus_cond_fairShowsUse") or g_i18n:getText("usedplus_cond_fadedNeedsTouchup")
     elseif value <= 0.70 then
         -- Worn
-        return isMechanical and "Worn, needs work" or "Weathered, repaint advised"
+        return isMechanical and g_i18n:getText("usedplus_cond_wornNeedsWork") or g_i18n:getText("usedplus_cond_weatheredRepaintAdvised")
     else
         -- Poor
-        return isMechanical and "Poor, major repairs needed" or "Poor, significant fading"
+        return isMechanical and g_i18n:getText("usedplus_cond_poorMajorRepairs") or g_i18n:getText("usedplus_cond_poorSignificantFading")
     end
 end
 

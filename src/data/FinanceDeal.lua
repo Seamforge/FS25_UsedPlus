@@ -248,7 +248,7 @@ function FinanceDeal:processConfiguredPayment()
         -- Warn about increasing balance
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_INFO,
-            string.format("Payment skipped for %s. Interest of %s added to balance.",
+            string.format(g_i18n:getText("usedplus_notification_paymentSkipped"),
                 self.itemName, g_i18n:formatMoney(interestDue, 0, true, true))
         )
 
@@ -326,7 +326,7 @@ function FinanceDeal:processConfiguredPayment()
 
             g_currentMission:addIngameNotification(
                 FSBaseMission.INGAME_NOTIFICATION_OK,
-                string.format("Congratulations! %s has been paid off!", self.itemName)
+                string.format(g_i18n:getText("usedplus_notification_dealPaidOff"), self.itemName)
             )
 
             return true
@@ -611,14 +611,14 @@ function FinanceDeal:handleMissedLandPayment()
 
     if self.missedPayments == 1 then
         g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_CRITICAL,
-            string.format("Missed land payment for %s! Interest of %s added. (1st warning)",
+            string.format(g_i18n:getText("usedplus_notification_missedLandPayment1st"),
                 self.itemName, g_i18n:formatMoney(monthlyInterest, 0, true, true)))
     elseif self.missedPayments == threshold - 1 then
-        local warningMsg = string.format("FINAL WARNING: Missed land payment for %s! One more = SEIZURE!", self.itemName)
+        local warningMsg = string.format(g_i18n:getText("usedplus_notification_missedLandPaymentFinal"), self.itemName)
         g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_CRITICAL, warningMsg)
 
         -- Show popup dialog to ensure player sees this critical warning
-        InfoDialog.show(warningMsg .. "\n\nYour next payment is due soon. Ensure sufficient funds are available or your land will be seized.")
+        InfoDialog.show(warningMsg .. "\n\n" .. g_i18n:getText("usedplus_notification_ensureFundsLandSeized"))
     elseif self.missedPayments >= threshold then
         self:seizeLand()
     end
@@ -643,14 +643,14 @@ function FinanceDeal:handleMissedVehiclePayment()
 
     if self.missedPayments == 1 then
         g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_INFO,
-            string.format("Missed payment for %s. Interest of %s added to balance. (1st warning)",
+            string.format(g_i18n:getText("usedplus_notification_missedPayment1st"),
                 self.itemName, g_i18n:formatMoney(monthlyInterest, 0, true, true)))
     elseif self.missedPayments == threshold - 1 then
-        local warningMsg = string.format("FINAL WARNING: Missed payment for %s. One more missed payment will result in repossession!", self.itemName)
+        local warningMsg = string.format(g_i18n:getText("usedplus_notification_missedPaymentFinal"), self.itemName)
         g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_CRITICAL, warningMsg)
 
         -- Show popup dialog to ensure player sees this critical warning
-        InfoDialog.show(warningMsg .. "\n\nYour next payment is due soon. Ensure sufficient funds are available or your vehicle will be repossessed.")
+        InfoDialog.show(warningMsg .. "\n\n" .. g_i18n:getText("usedplus_notification_ensureFundsRepossessed"))
     elseif self.missedPayments >= threshold then
         self:repossessVehicle()
     end
@@ -714,7 +714,7 @@ function FinanceDeal:repossessVehicle()
     else
         -- Fallback to notification if dialog not available
         g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_CRITICAL,
-            string.format("VEHICLE REPOSSESSED: %s has been taken due to non-payment!", self.itemName))
+            string.format(g_i18n:getText("usedplus_notification_vehicleRepossessed"), self.itemName))
     end
 end
 
@@ -816,23 +816,23 @@ function FinanceDeal:handleMissedLoanPayment()
 
     if self.missedPayments == 1 then
         local warningMsg = hasCollateral
-            and string.format("Missed loan payment! Interest of %s added. Your pledged collateral (%d items) is at risk! (1st warning)",
+            and string.format(g_i18n:getText("usedplus_notification_missedLoanPayment1stCollateral"),
                 g_i18n:formatMoney(monthlyInterest, 0, true, true), #self.collateralItems)
-            or string.format("Missed loan payment! Interest of %s added. (1st warning)",
+            or string.format(g_i18n:getText("usedplus_notification_missedLoanPayment1st"),
                 g_i18n:formatMoney(monthlyInterest, 0, true, true))
 
         g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_CRITICAL, warningMsg)
 
     elseif self.missedPayments == 2 then
         local warningMsg = hasCollateral
-            and string.format("FINAL WARNING: Missed loan payment! One more = COLLATERAL REPOSSESSED! (%d vehicles at stake)",
+            and string.format(g_i18n:getText("usedplus_notification_missedLoanPaymentFinalCollateral"),
                 #self.collateralItems)
-            or "FINAL WARNING: Missed loan payment! One more missed payment will result in loan default!"
+            or g_i18n:getText("usedplus_notification_missedLoanPaymentFinal")
 
         g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_CRITICAL, warningMsg)
 
         -- Show popup dialog to ensure player sees this critical warning
-        InfoDialog.show(warningMsg .. "\n\nYour next payment is due soon. Ensure sufficient funds are available or face repossession.")
+        InfoDialog.show(warningMsg .. "\n\n" .. g_i18n:getText("usedplus_notification_ensureFundsRepossession"))
 
     elseif self.missedPayments >= 3 then
         self:repossessCollateral()
@@ -966,14 +966,14 @@ function FinanceDeal:repossessCollateral()
         -- Fallback to notification if dialog not available
         local notificationMsg
         if repossessedCount > 0 then
-            local assetType = seizedLandCount > 0 and (repossessedCount > seizedLandCount and "assets" or "land parcels") or "vehicles"
+            local assetType = seizedLandCount > 0 and (repossessedCount > seizedLandCount and g_i18n:getText("usedplus_label_assets") or g_i18n:getText("usedplus_label_landParcels")) or g_i18n:getText("usedplus_label_vehicles")
             notificationMsg = string.format(
-                "LOAN DEFAULTED! %d %s worth %s have been repossessed!",
+                g_i18n:getText("usedplus_notification_loanDefaultedRepossessed"),
                 repossessedCount,
                 assetType,
                 g_i18n:formatMoney(repossessedValue, 0, true, true))
         else
-            notificationMsg = "LOAN DEFAULTED! No collateral could be recovered."
+            notificationMsg = g_i18n:getText("usedplus_notification_loanDefaultedNoCollateral")
         end
 
         g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_CRITICAL, notificationMsg)

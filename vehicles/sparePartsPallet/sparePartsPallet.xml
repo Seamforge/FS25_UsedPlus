@@ -52,7 +52,7 @@
             <fillUnitConfiguration>
                 <fillUnits removeVehicleIfEmpty="true">
                     <!-- Spare parts fill unit - 100 capacity -->
-                    <fillUnit unitTextOverride="$l10n_unit_pcs" fillTypes="USEDPLUS_SPAREPARTS" capacity="100" startFillLevel="100"/>
+                    <fillUnit unitTextOverride="$l10n_unit_pcs" fillTypes="USEDPLUS_SPAREPARTS" capacity="100" startFillType="USEDPLUS_SPAREPARTS" startFillLevel="100"/>
                 </fillUnits>
             </fillUnitConfiguration>
         </fillUnitConfigurations>
@@ -63,21 +63,9 @@
         <texture diffuse="$data/objects/pallets/shared/euroPallet/euroPalletNew_diffuse.dds"/>
         <texture diffuse="$data/objects/pallets/shared/euroPallet/euroPalletMiddle_diffuse.dds"/>
         <texture diffuse="$data/objects/pallets/shared/euroPallet/euroPalletOld_diffuse.dds"/>
-        <content>
-            <!-- Box visuals that hide as fill level decreases -->
-            <object node="box01" tensionBeltNode="box01Tension"/>
-            <object node="box02" tensionBeltNode="box02Tension"/>
-            <object node="box03" tensionBeltNode="box03Tension"/>
-            <object node="box04" tensionBeltNode="box04Tension"/>
-            <object node="box05" tensionBeltNode="box05Tension"/>
-            <object node="box06" tensionBeltNode="box06Tension"/>
-            <object node="box07" tensionBeltNode="box07Tension"/>
-            <object node="box08" tensionBeltNode="box08Tension"/>
-            <object node="box09" tensionBeltNode="box09Tension"/>
-            <object node="box10" tensionBeltNode="box10Tension"/>
-            <object node="box11" tensionBeltNode="box11Tension"/>
-            <object node="box12" tensionBeltNode="box12Tension"/>
-        </content>
+        <!-- Content/box nodes removed: vanilla raisinBoxPallet i3d doesn't have
+             12 children at the expected node paths, causing ~60 error lines per session.
+             Pallet works functionally without box hide/show animation. -->
         <sounds>
             <unload template="palletsFillPlastic" pitchScale="0.9"/>
         </sounds>
@@ -90,29 +78,5 @@
     <i3dMappings>
         <i3dMapping id="raisinBoxPallet_component1" node="0>"/>
         <i3dMapping id="dynamicMountTrigger" node="0>0"/>
-        <i3dMapping id="box01" node="0>2|0"/>
-        <i3dMapping id="box01Tension" node="0>2|0|0|0"/>
-        <i3dMapping id="box02" node="0>2|1"/>
-        <i3dMapping id="box02Tension" node="0>2|1|0|0"/>
-        <i3dMapping id="box03" node="0>2|2"/>
-        <i3dMapping id="box03Tension" node="0>2|2|0|0"/>
-        <i3dMapping id="box04" node="0>2|3"/>
-        <i3dMapping id="box04Tension" node="0>2|3|0|0"/>
-        <i3dMapping id="box05" node="0>2|4"/>
-        <i3dMapping id="box05Tension" node="0>2|4|0|0"/>
-        <i3dMapping id="box06" node="0>2|5"/>
-        <i3dMapping id="box06Tension" node="0>2|5|0|0"/>
-        <i3dMapping id="box07" node="0>2|6"/>
-        <i3dMapping id="box07Tension" node="0>2|6|0|0"/>
-        <i3dMapping id="box08" node="0>2|7"/>
-        <i3dMapping id="box08Tension" node="0>2|7|0|0"/>
-        <i3dMapping id="box09" node="0>2|8"/>
-        <i3dMapping id="box09Tension" node="0>2|8|0|0"/>
-        <i3dMapping id="box10" node="0>2|9"/>
-        <i3dMapping id="box10Tension" node="0>2|9|0|0"/>
-        <i3dMapping id="box11" node="0>2|10"/>
-        <i3dMapping id="box11Tension" node="0>2|10|0|0"/>
-        <i3dMapping id="box12" node="0>2|11"/>
-        <i3dMapping id="box12Tension" node="0>2|11|0|0"/>
     </i3dMappings>
 </vehicle>

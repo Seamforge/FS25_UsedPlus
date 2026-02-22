@@ -166,7 +166,7 @@ function FarmExtension:trackVanillaLoanPayment(farm)
 
             g_currentMission:addIngameNotification(
                 FSBaseMission.INGAME_NOTIFICATION_OK,
-                "Congratulations! Your bank loan has been paid off!"
+                g_i18n:getText("usedplus_notification_bankLoanPaidOff")
             )
 
             UsedPlus.logInfo(string.format("Farm %d: Vanilla bank loan paid off!", farmId))
@@ -278,7 +278,7 @@ function FarmExtension:seedRetroactiveVanillaLoanCredit(farm, currentLoan)
     -- Notify the player
     g_currentMission:addIngameNotification(
         FSBaseMission.INGAME_NOTIFICATION_OK,
-        string.format("UsedPlus: Credited %d prior bank loan payments to your history!",
+        string.format(g_i18n:getText("usedplus_notification_priorPaymentsCredited"),
             paymentsToCredit)
     )
 

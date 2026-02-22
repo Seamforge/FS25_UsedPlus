@@ -71,17 +71,17 @@ function UsedSearchDialog:setupSectionIcons()
 
     -- Vehicle section - vehicle icon
     if self.vehicleSectionIcon ~= nil then
-        self.vehicleSectionIcon:setImageFilename(self.iconDir .. "vehicle.png")
+        self.vehicleSectionIcon:setImageFilename(self.iconDir .. "vehicle.dds")
     end
 
     -- Tier section - agent icon
     if self.tierSectionIcon ~= nil then
-        self.tierSectionIcon:setImageFilename(self.iconDir .. "agent.png")
+        self.tierSectionIcon:setImageFilename(self.iconDir .. "agent.dds")
     end
 
     -- Quality section - quality star icon
     if self.qualitySectionIcon ~= nil then
-        self.qualitySectionIcon:setImageFilename(self.iconDir .. "quality_star.png")
+        self.qualitySectionIcon:setImageFilename(self.iconDir .. "quality_star.dds")
     end
 end
 
@@ -97,48 +97,58 @@ end
 UsedSearchDialog.QUALITY_TIERS = {
     {  -- Any Condition: Catch-all with widest variance
         name = "Any Condition",
+        nameKey = "usedplus_quality_any",
         priceRangeMin = 0.30,            -- 30% of new (70% off)
         priceRangeMax = 0.50,            -- 50% of new (50% off)
         damageRange = { 0.35, 0.60 },    -- 35-60% damage
         wearRange = { 0.40, 0.65 },      -- 40-65% wear
         successModifier = 0.08,          -- +8% easier to find rough equipment
-        description = "Wildcard - high variance in quality and price"
+        description = "Wildcard - high variance in quality and price",
+        descriptionKey = "usedplus_quality_anyDesc"
     },
     {  -- Poor Condition: Fixer-upper - highest repair costs
         name = "Poor Condition",
+        nameKey = "usedplus_quality_poor",
         priceRangeMin = 0.22,            -- 22% of new (78% off)
         priceRangeMax = 0.38,            -- 38% of new (62% off)
         damageRange = { 0.55, 0.80 },    -- 55-80% damage
         wearRange = { 0.60, 0.85 },      -- 60-85% wear
         successModifier = 0.15,          -- +15% easier to find junk
-        description = "Bargain bin - extensive repairs needed"
+        description = "Bargain bin - extensive repairs needed",
+        descriptionKey = "usedplus_quality_poorDesc"
     },
     {  -- Fair Condition: Middle ground
         name = "Fair Condition",
+        nameKey = "usedplus_quality_fair",
         priceRangeMin = 0.50,            -- 50% of new (50% off)
         priceRangeMax = 0.68,            -- 68% of new (32% off)
         damageRange = { 0.18, 0.35 },    -- 18-35% damage
         wearRange = { 0.22, 0.40 },      -- 22-40% wear
         successModifier = 0.00,          -- Baseline (no modifier)
-        description = "Moderate wear - some repairs likely"
+        description = "Moderate wear - some repairs likely",
+        descriptionKey = "usedplus_quality_fairDesc"
     },
     {  -- Good Condition: Well maintained
         name = "Good Condition",
+        nameKey = "usedplus_quality_good",
         priceRangeMin = 0.68,            -- 68% of new (32% off)
         priceRangeMax = 0.80,            -- 80% of new (20% off)
         damageRange = { 0.06, 0.18 },    -- 6-18% damage
         wearRange = { 0.08, 0.22 },      -- 8-22% wear
         successModifier = -0.08,         -- -8% harder to find well-maintained
-        description = "Well maintained - minimal repairs"
+        description = "Well maintained - minimal repairs",
+        descriptionKey = "usedplus_quality_goodDesc"
     },
     {  -- Excellent Condition: Like new
         name = "Excellent Condition",
+        nameKey = "usedplus_quality_excellent",
         priceRangeMin = 0.80,            -- 80% of new (20% off)
         priceRangeMax = 0.94,            -- 94% of new (6% off)
         damageRange = { 0.00, 0.06 },    -- 0-6% damage
         wearRange = { 0.00, 0.08 },      -- 0-8% wear
         successModifier = -0.15,         -- -15% harder to find pristine
-        description = "Like new - ready to work immediately"
+        description = "Like new - ready to work immediately",
+        descriptionKey = "usedplus_quality_excellentDesc"
     }
 }
 
@@ -147,11 +157,11 @@ UsedSearchDialog.QUALITY_TIERS = {
      Better credit = cheaper agent services (they trust you more)
 ]]
 UsedSearchDialog.CREDIT_FEE_MODIFIERS = {
-    {minScore = 750, modifier = -0.15, name = "Excellent"},  -- 15% discount
-    {minScore = 700, modifier = -0.08, name = "Good"},       -- 8% discount
-    {minScore = 650, modifier = 0.00,  name = "Fair"},       -- No change
-    {minScore = 600, modifier = 0.10,  name = "Poor"},       -- 10% surcharge
-    {minScore = 300, modifier = 0.20,  name = "Very Poor"}   -- 20% surcharge
+    {minScore = 750, modifier = -0.15, name = "Excellent", nameKey = "usedplus_creditRating_excellent"},  -- 15% discount
+    {minScore = 700, modifier = -0.08, name = "Good",      nameKey = "usedplus_creditRating_good"},       -- 8% discount
+    {minScore = 650, modifier = 0.00,  name = "Fair",      nameKey = "usedplus_creditRating_fair"},       -- No change
+    {minScore = 600, modifier = 0.10,  name = "Poor",      nameKey = "usedplus_creditRating_poor"},       -- 10% surcharge
+    {minScore = 300, modifier = 0.20,  name = "Very Poor", nameKey = "usedplus_creditRating_veryPoor"}   -- 20% surcharge
 }
 
 --[[
@@ -300,6 +310,7 @@ function UsedSearchDialog:setData(storeItem, storeItemIndex, farmId)
     self.SEARCH_TIERS = {
         {  -- Local Search: Quick, cheap, low odds
             name = "Local Search",
+            nameKey = "usedplus_searchTier_local",
             retainerFlat = 500,           -- $500 flat retainer
             retainerPercent = 0,          -- No percentage
             commissionPercent = 0.06,     -- 6% added to vehicle price
@@ -310,6 +321,7 @@ function UsedSearchDialog:setData(storeItem, storeItemIndex, farmId)
         },
         {  -- Regional Search: Balanced, best value
             name = "Regional Search",
+            nameKey = "usedplus_searchTier_regional",
             retainerFlat = 1000,          -- $1000 base
             retainerPercent = 0.005,      -- Plus 0.5% of vehicle price
             commissionPercent = 0.08,     -- 8% commission
@@ -320,6 +332,7 @@ function UsedSearchDialog:setData(storeItem, storeItemIndex, farmId)
         },
         {  -- National Search: Premium, high certainty
             name = "National Search",
+            nameKey = "usedplus_searchTier_national",
             retainerFlat = 2000,          -- $2000 base
             retainerPercent = 0.008,      -- Plus 0.8% of vehicle price
             commissionPercent = 0.10,     -- 10% commission
@@ -346,9 +359,9 @@ function UsedSearchDialog:setData(storeItem, storeItemIndex, farmId)
         -- Duration text (just maxMonths now, no minMonths)
         local durationText
         if tier.maxMonths == 1 then
-            durationText = "1 month"
+            durationText = g_i18n:getText("usedplus_time_1month")
         else
-            durationText = string.format("%d months", tier.maxMonths)
+            durationText = string.format(g_i18n:getText("usedplus_time_months"), tier.maxMonths)
         end
 
         -- Show monthly success chance (will be modified by quality selection)
@@ -563,6 +576,7 @@ function UsedSearchDialog:onStartSearch()
     local SEARCH_TIERS = {
         {
             name = "Local",
+            nameKey = "usedplus_searchTier_local",
             retainerFlat = 500,
             retainerPercent = 0,
             commissionPercent = 0.06,
@@ -572,6 +586,7 @@ function UsedSearchDialog:onStartSearch()
         },
         {
             name = "Regional",
+            nameKey = "usedplus_searchTier_regional",
             retainerFlat = 1000,
             retainerPercent = 0.005,
             commissionPercent = 0.08,
@@ -581,6 +596,7 @@ function UsedSearchDialog:onStartSearch()
         },
         {
             name = "National",
+            nameKey = "usedplus_searchTier_national",
             retainerFlat = 2000,
             retainerPercent = 0.008,
             commissionPercent = 0.10,
@@ -651,9 +667,9 @@ function UsedSearchDialog:onStartSearch()
     self:close()
 
     -- v1.5.0: Show styled SearchInitiatedDialog with all details
-    local tierName = tier.name
-    local qualityName = qualityTier.name
-    local durationText = tier.maxMonths == 1 and "1 month" or string.format("%d months", tier.maxMonths)
+    local tierName = tier.nameKey and g_i18n:getText(tier.nameKey) or tier.name
+    local qualityName = qualityTier.nameKey and g_i18n:getText(qualityTier.nameKey) or qualityTier.name
+    local durationText = tier.maxMonths == 1 and g_i18n:getText("usedplus_time_1month") or string.format(g_i18n:getText("usedplus_time_months"), tier.maxMonths)
 
     DialogLoader.show("SearchInitiatedDialog", "show", {
         vehicleName = itemName,
@@ -671,7 +687,7 @@ function UsedSearchDialog:onStartSearch()
     -- Also add corner notification for when they exit menus
     g_currentMission:addIngameNotification(
         FSBaseMission.INGAME_NOTIFICATION_OK,
-        string.format("Search initiated for %s (%s, %s)", itemName, tierName, durationText)
+        string.format(g_i18n:getText("usedplus_notification_searchInitiated"), itemName, tierName, durationText)
     )
 end
 

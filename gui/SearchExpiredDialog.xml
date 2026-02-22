@@ -15,34 +15,34 @@
 
         <GuiElement profile="fs25_dialogContentContainer">
             <!-- Title -->
-            <Text profile="sedTitle" id="titleText" position="0px -25px" text="Search Complete"/>
+            <Text profile="sedTitle" id="titleText" position="0px -25px" text="$l10n_usedplus_se_title"/>
 
             <!-- Search Summary Section with Vehicle Image -->
             <GuiElement profile="sedSectionContainer" position="0px -60px">
                 <Bitmap profile="sedSectionBg" position="0px 0px"/>
-                <Text profile="sedSectionHeader" position="0px -5px" text="SEARCH SUMMARY"/>
+                <Text profile="sedSectionHeader" position="0px -5px" text="$l10n_usedplus_se_summary"/>
 
                 <!-- Vehicle Image (left side) - Standard position, lowered 5px -->
                 <Bitmap profile="sedVehicleImage" id="vehicleImage" position="-185px 55px"/>
 
                 <!-- Search details (right side) - values shifted right 10px -->
-                <Text profile="sedLabel" position="20px -32px" text="Searched For:"/>
+                <Text profile="sedLabel" position="20px -32px" text="$l10n_usedplus_se_searchedFor"/>
                 <Text profile="sedValue" id="vehicleNameText" position="140px -32px" text=""/>
 
-                <Text profile="sedLabel" position="20px -55px" text="Agent Tier:"/>
+                <Text profile="sedLabel" position="20px -55px" text="$l10n_usedplus_se_agentTier"/>
                 <Text profile="sedValue" id="searchTierText" position="140px -55px" text=""/>
 
-                <Text profile="sedLabel" position="20px -78px" text="Quality:"/>
+                <Text profile="sedLabel" position="20px -78px" text="$l10n_usedplus_se_quality"/>
                 <Text profile="sedValue" id="qualityTierText" position="140px -78px" text=""/>
 
-                <Text profile="sedLabel" position="20px -101px" text="Duration:"/>
+                <Text profile="sedLabel" position="20px -101px" text="$l10n_usedplus_se_duration"/>
                 <Text profile="sedValue" id="durationText" position="140px -101px" text=""/>
             </GuiElement>
 
             <!-- Results Section -->
             <GuiElement profile="sedResultsSection" position="0px -210px">
                 <Bitmap profile="sedResultsBg" position="0px 0px"/>
-                <Text profile="sedSectionHeader" position="0px -5px" text="RESULTS"/>
+                <Text profile="sedSectionHeader" position="0px -5px" text="$l10n_usedplus_se_results"/>
 
                 <Text profile="sedResultsValue" id="resultsText" position="0px -40px" text=""/>
             </GuiElement>
@@ -50,10 +50,10 @@
             <!-- Renewal Option -->
             <GuiElement profile="sedRenewalSection" position="0px -300px">
                 <Bitmap profile="sedRenewalBg" position="0px 0px"/>
-                <Text profile="sedSectionHeader" position="0px -5px" text="RENEW SEARCH?"/>
+                <Text profile="sedSectionHeader" position="0px -5px" text="$l10n_usedplus_se_renewQuestion"/>
 
-                <Text profile="sedRenewalInfo" position="0px -32px" text="Continue searching for more options"/>
-                <Text profile="sedLabel" position="-80px -55px" text="Renewal Cost:"/>
+                <Text profile="sedRenewalInfo" position="0px -32px" text="$l10n_usedplus_se_renewInfo"/>
+                <Text profile="sedLabel" position="-80px -55px" text="$l10n_usedplus_se_renewalCost"/>
                 <Text profile="sedRenewCost" id="renewCostText" position="40px -55px" text=""/>
             </GuiElement>
 
@@ -61,7 +61,7 @@
 
         <!-- Button Box -->
         <BoxLayout profile="fs25_dialogButtonBox">
-            <Button id="renewButton" profile="buttonOK" text="Renew Search" onClick="onClickRenew"/>
+            <Button id="renewButton" profile="buttonOK" text="$l10n_usedplus_se_renewButton" onClick="onClickRenew"/>
             <Bitmap profile="fs25_dialogButtonBoxSeparator"/>
             <Button id="closeButton" profile="buttonBack" text="$l10n_button_close" onClick="onClickClose"/>
         </BoxLayout>

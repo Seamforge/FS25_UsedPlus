@@ -92,7 +92,7 @@
         </GuiElement>
 
         <BoxLayout profile="fs25_dialogButtonBox">
-            <Button profile="buttonActivate" id="viewPortfolioButton" text="View Found Vehicles" onClick="onViewPortfolio"/>
+            <Button profile="buttonActivate" id="viewPortfolioButton" text="$l10n_usedplus_sd_viewFoundVehicles" onClick="onViewPortfolio"/>
             <Bitmap profile="fs25_dialogButtonBoxSeparator"/>
             <Button profile="buttonBack" id="closeButton" text="$l10n_button_close" onClick="onCloseDialog"/>
         </BoxLayout>

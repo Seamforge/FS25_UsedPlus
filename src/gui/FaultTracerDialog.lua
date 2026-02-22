@@ -167,7 +167,7 @@ function FaultTracerDialog:displayComponentSelection()
     -- Display ceiling
     local ceiling = (maintSpec.maxReliabilityCeiling or 1.0) * 100
     if self.ftCeilingText then
-        self.ftCeilingText:setText(string.format("Max Potential: %.0f%%", ceiling))
+        self.ftCeilingText:setText(string.format(g_i18n:getText("usedplus_ft_maxPotential"), ceiling))
     end
 
     -- Engine
@@ -177,7 +177,7 @@ function FaultTracerDialog:displayComponentSelection()
         self:setReliabilityColor(self.ftEngineValue, engineRel)
     end
     if self.ftEngineStatus then
-        self.ftEngineStatus:setText(engineRel >= 90 and "Healthy" or "Needs Service")
+        self.ftEngineStatus:setText(engineRel >= 90 and g_i18n:getText("usedplus_ft_healthy") or g_i18n:getText("usedplus_ft_needsService"))
     end
     if self.ftEngineBg then
         self:setComponentBgColor(self.ftEngineBg, engineRel)
@@ -190,7 +190,7 @@ function FaultTracerDialog:displayComponentSelection()
         self:setReliabilityColor(self.ftElectricalValue, elecRel)
     end
     if self.ftElectricalStatus then
-        self.ftElectricalStatus:setText(elecRel >= 90 and "Healthy" or "Needs Service")
+        self.ftElectricalStatus:setText(elecRel >= 90 and g_i18n:getText("usedplus_ft_healthy") or g_i18n:getText("usedplus_ft_needsService"))
     end
     if self.ftElectricalBg then
         self:setComponentBgColor(self.ftElectricalBg, elecRel)
@@ -203,7 +203,7 @@ function FaultTracerDialog:displayComponentSelection()
         self:setReliabilityColor(self.ftHydraulicValue, hydRel)
     end
     if self.ftHydraulicStatus then
-        self.ftHydraulicStatus:setText(hydRel >= 90 and "Healthy" or "Needs Service")
+        self.ftHydraulicStatus:setText(hydRel >= 90 and g_i18n:getText("usedplus_ft_healthy") or g_i18n:getText("usedplus_ft_needsService"))
     end
     if self.ftHydraulicBg then
         self:setComponentBgColor(self.ftHydraulicBg, hydRel)
@@ -329,13 +329,13 @@ function FaultTracerDialog:displayGrid()
         componentName = componentName:sub(1, 1):upper() .. componentName:sub(2)
     end
     if self.ftGridTitle then
-        self.ftGridTitle:setText(componentName .. " FAULT TRACER")
+        self.ftGridTitle:setText(string.format(g_i18n:getText("usedplus_ft_componentTitle"), componentName))
     end
 
     -- Update fault counter
     if self.ftFaultCounter then
         local flagged = FaultTracerGrid.getFlaggedCount(self.grid)
-        self.ftFaultCounter:setText(string.format("Faults: %d/%d", flagged, self.grid.totalFaults))
+        self.ftFaultCounter:setText(string.format(g_i18n:getText("usedplus_ft_faultCounterFormat"), flagged, self.grid.totalFaults))
     end
 
     -- Update oil counter (single source of truth from grid state)
@@ -421,7 +421,7 @@ function FaultTracerDialog:renderCell(elements, cell, row, col)
                 elements.num:setTextColor(1, 0.2, 0.2, 1)
             end
             if elements.gauge then
-                elements.gauge:setText("FAULT")
+                elements.gauge:setText(g_i18n:getText("usedplus_ft_gaugeFault"))
                 elements.gauge:setTextColor(1, 0.3, 0.3, 1)
             end
         else
@@ -451,13 +451,13 @@ function FaultTracerDialog:renderCell(elements, cell, row, col)
             -- Gauge color label
             if elements.gauge then
                 if cell.gaugeColor == FaultTracerGrid.GAUGE_RED then
-                    elements.gauge:setText("RED")
+                    elements.gauge:setText(g_i18n:getText("usedplus_ft_gaugeRed"))
                     elements.gauge:setTextColor(1, 0.3, 0.3, 1)
                 elseif cell.gaugeColor == FaultTracerGrid.GAUGE_AMBER then
-                    elements.gauge:setText("AMB")
+                    elements.gauge:setText(g_i18n:getText("usedplus_ft_gaugeAmber"))
                     elements.gauge:setTextColor(1, 0.8, 0.2, 1)
                 else
-                    elements.gauge:setText("GRN")
+                    elements.gauge:setText(g_i18n:getText("usedplus_ft_gaugeGreen"))
                     elements.gauge:setTextColor(0.3, 1, 0.3, 1)
                 end
                 -- Zero cells don't need gauge
@@ -472,7 +472,7 @@ function FaultTracerDialog:renderCell(elements, cell, row, col)
         local clr = FaultTracerDialog.COLOR_FLAGGED
         if elements.bg then elements.bg:setImageColor(nil, clr[1], clr[2], clr[3], clr[4]) end
         if elements.num then
-            elements.num:setText("F")
+            elements.num:setText(g_i18n:getText("usedplus_ft_faultIndicator"))
             elements.num:setTextColor(0.8, 0.5, 1, 1)
         end
         if elements.gauge then
@@ -594,7 +594,7 @@ function FaultTracerDialog:displayTypeSelection()
 
     if self.ftTypeSelectCell and self.flaggingCell then
         local colLetter = string.char(64 + self.flaggingCell.col)  -- A, B, C, D, E
-        self.ftTypeSelectCell:setText(string.format("Cell [%s%d]", colLetter, self.flaggingCell.row))
+        self.ftTypeSelectCell:setText(string.format(g_i18n:getText("usedplus_ft_cellRef"), colLetter, self.flaggingCell.row))
     end
 
     -- Dynamic gauge hint: scan neighbors for gauge color clues
@@ -631,16 +631,16 @@ function FaultTracerDialog:displayTypeSelection()
         end
 
         if not hasProbed then
-            self.ftGaugeHint:setText("No probed cells nearby — use gauge colors as clues")
+            self.ftGaugeHint:setText(g_i18n:getText("usedplus_ft_hintNoProbes"))
             self.ftGaugeHint:setTextColor(0.5, 0.5, 0.6, 1)
         elseif worstGauge == FaultTracerGrid.GAUGE_RED then
-            self.ftGaugeHint:setText("Nearby gauges show RED — likely Seized")
+            self.ftGaugeHint:setText(g_i18n:getText("usedplus_ft_hintRedSeized"))
             self.ftGaugeHint:setTextColor(1, 0.3, 0.3, 1)
         elseif worstGauge == FaultTracerGrid.GAUGE_AMBER then
-            self.ftGaugeHint:setText("Nearby gauges show AMBER — likely Cracked")
+            self.ftGaugeHint:setText(g_i18n:getText("usedplus_ft_hintAmberCracked"))
             self.ftGaugeHint:setTextColor(1, 0.8, 0.2, 1)
         else
-            self.ftGaugeHint:setText("Nearby gauges show GREEN — likely Corroded")
+            self.ftGaugeHint:setText(g_i18n:getText("usedplus_ft_hintGreenCorroded"))
             self.ftGaugeHint:setTextColor(0.3, 1, 0.3, 1)
         end
     end
@@ -697,7 +697,7 @@ function FaultTracerDialog:onBeginRepairClick()
 
     if not FaultTracerGrid.allFaultsFlagged(self.grid) then
         if self.ftStatusMsg then
-            self.ftStatusMsg:setText("Flag all faults before beginning repair!")
+            self.ftStatusMsg:setText(g_i18n:getText("usedplus_ft_flagAllFirst"))
         end
         return
     end
@@ -746,10 +746,10 @@ function FaultTracerDialog:displayResults()
                 local fr = self.results.faultResults[i + 1]
                 local colLetter = string.char(64 + fr.col)
                 local typeLabel = fr.actualType:sub(1, 1):upper() .. fr.actualType:sub(2)
-                local status = fr.isCorrect and "CORRECT" or "INCORRECT"
+                local status = fr.isCorrect and g_i18n:getText("usedplus_ft_correct") or g_i18n:getText("usedplus_ft_incorrect")
                 local color = fr.isCorrect and {0.3, 1, 0.3} or {1, 0.3, 0.3}
 
-                element:setText(string.format("[%s%d] %s - %s (%.1fL oil)", colLetter, fr.row, typeLabel, status, fr.oilCost))
+                element:setText(string.format(g_i18n:getText("usedplus_ft_resultLine"), colLetter, fr.row, typeLabel, status, fr.oilCost))
                 element:setTextColor(color[1], color[2], color[3], 1)
                 element:setVisible(true)
             else
@@ -777,11 +777,11 @@ function FaultTracerDialog:displayResults()
     if outcomeIcon ~= nil then
         local iconDir = UsedPlus.MOD_DIR .. "gui/icons/"
         if self.results.diagnosisAccuracy >= 1.0 then
-            outcomeIcon:setImageFilename(iconDir .. "success.png")
+            outcomeIcon:setImageFilename(iconDir .. "success.dds")
         elseif self.results.diagnosisAccuracy >= 0.5 then
-            outcomeIcon:setImageFilename(iconDir .. "status_warning.png")
+            outcomeIcon:setImageFilename(iconDir .. "status_warning.dds")
         else
-            outcomeIcon:setImageFilename(iconDir .. "failure.png")
+            outcomeIcon:setImageFilename(iconDir .. "failure.dds")
         end
     end
 
@@ -791,10 +791,10 @@ function FaultTracerDialog:displayResults()
             self.ftQualityNote:setText(g_i18n:getText("usedplus_ft_quickScanCap") or "Quality capped at 60% (Quick Scan)")
             self.ftQualityNote:setVisible(true)
         elseif self.results.incorrectCount > 0 then
-            self.ftQualityNote:setText(string.format("%d incorrect diagnosis - reduced effectiveness", self.results.incorrectCount))
+            self.ftQualityNote:setText(string.format(g_i18n:getText("usedplus_ft_incorrectCount"), self.results.incorrectCount))
             self.ftQualityNote:setVisible(true)
         else
-            self.ftQualityNote:setText("Perfect diagnosis! Maximum repair quality achieved.")
+            self.ftQualityNote:setText(g_i18n:getText("usedplus_ft_perfectDiagnosis"))
             self.ftQualityNote:setTextColor(0.3, 1, 0.3, 1)
             self.ftQualityNote:setVisible(true)
         end

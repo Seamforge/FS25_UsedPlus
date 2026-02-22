@@ -111,7 +111,7 @@ function MaintenanceReportDialog:updateDisplay()
             damage = math.floor((vehicle:getDamageAmount() or 0) * 100)
         end
 
-        self.vehicleDetailsText:setText(string.format("Hours: %s | Age: %d years | Damage: %d%%",
+        self.vehicleDetailsText:setText(string.format(g_i18n:getText("usedplus_mr_vehicleDetailsFormat"),
             g_i18n:formatNumber(hours), age, damage))
     end
 

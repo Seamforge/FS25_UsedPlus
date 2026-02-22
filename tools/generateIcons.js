@@ -21,7 +21,7 @@ const CONFIG = {
     outputDir: path.join(__dirname, '..', 'gui', 'icons'),
     iconSize: 256,  // v2.8.1: Increased from 64 for better rendering in FS25
     textureTool: 'C:/Program Files/GIANTS Software/GIANTS_Editor_10.0.11/tools/textureTool.exe',
-    convertToDDS: false  // PNG works fine for GUI, skip slow DDS conversion
+    convertToDDS: true  // DDS required to avoid raw format warnings in game log
 };
 
 // Color palette - consistent with FS25 UI aesthetic
@@ -1019,6 +1019,20 @@ const ICONS = {
             </svg>`
     },
 
+    // GMC Brand Logo - bold red "GMC" text on dark background
+    // Used as brand image for the Service Truck in modDesc.xml
+    brand_gmc: {
+        name: 'brand_gmc',
+        bgColor: '#1a1a24',
+        bgColorDark: '#0f0f18',
+        svg: (size) => `
+            <svg width="${size}" height="${size}" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+                <rect width="256" height="256" fill="#1a1a24"/>
+                <text x="128" y="148" font-family="Arial Black, Arial" font-size="88" font-weight="900" fill="#C62828" text-anchor="middle" letter-spacing="6">GMC</text>
+                <rect x="40" y="168" width="176" height="4" rx="2" fill="#C62828"/>
+            </svg>`
+    },
+
     // Range marker - yellow downward arrow/triangle (transparent background)
     // Used in SaleOfferDialog to indicate offer position on range bar
     range_marker: {
@@ -1211,7 +1225,7 @@ async function generateIcon(iconDef, outputDir) {
             try {
                 execSync(`"${CONFIG.textureTool}" "${pngPath}"`, {
                     stdio: 'pipe',
-                    timeout: 30000
+                    timeout: 60000
                 });
                 console.log(`  [DDS] ${iconDef.name}.dds`);
             } catch (err) {

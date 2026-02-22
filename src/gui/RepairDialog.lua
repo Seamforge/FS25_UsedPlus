@@ -483,7 +483,7 @@ function RepairDialog:onPayCash()
     if self.totalCost <= 0 then
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_INFO,
-            "No repairs selected"
+            g_i18n:getText("usedplus_error_noRepairsSelected")
         )
         return
     end
@@ -493,7 +493,7 @@ function RepairDialog:onPayCash()
     if not farm or farm.money < self.totalCost then
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_CRITICAL,
-            string.format("Insufficient funds. Need %s", UIHelper.Text.formatMoney(self.totalCost))
+            string.format(g_i18n:getText("usedplus_error_insufficientFundsRepair"), UIHelper.Text.formatMoney(self.totalCost))
         )
         return
     end
@@ -579,7 +579,7 @@ function RepairDialog:onPayCashConfirmed(yes)
 
     g_currentMission:addIngameNotification(
         FSBaseMission.INGAME_NOTIFICATION_OK,
-        string.format("Repair complete!\n%s\nCost: %s",
+        string.format(g_i18n:getText("usedplus_notification_repairComplete"),
             repairInfo,
             UIHelper.Text.formatMoney(self.totalCost))
     )
@@ -694,7 +694,7 @@ function RepairDialog:onFinanceRepair()
     if self.totalCost <= 0 then
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_INFO,
-            "No repairs selected"
+            g_i18n:getText("usedplus_error_noRepairsSelected")
         )
         return
     end

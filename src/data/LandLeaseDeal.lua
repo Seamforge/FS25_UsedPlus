@@ -176,7 +176,7 @@ function LandLeaseDeal:checkExpirationWarnings()
         self.warned3Months = true
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_INFO,
-            string.format("Land lease for %s expires in 3 months! Buyout price: %s",
+            string.format(g_i18n:getText("usedplus_notification_landLeaseExpires3Mo"),
                 self.landName, g_i18n:formatMoney(self:calculateBuyoutPrice(), 0, true, true))
         )
     end
@@ -186,7 +186,7 @@ function LandLeaseDeal:checkExpirationWarnings()
         self.warned1Month = true
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_CRITICAL,
-            string.format("WARNING: Land lease for %s expires next month! Buy out now or lose access!",
+            string.format(g_i18n:getText("usedplus_notification_landLeaseExpires1Mo"),
                 self.landName)
         )
     end
@@ -196,7 +196,7 @@ function LandLeaseDeal:checkExpirationWarnings()
         self.warned1Week = true
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_CRITICAL,
-            string.format("FINAL WARNING: Land lease for %s expires this month!",
+            string.format(g_i18n:getText("usedplus_notification_landLeaseExpiresFinal"),
                 self.landName)
         )
     end
@@ -217,15 +217,15 @@ function LandLeaseDeal:handleMissedPayment()
     if self.missedPayments == 1 then
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_INFO,
-            string.format("Missed land lease payment for %s. Please ensure funds are available.",
+            string.format(g_i18n:getText("usedplus_notification_missedLandLease1st"),
                 self.landName)
         )
     elseif self.missedPayments == 2 then
-        local warningMsg = string.format("FINAL WARNING: 2nd missed payment for %s. One more and you WILL lose the land!", self.landName)
+        local warningMsg = string.format(g_i18n:getText("usedplus_notification_missedLandLeaseFinal"), self.landName)
         g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_CRITICAL, warningMsg)
 
         -- Show popup dialog to ensure player sees this critical warning
-        InfoDialog.show(warningMsg .. "\n\nYour next payment is due soon. Ensure sufficient funds are available or your land lease will be terminated.")
+        InfoDialog.show(warningMsg .. "\n\n" .. g_i18n:getText("usedplus_notification_missedLandLeaseEnsureFunds"))
     elseif self.missedPayments >= 3 then
         -- 3 missed payments = immediate expiration
         local remainingBalance = self:calculateRemainingCost() or 0
@@ -234,7 +234,7 @@ function LandLeaseDeal:handleMissedPayment()
         -- Show RepossessionDialog instead of just a banner
         if RepossessionDialog and RepossessionDialog.showLandSeizure then
             RepossessionDialog.showLandSeizure(
-                self.landName .. " (Land Lease)",
+                self.landName .. " " .. g_i18n:getText("usedplus_label_landLease"),
                 self.landPrice,
                 self.missedPayments,
                 remainingBalance
@@ -243,7 +243,7 @@ function LandLeaseDeal:handleMissedPayment()
             -- Fallback to notification if dialog not available
             g_currentMission:addIngameNotification(
                 FSBaseMission.INGAME_NOTIFICATION_CRITICAL,
-                string.format("Land lease TERMINATED due to non-payment! %s has been reclaimed.",
+                string.format(g_i18n:getText("usedplus_notification_landLeaseTerminated"),
                     self.landName)
             )
         end
@@ -266,7 +266,7 @@ function LandLeaseDeal:expireLease()
     -- Send notification
     g_currentMission:addIngameNotification(
         FSBaseMission.INGAME_NOTIFICATION_INFO,
-        string.format("Land lease for %s has expired. The land is now available for purchase.",
+        string.format(g_i18n:getText("usedplus_notification_landLeaseExpired"),
             self.landName)
     )
 
@@ -298,7 +298,7 @@ function LandLeaseDeal:terminateEarly()
 
     g_currentMission:addIngameNotification(
         FSBaseMission.INGAME_NOTIFICATION_OK,
-        string.format("Land lease for %s terminated. Land returned to market.",
+        string.format(g_i18n:getText("usedplus_notification_landLeaseReturnedToMarket"),
             self.landName)
     )
 

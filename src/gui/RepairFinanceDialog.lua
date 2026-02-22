@@ -386,7 +386,7 @@ function RepairFinanceDialog:onAcceptFinance()
     if farm and farm.money < downPayment then
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_CRITICAL,
-            string.format("Insufficient funds for down payment. Need %s",
+            string.format(g_i18n:getText("usedplus_error_insufficientFundsDownPayment"),
                 UIHelper.Text.formatMoney(downPayment))
         )
         return
@@ -412,7 +412,7 @@ function RepairFinanceDialog:onAcceptFinance()
     -- Show success notification
     g_currentMission:addIngameNotification(
         FSBaseMission.INGAME_NOTIFICATION_OK,
-        string.format("%s financed!\n%s over %d months\n%s/month",
+        string.format(g_i18n:getText("usedplus_notification_repairFinanced"),
             self.mode == "repaint" and "Repaint" or "Repair",
             self.vehicleName,
             self.termMonths,

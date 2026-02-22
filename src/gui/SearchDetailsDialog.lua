@@ -132,7 +132,7 @@ function SearchDetailsDialog:updateDisplay()
     if self.agentFeeText then
         local retainerFee = search.retainerFee or 0
         local commissionPercent = (search.commissionPercent or searchTier.commissionPercent or 0.08) * 100
-        self.agentFeeText:setText(string.format("%s + %d%% comm.",
+        self.agentFeeText:setText(string.format(g_i18n:getText("usedplus_sd_agentFeeFormat"),
             g_i18n:formatMoney(retainerFee, 0, true, true),
             commissionPercent))
     end
@@ -229,7 +229,7 @@ function SearchDetailsDialog:updateDisplay()
 
     -- v1.5.0: Status with portfolio count
     if self.statusText then
-        local statusText = "Searching..."
+        local statusText = g_i18n:getText("usedplus_sd_statusSearching")
         local statusColor = {0.7, 0.7, 0.7, 1}
 
         local foundCount = #(search.foundListings or {})
@@ -237,17 +237,17 @@ function SearchDetailsDialog:updateDisplay()
 
         if search.status == "active" then
             if foundCount > 0 then
-                statusText = string.format("%d vehicle(s) found!", foundCount)
+                statusText = string.format(g_i18n:getText("usedplus_sd_vehiclesFound"), foundCount)
                 statusColor = {0.3, 1, 0.3, 1}  -- Green
             else
-                statusText = "Searching..."
+                statusText = g_i18n:getText("usedplus_sd_statusSearching")
                 statusColor = {0.8, 0.8, 0.3, 1}  -- Yellow
             end
         elseif search.status == "completed" then
-            statusText = string.format("Complete: %d found", foundCount)
+            statusText = string.format(g_i18n:getText("usedplus_sd_statusComplete"), foundCount)
             statusColor = foundCount > 0 and {0.3, 1, 0.3, 1} or {0.6, 0.6, 0.6, 1}
         elseif search.status == "cancelled" then
-            statusText = "Cancelled"
+            statusText = g_i18n:getText("usedplus_sd_statusCancelled")
             statusColor = {0.6, 0.6, 0.6, 1}  -- Gray
         end
 
@@ -262,9 +262,9 @@ function SearchDetailsDialog:updateDisplay()
         local monthsRemaining = maxMonths - monthsElapsed
 
         if monthsRemaining > 0 then
-            self.timeRemainingText:setText(string.format("%d month(s) left", monthsRemaining))
+            self.timeRemainingText:setText(string.format(g_i18n:getText("usedplus_sd_monthsLeft"), monthsRemaining))
         else
-            self.timeRemainingText:setText("Final month")
+            self.timeRemainingText:setText(g_i18n:getText("usedplus_sd_finalMonth"))
         end
     end
 
@@ -272,31 +272,31 @@ function SearchDetailsDialog:updateDisplay()
     if self.startedText then
         local monthsElapsed = search.monthsElapsed or 0
         local maxMonths = search.maxMonths or searchTier.maxMonths or 1
-        self.startedText:setText(string.format("Month %d of %d", monthsElapsed + 1, maxMonths))
+        self.startedText:setText(string.format(g_i18n:getText("usedplus_sd_monthProgress"), monthsElapsed + 1, maxMonths))
     end
 
     -- v1.5.0: Show portfolio count
     if self.elapsedText then
         local foundCount = #(search.foundListings or {})
         local maxListings = search.maxListings or searchTier.maxListings or 10
-        self.elapsedText:setText(string.format("%d/%d found", foundCount, maxListings))
+        self.elapsedText:setText(string.format(g_i18n:getText("usedplus_sd_foundCount"), foundCount, maxListings))
     end
 
     -- Info text - tips based on search tier and portfolio
     if self.infoText then
         local foundCount = #(search.foundListings or {})
-        local tipText = "Regional searches offer the best balance of cost and success."
+        local tipText = g_i18n:getText("usedplus_sd_tipRegional")
 
         if foundCount > 0 then
-            tipText = "Vehicles found! View portfolio to inspect, buy, or decline."
+            tipText = g_i18n:getText("usedplus_sd_tipDefault")
         elseif search.searchLevel == 1 then
-            tipText = "Local searches are quick but have lower monthly success rates."
+            tipText = g_i18n:getText("usedplus_sd_tipLocal")
         elseif search.searchLevel == 3 then
-            tipText = "National searches have the highest success rate and guaranteed finds."
+            tipText = g_i18n:getText("usedplus_sd_tipNational")
         end
 
         if search.qualityLevel >= 4 and foundCount == 0 then
-            tipText = "Good/Excellent quality is harder to find but saves on repairs."
+            tipText = g_i18n:getText("usedplus_sd_tipQuality")
         end
 
         self.infoText:setText(tipText)
@@ -326,7 +326,7 @@ function SearchDetailsDialog:onViewPortfolio()
     if foundCount == 0 then
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_INFO,
-            "No vehicles found yet. Check back next month!"
+            g_i18n:getText("usedplus_notification_noVehiclesYet")
         )
         return
     end
@@ -359,7 +359,7 @@ function SearchDetailsDialog:updatePortfolioButton()
     -- Show/hide button based on whether there are found vehicles
     if foundCount > 0 then
         self.viewPortfolioButton:setVisible(true)
-        self.viewPortfolioButton:setText(string.format("View %d Found Vehicle%s",
+        self.viewPortfolioButton:setText(string.format(g_i18n:getText("usedplus_sd_viewPortfolio"),
             foundCount, foundCount > 1 and "s" or ""))
     else
         self.viewPortfolioButton:setVisible(false)

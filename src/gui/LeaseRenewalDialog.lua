@@ -54,13 +54,13 @@ function LeaseRenewalDialog:onCreate()
     local iconDir = self.iconDir
 
     if self.returnIcon ~= nil then
-        self.returnIcon:setImageFilename(iconDir .. "arrow_left.png")
+        self.returnIcon:setImageFilename(iconDir .. "arrow_left.dds")
     end
     if self.buyoutIcon ~= nil then
-        self.buyoutIcon:setImageFilename(iconDir .. "cash.png")
+        self.buyoutIcon:setImageFilename(iconDir .. "cash.dds")
     end
     if self.renewIcon ~= nil then
-        self.renewIcon:setImageFilename(iconDir .. "lease.png")
+        self.renewIcon:setImageFilename(iconDir .. "lease.dds")
     end
 end
 
@@ -207,7 +207,7 @@ function LeaseRenewalDialog:updateDisplay()
 
     -- Lease summary
     local termYears = deal.termMonths / 12
-    local termText = termYears >= 1 and string.format("%.0f year(s)", termYears) or string.format("%d months", deal.termMonths)
+    local termText = termYears >= 1 and string.format(g_i18n:getText("usedplus_lr_termYears"), termYears) or string.format(g_i18n:getText("usedplus_lr_termMonths"), deal.termMonths)
     UIHelper.Element.setText(self.termText, termText)
     UIHelper.Element.setText(self.paymentsMadeText, string.format("%d of %d", deal.monthsPaid, deal.termMonths))
 
@@ -318,7 +318,7 @@ function LeaseRenewalDialog:onBuyout()
     if not farm or farm.money < self.buyoutPrice then
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_ERROR,
-            string.format("Insufficient funds for buyout. Need %s",
+            string.format(g_i18n:getText("usedplus_notification_insufficientBuyout"),
                 UIHelper.Text.formatMoney(self.buyoutPrice))
         )
         return

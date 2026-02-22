@@ -89,16 +89,16 @@ function FieldServiceKitDialog:onCreate()
     local iconDir = UsedPlus.MOD_DIR .. "gui/icons/"
 
     if self.modeRepairIcon ~= nil then
-        self.modeRepairIcon:setImageFilename(iconDir .. "fsk_repair.png")
+        self.modeRepairIcon:setImageFilename(iconDir .. "fsk_repair.dds")
     end
     if self.modeWarningIcon ~= nil then
-        self.modeWarningIcon:setImageFilename(iconDir .. "fsk_warning.png")
+        self.modeWarningIcon:setImageFilename(iconDir .. "fsk_warning.dds")
     end
     if self.modeTireIcon ~= nil then
-        self.modeTireIcon:setImageFilename(iconDir .. "fsk_tire.png")
+        self.modeTireIcon:setImageFilename(iconDir .. "fsk_tire.dds")
     end
     if self.modeDiagnosticsIcon ~= nil then
-        self.modeDiagnosticsIcon:setImageFilename(iconDir .. "fsk_diagnostics.png")
+        self.modeDiagnosticsIcon:setImageFilename(iconDir .. "fsk_diagnostics.dds")
     end
 end
 
@@ -444,7 +444,7 @@ function FieldServiceKitDialog:displayRVBDetails(diagData)
             self.rvbFaultCountText:setText(tostring(faultCount))
             self.rvbFaultCountText:setTextColor(1, 0.3, 0.3, 1)  -- Red
         else
-            self.rvbFaultCountText:setText("None")
+            self.rvbFaultCountText:setText(g_i18n:getText("usedplus_fsk_none"))
             self.rvbFaultCountText:setTextColor(0.4, 0.8, 0.4, 1)  -- Green
         end
     end
@@ -604,7 +604,7 @@ function FieldServiceKitDialog:displayResults()
     -- Game log: "Character '10007' not found in texture font"
     if self.outcomeIcon ~= nil then
         if isCorrect then
-            self.outcomeIcon:setText("OK")
+            self.outcomeIcon:setText(g_i18n:getText("usedplus_fsk_ok"))
             self.outcomeIcon:setTextColor(0.3, 1, 0.4, 1)
         elseif isPartial then
             self.outcomeIcon:setText("~")
@@ -613,7 +613,7 @@ function FieldServiceKitDialog:displayResults()
             self.outcomeIcon:setText("~")
             self.outcomeIcon:setTextColor(1, 0.6, 0.2, 1)
         else
-            self.outcomeIcon:setText("X")
+            self.outcomeIcon:setText(g_i18n:getText("usedplus_fsk_failed"))
             self.outcomeIcon:setTextColor(1, 0.4, 0.4, 1)
         end
     end

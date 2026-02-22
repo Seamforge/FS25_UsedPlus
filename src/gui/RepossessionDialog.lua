@@ -111,7 +111,7 @@ end
 ]]
 function RepossessionDialog:setupWarningIcon()
     if self.warningIcon ~= nil and self.iconDir ~= nil then
-        self.warningIcon:setImageFilename(self.iconDir .. "status_bad.png")
+        self.warningIcon:setImageFilename(self.iconDir .. "status_bad.dds")
     end
 end
 
@@ -142,15 +142,15 @@ function RepossessionDialog:updateDisplay()
 
     -- Missed payments
     if self.missedPaymentsText then
-        self.missedPaymentsText:setText(string.format("%d consecutive", self.missedPayments))
+        self.missedPaymentsText:setText(string.format(g_i18n:getText("usedplus_repo_consecutive"), self.missedPayments))
     end
 
     -- Balance owed (now cleared by repossession)
     if self.balanceOwedText then
         if self.balanceOwed > 0 then
-            self.balanceOwedText:setText(g_i18n:formatMoney(self.balanceOwed, 0, true, true) .. " (cleared)")
+            self.balanceOwedText:setText(g_i18n:formatMoney(self.balanceOwed, 0, true, true) .. g_i18n:getText("usedplus_repo_cleared"))
         else
-            self.balanceOwedText:setText("$0 (cleared)")
+            self.balanceOwedText:setText(g_i18n:formatMoney(0, 0, true, true) .. g_i18n:getText("usedplus_repo_cleared"))
         end
     end
 

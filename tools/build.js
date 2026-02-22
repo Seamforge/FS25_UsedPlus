@@ -13,6 +13,7 @@
  *   node build.js --minor      Bump minor (2.12.0.3 → 2.13.0.0) then build
  *   node build.js --major      Bump major (2.12.0.3 → 3.0.0.0) then build
  *   node build.js --deploy     (Default behavior - always copies to mods folder)
+ *   node build.js --gcp        Build + local deploy + upload to GCP server + restart
  */
 
 const fs = require('fs');
@@ -30,7 +31,7 @@ const MODS_FOLDER = path.join(
 
 // Patterns to exclude (relative paths)
 const EXCLUDE_PATTERNS = [
-    /^(?!gui\/icons\/).*\.png$/i,  // Exclude PNGs EXCEPT in gui/icons/
+    /\.png$/i,  // Exclude all PNGs (icons now use DDS format)
     /\.psd$/i,
     /\.xcf$/i,
     /\.bak$/i,
@@ -98,7 +99,8 @@ function getTimestamp() {
 function parseArgs() {
     const args = process.argv.slice(2);
     const options = {
-        bumpType: null // 'major', 'minor', 'patch', or null (auto-increment build)
+        bumpType: null, // 'major', 'minor', 'patch', or null (auto-increment build)
+        gcp: false      // deploy to GCP dev server after build
     };
 
     for (const arg of args) {
@@ -111,6 +113,8 @@ function parseArgs() {
             options.bumpType = 'patch';
         } else if (normalized === 'deploy') {
             // Always deploys — flag accepted for compatibility
+        } else if (normalized === 'gcp') {
+            options.gcp = true;
         } else if (normalized === 'help' || normalized === 'h') {
             console.log(`
 Usage: node build.js [options]
@@ -122,6 +126,7 @@ Options:
   --minor    Bump minor version (2.12.0.3 → 2.13.0.0) then build
   --major    Bump major version (2.12.0.3 → 3.0.0.0) then build
   --deploy   Copy to mods folder (default behavior, always on)
+  --gcp      Also deploy to GCP dev server and restart
   --help     Show this help message
 
 If no version option is provided, auto-increments the build number.
@@ -364,6 +369,15 @@ async function main() {
     console.log('To test with GIANTS TestRunner:');
     console.log(`  TestRunner_public.exe "${outputPath}"`);
     console.log('');
+
+    // Deploy to GCP dev server if --gcp flag was passed
+    if (options.gcp) {
+        console.log('--------------------------------------------');
+        console.log('  Deploying to GCP dev server...');
+        console.log('--------------------------------------------');
+        console.log('');
+        execSync('node deploy-gcp.js', { cwd: SCRIPT_DIR, stdio: 'inherit' });
+    }
 
     // Remind about CHANGELOG if an explicit version bump was requested
     if (options.bumpType) {

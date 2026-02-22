@@ -180,7 +180,7 @@ if InGameMenuMapFrame ~= nil then
         UsedPlus.logDebug("InGameMenuMapFrame.setMapInputContext hook installed")
     end
 else
-    UsedPlus.logWarn("InGameMenuMapFrame not available at load time")
+    UsedPlus.logDebug("InGameMenuMapFrame not available at load time")
 end
 
 --[[
@@ -295,7 +295,7 @@ function InGameMenuMapFrameExtension.onRepairVehicle(inGameMenuMapFrame, element
         UsedPlus.logError("No vehicle selected for repair")
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_CRITICAL,
-            "No vehicle selected"
+            g_i18n:getText("usedplus_error_noVehicleSelected")
         )
         return true
     end
@@ -306,7 +306,7 @@ function InGameMenuMapFrameExtension.onRepairVehicle(inGameMenuMapFrame, element
     if vehicle.ownerFarmId ~= farmId then
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_CRITICAL,
-            "You do not own this vehicle"
+            g_i18n:getText("usedplus_error_notYourVehicle")
         )
         return true
     end

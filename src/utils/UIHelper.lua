@@ -298,7 +298,7 @@ UIHelper.Image = {}
     Examples:
         UIHelper.Image.set(self.vehicleImage, storeItem)           -- from store item
         UIHelper.Image.set(self.vehicleImage, vehicle)             -- from vehicle object
-        UIHelper.Image.set(self.vehicleImage, "path/to/image.png") -- from path string
+        UIHelper.Image.set(self.vehicleImage, "path/to/image.dds") -- from path string
         UIHelper.Image.set(self.vehicleImage, listing.vehicleImageFile) -- from saved path
 ]]
 function UIHelper.Image.set(imageElement, source)
@@ -480,11 +480,11 @@ end
 ]]
 function UIHelper.Credit.getTrendDisplay(trend)
     if trend > 0 then
-        return {text = "Improving", color = UIHelper.Colors.TREND_UP}
+        return {text = g_i18n:getText("usedplus_trend_improving"), color = UIHelper.Colors.TREND_UP}
     elseif trend < 0 then
-        return {text = "Declining", color = UIHelper.Colors.TREND_DOWN}
+        return {text = g_i18n:getText("usedplus_trend_declining"), color = UIHelper.Colors.TREND_DOWN}
     else
-        return {text = "Stable", color = UIHelper.Colors.TREND_STABLE}
+        return {text = g_i18n:getText("usedplus_trend_stable"), color = UIHelper.Colors.TREND_STABLE}
     end
 end
 
@@ -730,7 +730,7 @@ function UIHelper.Vehicle.displayConditionSummary(element, damage, wear)
     local avgCondition = math.floor((repairPercent + paintPercent) / 2)
 
     if element then
-        element:setText(string.format("Condition: %d%% (Repair: %d%%, Paint: %d%%)",
+        element:setText(string.format(g_i18n:getText("usedplus_ui_conditionSummary"),
             avgCondition, repairPercent, paintPercent))
     end
 
@@ -747,9 +747,9 @@ function UIHelper.Vehicle.displayUsedBadge(element, isUsed, condition)
     if element then
         if isUsed then
             if condition then
-                element:setText(string.format("USED - %d%% Condition", condition))
+                element:setText(string.format(g_i18n:getText("usedplus_ui_usedBadge") .. " - %d%% " .. g_i18n:getText("usedplus_uvp_condition"), condition))
             else
-                element:setText("USED")
+                element:setText(g_i18n:getText("usedplus_ui_usedBadge"))
             end
             element:setVisible(true)
         else

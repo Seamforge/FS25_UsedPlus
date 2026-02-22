@@ -39,8 +39,8 @@
                 <!-- Header -->
                 <GuiElement profile="fskModeHeaderSection" position="0px 0px">
                     <Bitmap profile="fskModeHeaderBg" position="0px 0px"/>
-                    <Text profile="fskSectionHeader" position="0px -8px" text="FIELD SERVICE KIT"/>
-                    <Text profile="fskModeSubtitle" position="0px -28px" text="Select service mode"/>
+                    <Text profile="fskSectionHeader" position="0px -8px" text="$l10n_usedplus_fsk_title"/>
+                    <Text profile="fskModeSubtitle" position="0px -28px" text="$l10n_usedplus_fsk_selectMode"/>
                 </GuiElement>
 
                 <!-- Mode Buttons (2x2 grid) -->
@@ -51,8 +51,8 @@
                     <Bitmap profile="fskModeBoxBg" id="modeDiagnoseBg" position="0px 0px"/>
                     <Button profile="fskModeBtn" id="modeDiagnoseButton" onClick="onModeDiagnoseClick" onHighlight="onModeBtnHighlight" onHighlightRemove="onModeBtnUnhighlight" position="0px 0px"/>
                     <Bitmap profile="fskModeIconImage" id="modeRepairIcon" position="0px -21px"/>
-                    <Text profile="fskModeLabel" id="modeDiagnoseLabel" position="0px -48px" text="Diagnose Component"/>
-                    <Text profile="fskModeDesc" position="0px -68px" text="Skill-based repair minigame"/>
+                    <Text profile="fskModeLabel" id="modeDiagnoseLabel" position="0px -48px" text="$l10n_usedplus_fsk_modeDiagnose"/>
+                    <Text profile="fskModeDesc" position="0px -68px" text="$l10n_usedplus_fsk_modeDiagnoseDesc"/>
                 </GuiElement>
 
                 <!-- Locate Malfunctions (top-right) -->
@@ -60,8 +60,8 @@
                     <Bitmap profile="fskModeBoxBgWarning" id="modeMalfunctionsBg" position="0px 0px"/>
                     <Button profile="fskModeBtn" id="modeMalfunctionsButton" onClick="onModeMalfunctionsClick" onHighlight="onModeBtnHighlight" onHighlightRemove="onModeBtnUnhighlight" position="0px 0px"/>
                     <Bitmap profile="fskModeIconImage" id="modeWarningIcon" position="0px -21px"/>
-                    <Text profile="fskModeLabel" id="modeMalfunctionsLabel" position="0px -48px" text="Locate Malfunctions"/>
-                    <Text profile="fskModeDesc" position="0px -68px" text="View active issues"/>
+                    <Text profile="fskModeLabel" id="modeMalfunctionsLabel" position="0px -48px" text="$l10n_usedplus_fsk_modeMalfunctions"/>
+                    <Text profile="fskModeDesc" position="0px -68px" text="$l10n_usedplus_fsk_modeMalfunctionsDesc"/>
                 </GuiElement>
 
                 <!-- Tire Service (bottom-left) -->
@@ -69,8 +69,8 @@
                     <Bitmap profile="fskModeBoxBg" id="modeTireServiceBg" position="0px 0px"/>
                     <Button profile="fskModeBtn" id="modeTireServiceButton" onClick="onModeTireServiceClick" onHighlight="onModeBtnHighlight" onHighlightRemove="onModeBtnUnhighlight" position="0px 0px"/>
                     <Bitmap profile="fskModeIconImage" id="modeTireIcon" position="0px -21px"/>
-                    <Text profile="fskModeLabel" id="modeTireServiceLabel" position="0px -48px" text="Tire Service"/>
-                    <Text profile="fskModeDesc" position="0px -68px" text="Repair flat tire"/>
+                    <Text profile="fskModeLabel" id="modeTireServiceLabel" position="0px -48px" text="$l10n_usedplus_fsk_modeTire"/>
+                    <Text profile="fskModeDesc" position="0px -68px" text="$l10n_usedplus_fsk_modeTireDesc"/>
                 </GuiElement>
 
                 <!-- RVB System Analysis (bottom-right) - hidden if RVB not installed -->
@@ -78,12 +78,12 @@
                     <Bitmap profile="fskModeBoxBgTech" id="modeRVBBg" position="0px 0px"/>
                     <Button profile="fskModeBtn" id="modeRVBButton" onClick="onModeRVBClick" onHighlight="onModeBtnHighlight" onHighlightRemove="onModeBtnUnhighlight" position="0px 0px"/>
                     <Bitmap profile="fskModeIconImage" id="modeDiagnosticsIcon" position="0px -21px"/>
-                    <Text profile="fskModeLabel" id="modeRVBLabel" position="0px -48px" text="RVB System Analysis"/>
-                    <Text profile="fskModeDesc" position="0px -68px" text="View RVB component life"/>
+                    <Text profile="fskModeLabel" id="modeRVBLabel" position="0px -48px" text="$l10n_usedplus_fsk_modeRVB"/>
+                    <Text profile="fskModeDesc" position="0px -68px" text="$l10n_usedplus_fsk_modeRVBDesc"/>
                 </GuiElement>
 
                 <!-- Info text -->
-                <Text profile="fskModeInfoText" position="0px -290px" text="Use the Field Service Kit for emergency field repairs"/>
+                <Text profile="fskModeInfoText" position="0px -290px" text="$l10n_usedplus_fsk_infoText"/>
             </GuiElement>
 
             <!-- ========== STEP 1: SYSTEM SELECTION ========== -->
@@ -92,8 +92,8 @@
                 <!-- SECTION: Vehicle Info -->
                 <GuiElement profile="fskVehicleSection" position="0px 0px">
                     <Bitmap profile="fskVehicleBg" position="0px 0px"/>
-                    <Text profile="fskSectionHeader" position="0px -5px" text="CONNECTED TO"/>
-                    <Text profile="fskLabel" position="-180px -28px" text="Vehicle:"/>
+                    <Text profile="fskSectionHeader" position="0px -5px" text="$l10n_usedplus_fsk_connectedTo"/>
+                    <Text profile="fskLabel" position="-180px -28px" text="$l10n_usedplus_fsk_vehicleLabel"/>
                     <Text profile="fskVehicleName" id="vehicleNameText" position="0px -28px" text=""/>
                 </GuiElement>
 
@@ -108,64 +108,64 @@
                 <!-- SECTION: System Selection -->
                 <GuiElement profile="fskSystemSection" position="0px -140px">
                     <Bitmap profile="fskSystemBg" position="0px 0px"/>
-                    <Text profile="fskSectionHeader" position="0px -5px" text="SELECT SYSTEM TO DIAGNOSE"/>
+                    <Text profile="fskSectionHeader" position="0px -5px" text="$l10n_usedplus_fsk_selectSystem"/>
 
                     <!-- ENGINE button (styled box with invisible click overlay) -->
                     <!-- v2.8.0: Removed reliability % display - player must diagnose from hints -->
                     <GuiElement profile="fskSystemBox" position="-200px -35px">
                         <Bitmap profile="fskSystemBoxBg" id="engineBg" position="0px 0px"/>
                         <Button profile="fskSystemBtn" id="engineButton" text="" onClick="onEngineClick" position="0px 0px"/>
-                        <Text profile="fskSystemLabel" id="engineLabel" position="0px -18px" text="ENGINE"/>
+                        <Text profile="fskSystemLabel" id="engineLabel" position="0px -18px" text="$l10n_usedplus_fsk_engine"/>
                     </GuiElement>
 
                     <!-- ELECTRICAL button -->
                     <GuiElement profile="fskSystemBox" position="0px -35px">
                         <Bitmap profile="fskSystemBoxBg" id="electricalBg" position="0px 0px"/>
                         <Button profile="fskSystemBtn" id="electricalButton" text="" onClick="onElectricalClick" position="0px 0px"/>
-                        <Text profile="fskSystemLabel" id="electricalLabel" position="0px -18px" text="ELECTRICAL"/>
+                        <Text profile="fskSystemLabel" id="electricalLabel" position="0px -18px" text="$l10n_usedplus_fsk_electrical"/>
                     </GuiElement>
 
                     <!-- HYDRAULIC button -->
                     <GuiElement profile="fskSystemBox" position="200px -35px">
                         <Bitmap profile="fskSystemBoxBg" id="hydraulicBg" position="0px 0px"/>
                         <Button profile="fskSystemBtn" id="hydraulicButton" text="" onClick="onHydraulicClick" position="0px 0px"/>
-                        <Text profile="fskSystemLabel" id="hydraulicLabel" position="0px -18px" text="HYDRAULIC"/>
+                        <Text profile="fskSystemLabel" id="hydraulicLabel" position="0px -18px" text="$l10n_usedplus_fsk_hydraulic"/>
                     </GuiElement>
                 </GuiElement>
 
                 <!-- SECTION: RVB Details (only shown when RVB installed) -->
                 <GuiElement profile="fskRVBSection" id="rvbDetailContainer" position="0px -235px" visible="false">
                     <Bitmap profile="fskRVBBg" position="0px 0px"/>
-                    <Text profile="fskSectionHeader" position="0px -5px" text="RVB PART STATUS"/>
-                    <Text profile="fskSmallLabel" position="-250px -25px" text="Engine:"/>
+                    <Text profile="fskSectionHeader" position="0px -5px" text="$l10n_usedplus_fsk_rvbPartStatus"/>
+                    <Text profile="fskSmallLabel" position="-250px -25px" text="$l10n_usedplus_fsk_engineColon"/>
                     <Text profile="fskSmallValue" id="rvbEngineText" position="-180px -25px" text=""/>
-                    <Text profile="fskSmallLabel" position="-80px -25px" text="Thermo:"/>
+                    <Text profile="fskSmallLabel" position="-80px -25px" text="$l10n_usedplus_fsk_thermoColon"/>
                     <Text profile="fskSmallValue" id="rvbThermostatText" position="-20px -25px" text=""/>
-                    <Text profile="fskSmallLabel" position="80px -25px" text="Battery:"/>
+                    <Text profile="fskSmallLabel" position="80px -25px" text="$l10n_usedplus_fsk_batteryColon"/>
                     <Text profile="fskSmallValue" id="rvbBatteryText" position="140px -25px" text=""/>
-                    <Text profile="fskSmallLabel" position="-250px -42px" text="Generator:"/>
+                    <Text profile="fskSmallLabel" position="-250px -42px" text="$l10n_usedplus_fsk_generatorColon"/>
                     <Text profile="fskSmallValue" id="rvbGeneratorText" position="-170px -42px" text=""/>
-                    <Text profile="fskSmallLabel" position="-80px -42px" text="Starter:"/>
+                    <Text profile="fskSmallLabel" position="-80px -42px" text="$l10n_usedplus_fsk_starterColon"/>
                     <Text profile="fskSmallValue" id="rvbStarterText" position="-20px -42px" text=""/>
-                    <Text profile="fskSmallLabel" position="80px -42px" text="GlowPlug:"/>
+                    <Text profile="fskSmallLabel" position="80px -42px" text="$l10n_usedplus_fsk_glowplugColon"/>
                     <Text profile="fskSmallValue" id="rvbGlowPlugText" position="150px -42px" text=""/>
-                    <Text profile="fskFaultLabel" position="220px -42px" text="Faults:"/>
+                    <Text profile="fskFaultLabel" position="220px -42px" text="$l10n_usedplus_fsk_faultsColon"/>
                     <Text profile="fskFaultValue" id="rvbFaultCountText" position="275px -42px" text=""/>
                 </GuiElement>
 
                 <!-- SECTION: UYT Tire Status (only shown when UYT installed) -->
                 <GuiElement profile="fskUYTSection" id="uytTireContainer" position="0px -305px" visible="false">
                     <Bitmap profile="fskUYTBg" position="0px 0px"/>
-                    <Text profile="fskSectionHeader" position="0px -5px" text="TIRE WEAR (UYT)"/>
-                    <Text profile="fskSmallLabel" position="-250px -25px" text="FL:"/>
+                    <Text profile="fskSectionHeader" position="0px -5px" text="$l10n_usedplus_fsk_tireWear"/>
+                    <Text profile="fskSmallLabel" position="-250px -25px" text="$l10n_usedplus_fsk_fl"/>
                     <Text profile="fskSmallValue" id="uytTireFLText" position="-220px -25px" text=""/>
-                    <Text profile="fskSmallLabel" position="-140px -25px" text="FR:"/>
+                    <Text profile="fskSmallLabel" position="-140px -25px" text="$l10n_usedplus_fsk_fr"/>
                     <Text profile="fskSmallValue" id="uytTireFRText" position="-110px -25px" text=""/>
-                    <Text profile="fskSmallLabel" position="-30px -25px" text="RL:"/>
+                    <Text profile="fskSmallLabel" position="-30px -25px" text="$l10n_usedplus_fsk_rl"/>
                     <Text profile="fskSmallValue" id="uytTireRLText" position="0px -25px" text=""/>
-                    <Text profile="fskSmallLabel" position="80px -25px" text="RR:"/>
+                    <Text profile="fskSmallLabel" position="80px -25px" text="$l10n_usedplus_fsk_rr"/>
                     <Text profile="fskSmallValue" id="uytTireRRText" position="110px -25px" text=""/>
-                    <Text profile="fskSmallLabel" position="180px -25px" text="Worst:"/>
+                    <Text profile="fskSmallLabel" position="180px -25px" text="$l10n_usedplus_fsk_worst"/>
                     <Text profile="fskSmallValue" id="uytWorstTireText" position="230px -25px" text=""/>
                 </GuiElement>
 
@@ -234,22 +234,22 @@
                 <!-- SECTION: Diagnosis Details -->
                 <GuiElement profile="fskDiagDetailSection" position="0px -80px">
                     <Bitmap profile="fskDiagDetailBg" position="0px 0px"/>
-                    <Text profile="fskDiagDetailLabel" position="-200px -12px" text="Your diagnosis:"/>
+                    <Text profile="fskDiagDetailLabel" position="-200px -12px" text="$l10n_usedplus_fsk_yourDiagnosis"/>
                     <Text profile="fskDiagDetailValue" id="playerDiagnosisText" position="50px -12px" text=""/>
-                    <Text profile="fskDiagDetailLabel" id="correctDiagLabel" position="-200px -35px" text="Correct answer:" visible="false"/>
+                    <Text profile="fskDiagDetailLabel" id="correctDiagLabel" position="-200px -35px" text="$l10n_usedplus_fsk_correctAnswer" visible="false"/>
                     <Text profile="fskCorrectAnswer" id="correctDiagnosisText" position="50px -35px" text="" visible="false"/>
                 </GuiElement>
 
                 <!-- SECTION: Reliability Improvement -->
                 <GuiElement profile="fskReliabilitySection" position="0px -145px">
                     <Bitmap profile="fskReliabilityBg" position="0px 0px"/>
-                    <Text profile="fskSectionHeader" id="reliabilityHeader" position="0px -5px" text="RELIABILITY RESTORED"/>
+                    <Text profile="fskSectionHeader" id="reliabilityHeader" position="0px -5px" text="$l10n_usedplus_fsk_reliabilityRestored"/>
 
                     <!-- Big before/after display -->
-                    <Text profile="fskRelBigLabel" position="-180px -35px" text="Before:"/>
+                    <Text profile="fskRelBigLabel" position="-180px -35px" text="$l10n_usedplus_fsk_before"/>
                     <Text profile="fskRelBigValue" id="beforeRelText" position="-100px -35px" text=""/>
                     <Text profile="fskRelArrow" position="0px -35px" text="→"/>
-                    <Text profile="fskRelBigLabel" position="80px -35px" text="After:"/>
+                    <Text profile="fskRelBigLabel" position="80px -35px" text="$l10n_usedplus_fsk_after"/>
                     <Text profile="fskRelBigValueGreen" id="afterRelText" position="160px -35px" text=""/>
                     <Text profile="fskBoostBig" id="boostText" position="260px -35px" text=""/>
                 </GuiElement>
@@ -276,7 +276,7 @@
                     <Bitmap profile="fskTireStatusBg" position="0px 0px"/>
 
                     <!-- Tire Status Label at top -->
-                    <Text profile="fskTireDiagramLabel" position="0px -10px" text="TIRE STATUS"/>
+                    <Text profile="fskTireDiagramLabel" position="0px -10px" text="$l10n_usedplus_fsk_tireStatus"/>
 
                     <!-- Vehicle Image (centered, 140x140) -->
                     <Bitmap profile="fskTireVehicleImage" id="tireVehicleImage" position="0px -30px"/>
@@ -285,28 +285,28 @@
                     <!-- Front Left -->
                     <GuiElement profile="fskTireSlot" position="-60px -185px">
                         <Bitmap profile="fskTireSlotBg" id="tireFLBg" position="0px 0px"/>
-                        <Text profile="fskTireSlotLabel" position="0px -5px" text="FL"/>
+                        <Text profile="fskTireSlotLabel" position="0px -5px" text="$l10n_usedplus_fsk_tireFL"/>
                         <Text profile="fskTireSlotValue" id="tireFLText" position="0px -22px" text=""/>
                     </GuiElement>
 
                     <!-- Front Right -->
                     <GuiElement profile="fskTireSlot" position="60px -185px">
                         <Bitmap profile="fskTireSlotBg" id="tireFRBg" position="0px 0px"/>
-                        <Text profile="fskTireSlotLabel" position="0px -5px" text="FR"/>
+                        <Text profile="fskTireSlotLabel" position="0px -5px" text="$l10n_usedplus_fsk_tireFR"/>
                         <Text profile="fskTireSlotValue" id="tireFRText" position="0px -22px" text=""/>
                     </GuiElement>
 
                     <!-- Rear Left -->
                     <GuiElement profile="fskTireSlot" position="-60px -235px">
                         <Bitmap profile="fskTireSlotBg" id="tireRLBg" position="0px 0px"/>
-                        <Text profile="fskTireSlotLabel" position="0px -5px" text="RL"/>
+                        <Text profile="fskTireSlotLabel" position="0px -5px" text="$l10n_usedplus_fsk_tireRL"/>
                         <Text profile="fskTireSlotValue" id="tireRLText" position="0px -22px" text=""/>
                     </GuiElement>
 
                     <!-- Rear Right -->
                     <GuiElement profile="fskTireSlot" position="60px -235px">
                         <Bitmap profile="fskTireSlotBg" id="tireRRBg" position="0px 0px"/>
-                        <Text profile="fskTireSlotLabel" position="0px -5px" text="RR"/>
+                        <Text profile="fskTireSlotLabel" position="0px -5px" text="$l10n_usedplus_fsk_tireRR"/>
                         <Text profile="fskTireSlotValue" id="tireRRText" position="0px -22px" text=""/>
                     </GuiElement>
                 </GuiElement>
@@ -338,7 +338,7 @@
                 <!-- Header -->
                 <GuiElement profile="fskMalfHeaderSection" position="0px 0px">
                     <Bitmap profile="fskMalfHeaderBg" position="0px 0px"/>
-                    <Text profile="fskSectionHeader" position="0px -8px" text="ACTIVE MALFUNCTIONS"/>
+                    <Text profile="fskSectionHeader" position="0px -8px" text="$l10n_usedplus_fsk_activeMalfunctions"/>
                     <Text profile="fskMalfCount" id="malfCountText" position="0px -32px" text=""/>
                 </GuiElement>
 
@@ -368,7 +368,7 @@
                 </GuiElement>
 
                 <!-- Info text -->
-                <Text profile="fskMalfInfo" position="0px -270px" text="Visit workshop for full repairs"/>
+                <Text profile="fskMalfInfo" position="0px -270px" text="$l10n_usedplus_fsk_visitWorkshop"/>
             </GuiElement>
 
             <!-- ========== STEP 6: RVB ANALYSIS (v2.7.0) ========== -->
@@ -377,7 +377,7 @@
                 <!-- Header -->
                 <GuiElement profile="fskRVBHeaderSection" position="0px 0px">
                     <Bitmap profile="fskRVBAnalysisBg" position="0px 0px"/>
-                    <Text profile="fskSectionHeader" position="0px -8px" text="RVB SYSTEM ANALYSIS"/>
+                    <Text profile="fskSectionHeader" position="0px -8px" text="$l10n_usedplus_fsk_rvbAnalysis"/>
                     <Text profile="fskRVBSummary" id="rvbSummaryText" position="0px -32px" text=""/>
                 </GuiElement>
 
@@ -422,7 +422,7 @@
                 </GuiElement>
 
                 <!-- Info text -->
-                <Text profile="fskRVBInfo" position="0px -290px" text="RVB parts degrade with operating hours"/>
+                <Text profile="fskRVBInfo" position="0px -290px" text="$l10n_usedplus_fsk_rvbDegradeInfo"/>
             </GuiElement>
 
         </GuiElement>
@@ -431,7 +431,7 @@
         <BoxLayout profile="fs25_dialogButtonBox">
             <Button profile="buttonOK" id="okButton" text="$l10n_button_ok" onClick="onOkClick" visible="false"/>
             <Bitmap profile="fs25_dialogButtonBoxSeparator"/>
-            <Button profile="buttonActivate" id="backButton" text="Back" onClick="onBackClick" visible="false"/>
+            <Button profile="buttonActivate" id="backButton" text="$l10n_usedplus_btn_back" onClick="onBackClick" visible="false"/>
             <Bitmap profile="fs25_dialogButtonBoxSeparator"/>
             <Button profile="buttonBack" id="cancelButton" text="$l10n_button_cancel" onClick="onCancelClick"/>
         </BoxLayout>

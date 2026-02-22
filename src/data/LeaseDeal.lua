@@ -168,13 +168,13 @@ function LeaseDeal:handleMissedPayment()
 
     if self.missedPayments == 1 then
         g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_INFO,
-            string.format("Missed lease payment for %s. (1st warning)", self.itemName))
+            string.format(g_i18n:getText("usedplus_notification_missedLeasePayment1st"), self.itemName))
     elseif self.missedPayments == 2 then
-        local warningMsg = string.format("FINAL WARNING: Missed lease payment for %s! One more = REPOSSESSION!", self.itemName)
+        local warningMsg = string.format(g_i18n:getText("usedplus_notification_missedLeasePaymentFinal"), self.itemName)
         g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_CRITICAL, warningMsg)
 
         -- Show popup dialog to ensure player sees this critical warning
-        InfoDialog.show(warningMsg .. "\n\nYour next payment is due soon. Ensure sufficient funds are available or your vehicle will be repossessed.")
+        InfoDialog.show(warningMsg .. "\n\n" .. g_i18n:getText("usedplus_notification_missedLeasePaymentFinalPopup"))
     elseif self.missedPayments >= 3 then
         self:repossessVehicle()
     end
@@ -216,7 +216,7 @@ function LeaseDeal:repossessVehicle()
     else
         -- Fallback to notification if dialog not available
         g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_CRITICAL,
-            string.format("LEASE VEHICLE REPOSSESSED: %s has been taken due to non-payment!", self.itemName))
+            string.format(g_i18n:getText("usedplus_notification_leaseVehicleRepossessed"), self.itemName))
     end
 end
 
@@ -257,7 +257,7 @@ function LeaseDeal:showLeaseEndDialog(vehicle, penalty)
     -- Send notification that lease has ended
     g_currentMission:addIngameNotification(
         FSBaseMission.INGAME_NOTIFICATION_INFO,
-        string.format("Lease ended for %s! Choose to return or buyout.", self.itemName)
+        string.format(g_i18n:getText("usedplus_notification_leaseEnded"), self.itemName)
     )
 end
 

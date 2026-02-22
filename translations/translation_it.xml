@@ -598,6 +598,23 @@
 
         <!-- Error Notifications - No Items/Options -->
         <e k="usedplus_error_noPaymentOptions" v="Nessuna opzione di pagamento disponibile" eh="5cf01d98" />
+        <e k="usedplus_error_noVanillaLoanBalance" v="Nessun saldo prestito vanilla da pagare" eh="d89e2840" />
+        <e k="usedplus_error_selectSaleOption" v="Seleziona un'opzione di vendita e una fascia di prezzo." eh="1b4a328b" />
+        <e k="usedplus_error_premiumConditionRequired" v="Il prezzo premium richiede migliori condizioni del veicolo." eh="526ed1e9" />
+        <e k="usedplus_error_insufficientFundsAgentFee" v="Fondi insufficienti. Commissione agente: %s" eh="aced7453" />
+        <e k="usedplus_error_noVehiclesInPortfolio" v="Nessun veicolo nel portafoglio. Ricontrolla il mese prossimo!" eh="6c266f3e" />
+        <e k="usedplus_error_tankContainsWrong" v="Il serbatoio contiene %s! Svuotalo prima di aggiungere %s." eh="f2b5d5e6" />
+        <e k="usedplus_error_tankNotOil" v="Il serbatoio contiene %s, non olio motore!" eh="463f93d0" />
+        <e k="usedplus_error_tankNotHydraulic" v="Il serbatoio contiene %s, non fluido idraulico!" eh="914123f6" />
+        <e k="usedplus_title_vehicleInspection" v="Ispezione veicolo" eh="7276b8fd" />
+        <e k="usedplus_title_offerWithdrawn" v="Offerta ritirata" eh="885e18c5" />
+        <e k="usedplus_ui_vanillaSellPrice" v="Prezzo vendita vanilla:" eh="edc4376c" />
+        <e k="usedplus_ui_thisOffer" v="Questa offerta:" eh="739d0e14" />
+        <e k="usedplus_ui_usedBadge" v="USATO" eh="d725ec43" />
+        <e k="usedplus_neg_fullPrice" v="Prezzo pieno" eh="dab32e38" />
+        <e k="usedplus_uvp_expired" v="Scaduto" eh="24fe4803" />
+        <e k="usedplus_sd_finalMonth" v="Ultimo mese" eh="f5ada565" />
+        <e k="usedplus_fm_notAvailable" v="N/D" eh="382b0f51" />
         <e k="usedplus_error_noActiveDeals" v="Nessun accordo finanziario attivo su cui effettuare pagamenti" eh="19c25246" />
         <e k="usedplus_error_noDealsToPayAll" v="Nessun accordo finanziario attivo da pagare" eh="a8217dc4" />
         <e k="usedplus_error_noPaymentsDue" v="Nessun pagamento dovuto in questo periodo" eh="9da7e0ff" />
@@ -1155,8 +1172,8 @@
         <e k="usedplus_so_keepWaitingNote" v="Potrebbe ottenere offerta migliore, o annuncio scade" eh="6b53991a" />
         <e k="usedplus_so_expiresIn" v="L'offerta scade tra:" eh="ca2ce4a5" />
         <e k="usedplus_so_acceptOffer" v="Accetta l'offerta" eh="93a5776a" />
-        <e k="usedplus_so_keepWaitingBtn" v="Continua ad aspettare" eh="addcd152" />
-        <e k="usedplus_so_previousOffers" v="[EN] Previous Offers:" eh="0a8e474c" />
+        <e k="usedplus_so_keepWaitingBtn" v="Rifiuta offerta" eh="3db99481" />
+        <e k="usedplus_so_previousOffers" v="Offerte precedenti:" eh="0a8e474c" />
         <!-- Deal quality ratings (set dynamically in Lua) -->
         <!-- Legacy keys kept for compatibility -->
         <e k="usedplus_so_title" v="OFFERTA DI VENDITA RICEVUTA!" eh="1596a2b0" />
@@ -1232,6 +1249,21 @@
         <e k="usedplus_cr_outstandingBalance" v="Saldo in sospeso:" eh="992c579f" />
         <e k="usedplus_cr_sectionActive" v="CONTI ATTIVI" eh="7aed11c2" />
         <e k="usedplus_cr_noActiveAccounts" v="Nessun account attivo" eh="1b3f60a4" />
+        <e k="usedplus_cr_notAvailable" v="N/D" eh="382b0f51" />
+        <e k="usedplus_cr_noPaymentHistory" v="Nessuno storico pagamenti" eh="2103413b" />
+        <e k="usedplus_cr_makePayments" v="Effettua pagamenti per creare uno storico creditizio" eh="b22a5cbe" />
+        <e k="usedplus_cr_netWorth" v="Patrimonio netto:" eh="e22409e2" />
+        <e k="usedplus_ft_gaugeFault" v="GUASTO" eh="893b3aaf" />
+        <e k="usedplus_ft_gaugeRed" v="ROSSO" eh="a2d9547b" />
+        <e k="usedplus_ft_gaugeAmber" v="AMB" eh="5d307fe6" />
+        <e k="usedplus_ft_gaugeGreen" v="VER" eh="92315fe6" />
+        <e k="usedplus_ft_faultIndicator" v="G" eh="80061894" />
+        <e k="usedplus_ft_hintNoProbes" v="Nessuna cella sondata nelle vicinanze -- usa i colori degli indicatori come indizi" eh="7c581fe4" />
+        <e k="usedplus_ft_hintRedSeized" v="Gli indicatori vicini mostrano ROSSO -- probabilmente grippato" eh="8c041b51" />
+        <e k="usedplus_ft_hintAmberCracked" v="Gli indicatori vicini mostrano AMBRA -- probabilmente incrinato" eh="d0116e41" />
+        <e k="usedplus_ft_hintGreenCorroded" v="Gli indicatori vicini mostrano VERDE -- probabilmente corroso" eh="66e1e456" />
+        <e k="usedplus_ft_flagAllFirst" v="Segnala tutti i guasti prima di iniziare la riparazione!" eh="66e6b5d8" />
+        <e k="usedplus_ft_perfectDiagnosis" v="Diagnosi perfetta! Qualità di riparazione massima raggiunta." eh="d4931f5f" />
         <e k="usedplus_cr_sectionPayment" v="STORICO PAGAMENTI" eh="56a90765" />
         <e k="usedplus_cr_onTimePayments" v="Pagamenti puntuali:" eh="5fe2e027" />
         <e k="usedplus_cr_missedPayments" v="Pagamenti mancati:" eh="b96a6a49" />
@@ -1715,6 +1747,39 @@
         <e k="usedplus_fsk_tier_basic" v="OBD base" eh="36823daa" />
         <e k="usedplus_fsk_activate" v="Collegare scanner OBD" eh="dc1214b1" />
         <e k="usedplus_fsk_title" v="SCANNER DIAGNOSTICO OBD - SERVIZIO CAMPO" eh="04584a39" />
+        <e k="usedplus_fsk_selectMode" v="Seleziona modalità di servizio" eh="036d55f1" />
+        <e k="usedplus_fsk_modeDiagnose" v="Diagnostica componente" eh="3b9e5655" />
+        <e k="usedplus_fsk_modeDiagnoseDesc" v="Minigioco di riparazione basato sulle abilità" eh="5be3de91" />
+        <e k="usedplus_fsk_modeMalfunctions" v="Localizza malfunzionamenti" eh="26d2acee" />
+        <e k="usedplus_fsk_modeMalfunctionsDesc" v="Visualizza problemi attivi" eh="b14c934d" />
+        <e k="usedplus_fsk_modeTire" v="Servizio pneumatici" eh="b0234f4e" />
+        <e k="usedplus_fsk_modeTireDesc" v="Ripara pneumatico a terra" eh="354da6fc" />
+        <e k="usedplus_fsk_modeRVB" v="Analisi sistema RVB" eh="5f5c4944" />
+        <e k="usedplus_fsk_modeRVBDesc" v="Visualizza vita componenti RVB" eh="37c67401" />
+        <e k="usedplus_fsk_infoText" v="Usa il kit di assistenza sul campo per riparazioni di emergenza" eh="84e02edf" />
+        <e k="usedplus_fsk_connectedTo" v="COLLEGATO A" eh="92e48e0c" />
+        <e k="usedplus_fsk_vehicleLabel" v="Veicolo:" eh="93e64f9c" />
+        <e k="usedplus_fsk_selectSystem" v="SELEZIONA SISTEMA DA DIAGNOSTICARE" eh="78c0faa7" />
+        <e k="usedplus_fsk_engine" v="MOTORE" eh="1942d6cf" />
+        <e k="usedplus_fsk_electrical" v="ELETTRICO" eh="9f317629" />
+        <e k="usedplus_fsk_hydraulic" v="IDRAULICO" eh="3e0b9977" />
+        <e k="usedplus_fsk_rvbPartStatus" v="STATO COMPONENTI RVB" eh="6668332b" />
+        <e k="usedplus_fsk_engineColon" v="Motore:" eh="c7d60198" />
+        <e k="usedplus_fsk_thermoColon" v="Termostato:" eh="a6c55c64" />
+        <e k="usedplus_fsk_batteryColon" v="Batteria:" eh="3db89244" />
+        <e k="usedplus_fsk_generatorColon" v="Generatore:" eh="327ab3e8" />
+        <e k="usedplus_fsk_starterColon" v="Motorino:" eh="464d7073" />
+        <e k="usedplus_fsk_glowplugColon" v="Candeletta:" eh="3c4e05dc" />
+        <e k="usedplus_fsk_faultsColon" v="Guasti:" eh="53f7ef48" />
+        <e k="usedplus_fsk_tireWear" v="USURA PNEUMATICI (UYT)" eh="85367410" />
+        <e k="usedplus_fsk_fl" v="AS:" eh="2fdbe27c" />
+        <e k="usedplus_fsk_fr" v="AD:" eh="abf2933e" />
+        <e k="usedplus_fsk_rl" v="PS:" eh="05d73353" />
+        <e k="usedplus_fsk_rr" v="PD:" eh="073ffce9" />
+        <e k="usedplus_fsk_worst" v="Peggiore:" eh="4ca3e96d" />
+        <e k="usedplus_fsk_yourDiagnosis" v="La tua diagnosi:" eh="59a422ad" />
+        <e k="usedplus_fsk_correctAnswer" v="Risposta corretta:" eh="f7248913" />
+        <e k="usedplus_fsk_reliabilityRestored" v="AFFIDABILITÀ RIPRISTINATA" eh="9cc39e14" />
         <e k="usedplus_fsk_vehicle" v="Collegato a:" eh="ed4c66be" />
         <e k="usedplus_fsk_status" v="Stato veicolo:" eh="4e265002" />
         <e k="usedplus_fsk_status_disabled" v="GUASTO - NON OPERATIVO" eh="44f80aed" />
@@ -1821,6 +1886,127 @@
         <e k="usedplus_fsk_results" v="RISULTATI RIPARAZIONE" eh="bb6599cb" />
         <e k="usedplus_fsk_before" v="Prima:" eh="0519a746" />
         <e k="usedplus_fsk_after" v="Dopo:" eh="fdbe650f" />
+        <e k="usedplus_fsk_tireStatus" v="STATO PNEUMATICI" eh="a060ee0a" />
+        <e k="usedplus_fsk_tireFL" v="AS" eh="ac717902" />
+        <e k="usedplus_fsk_tireFR" v="AD" eh="11aedd0e" />
+        <e k="usedplus_fsk_tireRL" v="PS" eh="7f49bbe2" />
+        <e k="usedplus_fsk_tireRR" v="PD" eh="cb95449a" />
+        <e k="usedplus_fsk_activeMalfunctions" v="MALFUNZIONAMENTI ATTIVI" eh="1e105c6d" />
+        <e k="usedplus_fsk_visitWorkshop" v="Vai in officina per riparazioni complete" eh="1ea6ac0c" />
+        <e k="usedplus_fsk_rvbAnalysis" v="ANALISI SISTEMA RVB" eh="9344b7d5" />
+        <e k="usedplus_fsk_rvbDegradeInfo" v="I componenti RVB si degradano con le ore di utilizzo" eh="fe3100b0" />
+        <e k="usedplus_fsk_none" v="Nessuno" eh="6adf97f8" />
+        <e k="usedplus_fsk_ok" v="OK" eh="e0aa021e" />
+        <e k="usedplus_fsk_failed" v="X" eh="02129bb8" />
+        <e k="usedplus_st_title" v="RESTAURO VEICOLO" eh="c041b062" />
+        <e k="usedplus_st_maxPotential" v="Potenziale massimo: 100%" eh="6029fca8" />
+        <e k="usedplus_error_spawnFailed" v="Impossibile generare il veicolo. Denaro rimborsato." eh="9025f5e7" />
+        <e k="usedplus_error_systemUnavailable" v="Sistema veicoli usati non disponibile!" eh="09843635" />
+        <e k="usedplus_st_selectComponent" v="SELEZIONA COMPONENTE DA RESTAURARE" eh="4b3e2914" />
+        <e k="usedplus_st_engine" v="MOTORE" eh="1942d6cf" />
+        <e k="usedplus_st_electrical" v="ELETTRICO" eh="9f317629" />
+        <e k="usedplus_st_hydraulic" v="IDRAULICO" eh="3e0b9977" />
+        <e k="usedplus_st_diesel" v="Gasolio:" eh="f2c90e25" />
+        <e k="usedplus_st_oil" v="Olio:" eh="eb99e035" />
+        <e k="usedplus_st_hydraulicFluid" v="Idraulico:" eh="a39ee8d2" />
+        <e k="usedplus_st_spareParts" v="Ricambi:" eh="13581a67" />
+        <e k="usedplus_st_selectHint" v="Seleziona un componente sotto il 90% per iniziare l'ispezione." eh="9edba748" />
+        <e k="usedplus_st_inspecting" v="Ispezione in corso: MOTORE" eh="d918fe3e" />
+        <e k="usedplus_st_estimatedTime" v="Restauro stimato: 48 ore" eh="281919bb" />
+        <e k="usedplus_st_diagnosticReadout" v="LETTURA DIAGNOSTICA" eh="a2cdbd3d" />
+        <e k="usedplus_st_chooseDiagnosis" v="SCEGLI LA TUA DIAGNOSI" eh="4bac7417" />
+        <e k="usedplus_st_option1" v="Opzione 1" eh="fd577a8b" />
+        <e k="usedplus_st_option2" v="Opzione 2" eh="e24963e4" />
+        <e k="usedplus_st_option3" v="Opzione 3" eh="fbeee6bc" />
+        <e k="usedplus_st_option4" v="Opzione 4" eh="b32b4636" />
+        <e k="usedplus_st_inspectionResult" v="RISULTATO ISPEZIONE" eh="7df33e46" />
+        <e k="usedplus_st_currentTarget" v="Attuale: 72%  &gt;  Obiettivo: 90%+" eh="8847daa5" />
+        <e k="usedplus_st_sparePartsAvailable" v="Ricambi: 12 disponibili" eh="9cae9be9" />
+        <e k="usedplus_st_fluidsConsumed" v="Gasolio, olio, fluido idraulico verranno consumati" eh="f2999b5f" />
+        <e k="usedplus_st_startRestoration" v="INIZIA RESTAURO" eh="696ac7a5" />
+        <e k="usedplus_st_cooldownHint" v="Nel frattempo prova un componente diverso." eh="208a1488" />
+        <e k="usedplus_st_hintPrefix" v="SUGGERIMENTO: " eh="18811f33" />
+        <e k="usedplus_st_diagnosisCorrect" v="DIAGNOSI CORRETTA" eh="726fa3e3" />
+        <e k="usedplus_st_diagnosisIncorrect" v="DIAGNOSI ERRATA" eh="90b774b8" />
+        <e k="usedplus_st_restorationCanBegin" v="Il restauro può iniziare." eh="a8adb101" />
+        <e k="usedplus_st_symptomsMismatch" v="I sintomi non corrispondono a questa diagnosi." eh="62b8aecd" />
+        <e k="usedplus_st_cooldownApplied" v="Un tempo di attesa è stato applicato." eh="267c9607" />
+        <e k="usedplus_st_vehicleLabel" v="Veicolo: " eh="27cfabe4" />
+        <e k="usedplus_std_vehicleName" v="GMC C7000 Autocarro di servizio" eh="7f78c3d1" />
+        <e k="usedplus_std_specialCapabilities" v="CAPACITÀ SPECIALI:" eh="d408664f" />
+        <e k="usedplus_std_featureRestoration" v="Restauro veicoli a lungo termine" eh="0fa4b175" />
+        <e k="usedplus_std_featureCeiling" v="Capacità di riparazione massima (restauro oltre il 100%)" eh="fdce0a09" />
+        <e k="usedplus_std_originalPrice" v="Originale:" eh="fd5835ce" />
+        <e k="usedplus_std_yourPrice" v="IL TUO PREZZO:" eh="b30fa470" />
+        <e k="usedplus_std_cashOnly" v="SOLO CONTANTI" eh="087d1524" />
+        <e k="usedplus_irp_engineCore" v="Blocco motore" eh="24a06875" />
+        <e k="usedplus_irp_thermostat" v="Termostato" eh="91e0b95d" />
+        <e k="usedplus_irp_generator" v="Generatore" eh="92a8f0b9" />
+        <e k="usedplus_irp_battery" v="Batteria" eh="d67c9286" />
+        <e k="usedplus_irp_starter" v="Motorino" eh="ee6085db" />
+        <e k="usedplus_irp_glowPlug" v="Candeletta" eh="6fdb6ce6" />
+        <e k="usedplus_irp_fl" v="AS" eh="ac717902" />
+        <e k="usedplus_irp_fr" v="AD" eh="11aedd0e" />
+        <e k="usedplus_irp_rl" v="PS" eh="7f49bbe2" />
+        <e k="usedplus_irp_rr" v="PD" eh="cb95449a" />
+        <e k="usedplus_fp_tankStatus" v="STATO SERBATOIO" eh="d2069f0d" />
+        <e k="usedplus_fp_currentLevel" v="Livello attuale:" eh="c204b97c" />
+        <e k="usedplus_fp_contains" v="Contiene:" eh="0acb039c" />
+        <e k="usedplus_fp_empty" v="Vuoto" eh="ce2c8aed" />
+        <e k="usedplus_fp_purchase" v="ACQUISTO" eh="2d2de459" />
+        <e k="usedplus_fp_fluidType" v="Tipo fluido:" eh="0b009844" />
+        <e k="usedplus_fp_amount" v="Quantità:" eh="6702a6e3" />
+        <e k="usedplus_fp_cost" v="Costo:" eh="69edde90" />
+        <e k="usedplus_fp_creditType" v="CREDITO" eh="e3968aae" />
+        <e k="usedplus_fp_revolving" v="Revolving" eh="4adc0103" />
+        <e k="usedplus_fp_open" v="Aperto" eh="c3bf447e" />
+        <e k="usedplus_vpf_title" v="Veicoli trovati" eh="b97c56ec" />
+        <e k="usedplus_vpf_next" v="Succ. v=" eh="dd9644ef" />
+        <e k="usedplus_vpf_vehicle" v="VEICOLO" eh="e9fa318f" />
+        <e k="usedplus_vpf_quality" v="Qualità:" eh="3ded0b1d" />
+        <e k="usedplus_vpf_condition" v="Condizione:" eh="ed51222f" />
+        <e k="usedplus_vpf_inspected" v="Ispezionato:" eh="1ff85e69" />
+        <e k="usedplus_vpf_no" v="No" eh="bafd7322" />
+        <e k="usedplus_vpf_pricing" v="PREZZI" eh="99ff3467" />
+        <e k="usedplus_vpf_basePrice" v="Prezzo base:" eh="74e3d937" />
+        <e k="usedplus_vpf_commission" v="Commissione:" eh="0edf3664" />
+        <e k="usedplus_vpf_askingPrice" v="Prezzo richiesto:" eh="c515d94e" />
+        <e k="usedplus_vpf_offerExpires" v="L'offerta scade tra 2 mesi" eh="a3f4165a" />
+        <e k="usedplus_vpf_infoText" v="Visualizza dettagli per ispezionare. Rifiuta per rimuovere dal portafoglio." eh="09d33c66" />
+        <e k="usedplus_vpf_viewDetails" v="Vedi dettagli" eh="5d5cd268" />
+        <e k="usedplus_vpf_declineOffer" v="Rifiuta offerta" eh="3db99481" />
+        <e k="usedplus_vpf_expiresNextMonth" v="L'offerta scade IL MESE PROSSIMO!" eh="51d3edaa" />
+        <e k="usedplus_vpf_expires2Months" v="L'offerta scade tra 2 mesi" eh="a3f4165a" />
+        <e k="usedplus_vpf_browseInstructions" v="Usa Prec./Succ. per sfogliare. Vedi dettagli per ispezionare o acquistare." eh="1b4dd747" />
+        <e k="usedplus_vpf_viewDetailsInstruction" v="Vedi dettagli per ispezionare le condizioni o acquistare questo veicolo." eh="7786ee45" />
+        <e k="usedplus_se_title" v="Ricerca completata" eh="e92d4ab1" />
+        <e k="usedplus_se_summary" v="RIEPILOGO RICERCA" eh="6fa784ed" />
+        <e k="usedplus_se_searchedFor" v="Cercato:" eh="e67ff702" />
+        <e k="usedplus_se_agentTier" v="Livello agente:" eh="4eb7801b" />
+        <e k="usedplus_se_quality" v="Qualità:" eh="3ded0b1d" />
+        <e k="usedplus_se_duration" v="Durata:" eh="68311558" />
+        <e k="usedplus_se_results" v="RISULTATI" eh="44795920" />
+        <e k="usedplus_se_renewQuestion" v="RINNOVARE LA RICERCA?" eh="e65ba949" />
+        <e k="usedplus_se_renewInfo" v="Continua a cercare per più opzioni" eh="4f6ca32a" />
+        <e k="usedplus_se_renewalCost" v="Costo rinnovo:" eh="cab42ff8" />
+        <e k="usedplus_se_renewButton" v="Rinnova ricerca" eh="5f2a7f33" />
+        <e k="usedplus_se_noOffers" v="Nessuno" eh="6adf97f8" />
+        <e k="usedplus_se_noFeePrivate" v="Nessuna commissione (Vendita privata)" eh="2bccd3b4" />
+        <e k="usedplus_se_noVehiclesFound" v="Nessun veicolo trovato" eh="df1eff24" />
+        <e k="usedplus_si_title" v="Ricerca avviata" eh="e42ba949" />
+        <e k="usedplus_si_searchConfig" v="CONFIGURAZIONE RICERCA" eh="b1db3ac1" />
+        <e k="usedplus_si_searchTier" v="Livello ricerca" eh="6a442f69" />
+        <e k="usedplus_si_qualityTarget" v="Obiettivo qualità" eh="9ef1e78d" />
+        <e k="usedplus_si_agentFees" v="COMMISSIONI AGENTE" eh="820c8c48" />
+        <e k="usedplus_si_retainer" v="Acconto (pagamento immediato)" eh="bea3961b" />
+        <e k="usedplus_si_commissionRate" v="Tasso commissione" eh="e3ed32ea" />
+        <e k="usedplus_si_expectedPricing" v="PREZZI PREVISTI" eh="76b4b461" />
+        <e k="usedplus_si_estBase" v="Base stim." eh="36e9580b" />
+        <e k="usedplus_si_estCommission" v="Comm. stim." eh="dbcf2ea4" />
+        <e k="usedplus_si_estAsking" v="Rich. stim." eh="417a8e9d" />
+        <e k="usedplus_si_agentInfo1" v="Il tuo agente cercherà mensilmente e ti avviserà quando troverà dei veicoli." eh="d646d24c" />
+        <e k="usedplus_si_agentInfo2" v="Controlla il Mercato dell'usato nel menu ESC per vedere lo stato della ricerca." eh="d7c17ba2" />
+        <e k="usedplus_sr_title" v="RISPOSTA ALL'OFFERTA" eh="118271b5" />
         <e k="usedplus_fsk_feedback_perfect" v="Diagnosi corretta!" eh="ea6dac23" />
         <e k="usedplus_fsk_feedback_partial" v="Sistema giusto, ma la causa specifica era diversa." eh="ad5b77ef" />
         <e k="usedplus_fsk_feedback_wrong" v="Il problema reale era in un sistema diverso." eh="9b04c318" />
@@ -2068,6 +2254,263 @@
         <e k="usedplus_sr_titleReject" v="OFFERTA RIFIUTATA" eh="2b54c509" />
         <e k="usedplus_sr_titleWalkaway" v="IL VENDITORE SE N'È ANDATO" eh="d4da1912" />
         <e k="usedplus_sr_yourOffer" v="La tua offerta:" eh="4e018663" />
+        <e k="usedplus_sld_status" v="Stato:" eh="24a23d78" />
+        <e k="usedplus_uvp_available" v="Disponibile" eh="78945de8" />
+        <e k="usedplus_uvp_inspectionProgress" v="Ispezione in corso..." eh="6a1ed94c" />
+        <e k="usedplus_uvp_ok" v="OK" eh="e0aa021e" />
+        <e k="usedplus_sd_viewFoundVehicles" v="Vedi veicoli trovati" eh="45ae1e0b" />
+        <e k="usedplus_sli_noFee" v="Nessuna commissione" eh="43c9b021" />
+        <e k="usedplus_fm_view" v="VEDI" eh="5824b315" />
+        <e k="usedplus_fm_skip" v="SALTA" eh="b85df04e" />
+        <e k="usedplus_btn_back" v="Indietro" eh="0557fa92" />
+        <e k="usedplus_btn_close" v="Chiudi" eh="d3d2e617" />
+        <e k="usedplus_btn_ok" v="OK" eh="e0aa021e" />
+        <e k="usedplus_btn_cancel" v="Annulla" eh="ea478870" />
+        <e k="usedplus_action_obdScanner" v="Scanner OBD" eh="96023669" />
+        <e k="usedplus_action_obdDisabled" v="Scanner OBD: %s (DISATTIVATO)" eh="562a5304" />
+        <e k="usedplus_action_obdWithWarnings" v="Scanner OBD: %s (%s)" eh="04f0df6b" />
+        <e k="usedplus_action_obdNormal" v="Scanner OBD: %s" eh="6645cd04" />
+        <e k="usedplus_action_fillTank" v="Riempi serbatoio %s (%.0f/%.0fL -&gt; +%.0fL)" eh="6fa80431" />
+        <e k="usedplus_action_tankEmpty" v="Serbatoio vuoto - Acquista prima %s" eh="c80194d4" />
+        <e k="usedplus_action_tankWrongFluid" v="Il serbatoio contiene %s - Il veicolo necessita %s" eh="02bf3527" />
+        <e k="usedplus_acp_balance" v="Saldo:" eh="b5397350" />
+        <e k="usedplus_acp_creditScore" v="Punteggio creditizio:" eh="0199e1a3" />
+        <e k="usedplus_acp_activeDeals" v="Contratti attivi:" eh="9d92ae65" />
+        <e k="usedplus_acp_totalDebt" v="Debito totale:" eh="3deb323c" />
+        <e k="usedplus_acp_eng100" v="Mot 100%" eh="6b2496ef" />
+        <e k="usedplus_acp_eng50" v="Mot 50%" eh="e5b41dac" />
+        <e k="usedplus_acp_eng10" v="Mot 10%" eh="3d831656" />
+        <e k="usedplus_acp_hyd100" v="Idr 100%" eh="5b316f07" />
+        <e k="usedplus_acp_hyd50" v="Idr 50%" eh="a0dcb21a" />
+        <e k="usedplus_acp_hyd10" v="Idr 10%" eh="ca55d820" />
+        <e k="usedplus_acp_elec100" v="Elett 100%" eh="d7f83824" />
+        <e k="usedplus_acp_elec50" v="Elett 50%" eh="f49dcc7b" />
+        <e k="usedplus_acp_elec10" v="Elett 10%" eh="9f33c4bc" />
+        <e k="usedplus_acp_emptyOil" v="Svuota olio" eh="3e5913d0" />
+        <e k="usedplus_acp_emptyHyd" v="Svuota idr." eh="8fe8c5a7" />
+        <e k="usedplus_acp_resetCooldowns" v="Resetta tempi di attesa" eh="5142227b" />
+        <e k="usedplus_acp_serviceTruckTanks" v="Serbatoi autocarro di servizio" eh="a61ce179" />
+        <e k="usedplus_acp_drainOil" v="Scarica olio" eh="229adbdc" />
+        <e k="usedplus_acp_drainHyd" v="Scarica idr." eh="2df1c578" />
+        <e k="usedplus_acp_setZero" v="Imposta $0" eh="ca8864ed" />
+        <e k="usedplus_ft_maxPotential" v="Potenziale massimo: %.0f%%" eh="52e4df0c" />
+        <e k="usedplus_ft_healthy" v="Integro" eh="396d45b5" />
+        <e k="usedplus_ft_needsService" v="Richiede manutenzione" eh="5248853a" />
+        <e k="usedplus_ft_componentTitle" v="TRACCIATORE GUASTI %s" eh="ca37ae86" />
+        <e k="usedplus_ft_faultCounterFormat" v="Guasti: %d/%d" eh="5abe853a" />
+        <e k="usedplus_ft_cellRef" v="Cella [%s%d]" eh="2a925984" />
+        <e k="usedplus_ft_resultLine" v="[%s%d] %s - %s (%.1fL olio)" eh="1ddae34a" />
+        <e k="usedplus_ft_incorrectCount" v="%d diagnosi errate - efficacia ridotta" eh="b00be569" />
+        <e k="usedplus_common_unknown" v="Sconosciuto" eh="88183b94" />
+        <e k="usedplus_common_unknownVehicle" v="Veicolo sconosciuto" eh="4fc625b9" />
+        <e k="usedplus_dd_paymentsOfTotal" v="%d di %d" eh="8e44b212" />
+        <e k="usedplus_dd_moreItems" v="...e %d altro/i elemento/i" eh="c57c3704" />
+        <e k="usedplus_dd_totalRepossessed" v="Valore totale confiscato: %s" eh="d810ed77" />
+        <e k="usedplus_dd_repossessionInfo" v="I seguenti %d elemento/i sono stati confiscati per mancati pagamenti:" eh="1af1da28" />
+        <e k="usedplus_repo_consecutive" v="%d consecutivi" eh="142731fb" />
+        <e k="usedplus_repo_cleared" v=" (saldato)" eh="0618d9ef" />
+        <e k="usedplus_fdf_termFormat" v="%d anni (%d mesi)" eh="58629dfc" />
+        <e k="usedplus_fdf_dayFormat" v="Giorno %d" eh="61eed6c7" />
+        <e k="usedplus_fmf_btnCreditReport" v="Rapporto creditizio" eh="3b3acbdd" />
+        <e k="usedplus_fmf_btnTakeLoan" v="Richiedi prestito" eh="40fe67fa" />
+        <e k="usedplus_fmf_versionFooter" v="UsedPlus v%s | Anteprima sviluppo | github.com/XelaNull/FS25_UsedPlus" eh="e86cc1be" />
+        <e k="usedplus_fmf_assetsWithFields" v="Patrimonio: %s (%d campi)" eh="dd6f8cc6" />
+        <e k="usedplus_fmf_historyPoints" v="Storico: %+d punti" eh="890d1766" />
+        <e k="usedplus_vpf_prev" v="&amp;lt; Prec." eh="93819e8f" />
+        <e k="usedplus_vpf_navFormat" v="%d di %d" eh="8e44b212" />
+        <e k="usedplus_sd_agentFeeFormat" v="%s + %d%% comm." eh="d71bd831" />
+        <e k="usedplus_sd_statusSearching" v="Ricerca in corso..." eh="1243daf5" />
+        <e k="usedplus_sd_vehiclesFound" v="%d veicolo/i trovato/i!" eh="31ab2e2e" />
+        <e k="usedplus_sd_statusComplete" v="Completata: %d trovati" eh="f2cee310" />
+        <e k="usedplus_sd_statusCancelled" v="Annullato" eh="a149e85a" />
+        <e k="usedplus_sd_monthsLeft" v="%d mese/i rimanente/i" eh="323fc33c" />
+        <e k="usedplus_sd_monthProgress" v="Mese %d di %d" eh="b2af1b34" />
+        <e k="usedplus_sd_foundCount" v="%d/%d trovati" eh="1c8c44f6" />
+        <e k="usedplus_sd_tipRegional" v="Gli agenti regionali coprono un'area più ampia ma impiegano più tempo." eh="5f3b4bfd" />
+        <e k="usedplus_sd_tipLocal" v="Le ricerche locali sono veloci ma trovano meno opzioni." eh="01e7df00" />
+        <e k="usedplus_sd_tipNational" v="Le ricerche nazionali trovano le migliori offerte ma richiedono più tempo." eh="3e6bc07b" />
+        <e k="usedplus_sd_tipQuality" v="Obiettivi di qualità superiore trovano veicoli migliori ma costano di più." eh="4c3c698f" />
+        <e k="usedplus_sd_tipDefault" v="Il tuo agente sta cercando attivamente nel mercato dell'usato." eh="a53007d3" />
+        <e k="usedplus_sd_viewPortfolio" v="Vedi %d veicolo/i trovato/i%s" eh="7384b969" />
+        <e k="usedplus_sld_tipDefault" v="Livelli agente superiori hanno una portata maggiore e trovano acquirenti più velocemente." eh="50fde41e" />
+        <e k="usedplus_sld_tipPendingOffer" v="Hai un'offerta in sospeso! Esaminala prima che scada." eh="a2e1e405" />
+        <e k="usedplus_sld_tipDeclined" v="Rifiutare offerte riduce il tempo rimanente dell'annuncio." eh="2278074c" />
+        <e k="usedplus_sld_tipPremium" v="I prezzi premium richiedono pazienza ma generano rendimenti più elevati." eh="6f2f3b59" />
+        <e k="usedplus_sld_tipQuickSale" v="I prezzi di vendita rapida attraggono acquirenti velocemente a un prezzo inferiore." eh="04749853" />
+        <e k="usedplus_sp_noListings" v="Nessun annuncio (0/%d). Vendi dal menu Garage." eh="5da453dc" />
+        <e k="usedplus_sp_offerStatus" v="OFFERTA: %s" eh="868cdf29" />
+        <e k="usedplus_sp_searching" v="Ricerca in corso..." eh="1243daf5" />
+        <e k="usedplus_sp_listingsWithOffers" v="%d/%d (%d offerte!)" eh="bc5e0961" />
+        <e k="usedplus_sp_editPricePrompt" v="Inserisci nuovo prezzo richiesto per %s&amp;#10;(Attuale: %s)" eh="0d0736e4" />
+        <e k="usedplus_srp_noSearches" v="Nessuna ricerca (0/%d). Inizia dal Negozio." eh="8b454ea0" />
+        <e k="usedplus_se_offersDeclined" v="%d (%d rifiutate)" eh="6f4f73a8" />
+        <e k="usedplus_se_nonRefundable" v=" (non rimborsabile)" eh="5e83c5f8" />
+        <e k="usedplus_se_durationFormat" v="%d mese%s" eh="272b73f2" />
+        <e k="usedplus_se_vehiclesFoundCount" v="%d veicol%s trovati" eh="68fa345e" />
+        <e k="usedplus_si_defaultTier" v="Regionale" eh="9c1c6794" />
+        <e k="usedplus_si_defaultDuration" v="3 mesi" eh="de0353ca" />
+        <e k="usedplus_si_defaultQuality" v="Qualsiasi condizione" eh="902a1b99" />
+        <e k="usedplus_si_maxFinds" v="Fino a %d risultati" eh="b7712c83" />
+        <e k="usedplus_sli_defaultPriceTier" v="Prezzo di mercato" eh="04cf089e" />
+        <e k="usedplus_sli_durationMonths" v="%d mese/i" eh="b6d6640d" />
+        <e k="usedplus_sli_durationRange" v="%d - %d mesi" eh="5d231cef" />
+        <e k="usedplus_status_active" v="Attivo" eh="4d3d769b" />
+        <e k="usedplus_status_paidOff" v="Estinto" eh="564a69ad" />
+        <e k="usedplus_status_completed" v="Completato" eh="07ca5050" />
+        <e k="usedplus_status_terminated" v="Terminato" eh="fba9c4da" />
+        <e k="usedplus_status_expired" v="Scaduto" eh="24fe4803" />
+        <e k="usedplus_status_defaulted" v="Insolvente" eh="02f56691" />
+        <e k="usedplus_vsl_statusSearching" v="Ricerca acquirente..." eh="28e37076" />
+        <e k="usedplus_vsl_statusOffer" v="OFFERTA: %s (scade tra %d ore)" eh="ea1515d3" />
+        <e k="usedplus_vsl_statusSold" v="VENDUTO per %s" eh="737a574b" />
+        <e k="usedplus_vsl_statusExpired" v="Scaduto - Nessun acquirente trovato" eh="3e3e51fd" />
+        <e k="usedplus_vsl_statusCancelled" v="Annullato" eh="a149e85a" />
+        <e k="usedplus_agent_privateSale" v="Vendita privata" eh="1be4ac47" />
+        <e k="usedplus_agent_privateSaleDesc" v="Nessuna commissione, ma tempi più lunghi e minore probabilità di successo." eh="01191ca2" />
+        <e k="usedplus_agent_local" v="Agente locale" eh="082cb5b6" />
+        <e k="usedplus_agent_localDesc" v="Tempi rapidi, bacino di acquirenti limitato." eh="75810dde" />
+        <e k="usedplus_agent_regional" v="Agente regionale" eh="403955ba" />
+        <e k="usedplus_agent_regionalDesc" v="Portata e tempistiche equilibrate." eh="77696fb3" />
+        <e k="usedplus_agent_national" v="Agente nazionale" eh="eef8214f" />
+        <e k="usedplus_agent_nationalDesc" v="Massima visibilità, attesa più lunga." eh="2a049c74" />
+        <e k="usedplus_price_quickSale" v="Vendita rapida" eh="bd7d9f3e" />
+        <e k="usedplus_price_quickSaleDesc" v="Prezzi di liquidazione. Facile trovare acquirenti." eh="7373ee56" />
+        <e k="usedplus_price_market" v="Prezzo di mercato" eh="04cf089e" />
+        <e k="usedplus_price_marketDesc" v="Valore equo di mercato. Probabilità standard." eh="2d860d33" />
+        <e k="usedplus_price_premium" v="Prezzo premium" eh="c7f0f08d" />
+        <e k="usedplus_price_premiumDesc" v="Prezzi premium. Richiede condizioni impeccabili." eh="a73d75ff" />
+        <e k="usedplus_searchTier_local" v="Ricerca locale" eh="e1ea5bc1" />
+        <e k="usedplus_searchTier_localDesc" v="Ricerca locale rapida con piccolo bacino. 1 mese, 30% di probabilità mensile, fino a 3 risultati." eh="9a61c1d4" />
+        <e k="usedplus_searchTier_regional" v="Ricerca regionale" eh="722cc490" />
+        <e k="usedplus_searchTier_regionalDesc" v="Ricerca bilanciata con portata maggiore. Fino a 3 mesi, 55% di probabilità mensile, fino a 6 risultati." eh="20eaa884" />
+        <e k="usedplus_searchTier_national" v="Ricerca nazionale" eh="c967061f" />
+        <e k="usedplus_searchTier_nationalDesc" v="Ricerca nazionale premium. Fino a 6 mesi, 85% di probabilità mensile, fino a 10 risultati. Almeno 1 garantito." eh="8e1f6391" />
+        <e k="usedplus_quality_any" v="Qualsiasi condizione" eh="902a1b99" />
+        <e k="usedplus_quality_anyDesc" v="Jolly - alta variabilità di qualità e prezzo" eh="d4ac3330" />
+        <e k="usedplus_quality_poor" v="Condizioni scadenti" eh="99c00753" />
+        <e k="usedplus_quality_poorDesc" v="Occasione - riparazioni estese necessarie" eh="59e39eef" />
+        <e k="usedplus_quality_fair" v="Condizioni discrete" eh="ee8ccfe1" />
+        <e k="usedplus_quality_fairDesc" v="Usura moderata - probabili alcune riparazioni" eh="d84528e2" />
+        <e k="usedplus_quality_good" v="Buone condizioni" eh="fcee437c" />
+        <e k="usedplus_quality_goodDesc" v="Ben mantenuto - riparazioni minime" eh="274bcd85" />
+        <e k="usedplus_quality_excellent" v="Condizioni eccellenti" eh="f2e7b4c1" />
+        <e k="usedplus_quality_excellentDesc" v="Come nuovo - pronto all'uso immediato" eh="ae7d5360" />
+        <e k="usedplus_creditRating_excellent" v="Eccellente" eh="fcc2d28a" />
+        <e k="usedplus_creditRating_good" v="Buono" eh="0c6ad70b" />
+        <e k="usedplus_creditRating_fair" v="Discreto" eh="f7f20cf0" />
+        <e k="usedplus_creditRating_poor" v="Scarso" eh="0e94d017" />
+        <e k="usedplus_creditRating_veryPoor" v="Molto scarso" eh="2796b346" />
+        <e k="usedplus_time_months" v="%d mesi" eh="eb5314ed" />
+        <e k="usedplus_time_1month" v="1 mese" eh="1634e66b" />
+        <e k="usedplus_time_complete" v="Completato" eh="ae94f80b" />
+        <e k="usedplus_sell_privateSale" v="Vendita privata (3-6 mesi)" eh="a71a8e34" />
+        <e k="usedplus_sell_quickSale" v="Vendita rapida (75-85%)" eh="37d1f4dc" />
+        <e k="usedplus_sell_marketPrice" v="Prezzo di mercato (95-105%)" eh="1ac71025" />
+        <e k="usedplus_sell_premium" v="Premium (115-130%)" eh="c37c4a25" />
+        <e k="usedplus_deal_fairOffer" v="Offerta equa" eh="b2134054" />
+        <e k="usedplus_deal_goodDeal" v="Buon affare" eh="e183104a" />
+        <e k="usedplus_deal_greatDeal" v="Ottimo affare" eh="9f2a01f0" />
+        <e k="usedplus_deal_excellentDeal" v="Affare eccellente" eh="fc0e87c7" />
+        <e k="usedplus_trend_improving" v="In miglioramento" eh="4ba4dfd7" />
+        <e k="usedplus_trend_declining" v="In calo" eh="12175033" />
+        <e k="usedplus_trend_stable" v="Stabile" eh="fa3aff3c" />
+        <e k="usedplus_ui_conditionSummary" v="Condizione: %d%% (Riparazione: %d%%, Verniciatura: %d%%)" eh="784d31c9" />
+        <e k="usedplus_ui_conditionPercent" v="Condizione: %d%%" eh="810c5870" />
+        <e k="usedplus_cond_excellent" v="Eccellente" eh="fcc2d28a" />
+        <e k="usedplus_cond_likeNew" v="Come nuovo" eh="36c3af97" />
+        <e k="usedplus_cond_veryGood" v="Molto buono" eh="df89f42d" />
+        <e k="usedplus_cond_minorScratches" v="Graffi minori" eh="db41b330" />
+        <e k="usedplus_cond_goodCondition" v="Buone condizioni" eh="2acb21a1" />
+        <e k="usedplus_cond_someWearVisible" v="Usura visibile" eh="f86836e8" />
+        <e k="usedplus_cond_fairShowsUse" v="Discreto, mostra segni d'uso" eh="55051e97" />
+        <e k="usedplus_cond_fadedNeedsTouchup" v="Sbiadito, necessita ritocchi" eh="54a73462" />
+        <e k="usedplus_cond_wornNeedsWork" v="Usurato, necessita lavoro" eh="cbe46eba" />
+        <e k="usedplus_cond_weatheredRepaintAdvised" v="Deteriorato, riverniciatura consigliata" eh="22e86375" />
+        <e k="usedplus_cond_poorMajorRepairs" v="Scadente, riparazioni importanti necessarie" eh="0c43488d" />
+        <e k="usedplus_cond_poorSignificantFading" v="Scadente, sbiadimento significativo" eh="a6a99071" />
+        <e k="usedplus_cr_bankCreditLine" v="Linea di credito bancaria" eh="ae4b0f92" />
+        <e k="usedplus_cr_bankLoan" v="Prestito bancario" eh="b8ba96a9" />
+        <e k="usedplus_cr_statusActive" v="Attivo" eh="4d3d769b" />
+        <e k="usedplus_cr_typeLoan" v="Prestito" eh="9ad81a8f" />
+        <e k="usedplus_cr_typeLease" v="Leasing" eh="47c96b08" />
+        <e k="usedplus_cr_typeFinance" v="Finanziamento" eh="c482980d" />
+        <e k="usedplus_cr_typeCashLoan" v="Prestito in contanti" eh="c1b883d7" />
+        <e k="usedplus_ir_vehicleDetailsFormat" v="Ore: %d | Età: %d anni | Danni: %d%%" eh="2dda5f52" />
+        <e k="usedplus_mr_vehicleDetailsFormat" v="Ore: %s | Età: %d anni | Danni: %d%%" eh="b160c943" />
+        <e k="usedplus_neg_whisperDefault" v="Tra noi... sembra un venditore affidabile." eh="bc649dcc" />
+        <e k="usedplus_neg_whisperWeatherGood" v="In più, con questo tempo, potrebbe voler chiudere in fretta." eh="a5b78ec8" />
+        <e k="usedplus_neg_whisperWeatherBad" v="Con una bella giornata come questa però... non aspettarti favori." eh="bf201d88" />
+        <e k="usedplus_neg_savingsFormat" v="%s (%d%% di sconto)" eh="072ccdcf" />
+        <e k="usedplus_sr_youSaved" v="Hai risparmiato %s!" eh="438ec0a8" />
+        <e k="usedplus_upd_repairPercent" v="Riparazione: %d%%" eh="c4bca797" />
+        <e k="usedplus_upd_damaged" v=" (danneggiato)" eh="4467bfca" />
+        <e k="usedplus_upd_paintPercent" v="Verniciatura: %d%%" eh="207936b7" />
+        <e k="usedplus_upd_worn" v=" (usurato)" eh="854363f4" />
+        <e k="usedplus_upd_hoursFormat" v="Ore: %d" eh="731c8e56" />
+        <e k="usedplus_upd_percentOfSell" v="(%d%% del valore di vendita)" eh="1db8ab06" />
+        <e k="usedplus_upd_creditCond" v="Credito: %d%% | Cond.: %d%%" eh="3eec7030" />
+        <e k="usedplus_workshop_inspectionConfirm" v="Pagare %s per un'ispezione completa del veicolo?&amp;#10;&amp;#10;Verranno controllate le condizioni meccaniche, le valutazioni di affidabilità e verrà fornito un rapporto dettagliato.&amp;#10;&amp;#10;I risultati dell'ispezione sono disponibili immediatamente." eh="ff4e58b0" />
+        <e k="usedplus_ph_progressFormat" v="%d di %d pagamenti (%d%%)" eh="a1779bd1" />
+        <e k="usedplus_la_termYears" v="%d anni" eh="86730d79" />
+        <e k="usedplus_lr_termYears" v="%.0f anno/i" eh="75bc9b86" />
+        <e k="usedplus_lr_termMonths" v="%d mesi" eh="eb5314ed" />
+        <e k="usedplus_tires_worstFormat" v="Peggiore: %s %.0f%%" eh="1158a3fb" />
+        <e k="usedplus_std_yourCash" v="I tuoi contanti: %s" eh="7bc506bb" />
+        <e k="usedplus_dealType_repair" v="Finanziamento riparazione/riverniciatura" eh="b5bba0b1" />
+        <e k="usedplus_dealType_repairDesc" v="Finanzia riparazioni e riverniciature nel tempo." eh="fbdc9b3c" />
+        <e k="usedplus_dealType_vehicleFinance" v="Finanziamento veicoli" eh="c19b65b7" />
+        <e k="usedplus_dealType_vehicleFinanceDesc" v="Acquista veicoli con pagamenti mensili." eh="b62fa38c" />
+        <e k="usedplus_dealType_vehicleLease" v="Leasing veicoli" eh="55a7f9a8" />
+        <e k="usedplus_dealType_vehicleLeaseDesc" v="Veicoli in leasing con opzione di acquisto a fine contratto." eh="722d9fec" />
+        <e k="usedplus_dealType_landFinance" v="Finanziamento terreni" eh="c00854e3" />
+        <e k="usedplus_dealType_landFinanceDesc" v="Acquista terreni agricoli con rate di mutuo." eh="0c5bcb3a" />
+        <e k="usedplus_dealType_cashLoan" v="Prestito in contanti" eh="c1b883d7" />
+        <e k="usedplus_dealType_cashLoanDesc" v="Prendi in prestito garantendo con i tuoi beni per contanti immediati." eh="b032157c" />
+        <e k="usedplus_osp_tankFull" v="Serbatoio pieno!" eh="bbd165a9" />
+        <e k="usedplus_osp_emptyCapacity" v="%s [Vuoto - %.0fL di capacità]" eh="99343849" />
+        <e k="usedplus_osp_fillingProgress" v="Riempimento serbatoio %s... %.0f/%.0fL" eh="a9b92a05" />
+        <e k="usedplus_osp_nothing" v="nulla" eh="3e47b750" />
+        <e k="usedplus_osp_serviceVehicle" v="Veicolo di servizio" eh="490a5409" />
+        <e k="usedplus_osp_storageTankEmpty" v="Il serbatoio di stoccaggio è vuoto!" eh="87848abb" />
+        <e k="usedplus_osp_tankFilled" v="Serbatoio %s riempito! (%.0f/%.0fL)" eh="0846e8fa" />
+        <e k="usedplus_osp_tankIsFull" v="Il serbatoio %s è pieno! (%.0f/%.0fL)" eh="3b27d285" />
+        <e k="usedplus_st_cooldownMessage" v="Questo componente non può essere riesaminato per %d ore di gioco." eh="bfd3f006" />
+        <e k="usedplus_st_degradedCount" v="%d component%s sotto il 90%%" eh="97e59707" />
+        <e k="usedplus_st_estimatedTimeResult" v="Tempo stimato: %d ore" eh="1d3deb3e" />
+        <e k="usedplus_st_low" v="(BASSO)" eh="02937491" />
+        <e k="usedplus_st_statusCritical" v="Critico" eh="278d01e5" />
+        <e k="usedplus_st_statusDegraded" v="Degradato" eh="aa95669c" />
+        <e k="usedplus_st_statusGood" v="Buono" eh="0c6ad70b" />
+        <e k="usedplus_st_statusPoor" v="Scarso" eh="0e94d017" />
+        <e k="usedplus_label_landLease" v=" (Affitto terreno)" eh="b87349ef" />
+        <e k="usedplus_label_pluralS" v="i" eh="03c7c0ac" />
+        <e k="usedplus_label_assets" v="beni" eh="32bb6361" />
+        <e k="usedplus_label_landParcels" v="appezzamenti" eh="b5a627f3" />
+        <e k="usedplus_label_vehicles" v="veicoli" eh="56bb5580" />
+        <e k="usedplus_notification_buildingFinanceCreditLow" v="Il finanziamento edifici richiede un credito di 750+. Il tuo punteggio: %d. Solo acquisto in contanti." eh="009ec60f" />
+        <e k="usedplus_notification_ensureFundsLandSeized" v="Il prossimo pagamento è imminente. Assicurati di avere fondi sufficienti o il tuo terreno verrà sequestrato." eh="5ec00447" />
+        <e k="usedplus_notification_ensureFundsRepossessed" v="Il prossimo pagamento è imminente. Assicurati di avere fondi sufficienti o il tuo veicolo verrà confiscato." eh="5d398699" />
+        <e k="usedplus_notification_ensureFundsRepossession" v="Il prossimo pagamento è imminente. Assicurati di avere fondi sufficienti o subirai una confisca." eh="8d0459dd" />
+        <e k="usedplus_notification_loanDefaultedRepossessed" v="PRESTITO INSOLVENTE! %d %s del valore di %s sono stati confiscati!" eh="e89c2695" />
+        <e k="usedplus_notification_missedLandLeaseEnsureFunds" v="Il prossimo pagamento è imminente. Assicurati di avere fondi sufficienti o il tuo affitto terreno verrà terminato." eh="dd4b0ce0" />
+        <e k="usedplus_notification_missedLeasePaymentFinalPopup" v="Il prossimo pagamento è imminente. Assicurati di avere fondi sufficienti o il tuo veicolo verrà confiscato." eh="5d398699" />
+        <e k="usedplus_notification_placeableFinanced" v="%s FINANZIATO! Credito temp.: %s (prestito) | Prezzo intero: %s | Costo odierno: %s anticipo | Mensile: %s per %d anni" eh="a78638ad" />
+        <e k="usedplus_notification_missedLoanPayment1stCollateral" v="Pagamento prestito mancato! Interessi di %s aggiunti. La tua garanzia (%d elementi) è a rischio! (1° avviso)" eh="34ce171a" />
+        <e k="usedplus_notification_missedLoanPaymentFinalCollateral" v="AVVISO FINALE: Pagamento prestito mancato! Un altro = GARANZIA CONFISCATA! (%d veicoli a rischio)" eh="c50d6889" />
+        <e k="usedplus_serviceTruck_purchased" v="Autocarro di servizio acquistato!" eh="39a5b8ae" />
+        <e k="usedplus_serviceTruck_purchaseFailed" v="Acquisto fallito" eh="e1928808" />
+        <e k="usedplus_term_1year" v="1 anno" eh="ca4c73c1" />
+        <e k="usedplus_term_months" v="%d mesi" eh="eb5314ed" />
+        <e k="usedplus_term_years" v="%d anni" eh="86730d79" />
+        <e k="usedplus_uvp_condition" v="Condizione" eh="9e2941b3" />
+        <e k="usedplus_uvp_expiresFormat" v="%d mes%s (scade %s)" eh="7917cee0" />
+        <e k="usedplus_warning_flattire" v="PNEUMATICO A TERRA!" eh="75fc9ab9" />
+        <e k="usedplus_error_fillTypeNotRegistered" v="Errore: tipo di riempimento non registrato!" eh="8ac3f268" />
+        <e k="usedplus_error_noMatchingFluid" v="Nessun tipo di fluido corrispondente per questo serbatoio!" eh="2efd6c76" />
+        <e k="usedplus_fp_containsLabel" v="Contiene:" eh="0acb039c" />
+        <e k="usedplus_leaseEnd_title" v="Fine del leasing" eh="35022911" />
+        <e k="usedplus_serviceTruck_agentMessage" v="Il tuo agente nazionale ha un'opportunità speciale per te..." eh="e7d6295a" />
+        <e k="usedplus_serviceTruck_expiryNotice" v="L'offerta scade tra %d giorni" eh="9d7bc900" />
         <e k="usedplus_sr_counterOffer" v="Controfferta:" eh="768065b8" />
         <e k="usedplus_sr_sellerPrice" v="Prezzo del venditore:" eh="1402265a" />
         <e k="usedplus_sr_completePurchase" v="Completa acquisto" eh="e1c9f521" />
@@ -2177,12 +2620,33 @@
 
         <!-- v2.12.0: Fault Tracer Minigame -->
         <e k="usedplus_ft_title" v="TRACCIATORE GUASTI" eh="92470a22" />
+        <e k="usedplus_ft_targetVehicle" v="VEICOLO OBIETTIVO" eh="1b0f53bb" />
         <e k="usedplus_ft_selectComponent" v="Seleziona componente da diagnosticare" eh="3fb628e9" />
+        <e k="usedplus_ft_engine" v="Motore" eh="7bfa3072" />
+        <e k="usedplus_ft_electrical" v="Elettrico" eh="6f15be3d" />
+        <e k="usedplus_ft_hydraulic" v="Idraulico" eh="fda2bff7" />
+        <e k="usedplus_ft_resources" v="RISORSE AUTOCARRO DI SERVIZIO" eh="95f2e911" />
+        <e k="usedplus_ft_oilColon" v="Olio:" eh="eb99e035" />
+        <e k="usedplus_ft_hydraulicColon" v="Idraulico:" eh="a39ee8d2" />
+        <e k="usedplus_ft_selectHint" v="Seleziona un componente sotto il 90% di affidabilità per iniziare il tracciamento guasti." eh="24638661" />
+        <e k="usedplus_ft_engineFaultTracer" v="TRACCIATORE GUASTI MOTORE" eh="996ef27c" />
+        <e k="usedplus_ft_faultCounter" v="Guasti: 0/0" eh="46831354" />
+        <e k="usedplus_ft_modeLabel" v="Modalità:" eh="1ee1c44c" />
+        <e k="usedplus_ft_probe" v="Sonda" eh="76d16796" />
+        <e k="usedplus_ft_flag" v="Segnala" eh="c5836008" />
         <e k="usedplus_ft_probeMode" v="Sonda" eh="76d16796" />
         <e k="usedplus_ft_flagMode" v="Segna" eh="c5836008" />
         <e k="usedplus_ft_quickScan" v="Scansione rapida (2x costo)" eh="31d0f8fb" />
         <e k="usedplus_ft_hint" v="Manuale officina" eh="d96f8735" />
         <e k="usedplus_ft_beginRepair" v="Avvia riparazione" eh="e792568e" />
+        <e k="usedplus_ft_howToPlay" v="COME GIOCARE" eh="5c8c8f0f" />
+        <e k="usedplus_ft_howToPlayLine1" v="1. SONDA le celle per rivelare i colori" eh="853e535f" />
+        <e k="usedplus_ft_howToPlayLine2" v="2. Usa gli indicatori per trovare i guasti" eh="5d47360b" />
+        <e k="usedplus_ft_howToPlayLine3" v="3. SEGNALA le celle che pensi siano guaste" eh="187124ff" />
+        <e k="usedplus_ft_howToPlayLine4" v="4. Diagnostica ogni tipo di guasto segnalato" eh="2cd2b9ff" />
+        <e k="usedplus_ft_howToPlayLine5" v="5. Inizia la riparazione quando tutti i guasti sono segnalati" eh="b0f8b8ad" />
+        <e k="usedplus_ft_diagnoseFaultType" v="DIAGNOSTICA TIPO DI GUASTO" eh="28f6e88d" />
+        <e k="usedplus_ft_cellLabel" v="Cella [A1]" eh="c22d69d2" />
         <e k="usedplus_ft_oilUsed" v="Olio usato: %.1fL" eh="bccd33a2" />
         <e k="usedplus_ft_faultsFound" v="Guasti: %d/%d" eh="5abe853a" />
         <e k="usedplus_ft_corroded" v="Corroso" eh="4b370f36" />
@@ -2203,6 +2667,12 @@
         <e k="usedplus_ft_corrodedDesc" v="Danni da ruggine / ossidazione" eh="8a01ae60" />
         <e k="usedplus_ft_crackedDesc" v="Fratture da stress / fatica" eh="81d5118b" />
         <e k="usedplus_ft_seizedDesc" v="Cuscinetto grippato / bloccato" eh="647b76a9" />
+        <e k="usedplus_ft_cancel" v="Annulla" eh="ea478870" />
+        <e k="usedplus_ft_repairResults" v="RISULTATI RIPARAZIONE" eh="bb6599cb" />
+        <e k="usedplus_ft_reliabilityGain" v="Guadagno affidabilità:" eh="d8c796d2" />
+        <e k="usedplus_ft_ceilingRestored" v="Limite ripristinato:" eh="311f8021" />
+        <e k="usedplus_ft_diagnosisAccuracy" v="Accuratezza diagnosi:" eh="3fc65596" />
+        <e k="usedplus_ft_oilConsumed" v="Olio consumato:" eh="e88bfeb0" />
 
         <!-- v2.9.0: Spare Parts Pallet -->
         <e k="usedplus_sparePartsPallet_name" v="Pallet Ricambi" eh="9bf39a93" />
@@ -2419,6 +2889,100 @@
 
 
         <e k="usedplus_admin_status_ready" v="Pronto. Seleziona un'azione." eh="1ef35a42" />
+        <e k="usedplus_notification_buildingPurchaseCancelled" v="Acquisto edificio annullato - fondi ripristinati" eh="f9c12b18" />
+        <e k="usedplus_notification_monthlyFinanceSuccess" v="Finanza mensile: %d pagament%s elaborati (%s)" eh="6e705fb6" />
+        <e k="usedplus_notification_monthlyFinanceMixed" v="Finanza mensile: %d pagati, %d MANCATI! Controlla il Gestore finanziario." eh="99d6c795" />
+        <e k="usedplus_notification_leaseTermComplete" v="Contratto di leasing completato per %s! Scegli se restituire, riscattare o rinnovare." eh="7d8976b3" />
+        <e k="usedplus_notification_paymentSkipped" v="Pagamento saltato per %s. Interessi di %s aggiunti al saldo." eh="8b91db2f" />
+        <e k="usedplus_notification_missedLandPayment1st" v="Pagamento terreno mancato per %s! Interessi di %s aggiunti. (1° avviso)" eh="6ba61351" />
+        <e k="usedplus_notification_missedLandPaymentFinal" v="AVVISO FINALE: Pagamento terreno mancato per %s! Un altro = SEQUESTRO!" eh="357f3d9c" />
+        <e k="usedplus_notification_missedPayment1st" v="Pagamento mancato per %s. Interessi di %s aggiunti al saldo. (1° avviso)" eh="3e90e83f" />
+        <e k="usedplus_notification_missedPaymentFinal" v="AVVISO FINALE: Pagamento mancato per %s. Un altro pagamento mancato comporterà la confisca!" eh="58dc1324" />
+        <e k="usedplus_notification_vehicleRepossessed" v="VEICOLO CONFISCATO: %s è stato sequestrato per mancato pagamento!" eh="6006f5c2" />
+        <e k="usedplus_notification_missedLoanPayment1st" v="Pagamento prestito mancato! Interessi di %s aggiunti. (1° avviso)" eh="56e3cdc4" />
+        <e k="usedplus_notification_missedLoanPaymentFinal" v="AVVISO FINALE: Pagamento prestito mancato! Un altro pagamento mancato causerà l'insolvenza del prestito!" eh="cdca23f0" />
+        <e k="usedplus_notification_loanDefaultedNoCollateral" v="PRESTITO INSOLVENTE! Nessuna garanzia recuperabile." eh="342931d5" />
+        <e k="usedplus_notification_missedLeasePayment1st" v="Pagamento leasing mancato per %s. (1° avviso)" eh="257c4d39" />
+        <e k="usedplus_notification_missedLeasePaymentFinal" v="AVVISO FINALE: Pagamento leasing mancato per %s! Un altro = CONFISCA!" eh="bb9baddc" />
+        <e k="usedplus_notification_leaseVehicleRepossessed" v="VEICOLO IN LEASING CONFISCATO: %s è stato sequestrato per mancato pagamento!" eh="95b5e009" />
+        <e k="usedplus_notification_leaseEnded" v="Leasing terminato per %s! Scegli se restituire o riscattare." eh="57c633a6" />
+        <e k="usedplus_notification_landLeaseExpires3Mo" v="L'affitto terreno per %s scade tra 3 mesi! Prezzo di riscatto: %s" eh="0339d494" />
+        <e k="usedplus_notification_landLeaseExpires1Mo" v="ATTENZIONE: L'affitto terreno per %s scade il mese prossimo! Riscatta ora o perdi l'accesso!" eh="0fd6f6f3" />
+        <e k="usedplus_notification_landLeaseExpiresFinal" v="AVVISO FINALE: L'affitto terreno per %s scade questo mese!" eh="2e55df9c" />
+        <e k="usedplus_notification_missedLandLease1st" v="Pagamento affitto terreno mancato per %s. Assicurati di avere fondi disponibili." eh="206c0781" />
+        <e k="usedplus_notification_missedLandLeaseFinal" v="AVVISO FINALE: 2° pagamento mancato per %s. Un altro e PERDERAI il terreno!" eh="f647ff06" />
+        <e k="usedplus_notification_landLeaseTerminated" v="Affitto terreno TERMINATO per mancato pagamento! %s è stato recuperato." eh="237a29da" />
+        <e k="usedplus_notification_landLeaseExpired" v="L'affitto terreno per %s è scaduto. Il terreno è ora disponibile per l'acquisto." eh="9449bb36" />
+        <e k="usedplus_notification_landLeaseReturnedToMarket" v="Affitto terreno per %s terminato. Terreno rimesso sul mercato." eh="21a867ba" />
+        <e k="usedplus_notification_creditImproved" v="Credito migliorato! Il tuo credito è ora %s (%d)" eh="0278a9cc" />
+        <e k="usedplus_notification_creditDropped" v="Avviso credito: Il tuo credito è sceso a %s (%d)" eh="6075cdd9" />
+        <e k="usedplus_notification_offersExpired" v="%d offerta/e veicolo scaduta/e - i venditori hanno trovato altri acquirenti" eh="dd9f314a" />
+        <e k="usedplus_notification_saleOfferExpired" v="Offerta scaduta per %s. L'agente continua a cercare..." eh="180bd573" />
+        <e k="usedplus_notification_noBuyerFound" v="Nessun acquirente trovato per %s. La commissione agente ($%d) non era rimborsabile." eh="2e72ddb2" />
+        <e k="usedplus_notification_vehicleNotAvailableRelist" v="Veicolo non più disponibile per il reinserimento." eh="56715d8f" />
+        <e k="usedplus_notification_offerDeclinedContinue" v="Offerta %s rifiutata per %s. L'agente continua a cercare..." eh="4a0b9ba7" />
+        <e k="usedplus_notification_offerDeclinedExpired" v="Offerta rifiutata per %s. L'annuncio è scaduto." eh="33ec3244" />
+        <e k="usedplus_notification_saleListingCancelled" v="Annuncio di vendita annullato per %s. La commissione agente ($%d) non era rimborsabile." eh="9cb70ca7" />
+        <e k="usedplus_notification_askingPriceUpdated" v="Prezzo richiesto aggiornato per %s: %s -&gt; %s" eh="ca049844" />
+        <e k="usedplus_notification_searchDelivered" v="Ricerca completata! Il tuo %s è stato consegnato." eh="a01c9b47" />
+        <e k="usedplus_notification_sellerBackedOut" v="Il venditore di %s ha accettato un'altra offerta e non è più disponibile. Continua a cercare!" eh="24c47a1f" />
+        <e k="usedplus_notification_insufficientFundsRenew" v="Fondi insufficienti per rinnovare la ricerca." eh="ffe2599c" />
+        <e k="usedplus_notification_searchRenewed" v="Ricerca rinnovata per %s!" eh="3f0b77e5" />
+        <e k="usedplus_notification_leaseSigned" v="Leasing firmato! %s per %s/mese" eh="1f685d3a" />
+        <e k="usedplus_notification_leaseSignedCollect" v="Leasing firmato! %s - Vai al negozio per ritirare il veicolo" eh="d4f49f88" />
+        <e k="usedplus_notification_insufficientDamagePenalty" v="Fondi insufficienti per la penale danni. Servono %s" eh="c4eb36ca" />
+        <e k="usedplus_notification_damagePenaltyPaid" v="Penale danni pagata: %s" eh="b2f2536d" />
+        <e k="usedplus_notification_leaseReturnComplete" v="Leasing terminato. %s restituito al concessionario." eh="00d61476" />
+        <e k="usedplus_notification_insufficientBuyout" v="Fondi insufficienti per il riscatto. Servono %s" eh="ac9101e3" />
+        <e k="usedplus_notification_leaseBuyoutComplete" v="Congratulazioni! %s è ora tuo per %s" eh="e7ed6c67" />
+        <e k="usedplus_notification_landLeaseTerminatedReturned" v="Affitto terreno terminato: %s è stato restituito" eh="8c192fb8" />
+        <e k="usedplus_notification_landLeaseReturned" v="Affitto terreno restituito: %s. Rimborso deposito: %s" eh="120a93d7" />
+        <e k="usedplus_notification_vehicleReturned" v="Veicolo restituito: %s. Rimborso deposito: %s" eh="62834cdc" />
+        <e k="usedplus_notification_landPurchasedEquity" v="Terreno acquistato! %s è ora tuo. Capitale applicato: %s" eh="99d16650" />
+        <e k="usedplus_notification_vehiclePurchasedEquity" v="Veicolo acquistato! %s è ora tuo. Capitale applicato: %s" eh="5ddca44a" />
+        <e k="usedplus_notification_leaseRenewed" v="Leasing rinnovato: %s. Capitale di %s applicato al futuro riscatto!" eh="2c51324d" />
+        <e k="usedplus_notification_loanPaidOffTotal" v="Prestito estinto! Totale pagato: %s" eh="6b08530f" />
+        <e k="usedplus_notification_loanPaymentProcessed" v="Pagamento elaborato: %s. Saldo rimanente: %s" eh="c6e491ac" />
+        <e k="usedplus_notification_landPurchased" v="Acquistato %s per %s" eh="ee85175a" />
+        <e k="usedplus_notification_landAlreadyOwned" v="Questo terreno è già di proprietà e non può essere affittato." eh="1682c131" />
+        <e k="usedplus_notification_landAlreadyLeased" v="Hai già un affitto su questo terreno." eh="431d8eef" />
+        <e k="usedplus_notification_landLeaseStarted" v="Affitto terreno avviato! %s per %s a %s/mese" eh="20628dfc" />
+        <e k="usedplus_notification_landBuyoutComplete" v="Congratulazioni! %s è ora completamente tuo per %s" eh="65e5ee2e" />
+        <e k="usedplus_notification_placementCancelled" v="Posizionamento annullato" eh="2037c247" />
+        <e k="usedplus_notification_bankLoanPaidOff" v="Congratulazioni! Il tuo prestito bancario è stato estinto!" eh="c84996ef" />
+        <e k="usedplus_notification_priorPaymentsCredited" v="UsedPlus: Accreditati %d pagamenti bancari precedenti nel tuo storico!" eh="483eb2b5" />
+        <e k="usedplus_notification_welcome" v="UsedPlus v%s -- Anteprima di sviluppo&amp;#10;Ultima versione &amp;amp; supporto: github.com/XelaNull/FS25_UsedPlus" eh="67beca84" />
+        <e k="usedplus_notification_hpAutoPayments" v="I pagamenti leasing HP sono automatici - gestiti da HirePurchasing" eh="4085cc6e" />
+        <e k="usedplus_notification_loansManByELS" v="I prestiti sono gestiti da EnhancedLoanSystem" eh="d7525a9f" />
+        <e k="usedplus_notification_elsPaymentProcessed" v="Pagamento prestito ELS elaborato: %s" eh="fcb1d74c" />
+        <e k="usedplus_notification_elsPaidOff" v="Prestito ELS estinto: %s" eh="866a1443" />
+        <e k="usedplus_notification_hpPaymentProcessed" v="Pagamento leasing HP elaborato: %s" eh="4247b55a" />
+        <e k="usedplus_notification_hpSettled" v="Leasing HP saldato con successo" eh="9b451dc7" />
+        <e k="usedplus_notification_noVehiclesYet" v="Nessun veicolo trovato ancora. Ricontrolla il mese prossimo!" eh="14a083d8" />
+        <e k="usedplus_notification_searchInitiated" v="Ricerca avviata per %s (%s, %s)" eh="7e3f56e5" />
+        <e k="usedplus_notification_offerDeclinedSeller" v="Offerta rifiutata. Il venditore è stato notificato." eh="6309e917" />
+        <e k="usedplus_notification_repairComplete" v="Riparazione completata!&amp;#10;%s&amp;#10;Costo: %s" eh="fee4ff60" />
+        <e k="usedplus_notification_repairFinanced" v="%s finanziato!&amp;#10;%s in %d mesi&amp;#10;%s/mese" eh="9e172df5" />
+        <e k="usedplus_notification_storageDepleted" v="Scorte esaurite! Serbatoio %s: %.0f/%.0fL" eh="8b9b49d3" />
+        <e k="usedplus_error_cannotSellLeased" v="I veicoli in leasing non possono essere venduti. Termina prima il leasing." eh="7385e257" />
+        <e k="usedplus_error_cannotSellFinanced" v="I veicoli finanziati non possono essere venduti fino all'estinzione del prestito." eh="b756f558" />
+        <e k="usedplus_error_vehicleIsCollateral" v="Questo veicolo è dato in garanzia per un prestito di %s.&amp;#10;Estingui prima il prestito per vendere." eh="8037dbf3" />
+        <e k="usedplus_error_alreadyListedForSale" v="Questo veicolo è già in vendita." eh="c1f35ff5" />
+        <e k="usedplus_error_saleSystemError" v="Errore del sistema di vendita. Riprova." eh="7bfb5d68" />
+        <e k="usedplus_error_cannotSellLeasedShort" v="I veicoli in leasing non possono essere venduti." eh="23b543d6" />
+        <e k="usedplus_error_notYourVehicle" v="Non possiedi questo veicolo." eh="506729e8" />
+        <e k="usedplus_error_maxActiveSearches" v="Massimo %d ricerche attive consentite." eh="ba2d5a44" />
+        <e k="usedplus_error_insufficientFundsRequired" v="Fondi insufficienti. Richiesti: %s" eh="e212e92e" />
+        <e k="usedplus_error_purchaseFailedAPI" v="Acquisto fallito - API di gioco non disponibile" eh="dd03bd6c" />
+        <e k="usedplus_error_buildingFinanceCreditRequired" v="Il finanziamento edifici richiede credito Eccellente (%d+). Il tuo credito: %d" eh="45dbcf43" />
+        <e k="usedplus_error_insufficientFundsNeed" v="Fondi insufficienti! Servono " eh="cc7dce5b" />
+        <e k="usedplus_error_noRepairsSelected" v="Nessuna riparazione selezionata" eh="9e34c6fb" />
+        <e k="usedplus_error_insufficientFundsRepair" v="Fondi insufficienti. Servono %s" eh="fe8244d2" />
+        <e k="usedplus_error_listingCompleted" v="Questo annuncio è già stato completato." eh="4f4401ef" />
+        <e k="usedplus_error_modifyPriceUnavailable" v="Errore: ModifyListingPriceEvent non disponibile" eh="6506e291" />
+        <e k="usedplus_error_cancelSearchUnavailable" v="Errore: CancelSearchEvent non disponibile" eh="af55f6d2" />
+        <e k="usedplus_error_insufficientFundsELS" v="Fondi insufficienti per il pagamento del prestito ELS" eh="86e4bec0" />
+        <e k="usedplus_error_insufficientFundsMinPayment" v="Fondi insufficienti. Pagamento minimo: %s, Hai: %s" eh="fd4b88c8" />
 
     </elements>
 </l10n>

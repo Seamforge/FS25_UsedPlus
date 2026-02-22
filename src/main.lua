@@ -39,7 +39,7 @@ end
 ]]
 function UsedPlus:initialize()
     if self.isInitialized then
-        UsedPlus.logWarn("Already initialized, skipping")
+        UsedPlus.logDebug("Already initialized, skipping")
         return
     end
 
@@ -119,12 +119,12 @@ function UsedPlus:initialize()
 
         -- Pre-load problem dialogs that fail with lazy loading
         -- These dialogs have XML parsing issues when loaded on-demand, so load them upfront
-        UsedPlus.logWarn("Pre-loading problem dialogs at startup...")
+        UsedPlus.logDebug("Pre-loading problem dialogs at startup...")
         DialogLoader.ensureLoaded("SearchDetailsDialog")
         DialogLoader.ensureLoaded("CreditReportDialog")
         DialogLoader.ensureLoaded("UsedSearchDialog")
         DialogLoader.ensureLoaded("PaymentHistoryDialog")
-        UsedPlus.logWarn("Pre-loading complete")
+        UsedPlus.logDebug("Pre-loading complete")
     end
 
     -- Register input actions for hotkeys
@@ -147,7 +147,7 @@ end
 Mission00.loadMission00Finished = Utils.appendedFunction(
     Mission00.loadMission00Finished,
     function(mission)
-        UsedPlus.logWarn("Mission00.loadMission00Finished hook fired")
+        UsedPlus.logDebug("Mission00.loadMission00Finished hook fired")
 
         if UsedPlus.instance == nil then
             UsedPlus.instance = UsedPlus.new()
@@ -163,7 +163,7 @@ Mission00.loadMission00Finished = Utils.appendedFunction(
         -- v2.8.0: FALLBACK - If FSBaseMission.loadItemsFinished hook didn't fire,
         -- try to get missionInfo directly from the mission object
         if UsedPlus.pendingMissionInfo == nil then
-            UsedPlus.logWarn("pendingMissionInfo is nil - trying to get missionInfo from mission object...")
+            UsedPlus.logDebug("pendingMissionInfo is nil - trying to get missionInfo from mission object...")
 
             -- Try various ways to get missionInfo
             local missionInfo = nil
@@ -171,13 +171,13 @@ Mission00.loadMission00Finished = Utils.appendedFunction(
             -- Method 1: mission.missionInfo (common pattern)
             if mission and mission.missionInfo then
                 missionInfo = mission.missionInfo
-                UsedPlus.logWarn("Got missionInfo from mission.missionInfo")
+                UsedPlus.logDebug("Got missionInfo from mission.missionInfo")
             end
 
             -- Method 2: g_currentMission.missionInfo
             if missionInfo == nil and g_currentMission and g_currentMission.missionInfo then
                 missionInfo = g_currentMission.missionInfo
-                UsedPlus.logWarn("Got missionInfo from g_currentMission.missionInfo")
+                UsedPlus.logDebug("Got missionInfo from g_currentMission.missionInfo")
             end
 
             -- Method 3: Try g_careerScreen (for career mode)
@@ -186,7 +186,7 @@ Mission00.loadMission00Finished = Utils.appendedFunction(
                 local savegame = g_careerScreen.currentSavegame
                 if savegame and savegame.savegameDirectory then
                     missionInfo = { savegameDirectory = savegame.savegameDirectory }
-                    UsedPlus.logWarn("Built missionInfo from g_careerScreen.currentSavegame")
+                    UsedPlus.logDebug("Built missionInfo from g_careerScreen.currentSavegame")
                 end
             end
 
@@ -195,13 +195,13 @@ Mission00.loadMission00Finished = Utils.appendedFunction(
                 local savegameDir = g_currentMission.savegameDirectory
                 if savegameDir then
                     missionInfo = { savegameDirectory = savegameDir }
-                    UsedPlus.logWarn("Built missionInfo from g_currentMission.savegameDirectory")
+                    UsedPlus.logDebug("Built missionInfo from g_currentMission.savegameDirectory")
                 end
             end
 
             if missionInfo then
                 UsedPlus.pendingMissionInfo = missionInfo
-                UsedPlus.logWarn(string.format("Fallback succeeded: savegameDirectory=%s",
+                UsedPlus.logDebug(string.format("Fallback succeeded: savegameDirectory=%s",
                     missionInfo.savegameDirectory or "nil"))
             else
                 UsedPlus.logError("CRITICAL: Could not get missionInfo from any source!")
@@ -225,12 +225,12 @@ Mission00.loadMission00Finished = Utils.appendedFunction(
 Mission00.onStartMission = Utils.appendedFunction(
     Mission00.onStartMission,
     function(mission)
-        UsedPlus.logWarn("Mission00.onStartMission hook fired")
+        UsedPlus.logDebug("Mission00.onStartMission hook fired")
 
         -- v2.8.0: NOW load savegame data - farms are guaranteed to exist at this point!
         -- Check if farms exist
         local farm1 = g_farmManager and g_farmManager:getFarmById(1)
-        UsedPlus.logWarn(string.format("Farm check: g_farmManager=%s, farm1=%s",
+        UsedPlus.logDebug(string.format("Farm check: g_farmManager=%s, farm1=%s",
             tostring(g_farmManager ~= nil), tostring(farm1 ~= nil)))
 
         if farm1 then
@@ -300,7 +300,7 @@ Mission00.onStartMission = Utils.appendedFunction(
         local version = UsedPlus.VERSION
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_OK,
-            string.format("UsedPlus v%s — Development Preview\nLatest version & support: github.com/XelaNull/FS25_UsedPlus", version)
+            string.format(g_i18n:getText("usedplus_notification_welcome"), version)
         )
     end
 )
@@ -468,13 +468,11 @@ end
 function UsedPlus.loadSavegameData()
     local missionInfo = UsedPlus.pendingMissionInfo
     if missionInfo == nil then
-        -- v2.8.0: Upgrade to WARN so we can diagnose persistence issues
-        UsedPlus.logWarn("loadSavegameData: No pending missionInfo (new game or hook didn't fire)")
+        UsedPlus.logInfo("loadSavegameData: No pending missionInfo (new game or hook didn't fire)")
         return
     end
 
-    -- v2.8.0: WARN so it always shows for persistence debugging
-    UsedPlus.logWarn(string.format("loadSavegameData: Loading from %s",
+    UsedPlus.logInfo(string.format("loadSavegameData: Loading from %s",
         missionInfo.savegameDirectory or "nil"))
 
     if g_financeManager then
@@ -528,8 +526,7 @@ end
 FSCareerMissionInfo.saveToXMLFile = Utils.appendedFunction(
     FSCareerMissionInfo.saveToXMLFile,
     function(missionInfo)
-        -- v2.8.0: WARN level for persistence debugging
-        UsedPlus.logWarn(string.format("saveToXMLFile hook: Saving to %s",
+        UsedPlus.logInfo(string.format("saveToXMLFile hook: Saving to %s",
             missionInfo and missionInfo.savegameDirectory or "nil"))
 
         if g_financeManager then
@@ -562,7 +559,7 @@ FSCareerMissionInfo.saveToXMLFile = Utils.appendedFunction(
             UsedPlusSettings:saveToXMLFile(missionInfo)
         end
 
-        UsedPlus.logWarn("saveToXMLFile hook: Complete")
+        UsedPlus.logInfo("saveToXMLFile hook: Complete")
     end
 )
 
@@ -585,7 +582,7 @@ function Farm.new(...)
             farm.vehicleSaleListings = {} -- NEW - Active sale listings (for selling)
         else
             -- Arrays already exist - log this unusual case
-            UsedPlus.logWarn(string.format("Farm.new: Farm %d already has usedVehicleSearches (%d items) - preserving!",
+            UsedPlus.logDebug(string.format("Farm.new: Farm %d already has usedVehicleSearches (%d items) - preserving!",
                 farm.farmId or 0, #farm.usedVehicleSearches))
         end
     end
@@ -615,7 +612,7 @@ function Farm.loadFromXMLFile(self, xmlFile, key)
         self.vehicleSaleListings = self.vehicleSaleListings or {}
 
         if hadSearches then
-            UsedPlus.logWarn(string.format("Farm.loadFromXMLFile: Farm %d preserved %d searches",
+            UsedPlus.logDebug(string.format("Farm.loadFromXMLFile: Farm %d preserved %d searches",
                 self.farmId or 0, #self.usedVehicleSearches))
         end
     end

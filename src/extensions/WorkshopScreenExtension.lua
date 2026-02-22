@@ -175,7 +175,7 @@ function WorkshopScreenExtension:hookSellButton(screen)
             if vehicle.propertyState ~= VehiclePropertyState.OWNED then
                 g_currentMission:addIngameNotification(
                     FSBaseMission.INGAME_NOTIFICATION_INFO,
-                    "Leased vehicles cannot be sold."
+                    g_i18n:getText("usedplus_error_cannotSellLeasedShort")
                 )
                 return
             end
@@ -194,7 +194,7 @@ function WorkshopScreenExtension:hookSellButton(screen)
                TradeInCalculations.isVehicleFinanced(vehicle, farmId) then
                 g_currentMission:addIngameNotification(
                     FSBaseMission.INGAME_NOTIFICATION_INFO,
-                    "Financed vehicles cannot be sold until loan is paid off."
+                    g_i18n:getText("usedplus_error_cannotSellFinanced")
                 )
                 return
             end
@@ -206,7 +206,7 @@ function WorkshopScreenExtension:hookSellButton(screen)
                     local loanBalance = deal and deal.currentBalance or 0
                     g_currentMission:addIngameNotification(
                         FSBaseMission.INGAME_NOTIFICATION_ERROR,
-                        string.format("This vehicle is pledged as collateral for a %s loan.\nPay off the loan first to sell.",
+                        string.format(g_i18n:getText("usedplus_error_vehicleIsCollateral"),
                             g_i18n:formatMoney(loanBalance, 0, true, true))
                     )
                     return
@@ -217,7 +217,7 @@ function WorkshopScreenExtension:hookSellButton(screen)
             if g_vehicleSaleManager and g_vehicleSaleManager:isVehicleListed(vehicle) then
                 g_currentMission:addIngameNotification(
                     FSBaseMission.INGAME_NOTIFICATION_INFO,
-                    "This vehicle is already listed for sale."
+                    g_i18n:getText("usedplus_error_alreadyListedForSale")
                 )
                 return
             end
@@ -468,7 +468,7 @@ function WorkshopScreenExtension:onTiresClick(screen)
     if vehicle == nil then
         UsedPlus.logDebug("WorkshopScreenExtension: No vehicle for tire service")
         if not g_dedicatedServer then
-            g_currentMission:showBlinkingWarning("No vehicle selected", 2000)
+            g_currentMission:showBlinkingWarning(g_i18n:getText("usedplus_error_noVehicleSelected"), 2000)
         end
         return
     end
@@ -500,7 +500,7 @@ function WorkshopScreenExtension:onInspectClick(screen)
 
     if vehicle == nil then
         UsedPlus.logDebug("WorkshopScreenExtension: No vehicle for inspection")
-        g_currentMission:showBlinkingWarning("No vehicle selected", 2000)
+        g_currentMission:showBlinkingWarning(g_i18n:getText("usedplus_error_noVehicleSelected"), 2000)
         return
     end
 
@@ -586,14 +586,8 @@ function WorkshopScreenExtension:showInspectionPaymentConfirmation(vehicle)
     -- Show confirmation dialog using FS25 pattern
     local dialog = g_gui:showDialog("YesNoDialog")
     if dialog and dialog.target then
-        dialog.target:setTitle("Vehicle Inspection")
-        dialog.target:setText(string.format(
-            "The mechanic will inspect your vehicle for %s.\n\n" ..
-            "This will provide a detailed maintenance report\n" ..
-            "showing engine, hydraulic, and electrical reliability.\n\n" ..
-            "Proceed with inspection?",
-            feeFormatted
-        ))
+        dialog.target:setTitle(g_i18n:getText("usedplus_title_vehicleInspection"))
+        dialog.target:setText(string.format(g_i18n:getText("usedplus_workshop_inspectionConfirm"), feeFormatted))
         dialog.target:setCallback(WorkshopScreenExtension.onInspectionPaymentConfirmed, WorkshopScreenExtension)
     end
 end

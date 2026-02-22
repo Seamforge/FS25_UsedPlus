@@ -62,7 +62,7 @@ function BuyPlaceableDataExtension.buyHook(self, superFunc, callback, callbackTa
 
         -- Notify user why financing isn't available
         local notifText = string.format(
-            "Building financing requires 750+ credit. Your score: %d. Cash purchase only.",
+            g_i18n:getText("usedplus_notification_buildingFinanceCreditLow"),
             creditScore
         )
         g_currentMission:addIngameNotification(
@@ -113,12 +113,12 @@ function BuyPlaceableDataExtension.buyHook(self, superFunc, callback, callbackTa
 
     -- DEFENSIVE CLEANUP: Clear stale global state from previous purchases
     if UsedPlus.pendingPlaceableFinance and not UsedPlus.pendingPlaceableFinance.placementActive then
-        UsedPlus.logWarn("  🧹 Clearing stale pendingPlaceableFinance from previous purchase")
+        UsedPlus.logDebug("  🧹 Clearing stale pendingPlaceableFinance from previous purchase")
         UsedPlus.pendingPlaceableFinance = nil
     end
 
     if UsedPlus.pendingPlaceableDialog then
-        UsedPlus.logWarn("  🧹 Clearing stale pendingPlaceableDialog reference")
+        UsedPlus.logDebug("  🧹 Clearing stale pendingPlaceableDialog reference")
         UsedPlus.pendingPlaceableDialog = nil
     end
 
@@ -131,7 +131,7 @@ function BuyPlaceableDataExtension.buyHook(self, superFunc, callback, callbackTa
         -- CRITICAL FIX: Completely UNLOAD existing dialog to force fresh reload
         -- Reusing a dialog instance causes input routing issues on second use
         -- Solution: Destroy it completely and reload from XML
-        UsedPlus.logWarn("  ⚠️  DIALOG EXISTS - Destroying and reloading fresh!")
+        UsedPlus.logDebug("  ⚠️  DIALOG EXISTS - Destroying and reloading fresh!")
         UsedPlus.logDebug(string.format("    - visible=%s, currentGui=%s, isOpen=%s",
             tostring(dialog.isVisible),
             currentGui and currentGui.name or "none",

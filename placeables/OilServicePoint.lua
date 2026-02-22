@@ -44,6 +44,8 @@ function OilServicePoint.registerFunctions(placeableType)
     SpecializationUtil.registerFunction(placeableType, "updatePlayerActions", OilServicePoint.updatePlayerActions)
     SpecializationUtil.registerFunction(placeableType, "updateVehicleActions", OilServicePoint.updateVehicleActions)
     SpecializationUtil.registerFunction(placeableType, "fillServiceTruckTank", OilServicePoint.fillServiceTruckTank)
+    SpecializationUtil.registerFunction(placeableType, "osp_updateFilling", OilServicePoint.osp_updateFilling)
+    SpecializationUtil.registerFunction(placeableType, "osp_stopFilling", OilServicePoint.osp_stopFilling)
     SpecializationUtil.registerFunction(placeableType, "getOilLitersNeeded", OilServicePoint.getOilLitersNeeded)
     SpecializationUtil.registerFunction(placeableType, "getHydraulicLitersNeeded", OilServicePoint.getHydraulicLitersNeeded)
 end
@@ -138,6 +140,15 @@ function OilServicePoint:onLoad(savegame)
     -- Activatable tracking (to avoid duplicates)
     spec.playerPurchaseActivatable = nil  -- Single activatable for purchase dialog
     spec.vehicleRefillActivatable = nil
+
+    -- Gradual fill state (for Service Truck tank filling)
+    spec.isFilling = false
+    spec.fillingVehicle = nil
+    spec.fillingFillUnit = nil
+    spec.fillingFillTypeName = nil
+    spec.fillingFillTypeIndex = nil
+    spec.fillingFluidLabel = nil
+    spec.fillingRate = 30  -- liters per second (matches diesel fillTriggerVehicle)
 
     -- Action text
     spec.purchaseFluidsText = g_i18n:getText("usedplus_fluid_purchaseAction") or "Purchase Fluids"
@@ -339,6 +350,11 @@ function OilServicePoint:onUpdate(dt)
     -- Keep requesting updates
     self:raiseActive()
 
+    -- Gradual fill processing (runs every frame, not throttled)
+    if spec.isFilling then
+        self:osp_updateFilling(dt)
+    end
+
     -- Throttle updates
     spec.activationTimer = (spec.activationTimer or 0) + dt
     if spec.activationTimer < spec.updateInterval then
@@ -363,9 +379,16 @@ function OilServicePoint:onUpdate(dt)
     -- Check for vehicle
     local vehicle = self:getVehicleInRange()
     if vehicle ~= nil then
-        self:updateVehicleActions(vehicle)
+        -- Skip normal action updates during active filling (osp_updateFilling manages the text)
+        if not spec.isFilling then
+            self:updateVehicleActions(vehicle)
+        end
     else
-        -- Vehicle left range - remove activatable
+        -- Vehicle left range - cancel any active fill
+        if spec.isFilling then
+            self:osp_stopFilling()
+        end
+        -- Remove activatable
         if spec.vehicleRefillActivatable ~= nil then
             g_currentMission.activatableObjectsSystem:removeActivatable(spec.vehicleRefillActivatable)
             spec.vehicleRefillActivatable = nil
@@ -396,9 +419,9 @@ function OilServicePoint:updatePlayerActions()
             spec.currentFluidStorage,
             spec.storageCapacity)
     elseif spaceAvailable <= 0 then
-        actionText = "Tank Full!"
+        actionText = g_i18n:getText("usedplus_osp_tankFull")
     else
-        actionText = string.format("%s [Empty - %.0fL capacity]",
+        actionText = string.format(g_i18n:getText("usedplus_osp_emptyCapacity"),
             actionText,
             spec.storageCapacity)
     end
@@ -459,7 +482,7 @@ function OilServicePoint:updateVehicleActions(vehicle)
                     local transferAmount = math.min(spaceInTruck, spec.currentFluidStorage)
                     hasEnough = true
 
-                    actionText = string.format("Fill %s Tank (%.0f/%.0fL → +%.0fL)",
+                    actionText = string.format(g_i18n:getText("usedplus_action_fillTank"),
                         fluidLabel, currentLevel, capacity, transferAmount)
                 end
             end
@@ -523,10 +546,10 @@ function OilServicePoint:updateVehicleActions(vehicle)
             local neededName = spec.fluidNames[neededType] or neededType
 
             if spec.currentFluidStorage <= 0 then
-                actionText = string.format("Tank Empty - Purchase %s first", neededName)
+                actionText = string.format(g_i18n:getText("usedplus_action_tankEmpty"), neededName)
             elseif spec.currentFluidType ~= neededType then
                 local tankFluid = spec.fluidNames[spec.currentFluidType] or spec.currentFluidType
-                actionText = string.format("Tank has %s - Vehicle needs %s", tankFluid, neededName)
+                actionText = string.format(g_i18n:getText("usedplus_action_tankWrongFluid"), tankFluid, neededName)
             end
 
             -- Show info activatable (not actionable)
@@ -731,7 +754,7 @@ function OilServicePoint:purchaseFluid(fluidType, amount, noEventSend)
         local currentFluidName = spec.fluidNames[spec.currentFluidType] or spec.currentFluidType
         local newFluidName = spec.fluidNames[fluidType] or fluidType
         g_currentMission:showBlinkingWarning(
-            string.format("Tank contains %s! Empty it first to add %s.", currentFluidName, newFluidName),
+            string.format(g_i18n:getText("usedplus_error_tankContainsWrong"), currentFluidName, newFluidName),
             2000
         )
         return false
@@ -816,9 +839,9 @@ function OilServicePoint:refillOil(vehicle, noEventSend)
 
     -- Check if tank has oil
     if spec.currentFluidType ~= "oil" then
-        local fluidName = spec.currentFluidType and spec.fluidNames[spec.currentFluidType] or "nothing"
+        local fluidName = spec.currentFluidType and spec.fluidNames[spec.currentFluidType] or g_i18n:getText("usedplus_osp_nothing")
         g_currentMission:showBlinkingWarning(
-            string.format("Tank contains %s, not Engine Oil!", fluidName),
+            string.format(g_i18n:getText("usedplus_error_tankNotOil"), fluidName),
             2000
         )
         return false
@@ -882,9 +905,9 @@ function OilServicePoint:refillHydraulic(vehicle, noEventSend)
 
     -- Check if tank has hydraulic fluid
     if spec.currentFluidType ~= "hydraulic" then
-        local fluidName = spec.currentFluidType and spec.fluidNames[spec.currentFluidType] or "nothing"
+        local fluidName = spec.currentFluidType and spec.fluidNames[spec.currentFluidType] or g_i18n:getText("usedplus_osp_nothing")
         g_currentMission:showBlinkingWarning(
-            string.format("Tank contains %s, not Hydraulic Fluid!", fluidName),
+            string.format(g_i18n:getText("usedplus_error_tankNotHydraulic"), fluidName),
             2000
         )
         return false
@@ -939,10 +962,11 @@ function OilServicePoint:fillServiceTruckTank(vehicle)
     local spec = self.spec_oilServicePoint
     if spec == nil then return false end
 
+    -- Already filling - don't re-trigger
+    if spec.isFilling then return false end
+
     local truckSpec = vehicle.spec_serviceTruck
     if truckSpec == nil then return false end
-
-    local vehicleName = vehicle:getName() or "Service Truck"
 
     -- Determine which fill unit to target
     local fillUnit = nil
@@ -958,73 +982,162 @@ function OilServicePoint:fillServiceTruckTank(vehicle)
         fillTypeName = "HYDRAULICOIL"
         fluidLabel = spec.fluidNames["hydraulic"] or "Hydraulic Fluid"
     else
-        g_currentMission:showBlinkingWarning("No matching fluid type for this tank!", 2000)
+        g_currentMission:showBlinkingWarning(g_i18n:getText("usedplus_error_noMatchingFluid"), 2000)
         return false
     end
 
-    -- Calculate transfer amount
+    -- Validate space in truck
     local currentLevel = vehicle:getFillUnitFillLevel(fillUnit) or 0
     local capacity = vehicle:getFillUnitCapacity(fillUnit) or 0
     local spaceInTruck = capacity - currentLevel
 
     if spaceInTruck <= 0.5 then
         g_currentMission:showBlinkingWarning(
-            string.format("%s tank is full! (%.0f/%.0fL)", fluidLabel, currentLevel, capacity), 2000)
+            string.format(g_i18n:getText("usedplus_osp_tankIsFull"), fluidLabel, currentLevel, capacity), 2000)
         return false
     end
 
-    local transferAmount = math.min(spaceInTruck, spec.currentFluidStorage)
-    if transferAmount <= 0 then
-        g_currentMission:showBlinkingWarning("Storage tank is empty!", 2000)
+    -- Validate storage has fluid
+    if spec.currentFluidStorage <= 0 then
+        g_currentMission:showBlinkingWarning(g_i18n:getText("usedplus_osp_storageTankEmpty"), 2000)
         return false
     end
 
-    -- Transfer fluid into truck's fill unit
+    -- Resolve fill type index
     local fillTypeIndex = g_fillTypeManager:getFillTypeIndexByName(fillTypeName)
-    UsedPlus.logInfo(string.format("OilServicePoint.fillServiceTruckTank: fillType=%s, fillTypeIndex=%s, fillUnit=%d, before=%.1f/%.1f, transfer=%.1f",
-        fillTypeName, tostring(fillTypeIndex), fillUnit, currentLevel, capacity, transferAmount))
-
     if fillTypeIndex == nil then
         UsedPlus.logError(string.format("OilServicePoint: Fill type '%s' NOT FOUND in g_fillTypeManager!", fillTypeName))
-        g_currentMission:showBlinkingWarning("Error: Fill type not registered!", 2000)
+        g_currentMission:showBlinkingWarning(g_i18n:getText("usedplus_error_fillTypeNotRegistered"), 2000)
         return false
     end
 
-    local actualAdded = vehicle:addFillUnitFillLevel(
-        vehicle:getOwnerFarmId(), fillUnit, transferAmount,
-        fillTypeIndex, ToolType.UNDEFINED, nil)
-    actualAdded = actualAdded or 0
+    -- Start gradual fill
+    spec.isFilling = true
+    spec.fillingVehicle = vehicle
+    spec.fillingFillUnit = fillUnit
+    spec.fillingFillTypeName = fillTypeName
+    spec.fillingFillTypeIndex = fillTypeIndex
+    spec.fillingFluidLabel = fluidLabel
 
-    local newLevel = vehicle:getFillUnitFillLevel(fillUnit) or 0
-    UsedPlus.logInfo(string.format("OilServicePoint.fillServiceTruckTank: addFillUnitFillLevel returned=%.1f, newLevel=%.1f/%.1f",
-        actualAdded, newLevel, capacity))
+    UsedPlus.logInfo(string.format("OilServicePoint: Starting gradual fill - %s tank (%.0f/%.0fL, storage: %.0fL, rate: %.0f L/s)",
+        fluidLabel, currentLevel, capacity, spec.currentFluidStorage, spec.fillingRate))
 
-    -- Only consume from storage what was ACTUALLY added to the truck
-    local consumed = math.abs(actualAdded)
-    if consumed < 0.1 then
-        -- Fill was rejected - don't consume storage
-        UsedPlus.logError(string.format("OilServicePoint: addFillUnitFillLevel REJECTED! fillUnit=%d, fillType=%s(%d), amount=%.1f",
-            fillUnit, fillTypeName, fillTypeIndex, transferAmount))
+    return true
+end
+
+--[[
+    Per-frame gradual fill processing.
+    Transfers fluid from storage to truck tank at spec.fillingRate liters/second.
+    Named with osp_ prefix to avoid base class method collisions.
+]]
+function OilServicePoint:osp_updateFilling(dt)
+    local spec = self.spec_oilServicePoint
+    if spec == nil or not spec.isFilling then return end
+
+    local vehicle = spec.fillingVehicle
+
+    -- Validate vehicle still exists
+    if vehicle == nil or vehicle.isDeleted then
+        self:osp_stopFilling()
+        return
+    end
+
+    -- Check vehicle still in range
+    local vehicleInRange = self:getVehicleInRange()
+    if vehicleInRange ~= vehicle then
+        self:osp_stopFilling()
+        return
+    end
+
+    -- Check storage not empty
+    if spec.currentFluidStorage <= 0 then
+        local finalLevel = vehicle:getFillUnitFillLevel(spec.fillingFillUnit) or 0
+        local capacity = vehicle:getFillUnitCapacity(spec.fillingFillUnit) or 0
         g_currentMission:showBlinkingWarning(
-            string.format("Fill failed! %s may not accept %s (fillUnit=%d)", vehicleName, fillTypeName, fillUnit), 3000)
-        return false
+            string.format(g_i18n:getText("usedplus_notification_storageDepleted"), spec.fillingFluidLabel, finalLevel, capacity), 2000)
+        self:osp_stopFilling()
+        return
     end
 
-    spec.currentFluidStorage = spec.currentFluidStorage - consumed
+    -- Calculate per-frame transfer amount
+    local amount = spec.fillingRate * (dt / 1000)
+
+    -- Clamp to available storage
+    amount = math.min(amount, spec.currentFluidStorage)
+
+    -- Clamp to remaining space in truck
+    local currentLevel = vehicle:getFillUnitFillLevel(spec.fillingFillUnit) or 0
+    local capacity = vehicle:getFillUnitCapacity(spec.fillingFillUnit) or 0
+    local spaceLeft = capacity - currentLevel
+    amount = math.min(amount, spaceLeft)
+
+    if amount <= 0.01 then
+        -- Tank is full
+        g_currentMission:showBlinkingWarning(
+            string.format(g_i18n:getText("usedplus_osp_tankFilled"), spec.fillingFluidLabel, currentLevel, capacity), 2000)
+        self:osp_stopFilling()
+        return
+    end
+
+    -- Transfer small per-frame amount
+    local actualAdded = vehicle:addFillUnitFillLevel(
+        vehicle:getOwnerFarmId(), spec.fillingFillUnit, amount,
+        spec.fillingFillTypeIndex, ToolType.UNDEFINED, nil)
+    actualAdded = math.abs(actualAdded or 0)
+
+    -- Consume from storage what was actually added
+    if actualAdded > 0 then
+        spec.currentFluidStorage = spec.currentFluidStorage - actualAdded
+        if spec.currentFluidStorage < 0 then
+            spec.currentFluidStorage = 0
+        end
+    end
+
+    -- Update activatable text with progress
+    local newLevel = vehicle:getFillUnitFillLevel(spec.fillingFillUnit) or 0
+    if spec.vehicleRefillActivatable ~= nil then
+        spec.vehicleRefillActivatable.activateText = string.format(
+            g_i18n:getText("usedplus_osp_fillingProgress"),
+            spec.fillingFluidLabel, newLevel, capacity)
+        spec.vehicleRefillActivatable.canActivate = false  -- Prevent re-triggering during fill
+    end
+
+    -- Check completion
+    local finalSpace = capacity - newLevel
+    if finalSpace <= 0.5 then
+        g_currentMission:showBlinkingWarning(
+            string.format(g_i18n:getText("usedplus_osp_tankFilled"), spec.fillingFluidLabel, newLevel, capacity), 2000)
+        self:osp_stopFilling()
+    elseif spec.currentFluidStorage <= 0 then
+        g_currentMission:showBlinkingWarning(
+            string.format(g_i18n:getText("usedplus_notification_storageDepleted"), spec.fillingFluidLabel, newLevel, capacity), 2000)
+        self:osp_stopFilling()
+    end
+end
+
+--[[
+    Stop gradual filling and clean up state.
+    Named with osp_ prefix to avoid base class method collisions.
+]]
+function OilServicePoint:osp_stopFilling()
+    local spec = self.spec_oilServicePoint
+    if spec == nil then return end
+
+    spec.isFilling = false
+    spec.fillingVehicle = nil
+    spec.fillingFillUnit = nil
+    spec.fillingFillTypeName = nil
+    spec.fillingFillTypeIndex = nil
+    spec.fillingFluidLabel = nil
+
+    -- Clear fluid type if storage is empty
     if spec.currentFluidStorage <= 0 then
         spec.currentFluidStorage = 0
         spec.currentFluidType = nil
     end
 
-    -- Confirmation
-    g_currentMission:showBlinkingWarning(
-        string.format("%s tank filled - +%.0fL (now %.0f/%.0fL)",
-            fluidLabel, consumed, newLevel, capacity), 2000)
-
-    UsedPlus.logInfo(string.format("OilServicePoint: Filled %s %s tank +%.0fL (%.0f/%.0fL, storage: %.0fL left)",
-        vehicleName, fluidLabel, consumed, newLevel, capacity, spec.currentFluidStorage))
-
-    return true
+    UsedPlus.logInfo(string.format("OilServicePoint: Fill stopped (storage: %.0fL %s remaining)",
+        spec.currentFluidStorage, tostring(spec.currentFluidType)))
 end
 
 -- Multiplayer sync
@@ -1136,7 +1249,7 @@ end
     Shows different text based on whether action is available
 ]]
 function FluidRefillActivatable:getActivateText()
-    return self.activateText or "Service Vehicle"
+    return self.activateText or g_i18n:getText("usedplus_osp_serviceVehicle")
 end
 
 function FluidRefillActivatable:run()

@@ -50,7 +50,7 @@ function UsedVehicleManager:processSearchesForFarm(farmId, farm)
                 if g_currentMission and not g_currentMission.isLoading then
                     g_currentMission:addIngameNotification(
                         FSBaseMission.INGAME_NOTIFICATION_INFO,
-                        string.format("%d vehicle offer(s) expired - sellers found other buyers", normalExpired)
+                        string.format(g_i18n:getText("usedplus_notification_offersExpired"), normalExpired)
                     )
                 end
             end
@@ -141,7 +141,7 @@ function UsedVehicleManager:showSellerBackedOutDialog(vehicleName)
     end
 
     local message = string.format(
-        "The seller of the %s accepted another offer and is no longer available. Keep searching!",
+        g_i18n:getText("usedplus_notification_sellerBackedOut"),
         vehicleName or "vehicle"
     )
 
@@ -158,7 +158,7 @@ function UsedVehicleManager:showSellerBackedOutDialog(vehicleName)
     -- Use DialogLoader to show simple info dialog
     if DialogLoader and DialogLoader.showInfoDialog then
         DialogLoader.showInfoDialog(
-            "Offer Withdrawn",
+            g_i18n:getText("usedplus_title_offerWithdrawn"),
             message,
             function() end  -- No callback needed
         )
@@ -295,7 +295,7 @@ function UsedVehicleManager:renewSearch(oldSearch, farmId)
     if farm.money < cost then
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_CRITICAL,
-            "Insufficient funds to renew search."
+            g_i18n:getText("usedplus_notification_insufficientFundsRenew")
         )
         return false
     end
@@ -320,7 +320,7 @@ function UsedVehicleManager:renewSearch(oldSearch, farmId)
     -- Notify player
     g_currentMission:addIngameNotification(
         FSBaseMission.INGAME_NOTIFICATION_OK,
-        string.format("Search renewed for %s!", oldSearch.storeItemName)
+        string.format(g_i18n:getText("usedplus_notification_searchRenewed"), oldSearch.storeItemName)
     )
 
     UsedPlus.logInfo(string.format("Renewed search for %s (Tier %d, Quality %d)",

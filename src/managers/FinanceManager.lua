@@ -380,7 +380,7 @@ function FinanceManager:checkStalePlaceableFinance()
         UsedPlus.logWarn("  → Notifying player of emergency cleanup")
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_INFO,
-            "Building purchase cancelled - funds restored"
+            g_i18n:getText("usedplus_notification_buildingPurchaseCancelled")
         )
 
         UsedPlus.logWarn("║ Stale finance cleanup complete")
@@ -537,16 +537,16 @@ function FinanceManager:sendPaymentSummaryNotification(farm, successCount, misse
 
     local message
     if missedCount == 0 then
-        message = string.format("Monthly Finance: %d payment%s processed (%s)",
+        message = string.format(g_i18n:getText("usedplus_notification_monthlyFinanceSuccess"),
             successCount,
-            successCount > 1 and "s" or "",
+            successCount > 1 and g_i18n:getText("usedplus_label_pluralS") or "",
             g_i18n:formatMoney(totalPaid, 0, true, true))
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_OK,
             message
         )
     else
-        message = string.format("Monthly Finance: %d paid, %d MISSED! Check Finance Manager.",
+        message = string.format(g_i18n:getText("usedplus_notification_monthlyFinanceMixed"),
             successCount, missedCount)
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_CRITICAL,
@@ -610,7 +610,7 @@ function FinanceManager:showLeaseRenewalDialog(deal)
     -- Send notification that lease has ended
     g_currentMission:addIngameNotification(
         FSBaseMission.INGAME_NOTIFICATION_INFO,
-        string.format("Lease term complete for %s! Choose to return, buyout, or renew.", deal.itemName)
+        string.format(g_i18n:getText("usedplus_notification_leaseTermComplete"), deal.itemName)
     )
 end
 

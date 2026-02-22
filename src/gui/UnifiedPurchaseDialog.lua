@@ -210,32 +210,32 @@ function UnifiedPurchaseDialog:setupSectionIcons()
 
     -- Vehicle section - vehicle icon
     if self.vehicleSectionIcon ~= nil then
-        self.vehicleSectionIcon:setImageFilename(self.iconDir .. "vehicle.png")
+        self.vehicleSectionIcon:setImageFilename(self.iconDir .. "vehicle.dds")
     end
 
     -- Method section - percentage icon
     if self.methodSectionIcon ~= nil then
-        self.methodSectionIcon:setImageFilename(self.iconDir .. "percentage.png")
+        self.methodSectionIcon:setImageFilename(self.iconDir .. "percentage.dds")
     end
 
     -- Trade-In section - trade_in icon
     if self.tradeInSectionIcon ~= nil then
-        self.tradeInSectionIcon:setImageFilename(self.iconDir .. "trade_in.png")
+        self.tradeInSectionIcon:setImageFilename(self.iconDir .. "trade_in.dds")
     end
 
     -- Cash section - cash icon
     if self.cashSectionIcon ~= nil then
-        self.cashSectionIcon:setImageFilename(self.iconDir .. "cash.png")
+        self.cashSectionIcon:setImageFilename(self.iconDir .. "cash.dds")
     end
 
     -- Finance section - loan_doc icon
     if self.financeSectionIcon ~= nil then
-        self.financeSectionIcon:setImageFilename(self.iconDir .. "loan_doc.png")
+        self.financeSectionIcon:setImageFilename(self.iconDir .. "loan_doc.dds")
     end
 
     -- Lease section - lease icon
     if self.leaseSectionIcon ~= nil then
-        self.leaseSectionIcon:setImageFilename(self.iconDir .. "lease.png")
+        self.leaseSectionIcon:setImageFilename(self.iconDir .. "lease.dds")
     end
 end
 
@@ -838,18 +838,18 @@ function UnifiedPurchaseDialog:onTradeInVehicleChanged()
 
             -- Update condition display - Line 1: Repair status
             if self.tradeInConditionText then
-                local repairText = string.format("Repair: %d%%", item.repairPercent or 100)
+                local repairText = string.format(g_i18n:getText("usedplus_upd_repairPercent"), item.repairPercent or 100)
                 if (item.repairPercent or 100) < 70 then
-                    repairText = repairText .. " (damaged)"
+                    repairText = repairText .. g_i18n:getText("usedplus_upd_damaged")
                 end
                 self.tradeInConditionText:setText(repairText)
             end
 
             -- Update condition display - Line 2: Paint status
             if self.tradeInCondition2Text then
-                local paintText = string.format("Paint: %d%%", item.paintPercent or 100)
+                local paintText = string.format(g_i18n:getText("usedplus_upd_paintPercent"), item.paintPercent or 100)
                 if (item.paintPercent or 100) < 70 then
-                    paintText = paintText .. " (worn)"
+                    paintText = paintText .. g_i18n:getText("usedplus_upd_worn")
                 end
                 self.tradeInCondition2Text:setText(paintText)
             end
@@ -857,7 +857,7 @@ function UnifiedPurchaseDialog:onTradeInVehicleChanged()
             -- Update hours display
             if self.tradeInHoursText then
                 local hours = math.floor((item.operatingHours or 0) / 3600000)  -- ms to hours
-                self.tradeInHoursText:setText(string.format("Hours: %d", hours))
+                self.tradeInHoursText:setText(string.format(g_i18n:getText("usedplus_upd_hoursFormat"), hours))
             end
 
             -- Update value percentage (what % of sell price this represents)
@@ -867,7 +867,7 @@ function UnifiedPurchaseDialog:onTradeInVehicleChanged()
                 if sellPrice > 0 then
                     percentOfSell = math.floor((item.value / sellPrice) * 100)
                 end
-                self.tradeInPercentText:setText(string.format("(%d%% of sell value)", percentOfSell))
+                self.tradeInPercentText:setText(string.format(g_i18n:getText("usedplus_upd_percentOfSell"), percentOfSell))
             end
 
             -- Update credit impact display
@@ -876,7 +876,7 @@ function UnifiedPurchaseDialog:onTradeInVehicleChanged()
                 local baseFallback = (UsedPlusSettings and UsedPlusSettings:get("baseTradeInPercent") or 55) / 100
                 local creditPct = math.floor((item.creditMultiplier or baseFallback) * 100)
                 local condPct = math.floor((item.conditionMultiplier or 1.0) * 100)
-                self.tradeInCreditText:setText(string.format("Credit: %d%% | Cond: %d%%", creditPct, condPct))
+                self.tradeInCreditText:setText(string.format(g_i18n:getText("usedplus_upd_creditCond"), creditPct, condPct))
             end
         else
             -- Invalid index - clear trade-in
@@ -1713,7 +1713,7 @@ function UnifiedPurchaseDialog:executeCashPurchasePlaceable()
 
     if not farm then
         UsedPlus.logWarn("  ✗ Farm not found - ABORTING")
-        g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_CRITICAL, "Farm not found")
+        g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_CRITICAL, g_i18n:getText("usedplus_error_farmNotFound"))
         return
     end
 
@@ -1729,7 +1729,7 @@ function UnifiedPurchaseDialog:executeCashPurchasePlaceable()
         UsedPlus.logWarn(string.format("  ✗ Insufficient funds - ABORTING (need %s, have %s)",
             g_i18n:formatMoney(totalDue), g_i18n:formatMoney(farm.money)))
         g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_CRITICAL,
-            string.format("Insufficient funds. Required: %s", g_i18n:formatMoney(totalDue, 0, true, true)))
+            string.format(g_i18n:getText("usedplus_error_insufficientFundsRequired"), g_i18n:formatMoney(totalDue, 0, true, true)))
         return
     end
 
@@ -1841,7 +1841,7 @@ function UnifiedPurchaseDialog:executeCashPurchasePlaceable()
         else
             UsedPlus.logError("  ✗ BuyPlaceableData not available - CRITICAL FAILURE")
             g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_CRITICAL,
-                "Purchase failed - game API not available")
+                g_i18n:getText("usedplus_error_purchaseFailedAPI"))
         end
 
         UsedPlus.logInfo("╚════════════════════════════════════════════════════════════════")
@@ -2073,7 +2073,7 @@ function UnifiedPurchaseDialog:executeFinancePurchasePlaceable_OLD()
 
     if not farm then
         UsedPlus.logWarn("  ✗ Farm not found - ABORTING")
-        g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_CRITICAL, "Farm not found")
+        g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_CRITICAL, g_i18n:getText("usedplus_error_farmNotFound"))
         return
     end
 
@@ -2088,7 +2088,7 @@ function UnifiedPurchaseDialog:executeFinancePurchasePlaceable_OLD()
         UsedPlus.logWarn(string.format("  ✗ Credit too low - ABORTING (have %d, need %d)",
             self.creditScore, PLACEABLE_MIN_CREDIT))
         g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_CRITICAL,
-            string.format("Building financing requires Excellent credit (%d+). Your credit: %d", PLACEABLE_MIN_CREDIT, self.creditScore))
+            string.format(g_i18n:getText("usedplus_error_buildingFinanceCreditRequired"), PLACEABLE_MIN_CREDIT, self.creditScore))
         return
     end
     UsedPlus.logInfo("  ✓ Credit score check PASSED")
@@ -2114,7 +2114,7 @@ function UnifiedPurchaseDialog:executeFinancePurchasePlaceable_OLD()
         UsedPlus.logWarn(string.format("  ✗ Insufficient funds for down payment - ABORTING (need %s, have %s)",
             g_i18n:formatMoney(downPayment), g_i18n:formatMoney(farm.money)))
         g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_CRITICAL,
-            string.format("Insufficient funds for down payment. Required: %s", g_i18n:formatMoney(downPayment, 0, true, true)))
+            string.format(g_i18n:getText("usedplus_error_insufficientFundsDownPayment"), g_i18n:formatMoney(downPayment, 0, true, true)))
         return
     end
     UsedPlus.logInfo("  ✓ Down payment affordability check PASSED")
@@ -2340,7 +2340,7 @@ function UnifiedPurchaseDialog:executeFinancePurchasePlaceable_OLD()
             end
 
             g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_CRITICAL,
-                "Purchase failed - game API not available")
+                g_i18n:getText("usedplus_error_purchaseFailedAPI"))
         end
 
         UsedPlus.logInfo("╚════════════════════════════════════════════════════════════════")
@@ -2361,12 +2361,12 @@ end
     3. Deducting money (down payment)
 ]]
 function UnifiedPurchaseDialog:executeLeasePurchase()
-    UsedPlus.logWarn("executeLeasePurchase: ENTERED")
+    UsedPlus.logDebug("executeLeasePurchase: ENTERED")
 
     local farmId = g_currentMission:getFarmId()
     local farm = g_farmManager:getFarmById(farmId)
 
-    UsedPlus.logWarn(string.format("executeLeasePurchase: farmId=%s, farm=%s", tostring(farmId), tostring(farm ~= nil)))
+    UsedPlus.logDebug(string.format("executeLeasePurchase: farmId=%s, farm=%s", tostring(farmId), tostring(farm ~= nil)))
 
     if not farm then
         g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_CRITICAL, g_i18n:getText("usedplus_error_farmNotFound"))
@@ -2400,7 +2400,7 @@ function UnifiedPurchaseDialog:executeLeasePurchase()
     -- Check if player can afford total due today
     if totalDueToday > farm.money then
         g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_CRITICAL,
-            "Insufficient funds! Need " .. g_i18n:formatMoney(totalDueToday, 0, true, true))
+            string.format(g_i18n:getText("usedplus_error_insufficientFundsNeed"), g_i18n:formatMoney(totalDueToday, 0, true, true)))
         return
     end
 

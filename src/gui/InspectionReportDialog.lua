@@ -63,34 +63,34 @@ function InspectionReportDialog:setupSystemIcons()
 
     -- Section header icons
     if self.vehicleSectionIcon ~= nil then
-        self.vehicleSectionIcon:setImageFilename(iconDir .. "vehicle.png")
+        self.vehicleSectionIcon:setImageFilename(iconDir .. "vehicle.dds")
     end
     if self.mechanicalSectionIcon ~= nil then
-        self.mechanicalSectionIcon:setImageFilename(iconDir .. "sys_engine.png")
+        self.mechanicalSectionIcon:setImageFilename(iconDir .. "sys_engine.dds")
     end
     if self.tireSectionIcon ~= nil then
-        self.tireSectionIcon:setImageFilename(iconDir .. "tire.png")
+        self.tireSectionIcon:setImageFilename(iconDir .. "fsk_tire.dds")
     end
     if self.mechanicSectionIcon ~= nil then
-        self.mechanicSectionIcon:setImageFilename(iconDir .. "agent.png")
+        self.mechanicSectionIcon:setImageFilename(iconDir .. "agent.dds")
     end
     if self.recommendSectionIcon ~= nil then
-        self.recommendSectionIcon:setImageFilename(iconDir .. "lightbulb.png")
+        self.recommendSectionIcon:setImageFilename(iconDir .. "lightbulb.dds")
     end
 
     -- Engine system icon
     if self.engineSystemIcon ~= nil then
-        self.engineSystemIcon:setImageFilename(iconDir .. "sys_engine.png")
+        self.engineSystemIcon:setImageFilename(iconDir .. "sys_engine.dds")
     end
 
     -- Hydraulic system icon
     if self.hydraulicSystemIcon ~= nil then
-        self.hydraulicSystemIcon:setImageFilename(iconDir .. "sys_hydraulic.png")
+        self.hydraulicSystemIcon:setImageFilename(iconDir .. "sys_hydraulic.dds")
     end
 
     -- Electrical system icon
     if self.electricalSystemIcon ~= nil then
-        self.electricalSystemIcon:setImageFilename(iconDir .. "sys_electrical.png")
+        self.electricalSystemIcon:setImageFilename(iconDir .. "sys_electrical.dds")
     end
 
     UsedPlus.logDebug("InspectionReportDialog: System icons initialized")
@@ -202,7 +202,7 @@ function InspectionReportDialog:updateDisplay()
 
     -- Vehicle name
     if self.vehicleNameText then
-        self.vehicleNameText:setText(listing.storeItemName or "Unknown Vehicle")
+        self.vehicleNameText:setText(listing.storeItemName or g_i18n:getText("usedplus_common_unknownVehicle"))
     end
 
     -- Vehicle details
@@ -210,7 +210,7 @@ function InspectionReportDialog:updateDisplay()
         local hours = listing.operatingHours or 0
         local age = listing.age or 0
         local damage = math.floor((listing.damage or 0) * 100)
-        self.vehicleDetailsText:setText(string.format("Hours: %d | Age: %d yrs | Damage: %d%%",
+        self.vehicleDetailsText:setText(string.format(g_i18n:getText("usedplus_ir_vehicleDetailsFormat"),
             hours, age, damage))
     end
 

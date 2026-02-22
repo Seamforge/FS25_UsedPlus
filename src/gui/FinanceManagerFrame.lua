@@ -64,7 +64,7 @@ function FinanceManagerFrame.new()
     }
 
     self.btnDashboard = {
-        text = "Credit Report",
+        text = g_i18n:getText("usedplus_fmf_btnCreditReport"),
         inputAction = InputAction.MENU_ACTIVATE,
         callback = function()
             self:onCreditReportClick()
@@ -72,7 +72,7 @@ function FinanceManagerFrame.new()
     }
 
     self.btnTakeLoan = {
-        text = "Take Loan",
+        text = g_i18n:getText("usedplus_fmf_btnTakeLoan"),
         inputAction = InputAction.MENU_EXTRA_1,
         callback = function()
             self:onTakeLoanClick()
@@ -271,27 +271,27 @@ function FinanceManagerFrame:setupSectionIcons()
 
     -- Finance section (left column) - dollar sign
     if self.financeSectionIcon ~= nil then
-        self.financeSectionIcon:setImageFilename(iconDir .. "finance.png")
+        self.financeSectionIcon:setImageFilename(iconDir .. "finance.dds")
     end
 
     -- Marketplace section (center column) - search magnifying glass
     if self.marketplaceSectionIcon ~= nil then
-        self.marketplaceSectionIcon:setImageFilename(iconDir .. "search.png")
+        self.marketplaceSectionIcon:setImageFilename(iconDir .. "search.dds")
     end
 
     -- Credit/Stats section (right column) - credit score star
     if self.creditSectionIcon ~= nil then
-        self.creditSectionIcon:setImageFilename(iconDir .. "credit_score.png")
+        self.creditSectionIcon:setImageFilename(iconDir .. "credit_score.dds")
     end
 
     -- Vehicles For Sale subsection - sale tag
     if self.saleSectionIcon ~= nil then
-        self.saleSectionIcon:setImageFilename(iconDir .. "sale.png")
+        self.saleSectionIcon:setImageFilename(iconDir .. "sale.dds")
     end
 
     -- Used Vehicle Searches subsection - inspect/eye icon
     if self.searchSectionIcon ~= nil then
-        self.searchSectionIcon:setImageFilename(iconDir .. "inspect.png")
+        self.searchSectionIcon:setImageFilename(iconDir .. "inspect.dds")
     end
 end
 
@@ -355,7 +355,7 @@ function FinanceManagerFrame:updateDisplay()
     if self.versionFooterText then
         local version = UsedPlus.VERSION
         self.versionFooterText:setText(string.format(
-            "UsedPlus v%s  |  Development Preview  |  github.com/XelaNull/FS25_UsedPlus  |  100%% AI-Authored",
+            g_i18n:getText("usedplus_fmf_versionFooter"),
             version))
     end
 
@@ -494,7 +494,7 @@ function FinanceManagerFrame:updateStatsSection(farmId, farm)
             local farmlandCount = ModCompatibility.getFarmlandCount(farmId)
             local assetsStr = g_i18n:formatMoney(assets, 0, true, true)
             if farmlandCount > 0 then
-                self.assetsText:setText(string.format("Assets: %s (%d fields)", assetsStr, farmlandCount))
+                self.assetsText:setText(string.format(g_i18n:getText("usedplus_fmf_assetsWithFields"), assetsStr, farmlandCount))
             else
                 self.assetsText:setText(string.format(g_i18n:getText("usedplus_manager_assetsLabel"), assetsStr))
             end
@@ -557,7 +557,7 @@ function FinanceManagerFrame:updateStatsSection(farmId, farm)
             local rate = math.floor((found / totalSearches) * 100)
             self.lifetimeSuccessRateText:setText(string.format("%d%%", rate))
         else
-            self.lifetimeSuccessRateText:setText("N/A")
+            self.lifetimeSuccessRateText:setText(g_i18n:getText("usedplus_fm_notAvailable"))
         end
     end
 
@@ -602,7 +602,7 @@ function FinanceManagerFrame:updateStatsSection(farmId, farm)
         end
         if self.historyAdjustmentText then
             local adjustment = CreditHistory.getScoreAdjustment(farmId)
-            self.historyAdjustmentText:setText(string.format("History: %+d pts", adjustment))
+            self.historyAdjustmentText:setText(string.format(g_i18n:getText("usedplus_fmf_historyPoints"), adjustment))
         end
     end
 end
@@ -649,7 +649,7 @@ function FinanceManagerFrame:onTakeLoanClick()
     if not ModCompatibility.shouldShowTakeLoanOption() then
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_INFO,
-            "Loans are managed by EnhancedLoanSystem"
+            g_i18n:getText("usedplus_notification_loansManByELS")
         )
         return
     end

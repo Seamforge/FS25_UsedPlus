@@ -208,7 +208,7 @@ function FluidPurchaseDialog:updateDisplay()
                 self.tankContentsText:setTextColor(0.4, 0.85, 1, 1)
             end
         else
-            self.tankContentsText:setText("Empty")
+            self.tankContentsText:setText(g_i18n:getText("usedplus_fp_empty"))
             self.tankContentsText:setTextColor(0.5, 0.5, 0.5, 1)
         end
     end
@@ -237,7 +237,7 @@ function FluidPurchaseDialog:updateDisplay()
         canPurchase = false
         if self.costText then
             local currentFluidName = g_i18n:getText("usedplus_fluid_" .. self.tankFluidType) or self.tankFluidType
-            self.costText:setText("Contains " .. currentFluidName)
+            self.costText:setText(g_i18n:getText("usedplus_fp_contains") .. currentFluidName)
             self.costText:setTextColor(1, 0.5, 0.2, 1)
         end
     end

@@ -150,7 +150,7 @@ function UsedVehicleManager:purchaseUsedVehicle(listing, farmId)
         -- Refund if spawn failed
         g_currentMission:addMoney(listing.price, farmId, MoneyType.OTHER, true, true)
         if not g_dedicatedServer then
-            g_currentMission:showBlinkingWarning("Failed to spawn vehicle. Money refunded.", 5000)
+            g_currentMission:showBlinkingWarning(g_i18n:getText("usedplus_error_spawnFailed"), 5000)
         end
         return false
     end
@@ -231,7 +231,7 @@ function UsedVehicleManager:spawnUsedVehicle(listing, farmId)
         storeItemName = listing.storeItemName or storeItem.name or "unknown",
         category = storeItem.category or "unknown",
     }
-    UsedPlus.logInfo(string.format("SPAWN DEBUG: Stored pending purchase: %s (item: %s, category: %s)",
+    UsedPlus.logDebug(string.format("Stored pending purchase: %s (item: %s, category: %s)",
         pendingKey, self.pendingUsedPurchases[pendingKey].storeItemName, self.pendingUsedPurchases[pendingKey].category))
 
     UsedPlus.logDebug("Sending BuyVehicleEvent...")
@@ -341,7 +341,7 @@ function UsedVehicleManager:applyUsedConditionToVehicle(vehicle, listing)
 
     -- v2.1.0: Apply RVB parts data if RVB is installed
     if listing.rvbPartsData and ModCompatibility and ModCompatibility.rvbInstalled then
-        ModCompatibility.applyRVBPartsData(vehicle, listing.rvbPartsData)
+        ModCompatibility.initializeRVBPartsFromListing(vehicle, listing.rvbPartsData)
         UsedPlus.logDebug("  Applied RVB parts data")
     end
 

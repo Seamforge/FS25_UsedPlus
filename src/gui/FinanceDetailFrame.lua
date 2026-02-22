@@ -142,13 +142,13 @@ function FinanceDetailFrame:updateDealInfo()
 
     if self.termText then
         local termYears = math.floor(self.deal.termMonths / 12)
-        self.termText:setText(string.format("%d years (%d months)", termYears, self.deal.termMonths))
+        self.termText:setText(string.format(g_i18n:getText("usedplus_fdf_termFormat"), termYears, self.deal.termMonths))
     end
 
     if self.startDateText then
         -- Format start date (stored as game day number)
         if self.deal.startDate then
-            self.startDateText:setText(string.format("Day %d", self.deal.startDate))
+            self.startDateText:setText(string.format(g_i18n:getText("usedplus_fdf_dayFormat"), self.deal.startDate))
         end
     end
 end

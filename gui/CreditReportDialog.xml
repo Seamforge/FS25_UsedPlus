@@ -122,7 +122,7 @@
                 <Text profile="crLabel" position="-80px -76px" text="$l10n_usedplus_cr_outstandingBalance"/>
                 <Text profile="crValueDebt" id="totalBalanceText" position="80px -76px" text=""/>
 
-                <Text profile="crLabel" position="-80px -98px" text="Net Worth:"/>
+                <Text profile="crLabel" position="-80px -98px" text="$l10n_usedplus_cr_netWorth"/>
                 <Text profile="crValueGood" id="netWorthText" position="80px -98px" text=""/>
             </GuiElement>
 

@@ -24,27 +24,27 @@
             <!-- Tank Status Section -->
             <GuiElement profile="fpTankSection" id="tankSection" position="0px -60px">
                 <Bitmap profile="fpSectionBg" id="tankSectionBg" position="0px 0px"/>
-                <Text profile="fpSectionHeader" id="tankSectionHeader" position="0px -5px" text="TANK STATUS"/>
+                <Text profile="fpSectionHeader" id="tankSectionHeader" position="0px -5px" text="$l10n_usedplus_fp_tankStatus"/>
 
-                <Text profile="fpLabel" id="levelLabel" position="-100px -30px" text="Current Level:"/>
+                <Text profile="fpLabel" id="levelLabel" position="-100px -30px" text="$l10n_usedplus_fp_currentLevel"/>
                 <Text profile="fpValue" id="tankLevelText" position="100px -30px" text="0 / 500 L"/>
 
-                <Text profile="fpLabel" id="contentsLabel" position="-100px -52px" text="Contains:"/>
-                <Text profile="fpValue" id="tankContentsText" position="100px -52px" text="Empty"/>
+                <Text profile="fpLabel" id="contentsLabel" position="-100px -52px" text="$l10n_usedplus_fp_containsLabel"/>
+                <Text profile="fpValue" id="tankContentsText" position="100px -52px" text="$l10n_usedplus_fp_empty"/>
             </GuiElement>
 
             <!-- Purchase Options Section -->
             <GuiElement profile="fpPurchaseSection" id="purchaseSection" position="0px -145px">
                 <Bitmap profile="fpPurchaseSectionBg" id="purchaseSectionBg" position="0px 0px"/>
-                <Text profile="fpSectionHeader" id="purchaseSectionHeader" position="0px -5px" text="PURCHASE"/>
+                <Text profile="fpSectionHeader" id="purchaseSectionHeader" position="0px -5px" text="$l10n_usedplus_fp_purchase"/>
 
-                <Text profile="fpLabel" id="fluidTypeLabel" position="-100px -35px" text="Fluid Type:"/>
+                <Text profile="fpLabel" id="fluidTypeLabel" position="-100px -35px" text="$l10n_usedplus_fp_fluidType"/>
                 <MultiTextOption profile="fpFluidDropdown" id="fluidTypeOption" position="80px -35px" onClick="onFluidTypeChanged"/>
 
-                <Text profile="fpLabel" id="amountLabel" position="-100px -65px" text="Amount:"/>
+                <Text profile="fpLabel" id="amountLabel" position="-100px -65px" text="$l10n_usedplus_fp_amount"/>
                 <MultiTextOption profile="fpAmountDropdown" id="amountOption" position="80px -65px" onClick="onAmountChanged"/>
 
-                <Text profile="fpLabel" id="costLabel" position="-100px -90px" text="Cost:"/>
+                <Text profile="fpLabel" id="costLabel" position="-100px -90px" text="$l10n_usedplus_fp_cost"/>
                 <Text profile="fpCostValue" id="costText" position="100px -90px" text="$250"/>
             </GuiElement>
 
