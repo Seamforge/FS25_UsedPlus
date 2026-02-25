@@ -1,7 +1,7 @@
 # FS25_UsedPlus — Traffic Dashboard
 
-**Last updated:** 2026-02-24T18:19:11Z
-**Days tracked:** 7 | **Download snapshots:** 141 (hourly)
+**Last updated:** 2026-02-25T00:17:53Z
+**Days tracked:** 8 | **Download snapshots:** 147 (hourly)
 
 ---
 
