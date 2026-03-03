@@ -1,7 +1,7 @@
 # FS25_UsedPlus — Traffic Dashboard
 
-**Last updated:** 2026-03-03T06:15:37Z
-**Days tracked:** 14 | **Download snapshots:** 296 (hourly)
+**Last updated:** 2026-03-03T12:09:07Z
+**Days tracked:** 14 | **Download snapshots:** 302 (hourly)
 
 ---
 
@@ -11,10 +11,10 @@
 
 | Metric | 14-Day Total | Unique |
 |--------|-------------|--------|
-| Page Views | 3155 | 306 |
-| Git Clones | 2446 | 749 |
+| Page Views | 3123 | 306 |
+| Git Clones | 2457 | 769 |
 
-> **Engagement:** 10.3 pages per visitor (14-day avg)
+> **Engagement:** 10.2 pages per visitor (14-day avg)
 
 ---
 
@@ -30,9 +30,9 @@
 
 ![Conversion](charts/conversion.png)
 
-> **14-day conversion:** 909 of 306 visitors cloned or downloaded (**297.0%**)
+> **14-day conversion:** 931 of 306 visitors cloned or downloaded (**304.2%**)
 >
-> Unique cloners: 749 | Release downloads: 160
+> Unique cloners: 769 | Release downloads: 162
 
 ---
 
@@ -42,9 +42,9 @@
 
 | Channel | Count |
 |---------|-------|
-| Zip Downloads | 160 |
-| Git Clones (14-day) | 2446 |
-| **Total Acquisitions** | **2606** |
+| Zip Downloads | 162 |
+| Git Clones (14-day) | 2457 |
+| **Total Acquisitions** | **2619** |
 
 ---
 
@@ -62,13 +62,13 @@
 
 | Source | Views | Unique |
 |--------|-------|--------|
-| github.com | 1126 | 120 |
-| Bing | 202 | 29 |
-| Yahoo | 56 | 7 |
+| github.com | 1124 | 122 |
+| Bing | 166 | 25 |
+| Yahoo | 42 | 7 |
 | DuckDuckGo | 28 | 2 |
+| Google | 8 | 5 |
 | yandex.ru | 7 | 2 |
 | chatgpt.com | 7 | 1 |
-| Google | 6 | 4 |
 
 ---
 
@@ -88,16 +88,16 @@
 
 | Page | Views | Unique |
 |------|-------|--------|
-| `/XelaNull/FS25_UsedPlus` | 1017 | 222 |
-| `/XelaNull/FS25_UsedPlus/releases` | 254 | 84 |
-| `/XelaNull/FS25_UsedPlus/issues` | 253 | 69 |
-| `/XelaNull/FS25_UsedPlus/releases/tag/v2.14.2` | 127 | 62 |
-| `/XelaNull/FS25_UsedPlus/issues/19` | 73 | 23 |
-| `/XelaNull/FS25_UsedPlus/issues/17` | 60 | 11 |
-| `/XelaNull/FS25_UsedPlus/wiki/Other-Mod-Compatibility` | 58 | 25 |
+| `/XelaNull/FS25_UsedPlus` | 1012 | 229 |
+| `/XelaNull/FS25_UsedPlus/releases` | 255 | 81 |
+| `/XelaNull/FS25_UsedPlus/issues` | 233 | 66 |
+| `/XelaNull/FS25_UsedPlus/releases/tag/v2.14.2` | 129 | 64 |
+| `/XelaNull/FS25_UsedPlus/issues/19` | 74 | 24 |
+| `/XelaNull/FS25_UsedPlus/issues/17` | 61 | 12 |
+| `/XelaNull/FS25_UsedPlus/wiki/Other-Mod-Compatibility` | 59 | 25 |
+| `/XelaNull/FS25_UsedPlus/wiki/Malfunctions` | 56 | 22 |
 | `/XelaNull/FS25_UsedPlus/blob/master/screenshots/used_plus_finances_zoomed.png` | 55 | 28 |
-| `/XelaNull/FS25_UsedPlus/wiki/Malfunctions` | 50 | 19 |
-| `/XelaNull/FS25_UsedPlus/wiki/Service-Truck` | 48 | 23 |
+| `/XelaNull/FS25_UsedPlus/wiki/Service-Truck` | 51 | 24 |
 
 ---
 
