@@ -37,12 +37,17 @@
  *   3. Hash mismatch = translation is STALE (needs re-translation)
  *
  * COMMANDS:
- *   sync      - Add missing keys, update hashes, show what changed
- *   status    - Quick table: translated/stale/missing per language
- *   report    - Detailed lists of problem keys by language
- *   check     - Report issues, exit code 1 if MISSING keys exist
- *   validate  - CI-friendly: minimal output, exit codes only
- *   help      - Show full help with all options
+ *   sync           - Add missing keys, update hashes, show what changed
+ *   status         - Quick table: translated/stale/missing per language
+ *   report         - Detailed lists of problem keys by language
+ *   check          - Report issues, exit code 1 if MISSING keys exist
+ *   validate       - CI-friendly: minimal output, exit codes only
+ *   help           - Show full help with all options
+ *
+ * CODEBASE VALIDATION (v4.0.0):
+ *   All commands now gate on codebase usage first. English keys that aren't
+ *   referenced in any Lua/XML file are flagged as UNUSED and excluded from
+ *   translation counts. This prevents translating dead keys.
  *
  * WHAT IT DETECTS:
  *   ✓ Missing keys     - Key in English but not in target language
@@ -62,6 +67,8 @@
  *   <text name="key" text="value"/>     (texts pattern - no hash support)
  *
  * VERSION HISTORY:
+ *   v4.0.0 - Codebase validation: scan src/gui/modDesc for actual key usage,
+ *            'unused' command lists dead keys, 'prune' command removes keys from all files
  *   v3.2.2 - Added cognate detection (no false positives for international terms)
  *   v3.2.1 - Fixed format specifier regex (no false positives on "40% success")
  *   v3.2.0 - Added format specifier validation, empty/whitespace detection
@@ -73,7 +80,7 @@
  * ══════════════════════════════════════════════════════════════════════════════
  */
 
-const VERSION = '3.2.2';
+const VERSION = '4.0.0';
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
@@ -340,6 +347,171 @@ function isCognateOrInternationalTerm(value) {
     return false;
 }
 
+// ──────────────────────────────────────────────────────────────────────────────
+// Codebase Scanning (v4.0.0)
+// ──────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Recursively get all files matching extensions under a directory
+ */
+function getFilesRecursive(dir, extensions) {
+    const results = [];
+    if (!fs.existsSync(dir)) return results;
+
+    const entries = fs.readdirSync(dir, { withFileTypes: true });
+    for (const entry of entries) {
+        const fullPath = path.join(dir, entry.name);
+        if (entry.isDirectory()) {
+            results.push(...getFilesRecursive(fullPath, extensions));
+        } else if (extensions.some(ext => entry.name.endsWith(ext))) {
+            results.push(fullPath);
+        }
+    }
+    return results;
+}
+
+/**
+ * Resolve the mod root directory (parent of translations/)
+ */
+function getModDir() {
+    return path.resolve(__dirname, '..');
+}
+
+// Cache for codebase scan results (only scan once per run)
+let _codebaseScanCache = null;
+
+/**
+ * Gate function: scan the codebase and partition English keys into used/unused.
+ * Called once at the start of every command. Results are cached.
+ *
+ * Returns: { usedKeys: Set, unusedKeys: string[], dynamicPrefixes: Set, activeKeyCount: number }
+ */
+function gateCodebaseValidation(sourceEntries) {
+    if (_codebaseScanCache) return _codebaseScanCache;
+
+    const modDir = getModDir();
+    const allKeys = [...sourceEntries.keys()];
+    const { usedKeys, dynamicPrefixes } = scanCodebaseForUsedKeys(modDir, allKeys);
+
+    const unusedKeys = allKeys.filter(k => !usedKeys.has(k));
+
+    _codebaseScanCache = {
+        usedKeys,
+        unusedKeys,
+        dynamicPrefixes,
+        activeKeyCount: allKeys.length - unusedKeys.length
+    };
+
+    return _codebaseScanCache;
+}
+
+/**
+ * Print the codebase gate summary (shown at start of every command)
+ */
+function printGateSummary(gate, totalKeys) {
+    const used = gate.activeKeyCount;
+    const unused = gate.unusedKeys.length;
+    console.log(`Codebase gate: ${used} keys in use, ${unused} unused (of ${totalKeys} total in English)`);
+    if (gate.dynamicPrefixes.size > 0) {
+        console.log(`  Dynamic prefixes detected: ${[...gate.dynamicPrefixes].join(', ')}`);
+    }
+    if (unused > 0 && unused <= 10) {
+        console.log(`  Unused keys: ${gate.unusedKeys.join(', ')}`);
+    } else if (unused > 10) {
+        console.log(`  Unused keys: ${gate.unusedKeys.slice(0, 5).join(', ')} ... +${unused - 5} more`);
+        console.log(`  Run with 'unused' command to see full list`);
+    }
+    console.log();
+}
+
+/**
+ * Scan the codebase (src/, gui/, modDesc.xml) to find which translation keys
+ * are actually referenced. Returns a Set of used key names.
+ *
+ * Detection methods:
+ *   1. Direct getText("key") calls in Lua
+ *   2. All "usedplus_*" / "usedPlus_*" string literals in Lua (catches config tables)
+ *   3. $l10n_key references in XML files
+ *   4. Dynamic prefix detection ("usedplus_component_" .. var) — whitelists all matching keys
+ *   5. Game-engine auto-mapped keys (input_*, fillType_*, configuration_*, unit_*)
+ */
+function scanCodebaseForUsedKeys(modDir, allEnglishKeys) {
+    const usedKeys = new Set();
+    const dynamicPrefixes = new Set();
+
+    const srcDir = path.join(modDir, 'src');
+    const guiDir = path.join(modDir, 'gui');
+    const modDescPath = path.join(modDir, 'modDesc.xml');
+
+    // --- 1 & 2: Scan Lua files for getText() calls and string literals ---
+    const luaFiles = getFilesRecursive(srcDir, ['.lua']);
+    for (const luaFile of luaFiles) {
+        const content = fs.readFileSync(luaFile, 'utf8');
+
+        // Direct getText("key") calls
+        const getTextPattern = /getText\("([^"]+)"\)/g;
+        let match;
+        while ((match = getTextPattern.exec(content)) !== null) {
+            usedKeys.add(match[1]);
+        }
+
+        // All "usedplus_*" or "usedPlus_*" string literals (catches config tables, nameKey, etc.)
+        const stringPattern = /"(usedplus_[a-zA-Z0-9_]+|usedPlus_[a-zA-Z0-9_]+)"/g;
+        while ((match = stringPattern.exec(content)) !== null) {
+            usedKeys.add(match[1]);
+        }
+
+        // Dynamic prefix detection: "usedplus_something_" .. variable
+        const dynamicPattern = /"(usedplus_[a-z_]+_|usedPlus_[a-z_]+_)"\s*\.\./g;
+        while ((match = dynamicPattern.exec(content)) !== null) {
+            dynamicPrefixes.add(match[1]);
+        }
+    }
+
+    // --- 3: Scan XML files for $l10n_ references ---
+    const xmlFiles = getFilesRecursive(guiDir, ['.xml']);
+    for (const xmlFile of xmlFiles) {
+        const content = fs.readFileSync(xmlFile, 'utf8');
+        const l10nPattern = /\$l10n_([a-zA-Z0-9_]+)/g;
+        let match;
+        while ((match = l10nPattern.exec(content)) !== null) {
+            usedKeys.add(match[1]);
+        }
+    }
+
+    // --- 4: Scan modDesc.xml ---
+    if (fs.existsSync(modDescPath)) {
+        const content = fs.readFileSync(modDescPath, 'utf8');
+        const l10nPattern = /\$l10n_([a-zA-Z0-9_]+)/g;
+        let match;
+        while ((match = l10nPattern.exec(content)) !== null) {
+            usedKeys.add(match[1]);
+        }
+    }
+
+    // --- 5: Whitelist dynamic prefix keys ---
+    // If code has "usedplus_component_" .. var, then all keys starting with
+    // "usedplus_component_" are considered used
+    for (const prefix of dynamicPrefixes) {
+        for (const key of allEnglishKeys) {
+            if (key.startsWith(prefix)) {
+                usedKeys.add(key);
+            }
+        }
+    }
+
+    // --- 6: Game-engine auto-mapped keys ---
+    // FS25 automatically maps input actions, fill types, etc. to $l10n_ keys
+    const gameEnginePrefixes = ['input_', 'fillType_', 'configuration_', 'unit_'];
+    for (const key of allEnglishKeys) {
+        if (gameEnginePrefixes.some(p => key.startsWith(p))) {
+            usedKeys.add(key);
+        }
+    }
+
+    return { usedKeys, dynamicPrefixes };
+}
+
 /**
  * Validate a translation entry against its source
  * Returns array of issues found
@@ -591,7 +763,7 @@ function syncTranslations() {
     }
 
     // Step 1: Update hashes in the English source file
-    console.log(`[1/3] Updating hashes in source file...`);
+    console.log(`[1/4] Updating hashes in source file...`);
 
     if (format === 'elements') {
         const hashesUpdated = updateSourceHashes(sourceFile, format);
@@ -607,6 +779,9 @@ function syncTranslations() {
     // Re-parse source after hash update
     const { entries: sourceEntries, orderedKeys: sourceOrderedKeys } = parseTranslationFile(sourceFile, format);
 
+    // GATE: Codebase validation — determine which keys are actually used
+    const gate = gateCodebaseValidation(sourceEntries);
+
     // Compute hashes for comparison
     const sourceHashes = new Map();
     for (const [key, data] of sourceEntries) {
@@ -614,12 +789,16 @@ function syncTranslations() {
     }
 
     console.log();
-    console.log(`[2/3] Source: ${sourceFile} (${sourceEntries.size} keys)`);
+    console.log(`[2/4] Source: ${sourceFile} (${sourceEntries.size} keys)`);
     console.log(`      Format: ${format}`);
     console.log();
 
-    // Step 2: Sync to all target languages
-    console.log(`[3/3] Syncing to target languages...`);
+    // Step 2: Codebase gate
+    console.log(`[3/4] Codebase validation...`);
+    printGateSummary(gate, sourceEntries.size);
+
+    // Step 3: Sync to all target languages (only active keys)
+    console.log(`[4/4] Syncing to target languages (${gate.activeKeyCount} active keys)...`);
     console.log();
 
     const enabledLangs = getEnabledLanguages();
@@ -873,7 +1052,11 @@ function checkSync() {
         sourceHashes.set(key, getHash(data.value));
     }
 
-    console.log(`Source: ${sourceFile} (${sourceEntries.size} keys)\n`);
+    // GATE: Codebase validation
+    const gate = gateCodebaseValidation(sourceEntries);
+
+    console.log(`Source: ${sourceFile} (${sourceEntries.size} keys, ${gate.activeKeyCount} active)\n`);
+    printGateSummary(gate, sourceEntries.size);
 
     let hasProblems = false;
     const summary = [];
@@ -1026,9 +1209,13 @@ function showStatus() {
         sourceHashes.set(key, getHash(data.value));
     }
 
-    console.log(`Source: ${sourceFile} (${sourceEntries.size} keys)`);
+    // GATE: Codebase validation
+    const gate = gateCodebaseValidation(sourceEntries);
+
+    console.log(`Source: ${sourceFile} (${sourceEntries.size} keys, ${gate.activeKeyCount} active)`);
     console.log(`Format: ${format}${format === 'elements' ? ' (hash-enabled)' : ''}`);
     console.log();
+    printGateSummary(gate, sourceEntries.size);
 
     console.log("Language            | Translated |  Stale  | Untranslated | Missing | Dups | Orphaned");
     console.log("──────────────────────────────────────────────────────────────────────────────────────────");
@@ -1116,7 +1303,11 @@ function generateReport() {
         sourceHashes.set(key, getHash(data.value));
     }
 
-    console.log(`Source: ${sourceFile} (${sourceEntries.size} keys)\n`);
+    // GATE: Codebase validation
+    const gate = gateCodebaseValidation(sourceEntries);
+
+    console.log(`Source: ${sourceFile} (${sourceEntries.size} keys, ${gate.activeKeyCount} active)\n`);
+    printGateSummary(gate, sourceEntries.size);
 
     const enabledLangs = getEnabledLanguages();
 
@@ -1241,6 +1432,20 @@ function generateReport() {
         console.log();
     }
 
+    // UNUSED section (global, not per-language)
+    if (gate.unusedKeys.length > 0) {
+        console.log(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
+        console.log(`UNUSED KEYS (${gate.unusedKeys.length} keys not referenced in codebase)`);
+        console.log(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
+        for (const key of gate.unusedKeys.slice(0, 20)) {
+            console.log(`    - ${key}`);
+        }
+        if (gate.unusedKeys.length > 20) {
+            console.log(`    ... and ${gate.unusedKeys.length - 20} more (run 'unused' command for full list)`);
+        }
+        console.log();
+    }
+
     console.log("══════════════════════════════════════════════════════════════════════");
 }
 
@@ -1264,6 +1469,9 @@ function validateSync() {
     const sourceContent = fs.readFileSync(sourceFile, 'utf8');
     const format = autoDetectXmlFormat(sourceContent);
     const { entries: sourceEntries } = parseTranslationFile(sourceFile, format);
+
+    // GATE: Codebase validation
+    const gate = gateCodebaseValidation(sourceEntries);
 
     let hasProblems = false;
     const enabledLangs = getEnabledLanguages();
@@ -1297,6 +1505,203 @@ function validateSync() {
 }
 
 // ──────────────────────────────────────────────────────────────────────────────
+// UNUSED Command
+// ──────────────────────────────────────────────────────────────────────────────
+
+function showUnused() {
+    console.log("══════════════════════════════════════════════════════════════════════");
+    console.log(`UNUSED TRANSLATION KEYS v${VERSION}`);
+    console.log("══════════════════════════════════════════════════════════════════════");
+    console.log();
+
+    const filePrefix = autoDetectFilePrefix();
+    if (!filePrefix) {
+        console.error("ERROR: Could not find source translation file.");
+        process.exit(1);
+    }
+
+    const sourceFile = getSourceFilePath(filePrefix);
+    const sourceContent = fs.readFileSync(sourceFile, 'utf8');
+    const format = autoDetectXmlFormat(sourceContent);
+    const { entries: sourceEntries } = parseTranslationFile(sourceFile, format);
+
+    const gate = gateCodebaseValidation(sourceEntries);
+    printGateSummary(gate, sourceEntries.size);
+
+    if (gate.unusedKeys.length === 0) {
+        console.log("All keys are referenced in the codebase. Nothing to clean up!");
+        return;
+    }
+
+    // Group unused keys by prefix
+    const groups = new Map();
+    for (const key of gate.unusedKeys) {
+        // Extract prefix: everything up to and including the second underscore
+        const parts = key.split('_');
+        const prefix = parts.length >= 2 ? parts.slice(0, 2).join('_') + '_' : key;
+        if (!groups.has(prefix)) groups.set(prefix, []);
+        groups.get(prefix).push(key);
+    }
+
+    // Sort groups by size (largest first)
+    const sortedGroups = [...groups.entries()].sort((a, b) => b[1].length - a[1].length);
+
+    console.log(`${gate.unusedKeys.length} unused keys grouped by prefix:\n`);
+
+    for (const [prefix, keys] of sortedGroups) {
+        console.log(`  ${prefix}* (${keys.length} keys):`);
+        for (const key of keys) {
+            console.log(`    - ${key}`);
+        }
+        console.log();
+    }
+
+    console.log("══════════════════════════════════════════════════════════════════════");
+    console.log("To remove these keys, run:");
+    console.log("  node translation_sync.js prune --all-unused");
+    console.log("Or remove specific keys:");
+    console.log("  node translation_sync.js prune key1 key2 key3");
+    console.log("══════════════════════════════════════════════════════════════════════");
+}
+
+// ──────────────────────────────────────────────────────────────────────────────
+// PRUNE Command
+// ──────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Remove specified keys from English + all language translation files.
+ *
+ * Usage:
+ *   node translation_sync.js prune key1 key2 key3     # Remove specific keys
+ *   node translation_sync.js prune --all-unused        # Remove all codebase-unused keys
+ */
+function pruneKeys() {
+    console.log("══════════════════════════════════════════════════════════════════════");
+    console.log(`TRANSLATION PRUNE v${VERSION}`);
+    console.log("══════════════════════════════════════════════════════════════════════");
+    console.log();
+
+    const filePrefix = autoDetectFilePrefix();
+    if (!filePrefix) {
+        console.error("ERROR: Could not find source translation file.");
+        process.exit(1);
+    }
+
+    const sourceFile = getSourceFilePath(filePrefix);
+    const sourceContent = fs.readFileSync(sourceFile, 'utf8');
+    const format = autoDetectXmlFormat(sourceContent);
+    const { entries: sourceEntries } = parseTranslationFile(sourceFile, format);
+
+    // Determine which keys to prune
+    const args = process.argv.slice(3);
+    let keysToPrune = [];
+
+    if (args.includes('--all-unused')) {
+        const gate = gateCodebaseValidation(sourceEntries);
+        printGateSummary(gate, sourceEntries.size);
+        keysToPrune = gate.unusedKeys;
+    } else if (args.length > 0) {
+        keysToPrune = args.filter(a => !a.startsWith('--'));
+    } else {
+        console.error("ERROR: Specify keys to prune, or use --all-unused");
+        console.error("");
+        console.error("  node translation_sync.js prune key1 key2 key3");
+        console.error("  node translation_sync.js prune --all-unused");
+        process.exit(1);
+    }
+
+    if (keysToPrune.length === 0) {
+        console.log("No keys to prune.");
+        return;
+    }
+
+    // Validate that specified keys actually exist in English
+    const validKeys = [];
+    const invalidKeys = [];
+    for (const key of keysToPrune) {
+        if (sourceEntries.has(key)) {
+            validKeys.push(key);
+        } else {
+            invalidKeys.push(key);
+        }
+    }
+
+    if (invalidKeys.length > 0) {
+        console.log(`WARNING: ${invalidKeys.length} key(s) not found in English source (skipping):`);
+        for (const key of invalidKeys.slice(0, 10)) {
+            console.log(`  ? ${key}`);
+        }
+        if (invalidKeys.length > 10) {
+            console.log(`  ... and ${invalidKeys.length - 10} more`);
+        }
+        console.log();
+    }
+
+    if (validKeys.length === 0) {
+        console.log("No valid keys to prune.");
+        return;
+    }
+
+    console.log(`Pruning ${validKeys.length} key(s) from all translation files...\n`);
+
+    // Build the set for fast lookup
+    const pruneSet = new Set(validKeys);
+
+    // Process English source + all language files
+    const allFiles = [sourceFile];
+    const enabledLangs = getEnabledLanguages();
+    for (const { code } of enabledLangs) {
+        const langFile = getLangFilePath(filePrefix, code);
+        if (fs.existsSync(langFile)) {
+            allFiles.push(langFile);
+        }
+    }
+
+    let totalRemoved = 0;
+
+    for (const filePath of allFiles) {
+        let content = fs.readFileSync(filePath, 'utf8');
+        let removedFromFile = 0;
+
+        for (const key of pruneSet) {
+            // Match the full XML line for this key (handles both formats)
+            let pattern;
+            if (format === 'elements') {
+                // Match: optional whitespace + <e k="key" ... /> + optional newline
+                pattern = new RegExp(`\\s*<e k="${escapeRegex(key)}" v="[^"]*"[^>]*/>\\s*\\n?`, 'g');
+            } else {
+                pattern = new RegExp(`\\s*<text name="${escapeRegex(key)}" text="[^"]*"\\s*/>\\s*\\n?`, 'g');
+            }
+
+            const before = content;
+            content = content.replace(pattern, '\n');
+            if (content !== before) {
+                removedFromFile++;
+            }
+        }
+
+        if (removedFromFile > 0) {
+            // Clean up any double-blank-lines left behind
+            content = content.replace(/\n{3,}/g, '\n\n');
+            fs.writeFileSync(filePath, content, 'utf8');
+        }
+
+        const fileName = path.basename(filePath);
+        if (removedFromFile > 0) {
+            console.log(`  ${fileName.padEnd(25)}: removed ${removedFromFile} key(s)`);
+            totalRemoved += removedFromFile;
+        } else {
+            console.log(`  ${fileName.padEnd(25)}: no matches`);
+        }
+    }
+
+    console.log();
+    console.log("══════════════════════════════════════════════════════════════════════");
+    console.log(`PRUNE COMPLETE: Removed ${totalRemoved} entries across ${allFiles.length} files`);
+    console.log("══════════════════════════════════════════════════════════════════════");
+}
+
+// ──────────────────────────────────────────────────────────────────────────────
 // Help
 // ──────────────────────────────────────────────────────────────────────────────
 
@@ -1323,12 +1728,22 @@ COMMANDS:
   status    - Quick overview: translated/stale/missing per language
   report    - Detailed breakdown by language with lists of problem keys
   validate  - CI-friendly: minimal output, exit codes only
+  unused    - List all dead keys not referenced in codebase (grouped by prefix)
+  prune     - Remove keys from English + all language files
   help      - Show this help
+
+CODEBASE VALIDATION (v4.0.0):
+  All commands show a codebase gate summary identifying which English keys
+  are actually referenced in src/*.lua, gui/*.xml, or modDesc.xml. Keys not
+  found in the codebase are flagged as UNUSED — use 'prune' to remove them.
 
 USAGE:
   node translation_sync.js sync     # Sync all languages, update hashes
   node translation_sync.js check    # Verify sync status
   node translation_sync.js report   # See detailed stale/missing lists
+  node translation_sync.js unused   # List dead keys for cleanup
+  node translation_sync.js prune key1 key2   # Remove specific keys from all files
+  node translation_sync.js prune --all-unused # Remove all dead keys at once
 
 WORKFLOW:
   1. Add/change text in translation_${CONFIG.sourceLanguage}.xml
@@ -1375,6 +1790,12 @@ switch (command) {
         break;
     case 'validate':
         validateSync();
+        break;
+    case 'unused':
+        showUnused();
+        break;
+    case 'prune':
+        pruneKeys();
         break;
     case 'help':
     case '--help':

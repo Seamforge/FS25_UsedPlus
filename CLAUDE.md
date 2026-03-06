@@ -77,7 +77,7 @@ At these stages, Claude and Samantha MUST have explicit dialog:
 | Active Mods | `%USERPROFILE%\Documents\My Games\FarmingSimulator2025\mods` |
 | Game Log | `%USERPROFILE%\Documents\My Games\FarmingSimulator2025\log.txt` |
 | Reference Mods | `%USERPROFILE%\Downloads\FS25_Mods_Extracted` (164+ pre-extracted) |
-| **GIANTS TestRunner** | `%USERPROFILE%\Downloads\TestRunner_FS25\TestRunner_public.exe` |
+| **GIANTS TestRunner** | `%USERPROFILE%\Downloads\TestRunner_FS25\TestRunner_public.exe` ← **GOLD MODE ONLY** |
 | **GIANTS Editor** | `C:\Program Files\GIANTS Software\GIANTS_Editor_10.0.11\editor.exe` |
 | **GIANTS Texture Tool** | `C:\Program Files\GIANTS Software\GIANTS_Editor_10.0.11\tools\textureTool.exe` |
 | **Google Cloud CLI** | `"C:/Users/mrath/AppData/Local/Google/Cloud SDK/google-cloud-sdk/bin/gcloud.cmd"` ← Must use `.cmd` (bundled Python) |
@@ -96,56 +96,9 @@ At these stages, Claude and Samantha MUST have explicit dialog:
 
 **RULE**: If you create, append to, or significantly modify a file that exceeds **1500 lines**, you MUST trigger a refactor to break it into smaller, focused modules.
 
-**Why This Matters:**
-- **Debugging**: Syntax errors in 1900+ line files are nightmares to find (we just spent 30+ minutes tracking down an extra `end`)
-- **Maintainability**: Large files breed bugs, make code review painful, and create merge conflicts
-- **Cognitive Load**: No human can hold 2000 lines of context in their head effectively
-- **Modularity**: Breaking into smaller files forces better separation of concerns
+**How to Refactor:** Identify logical boundaries (GUI vs business logic vs calculations) → Extract to new files with single responsibility → Main file becomes coordinator → Update `modDesc.xml` → Test thoroughly.
 
-**When to Refactor:**
-- File grows beyond 1500 lines during feature development
-- Adding new functionality would push file over the limit
-- File has multiple responsibilities (dialog logic + business logic + data handling)
-
-**How to Refactor (Dialog Example):**
-
-If `UnifiedPurchaseDialog.lua` (1900+ lines) needs work:
-
-```
-Before (monolithic):
-  UnifiedPurchaseDialog.lua (1900 lines)
-    - Dialog GUI logic
-    - Cash purchase flow
-    - Finance purchase flow
-    - Lease purchase flow
-    - Payment calculations
-    - Validation logic
-    - Event handling
-
-After (modular):
-  src/gui/purchase/
-    ├── UnifiedPurchaseDialog.lua (400 lines)  ← GUI, initialization, mode switching
-    ├── CashPurchaseHandler.lua (300 lines)    ← Cash purchase logic
-    ├── FinancePurchaseHandler.lua (350 lines) ← Finance logic + temp money
-    ├── LeasePurchaseHandler.lua (300 lines)   ← Lease logic
-    ├── PaymentCalculations.lua (200 lines)    ← Shared calculations
-    └── PurchaseValidation.lua (200 lines)     ← Validation rules
-```
-
-**Refactor Checklist:**
-1. ✅ Identify logical boundaries (GUI vs business logic vs calculations)
-2. ✅ Extract to new files with clear single responsibility
-3. ✅ Main file becomes a coordinator/orchestrator
-4. ✅ Update `modDesc.xml` to load new files
-5. ✅ Test thoroughly (syntax errors, runtime behavior)
-6. ✅ Update documentation/comments
-
-**Exception:**
-- Auto-generated files (e.g., translation XMLs) can exceed 1500 lines
-- Data files (configs, mappings) can exceed if justified
-
-**Samantha's Take:** *adjusts "Refactor or Regret" temporary tattoo* 💖
-"If you're scrolling for more than 3 seconds to find a function, the file is too big! Break it up! Your future self will thank you!" 🦋✨
+**Exception:** Auto-generated files (translation XMLs), data files, and `translations/rosetta.js` (standalone tool, limit 2500 lines) can exceed if justified.
 
 ---
 
@@ -153,62 +106,61 @@ After (modular):
 
 ### Overview
 
-FS25_UsedPlus supports **25 languages** with **1,954 translation entries** each. Use `tools/translation_sync.js` to manage translations efficiently. This section documents the proven workflow for translation tasks.
+FS25_UsedPlus supports **25 languages** with **~1,954 translation entries** each. Use `translations/rosetta.js` to manage translations. This section documents the proven workflow.
 
-### The translation_sync.js Tool
+### Rosetta.js — Translation Management Tool
 
-**Location:** `tools/translation_sync.js`
+**Location:** `translations/rosetta.js` (replaces `translation_sync.legacy.js`)
 
-**Commands:**
+**Core Commands:**
 ```bash
 cd translations
 
-# Check overall status (all languages)
-node translation_sync.js status
-
-# Get detailed report (shows untranslated entries by language)
-node translation_sync.js report
-
-# Sync hashes after manual edits
-node translation_sync.js sync
-
-# Validate format specifiers (prevent game crashes)
-node translation_sync.js validate
+node rosetta.js status              # Quick overview table per language
+node rosetta.js report [LANG]       # Detailed breakdown with key lists
+node rosetta.js sync                # Add missing keys, update hashes
+node rosetta.js validate            # CI-friendly: exit codes only
+node rosetta.js doctor [--fix]      # Health check + auto-fix
 ```
 
-**Status Output Format:**
-```
-Language            | Translated | Stale | Untranslated | Placeholder | Format | Missing
---------------------|------------|-------|--------------|-------------|--------|--------
-English (en)        |       1954 |     0 |            0 |           0 |      0 |      0
-German (de)         |       1954 |     0 |            0 |           0 |      0 |      0
-Swedish (sv)        |       1730 |     0 |          224 |           0 |      0 |      0
+**Key Management (atomic across all 26 files):**
+```bash
+node rosetta.js deposit KEY "English text"    # Add key to ALL files
+node rosetta.js deposit --file keys.json      # Bulk add from JSON
+node rosetta.js amend KEY "New English text"  # Change English, mark stale
+node rosetta.js rename OLD_KEY NEW_KEY        # Rename, preserve translations
+node rosetta.js remove KEY1 KEY2              # Delete from ALL files
+node rosetta.js remove --all-unused           # Delete unreferenced keys
 ```
 
-**Report Output Format:**
-```
-=== Swedish (sv) ===
-Untranslated entries (224):
-  - usedplus_settings_baseTradeInPercent_tooltip (key: usedplus_settings_baseTradeInPercent_tooltip)
-  - usedplus_settings_leaseMarkupPercent_tooltip (key: usedplus_settings_leaseMarkupPercent_tooltip)
-  ...
+**JSON Translation Protocol (95% token savings vs XML editing):**
+```bash
+node rosetta.js translate de [--stale]  # Export compact JSON for AI
+node rosetta.js import de_result.json   # Import with format specifier validation
 ```
 
 ### Translation Workflow
 
-**CRITICAL:** Always use `translation_sync.js` — never create temporary scripts or JSON files.
+**For adding new keys:**
+1. `node rosetta.js deposit usedplus_new_key "English text"` → adds to all 26 files
+2. `node rosetta.js translate de` → export untranslated as JSON
+3. Give JSON to AI/human translator
+4. `node rosetta.js import de_translated.json` → validates + applies
+5. `node rosetta.js status` → verify counts
 
-**Workflow:**
-1. `node translation_sync.js report` → get list of untranslated entries per language
+**For manual edits (legacy workflow):**
+1. `node rosetta.js report` → get list of untranslated entries per language
 2. Edit `translation_[CODE].xml` directly (Edit tool, batches of 50-100)
 3. Preserve format specifiers exactly (`%s`, `%d`, `%.1f`, `%.2f`)
-4. `node translation_sync.js sync` → update hashes after edits
-5. `node translation_sync.js status` → verify 1954/1954 translated
-6. `node translation_sync.js validate` → check format specifiers
+4. `node rosetta.js sync` → update hashes after edits
+5. `node rosetta.js status` → verify translated
+6. `node rosetta.js validate` → check format specifiers
 
-**Rules:** DO NOT create temp files/scripts. Edit XML directly. Only `translation_sync.js`, `build.js`, `generateIcons.js`, `deploy-gcp.js` belong in `tools/`.
+**Rules:** `rosetta.js` lives in `translations/`. Only `build.js`, `generateIcons.js`, `deploy-gcp.js` belong in `tools/`.
 
-**Current Status:** 25 languages at 100% ✅
+**Subagent Rule (JSON Protocol preferred):** For bulk translation, use the JSON protocol: `rosetta.js translate LANG` exports a compact JSON file (~1,500 tokens per batch vs ~75,000 for raw XML). Dispatch Haiku subagents to translate the JSON, then `rosetta.js import` handles XML surgery with format specifier validation. Fallback: Haiku subagents editing XML directly for languages where JSON export shows nothing to translate.
+
+**Current Status:** See `node translations/rosetta.js status` for live counts
 
 ---
 
@@ -339,129 +291,374 @@ FS25_UsedPlus/
 
 ### Custom GUI Icons (Images from Mod ZIP)
 
-**THE PROBLEM:** FS25 cannot load images specified in XML from within a mod ZIP file. XML attributes like `imageFilename="gui/icons/myicon.png"` or `filename="$moddir$gui/icons/myicon.png"` will fail or show a corrupted texture atlas.
+**THE PROBLEM:** FS25 cannot load images from XML attributes within a mod ZIP. `imageFilename` in XML fails or shows corrupted atlas.
 
-**THE SOLUTION:** Set images dynamically via Lua using `setImageFilename()`:
+**THE SOLUTION:** Set images dynamically via Lua `setImageFilename()` in `onCreate()`:
+- XML: Profile extends `baseReference`, has `imageSliceId value="noSlice"`, Bitmap has `id` but NO `filename`
+- Lua: `self.myIconElement:setImageFilename(MyMod.MOD_DIR .. "gui/icons/my_icon.png")`
+- Generate icons: `cd tools && node generateIcons.js` (256x256 PNG, renders crisp at 40-48px)
 
-```xml
-<!-- In dialog XML: Create Bitmap with id, NO filename attribute -->
-<Profile name="myIconProfile" extends="baseReference" with="anchorTopCenter">
-    <size value="40px 40px"/>
-    <imageSliceId value="noSlice"/>
-</Profile>
-<Bitmap profile="myIconProfile" id="myIconElement" position="0px -20px"/>
-```
-
-```lua
--- In dialog Lua onCreate(): Set image path dynamically
-function MyDialog:onCreate()
-    MyDialog:superClass().onCreate(self)
-
-    if self.myIconElement ~= nil then
-        local iconPath = MyMod.MOD_DIR .. "gui/icons/my_icon.png"
-        self.myIconElement:setImageFilename(iconPath)
-    end
-end
-```
-
-**GENERATING ICONS:** Use `tools/generateIcons.js` (requires `npm install sharp`):
-```bash
-cd tools && node generateIcons.js
-```
-- Generates 256x256 PNG icons with SVG-defined vector graphics
-- Icons stored in `gui/icons/` folder
-- Build script includes `gui/icons/*.png` in ZIP (other PNGs excluded)
-
-**KEY POINTS:**
-- Profile MUST have `imageSliceId value="noSlice"` to prevent atlas slicing
-- Profile MUST extend `baseReference` for proper image rendering
-- Image path in Lua uses `MOD_DIR` (full path that works inside ZIP)
-- 256x256 source size recommended for crisp rendering at 40-48px display size
-
-**Reference:** `gui/FieldServiceKitDialog.xml` + `src/gui/FieldServiceKitDialog.lua` (v2.8.1)
+**Reference:** `gui/FieldServiceKitDialog.xml` + `src/gui/FieldServiceKitDialog.lua`
 
 ### On-Foot Input System (Hand Tools / Ground Objects)
 
-**THE PROBLEM:** When creating custom keybinds for on-foot interactions (hand tools, placeables, etc.):
-- Using ONLY `inputBinding` in modDesc.xml → keybind shows but no way to detect presses
-- Using ONLY `registerActionEvent()` → keybind doesn't show at all
-- Using BOTH together INCORRECTLY → **DUPLICATE keybinds** (`[O] [O]`) and callback never fires
+**THE PROBLEM:** Custom keybinds for on-foot interactions require BOTH `inputBinding` in modDesc.xml AND `registerActionEvent()` in Lua, wrapped correctly — otherwise you get duplicates or no response.
 
-**THE SOLUTION:** RVB Pattern (Real Vehicle Breakdowns) - uses `beginActionEventsModification()` wrapper
-
-```xml
-<!-- In modDesc.xml: Define action AND inputBinding -->
-<actions>
-    <action name="MY_CUSTOM_ACTION"/>
-</actions>
-<inputBinding>
-    <actionBinding action="MY_CUSTOM_ACTION">
-        <binding device="KB_MOUSE_DEFAULT" input="KEY_o"/>
-    </actionBinding>
-</inputBinding>
-```
-
-```lua
--- Hook into PlayerInputComponent.registerActionEvents (NOT registerGlobalPlayerActionEvents!)
-MyMod.actionEventId = nil
-
-function MyMod.hookPlayerInputComponent()
-    local originalFunc = PlayerInputComponent.registerActionEvents
-    PlayerInputComponent.registerActionEvents = function(inputComponent, ...)
-        originalFunc(inputComponent, ...)
-
-        if inputComponent.player ~= nil and inputComponent.player.isOwner then
-            -- CRITICAL: Wrap in modification context
-            g_inputBinding:beginActionEventsModification(PlayerInputComponent.INPUT_CONTEXT_NAME)
-
-            local success, eventId = g_inputBinding:registerActionEvent(
-                InputAction.MY_CUSTOM_ACTION,
-                MyMod,                    -- Target object
-                MyMod.actionCallback,     -- Callback function
-                false,                    -- triggerUp
-                true,                     -- triggerDown
-                false,                    -- triggerAlways
-                false,                    -- startActive (MUST be false)
-                nil,                      -- callbackState
-                true                      -- disableConflictingBindings
-            )
-
-            g_inputBinding:endActionEventsModification()
-
-            if success then MyMod.actionEventId = eventId end
-        end
-    end
-end
-
--- In onUpdate: Control visibility with setActionEventActive/TextVisibility/Text
-function MyMod:onUpdate(dt)
-    if MyMod.actionEventId ~= nil then
-        local shouldShow = playerNearby and isOnFoot
-        g_inputBinding:setActionEventTextPriority(MyMod.actionEventId, GS_PRIO_VERY_HIGH)
-        g_inputBinding:setActionEventTextVisibility(MyMod.actionEventId, shouldShow)
-        g_inputBinding:setActionEventActive(MyMod.actionEventId, shouldShow)
-        g_inputBinding:setActionEventText(MyMod.actionEventId, "My Tool: " .. vehicleName)  -- NO [O] prefix!
-    end
-end
-
--- Callback - fires when key is pressed
-function MyMod.actionCallback(self, actionName, inputValue, ...)
-    if inputValue > 0 then
-        -- Do your action
-    end
-end
-```
+**THE SOLUTION:** RVB Pattern — Hook `PlayerInputComponent.registerActionEvents` (NOT `registerGlobalPlayerActionEvents`), wrap in `beginActionEventsModification()` / `endActionEventsModification()`, use `startActive = false` and `disableConflictingBindings = true`.
 
 **KEY POINTS:**
-- Hook `PlayerInputComponent.registerActionEvents` (NOT `registerGlobalPlayerActionEvents`)
-- Wrap registration in `beginActionEventsModification()` / `endActionEventsModification()`
-- Use `startActive = false` and `disableConflictingBindings = true`
-- Game renders `[O]` automatically - your text should NOT include the key
-- Use `setActionEventText()` for dynamic text (vehicle name, etc.)
-- Use `setActionEventActive()` to show/hide based on proximity
+- Define `<action>` + `<inputBinding>` in modDesc.xml
+- Hook `PlayerInputComponent.registerActionEvents` to register via `g_inputBinding:registerActionEvent()`
+- Use `setActionEventActive()` / `setActionEventText()` in `onUpdate` for dynamic visibility
+- Game renders `[O]` automatically — your text should NOT include the key
 
-**Reference:** `vehicles/FieldServiceKit.lua` (OBD Scanner) - v2.0.7
-**Debug Log:** `docs/OBD_SCANNER_DEBUG.md` - full debug journey with failed patterns
+**Reference:** `vehicles/FieldServiceKit.lua` (OBD Scanner) — working implementation
+**Debug Log:** `docs/OBD_SCANNER_DEBUG.md` — full debug journey with failed patterns
+
+---
+
+## Operational Modes — Color Gate Protocol
+
+### Color Gate — Mandatory Triage Before Any Mode
+
+**RULE**: Before launching any mode, run the Color Gate to determine which protocol applies.
+
+**The Decision Fork — One Question:**
+
+> *"Has this capability ever worked in this mod, or does it not exist yet?"*
+
+| Answer | Color | Protocol | What It Means |
+|--------|-------|----------|---------------|
+| "It worked before, now it doesn't" | BLUE | Diagnostic Triage | Something broke — find and fix the regression |
+| "It never existed / it's additive" | GREEN | Feature Gap Resolution | Something's missing — design and build it |
+
+**Activation Trigger Routing:**
+
+| Trigger | Route | Gate Needed? |
+|---------|-------|-------------|
+| "blue mode" / "diagnose" / "something's broken" | BLUE | No — explicit request |
+| "green mode" / "feature gap" / "build this" | GREEN | No — explicit request |
+| "gold mode" / "polish" / "quality sweep" | GOLD | No — explicit request |
+| "violet mode" / "vision audit" / "align to spec" | VIOLET | No — explicit request |
+| "Lua error" / "dialog won't open" / "not working" | BLUE | No — clear regression |
+| "add support for..." / "I want the mod to..." | GREEN | No — clear additive |
+| "something's off" / "X isn't right" | GATE | **Yes** — ask before routing |
+
+---
+
+## BLUE MODE — Diagnostic Triage Protocol
+
+### What Is Blue Mode?
+
+Like a hospital "Code Blue," this protocol launches a full diagnostic sweep across the mod's loading, runtime, dialogs, events, GUI, and translations — all in parallel, all read-only.
+
+**RULE**: Launch **6 parallel investigation tracks** as subagents. Every track is **strictly read-only**. Synthesize results into a diagnostic report with verdict and actionable next steps.
+
+**Activation Triggers**: "blue mode" / "diagnose" / "run diagnostics" / "something's broken" / "Lua error"
+
+### The 6 Parallel Investigation Tracks
+
+Launch all 6 as subagents in parallel. Each reads source files and checks logs. **All read-only.**
+
+#### Track 1: MOD LOADING — Does the Mod Load?
+**Check:** `modDesc.xml` is valid XML · All `<sourceFile>` entries point to existing `.lua` files · All `<l10n>` entries point to existing translation files · All `<gui>` entries point to existing `.xml` files · No `Error` or `Warning` lines referencing `UsedPlus` in `log.txt` during load phase · Specializations registered correctly
+**Red Flags:** Missing source files · Invalid XML · Specialization registration errors · "Failed to open" messages in log
+
+#### Track 2: LUA RUNTIME — Any Runtime Errors?
+**Check:** `log.txt` for `Error` / `Warning` / `LUA call stack` referencing UsedPlus files · Nil reference errors · Attempt to index/call nil values · Stack traces pointing to `src/` files · `pcall` / error handling around dangerous operations
+**Red Flags:** Stack traces · Nil reference errors · "attempt to index" errors · Repeated warnings on timer/update cycles
+
+#### Track 3: XML INTEGRITY — Are Dialogs and Profiles Valid?
+**Check:** All `gui/*.xml` files are well-formed XML · Profile `extends` references exist in base game or mod profiles · Element `id` attributes are unique within each dialog · `imageSliceId`, `imageFilename` references are valid · Dialog structure follows `TakeLoanDialog.xml` pattern (GuiElement → dialogBg → content → buttonBox)
+**Red Flags:** Malformed XML · Dangling profile references · Duplicate IDs · Missing required dialog structure elements
+
+#### Track 4: NETWORK EVENTS — Is Multiplayer Working?
+**Check:** All events in `src/events/` have matching registration in source files · Events check `g_server ~= nil` for server-side logic · `writeStream` / `readStream` field counts match · `Event.sendToServer()` used (not direct execution on client) · Static `execute()` pattern followed for business logic
+**Red Flags:** Missing event registration · Client-side execution of server logic · Stream read/write mismatch · "must run on server" errors in log
+
+#### Track 5: GUI SYSTEM — Are Dialogs Rendering Correctly?
+**Check:** Dialog coordinate system correct (Y negative going down) · `anchorTopCenter` used for dialog content · Vehicle images use all 4 required attributes (`baseReference`, 180x180, `noSlice`, position) · Custom images loaded via `setImageFilename()` in Lua (not XML `filename`) · DialogLoader.show() pattern used · No `onClose`/`onOpen` callback name conflicts
+**Red Flags:** Upside-down layouts · Missing vehicle images · Blank/corrupted textures · Stack overflow from lifecycle callback conflicts
+
+#### Track 6: TRANSLATIONS — Are All Languages Complete?
+**Check:** Run `node translations/rosetta.js status` · All 25 languages at expected entry count · Run `node translations/rosetta.js validate` · Format specifiers match English source (`%s`, `%d`, `%.1f`, `%.2f`) · No placeholder entries remaining
+**Red Flags:** Languages below 100% · Mismatched format specifiers (crash risk) · Stale/untranslated entries · Missing translation files
+
+### Severity Guide
+
+| Severity | Meaning |
+|----------|---------|
+| CRITICAL | Mod won't load, game crashes, or save corruption (XML invalid, missing source files, stream mismatch) |
+| HIGH | Degraded — mod loads but key features broken (events failing, dialogs not opening, nil errors on use) |
+| WARNING | Unusual — monitor (incomplete translations, minor log warnings, edge case nil checks) |
+| OK | Healthy — all checks pass |
+
+### Diagnostic Report
+
+Output: Overall verdict (CRITICAL / DEGRADED / HEALTHY) · Top 3 findings by impact · Track summary table (track x status x one-liner) · Recommended actions (specific file:line references and fixes) · Plain-English summary.
+
+**Verdict:** CRITICAL = any critical finding · DEGRADED = any high, no critical · HEALTHY = all OK
+
+### Blue Mode Checklist
+
+1. All 6 tracks launched in parallel
+2. Mod loading checked first (Track 1)
+3. Red flags evaluated against severity guide
+4. Cross-track correlations identified (e.g., missing source file explains both load error AND nil runtime error)
+5. Report with verdict synthesized
+6. Actions reference specific files and line numbers
+7. Plain-English summary written
+
+---
+
+## GREEN MODE — Feature Gap Resolution Protocol
+
+### What Is Green Mode?
+
+Green Mode resolves **feature gaps** — capabilities that should exist but don't. Unlike Blue Mode (diagnostics), Green Mode designs and builds new functionality through a 6-stage process.
+
+**RULE**: Follow all 6 stages in order. Do NOT skip stages.
+
+**Activation Triggers**: Color Gate routes GREEN · "green mode" / "feature gap" · Additive functionality requests
+
+### The 6 Stages
+
+#### Stage 1: GAP ANALYSIS — Define What's Missing
+
+Articulate what exists vs what's needed. Output a 3-part gap statement:
+- **Current behavior**: [What happens now]
+- **Expected behavior**: [What should happen]
+- **Constraints**: [What must NOT change — especially multiplayer sync, existing save data, other features]
+
+#### Stage 2: CODEBASE EXPLORATION — Understand the System
+
+Read-only exploration. Identify affected files, read source, note patterns/conventions.
+
+**Key Files by Subsystem:**
+
+| Subsystem | Key Files |
+|-----------|-----------|
+| Data Models | `src/data/` — loan records, credit scores, marketplace data |
+| Utilities | `src/utils/` — UIHelper, formatting, calculations |
+| Network Events | `src/events/` — all multiplayer event classes |
+| Managers | `src/managers/` — singleton managers (Finance, Marketplace, etc.) |
+| GUI Dialogs | `src/gui/` + `gui/*.xml` — dialog Lua + XML pairs |
+| Extensions | `src/extensions/` — vehicle/shop specialization extensions |
+| Translations | `translations/` — 25 language XML files |
+| Config | `modDesc.xml` — source files, specializations, input bindings |
+
+Output: Relevant files · Current code path · Existing patterns to follow · Impact assessment
+
+#### Stage 3: DESIGN — Architecture & Edge Cases (Approval Required)
+
+Design before coding. Consider:
+- Architecture and data flow
+- Multiplayer implications (what needs events? server-authoritative?)
+- GUI layout (coordinate system, profile inheritance)
+- Edge cases (nil vehicles, missing data, mid-save state)
+- Impact on existing features
+
+Output: Architecture · Data flow · Edge cases · Multiplayer impact · Risk level
+
+**Checkpoint (REQUIRED)**: Samantha approves before any code is written. Checks: fits existing patterns? Multiplayer safe? Simplest solution? File size under 1500 lines?
+
+#### Stage 4: PLAN — Implementation Steps
+
+Turn design into numbered checklist via `EnterPlanMode`. Cover: dependency-ordered changes, file size checks, translation keys needed, verification steps.
+
+#### Stage 5: IMPLEMENT — Execute the Plan
+
+Follow approved plan. No improvising. If plan needs changes, pause and discuss.
+
+**Rules during implementation:**
+- Follow existing patterns (MessageDialog, DialogLoader, Event.sendToServer)
+- Respect 1500-line file limit — refactor if exceeded
+- Add translation keys to all 25 languages
+- Register new source files in `modDesc.xml`
+- No `goto`, no `os.time()`, no sliders (see "What DOESN'T Work")
+
+**Subagent dispatch (conditional):** If the plan has **4+ files across multiple subsystems**, dispatch independent work items as parallel subagents. For **small plans (3 files or fewer)**, implement directly.
+
+#### Stage 6: VERIFY — Confirm Gap Closed
+
+ALL must pass:
+1. `node tools/build.js` — builds without errors
+2. No new `Error` lines in `log.txt` after loading mod
+3. All existing features still work (no regressions)
+4. New feature works as specified in gap statement
+5. Multiplayer events have matching read/write streams
+6. `node translations/rosetta.js validate` — format specifiers intact
+7. Files under 1500-line limit
+
+### Green Mode Checklist
+
+1. Color Gate routed GREEN
+2. Gap statement defined and approved
+3. Codebase explored, patterns documented
+4. Design explicitly approved by Samantha
+5. Plan formalized via EnterPlanMode
+6. Implementation follows plan — subagent waves if 4+ files, direct if 3 or fewer
+7. All verification criteria pass
+
+---
+
+## GOLD MODE — Polish Protocol
+
+### What Is Gold Mode?
+
+Gold Mode is a **proactive codebase quality sweep** using **subagents** in orchestrated waves. Each pass: analyze wave (read-only subagents per zone) → checkpoint → fix wave → verify. Unlike Blue (reactive) or Green (additive), Gold is preventive maintenance.
+
+**Activation Triggers**: "gold mode" / "polish" / "quality sweep" / "code polish" / "clean up"
+
+Gold runs AFTER Blue or Green mode, never DURING. Always explicit — not routed through the Color Gate.
+
+### Zone Partitioning
+
+Files in the same subsystem stay together. No two subagents write to the same file.
+
+| Zone | Covers |
+|------|--------|
+| DATA | `src/data/` — data models and records |
+| EVENTS | `src/events/` — network event classes |
+| MANAGERS | `src/managers/` — singleton managers |
+| GUI | `src/gui/` + `gui/*.xml` — dialog Lua and XML pairs |
+| EXTENSIONS | `src/extensions/` — vehicle/shop extensions |
+| UTILS | `src/utils/` — helpers, formatters, calculations |
+| TRANSLATIONS | `translations/` — 25 language XML files |
+| CONFIG | `modDesc.xml`, `tools/` — build/deploy scripts, mod descriptor |
+
+### The 8 Issue Categories
+
+| # | Category | Sev | Detection Pattern |
+|---|----------|-----|-------------------|
+| 1 | DEAD-CODE | LOW | Unused functions, unreachable code, commented-out blocks |
+| 2 | STUB | MED | Hardcoded defaults, placeholder logic, `-- TODO` markers |
+| 3 | UNWIRED | HIGH | Implemented but never called (event exists but isn't registered, dialog built but never shown) |
+| 4 | ERROR-HANDLING | MED | Missing nil checks before indexing, unguarded vehicle/mission references |
+| 5 | MULTIPLAYER-GAP | HIGH | Missing server checks, client-side state mutation, stream read/write mismatch |
+| 6 | CONSISTENCY | LOW | Mixed naming conventions, inconsistent logging format (`[UsedPlus]` prefix), style drift |
+| 7 | FILE-SIZE | HIGH | Files exceeding 1500-line limit (see Code Quality Rules) |
+| 8 | TRANSLATION-DRIFT | MED | Missing keys across languages, stale entries, format specifier mismatches |
+
+### The Convergent Loop (Subagent Waves)
+
+Each pass has two subagent waves orchestrated by the main agent:
+
+1. **Analyze wave**: Launch subagents in parallel (one per zone, read-only). Each scans zone files against the 8 categories, returns findings.
+2. **Fix wave**: Launch subagents in parallel (one per zone). Each applies approved fixes. Zone partitioning prevents file conflicts.
+3. **Verify**: `node tools/build.js` succeeds · No new errors in `log.txt` · `node translations/rosetta.js validate` passes.
+4. **Convergence**: Findings decreased → next pass. Stalled or pass 4 → HALT.
+
+**Rules:** Monotonic decrease required · Max 4 passes · 0 findings = success · Identical findings on consecutive passes → HALT
+
+### Verdict Scale
+
+| Verdict | Meaning |
+|---------|---------|
+| PRISTINE | Clean pass 1 — zero issues |
+| POLISHED | Clean pass 2-3 — found and resolved |
+| ACCEPTABLE | Pass 4 or halted with 5 or fewer LOW unresolved |
+| NEEDS ATTENTION | Unresolved HIGH findings or did not converge |
+
+### Gold Mode Checklist
+
+1. Subagent count determined (scale with file count per zone)
+2. Zones assigned by subsystem — no file overlap
+3. Each pass: analyze → review → fix → verify
+4. Convergence tracked (monotonic decrease)
+5. Max 4 passes enforced
+6. Final report with verdict
+
+---
+
+## VIOLET MODE — Spec Compliance & Construction Protocol
+
+### What Is Violet Mode?
+
+Violet Mode is a **spec-driven audit + construction protocol** that compares the mod's design documents against the actual codebase, grades every section, and builds what's missing. Unlike Blue (reactive), Green (single gap), or Gold (polish), Violet treats the spec documents as the source of truth and closes the gap between spec and reality.
+
+**RULE**: Violet Mode is **explicit-only** — never auto-triggered by the Color Gate. Uses **subagents** in two phases: audit subagents (read-only), then build subagents in dependency-ordered waves. Max 3 passes.
+
+**Activation Triggers**: "violet mode" / "vision audit" / "spec compliance" / "align to spec" / "build from spec"
+
+### Spec Documents (Source of Truth)
+
+| Document | Purpose | What It Defines |
+|----------|---------|-----------------|
+| `DESIGN.md` | Architecture & technical design | System architecture, data models, multiplayer patterns, GUI framework |
+| `CHANGELOG.md` | Version history & feature record | What was built, when, and why — the historical record |
+| `FEATURES.md` | Feature inventory & status | Complete feature list with current implementation status |
+| `README.md` | User-facing documentation | What the mod does, how to install, how to use — the public contract |
+
+### Section Classification
+
+Audit the codebase against these categories derived from the spec documents:
+
+| # | Category | Source Doc | Class | Zone |
+|---|----------|-----------|-------|------|
+| 1 | Core Finance System | DESIGN + FEATURES | AUDIT | MANAGERS + DATA |
+| 2 | Credit Score System | DESIGN + FEATURES | AUDIT | MANAGERS + DATA |
+| 3 | Used Vehicle Marketplace | DESIGN + FEATURES | AUDIT | MANAGERS + EVENTS + GUI |
+| 4 | Repair & Repaint System | DESIGN + FEATURES | AUDIT | EXTENSIONS + GUI |
+| 5 | Lease System | DESIGN + FEATURES | AUDIT | MANAGERS + EVENTS |
+| 6 | GUI Dialogs | DESIGN + README | AUDIT | GUI |
+| 7 | Multiplayer Support | DESIGN | AUDIT | EVENTS |
+| 8 | Translation Coverage | README + FEATURES | AUDIT | TRANSLATIONS |
+| 9 | User Documentation | README | AUDIT | — (docs only) |
+| 10 | Version & Release | CHANGELOG | INFO | — (historical record) |
+
+**AUDIT** = grade against spec. **INFO** = context/reference only.
+
+### Audit Grading Rubric
+
+**4 Dimensions:**
+- **Coverage** (0-100%): How many spec requirements have corresponding code?
+- **Depth** (STUB / SHALLOW / ADEQUATE / DEEP): How complete is the implementation?
+- **Fidelity** (LOW / MED / HIGH): How closely does code match spec intent?
+- **Quality** (LOW / MED / HIGH): Error handling, multiplayer safety, edge cases?
+
+**Overall Grades:**
+- **COMPLETE** (3pts): Coverage >= 90%, Depth >= ADEQUATE, HIGH fidelity
+- **PARTIAL** (2pts): Coverage 40-89% or SHALLOW depth
+- **SKELETAL** (1pt): Coverage < 40% or STUB depth
+- **MISSING** (0pts): Coverage < 10%
+- **N/A**: Excluded from scoring
+
+**Max total:** 9 auditable categories x 3 = **27 points**
+
+### The Convergent Audit-Build Loop
+
+**Phase 1 — AUDIT** (read-only subagents): Launch subagents for each auditable category. Each reads the relevant spec document sections + source files and returns a scorecard. Main agent synthesizes into audit report.
+
+**Phase 2 — BUILD** (dependency-wave subagents): Build in order:
+1. **DATA + MANAGERS** — core data models and manager singletons must exist first
+2. **EVENTS** — network events depend on data models
+3. **GUI** — dialogs depend on managers and events
+4. **EXTENSIONS** — vehicle/shop extensions depend on all of the above
+5. **TRANSLATIONS** — translation keys depend on all UI text being finalized
+
+After all waves: verify (`node tools/build.js`, check log.txt, `node translations/rosetta.js validate`), re-audit changed categories.
+
+**Convergence:** Max 3 passes. Score must improve each pass, else HALT. Build priority: MISSING → SKELETAL → PARTIAL.
+
+### Verdict Scale
+
+| Verdict | Criteria | Meaning |
+|---------|----------|---------|
+| ALIGNED | Score = 27/27 (all COMPLETE) | Codebase fully implements all spec documents |
+| CONVERGING | Score >= 21 AND improving each pass | On track — most categories COMPLETE or PARTIAL |
+| DRIFTING | Score 12-20 OR any MISSING categories remain | Significant gaps between spec and code |
+| MISALIGNED | Score < 12 OR score stalled/regressed | Major disconnect between spec and codebase |
+
+### Violet Mode Checklist
+
+1. User explicitly requested Violet Mode
+2. All 4 spec documents read and section classification reviewed
+3. Audit subagents launched (read-only) + scorecards synthesized
+4. Build scope approved by Samantha before any code is written (REQUIRED gate)
+5. Build subagents dispatched in dependency-ordered waves + verification passed
+6. Convergence tracked (score must improve each pass, max 3)
+7. Final report with verdict
 
 ---
 
@@ -555,177 +752,14 @@ gh project item-edit \
 
 ---
 
-## GCP Dedicated Server (FS25 Testing)
+## GCP Dedicated Server & Dev Iteration Workflow
 
-### Infrastructure Summary
+**Full documentation:** See [`docs/GCP-SERVER.md`](docs/GCP-SERVER.md) for infrastructure details, access points, firewall rules, GIANTS license, server architecture, management commands, and troubleshooting.
 
-| Resource | Value |
-|----------|-------|
-| **GCP Project** | `fs25-dedicated` |
-| **Billing Account** | `017B40-04F445-C6229C` |
-| **VM** | `fs25-server` (e2-medium, 2 vCPU, 4GB RAM) |
-| **Zone** | `us-east1-b` |
-| **OS** | Debian 12 (bookworm) |
-| **Disk** | 150GB standard persistent |
-| **Static IP** | `35.229.101.149` |
-| **Docker Image** | `toetje585/arch-fs25server:latest` (Wine-based FS25 container) |
-| **VM Username** | `shouden` |
-| **Monthly Cost** | ~$35 |
-| **FS25 Version** | 1.16.0.3 (GIANTS license, NOT Steam) |
-| **Status** | Fully operational (as of 2026-02-22) |
-
-### Access Points
-
-| Service | URL / Command |
-|---------|---------------|
-| **Game Server** | `35.229.101.149:10823` (connect with FS25 game client) |
-| **SSH (direct)** | `ssh -i ~/.ssh/google_compute_engine shouden@35.229.101.149` |
-| **SSH (gcloud)** | `gcloud compute ssh fs25-server --zone=us-east1-b --project=fs25-dedicated` |
-| **VNC** | `http://35.229.101.149:6080/vnc.html` (password: `UsedPlusDev2026`) — for manual setup/debugging only |
-
-### Firewall Rules
-
-| Rule | Ports | Source |
-|------|-------|--------|
-| `fs25-game-port` | TCP/UDP 10823 | `0.0.0.0/0` (public) |
-| `fs25-web-admin` | TCP 7999, 8443 | Your IP only |
-| `fs25-vnc-setup` | TCP 5900, 6080, 7999 | Your IP only |
-| `fs25-iap-ssh` | TCP 22 | `35.235.240.0/20` (Google IAP) |
-| `fs25-ssh-whitelist` | TCP 22 | Your IP only |
-
-Only game port (10823) is public. If your IP changes:
-```bash
-for RULE in fs25-ssh-whitelist fs25-vnc-setup fs25-web-admin; do
-  "C:/Users/mrath/AppData/Local/Google/Cloud SDK/google-cloud-sdk/bin/gcloud.cmd" compute firewall-rules update $RULE --source-ranges=NEW_IP/32 --project=fs25-dedicated
-done
-```
-
-### GIANTS License (NOT Steam)
-
-The server uses a **GIANTS-purchased license** (not Steam). Steam's DRM prevents dedicated server use.
-
-- **Key format:** `DSR23-XXXXX-XXXXX-XXXXX` (purchased from `eshop.giants-software.com`)
-- **License files:** `config/FarmingSimulator2025/AHC_63805.dat` + `AHT_63805.dat`
-- **Activation:** Run `FarmingSimulator2025.exe` via VNC → GIANTS launcher prompts for key
-- **Product ID:** B7094197 (base game)
-- **Steam App ID:** 2300320 (for reference only — NOT usable for dedicated server without Steam client)
-
-**If re-activation is needed:** Open VNC, run the GIANTS launcher, enter the key.
-
-### Server Architecture
-
-```
-~/fs25-server/                           (on GCP VM)
-├── docker-compose.yml                   (AUTOSTART_SERVER=true)
-├── config/ → /opt/fs25/config           (server config, savegames, mods, logs)
-│   └── FarmingSimulator2025/
-│       ├── mods/FS25_UsedPlus.zip       (deployed mod)
-│       ├── AHC_63805.dat, AHT_63805.dat (GIANTS license)
-│       └── log_YYYY-MM-DD_HH-MM-SS.txt (game logs — timestamped, NOT log.txt)
-├── game/ → /opt/fs25/game               (FS25 game files, ~55GB)
-│   └── Farming Simulator 2025/
-│       ├── FarmingSimulator2025.exe      (GIANTS launcher, 9.6MB)
-│       ├── x64/FarmingSimulator2025Game.exe (game engine, 19MB)
-│       └── dedicatedServer.exe          (web admin → launches game engine)
-├── dlc/ → /opt/fs25/dlc
-└── installer/ → /opt/fs25/installer
-```
-
-**How the container works:** Creates fresh Wine prefix on each start → symlinks game/config directories → runs `dedicatedServer.exe` via Wine → web admin on port 7999 → auto-starts game engine with `-server` flag.
-
-### gcloud CLI Quoting (CRITICAL)
-
-The gcloud path has spaces: `"C:/Users/mrath/AppData/Local/Google/Cloud SDK/google-cloud-sdk/bin/gcloud.cmd"`. Double-quoted flag values conflict with the outer path quotes.
-
-**Solution:** Use direct SSH for commands with spaces:
-```bash
-ssh -i ~/.ssh/google_compute_engine shouden@35.229.101.149 "any command with spaces"
-```
-
-For gcloud commands, use single-quoted or `=`-joined flag values (no spaces).
-
-### Server Management
-
-```bash
-# Docker management (via SSH)
-ssh -i ~/.ssh/google_compute_engine shouden@35.229.101.149 "cd ~/fs25-server && docker compose restart"
-ssh -i ~/.ssh/google_compute_engine shouden@35.229.101.149 "cd ~/fs25-server && docker compose down"
-ssh -i ~/.ssh/google_compute_engine shouden@35.229.101.149 "cd ~/fs25-server && docker compose up -d"
-ssh -i ~/.ssh/google_compute_engine shouden@35.229.101.149 "docker logs arch-fs25server --tail=50"
-```
-
-### Uploading Mods
-
-Mods go in `config/FarmingSimulator2025/mods/` (NOT top-level `mods/`).
-```bash
-scp -i ~/.ssh/google_compute_engine "C:/path/to/mod.zip" shouden@35.229.101.149:~/fs25-server/config/FarmingSimulator2025/mods/
-```
-
-### Shutting Down (Save Money)
-
-```bash
-# Stop VM (disk still charges ~$6/mo for 150GB)
-"C:/Users/mrath/AppData/Local/Google/Cloud SDK/google-cloud-sdk/bin/gcloud.cmd" compute instances stop fs25-server --zone=us-east1-b --project=fs25-dedicated
-
-# Start VM back up
-"C:/Users/mrath/AppData/Local/Google/Cloud SDK/google-cloud-sdk/bin/gcloud.cmd" compute instances start fs25-server --zone=us-east1-b --project=fs25-dedicated
-```
-
-### Local Reference Server
-
-A working FS25 dedicated server also exists on the local network at `interstitch.shouden.us` (192.168.88.150), RHEL/CentOS 9, same Docker container. SSH: `ssh mrathbone@192.168.88.150`. Game files were originally rsync'd from here to GCP.
-
----
-
-## Dev Iteration Workflow (GCP Server)
-
-### One-Command Build + Deploy
-
-```bash
-# Build mod, deploy locally, upload to GCP, restart server — all in one:
-node tools/build.js --gcp
-
-# Combine with version bump:
-node tools/build.js --patch --gcp
-```
-
-### Individual Deploy Commands
-
-```bash
-# Upload latest mod zip + restart server (uses local mods folder build)
-node tools/deploy-gcp.js
-
-# Just restart the server (no re-upload — useful after config changes)
-node tools/deploy-gcp.js --restart
-
-# Tail the server log in real-time (Ctrl+C to stop)
-node tools/deploy-gcp.js --log
-
-# Check server status (process, container, disk, mod info)
-node tools/deploy-gcp.js --status
-
-# Clear the server log (fresh start for next test session)
-node tools/deploy-gcp.js --log-clear
-```
-
-### Typical Dev Session
-
-1. Edit code locally
-2. `node tools/build.js --gcp` (builds + deploys + restarts)
-3. Connect with game client to `35.229.101.149:10823`
-4. `node tools/deploy-gcp.js --log` in a second terminal (monitor logs)
-5. Test, find issues, `Ctrl+C` the log tail
-6. Edit code, repeat from step 2
-
-### Troubleshooting
-
-| Issue | Fix |
-|-------|-----|
-| "Cannot connect" | VM may be stopped — start it with gcloud |
-| "SSH key not found" | Run `gcloud compute ssh fs25-server ...` once to generate keys |
-| Server won't start | Check `--log` for Wine/crash errors |
-| Mod not loading | Check `--status` to verify mod zip was uploaded |
-| Stale log | Run `--log-clear` before testing for clean output |
+**Quick Reference:**
+- **Server IP:** `35.229.101.149:10823` | **SSH:** `ssh -i ~/.ssh/google_compute_engine shouden@35.229.101.149`
+- **Build + Deploy:** `node tools/build.js --gcp` | **Deploy only:** `node tools/deploy-gcp.js`
+- **Tail log:** `node tools/deploy-gcp.js --log` | **Status:** `node tools/deploy-gcp.js --status`
 
 ---
 

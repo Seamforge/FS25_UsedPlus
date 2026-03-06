@@ -6,10 +6,10 @@ This folder contains all localization files for the UsedPlus mod.
 
 ```bash
 cd translations/
-node translation_sync.js status    # See current state
-node translation_sync.js sync      # Sync all languages
-node translation_sync.js report    # Detailed breakdown
-node translation_sync.js help      # Full documentation
+node rosetta.js status    # See current state
+node rosetta.js sync      # Sync all languages
+node rosetta.js report    # Detailed breakdown
+node rosetta.js help      # Full documentation
 ```
 
 ## Files
@@ -56,66 +56,80 @@ When you change English text:
 2. Target hashes stay the same (they reflect what was translated FROM)
 3. Hash mismatch = translation is STALE (needs re-translation)
 
-## Translation Sync Tool (v3.2.1)
+## Rosetta.js — Translation Management Tool (v1.0.0)
 
-`translation_sync.js` manages translation synchronization and validation.
+`rosetta.js` manages translation synchronization, validation, and key lifecycle.
 
 ### Commands
 
 ```bash
-node translation_sync.js sync      # Add missing keys, update hashes
-node translation_sync.js status    # Quick table overview
-node translation_sync.js report    # Detailed lists by language
-node translation_sync.js check     # Exit code 1 if missing keys
-node translation_sync.js validate  # CI-friendly, minimal output
-node translation_sync.js help      # Full documentation
+node rosetta.js sync                    # Add missing keys, update hashes
+node rosetta.js status                  # Quick table overview
+node rosetta.js report [LANG]           # Detailed lists by language
+node rosetta.js check                   # Exit code 1 if missing keys
+node rosetta.js validate                # CI-friendly, minimal output
+node rosetta.js unused                  # List dead keys not in codebase
+node rosetta.js deposit KEY VALUE       # Add key atomically to ALL files
+node rosetta.js amend KEY NEW_VALUE     # Change English, mark translations stale
+node rosetta.js rename OLD_KEY NEW_KEY  # Rename across all files
+node rosetta.js remove KEY [KEY...]     # Delete from all files
+node rosetta.js translate LANG [--stale]  # Export JSON for AI translation
+node rosetta.js import FILE.json        # Import translations with validation
+node rosetta.js doctor [--fix]          # Health check + auto-fix
+node rosetta.js help                    # Full documentation
 ```
 
 ### What It Detects
 
 | Symbol | Meaning | Action |
 |--------|---------|--------|
-| ✓ | Translated | Up to date, no action needed |
-| ~ | Stale | English changed, needs re-translation |
-| ? | Untranslated | Has `[EN]` prefix or matches English exactly |
-| - | Missing | Key not in target file (sync adds it) |
-| !! | Duplicate | Same key twice in file - remove one! |
-| x | Orphaned | Key in target but not English - safe to delete |
-| 💥 | Format Error | Wrong `%s`/`%d` specifiers - WILL CRASH GAME! |
-| ⚠ | Empty/Whitespace | Empty value or leading/trailing spaces |
+| Translated | Up to date | No action needed |
+| Stale | English changed | Needs re-translation |
+| Untranslated | Has `[EN]` prefix or matches English | Needs translation |
+| Missing | Key not in target file | Sync adds it |
+| Duplicate | Same key twice in file | Remove one! |
+| Orphaned | Key in target but not English | Safe to delete |
+| Format Error | Wrong `%s`/`%d` specifiers | WILL CRASH GAME! |
+| Empty/Whitespace | Empty value or leading/trailing spaces | Fix value |
 
 ### Example Output
 
 **status command:**
 ```
 Language            | Translated |  Stale  | Untranslated | Missing | Dups | Orphaned
-──────────────────────────────────────────────────────────────────────────────────────
-German              |       1630 |       4 |           51 |       0 |    0 |        0
-French              |       1615 |       4 |           66 |       0 |    0 |        0
-Spanish             |       1634 |       4 |           47 |       0 |    0 |        0
+-----------------------------------------------------------------------------------------------
+German              |       1954 |       0 |            0 |       0 |    0 |        0
+French              |       1954 |       0 |            0 |       0 |    0 |        0
 ```
 
 ## Workflow
 
-### Adding New Strings
+### Adding New Keys (Recommended)
+
+1. Run `node rosetta.js deposit usedplus_new_key "English text"`
+2. Key is added atomically to English (real value) + all 25 languages (`[EN]` placeholder)
+3. Use `node rosetta.js translate de` to export JSON for AI translation
+4. Import results: `node rosetta.js import de_translated.json`
+
+### Adding New Keys (Manual)
 
 1. Add the new key to `translation_en.xml`
-2. Run `node translation_sync.js sync`
+2. Run `node rosetta.js sync`
 3. Script automatically adds key to all languages with `[EN]` prefix
 4. Translators update values and remove prefix
 
 ### Updating English Text
 
-1. Modify the value in `translation_en.xml`
-2. Run `node translation_sync.js sync`
-3. Script shows which translations are now STALE
-4. Update translations, hashes auto-update on next sync
+1. Run `node rosetta.js amend usedplus_key "New English text"`
+2. English value + hash updated, all translations marked stale automatically
+3. Use `translate` command to export stale entries for re-translation
 
 ### Verifying Translations
 
 ```bash
-node translation_sync.js status    # Quick check
-node translation_sync.js report    # See exactly which keys need work
+node rosetta.js status    # Quick check
+node rosetta.js report    # See exactly which keys need work
+node rosetta.js doctor    # Comprehensive health check
 ```
 
 ## Translation Guidelines
@@ -126,12 +140,12 @@ Format specifiers MUST be preserved exactly - wrong specifiers crash the game:
 
 | Specifier | Type | Example |
 |-----------|------|---------|
-| `%s` | String | `"Hello %s"` → `"Hola %s"` |
-| `%d` | Integer | `"Count: %d"` → `"Anzahl: %d"` |
-| `%.1f` | Decimal (1 place) | `"%.1f hours"` → `"%.1f Stunden"` |
-| `%.2f` | Decimal (2 places) | `"$%.2f"` → `"%.2f €"` |
+| `%s` | String | `"Hello %s"` -> `"Hola %s"` |
+| `%d` | Integer | `"Count: %d"` -> `"Anzahl: %d"` |
+| `%.1f` | Decimal (1 place) | `"%.1f hours"` -> `"%.1f Stunden"` |
+| `%.2f` | Decimal (2 places) | `"$%.2f"` -> `"%.2f EUR"` |
 
-The sync tool validates these automatically and reports 💥 FORMAT ERRORS.
+The sync tool validates these automatically and reports FORMAT ERRORS.
 
 ### Context Matters
 
