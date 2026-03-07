@@ -465,14 +465,18 @@ function scanCodebaseForUsedKeys(modDir, allEnglishKeys) {
         }
     }
 
-    // Scan XML files
-    const xmlFiles = getFilesRecursive(guiDir, ['.xml']);
-    for (const xmlFile of xmlFiles) {
-        const content = fs.readFileSync(xmlFile, 'utf8');
-        const l10nPattern = /\$l10n_([a-zA-Z0-9_]+)/g;
-        let match;
-        while ((match = l10nPattern.exec(content)) !== null) {
-            usedKeys.add(match[1]);
+    // Scan XML files (gui dialogs, placeables, vehicles)
+    const placeablesDir = path.join(modDir, 'placeables');
+    const xmlDirs = [guiDir, placeablesDir, vehiclesDir];
+    for (const dir of xmlDirs) {
+        const xmlFiles = getFilesRecursive(dir, ['.xml']);
+        for (const xmlFile of xmlFiles) {
+            const content = fs.readFileSync(xmlFile, 'utf8');
+            const l10nPattern = /\$l10n_([a-zA-Z0-9_]+)/g;
+            let match;
+            while ((match = l10nPattern.exec(content)) !== null) {
+                usedKeys.add(match[1]);
+            }
         }
     }
 

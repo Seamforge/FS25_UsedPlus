@@ -19,24 +19,100 @@
 <l10n>
     <!--  Finance Dialog -->
     <elements>
-<e k="usedplus_finance_monthlyPayment" v="Pembayaran Bulanan" eh="c102e118" />
-<e k="usedplus_lease_monthlyPayment" v="Pembayaran Bulanan" eh="c102e118" />
-<e k="usedplus_search_title" v="Cari Peralatan Bekas" eh="7c093c6a" />
-<e k="usedplus_search_newPrice" v="Harga Baru:" eh="8def7435" />
-<e k="usedplus_search_tierDescription" v="Pilih cakupan pencarian Anda. Tingkat lebih tinggi lebih mahal dan lebih lama, tetapi memiliki tingkat keberhasilan dan kualitas lebih baik." eh="0e9cafdd" />
-<e k="usedplus_search_tierLocal" v="Pencarian Lokal" eh="e1ea5bc1" />
+        <e k="usedplus_finance_title" v="Pembiayaan Kendaraan" eh="6efef1bd" />
+        <e k="usedplus_finance_itemDetails" v="Detail Kendaraan" eh="fcb2575f" />
+        <e k="usedplus_finance_configuration" v="Konfigurasi Pembiayaan" eh="0519e514" />
+        <e k="usedplus_finance_term" v="Jangka Waktu Pinjaman" eh="5d1f9c9f" />
+        <e k="usedplus_finance_loanTerm" v="Jangka Waktu Pinjaman (Tahun)" eh="a33ae292" />
+        <e k="usedplus_finance_downPayment" v="Uang Muka" eh="46b7f6c5" />
+        <e k="usedplus_finance_cashBack" v="Uang Kembali" eh="bca1e43d" />
+        <e k="usedplus_finance_paymentPreview" v="Pratinjau Pembayaran" eh="a3f5396e" />
+        <e k="usedplus_finance_monthlyPayment" v="Pembayaran Bulanan" eh="c102e118" />
+        <e k="usedplus_finance_yearlyPayment" v="Pembayaran Tahunan" eh="b4080ee0" />
+        <e k="usedplus_finance_totalInterest" v="Total Bunga" eh="8c4f3836" />
+        <e k="usedplus_finance_totalCost" v="Total Biaya" eh="50e91dab" />
+        <e k="usedplus_finance_interestRate" v="Suku Bunga" eh="0b6e9e85" />
+        <e k="usedplus_finance_creditScore" v="Skor Kredit" eh="ae61b052" />
+        <e k="usedplus_finance_creditRating" v="Peringkat Kredit" eh="0c50a24a" />
+        <e k="usedplus_finance_important" v="Informasi Penting" eh="e89802a1" />
+        <e k="usedplus_finance_ownershipTransfers" v="Kepemilikan berpindah segera setelah persetujuan." eh="8dcaaa5b" />
+        <e k="usedplus_finance_sellAnytime" v="Anda dapat menjual barang yang dibiayai kapan saja. Sisa saldo harus dibayar dari hasil penjualan." eh="ce3d5807" />
+        <e k="usedplus_lease_title" v="Sewa Kendaraan" eh="beae83e4" />
+        <e k="usedplus_lease_vehicleDetails" v="Detail Kendaraan" eh="fcb2575f" />
+        <e k="usedplus_lease_configuration" v="Konfigurasi Sewa" eh="07e07e72" />
+        <e k="usedplus_lease_term" v="Jangka Waktu Sewa (Tahun)" eh="13fd4421" />
+        <e k="usedplus_lease_downPayment" v="Uang Muka" eh="46b7f6c5" />
+        <e k="usedplus_lease_residualValue" v="Nilai Sisa (Pembayaran Balon)" eh="458fd3b9" />
+        <e k="usedplus_lease_paymentPreview" v="Pratinjau Pembayaran" eh="a3f5396e" />
+        <e k="usedplus_lease_monthlyPayment" v="Pembayaran Bulanan" eh="c102e118" />
+        <e k="usedplus_lease_yearlyPayment" v="Pembayaran Tahunan" eh="b4080ee0" />
+        <e k="usedplus_lease_totalCost" v="Total Biaya Sewa" eh="993f980c" />
+        <e k="usedplus_lease_interestRate" v="Suku Bunga" eh="0b6e9e85" />
+        <e k="usedplus_lease_creditScore" v="Skor Kredit" eh="ae61b052" />
+        <e k="usedplus_lease_important" v="Informasi Penting Sewa" eh="767b599f" />
+        <e k="usedplus_lease_endOfTerm" v="Akhir Masa Sewa" eh="35022911" />
+        <e k="usedplus_lease_buyoutPrice" v="Harga Tebus" eh="8d6be5af" />
+        <e k="usedplus_lease_totalInterest" v="Total Bunga" eh="8c4f3836" />
+        <e k="usedplus_search_title" v="Cari Peralatan Bekas" eh="7c093c6a" />
+        <e k="usedplus_search_itemDetails" v="Detail Barang" eh="6df16946" />
+        <e k="usedplus_search_searching" v="Mencari" eh="7706fe6a" />
+        <e k="usedplus_search_newPrice" v="Harga Baru:" eh="8def7435" />
+        <e k="usedplus_search_selectTier" v="Pilih Tingkat Pencarian" eh="fe21c40b" />
+        <e k="usedplus_search_tierDescription" v="Pilih cakupan pencarian Anda. Tingkat lebih tinggi lebih mahal dan lebih lama, tetapi memiliki tingkat keberhasilan dan kualitas lebih baik." eh="0e9cafdd" />
+        <e k="usedplus_search_tierSelection" v="Pemilihan Tingkat Pencarian" eh="a2527868" />
+        <e k="usedplus_search_tierLocal" v="Pencarian Lokal" eh="e1ea5bc1" />
         <e k="usedplus_search_tierRegional" v="Pencarian Regional" eh="722cc490" />
         <e k="usedplus_search_tierNational" v="Pencarian Nasional" eh="c967061f" />
         <e k="usedplus_search_cost" v="Biaya Pencarian" eh="510c1fa6" />
         <e k="usedplus_search_duration" v="Durasi" eh="e02d2ae0" />
         <e k="usedplus_search_success" v="Tingkat Keberhasilan" eh="aac60ede" />
-<e k="usedplus_search_match" v="Peluang Cocok Kualitas" eh="da45c669" />
-<e k="usedplus_search_qualityDescription" v="Kualitas rendah = harga lebih murah tapi perlu lebih banyak perbaikan" eh="f991384c" />
-<e k="usedplus_notify_vehicleFound" v="Agen Anda menemukan %s!" eh="bf9782f6" />
+        <e k="usedplus_search_successChance" v="Peluang Keberhasilan" eh="7ad5b765" />
+        <e k="usedplus_search_match" v="Peluang Cocok Kualitas" eh="da45c669" />
+        <e k="usedplus_search_description" v="Deskripsi" eh="b5a7adde" />
+        <e k="usedplus_search_descLocal" v="Cari dealer terdekat. Respons 1 bulan dijamin, biaya 2%, keberhasilan 40%." eh="1aef5e06" />
+        <e k="usedplus_search_descRegional" v="Cari jaringan regional. 1-3 bulan, biaya 6%, keberhasilan 70%." eh="d0d8016e" />
+        <e k="usedplus_search_descNational" v="Cari seluruh negeri. 2-6 bulan, biaya 12%, keberhasilan 85%." eh="71992615" />
+        <e k="usedplus_search_qualitySelection" v="Kualitas yang Diinginkan" eh="f70a51e0" />
+        <e k="usedplus_search_qualityDescription" v="Kualitas rendah = harga lebih murah tapi perlu lebih banyak perbaikan" eh="f991384c" />
+        <e k="usedplus_search_confirmTitle" v="Pencarian Dimulai" eh="e42ba949" />
+        <e k="usedplus_search_retainer" v="Uang Jasa Agen" eh="22908ab1" />
+        <e k="usedplus_search_commission" v="Biaya Penemuan" eh="1130f6f3" />
+        <e k="usedplus_search_commissionInfo" v="%d%% ditambahkan ke harga kendaraan" eh="e6462a3c" />
+        <e k="usedplus_search_monthProgress" v="Bulan %d dari %d" eh="b2af1b34" />
+        <e k="usedplus_search_vehiclesFound" v="%d kendaraan ditemukan" eh="69e744df" />
+        <e k="usedplus_search_monthlyChance" v="%d%% per bulan" eh="c5458c12" />
+        <e k="usedplus_search_foundVehicles" v="KENDARAAN DITEMUKAN" eh="4a8990d1" />
+        <e k="usedplus_search_noVehiclesYet" v="Belum ada kendaraan ditemukan" eh="812b14d0" />
+        <e k="usedplus_search_inspectVehicle" v="Inspeksi" eh="35a9dbe6" />
+        <e k="usedplus_search_buyVehicle" v="Beli" eh="831a28f1" />
+        <e k="usedplus_search_declineVehicle" v="Tolak" eh="0d362728" />
+        <e k="usedplus_notify_vehicleFound" v="Agen Anda menemukan %s!" eh="bf9782f6" />
         <e k="usedplus_notify_searchComplete" v="Pencarian selesai: %d kendaraan ditemukan" eh="dbd32f05" />
-<e k="usedplus_inGameMenuTitle" v="Used Plus - Keuangan &amp; Pencarian" eh="093c7b9e" />
-<e k="usedplus_vanillaLoan" v="Kredit Bank" eh="ae4b0f92" />
-<e k="usedplus_detail_dealInfo" v="Informasi Transaksi" eh="442669bc" />
+        <e k="usedplus_confirmation_title" v="Konfirmasi" eh="f4d1ea47" />
+        <e k="usedplus_inGameMenuTitle" v="Used Plus - Keuangan &amp; Pencarian" eh="093c7b9e" />
+        <e k="usedplus_activeFinanceDeals" v="Pembiayaan Aktif:" eh="5cf7fac5" />
+        <e k="usedplus_activeSearches" v="Pencarian Aktif:" eh="274e131d" />
+        <e k="usedplus_creditScore" v="Skor Kredit:" eh="0199e1a3" />
+        <e k="usedplus_manager_title" v="Manajer Keuangan" eh="76701fe5" />
+        <e k="usedplus_manager_totalFinanced" v="Total Dibiayai" eh="223e5677" />
+        <e k="usedplus_manager_monthlyObligations" v="Kewajiban Bulanan" eh="398fa99a" />
+        <e k="usedplus_manager_creditScore" v="Skor Kredit" eh="ae61b052" />
+        <e k="usedplus_manager_assetValue" v="Nilai Aset" eh="5482d5a2" />
+        <e k="usedplus_manager_debtRatio" v="Rasio Utang" eh="93581501" />
+        <e k="usedplus_manager_activeDeals" v="Transaksi Aktif" eh="5bf89e7b" />
+        <e k="usedplus_manager_type" v="Tipe" eh="a1fa2777" />
+        <e k="usedplus_manager_item" v="Barang" eh="7d74f3b9" />
+        <e k="usedplus_manager_balance" v="Saldo" eh="99a808d8" />
+        <e k="usedplus_manager_monthly" v="Pembayaran Bulanan" eh="c102e118" />
+        <e k="usedplus_manager_progress" v="Kemajuan" eh="46b5f8c5" />
+        <e k="usedplus_manager_actions" v="Tindakan" eh="06df3300" />
+        <e k="usedplus_manager_noDeals" v="Tidak ada pembiayaan atau sewa aktif." eh="880134fe" />
+        <e k="usedplus_manager_helpText" v="Biayai kendaraan dari toko (tombol F). Cari peralatan bekas (tombol V). Pembayaran dipotong otomatis setiap bulan." eh="ea889bec" />
+        <e k="usedplus_vanillaLoan" v="Kredit Bank" eh="ae4b0f92" />
+        <e k="usedplus_loanOpen" v="Terbuka" eh="c3bf447e" />
+        <e k="usedplus_loanNoTerm" v="Tanpa Jangka Waktu" eh="8dbfc606" />
+        <e k="usedplus_loanInterestOnly" v="Bunga" eh="920beb5d" />
+        <e k="usedplus_detail_dealInfo" v="Informasi Transaksi" eh="442669bc" />
         <e k="usedplus_detail_itemName" v="Barang" eh="7d74f3b9" />
         <e k="usedplus_detail_dealType" v="Tipe" eh="a1fa2777" />
         <e k="usedplus_detail_originalPrice" v="Harga Asli" eh="8bd19c0a" />
@@ -59,57 +135,210 @@
         <e k="usedplus_detail_toInterest" v="Ke Bunga" eh="d9e82220" />
         <e k="usedplus_detail_newBalance" v="Saldo Baru" eh="17d35991" />
         <e k="usedplus_detail_prepaymentPenalty" v="Penalti Pelunasan Awal" eh="057cca0e" />
-<e k="usedplus_button_acceptFinance" v="Terima Pembiayaan" eh="dac8a2e3" />
-<e k="usedplus_button_startSearch" v="Mulai Pencarian" eh="39d69ff6" />
+        <e k="usedplus_landFinance_title" v="Pembiayaan Lahan Pertanian" eh="4a5ab59c" />
+        <e k="usedplus_landFinance_fieldDetails" v="Detail Lahan" eh="cb124d38" />
+        <e k="usedplus_landFinance_configuration" v="Konfigurasi Pembiayaan" eh="0519e514" />
+        <e k="usedplus_landFinance_term" v="Jangka Waktu Pinjaman (Tahun)" eh="a33ae292" />
+        <e k="usedplus_landFinance_downPayment" v="Uang Muka" eh="46b7f6c5" />
+        <e k="usedplus_landFinance_paymentPreview" v="Pratinjau Pembayaran" eh="a3f5396e" />
+        <e k="usedplus_landFinance_monthlyPayment" v="Pembayaran Bulanan" eh="c102e118" />
+        <e k="usedplus_landFinance_yearlyPayment" v="Pembayaran Tahunan" eh="b4080ee0" />
+        <e k="usedplus_landFinance_totalInterest" v="Total Bunga" eh="8c4f3836" />
+        <e k="usedplus_landFinance_totalCost" v="Total Biaya" eh="50e91dab" />
+        <e k="usedplus_landFinance_interestRate" v="Suku Bunga" eh="0b6e9e85" />
+        <e k="usedplus_landFinance_lowerRates" v="Pembiayaan lahan biasanya menawarkan suku bunga lebih rendah." eh="6a9be1a3" />
+        <e k="usedplus_landFinance_creditScore" v="Skor Kredit" eh="ae61b052" />
+        <e k="usedplus_landFinance_important" v="Informasi Penting" eh="e89802a1" />
+        <e k="usedplus_landFinance_ownershipTransfers" v="Kepemilikan lahan berpindah segera. Anda dapat menggunakan lahan langsung." eh="6bd793be" />
+        <e k="usedplus_landFinance_seizureWarning" v="Peringatan: Gagal membayar cicilan bulanan dapat mengakibatkan penyitaan lahan." eh="9e692b4f" />
+        <e k="usedplus_button_acceptFinance" v="Terima Pembiayaan" eh="dac8a2e3" />
+        <e k="usedplus_button_acceptLease" v="Terima Sewa" eh="8230fec9" />
+        <e k="usedplus_button_startSearch" v="Mulai Pencarian" eh="39d69ff6" />
         <e k="usedplus_button_viewDetail" v="Lihat Detail" eh="5d5cd268" />
         <e k="usedplus_button_makePayment" v="Buat Pembayaran" eh="772005c5" />
         <e k="usedplus_button_endLeaseEarly" v="Akhiri Sewa Lebih Awal" eh="57913dd8" />
-<e k="usedplus_button_finance" v="Pembiayaan" eh="c482980d" />
-<e k="usedplus_button_searchUsed" v="Cari Bekas" eh="11533c61" />
+        <e k="usedplus_button_purchaseUsed" v="Beli Bekas" eh="b2e3f11c" />
+        <e k="usedplus_button_finance" v="Pembiayaan" eh="c482980d" />
+        <e k="usedplus_button_financeLand" v="Biayai Lahan" eh="638732e0" />
+        <e k="usedplus_button_leaseLand" v="Sewa Lahan" eh="ec34a2a6" />
+        <e k="usedplus_button_lease" v="Sewa" eh="47c96b08" />
+        <e k="usedplus_button_searchUsed" v="Cari Bekas" eh="11533c61" />
         <e k="usedplus_notification_dealComplete" v="%s telah lunas!" eh="5d829f21" />
-<e k="usedplus_notification_searchCancelled" v="Pencarian %s dibatalkan. Tanpa pengembalian." eh="e5f294f4" />
+        <e k="usedplus_notification_searchSuccess" v="%s bekas ditemukan!" eh="ef123353" />
+        <e k="usedplus_notification_searchFailed" v="Pencarian %s gagal. Tidak ada yang cocok." eh="fc5652a6" />
+        <e k="usedplus_searchFailed_title" v="Pencarian Selesai" eh="e92d4ab1" />
+        <e k="usedplus_searchFailed_message" v="Agen Anda tidak dapat menemukan %s yang sesuai kriteria. Biaya pencarian tidak dapat dikembalikan. Anda dapat memulai pencarian baru jika diinginkan." eh="f866d76d" />
+        <e k="usedplus_notification_searchStarted" v="Mencari %s. Perkiraan selesai: %d hari." eh="1b04e427" />
+        <e k="usedplus_notification_searchCancelled" v="Pencarian %s dibatalkan. Tanpa pengembalian." eh="e5f294f4" />
         <e k="usedplus_notification_vehicleFound" v="%s bekas (%s) ditemukan seharga %s!" eh="97804817" />
         <e k="usedplus_notification_dealPaidOff" v="%s telah lunas sepenuhnya!" eh="2d9db7b8" />
         <e k="usedplus_notification_paymentProcessed" v="Pembayaran %s diproses untuk %s" eh="81123b2d" />
         <e k="usedplus_notification_leaseTerminated" v="Sewa %s dihentikan. Penalti: %s" eh="b59ab283" />
         <e k="usedplus_notification_leaseTerminatedNoPenalty" v="Sewa %s dihentikan. Tanpa penalti." eh="07e1dcd5" />
-<e k="usedplus_notification_dealPaidFromSale" v="%s terjual. Saldo pembiayaan %s dibayar dari hasil penjualan." eh="8ef8395a" />
+        <e k="usedplus_notification_missedLeasePayment" v="GAGAL BAYAR SEWA: Tidak dapat membayar %s untuk %s" eh="1efc41eb" />
+        <e k="usedplus_notification_leaseDamagePenalty" v="Penalti kerusakan sewa untuk %s: %s" eh="618cc31d" />
+        <e k="usedplus_notification_leaseComplete" v="Sewa selesai! %s telah dikembalikan." eh="d78a78c7" />
+        <e k="usedplus_notification_dealPaidFromSale" v="%s terjual. Saldo pembiayaan %s dibayar dari hasil penjualan." eh="8ef8395a" />
         <e k="usedplus_error_insufficientFunds" v="Dana tidak cukup. Dibutuhkan: %s" eh="e212e92e" />
         <e k="usedplus_error_searchFailed" v="Gagal memulai pencarian. Silakan coba lagi." eh="1fdff9c2" />
         <e k="usedplus_error_insufficientFundsTermination" v="Dana tidak cukup untuk pengakhiran sewa. Dibutuhkan: %s" eh="b089241b" />
-<e k="usedplus_error_cannotSellLeasedVehicle" v="Tidak dapat menjual kendaraan sewa. Akhiri sewa terlebih dahulu atau tunggu sampai sewa berakhir." eh="056547d3" />
+        <e k="usedplus_error_invalidDeal" v="Transaksi tidak valid. Silakan hubungi dukungan." eh="5a9d61df" />
+        <e k="usedplus_error_cannotSellLeasedVehicle" v="Tidak dapat menjual kendaraan sewa. Akhiri sewa terlebih dahulu atau tunggu sampai sewa berakhir." eh="056547d3" />
         <e k="usedplus_error_insufficientSalePrice" v="Tidak dapat menjual. Sisa saldo (%s) melebihi harga jual (%s)." eh="bb69fad7" />
         <e k="usedplus_error_maxSaleListings" v="Maksimal %d kendaraan dapat didaftarkan untuk dijual sekaligus. Tunggu penjualan selesai atau batalkan daftar." eh="a5dd26b0" />
-<e k="usedplus_condition_critical" v="Kritis" eh="278d01e5" />
+        <e k="usedplus_credit_excellent" v="Sangat Baik" eh="fcc2d28a" />
+        <e k="usedplus_credit_good" v="Baik" eh="0c6ad70b" />
+        <e k="usedplus_credit_fair" v="Cukup" eh="f7f20cf0" />
+        <e k="usedplus_credit_poor" v="Buruk" eh="0e94d017" />
+        <e k="usedplus_condition_critical" v="Kritis" eh="278d01e5" />
         <e k="usedplus_condition_poor" v="Buruk" eh="0e94d017" />
-<e k="usedplus_condition_fair" v="Cukup" eh="f7f20cf0" />
+        <e k="usedplus_condition_any" v="Apapun" eh="ed36a1ef" />
+        <e k="usedplus_condition_fair" v="Cukup" eh="f7f20cf0" />
         <e k="usedplus_condition_good" v="Baik" eh="0c6ad70b" />
         <e k="usedplus_condition_excellent" v="Sangat Baik" eh="fcc2d28a" />
-<e k="usedplus_dealType_finance" v="Pembiayaan" eh="c482980d" />
+        <e k="usedplus_condition_poor_desc" v="Barang murah - mungkin tidak berfungsi atau butuh perbaikan besar" eh="01dfd975" />
+        <e k="usedplus_condition_any_desc" v="Termurah yang berfungsi - mungkin butuh perbaikan signifikan" eh="4f93d3f3" />
+        <e k="usedplus_dealType_finance" v="Pembiayaan" eh="c482980d" />
         <e k="usedplus_dealType_lease" v="Sewa" eh="47c96b08" />
-<e k="usedplus_action_openFinanceManager" v="Buka Manajer Keuangan" eh="806bb897" />
-<e k="input_USEDPLUS_OPEN_FINANCE_MANAGER" v="Buka Manajer Keuangan" eh="806bb897" />
+        <e k="usedplus_itemType_vehicle" v="Kendaraan" eh="d6af9c1e" />
+        <e k="usedplus_itemType_land" v="Lahan Pertanian" eh="d13a7835" />
+        <e k="usedplus_itemType_placeable" v="Bangunan" eh="a50f608e" />
+        <e k="usedplus_generation_recent" v="Baru" eh="dae52b80" />
+        <e k="usedplus_generation_midage" v="Setengah Baya" eh="414353d1" />
+        <e k="usedplus_generation_old" v="Tua" eh="c7268757" />
+        <e k="usedplus_help_creditScore" v="Skor kredit mempengaruhi suku bunga Anda. Tingkatkan dengan menjaga rasio utang terhadap aset rendah." eh="a3a769c7" />
+        <e k="usedplus_help_downPayment" v="Uang muka lebih tinggi mengurangi pembayaran bulanan dan dapat menurunkan suku bunga." eh="b8e7782b" />
+        <e k="usedplus_help_cashBack" v="Uang kembali dikurangi dari uang muka. Meningkatkan jumlah yang dibiayai." eh="0ff6b424" />
+        <e k="usedplus_help_prepayment" v="Anda dapat melunasi pinjaman lebih awal untuk menghemat bunga. Penalti pelunasan awal mungkin berlaku." eh="f8455d1a" />
+        <e k="usedplus_help_leaseDamage" v="Jaga kendaraan sewa dalam kondisi baik untuk menghindari penalti pengembalian." eh="f99c02f9" />
+        <e k="usedplus_menu_financeManager" v="Manajer Keuangan" eh="76701fe5" />
+        <e k="usedplus_action_openFinanceManager" v="Buka Manajer Keuangan" eh="806bb897" />
+        <e k="usedplus_action_searchUsed" v="Cari Peralatan Bekas" eh="77397317" />
+        <e k="input_USEDPLUS_OPEN_FINANCE_MANAGER" v="Buka Manajer Keuangan" eh="806bb897" />
         <e k="input_USEDPLUS_SEARCH_USED" v="Cari Peralatan Bekas" eh="77397317" />
         <e k="input_USEDPLUS_INSPECT_VEHICLE" v="Inspeksi Kendaraan" eh="c06f09f1" />
         <e k="input_USEDPLUS_ACTIVATE_OBD" v="Gunakan OBD Scanner" eh="9666e26b" />
         <e k="input_USEDPLUS_TIRES" v="Layanan Ban" eh="b0234f4e" />
         <e k="input_USEDPLUS_SERVICE_TRUCK" v="Kontrol Truk Servis" eh="fad0e0f1" />
         <e k="input_USEDPLUS_FAULT_TRACER" v="Pelacak Kesalahan" eh="d1b82197" />
-<e k="usedplus_detail_principalPaid_tooltip" v="Bagian pinjaman asli yang sudah Anda bayar. Ini mengurangi saldo Anda." eh="b4d4023c" />
+        <e k="usedplus_finance_loanTerm_tooltip" v="Sebarkan pembayaran selama 1-20 tahun. Jangka lebih lama = cicilan bulanan lebih kecil tapi total bunga lebih banyak." eh="e1170142" />
+        <e k="usedplus_finance_downPayment_tooltip" v="Bayar di muka untuk mengurangi jumlah pinjaman. Uang muka lebih tinggi = suku bunga dan cicilan lebih rendah. Rentang: 0-50%." eh="cb530b47" />
+        <e k="usedplus_finance_cashBack_tooltip" v="Terima uang tunai langsung (ditambahkan ke pinjaman). Berguna untuk biaya operasional, tapi meningkatkan cicilan dan total biaya." eh="dc2693cd" />
+        <e k="usedplus_finance_monthlyPayment_tooltip" v="Dipotong dari rekening pertanian secara otomatis setiap bulan dalam game. Pastikan Anda punya cukup uang!" eh="c0ee3f8c" />
+        <e k="usedplus_finance_totalInterest_tooltip" v="Biaya tambahan pembiayaan vs. bayar tunai. Ini yang Anda bayar untuk menyebar pembayaran dari waktu ke waktu." eh="93fba715" />
+        <e k="usedplus_finance_totalCost_tooltip" v="Harga beli + total bunga = yang sebenarnya Anda bayar selama masa pinjaman." eh="52be56aa" />
+        <e k="usedplus_finance_interestRate_tooltip" v="Persentase tahunan yang dikenakan pada pinjaman. Berdasarkan skor kredit dan uang muka. Lebih rendah lebih baik!" eh="d2b214cf" />
+        <e k="usedplus_finance_creditScore_tooltip" v="Peringkat keuangan pertanian Anda (300-850). Skor lebih tinggi = bunga lebih rendah. Tingkatkan dengan menjaga utang rendah dan membayar tepat waktu." eh="63bcbfcf" />
+        <e k="usedplus_lease_term_tooltip" v="Sewa selama 1-5 tahun, lalu kembalikan kendaraan atau bayar nilai sisa untuk memilikinya. Jangka lebih pendek = cicilan lebih tinggi." eh="dad3d80d" />
+        <e k="usedplus_lease_downPayment_tooltip" v="Pembayaran di muka. Maksimum lebih rendah (20%) daripada pembiayaan karena Anda belum memiliki kendaraan." eh="eee20887" />
+        <e k="usedplus_lease_residualValue_tooltip" v="Jumlah yang dibayar di akhir sewa jika ingin memiliki kendaraan. Berdasarkan estimasi depresiasi. Kembalikan kendaraan untuk tidak bayar tambahan (jika kondisi baik)." eh="828cc532" />
+        <e k="usedplus_lease_monthlyPayment_tooltip" v="Dipotong otomatis setiap bulan selama masa sewa. Lebih rendah dari cicilan pembiayaan karena tidak membayar nilai penuh kendaraan." eh="a251e99c" />
+        <e k="usedplus_lease_totalCost_tooltip" v="Uang muka + semua cicilan bulanan. TIDAK termasuk nilai sisa jika memilih membeli di akhir." eh="dc10c085" />
+        <e k="usedplus_lease_interestRate_tooltip" v="Persentase tahunan untuk sewa. Lebih tinggi dari bunga pembiayaan (5.5% vs 4.5%) karena risiko pemberi pinjaman lebih tinggi." eh="f4c00279" />
+        <e k="usedplus_lease_damage_tooltip" v="Di akhir sewa: kerusakan >10% atau keausan >15% = penalti hingga 30% harga kendaraan. Jaga kendaraan terawat!" eh="01999ed8" />
+        <e k="usedplus_search_local_tooltip" v="Cari dealer terdekat. Respons 1 bulan dijamin, biaya 2%, keberhasilan 40%. Cepat dan murah." eh="9b08bf3e" />
+        <e k="usedplus_search_regional_tooltip" v="Cari jaringan regional. 1-3 bulan, biaya 6%, keberhasilan 70%. Keseimbangan baik untuk sebagian besar pencarian." eh="e5535f88" />
+        <e k="usedplus_search_national_tooltip" v="Cari seluruh negeri. 2-6 bulan, biaya 12%, keberhasilan 85%. Terbaik untuk peralatan langka." eh="0717b1d3" />
+        <e k="usedplus_search_cost_tooltip" v="Biaya di muka dipotong langsung. Tidak dapat dikembalikan meski pencarian gagal." eh="88816596" />
+        <e k="usedplus_search_duration_tooltip" v="Bulan dalam game sampai hasil. Anda akan mendapat notifikasi saat pencarian selesai." eh="9c9f3c15" />
+        <e k="usedplus_search_successChance_tooltip" v="Probabilitas menemukan jenis peralatan ini dalam kondisi bekas sama sekali." eh="a25aade9" />
+        <e k="usedplus_manager_totalFinanced_tooltip" v="Total jumlah yang masih Anda hutang di semua pinjaman dan sewa. Jaga di bawah nilai aset Anda!" eh="7c15778c" />
+        <e k="usedplus_manager_monthlyObligations_tooltip" v="Total yang dipotong dari rekening setiap bulan. Pastikan selalu punya arus kas cukup!" eh="c5cee5ec" />
+        <e k="usedplus_manager_creditScore_tooltip" v="Peringkat 300-850. 750+ = Sangat Baik, 650-749 = Baik, 550-649 = Cukup, &lt;550 = Buruk. Mempengaruhi semua suku bunga di masa depan!" eh="4b1c2269" />
+        <e k="usedplus_manager_assetValue_tooltip" v="Nilai gabungan kendaraan, peralatan, lahan, dan bangunan yang Anda miliki. Harus lebih tinggi dari utang Anda!" eh="64ef61f3" />
+        <e k="usedplus_manager_debtRatio_tooltip" v="Total Utang ÷ Nilai Aset. Jaga di bawah 30% untuk kredit sangat baik. Di atas 50% sangat merusak skor Anda!" eh="041f390c" />
+        <e k="usedplus_detail_principalPaid_tooltip" v="Bagian pinjaman asli yang sudah Anda bayar. Ini mengurangi saldo Anda." eh="b4d4023c" />
         <e k="usedplus_detail_interestPaid_tooltip" v="Biaya tambahan yang sudah Anda bayar untuk meminjam uang. Ini TIDAK mengurangi saldo Anda." eh="f0c23fa4" />
         <e k="usedplus_detail_projectedInterest_tooltip" v="Total bunga yang akan Anda bayar jika terus membayar cicilan minimum. Bayar lebih sekarang untuk mengurangi ini!" eh="d5d18292" />
         <e k="usedplus_detail_prepaymentPenalty_tooltip" v="Biaya sekali bayar untuk pelunasan awal (biasanya 1-3% dari saldo). Dikenakan karena pemberi pinjaman kehilangan pendapatan bunga di masa depan." eh="aff5ffdd" />
         <e k="usedplus_detail_currentBalance_tooltip" v="Jumlah yang masih Anda hutang (pokok saja). Membayar lebih mengurangi ini lebih cepat!" eh="d789bc3a" />
         <e k="usedplus_detail_paymentSplit_tooltip" v="Menunjukkan bagaimana pembayaran Anda terbagi: Pokok (mengurangi saldo) vs Bunga (biaya pinjaman)." eh="4c8d291b" />
-<e k="usedplus_repair_title" v="Servis Kendaraan" eh="40546bfb" />
+        <e k="usedplus_loan_title" v="Ambil Pinjaman" eh="f50c2071" />
+        <e k="usedplus_loan_configuration" v="KONFIGURASI PINJAMAN" eh="6c055726" />
+        <e k="usedplus_loan_paymentPreview" v="PRATINJAU PEMBAYARAN" eh="3890682c" />
+        <e k="usedplus_loan_accept" v="Terima Pinjaman" eh="ad5f835e" />
+        <e k="usedplus_loan_creditInfo" v="Skor kredit Anda menentukan batas pinjaman maksimum dan suku bunga." eh="2af2776a" />
+        <e k="usedplus_loan_collateralInfo" v="Jaminan dihitung dari 50% nilai kendaraan dan 60% nilai lahan." eh="4a5857f7" />
+        <e k="usedplus_loan_success" v="Pinjaman disetujui! %s disetor ke rekening Anda." eh="aefc6532" />
+        <e k="usedplus_loan_denied" v="Pinjaman ditolak. Jaminan tidak cukup atau kredit buruk." eh="c49dcbcb" />
+        <e k="usedplus_loan_monthlyPayment" v="Pembayaran Bulanan" eh="c102e118" />
+        <e k="usedplus_loan_totalInterest" v="Total Bunga" eh="8c4f3836" />
+        <e k="usedplus_loan_totalRepayment" v="Total Pembayaran" eh="78b2ff2b" />
+        <e k="usedplus_repair_title" v="Servis Kendaraan" eh="40546bfb" />
         <e k="usedplus_repair_title_mechanical" v="Perbaikan Mekanis" eh="60a0d54f" />
         <e k="usedplus_repair_title_repaint" v="Cat Ulang Kendaraan" eh="d5b4d6be" />
         <e k="usedplus_repair_mechanical" v="PERBAIKAN MEKANIS" eh="6294bbee" />
         <e k="usedplus_repair_cosmetic" v="CAT &amp; KOSMETIK" eh="d111819f" />
-<e k="usedplus_button_repairVehicle" v="Perbaiki Kendaraan" eh="9592bc0d" />
+        <e k="usedplus_repair_slider" v="Jumlah Perbaikan" eh="0dda5ee8" />
+        <e k="usedplus_repair_cost" v="Biaya Perbaikan" eh="6f0504d5" />
+        <e k="usedplus_repair_after" v="Kondisi Setelah" eh="d6d75451" />
+        <e k="usedplus_repair_payCash" v="Bayar Tunai" eh="e490310b" />
+        <e k="usedplus_repair_finance" v="Biayai Perbaikan" eh="70ef80a4" />
+        <e k="usedplus_repair_success" v="Perbaikan selesai! %s diperbaiki." eh="fecc6480" />
+        <e k="usedplus_repaint_slider" v="Jumlah Cat Ulang" eh="bf64833d" />
+        <e k="usedplus_repaint_cost" v="Biaya Cat Ulang" eh="b994cb4e" />
+        <e k="usedplus_button_repairVehicle" v="Perbaiki Kendaraan" eh="9592bc0d" />
         <e k="usedplus_button_repaint" v="Cat Ulang" eh="1d0b7dd4" />
-<e k="usedplus_dashboard_title" v="Dasbor Keuangan" eh="475b3fca" />
-<e k="usedplus_land_title" v="Beli Lahan Pertanian" eh="f741fdc8" />
+        <e k="usedplus_button_tradeIn" v="Tukar Tambah" eh="d9a572a1" />
+        <e k="usedplus_repair_financeSuccess" v="Perbaikan dibiayai! %s selama %d bulan dengan %s/bulan" eh="ac520447" />
+        <e k="usedplus_repair_noRepairsNeeded" v="Kendaraan ini tidak perlu perbaikan." eh="58c85fca" />
+        <e k="usedplus_tab_finances" v="Keuangan" eh="46d0ae63" />
+        <e k="usedplus_tab_searches" v="Pencarian" eh="490fae83" />
+        <e k="usedplus_tab_stats" v="Statistik" eh="c33e404a" />
+        <e k="usedplus_searches_active" v="Pencarian Aktif" eh="f33a3913" />
+        <e k="usedplus_searches_totalCost" v="Total Biaya Pencarian" eh="1bd59244" />
+        <e k="usedplus_stats_creditInfo" v="Berdasarkan rasio aset vs utang" eh="f07db642" />
+        <e k="usedplus_stats_lifetime" v="Statistik Sepanjang Waktu" eh="727103d4" />
+        <e k="usedplus_stats_totalFinanced" v="Total Dibiayai (Sepanjang Waktu)" eh="772f294e" />
+        <e k="usedplus_stats_totalInterest" v="Total Bunga Dibayar" eh="ee7cd19e" />
+        <e k="usedplus_stats_searchesCompleted" v="Pencarian Selesai" eh="20cde964" />
+        <e k="usedplus_stats_searchesSuccessful" v="Pencarian Berhasil" eh="9b0bb3f7" />
+        <e k="usedplus_creditHistory_title" v="Riwayat Kredit" eh="317d0ae5" />
+        <e k="usedplus_creditHistory_paymentOnTime" v="Pembayaran Tepat Waktu" eh="40b0a85e" />
+        <e k="usedplus_creditHistory_paymentMissed" v="Pembayaran Terlewat" eh="1c3f3184" />
+        <e k="usedplus_creditHistory_dealPaidOff" v="Pinjaman Lunas" eh="d75739c7" />
+        <e k="usedplus_creditHistory_newDebt" v="Pembiayaan Baru" eh="516d9124" />
+        <e k="usedplus_creditHistory_loanTaken" v="Pinjaman Tunai Diambil" eh="42a815ac" />
+        <e k="usedplus_creditHistory_excellent" v="Kredit Sangat Baik Tercapai" eh="00e0a79c" />
+        <e k="usedplus_creditHistory_trend" v="Tren Skor" eh="c93fabeb" />
+        <e k="usedplus_creditHistory_trendUp" v="Tren Naik" eh="b308896e" />
+        <e k="usedplus_creditHistory_trendDown" v="Tren Turun" eh="39e2d7ed" />
+        <e k="usedplus_creditHistory_stable" v="Stabil" eh="fa3aff3c" />
+        <e k="usedplus_tradeIn_title" v="Tukar Tambah Kendaraan" eh="f5f0c421" />
+        <e k="usedplus_tradeIn_select" v="Pilih kendaraan untuk ditukar tambah:" eh="4d5697ad" />
+        <e k="usedplus_tradeIn_value" v="Nilai Tukar Tambah" eh="a62d3415" />
+        <e k="usedplus_tradeIn_brandBonus" v="Bonus Merek Sama (+10%)" eh="5775348c" />
+        <e k="usedplus_tradeIn_noVehicles" v="Tidak ada kendaraan yang memenuhi syarat untuk tukar tambah" eh="0ffbcb88" />
+        <e k="usedplus_tradeIn_confirm" v="Terapkan Tukar Tambah" eh="5d265e23" />
+        <e k="usedplus_tradeIn_skip" v="Tanpa Tukar Tambah" eh="d28a6989" />
+        <e k="usedplus_tradeIn_help" v="Nilai tukar tambah adalah 85% dari harga jual. Pembelian merek sama mendapat bonus 10%." eh="acd55aef" />
+        <e k="usedplus_tradeIn_applied" v="Tukar tambah diterapkan: kredit %s" eh="d58037e6" />
+        <e k="usedplus_tradeIn_financed" v="Kendaraan yang dibiayai tidak dapat ditukar tambah" eh="b99f5ae1" />
+        <e k="usedplus_dashboard_title" v="Dasbor Keuangan" eh="475b3fca" />
+        <e k="usedplus_dashboard_creditScore" v="Skor Kredit" eh="ae61b052" />
+        <e k="usedplus_dashboard_obligations" v="Kewajiban Bulanan" eh="398fa99a" />
+        <e k="usedplus_dashboard_debtRatio" v="Rasio Utang terhadap Aset" eh="325f67e0" />
+        <e k="usedplus_dashboard_upcoming" v="Pembayaran Mendatang" eh="f994fae4" />
+        <e k="usedplus_dashboard_history" v="Aktivitas Kredit Terkini" eh="6b32a5cb" />
+        <e k="usedplus_dashboard_statistics" v="Statistik Sepanjang Waktu" eh="727103d4" />
+        <e k="usedplus_dashboard_equipment" v="Peralatan" eh="9ccda2d5" />
+        <e k="usedplus_dashboard_land" v="Lahan" eh="512ef7c6" />
+        <e k="usedplus_dashboard_loans" v="Pinjaman" eh="64e109fb" />
+        <e k="usedplus_dashboard_total" v="Jumlah" eh="96b01412" />
+        <e k="usedplus_dashboard_assets" v="Total Aset" eh="7f0b6dfb" />
+        <e k="usedplus_dashboard_debt" v="Total Utang" eh="f0648c99" />
+        <e k="usedplus_dashboard_ratio" v="Rasio" eh="8334a158" />
+        <e k="usedplus_dashboard_excellent" v="Sangat Baik" eh="fcc2d28a" />
+        <e k="usedplus_dashboard_good" v="Baik" eh="0c6ad70b" />
+        <e k="usedplus_dashboard_fair" v="Cukup" eh="f7f20cf0" />
+        <e k="usedplus_dashboard_high" v="Tinggi" eh="655d20c1" />
+        <e k="usedplus_dashboard_critical" v="Kritis" eh="278d01e5" />
+        <e k="usedplus_dashboard_noPayments" v="Tidak ada pembayaran mendatang" eh="96a72e57" />
+        <e k="usedplus_dashboard_noHistory" v="Belum ada riwayat kredit" eh="4e58800f" />
+        <e k="usedplus_dashboard_onTime" v="Pembayaran Tepat Waktu" eh="3f020383" />
+        <e k="usedplus_dashboard_missed" v="Pembayaran Terlewat" eh="352ca78d" />
+        <e k="usedplus_dashboard_tip" v="Tips: Bayar tepat waktu untuk meningkatkan skor kredit. Lunasi pinjaman lebih awal untuk menghemat bunga." eh="4878dc76" />
+        <e k="usedplus_land_title" v="Beli Lahan Pertanian" eh="f741fdc8" />
         <e k="usedplus_land_purchaseMethod" v="METODE PEMBELIAN" eh="f5f3c261" />
         <e k="usedplus_land_paymentSummary" v="RINGKASAN PEMBAYARAN" eh="0dd98605" />
         <e k="usedplus_land_financeTerms" v="KETENTUAN PEMBIAYAAN" eh="42352b5c" />
@@ -118,30 +347,75 @@
         <e k="usedplus_land_taxes" v="Pajak Transfer:" eh="351b4b60" />
         <e k="usedplus_land_totalDue" v="TOTAL HARUS DIBAYAR:" eh="6527240c" />
         <e k="usedplus_land_loanTerm" v="Jangka Pinjaman:" eh="766186df" />
-<e k="usedplus_land_downPayment" v="Uang Muka:" eh="a706fdb6" />
+        <e k="usedplus_land_leaseTerm" v="Jangka Sewa:" eh="52b77655" />
+        <e k="usedplus_land_downPayment" v="Uang Muka:" eh="a706fdb6" />
         <e k="usedplus_land_amountFinanced" v="Jumlah Dibiayai:" eh="c9247e08" />
         <e k="usedplus_land_interestRate" v="Suku Bunga:" eh="389f9dd8" />
         <e k="usedplus_land_monthlyPayment" v="Pembayaran Bulanan:" eh="3499b658" />
         <e k="usedplus_land_totalInterest" v="Total Bunga:" eh="183c0158" />
         <e k="usedplus_land_dueToday" v="BAYAR HARI INI:" eh="f644eca9" />
-<e k="usedplus_land_confirm" v="Konfirmasi Pembelian" eh="c8505ab3" />
-<e k="usedplus_sell_localAgent" v="Agen Lokal" eh="082cb5b6" />
+        <e k="usedplus_land_totalLeaseCost" v="Total Biaya Sewa:" eh="61a93e0e" />
+        <e k="usedplus_land_buyoutPrice" v="Harga Tebus:" eh="121b9571" />
+        <e k="usedplus_land_confirm" v="Konfirmasi Pembelian" eh="c8505ab3" />
+        <e k="usedplus_sell_title" v="Jual Kendaraan" eh="fe030802" />
+        <e k="usedplus_sell_selectAgent" v="Pilih Agen Penjualan" eh="08c52dc1" />
+        <e k="usedplus_sell_vehicleDetails" v="Detail Kendaraan" eh="fcb2575f" />
+        <e k="usedplus_sell_vanillaValue" v="Nilai Jual Instan" eh="8ddad336" />
+        <e k="usedplus_sell_localAgent" v="Agen Lokal" eh="082cb5b6" />
         <e k="usedplus_sell_regionalAgent" v="Agen Regional" eh="403955ba" />
         <e k="usedplus_sell_nationalAgent" v="Agen Nasional" eh="eef8214f" />
-<e k="usedplus_sell_cantSellFinanced" v="Tidak dapat menjual kendaraan yang dibiayai. Lunasi saldo terlebih dahulu." eh="1dcb38c2" />
-<e k="usedplus_saleExpired_title" v="Daftar Penjualan Kedaluwarsa" eh="610084ea" />
+        <e k="usedplus_sell_expectedReturn" v="Perkiraan Hasil" eh="20b99f1d" />
+        <e k="usedplus_sell_timeFrame" v="Jangka Waktu" eh="ced18839" />
+        <e k="usedplus_sell_agentFee" v="Biaya Agen" eh="40f286a6" />
+        <e k="usedplus_sell_successRate" v="Tingkat Keberhasilan" eh="aac60ede" />
+        <e k="usedplus_sell_confirm" v="Daftarkan untuk Dijual" eh="8ce97708" />
+        <e k="usedplus_sell_tradeInOnly" v="Tukar Tambah Saja" eh="c9626b59" />
+        <e k="usedplus_sell_tradeInDescription" v="50-65% nilai instan saat membeli kendaraan baru" eh="d6dcdb1f" />
+        <e k="usedplus_sell_localDescription" v="Penjualan lokal cepat. 1-2 bulan, keberhasilan 85%." eh="8cb93a6b" />
+        <e k="usedplus_sell_regionalDescription" v="Jaringan regional. 2-4 bulan, keberhasilan 90%." eh="9e0c4114" />
+        <e k="usedplus_sell_nationalDescription" v="Jangkauan nasional. 3-6 bulan, keberhasilan 95%." eh="013aefeb" />
+        <e k="usedplus_sell_listed" v="Kendaraan didaftarkan dengan %s. Perkiraan: %s - %s" eh="28271f31" />
+        <e k="usedplus_sell_alreadyListed" v="Kendaraan ini sudah terdaftar untuk dijual" eh="cb22926e" />
+        <e k="usedplus_sell_cantSellFinanced" v="Tidak dapat menjual kendaraan yang dibiayai. Lunasi saldo terlebih dahulu." eh="1dcb38c2" />
+        <e k="usedplus_saleOffer_title" v="Penawaran Penjualan Diterima" eh="6eeec636" />
+        <e k="usedplus_saleOffer_message" v="Pembeli telah ditemukan untuk kendaraan Anda!" eh="7b1304f7" />
+        <e k="usedplus_saleOffer_offerAmount" v="Jumlah Penawaran" eh="0916d967" />
+        <e k="usedplus_saleOffer_expiresIn" v="Penawaran Berakhir Dalam" eh="ce06a052" />
+        <e k="usedplus_saleOffer_accept" v="Terima Penawaran" eh="93a5776a" />
+        <e k="usedplus_saleOffer_decline" v="Tolak Penawaran" eh="3db99481" />
+        <e k="usedplus_saleOffer_hours" v="%d jam" eh="4e8d5e54" />
+        <e k="usedplus_saleOffer_accepted" v="Kendaraan terjual seharga %s!" eh="f5cd95ab" />
+        <e k="usedplus_saleOffer_declined" v="Penawaran ditolak. Agen terus mencari..." eh="b7c0bba6" />
+        <e k="usedplus_saleOffer_expired" v="Penawaran kedaluwarsa untuk %s. Agen terus mencari..." eh="180bd573" />
+        <e k="usedplus_saleExpired_title" v="Daftar Penjualan Kedaluwarsa" eh="610084ea" />
         <e k="usedplus_saleExpired_sectionInfo" v="DETAIL DAFTAR" eh="7b3916d2" />
         <e k="usedplus_saleExpired_sectionOutcome" v="HASIL" eh="79988be0" />
         <e k="usedplus_saleExpired_noBuyer" v="Tidak ada pembeli ditemukan selama periode pendaftaran." eh="aa575ade" />
         <e k="usedplus_saleExpired_feePaid" v="Biaya Agen Dibayar:" eh="ce19a828" />
         <e k="usedplus_saleExpired_hint" v="Anda dapat mendaftarkan ulang kendaraan ini dengan agen/pengaturan harga yang sama atau berbeda." eh="e225592c" />
         <e k="usedplus_saleExpired_relist" v="Daftarkan Ulang Kendaraan" eh="a556ce3c" />
-<e k="usedplus_button_nextPage" v="Menu Berikutnya" eh="2553da59" />
+        <e k="usedplus_sale_statusActive" v="Mencari pembeli..." eh="28e37076" />
+        <e k="usedplus_sale_statusPending" v="PENAWARAN: %s" eh="868cdf29" />
+        <e k="usedplus_sale_statusSold" v="TERJUAL seharga %s" eh="737a574b" />
+        <e k="usedplus_sale_statusExpired" v="Kedaluwarsa - Tidak ada pembeli ditemukan" eh="3e3e51fd" />
+        <e k="usedplus_sale_statusCancelled" v="Dibatalkan" eh="a149e85a" />
+        <e k="usedplus_sale_listingExpired" v="Tidak ada pembeli ditemukan untuk %s. Biaya agen (%s) tidak dapat dikembalikan." eh="08587fe0" />
+        <e k="usedplus_sale_cancel" v="Batalkan Daftar" eh="587021c1" />
+        <e k="usedplus_sale_cancelConfirm" v="Batalkan daftar penjualan untuk %s? Biaya agen TIDAK akan dikembalikan." eh="3bbc7efa" />
+        <e k="usedplus_sale_cancelled" v="Daftar penjualan dibatalkan untuk %s." eh="aa5902d2" />
+        <e k="usedplus_manager_saleListings" v="KENDARAAN UNTUK DIJUAL" eh="2f6d760e" />
+        <e k="usedplus_manager_noSales" v="Tidak ada daftar penjualan aktif" eh="0af1686a" />
+        <e k="usedplus_button_nextPage" v="Menu Berikutnya" eh="2553da59" />
         <e k="usedplus_button_prevPage" v="Menu Sebelumnya" eh="d4e01f11" />
-<e k="usedPlus_engineStalledRecovery" v="Mesin mati! Tunggu %d detik..." eh="9a57b319" />
-<e k="usedPlus_electricalCutout" v="Kerusakan listrik - peralatan offline!" eh="0c156989" />
+        <e k="usedPlus_engineStalled" v="Mesin mati!" eh="2cfeb1d2" />
+        <e k="usedPlus_engineStalledRecovery" v="Mesin mati! Tunggu %d detik..." eh="9a57b319" />
+        <e k="usedPlus_engineWontStart" v="Mesin tidak mau hidup - coba lagi" eh="daa0591c" />
+        <e k="usedPlus_hydraulicDrift" v="Kehilangan tekanan hidrolik!" eh="31f2964d" />
+        <e k="usedPlus_implementCutout" v="Peralatan mati!" eh="395b6ba3" />
+        <e k="usedPlus_electricalCutout" v="Kerusakan listrik - peralatan offline!" eh="0c156989" />
         <e k="usedPlus_speedDegraded" v="Mesin berjuang - kecepatan maksimum turun ke %d%%!" eh="af083aef" />
-<e k="usedPlus_speedGovernor" v="Mesin tidak dapat mempertahankan kecepatan ini!" eh="f9bd1f68" />
+        <e k="usedPlus_speedDegradedReminder" v="Kendaraan berjalan lambat - perbaikan disarankan" eh="95eb2457" />
+        <e k="usedPlus_speedGovernor" v="Mesin tidak dapat mempertahankan kecepatan ini!" eh="f9bd1f68" />
         <e k="usedPlus_firstStartStall" v="Mesin gagal hidup!" eh="cc82faeb" />
         <e k="usedPlus_steeringLoose" v="Kemudi terasa longgar - hidrolik aus!" eh="75649517" />
         <e k="usedPlus_steeringPull" v="Kemudi menarik ke %s!" eh="e743ac7b" />
@@ -158,7 +432,37 @@
         <e k="usedPlus_hitchFailure" v="KEGAGALAN GANDENGAN - Peralatan terlepas!" eh="16f9096e" />
         <e k="usedPlus_hydraulicWeak" v="Hidrolik lemah (%d%%) - peralatan mungkin melorot!" eh="dc1e58d4" />
         <e k="usedPlus_hydraulicDrifted" v="Peralatan turun karena kegagalan hidrolik" eh="5df727d2" />
-<e k="usedplus_error_selectDealFirst" v="Pilih transaksi pembiayaan terlebih dahulu" eh="b675a0de" />
+        <e k="usedPlus_inspectButton" v="Inspeksi (%s)" eh="cd9aa28e" />
+        <e k="usedPlus_inspectionTitle" v="Laporan Inspeksi" eh="ecd12a05" />
+        <e k="usedPlus_inspectionCost" v="Biaya Inspeksi" eh="5cb45e67" />
+        <e k="usedPlus_mechanicalAssessment" v="PENILAIAN MEKANIS" eh="9437e788" />
+        <e k="usedPlus_inspectorNotes" v="Catatan Inspektur" eh="0f769201" />
+        <e k="usedPlus_recommendation" v="Rekomendasi" eh="c76e3867" />
+        <e k="usedPlus_hiddenConditionWarning" v="Kondisi mekanis tersembunyi tidak diketahui" eh="d2e42691" />
+        <e k="usedPlus_payForInspection" v="Bayar untuk inspeksi profesional" eh="2c3e76c2" />
+        <e k="usedPlus_conditionGood" v="Baik" eh="0c6ad70b" />
+        <e k="usedPlus_conditionAcceptable" v="Dapat Diterima" eh="e684de7f" />
+        <e k="usedPlus_conditionBelowAverage" v="Di Bawah Rata-rata" eh="271d9709" />
+        <e k="usedPlus_conditionPoor" v="Buruk" eh="0e94d017" />
+        <e k="usedPlus_conditionCritical" v="Kritis" eh="278d01e5" />
+        <e k="usedPlus_indicatorCritical" v="[KRITIS]" eh="b0eac769" />
+        <e k="usedPlus_indicatorNeedsService" v="[PERLU SERVIS]" eh="c3591f0d" />
+        <e k="usedPlus_indicatorWorn" v="[AUS]" eh="393432f2" />
+        <e k="usedPlus_maintenanceHistory" v="Riwayat Perawatan" eh="ad562d90" />
+        <e k="usedPlus_engineReliability" v="Mesin" eh="7bfa3072" />
+        <e k="usedPlus_hydraulicReliability" v="Hidrolik" eh="1de58ed3" />
+        <e k="usedPlus_electricalReliability" v="Listrik" eh="6f15be3d" />
+        <e k="usedPlus_purchasedUsed" v="Dibeli bekas" eh="0cf8d116" />
+        <e k="usedPlus_repairHistory" v="Perbaikan: %d (total %s)" eh="724d4694" />
+        <e k="usedPlus_breakdownHistory" v="Kerusakan: %d" eh="18b384ef" />
+        <e k="usedPlus_mechanicalCondition" v="Mekanis: %s" eh="e74c01b3" />
+        <e k="usedPlus_noteEngineWorn" v="Mesin menunjukkan tanda-tanda pemakaian berat. Harapkan sesekali mati saat beban." eh="40261310" />
+        <e k="usedPlus_noteHydraulicWorn" v="Sistem hidrolik aus. Peralatan mungkin melorot saat diangkat." eh="8b84b53a" />
+        <e k="usedPlus_noteElectricalIssues" v="Masalah listrik terdeteksi. Peralatan mungkin mati tiba-tiba." eh="439af566" />
+        <e k="usedPlus_noteVehicleOk" v="Kendaraan dalam kondisi mekanis yang dapat diterima." eh="876a0550" />
+        <e k="usedPlus_recommendNegotiate" v="Negosiasi harga atau anggarkan untuk perbaikan" eh="0721eac5" />
+        <e k="usedPlus_recommendProceed" v="Kondisi mekanis baik - lanjutkan dengan percaya diri" eh="96c54629" />
+        <e k="usedplus_error_selectDealFirst" v="Pilih transaksi pembiayaan terlebih dahulu" eh="b675a0de" />
         <e k="usedplus_error_noSearchInRow" v="Tidak ada pencarian di baris ini" eh="5cdf2cd9" />
         <e k="usedplus_error_noSaleListingInRow" v="Tidak ada daftar penjualan di baris ini" eh="c671d622" />
         <e k="usedplus_error_noDealInRow" v="Tidak ada transaksi pembiayaan di baris ini" eh="875f8314" />
@@ -171,31 +475,41 @@
         <e k="usedplus_error_cannotCancelPendingOffer" v="Tidak dapat membatalkan saat penawaran tertunda. Terima atau tolak terlebih dahulu." eh="cdf73751" />
         <e k="usedplus_error_cannotModifyPendingOffer" v="Tidak dapat mengubah harga saat penawaran tertunda." eh="7fb9f02b" />
         <e k="usedplus_error_invalidPrice" v="Harga tidak valid. Masukkan angka positif." eh="89f7cc3c" />
-<e k="usedplus_error_insufficientFundsPayment" v="Dana tidak cukup. Butuh %s untuk pembayaran bulanan." eh="cea3245c" />
+        <e k="usedplus_error_invalidAmount" v="Jumlah tidak valid. Masukkan angka positif." eh="9baf36ff" />
+        <e k="usedplus_error_insufficientFundsPayment" v="Dana tidak cukup. Butuh %s untuk pembayaran bulanan." eh="cea3245c" />
         <e k="usedplus_error_insufficientFundsPayoff" v="Dana tidak cukup untuk pelunasan" eh="ff08bf99" />
         <e k="usedplus_error_insufficientFundsNeedHave" v="Dana tidak cukup. Butuh %s, punya %s" eh="7005b33c" />
         <e k="usedplus_error_insufficientFundsDownPayment" v="Dana tidak cukup untuk uang muka! Butuh %s" eh="e1cfc60d" />
         <e k="usedplus_error_insufficientFundsGeneric" v="Dana tidak cukup! Butuh %s" eh="d8249477" />
         <e k="usedplus_error_insufficientFundsForPayment" v="Dana tidak cukup untuk pembayaran" eh="bc4a233a" />
         <e k="usedplus_error_noPaymentOptions" v="Tidak ada opsi pembayaran tersedia" eh="5cf01d98" />
-<e k="usedplus_error_noDealsToPayAll" v="Tidak ada transaksi pembiayaan aktif untuk dibayar" eh="a8217dc4" />
+        <e k="usedplus_error_noActiveDeals" v="Tidak ada transaksi pembiayaan aktif untuk dibayar" eh="19c25246" />
+        <e k="usedplus_error_noDealsToPayAll" v="Tidak ada transaksi pembiayaan aktif untuk dibayar" eh="a8217dc4" />
         <e k="usedplus_error_noPaymentsDue" v="Tidak ada pembayaran jatuh tempo periode ini" eh="9da7e0ff" />
-<e k="usedplus_error_creditTooLowDetail" v="Skor kredit Anda (%d) di bawah minimum (%d) yang diperlukan untuk %s." eh="210df978" />
+        <e k="usedplus_error_payoffFailed" v="Pelunasan gagal" eh="ab252955" />
+        <e k="usedplus_error_paymentFailed" v="Pembayaran gagal" eh="1305a2b0" />
+        <e k="usedplus_error_eventNotAvailable" v="Error: %s tidak tersedia" eh="9c93ae19" />
+        <e k="usedplus_error_creditTooLow" v="Skor Kredit Terlalu Rendah" eh="660fbd90" />
+        <e k="usedplus_error_creditTooLowDetail" v="Skor kredit Anda (%d) di bawah minimum (%d) yang diperlukan untuk %s." eh="210df978" />
         <e k="usedplus_error_creditTip" v="Tips: Bayar tepat waktu pada pinjaman yang ada untuk membangun kredit." eh="3346706d" />
-<e k="usedplus_finance_repairFinancing" v="pembiayaan perbaikan" eh="4f72a7b2" />
+        <e k="usedplus_error_creditShortfall" v="Kekurangan: %d poin" eh="a19b5472" />
+        <e k="usedplus_finance_repairFinancing" v="pembiayaan perbaikan" eh="4f72a7b2" />
         <e k="usedplus_finance_vehicleFinancing" v="pembiayaan kendaraan" eh="7b2b15aa" />
         <e k="usedplus_finance_vehicleLeasing" v="sewa kendaraan" eh="524b6d9b" />
         <e k="usedplus_finance_landFinancing" v="pembiayaan lahan" eh="ef09c4c7" />
         <e k="usedplus_finance_cashLoan" v="pinjaman tunai" eh="ac895880" />
         <e k="usedplus_credit_tooLowForFinancing" v="Skor kredit terlalu rendah untuk pembiayaan. Skor Anda: %d (butuh %d+). Bangun kredit dengan pembayaran tepat waktu." eh="c7e03e45" />
         <e k="usedplus_credit_tooLowForLeasing" v="Skor kredit terlalu rendah untuk sewa. Skor Anda: %d (butuh %d+). Sewa membutuhkan kredit lebih baik daripada pembiayaan." eh="50b91953" />
-<e k="usedplus_credit_tooLowForRepair" v="Skor kredit terlalu rendah (%d). Butuh %d+ untuk membiayai perbaikan." eh="70147f73" />
+        <e k="usedplus_credit_tooLowForLand" v="Skor kredit terlalu rendah (%d). Butuh %d+ untuk membiayai lahan." eh="78d73204" />
+        <e k="usedplus_credit_tooLowForRepair" v="Skor kredit terlalu rendah (%d). Butuh %d+ untuk membiayai perbaikan." eh="70147f73" />
         <e k="usedplus_credit_tooLowForPlaceable" v="Pembiayaan bangunan memerlukan kredit Sempurna (%d+).\nKredit Anda: %d (%s)" eh="0fb63457" />
         <e k="usedplus_credit_needScore" v="Kredit: %d (butuh %d)" eh="82790b98" />
-<e k="usedplus_finance_amountTooSmall" v="Jumlah terlalu kecil untuk pembiayaan. Minimum: %s" eh="3a90d8c2" />
+        <e k="usedplus_placeable_cannotLease" v="Bangunan tidak dapat disewa. Gunakan opsi Tunai atau Pembiayaan." eh="e4fd7eed" />
+        <e k="usedplus_finance_amountTooSmall" v="Jumlah terlalu kecil untuk pembiayaan. Minimum: %s" eh="3a90d8c2" />
         <e k="usedplus_lease_amountTooSmall" v="Jumlah terlalu kecil untuk sewa. Minimum: %s" eh="3e2012e8" />
         <e k="usedplus_repair_amountTooSmall" v="Biaya perbaikan terlalu kecil untuk dibiayai. Minimum: %s" eh="446dd4cd" />
-<e k="usedplus_mp_error_unauthorized" v="Tindakan tidak diizinkan untuk pertanian Anda" eh="343a024c" />
+        <e k="usedplus_land_amountTooSmall" v="Harga lahan terlalu kecil untuk pembiayaan. Minimum: %s" eh="b4e8480c" />
+        <e k="usedplus_mp_error_unauthorized" v="Tindakan tidak diizinkan untuk pertanian Anda" eh="343a024c" />
         <e k="usedplus_mp_error_disabled" v="Fitur ini dinonaktifkan di pengaturan" eh="d3f06efd" />
         <e k="usedplus_mp_error_manager" v="Sistem tidak diinisialisasi. Coba lagi." eh="53daf785" />
         <e k="usedplus_mp_error_invalid_params" v="Parameter tidak valid" eh="a79fae6b" />
@@ -221,7 +535,8 @@
         <e k="usedplus_mp_success_price_modified" v="Harga diperbarui!" eh="3778ab16" />
         <e k="usedplus_mp_success_repair" v="Perbaikan selesai!" eh="9e6d62a2" />
         <e k="usedplus_mp_success_search_started" v="Pencarian dimulai!" eh="f10690d3" />
-<e k="usedplus_mp_success_lease_terminated" v="Sewa dihentikan!" eh="2ac6c824" />
+        <e k="usedplus_mp_success_lease_ended" v="Sewa berhasil diakhiri!" eh="71efe46d" />
+        <e k="usedplus_mp_success_lease_terminated" v="Sewa dihentikan!" eh="2ac6c824" />
         <e k="usedplus_mp_success_lease_renewed" v="Sewa diperpanjang!" eh="30c5a4dd" />
         <e k="usedplus_mp_success_lease_buyout" v="Tebus sewa selesai!" eh="b76c5d41" />
         <e k="usedplus_mode_cash" v="Beli dengan Tunai" eh="01dc9cc3" />
@@ -233,15 +548,33 @@
         <e k="usedplus_notify_offerDeclined" v="Penawaran ditolak - agen akan terus mencari" eh="957ec943" />
         <e k="usedplus_notify_listingCancelled" v="Daftar penjualan untuk %s dibatalkan" eh="77f331c5" />
         <e k="usedplus_notify_vehiclePurchased" v="Membeli %s seharga %s" eh="ee85175a" />
-<e k="usedplus_notify_vehicleFinanced" v="Membiayai %s - %s jatuh tempo hari ini" eh="874037b7" />
-<e k="usedplus_notify_vehicleNowYours" v="Selamat! %s sekarang milik Anda!" eh="f9f453e9" />
-<e k="usedplus_notify_placeableSoldPayoff" v="Bangunan terjual. Pelunasan pinjaman: %s" eh="78ac7164" />
+        <e k="usedplus_notify_vehiclePurchasedShop" v="Membeli %s - Kunjungi toko untuk mengambil kendaraan" eh="3359716e" />
+        <e k="usedplus_notify_vehicleFinanced" v="Membiayai %s - %s jatuh tempo hari ini" eh="874037b7" />
+        <e k="usedplus_notify_vehicleFinancedShop" v="Membiayai %s - Kunjungi toko untuk mengambil kendaraan" eh="815fb77d" />
+        <e k="usedplus_notify_landPurchased" v="Membeli %s seharga %s" eh="ee85175a" />
+        <e k="usedplus_notify_landFinanced" v="Membiayai %s - %s jatuh tempo hari ini" eh="874037b7" />
+        <e k="usedplus_notify_vehicleNowYours" v="Selamat! %s sekarang milik Anda!" eh="f9f453e9" />
+        <e k="usedplus_notify_placeableFinanced" v="Bangunan Dibiayai!\n%s\nUang Muka: %s | Bulanan: %s selama %d tahun" eh="72ebd0e0" />
+        <e k="usedplus_notify_placeableSoldPayoff" v="Bangunan terjual. Pelunasan pinjaman: %s" eh="78ac7164" />
         <e k="usedplus_notify_loanPaidOff" v="Pinjaman lunas! Total: %s" eh="0ba73cba" />
         <e k="usedplus_notify_paymentProcessed" v="Pembayaran %s diproses!" eh="fc4c5db3" />
         <e k="usedplus_notify_paidDealsTotal" v="Membayar %d transaksi! Total: %s" eh="14743f8a" />
         <e k="usedplus_notify_paidDealsSomeFailed" v="Membayar %d transaksi, %d gagal" eh="203dd11e" />
-<e k="usedplus_notify_landLeaseTerminated" v="Sewa lahan untuk %s telah dihentikan" eh="f2414acd" />
-<e k="usedplus_dealdetails_payoffInfo" v="Lunasi lebih awal untuk menghemat bunga." eh="6d50cda5" />
+        <e k="usedplus_notify_paymentConfigSaved" v="Konfigurasi pembayaran disimpan!" eh="c0ea9507" />
+        <e k="usedplus_notify_landLeaseTerminated" v="Sewa lahan untuk %s telah dihentikan" eh="f2414acd" />
+        <e k="usedplus_creditreport_reportDate" v="Tanggal Laporan: %s" eh="6bcda474" />
+        <e k="usedplus_creditreport_scoreRange" v="Rentang Skor: 300-850" eh="3d50ef3a" />
+        <e k="usedplus_creditreport_standardRates" v="Suku bunga standar berlaku" eh="0012275c" />
+        <e k="usedplus_creditreport_noHistory" v="Tidak Ada Riwayat" eh="be5404ee" />
+        <e k="usedplus_creditreport_noActiveAccounts" v="Tidak ada akun aktif" eh="1b3f60a4" />
+        <e k="usedplus_creditreport_noPaymentHistory" v="Belum ada riwayat pembayaran" eh="2103413b" />
+        <e k="usedplus_creditreport_makePaymentsHint" v="Mulai membuat pembayaran untuk membangun riwayat Anda" eh="84400e0a" />
+        <e k="usedplus_creditreport_trend_excellent" v="Sangat Baik - Tren naik kuat" eh="b60dafaf" />
+        <e k="usedplus_creditreport_trend_good" v="Baik - Momentum positif" eh="83cf1f7c" />
+        <e k="usedplus_creditreport_trend_stable" v="Stabil - Dipertahankan" eh="06f25cfd" />
+        <e k="usedplus_creditreport_trend_declining" v="Menurun - Perlu perhatian" eh="cae1fb1c" />
+        <e k="usedplus_creditreport_trend_poor" v="Buruk - Perlu tindakan segera" eh="3abb1302" />
+        <e k="usedplus_dealdetails_payoffInfo" v="Lunasi lebih awal untuk menghemat bunga." eh="6d50cda5" />
         <e k="usedplus_dealdetails_buyoutLease" v="TEBUS SEWA" eh="15e7acf5" />
         <e k="usedplus_dealdetails_earlyPayoff" v="PELUNASAN AWAL" eh="58ce5d42" />
         <e k="usedplus_dealdetails_paidOff" v="Lunas!" eh="549facbe" />
@@ -256,7 +589,8 @@
         <e k="usedplus_inspection_notReady" v="Inspeksi belum selesai!" eh="cca0fa21" />
         <e k="usedplus_inspection_notDone" v="Kendaraan belum diinspeksi!" eh="58a6a5a1" />
         <e k="usedplus_inspection_failed" v="Inspeksi gagal: %s" eh="13d9eb55" />
-<e k="usedplus_confirmInspection" v="Minta inspeksi %s untuk %s?\n\nSiap dalam ~%d jam." eh="20a936ac" />
+        <e k="usedplus_inspectionTitle" v="Inspeksi Kendaraan" eh="7276b8fd" />
+        <e k="usedplus_confirmInspection" v="Minta inspeksi %s untuk %s?\n\nSiap dalam ~%d jam." eh="20a936ac" />
         <e k="usedplus_selectInspectionTier" v="Pilih Jenis Inspeksi:" eh="d920b2ce" />
         <e k="usedplus_tier_quick_desc" v="Hanya penilaian keseluruhan" eh="b2f8f4ab" />
         <e k="usedplus_tier_standard_desc" v="Keandalan penuh + kondisi komponen" eh="f7939a73" />
@@ -267,7 +601,10 @@
         <e k="usedplus_maintenance_purchasedUsed" v="Dibeli Bekas" eh="9b4614d5" />
         <e k="usedplus_maintenance_purchasedNew" v="Dibeli Baru" eh="675dda81" />
         <e k="usedplus_maintenance_excellentCondition" v="Kendaraan ini dalam kondisi sangat baik tanpa masalah perawatan." eh="3b88ba3a" />
-<e k="usedplus_repairfinance_title_repaint" v="Biayai Cat Ulang" eh="fdcf5d38" />
+        <e k="usedplus_paymentconfig_selectLoan" v="Pilih pinjaman di atas untuk mengubah mode pembayaran" eh="9c398fdf" />
+        <e k="usedplus_paymentconfig_warningSkip" v="PERINGATAN: Melewatkan pembayaran akan meningkatkan saldo!" eh="edd2053c" />
+        <e k="usedplus_paymentconfig_noteNegAmort" v="Catatan: Beberapa pembayaran di bawah bunga saja" eh="5502d2f3" />
+        <e k="usedplus_repairfinance_title_repaint" v="Biayai Cat Ulang" eh="fdcf5d38" />
         <e k="usedplus_repairfinance_title_repair" v="Biayai Perbaikan" eh="70ef80a4" />
         <e k="usedplus_preview_title" v="Kendaraan Bekas Ditemukan" eh="ac794919" />
         <e k="usedplus_preview_viewReport" v="Lihat Laporan" eh="7cd1ac84" />
@@ -276,8 +613,11 @@
         <e k="usedplus_manager_debtLabel" v="Utang: %s" eh="fff2ef4c" />
         <e k="usedplus_dealdetails_earlyPayoffSaves" v="Pelunasan awal menghemat %s bunga!" eh="482a76d4" />
         <e k="usedplus_preview_ageYears" v="%d tahun" eh="86730d79" />
-<e k="usedplus_preview_inspectionProgress" v="Inspeksi %s dalam proses... ~%d jam tersisa" eh="911dfff0" />
-<e k="usedplus_preview_inProgress" v="Dalam Proses..." eh="bd62582e" />
+        <e k="usedplus_preview_payForInspection" v="Bayar %s untuk inspeksi profesional" eh="a64ff42a" />
+        <e k="usedplus_preview_inspectionRange" v="Opsi inspeksi: %s - %s" eh="47ff59b3" />
+        <e k="usedplus_preview_inspectionProgress" v="Inspeksi %s dalam proses... ~%d jam tersisa" eh="911dfff0" />
+        <e k="usedplus_preview_requestInspection" v="Minta Inspeksi" eh="e555e8b2" />
+        <e k="usedplus_preview_inProgress" v="Dalam Proses..." eh="bd62582e" />
         <e k="usedplus_preview_implementNoInspection" v="Inspeksi tidak tersedia untuk peralatan non-motor. Beli hanya apa adanya." eh="620e727f" />
         <e k="usedplus_land_modeCash" v="Beli dengan Tunai" eh="01dc9cc3" />
         <e k="usedplus_land_modeFinance" v="Pembiayaan" eh="c482980d" />
@@ -293,11 +633,15 @@
         <e k="usedplus_land_depositInfo" v="%s (%d bln, kredit %s)" eh="062ae4ba" />
         <e k="usedplus_land_buyoutAnytime" v="Tebus kapan saja: %s" eh="056478ed" />
         <e k="usedplus_land_signingBonus" v="Bonus Penandatanganan: Termasuk %s senilai %s" eh="bec8cd54" />
-<e k="usedplus_error_insufficientFundsLand" v="Dana tidak cukup! Butuh %s lagi. Coba pembiayaan atau sewa." eh="d993d097" />
+        <e k="usedplus_land_securityDeposit" v="Deposit keamanan %s" eh="d8780aed" />
+        <e k="usedplus_land_noDepositRequired" v="deposit tidak diperlukan" eh="467a3088" />
+        <e k="usedplus_error_insufficientFundsLand" v="Dana tidak cukup! Butuh %s lagi. Coba pembiayaan atau sewa." eh="d993d097" />
         <e k="usedplus_error_insufficientFundsDeposit" v="Dana tidak cukup untuk deposit keamanan! Butuh %s lagi." eh="ad97e0d8" />
         <e k="usedplus_error_couldNotCompletePurchase" v="Error: Tidak dapat menyelesaikan pembelian" eh="a0fca4fc" />
-<e k="usedplus_loan_useFinancialDashboard" v="Gunakan Dasbor Keuangan (Menu ESC) untuk mengambil pinjaman berbasis kredit" eh="1175c14f" />
-<e k="usedplus_button_purchase" v="Beli" eh="76b6a47a" />
+        <e k="usedplus_notify_landLeased" v="Menyewa %s! %s/bulan, %s" eh="71a876f7" />
+        <e k="usedplus_loan_useFinancialDashboard" v="Gunakan Dasbor Keuangan (Menu ESC) untuk mengambil pinjaman berbasis kredit" eh="1175c14f" />
+        <e k="usedplus_loan_vanillaBorrowDisabled" v="Pinjaman vanilla dinonaktifkan. Buka Dasbor Keuangan untuk pinjaman berbasis kredit." eh="c81aff14" />
+        <e k="usedplus_button_purchase" v="Beli" eh="76b6a47a" />
         <e k="usedplus_button_buyNow" v="Beli Sekarang" eh="c1f52fba" />
         <e k="usedplus_button_decline" v="Tolak" eh="0d362728" />
         <e k="usedplus_button_goBack" v="Kembali" eh="4f2f5e1d" />
@@ -306,11 +650,14 @@
         <e k="usedplus_button_cancel" v="Batal" eh="ea478870" />
         <e k="usedplus_button_later" v="Nanti" eh="61057a0c" />
         <e k="usedplus_button_takeLoan" v="Ambil Pinjaman" eh="40fe67fa" />
-<e k="usedplus_irp_title" v="LAPORAN INSPEKSI" eh="fca75392" />
+        <e k="usedplus_button_payOff" v="Lunasi" eh="416ff954" />
+        <e k="usedplus_irp_title" v="LAPORAN INSPEKSI" eh="fca75392" />
         <e k="usedplus_irp_sectionVehicle" v="KENDARAAN" eh="e9fa318f" />
         <e k="usedplus_irp_sectionMechanical" v="PENILAIAN MEKANIS" eh="9437e788" />
-<e k="usedplus_irp_sectionMechanic" v="PENILAIAN MEKANIK" eh="ed0defaa" />
-<e k="usedplus_irp_sectionRecommend" v="REKOMENDASI" eh="7ae70d6c" />
+        <e k="usedplus_irp_sectionNotes" v="CATATAN INSPEKTUR" eh="24c3a1cc" />
+        <e k="usedplus_irp_sectionMechanic" v="PENILAIAN MEKANIK" eh="ed0defaa" />
+        <e k="usedplus_irp_mechanicName" v="- Jim" eh="32d190f0" />
+        <e k="usedplus_irp_sectionRecommend" v="REKOMENDASI" eh="7ae70d6c" />
         <e k="usedplus_irp_listedPrice" v="Harga Tercantum:" eh="64a72200" />
         <e k="usedplus_irp_engine" v="Mesin:" eh="c7d60198" />
         <e k="usedplus_irp_hydraulics" v="Hidrolik:" eh="1dccde48" />
@@ -319,13 +666,26 @@
         <e k="usedplus_irp_estRepairCost" v="Perkiraan Biaya Perbaikan:" eh="e0065daa" />
         <e k="usedplus_irp_postRepairValue" v="Nilai Setelah Perbaikan:" eh="676a8d00" />
         <e k="usedplus_irp_priceNote" v="Harga mencerminkan harga yang diminta penjual. Negosiasi berdasarkan hasil inspeksi." eh="1d136196" />
-<e k="usedplus_irp_sectionTires" v="KONDISI BAN" eh="d7d271cc" />
+        <e k="usedplus_irp_sectionRvbParts" v="STATUS KOMPONEN" eh="73555be1" />
+        <e k="usedplus_irp_part_engine" v="Mesin" eh="7bfa3072" />
+        <e k="usedplus_irp_part_thermostat" v="Termostat" eh="91e0b95d" />
+        <e k="usedplus_irp_part_generator" v="Generator" eh="92a8f0b9" />
+        <e k="usedplus_irp_part_battery" v="Aki" eh="d67c9286" />
+        <e k="usedplus_irp_part_starter" v="Starter" eh="ee6085db" />
+        <e k="usedplus_irp_part_glowplug" v="Busi Pijar" eh="6fdb6ce6" />
+        <e k="usedplus_irp_sectionTires" v="KONDISI BAN" eh="d7d271cc" />
         <e k="usedplus_irp_worstTire" v="Terburuk:" eh="4ca3e96d" />
         <e k="usedplus_mrp_title" v="LAPORAN PEMELIHARAAN" eh="a2ca3391" />
-<e k="usedplus_mrp_breakdowns" v="Kerusakan" eh="ff1cc005" />
-<e k="usedplus_mrp_inspected" v="Diinspeksi" eh="3a07b37b" />
+        <e k="usedplus_mrp_sectionReliability" v="PERINGKAT KEANDALAN" eh="87b5f6c4" />
+        <e k="usedplus_mrp_sectionHistory" v="RIWAYAT PEMELIHARAAN" eh="2ec3182d" />
+        <e k="usedplus_mrp_sectionNotes" v="CATATAN STATUS" eh="078385a2" />
+        <e k="usedplus_mrp_breakdowns" v="Kerusakan" eh="ff1cc005" />
+        <e k="usedplus_mrp_repairs" v="Perbaikan" eh="810a4b9e" />
+        <e k="usedplus_mrp_inspected" v="Diinspeksi" eh="3a07b37b" />
         <e k="usedplus_mrp_resaleImpact" v="Dampak Jual Kembali:" eh="92b1671e" />
-<e k="usedplus_dash_creditScore" v="SKOR KREDIT" eh="4f3b169e" />
+        <e k="usedplus_mrp_origin" v="Asal:" eh="dd187730" />
+        <e k="usedplus_mrp_overallCondition" v="KONDISI KESELURUHAN" eh="c8090411" />
+        <e k="usedplus_dash_creditScore" v="SKOR KREDIT" eh="4f3b169e" />
         <e k="usedplus_dash_debtRatio" v="RASIO UTANG" eh="c32f2503" />
         <e k="usedplus_dash_assets" v="Aset:" eh="9c1a8d1e" />
         <e k="usedplus_dash_debt" v="Utang:" eh="5cd7ac01" />
@@ -385,7 +745,8 @@
         <e k="usedplus_dd_accruedNote" v="(termasuk bunga terkumpul)" eh="ba209296" />
         <e k="usedplus_dd_payoffInfo" v="Pelunasan awal menghemat bunga!" eh="3e87cef1" />
         <e k="usedplus_dd_repossessedInfo" v="Barang berikut disita karena pembayaran terlewat:" eh="b9f50218" />
-<e k="usedplus_button_viewHistory" v="Lihat Riwayat" eh="db9c40b5" />
+        <e k="usedplus_dd_repossessedTotal" v="Total nilai disita:" eh="a6274dce" />
+        <e k="usedplus_button_viewHistory" v="Lihat Riwayat" eh="db9c40b5" />
         <e k="usedplus_button_earlyPayoff" v="Pelunasan Awal" eh="4ccf6612" />
         <e k="usedplus_tl_title" v="AMBIL PINJAMAN" eh="2d3208d6" />
         <e k="usedplus_tl_sectionCredit" v="KREDIT ANDA" eh="87d51ea4" />
@@ -437,7 +798,8 @@
         <e k="usedplus_up_methodHelp" v="Pilih cara pembayaran: tunai langsung, pembiayaan bertahap, atau sewa dengan cicilan lebih rendah." eh="83636102" />
         <e k="usedplus_up_sectionTradeIn" v="TUKAR TAMBAH (Opsional)" eh="e5bfdf59" />
         <e k="usedplus_up_tradeInHelp" v="Pilih kendaraan untuk ditukar dan kurangi jumlah yang harus dibayar." eh="93193d20" />
-<e k="usedplus_up_tradeInValue" v="Nilai Tukar Tambah:" eh="4f0e849e" />
+        <e k="usedplus_up_tradeInVehicle" v="Kendaraan Tukar Tambah:" eh="300da437" />
+        <e k="usedplus_up_tradeInValue" v="Nilai Tukar Tambah:" eh="4f0e849e" />
         <e k="usedplus_up_sectionCash" v="RINGKASAN PEMBAYARAN" eh="0dd98605" />
         <e k="usedplus_up_cashHelp" v="Bayar penuh sekarang. Nilai tukar tambah dikurangi dari total." eh="6439a515" />
         <e k="usedplus_up_vehiclePrice" v="Harga Kendaraan:" eh="3c3c7b43" />
@@ -490,7 +852,8 @@
         <e k="usedplus_us_qualityFair" v="Cukup" eh="f7f20cf0" />
         <e k="usedplus_us_qualityGood" v="Baik" eh="0c6ad70b" />
         <e k="usedplus_us_qualityExcellent" v="Sangat Baik" eh="fcc2d28a" />
-<e k="usedplus_us_infoText" v="Tingkat lebih tinggi lebih mahal tapi tingkat keberhasilan lebih baik dan menemukan kualitas lebih tinggi." eh="5d292c52" />
+        <e k="usedplus_us_discountFormat" v="~%d%% diskon" eh="69923e02" />
+        <e k="usedplus_us_infoText" v="Tingkat lebih tinggi lebih mahal tapi tingkat keberhasilan lebih baik dan menemukan kualitas lebih tinggi." eh="5d292c52" />
         <e k="usedplus_uvp_title" v="Kendaraan Bekas Ditemukan" eh="ac794919" />
         <e k="usedplus_uvp_sectionVehicle" v="INFORMASI KENDARAAN" eh="47b7b38d" />
         <e k="usedplus_uvp_askingPrice" v="Harga Permintaan:" eh="c515d94e" />
@@ -501,17 +864,20 @@
         <e k="usedplus_uvp_wear" v="Keausan:" eh="0f25ac5c" />
         <e k="usedplus_uvp_warningTitle" v="Kondisi mekanis tersembunyi tidak diketahui" eh="d2e42691" />
         <e k="usedplus_uvp_selectTier" v="Pilih tingkat inspeksi:" eh="c3d4dde6" />
-<e k="usedplus_uvp_inspectedText" v="Kendaraan telah diinspeksi - lihat laporan" eh="9015cd17" />
+        <e k="usedplus_uvp_inspectPrompt" v="Bayar untuk inspeksi profesional" eh="2c3e76c2" />
+        <e k="usedplus_uvp_inspectedText" v="Kendaraan telah diinspeksi - lihat laporan" eh="9015cd17" />
         <e k="usedplus_button_buyAsIs" v="Beli Apa Adanya" eh="43e49e70" />
         <e k="usedplus_button_inspect" v="Inspeksi" eh="35a9dbe6" />
         <e k="usedplus_button_tires" v="Ban" eh="3fe2c06a" />
-<e k="usedplus_rp_sectionStatus" v="STATUS KENDARAAN" eh="41898172" />
+        <e k="usedplus_button_fluids" v="Cairan" eh="c599fed9" />
+        <e k="usedplus_rp_sectionStatus" v="STATUS KENDARAAN" eh="41898172" />
         <e k="usedplus_rp_mechanical" v="Mekanis:" eh="80061faf" />
         <e k="usedplus_rp_paint" v="Cat:" eh="d65951a4" />
         <e k="usedplus_rp_sectionRepair" v="PERBAIKAN MEKANIS" eh="6294bbee" />
         <e k="usedplus_rp_sectionRepaint" v="CAT ULANG" eh="8c638cea" />
         <e k="usedplus_rp_selectAmount" v="Pilih seberapa banyak yang diperbaiki:" eh="99d6f5e9" />
-<e k="usedplus_rp_percentExplain" v="Persentase kerusakan tersisa untuk diperbaiki. 100% = pulihkan ke kondisi penuh." eh="83a0df1d" />
+        <e k="usedplus_rp_selectPaint" v="Pilih seberapa banyak yang dicat ulang:" eh="9c5d4c7b" />
+        <e k="usedplus_rp_percentExplain" v="Persentase kerusakan tersisa untuk diperbaiki. 100% = pulihkan ke kondisi penuh." eh="83a0df1d" />
         <e k="usedplus_rp_percentExplainPaint" v="Persentase keausan cat untuk dipulihkan. 100% = hasil akhir pabrik segar." eh="e8268659" />
         <e k="usedplus_rp_selected" v="Dipilih:" eh="e8418a9e" />
         <e k="usedplus_rp_cost" v="Biaya:" eh="69edde90" />
@@ -519,7 +885,8 @@
         <e k="usedplus_rp_sectionPayment" v="PEMBAYARAN" eh="b842122b" />
         <e k="usedplus_rp_totalCost" v="TOTAL BIAYA:" eh="c4886680" />
         <e k="usedplus_rp_result" v="HASIL:" eh="442def3f" />
-<e k="usedplus_rp_infoText" v="Bayar sekarang atau biayai bertahap dengan cicilan bulanan." eh="9462576c" />
+        <e k="usedplus_rp_yourMoney" v="Uang Anda:" eh="8f18f24a" />
+        <e k="usedplus_rp_infoText" v="Bayar sekarang atau biayai bertahap dengan cicilan bulanan." eh="9462576c" />
         <e k="usedplus_button_payCash" v="BAYAR TUNAI" eh="b134b99e" />
         <e k="usedplus_rp_buttonFinance" v="PEMBIAYAAN" eh="65fe55e3" />
         <e k="usedplus_sv_title" v="Jual Kendaraan" eh="fe030802" />
@@ -566,7 +933,18 @@
         <e k="usedplus_so_acceptOffer" v="Terima Penawaran" eh="93a5776a" />
         <e k="usedplus_so_keepWaitingBtn" v="Tolak tawaran" eh="3db99481" />
         <e k="usedplus_so_previousOffers" v="[EN] Previous Offers:" eh="0a8e474c" />
-<e k="usedplus_le_chooseOption" v="Pilih an Option:" eh="c4477bb4" />
+        <e k="usedplus_so_title" v="PENAWARAN PENJUALAN DITERIMA!" eh="1596a2b0" />
+        <e k="usedplus_button_acceptOffer" v="Terima Penawaran" eh="93a5776a" />
+        <e k="usedplus_pc_title" v="Konfigurasi Pembayaran Pinjaman" eh="07beb52e" />
+        <e k="usedplus_pc_headerLoan" v="Pinjaman" eh="9ad81a8f" />
+        <e k="usedplus_pc_headerBalance" v="Saldo" eh="99a808d8" />
+        <e k="usedplus_pc_headerMode" v="Mode" eh="650be618" />
+        <e k="usedplus_pc_headerPayment" v="Pembayaran" eh="c453a4b8" />
+        <e k="usedplus_pc_selectLoan" v="Pilih a loan above untuk mengubah mode pembayaran" eh="9c398fdf" />
+        <e k="usedplus_pc_totalPayment" v="TOTAL PEMBAYARAN" eh="bea684c8" />
+        <e k="usedplus_button_resetAll" v="Atur Ulang Semua" eh="b69a15a8" />
+        <e k="usedplus_button_apply" v="Terapkan" eh="9639e32c" />
+        <e k="usedplus_le_chooseOption" v="Pilih an Option:" eh="c4477bb4" />
         <e k="usedplus_le_returnTitle" v="KEMBALIKAN KENDARAAN" eh="2c0e1ab5" />
         <e k="usedplus_le_returnDesc" v="Kembalikan ke dealer, bayar penalti kerusakan apa pun" eh="91a379d9" />
         <e k="usedplus_le_buyoutTitle" v="TEBUS KENDARAAN" eh="4fd832ea" />
@@ -594,9 +972,13 @@
         <e k="usedplus_lr_optionRenew" v="PERPANJANG" eh="f2120692" />
         <e k="usedplus_lr_optionRenewDesc" v="Perpanjang jangka sewa" eh="392db1c5" />
         <e k="usedplus_lr_equityCarries" v="Ekuitas dibawa ke sewa berikutnya:" eh="4c5d28b7" />
-<e k="usedplus_lr_helpText" v="You must pilih an option. Returning gives you your deposit back. Buyout uses your equity toward purchase. Renewing extends the lease with equity applied to future buyout." eh="91673bf9" />
+        <e k="usedplus_button_return" v="Kembali" eh="988fd738" />
+        <e k="usedplus_button_buyout" v="Tebus" eh="6e052e38" />
+        <e k="usedplus_button_renew" v="Perpanjang" eh="0b9feba3" />
+        <e k="usedplus_lr_helpText" v="You must pilih an option. Returning gives you your deposit back. Buyout uses your equity toward purchase. Renewing extends the lease with equity applied to future buyout." eh="91673bf9" />
         <e k="usedplus_lr_deferNotice" v="Pilihan ini akan muncul lagi bulan depan. Tidak ada biaya tambahan sampai Anda memutuskan." eh="9382457d" />
-<e k="usedplus_cr_title" v="LAPORAN KREDIT" eh="3725e302" />
+        <e k="usedplus_conf_title" v="Konfirmasi" eh="f4d1ea47" />
+        <e k="usedplus_cr_title" v="LAPORAN KREDIT" eh="3725e302" />
         <e k="usedplus_cr_reportDate" v="Tanggal Laporan:" eh="93ad31a7" />
         <e k="usedplus_cr_sectionScore" v="SKOR KREDIT" eh="4f3b169e" />
         <e k="usedplus_cr_scoreRange" v="Rentang Skor: 300-850" eh="3d50ef3a" />
@@ -649,7 +1031,8 @@
         <e k="usedplus_sd_infoText" v="Pencarian regional menawarkan nilai terbaik untuk tingkat keberhasilan." eh="83c02892" />
         <e k="usedplus_sld_title" v="RINCIAN DAFTAR PENJUALAN" eh="9e334439" />
         <e k="usedplus_sld_sectionVehicle" v="KENDARAAN" eh="e9fa318f" />
-<e k="usedplus_sld_condition" v="Kondisi:" eh="ed51222f" />
+        <e k="usedplus_sld_sectionStatus" v="STATUS" eh="5f241c8c" />
+        <e k="usedplus_sld_condition" v="Kondisi:" eh="ed51222f" />
         <e k="usedplus_sld_hours" v="Jam:" eh="ad179a10" />
         <e k="usedplus_sld_timeLeft" v="Waktu Tersisa:" eh="39eed84f" />
         <e k="usedplus_sld_sectionConfig" v="KONFIGURASI PENJUALAN" eh="363705b3" />
@@ -716,7 +1099,8 @@
         <e k="usedplus_fmf_nationalSearch" v="Pencarian Nasional" eh="c967061f" />
         <e k="usedplus_fmf_nationalStats" v="Biaya 12% | Sukses 85% | 2-6 bulan" eh="685c2f27" />
         <e k="usedplus_fmf_startFromShop" v="Mulai pencarian dari toko melalui &apos;Cari Bekas&apos;" eh="f0c6f05a" />
-<e k="usedplus_fmf_usedVehicleSearches" v="Pencarian Kendaraan Bekas" eh="a3601db6" />
+        <e k="usedplus_fmf_viaSearchUsed" v="" eh="d41d8cd9" />
+        <e k="usedplus_fmf_usedVehicleSearches" v="Pencarian Kendaraan Bekas" eh="a3601db6" />
         <e k="usedplus_fmf_noActiveSearches" v="Tidak ada pencarian aktif. Mulai dari Toko." eh="6f447735" />
         <e k="usedplus_fmf_headerPrice" v="HARGA" eh="6da7ab78" />
         <e k="usedplus_fmf_headerTier" v="TINGKAT" eh="cd24a010" />
@@ -737,14 +1121,16 @@
         <e k="usedplus_fmf_vehiclesFound" v="Kendaraan Ditemukan:" eh="047a7db6" />
         <e k="usedplus_fmf_feesSpent" v="Biaya Dihabiskan:" eh="787c75fb" />
         <e k="usedplus_fmf_successRate" v="Tingkat Keberhasilan:" eh="346bdbd3" />
-<e k="usedplus_fmf_yourCreditScore" v="Skor Kredit Anda" eh="5bbd5087" />
+        <e k="usedplus_fmf_totalSaved" v="Nilai Pasar:" eh="bf7d98b0" />
+        <e k="usedplus_fmf_yourCreditScore" v="Skor Kredit Anda" eh="5bbd5087" />
         <e k="usedplus_fmf_creditRanges" v="Rentang Kredit:" eh="a4a7b278" />
         <e k="usedplus_fmf_tierExcellent" v="750-850 Sangat Baik -1.5%" eh="8d6d7463" />
         <e k="usedplus_fmf_tierGood" v="700-749 Baik -0.5%" eh="331b260e" />
         <e k="usedplus_fmf_tierFair" v="650-699 Cukup +0.5%" eh="ce30f0f5" />
         <e k="usedplus_fmf_tierPoor" v="600-649 Buruk +1.5%" eh="f6639d3f" />
         <e k="usedplus_fmf_tierVeryPoor" v="300-599 Sangat Buruk +3.0%" eh="e80b837e" />
-<e k="usedplus_fmf_overview" v="GAMBARAN UMUM" eh="3b9ae4ee" />
+        <e k="usedplus_fmf_listings" v="%d daftar" eh="5a6d48e6" />
+        <e k="usedplus_fmf_overview" v="GAMBARAN UMUM" eh="3b9ae4ee" />
         <e k="usedplus_fmf_overviewLine1" v="UsedPlus memperluas ekonomi vanilla dengan pembiayaan realistis, pasar bekas, dan sistem kredit." eh="608d34f6" />
         <e k="usedplus_fmf_overviewLine2" v="Biayai atau sewa dari Toko. Trade-In peralatan lama. Jual melalui agen untuk hasil lebih baik daripada vanilla." eh="a48f7073" />
         <e k="usedplus_fmf_buyingUsed" v="MEMBELI BEKAS" eh="bcd9a06a" />
@@ -761,7 +1147,29 @@
         <e k="usedplus_fmf_quickRefLine2" v="Pembayaran bulanan otomatis dipotong. Pelunasan awal menghemat bunga." eh="73cd35d9" />
         <e k="usedplus_btn_admin_panel" v="Panel Admin" eh="a0e0d3f0" />
         <e k="usedplus_admin_no_vehicle_warning" v="Anda harus berada di dalam kendaraan untuk menggunakan Panel Admin. Masuk ke kendaraan terlebih dahulu, lalu tekan ESC." eh="abe11d3f" />
-<e k="usedplus_fd_title" v="Rincian Transaksi Keuangan" eh="b49b6b5b" />
+        <e k="usedplus_ll_title" v="Sewa Tanah" eh="ec34a2a6" />
+        <e k="usedplus_ll_sectionDetails" v="RINCIAN LAHAN" eh="9550d705" />
+        <e k="usedplus_ll_field" v="Ladang:" eh="af9b2925" />
+        <e k="usedplus_ll_size" v="Ukuran:" eh="af645946" />
+        <e k="usedplus_ll_value" v="Nilai:" eh="acdb802b" />
+        <e k="usedplus_ll_sectionTerm" v="MASA SEWA" eh="bb3b670a" />
+        <e k="usedplus_ll_selectDuration" v="Pilih lease duration:" eh="8f0c8cd2" />
+        <e k="usedplus_ll_sectionCosts" v="BIAYA SEWA" eh="5793e394" />
+        <e k="usedplus_ll_monthlyPayment" v="Pembayaran Bulanan:" eh="3499b658" />
+        <e k="usedplus_ll_yearlyPayment" v="Pembayaran Tahunan:" eh="e1ddacf9" />
+        <e k="usedplus_ll_totalCost" v="Total Biaya Sewa:" eh="61a93e0e" />
+        <e k="usedplus_ll_markup" v="Jumlah Markup:" eh="62aed63e" />
+        <e k="usedplus_ll_buyoutPrice" v="Harga Beli Putus:" eh="121b9571" />
+        <e k="usedplus_ll_note1" v="Sewa memungkinkan penggunaan tanah tanpa pembelian penuh." eh="b4808387" />
+        <e k="usedplus_ll_note2" v="Tanah kembali ke pasar saat sewa berakhir kecuali dibeli putus." eh="bbed7c34" />
+        <e k="usedplus_lf_field" v="Ladang:" eh="af9b2925" />
+        <e k="usedplus_lf_size" v="Ukuran:" eh="af645946" />
+        <e k="usedplus_lf_price" v="Harga:" eh="f2c12ae1" />
+        <e k="usedplus_lf_sectionDueToday" v="JATUH TEMPO HARI INI SAAT PENANDATANGANAN" eh="cdbd21f6" />
+        <e k="usedplus_lf_downPayment" v="Uang Muka:" eh="a706fdb6" />
+        <e k="usedplus_lf_youPayToday" v="ANDA BAYAR HARI INI:" eh="6d6d4e26" />
+        <e k="usedplus_lf_lowerRatesNote" v="Pembiayaan tanah memiliki tarif lebih rendah dari pinjaman kendaraan." eh="1e35d132" />
+        <e k="usedplus_fd_title" v="Rincian Transaksi Keuangan" eh="b49b6b5b" />
         <e k="usedplus_fd_quick1Month" v="1 Bulan" eh="cf13b270" />
         <e k="usedplus_fd_quick6Months" v="6 Bulan" eh="1d4545e8" />
         <e k="usedplus_fd_quick1Year" v="1 Tahun" eh="cc1a252a" />
@@ -833,7 +1241,21 @@
         <e k="usedplus_quote_leg_3" v="Pertahankan ini. Anda tidak akan menemukan yang lain seperti ini." eh="9b78b8eb" />
         <e k="usedplus_quote_leg_4" v="Orang-orang tua biasa bicara tentang traktor seperti ini. Pikir mereka hanya legenda." eh="79b4f4fa" />
         <e k="usedplus_quote_leg_5" v="Ini punya malaikat pelindung bekerja lembur di ruang mesin." eh="d8d30168" />
-<e k="usedplus_warning_tireWorn" v="Peringatan: Ban mulai aus. Pertimbangkan penggantian segera." eh="b2f94e8c" />
+        <e k="usedplus_searchExpired_title" v="Pencarian Selesai" eh="e92d4ab1" />
+        <e k="usedplus_searchExpired_summary" v="RINGKASAN PENCARIAN" eh="6fa784ed" />
+        <e k="usedplus_searchExpired_searchedFor" v="Mencari:" eh="e67ff702" />
+        <e k="usedplus_searchExpired_agentTier" v="Tingkat Agen:" eh="4eb7801b" />
+        <e k="usedplus_searchExpired_quality" v="Kualitas:" eh="3ded0b1d" />
+        <e k="usedplus_searchExpired_duration" v="Durasi:" eh="68311558" />
+        <e k="usedplus_searchExpired_results" v="HASIL" eh="44795920" />
+        <e k="usedplus_searchExpired_vehiclesFound" v="%d kendaraan ditemukan" eh="69e744df" />
+        <e k="usedplus_searchExpired_noVehicles" v="Tidak ada kendaraan ditemukan" eh="df1eff24" />
+        <e k="usedplus_searchExpired_renewSearch" v="PERPANJANG PENCARIAN?" eh="e65ba949" />
+        <e k="usedplus_searchExpired_renewCost" v="Biaya Perpanjangan:" eh="cab42ff8" />
+        <e k="usedplus_searchExpired_renew" v="Perpanjang Pencarian" eh="5f2a7f33" />
+        <e k="usedplus_searchExpired_renewed" v="Pencarian diperpanjang untuk %s!" eh="3f0b77e5" />
+        <e k="usedplus_searchExpired_insufficientFunds" v="Dana tidak cukup untuk memperpanjang pencarian." eh="ffe2599c" />
+        <e k="usedplus_warning_tireWorn" v="Peringatan: Ban mulai aus. Pertimbangkan penggantian segera." eh="b2f94e8c" />
         <e k="usedplus_warning_tireCritical" v="KRITIS: Ban aus kritis! Ganti segera untuk menghindari ban kempes." eh="773fe608" />
         <e k="usedplus_warning_flatTire" v="BAN KEMPES! Handling kendaraan sangat terganggu. Penggantian ban diperlukan." eh="d5759919" />
         <e k="usedplus_warning_lowTraction" v="Peringatan: Traksi rendah karena ban aus. Kurangi kecepatan dalam kondisi buruk." eh="07b59ae5" />
@@ -858,7 +1280,39 @@
         <e k="usedplus_warning_implementPull" v="HAMBATAN PERALATAN - Menarik %s!" eh="9542214f" />
         <e k="usedplus_warning_implementDrag" v="KETEGANGAN HIDROLIK - Kecepatan berkurang!" eh="4202b7ec" />
         <e k="usedplus_warning_reducedTurning" v="POWER STEERING LEMAH - Belok terbatas!" eh="a9794a39" />
-<e k="usedplus_info_oil_level" v="Tingkat Oli" eh="a6d699fb" />
+        <e k="usedplus_tire_retread" v="Vulkanisir" eh="bcf7f101" />
+        <e k="usedplus_tire_normal" v="Normal" eh="960b44c5" />
+        <e k="usedplus_tire_quality" v="Kualitas" eh="571094bb" />
+        <e k="usedplus_fluids_level" v="Tingkat:" eh="07ad8151" />
+        <e k="usedplus_fluids_status" v="Status:" eh="24a23d78" />
+        <e k="usedplus_fluids_statusOk" v="OK" eh="e0aa021e" />
+        <e k="usedplus_fluids_statusLow" v="RENDAH" eh="41bc94cb" />
+        <e k="usedplus_fluids_statusCritical" v="KRITIS" eh="99cd1c61" />
+        <e k="usedplus_fluids_statusLeaking" v="BOCOR" eh="2ec9e171" />
+        <e k="usedplus_fluids_leakMinor" v="Bocor Kecil" eh="b6c9aa5d" />
+        <e k="usedplus_fluids_leakModerate" v="Bocor Sedang" eh="ed8731d2" />
+        <e k="usedplus_fluids_leakSevere" v="Bocor Parah" eh="2d132bfd" />
+        <e k="usedplus_fluids_topUp" v="Isi Ulang" eh="e38f9cb0" />
+        <e k="usedplus_fluids_fullChange" v="Ganti Penuh" eh="08692df2" />
+        <e k="usedplus_fluids_cost" v="Biaya:" eh="69edde90" />
+        <e k="usedplus_tires_condition" v="Kondisi:" eh="ed51222f" />
+        <e k="usedplus_tires_traction" v="Traksi:" eh="8d38bce1" />
+        <e k="usedplus_tires_flatTire" v="BAN KEMPES" eh="6e87cc30" />
+        <e k="usedplus_tires_replace" v="Ganti Ban" eh="3a0d1434" />
+        <e k="usedplus_tires_retreadDesc" v="Opsi hemat - traksi lebih rendah, risiko kerusakan lebih tinggi" eh="f277d077" />
+        <e k="usedplus_tires_normalDesc" v="Standard ban - balanced performance" eh="df677172" />
+        <e k="usedplus_tires_qualityDesc" v="Premium ban - better traction, lower failure risk" eh="69e595ca" />
+        <e k="usedplus_tires_cost" v="Biaya:" eh="69edde90" />
+        <e k="usedplus_mr_tires" v="BAN" eh="36173e29" />
+        <e k="usedplus_mr_fluids" v="CAIRAN" eh="d857c0c4" />
+        <e k="usedplus_mr_tireCondition" v="Kondisi Ban:" eh="e8946816" />
+        <e k="usedplus_mr_tireQuality" v="Kualitas Ban:" eh="40db131b" />
+        <e k="usedplus_mr_oilLevel" v="Tingkat Oli:" eh="0fe915e8" />
+        <e k="usedplus_mr_hydraulicLevel" v="Cairan Hidrolik:" eh="45673d76" />
+        <e k="usedplus_mr_fuelLeak" v="Kebocoran Bahan Bakar:" eh="caf0d1a8" />
+        <e k="usedplus_mr_yes" v="Ya" eh="93cba074" />
+        <e k="usedplus_mr_no" v="Tidak" eh="bafd7322" />
+        <e k="usedplus_info_oil_level" v="Tingkat Oli" eh="a6d699fb" />
         <e k="usedplus_info_hydraulic_level" v="Cairan Hidrolik" eh="f9c4d7d9" />
         <e k="usedplus_info_tire_condition" v="Ban" eh="3fe2c06a" />
         <e k="usedplus_info_dealType" v="Status" eh="ec53a8c4" />
@@ -878,9 +1332,12 @@
         <e k="usedplus_tires_retreadInfo" v="85% traksi, 3x kegagalan" eh="5d43f3aa" />
         <e k="usedplus_tires_normalInfo" v="100% traksi, dasar" eh="c5306480" />
         <e k="usedplus_tires_qualityInfo" v="110% traksi, 0.5x kegagalan" eh="0017aa0f" />
-<e k="usedplus_tires_selectedQuality" v="Kualitas Dipilih:" eh="c8df8c6c" />
+        <e k="usedplus_tires_selectedTire" v="Ban Dipilih:" eh="83200a19" />
+        <e k="usedplus_tires_selectedQuality" v="Kualitas Dipilih:" eh="c8df8c6c" />
         <e k="usedplus_tires_totalCost" v="Total Biaya:" eh="a131af32" />
-<e k="usedplus_tires_selectAbove" v="Pilih above" eh="cf957b6f" />
+        <e k="usedplus_tires_selectOne" v="Pilih a tire..." eh="b97fd8a1" />
+        <e k="usedplus_tires_selectQuality" v="Pilih quality" eh="46aef69c" />
+        <e k="usedplus_tires_selectAbove" v="Pilih above" eh="cf957b6f" />
         <e k="usedplus_tires_infoText" v="Ban baru memulihkan kondisi 100%. Retread adalah casing daur ulang." eh="3196a18f" />
         <e k="usedplus_tires_flatWarning" v="BAN KEMPES - Penggantian Diperlukan!" eh="1f8d653d" />
         <e k="usedplus_tires_selectFirst" v="Please pilih a tire quality first." eh="41ebcf2f" />
@@ -907,13 +1364,33 @@
         <e k="usedplus_fluids_hydraulicLeakWarning" v="KEBOCORAN HIDROLIK TERDETEKSI" eh="daa3a59f" />
         <e k="usedplus_fluids_selectFirst" v="Please pilih at least one service." eh="a638ea70" />
         <e k="usedplus_fluids_refilled" v="Cairan diisi ulang: %s" eh="b427d6fd" />
-<e k="usedplus_fluid_purchaseAction" v="Beli Cairan" eh="6533ddc5" />
+        <e k="usedplus_oilBarrel_name" v="Tong Layanan Oli" eh="54ea297f" />
+        <e k="usedplus_oilBarrel_function" v="Kendarai kendaraan ke dekatnya untuk mengisi ulang oli mesin dan cairan hidrolik." eh="7dfb134d" />
+        <e k="usedplus_oilBarrel_specUnlimited" v="Tidak Terbatas" eh="545f6c2f" />
+        <e k="usedplus_oilTank_name" v="Tangki Layanan Oli" eh="fa56df0c" />
+        <e k="usedplus_oilTank_function" v="Titik layanan oli berkapasitas besar untuk mengisi ulang oli mesin dan cairan hidrolik." eh="e6a6837a" />
+        <e k="usedplus_oil_refillAction" v="Isi Ulang Oli Mesin" eh="001b2a5a" />
+        <e k="usedplus_hydraulic_refillAction" v="Isi Ulang Cairan Hidrolik" eh="11081031" />
+        <e k="usedplus_oil_refillComplete" v="Oli diisi ulang - Biaya: %s" eh="0dff6e72" />
+        <e k="usedplus_hydraulic_refillComplete" v="Cairan hidrolik diisi ulang - Biaya: %s" eh="2d22bcb4" />
+        <e k="usedplus_oil_refillCompleteStorage" v="Oli diisi ulang dari penyimpanan" eh="2d3715a7" />
+        <e k="usedplus_oil_notEnoughStorage" v="Tidak cukup oli di penyimpanan" eh="4cf5955b" />
+        <e k="usedplus_hydraulic_notEnoughStorage" v="Tidak cukup cairan hidrolik di penyimpanan" eh="a1a0eb52" />
+        <e k="usedplus_oil_alreadyFull" v="Oli mesin sudah penuh" eh="9474e86e" />
+        <e k="usedplus_hydraulic_alreadyFull" v="Cairan hidrolik sudah penuh" eh="904d6078" />
+        <e k="usedplus_oil_storageLevel" v="Penyimpanan Oli: %d / %d L" eh="1a5af945" />
+        <e k="usedplus_hydraulic_storageLevel" v="Penyimpanan Hidrolik: %d / %d L" eh="d35b0be5" />
+        <e k="usedplus_oil_purchaseAction" v="Beli Oli" eh="9c9c34d3" />
+        <e k="usedplus_oil_purchased" v="Dibeli %.0fL oli - %s (Tangki: %.0f/%.0fL)" eh="5b99f35f" />
+        <e k="usedplus_oil_storageFull" v="Tangki oli penuh!" eh="980d9a22" />
+        <e k="usedplus_fluid_purchaseAction" v="Beli Cairan" eh="6533ddc5" />
         <e k="usedplus_fluid_oil" v="Oli Mesin" eh="d2d4a89d" />
         <e k="usedplus_fluid_hydraulic" v="Cairan Hidrolik" eh="f9c4d7d9" />
         <e k="usedplus_fluid_purchased" v="Dibeli %.0fL %s - %s (Tangki: %.0f/%.0fL)" eh="a63f3cbd" />
         <e k="usedplus_fluid_storageFull" v="Tangki penuh!" eh="3a3fc002" />
         <e k="usedplus_fluid_notEnoughStorage" v="Cairan tidak cukup! Perlu %.1fL, tersedia %.1fL" eh="4c38b7b9" />
-<e k="usedplus_fluid_oilLeakSevere" v="Kebocoran oli signifikan terdeteksi - perlu perhatian segera." eh="e1254667" />
+        <e k="usedplus_hydraulic_refillCompleteStorage" v="Cairan hidrolik diisi ulang - %.1fL digunakan (%.1fL tersisa)" eh="8290045e" />
+        <e k="usedplus_fluid_oilLeakSevere" v="Kebocoran oli signifikan terdeteksi - perlu perhatian segera." eh="e1254667" />
         <e k="usedplus_fluid_oilLeakMinor" v="Kebocoran oli kecil terdeteksi - mungkin memburuk seiring waktu." eh="f363cc55" />
         <e k="usedplus_fluid_oilCritical" v="Tingkat oli sangat rendah - isi ulang sebelum operasi." eh="ae9c42e9" />
         <e k="usedplus_fluid_oilLow" v="Tingkat oli di bawah yang direkomendasikan - perlu diisi ulang." eh="38c0af65" />
@@ -926,10 +1403,18 @@
         <e k="usedplus_fluid_hydGood" v="Sistem hidrolik terlihat sehat." eh="0419e98f" />
         <e k="usedplus_fluid_fuelLeak" v="HATI-HATI: Kebocoran bahan bakar terdeteksi - bahaya kebakaran, perlu perbaikan." eh="9016df52" />
         <e k="usedplus_fluid_allClear" v="Semua sistem cairan tampak normal." eh="339f1e72" />
-<e k="usedplus_fsk_title" v="PEMINDAI DIAGNOSTIK OBD - LAYANAN LAPANGAN" eh="04584a39" />
-<e k="usedplus_fsk_status_disabled" v="KERUSAKAN - TIDAK DAPAT BEROPERASI" eh="44f80aed" />
+        <e k="usedplus_fsk_name" v="Pemindai OBD" eh="96023669" />
+        <e k="usedplus_fsk_function" v="Scanner diagnostik OBD portabel untuk perbaikan darurat di lapangan. Terhubung ke port diagnostik kendaraan untuk membaca kode kesalahan dan data sensor. Habis pakai - sekali pakai." eh="bfdb43fa" />
+        <e k="usedplus_fsk_tier_basic" v="OBD Dasar" eh="36823daa" />
+        <e k="usedplus_fsk_activate" v="Hubungkan OBD Scanner" eh="dc1214b1" />
+        <e k="usedplus_fsk_title" v="PEMINDAI DIAGNOSTIK OBD - LAYANAN LAPANGAN" eh="04584a39" />
+        <e k="usedplus_fsk_vehicle" v="Terhubung ke:" eh="ed4c66be" />
+        <e k="usedplus_fsk_status" v="Status Kendaraan:" eh="4e265002" />
+        <e k="usedplus_fsk_status_disabled" v="KERUSAKAN - TIDAK DAPAT BEROPERASI" eh="44f80aed" />
         <e k="usedplus_fsk_status_needs_service" v="SERVIS DIPERLUKAN" eh="83142576" />
-<e k="usedplus_fsk_system_engine" v="ECU Mesin" eh="0171f3c6" />
+        <e k="usedplus_fsk_select_system" v="Pemindaian OBD mendeteksi kerusakan di beberapa sistem. Sistem mana yang ingin Anda diagnosis?" eh="a0116adf" />
+        <e k="usedplus_fsk_reliability" v="Kesehatan Sistem" eh="5bbdb0be" />
+        <e k="usedplus_fsk_system_engine" v="ECU Mesin" eh="0171f3c6" />
         <e k="usedplus_fsk_system_electrical" v="Sistem Kelistrikan" eh="7a1b3240" />
         <e k="usedplus_fsk_system_hydraulic" v="Kontrol Hidrolik" eh="ab71d1ba" />
         <e k="usedplus_fsk_warning_choose" v="Pilih the system most likely at fault - misdiagnosis reduces repair effectiveness" eh="88de8162" />
@@ -1010,12 +1495,20 @@
         <e k="usedplus_fsk_reliability_minimal" v="PENINGKATAN MINIMAL" eh="9ffdf95d" />
         <e k="usedplus_fsk_flat" v="KEMPES!" eh="ea13651c" />
         <e k="usedplus_fsk_seized" v="MACET!" eh="0a5c79b9" />
-<e k="usedplus_fsk_before" v="Sebelum:" eh="0519a746" />
+        <e k="usedplus_fsk_results" v="HASIL PERBAIKAN" eh="bb6599cb" />
+        <e k="usedplus_fsk_before" v="Sebelum:" eh="0519a746" />
         <e k="usedplus_fsk_after" v="Setelah:" eh="fdbe650f" />
-<e k="usedplus_fsk_onetime_title" v="LAYANAN LAPANGAN SELESAI" eh="4336e84b" />
+        <e k="usedplus_fsk_feedback_perfect" v="Diagnosis benar!" eh="ea6dac23" />
+        <e k="usedplus_fsk_feedback_partial" v="Sistem benar, tapi penyebab spesifiknya berbeda." eh="ad5b77ef" />
+        <e k="usedplus_fsk_feedback_wrong" v="Masalah sebenarnya ada di sistem yang berbeda." eh="9b04c318" />
+        <e k="usedplus_fsk_temp_repair" v="PERBAIKAN LAPANGAN SEMENTARA" eh="b3bc3876" />
+        <e k="usedplus_fsk_temp_repair_desc" v="Ini perbaikan darurat. Kunjungi bengkel yang tepat untuk layanan penuh." eh="648457f5" />
+        <e k="usedplus_fsk_kit_consumed" v="Pemindai OBD telah habis digunakan." eh="b2ea1455" />
+        <e k="usedplus_fsk_onetime_title" v="LAYANAN LAPANGAN SELESAI" eh="4336e84b" />
         <e k="usedplus_fsk_onetime_desc" v="Diagnostik lebih lanjut pada sistem ini memerlukan peralatan bengkel" eh="38988277" />
         <e k="usedplus_fsk_kit_consumed_onetime" v="OBD Scanner consumed. Semua penyesuaian yang dapat dilayani lapangan telah dibuat pada sistem ini." eh="4ae3775f" />
-<e k="usedplus_fsk_noVehicle" v="Tidak ada kendaraan terdeteksi dalam jangkauan. Pindahkan pemindai lebih dekat ke kendaraan." eh="e89e127f" />
+        <e k="usedplus_fsk_cannot_cancel" v="Perbaikan sedang berlangsung - tidak dapat dibatalkan pada tahap ini." eh="6172d2ec" />
+        <e k="usedplus_fsk_noVehicle" v="Tidak ada kendaraan terdeteksi dalam jangkauan. Pindahkan pemindai lebih dekat ke kendaraan." eh="e89e127f" />
         <e k="usedplus_fsk_tire_repair" v="FLAT TIRE DETECTED - Klik to Repair" eh="0cd0073e" />
         <e k="usedplus_fsk_tire_repair_title" v="PERBAIKAN DARURAT BAN" eh="fe197822" />
         <e k="usedplus_fsk_tire_choose" v="Pilih repair method:" eh="51db1af3" />
@@ -1050,7 +1543,8 @@
         <e k="usedplus_fsk_mode_diagnose" v="Diagnosis Komponen" eh="3b9e5655" />
         <e k="usedplus_fsk_mode_malfunctions" v="Cari Kerusakan" eh="26d2acee" />
         <e k="usedplus_fsk_mode_tire" v="Layanan Ban" eh="b0234f4e" />
-<e k="usedplus_fsk_rvb_not_installed" v="Mod RVB tidak terinstal" eh="68a5ac1b" />
+        <e k="usedplus_fsk_mode_rvb" v="Analisis Sistem RVB" eh="5f5c4944" />
+        <e k="usedplus_fsk_rvb_not_installed" v="Mod RVB tidak terinstal" eh="68a5ac1b" />
         <e k="usedplus_fsk_rvb_no_data" v="Tidak ada data RVB tersedia untuk kendaraan ini" eh="772bef55" />
         <e k="usedplus_fsk_no_malfunctions" v="Tidak ada kerusakan aktif terdeteksi" eh="3d25e830" />
         <e k="usedplus_component_engine" v="Mesin" eh="7bfa3072" />
@@ -1062,8 +1556,14 @@
         <e k="usedplus_malfunction_leak" v="BOCOR" eh="2ec9e171" />
         <e k="usedplus_malfunction_flat" v="KEMPES" eh="f88a77e3" />
         <e k="usedplus_fsk_diagnosis_exhausted" v="Sistem ini sudah menerima layanan lapangan. Perbaikan lebih lanjut memerlukan peralatan bengkel." eh="79b71f1e" />
-<e k="usedplus_serviceTruck_inspect" v="Inspeksi %s" eh="1fb02eae" />
-<e k="usedplus_serviceTruck_resume" v="Lanjutkan Pemulihan" eh="0e390222" />
+        <e k="usedplus_serviceTruck_name" v="Truk Servis" eh="51b741d0" />
+        <e k="usedplus_serviceTruck_function" v="Bengkel bergerak untuk restorasi kendaraan jangka panjang. Dapat memulihkan keandalan DAN plafon keandalan seiring waktu. Memerlukan diesel, oli, cairan hidrolik, dan suku cadang." eh="3c12f4e8" />
+        <e k="usedplus_serviceTruck_typeDesc" v="Kendaraan Restorasi" eh="7d7e5cd9" />
+        <e k="usedplus_serviceTruck_dialogTitle" v="TRUK SERVIS - PEMULIHAN KENDARAAN" eh="00a2db6f" />
+        <e k="usedplus_serviceTruck_inspect" v="Inspeksi %s" eh="1fb02eae" />
+        <e k="usedplus_serviceTruck_noTarget" v="Tidak ada kendaraan di dekat" eh="c02151b6" />
+        <e k="usedplus_serviceTruck_noVehicle" v="Tidak ada kendaraan di dekat untuk dipulihkan" eh="a06fd6fe" />
+        <e k="usedplus_serviceTruck_resume" v="Lanjutkan Pemulihan" eh="0e390222" />
         <e k="usedplus_serviceTruck_stop" v="Hentikan Pemulihan" eh="145970e3" />
         <e k="usedplus_serviceTruck_started" v="Memulai pemulihan %s" eh="9ae2b7d4" />
         <e k="usedplus_serviceTruck_stopped" v="Menghentikan pemulihan %s" eh="486b803c" />
@@ -1072,11 +1572,22 @@
         <e k="usedplus_serviceTruck_needParts" v="Perlu palet suku cadang di dekat!" eh="13f1aea0" />
         <e k="usedplus_serviceTruck_damage" v="Peringatan: Kerusakan pemulihan karena sumber daya kosong!" eh="a0546a3a" />
         <e k="usedplus_serviceTruck_ceiling" v="Potensi Maksimal: %d%%" eh="6f7241ba" />
-<e k="usedplus_serviceTruck_cooldown" v="Cooldown: %dj" eh="2ea1fcb2" />
+        <e k="usedplus_serviceTruck_selectInfo" v="Pilih a component to begin deep restoration. Unlike field repairs, this process takes hours but can fully restore the vehicle." eh="979901a5" />
+        <e k="usedplus_serviceTruck_cooldown" v="Cooldown: %dj" eh="2ea1fcb2" />
         <e k="usedplus_serviceTruck_healthy" v="Sistem Sehat" eh="5576cd8a" />
         <e k="usedplus_serviceTruck_inspecting" v="Menginspeksi: %s" eh="e11e1d26" />
         <e k="usedplus_serviceTruck_estimatedTime" v="Perkiraan waktu: %d jam" eh="1d3deb3e" />
-<e k="usedplus_serviceTruck_discoveryTitle" v="KESEMPATAN ISTIMEWA" eh="5859f1ad" />
+        <e k="usedplus_serviceTruck_inspectionPassed" v="INSPEKSI LULUS" eh="47f7fcfd" />
+        <e k="usedplus_serviceTruck_inspectionFailed" v="INSPEKSI GAGAL" eh="a631d00c" />
+        <e k="usedplus_serviceTruck_canStartRestoration" v="Pemulihan dapat dimulai. Estimasi: %d jam" eh="0e981aef" />
+        <e k="usedplus_serviceTruck_wrongDiagnosis" v="Diagnosis salah. Anda harus menunggu sebelum mencoba lagi komponen ini." eh="5a4aabc9" />
+        <e k="usedplus_serviceTruck_cooldownApplied" v="Cooldown: %d jam" eh="2c7183c1" />
+        <e k="usedplus_serviceTruck_startRestoration" v="MULAI PEMULIHAN" eh="696ac7a5" />
+        <e k="usedplus_serviceTruck_paused_diesel" v="Pemulihan dijeda - isi ulang tangki diesel" eh="1fe7b196" />
+        <e k="usedplus_serviceTruck_paused_oil" v="Pemulihan dijeda - isi ulang tangki oli" eh="e8431b21" />
+        <e k="usedplus_serviceTruck_paused_hydraulic" v="Pemulihan dijeda - isi ulang cairan hidrolik" eh="613a5371" />
+        <e k="usedplus_serviceTruck_paused_parts" v="Pemulihan dijeda - perlu lebih banyak suku cadang!" eh="bd1c3747" />
+        <e k="usedplus_serviceTruck_discoveryTitle" v="KESEMPATAN ISTIMEWA" eh="5859f1ad" />
         <e k="usedplus_serviceTruck_discoverySubtitle" v="Agen Nasional Anda Punya Koneksi" eh="c0c9fe88" />
         <e k="usedplus_serviceTruck_mechanicQuote" v="&amp;quot;Saya kenal mekanik yang pensiun dari bisnis perbaikan. Dia punya truk servis lengkap yang ingin dijual. Hanya tunai, tapi saya bisa dapat harga bagus untuk Anda. Tertarik?&amp;quot;" eh="219139f8" />
         <e k="usedplus_serviceTruck_vehicleName" v="Truk Servis GMC C7000" eh="7f78c3d1" />
@@ -1088,30 +1599,44 @@
         <e k="usedplus_serviceTruck_cashOnly" v="TUNAI SAJA" eh="087d1524" />
         <e k="usedplus_serviceTruck_expiryNote" v="Penawaran berakhir dalam %d hari" eh="9d7bc900" />
         <e k="usedplus_serviceTruck_buyNow" v="Beli Sekarang" eh="c1f52fba" />
-<e k="usedplus_serviceTruck_purchaseSuccess" v="Truk Servis dibeli! Temukan di titik spawn toko." eh="16cacb8d" />
+        <e k="usedplus_serviceTruck_notNow" v="Nanti Saja" eh="8dff1db0" />
+        <e k="usedplus_serviceTruck_purchaseSuccess" v="Truk Servis dibeli! Temukan di titik spawn toko." eh="16cacb8d" />
         <e k="usedplus_serviceTruck_opportunitySaved" v="Kesempatan disimpan. Periksa Manajer Keuangan untuk membeli nanti." eh="410b1a26" />
         <e k="usedplus_serviceTruck_opportunityExpired" v="Kesempatan Truk Servis telah kedaluwarsa." eh="a5d3a5fb" />
         <e k="usedplus_serviceTruck_insufficientFunds" v="Dana tidak cukup! Anda butuh uang tunai $%s." eh="9b84e434" />
-<e k="configuration_bodyColor" v="Warna Bodi" eh="e607d9e6" />
-<e k="usedplus_ft_title" v="PELACAK KERUSAKAN" eh="92470a22" />
+        <e k="usedplus_serviceTruck_alreadyOwned" v="Anda sudah memiliki Truk Servis." eh="8d7c53f6" />
+        <e k="configuration_bodyColor" v="Warna Bodi" eh="e607d9e6" />
+        <e k="usedplus_serviceTruck_stripeColor" v="Warna Garis" eh="12b22714" />
+        <e k="usedplus_ft_title" v="PELACAK KERUSAKAN" eh="92470a22" />
         <e k="usedplus_ft_selectComponent" v="Pilih komponen untuk didiagnosis" eh="3fb628e9" />
-<e k="usedplus_ft_quickScan" v="Scan cepat (2x biaya)" eh="31d0f8fb" />
-<e k="usedplus_ft_beginRepair" v="Mulai perbaikan" eh="e792568e" />
+        <e k="usedplus_ft_probeMode" v="Periksa" eh="76d16796" />
+        <e k="usedplus_ft_flagMode" v="Tandai" eh="c5836008" />
+        <e k="usedplus_ft_quickScan" v="Scan cepat (2x biaya)" eh="31d0f8fb" />
+        <e k="usedplus_ft_hint" v="Manual servis" eh="d96f8735" />
+        <e k="usedplus_ft_beginRepair" v="Mulai perbaikan" eh="e792568e" />
         <e k="usedplus_ft_oilUsed" v="Oli terpakai: %.1fL" eh="bccd33a2" />
-<e k="usedplus_ft_corroded" v="Berkarat" eh="4b370f36" />
+        <e k="usedplus_ft_faultsFound" v="Kerusakan: %d/%d" eh="5abe853a" />
+        <e k="usedplus_ft_corroded" v="Berkarat" eh="4b370f36" />
         <e k="usedplus_ft_cracked" v="Retak" eh="26d3b853" />
         <e k="usedplus_ft_seized" v="Macet" eh="04db850b" />
-<e k="usedplus_ft_probeHit" v="KERUSAKAN DITEMUKAN! Kebocoran cairan - 3x biaya" eh="21e8a8bf" />
+        <e k="usedplus_ft_selectType" v="Diagnosis jenis kerusakan:" eh="bf552726" />
+        <e k="usedplus_ft_probeHit" v="KERUSAKAN DITEMUKAN! Kebocoran cairan - 3x biaya" eh="21e8a8bf" />
         <e k="usedplus_ft_correct" v="BENAR" eh="0d536515" />
         <e k="usedplus_ft_incorrect" v="SALAH" eh="befd188c" />
-<e k="usedplus_ft_quickScanCap" v="Kualitas dibatasi 60%% (Scan cepat)" eh="5b519744" />
+        <e k="usedplus_ft_repairResult" v="%s: %s - %s +%.0f%%" eh="ba74960b" />
+        <e k="usedplus_ft_totalGain" v="Total: +%.1f%% keandalan, +%.1f%% batas" eh="1da183e9" />
+        <e k="usedplus_ft_totalCost" v="Sumber daya terpakai: %.1fL oli" eh="3dd1f971" />
+        <e k="usedplus_ft_hintsRemaining" v="Petunjuk: %d" eh="c8f080c2" />
+        <e k="usedplus_ft_quickScanCap" v="Kualitas dibatasi 60%% (Scan cepat)" eh="5b519744" />
         <e k="usedplus_ft_noFaults" v="Tidak ada kerusakan - sistem baik!" eh="6bfa5546" />
         <e k="usedplus_ft_noOil" v="Truk Servis tidak memiliki oli! Isi tangki oli sebelum mendiagnosis." eh="3cd9a926" />
         <e k="usedplus_ft_action" v="Pelacak kerusakan: %s" eh="c4066687" />
         <e k="usedplus_ft_corrodedDesc" v="Kerusakan karat / oksidasi" eh="8a01ae60" />
         <e k="usedplus_ft_crackedDesc" v="Retakan tekanan / kelelahan" eh="81d5118b" />
         <e k="usedplus_ft_seizedDesc" v="Bearing macet / terkunci" eh="647b76a9" />
-<e k="fillType_spareParts" v="Suku Cadang" eh="ab6b8ce1" />
+        <e k="usedplus_sparePartsPallet_name" v="Palet Suku Cadang" eh="9bf39a93" />
+        <e k="usedplus_sparePartsPallet_function" v="Suku cadang habis pakai untuk restorasi Truk Servis. Tempatkan di dekat truk selama pekerjaan restorasi." eh="c90aa3eb" />
+        <e k="fillType_spareParts" v="Suku Cadang" eh="ab6b8ce1" />
         <e k="fillType_hydraulicOil" v="Oli Hidrolik" eh="646d470f" />
         <e k="unit_pcs" v="pcs" eh="3ecf2642" />
         <e k="usedplus_resto_symptom_engine_knocking_load" v="Ketukan parah saat beban" eh="fb8c3067" />
@@ -1192,7 +1717,8 @@
         <e k="usedplus_resto_desc_cylinders" v="Reseal silinder dan refinishing batang" eh="d0aab178" />
         <e k="usedplus_resto_desc_hoses" v="Penggantian selang lengkap" eh="b9531198" />
         <e k="usedplus_settings_header" v="Pengaturan UsedPlus" eh="3ac65cdc" />
-<e k="usedplus_setting_preset" v="Preset Cepat" eh="ef6e6470" />
+        <e k="usedplus_settings_requiresAdmin" v="Hanya admin server yang dapat mengubah pengaturan." eh="e036f8a5" />
+        <e k="usedplus_setting_preset" v="Preset Cepat" eh="ef6e6470" />
         <e k="usedplus_setting_preset_desc" v="Terapkan konfigurasi preset (mengubah semua pengaturan di bawah)" eh="63332963" />
         <e k="usedplus_setting_finance" v="Pembiayaan Kendaraan/Tanah" eh="8159256d" />
         <e k="usedplus_setting_finance_desc" v="Aktifkan pembiayaan untuk pembelian kendaraan dan tanah" eh="4834038c" />
@@ -1241,7 +1767,12 @@
         <e k="usedplus_setting_elsIntegration_desc" v="Aktifkan integrasi EnhancedLoanSystem. Menonaktifkan pinjaman UsedPlus (ELS menangani mereka)." eh="1594da56" />
         <e k="usedplus_setting_bcIntegration" v="Better Contracts" eh="66a6ff26" />
         <e k="usedplus_setting_bcIntegration_desc" v="Aktifkan integrasi Better Contracts. Menerapkan diskon lahan yang diperoleh dari kontrak yang diselesaikan." eh="d4e02c7b" />
-<e k="usedplus_setting_interestRate" v="Suku Bunga Pembiayaan" eh="ec5e55f4" />
+        <e k="usedplus_settings_toggles" v="Pengalihan Fitur" eh="2aa7da8d" />
+        <e k="usedplus_settings_money" v="Uang &amp;amp; Tarif" eh="e0d1b0db" />
+        <e k="usedplus_settings_risk" v="Pengampunan &amp;amp; Risiko" eh="c57ae16a" />
+        <e k="usedplus_settings_marketplace" v="Pasar" eh="675e31b9" />
+        <e k="usedplus_settings_condition" v="Kondisi &amp;amp; Kualitas" eh="0ada4be1" />
+        <e k="usedplus_setting_interestRate" v="Suku Bunga Pembiayaan" eh="ec5e55f4" />
         <e k="usedplus_setting_interestRate_desc" v="Tarif dasar untuk semua pembiayaan (kendaraan, tanah, pinjaman). Skor kredit memodifikasi ini." eh="86443f38" />
         <e k="usedplus_setting_tradeInValue" v="Nilai Trade-In %" eh="1f2d9066" />
         <e k="usedplus_setting_tradeInValue_desc" v="Persentase dasar dari harga jual untuk trade-in (varian ±7,5%)" eh="7337cf9e" />
@@ -1261,7 +1792,9 @@
         <e k="usedplus_setting_latePenalty_desc" v="Poin skor kredit hilang per pembayaran terlambat" eh="a58e7e31" />
         <e k="usedplus_setting_searchSuccess" v="Keberhasilan Pencarian Dasar %" eh="01f7d1c0" />
         <e k="usedplus_setting_searchSuccess_desc" v="Peluang dasar untuk menemukan kendaraan bekas. Tingkat menambah bonus: Ekonomi +0%, Standar +10%, Premium +20%, Elite +30%" eh="69f7bd7b" />
-<e k="usedplus_setting_offerExpiry" v="Kedaluwarsa Penawaran" eh="8b1b7a6f" />
+        <e k="usedplus_setting_maxListings" v="Daftar Maks Per Pertanian" eh="5f8a47bd" />
+        <e k="usedplus_setting_maxListings_desc" v="Daftar penjualan aktif maksimum per pertanian (pengaturan internal)" eh="88403541" />
+        <e k="usedplus_setting_offerExpiry" v="Kedaluwarsa Penawaran" eh="8b1b7a6f" />
         <e k="usedplus_setting_offerExpiry_desc" v="Jam hingga penawaran penjualan kedaluwarsa" eh="fe118057" />
         <e k="usedplus_setting_commission" v="Komisi Agen %" eh="443d1555" />
         <e k="usedplus_setting_commission_desc" v="Persentase diambil oleh agen penjualan" eh="8f42cc9d" />
@@ -1277,10 +1810,32 @@
         <e k="usedplus_setting_overrideShopBuyLease_desc" v="Saat AKTIF, tombol Beli/Sewa membuka dialog UsedPlus. Saat NONAKTIF, gunakan tombol Biaya sebagai gantinya. Nonaktifkan jika Anda memiliki konflik dengan mod toko lain." eh="8a2bc868" />
         <e k="usedplus_setting_overrideRVBRepair" v="Timpa Perbaikan RVB" eh="ad8478fa" />
         <e k="usedplus_setting_overrideRVBRepair_desc" v="Saat AKTIF, tombol Perbaikan RVB membuka perbaikan parsial UsedPlus. Saat NONAKTIF, gunakan Peta &gt; Perbaiki Kendaraan untuk fitur UsedPlus. Hanya berlaku dengan Real Vehicle Breakdowns terinstal." eh="364e998d" />
-<e k="usedplus_hydraulic_system" v="Sistem Hidrolik" eh="2f6e031e" />
+        <e k="usedplus_preset_title" v="Terapkan Preset" eh="124235e0" />
+        <e k="usedplus_preset_easy" v="Mudah" eh="7f943921" />
+        <e k="usedplus_preset_easy_desc" v="Pengampunan maksimum - fokus pada bertani, bukan keuangan" eh="81004805" />
+        <e k="usedplus_preset_balanced" v="Seimbang" eh="c6589f52" />
+        <e k="usedplus_preset_balanced_desc" v="Simulasi seimbang default - pengalaman yang dimaksudkan" eh="e4b620f0" />
+        <e k="usedplus_preset_challenging" v="Menantang" eh="4235e068" />
+        <e k="usedplus_preset_challenging_desc" v="Konsekuensi nyata - keputusan penting" eh="232773e0" />
+        <e k="usedplus_preset_hardcore" v="Hardcore" eh="1c800aa9" />
+        <e k="usedplus_preset_hardcore_desc" v="Bertahan ekonomi - setiap dolar berarti" eh="f893227a" />
+        <e k="usedplus_preset_streamlined" v="Dipermudah" eh="093eb019" />
+        <e k="usedplus_preset_streamlined_desc" v="Hanya biaya dan sewa - tanpa tambahan" eh="e3952520" />
+        <e k="usedplus_preset_immersive" v="Imersif" eh="7a7f14a4" />
+        <e k="usedplus_preset_immersive_desc" v="Simulasi penuh - terbaik dengan mod RVB/UYT" eh="777e7831" />
+        <e k="usedplus_preset_realistic" v="Seimbang" eh="c6589f52" />
+        <e k="usedplus_preset_casual" v="Mudah" eh="7f943921" />
+        <e k="usedplus_preset_lite" v="Dipermudah" eh="093eb019" />
+        <e k="usedplus_preset_realistic_desc" v="Simulasi seimbang default - pengalaman yang dimaksudkan" eh="e4b620f0" />
+        <e k="usedplus_preset_casual_desc" v="Pengampunan maksimum - fokus pada bertani, bukan keuangan" eh="81004805" />
+        <e k="usedplus_preset_lite_desc" v="Hanya biaya dan sewa - tanpa tambahan" eh="e3952520" />
+        <e k="usedplus_preset_apply" v="Terapkan" eh="9639e32c" />
+        <e k="usedplus_preset_reset" v="Reset ke Default" eh="6795975d" />
+        <e k="usedplus_hydraulic_system" v="Sistem Hidrolik" eh="2f6e031e" />
         <e k="usedplus_maintenance_grade" v="Perawatan" eh="10d0de28" />
         <e k="usedplus_service_history" v="Riwayat" eh="16d2b386" />
-<e k="usedplus_mechanic_assessment" v="PENILAIAN MEKANIK" eh="ed0defaa" />
+        <e k="usedplus_mechanic_says" v="Mekanik" eh="64eb6697" />
+        <e k="usedplus_mechanic_assessment" v="PENILAIAN MEKANIK" eh="ed0defaa" />
         <e k="usedplus_grade_excellent" v="Sangat Baik" eh="fcc2d28a" />
         <e k="usedplus_grade_good" v="Baik" eh="0c6ad70b" />
         <e k="usedplus_grade_fair" v="Cukup" eh="f7f20cf0" />
@@ -1309,7 +1864,8 @@
         <e k="usedplus_sr_titleAccept" v="PENAWARAN DITERIMA!" eh="c36f802f" />
         <e k="usedplus_sr_titleCounter" v="PENAWARAN BALASAN" eh="544441c8" />
         <e k="usedplus_sr_titleReject" v="PENAWARAN DITOLAK" eh="2b54c509" />
-<e k="usedplus_sr_yourOffer" v="Penawaran Anda:" eh="4e018663" />
+        <e k="usedplus_sr_titleWalkaway" v="PENJUAL PERGI" eh="d4da1912" />
+        <e k="usedplus_sr_yourOffer" v="Penawaran Anda:" eh="4e018663" />
         <e k="usedplus_sr_counterOffer" v="Penawaran Balasan:" eh="768065b8" />
         <e k="usedplus_sr_sellerPrice" v="Harga Penjual:" eh="1402265a" />
         <e k="usedplus_sr_completePurchase" v="Selesaikan Pembelian" eh="e1c9f521" />
@@ -1320,15 +1876,27 @@
         <e k="usedplus_response_accepted" v="Deal! Anda mendapat %s." eh="e1b388b0" />
         <e k="usedplus_response_counter" v="Saya tidak bisa serendah itu, tapi saya akan bertemu Anda di tengah. Bagaimana dengan %s?" eh="6da9eb6a" />
         <e k="usedplus_response_rejected" v="Maaf, tapi saya tidak bisa menerima itu. Harga saya tetap di %s." eh="d99f0b95" />
-<e k="usedplus_standfirm_success" v="Baiklah, baiklah... Anda pengusaha keras. Saya ambil." eh="0953e50a" />
+        <e k="usedplus_response_walkaway" v="Saya pikir kita terlalu jauh. Kembali jika Anda berubah pikiran." eh="c73a083b" />
+        <e k="usedplus_standfirm_success" v="Baiklah, baiklah... Anda pengusaha keras. Saya ambil." eh="0953e50a" />
         <e k="usedplus_standfirm_hold" v="Lihat, %s serendah mungkin saya. Ambil atau tinggalkan." eh="2d81ca38" />
         <e k="usedplus_standfirm_walkaway" v="Saya tidak berpikir kita akan setuju. Mungkin lain kali." eh="2d8a7003" />
-<e k="usedplus_negotiation_locked" v="Penjual tidak tersedia. Coba lagi dalam %d menit." eh="938f0f62" />
-<e k="usedplus_walkaway_message" v="Penawaran Anda menghina penjual. Mereka menolak berbisnis dengan Anda dan kendaraan ini tidak lagi tersedia." eh="3ef90ec2" />
-<e k="usedplus_mode_finance_disabled" v="Biaya (Dinonaktifkan)" eh="a7fe11df" />
+        <e k="usedplus_negotiation_locked_title" v="Penjual Tidak Tersedia" eh="00a519f4" />
+        <e k="usedplus_negotiation_locked" v="Penjual tidak tersedia. Coba lagi dalam %d menit." eh="938f0f62" />
+        <e k="usedplus_negotiation_locked_hint" v="Mereka mungkin mendingin setelah sedikit..." eh="1c8c51e6" />
+        <e k="usedplus_insufficient_funds" v="Dana Tidak Cukup" eh="68c8a940" />
+        <e k="usedplus_insufficient_funds_offer" v="Anda tidak dapat membeli penawaran ini. Pembelian kendaraan bekas hanya tunai." eh="1c7f7913" />
+        <e k="usedplus_insufficient_funds_shortfall" v="Anda butuh %s more to complete this purchase." eh="d40315cf" />
+        <e k="usedplus_insufficient_funds_balance" v="Saldo saat ini: %s" eh="b9522f76" />
+        <e k="usedplus_walkaway_title" v="PENJUAL PERGI" eh="d4da1912" />
+        <e k="usedplus_walkaway_message" v="Penawaran Anda menghina penjual. Mereka menolak berbisnis dengan Anda dan kendaraan ini tidak lagi tersedia." eh="3ef90ec2" />
+        <e k="usedplus_walkaway_workhorse" v="Penjual ini tahu persis apa yang mereka miliki - mesin yang tidak pernah gagal. Mereka tidak akan menghibur penawaran rendah." eh="dd4d6411" />
+        <e k="usedplus_seller_immovable_hint" v="Penjual ini tahu persis apa yang mereka miliki. Jangan harap ruang negosiasi apapun." eh="afe11ced" />
+        <e k="usedplus_mode_finance_disabled" v="Biaya (Dinonaktifkan)" eh="a7fe11df" />
         <e k="usedplus_mode_lease_disabled" v="Sewa (Dinonaktifkan)" eh="2c3f5a31" />
-<e k="usedplus_finance_disabled_msg" v="Pembiayaan kendaraan dinonaktifkan di pengaturan UsedPlus." eh="fffb70a6" />
-<e k="usedplus_lease_disabled_msg" v="Leasing kendaraan dinonaktifkan di pengaturan UsedPlus." eh="bd7f5b24" />
+        <e k="usedplus_finance_disabled_title" v="Fitur Dinonaktifkan" eh="e4c783e8" />
+        <e k="usedplus_finance_disabled_msg" v="Pembiayaan kendaraan dinonaktifkan di pengaturan UsedPlus." eh="fffb70a6" />
+        <e k="usedplus_lease_disabled_title" v="Fitur Dinonaktifkan" eh="e4c783e8" />
+        <e k="usedplus_lease_disabled_msg" v="Leasing kendaraan dinonaktifkan di pengaturan UsedPlus." eh="bd7f5b24" />
         <e k="usedplus_land_finance_disabled_msg" v="Pembiayaan tanah dinonaktifkan di pengaturan UsedPlus." eh="0335547a" />
         <e k="usedplus_land_lease_disabled_msg" v="Leasing tanah dinonaktifkan di pengaturan UsedPlus." eh="f875a63d" />
         <e k="usedplus_land_modeFinance_disabled" v="Biaya (Dinonaktifkan)" eh="a7fe11df" />
@@ -1340,12 +1908,14 @@
         <e k="usedplus_seizure_repair_confirm" v="%s macet dan memerlukan perbaikan darurat.\n\nBiaya perbaikan: %s\n\nLanjutkan dengan perbaikan?" eh="bf702608" />
         <e k="usedplus_seizure_repaired" v="%s diperbaiki! Keandalan dipulihkan ke %d%%" eh="323fa338" />
         <e k="usedplus_repair_no_money" v="Uang tidak cukup untuk perbaikan!" eh="0c0a7c19" />
-<e k="usedplus_notification_landSeized" v="TANAH DISITA: %s telah diambil karena tidak ada pembayaran!" eh="1c095ac6" />
+        <e k="usedplus_warning_notEnoughMoney" v="Uang tidak cukup!" eh="48f194d4" />
+        <e k="usedplus_notification_landSeized" v="TANAH DISITA: %s telah diambil karena tidak ada pembayaran!" eh="1c095ac6" />
         <e k="usedplus_error_paymentTooLow" v="Jumlah pembayaran di bawah minimum yang diperlukan." eh="4f83eda0" />
         <e k="usedplus_error_paymentTooHigh" v="Jumlah pembayaran melebihi saldo yang tersisa." eh="091a9776" />
         <e k="usedplus_success_paymentMade" v="Pembayaran berhasil diproses!" eh="b12aba7d" />
         <e k="usedplus_error_cannotAffordTermination" v="Uang tidak cukup untuk membayar biaya penghentian sewa." eh="64ed9e67" />
-<e k="usedplus_finance_credit_msg" v="Pembiayaan memerlukan skor kredit %d atau lebih tinggi." eh="7d3d6778" />
+        <e k="usedplus_credit_required" v="Kredit Diperlukan" eh="cefa86b5" />
+        <e k="usedplus_finance_credit_msg" v="Pembiayaan memerlukan skor kredit %d atau lebih tinggi." eh="7d3d6778" />
         <e k="usedplus_lease_credit_msg" v="Leasing memerlukan skor kredit %d atau lebih tinggi." eh="c86cbfc5" />
         <e k="usedplus_error_purchaseFailed" v="Pembelian gagal - API game tidak tersedia." eh="c02a7002" />
         <e k="usedplus_error_negativeDownPayment" v="Uang muka tidak boleh negatif." eh="0634f8d8" />
@@ -1360,7 +1930,9 @@
         <e k="usedplus_mp_success_vehicle_purchased" v="Kendaraan berhasil dibeli!" eh="b5beec4f" />
         <e k="usedplus_mp_success_trade_in" v="Trade-in berhasil diselesaikan!" eh="0a59b49a" />
         <e k="usedplus_mp_success_field_repair" v="Perbaikan lapangan selesai!" eh="06239aac" />
-<e k="usedplus_mp_success_land_purchased" v="Tanah berhasil dibeli!" eh="9de4a0f4" />
+        <e k="usedplus_mp_success_fluids_refilled" v="Cairan berhasil diisi ulang!" eh="9597cd1d" />
+        <e k="usedplus_mp_success_tires_replaced" v="Ban berhasil diganti!" eh="5224fbbe" />
+        <e k="usedplus_mp_success_land_purchased" v="Tanah berhasil dibeli!" eh="9de4a0f4" />
         <e k="usedplus_mp_error_purchase_failed" v="Pembelian gagal. Silakan coba lagi." eh="42d7ddab" />
         <e k="usedplus_mp_error_vehicle_not_found" v="Kendaraan tidak ditemukan." eh="02c84e79" />
         <e k="usedplus_mp_error_no_loan" v="Tidak ada saldo pinjaman untuk dibayar." eh="5668e12f" />
@@ -1374,11 +1946,15 @@
         <e k="usedplus_admin_section_electrical" v="LISTRIK" eh="9f317629" />
         <e k="usedplus_admin_section_hydraulic" v="HIDROLIK" eh="3e0b9977" />
         <e k="usedplus_admin_section_tires" v="BAN" eh="36173e29" />
-<e k="usedplus_admin_section_items" v="BARANG" eh="9a932d55" />
+        <e k="usedplus_admin_section_utility" v="UTILITAS" eh="1697ce5d" />
+        <e k="usedplus_admin_section_items" v="BARANG" eh="9a932d55" />
         <e k="usedplus_admin_section_discovery" v="PENEMUAN" eh="f5be5d66" />
         <e k="usedplus_admin_section_test_vehicles" v="KENDARAAN UJI" eh="682cb0f3" />
         <e k="usedplus_admin_section_condition" v="PAINTER KONDISI" eh="2593ea9b" />
-<e k="usedplus_admin_section_finance_dialogs" v="DIALOG KEUANGAN" eh="babbf134" />
+        <e k="usedplus_admin_section_money" v="UANG" eh="2bc794c2" />
+        <e k="usedplus_admin_section_credit" v="SKOR KREDIT" eh="4f3b169e" />
+        <e k="usedplus_admin_section_deals" v="TRANSAKSI" eh="bdcaa389" />
+        <e k="usedplus_admin_section_finance_dialogs" v="DIALOG KEUANGAN" eh="babbf134" />
         <e k="usedplus_admin_section_market_dialogs" v="DIALOG PASAR" eh="4c8988f5" />
         <e k="usedplus_admin_section_service_dialogs" v="DIALOG LAYANAN" eh="e407aa85" />
         <e k="usedplus_admin_section_lease_dialogs" v="DIALOG SEWA" eh="479e552e" />
@@ -1405,7 +1981,11 @@
         <e k="usedplus_admin_btn_paint_worn" v="Aus" eh="36cc503e" />
         <e k="usedplus_admin_btn_paint_beaten" v="Rusak Berat" eh="866731dc" />
         <e k="usedplus_admin_btn_paint_destroyed" v="Hancur" eh="aefbd059" />
-<e k="usedplus_admin_btn_payoff_all" v="Lunasi Semua" eh="3817edc8" />
+        <e k="usedplus_admin_btn_add_10k" v="+$10.000" eh="3ca6f66c" />
+        <e k="usedplus_admin_btn_add_100k" v="+$100.000" eh="860860a5" />
+        <e k="usedplus_admin_btn_add_1m" v="+$1.000.000" eh="8946b435" />
+        <e k="usedplus_admin_btn_set_zero" v="Set $0" eh="ca8864ed" />
+        <e k="usedplus_admin_btn_payoff_all" v="Lunasi Semua" eh="3817edc8" />
         <e k="usedplus_admin_btn_dlg_loan" v="Ambil Pinjaman" eh="40fe67fa" />
         <e k="usedplus_admin_btn_dlg_approved" v="Disetujui" eh="6f806341" />
         <e k="usedplus_admin_btn_dlg_credit" v="Kredit" eh="0a90b1bc" />
@@ -1516,7 +2096,8 @@
         <e k="usedplus_notification_offerDeclinedSeller" v="[EN] Offer declined. Seller has been notified." eh="6309e917" />
         <e k="usedplus_notification_repairComplete" v="[EN] Repair complete!&amp;#10;%s&amp;#10;Cost: %s" eh="fee4ff60" />
         <e k="usedplus_notification_repairFinanced" v="[EN] %s financed!&amp;#10;%s over %d months&amp;#10;%s/month" eh="9e172df5" />
-<e k="usedplus_error_cannotSellLeased" v="[EN] Leased vehicles cannot be sold. Terminate the lease first." eh="7385e257" />
+        <e k="usedplus_notification_storageDepleted" v="[EN] Storage depleted! %s tank: %.0f/%.0fL" eh="8b9b49d3" />
+        <e k="usedplus_error_cannotSellLeased" v="[EN] Leased vehicles cannot be sold. Terminate the lease first." eh="7385e257" />
         <e k="usedplus_error_cannotSellFinanced" v="[EN] Financed vehicles cannot be sold until loan is paid off." eh="b756f558" />
         <e k="usedplus_error_vehicleIsCollateral" v="[EN] This vehicle is pledged as collateral for a %s loan.&amp;#10;Pay off the loan first to sell." eh="8037dbf3" />
         <e k="usedplus_error_alreadyListedForSale" v="[EN] This vehicle is already listed for sale." eh="c1f35ff5" />
@@ -1540,7 +2121,10 @@
         <e k="usedplus_error_premiumConditionRequired" v="[EN] Premium pricing requires better vehicle condition." eh="526ed1e9" />
         <e k="usedplus_error_insufficientFundsAgentFee" v="[EN] Insufficient funds. Agent fee: %s" eh="aced7453" />
         <e k="usedplus_error_noVehiclesInPortfolio" v="[EN] No vehicles in portfolio. Check back next month!" eh="6c266f3e" />
-<e k="usedplus_title_vehicleInspection" v="[EN] Vehicle Inspection" eh="7276b8fd" />
+        <e k="usedplus_error_tankContainsWrong" v="[EN] Tank contains %s! Empty it first to add %s." eh="f2b5d5e6" />
+        <e k="usedplus_error_tankNotOil" v="[EN] Tank contains %s, not Engine Oil!" eh="463f93d0" />
+        <e k="usedplus_error_tankNotHydraulic" v="[EN] Tank contains %s, not Hydraulic Fluid!" eh="914123f6" />
+        <e k="usedplus_title_vehicleInspection" v="[EN] Vehicle Inspection" eh="7276b8fd" />
         <e k="usedplus_title_offerWithdrawn" v="[EN] Offer Withdrawn" eh="885e18c5" />
         <e k="usedplus_ui_vanillaSellPrice" v="[EN] Vanilla Sell Price:" eh="edc4376c" />
         <e k="usedplus_ui_thisOffer" v="[EN] This Offer:" eh="739d0e14" />
@@ -1585,7 +2169,8 @@
         <e k="usedplus_ft_howToPlayLine5" v="[EN] 5. Begin Repair when all faults flagged" eh="b0f8b8ad" />
         <e k="usedplus_ft_diagnoseFaultType" v="[EN] DIAGNOSE FAULT TYPE" eh="28f6e88d" />
         <e k="usedplus_ft_cellLabel" v="[EN] Cell [A1]" eh="c22d69d2" />
-<e k="usedplus_ft_repairResults" v="[EN] REPAIR RESULTS" eh="bb6599cb" />
+        <e k="usedplus_ft_cancel" v="[EN] Cancel" eh="ea478870" />
+        <e k="usedplus_ft_repairResults" v="[EN] REPAIR RESULTS" eh="bb6599cb" />
         <e k="usedplus_ft_reliabilityGain" v="[EN] Reliability Gain:" eh="d8c796d2" />
         <e k="usedplus_ft_ceilingRestored" v="[EN] Ceiling Restored:" eh="311f8021" />
         <e k="usedplus_ft_diagnosisAccuracy" v="[EN] Diagnosis Accuracy:" eh="3fc65596" />
@@ -1758,7 +2343,10 @@
         <e k="usedplus_action_obdDisabled" v="[EN] OBD Scanner: %s (DISABLED)" eh="562a5304" />
         <e k="usedplus_action_obdWithWarnings" v="[EN] OBD Scanner: %s (%s)" eh="04f0df6b" />
         <e k="usedplus_action_obdNormal" v="[EN] OBD Scanner: %s" eh="6645cd04" />
-<e k="usedplus_acp_balance" v="[EN] Balance:" eh="b5397350" />
+        <e k="usedplus_action_fillTank" v="[EN] Fill %s Tank (%.0f/%.0fL -&gt; +%.0fL)" eh="6fa80431" />
+        <e k="usedplus_action_tankEmpty" v="[EN] Tank Empty - Purchase %s first" eh="c80194d4" />
+        <e k="usedplus_action_tankWrongFluid" v="[EN] Tank has %s - Vehicle needs %s" eh="02bf3527" />
+        <e k="usedplus_acp_balance" v="[EN] Balance:" eh="b5397350" />
         <e k="usedplus_acp_creditScore" v="[EN] Credit Score:" eh="0199e1a3" />
         <e k="usedplus_acp_activeDeals" v="[EN] Active Deals:" eh="9d92ae65" />
         <e k="usedplus_acp_totalDebt" v="[EN] Total Debt:" eh="3deb323c" />
@@ -1951,7 +2539,15 @@
         <e k="usedplus_dealType_landFinanceDesc" v="[EN] Purchase farmland with mortgage payments." eh="0c5bcb3a" />
         <e k="usedplus_dealType_cashLoan" v="[EN] Cash Loan" eh="c1b883d7" />
         <e k="usedplus_dealType_cashLoanDesc" v="[EN] Borrow against your assets for immediate cash." eh="b032157c" />
-<e k="usedplus_st_cooldownMessage" v="[EN] This component cannot be re-inspected for %d hours of game time." eh="bfd3f006" />
+        <e k="usedplus_osp_tankFull" v="[EN] Tank Full!" eh="bbd165a9" />
+        <e k="usedplus_osp_emptyCapacity" v="[EN] %s [Empty - %.0fL capacity]" eh="99343849" />
+        <e k="usedplus_osp_fillingProgress" v="[EN] Filling %s Tank... %.0f/%.0fL" eh="a9b92a05" />
+        <e k="usedplus_osp_nothing" v="[EN] nothing" eh="3e47b750" />
+        <e k="usedplus_osp_serviceVehicle" v="[EN] Service Vehicle" eh="490a5409" />
+        <e k="usedplus_osp_storageTankEmpty" v="[EN] Storage tank is empty!" eh="87848abb" />
+        <e k="usedplus_osp_tankFilled" v="[EN] %s tank filled! (%.0f/%.0fL)" eh="0846e8fa" />
+        <e k="usedplus_osp_tankIsFull" v="[EN] %s tank is full! (%.0f/%.0fL)" eh="3b27d285" />
+        <e k="usedplus_st_cooldownMessage" v="[EN] This component cannot be re-inspected for %d hours of game time." eh="bfd3f006" />
         <e k="usedplus_st_degradedCount" v="[EN] %d component%s below 90%%" eh="97e59707" />
         <e k="usedplus_st_estimatedTimeResult" v="[EN] Estimated time: %d hours" eh="1d3deb3e" />
         <e k="usedplus_st_low" v="[EN] (LOW)" eh="02937491" />
@@ -1982,119 +2578,14 @@
         <e k="usedplus_uvp_condition" v="[EN] Condition" eh="9e2941b3" />
         <e k="usedplus_uvp_expiresFormat" v="[EN] %d month%s (expires %s)" eh="7917cee0" />
         <e k="usedplus_warning_flattire" v="[EN] FLAT TIRE!" eh="75fc9ab9" />
-<e k="usedplus_fp_containsLabel" v="[EN] Contains:" eh="0acb039c" />
+        <e k="usedplus_error_fillTypeNotRegistered" v="[EN] Error: Fill type not registered!" eh="8ac3f268" />
+        <e k="usedplus_error_noMatchingFluid" v="[EN] No matching fluid type for this tank!" eh="2efd6c76" />
+        <e k="usedplus_fp_containsLabel" v="[EN] Contains:" eh="0acb039c" />
         <e k="usedplus_leaseEnd_title" v="[EN] End of Lease" eh="35022911" />
         <e k="usedplus_serviceTruck_agentMessage" v="[EN] Your National Agent has a special opportunity for you..." eh="e7d6295a" />
         <e k="usedplus_serviceTruck_expiryNotice" v="[EN] Offer expires in %d days" eh="9d7bc900" />
         <e k="usedplus_st_maxPotential" v="[EN] Max Potential: 100%" eh="6029fca8" />
         <e k="usedplus_error_spawnFailed" v="[EN] Failed to spawn vehicle. Money refunded." eh="9025f5e7" />
         <e k="usedplus_error_systemUnavailable" v="[EN] Used vehicle system not available!" eh="09843635" />
-        <e k="usedplus_repair_title_workshop" v="[EN] Workshop Repair" eh="61a80a46" />
-        <e k="usedplus_rp_label_components" v="[EN] Components:" eh="3b7009ae" />
-        <e k="usedplus_rp_label_repair" v="[EN] Repair:" eh="5dcb42f0" />
-        <e k="usedplus_rp_label_repaint" v="[EN] Repaint:" eh="e63bb6f4" />
-        <e k="usedplus_rvb_parts_status" v="[EN] Components: %d / %d need repair" eh="4ad0ab6d" />
-        <e k="usedplus_rp_confirm_title" v="[EN] Confirm Payment" eh="413e8eec" />
-        <e k="usedplus_rp_service_workshop" v="[EN] Workshop Repair" eh="61a80a46" />
-        <e k="usedplus_rp_service_mechanical" v="[EN] Mechanical Repair" eh="60a0d54f" />
-        <e k="usedplus_rp_service_repaint" v="[EN] Repaint" eh="1d0b7dd4" />
-        <e k="usedplus_rp_notification_workshop" v="[EN] full workshop repair" eh="a338c59a" />
-        <e k="usedplus_purchase_complete" v="[EN] Purchase Complete" eh="7328ece0" />
-        <e k="usedplus_purchase_detail" v="[EN] Purchased %s for %s. Check near your position!" eh="1738ea68" />
-        <e k="usedplus_error_insufficientFundsBuy" v="[EN] Insufficient funds. Need %s" eh="fe8244d2" />
-        <e k="usedplus_error_cannotFinance" v="[EN] Cannot finance (credit score %d, need %d)" eh="6b37f923" />
-        <e k="usedplus_error_cannotLease" v="[EN] Cannot lease (credit score %d, need %d)" eh="9bacc21e" />
-        <e k="usedplus_error_placeablesNotLeasable" v="[EN] Placeables cannot be leased" eh="a529b7f9" />
-        <e k="usedplus_inspection_cached" v="[EN] Vehicle condition unchanged since last inspection.
-Viewing previous report (no charge)." eh="b19e3ace" />
-        <e k="usedplus_inspection_insufficientFunds" v="[EN] Inspection fee: %s
-
-Insufficient funds for inspection." eh="6c43421d" />
-        <e k="usedplus_vpf_offerValidMonths" v="[EN] Offer valid for %d months" eh="5fe704c6" />
-        <e k="usedplus_rp_fuelLeakLabel" v="[EN] Fuel Leak (+%s)" eh="3281f228" />
-        <e k="usedplus_rp_flatTireLabel" v="[EN] Flat Tire (+%s)" eh="68a4809d" />
-        <e k="usedplus_rp_includesLabel" v="[EN] Includes: " eh="59bef2f2" />
-        <e k="usedplus_rvb_sectionHeader" v="[EN] — UsedPlus —" eh="313c518f" />
-        <e k="usedplus_dd_titleFinance" v="[EN] FINANCE DETAILS" eh="12949ab3" />
-        <e k="usedplus_dd_titleLandLease" v="[EN] LAND LEASE DETAILS" eh="4a6f0e4d" />
-        <e k="usedplus_dd_titleLease" v="[EN] LEASE DETAILS" eh="dee3389e" />
-        <e k="usedplus_dd_typeVehicleFinance" v="[EN] Vehicle Finance" eh="6bd5146b" />
-        <e k="usedplus_dd_typeRepair" v="[EN] Repair" eh="0493d27e" />
-        <e k="usedplus_dd_typeRepaint" v="[EN] Repaint" eh="1d0b7dd4" />
-        <e k="usedplus_dd_typeRepairRepaint" v="[EN] Repair &amp; Repaint" eh="d1ed8a49" />
-        <e k="usedplus_dd_typeLandFinance" v="[EN] Land Finance" eh="b6dcb2f3" />
-        <e k="usedplus_dd_typeLease" v="[EN] Lease" eh="47c96b08" />
-        <e k="usedplus_dd_typeLandLease" v="[EN] Land Lease" eh="9c6119ac" />
-        <e k="usedplus_dd_statusActive" v="[EN] Active" eh="4d3d769b" />
-        <e k="usedplus_dd_termYears" v="[EN] %d months (%d year%s)" eh="7b504ff3" />
-        <e k="usedplus_dd_termMonths" v="[EN] %d months" eh="eb5314ed" />
-        <e k="usedplus_dd_bankLoanExtra" v="[EN] Bank loan payment: %s (+%d%% extra toward principal)" eh="fdf83142" />
-        <e k="usedplus_dd_bankLoanStandard" v="[EN] Bank loan payment: Standard (interest only)" eh="d80d4b22" />
-        <e k="usedplus_dd_paymentSet" v="[EN] Payment set to %s (%.0f%% of base)" eh="bc1691c3" />
-        <e k="usedplus_dd_buyoutLandMessage" v="[EN] Buy out this land lease for %s?
-
-Original land price: %s
-Lease progress savings: -%s
-Buyout price: %s" eh="c9136a1a" />
-        <e k="usedplus_dd_buyoutVehicleMessage" v="[EN] Buy out this lease for %s?
-
-Buyout price: %s
-Equity applied: -%s
-Deposit refund: +%s
-Net cost: %s" eh="8cf09564" />
-        <e k="usedplus_dd_payoffConfirm" v="[EN] Are you sure you want to pay off this loan for %s?" eh="eee2e704" />
-        <e k="usedplus_dd_buyoutLeaseTitle" v="[EN] Buyout Lease" eh="361aaaa7" />
-        <e k="usedplus_dd_earlyPayoffTitle" v="[EN] Early Payoff" eh="4ccf6612" />
-        <e k="usedplus_cr_discountRates" v="[EN] %.1f%% discount on interest rates" eh="0711b339" />
-        <e k="usedplus_cr_penaltyRates" v="[EN] +%.1f%% on interest rates" eh="42125e5e" />
-        <e k="usedplus_cr_standardRates" v="[EN] Standard interest rates apply" eh="0012275c" />
-        <e k="usedplus_cr_trendExcellent" v="[EN] Excellent - Strong Growth" eh="6733f8f7" />
-        <e k="usedplus_cr_trendGood" v="[EN] Good - Positive Momentum" eh="ea0cc729" />
-        <e k="usedplus_cr_trendStable" v="[EN] Stable - Maintaining" eh="06f25cfd" />
-        <e k="usedplus_cr_trendDeclining" v="[EN] Declining - Needs Attention" eh="c0dff221" />
-        <e k="usedplus_cr_trendPoor" v="[EN] Poor - Immediate Action Needed" eh="695283ec" />
-        <e k="usedplus_cr_factorExcellent" v="[EN] Excellent (%d%% on-time)" eh="d3ba0cc0" />
-        <e k="usedplus_cr_factorGood" v="[EN] Good (%d%% on-time)" eh="36c000f1" />
-        <e k="usedplus_cr_factorFair" v="[EN] Fair (%d%% on-time)" eh="841dcf31" />
-        <e k="usedplus_cr_factorPoor" v="[EN] Poor (%d%% on-time)" eh="8d3f3834" />
-        <e k="usedplus_cr_utilExcellent" v="[EN] Excellent (%.0f%% utilized)" eh="d755158d" />
-        <e k="usedplus_cr_utilGood" v="[EN] Good (%.0f%% utilized)" eh="e5d75b1a" />
-        <e k="usedplus_cr_utilFair" v="[EN] Fair (%.0f%% utilized)" eh="f65db5f6" />
-        <e k="usedplus_cr_utilHigh" v="[EN] High (%.0f%% utilized)" eh="21decde4" />
-        <e k="usedplus_cr_ageNew" v="[EN] New" eh="03c2e7e4" />
-        <e k="usedplus_cr_ageEstablished" v="[EN] Established (%d payments)" eh="776f4287" />
-        <e k="usedplus_cr_ageBuilding" v="[EN] Building (%d payments)" eh="23775faa" />
-        <e k="usedplus_cr_ageGrowing" v="[EN] Growing (%d payments)" eh="7ac52629" />
-        <e k="usedplus_cr_ageNewCount" v="[EN] New (%d payments)" eh="3b231c55" />
-        <e k="usedplus_cr_histogramFormat" v="[EN] %s  %d%% On-Time" eh="b5fbdcda" />
-        <e k="usedplus_cr_legendOnTime" v="[EN] +%d on-time" eh="94764fa4" />
-        <e k="usedplus_cr_legendLate" v="[EN] -%d late" eh="11854e47" />
-        <e k="usedplus_cr_legendMissed" v="[EN] X%d missed" eh="57228c2a" />
-        <e k="usedplus_cr_tipMissedPayments" v="[EN] PRIORITY: Avoid late payments - they hurt your score the most!" eh="ed07d6da" />
-        <e k="usedplus_cr_tipHighDebt" v="[EN] Pay down debt - using &gt;70% of credit hurts your score." eh="c512f38e" />
-        <e k="usedplus_cr_tipDebtRatio" v="[EN] Try to keep debt below 50% of your assets for better rates." eh="94bf4051" />
-        <e k="usedplus_cr_tipStartSmall" v="[EN] Start small: finance one affordable vehicle to build history." eh="588bfefd" />
-        <e k="usedplus_cr_tipOnTime6Months" v="[EN] Make every payment on time for 6+ months to rebuild." eh="0c87397d" />
-        <e k="usedplus_cr_tipConsistency" v="[EN] Consistency is key - 6 on-time payments will boost your score." eh="3caf2794" />
-        <e k="usedplus_cr_tipOpenDeal" v="[EN] Open a small finance deal to start building credit history." eh="6d0d1457" />
-        <e k="usedplus_cr_tipStreak" v="[EN] Keep your current streak going - 6+ months helps a lot!" eh="26cc825c" />
-        <e k="usedplus_cr_tipMixAccounts" v="[EN] Mix account types (finance + lease) for a diverse credit mix." eh="5111a874" />
-        <e k="usedplus_cr_tipGoodProgress" v="[EN] Excellent progress! Maintain current habits to reach 750+." eh="7e2656a1" />
-        <e k="usedplus_cr_tipDebt30" v="[EN] Paying down debt below 30% unlocks the best interest rates." eh="99dfcd68" />
-        <e k="usedplus_cr_tipExcellent" v="[EN] Outstanding credit! You qualify for the best rates available." eh="29979a0f" />
-        <e k="usedplus_cr_tipRefinance" v="[EN] Consider refinancing older loans at your new lower rate." eh="93764915" />
-        <e k="usedplus_cr_tipTimeBuilds" v="[EN] Credit history takes time - keep making payments monthly." eh="85fe5077" />
-        <e k="usedplus_cr_tipNoHistory" v="[EN] No credit history yet - finance a vehicle to start building!" eh="ecd67784" />
-        <e k="usedplus_cr_tipGeneral1" v="[EN] Pay bills on time - payment history is 35% of your score." eh="eacdc218" />
-        <e k="usedplus_cr_tipGeneral2" v="[EN] Keep debt-to-asset ratio below 50% for better rates." eh="00239f5d" />
-        <e k="usedplus_cr_tipGeneral3" v="[EN] Longer credit history = higher score. Be patient!" eh="8d34249a" />
-        <e k="usedplus_cr_tipGeneral4" v="[EN] Successfully completing loans improves your score." eh="cbada9c7" />
-        <e k="usedplus_cr_tipGeneral5" v="[EN] Finance used equipment for lower monthly payments." eh="1f5ed592" />
-        <e k="usedplus_ft_vehicleUnavailable" v="[EN] Vehicle no longer available." eh="a6698ee1" />
-        <e k="usedplus_ft_truckUnavailable" v="[EN] Service Truck no longer available." eh="5467f73f" />
-        <e k="usedplus_maintenance_noDataAvailable" v="[EN] No maintenance data available for this vehicle." eh="f5963282" />
-        <e k="usedplus_negotiation_cannotAfford" v="[EN] You cannot afford this offer." eh="4e8dfdf2" />
-        <e k="usedplus_error_genericError" v="[EN] An error occurred" eh="a25c753e" />
-        <e k="usedplus_runaway_defaultEnded" v="[EN] Runaway ended." eh="91b5657e" />
     </elements>
 </l10n>
