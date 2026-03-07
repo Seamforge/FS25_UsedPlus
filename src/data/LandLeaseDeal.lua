@@ -129,9 +129,9 @@ function LandLeaseDeal:processMonthlyPayment()
         return false
     end
 
-    -- Deduct payment
+    -- Deduct payment (use changeBalance — the actual Farm money API)
     if g_server then
-        g_currentMission:addMoneyChange(-self.monthlyPayment, self.farmId, MoneyType.LEASING_COSTS, true)
+        farm:changeBalance(-self.monthlyPayment, MoneyType.LEASING_COSTS)
     end
 
     -- Update tracking

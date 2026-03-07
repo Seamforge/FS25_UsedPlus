@@ -4,5 +4,8 @@
   },
   "devDependencies": {
     "sharp": "^0.34.5"
+  },
+  "overrides": {
+    "glob": "^13.0.6"
   }
 }

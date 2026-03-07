@@ -704,14 +704,14 @@ function FaultTracerDialog:onBeginRepairClick()
 
     -- Validate vehicle still exists
     if self.vehicle == nil or self.vehicle.isDeleted then
-        InfoDialog.show("Vehicle no longer available.")
+        InfoDialog.show(g_i18n:getText("usedplus_ft_vehicleUnavailable"))
         self:close()
         return
     end
 
     -- Validate truck still exists
     if self.serviceTruck == nil or self.serviceTruck.isDeleted then
-        InfoDialog.show("Service Truck no longer available.")
+        InfoDialog.show(g_i18n:getText("usedplus_ft_truckUnavailable"))
         self:close()
         return
     end

@@ -573,8 +573,11 @@ function VehicleSaleManager:createSaleListing(farmId, vehicle, agentTier, priceT
     -- Register listing
     self:registerListing(listing)
 
-    -- Deduct agent fee
-    g_currentMission:addMoney(-listing.agentFee, farmId, MoneyType.OTHER, true, true)
+    -- Deduct agent fee (use changeBalance — addMoney crashes from nested dialog callbacks)
+    local farm = g_farmManager:getFarmById(farmId)
+    if farm then
+        farm:changeBalance(-listing.agentFee, MoneyType.OTHER)
+    end
 
     -- Track statistics
     if g_financeManager then
@@ -651,9 +654,10 @@ function VehicleSaleManager:acceptOffer(listingId)
     local vehicleName = listing.vehicleName
     local vehicleId = listing.vehicleId
 
-    -- Calculate agent commission from settings (default 8%)
-    local commissionPercent = UsedPlusSettings and UsedPlusSettings:get("agentCommissionPercent") or 8
-    local agentCommission = math.floor(grossSalePrice * (commissionPercent / 100))
+    -- Calculate agent commission from the listing's agent tier (matches what was shown at listing time)
+    local agentTierConfig = listing:getAgentTierConfig()
+    local commissionPercent = math.floor((agentTierConfig.feePercent or 0.04) * 100)
+    local agentCommission = math.floor(grossSalePrice * (agentTierConfig.feePercent or 0.04))
     local netSalePrice = grossSalePrice - agentCommission
 
     -- v2.8.0: Close workshop screen if it's showing the vehicle being sold
@@ -699,8 +703,11 @@ function VehicleSaleManager:acceptOffer(listingId)
         end
     })
 
-    -- Credit NET sale price to farm (after agent commission)
-    g_currentMission:addMoney(netSalePrice, farmId, MoneyType.VEHICLE_SELL, true, true)
+    -- Credit NET sale price to farm (use changeBalance — addMoney crashes from nested dialog callbacks)
+    local saleFarm = g_farmManager:getFarmById(farmId)
+    if saleFarm then
+        saleFarm:changeBalance(netSalePrice, MoneyType.VEHICLE_SELL)
+    end
 
     -- Track statistics (record gross sale for reporting)
     if g_financeManager then

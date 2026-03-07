@@ -87,7 +87,8 @@ function FluidsDialog:setVehicle(vehicle, farmId)
     local storeItem = g_storeManager:getItemByXMLFilename(vehicle.configFileName)
     self.storeItem = storeItem
     self.vehicleName = storeItem and storeItem.name or vehicle:getName() or "Unknown Vehicle"
-    self.basePrice = storeItem and (StoreItemUtil.getDefaultPrice(storeItem, vehicle.configurations) or storeItem.price or 10000) or 10000
+    -- Use empty config table to get base store price (not depreciated vehicle price)
+    self.basePrice = storeItem and (StoreItemUtil.getDefaultPrice(storeItem, {}) or storeItem.price or 10000) or 10000
 
     -- Get current fluid levels from UsedPlusMaintenance
     local spec = vehicle.spec_usedPlusMaintenance

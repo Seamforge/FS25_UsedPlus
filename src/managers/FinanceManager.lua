@@ -779,7 +779,7 @@ function FinanceManager:createLeaseDeal(farmId, vehicleConfig, vehicleName, pric
     self:registerDeal(deal)
 
     -- Deduct down payment
-    g_currentMission:addMoneyChange(-downPayment, farmId, MoneyType.LEASING_COSTS, true)
+    g_currentMission:addMoney(-downPayment, farmId, MoneyType.LEASING_COSTS, true, true)
 
     UsedPlus.logDebug(string.format("Created lease deal %s: %s ($%.2f, %d months @ %.2f%%, residual $%.2f)",
         deal.id, vehicleName, price, termMonths, interestRate, residualValue))

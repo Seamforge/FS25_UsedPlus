@@ -117,7 +117,8 @@ function RepairDialog:setVehicle(vehicle, farmId, mode, rvbRepairCost)
     local storeItem = g_storeManager:getItemByXMLFilename(vehicle.configFileName)
     self.storeItem = storeItem
     self.vehicleName = UIHelper.Vehicle.getFullName(storeItem)
-    self.basePrice = storeItem and (StoreItemUtil.getDefaultPrice(storeItem, vehicle.configurations) or storeItem.price or 10000) or 10000
+    -- Use empty config table to get base store price (not depreciated vehicle price)
+    self.basePrice = storeItem and (StoreItemUtil.getDefaultPrice(storeItem, {}) or storeItem.price or 10000) or 10000
 
     -- Get current damage and wear (0-1 scale, 0 = perfect)
     if vehicle.getDamageAmount then
@@ -162,9 +163,31 @@ function RepairDialog:setVehicle(vehicle, farmId, mode, rvbRepairCost)
     self.fullRepaintCost = math.floor(self.fullRepaintCost * paintMultiplier)
 
     -- Reset sliders to sensible defaults
-    -- If vehicle needs minimal repair, default to 100%
-    -- If vehicle needs major repair, default to 50%
-    if self.currentDamage < 0.2 then
+    if self.rvbRepairCost and self.rvbRepairCost > 0 then
+        -- v2.15.4: RVB mode — default to 50% for expensive repairs, 100% for cheap
+        self.repairPercent = (self.rvbRepairCost > 10000) and 50 or 100
+        -- Collect RVB parts data for display
+        self.rvbParts = {}
+        if vehicle.spec_faultData and vehicle.spec_faultData.parts then
+            for partKey, part in pairs(vehicle.spec_faultData.parts) do
+                if partKey ~= "USEDPLUS_HYDRAULIC" then
+                    table.insert(self.rvbParts, {
+                        key = partKey,
+                        condition = part.condition or 100,
+                        repairreq = part.repairreq or false,
+                        fault = part.fault or "empty"
+                    })
+                end
+            end
+            -- Sort: parts needing repair first, then by condition (worst first)
+            table.sort(self.rvbParts, function(a, b)
+                if a.repairreq ~= b.repairreq then
+                    return a.repairreq  -- repairreq=true sorts first
+                end
+                return (a.condition or 100) < (b.condition or 100)
+            end)
+        end
+    elseif self.currentDamage < 0.2 then
         self.repairPercent = 100
     else
         self.repairPercent = 50
@@ -306,7 +329,10 @@ function RepairDialog:updateDisplay()
 
     -- Update dialog title based on mode
     local title = "Vehicle Service"
-    if isRepairMode then
+    local isRVBRepair = (self.rvbRepairCost and self.rvbRepairCost > 0)
+    if isRVBRepair then
+        title = g_i18n:getText("usedplus_repair_title_workshop") or "Workshop Repair"
+    elseif isRepairMode then
         title = g_i18n:getText("usedplus_repair_title_mechanical") or "Mechanical Repair"
     elseif isRepaintMode then
         title = g_i18n:getText("usedplus_repair_title_repaint") or "Repaint Vehicle"
@@ -323,29 +349,105 @@ function RepairDialog:updateDisplay()
     UIHelper.Element.setVisible(self.repaintStatusSection, isRepaintMode)
 
     -- Update work section title and labels based on mode
-    local sectionTitle = isRepairMode
-        and (g_i18n:getText("usedplus_repair_mechanical") or "MECHANICAL REPAIR")
-        or (g_i18n:getText("usedplus_repair_cosmetic") or "PAINT & COSMETICS")
+    local sectionTitle
+    if isRVBRepair then
+        sectionTitle = g_i18n:getText("usedplus_repair_title_workshop") or "WORKSHOP REPAIR"
+    elseif isRepairMode then
+        sectionTitle = g_i18n:getText("usedplus_repair_mechanical") or "MECHANICAL REPAIR"
+    else
+        sectionTitle = g_i18n:getText("usedplus_repair_cosmetic") or "PAINT & COSMETICS"
+    end
     UIHelper.Element.setText(self.workSectionTitle, sectionTitle)
-    UIHelper.Element.setText(self.workSliderLabel, isRepairMode and "Repair:" or "Repaint:")
+    local sliderLabel
+    if isRVBRepair then
+        sliderLabel = g_i18n:getText("usedplus_rp_label_components") or "Components:"
+    elseif isRepairMode then
+        sliderLabel = g_i18n:getText("usedplus_rp_label_repair") or "Repair:"
+    else
+        sliderLabel = g_i18n:getText("usedplus_rp_label_repaint") or "Repaint:"
+    end
+    UIHelper.Element.setText(self.workSliderLabel, sliderLabel)
 
     -- Set explanatory text based on mode
-    local explainKey = isRepairMode and "usedplus_rp_percentExplain" or "usedplus_rp_percentExplainPaint"
-    UIHelper.Element.setText(self.percentExplainText, g_i18n:getText(explainKey))
+    if isRVBRepair and self.rvbParts then
+        -- v2.15.4: Show only parts needing repair, split across two lines
+        local repairParts = {}
+        for _, part in ipairs(self.rvbParts) do
+            if part.repairreq then
+                local name = part.key:gsub("_", " "):gsub("(%a)([%w]*)", function(a, b) return string.upper(a) .. b end)
+                table.insert(repairParts, string.format("%s %d%%", name, part.condition or 100))
+            end
+        end
 
-    -- Current condition displays (using UIHelper.Vehicle pattern)
-    UIHelper.Vehicle.displayCondition(
-        self.currentConditionText,
-        self.currentPaintText,
-        self.currentConditionBar,
-        self.currentPaintBar,
-        self.currentDamage,
-        self.currentWear
-    )
+        -- Split into two lines (~6 parts each)
+        local mid = math.ceil(#repairParts / 2)
+        local line1 = {}
+        local line2 = {}
+        for i, entry in ipairs(repairParts) do
+            if i <= mid then
+                table.insert(line1, entry)
+            else
+                table.insert(line2, entry)
+            end
+        end
+
+        UIHelper.Element.setText(self.percentExplainText, table.concat(line1, "  |  "))
+        UIHelper.Element.setVisible(self.rvbPartsLine2, #line2 > 0)
+        UIHelper.Element.setText(self.rvbPartsLine2, table.concat(line2, "  |  "))
+    else
+        local explainKey = isRepairMode and "usedplus_rp_percentExplain" or "usedplus_rp_percentExplainPaint"
+        UIHelper.Element.setText(self.percentExplainText, g_i18n:getText(explainKey))
+        UIHelper.Element.setVisible(self.rvbPartsLine2, false)
+    end
+
+    -- Current condition displays
+    if isRVBRepair then
+        -- v2.15.4: RVB mode — use wide status line, hide vanilla elements
+        local partsNeedRepair = 0
+        local totalParts = 0
+        if self.vehicle and self.vehicle.spec_faultData and self.vehicle.spec_faultData.parts then
+            for partKey, part in pairs(self.vehicle.spec_faultData.parts) do
+                if partKey ~= "USEDPLUS_HYDRAULIC" then
+                    totalParts = totalParts + 1
+                    if part.repairreq then
+                        partsNeedRepair = partsNeedRepair + 1
+                    end
+                end
+            end
+        end
+        -- Hide vanilla elements (label, bar, value)
+        UIHelper.Element.setVisible(self.repairStatusLabel, false)
+        UIHelper.Element.setVisible(self.currentConditionBar, false)
+        UIHelper.Element.setVisible(self.currentConditionText, false)
+        -- Show wide RVB status line
+        UIHelper.Element.setVisible(self.rvbStatusText, true)
+        local statusFormat = g_i18n:getText("usedplus_rvb_parts_status") or "Components: %d / %d need repair"
+        UIHelper.Element.setText(self.rvbStatusText, string.format(statusFormat, partsNeedRepair, totalParts))
+    else
+        -- Restore vanilla elements, hide RVB status
+        UIHelper.Element.setVisible(self.repairStatusLabel, true)
+        UIHelper.Element.setVisible(self.currentConditionBar, true)
+        UIHelper.Element.setVisible(self.currentConditionText, true)
+        UIHelper.Element.setVisible(self.rvbStatusText, false)
+        -- Vanilla condition display
+        UIHelper.Vehicle.displayCondition(
+            self.currentConditionText,
+            self.currentPaintText,
+            self.currentConditionBar,
+            self.currentPaintBar,
+            self.currentDamage,
+            self.currentWear
+        )
+    end
 
     -- Work section values (unified slider/buttons)
     local workPercent, workCost, workAfter
-    if isRepairMode then
+    if isRVBRepair then
+        -- RVB: slider controls repair percentage, cost scales proportionally
+        workPercent = self.repairPercent
+        workCost = self.repairCost
+        workAfter = workPercent  -- percentage of components repaired
+    elseif isRepairMode then
         workPercent = self.repairPercent
         workCost = self.repairCost
         workAfter = math.floor(self:getConditionAfterRepair() * 100)
@@ -358,8 +460,13 @@ function RepairDialog:updateDisplay()
     -- Update work slider
     if self.workSlider then
         self.workSlider:setValue(workPercent / 100)
-        local needsWork = isRepairMode and (self.currentDamage >= 0.01) or (self.currentWear >= 0.01)
-        self.workSlider:setDisabled(not needsWork)
+        if isRVBRepair then
+            -- RVB: slider always enabled (partial repair scales cost)
+            self.workSlider:setDisabled(false)
+        else
+            local needsWork = isRepairMode and (self.currentDamage >= 0.01) or (self.currentWear >= 0.01)
+            self.workSlider:setDisabled(not needsWork)
+        end
     end
 
     -- Work section text displays
@@ -373,12 +480,12 @@ function RepairDialog:updateDisplay()
         if hasAdditionalRepairs then
             local parts = {}
             if self.hasFuelLeak then
-                table.insert(parts, string.format("Fuel Leak (+%s)", UIHelper.Text.formatMoney(self.fuelLeakRepairCost)))
+                table.insert(parts, string.format(g_i18n:getText("usedplus_rp_fuelLeakLabel"), UIHelper.Text.formatMoney(self.fuelLeakRepairCost)))
             end
             if self.hasFlatTire then
-                table.insert(parts, string.format("Flat Tire (+%s)", UIHelper.Text.formatMoney(self.flatTireRepairCost)))
+                table.insert(parts, string.format(g_i18n:getText("usedplus_rp_flatTireLabel"), UIHelper.Text.formatMoney(self.flatTireRepairCost)))
             end
-            local additionalText = "Includes: " .. table.concat(parts, ", ")
+            local additionalText = g_i18n:getText("usedplus_rp_includesLabel") .. table.concat(parts, ", ")
             self.additionalRepairsText:setText(additionalText)
             self.additionalRepairsText:setTextColor(1, 0.8, 0.2, 1)  -- Yellow/gold for info
             self.additionalRepairsText:setVisible(true)
@@ -499,7 +606,14 @@ function RepairDialog:onPayCash()
     end
 
     -- Build confirmation message
-    local serviceType = (self.mode == RepairDialog.MODE_REPAIR) and "Mechanical Repair" or "Repaint"
+    local serviceType
+    if self.rvbRepairCost and self.rvbRepairCost > 0 then
+        serviceType = g_i18n:getText("usedplus_rp_service_workshop") or "Workshop Repair"
+    elseif self.mode == RepairDialog.MODE_REPAIR then
+        serviceType = g_i18n:getText("usedplus_rp_service_mechanical") or "Mechanical Repair"
+    else
+        serviceType = g_i18n:getText("usedplus_rp_service_repaint") or "Repaint"
+    end
     local workPercent = (self.mode == RepairDialog.MODE_REPAIR) and self.repairPercent or self.repaintPercent
 
     local confirmMessage = string.format(
@@ -523,7 +637,7 @@ function RepairDialog:onPayCash()
         self.onPayCashConfirmed,
         self,
         confirmMessage,
-        "Confirm Payment"
+        g_i18n:getText("usedplus_rp_confirm_title") or "Confirm Payment"
     )
 end
 
@@ -541,33 +655,63 @@ function RepairDialog:onPayCashConfirmed(yes)
         return  -- User cancelled
     end
 
-    -- Determine what to send based on mode (only send values for active mode)
-    local sendRepairPercent = 0
-    local sendRepaintPercent = 0
+    -- v2.15.4: When RVB cost was used, trigger RVB's native repair callback
+    -- This repairs RVB components and deducts money through RVB's own mechanism.
+    -- hookRepairCompletion handles hydraulic repair when RVB's callback fires.
+    if self.rvbRepairCost and self.rvbRepairCost > 0 and VehicleSellingPointExtension then
+        local callback = VehicleSellingPointExtension.pendingRepairCallback
+        local target = VehicleSellingPointExtension.pendingRepairTarget
 
-    if self.mode == RepairDialog.MODE_REPAIR or self.mode == RepairDialog.MODE_BOTH then
-        sendRepairPercent = self.repairPercent / 100
-    end
-    if self.mode == RepairDialog.MODE_REPAINT or self.mode == RepairDialog.MODE_BOTH then
-        sendRepaintPercent = self.repaintPercent / 100
-    end
+        if callback then
+            -- Trigger RVB's repair (deducts money + repairs components)
+            callback(target, true)
+            UsedPlus.logDebug("RepairDialog: Triggered RVB repair callback")
+        end
 
-    -- Send repair event to server
-    RepairVehicleEvent.sendToServer(
-        self.vehicle,
-        self.farmId,
-        sendRepairPercent,
-        sendRepaintPercent,
-        self.totalCost,
-        false  -- Not financed
-    )
+        -- Also trigger our side effects (seizures, fluids, steering pull) with $0 cost
+        -- RVB already handled money deduction, so we pass 0 for totalCost
+        RepairVehicleEvent.sendToServer(
+            self.vehicle,
+            self.farmId,
+            1.0,  -- Full repair percent to trigger all side effects
+            0,    -- No repaint
+            0,    -- $0 cost (RVB already deducted)
+            false
+        )
+
+        -- Clear stored callback
+        VehicleSellingPointExtension.pendingRepairCallback = nil
+        VehicleSellingPointExtension.pendingRepairTarget = nil
+    else
+        -- Vanilla repair path
+        local sendRepairPercent = 0
+        local sendRepaintPercent = 0
+
+        if self.mode == RepairDialog.MODE_REPAIR or self.mode == RepairDialog.MODE_BOTH then
+            sendRepairPercent = self.repairPercent / 100
+        end
+        if self.mode == RepairDialog.MODE_REPAINT or self.mode == RepairDialog.MODE_BOTH then
+            sendRepaintPercent = self.repaintPercent / 100
+        end
+
+        RepairVehicleEvent.sendToServer(
+            self.vehicle,
+            self.farmId,
+            sendRepairPercent,
+            sendRepaintPercent,
+            self.totalCost,
+            false  -- Not financed
+        )
+    end
 
     -- Close dialog
     self:close()
 
     -- Show success notification
     local repairInfo = ""
-    if self.repairPercent > 0 and self.currentDamage > 0.01 then
+    if self.rvbRepairCost and self.rvbRepairCost > 0 then
+        repairInfo = g_i18n:getText("usedplus_rp_notification_workshop") or "full workshop repair"
+    elseif self.repairPercent > 0 and self.currentDamage > 0.01 then
         repairInfo = string.format("%d%% mechanical repair", self.repairPercent)
     end
     if self.repaintPercent > 0 and self.currentWear > 0.01 then

@@ -167,7 +167,7 @@
     <!-- ================================================================ -->
     <GUIProfiles>
         <!-- Section background (dark panel) -->
-        <Profile name="soSectionBg" extends="fs25_guiElement" with="anchorTopCenter">
+        <Profile name="soSectionBg" extends="emptyPanel" with="anchorTopCenter">
             <bgColor value="0.05 0.05 0.08 0.9"/>
         </Profile>
 

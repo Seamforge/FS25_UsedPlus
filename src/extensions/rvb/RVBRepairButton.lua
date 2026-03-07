@@ -3,14 +3,19 @@
     Hook RVB's native Repair button to redirect to UsedPlus RepairDialog
 
     Extracted from RVBWorkshopIntegration.lua for modularity
+
+    v2.15.3: Fixed hook mechanism — hooks dialog:onClickRepair() method directly
+             instead of button.onClickCallback (which doesn't intercept XML onClick).
+             Also hooks onYesNoRepairDialog to repair hydraulics when RVB repair completes.
 ]]
 
 -- Ensure RVBWorkshopIntegration table exists (modules load before coordinator)
 RVBWorkshopIntegration = RVBWorkshopIntegration or {}
 
 --[[
-    Hook RVB's native Repair button to redirect to our partial repair dialog
-    Uses RVB's calculated repair cost
+    Hook RVB's native Repair button to redirect to our partial repair dialog.
+    Hooks the dialog METHOD onClickRepair (not button.onClickCallback),
+    because RVB uses XML onClick="onClickRepair" which bypasses onClickCallback.
 ]]
 function RVBWorkshopIntegration:hookRepairButton(dialog)
     -- v2.6.2: Don't hook repair button if repair system is disabled
@@ -21,7 +26,9 @@ function RVBWorkshopIntegration:hookRepairButton(dialog)
 
     -- v2.7.0: Don't hook if override is disabled - let RVB handle repair natively
     if UsedPlusSettings and UsedPlusSettings:get("overrideRVBRepair") == false then
-        UsedPlus.logDebug("RVBWorkshopIntegration: RVB repair override disabled, not hooking repair button")
+        UsedPlus.logDebug("RVBWorkshopIntegration: RVB repair override disabled, not hooking")
+        -- Even if not overriding, still hook the completion to repair hydraulics
+        self:hookRepairCompletion(dialog)
         return
     end
 
@@ -34,92 +41,130 @@ function RVBWorkshopIntegration:hookRepairButton(dialog)
         return
     end
 
-    -- Find RVB's repair button
-    local repairButton = dialog.repairButton
-    if repairButton == nil then
-        -- Try to find by iterating elements
-        local buttonsBox = dialog.buttonsBox
-        if buttonsBox and buttonsBox.elements then
-            for _, element in ipairs(buttonsBox.elements) do
-                if element.id == "repairButton" or element.name == "repairButton" then
-                    repairButton = element
-                    break
-                end
+    -- Hook the dialog's onClickRepair METHOD directly (not button callback)
+    -- This is what RVB's XML onClick="onClickRepair" calls
+    local origOnClickRepair = dialog.onClickRepair
+    if origOnClickRepair == nil then
+        -- Try metatable
+        local mt = getmetatable(dialog)
+        while mt do
+            local idx = mt.__index
+            if type(idx) == "table" and idx.onClickRepair then
+                origOnClickRepair = idx.onClickRepair
+                break
+            elseif type(idx) == "function" then
+                break
             end
+            mt = getmetatable(idx)
         end
     end
 
-    if repairButton == nil then
-        UsedPlus.logDebug("RVBWorkshopIntegration: Could not find repair button to hook")
+    if origOnClickRepair == nil then
+        UsedPlus.logDebug("RVBWorkshopIntegration: Could not find onClickRepair to hook")
         return
     end
 
-    -- Store original callback for potential fallback
-    dialog.usedPlusOriginalRepairCallback = repairButton.onClickCallback
+    -- Store original for fallback
+    dialog.usedPlusOriginalOnClickRepair = origOnClickRepair
 
-    -- Replace with our callback
-    repairButton.onClickCallback = function()
-        RVBWorkshopIntegration:onRVBRepairButtonClick(dialog)
+    -- Replace with our redirect
+    dialog.onClickRepair = function(self, ...)
+        RVBWorkshopIntegration:onRVBRepairButtonClick(self)
     end
 
     dialog.usedPlusRepairHooked = true
-    UsedPlus.logDebug("RVBWorkshopIntegration: Hooked RVB repair button")
+    UsedPlus.logInfo("RVBWorkshopIntegration: Hooked onClickRepair method for repair redirect")
+
+    -- Also hook repair completion for hydraulic repair
+    self:hookRepairCompletion(dialog)
 end
 
 --[[
-    v2.15.0: Update the Repair button enabled/disabled state based on vehicle damage
-    RVB's own updateScreen may disable the button; we re-enable if there's mechanical damage to fix
+    Hook RVB's repair completion to also repair hydraulic reliability.
+    When RVB finishes a repair (player confirms YesNo dialog), we boost hydraulics.
+    This ensures hydraulic system benefits from RVB repairs even if our override is disabled.
 ]]
-function RVBWorkshopIntegration:updateRepairButtonState(dialog)
-    local repairButton = dialog.repairButton
-    if repairButton == nil then
-        -- Try to find by iterating elements (same pattern as hookRepairButton)
-        local buttonsBox = dialog.buttonsBox
-        if buttonsBox and buttonsBox.elements then
-            for _, element in ipairs(buttonsBox.elements) do
-                if element.id == "repairButton" or element.name == "repairButton" then
-                    repairButton = element
-                    break
+function RVBWorkshopIntegration:hookRepairCompletion(dialog)
+    if dialog == nil or dialog.usedPlusRepairCompletionHooked then
+        return
+    end
+
+    -- Hook onYesNoRepairDialog — called when player confirms RVB's repair
+    local origOnYesNoRepair = dialog.onYesNoRepairDialog
+    if origOnYesNoRepair == nil then
+        local mt = getmetatable(dialog)
+        while mt do
+            local idx = mt.__index
+            if type(idx) == "table" and idx.onYesNoRepairDialog then
+                origOnYesNoRepair = idx.onYesNoRepairDialog
+                break
+            elseif type(idx) == "function" then
+                break
+            end
+            mt = getmetatable(idx)
+        end
+    end
+
+    if origOnYesNoRepair == nil then
+        UsedPlus.logDebug("RVBWorkshopIntegration: Could not find onYesNoRepairDialog to hook")
+        return
+    end
+
+    dialog.onYesNoRepairDialog = function(self, yes)
+        -- Call original first (this does the actual RVB repair)
+        origOnYesNoRepair(self, yes)
+
+        -- If player confirmed repair and hydraulic toggle was on, repair hydraulics
+        if yes and self.vehicle and RVBWorkshopIntegration.hydraulicRepairRequested then
+            local spec = self.vehicle.spec_usedPlusMaintenance
+            if spec then
+                -- Deduct hydraulic repair cost from farm
+                local hydraulicCost = RVBWorkshopIntegration.lastHydraulicRepairCost or 0
+                if hydraulicCost > 0 then
+                    local farmId = g_currentMission:getFarmId()
+                    if g_currentMission:getMoney(farmId) >= hydraulicCost then
+                        g_currentMission:addMoney(-hydraulicCost, farmId, MoneyType.VEHICLE_RUNNING_COSTS, true)
+                        UsedPlus.logInfo(string.format(
+                            "RVBWorkshopIntegration: Deducted $%d for hydraulic repair", hydraulicCost))
+                    end
                 end
+
+                -- Full hydraulic repair — restore to max ceiling
+                local oldHydraulic = spec.hydraulicReliability or 1.0
+                local maxHydraulic = spec.maxHydraulicDurability or spec.maxReliabilityCeiling or 1.0
+                spec.hydraulicReliability = maxHydraulic
+
+                -- Engine gets a small boost from the work
+                local oldEngine = spec.engineReliability or 1.0
+                local maxEngine = spec.maxEngineDurability or spec.maxReliabilityCeiling or 1.0
+                spec.engineReliability = math.min(maxEngine, oldEngine + 0.05)
+
+                -- Top up fluids as part of repair
+                if spec.hydraulicFluidLevel and spec.hydraulicFluidLevel < 1.0 then
+                    spec.hydraulicFluidLevel = 1.0
+                    spec.hasHydraulicLeak = false
+                    spec.hydraulicLeakSeverity = 0
+                end
+                if spec.oilLevel and spec.oilLevel < 1.0 then
+                    spec.oilLevel = 1.0
+                    spec.hasOilLeak = false
+                    spec.oilLeakSeverity = 0
+                end
+
+                UsedPlus.logInfo(string.format(
+                    "RVBWorkshopIntegration: Repair completed — hydraulic %.0f%% -> %.0f%%, engine %.0f%% -> %.0f%%",
+                    oldHydraulic * 100, spec.hydraulicReliability * 100,
+                    oldEngine * 100, spec.engineReliability * 100))
+
+                -- Reset toggle state after repair
+                RVBWorkshopIntegration.hydraulicRepairRequested = false
+                RVBWorkshopIntegration.lastHydraulicRepairCost = 0
             end
         end
     end
 
-    if repairButton == nil then
-        return
-    end
-
-    local vehicle = dialog.vehicle
-    if vehicle == nil then
-        if repairButton.setDisabled then
-            repairButton:setDisabled(true)
-        end
-        return
-    end
-
-    -- Check mechanical damage (base game damage amount)
-    local damage = 0
-    if vehicle.getDamageAmount then
-        damage = vehicle:getDamageAmount() or 0
-    end
-
-    -- Also check UsedPlus reliability - if any component is below ceiling, repair is useful
-    local hasUsedPlusDamage = false
-    local spec = vehicle.spec_usedPlusMaintenance
-    if spec then
-        local ceiling = spec.maxReliabilityCeiling or 1.0
-        if (spec.engineReliability or 1.0) < ceiling or
-           (spec.hydraulicReliability or 1.0) < ceiling or
-           (spec.electricalReliability or 1.0) < ceiling then
-            hasUsedPlusDamage = true
-        end
-    end
-
-    -- Enable if there's any damage to repair
-    local hasDamage = damage > 0.01 or hasUsedPlusDamage
-    if repairButton.setDisabled then
-        repairButton:setDisabled(not hasDamage)
-    end
+    dialog.usedPlusRepairCompletionHooked = true
+    UsedPlus.logInfo("RVBWorkshopIntegration: Hooked onYesNoRepairDialog for hydraulic repair")
 end
 
 --[[
@@ -127,60 +172,13 @@ end
     Shows our RepairDialog in MODE_REPAIR with RVB's calculated cost
 ]]
 function RVBWorkshopIntegration:onRVBRepairButtonClick(dialog)
-    -- v2.6.2: Check master repair system toggle
-    -- v2.7.0: Also check override setting
-    local repairDisabled = UsedPlusSettings and UsedPlusSettings:get("enableRepairSystem") == false
-    local overrideDisabled = UsedPlusSettings and UsedPlusSettings:get("overrideRVBRepair") == false
-
-    if repairDisabled or overrideDisabled then
-        UsedPlus.logDebug("RVBWorkshopIntegration: Repair override disabled, calling original RVB callback")
-        -- Call original RVB behavior
-        if dialog.usedPlusOriginalRepairCallback then
-            dialog.usedPlusOriginalRepairCallback()
-        end
-        return
-    end
-
-    local vehicle = dialog and dialog.vehicle
-    if vehicle == nil then
-        UsedPlus.logDebug("RVBWorkshopIntegration: No vehicle for repair")
-        return
-    end
-
-    UsedPlus.logDebug(string.format("RVBWorkshopIntegration: RVB Repair clicked for %s", vehicle:getName()))
-
-    -- Get RVB's calculated repair cost from the dialog if available
-    local rvbRepairCost = nil
-    if dialog.repairCost then
-        rvbRepairCost = dialog.repairCost
-        UsedPlus.logDebug(string.format("RVBWorkshopIntegration: Using RVB repair cost: %d", rvbRepairCost))
-    end
-
-    -- Play click sound (use pcall for safety - API varies between versions)
-    pcall(function()
-        if g_gui and g_gui.playSample then
-            g_gui:playSample(GuiSoundPlayer.SOUND_SAMPLES.CLICK)
-        end
-    end)
-
-    -- Close RVB dialog first
-    if dialog.close then
-        dialog:close()
-    elseif g_gui.closeDialog then
-        g_gui:closeDialog()
-    end
-
-    -- Show our RepairDialog in REPAIR mode
-    local farmId = g_currentMission:getFarmId()
-
-    -- Use DialogLoader for centralized lazy loading
-    if DialogLoader and DialogLoader.show then
-        -- Pass RVB cost as optional 4th parameter
-        DialogLoader.show("RepairDialog", "setVehicle", vehicle, farmId, RepairDialog.MODE_REPAIR, rvbRepairCost)
+    -- Let RVB handle repair natively — its component-based system shows proper
+    -- part breakdowns, costs, and repair times. Our RepairDialog is designed for
+    -- vanilla FS25 damage/wear, not RVB components.
+    -- hookRepairCompletion handles hydraulic repair when RVB's repair completes.
+    if dialog.usedPlusOriginalOnClickRepair then
+        dialog.usedPlusOriginalOnClickRepair(dialog)
     else
-        -- Fallback: direct dialog creation
-        if VehicleSellingPointExtension and VehicleSellingPointExtension.showRepairDialog then
-            VehicleSellingPointExtension.showRepairDialog(vehicle, RepairDialog.MODE_REPAIR)
-        end
+        UsedPlus.logWarn("RVBWorkshopIntegration: usedPlusOriginalOnClickRepair is nil")
     end
 end

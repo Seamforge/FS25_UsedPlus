@@ -24,10 +24,9 @@ const MOD_NAME = 'FS25_UsedPlus';
 const SCRIPT_DIR = __dirname;
 const MOD_DIR = path.dirname(SCRIPT_DIR);
 const OUTPUT_DIR = path.join(MOD_DIR, 'dist');
-const MODS_FOLDER = path.join(
-    process.env.USERPROFILE || process.env.HOME,
-    'OneDrive', 'Documents', 'My Games', 'FarmingSimulator2025', 'mods'
-);
+const MODS_FOLDER = process.platform === 'darwin'
+    ? path.join(process.env.HOME, 'Library', 'Application Support', 'FarmingSimulator2025', 'mods')
+    : path.join(process.env.USERPROFILE || process.env.HOME, 'OneDrive', 'Documents', 'My Games', 'FarmingSimulator2025', 'mods');
 
 // Patterns to exclude (relative paths)
 const EXCLUDE_PATTERNS = [

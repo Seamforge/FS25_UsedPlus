@@ -579,7 +579,7 @@ end
 ]]
 function UsedPlusUI.Dialog.showErrorAndClose(dialog, message)
     -- Show error message then close dialog
-    InfoDialog.show(message or "An error occurred")
+    InfoDialog.show(message or g_i18n:getText("usedplus_error_genericError"))
     UsedPlusUI.Dialog.safeClose(dialog)
 end
 

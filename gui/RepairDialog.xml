@@ -35,9 +35,11 @@
 
                     <!-- Repair Status (shown in repair mode) -->
                     <GuiElement id="repairStatusSection" position="120px -40px">
-                        <Text profile="rpStatusLabel" position="0px 0px" text="$l10n_usedplus_rp_mechanical"/>
+                        <Text profile="rpStatusLabel" id="repairStatusLabel" position="0px 0px" text="$l10n_usedplus_rp_mechanical"/>
                         <Slider profile="rpProgressBar" id="currentConditionBar" position="100px 0px" disabled="true"/>
                         <Text profile="rpConditionValue" id="currentConditionText" position="215px 0px" text=""/>
+                        <!-- RVB: Single wide text spanning the full area -->
+                        <Text profile="rpRVBStatusLine" id="rvbStatusText" position="0px 0px" text=""/>
                     </GuiElement>
 
                     <!-- Repaint Status (shown in repaint mode) -->
@@ -80,6 +82,8 @@
 
                 <!-- Explanatory text below buttons -->
                 <Text profile="rpExplainText" id="percentExplainText" position="0px -95px" text="$l10n_usedplus_rp_percentExplain"/>
+                <!-- RVB: Second line for overflow parts -->
+                <Text profile="rpExplainText" id="rvbPartsLine2" position="0px -109px" text=""/>
 
                 <!-- Selection Display - 3 columns -->
                 <Text profile="rpLabel" position="-220px -118px" text="$l10n_usedplus_rp_selected"/>
@@ -258,9 +262,18 @@
 
         <!-- ========== CONDITION VALUES ========== -->
         <Profile name="rpConditionValue" extends="fs25_textDefault" with="anchorTopCenter">
-            <size value="80px 20px"/>
+            <size value="160px 20px"/>
             <textSize value="14px"/>
             <textBold value="true"/>
+        </Profile>
+
+        <!-- RVB: Wide status line spanning full repair status area -->
+        <Profile name="rpRVBStatusLine" extends="fs25_textDefault" with="anchorTopLeft">
+            <size value="350px 20px"/>
+            <textSize value="14px"/>
+            <textBold value="true"/>
+            <textColor value="0.9 0.9 0.9 1"/>
+            <textAlignment value="left"/>
         </Profile>
 
         <!-- ========== WORK VALUES ========== -->
@@ -339,7 +352,7 @@
         </Profile>
 
         <!-- ========== PROGRESS BAR ========== -->
-        <Profile name="rpProgressBar" extends="fs25_slider" with="anchorTopCenter">
+        <Profile name="rpProgressBar" extends="emptyPanel" with="anchorTopCenter">
             <size value="180px 18px"/>
         </Profile>
 

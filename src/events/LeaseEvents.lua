@@ -591,7 +591,7 @@ function TerminateLeaseEvent:run(connection)
     end
 
     if totalPenalty > 0 then
-        g_currentMission:addMoneyChange(-totalPenalty, self.farmId, MoneyType.LEASING_COSTS, true)
+        g_currentMission:addMoney(-totalPenalty, self.farmId, MoneyType.LEASING_COSTS, true, true)
     end
 
     if vehicle then

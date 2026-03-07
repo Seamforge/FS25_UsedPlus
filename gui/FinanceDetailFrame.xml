@@ -9,7 +9,7 @@
     - Center: Payment status (balance, interest paid, progress)
     - Right: Payment options (slider, quick select, summary)
 -->
-<Gui>
+<GUI>
     <GuiElement type="FinanceDetailFrame" profile="ingameMenuFrame">
         <GuiElement type="BoxLayout" profile="frameMain">
 
@@ -179,4 +179,4 @@
 
         </GuiElement>
     </GuiElement>
-</Gui>
+</GUI>

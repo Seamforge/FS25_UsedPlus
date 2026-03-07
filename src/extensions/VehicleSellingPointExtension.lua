@@ -120,7 +120,7 @@ end
     @param vehicle - The vehicle to repair/repaint
     @param mode - "repair", "repaint", or "both"
 ]]
-function VehicleSellingPointExtension.showRepairDialog(vehicle, mode)
+function VehicleSellingPointExtension.showRepairDialog(vehicle, mode, rvbRepairCost)
     if vehicle == nil then
         UsedPlus.logDebug("showRepairDialog: No vehicle provided")
         return false
@@ -141,7 +141,7 @@ function VehicleSellingPointExtension.showRepairDialog(vehicle, mode)
     VehicleSellingPointExtension.currentVehicle = vehicle
 
     -- Use DialogLoader for centralized lazy loading
-    local shown = DialogLoader.show("RepairDialog", "setVehicle", vehicle, farmId, mode)
+    local shown = DialogLoader.show("RepairDialog", "setVehicle", vehicle, farmId, mode, rvbRepairCost)
     return shown
 end
 
@@ -438,8 +438,9 @@ function VehicleSellingPointExtension.hookShowYesNoDialog()
 
             -- If we found a vehicle, show our custom dialog instead
             if vehicle ~= nil then
-                -- Store the callback in case user wants to do vanilla repair
+                -- Store the callback and target for RVB repair passthrough
                 VehicleSellingPointExtension.pendingRepairCallback = callback
+                VehicleSellingPointExtension.pendingRepairTarget = target
                 VehicleSellingPointExtension.pendingRepairVehicle = vehicle
 
                 -- Determine mode
@@ -450,8 +451,19 @@ function VehicleSellingPointExtension.hookShowYesNoDialog()
                     mode = RepairDialog.MODE_REPAINT
                 end
 
+                -- v2.15.4: Pass RVB's repair cost so our dialog shows the correct price
+                local rvbRepairCost = nil
+                if isRepair and ModCompatibility and ModCompatibility.rvbInstalled and vehicle.getRepairPrice_RVBClone then
+                    rvbRepairCost = vehicle:getRepairPrice_RVBClone() or 0
+                    -- Include hydraulic cost if toggled on
+                    if RVBWorkshopIntegration and RVBWorkshopIntegration.hydraulicRepairRequested then
+                        local hydCost = RVBWorkshopIntegration:calculateHydraulicRepairCost(vehicle)
+                        rvbRepairCost = rvbRepairCost + (hydCost or 0)
+                    end
+                end
+
                 -- Show our custom dialog
-                local success = VehicleSellingPointExtension.showRepairDialog(vehicle, mode)
+                local success = VehicleSellingPointExtension.showRepairDialog(vehicle, mode, rvbRepairCost)
 
                 if success then
                     UsedPlus.logDebug("Intercepted and replaced repair dialog with custom dialog")
@@ -937,8 +949,18 @@ function VehicleSellingPointExtension.hookAllDialogs()
                                 mode = RepairDialog.MODE_REPAINT
                             end
 
+                            -- v2.15.4: Pass RVB's repair cost so our dialog shows the correct price
+                            local rvbRepairCost = nil
+                            if isRepair and ModCompatibility and ModCompatibility.rvbInstalled and vehicle.getRepairPrice_RVBClone then
+                                rvbRepairCost = vehicle:getRepairPrice_RVBClone() or 0
+                                if RVBWorkshopIntegration and RVBWorkshopIntegration.hydraulicRepairRequested then
+                                    local hydCost = RVBWorkshopIntegration:calculateHydraulicRepairCost(vehicle)
+                                    rvbRepairCost = rvbRepairCost + (hydCost or 0)
+                                end
+                            end
+
                             -- Show our custom dialog instead
-                            local success = VehicleSellingPointExtension.showRepairDialog(vehicle, mode)
+                            local success = VehicleSellingPointExtension.showRepairDialog(vehicle, mode, rvbRepairCost)
                             if success then
                                 UsedPlus.logDebug("Intercepted YesNoDialog and showed custom repair dialog")
                                 return true -- Don't show the original YesNoDialog

@@ -218,7 +218,7 @@ function VehiclePortfolioDialog:updateDisplay()
             self.expirationText:setText(g_i18n:getText("usedplus_vpf_expires2Months"))
             self.expirationText:setTextColor(1, 0.7, 0.3, 1)  -- Orange - warning
         else
-            self.expirationText:setText(string.format("Offer valid for %d months", monthsRemaining))
+            self.expirationText:setText(string.format(g_i18n:getText("usedplus_vpf_offerValidMonths"), monthsRemaining))
             self.expirationText:setTextColor(1, 0.85, 0.4, 1)  -- Yellow - normal
         end
     end

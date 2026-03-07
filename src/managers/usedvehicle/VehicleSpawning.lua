@@ -98,10 +98,8 @@ function UsedVehicleManager:purchaseUsedVehicle(listing, farmId)
     -- Check if player can afford
     if farm.money < listing.price then
         if not g_dedicatedServer then
-            g_currentMission:showBlinkingWarning(
-                string.format("Insufficient funds. Need %s", g_i18n:formatMoney(listing.price, 0, true, true)),
-                3000
-            )
+            local msg = string.format(g_i18n:getText("usedplus_error_insufficientFundsBuy"), g_i18n:formatMoney(listing.price, 0, true, true))
+            g_currentMission:showBlinkingWarning(msg, 3000)
         end
         return false
     end
@@ -135,9 +133,9 @@ function UsedVehicleManager:purchaseUsedVehicle(listing, farmId)
 
         -- Use addGameNotification (pattern from BuyUsedEquipment)
         g_currentMission:addGameNotification(
-            "Purchase Complete",
+            g_i18n:getText("usedplus_purchase_complete"),
             "",
-            string.format("Purchased %s for %s. Check near your position!",
+            string.format(g_i18n:getText("usedplus_purchase_detail"),
                 listing.storeItemName,
                 g_i18n:formatMoney(listing.price, 0, true, true)),
             nil,

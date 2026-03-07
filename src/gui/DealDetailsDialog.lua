@@ -151,11 +151,11 @@ function DealDetailsDialog:updateDisplay()
 
     -- Update title based on deal type
     if self.dialogTitleElement then
-        local title = "FINANCE DETAILS"
+        local title = g_i18n:getText("usedplus_dd_titleFinance")
         if deal.dealType == DealUtils.TYPE.LAND_LEASE then
-            title = "LAND LEASE DETAILS"
+            title = g_i18n:getText("usedplus_dd_titleLandLease")
         elseif isLease then
-            title = "LEASE DETAILS"
+            title = g_i18n:getText("usedplus_dd_titleLease")
         end
         self.dialogTitleElement:setText(title)
     end
@@ -169,13 +169,13 @@ function DealDetailsDialog:updateDisplay()
 
         -- Convert itemType codes to display-friendly text
         local typeDisplayMap = {
-            vehicle = "Vehicle Finance",
-            repair = "Repair",
-            repaint = "Repaint",
-            repair_repaint = "Repair & Repaint",
-            land = "Land Finance",
-            lease = "Lease",
-            land_lease = "Land Lease"
+            vehicle = g_i18n:getText("usedplus_dd_typeVehicleFinance"),
+            repair = g_i18n:getText("usedplus_dd_typeRepair"),
+            repaint = g_i18n:getText("usedplus_dd_typeRepaint"),
+            repair_repaint = g_i18n:getText("usedplus_dd_typeRepairRepaint"),
+            land = g_i18n:getText("usedplus_dd_typeLandFinance"),
+            lease = g_i18n:getText("usedplus_dd_typeLease"),
+            land_lease = g_i18n:getText("usedplus_dd_typeLandLease")
         }
 
         typeText = typeDisplayMap[typeText] or (typeText:sub(1,1):upper() .. typeText:sub(2))
@@ -184,7 +184,7 @@ function DealDetailsDialog:updateDisplay()
 
     -- Status
     if self.dealStatusText then
-        local statusText = deal.status or "Active"
+        local statusText = deal.status or g_i18n:getText("usedplus_dd_statusActive")
         statusText = statusText:sub(1,1):upper() .. statusText:sub(2)
         self.dealStatusText:setText(statusText)
 
@@ -227,9 +227,9 @@ function DealDetailsDialog:updateDisplay()
         local remainingMonths = months % 12
         local termStr
         if remainingMonths == 0 then
-            termStr = string.format("%d months (%d year%s)", months, years, years == 1 and "" or "s")
+            termStr = string.format(g_i18n:getText("usedplus_dd_termYears"), months, years, years == 1 and "" or "s")
         else
-            termStr = string.format("%d months", months)
+            termStr = string.format(g_i18n:getText("usedplus_dd_termMonths"), months)
         end
         self.termText:setText(termStr)
     end
@@ -488,12 +488,12 @@ function DealDetailsDialog:onMultiplierChanged()
         if newMultiplier > 1.0 then
             local extraPercent = math.floor((newMultiplier - 1.0) * 100)
             notificationText = string.format(
-                "Bank loan payment: %s (+%d%% extra toward principal)",
+                g_i18n:getText("usedplus_dd_bankLoanExtra"),
                 DealDetailsDialog.MULTIPLIER_TEXTS[stateIndex],
                 extraPercent
             )
         else
-            notificationText = "Bank loan payment: Standard (interest only)"
+            notificationText = g_i18n:getText("usedplus_dd_bankLoanStandard")
         end
         g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_OK, notificationText)
         return
@@ -524,7 +524,7 @@ function DealDetailsDialog:onMultiplierChanged()
     end
 
     -- Show notification with savings info if applicable
-    local notificationText = string.format("Payment set to %s (%.0f%% of base)",
+    local notificationText = string.format(g_i18n:getText("usedplus_dd_paymentSet"),
         DealDetailsDialog.MULTIPLIER_TEXTS[stateIndex],
         newMultiplier * 100)
 
@@ -566,7 +566,7 @@ function DealDetailsDialog:onEarlyPayoff()
             }
 
             message = string.format(
-                "Buy out this land lease for %s?\n\nOriginal land price: %s\nLease progress savings: -%s\nBuyout price: %s",
+                g_i18n:getText("usedplus_dd_buyoutLandMessage"),
                 g_i18n:formatMoney(buyoutPrice, 0, true, true),
                 g_i18n:formatMoney(deal.landPrice or 0, 0, true, true),
                 g_i18n:formatMoney(savings, 0, true, true),
@@ -590,7 +590,7 @@ function DealDetailsDialog:onEarlyPayoff()
 
             local netCost = buyoutPrice - depositRefund
             message = string.format(
-                "Buy out this lease for %s?\n\nBuyout price: %s\nEquity applied: -%s\nDeposit refund: +%s\nNet cost: %s",
+                g_i18n:getText("usedplus_dd_buyoutVehicleMessage"),
                 g_i18n:formatMoney(buyoutPrice, 0, true, true),
                 g_i18n:formatMoney(residualValue, 0, true, true),
                 g_i18n:formatMoney(equity, 0, true, true),
@@ -598,7 +598,7 @@ function DealDetailsDialog:onEarlyPayoff()
                 g_i18n:formatMoney(netCost, 0, true, true))
         end
 
-        YesNoDialog.show(self.onLeaseBuyoutConfirm, self, message, "Buyout Lease")
+        YesNoDialog.show(self.onLeaseBuyoutConfirm, self, message, g_i18n:getText("usedplus_dd_buyoutLeaseTitle"))
     else
         -- Finance payoff (unchanged)
         local payoffAmount = deal.currentBalance or 0
@@ -606,10 +606,10 @@ function DealDetailsDialog:onEarlyPayoff()
             payoffAmount = payoffAmount + deal.accruedInterest
         end
 
-        local message = string.format("Are you sure you want to pay off this loan for %s?",
+        local message = string.format(g_i18n:getText("usedplus_dd_payoffConfirm"),
             g_i18n:formatMoney(payoffAmount, 0, true, true))
 
-        YesNoDialog.show(self.onPayoffConfirm, self, message, "Early Payoff")
+        YesNoDialog.show(self.onPayoffConfirm, self, message, g_i18n:getText("usedplus_dd_earlyPayoffTitle"))
     end
 end
 

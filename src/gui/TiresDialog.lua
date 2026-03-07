@@ -103,7 +103,8 @@ function TiresDialog:setVehicle(vehicle, farmId)
     local storeItem = g_storeManager:getItemByXMLFilename(vehicle.configFileName)
     self.storeItem = storeItem
     self.vehicleName = storeItem and storeItem.name or vehicle:getName() or "Unknown Vehicle"
-    self.basePrice = storeItem and (StoreItemUtil.getDefaultPrice(storeItem, vehicle.configurations) or storeItem.price or 10000) or 10000
+    -- Use empty config table to get base store price (not depreciated vehicle price)
+    self.basePrice = storeItem and (StoreItemUtil.getDefaultPrice(storeItem, {}) or storeItem.price or 10000) or 10000
 
     -- Get current tire state from UsedPlusMaintenance
     local spec = vehicle.spec_usedPlusMaintenance
@@ -308,7 +309,7 @@ function TiresDialog:updatePaymentSummary()
             self.selectedTireText:setText(g_i18n:getText("usedplus_tires_selectAbove") or "Select above")
         end
         if self.totalCostText then
-            self.totalCostText:setText("$0")
+            self.totalCostText:setText(g_i18n:formatMoney(0, 0, true, true))
         end
     end
 end

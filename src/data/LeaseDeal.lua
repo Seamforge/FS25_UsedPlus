@@ -122,9 +122,9 @@ function LeaseDeal:processMonthlyPayment()
         return false
     end
 
-    -- Deduct payment
+    -- Deduct payment (use changeBalance — the actual Farm money API)
     if g_server then
-        g_currentMission:addMoneyChange(-self.monthlyPayment, self.farmId, MoneyType.LEASING_COSTS, true)
+        farm:changeBalance(-self.monthlyPayment, MoneyType.LEASING_COSTS)
     end
 
     -- Increment months paid and reset missed counter
@@ -309,8 +309,8 @@ function LeaseDeal:terminateEarly()
         return false
     end
 
-    -- Deduct fee
-    g_currentMission:addMoneyChange(-terminationFee, self.farmId, MoneyType.LEASING_COSTS, true)
+    -- Deduct fee (use changeBalance — the actual Farm money API)
+    farm:changeBalance(-terminationFee, MoneyType.LEASING_COSTS)
 
     -- Find and remove vehicle
     local vehicle = self:findVehicle()

@@ -222,7 +222,7 @@ function UsedPlusMaintenance.endRunaway(vehicle, reason)
 
     -- Show info (not warning - the danger is over)
     if not g_dedicatedServer then
-        g_currentMission:showBlinkingWarning(messages[reason] or "Runaway ended.", 3000)
+        g_currentMission:showBlinkingWarning(messages[reason] or g_i18n:getText("usedplus_runaway_defaultEnded"), 3000)
     end
 
     -- v2.5.2: Fire API event

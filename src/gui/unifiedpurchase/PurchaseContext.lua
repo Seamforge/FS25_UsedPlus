@@ -120,16 +120,16 @@ function PurchaseContext:validate()
     -- Check mode-specific requirements
     if self.currentMode == self.MODE_FINANCE then
         if not self.canFinance then
-            return false, string.format("Cannot finance (credit score %d, need %d)",
+            return false, string.format(g_i18n:getText("usedplus_error_cannotFinance"),
                 self.creditScore, self.financeMinScore)
         end
     elseif self.currentMode == self.MODE_LEASE then
         if not self.canLease then
-            return false, string.format("Cannot lease (credit score %d, need %d)",
+            return false, string.format(g_i18n:getText("usedplus_error_cannotLease"),
                 self.creditScore, self.leaseMinScore)
         end
         if self.itemType == "placeable" then
-            return false, "Placeables cannot be leased"
+            return false, g_i18n:getText("usedplus_error_placeablesNotLeasable")
         end
     end
 

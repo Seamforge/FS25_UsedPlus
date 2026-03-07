@@ -334,7 +334,15 @@ function SaleOfferDialog:updateDisplay()
     -- ================================================================
     -- SECTION 4: Your Options (simplified - just show offer amount)
     -- ================================================================
-    UIHelper.Element.setText(self.thisOfferText, UIHelper.Text.formatMoney(offer))
+    -- Show net amount after commission (gross is already shown in Section 2)
+    local agentTierCfg = self.listing:getAgentTierConfig()
+    local feePercent = agentTierCfg.feePercent or 0.04
+    local commission = math.floor(offer * feePercent)
+    local netAmount = offer - commission
+    local offerDisplay = string.format("%s net (%d%%)",
+        g_i18n:formatMoney(netAmount, 0, true, true),
+        math.floor(feePercent * 100))
+    UIHelper.Element.setText(self.thisOfferText, offerDisplay)
 
     -- v2.16.0: Show previous offers text summary
     local history = self.listing.offerHistory or {}

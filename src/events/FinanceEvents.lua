@@ -443,7 +443,7 @@ function FinancePaymentEvent:run(connection)
             return
         end
 
-        g_currentMission:addMoneyChange(-totalCost, self.farmId, MoneyType.OTHER, true)
+        g_currentMission:addMoney(-totalCost, self.farmId, MoneyType.OTHER, true, true)
 
         deal.status = "completed"
         deal.currentBalance = 0
@@ -476,7 +476,7 @@ function FinancePaymentEvent:run(connection)
         local interestPortion = (deal.interestRate / 12) * deal.currentBalance
         local principalPortion = self.paymentAmount - interestPortion
 
-        g_currentMission:addMoneyChange(-self.paymentAmount, self.farmId, MoneyType.OTHER, true)
+        g_currentMission:addMoney(-self.paymentAmount, self.farmId, MoneyType.OTHER, true, true)
 
         deal.currentBalance = deal.currentBalance - principalPortion
         deal.totalInterestPaid = deal.totalInterestPaid + interestPortion

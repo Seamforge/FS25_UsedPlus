@@ -727,24 +727,25 @@ function ShopConfigScreenExtension.onInspectClick(shopScreen, vehicle)
     end
 
     -- Fallback: Show simple info dialog
-    local info = "Maintenance information not available."
+    local info = g_i18n:getText("usedplus_inspection_noData")
 
     if UsedPlusMaintenance and UsedPlusMaintenance.getReliabilityData then
         local data = UsedPlusMaintenance.getReliabilityData(vehicle)
         if data then
             info = string.format(
-                "=== Maintenance Report ===\n" ..
-                "Vehicle: %s\n\n" ..
-                "Engine Reliability: %d%%\n" ..
-                "Hydraulic Reliability: %d%%\n" ..
-                "Electrical Reliability: %d%%\n\n" ..
-                "Breakdowns: %d\n" ..
-                "Repairs: %d",
-                vehicle:getName() or "Unknown",
+                "%s\n%s: %s\n\n%s: %d%%\n%s: %d%%\n%s: %d%%\n\n%s: %d\n%s: %d",
+                g_i18n:getText("usedplus_title_maintenanceReport") or "=== Maintenance Report ===",
+                g_i18n:getText("usedplus_common_vehicle") or "Vehicle",
+                vehicle:getName() or g_i18n:getText("usedplus_common_unknown") or "Unknown",
+                g_i18n:getText("usedplus_engine_reliability") or "Engine Reliability",
                 math.floor((data.engineReliability or 1) * 100),
+                g_i18n:getText("usedplus_hydraulic_system") or "Hydraulic Reliability",
                 math.floor((data.hydraulicReliability or 1) * 100),
+                g_i18n:getText("usedplus_electrical_reliability") or "Electrical Reliability",
                 math.floor((data.electricalReliability or 1) * 100),
+                g_i18n:getText("usedplus_mr_breakdowns") or "Breakdowns",
                 data.failureCount or 0,
+                g_i18n:getText("usedplus_mr_repairs") or "Repairs",
                 data.repairCount or 0
             )
         end

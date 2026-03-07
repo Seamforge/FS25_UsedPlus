@@ -1,17 +1,19 @@
 --[[
     RVBServiceHooks.lua
-    Hook RVB's Service button and fault tracking/degradation
+    Hook RVB's Service completion and fault tracking/degradation
 
     Extracted from RVBWorkshopIntegration.lua for modularity
     v2.2.0: Progressive degradation - DNA affects RVB part lifetimes
+    v2.15.3: Fixed hook — hooks dialog:onYesNoServiceDialog() method directly
+             instead of button.onClickCallback (XML onClick bypasses onClickCallback)
 ]]
 
 -- Ensure RVBWorkshopIntegration table exists (modules load before coordinator)
 RVBWorkshopIntegration = RVBWorkshopIntegration or {}
 
 --[[
-    Hook RVB's Service button to apply degradation after service completes
-    This catches repairs that don't go through our RepairDialog
+    Hook RVB's Service completion to apply degradation and top up UsedPlus fluids.
+    Hooks onYesNoServiceDialog — the method called when the player confirms service.
 ]]
 function RVBWorkshopIntegration:hookServiceButton(dialog)
     if dialog == nil then
@@ -23,121 +25,87 @@ function RVBWorkshopIntegration:hookServiceButton(dialog)
         return
     end
 
-    -- Find RVB's service button
-    local serviceButton = dialog.serviceButton
-    if serviceButton == nil then
-        -- Try to find by iterating elements
-        local buttonsBox = dialog.buttonsBox
-        if buttonsBox and buttonsBox.elements then
-            for _, element in ipairs(buttonsBox.elements) do
-                if element.id == "serviceButton" or element.name == "serviceButton" then
-                    serviceButton = element
-                    break
-                end
+    -- Hook the dialog's onYesNoServiceDialog METHOD
+    local origOnYesNoService = dialog.onYesNoServiceDialog
+    if origOnYesNoService == nil then
+        local mt = getmetatable(dialog)
+        while mt do
+            local idx = mt.__index
+            if type(idx) == "table" and idx.onYesNoServiceDialog then
+                origOnYesNoService = idx.onYesNoServiceDialog
+                break
+            elseif type(idx) == "function" then
+                break
             end
+            mt = getmetatable(idx)
         end
     end
 
-    if serviceButton == nil then
-        UsedPlus.logDebug("RVBWorkshopIntegration: Could not find service button to hook")
+    if origOnYesNoService == nil then
+        UsedPlus.logDebug("RVBWorkshopIntegration: Could not find onYesNoServiceDialog to hook")
         return
     end
 
-    -- Store original callback (may be nil if RVB hasn't assigned it yet)
-    local originalCallback = serviceButton.onClickCallback
+    dialog.onYesNoServiceDialog = function(self, yes)
+        -- Call original first (this does the actual RVB service)
+        origOnYesNoService(self, yes)
 
-    -- Wrap with our degradation logic AND fluid top-up
-    serviceButton.onClickCallback = function()
-        local vehicle = dialog.vehicle
-        UsedPlus.logDebug(string.format("RVBWorkshopIntegration: Service button clicked for %s",
-            vehicle and vehicle:getName() or "nil"))
+        -- If player confirmed service, apply UsedPlus effects
+        if yes and self.vehicle then
+            local vehicle = self.vehicle
 
-        -- v2.15.0: Call original service with robust fallback
-        -- originalCallback may be nil (RVB hadn't assigned it at hook time) or may need dialog context
-        local serviceCallOk = false
-        if originalCallback then
-            -- Try closure-style first (most common)
-            local ok = pcall(originalCallback)
-            if ok then
-                serviceCallOk = true
-            else
-                -- Try method-style with dialog as self
-                ok = pcall(originalCallback, dialog)
-                if ok then serviceCallOk = true end
+            -- Apply degradation after service completes
+            if ModCompatibility and ModCompatibility.applyRVBRepairDegradation then
+                ModCompatibility.applyRVBRepairDegradation(vehicle)
+                UsedPlus.logDebug("RVBWorkshopIntegration: Applied repair degradation after RVB service")
             end
-        end
-        -- Fallback: try well-known RVB method names on the dialog
-        if not serviceCallOk then
-            local fallbackNames = {"onServiceButtonClick", "onService", "serviceVehicle"}
-            for _, name in ipairs(fallbackNames) do
-                if dialog[name] and type(dialog[name]) == "function" then
-                    local ok = pcall(dialog[name], dialog)
-                    if ok then
-                        serviceCallOk = true
-                        UsedPlus.logDebug("RVBWorkshopIntegration: Service called via fallback: " .. name)
-                        break
-                    end
+
+            -- Top up UsedPlus fluids (oil + hydraulic)
+            local spec = vehicle.spec_usedPlusMaintenance
+            if spec then
+                local fluidsToppedUp = false
+
+                -- Top up oil
+                if spec.oilLevel and spec.oilLevel < 1.0 then
+                    spec.oilLevel = 1.0
+                    spec.hasOilLeak = false
+                    spec.oilLeakSeverity = 0
+                    fluidsToppedUp = true
+                    UsedPlus.logDebug("RVBWorkshopIntegration: Topped up engine oil")
                 end
-            end
-        end
-        if not serviceCallOk then
-            UsedPlus.logDebug("RVBWorkshopIntegration: Could not invoke RVB native service — applying UsedPlus service only")
-        end
 
-        -- Apply degradation after service completes
-        -- Note: Service in RVB typically resets wear/fixes minor issues
-        if vehicle and ModCompatibility and ModCompatibility.applyRVBRepairDegradation then
-            ModCompatibility.applyRVBRepairDegradation(vehicle)
-            UsedPlus.logDebug("RVBWorkshopIntegration: Applied repair degradation after RVB service")
-        end
+                -- Top up hydraulic fluid
+                if spec.hydraulicFluidLevel and spec.hydraulicFluidLevel < 1.0 then
+                    spec.hydraulicFluidLevel = 1.0
+                    spec.hasHydraulicLeak = false
+                    spec.hydraulicLeakSeverity = 0
+                    fluidsToppedUp = true
+                    UsedPlus.logDebug("RVBWorkshopIntegration: Topped up hydraulic fluid")
+                end
 
-        -- v2.5.1: Service also tops up UsedPlus fluids (oil + hydraulic)
-        -- This creates cohesive experience - RVB service includes our fluids
-        local spec = vehicle and vehicle.spec_usedPlusMaintenance
-        if spec then
-            local fluidsToppedUp = false
+                -- Small reliability boost from proper maintenance
+                if fluidsToppedUp then
+                    local serviceBoost = 0.03  -- 3% reliability improvement from service
 
-            -- Top up oil
-            if spec.oilLevel and spec.oilLevel < 1.0 then
-                spec.oilLevel = 1.0
-                spec.hasOilLeak = false  -- Service fixes minor leaks
-                spec.oilLeakSeverity = 0
-                fluidsToppedUp = true
-                UsedPlus.logDebug("RVBWorkshopIntegration: Topped up engine oil")
-            end
+                    local oldHydraulic = spec.hydraulicReliability or 1.0
+                    local maxHydraulic = spec.maxHydraulicDurability or spec.maxReliabilityCeiling or 1.0
+                    spec.hydraulicReliability = math.min(maxHydraulic, oldHydraulic + serviceBoost)
 
-            -- Top up hydraulic fluid
-            if spec.hydraulicFluidLevel and spec.hydraulicFluidLevel < 1.0 then
-                spec.hydraulicFluidLevel = 1.0
-                spec.hasHydraulicLeak = false  -- Service fixes minor leaks
-                spec.hydraulicLeakSeverity = 0
-                fluidsToppedUp = true
-                UsedPlus.logDebug("RVBWorkshopIntegration: Topped up hydraulic fluid")
-            end
+                    local oldEngine = spec.engineReliability or 1.0
+                    local maxEngine = spec.maxEngineDurability or spec.maxReliabilityCeiling or 1.0
+                    spec.engineReliability = math.min(maxEngine, oldEngine + (serviceBoost * 0.5))
 
-            -- Small reliability boost from proper maintenance (max 5% boost, caps at ceiling)
-            if fluidsToppedUp then
-                local serviceBoost = 0.03  -- 3% reliability improvement from service
-
-                -- Hydraulic boost (primary benefit for v2.5.0 malfunctions)
-                local oldHydraulic = spec.hydraulicReliability or 1.0
-                local maxHydraulic = spec.maxHydraulicDurability or spec.maxReliabilityCeiling or 1.0
-                spec.hydraulicReliability = math.min(maxHydraulic, oldHydraulic + serviceBoost)
-
-                -- Engine boost (minor)
-                local oldEngine = spec.engineReliability or 1.0
-                local maxEngine = spec.maxEngineDurability or spec.maxReliabilityCeiling or 1.0
-                spec.engineReliability = math.min(maxEngine, oldEngine + (serviceBoost * 0.5))
-
-                UsedPlus.logDebug(string.format("RVBWorkshopIntegration: Service reliability boost - hydraulic %.1f%% -> %.1f%%, engine %.1f%% -> %.1f%%",
-                    oldHydraulic * 100, spec.hydraulicReliability * 100,
-                    oldEngine * 100, spec.engineReliability * 100))
+                    UsedPlus.logDebug(string.format(
+                        "RVBWorkshopIntegration: Service reliability boost - hydraulic %.1f%% -> %.1f%%, engine %.1f%% -> %.1f%%",
+                        oldHydraulic * 100, spec.hydraulicReliability * 100,
+                        oldEngine * 100, spec.engineReliability * 100))
+                end
             end
         end
     end
 
     dialog.usedPlusServiceHooked = true
-    UsedPlus.logDebug("RVBWorkshopIntegration: Hooked RVB service button for degradation")
+    UsedPlus.logInfo("RVBWorkshopIntegration: Hooked onYesNoServiceDialog for service effects")
 end
 
 --[[
@@ -222,32 +190,3 @@ function RVBWorkshopIntegration:countParts(partsTable)
     return count
 end
 
---[[
-    Clean up fault tracking when vehicle is sold/removed
-]]
-function RVBWorkshopIntegration:cleanupFaultTracking(vehicle)
-    if vehicle and self.previousFaultStates[vehicle] then
-        self.previousFaultStates[vehicle] = nil
-        UsedPlus.logDebug(string.format("RVBWorkshopIntegration: Cleaned up fault tracking for %s",
-            vehicle:getName()))
-    end
-end
-
---[[
-    Periodic fault check for all vehicles with RVB data
-    Called from UsedPlusMaintenance:onUpdate or message center subscription
-]]
-function RVBWorkshopIntegration:updateFaultMonitoring()
-    if not ModCompatibility or not ModCompatibility.rvbInstalled then
-        return
-    end
-
-    -- Check all vehicles with UsedPlus maintenance spec
-    if g_currentMission and g_currentMission.vehicles then
-        for _, vehicle in ipairs(g_currentMission.vehicles) do
-            if vehicle.spec_usedPlusMaintenance and vehicle.spec_faultData then
-                self:checkForNewFaults(vehicle)
-            end
-        end
-    end
-end

@@ -956,7 +956,7 @@ function InGameMenuVehiclesFrameExtension.showMaintenanceReport(vehicle)
         if info then
             InfoDialog.show(info)
         else
-            InfoDialog.show("No maintenance data available for this vehicle.")
+            InfoDialog.show(g_i18n:getText("usedplus_maintenance_noDataAvailable"))
         end
         return true
     end

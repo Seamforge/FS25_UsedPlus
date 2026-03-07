@@ -132,7 +132,7 @@
 
     <GUIProfiles>
         <!--  All profiles MUST use anchorTopCenter for dialog content per CLAUDE.md -->
-        <Profile name="dashboardSectionTitle" extends="fs25_dialogText" with="anchorTopCenter">
+        <Profile name="dashboardSectionTitle" extends="fs25_textDefault" with="anchorTopCenter">
             <textSize value="18px"/>
             <textBold value="true"/>
             <textColor value="1 0.8 0 1"/>

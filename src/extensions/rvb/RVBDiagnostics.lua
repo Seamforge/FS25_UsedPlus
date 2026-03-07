@@ -38,6 +38,16 @@ function RVBWorkshopIntegration:injectUsedPlusData(dialog)
         return
     end
 
+    -- Check if our rows are still in settingsBox (RVB rebuilds it each updateScreen)
+    if dialog.usedPlusDividerRow then
+        for _, el in ipairs(settingsBox.elements or {}) do
+            if el == dialog.usedPlusDividerRow then
+                return  -- Our rows persist, no need to re-inject
+            end
+        end
+        dialog.usedPlusDividerRow = nil
+    end
+
     -- Get UsedPlus maintenance data
     local spec = vehicle.spec_usedPlusMaintenance
     if spec == nil then
@@ -75,6 +85,7 @@ function RVBWorkshopIntegration:injectUsedPlusData(dialog)
     -- Add a subtle header/divider row
     local dividerRow = templateRow:clone(settingsBox)
     if dividerRow then
+        dialog.usedPlusDividerRow = dividerRow
         dividerRow:setVisible(true)
         local divColor = colorTable[alternating]
         if divColor then
@@ -83,7 +94,7 @@ function RVBWorkshopIntegration:injectUsedPlusData(dialog)
         local divLabel = dividerRow:getDescendantByName("label")
         local divValue = dividerRow:getDescendantByName("value")
         if divLabel then
-            divLabel:setText("— UsedPlus —")
+            divLabel:setText(g_i18n:getText("usedplus_rvb_sectionHeader"))
             -- Make it slightly dimmer to look like a section header
             if divLabel.setTextColor then
                 divLabel:setTextColor(0.6, 0.7, 0.8, 1)
@@ -148,173 +159,288 @@ end
     2. Mark it for cleanup after RVB processes it
 ]]
 function RVBWorkshopIntegration:injectHydraulicDiagnosticV2(dialog, vehicle, spec)
-    if dialog == nil or vehicle == nil or spec == nil then
-        return false
-    end
-
-    -- Only inject once per dialog update
-    if dialog.usedPlusHydraulicInjected then
-        return true
-    end
-
-    -- Get hydraulic data
-    local hydraulicReliability = spec.hydraulicReliability or 1.0
-    local hydraulicPct = math.floor(hydraulicReliability * 100)
-
-    -- Try to find RVB's diagnosticsList and understand its structure
-    local diagnosticsList = dialog.diagnosticsList
-    if diagnosticsList == nil then
-        UsedPlus.logDebug("RVBWorkshopIntegration: diagnosticsList not found")
-        return false
-    end
-
-    -- Log list properties to understand structure
-    UsedPlus.logDebug("RVBWorkshopIntegration: Analyzing diagnosticsList structure...")
-    local numericProps = {}
-    local functionProps = {}
-    for k, v in pairs(diagnosticsList) do
-        if type(v) == "number" then
-            numericProps[k] = v
-        elseif type(v) == "function" then
-            table.insert(functionProps, k)
-        end
-    end
-
-    -- Log numeric properties (likely include item counts)
-    for k, v in pairs(numericProps) do
-        UsedPlus.logDebug(string.format("  [number] %s = %d", k, v))
-    end
-
-    -- Log function names (looking for add/update methods)
-    UsedPlus.logDebug("  [functions] " .. table.concat(functionProps, ", "))
-
-    -- Check if list has a dataSource
-    if diagnosticsList.dataSource then
-        UsedPlus.logDebug("RVBWorkshopIntegration: List has dataSource - trying wrapper approach")
-        return self:injectViaDataSource(dialog, diagnosticsList, hydraulicReliability)
-    end
-
-    -- Check if list has elements we can clone from
-    if diagnosticsList.elements and #diagnosticsList.elements > 0 then
-        UsedPlus.logDebug(string.format("RVBWorkshopIntegration: List has %d elements", #diagnosticsList.elements))
-        return self:injectViaCloneWithStateUpdate(dialog, diagnosticsList, hydraulicReliability)
-    end
-
-    UsedPlus.logDebug("RVBWorkshopIntegration: No viable injection method found")
-    return false
+    -- Method hooks installed? Hydraulics will appear on right side.
+    return dialog.usedPlusMethodsHooked == true
 end
 
 --[[
-    Approach 1: Wrap the data source to include our hydraulic item
+    Hook the dialog's own dataSource methods to add a hydraulic row.
+
+    CRITICAL: RVB sets `self` (the dialog) as the dataSource. Previous approach
+    wrapped with a new object, which replaced `self` in delegate methods — breaking
+    `self.partBreakdowns`, `self.vehicle`, etc. and corrupting toggles.
+
+    This approach modifies the dialog's OWN methods directly. `self` remains the
+    dialog throughout, so all RVB internal state access works correctly.
+    Hydraulic item is appended at the END so RVB part indices stay unchanged.
 ]]
-function RVBWorkshopIntegration:injectViaDataSource(dialog, diagnosticsList, hydraulicReliability)
-    local originalDataSource = diagnosticsList.dataSource
-
-    -- Create wrapper that adds our item
-    local wrapper = {}
-    setmetatable(wrapper, {__index = originalDataSource})
-
-    -- Override getNumberOfItemsInSection
-    if originalDataSource.getNumberOfItemsInSection then
-        wrapper.getNumberOfItemsInSection = function(self, list, section)
-            local count = originalDataSource:getNumberOfItemsInSection(list, section)
-            return count + 1
-        end
+function RVBWorkshopIntegration:hookDiagnosticsMethods(dialog)
+    if dialog == nil then
+        return
     end
 
-    -- Override populateCellForItemInSection
-    if originalDataSource.populateCellForItemInSection then
-        wrapper.populateCellForItemInSection = function(self, list, section, index, cell)
-            local originalCount = originalDataSource:getNumberOfItemsInSection(list, section)
+    -- Only hook once per dialog instance
+    if dialog.usedPlusMethodsHooked then
+        return
+    end
 
-            if index > originalCount then
-                -- This is our hydraulic item
-                RVBWorkshopIntegration:populateHydraulicCell(cell, hydraulicReliability)
+    -- Capture originals from metatable (class methods)
+    local origGetCount = dialog.getNumberOfItemsInSection
+    local origPopulate = dialog.populateCellForItemInSection
+
+    if origGetCount == nil or origPopulate == nil then
+        UsedPlus.logWarn("RVBWorkshopIntegration: Could not find dataSource methods to hook")
+        return
+    end
+
+    -- Resolve DIAGNOSTICS mode value — try multiple sources since the global may be nil
+    local DIAGNOSTICS_MODE = nil
+
+    -- Method 1: rvbWorkshopDialog global (may be nil in our mod's scope)
+    if rvbWorkshopDialog and rvbWorkshopDialog.MODE then
+        DIAGNOSTICS_MODE = rvbWorkshopDialog.MODE.DIAGNOSTICS
+    end
+
+    -- Method 2: Instance's own MODE (resolved via metatable chain)
+    if DIAGNOSTICS_MODE == nil and dialog.MODE then
+        DIAGNOSTICS_MODE = dialog.MODE.DIAGNOSTICS
+    end
+
+    -- Method 3: Walk metatable chain manually
+    if DIAGNOSTICS_MODE == nil then
+        local mt = getmetatable(dialog)
+        while mt do
+            local idx = mt.__index
+            if type(idx) == "table" then
+                if idx.MODE and idx.MODE.DIAGNOSTICS then
+                    DIAGNOSTICS_MODE = idx.MODE.DIAGNOSTICS
+                    break
+                end
+                mt = getmetatable(idx)
             else
-                -- Original item
-                originalDataSource:populateCellForItemInSection(list, section, index, cell)
+                break
             end
         end
     end
 
-    -- Set wrapper and reload
-    diagnosticsList:setDataSource(wrapper)
-    if diagnosticsList.reloadData then
-        diagnosticsList:reloadData()
+    -- Method 4: Infer from dialog's current selectedMode (RVB starts in DIAGNOSTICS)
+    if DIAGNOSTICS_MODE == nil then
+        if dialog.selectedMode ~= nil and dialog.selectedMode ~= 0 then
+            DIAGNOSTICS_MODE = dialog.selectedMode
+        end
     end
 
-    dialog.usedPlusHydraulicInjected = true
-    UsedPlus.logInfo("RVBWorkshopIntegration: Injected hydraulic via data source wrapper")
-    return true
+    -- Method 5: _G global lookup
+    if DIAGNOSTICS_MODE == nil and _G and _G.rvbWorkshopDialog and _G.rvbWorkshopDialog.MODE then
+        DIAGNOSTICS_MODE = _G.rvbWorkshopDialog.MODE.DIAGNOSTICS
+    end
+
+    if DIAGNOSTICS_MODE == nil then
+        UsedPlus.logWarn("RVBWorkshopIntegration: Could not resolve DIAGNOSTICS mode value")
+        return
+    end
+
+    -- Override getNumberOfItemsInSection: +1 for hydraulics in diagnostics mode
+    -- Check if our entry is already in partBreakdowns (appended by updateScreen hook)
+    dialog.getNumberOfItemsInSection = function(self, list, section)
+        local count = origGetCount(self, list, section)
+        if self.selectedMode == DIAGNOSTICS_MODE then
+            -- Only add +1 if our entry isn't already in partBreakdowns
+            local lastEntry = self.partBreakdowns and self.partBreakdowns[#self.partBreakdowns]
+            if not lastEntry or lastEntry.name ~= "USEDPLUS_HYDRAULIC" then
+                return count + 1
+            end
+        end
+        return count
+    end
+
+    -- Override populateCellForItemInSection: handle our hydraulic item
+    dialog.populateCellForItemInSection = function(self, list, section, index, cell)
+        if self.selectedMode == DIAGNOSTICS_MODE then
+            -- Check if this index is our hydraulic entry (by name or by overflow)
+            local partEntry = self.partBreakdowns and self.partBreakdowns[index]
+            local isOurs = (partEntry and partEntry.name == "USEDPLUS_HYDRAULIC")
+                or (not partEntry)  -- index beyond partBreakdowns = our extra item
+            if isOurs then
+                -- Our hydraulic item — read live value from vehicle
+                local hydraulicRel = 1.0
+                if self.vehicle and self.vehicle.spec_usedPlusMaintenance then
+                    hydraulicRel = self.vehicle.spec_usedPlusMaintenance.hydraulicReliability or 1.0
+                end
+                RVBWorkshopIntegration:populateHydraulicCell(cell, hydraulicRel, self)
+                -- After populating (including on list reload after toggle), update price
+                RVBWorkshopIntegration:adjustRepairButtonPrice(self)
+                return
+            end
+        end
+        -- All other items: call original (self IS the dialog, indices unchanged)
+        origPopulate(self, list, section, index, cell)
+    end
+
+    -- Initialize toggle state
+    RVBWorkshopIntegration.hydraulicRepairRequested = false
+
+    dialog.usedPlusMethodsHooked = true
+    UsedPlus.logInfo("RVBWorkshopIntegration: Diagnostics methods hooked successfully")
 end
 
 --[[
-    Approach 2: Clone element and update internal state
+    Inject a fake "USEDPLUS_HYDRAULIC" entry into partBreakdowns.
+    This allows RVB's native onClickPart to handle our toggle — no hooking needed.
+    Called from the updateScreen hook after RVB rebuilds partBreakdowns.
 ]]
-function RVBWorkshopIntegration:injectViaCloneWithStateUpdate(dialog, diagnosticsList, hydraulicReliability)
-    local templateRow = diagnosticsList.elements[1]
-
-    -- Remember state before
-    local elementsBefore = #diagnosticsList.elements
-
-    -- Clone the row
-    local success, hydraulicRow = pcall(function()
-        return templateRow:clone(diagnosticsList)
-    end)
-
-    if not success or hydraulicRow == nil then
-        UsedPlus.logDebug("RVBWorkshopIntegration: Clone failed")
-        return false
+function RVBWorkshopIntegration:injectHydraulicPartEntry(dialog)
+    if dialog == nil or dialog.partBreakdowns == nil then
+        return
     end
 
-    -- Populate the row
-    self:populateHydraulicCell(hydraulicRow, hydraulicReliability)
+    -- Check if already appended (RVB rebuilds partBreakdowns each updateScreen)
+    local lastEntry = dialog.partBreakdowns[#dialog.partBreakdowns]
+    if lastEntry and lastEntry.name == "USEDPLUS_HYDRAULIC" then
+        return  -- Already appended
+    end
 
-    -- Update internal state - try multiple property names
-    local stateUpdated = false
-    local propsToUpdate = {
-        "numItems", "itemCount", "totalItemCount", "numberOfItems",
-        "listItemCount", "numSections", "totalDataCount"
-    }
+    -- Append our entry — RVB's onClickPart will find it at this index
+    table.insert(dialog.partBreakdowns, {name = "USEDPLUS_HYDRAULIC"})
 
-    for _, prop in ipairs(propsToUpdate) do
-        if diagnosticsList[prop] ~= nil and type(diagnosticsList[prop]) == "number" then
-            local oldVal = diagnosticsList[prop]
-            diagnosticsList[prop] = oldVal + 1
-            UsedPlus.logDebug(string.format("Updated %s: %d -> %d", prop, oldVal, oldVal + 1))
-            stateUpdated = true
+    -- Ensure the vehicle has a fake part entry so setPartsRepairreq doesn't crash
+    if dialog.vehicle and dialog.vehicle.spec_faultData and dialog.vehicle.spec_faultData.parts then
+        local parts = dialog.vehicle.spec_faultData.parts
+        if parts["USEDPLUS_HYDRAULIC"] == nil then
+            parts["USEDPLUS_HYDRAULIC"] = {
+                repairreq = RVBWorkshopIntegration.hydraulicRepairRequested or false,
+                fault = "empty",
+                condition = 100
+            }
         end
     end
+end
 
-    -- Try calling update/refresh methods
-    local methodsToTry = {
-        "updateItemPositions", "buildItemList", "updateContentSize",
-        "invalidateLayout", "updateAbsolutePosition", "layoutItems"
-    }
-
-    for _, method in ipairs(methodsToTry) do
-        if diagnosticsList[method] and type(diagnosticsList[method]) == "function" then
-            pcall(function()
-                diagnosticsList[method](diagnosticsList)
-                UsedPlus.logDebug(string.format("Called %s()", method))
-            end)
-        end
+--[[
+    Hook setPartsRepairreq on the vehicle to intercept our fake hydraulic part.
+    When RVB's onClickPart calls vehicle:setPartsRepairreq("USEDPLUS_HYDRAULIC", state),
+    we handle it ourselves instead of letting RVB process it (which would crash/send bad events).
+]]
+function RVBWorkshopIntegration:hookSetPartsRepairreq(dialog)
+    if dialog == nil or dialog.vehicle == nil then
+        return
     end
 
-    dialog.usedPlusHydraulicInjected = true
+    local vehicle = dialog.vehicle
+    if vehicle.usedPlusSetPartsHooked then
+        return
+    end
 
-    local elementsAfter = #diagnosticsList.elements
-    UsedPlus.logInfo(string.format(
-        "RVBWorkshopIntegration: Injected hydraulic via clone (elements: %d -> %d, state updated: %s)",
-        elementsBefore, elementsAfter, tostring(stateUpdated)))
+    local origSetParts = vehicle.setPartsRepairreq
+    if origSetParts == nil then
+        return
+    end
 
-    return true
+    vehicle.setPartsRepairreq = function(self, part, state)
+        if part == "USEDPLUS_HYDRAULIC" then
+            -- Handle our fake part — update toggle state, skip RVB event
+            RVBWorkshopIntegration.hydraulicRepairRequested = state
+            UsedPlus.logDebug(string.format("RVBWorkshopIntegration: Hydraulic toggle set to %s", tostring(state)))
+            -- Update the fake part entry directly (no network event)
+            if self.spec_faultData and self.spec_faultData.parts and self.spec_faultData.parts["USEDPLUS_HYDRAULIC"] then
+                self.spec_faultData.parts["USEDPLUS_HYDRAULIC"].repairreq = state
+            end
+            return
+        end
+        -- All other parts: call original RVB handler
+        origSetParts(self, part, state)
+    end
+
+    vehicle.usedPlusSetPartsHooked = true
+    UsedPlus.logDebug("RVBWorkshopIntegration: hookSetPartsRepairreq hooked on vehicle")
+end
+
+--[[
+    Calculate the cost to repair hydraulics for a vehicle.
+    Uses a formula compatible with RVB's pricing:
+      vehiclePrice × costFraction × damageFraction + labor
+]]
+function RVBWorkshopIntegration:calculateHydraulicRepairCost(vehicle)
+    if vehicle == nil then
+        return 0
+    end
+
+    local spec = vehicle.spec_usedPlusMaintenance
+    if spec == nil then
+        return 0
+    end
+
+    local hydraulicReliability = spec.hydraulicReliability or 1.0
+    if hydraulicReliability >= 0.99 then
+        return 0
+    end
+
+    local damage = 1.0 - hydraulicReliability
+
+    -- Get vehicle base price
+    local storeItem = g_storeManager:getItemByXMLFilename(vehicle.configFileName)
+    local basePrice = storeItem and (StoreItemUtil.getDefaultPrice(storeItem, {}) or storeItem.price or 10000) or 10000
+
+    -- Cost = 0.5% of vehicle price scaled by damage + labor (200 per full repair)
+    local partCost = basePrice * 0.005 * damage
+    local laborCost = 200 * damage
+    local repairMultiplier = UsedPlusSettings and UsedPlusSettings:get("repairCostMultiplier") or 1.0
+
+    return math.floor((partCost + laborCost) * repairMultiplier)
+end
+
+--[[
+    Adjust the repair button price to include hydraulic repair cost.
+    Called directly after updateButtons() runs — no hooking needed.
+    Works from both our onClickPart handler and the updateScreen hook.
+]]
+function RVBWorkshopIntegration:adjustRepairButtonPrice(dialog)
+    if dialog == nil or dialog.vehicle == nil or dialog.repairButton == nil then
+        return
+    end
+
+    if self.hydraulicRepairRequested then
+        local hydraulicCost = self:calculateHydraulicRepairCost(dialog.vehicle)
+        if hydraulicCost > 0 then
+            -- Get RVB's repair price and add ours
+            local rvbPrice = 0
+            if dialog.vehicle.getRepairPrice_RVBClone then
+                rvbPrice = dialog.vehicle:getRepairPrice_RVBClone() or 0
+            end
+            local totalPrice = rvbPrice + hydraulicCost
+
+            -- Update button text with combined price
+            dialog.repairButton:setText(string.format("%s (%s)",
+                g_i18n:getText("button_repair"),
+                g_i18n:formatMoney(totalPrice, 0, true, true)))
+
+            -- Enable the button if it was disabled due to low RVB-only cost
+            -- but hydraulic repair is meaningful
+            if rvbPrice <= 100 then
+                local rvb = dialog.vehicle.spec_faultData
+                local activeWork = false
+                if rvb then
+                    activeWork = (rvb.repair and rvb.repair.active)
+                        or (rvb.inspection and rvb.inspection.active)
+                        or (rvb.service and rvb.service.active)
+                end
+                if not activeWork then
+                    dialog.repairButton:setDisabled(false)
+                end
+            end
+
+            -- Store the cost for the repair completion handler
+            self.lastHydraulicRepairCost = hydraulicCost
+        end
+    else
+        self.lastHydraulicRepairCost = 0
+    end
 end
 
 --[[
     Populate a diagnostics row cell with hydraulic data
 ]]
-function RVBWorkshopIntegration:populateHydraulicCell(cell, hydraulicReliability)
+function RVBWorkshopIntegration:populateHydraulicCell(cell, hydraulicReliability, dialog)
     local hydraulicPct = math.floor(hydraulicReliability * 100)
 
     -- Determine condition text and color
@@ -374,18 +500,13 @@ function RVBWorkshopIntegration:populateHydraulicCell(cell, hydraulicReliability
         end
     end
 
-    -- Hide repair toggle (we handle this separately)
+    -- Show toggle — enabled when hydraulic reliability is below ceiling
     local checkPart = cell:getDescendantByName("checkPart")
     if checkPart then
-        checkPart:setVisible(false)
-    end
-
-    -- Hide action row
-    for _, child in ipairs(cell.elements or {}) do
-        if child.profile and string.find(tostring(child.profile), "actionRow") then
-            child:setVisible(false)
-            break
-        end
+        checkPart:setVisible(true)
+        local canToggle = hydraulicReliability < 0.99
+        checkPart:setDisabled(not canToggle)
+        checkPart:setIsChecked(RVBWorkshopIntegration.hydraulicRepairRequested == true)
     end
 end
 

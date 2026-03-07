@@ -127,7 +127,7 @@ function SearchInitiatedDialog:updateDisplay(details)
         if type(retainer) == "number" then
             retainer = g_i18n:formatMoney(retainer, 0, true, true)
         end
-        self.retainerText:setText(retainer or "$0")
+        self.retainerText:setText(retainer or g_i18n:formatMoney(0, 0, true, true))
     end
 
     -- Commission rate
@@ -145,7 +145,7 @@ function SearchInitiatedDialog:updateDisplay(details)
         if type(basePrice) == "number" then
             basePrice = g_i18n:formatMoney(basePrice, 0, true, true)
         end
-        self.basePriceText:setText(basePrice or "$0")
+        self.basePriceText:setText(basePrice or g_i18n:formatMoney(0, 0, true, true))
     end
 
     -- Estimated commission amount
@@ -154,7 +154,7 @@ function SearchInitiatedDialog:updateDisplay(details)
         if type(commAmt) == "number" then
             commAmt = "+" .. g_i18n:formatMoney(commAmt, 0, true, true)
         end
-        self.commissionAmtText:setText(commAmt or "+$0")
+        self.commissionAmtText:setText(commAmt or "+" .. g_i18n:formatMoney(0, 0, true, true))
     end
 
     -- Estimated asking price
@@ -163,7 +163,7 @@ function SearchInitiatedDialog:updateDisplay(details)
         if type(askingPrice) == "number" then
             askingPrice = g_i18n:formatMoney(askingPrice, 0, true, true)
         end
-        self.askingPriceText:setText(askingPrice or "$0")
+        self.askingPriceText:setText(askingPrice or g_i18n:formatMoney(0, 0, true, true))
     end
 end
 

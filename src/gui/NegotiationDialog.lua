@@ -628,7 +628,7 @@ function NegotiationDialog:onClickSendOffer()
     -- Validate player can afford their offer (used vehicles are cash only!)
     local canAfford, errorMsg = self:canAffordAmount(self.offerAmount)
     if not canAfford then
-        InfoDialog.show(errorMsg or "You cannot afford this offer.")
+        InfoDialog.show(errorMsg or g_i18n:getText("usedplus_negotiation_cannotAfford"))
         return
     end
 

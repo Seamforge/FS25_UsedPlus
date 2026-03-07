@@ -9,6 +9,22 @@
 RVBWorkshopIntegration = RVBWorkshopIntegration or {}
 
 --[[
+    Validate that an element reference is still in a parent's elements list
+    Returns true if the element is live in the parent DOM, false if stale
+]]
+local function isElementStillInParent(element, parent)
+    if element == nil or parent == nil or parent.elements == nil then
+        return false
+    end
+    for _, child in ipairs(parent.elements) do
+        if child == element then
+            return true
+        end
+    end
+    return false
+end
+
+--[[
     Inject a Repaint button into RVB's Workshop dialog
     Clones the Repair button and places it after Repair, before Back
 ]]
@@ -26,12 +42,17 @@ function RVBWorkshopIntegration:injectRepaintButton(dialog)
         return
     end
 
-    -- Only add once per dialog instance
+    -- Check if button reference exists
     if dialog.usedPlusRepaintButton then
-        -- Button exists, just update its state
-        UsedPlus.logDebug("RVBWorkshopIntegration: Repaint button already exists, updating state")
-        self:updateRepaintButtonState(dialog)
-        return
+        -- Validate button is still in the DOM (not stale from dialog close/reopen)
+        if isElementStillInParent(dialog.usedPlusRepaintButton, dialog.buttonsBox) then
+            self:updateRepaintButtonState(dialog)
+            return
+        end
+        -- Stale reference — clear and fall through to re-inject
+        UsedPlus.logDebug("RVBWorkshopIntegration: Repaint button reference is stale, re-injecting")
+        dialog.usedPlusRepaintButton = nil
+        dialog.usedPlusRepaintSeparator = nil
     end
 
     local buttonsBox = dialog.buttonsBox
@@ -138,66 +159,6 @@ function RVBWorkshopIntegration:injectRepaintButton(dialog)
 end
 
 --[[
-    Reorder elements so Repaint button is after Repair but before Back
-]]
-function RVBWorkshopIntegration:reorderRepaintButton(dialog)
-    local buttonsBox = dialog.buttonsBox
-    if buttonsBox == nil or buttonsBox.elements == nil then
-        return
-    end
-
-    local repaintButton = dialog.usedPlusRepaintButton
-    local repaintSeparator = dialog.usedPlusRepaintSeparator
-    local okButton = dialog.okButton  -- Back button has id="okButton"
-
-    if repaintButton == nil then
-        return
-    end
-
-    -- Find indices
-    local repaintIdx = nil
-    local separatorIdx = nil
-    local backIdx = nil
-
-    for i, element in ipairs(buttonsBox.elements) do
-        if element == repaintButton then
-            repaintIdx = i
-        elseif element == repaintSeparator then
-            separatorIdx = i
-        elseif element == okButton or element.id == "okButton" then
-            backIdx = i
-        end
-    end
-
-    -- If back button found, move repaint button and separator before it
-    if backIdx and repaintIdx and repaintIdx > backIdx then
-        -- Remove and reinsert at correct position
-        table.remove(buttonsBox.elements, repaintIdx)
-        if separatorIdx and separatorIdx > repaintIdx then
-            separatorIdx = separatorIdx - 1
-        end
-        if separatorIdx then
-            table.remove(buttonsBox.elements, separatorIdx)
-        end
-
-        -- Recalculate back index
-        for i, element in ipairs(buttonsBox.elements) do
-            if element == okButton or element.id == "okButton" then
-                backIdx = i
-                break
-            end
-        end
-
-        -- Insert separator and button before back
-        if repaintSeparator then
-            table.insert(buttonsBox.elements, backIdx, repaintSeparator)
-            backIdx = backIdx + 1
-        end
-        table.insert(buttonsBox.elements, backIdx, repaintButton)
-    end
-end
-
---[[
     Update the Repaint button state based on vehicle condition
 ]]
 function RVBWorkshopIntegration:updateRepaintButtonState(dialog)
@@ -222,7 +183,8 @@ function RVBWorkshopIntegration:updateRepaintButtonState(dialog)
 
     -- Calculate repaint cost (similar to RepairDialog logic)
     local storeItem = g_storeManager:getItemByXMLFilename(vehicle.configFileName)
-    local basePrice = storeItem and (StoreItemUtil.getDefaultPrice(storeItem, vehicle.configurations) or storeItem.price or 10000) or 10000
+    -- Use empty config table to get base store price (not depreciated vehicle price)
+    local basePrice = storeItem and (StoreItemUtil.getDefaultPrice(storeItem, {}) or storeItem.price or 10000) or 10000
 
     local repaintCost = 0
     if Wearable and Wearable.calculateRepaintPrice then
@@ -307,11 +269,16 @@ function RVBWorkshopIntegration:injectTiresButton(dialog)
         return
     end
 
-    -- Only add once per dialog instance
+    -- Check if button reference exists
     if dialog.usedPlusTiresButton then
-        UsedPlus.logDebug("RVBWorkshopIntegration: Tires button already exists, updating state")
-        self:updateTiresButtonState(dialog)
-        return
+        -- Validate button is still in the DOM
+        if isElementStillInParent(dialog.usedPlusTiresButton, dialog.buttonsBox) then
+            self:updateTiresButtonState(dialog)
+            return
+        end
+        -- Stale reference — clear and fall through to re-inject
+        UsedPlus.logDebug("RVBWorkshopIntegration: Tires button reference is stale, re-injecting")
+        dialog.usedPlusTiresButton = nil
     end
 
     local buttonsBox = dialog.buttonsBox

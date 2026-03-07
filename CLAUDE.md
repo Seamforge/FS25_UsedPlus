@@ -73,9 +73,11 @@ At these stages, Claude and Samantha MUST have explicit dialog:
 
 | Resource | Location |
 |----------|----------|
-| **This Workspace** | `C:\github\FS25_UsedPlus` |
-| Active Mods | `%USERPROFILE%\Documents\My Games\FarmingSimulator2025\mods` |
-| Game Log | `%USERPROFILE%\Documents\My Games\FarmingSimulator2025\log.txt` |
+| **This Workspace** | Windows: `C:\github\FS25_UsedPlus` · macOS: `/Users/mrathbone/github/FS25_UsedPlus` |
+| Active Mods (Win) | `%USERPROFILE%\Documents\My Games\FarmingSimulator2025\mods` |
+| Active Mods (Mac) | `~/Library/Application Support/FarmingSimulator2025/mods` |
+| Game Log (Win) | `%USERPROFILE%\Documents\My Games\FarmingSimulator2025\log.txt` |
+| Game Log (Mac) | `~/Library/Application Support/FarmingSimulator2025/log.txt` |
 | Reference Mods | `%USERPROFILE%\Downloads\FS25_Mods_Extracted` (164+ pre-extracted) |
 | **GIANTS TestRunner** | `%USERPROFILE%\Downloads\TestRunner_FS25\TestRunner_public.exe` ← **GOLD MODE ONLY** |
 | **GIANTS Editor** | `C:\Program Files\GIANTS Software\GIANTS_Editor_10.0.11\editor.exe` |

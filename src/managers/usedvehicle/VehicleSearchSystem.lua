@@ -287,12 +287,17 @@ end
     @param farmId - Farm ID
 ]]
 function UsedVehicleManager:renewSearch(oldSearch, farmId)
-    -- Calculate cost
-    local cost = self:calculateSearchCost(oldSearch.tier, oldSearch.storeItemPrice or 0, farmId)
+    -- Calculate cost using correct field names (searchLevel, basePrice)
+    local cost = self:calculateSearchCost(oldSearch.searchLevel, oldSearch.basePrice or 0, farmId)
 
     -- Check if player can afford
     local farm = g_farmManager:getFarmById(farmId)
-    if farm.money < cost then
+    if farm == nil then
+        UsedPlus.logError("renewSearch: Farm not found for id " .. tostring(farmId))
+        return false
+    end
+
+    if (farm.money or 0) < cost then
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_CRITICAL,
             g_i18n:getText("usedplus_notification_insufficientFundsRenew")
@@ -301,21 +306,24 @@ function UsedVehicleManager:renewSearch(oldSearch, farmId)
     end
 
     -- Create new search with same parameters
+    -- UsedVehicleSearch.new(farmId, storeItemIndex, storeItemName, basePrice, searchLevel, qualityLevel)
     local newSearch = UsedVehicleSearch.new(
+        farmId,
         oldSearch.storeItemIndex,
         oldSearch.storeItemName,
-        oldSearch.storeItemPrice or 0,
-        oldSearch.tier,
-        oldSearch.qualityTier,
-        oldSearch.requestedConfigId
+        oldSearch.basePrice or 0,
+        oldSearch.searchLevel,
+        oldSearch.qualityLevel
     )
+
+    -- Assign an ID (new() leaves id=nil, manager must assign)
+    newSearch.id = self:generateSearchId()
 
     -- Charge the fee
     farm:changeBalance(-cost, MoneyType.OTHER)
 
-    -- Add to active searches
-    self.activeSearches[newSearch.id] = newSearch
-    table.insert(farm.usedVehicleSearches, newSearch)
+    -- Register in manager and farm
+    self:registerSearch(newSearch)
 
     -- Notify player
     g_currentMission:addIngameNotification(
@@ -323,8 +331,8 @@ function UsedVehicleManager:renewSearch(oldSearch, farmId)
         string.format(g_i18n:getText("usedplus_notification_searchRenewed"), oldSearch.storeItemName)
     )
 
-    UsedPlus.logInfo(string.format("Renewed search for %s (Tier %d, Quality %d)",
-        oldSearch.storeItemName, oldSearch.tier, oldSearch.qualityTier))
+    UsedPlus.logInfo(string.format("Renewed search for %s (Level %d, Quality %d)",
+        oldSearch.storeItemName, oldSearch.searchLevel or 0, oldSearch.qualityLevel or 0))
 
     return true
 end

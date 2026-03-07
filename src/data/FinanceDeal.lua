@@ -261,9 +261,9 @@ function FinanceDeal:processConfiguredPayment()
         self.totalInterestPaid = self.totalInterestPaid + paymentAmount
         self.lastPaymentAmount = paymentAmount
 
-        -- Deduct from farm
+        -- Deduct from farm (use changeBalance — the actual Farm money API)
         if g_server then
-            g_currentMission:addMoneyChange(-paymentAmount, self.farmId, MoneyType.OTHER, true)
+            farm:changeBalance(-paymentAmount, MoneyType.OTHER)
         end
 
         -- Record credit impact
@@ -299,9 +299,9 @@ function FinanceDeal:processConfiguredPayment()
             end
         end
 
-        -- Deduct from farm
+        -- Deduct from farm (use changeBalance — the actual Farm money API)
         if g_server then
-            g_currentMission:addMoneyChange(-paymentAmount, self.farmId, MoneyType.OTHER, true)
+            farm:changeBalance(-paymentAmount, MoneyType.OTHER)
         end
 
         -- Record credit impact based on payment mode
@@ -547,9 +547,9 @@ function FinanceDeal:processMonthlyPayment()
     self.lastPaymentAmount = paymentAmount
     self.missedPayments = 0  -- Reset missed payment counter
 
-    -- Deduct money from farm (server only)
+    -- Deduct money from farm (use changeBalance — the actual Farm money API)
     if g_server then
-        g_currentMission:addMoneyChange(-paymentAmount, self.farmId, MoneyType.OTHER, true)
+        farm:changeBalance(-paymentAmount, MoneyType.OTHER)
     end
 
     -- Record on-time payment to PaymentTracker (builds credit score!)
@@ -1068,9 +1068,9 @@ function FinanceDeal:makePayment(amount)
         end
     end
 
-    -- Deduct money
+    -- Deduct money (use changeBalance — the actual Farm money API)
     if g_server then
-        g_currentMission:addMoneyChange(-amount, self.farmId, MoneyType.OTHER, true)
+        farm:changeBalance(-amount, MoneyType.OTHER)
     end
 
     return true, g_i18n:getText("usedplus_success_paymentMade")

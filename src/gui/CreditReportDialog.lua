@@ -296,11 +296,11 @@ function CreditReportDialog:updateScoreSection()
     if self.interestImpactText then
         local impactStr
         if interestAdj < 0 then
-            impactStr = string.format("%.1f%% discount on interest rates", -interestAdj)
+            impactStr = string.format(g_i18n:getText("usedplus_cr_discountRates"), -interestAdj)
         elseif interestAdj > 0 then
-            impactStr = string.format("+%.1f%% on interest rates", interestAdj)
+            impactStr = string.format(g_i18n:getText("usedplus_cr_penaltyRates"), interestAdj)
         else
-            impactStr = "Standard interest rates apply"
+            impactStr = g_i18n:getText("usedplus_cr_standardRates")
         end
         self.interestImpactText:setText(impactStr)
     end
@@ -318,7 +318,7 @@ function CreditReportDialog:updateScoreTrend()
         return
     end
 
-    local trendText = "No History"
+    local trendText = g_i18n:getText("usedplus_cr_noHistory")
     local trendColor = {0.6, 0.6, 0.6, 1}
     local trendIconFile = "trend_flat.dds"  -- Default icon
 
@@ -330,23 +330,23 @@ function CreditReportDialog:updateScoreTrend()
             local streak = stats.currentStreak or 0
 
             if streak >= 6 and onTimeRate >= 0.95 then
-                trendText = "Excellent - Strong Growth"
+                trendText = g_i18n:getText("usedplus_cr_trendExcellent")
                 trendColor = {0.2, 0.9, 0.3, 1}
                 trendIconFile = "trend_up.dds"
             elseif streak >= 3 and onTimeRate >= 0.85 then
-                trendText = "Good - Positive Momentum"
+                trendText = g_i18n:getText("usedplus_cr_trendGood")
                 trendColor = {0.5, 0.9, 0.4, 1}
                 trendIconFile = "trend_up.dds"
             elseif onTimeRate >= 0.70 then
-                trendText = "Stable - Maintaining"
+                trendText = g_i18n:getText("usedplus_cr_trendStable")
                 trendColor = {0.8, 0.8, 0.4, 1}
                 trendIconFile = "trend_flat.dds"
             elseif onTimeRate >= 0.50 then
-                trendText = "Declining - Needs Attention"
+                trendText = g_i18n:getText("usedplus_cr_trendDeclining")
                 trendColor = {1, 0.6, 0.3, 1}
                 trendIconFile = "trend_down.dds"
             else
-                trendText = "Poor - Immediate Action Needed"
+                trendText = g_i18n:getText("usedplus_cr_trendPoor")
                 trendColor = {1, 0.3, 0.3, 1}
                 trendIconFile = "trend_down.dds"
             end
@@ -379,22 +379,23 @@ function CreditReportDialog:updateFactorsSection()
 
     -- Payment History factor (most important - 35%)
     if self.factorPaymentText then
-        local paymentScore = "No history"
+        local paymentScore = g_i18n:getText("usedplus_cr_noPaymentHistory")
         local paymentColor = {0.6, 0.6, 0.6, 1}
 
         if stats.totalPayments and stats.totalPayments > 0 then
             local rate = stats.onTimePayments / stats.totalPayments
+            local pct = math.floor(rate * 100)
             if rate >= 0.95 then
-                paymentScore = "Excellent (" .. math.floor(rate * 100) .. "% on-time)"
+                paymentScore = string.format(g_i18n:getText("usedplus_cr_factorExcellent"), pct)
                 paymentColor = {0.2, 0.9, 0.3, 1}
             elseif rate >= 0.85 then
-                paymentScore = "Good (" .. math.floor(rate * 100) .. "% on-time)"
+                paymentScore = string.format(g_i18n:getText("usedplus_cr_factorGood"), pct)
                 paymentColor = {0.5, 0.9, 0.4, 1}
             elseif rate >= 0.70 then
-                paymentScore = "Fair (" .. math.floor(rate * 100) .. "% on-time)"
+                paymentScore = string.format(g_i18n:getText("usedplus_cr_factorFair"), pct)
                 paymentColor = {0.8, 0.8, 0.4, 1}
             else
-                paymentScore = "Poor (" .. math.floor(rate * 100) .. "% on-time)"
+                paymentScore = string.format(g_i18n:getText("usedplus_cr_factorPoor"), pct)
                 paymentColor = {1, 0.4, 0.3, 1}
             end
         end
@@ -414,16 +415,16 @@ function CreditReportDialog:updateFactorsSection()
 
         if assets > 0 then
             if ratio <= 0.30 then
-                utilScore = string.format("Excellent (%.0f%% utilized)", ratio * 100)
+                utilScore = string.format(g_i18n:getText("usedplus_cr_utilExcellent"), ratio * 100)
                 utilColor = {0.2, 0.9, 0.3, 1}
             elseif ratio <= 0.50 then
-                utilScore = string.format("Good (%.0f%% utilized)", ratio * 100)
+                utilScore = string.format(g_i18n:getText("usedplus_cr_utilGood"), ratio * 100)
                 utilColor = {0.5, 0.9, 0.4, 1}
             elseif ratio <= 0.70 then
-                utilScore = string.format("Fair (%.0f%% utilized)", ratio * 100)
+                utilScore = string.format(g_i18n:getText("usedplus_cr_utilFair"), ratio * 100)
                 utilColor = {0.8, 0.8, 0.4, 1}
             else
-                utilScore = string.format("High (%.0f%% utilized)", ratio * 100)
+                utilScore = string.format(g_i18n:getText("usedplus_cr_utilHigh"), ratio * 100)
                 utilColor = {1, 0.4, 0.3, 1}
             end
         end
@@ -435,20 +436,20 @@ function CreditReportDialog:updateFactorsSection()
     -- Account Age factor (15%)
     if self.factorAgeText then
         local totalPayments = stats.totalPayments or 0
-        local ageScore = "New"
+        local ageScore = g_i18n:getText("usedplus_cr_ageNew")
         local ageColor = {0.6, 0.6, 0.6, 1}
 
         if totalPayments >= 24 then
-            ageScore = "Established (" .. totalPayments .. " payments)"
+            ageScore = string.format(g_i18n:getText("usedplus_cr_ageEstablished"), totalPayments)
             ageColor = {0.2, 0.9, 0.3, 1}
         elseif totalPayments >= 12 then
-            ageScore = "Building (" .. totalPayments .. " payments)"
+            ageScore = string.format(g_i18n:getText("usedplus_cr_ageBuilding"), totalPayments)
             ageColor = {0.5, 0.9, 0.4, 1}
         elseif totalPayments >= 6 then
-            ageScore = "Growing (" .. totalPayments .. " payments)"
+            ageScore = string.format(g_i18n:getText("usedplus_cr_ageGrowing"), totalPayments)
             ageColor = {0.8, 0.8, 0.4, 1}
         elseif totalPayments > 0 then
-            ageScore = "New (" .. totalPayments .. " payments)"
+            ageScore = string.format(g_i18n:getText("usedplus_cr_ageNewCount"), totalPayments)
             ageColor = {0.7, 0.7, 0.7, 1}
         end
 
@@ -807,7 +808,7 @@ function CreditReportDialog:updatePaymentHistogram(stats)
     "]"
 
     -- Summary text with the bar
-    local summaryText = string.format("%s  %d%% On-Time", bar, onTimePercent)
+    local summaryText = string.format(g_i18n:getText("usedplus_cr_histogramFormat"), bar, onTimePercent)
     self.histogramText:setText(summaryText)
     UsedPlus.logDebug("CreditReportDialog: Histogram bar = '" .. summaryText .. "'")
 
@@ -815,13 +816,13 @@ function CreditReportDialog:updatePaymentHistogram(stats)
     if self.histogramLegendText then
         local legendParts = {}
         if onTime > 0 then
-            table.insert(legendParts, string.format("+%d on-time", onTime))
+            table.insert(legendParts, string.format(g_i18n:getText("usedplus_cr_legendOnTime"), onTime))
         end
         if late > 0 then
-            table.insert(legendParts, string.format("-%d late", late))
+            table.insert(legendParts, string.format(g_i18n:getText("usedplus_cr_legendLate"), late))
         end
         if missed > 0 then
-            table.insert(legendParts, string.format("X%d missed", missed))
+            table.insert(legendParts, string.format(g_i18n:getText("usedplus_cr_legendMissed"), missed))
         end
         self.histogramLegendText:setText(table.concat(legendParts, "  "))
     end
@@ -874,55 +875,55 @@ function CreditReportDialog:updateTipsSection()
 
     -- Priority 1: Address missed payments (biggest impact)
     if missedPayments > 0 then
-        table.insert(tips, "PRIORITY: Avoid late payments - they hurt your score the most!")
+        table.insert(tips, g_i18n:getText("usedplus_cr_tipMissedPayments"))
     end
 
     -- Priority 2: High debt utilization
     if debtRatio > 0.70 then
-        table.insert(tips, "Pay down debt - using >70% of credit hurts your score.")
+        table.insert(tips, g_i18n:getText("usedplus_cr_tipHighDebt"))
     elseif debtRatio > 0.50 then
-        table.insert(tips, "Try to keep debt below 50% of your assets for better rates.")
+        table.insert(tips, g_i18n:getText("usedplus_cr_tipDebtRatio"))
     end
 
     -- Based on score level
     if score < 600 then
         -- Very Poor score tips
-        table.insert(tips, "Start small: finance one affordable vehicle to build history.")
+        table.insert(tips, g_i18n:getText("usedplus_cr_tipStartSmall"))
         if missedPayments == 0 then
-            table.insert(tips, "Make every payment on time for 6+ months to rebuild.")
+            table.insert(tips, g_i18n:getText("usedplus_cr_tipOnTime6Months"))
         end
     elseif score < 650 then
         -- Poor score tips
-        table.insert(tips, "Consistency is key - 6 on-time payments will boost your score.")
+        table.insert(tips, g_i18n:getText("usedplus_cr_tipConsistency"))
         if openAccounts == 0 then
-            table.insert(tips, "Open a small finance deal to start building credit history.")
+            table.insert(tips, g_i18n:getText("usedplus_cr_tipOpenDeal"))
         end
     elseif score < 700 then
         -- Fair score tips
         if paymentStats and paymentStats.currentStreak and paymentStats.currentStreak < 6 then
-            table.insert(tips, "Keep your current streak going - 6+ months helps a lot!")
+            table.insert(tips, g_i18n:getText("usedplus_cr_tipStreak"))
         end
-        table.insert(tips, "Mix account types (finance + lease) for a diverse credit mix.")
+        table.insert(tips, g_i18n:getText("usedplus_cr_tipMixAccounts"))
     elseif score < 750 then
         -- Good score tips
-        table.insert(tips, "Excellent progress! Maintain current habits to reach 750+.")
+        table.insert(tips, g_i18n:getText("usedplus_cr_tipGoodProgress"))
         if debtRatio > 0.30 then
-            table.insert(tips, "Paying down debt below 30% unlocks the best interest rates.")
+            table.insert(tips, g_i18n:getText("usedplus_cr_tipDebt30"))
         end
     else
         -- Excellent score tips
-        table.insert(tips, "Outstanding credit! You qualify for the best rates available.")
-        table.insert(tips, "Consider refinancing older loans at your new lower rate.")
+        table.insert(tips, g_i18n:getText("usedplus_cr_tipExcellent"))
+        table.insert(tips, g_i18n:getText("usedplus_cr_tipRefinance"))
     end
 
     -- Account age tip for new players
     if paymentStats == nil or (paymentStats.totalPayments or 0) < 6 then
-        table.insert(tips, "Credit history takes time - keep making payments monthly.")
+        table.insert(tips, g_i18n:getText("usedplus_cr_tipTimeBuilds"))
     end
 
     -- No accounts tip
     if openAccounts == 0 and debt == 0 then
-        table.insert(tips, "No credit history yet - finance a vehicle to start building!")
+        table.insert(tips, g_i18n:getText("usedplus_cr_tipNoHistory"))
     end
 
     -- Limit to 3 tips
@@ -932,11 +933,11 @@ function CreditReportDialog:updateTipsSection()
 
     -- Pad with general tips if needed
     local generalTips = {
-        "Pay bills on time - payment history is 35% of your score.",
-        "Keep debt-to-asset ratio below 50% for better rates.",
-        "Longer credit history = higher score. Be patient!",
-        "Successfully completing loans improves your score.",
-        "Finance used equipment for lower monthly payments."
+        g_i18n:getText("usedplus_cr_tipGeneral1"),
+        g_i18n:getText("usedplus_cr_tipGeneral2"),
+        g_i18n:getText("usedplus_cr_tipGeneral3"),
+        g_i18n:getText("usedplus_cr_tipGeneral4"),
+        g_i18n:getText("usedplus_cr_tipGeneral5")
     }
 
     local generalIndex = 1

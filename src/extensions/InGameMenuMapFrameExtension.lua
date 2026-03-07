@@ -311,8 +311,14 @@ function InGameMenuMapFrameExtension.onRepairVehicle(inGameMenuMapFrame, element
         return true
     end
 
+    -- v2.15.4: Pass RVB's repair cost if RVB is installed
+    local rvbRepairCost = nil
+    if ModCompatibility and ModCompatibility.rvbInstalled and vehicle.getRepairPrice_RVBClone then
+        rvbRepairCost = vehicle:getRepairPrice_RVBClone() or 0
+    end
+
     -- Use DialogLoader for centralized lazy loading
-    local shown = DialogLoader.show("RepairDialog", "setVehicle", vehicle, farmId, RepairDialog.MODE_REPAIR)
+    local shown = DialogLoader.show("RepairDialog", "setVehicle", vehicle, farmId, RepairDialog.MODE_REPAIR, rvbRepairCost)
 
     if shown then
         -- Hide context boxes after opening dialog
