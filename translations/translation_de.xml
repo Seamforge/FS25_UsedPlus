@@ -1636,7 +1636,7 @@
         <e k="usedplus_sparePartsPallet_name" v="Ersatzteilpalette" eh="9bf39a93" />
         <e k="usedplus_sparePartsPallet_function" v="Verbrauchbare Ersatzteile fuer die Werkstattwagen-Restaurierung. Platziere sie in der Naehe des Wagens waehrend der Restaurierungsarbeit." eh="c90aa3eb" />
         <e k="fillType_spareParts" v="Ersatzteile" eh="ab6b8ce1" />
-        <e k="fillType_hydraulicOil" v="Hydrauliköl" eh="646d470f" />
+        <e k="fillType_hydraulicOil" v="Hydrauliköl" eh="f9c4d7d9" />
         <e k="unit_pcs" v="Stk" eh="3ecf2642" />
         <e k="usedplus_resto_symptom_engine_knocking_load" v="Starkes Klopfen unter Last" eh="fb8c3067" />
         <e k="usedplus_resto_symptom_engine_low_oil_pressure" v="Oeldruck kritisch niedrig" eh="a3efa42d" />
@@ -2021,16 +2021,16 @@
         <e k="usedplus_admin_btn_paint" v="Lackieren" eh="4802a5ac" />
         <e k="usedplus_admin_btn_fix_leaks" v="Lecks reparieren" eh="e0140cbb" />
         <e k="usedplus_admin_status_ready" v="Bereit. Waehle eine Aktion." eh="1ef35a42" />
-        <e k="usedplus_notification_buildingPurchaseCancelled" v="[EN] Building purchase cancelled - funds restored" eh="f9c12b18" />
-        <e k="usedplus_notification_monthlyFinanceSuccess" v="[EN] Monthly Finance: %d payment%s processed (%s)" eh="6e705fb6" />
-        <e k="usedplus_notification_monthlyFinanceMixed" v="[EN] Monthly Finance: %d paid, %d MISSED! Check Finance Manager." eh="99d6c795" />
-        <e k="usedplus_notification_leaseTermComplete" v="[EN] Lease term complete for %s! Choose to return, buyout, or renew." eh="7d8976b3" />
-        <e k="usedplus_notification_paymentSkipped" v="[EN] Payment skipped for %s. Interest of %s added to balance." eh="8b91db2f" />
-        <e k="usedplus_notification_missedLandPayment1st" v="[EN] Missed land payment for %s! Interest of %s added. (1st warning)" eh="6ba61351" />
-        <e k="usedplus_notification_missedLandPaymentFinal" v="[EN] FINAL WARNING: Missed land payment for %s! One more = SEIZURE!" eh="357f3d9c" />
-        <e k="usedplus_notification_missedPayment1st" v="[EN] Missed payment for %s. Interest of %s added to balance. (1st warning)" eh="3e90e83f" />
-        <e k="usedplus_notification_missedPaymentFinal" v="[EN] FINAL WARNING: Missed payment for %s. One more missed payment will result in repossession!" eh="58dc1324" />
-        <e k="usedplus_notification_vehicleRepossessed" v="[EN] VEHICLE REPOSSESSED: %s has been taken due to non-payment!" eh="6006f5c2" />
+        <e k="usedplus_notification_buildingPurchaseCancelled" v="Gebaeudekauf abgebrochen - Geld zurueckerstattet" eh="f9c12b18" />
+        <e k="usedplus_notification_monthlyFinanceSuccess" v="Monatliche Finanzierung: %d Zahlung%s verarbeitet (%s)" eh="6e705fb6" />
+        <e k="usedplus_notification_monthlyFinanceMixed" v="Monatliche Finanzierung: %d bezahlt, %d VERSAEUMT! Finanzmanager pruefen." eh="99d6c795" />
+        <e k="usedplus_notification_leaseTermComplete" v="Leasingvertrag fuer %s abgelaufen! Rueckgabe, Kauf oder Verlaengerung waehlen." eh="7d8976b3" />
+        <e k="usedplus_notification_paymentSkipped" v="Zahlung fuer %s uebersprungen. Zinsen von %s zum Saldo hinzugefuegt." eh="8b91db2f" />
+        <e k="usedplus_notification_missedLandPayment1st" v="Verpasste Landzahlung fuer %s! Zinsen von %s hinzugefuegt. (1. Warnung)" eh="6ba61351" />
+        <e k="usedplus_notification_missedLandPaymentFinal" v="LETZTE WARNUNG: Verpasste Landzahlung fuer %s! Noch einmal = BESCHLAGNAHMUNG!" eh="357f3d9c" />
+        <e k="usedplus_notification_missedPayment1st" v="Zahlung fuer %s versaeumt. Zinsen von %s zum Saldo hinzugefuegt. (1. Warnung)" eh="3e90e83f" />
+        <e k="usedplus_notification_missedPaymentFinal" v="LETZTE WARNUNG: Zahlung fuer %s versaeumt. Eine weitere versaeumte Zahlung fuehrt zur Beschlagnahmung!" eh="58dc1324" />
+        <e k="usedplus_notification_vehicleRepossessed" v="FAHRZEUG BESCHLAGNAHMT: %s wurde wegen Nichtzahlung eingezogen!" eh="6006f5c2" />
         <e k="usedplus_notification_missedLoanPayment1st" v="Kreditrate versäumt! Zinsen von %s hinzugefügt. (1. Warnung)" eh="56e3cdc4" />
         <e k="usedplus_notification_missedLoanPaymentFinal" v="LETZTE WARNUNG: Kreditrate versäumt! Eine weitere versäumte Zahlung führt zum Kreditausfall!" eh="cdca23f0" />
         <e k="usedplus_notification_loanDefaultedNoCollateral" v="KREDIT AUSGEFALLEN! Keine Sicherheiten konnten eingezogen werden." eh="342931d5" />

@@ -106,61 +106,43 @@ At these stages, Claude and Samantha MUST have explicit dialog:
 
 ## Translation Workflow
 
-### Overview
+FS25_UsedPlus supports **25 languages** with **~2,567 translation entries** each. Use `translations/rosetta.js` to manage translations.
 
-FS25_UsedPlus supports **25 languages** with **~1,954 translation entries** each. Use `translations/rosetta.js` to manage translations. This section documents the proven workflow.
-
-### Rosetta.js — Translation Management Tool
-
-**Location:** `translations/rosetta.js` (replaces `translation_sync.legacy.js`)
-
-**Core Commands:**
+### Rosetta.js Commands
 ```bash
 cd translations
-
 node rosetta.js status              # Quick overview table per language
 node rosetta.js report [LANG]       # Detailed breakdown with key lists
 node rosetta.js sync                # Add missing keys, update hashes
 node rosetta.js validate            # CI-friendly: exit codes only
 node rosetta.js doctor [--fix]      # Health check + auto-fix
+node rosetta.js deposit KEY "text"  # Add key to ALL 26 files
+node rosetta.js amend KEY "text"    # Change English, mark stale
+node rosetta.js rename OLD NEW      # Rename, preserve translations
+node rosetta.js remove KEY1 KEY2    # Delete from ALL files
+node rosetta.js translate LANG      # Export untranslated as JSON (add --compact for 70% smaller)
+node rosetta.js import FILE.json    # Import with format specifier validation
+node rosetta.js fix-stale [LANG]    # Accept current translations, update hashes
 ```
 
-**Key Management (atomic across all 26 files):**
-```bash
-node rosetta.js deposit KEY "English text"    # Add key to ALL files
-node rosetta.js deposit --file keys.json      # Bulk add from JSON
-node rosetta.js amend KEY "New English text"  # Change English, mark stale
-node rosetta.js rename OLD_KEY NEW_KEY        # Rename, preserve translations
-node rosetta.js remove KEY1 KEY2              # Delete from ALL files
-node rosetta.js remove --all-unused           # Delete unreferenced keys
+### Adding New Keys
+1. `node rosetta.js deposit usedplus_new_key "English text"`
+2. `node rosetta.js translate LANG` → export JSON
+3. Dispatch translator agent (see below)
+4. `node rosetta.js status` → verify counts
+
+### Bulk Translation — Use Translator Agent (MANDATORY)
+
+**RULE:** For bulk translation, ALWAYS use the custom Haiku translator agent at `.claude/agents/translator.md`. NEVER use Opus agents for translation — it wastes tokens.
+
+```
+Agent tool → subagent_type: "translator"
+Prompt: "Translate FS25_UsedPlus to Finnish (fi)."
 ```
 
-**JSON Translation Protocol (95% token savings vs XML editing):**
-```bash
-node rosetta.js translate de [--stale]  # Export compact JSON for AI
-node rosetta.js import de_result.json   # Import with format specifier validation
-```
-
-### Translation Workflow
-
-**For adding new keys:**
-1. `node rosetta.js deposit usedplus_new_key "English text"` → adds to all 26 files
-2. `node rosetta.js translate de` → export untranslated as JSON
-3. Give JSON to AI/human translator
-4. `node rosetta.js import de_translated.json` → validates + applies
-5. `node rosetta.js status` → verify counts
-
-**For manual edits (legacy workflow):**
-1. `node rosetta.js report` → get list of untranslated entries per language
-2. Edit `translation_[CODE].xml` directly (Edit tool, batches of 50-100)
-3. Preserve format specifiers exactly (`%s`, `%d`, `%.1f`, `%.2f`)
-4. `node rosetta.js sync` → update hashes after edits
-5. `node rosetta.js status` → verify translated
-6. `node rosetta.js validate` → check format specifiers
+The translator agent handles: JSON protocol, format specifier preservation, import schema, file naming, and the rosetta import command. All rules are baked into the agent definition — dispatch prompts only need the language code.
 
 **Rules:** `rosetta.js` lives in `translations/`. Only `build.js`, `generateIcons.js`, `deploy-gcp.js` belong in `tools/`.
-
-**Subagent Rule (JSON Protocol preferred):** For bulk translation, use the JSON protocol: `rosetta.js translate LANG` exports a compact JSON file (~1,500 tokens per batch vs ~75,000 for raw XML). Dispatch Haiku subagents to translate the JSON, then `rosetta.js import` handles XML surgery with format specifier validation. Fallback: Haiku subagents editing XML directly for languages where JSON export shows nothing to translate.
 
 **Current Status:** See `node translations/rosetta.js status` for live counts
 

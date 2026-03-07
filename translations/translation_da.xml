@@ -2027,7 +2027,7 @@ Fortsæt med reparation?" eh="bf702608" />
         <e k="usedplus_admin_btn_fix_leaks" v="Rep. Lækager" eh="e0140cbb" />
         <e k="usedplus_admin_status_ready" v="Klar. Vælg en handling." eh="1ef35a42" />
         <e k="usedplus_notification_buildingPurchaseCancelled" v="Bygningskøb annulleret - midler gendannet" eh="f9c12b18" />
-        <e k="usedplus_notification_monthlyFinanceSuccess" v="Månedlig Finansiering: %d betaling(er) behandlet (%s)" eh="6e705fb6" />
+        <e k="usedplus_notification_monthlyFinanceSuccess" v="Månedlig Finansiering: %d betaling%s behandlet (%s)" eh="6e705fb6" />
         <e k="usedplus_notification_monthlyFinanceMixed" v="Månedlig Finansiering: %d betalt, %d MANGLENDE! Tjek Finansforvalter." eh="99d6c795" />
         <e k="usedplus_notification_leaseTermComplete" v="Leasingperiode fuldført for %s! Vælg at returnere, udkøbe eller forny." eh="7d8976b3" />
         <e k="usedplus_notification_paymentSkipped" v="Betaling sprunget over for %s. Rente på %s tilføjet til saldo." eh="8b91db2f" />
@@ -2552,7 +2552,7 @@ Fortsæt med reparation?" eh="bf702608" />
         <e k="usedplus_osp_tankFilled" v="%s tank fyldt! (%.0f/%.0fL)" eh="0846e8fa" />
         <e k="usedplus_osp_tankIsFull" v="%s tank er fuld! (%.0f/%.0fL)" eh="3b27d285" />
         <e k="usedplus_st_cooldownMessage" v="Dette komponent kan ikke gennemgås igen for %d timer spiløvelse." eh="bfd3f006" />
-        <e k="usedplus_st_degradedCount" v="%d komponent(er) under 90%%" eh="97e59707" />
+        <e k="usedplus_st_degradedCount" v="%d komponent%s under 90%%" eh="97e59707" />
         <e k="usedplus_st_estimatedTimeResult" v="Estimeret tid: %d timer" eh="1d3deb3e" />
         <e k="usedplus_st_low" v="(LAV)" eh="02937491" />
         <e k="usedplus_st_statusCritical" v="Kritisk" eh="278d01e5" />
@@ -2580,7 +2580,7 @@ Fortsæt med reparation?" eh="bf702608" />
         <e k="usedplus_term_months" v="%d måneder" eh="eb5314ed" />
         <e k="usedplus_term_years" v="%d år" eh="86730d79" />
         <e k="usedplus_uvp_condition" v="Tilstand" eh="9e2941b3" />
-        <e k="usedplus_uvp_expiresFormat" v="%d måned(er) (udløber %s)" eh="7917cee0" />
+        <e k="usedplus_uvp_expiresFormat" v="%d måned%s (udløber %s)" eh="7917cee0" />
         <e k="usedplus_warning_flattire" v="FLADT DÆK!" eh="75fc9ab9" />
         <e k="usedplus_error_fillTypeNotRegistered" v="Fejl: Fyldningstype ikke registreret!" eh="8ac3f268" />
         <e k="usedplus_error_noMatchingFluid" v="Ingen matchende væsketype til denne tank!" eh="2efd6c76" />

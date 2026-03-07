@@ -2034,88 +2034,88 @@
         <e k="usedplus_notification_vehicleRepossessed" v="車輛被回收：%s 因未付款而被沒收！" eh="6006f5c2" />
         <e k="usedplus_notification_missedLoanPayment1st" v="錯過了貸款付款！ 利息 %s 已添加。（第 1 次警告）" eh="56e3cdc4" />
         <e k="usedplus_notification_missedLoanPaymentFinal" v="最後警告：錯過了貸款付款！再多一次逾期付款將導致貸款違約！" eh="cdca23f0" />
-        <e k="usedplus_notification_loanDefaultedNoCollateral" v="LOAN DEFAULTED! No collateral could be recovered." eh="342931d5" />
-        <e k="usedplus_notification_missedLeasePayment1st" v="Missed lease payment for %s. (1st warning)" eh="257c4d39" />
+        <e k="usedplus_notification_loanDefaultedNoCollateral" v="貸款違約！無法收回抵押品。" eh="342931d5" />
+        <e k="usedplus_notification_missedLeasePayment1st" v="錯過租賃付款 %s。（第 1 次警告）" eh="257c4d39" />
         <e k="usedplus_notification_missedLeasePaymentFinal" v="最後警告：錯過了 %s 的租賃付款！再多一次 = 回收！" eh="bb9baddc" />
-        <e k="usedplus_notification_leaseVehicleRepossessed" v="LEASE VEHICLE REPOSSESSED: %s has been taken due to non-payment!" eh="95b5e009" />
-        <e k="usedplus_notification_leaseEnded" v="Lease ended for %s! Choose to return or buyout." eh="57c633a6" />
-        <e k="usedplus_notification_landLeaseExpires3Mo" v="Land lease for %s expires in 3 months! Buyout price: %s" eh="0339d494" />
-        <e k="usedplus_notification_landLeaseExpires1Mo" v="WARNING: Land lease for %s expires next month! Buy out now or lose access!" eh="0fd6f6f3" />
+        <e k="usedplus_notification_leaseVehicleRepossessed" v="租賃車輛被收回：%s 因未付款而被沒收！" eh="95b5e009" />
+        <e k="usedplus_notification_leaseEnded" v="租賃已結束 %s！選擇返還或購買。" eh="57c633a6" />
+        <e k="usedplus_notification_landLeaseExpires3Mo" v="土地租賃 %s 將在 3 個月後到期！購買價格：%s" eh="0339d494" />
+        <e k="usedplus_notification_landLeaseExpires1Mo" v="警告：土地租賃 %s 下月到期！立即購買或失去訪問權！" eh="0fd6f6f3" />
         <e k="usedplus_notification_landLeaseExpiresFinal" v="最後警告：%s 的土地租賃本月到期！" eh="2e55df9c" />
-        <e k="usedplus_notification_missedLandLease1st" v="Missed land lease payment for %s. Please ensure funds are available." eh="206c0781" />
+        <e k="usedplus_notification_missedLandLease1st" v="錯過土地租賃付款 %s。請確保有足夠資金。" eh="206c0781" />
         <e k="usedplus_notification_missedLandLeaseFinal" v="最後警告：第二次逾期付款 %s。再多一次，您將失去該土地！" eh="f647ff06" />
-        <e k="usedplus_notification_landLeaseTerminated" v="Land lease TERMINATED due to non-payment! %s has been reclaimed." eh="237a29da" />
-        <e k="usedplus_notification_landLeaseExpired" v="Land lease for %s has expired. The land is now available for purchase." eh="9449bb36" />
-        <e k="usedplus_notification_landLeaseReturnedToMarket" v="Land lease for %s terminated. Land returned to market." eh="21a867ba" />
+        <e k="usedplus_notification_landLeaseTerminated" v="土地租賃因未付款而終止！%s 已被收回。" eh="237a29da" />
+        <e k="usedplus_notification_landLeaseExpired" v="土地租賃 %s 已過期。現在可購買該土地。" eh="9449bb36" />
+        <e k="usedplus_notification_landLeaseReturnedToMarket" v="土地租賃 %s 已終止。土地已返回市場。" eh="21a867ba" />
         <e k="usedplus_notification_creditImproved" v="信用改善！您的信用現在是 %s（%d）" eh="0278a9cc" />
         <e k="usedplus_notification_creditDropped" v="信用警告：您的信用降低至 %s（%d）" eh="6075cdd9" />
         <e k="usedplus_notification_offersExpired" v="%d 個車輛優惠已過期 - 賣方找到了其他買家" eh="dd9f314a" />
-        <e k="usedplus_notification_saleOfferExpired" v="Offer expired for %s. Agent continues searching..." eh="180bd573" />
-        <e k="usedplus_notification_noBuyerFound" v="No buyer found for %s. Agent fee ($%d) was non-refundable." eh="2e72ddb2" />
-        <e k="usedplus_notification_vehicleNotAvailableRelist" v="Vehicle no longer available to relist." eh="56715d8f" />
+        <e k="usedplus_notification_saleOfferExpired" v="offer 已過期 %s。代理商繼續搜尋..." eh="180bd573" />
+        <e k="usedplus_notification_noBuyerFound" v="未找到 %s 的買家。代理費（$%d）不可退款。" eh="2e72ddb2" />
+        <e k="usedplus_notification_vehicleNotAvailableRelist" v="車輛不再可用於重新列表。" eh="56715d8f" />
         <e k="usedplus_notification_offerDeclinedContinue" v="拒絕了 %s 對 %s 的優惠。代理繼續搜索..." eh="4a0b9ba7" />
         <e k="usedplus_notification_offerDeclinedExpired" v="拒絕了對 %s 的優惠。清單已過期。" eh="33ec3244" />
         <e k="usedplus_notification_saleListingCancelled" v="取消了 %s 的銷售清單。代理費用（$%d）不可退款。" eh="9cb70ca7" />
         <e k="usedplus_notification_askingPriceUpdated" v="Updated asking price for %s: %s -&gt; %s" eh="ca049844" />
-        <e k="usedplus_notification_searchDelivered" v="Search complete! Your %s has been delivered." eh="a01c9b47" />
-        <e k="usedplus_notification_sellerBackedOut" v="The seller of the %s accepted another offer and is no longer available. Keep searching!" eh="24c47a1f" />
-        <e k="usedplus_notification_insufficientFundsRenew" v="Insufficient funds to renew search." eh="ffe2599c" />
+        <e k="usedplus_notification_searchDelivered" v="搜尋完成！您的 %s 已送達。" eh="a01c9b47" />
+        <e k="usedplus_notification_sellerBackedOut" v="%s 的賣方接受了另一個 offer，不再可用。繼續搜尋！" eh="24c47a1f" />
+        <e k="usedplus_notification_insufficientFundsRenew" v="資金不足以續約搜尋。" eh="ffe2599c" />
         <e k="usedplus_notification_searchRenewed" v="Search renewed for %s!" eh="3f0b77e5" />
-        <e k="usedplus_notification_leaseSigned" v="Lease signed! %s for %s/month" eh="1f685d3a" />
-        <e k="usedplus_notification_leaseSignedCollect" v="Lease signed! %s - Visit shop to collect vehicle" eh="d4f49f88" />
-        <e k="usedplus_notification_insufficientDamagePenalty" v="Insufficient funds for damage penalty. Need %s" eh="c4eb36ca" />
+        <e k="usedplus_notification_leaseSigned" v="租賃已簽訂！%s，每月 %s" eh="1f685d3a" />
+        <e k="usedplus_notification_leaseSignedCollect" v="租賃已簽訂！%s - 訪問店鋪以取回車輛" eh="d4f49f88" />
+        <e k="usedplus_notification_insufficientDamagePenalty" v="資金不足以支付損害賠償。需要 %s" eh="c4eb36ca" />
         <e k="usedplus_notification_damagePenaltyPaid" v="損壞罰款已支付：%s" eh="b2f2536d" />
-        <e k="usedplus_notification_leaseReturnComplete" v="Lease ended. %s returned to dealer." eh="00d61476" />
-        <e k="usedplus_notification_insufficientBuyout" v="Insufficient funds for buyout. Need %s" eh="ac9101e3" />
+        <e k="usedplus_notification_leaseReturnComplete" v="租賃已結束。%s 已返回經銷商。" eh="00d61476" />
+        <e k="usedplus_notification_insufficientBuyout" v="資金不足以購買。需要 %s" eh="ac9101e3" />
         <e k="usedplus_notification_leaseBuyoutComplete" v="恭喜！%s 現在是您的了，共 %s" eh="e7ed6c67" />
-        <e k="usedplus_notification_landLeaseTerminatedReturned" v="Land lease terminated: %s has been returned" eh="8c192fb8" />
-        <e k="usedplus_notification_landLeaseReturned" v="Land lease returned: %s. Deposit refund: %s" eh="120a93d7" />
-        <e k="usedplus_notification_vehicleReturned" v="Vehicle returned: %s. Deposit refund: %s" eh="62834cdc" />
-        <e k="usedplus_notification_landPurchasedEquity" v="Land purchased! %s is now yours. Equity applied: %s" eh="99d16650" />
-        <e k="usedplus_notification_vehiclePurchasedEquity" v="Vehicle purchased! %s is now yours. Equity applied: %s" eh="5ddca44a" />
-        <e k="usedplus_notification_leaseRenewed" v="Lease renewed: %s. Equity of %s applied to future buyout!" eh="2c51324d" />
-        <e k="usedplus_notification_loanPaidOffTotal" v="Loan paid off! Total paid: %s" eh="6b08530f" />
-        <e k="usedplus_notification_loanPaymentProcessed" v="Payment processed: %s. Remaining balance: %s" eh="c6e491ac" />
-        <e k="usedplus_notification_landPurchased" v="Purchased %s for %s" eh="ee85175a" />
-        <e k="usedplus_notification_landAlreadyOwned" v="This land is already owned and cannot be leased." eh="1682c131" />
-        <e k="usedplus_notification_landAlreadyLeased" v="You already have a lease on this land." eh="431d8eef" />
-        <e k="usedplus_notification_landLeaseStarted" v="Land lease started! %s for %s at %s/month" eh="20628dfc" />
+        <e k="usedplus_notification_landLeaseTerminatedReturned" v="土地租賃已終止：%s 已返回" eh="8c192fb8" />
+        <e k="usedplus_notification_landLeaseReturned" v="土地租賃已返回：%s。押金退款：%s" eh="120a93d7" />
+        <e k="usedplus_notification_vehicleReturned" v="車輛已返回：%s。押金退款：%s" eh="62834cdc" />
+        <e k="usedplus_notification_landPurchasedEquity" v="土地已購買！%s 現在是您的。應用權益：%s" eh="99d16650" />
+        <e k="usedplus_notification_vehiclePurchasedEquity" v="車輛已購買！%s 現在是您的。應用權益：%s" eh="5ddca44a" />
+        <e k="usedplus_notification_leaseRenewed" v="租賃已續約：%s。權益 %s 已應用到未來購買！" eh="2c51324d" />
+        <e k="usedplus_notification_loanPaidOffTotal" v="貸款已還清！總付款：%s" eh="6b08530f" />
+        <e k="usedplus_notification_loanPaymentProcessed" v="付款已處理：%s。剩餘餘額：%s" eh="c6e491ac" />
+        <e k="usedplus_notification_landPurchased" v="購買了 %s，價格為 %s" eh="ee85175a" />
+        <e k="usedplus_notification_landAlreadyOwned" v="此土地已被擁有，無法租賃。" eh="1682c131" />
+        <e k="usedplus_notification_landAlreadyLeased" v="您已對此土地有租賃協議。" eh="431d8eef" />
+        <e k="usedplus_notification_landLeaseStarted" v="土地租賃已開始！%s，每月 %s，價格 %s" eh="20628dfc" />
         <e k="usedplus_notification_landBuyoutComplete" v="恭喜！%s 現在完全是您的了，共 %s" eh="65e5ee2e" />
         <e k="usedplus_notification_placementCancelled" v="Placement cancelled" eh="2037c247" />
         <e k="usedplus_notification_bankLoanPaidOff" v="恭喜！您的銀行貸款已付清！" eh="c84996ef" />
-        <e k="usedplus_notification_priorPaymentsCredited" v="UsedPlus: Credited %d prior bank loan payments to your history!" eh="483eb2b5" />
+        <e k="usedplus_notification_priorPaymentsCredited" v="UsedPlus：將 %d 筆先前銀行貸款付款記入您的歷史記錄！" eh="483eb2b5" />
         <e k="usedplus_notification_welcome" v="UsedPlus v%s -- Development Preview&amp;#10;Latest version &amp;amp; support: github.com/XelaNull/FS25_UsedPlus" eh="67beca84" />
-        <e k="usedplus_notification_hpAutoPayments" v="HP lease payments are automatic - managed by HirePurchasing" eh="4085cc6e" />
-        <e k="usedplus_notification_loansManByELS" v="Loans are managed by EnhancedLoanSystem" eh="d7525a9f" />
+        <e k="usedplus_notification_hpAutoPayments" v="HP 租賃付款為自動 - 由 HirePurchasing 管理" eh="4085cc6e" />
+        <e k="usedplus_notification_loansManByELS" v="貸款由 EnhancedLoanSystem 管理" eh="d7525a9f" />
         <e k="usedplus_notification_elsPaymentProcessed" v="ELS 貸款付款已處理：%s" eh="fcb1d74c" />
         <e k="usedplus_notification_elsPaidOff" v="ELS 貸款已付清：%s" eh="866a1443" />
-        <e k="usedplus_notification_hpPaymentProcessed" v="HP lease payment processed: %s" eh="4247b55a" />
+        <e k="usedplus_notification_hpPaymentProcessed" v="HP 租賃付款已處理：%s" eh="4247b55a" />
         <e k="usedplus_notification_hpSettled" v="HP lease settled successfully" eh="9b451dc7" />
-        <e k="usedplus_notification_noVehiclesYet" v="No vehicles found yet. Check back next month!" eh="14a083d8" />
-        <e k="usedplus_notification_searchInitiated" v="Search initiated for %s (%s, %s)" eh="7e3f56e5" />
-        <e k="usedplus_notification_offerDeclinedSeller" v="Offer declined. Seller has been notified." eh="6309e917" />
+        <e k="usedplus_notification_noVehiclesYet" v="未找到車輛。請下個月回來！" eh="14a083d8" />
+        <e k="usedplus_notification_searchInitiated" v="搜尋已開始，針對 %s（%s，%s）" eh="7e3f56e5" />
+        <e k="usedplus_notification_offerDeclinedSeller" v="Offer 已被拒絕。賣方已收到通知。" eh="6309e917" />
         <e k="usedplus_notification_repairComplete" v="Repair complete!&amp;#10;%s&amp;#10;Cost: %s" eh="fee4ff60" />
         <e k="usedplus_notification_repairFinanced" v="%s 已融資！&#10;%s 超過 %d 個月&#10;%s/月" eh="9e172df5" />
-        <e k="usedplus_notification_storageDepleted" v="Storage depleted! %s tank: %.0f/%.0fL" eh="8b9b49d3" />
-        <e k="usedplus_error_cannotSellLeased" v="Leased vehicles cannot be sold. Terminate the lease first." eh="7385e257" />
-        <e k="usedplus_error_cannotSellFinanced" v="Financed vehicles cannot be sold until loan is paid off." eh="b756f558" />
+        <e k="usedplus_notification_storageDepleted" v="儲存已用盡！%s 油箱：%.0f/%.0fL" eh="8b9b49d3" />
+        <e k="usedplus_error_cannotSellLeased" v="租賃車輛無法出售。請先終止租賃。" eh="7385e257" />
+        <e k="usedplus_error_cannotSellFinanced" v="融資車輛無法出售，直到貸款還清為止。" eh="b756f558" />
         <e k="usedplus_error_vehicleIsCollateral" v="This vehicle is pledged as collateral for a %s loan.&amp;#10;Pay off the loan first to sell." eh="8037dbf3" />
-        <e k="usedplus_error_alreadyListedForSale" v="This vehicle is already listed for sale." eh="c1f35ff5" />
-        <e k="usedplus_error_saleSystemError" v="Sale system error. Please try again." eh="7bfb5d68" />
-        <e k="usedplus_error_cannotSellLeasedShort" v="Leased vehicles cannot be sold." eh="23b543d6" />
-        <e k="usedplus_error_notYourVehicle" v="You do not own this vehicle." eh="506729e8" />
-        <e k="usedplus_error_maxActiveSearches" v="Maximum %d active searches allowed." eh="ba2d5a44" />
+        <e k="usedplus_error_alreadyListedForSale" v="此車輛已列表待售。" eh="c1f35ff5" />
+        <e k="usedplus_error_saleSystemError" v="銷售系統錯誤。請再試一次。" eh="7bfb5d68" />
+        <e k="usedplus_error_cannotSellLeasedShort" v="租賃車輛無法出售。" eh="23b543d6" />
+        <e k="usedplus_error_notYourVehicle" v="您不擁有此車輛。" eh="506729e8" />
+        <e k="usedplus_error_maxActiveSearches" v="最多允許 %d 個活躍搜尋。" eh="ba2d5a44" />
         <e k="usedplus_error_insufficientFundsRequired" v="Insufficient funds. Required: %s" eh="e212e92e" />
-        <e k="usedplus_error_purchaseFailedAPI" v="Purchase failed - game API not available" eh="dd03bd6c" />
+        <e k="usedplus_error_purchaseFailedAPI" v="購買失敗 - 遊戲 API 不可用" eh="dd03bd6c" />
         <e k="usedplus_error_buildingFinanceCreditRequired" v="建築融資需要優秀信用（%d+）。您的信用：%d" eh="45dbcf43" />
         <e k="usedplus_error_insufficientFundsNeed" v="Insufficient funds! Need " eh="cc7dce5b" />
         <e k="usedplus_error_noRepairsSelected" v="No repairs selected" eh="9e34c6fb" />
         <e k="usedplus_error_insufficientFundsRepair" v="Insufficient funds. Need %s" eh="fe8244d2" />
-        <e k="usedplus_error_listingCompleted" v="This listing has already been completed." eh="4f4401ef" />
+        <e k="usedplus_error_listingCompleted" v="此列表已完成。" eh="4f4401ef" />
         <e k="usedplus_error_modifyPriceUnavailable" v="錯誤：ModifyListingPriceEvent 不可用" eh="6506e291" />
         <e k="usedplus_error_cancelSearchUnavailable" v="錯誤：CancelSearchEvent 不可用" eh="af55f6d2" />
-        <e k="usedplus_error_insufficientFundsELS" v="Insufficient funds for ELS loan payment" eh="86e4bec0" />
-        <e k="usedplus_error_insufficientFundsMinPayment" v="Insufficient funds. Minimum payment: %s, You have: %s" eh="fd4b88c8" />
+        <e k="usedplus_error_insufficientFundsELS" v="資金不足以支付 ELS 貸款付款" eh="86e4bec0" />
+        <e k="usedplus_error_insufficientFundsMinPayment" v="資金不足。最低付款：%s，您擁有：%s" eh="fd4b88c8" />
         <e k="usedplus_error_noVanillaLoanBalance" v="無香草貸款餘額可支付" eh="d89e2840" />
         <e k="usedplus_error_selectSaleOption" v="請選擇銷售選項和價格等級。" eh="1b4a328b" />
         <e k="usedplus_error_premiumConditionRequired" v="高級定價需要更好的車輛狀況。" eh="526ed1e9" />
@@ -2155,7 +2155,7 @@
         <e k="usedplus_ft_resources" v="務車資源" eh="95f2e911" />
         <e k="usedplus_ft_oilColon" v="油：" eh="eb99e035" />
         <e k="usedplus_ft_hydraulicColon" v="壓油：" eh="a39ee8d2" />
-        <e k="usedplus_ft_selectHint" v="Select a component below 90% reliability to begin fault tracing." eh="24638661" />
+        <e k="usedplus_ft_selectHint" v="選擇可靠性低於 90% 的組件以開始故障跟蹤。" eh="24638661" />
         <e k="usedplus_ft_engineFaultTracer" v="擎故障追蹤器" eh="996ef27c" />
         <e k="usedplus_ft_faultCounter" v="障：0/0" eh="46831354" />
         <e k="usedplus_ft_modeLabel" v="式：" eh="1ee1c44c" />
@@ -2230,7 +2230,7 @@
         <e k="usedplus_st_oil" v="油：" eh="eb99e035" />
         <e k="usedplus_st_hydraulicFluid" v="壓油：" eh="a39ee8d2" />
         <e k="usedplus_st_spareParts" v="備用零件：" eh="13581a67" />
-        <e k="usedplus_st_selectHint" v="Select a component below 90% to begin inspection." eh="9edba748" />
+        <e k="usedplus_st_selectHint" v="選擇狀態低於 90% 的組件以開始檢查。" eh="9edba748" />
         <e k="usedplus_st_inspecting" v="正在檢查：引擎" eh="d918fe3e" />
         <e k="usedplus_st_estimatedTime" v="估計修復時間：48 小時" eh="281919bb" />
         <e k="usedplus_st_diagnosticReadout" v="診斷讀數" eh="a2cdbd3d" />
@@ -2297,8 +2297,8 @@
         <e k="usedplus_vpf_declineOffer" v="拒絕優惠" eh="3db99481" />
         <e k="usedplus_vpf_expiresNextMonth" v="優惠下個月到期！" eh="51d3edaa" />
         <e k="usedplus_vpf_expires2Months" v="優惠在 2 個月內到期" eh="a3f4165a" />
-        <e k="usedplus_vpf_browseInstructions" v="Use Prev/Next to browse. View Details to inspect or buy." eh="1b4dd747" />
-        <e k="usedplus_vpf_viewDetailsInstruction" v="View Details to inspect condition or purchase this vehicle." eh="7786ee45" />
+        <e k="usedplus_vpf_browseInstructions" v="使用上一個/下一個瀏覽。查看詳細信息以檢查或購買。" eh="1b4dd747" />
+        <e k="usedplus_vpf_viewDetailsInstruction" v="查看詳細信息以檢查狀況或購買此車輛。" eh="7786ee45" />
         <e k="usedplus_se_title" v="搜索完成" eh="e92d4ab1" />
         <e k="usedplus_se_summary" v="搜索摘要" eh="6fa784ed" />
         <e k="usedplus_se_searchedFor" v="Searched For:" eh="e67ff702" />
@@ -2318,7 +2318,7 @@
         <e k="usedplus_si_searchTier" v="Search Tier" eh="6a442f69" />
         <e k="usedplus_si_qualityTarget" v="Quality Target" eh="9ef1e78d" />
         <e k="usedplus_si_agentFees" v="代理費用" eh="820c8c48" />
-        <e k="usedplus_si_retainer" v="Retainer (Paid Now)" eh="bea3961b" />
+        <e k="usedplus_si_retainer" v="預付金（現在支付）" eh="bea3961b" />
         <e k="usedplus_si_commissionRate" v="佣金率" eh="e3ed32ea" />
         <e k="usedplus_si_expectedPricing" v="預期定價" eh="76b4b461" />
         <e k="usedplus_si_estBase" v="估計基礎" eh="36e9580b" />
@@ -2374,48 +2374,48 @@
         <e k="usedplus_ft_cellRef" v="單元格【%s%d】" eh="2a925984" />
         <e k="usedplus_ft_resultLine" v="【%s%d】%s - %s（%.1fL 機油）" eh="1ddae34a" />
         <e k="usedplus_ft_incorrectCount" v="%d 個錯誤診斷 - 有效性降低" eh="b00be569" />
-        <e k="usedplus_common_unknown" v="Unknown" eh="88183b94" />
+        <e k="usedplus_common_unknown" v="未知" eh="88183b94" />
         <e k="usedplus_common_unknownVehicle" v="Unknown Vehicle" eh="4fc625b9" />
         <e k="usedplus_dd_paymentsOfTotal" v="%d / %d" eh="8e44b212" />
         <e k="usedplus_dd_moreItems" v="...還有 %d 個項目" eh="c57c3704" />
         <e k="usedplus_dd_totalRepossessed" v="Total value repossessed: %s" eh="d810ed77" />
-        <e k="usedplus_dd_repossessionInfo" v="The following %d item(s) were repossessed due to missed payments:" eh="1af1da28" />
+        <e k="usedplus_dd_repossessionInfo" v="以下 %d 件物品因未付款而被收回：" eh="1af1da28" />
         <e k="usedplus_repo_consecutive" v="%d 連續" eh="142731fb" />
         <e k="usedplus_repo_cleared" v=" （已清除）" eh="0618d9ef" />
         <e k="usedplus_fdf_termFormat" v="%d 年（%d 個月）" eh="58629dfc" />
         <e k="usedplus_fdf_dayFormat" v="第 %d 天" eh="61eed6c7" />
         <e k="usedplus_fmf_btnCreditReport" v="信用報告" eh="3b3acbdd" />
         <e k="usedplus_fmf_btnTakeLoan" v="Take Loan" eh="40fe67fa" />
-        <e k="usedplus_fmf_versionFooter" v="UsedPlus v%s | Development Preview | github.com/XelaNull/FS25_UsedPlus" eh="e86cc1be" />
+        <e k="usedplus_fmf_versionFooter" v="UsedPlus v%s | 開發預覽版 | github.com/XelaNull/FS25_UsedPlus" eh="e86cc1be" />
         <e k="usedplus_fmf_assetsWithFields" v="資產：%s（%d 個田地）" eh="dd6f8cc6" />
-        <e k="usedplus_fmf_historyPoints" v="History: %+d pts" eh="890d1766" />
+        <e k="usedplus_fmf_historyPoints" v="歷史記錄：%+d 點" eh="890d1766" />
         <e k="usedplus_vpf_prev" v="&lt; 上一個" eh="93819e8f" />
         <e k="usedplus_vpf_navFormat" v="%d / %d" eh="8e44b212" />
         <e k="usedplus_sd_agentFeeFormat" v="%s + %d%% 佣金" eh="d71bd831" />
-        <e k="usedplus_sd_statusSearching" v="Searching..." eh="1243daf5" />
+        <e k="usedplus_sd_statusSearching" v="搜尋中..." eh="1243daf5" />
         <e k="usedplus_sd_vehiclesFound" v="找到 %d 個車輛！" eh="31ab2e2e" />
         <e k="usedplus_sd_statusComplete" v="完成：找到 %d" eh="f2cee310" />
         <e k="usedplus_sd_statusCancelled" v="已取消" eh="a149e85a" />
         <e k="usedplus_sd_monthsLeft" v="還剩 %d 個月" eh="323fc33c" />
-        <e k="usedplus_sd_monthProgress" v="Month %d of %d" eh="b2af1b34" />
+        <e k="usedplus_sd_monthProgress" v="第 %d 個月，共 %d" eh="b2af1b34" />
         <e k="usedplus_sd_foundCount" v="%d/%d 找到" eh="1c8c44f6" />
-        <e k="usedplus_sd_tipRegional" v="Regional agents cover a wider area but take longer." eh="5f3b4bfd" />
-        <e k="usedplus_sd_tipLocal" v="Local searches are fast but find fewer options." eh="01e7df00" />
-        <e k="usedplus_sd_tipNational" v="National searches find the best deals but take the longest." eh="3e6bc07b" />
-        <e k="usedplus_sd_tipQuality" v="Higher quality targets find better vehicles but cost more." eh="4c3c698f" />
-        <e k="usedplus_sd_tipDefault" v="Your agent is actively searching the used market." eh="a53007d3" />
-        <e k="usedplus_sd_viewPortfolio" v="View %d Found Vehicle%s" eh="7384b969" />
-        <e k="usedplus_sld_tipDefault" v="Higher agent tiers have wider reach and find buyers faster." eh="50fde41e" />
-        <e k="usedplus_sld_tipPendingOffer" v="You have a pending offer! Review it before it expires." eh="a2e1e405" />
+        <e k="usedplus_sd_tipRegional" v="區域代理商涵蓋更廣泛的區域，但耗時更久。" eh="5f3b4bfd" />
+        <e k="usedplus_sd_tipLocal" v="本地搜尋速度快但選項較少。" eh="01e7df00" />
+        <e k="usedplus_sd_tipNational" v="全國搜尋找到最好的交易但耗時最長。" eh="3e6bc07b" />
+        <e k="usedplus_sd_tipQuality" v="更高品質的目標找到更好的車輛但成本更高。" eh="4c3c698f" />
+        <e k="usedplus_sd_tipDefault" v="您的代理商正在積極搜尋二手市場。" eh="a53007d3" />
+        <e k="usedplus_sd_viewPortfolio" v="查看 %d 輛已找到的車輛%s" eh="7384b969" />
+        <e k="usedplus_sld_tipDefault" v="更高級代理商具有更廣的覆蓋範圍，找到買家的速度更快。" eh="50fde41e" />
+        <e k="usedplus_sld_tipPendingOffer" v="您有待處理的 offer！在到期前審查它。" eh="a2e1e405" />
         <e k="usedplus_sld_tipDeclined" v="拒絕優惠會減少剩餘上市時間。" eh="2278074c" />
-        <e k="usedplus_sld_tipPremium" v="Premium pricing requires patience but yields higher returns." eh="6f2f3b59" />
-        <e k="usedplus_sld_tipQuickSale" v="Quick sale pricing attracts buyers fast at a lower price." eh="04749853" />
-        <e k="usedplus_sp_noListings" v="No listings (0/%d). Sell from Garage menu." eh="5da453dc" />
-        <e k="usedplus_sp_offerStatus" v="OFFER: %s" eh="868cdf29" />
-        <e k="usedplus_sp_searching" v="Searching..." eh="1243daf5" />
+        <e k="usedplus_sld_tipPremium" v="溢價定價需要耐心，但產生更高回報。" eh="6f2f3b59" />
+        <e k="usedplus_sld_tipQuickSale" v="快速銷售定價可快速吸引買家，但價格較低。" eh="04749853" />
+        <e k="usedplus_sp_noListings" v="無列表（0/%d）。從車庫菜單出售。" eh="5da453dc" />
+        <e k="usedplus_sp_offerStatus" v="Offer：%s" eh="868cdf29" />
+        <e k="usedplus_sp_searching" v="搜尋中..." eh="1243daf5" />
         <e k="usedplus_sp_listingsWithOffers" v="%d/%d（%d 個優惠！）" eh="bc5e0961" />
         <e k="usedplus_sp_editPricePrompt" v="為 %s 輸入新的要求價格&#10;（當前：%s）" eh="0d0736e4" />
-        <e k="usedplus_srp_noSearches" v="No searches (0/%d). Start from Shop." eh="8b454ea0" />
+        <e k="usedplus_srp_noSearches" v="無搜尋（0/%d）。從店鋪開始。" eh="8b454ea0" />
         <e k="usedplus_se_offersDeclined" v="%d（%d 個被拒絕）" eh="6f4f73a8" />
         <e k="usedplus_se_nonRefundable" v=" （不可退款）" eh="5e83c5f8" />
         <e k="usedplus_se_durationFormat" v="%d 個月%s" eh="272b73f2" />
@@ -2430,48 +2430,48 @@
         <e k="usedplus_status_active" v="活動" eh="4d3d769b" />
         <e k="usedplus_status_paidOff" v="Paid Off" eh="564a69ad" />
         <e k="usedplus_status_completed" v="已完成" eh="07ca5050" />
-        <e k="usedplus_status_terminated" v="Terminated" eh="fba9c4da" />
+        <e k="usedplus_status_terminated" v="已終止" eh="fba9c4da" />
         <e k="usedplus_status_expired" v="已過期" eh="24fe4803" />
         <e k="usedplus_status_defaulted" v="默認" eh="02f56691" />
         <e k="usedplus_vsl_statusSearching" v="Searching for buyer..." eh="28e37076" />
-        <e k="usedplus_vsl_statusOffer" v="OFFER: %s (expires in %d hrs)" eh="ea1515d3" />
+        <e k="usedplus_vsl_statusOffer" v="Offer：%s（在 %d 小時內到期）" eh="ea1515d3" />
         <e k="usedplus_vsl_statusSold" v="SOLD for %s" eh="737a574b" />
         <e k="usedplus_vsl_statusExpired" v="已過期 - 未找到買家" eh="3e3e51fd" />
         <e k="usedplus_vsl_statusCancelled" v="已取消" eh="a149e85a" />
         <e k="usedplus_agent_privateSale" v="Private Sale" eh="1be4ac47" />
-        <e k="usedplus_agent_privateSaleDesc" v="No agent fee, but longer time and lower success rate." eh="01191ca2" />
+        <e k="usedplus_agent_privateSaleDesc" v="無代理費，但耗時更久，成功率較低。" eh="01191ca2" />
         <e k="usedplus_agent_local" v="Local Agent" eh="082cb5b6" />
-        <e k="usedplus_agent_localDesc" v="Quick turnaround, limited buyer pool." eh="75810dde" />
+        <e k="usedplus_agent_localDesc" v="快速周轉，買家池有限。" eh="75810dde" />
         <e k="usedplus_agent_regional" v="Regional Agent" eh="403955ba" />
         <e k="usedplus_agent_regionalDesc" v="平衡的範圍和時間。" eh="77696fb3" />
         <e k="usedplus_agent_national" v="National Agent" eh="eef8214f" />
         <e k="usedplus_agent_nationalDesc" v="Maximum exposure, longest wait." eh="2a049c74" />
         <e k="usedplus_price_quickSale" v="Quick Sale" eh="bd7d9f3e" />
-        <e k="usedplus_price_quickSaleDesc" v="Fire sale pricing. Easy to find buyers." eh="7373ee56" />
+        <e k="usedplus_price_quickSaleDesc" v="清倉定價。容易找到買家。" eh="7373ee56" />
         <e k="usedplus_price_market" v="Market Price" eh="04cf089e" />
         <e k="usedplus_price_marketDesc" v="公平" eh="2d860d33" />
         <e k="usedplus_price_premium" v="Premium Price" eh="c7f0f08d" />
-        <e k="usedplus_price_premiumDesc" v="Premium pricing. Requires pristine condition." eh="a73d75ff" />
+        <e k="usedplus_price_premiumDesc" v="溢價定價。需要完美狀況。" eh="a73d75ff" />
         <e k="usedplus_searchTier_local" v="Local Search" eh="e1ea5bc1" />
-        <e k="usedplus_searchTier_localDesc" v="Quick local search with small buyer pool. 1 month, 30% monthly chance, up to 3 finds." eh="9a61c1d4" />
+        <e k="usedplus_searchTier_localDesc" v="快速本地搜尋，買家池有限。1 個月，30% 月成功率，最多 3 次查找。" eh="9a61c1d4" />
         <e k="usedplus_searchTier_regional" v="Regional Search" eh="722cc490" />
         <e k="usedplus_searchTier_regionalDesc" v="具有更廣泛範圍的平衡搜索。最多 3 個月，55% 月度機會，最多 6 個發現。" eh="20eaa884" />
         <e k="usedplus_searchTier_national" v="National Search" eh="c967061f" />
-        <e k="usedplus_searchTier_nationalDesc" v="Premium nationwide search. Up to 6 months, 85% monthly chance, up to 10 finds. Guaranteed at least 1." eh="8e1f6391" />
+        <e k="usedplus_searchTier_nationalDesc" v="高級全國搜尋。最多 6 個月，85% 月成功率，最多 10 次查找。至少保證 1 次。" eh="8e1f6391" />
         <e k="usedplus_quality_any" v="任何狀況" eh="902a1b99" />
-        <e k="usedplus_quality_anyDesc" v="Wildcard - high variance in quality and price" eh="d4ac3330" />
+        <e k="usedplus_quality_anyDesc" v="通配符 - 品質和價格差異大" eh="d4ac3330" />
         <e k="usedplus_quality_poor" v="Poor Condition" eh="99c00753" />
         <e k="usedplus_quality_poorDesc" v="便宜貨 - 需要大量維修" eh="59e39eef" />
         <e k="usedplus_quality_fair" v="公平" eh="ee8ccfe1" />
-        <e k="usedplus_quality_fairDesc" v="Moderate wear - some repairs likely" eh="d84528e2" />
+        <e k="usedplus_quality_fairDesc" v="中度磨損 - 可能需要一些維修" eh="d84528e2" />
         <e k="usedplus_quality_good" v="Good Condition" eh="fcee437c" />
-        <e k="usedplus_quality_goodDesc" v="Well maintained - minimal repairs" eh="274bcd85" />
+        <e k="usedplus_quality_goodDesc" v="保養良好 - 最少維修" eh="274bcd85" />
         <e k="usedplus_quality_excellent" v="優秀" eh="f2e7b4c1" />
-        <e k="usedplus_quality_excellentDesc" v="Like new - ready to work immediately" eh="ae7d5360" />
+        <e k="usedplus_quality_excellentDesc" v="如新 - 準備立即工作" eh="ae7d5360" />
         <e k="usedplus_creditRating_excellent" v="優秀" eh="fcc2d28a" />
         <e k="usedplus_creditRating_good" v="好" eh="0c6ad70b" />
         <e k="usedplus_creditRating_fair" v="公平" eh="f7f20cf0" />
-        <e k="usedplus_creditRating_poor" v="Poor" eh="0e94d017" />
+        <e k="usedplus_creditRating_poor" v="較差" eh="0e94d017" />
         <e k="usedplus_creditRating_veryPoor" v="Very Poor" eh="2796b346" />
         <e k="usedplus_time_months" v="%d 個月" eh="eb5314ed" />
         <e k="usedplus_time_1month" v="1 個月" eh="1634e66b" />
@@ -2484,7 +2484,7 @@
         <e k="usedplus_deal_goodDeal" v="Good Deal" eh="e183104a" />
         <e k="usedplus_deal_greatDeal" v="Great Deal" eh="9f2a01f0" />
         <e k="usedplus_deal_excellentDeal" v="優秀" eh="fc0e87c7" />
-        <e k="usedplus_trend_improving" v="Improving" eh="4ba4dfd7" />
+        <e k="usedplus_trend_improving" v="改善中" eh="4ba4dfd7" />
         <e k="usedplus_trend_declining" v="下降" eh="12175033" />
         <e k="usedplus_trend_stable" v="Stable" eh="fa3aff3c" />
         <e k="usedplus_ui_conditionSummary" v="狀況：%d%%（維修：%d%%，油漆：%d%%）" eh="784d31c9" />
@@ -2497,29 +2497,29 @@
         <e k="usedplus_cond_someWearVisible" v="Some wear visible" eh="f86836e8" />
         <e k="usedplus_cond_fairShowsUse" v="公平" eh="55051e97" />
         <e k="usedplus_cond_fadedNeedsTouchup" v="褪色，需要修正" eh="54a73462" />
-        <e k="usedplus_cond_wornNeedsWork" v="Worn, needs work" eh="cbe46eba" />
-        <e k="usedplus_cond_weatheredRepaintAdvised" v="Weathered, repaint advised" eh="22e86375" />
-        <e k="usedplus_cond_poorMajorRepairs" v="Poor, major repairs needed" eh="0c43488d" />
-        <e k="usedplus_cond_poorSignificantFading" v="Poor, significant fading" eh="a6a99071" />
+        <e k="usedplus_cond_wornNeedsWork" v="磨損，需要工作" eh="cbe46eba" />
+        <e k="usedplus_cond_weatheredRepaintAdvised" v="風化，建議重新噴漆" eh="22e86375" />
+        <e k="usedplus_cond_poorMajorRepairs" v="較差，需要主要維修" eh="0c43488d" />
+        <e k="usedplus_cond_poorSignificantFading" v="較差，明顯褪色" eh="a6a99071" />
         <e k="usedplus_cr_bankCreditLine" v="銀行信用額度" eh="ae4b0f92" />
         <e k="usedplus_cr_bankLoan" v="銀行貸款" eh="b8ba96a9" />
         <e k="usedplus_cr_statusActive" v="活動" eh="4d3d769b" />
-        <e k="usedplus_cr_typeLoan" v="Loan" eh="9ad81a8f" />
-        <e k="usedplus_cr_typeLease" v="Lease" eh="47c96b08" />
+        <e k="usedplus_cr_typeLoan" v="貸款" eh="9ad81a8f" />
+        <e k="usedplus_cr_typeLease" v="租賃" eh="47c96b08" />
         <e k="usedplus_cr_typeFinance" v="Finance" eh="c482980d" />
         <e k="usedplus_cr_typeCashLoan" v="現金貸款" eh="c1b883d7" />
-        <e k="usedplus_ir_vehicleDetailsFormat" v="Hours: %d | Age: %d yrs | Damage: %d%%" eh="2dda5f52" />
-        <e k="usedplus_mr_vehicleDetailsFormat" v="Hours: %s | Age: %d years | Damage: %d%%" eh="b160c943" />
+        <e k="usedplus_ir_vehicleDetailsFormat" v="小時：%d | 年齡：%d 年 | 損壞：%d%%" eh="2dda5f52" />
+        <e k="usedplus_mr_vehicleDetailsFormat" v="小時：%s | 年齡：%d 年 | 損壞：%d%%" eh="b160c943" />
         <e k="usedplus_neg_whisperDefault" v="在你和我之間……似乎是一個直率的賣家。" eh="bc649dcc" />
-        <e k="usedplus_neg_whisperWeatherGood" v="Plus, with this weather, they might want to close quick." eh="a5b78ec8" />
+        <e k="usedplus_neg_whisperWeatherGood" v="另外，天氣這麼好，他們可能想快速成交。" eh="a5b78ec8" />
         <e k="usedplus_neg_whisperWeatherBad" v="雖然像這樣的美好一天……不要期望任何好處。" eh="bf201d88" />
         <e k="usedplus_neg_savingsFormat" v="%s（%d%% 折扣）" eh="072ccdcf" />
         <e k="usedplus_sr_youSaved" v="You saved %s!" eh="438ec0a8" />
-        <e k="usedplus_upd_repairPercent" v="Repair: %d%%" eh="c4bca797" />
+        <e k="usedplus_upd_repairPercent" v="維修：%d%%" eh="c4bca797" />
         <e k="usedplus_upd_damaged" v=" （損壞）" eh="4467bfca" />
-        <e k="usedplus_upd_paintPercent" v="Paint: %d%%" eh="207936b7" />
+        <e k="usedplus_upd_paintPercent" v="油漆：%d%%" eh="207936b7" />
         <e k="usedplus_upd_worn" v=" （磨損）" eh="854363f4" />
-        <e k="usedplus_upd_hoursFormat" v="Hours: %d" eh="731c8e56" />
+        <e k="usedplus_upd_hoursFormat" v="小時：%d" eh="731c8e56" />
         <e k="usedplus_upd_percentOfSell" v="（銷售價值的 %d%%）" eh="1db8ab06" />
         <e k="usedplus_upd_creditCond" v="信用：%d%% | 狀況：%d%%" eh="3eec7030" />
         <e k="usedplus_workshop_inspectionConfirm" v="Pay %s for a comprehensive vehicle inspection?&amp;#10;&amp;#10;This will check mechanical condition, reliability ratings, and provide a detailed report.&amp;#10;&amp;#10;Inspection results are available immediately." eh="ff4e58b0" />
@@ -2527,48 +2527,48 @@
         <e k="usedplus_la_termYears" v="%d 年" eh="86730d79" />
         <e k="usedplus_lr_termYears" v="%.0f 年" eh="75bc9b86" />
         <e k="usedplus_lr_termMonths" v="%d 個月" eh="eb5314ed" />
-        <e k="usedplus_tires_worstFormat" v="Worst: %s %.0f%%" eh="1158a3fb" />
+        <e k="usedplus_tires_worstFormat" v="最差：%s %.0f%%" eh="1158a3fb" />
         <e k="usedplus_std_yourCash" v="Your Cash: %s" eh="7bc506bb" />
-        <e k="usedplus_dealType_repair" v="Repair/Repaint Financing" eh="b5bba0b1" />
-        <e k="usedplus_dealType_repairDesc" v="Finance vehicle repairs and repaints over time." eh="fbdc9b3c" />
+        <e k="usedplus_dealType_repair" v="維修/重新噴漆融資" eh="b5bba0b1" />
+        <e k="usedplus_dealType_repairDesc" v="在一段時間內融資車輛維修和重新噴漆。" eh="fbdc9b3c" />
         <e k="usedplus_dealType_vehicleFinance" v="Vehicle Financing" eh="c19b65b7" />
-        <e k="usedplus_dealType_vehicleFinanceDesc" v="Purchase vehicles with monthly payments." eh="b62fa38c" />
+        <e k="usedplus_dealType_vehicleFinanceDesc" v="購買帶月付款的車輛。" eh="b62fa38c" />
         <e k="usedplus_dealType_vehicleLease" v="Vehicle Leasing" eh="55a7f9a8" />
-        <e k="usedplus_dealType_vehicleLeaseDesc" v="Lease vehicles with option to buy at end of term." eh="722d9fec" />
+        <e k="usedplus_dealType_vehicleLeaseDesc" v="租賃車輛，期限結束時可購買。" eh="722d9fec" />
         <e k="usedplus_dealType_landFinance" v="Land Financing" eh="c00854e3" />
-        <e k="usedplus_dealType_landFinanceDesc" v="Purchase farmland with mortgage payments." eh="0c5bcb3a" />
+        <e k="usedplus_dealType_landFinanceDesc" v="購買農田並支付抵押貸款。" eh="0c5bcb3a" />
         <e k="usedplus_dealType_cashLoan" v="現金貸款" eh="c1b883d7" />
         <e k="usedplus_dealType_cashLoanDesc" v="以您的資產為擔保借款以獲得立即現金。" eh="b032157c" />
         <e k="usedplus_osp_tankFull" v="Tank Full!" eh="bbd165a9" />
         <e k="usedplus_osp_emptyCapacity" v="%s【空 - %.0fL 容量】" eh="99343849" />
         <e k="usedplus_osp_fillingProgress" v="正在填充 %s 油箱...%.0f/%.0fL" eh="a9b92a05" />
-        <e k="usedplus_osp_nothing" v="nothing" eh="3e47b750" />
+        <e k="usedplus_osp_nothing" v="無" eh="3e47b750" />
         <e k="usedplus_osp_serviceVehicle" v="Service Vehicle" eh="490a5409" />
         <e k="usedplus_osp_storageTankEmpty" v="Storage tank is empty!" eh="87848abb" />
         <e k="usedplus_osp_tankFilled" v="%s 油箱已裝滿！（%.0f/%.0fL）" eh="0846e8fa" />
         <e k="usedplus_osp_tankIsFull" v="%s 油箱已滿！（%.0f/%.0fL）" eh="3b27d285" />
-        <e k="usedplus_st_cooldownMessage" v="This component cannot be re-inspected for %d hours of game time." eh="bfd3f006" />
+        <e k="usedplus_st_cooldownMessage" v="此組件在 %d 小時遊戲時間內無法重新檢查。" eh="bfd3f006" />
         <e k="usedplus_st_degradedCount" v="%d 組件%s 低於 90%%" eh="97e59707" />
         <e k="usedplus_st_estimatedTimeResult" v="估計時間：%d 小時" eh="1d3deb3e" />
         <e k="usedplus_st_low" v="（低）" eh="02937491" />
         <e k="usedplus_st_statusCritical" v="關鍵" eh="278d01e5" />
         <e k="usedplus_st_statusDegraded" v="降級" eh="aa95669c" />
         <e k="usedplus_st_statusGood" v="好" eh="0c6ad70b" />
-        <e k="usedplus_st_statusPoor" v="Poor" eh="0e94d017" />
+        <e k="usedplus_st_statusPoor" v="較差" eh="0e94d017" />
         <e k="usedplus_label_landLease" v=" （土地租賃）" eh="b87349ef" />
         <e k="usedplus_label_pluralS" v="s" eh="03c7c0ac" />
         <e k="usedplus_label_assets" v="資產" eh="32bb6361" />
         <e k="usedplus_label_landParcels" v="land parcels" eh="b5a627f3" />
-        <e k="usedplus_label_vehicles" v="vehicles" eh="56bb5580" />
+        <e k="usedplus_label_vehicles" v="車輛" eh="56bb5580" />
         <e k="usedplus_notification_buildingFinanceCreditLow" v="建築融資需要 750+ 信用。您的分數：%d。僅限現金購買。" eh="009ec60f" />
-        <e k="usedplus_notification_ensureFundsLandSeized" v="Your next payment is due soon. Ensure sufficient funds are available or your land will be seized." eh="5ec00447" />
-        <e k="usedplus_notification_ensureFundsRepossessed" v="Your next payment is due soon. Ensure sufficient funds are available or your vehicle will be repossessed." eh="5d398699" />
-        <e k="usedplus_notification_ensureFundsRepossession" v="Your next payment is due soon. Ensure sufficient funds are available or face repossession." eh="8d0459dd" />
-        <e k="usedplus_notification_loanDefaultedRepossessed" v="LOAN DEFAULTED! %d %s worth %s have been repossessed!" eh="e89c2695" />
-        <e k="usedplus_notification_missedLandLeaseEnsureFunds" v="Your next payment is due soon. Ensure sufficient funds are available or your land lease will be terminated." eh="dd4b0ce0" />
-        <e k="usedplus_notification_missedLeasePaymentFinalPopup" v="Your next payment is due soon. Ensure sufficient funds are available or your vehicle will be repossessed." eh="5d398699" />
+        <e k="usedplus_notification_ensureFundsLandSeized" v="您的下次付款即將到期。確保有足夠資金，否則您的土地將被沒收。" eh="5ec00447" />
+        <e k="usedplus_notification_ensureFundsRepossessed" v="您的下次付款即將到期。確保有足夠資金，否則您的車輛將被收回。" eh="5d398699" />
+        <e k="usedplus_notification_ensureFundsRepossession" v="您的下次付款即將到期。確保有足夠資金，否則面臨收回風險。" eh="8d0459dd" />
+        <e k="usedplus_notification_loanDefaultedRepossessed" v="貸款違約！%d %s 價值 %s 已被收回！" eh="e89c2695" />
+        <e k="usedplus_notification_missedLandLeaseEnsureFunds" v="您的下次付款即將到期。確保有足夠資金，否則您的土地租賃將被終止。" eh="dd4b0ce0" />
+        <e k="usedplus_notification_missedLeasePaymentFinalPopup" v="您的下次付款即將到期。確保有足夠資金，否則您的車輛將被收回。" eh="5d398699" />
         <e k="usedplus_notification_placeableFinanced" v="%s 已融資！臨時信用：%s（貸款）| 全價：%s | 您今天的成本：%s 頭期款 | 每月：%s 共 %d 年" eh="a78638ad" />
-        <e k="usedplus_notification_missedLoanPayment1stCollateral" v="Missed loan payment! Interest of %s added. Your pledged collateral (%d items) is at risk! (1st warning)" eh="34ce171a" />
+        <e k="usedplus_notification_missedLoanPayment1stCollateral" v="錯過貸款付款！利息 %s 已添加。您的質押抵押品（%d 件）面臨風險！（第 1 次警告）" eh="34ce171a" />
         <e k="usedplus_notification_missedLoanPaymentFinalCollateral" v="最後警告：錯過了貸款付款！再多一次 = 抵押品被回收！（%d 輛車面臨風險）" eh="c50d6889" />
         <e k="usedplus_serviceTruck_purchased" v="Service Truck purchased!" eh="39a5b8ae" />
         <e k="usedplus_serviceTruck_purchaseFailed" v="Purchase failed" eh="e1928808" />
@@ -2579,11 +2579,11 @@
         <e k="usedplus_uvp_expiresFormat" v="%d 個月%s（到期 %s）" eh="7917cee0" />
         <e k="usedplus_warning_flattire" v="平坦" eh="75fc9ab9" />
         <e k="usedplus_error_fillTypeNotRegistered" v="錯誤：填充類型未註冊！" eh="8ac3f268" />
-        <e k="usedplus_error_noMatchingFluid" v="No matching fluid type for this tank!" eh="2efd6c76" />
+        <e k="usedplus_error_noMatchingFluid" v="此油箱無匹配的液體類型！" eh="2efd6c76" />
         <e k="usedplus_fp_containsLabel" v="含有：" eh="0acb039c" />
         <e k="usedplus_leaseEnd_title" v="租賃結束" eh="35022911" />
-        <e k="usedplus_serviceTruck_agentMessage" v="Your National Agent has a special opportunity for you..." eh="e7d6295a" />
-        <e k="usedplus_serviceTruck_expiryNotice" v="Offer expires in %d days" eh="9d7bc900" />
+        <e k="usedplus_serviceTruck_agentMessage" v="您的全國代理商為您提供了一個特殊機會..." eh="e7d6295a" />
+        <e k="usedplus_serviceTruck_expiryNotice" v="Offer 在 %d 天內到期" eh="9d7bc900" />
         <e k="usedplus_st_maxPotential" v="最大潛力：100%" eh="6029fca8" />
         <e k="usedplus_error_spawnFailed" v="生成車輛失敗。金錢已退款。" eh="9025f5e7" />
         <e k="usedplus_error_systemUnavailable" v="使用的車輛系統不可用！" eh="09843635" />

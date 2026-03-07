@@ -129,8 +129,8 @@ function isFormatOnlyString(value) {
     if (!value) return false;
     const stripped = value
         .replace(/%[-+0-9]*\.?[0-9]*[sdfeEgGoxXuc%]/g, '')
-        .replace(/\b(km|m|kg|l|h|s|ms|px|pcs)\b/gi, '')
-        .replace(/[:\s.,\-\/()[\]{}]+/g, '');
+        .replace(/\b(km|m|kg|l|h|s|ms|px|pcs|comm)\b/gi, '')
+        .replace(/[:\s.,\-\/()[\]{}+]+/g, '');
     return stripped.length === 0;
 }
 
@@ -150,7 +150,7 @@ function isCognateOrInternationalTerm(value) {
         'type', 'total', 'status', 'agent', 'normal', 'ok', 'info', 'mode',
         'generator', 'starter', 'min', 'max', 'per', 'vs', 'hardcore',
         'obd', 'ecu', 'can', 'dtc', 'debug', 'regional', 'national',
-        'original', 'score', 'principal', 'ha', 'pcs', 'elite', 'premium',
+        'original', 'score', 'principal', 'ha', 'pcs', 'elite', 'premium', 'portfolio', 'cell', 'open',
         'standard', 'budget', 'basic', 'advanced', 'pro', 'master',
         'leasing', 'spawning', 'repo', 'state', 'misfire', 'overheat',
         'runaway', 'cutout', 'workhorse', 'integration', 'vanilla',
@@ -160,6 +160,9 @@ function isCognateOrInternationalTerm(value) {
     ];
     const lowerValue = value.toLowerCase().trim();
     if (commonCognates.includes(lowerValue)) return true;
+    // Split into alpha-only words — if every word is a cognate or single-char, it's international
+    const words = lowerValue.split(/[^a-z]+/i).filter(w => w.length > 0);
+    if (words.length > 0 && words.every(w => commonCognates.includes(w) || w.length <= 1)) return true;
 
     const commonPhrases = [
         'regional agent', 'national agent', 'local agent',
@@ -356,6 +359,8 @@ function classifyEntries(sourceEntries, sourceHashes, langEntries, langOrderedKe
 
             if (langData.value.startsWith(CONFIG.untranslatedPrefix)) {
                 result.untranslated.push({ key, value: langData.value, reason: 'has [EN] prefix' });
+            } else if (/^\[[A-Z]{2,3}\]\s/.test(langData.value)) {
+                result.untranslated.push({ key, value: langData.value, reason: `has ${langData.value.match(/^\[[A-Z]{2,3}\]/)[0]} prefix (not translated)` });
             } else if (langData.value === sourceData.value && !isFormatOnlyString(sourceData.value) && !isCognateOrInternationalTerm(sourceData.value)) {
                 result.untranslated.push({ key, value: langData.value, reason: 'exact match (not cognate)' });
             } else if (format === 'elements' && langData.hash && langData.hash !== sourceHash) {
@@ -705,7 +710,7 @@ function getKeySection(key) {
  * Export entries for translation as JSON.
  * Includes context (nearby translated keys, format specifiers, section).
  */
-function exportForTranslation(langCode, sourceEntries, sourceHashes, langEntries, langOrderedKeys, format, includeStale) {
+function exportForTranslation(langCode, sourceEntries, sourceHashes, langEntries, langOrderedKeys, format, includeStale, compact) {
     const langName = LANGUAGE_NAMES[langCode] || langCode.toUpperCase();
     const classification = classifyEntries(sourceEntries, sourceHashes, langEntries, langOrderedKeys, format);
 
@@ -718,14 +723,20 @@ function exportForTranslation(langCode, sourceEntries, sourceHashes, langEntries
         return null;
     }
 
-    const sourceKeys = [...sourceEntries.keys()];
-    const translatedSet = new Set(classification.translated.map(e => e.key));
+    const sourceKeys = compact ? null : [...sourceEntries.keys()];
+    const translatedSet = compact ? null : new Set(classification.translated.map(e => e.key));
 
     const entries = entriesToExport.map(entry => {
         const key = entry.key;
         const sourceData = sourceEntries.get(key);
         const sourceValue = sourceData ? sourceData.value : entry.enValue;
         const sourceHash = sourceHashes.get(key);
+
+        // Compact mode: key + source + sourceHash only (70% smaller)
+        if (compact) {
+            return { key, source: sourceValue, sourceHash };
+        }
+
         const langData = langEntries ? langEntries.get(key) : null;
         const formatSpecs = extractFormatSpecifiers(sourceValue);
         const keyIndex = sourceKeys.indexOf(key);
@@ -1604,8 +1615,9 @@ function cmdRemove() {
 function cmdTranslate() {
     const args = process.argv.slice(3).filter(a => !a.startsWith('--'));
     const includeStale = process.argv.includes('--stale');
+    const compact = process.argv.includes('--compact');
 
-    if (args.length === 0) { console.error("Usage: rosetta.js translate LANG [--stale]"); process.exit(1); }
+    if (args.length === 0) { console.error("Usage: rosetta.js translate LANG [--stale] [--compact]"); process.exit(1); }
 
     const langCode = args[0].toLowerCase();
     const store = initStore();
@@ -1616,7 +1628,7 @@ function cmdTranslate() {
     if (!fs.existsSync(langFile)) { console.error(`File not found: ${langFile}`); process.exit(1); }
 
     const { entries: langEntries, orderedKeys: langKeys } = parseTranslationFile(langFile, store.format);
-    const exportData = exportForTranslation(langCode, store.sourceEntries, store.sourceHashes, langEntries, langKeys, store.format, includeStale);
+    const exportData = exportForTranslation(langCode, store.sourceEntries, store.sourceHashes, langEntries, langKeys, store.format, includeStale, compact);
 
     if (!exportData) { console.log(`Nothing to translate for ${langMatch.name}.`); return; }
 
@@ -1676,6 +1688,51 @@ function cmdImport() {
     if (!dryRun && v.accepted.length > 0) atomicWrite(langFile, content);
 
     console.log(`\nApplied: ${v.accepted.length} | Rejected: ${v.rejected.length} | Warnings: ${v.warnings.length}`);
+    console.log("======================================================================");
+}
+
+// --- FIX-STALE (accept current translations, update hashes) ---
+function cmdFixStale() {
+    const args = process.argv.slice(3).filter(a => !a.startsWith('--'));
+    const dryRun = process.argv.includes('--dry-run');
+    const store = initStore();
+
+    const langsToFix = args.length > 0
+        ? store.enabledLangs.filter(l => args.map(a => a.toLowerCase()).includes(l.code))
+        : store.enabledLangs;
+
+    if (langsToFix.length === 0) { console.error("No matching languages found."); process.exit(1); }
+
+    console.log("======================================================================");
+    console.log(`ROSETTA FIX-STALE v${VERSION}${dryRun ? ' (DRY RUN)' : ''}`);
+    console.log("======================================================================\n");
+
+    let totalFixed = 0;
+    for (const { code: langCode, name: langName } of langsToFix) {
+        const langFile = getLangFilePath(store.filePrefix, langCode);
+        if (!fs.existsSync(langFile)) continue;
+
+        const { entries: langEntries, orderedKeys: langKeys } = parseTranslationFile(langFile, store.format);
+        const cls = classifyEntries(store.sourceEntries, store.sourceHashes, langEntries, langKeys, store.format);
+
+        if (cls.stale.length === 0) continue;
+
+        console.log(`${langName} (${langCode}): ${cls.stale.length} stale → accepting current translations`);
+        if (!dryRun) {
+            let content = fs.readFileSync(langFile, 'utf8');
+            for (const entry of cls.stale) {
+                const currentHash = store.sourceHashes.get(entry.key);
+                content = updateEntryInContent(content, entry.key, entry.value, currentHash, store.format);
+            }
+            atomicWrite(langFile, content);
+        }
+        totalFixed += cls.stale.length;
+        for (const entry of cls.stale) {
+            console.log(`  ✓ ${entry.key}`);
+        }
+    }
+
+    console.log(`\nFixed: ${totalFixed} stale entries${dryRun ? ' (dry run)' : ''}`);
     console.log("======================================================================");
 }
 
@@ -2003,7 +2060,7 @@ const commands = {
     sync: cmdSync, status: cmdStatus, report: cmdReport, check: cmdCheck,
     validate: cmdValidate, unused: cmdUnused, deposit: cmdDeposit, amend: cmdAmend,
     rename: cmdRename, remove: cmdRemove, translate: cmdTranslate, import: cmdImport,
-    doctor: cmdDoctor, format: cmdFormat, help: showHelp, '--help': showHelp, '-h': showHelp,
+    'fix-stale': cmdFixStale, doctor: cmdDoctor, format: cmdFormat, help: showHelp, '--help': showHelp, '-h': showHelp,
 };
 if (command === 'prune') { console.log("NOTE: 'prune' is deprecated. Use 'remove' instead.\n"); cmdRemove(); }
 else if (commands[command]) { commands[command](); }
