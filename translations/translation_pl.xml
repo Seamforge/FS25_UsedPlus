@@ -18,7 +18,7 @@
 <l10n>
     <!--  Finance Dialog -->
     <elements>
-        <e k="usedplus_finance_title" v="Pojazd finansowy" eh="6efef1bd" />
+        <e k="usedplus_finance_title" v="Finansowanie pojazdu" eh="6efef1bd" />
         <e k="usedplus_finance_itemDetails" v="Szczegóły pojazdu" eh="fcb2575f" />
         <e k="usedplus_finance_configuration" v="Konfiguracja finansów" eh="0519e514" />
         <e k="usedplus_finance_term" v="Okres pożyczki" eh="5d1f9c9f" />
@@ -84,7 +84,7 @@
         <e k="usedplus_search_noVehiclesYet" v="Nie znaleziono jeszcze żadnych pojazdów" eh="812b14d0" />
         <e k="usedplus_search_inspectVehicle" v="Sprawdzać" eh="35a9dbe6" />
         <e k="usedplus_search_buyVehicle" v="Kupić" eh="831a28f1" />
-        <e k="usedplus_search_declineVehicle" v="Spadek" eh="0d362728" />
+        <e k="usedplus_search_declineVehicle" v="Odrzuć" eh="0d362728" />
         <e k="usedplus_notify_vehicleFound" v="Twój agent znalazł %s!" eh="bf9782f6" />
         <e k="usedplus_notify_searchComplete" v="Wyszukiwanie zakończone: znaleziono %d pojazd(y)." eh="dbd32f05" />
         <e k="usedplus_confirmation_title" v="Potwierdzenie" eh="f4d1ea47" />
@@ -408,7 +408,7 @@
         <e k="usedPlus_engineStalledRecovery" v="Silnik zgasł! Poczekaj %d sekund..." eh="9a57b319" />
         <e k="usedPlus_engineWontStart" v="Silnik nie uruchamia się – spróbuj ponownie" eh="daa0591c" />
         <e k="usedPlus_hydraulicDrift" v="Spadek ciśnienia hydraulicznego!" eh="31f2964d" />
-        <e k="usedPlus_implementCutout" v="Implementacja utknęła w martwym punkcie!" eh="395b6ba3" />
+        <e k="usedPlus_implementCutout" v="Narzędzie utknęło!" eh="395b6ba3" />
         <e k="usedPlus_electricalCutout" v="Usterka elektryczna – maszyny w trybie offline!" eh="0c156989" />
         <e k="usedPlus_speedDegraded" v="Silnik walczy - maksymalna prędkość zmniejszona do %d%%!" eh="af083aef" />
         <e k="usedPlus_speedDegradedReminder" v="Pojazd pracuje powoli – zalecana naprawa" eh="95eb2457" />
@@ -417,14 +417,14 @@
         <e k="usedPlus_steeringLoose" v="Układ kierowniczy jest luźny – zużyty układ hydrauliczny!" eh="75649517" />
         <e k="usedPlus_steeringPull" v="Ciągnięcie kierownicy do %s!" eh="e743ac7b" />
         <e k="usedPlus_directionLeft" v="lewy" eh="811882fe" />
-        <e k="usedPlus_directionRight" v="Prawidłowy" eh="7c4f2940" />
+        <e k="usedPlus_directionRight" v="prawo" eh="7c4f2940" />
         <e k="usedPlus_engineMisfire" v="Awaria silnika!" eh="46773a4f" />
         <e k="usedPlus_engineOverheating" v="Przegrzanie silnika! (%d%%)" eh="736c0a30" />
         <e k="usedPlus_engineOverheated" v="SILNIK PRZEGRZONY! Niech się ochłodzi!" eh="48a6aa38" />
         <e k="usedPlus_implementSurge" v="Fala hydrauliczna – narzędzie podniesione!" eh="31786612" />
         <e k="usedPlus_implementDrop" v="Awaria hydrauliczna – opuszczone narzędzie!" eh="9445c54d" />
         <e k="usedPlus_ptoToggle" v="Usterka elektryczna – przystawka odbioru mocy przełączona %s!" eh="0dce42ac" />
-        <e k="usedPlus_ptoOn" v="NA" eh="ed2b5c01" />
+        <e k="usedPlus_ptoOn" v="włączony" eh="ed2b5c01" />
         <e k="usedPlus_ptoOff" v="wyłączony" eh="3262d48d" />
         <e k="usedPlus_hitchFailure" v="AWARIA ZACZEPU - Osprzęt odłączony!" eh="16f9096e" />
         <e k="usedPlus_hydraulicWeak" v="Słaba hydraulika (%d%%) – narzędzia mogą dryfować!" eh="dc1e58d4" />
@@ -444,7 +444,7 @@
         <e k="usedPlus_conditionCritical" v="Krytyczny" eh="278d01e5" />
         <e k="usedPlus_indicatorCritical" v="[KRYTYCZNY]" eh="b0eac769" />
         <e k="usedPlus_indicatorNeedsService" v="[POTRZEBUJE SERWISU]" eh="c3591f0d" />
-        <e k="usedPlus_indicatorWorn" v="[NOSZONY]" eh="393432f2" />
+        <e k="usedPlus_indicatorWorn" v="[ZUŻYTY]" eh="393432f2" />
         <e k="usedPlus_maintenanceHistory" v="Historia konserwacji" eh="ad562d90" />
         <e k="usedPlus_engineReliability" v="Silnik" eh="7bfa3072" />
         <e k="usedPlus_hydraulicReliability" v="Hydraulika" eh="1de58ed3" />
@@ -707,8 +707,8 @@
         <e k="usedplus_mrp_sectionStatus" v="STATUS" eh="5f241c8c" />
         <e k="usedplus_mrp_shopRepairs" v="Naprawy sklepu" eh="6aec1607" />
         <e k="usedplus_mrp_overall" v="Ogólnie:" eh="418a41b5" />
-        <e k="usedplus_mrp_condition" v="Stan : schorzenie:" eh="ed51222f" />
-        <e k="usedplus_mrp_hours" v="Godziny otwarcia" eh="f6eeda8b" />
+        <e k="usedplus_mrp_condition" v="Stan:" eh="ed51222f" />
+        <e k="usedplus_mrp_hours" v="Godziny pracy" eh="f6eeda8b" />
         <e k="usedplus_dd_title" v="SZCZEGÓŁY OFERTY" eh="d711da33" />
         <e k="usedplus_dd_sectionItem" v="INFORMACJE O PRZEDMIOCIE" eh="344a6d4f" />
         <e k="usedplus_dd_sectionTerms" v="WARUNKI FINANSOWE" eh="cfadb041" />
@@ -745,7 +745,7 @@
         <e k="usedplus_dd_repossessedTotal" v="Całkowita przejęta wartość:" eh="a6274dce" />
         <e k="usedplus_button_viewHistory" v="Zobacz historię" eh="db9c40b5" />
         <e k="usedplus_button_earlyPayoff" v="Wczesna wypłata" eh="4ccf6612" />
-        <e k="usedplus_tl_title" v="ZAJĄĆ POŻYCZKĘ" eh="2d3208d6" />
+        <e k="usedplus_tl_title" v="ZACIĄGNIJ POŻYCZKĘ" eh="2d3208d6" />
         <e k="usedplus_tl_sectionCredit" v="TWÓJ KREDYT" eh="87d51ea4" />
         <e k="usedplus_tl_score" v="Wynik:" eh="343bc2b9" />
         <e k="usedplus_tl_yourRate" v="Twoje Oprocentowanie:" eh="6387ae1b" />
@@ -2520,7 +2520,7 @@
         <e k="usedplus_upd_percentOfSell" v="%d%% ceny sprzedaży" eh="1db8ab06" />
         <e k="usedplus_upd_creditCond" v="Kredyt: %d%% | Stan: %d%%" eh="3eec7030" />
         <e k="usedplus_workshop_inspectionConfirm" v="Zapłać %s za kompleksową inspekcję pojazdu?&#10;&#10;Sprawdzi stan mechaniczny, oceny niezawodności i dostarczy szczegółowy raport.&#10;&#10;Wyniki inspekcji są dostępne natychmiast." eh="ff4e58b0" />
-        <e k="usedplus_ph_progressFormat" v="%d of %d Płatnośćs (%d%%)" eh="a1779bd1" />
+        <e k="usedplus_ph_progressFormat" v="%d z %d płatności (%d%%)" eh="a1779bd1" />
         <e k="usedplus_la_termYears" v="%d lat" eh="86730d79" />
         <e k="usedplus_lr_termYears" v="%.0f rok(i)" eh="75bc9b86" />
         <e k="usedplus_lr_termMonths" v="%d miesięcy" eh="eb5314ed" />

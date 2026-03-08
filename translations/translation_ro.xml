@@ -27,9 +27,9 @@
         <e k="usedplus_lease_term" v="Leasing Durata (Ani)" eh="13fd4421" />
         <e k="usedplus_lease_downPayment" v="Avans" eh="46b7f6c5" />
         <e k="usedplus_lease_residualValue" v="Valoare reziduala (Plata finala)" eh="458fd3b9" />
-        <e k="usedplus_lease_paymentPreview" v="Plata Previzualizare" eh="a3f5396e" />
-        <e k="usedplus_lease_monthlyPayment" v="Lunar Plata" eh="c102e118" />
-        <e k="usedplus_lease_yearlyPayment" v="Anual Plata" eh="b4080ee0" />
+        <e k="usedplus_lease_paymentPreview" v="Previzualizare plată" eh="a3f5396e" />
+        <e k="usedplus_lease_monthlyPayment" v="Plată lunară" eh="c102e118" />
+        <e k="usedplus_lease_yearlyPayment" v="Plată anuală" eh="b4080ee0" />
         <e k="usedplus_lease_totalCost" v="Cost Total Leasing" eh="993f980c" />
         <e k="usedplus_lease_interestRate" v="Rata Dobânzii" eh="0b6e9e85" />
         <e k="usedplus_lease_creditScore" v="Scor de Credit" eh="ae61b052" />
@@ -79,15 +79,15 @@
         <e k="usedplus_creditScore" v="Scor de Credit:" eh="0199e1a3" />
         <e k="usedplus_manager_title" v="Manager Finanțare" eh="76701fe5" />
         <e k="usedplus_manager_totalFinanced" v="Total Finanțat" eh="223e5677" />
-        <e k="usedplus_manager_monthlyObligations" v="Lunar Obligations" eh="398fa99a" />
+        <e k="usedplus_manager_monthlyObligations" v="Obligații lunare" eh="398fa99a" />
         <e k="usedplus_manager_creditScore" v="Scor de Credit" eh="ae61b052" />
-        <e k="usedplus_manager_assetValue" v="Asset Valoare" eh="5482d5a2" />
+        <e k="usedplus_manager_assetValue" v="Valoare Active" eh="5482d5a2" />
         <e k="usedplus_manager_debtRatio" v="Datorie Ratio" eh="93581501" />
         <e k="usedplus_manager_activeDeals" v="Tranzactii Active" eh="5bf89e7b" />
         <e k="usedplus_manager_type" v="Tip" eh="a1fa2777" />
         <e k="usedplus_manager_item" v="Articol" eh="7d74f3b9" />
         <e k="usedplus_manager_balance" v="Sold" eh="99a808d8" />
-        <e k="usedplus_manager_monthly" v="Lunar Plata" eh="c102e118" />
+        <e k="usedplus_manager_monthly" v="Plată lunară" eh="c102e118" />
         <e k="usedplus_manager_progress" v="Progres" eh="46b5f8c5" />
         <e k="usedplus_manager_actions" v="Actiuni" eh="06df3300" />
         <e k="usedplus_manager_noDeals" v="Nicio tranzacție finanțare sau leasing activ." eh="880134fe" />
@@ -120,13 +120,13 @@
         <e k="usedplus_detail_newBalance" v="Nou Sold" eh="17d35991" />
         <e k="usedplus_detail_prepaymentPenalty" v="Penalitate Plata Anticipata" eh="057cca0e" />
         <e k="usedplus_landFinance_title" v="Finanțare Teren Agricol" eh="4a5ab59c" />
-        <e k="usedplus_landFinance_fieldDetails" v="Camp Detalii" eh="cb124d38" />
+        <e k="usedplus_landFinance_fieldDetails" v="Detalii câmp" eh="cb124d38" />
         <e k="usedplus_landFinance_configuration" v="Configurare Finanțare" eh="0519e514" />
         <e k="usedplus_landFinance_term" v="Durata Împrumutului (Ani)" eh="a33ae292" />
         <e k="usedplus_landFinance_downPayment" v="Avans" eh="46b7f6c5" />
-        <e k="usedplus_landFinance_paymentPreview" v="Plata Previzualizare" eh="a3f5396e" />
-        <e k="usedplus_landFinance_monthlyPayment" v="Lunar Plata" eh="c102e118" />
-        <e k="usedplus_landFinance_yearlyPayment" v="Anual Plata" eh="b4080ee0" />
+        <e k="usedplus_landFinance_paymentPreview" v="Previzualizare plată" eh="a3f5396e" />
+        <e k="usedplus_landFinance_monthlyPayment" v="Plată lunară" eh="c102e118" />
+        <e k="usedplus_landFinance_yearlyPayment" v="Plată anuală" eh="b4080ee0" />
         <e k="usedplus_landFinance_totalInterest" v="Dobândă Totală" eh="8c4f3836" />
         <e k="usedplus_landFinance_totalCost" v="Cost Total" eh="50e91dab" />
         <e k="usedplus_landFinance_interestRate" v="Rata Dobânzii" eh="0b6e9e85" />
@@ -243,7 +243,7 @@
         <e k="usedplus_loan_collateralInfo" v="Garanția se calculează din 50% din valorile vehiculelor și 60% din valorile terenurilor." eh="4a5857f7" />
         <e k="usedplus_loan_success" v="Împrumut aprobat! %s depozitat pe cont." eh="aefc6532" />
         <e k="usedplus_loan_denied" v="Împrumut respins. Garanție insuficientă sau credit slab." eh="c49dcbcb" />
-        <e k="usedplus_loan_monthlyPayment" v="Lunar Plata" eh="c102e118" />
+        <e k="usedplus_loan_monthlyPayment" v="Plată lunară" eh="c102e118" />
         <e k="usedplus_loan_totalInterest" v="Dobândă Totală" eh="8c4f3836" />
         <e k="usedplus_loan_totalRepayment" v="Rambursare Totala" eh="78b2ff2b" />
         <e k="usedplus_repair_title" v="Vehicul Service" eh="40546bfb" />
@@ -298,7 +298,7 @@
         <e k="usedplus_tradeIn_financed" v="Vehiculele finanțate nu pot fi schimbate" eh="b99f5ae1" />
         <e k="usedplus_dashboard_title" v="Tablou de Bord Financiar" eh="475b3fca" />
         <e k="usedplus_dashboard_creditScore" v="Scor de Credit" eh="ae61b052" />
-        <e k="usedplus_dashboard_obligations" v="Lunar Obligations" eh="398fa99a" />
+        <e k="usedplus_dashboard_obligations" v="Obligații lunare" eh="398fa99a" />
         <e k="usedplus_dashboard_debtRatio" v="Datorie-la-Asset Ratio" eh="325f67e0" />
         <e k="usedplus_dashboard_upcoming" v="Plati Viitoare" eh="f994fae4" />
         <e k="usedplus_dashboard_history" v="Activitate Recentă de Credit" eh="6b32a5cb" />
@@ -333,7 +333,7 @@
         <e k="usedplus_land_downPayment" v="Avans:" eh="a706fdb6" />
         <e k="usedplus_land_amountFinanced" v="Suma Finanțată:" eh="c9247e08" />
         <e k="usedplus_land_interestRate" v="Rata Dobânzii:" eh="389f9dd8" />
-        <e k="usedplus_land_monthlyPayment" v="Lunar Plata:" eh="3499b658" />
+        <e k="usedplus_land_monthlyPayment" v="Plată lunară:" eh="3499b658" />
         <e k="usedplus_land_totalInterest" v="Dobândă Totală:" eh="183c0158" />
         <e k="usedplus_land_dueToday" v="DATORAT AZI:" eh="f644eca9" />
         <e k="usedplus_land_totalLeaseCost" v="Cost Total Leasing:" eh="61a93e0e" />
@@ -400,7 +400,7 @@
         <e k="usedPlus_speedGovernor" v="Motorul nu poate susține această viteză!" eh="f9bd1f68" />
         <e k="usedPlus_firstStartStall" v="Motorul a eșuat la pornire!" eh="cc82faeb" />
         <e k="usedPlus_steeringLoose" v="Direcția pare loosă - hidraulică uzată!" eh="75649517" />
-        <e k="usedPlus_steeringPull" v="Steering pulling la the %s!" eh="e743ac7b" />
+        <e k="usedPlus_steeringPull" v="Direcția trage spre %s!" eh="e743ac7b" />
         <e k="usedPlus_directionLeft" v="stanga" eh="811882fe" />
         <e k="usedPlus_directionRight" v="dreapta" eh="7c4f2940" />
         <e k="usedPlus_engineMisfire" v="Motor cu ratee!" eh="46773a4f" />
@@ -503,7 +503,7 @@
         <e k="usedplus_mp_error_land_owned" v="Acest teren e deja deținut" eh="7175cfeb" />
         <e k="usedplus_mp_error_already_leased" v="Tu ai deja un leasing pe acest teren" eh="25394947" />
         <e k="usedplus_mp_error_invalid_deal_type" v="Invalid tranzactie tip" eh="e9926aa4" />
-        <e k="usedplus_mp_error_deal_not_active" v="Tranzactie is not active" eh="4f8a3c97" />
+        <e k="usedplus_mp_error_deal_not_active" v="Tranzacția nu este activă" eh="4f8a3c97" />
         <e k="usedplus_mp_error_repair_failed" v="Reparație eșuată" eh="e25882fc" />
         <e k="usedplus_mp_error_search_failed" v="Cauta esuat" eh="a4d17776" />
         <e k="usedplus_mp_success_financed" v="Vehicul finanțat cu succes!" eh="e0a11202" />
@@ -722,13 +722,13 @@
         <e k="usedplus_dd_multiplier" v="Multiplicator:" eh="933d643e" />
         <e k="usedplus_dd_adjusted" v="Ajustat:" eh="468e7f0c" />
         <e k="usedplus_dd_payoffIn" v="Achitare in:" eh="2873bd4e" />
-        <e k="usedplus_dd_youSave" v="You salveaza:" eh="8b00c75c" />
+        <e k="usedplus_dd_youSave" v="Economisești:" eh="8b00c75c" />
         <e k="usedplus_dd_payoff" v="Achitare:" eh="7e7f2967" />
         <e k="usedplus_dd_accruedNote" v="(include dobândă acumulată)" eh="ba209296" />
         <e k="usedplus_dd_payoffInfo" v="Plata devreme economisești dobândă!" eh="3e87cef1" />
         <e k="usedplus_dd_repossessedInfo" v="Articolele următoare au fost reluate în posesie din cauza plăților ratate:" eh="b9f50218" />
         <e k="usedplus_dd_repossessedTotal" v="Valoare totală recuperată:" eh="a6274dce" />
-        <e k="usedplus_button_viewHistory" v="View Istoric" eh="db9c40b5" />
+        <e k="usedplus_button_viewHistory" v="Vizualizare Istoric" eh="db9c40b5" />
         <e k="usedplus_button_earlyPayoff" v="Achitare Anticipata" eh="4ccf6612" />
         <e k="usedplus_tl_title" v="OBȚIN UN ÎMPRUMUT" eh="2d3208d6" />
         <e k="usedplus_tl_sectionCredit" v="CREDITUL DVS" eh="87d51ea4" />
@@ -794,7 +794,7 @@
         <e k="usedplus_up_cashBack" v="Bani inapoi:" eh="3a5f448d" />
         <e k="usedplus_up_amountFinanced" v="Suma Finanțată:" eh="c9247e08" />
         <e k="usedplus_up_interestRate" v="Rata Dobânzii:" eh="389f9dd8" />
-        <e k="usedplus_up_monthlyPayment" v="Lunar Plata:" eh="3499b658" />
+        <e k="usedplus_up_monthlyPayment" v="Plată lunară:" eh="3499b658" />
         <e k="usedplus_up_totalInterest" v="Dobândă Totală:" eh="183c0158" />
         <e k="usedplus_up_dueToday" v="DATORAT AZI:" eh="f644eca9" />
         <e k="usedplus_up_sectionPayment" v="PLATA SCHEDULE" eh="7facfc46" />
@@ -814,13 +814,13 @@
         <e k="usedplus_lp_basePrice" v="Base Pret:" eh="74e3d937" />
         <e k="usedplus_lp_bcDiscount" v="Reducere contract:" eh="77ad5271" />
         <e k="usedplus_lp_creditAdjust" v="Ajustare Credit:" eh="f7acd3c7" />
-        <e k="usedplus_lp_yourPrice" v="Your Pret:" eh="1d387415" />
+        <e k="usedplus_lp_yourPrice" v="Prețul tău:" eh="1d387415" />
         <e k="usedplus_lp_methodHelp" v="Alege cum vrei să plătești: numerar în avans, finanțare în timp, sau leasing teren." eh="57d0bf21" />
         <e k="usedplus_lp_cashHelp" v="Plătește suma completă acum pentru a poseda pământul." eh="1d680803" />
         <e k="usedplus_lp_financeHelp" v="Finanțează cumpărarea terenului cu plăți lunare. Ajustează termen și plată inițială mai jos." eh="c823a585" />
         <e k="usedplus_lp_leaseHelp" v="Lease teren cu plăți lunare. Rata se bazează pe acreaj și calitate sol." eh="fcb662a3" />
         <e k="usedplus_lp_leaseTerm" v="Leasing Durata:" eh="52b77655" />
-        <e k="usedplus_lp_monthlyPayment" v="Lunar Plata:" eh="3499b658" />
+        <e k="usedplus_lp_monthlyPayment" v="Plată lunară:" eh="3499b658" />
         <e k="usedplus_lp_annualCost" v="Anual Cost:" eh="bdfc1025" />
         <e k="usedplus_lp_rateCalc" v="Rata Calculation:" eh="0514b02f" />
         <e k="usedplus_lp_securityDeposit" v="Depozit Garantie:" eh="40ff2282" />
@@ -1137,8 +1137,8 @@
         <e k="usedplus_ll_sectionTerm" v="LEASING DURATA" eh="bb3b670a" />
         <e k="usedplus_ll_selectDuration" v="Select leasing duration:" eh="8f0c8cd2" />
         <e k="usedplus_ll_sectionCosts" v="LEASING COSTS" eh="5793e394" />
-        <e k="usedplus_ll_monthlyPayment" v="Lunar Plata:" eh="3499b658" />
-        <e k="usedplus_ll_yearlyPayment" v="Anual Plata:" eh="e1ddacf9" />
+        <e k="usedplus_ll_monthlyPayment" v="Plată lunară:" eh="3499b658" />
+        <e k="usedplus_ll_yearlyPayment" v="Plată anuală:" eh="e1ddacf9" />
         <e k="usedplus_ll_totalCost" v="Cost Total Leasing:" eh="61a93e0e" />
         <e k="usedplus_ll_markup" v="Markup Suma:" eh="62aed63e" />
         <e k="usedplus_ll_buyoutPrice" v="Pret de cumparare:" eh="121b9571" />
@@ -1162,7 +1162,7 @@
         <e k="usedplus_rf_repaintCost" v="Revopsire Cost:" eh="78155645" />
         <e k="usedplus_rf_loanTerm" v="Durata Împrumutului:" eh="766186df" />
         <e k="usedplus_rf_downPayment" v="Avans:" eh="a706fdb6" />
-        <e k="usedplus_rf_monthlyPayment" v="Lunar Plata:" eh="3499b658" />
+        <e k="usedplus_rf_monthlyPayment" v="Plată lunară:" eh="3499b658" />
         <e k="usedplus_rf_totalInterest" v="Dobândă Totală:" eh="183c0158" />
         <e k="usedplus_rf_interestRate" v="Rata Dobânzii:" eh="389f9dd8" />
         <e k="usedplus_rf_totalPayments" v="Plati Totale:" eh="66fc72d1" />
@@ -1829,7 +1829,7 @@
         <e k="usedplus_neg_sectionWhisper" v="ȘOAPTĂ MECANIC" eh="29e2cd4f" />
         <e k="usedplus_neg_sectionOffer" v="YOUR OFERTA" eh="0b3b396e" />
         <e k="usedplus_neg_askingPrice" v="Asking Pret:" eh="c515d94e" />
-        <e k="usedplus_neg_yourOffer" v="Your Oferta:" eh="4e018663" />
+        <e k="usedplus_neg_yourOffer" v="Oferta ta:" eh="4e018663" />
         <e k="usedplus_neg_savings" v="Economii:" eh="f3815936" />
         <e k="usedplus_neg_sendOffer" v="Send Oferta" eh="1afbee68" />
         <e k="usedplus_whisper_desperate_seller" v="Între tine și mine... par destul de dornici să vândă. S-ar putea să fie într-o situație grea." eh="7250e321" />
@@ -1847,7 +1847,7 @@
         <e k="usedplus_sr_titleCounter" v="CONTRAOFERTA" eh="544441c8" />
         <e k="usedplus_sr_titleReject" v="OFERTĂ RESPINGĂ" eh="2b54c509" />
         <e k="usedplus_sr_titleWalkaway" v="VANZATOR WALKED AWAY" eh="d4da1912" />
-        <e k="usedplus_sr_yourOffer" v="Your Oferta:" eh="4e018663" />
+        <e k="usedplus_sr_yourOffer" v="Oferta ta:" eh="4e018663" />
         <e k="usedplus_sr_counterOffer" v="Contraoferta:" eh="768065b8" />
         <e k="usedplus_sr_sellerPrice" v="Vanzator's Pret:" eh="1402265a" />
         <e k="usedplus_sr_completePurchase" v="Completează Cumpărare" eh="e1c9f521" />
@@ -1893,7 +1893,7 @@
         <e k="usedplus_warning_notEnoughMoney" v="Bani insuficienți!" eh="48f194d4" />
         <e k="usedplus_notification_landSeized" v="TEREN CONFISCAT: %s a fost luat din cauza neachitării!" eh="1c095ac6" />
         <e k="usedplus_error_paymentTooLow" v="Suma plății este sub minimul necesar." eh="4f83eda0" />
-        <e k="usedplus_error_paymentTooHigh" v="Plata suma exceeds the ramas sold." eh="091a9776" />
+        <e k="usedplus_error_paymentTooHigh" v="Suma plății depășește soldul rămas." eh="091a9776" />
         <e k="usedplus_success_paymentMade" v="Plată procesată cu succes!" eh="b12aba7d" />
         <e k="usedplus_error_cannotAffordTermination" v="Nu sunt destui bani pentru a plăti taxa de terminare a leasingului." eh="64ed9e67" />
         <e k="usedplus_credit_required" v="Credit Obligatoriu" eh="cefa86b5" />
@@ -2533,10 +2533,10 @@
         <e k="usedplus_st_degradedCount" v="%d component%s sub 90%%" eh="97e59707" />
         <e k="usedplus_st_estimatedTimeResult" v="Timp estimat: %d ore" eh="1d3deb3e" />
         <e k="usedplus_st_low" v="(SCĂZUT)" eh="02937491" />
-        <e k="usedplus_st_statusCritical" v="Status" eh="278d01e5" />
-        <e k="usedplus_st_statusDegraded" v="Status" eh="aa95669c" />
-        <e k="usedplus_st_statusGood" v="Status" eh="0c6ad70b" />
-        <e k="usedplus_st_statusPoor" v="Status" eh="0e94d017" />
+        <e k="usedplus_st_statusCritical" v="Critic" eh="278d01e5" />
+        <e k="usedplus_st_statusDegraded" v="Degradat" eh="aa95669c" />
+        <e k="usedplus_st_statusGood" v="Bun" eh="0c6ad70b" />
+        <e k="usedplus_st_statusPoor" v="Slab" eh="0e94d017" />
         <e k="usedplus_label_landLease" v=" (Leasing de teren)" eh="b87349ef" />
         <e k="usedplus_label_pluralS" v="s" eh="03c7c0ac" />
         <e k="usedplus_label_assets" v="Etichetă" eh="32bb6361" />

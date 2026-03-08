@@ -950,6 +950,55 @@ function scanCodebaseForUsedKeys(modDir, allEnglishKeys) {
     return { usedKeys, dynamicPrefixes };
 }
 
+// Scan codebase for ALL getText/l10n references and find keys missing from translation files
+function findMissingKeys(sourceEntries) {
+    const modDir = getModDir();
+    const allCodeKeys = new Set();
+
+    const srcDir = path.join(modDir, 'src');
+    const guiDir = path.join(modDir, 'gui');
+    const modDescPath = path.join(modDir, 'modDesc.xml');
+    const vehiclesDir = path.join(modDir, 'vehicles');
+
+    // Scan Lua files for getText("key") references
+    for (const dir of [srcDir, vehiclesDir]) {
+        const luaFiles = getFilesRecursive(dir, ['.lua']);
+        for (const luaFile of luaFiles) {
+            const content = fs.readFileSync(luaFile, 'utf8');
+            let match;
+            const getTextPattern = /getText\("([^"]+)"\)/g;
+            while ((match = getTextPattern.exec(content)) !== null) allCodeKeys.add(match[1]);
+        }
+    }
+
+    // Scan XML files for $l10n_ references
+    const placeablesDir = path.join(modDir, 'placeables');
+    for (const dir of [guiDir, placeablesDir, vehiclesDir]) {
+        const xmlFiles = getFilesRecursive(dir, ['.xml']);
+        for (const xmlFile of xmlFiles) {
+            const content = fs.readFileSync(xmlFile, 'utf8');
+            const l10nPattern = /\$l10n_([a-zA-Z0-9_]+)/g;
+            let match;
+            while ((match = l10nPattern.exec(content)) !== null) allCodeKeys.add(match[1]);
+        }
+    }
+
+    if (fs.existsSync(modDescPath)) {
+        const content = fs.readFileSync(modDescPath, 'utf8');
+        const l10nPattern = /\$l10n_([a-zA-Z0-9_]+)/g;
+        let match;
+        while ((match = l10nPattern.exec(content)) !== null) allCodeKeys.add(match[1]);
+    }
+
+    // Filter to only usedplus_/usedPlus_ keys (ignore game engine keys like input_, fillType_)
+    const modKeys = [...allCodeKeys].filter(k => /^usedplus_|^usedPlus_/i.test(k));
+
+    // Find keys referenced in code but missing from English source
+    const missing = modKeys.filter(k => !sourceEntries.has(k)).sort();
+
+    return { allCodeKeys: modKeys, missing };
+}
+
 function printGateSummary(gate, totalKeys) {
     const used = gate.activeKeyCount;
     const unused = gate.unusedKeys.length;
@@ -1232,7 +1281,7 @@ module.exports = {
     autoDetectFilePrefix, autoDetectXmlFormat, getSourceFilePath, getLangFilePath,
     parseTranslationFile, formatEntry, findInsertPosition, getEnabledLanguages,
     classifyEntries,
-    getFilesRecursive, getModDir, gateCodebaseValidation, printGateSummary,
+    getFilesRecursive, getModDir, gateCodebaseValidation, findMissingKeys, printGateSummary,
     initStore,
     addEntryToContent, updateEntryInContent, removeEntryFromContent, renameKeyInContent,
     atomicWrite, getAllFilePaths,

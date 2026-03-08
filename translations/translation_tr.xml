@@ -2416,7 +2416,7 @@
         <e k="usedplus_status_completed" v="Tamamlandı" eh="07ca5050" />
         <e k="usedplus_status_terminated" v="Sonlandırıldı" eh="fba9c4da" />
         <e k="usedplus_status_expired" v="Süresi Doldu" eh="24fe4803" />
-        <e k="usedplus_status_defaulted" v="Dehataed" eh="02f56691" />
+        <e k="usedplus_status_defaulted" v="Temerrüt" eh="02f56691" />
         <e k="usedplus_vsl_statusSearching" v="Alıcı aranıyor..." eh="28e37076" />
         <e k="usedplus_vsl_statusOffer" v="TEKLİF: %s (%d saat içinde sona eriyor)" eh="ea1515d3" />
         <e k="usedplus_vsl_statusSold" v="%s karşılığında SATILDI" eh="737a574b" />
@@ -2491,7 +2491,7 @@
         <e k="usedplus_cr_typeLoan" v="Kredi" eh="9ad81a8f" />
         <e k="usedplus_cr_typeLease" v="Kiralama" eh="47c96b08" />
         <e k="usedplus_cr_typeFinance" v="Finansman" eh="c482980d" />
-        <e k="usedplus_cr_typeCashLoan" v="Cash Kredi" eh="c1b883d7" />
+        <e k="usedplus_cr_typeCashLoan" v="Nakit Kredi" eh="c1b883d7" />
         <e k="usedplus_ir_vehicleDetailsFormat" v="Saatler: %d | Yaş: %d yıl | Hasar: %d%%" eh="2dda5f52" />
         <e k="usedplus_mr_vehicleDetailsFormat" v="Saatler: %s | Yaş: %d yıl | Hasar: %d%%" eh="b160c943" />
         <e k="usedplus_neg_whisperDefault" v="Sen ve ben arasında... düz birisi satıcı gibi görünüyor." eh="bc649dcc" />
@@ -2507,8 +2507,8 @@
         <e k="usedplus_upd_percentOfSell" v="(%d%% satış değerinin)" eh="1db8ab06" />
         <e k="usedplus_upd_creditCond" v="Kredi: %d%% | Cond: %d%%" eh="3eec7030" />
         <e k="usedplus_workshop_inspectionConfirm" v="Kapsamlı araç kontrolü için %s ödenssin mi?&#10;&#10;Bu, mekanik durumu, güvenilirlik puanlarını kontrol edecek ve ayrıntılı bir rapor sağlayacaktır.&#10;&#10;Kontrol sonuçları hemen kullanılabilir." eh="ff4e58b0" />
-        <e k="usedplus_ph_progressFormat" v="%d of %d ödemes (%d%%)" eh="a1779bd1" />
-        <e k="usedplus_la_termYears" v="%d yıls" eh="86730d79" />
+        <e k="usedplus_ph_progressFormat" v="%d / %d ödeme (%d%%)" eh="a1779bd1" />
+        <e k="usedplus_la_termYears" v="%d yıl" eh="86730d79" />
         <e k="usedplus_lr_termYears" v="%.0f yıl(s)" eh="75bc9b86" />
         <e k="usedplus_lr_termMonths" v="%d ay" eh="eb5314ed" />
         <e k="usedplus_tires_worstFormat" v="En Kötü: %s %.0f%%" eh="1158a3fb" />
@@ -2521,7 +2521,7 @@
         <e k="usedplus_dealType_vehicleLeaseDesc" v="Araç kiralanmış, son kullanma tarihinin sonunda satın alma seçeneği." eh="722d9fec" />
         <e k="usedplus_dealType_landFinance" v="Arazi Finansmanı" eh="c00854e3" />
         <e k="usedplus_dealType_landFinanceDesc" v="İpotek ödemeleriyle tarım arazisi satın alın." eh="0c5bcb3a" />
-        <e k="usedplus_dealType_cashLoan" v="Cash Kredi" eh="c1b883d7" />
+        <e k="usedplus_dealType_cashLoan" v="Nakit Kredi" eh="c1b883d7" />
         <e k="usedplus_dealType_cashLoanDesc" v="Anında nakit için varlıklarınıza karşı borç alın." eh="b032157c" />
         <e k="usedplus_osp_tankFull" v="Depo Dolu!" eh="bbd165a9" />
         <e k="usedplus_osp_emptyCapacity" v="%s [Boş - %.0fL kapasitesi]" eh="99343849" />
@@ -2539,11 +2539,11 @@
         <e k="usedplus_st_statusDegraded" v="Bozulmuş" eh="aa95669c" />
         <e k="usedplus_st_statusGood" v="İyi" eh="0c6ad70b" />
         <e k="usedplus_st_statusPoor" v="Zayıf" eh="0e94d017" />
-        <e k="usedplus_label_landLease" v=" (Land Kiralama)" eh="b87349ef" />
+        <e k="usedplus_label_landLease" v=" (Arazi Kiralama)" eh="b87349ef" />
         <e k="usedplus_label_pluralS" v="s" eh="03c7c0ac" />
         <e k="usedplus_label_assets" v="varlıklar" eh="32bb6361" />
         <e k="usedplus_label_landParcels" v="arazi parselleri" eh="b5a627f3" />
-        <e k="usedplus_label_vehicles" v="araçs" eh="56bb5580" />
+        <e k="usedplus_label_vehicles" v="araçlar" eh="56bb5580" />
         <e k="usedplus_notification_buildingFinanceCreditLow" v="Bina finansmanı 750+ kredi gerektirir. Puanın: %d. Sadece nakit satın alma." eh="009ec60f" />
         <e k="usedplus_notification_ensureFundsLandSeized" v="Bir sonraki ödemeniz yakında yapılacak. Yeterli fonlar mevcutsa emin olun yoksa araziniz baskıya uğrayacak." eh="5ec00447" />
         <e k="usedplus_notification_ensureFundsRepossessed" v="Sonraki ödemen yakında geçiyor. Yeterli fon kullanılabilir olduğundan emin ol veya aracın haciz yoluyla ele geçirilecek." eh="5d398699" />
@@ -2558,14 +2558,14 @@
         <e k="usedplus_serviceTruck_purchaseFailed" v="Satın alma başarısız" eh="e1928808" />
         <e k="usedplus_term_1year" v="1 yıl" eh="ca4c73c1" />
         <e k="usedplus_term_months" v="%d ay" eh="eb5314ed" />
-        <e k="usedplus_term_years" v="%d yıls" eh="86730d79" />
+        <e k="usedplus_term_years" v="%d yıl" eh="86730d79" />
         <e k="usedplus_uvp_condition" v="Durum" eh="9e2941b3" />
         <e k="usedplus_uvp_expiresFormat" v="%d ay%s (süresi doluyor %s)" eh="7917cee0" />
         <e k="usedplus_warning_flattire" v="PATLAMIS LASTİK!" eh="75fc9ab9" />
         <e k="usedplus_error_fillTypeNotRegistered" v="Hata: Dolum türü kaydedilmemiş!" eh="8ac3f268" />
         <e k="usedplus_error_noMatchingFluid" v="Bu tank için eşleşen sıvı türü yok!" eh="2efd6c76" />
         <e k="usedplus_fp_containsLabel" v="İçeriği:" eh="0acb039c" />
-        <e k="usedplus_leaseEnd_title" v="End of Kiralama" eh="35022911" />
+        <e k="usedplus_leaseEnd_title" v="Kiralama Sonu" eh="35022911" />
         <e k="usedplus_serviceTruck_agentMessage" v="Ulusal Temsilcin senin için özel bir fırsat var..." eh="e7d6295a" />
         <e k="usedplus_serviceTruck_expiryNotice" v="Teklif %d gün içinde sona eriyor" eh="9d7bc900" />
         <e k="usedplus_error_spawnFailed" v="Araç oluşturmada başarısız. Para iade edildi." eh="9025f5e7" />

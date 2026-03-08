@@ -2015,13 +2015,13 @@
         <e k="usedplus_notification_missedLandPaymentFinal" v="VÉGSŐ FIGYELMEZTETÉS: Elmaradt földleasing fizetés %s-hoz! Még egy = LEFOGLALÁS!" eh="357f3d9c" />
         <e k="usedplus_notification_missedPayment1st" v="Elmaradt fizetés %s-hoz. Kamat: %s hozzáadva az egyenleghez. (1. figyelmeztetés)" eh="3e90e83f" />
         <e k="usedplus_notification_missedPaymentFinal" v="VÉGSŐ FIGYELMEZTETÉS: Elmaradt fizetés %s-hoz. Még egy elmaradt fizetés visszavételhez vezet!" eh="58dc1324" />
-        <e k="usedplus_notification_vehicleRepossessed" v="JÁRMŰ VISSZAVÉVE: %s el lett vételezve a nem fizetés miatt!" eh="6006f5c2" />
+        <e k="usedplus_notification_vehicleRepossessed" v="JÁRMŰ VISSZAVÉVE: %s elkobozva a nem fizetés miatt!" eh="6006f5c2" />
         <e k="usedplus_notification_missedLoanPayment1st" v="Elmaradt kölcsön fizetés! Kamat: %s hozzáadva. (1. figyelmeztetés)" eh="56e3cdc4" />
         <e k="usedplus_notification_missedLoanPaymentFinal" v="VÉGSŐ FIGYELMEZTETÉS: Elmaradt kölcsön fizetés! Még egy elmaradt fizetés kölcsön nemfizetéshez vezet!" eh="cdca23f0" />
         <e k="usedplus_notification_loanDefaultedNoCollateral" v="KÖLCSÖN NEMFIZETÉSBEN! Nem lehetett fedezet visszaszerezni." eh="342931d5" />
         <e k="usedplus_notification_missedLeasePayment1st" v="Elmaradt lízing fizetés %s-hoz. (1. figyelmeztetés)" eh="257c4d39" />
         <e k="usedplus_notification_missedLeasePaymentFinal" v="VÉGSŐ FIGYELMEZTETÉS: Elmaradt lízing fizetés %s-hoz! Még egy = VISSZAVÉTEL!" eh="bb9baddc" />
-        <e k="usedplus_notification_leaseVehicleRepossessed" v="LÍZING JÁRMŰ VISSZAVÉVE: %s el lett vételezve a nem fizetés miatt!" eh="95b5e009" />
+        <e k="usedplus_notification_leaseVehicleRepossessed" v="LÍZING JÁRMŰ VISSZAVÉVE: %s elkobozva a nem fizetés miatt!" eh="95b5e009" />
         <e k="usedplus_notification_leaseEnded" v="Lízing lejárt %s-hoz! Válassz: visszavétel vagy kivásárlás." eh="57c633a6" />
         <e k="usedplus_notification_landLeaseExpires3Mo" v="Földleasing %s-hoz 3 hónapon belül lejár! Kivásárlási ár: %s" eh="0339d494" />
         <e k="usedplus_notification_landLeaseExpires1Mo" v="FIGYELMEZTETÉS: Földleasing %s-hoz következő hónapban lejár! Vásárolj most vagy veszítsd el a hozzáférést!" eh="0fd6f6f3" />
@@ -2031,8 +2031,8 @@
         <e k="usedplus_notification_landLeaseTerminated" v="Földleasing LEZÁRVA a nem fizetés miatt! %s vissza lett szerezve." eh="237a29da" />
         <e k="usedplus_notification_landLeaseExpired" v="Földleasing %s-hoz lejárt. A föld most elérhető vásárlásra." eh="9449bb36" />
         <e k="usedplus_notification_landLeaseReturnedToMarket" v="Földleasing %s-hoz lezárva. Föld visszatérül a piacra." eh="21a867ba" />
-        <e k="usedplus_notification_creditImproved" v="Hiteligazolásviszony Javult! A hitelpontszámod most %s (%d)" eh="0278a9cc" />
-        <e k="usedplus_notification_creditDropped" v="Hiteligazolásviszony Figyelmeztetés: A hitelpontszámod esett %s-re (%d)" eh="6075cdd9" />
+        <e k="usedplus_notification_creditImproved" v="Hitelképesség javult! A hitelpontszámod most %s (%d)" eh="0278a9cc" />
+        <e k="usedplus_notification_creditDropped" v="Hitelképesség figyelmeztetés: A hitelpontszámod esett %s-re (%d)" eh="6075cdd9" />
         <e k="usedplus_notification_offersExpired" v="%d járműajánlat lejárt - eladók más vevőket találtak" eh="dd9f314a" />
         <e k="usedplus_notification_saleOfferExpired" v="Ajánlat lejárt %s-hoz. Az ügynök továbbra is keres..." eh="180bd573" />
         <e k="usedplus_notification_noBuyerFound" v="Nem találtunk vevőt %s-hoz. Ügynök díja ($%d) nem visszatérítendő volt." eh="2e72ddb2" />
@@ -2413,7 +2413,7 @@
         <e k="usedplus_sli_durationRange" v="%d - %d hónap" eh="5d231cef" />
         <e k="usedplus_status_active" v="Aktív" eh="4d3d769b" />
         <e k="usedplus_status_paidOff" v="Kifizette" eh="564a69ad" />
-        <e k="usedplus_status_completed" v="Befejezettettett" eh="07ca5050" />
+        <e k="usedplus_status_completed" v="Befejezett" eh="07ca5050" />
         <e k="usedplus_status_terminated" v="Lezárva" eh="fba9c4da" />
         <e k="usedplus_status_expired" v="Lejárt" eh="24fe4803" />
         <e k="usedplus_status_defaulted" v="Nemfizetésben" eh="02f56691" />

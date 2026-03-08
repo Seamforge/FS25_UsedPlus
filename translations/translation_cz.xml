@@ -18,7 +18,7 @@
 <l10n>
     <!--  Finance Dialog -->
     <elements>
-        <e k="usedplus_finance_title" v="Finanční vozidlo" eh="6efef1bd" />
+        <e k="usedplus_finance_title" v="Financování vozidla" eh="6efef1bd" />
         <e k="usedplus_finance_itemDetails" v="Podrobnosti o vozidle" eh="fcb2575f" />
         <e k="usedplus_finance_configuration" v="Konfigurace financí" eh="0519e514" />
         <e k="usedplus_finance_term" v="Doba půjčky" eh="5d1f9c9f" />
@@ -84,7 +84,7 @@
         <e k="usedplus_search_noVehiclesYet" v="Zatím nebyla nalezena žádná vozidla" eh="812b14d0" />
         <e k="usedplus_search_inspectVehicle" v="Kontrolovat" eh="35a9dbe6" />
         <e k="usedplus_search_buyVehicle" v="Nakoupit" eh="831a28f1" />
-        <e k="usedplus_search_declineVehicle" v="Pokles" eh="0d362728" />
+        <e k="usedplus_search_declineVehicle" v="Odmítnout" eh="0d362728" />
         <e k="usedplus_notify_vehicleFound" v="Váš agent našel %s!" eh="bf9782f6" />
         <e k="usedplus_notify_searchComplete" v="Hledání dokončeno: %d vozidlo(a) nalezeno" eh="dbd32f05" />
         <e k="usedplus_confirmation_title" v="Potvrzení" eh="f4d1ea47" />
@@ -408,7 +408,7 @@
         <e k="usedPlus_engineStalledRecovery" v="Motor se zadřel! Počkejte %d sekund..." eh="9a57b319" />
         <e k="usedPlus_engineWontStart" v="Motor se nespustí - zkuste to znovu" eh="daa0591c" />
         <e k="usedPlus_hydraulicDrift" v="Ztráta hydraulického tlaku!" eh="31f2964d" />
-        <e k="usedPlus_implementCutout" v="Implementace se zastavila!" eh="395b6ba3" />
+        <e k="usedPlus_implementCutout" v="Nářadí se zaseklo!" eh="395b6ba3" />
         <e k="usedPlus_electricalCutout" v="Elektrická závada – nářadí offline!" eh="0c156989" />
         <e k="usedPlus_speedDegraded" v="Problém motoru - maximální rychlost snížena na %d%%!" eh="af083aef" />
         <e k="usedPlus_speedDegradedReminder" v="Vozidlo jede pomalu - doporučujeme opravu" eh="95eb2457" />
@@ -417,7 +417,7 @@
         <e k="usedPlus_steeringLoose" v="Řízení je uvolněné - hydraulika opotřebovaná!" eh="75649517" />
         <e k="usedPlus_steeringPull" v="Tažení řízení na %s!" eh="e743ac7b" />
         <e k="usedPlus_directionLeft" v="vlevo" eh="811882fe" />
-        <e k="usedPlus_directionRight" v="právo" eh="7c4f2940" />
+        <e k="usedPlus_directionRight" v="vpravo" eh="7c4f2940" />
         <e k="usedPlus_engineMisfire" v="Vynechává motor!" eh="46773a4f" />
         <e k="usedPlus_engineOverheating" v="Přehřívání motoru! (%d%%)" eh="736c0a30" />
         <e k="usedPlus_engineOverheated" v="MOTOR SE PŘEHŘÁT! Nechte vychladnout!" eh="48a6aa38" />
@@ -593,7 +593,7 @@
         <e k="usedplus_tier_standard_desc" v="Plná spolehlivost + stav dílů" eh="f7939a73" />
         <e k="usedplus_tier_comprehensive_desc" v="Úplné detaily + nápověda DNA + odhad opravy" eh="a80be59a" />
         <e k="usedplus_common_yes" v="Ano" eh="93cba074" />
-        <e k="usedplus_common_no" v="Žádný" eh="bafd7322" />
+        <e k="usedplus_common_no" v="Ne" eh="bafd7322" />
         <e k="usedplus_common_na" v="N/A" eh="382b0f51" />
         <e k="usedplus_maintenance_purchasedUsed" v="Zakoupeno Použité" eh="9b4614d5" />
         <e k="usedplus_maintenance_purchasedNew" v="Zakoupeno nové" eh="675dda81" />
@@ -2538,7 +2538,7 @@
         <e k="usedplus_dealType_cashLoanDesc" v="Půjčujte si pro svoje majetek za okamžitou hotovost." eh="b032157c" />
         <e k="usedplus_osp_tankFull" v="Nádrž Plná!" eh="bbd165a9" />
         <e k="usedplus_osp_emptyCapacity" v="%s [Prázdný - kapacita %.0fL]" eh="99343849" />
-        <e k="usedplus_osp_fillingProgress" v="Plnění %s Tank... %.0f/%.0fL" eh="a9b92a05" />
+        <e k="usedplus_osp_fillingProgress" v="Plnění %s nádrže... %.0f/%.0fL" eh="a9b92a05" />
         <e k="usedplus_osp_nothing" v="nic" eh="3e47b750" />
         <e k="usedplus_osp_serviceVehicle" v="Servisní Vozidlo" eh="490a5409" />
         <e k="usedplus_osp_storageTankEmpty" v="Skladovací nádrž je prázdná!" eh="87848abb" />

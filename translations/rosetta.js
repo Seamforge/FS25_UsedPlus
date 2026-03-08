@@ -21,7 +21,7 @@ const {
     autoDetectFilePrefix, autoDetectXmlFormat,
     addEntryToContent, updateEntryInContent, removeEntryFromContent, renameKeyInContent,
     atomicWrite, getAllFilePaths,
-    initStore, printGateSummary, gateCodebaseValidation,
+    initStore, printGateSummary, gateCodebaseValidation, findMissingKeys,
     exportForTranslation, validateAndImport,
     padRight, padLeft, printCheckSummaryTable,
     getFilesRecursive, getModDir,
@@ -561,6 +561,56 @@ function cmdUnused() {
     console.log("======================================================================");
     console.log("To remove these keys, run:");
     console.log("  node rosetta.js remove --all-unused");
+    console.log("======================================================================");
+}
+
+function cmdMissing() {
+    const store = initStore();
+
+    console.log("======================================================================");
+    console.log(`ROSETTA MISSING KEYS v${VERSION}`);
+    console.log("======================================================================");
+    console.log();
+    console.log("Scanning codebase for getText() and $l10n_ references...");
+
+    const { allCodeKeys, missing } = findMissingKeys(store.sourceEntries);
+
+    console.log(`Found ${allCodeKeys.length} unique usedplus_/usedPlus_ key references in source code.`);
+    console.log(`English source has ${store.sourceEntries.size} keys.`);
+    console.log();
+
+    if (missing.length === 0) {
+        console.log("All referenced keys exist in translation files. Nothing missing!");
+        return;
+    }
+
+    console.log(`MISSING: ${missing.length} key(s) referenced in code but NOT in translation files:\n`);
+
+    // Find where each missing key is referenced
+    const modDir = getModDir();
+    const srcDir = path.join(modDir, 'src');
+    const guiDir = path.join(modDir, 'gui');
+    const vehiclesDir = path.join(modDir, 'vehicles');
+
+    for (const key of missing) {
+        const refs = [];
+        for (const dir of [srcDir, guiDir, vehiclesDir]) {
+            const files = getFilesRecursive(dir, ['.lua', '.xml']);
+            for (const f of files) {
+                const content = fs.readFileSync(f, 'utf8');
+                if (content.includes(key)) {
+                    refs.push(path.relative(modDir, f));
+                }
+            }
+        }
+        console.log(`  ${key}`);
+        for (const ref of refs) console.log(`    → ${ref}`);
+    }
+
+    console.log();
+    console.log("======================================================================");
+    console.log("To add these keys, run:");
+    console.log(`  node rosetta.js deposit KEY "English text"`);
     console.log("======================================================================");
 }
 
@@ -1688,7 +1738,7 @@ ensureTranslatorAgent();
 
 const commands = {
     sync: cmdSync, status: cmdStatus, report: cmdReport, check: cmdCheck,
-    validate: cmdValidate, unused: cmdUnused, audit: cmdAudit, inspect: cmdInspect, deposit: cmdDeposit, amend: cmdAmend,
+    validate: cmdValidate, unused: cmdUnused, missing: cmdMissing, audit: cmdAudit, inspect: cmdInspect, deposit: cmdDeposit, amend: cmdAmend,
     rename: cmdRename, remove: cmdRemove, translate: cmdTranslate, import: cmdImport,
     fix: cmdFix, 'fix-stale': cmdFixStale, doctor: cmdDoctor, cleanup: cmdCleanup, format: cmdFormat, help: showHelp, '--help': showHelp, '-h': showHelp,
 };
