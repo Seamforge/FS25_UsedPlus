@@ -621,8 +621,8 @@ function formatEntry(key, value, hash, format, tag) {
     }
 }
 
-function findInsertPosition(content, key, enOrderedKeys, langKeys, format) {
-    const enIndex = enOrderedKeys.indexOf(key);
+function findInsertPosition(content, key, enOrderedKeys, langKeys, format, enKeyIndex) {
+    const enIndex = enKeyIndex ? (enKeyIndex.get(key) ?? -1) : enOrderedKeys.indexOf(key);
 
     for (let i = enIndex - 1; i >= 0; i--) {
         const prevKey = enOrderedKeys[i];
@@ -999,6 +999,33 @@ function findMissingKeys(sourceEntries) {
     return { allCodeKeys: modKeys, missing };
 }
 
+// Extended missing-key scan that also extracts fallback English text from `getText("key") or "fallback"` patterns
+function findMissingKeysWithFallbacks(sourceEntries) {
+    const { allCodeKeys, missing } = findMissingKeys(sourceEntries);
+    const modDir = getModDir();
+    const fallbackMap = new Map();
+
+    // Scan Lua files for getText("key") or "fallback" pattern
+    for (const dir of [path.join(modDir, 'src'), path.join(modDir, 'vehicles')]) {
+        const luaFiles = getFilesRecursive(dir, ['.lua']);
+        for (const luaFile of luaFiles) {
+            const content = fs.readFileSync(luaFile, 'utf8');
+            const re = /getText\(["']([^"']+)["']\)\s+or\s+["']([^"']+)["']/g;
+            let m;
+            while ((m = re.exec(content)) !== null) {
+                if (/^usedplus_|^usedPlus_/i.test(m[1]) && !fallbackMap.has(m[1])) {
+                    fallbackMap.set(m[1], m[2]);
+                }
+            }
+        }
+    }
+
+    const missingWithFallbacks = missing.filter(k => fallbackMap.has(k));
+    const missingWithoutFallbacks = missing.filter(k => !fallbackMap.has(k));
+
+    return { allCodeKeys, missing, missingWithFallbacks, missingWithoutFallbacks, fallbackMap };
+}
+
 function printGateSummary(gate, totalKeys) {
     const used = gate.activeKeyCount;
     const unused = gate.unusedKeys.length;
@@ -1053,9 +1080,9 @@ function initStore() {
 
 // --- MUTATION ENGINE
 
-function addEntryToContent(content, key, value, hash, format, enOrderedKeys, langKeySet, tag) {
+function addEntryToContent(content, key, value, hash, format, enOrderedKeys, langKeySet, tag, enKeyIndex) {
     const newEntry = `\n        ${formatEntry(key, value, hash, format, tag)}`;
-    const insertPos = findInsertPosition(content, key, enOrderedKeys, langKeySet, format);
+    const insertPos = findInsertPosition(content, key, enOrderedKeys, langKeySet, format, enKeyIndex);
 
     if (insertPos !== -1) {
         return content.substring(0, insertPos) + newEntry + content.substring(insertPos);
@@ -1281,7 +1308,7 @@ module.exports = {
     autoDetectFilePrefix, autoDetectXmlFormat, getSourceFilePath, getLangFilePath,
     parseTranslationFile, formatEntry, findInsertPosition, getEnabledLanguages,
     classifyEntries,
-    getFilesRecursive, getModDir, gateCodebaseValidation, findMissingKeys, printGateSummary,
+    getFilesRecursive, getModDir, gateCodebaseValidation, findMissingKeys, findMissingKeysWithFallbacks, printGateSummary,
     initStore,
     addEntryToContent, updateEntryInContent, removeEntryFromContent, renameKeyInContent,
     atomicWrite, getAllFilePaths,

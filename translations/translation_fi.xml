@@ -2664,5 +2664,105 @@
         <e k="usedplus_common_unknownLand" v="Tuntematon maa-alue" eh="1b201d84" />
         <e k="usedplus_common_unknownFarm" v="Tuntematon maatila" eh="92a9cc35" />
         <e k="usedplus_common_unknownError" v="Tuntematon virhe" eh="aee9784c" />
+        <e k="usedplus_common_vehicle" v="Ajoneuvo" eh="d6af9c1e" />
+        <e k="usedplus_electrical_reliability" v="Sähköinen luotettavuus" eh="ef16f00d" />
+        <e k="usedplus_engine_reliability" v="Moottorin luotettavuus" eh="d86b8cc4" />
+        <e k="usedplus_mr_breakdowns" v="Viat" eh="ff1cc005" />
+        <e k="usedplus_mr_repairs" v="Korjaukset" eh="810a4b9e" />
+        <e k="usedplus_repair_title_workshop" v="Korjaamon korjaus" eh="61a80a46" />
+        <e k="usedplus_rp_confirm_title" v="Vahvista maksu" eh="413e8eec" />
+        <e k="usedplus_rp_label_components" v="Komponentit:" eh="3b7009ae" />
+        <e k="usedplus_rp_label_repaint" v="Uudelleen maalaus:" eh="e63bb6f4" />
+        <e k="usedplus_rp_label_repair" v="Korjaus:" eh="5dcb42f0" />
+        <e k="usedplus_rp_notification_workshop" v="täysi korjaamon korjaus" eh="a338c59a" />
+        <e k="usedplus_rp_service_mechanical" v="Mekaaninen korjaus" eh="60a0d54f" />
+        <e k="usedplus_rp_service_repaint" v="Uudelleen maalaus" eh="1d0b7dd4" />
+        <e k="usedplus_rp_service_workshop" v="Korjaamon korjaus" eh="61a80a46" />
+        <e k="usedplus_rvb_parts_status" v="Komponentit: %d / %d tarvitsevat korjauksen" eh="4ad0ab6d" />
+        <e k="usedplus_title_maintenanceReport" v="=== Huoltokertomus ===" eh="984a7db3" />
+        <e k="usedplus_cr_ageBuilding" v="Rakentaminen (%d maksua)" eh="23775faa" />
+        <e k="usedplus_cr_ageEstablished" v="Perustettu (%d maksua)" eh="776f4287" />
+        <e k="usedplus_cr_ageGrowing" v="Kasvava (%d maksua)" eh="7ac52629" />
+        <e k="usedplus_cr_ageNew" v="Uusi" eh="03c2e7e4" />
+        <e k="usedplus_cr_ageNewCount" v="Uusi (%d maksua)" eh="3b231c55" />
+        <e k="usedplus_cr_discountRates" v="Alennuskorot: -%.1f%%" eh="41dcfad7" />
+        <e k="usedplus_cr_factorExcellent" v="Erinomainen (%d%% ajallaan)" eh="a393cc84" />
+        <e k="usedplus_cr_factorFair" v="Kohtuullinen (%d%% ajallaan)" eh="d7cb93a6" />
+        <e k="usedplus_cr_factorGood" v="Hyvä (%d%% ajallaan)" eh="ed07d038" />
+        <e k="usedplus_cr_factorPoor" v="Huono (%d%% ajallaan)" eh="d3b1e976" />
+        <e k="usedplus_cr_histogramFormat" v="%s  %.0f%% ajallaan" eh="25531fe2" />
+        <e k="usedplus_cr_legendLate" v="Myöhässä: %d" eh="710bdbb1" />
+        <e k="usedplus_cr_legendMissed" v="Väliin jäänyt: %d" eh="655c731c" />
+        <e k="usedplus_cr_legendOnTime" v="Ajallaan: %d" eh="0a4420a4" />
+        <e k="usedplus_cr_penaltyRates" v="Sakkokorot: +%.1f%%" eh="b83c6923" />
+        <e k="usedplus_cr_standardRates" v="Vakiokorot" eh="4c7f68aa" />
+        <e k="usedplus_cr_tipConsistency" v="Keskity johdonmukaisiin ajoissa suoritettaviin maksuihin pisteidesi parantamiseksi." eh="fe0b4e10" />
+        <e k="usedplus_cr_tipDebt30" v="Yritä pitää velka-suhdearvosi alle 30%%:ssa parasta korkoa varten." eh="521de800" />
+        <e k="usedplus_cr_tipDebtRatio" v="Velka-suhdearvosi on korkea. Maksa olemassa olevat lainat alas parantaaksesi pisteitäsi." eh="726e898c" />
+        <e k="usedplus_cr_tipExcellent" v="Erinomainen luotto! Täytät parhaat korot ja ehdot." eh="c4bd3149" />
+        <e k="usedplus_cr_tipGeneral1" v="Ajoissa maksaminen on suurin tekijä luottopisteeseissäsi." eh="1ebb471c" />
+        <e k="usedplus_cr_tipGeneral2" v="Pidä velka-suhteesi alle 50%%:ssa paremmille koroille." eh="279b2666" />
+        <e k="usedplus_cr_tipGeneral3" v="Pidempi luottohistoria auttaa — aika ja johdonmukaisuus ovat avain." eh="f43fdbc2" />
+        <e k="usedplus_cr_tipGeneral4" v="Autolainojen, maan rahoituksen ja vuokrasopimusten sekoitus osoittaa vastuullista lainaamista." eh="d340b335" />
+        <e k="usedplus_cr_tipGeneral5" v="Vastaamatta jääneet maksut vaikuttavat enemmän kuin ylimääräiset maksut." eh="1b319c2c" />
+        <e k="usedplus_cr_tipGoodProgress" v="Hyvä edistys! Jatka ajoissa suoritettavilla maksuilla Erinomaisen saavuttamiseksi." eh="0414afc6" />
+        <e k="usedplus_cr_tipHighDebt" v="Suuri velkaantuminen havaittu. Keskity olemassa olevien lainojen maksamiseen alas." eh="4c5c6512" />
+        <e k="usedplus_cr_tipMissedPayments" v="Vastaamatta jääneet maksut vetävät pisteitäsi alas. Priorisoi näiden kiinnijääminen." eh="72f5e32d" />
+        <e k="usedplus_cr_tipMixAccounts" v="Eri tilityypien sekoitus (lainat, vuokrasopimukset, maa) voi parantaa pisteitäsi." eh="27d730d4" />
+        <e k="usedplus_cr_tipNoHistory" v="Ei vielä luottohistoriaa. Ota pieni laina aloittaaksesi pisteittesi rakentamisen." eh="21023caf" />
+        <e k="usedplus_cr_tipOnTime6Months" v="Maksa kaikki maksut ajallaan 6 kuukauden ajan merkittävän parantamisen näkemiseksi." eh="a50441bf" />
+        <e k="usedplus_cr_tipOpenDeal" v="Avaa rahoitussopimus aloittaaksesi luottohistoriasi rakentamisen." eh="27390112" />
+        <e k="usedplus_cr_tipRefinance" v="Harkitse vanhojen lainojen uudelleenrahoitusta hyödyntääksesi pieniä korkojasi." eh="d3a3a2e5" />
+        <e k="usedplus_cr_tipStartSmall" v="Aloita pienellä lainalla ja maksa se ajallaan luottojen rakentamiseksi." eh="ac79b368" />
+        <e k="usedplus_cr_tipStreak" v="Rakenna pidemmän sarjan ajoissa suoritettavista maksuista pisteittesi nostamiseksi." eh="196cacdf" />
+        <e k="usedplus_cr_tipTimeBuilds" v="Luotto rakentuu ajan myötä. Jatka johdonmukaisia maksuja." eh="6508e92a" />
+        <e k="usedplus_cr_trendDeclining" v="Laskeva" eh="12175033" />
+        <e k="usedplus_cr_trendExcellent" v="Erinomainen" eh="fcc2d28a" />
+        <e k="usedplus_cr_trendGood" v="Paraneminen" eh="4ba4dfd7" />
+        <e k="usedplus_cr_trendPoor" v="Huono" eh="0e94d017" />
+        <e k="usedplus_cr_trendStable" v="Vakaa" eh="fa3aff3c" />
+        <e k="usedplus_cr_utilExcellent" v="Erinomainen (%.0f%% käytetty)" eh="7dfc86c1" />
+        <e k="usedplus_cr_utilFair" v="Kohtuullinen (%.0f%% käytetty)" eh="a617a851" />
+        <e k="usedplus_cr_utilGood" v="Hyvä (%.0f%% käytetty)" eh="c0b657d4" />
+        <e k="usedplus_cr_utilHigh" v="Korkea (%.0f%% käytetty)" eh="86e0b0c5" />
+        <e k="usedplus_dd_bankLoanExtra" v="Maksu asetettu arvoon %s (+%d%% ylimääräinen)" eh="63c230fc" />
+        <e k="usedplus_dd_bankLoanStandard" v="Maksu asetettu standardisummaksi" eh="e169e647" />
+        <e k="usedplus_dd_buyoutLandMessage" v="Ostaaksesi tämä maa %s:lla?&#10;&#10;Maan arvo: %s&#10;Säästö vs. uuden ostaminen: %s&#10;&#10;Kokonaiskulut: %s" eh="2764369e" />
+        <e k="usedplus_dd_buyoutLeaseTitle" v="Vuokrasopimuksen lunastus" eh="b14741b3" />
+        <e k="usedplus_dd_buyoutVehicleMessage" v="Ostaaksesi tämä vuokrasopimus %s:lla?&#10;&#10;Jäännösarvo: %s&#10;Omapääoma käytetty: -%s&#10;Vakuustalletuksen palautus: -%s&#10;&#10;Nettokustannus: %s" eh="05504f8c" />
+        <e k="usedplus_dd_earlyPayoffTitle" v="Varhainen takaisinmaksu" eh="4ccf6612" />
+        <e k="usedplus_dd_paymentSet" v="Maksu asetettu arvoon %s (%.0f%%)" eh="28307eef" />
+        <e k="usedplus_dd_payoffConfirm" v="Maksaa jäljellä oleva saldo %s nyt?" eh="491a3bbc" />
+        <e k="usedplus_dd_statusActive" v="Aktiivinen" eh="4d3d769b" />
+        <e k="usedplus_dd_termMonths" v="%d kuukautta" eh="eb5314ed" />
+        <e k="usedplus_dd_termYears" v="%d kuukautta (%d vuosi%s)" eh="7b504ff3" />
+        <e k="usedplus_dd_titleFinance" v="Rahoituksen tiedot" eh="162264ba" />
+        <e k="usedplus_dd_titleLandLease" v="Maanvuokran tiedot" eh="b6577396" />
+        <e k="usedplus_dd_titleLease" v="Vuokran tiedot" eh="53e751e8" />
+        <e k="usedplus_dd_typeLandFinance" v="Maanrahoitus" eh="b6dcb2f3" />
+        <e k="usedplus_dd_typeLandLease" v="Maanvuokra" eh="9c6119ac" />
+        <e k="usedplus_dd_typeLease" v="Vuokra" eh="47c96b08" />
+        <e k="usedplus_dd_typeRepaint" v="Uudelleen maalaus" eh="1d0b7dd4" />
+        <e k="usedplus_dd_typeRepair" v="Korjaus" eh="0493d27e" />
+        <e k="usedplus_dd_typeRepairRepaint" v="Korjaus &amp; uudelleen maalaus" eh="e53c01f2" />
+        <e k="usedplus_dd_typeVehicleFinance" v="Ajoneuvorahoitus" eh="6bd5146b" />
+        <e k="usedplus_error_cannotFinance" v="Ei voida rahoittaa: luottopisteet %d ovat alle vähintään %d" eh="3db1fb5e" />
+        <e k="usedplus_error_cannotLease" v="Ei voida vuokrata: luottopisteet %d ovat alle vähintään %d" eh="03c9bd36" />
+        <e k="usedplus_error_insufficientFundsBuy" v="Riittämättömät varat! Tarvitaan %s ostaa." eh="b1aef085" />
+        <e k="usedplus_error_placeablesNotLeasable" v="Rakennuksia ja kohteita ei voi vuokrata." eh="fdb637b5" />
+        <e k="usedplus_ft_truckUnavailable" v="Palvelun ajoneuvo ei ole enää saatavilla." eh="3fd5b50a" />
+        <e k="usedplus_ft_vehicleUnavailable" v="Ajoneuvo ei ole enää saatavilla." eh="82cb8143" />
+        <e k="usedplus_inspection_cached" v="Käytä välimuistiin tallennettujen tarkastustulosten tuloksia (ei maksua)." eh="32ebad96" />
+        <e k="usedplus_inspection_insufficientFunds" v="Riittämättömät varat tarkastusta varten. Vaaditaan: %s" eh="a1f203a9" />
+        <e k="usedplus_maintenance_noDataAvailable" v="Tälle ajoneuvolle ei ole saatavilla huoltotietoja." eh="f5963282" />
+        <e k="usedplus_negotiation_cannotAfford" v="Sinulla ei ole varaa tähän tarjoukseen." eh="4e8dfdf2" />
+        <e k="usedplus_purchase_complete" v="Osto valmis" eh="7328ece0" />
+        <e k="usedplus_purchase_detail" v="%s ostettu %s:lla" eh="a9d8903a" />
+        <e k="usedplus_rp_flatTireLabel" v="Renkaan puhkeama korjaus (%s)" eh="8ba1e25d" />
+        <e k="usedplus_rp_fuelLeakLabel" v="Polttoainevuoto korjaus (%s)" eh="de978bcc" />
+        <e k="usedplus_rp_includesLabel" v="Sisältää: " eh="59bef2f2" />
+        <e k="usedplus_runaway_defaultEnded" v="Juoksija pysäytetty." eh="ed4659ca" />
+        <e k="usedplus_rvb_sectionHeader" v="Ajoneuvon diagnostiikka" eh="ae666ba0" />
+        <e k="usedplus_vpf_offerValidMonths" v="Tarjous voimassa %d kuukautta" eh="5fe704c6" />
 </elements>
 </l10n>

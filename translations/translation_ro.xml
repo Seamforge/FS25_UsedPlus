@@ -2648,6 +2648,106 @@
         <e k="usedplus_common_unknownLand" v="Teren Necunoscut" eh="1b201d84" />
         <e k="usedplus_common_unknownFarm" v="Fermă Necunoscută" eh="92a9cc35" />
         <e k="usedplus_common_unknownError" v="Eroare necunoscută" eh="aee9784c" />
+        <e k="usedplus_common_vehicle" v="Vehicul" eh="d6af9c1e" />
+        <e k="usedplus_electrical_reliability" v="Fiabilitate electrică" eh="ef16f00d" />
+        <e k="usedplus_engine_reliability" v="Fiabilitate motor" eh="d86b8cc4" />
+        <e k="usedplus_mr_breakdowns" v="Defecțiuni" eh="ff1cc005" />
+        <e k="usedplus_mr_repairs" v="Reparații" eh="810a4b9e" />
+        <e k="usedplus_repair_title_workshop" v="Reparație în atelier" eh="61a80a46" />
+        <e k="usedplus_rp_confirm_title" v="Confirmar plată" eh="413e8eec" />
+        <e k="usedplus_rp_label_components" v="Componente:" eh="3b7009ae" />
+        <e k="usedplus_rp_label_repaint" v="Repictare:" eh="e63bb6f4" />
+        <e k="usedplus_rp_label_repair" v="Reparație:" eh="5dcb42f0" />
+        <e k="usedplus_rp_notification_workshop" v="reparație completă în atelier" eh="a338c59a" />
+        <e k="usedplus_rp_service_mechanical" v="Reparație mecanică" eh="60a0d54f" />
+        <e k="usedplus_rp_service_repaint" v="Repictare" eh="1d0b7dd4" />
+        <e k="usedplus_rp_service_workshop" v="Reparație în atelier" eh="61a80a46" />
+        <e k="usedplus_rvb_parts_status" v="Componente: %d / %d necesită reparație" eh="4ad0ab6d" />
+        <e k="usedplus_title_maintenanceReport" v="=== Raport de întreținere ===" eh="984a7db3" />
+        <e k="usedplus_cr_ageBuilding" v="Construire (%d plăți)" eh="23775faa" />
+        <e k="usedplus_cr_ageEstablished" v="Stabilit (%d plăți)" eh="776f4287" />
+        <e k="usedplus_cr_ageGrowing" v="În creștere (%d plăți)" eh="7ac52629" />
+        <e k="usedplus_cr_ageNew" v="Nou" eh="03c2e7e4" />
+        <e k="usedplus_cr_ageNewCount" v="Nou (%d plăți)" eh="3b231c55" />
+        <e k="usedplus_cr_discountRates" v="Rates de reducere: -%.1f%%" eh="41dcfad7" />
+        <e k="usedplus_cr_factorExcellent" v="Excelent (%d%% la timp)" eh="a393cc84" />
+        <e k="usedplus_cr_factorFair" v="Corect (%d%% la timp)" eh="d7cb93a6" />
+        <e k="usedplus_cr_factorGood" v="Bun (%d%% la timp)" eh="ed07d038" />
+        <e k="usedplus_cr_factorPoor" v="Slab (%d%% la timp)" eh="d3b1e976" />
+        <e k="usedplus_cr_histogramFormat" v="%s  %.0f%% la timp" eh="25531fe2" />
+        <e k="usedplus_cr_legendLate" v="Întârziat: %d" eh="710bdbb1" />
+        <e k="usedplus_cr_legendMissed" v="Ratat: %d" eh="655c731c" />
+        <e k="usedplus_cr_legendOnTime" v="La timp: %d" eh="0a4420a4" />
+        <e k="usedplus_cr_penaltyRates" v="Rate penale: +%.1f%%" eh="b83c6923" />
+        <e k="usedplus_cr_standardRates" v="Rate standard" eh="4c7f68aa" />
+        <e k="usedplus_cr_tipConsistency" v="Concentrează-te pe plăți consistente la timp pentru a-ți reconstrui scorul de credit." eh="fe0b4e10" />
+        <e k="usedplus_cr_tipDebt30" v="Încearcă să reduci raportul datorii-active sub 30%% pentru cele mai bune rate." eh="521de800" />
+        <e k="usedplus_cr_tipDebtRatio" v="Raportul tău datorii-active este ridicat. Plătește împrumuturile existente pentru a-ți îmbunătăți scorul." eh="726e898c" />
+        <e k="usedplus_cr_tipExcellent" v="Credit excelent! Îndeplinești condițiile pentru cele mai bune rate și termeni." eh="c4bd3149" />
+        <e k="usedplus_cr_tipGeneral1" v="Plata la timp este cel mai important factor în scorul tău de credit." eh="1ebb471c" />
+        <e k="usedplus_cr_tipGeneral2" v="Ține raportul datorii-active sub 50%% pentru rate mai bune." eh="279b2666" />
+        <e k="usedplus_cr_tipGeneral3" v="Istoria de credit mai lungă ajută — timpul și consecvența sunt esențiale." eh="f43fdbc2" />
+        <e k="usedplus_cr_tipGeneral4" v="Un mix de împrumuturi pentru vehicule, finanțare de teren și leasing arată împrumuturi responsabile." eh="d340b335" />
+        <e k="usedplus_cr_tipGeneral5" v="Ratarea unei plăți are un impact mai mare decât efectuarea unor plăți suplimentare." eh="1b319c2c" />
+        <e k="usedplus_cr_tipGoodProgress" v="Progres bun! Continuă cu plăți la timp pentru a atinge Excelent." eh="0414afc6" />
+        <e k="usedplus_cr_tipHighDebt" v="Detectat nivel ridicat de datorii. Concentrează-te pe plata împrumuturilor existente." eh="4c5c6512" />
+        <e k="usedplus_cr_tipMissedPayments" v="Plăți ratate îți scad scorul. Prioritate la recuperare." eh="72f5e32d" />
+        <e k="usedplus_cr_tipMixAccounts" v="Un mix de tipuri de conturi (împrumuturi, leasing, teren) poate îmbunătăți scorul tău." eh="27d730d4" />
+        <e k="usedplus_cr_tipNoHistory" v="Fără istoricul de credit încă. Ia un mic împrumut pentru a-ți construi scorul." eh="21023caf" />
+        <e k="usedplus_cr_tipOnTime6Months" v="Efectuează toate plăți la timp timp de 6 luni pentru a vedea o îmbunătățire semnificativă." eh="a50441bf" />
+        <e k="usedplus_cr_tipOpenDeal" v="Deschide o afacere de finanțare pentru a-ți construi istoricul de credit." eh="27390112" />
+        <e k="usedplus_cr_tipRefinance" v="Consideră refinanțarea împrumuturilor mai vechi pentru a profita de ratele tale joase." eh="d3a3a2e5" />
+        <e k="usedplus_cr_tipStartSmall" v="Începe cu un mic împrumut și plătește-l la timp pentru a-ți construi creditul." eh="ac79b368" />
+        <e k="usedplus_cr_tipStreak" v="Construiește o serie mai lungă de plăți la timp pentru a-ți crește scorul." eh="196cacdf" />
+        <e k="usedplus_cr_tipTimeBuilds" v="Creditul necesită timp pentru a se construi. Continuă cu plăți consistente." eh="6508e92a" />
+        <e k="usedplus_cr_trendDeclining" v="În declin" eh="12175033" />
+        <e k="usedplus_cr_trendExcellent" v="Excelent" eh="fcc2d28a" />
+        <e k="usedplus_cr_trendGood" v="În creștere" eh="4ba4dfd7" />
+        <e k="usedplus_cr_trendPoor" v="Slab" eh="0e94d017" />
+        <e k="usedplus_cr_trendStable" v="Stabil" eh="fa3aff3c" />
+        <e k="usedplus_cr_utilExcellent" v="Excelent (%.0f%% utilizat)" eh="7dfc86c1" />
+        <e k="usedplus_cr_utilFair" v="Corect (%.0f%% utilizat)" eh="a617a851" />
+        <e k="usedplus_cr_utilGood" v="Bun (%.0f%% utilizat)" eh="c0b657d4" />
+        <e k="usedplus_cr_utilHigh" v="Ridicat (%.0f%% utilizat)" eh="86e0b0c5" />
+        <e k="usedplus_dd_bankLoanExtra" v="Plată setată la %s (+%d%% extra)" eh="63c230fc" />
+        <e k="usedplus_dd_bankLoanStandard" v="Plată setată la suma standard" eh="e169e647" />
+        <e k="usedplus_dd_buyoutLandMessage" v="Cumpără acest teren pentru %s?&#10;&#10;Valoarea terenului: %s&#10;Economii vs. cumpărare nouă: %s&#10;&#10;Cost total: %s" eh="2764369e" />
+        <e k="usedplus_dd_buyoutLeaseTitle" v="Rambursare leasing" eh="b14741b3" />
+        <e k="usedplus_dd_buyoutVehicleMessage" v="Cumpără din leasing-ul acesta pentru %s?&#10;&#10;Valoare reziduală: %s&#10;Capitaluri aplicate: -%s&#10;Rambursare depozit de garanție: -%s&#10;&#10;Cost net: %s" eh="05504f8c" />
+        <e k="usedplus_dd_earlyPayoffTitle" v="Rambursare anticipată" eh="4ccf6612" />
+        <e k="usedplus_dd_paymentSet" v="Plată setată la %s (%.0f%%)" eh="28307eef" />
+        <e k="usedplus_dd_payoffConfirm" v="Plătește soldul rămas de %s acum?" eh="491a3bbc" />
+        <e k="usedplus_dd_statusActive" v="Activ" eh="4d3d769b" />
+        <e k="usedplus_dd_termMonths" v="%d luni" eh="eb5314ed" />
+        <e k="usedplus_dd_termYears" v="%d luni (%d an%s)" eh="7b504ff3" />
+        <e k="usedplus_dd_titleFinance" v="Detalii finanțare" eh="162264ba" />
+        <e k="usedplus_dd_titleLandLease" v="Detalii leasing teren" eh="b6577396" />
+        <e k="usedplus_dd_titleLease" v="Detalii leasing" eh="53e751e8" />
+        <e k="usedplus_dd_typeLandFinance" v="Finanțare teren" eh="b6dcb2f3" />
+        <e k="usedplus_dd_typeLandLease" v="Leasing teren" eh="9c6119ac" />
+        <e k="usedplus_dd_typeLease" v="Leasing" eh="47c96b08" />
+        <e k="usedplus_dd_typeRepaint" v="Repictare" eh="1d0b7dd4" />
+        <e k="usedplus_dd_typeRepair" v="Reparație" eh="0493d27e" />
+        <e k="usedplus_dd_typeRepairRepaint" v="Reparație &amp; Repictare" eh="e53c01f2" />
+        <e k="usedplus_dd_typeVehicleFinance" v="Finanțare vehicul" eh="6bd5146b" />
+        <e k="usedplus_error_cannotFinance" v="Nu se poate finanța: scor de credit %d este sub minimum %d" eh="3db1fb5e" />
+        <e k="usedplus_error_cannotLease" v="Nu se poate lua în leasing: scor de credit %d este sub minimum %d" eh="03c9bd36" />
+        <e k="usedplus_error_insufficientFundsBuy" v="Fonduri insuficiente! Necesari %s pentru achiziție." eh="b1aef085" />
+        <e k="usedplus_error_placeablesNotLeasable" v="Clădirile și obiectele nu pot fi luate în leasing." eh="fdb637b5" />
+        <e k="usedplus_ft_truckUnavailable" v="Camionul de service nu mai este disponibil." eh="3fd5b50a" />
+        <e k="usedplus_ft_vehicleUnavailable" v="Vehiculul nu mai este disponibil." eh="82cb8143" />
+        <e k="usedplus_inspection_cached" v="Utilizarea rezultatelor de inspecție în cache (fără plată)." eh="32ebad96" />
+        <e k="usedplus_inspection_insufficientFunds" v="Fonduri insuficiente pentru inspecție. Necesar: %s" eh="a1f203a9" />
+        <e k="usedplus_maintenance_noDataAvailable" v="Nu sunt disponibile date de întreținere pentru acest vehicul." eh="f5963282" />
+        <e k="usedplus_negotiation_cannotAfford" v="Nu poți permite oferta aceasta." eh="4e8dfdf2" />
+        <e k="usedplus_purchase_complete" v="Achiziție completă" eh="7328ece0" />
+        <e k="usedplus_purchase_detail" v="%s cumpărat pentru %s" eh="a9d8903a" />
+        <e k="usedplus_rp_flatTireLabel" v="Reparație pneu plat (%s)" eh="8ba1e25d" />
+        <e k="usedplus_rp_fuelLeakLabel" v="Reparație scurgere combustibil (%s)" eh="de978bcc" />
+        <e k="usedplus_rp_includesLabel" v="Include: " eh="59bef2f2" />
+        <e k="usedplus_runaway_defaultEnded" v="Fugă oprită." eh="ed4659ca" />
+        <e k="usedplus_rvb_sectionHeader" v="Diagnostică vehicul" eh="ae666ba0" />
+        <e k="usedplus_vpf_offerValidMonths" v="Oferta valabilă pentru %d luni" eh="5fe704c6" />
 </elements>
     </texts>
 </l10n>

@@ -2664,5 +2664,105 @@
         <e k="usedplus_common_unknownLand" v="Okänd mark" eh="1b201d84" />
         <e k="usedplus_common_unknownFarm" v="Okänd gård" eh="92a9cc35" />
         <e k="usedplus_common_unknownError" v="Okänt fel" eh="aee9784c" />
+        <e k="usedplus_common_vehicle" v="Fordon" eh="d6af9c1e" />
+        <e k="usedplus_electrical_reliability" v="Elektrisk tillförlitlighet" eh="ef16f00d" />
+        <e k="usedplus_engine_reliability" v="Motortillförlitlighet" eh="d86b8cc4" />
+        <e k="usedplus_mr_breakdowns" v="Haverier" eh="ff1cc005" />
+        <e k="usedplus_mr_repairs" v="Reparationer" eh="810a4b9e" />
+        <e k="usedplus_repair_title_workshop" v="Verkstadsreparation" eh="61a80a46" />
+        <e k="usedplus_rp_confirm_title" v="Bekräfta betalning" eh="413e8eec" />
+        <e k="usedplus_rp_label_components" v="Komponenter:" eh="3b7009ae" />
+        <e k="usedplus_rp_label_repaint" v="Omålning:" eh="e63bb6f4" />
+        <e k="usedplus_rp_label_repair" v="Reparation:" eh="5dcb42f0" />
+        <e k="usedplus_rp_notification_workshop" v="fullständig verkstadsreparation" eh="a338c59a" />
+        <e k="usedplus_rp_service_mechanical" v="Mekanisk reparation" eh="60a0d54f" />
+        <e k="usedplus_rp_service_repaint" v="Omålning" eh="1d0b7dd4" />
+        <e k="usedplus_rp_service_workshop" v="Verkstadsreparation" eh="61a80a46" />
+        <e k="usedplus_rvb_parts_status" v="Komponenter: %d / %d behöver reparation" eh="4ad0ab6d" />
+        <e k="usedplus_title_maintenanceReport" v="=== Underhållsrapport ===" eh="984a7db3" />
+        <e k="usedplus_cr_ageBuilding" v="Byggnation (%d betalningar)" eh="23775faa" />
+        <e k="usedplus_cr_ageEstablished" v="Etablerad (%d betalningar)" eh="776f4287" />
+        <e k="usedplus_cr_ageGrowing" v="Växande (%d betalningar)" eh="7ac52629" />
+        <e k="usedplus_cr_ageNew" v="Ny" eh="03c2e7e4" />
+        <e k="usedplus_cr_ageNewCount" v="Ny (%d betalningar)" eh="3b231c55" />
+        <e k="usedplus_cr_discountRates" v="Rabatträntor: -%.1f%%" eh="41dcfad7" />
+        <e k="usedplus_cr_factorExcellent" v="Utmärkt (%d%% i tid)" eh="a393cc84" />
+        <e k="usedplus_cr_factorFair" v="Rättvis (%d%% i tid)" eh="d7cb93a6" />
+        <e k="usedplus_cr_factorGood" v="Bra (%d%% i tid)" eh="ed07d038" />
+        <e k="usedplus_cr_factorPoor" v="Dålig (%d%% i tid)" eh="d3b1e976" />
+        <e k="usedplus_cr_histogramFormat" v="%s  %.0f%% i tid" eh="25531fe2" />
+        <e k="usedplus_cr_legendLate" v="Sen: %d" eh="710bdbb1" />
+        <e k="usedplus_cr_legendMissed" v="Missad: %d" eh="655c731c" />
+        <e k="usedplus_cr_legendOnTime" v="I tid: %d" eh="0a4420a4" />
+        <e k="usedplus_cr_penaltyRates" v="Straffräntor: +%.1f%%" eh="b83c6923" />
+        <e k="usedplus_cr_standardRates" v="Standardräntor" eh="4c7f68aa" />
+        <e k="usedplus_cr_tipConsistency" v="Fokusera på att göra konsekventa betalningar i tid för att återuppbygga din poäng." eh="fe0b4e10" />
+        <e k="usedplus_cr_tipDebt30" v="Försök att hålla din skuld-till-egendom-kvot under 30%% för bästa räntor." eh="521de800" />
+        <e k="usedplus_cr_tipDebtRatio" v="Din skuld-till-egendom-kvot är höga. Betala ned befintliga lån för att förbättra din poäng." eh="726e898c" />
+        <e k="usedplus_cr_tipExcellent" v="Utmärkt kredit! Du kvalificerar dig för bästa räntor och villkor." eh="c4bd3149" />
+        <e k="usedplus_cr_tipGeneral1" v="Betala i tid är den enskilt viktigaste faktorn för din kreditpoäng." eh="1ebb471c" />
+        <e k="usedplus_cr_tipGeneral2" v="Håll din skuld-till-egendom-kvot under 50%% för bättre räntor." eh="279b2666" />
+        <e k="usedplus_cr_tipGeneral3" v="Längre kredithistorik hjälper — tid och konsekvens är nyckeln." eh="f43fdbc2" />
+        <e k="usedplus_cr_tipGeneral4" v="En blandning av billån, markfinansiering och hyresavtal visar ansvarsfull upplåning." eh="d340b335" />
+        <e k="usedplus_cr_tipGeneral5" v="En missad betalning har större inverkan än extra betalningar." eh="1b319c2c" />
+        <e k="usedplus_cr_tipGoodProgress" v="Bra framsteg! Fortsätt att göra betalningar i tid för att nå Utmärkt." eh="0414afc6" />
+        <e k="usedplus_cr_tipHighDebt" v="Höga skuldbelastning upptäckt. Fokusera på att betala ned befintliga lån." eh="4c5c6512" />
+        <e k="usedplus_cr_tipMissedPayments" v="Missade betalningar drar ned din poäng. Prioritera att komma ikapp." eh="72f5e32d" />
+        <e k="usedplus_cr_tipMixAccounts" v="En blandning av kontotyper (lån, hyresavtal, mark) kan förbättra din poäng." eh="27d730d4" />
+        <e k="usedplus_cr_tipNoHistory" v="Ingen kredithistorik än. Ta ett litet lån för att börja bygga din poäng." eh="21023caf" />
+        <e k="usedplus_cr_tipOnTime6Months" v="Betala alla betalningar i tid under 6 månader för att se betydande förbättringar." eh="a50441bf" />
+        <e k="usedplus_cr_tipOpenDeal" v="Öppna ett finansieringsavtal för att börja bygga din kredithistorik." eh="27390112" />
+        <e k="usedplus_cr_tipRefinance" v="Överväg att refinansiera äldre lån för att dra nytta av dina låga räntor." eh="d3a3a2e5" />
+        <e k="usedplus_cr_tipStartSmall" v="Börja med ett litet lån och betala det i tid för att bygga krediter." eh="ac79b368" />
+        <e k="usedplus_cr_tipStreak" v="Bygg en längre serie av betalningar i tid för att öka din poäng." eh="196cacdf" />
+        <e k="usedplus_cr_tipTimeBuilds" v="Kredit tar tid att bygga. Fortsätt att betala konsekvent." eh="6508e92a" />
+        <e k="usedplus_cr_trendDeclining" v="Sjunkande" eh="12175033" />
+        <e k="usedplus_cr_trendExcellent" v="Utmärkt" eh="fcc2d28a" />
+        <e k="usedplus_cr_trendGood" v="Förbättrande" eh="4ba4dfd7" />
+        <e k="usedplus_cr_trendPoor" v="Dålig" eh="0e94d017" />
+        <e k="usedplus_cr_trendStable" v="Stabil" eh="fa3aff3c" />
+        <e k="usedplus_cr_utilExcellent" v="Utmärkt (%.0f%% använd)" eh="7dfc86c1" />
+        <e k="usedplus_cr_utilFair" v="Rättvis (%.0f%% använd)" eh="a617a851" />
+        <e k="usedplus_cr_utilGood" v="Bra (%.0f%% använd)" eh="c0b657d4" />
+        <e k="usedplus_cr_utilHigh" v="Höga (%.0f%% använd)" eh="86e0b0c5" />
+        <e k="usedplus_dd_bankLoanExtra" v="Betaling inställd på %s (+%d%% extra)" eh="63c230fc" />
+        <e k="usedplus_dd_bankLoanStandard" v="Betaling inställd på standardbelopp" eh="e169e647" />
+        <e k="usedplus_dd_buyoutLandMessage" v="Köp denna mark för %s?&#10;&#10;Markwärde: %s&#10;Besparingar vs. att köpa ny: %s&#10;&#10;Totala kostnader: %s" eh="2764369e" />
+        <e k="usedplus_dd_buyoutLeaseTitle" v="Hyresavtalövertagande" eh="b14741b3" />
+        <e k="usedplus_dd_buyoutVehicleMessage" v="Övertar detta hyresavtal för %s?&#10;&#10;Restvärde: %s&#10;Eget kapital tillämpad: -%s&#10;Säkerhetsdepositum återbetalning: -%s&#10;&#10;Nettokostnader: %s" eh="05504f8c" />
+        <e k="usedplus_dd_earlyPayoffTitle" v="Tidig återbetalning" eh="4ccf6612" />
+        <e k="usedplus_dd_paymentSet" v="Betaling inställd på %s (%.0f%%)" eh="28307eef" />
+        <e k="usedplus_dd_payoffConfirm" v="Betala återstående saldo på %s nu?" eh="491a3bbc" />
+        <e k="usedplus_dd_statusActive" v="Aktiv" eh="4d3d769b" />
+        <e k="usedplus_dd_termMonths" v="%d månader" eh="eb5314ed" />
+        <e k="usedplus_dd_termYears" v="%d månader (%d år%s)" eh="7b504ff3" />
+        <e k="usedplus_dd_titleFinance" v="Finansieringsdetaljer" eh="162264ba" />
+        <e k="usedplus_dd_titleLandLease" v="Markinhyrningsdetaljer" eh="b6577396" />
+        <e k="usedplus_dd_titleLease" v="Hyresdetaljer" eh="53e751e8" />
+        <e k="usedplus_dd_typeLandFinance" v="Markfinansiering" eh="b6dcb2f3" />
+        <e k="usedplus_dd_typeLandLease" v="Markinhyrning" eh="9c6119ac" />
+        <e k="usedplus_dd_typeLease" v="Hyresavtal" eh="47c96b08" />
+        <e k="usedplus_dd_typeRepaint" v="Omålning" eh="1d0b7dd4" />
+        <e k="usedplus_dd_typeRepair" v="Reparation" eh="0493d27e" />
+        <e k="usedplus_dd_typeRepairRepaint" v="Reparation &amp; omålning" eh="e53c01f2" />
+        <e k="usedplus_dd_typeVehicleFinance" v="Fordonfinansiering" eh="6bd5146b" />
+        <e k="usedplus_error_cannotFinance" v="Kan inte finansiera: kreditpoäng %d är under minst %d" eh="3db1fb5e" />
+        <e k="usedplus_error_cannotLease" v="Kan inte hyra: kreditpoäng %d är under minst %d" eh="03c9bd36" />
+        <e k="usedplus_error_insufficientFundsBuy" v="Otillräcklig medel! Behöva %s för att köpa." eh="b1aef085" />
+        <e k="usedplus_error_placeablesNotLeasable" v="Byggnader och objekt kan inte hyras." eh="fdb637b5" />
+        <e k="usedplus_ft_truckUnavailable" v="Servicefordonen är inte längre tillgängligt." eh="3fd5b50a" />
+        <e k="usedplus_ft_vehicleUnavailable" v="Fordonet är inte längre tillgängligt." eh="82cb8143" />
+        <e k="usedplus_inspection_cached" v="Använd cachade inspektionsresultat (ingen avgift)." eh="32ebad96" />
+        <e k="usedplus_inspection_insufficientFunds" v="Otillräcklig medel för inspektion. Krävs: %s" eh="a1f203a9" />
+        <e k="usedplus_maintenance_noDataAvailable" v="Ingen underhållsdata tillgänglig för detta fordon." eh="f5963282" />
+        <e k="usedplus_negotiation_cannotAfford" v="Du har inte råd med detta erbjudande." eh="4e8dfdf2" />
+        <e k="usedplus_purchase_complete" v="Köp slutfört" eh="7328ece0" />
+        <e k="usedplus_purchase_detail" v="%s köpt för %s" eh="a9d8903a" />
+        <e k="usedplus_rp_flatTireLabel" v="Punktering reparation (%s)" eh="8ba1e25d" />
+        <e k="usedplus_rp_fuelLeakLabel" v="Bränslelycka reparation (%s)" eh="de978bcc" />
+        <e k="usedplus_rp_includesLabel" v="Inkluderar: " eh="59bef2f2" />
+        <e k="usedplus_runaway_defaultEnded" v="Rymlingen stoppade." eh="ed4659ca" />
+        <e k="usedplus_rvb_sectionHeader" v="Fordondiagnostik" eh="ae666ba0" />
+        <e k="usedplus_vpf_offerValidMonths" v="Erbjudande giltiga för %d månader" eh="5fe704c6" />
 </elements>
 </l10n>

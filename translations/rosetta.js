@@ -21,7 +21,7 @@ const {
     autoDetectFilePrefix, autoDetectXmlFormat,
     addEntryToContent, updateEntryInContent, removeEntryFromContent, renameKeyInContent,
     atomicWrite, getAllFilePaths,
-    initStore, printGateSummary, gateCodebaseValidation, findMissingKeys,
+    initStore, printGateSummary, gateCodebaseValidation, findMissingKeys, findMissingKeysWithFallbacks,
     exportForTranslation, validateAndImport,
     padRight, padLeft, printCheckSummaryTable,
     getFilesRecursive, getModDir,
@@ -565,15 +565,18 @@ function cmdUnused() {
 }
 
 function cmdMissing() {
+    const doDeposit = process.argv.includes('--deposit');
+    const doExport = process.argv.includes('--export');
+    const dryRun = process.argv.includes('--dry-run');
     const store = initStore();
 
     console.log("======================================================================");
-    console.log(`ROSETTA MISSING KEYS v${VERSION}`);
+    console.log(`ROSETTA MISSING KEYS v${VERSION}${doDeposit ? (dryRun ? ' (DEPOSIT DRY RUN)' : ' (DEPOSIT)') : doExport ? ' (EXPORT)' : ''}`);
     console.log("======================================================================");
     console.log();
     console.log("Scanning codebase for getText() and $l10n_ references...");
 
-    const { allCodeKeys, missing } = findMissingKeys(store.sourceEntries);
+    const { allCodeKeys, missing, missingWithFallbacks, missingWithoutFallbacks, fallbackMap } = findMissingKeysWithFallbacks(store.sourceEntries);
 
     console.log(`Found ${allCodeKeys.length} unique usedplus_/usedPlus_ key references in source code.`);
     console.log(`English source has ${store.sourceEntries.size} keys.`);
@@ -584,9 +587,53 @@ function cmdMissing() {
         return;
     }
 
-    console.log(`MISSING: ${missing.length} key(s) referenced in code but NOT in translation files:\n`);
+    console.log(`MISSING: ${missing.length} key(s) referenced in code but NOT in translation files`);
+    console.log(`  With fallback text:    ${missingWithFallbacks.length} (auto-depositable)`);
+    console.log(`  Without fallback text: ${missingWithoutFallbacks.length} (need manual English text)`);
+    console.log();
 
-    // Find where each missing key is referenced
+    // --export mode: write JSON file compatible with `deposit --file`
+    if (doExport) {
+        const exportData = missingWithFallbacks.map(key => ({ key, value: fallbackMap.get(key) }));
+        const outputFile = '_missing_deposit.json';
+        fs.writeFileSync(outputFile, JSON.stringify(exportData, null, 2), 'utf8');
+        console.log(`Exported ${exportData.length} key(s) with fallback text to ${outputFile}`);
+        console.log(`Import: node rosetta.js deposit --file ${outputFile}`);
+
+        if (missingWithoutFallbacks.length > 0) {
+            console.log(`\n${missingWithoutFallbacks.length} key(s) without fallback text (add manually):`);
+            for (const key of missingWithoutFallbacks) console.log(`  ${key}`);
+        }
+        console.log("======================================================================");
+        return;
+    }
+
+    // --deposit mode: deposit all missing keys with fallback text in one pass
+    if (doDeposit) {
+        if (missingWithFallbacks.length === 0) {
+            console.log("No missing keys have fallback text. Add English text manually:");
+            console.log(`  node rosetta.js deposit KEY "English text"`);
+            return;
+        }
+
+        const keysToDeposit = missingWithFallbacks.map(key => ({ key, value: fallbackMap.get(key) }));
+        console.log(`Depositing ${keysToDeposit.length} key(s) across ${store.enabledLangs.length + 1} files...\n`);
+
+        const deposited = depositKeysToFiles(store, keysToDeposit, dryRun);
+
+        console.log();
+        if (missingWithoutFallbacks.length > 0) {
+            console.log(`${missingWithoutFallbacks.length} key(s) without fallback text (add manually):`);
+            for (const key of missingWithoutFallbacks) console.log(`  ${key}`);
+            console.log();
+        }
+        console.log("======================================================================");
+        console.log(`DEPOSIT COMPLETE: ${deposited} key(s) added across ${store.enabledLangs.length + 1} files${dryRun ? ' (DRY RUN)' : ''}`);
+        console.log("======================================================================");
+        return;
+    }
+
+    // Default mode: list missing keys with file references and fallback hints
     const modDir = getModDir();
     const srcDir = path.join(modDir, 'src');
     const guiDir = path.join(modDir, 'gui');
@@ -603,13 +650,18 @@ function cmdMissing() {
                 }
             }
         }
-        console.log(`  ${key}`);
+        const fallback = fallbackMap.get(key);
+        console.log(`  ${key}${fallback ? `  ← fallback: "${fallback}"` : ''}`);
         for (const ref of refs) console.log(`    → ${ref}`);
     }
 
     console.log();
     console.log("======================================================================");
-    console.log("To add these keys, run:");
+    console.log("To deposit all keys with fallback text in one pass:");
+    console.log("  node rosetta.js missing --deposit [--dry-run]");
+    console.log("To export as JSON for review first:");
+    console.log("  node rosetta.js missing --export");
+    console.log("To add individual keys:");
     console.log(`  node rosetta.js deposit KEY "English text"`);
     console.log("======================================================================");
 }
@@ -852,6 +904,55 @@ function cmdSync() {
     console.log("======================================================================");
 }
 
+/**
+ * Shared helper: deposit an array of {key, value} pairs across all translation files.
+ * Builds an enKeyIndex Map for O(1) insert-position lookups.
+ * Returns count of keys actually deposited.
+ */
+function depositKeysToFiles(store, keysToDeposit, dryRun) {
+    // Build O(1) key index from source ordered keys
+    const enKeyIndex = new Map();
+    for (let i = 0; i < store.sourceOrderedKeys.length; i++) {
+        enKeyIndex.set(store.sourceOrderedKeys[i], i);
+    }
+
+    // Deposit to English source
+    let sourceContent = fs.readFileSync(store.sourceFile, 'utf8');
+    const sourceKeySet = new Set(store.sourceOrderedKeys);
+
+    for (const { key, value } of keysToDeposit) {
+        const hash = getHash(value);
+        sourceContent = addEntryToContent(sourceContent, key, value, hash, store.format, store.sourceOrderedKeys, sourceKeySet, undefined, enKeyIndex);
+        sourceKeySet.add(key);
+        enKeyIndex.set(key, store.sourceOrderedKeys.length);
+        store.sourceOrderedKeys.push(key);
+    }
+
+    if (!dryRun) atomicWrite(store.sourceFile, sourceContent);
+    console.log(`  ${padRight(path.basename(store.sourceFile), 25)}: +${keysToDeposit.length} (English values)`);
+
+    // Deposit to all target language files
+    for (const { code: langCode, name: langName } of store.enabledLangs) {
+        const langFile = getLangFilePath(store.filePrefix, langCode);
+        if (!fs.existsSync(langFile)) continue;
+
+        let content = fs.readFileSync(langFile, 'utf8');
+        const { orderedKeys: langKeys } = parseTranslationFile(langFile, store.format);
+        const langKeySet = new Set(langKeys);
+
+        for (const { key, value } of keysToDeposit) {
+            const hash = getHash(value);
+            content = addEntryToContent(content, key, CONFIG.untranslatedPrefix + value, hash, store.format, store.sourceOrderedKeys, langKeySet, undefined, enKeyIndex);
+            langKeySet.add(key);
+        }
+
+        if (!dryRun) atomicWrite(langFile, content);
+        console.log(`  ${padRight(path.basename(langFile), 25)}: +${keysToDeposit.length} ([EN] placeholders)`);
+    }
+
+    return keysToDeposit.length;
+}
+
 function cmdDeposit() {
     const dryRun = process.argv.includes('--dry-run');
     const args = process.argv.slice(3).filter(a => !a.startsWith('--'));
@@ -894,40 +995,11 @@ function cmdDeposit() {
 
     console.log(`Depositing ${valid.length} key(s) across ${store.enabledLangs.length + 1} files...\n`);
 
-    let sourceContent = fs.readFileSync(store.sourceFile, 'utf8');
-    const sourceKeySet = new Set(store.sourceOrderedKeys);
-
-    for (const { key, value } of valid) {
-        const hash = getHash(value);
-        sourceContent = addEntryToContent(sourceContent, key, value, hash, store.format, store.sourceOrderedKeys, sourceKeySet);
-        sourceKeySet.add(key);
-        store.sourceOrderedKeys.push(key);
-    }
-
-    if (!dryRun) atomicWrite(store.sourceFile, sourceContent);
-    console.log(`  ${padRight(path.basename(store.sourceFile), 25)}: +${valid.length} (English values)`);
-
-    for (const { code: langCode, name: langName } of store.enabledLangs) {
-        const langFile = getLangFilePath(store.filePrefix, langCode);
-        if (!fs.existsSync(langFile)) continue;
-
-        let content = fs.readFileSync(langFile, 'utf8');
-        const { orderedKeys: langKeys } = parseTranslationFile(langFile, store.format);
-        const langKeySet = new Set(langKeys);
-
-        for (const { key, value } of valid) {
-            const hash = getHash(value);
-            content = addEntryToContent(content, key, CONFIG.untranslatedPrefix + value, hash, store.format, store.sourceOrderedKeys, langKeySet);
-            langKeySet.add(key);
-        }
-
-        if (!dryRun) atomicWrite(langFile, content);
-        console.log(`  ${padRight(path.basename(langFile), 25)}: +${valid.length} ([EN] placeholders)`);
-    }
+    const deposited = depositKeysToFiles(store, valid, dryRun);
 
     console.log();
     console.log("======================================================================");
-    console.log(`DEPOSIT COMPLETE: ${valid.length} key(s) added across ${store.enabledLangs.length + 1} files`);
+    console.log(`DEPOSIT COMPLETE: ${deposited} key(s) added across ${store.enabledLangs.length + 1} files`);
     console.log("======================================================================");
 }
 
@@ -1593,7 +1665,10 @@ function cmdCleanup() {
         /^[a-z]{2}_quality_translate[_\w]*\.json$/,
         /^[a-z]{2}_retranslated[_\w]*\.json$/,
         /^[a-z]{2}_fix[_\w]*\.json$/,
+        /^_missing_deposit\.json$/,
         /^(translate|retranslate|export|generate|ct_comprehensive)[_\w]*\.(js|py)$/,
+        /^_extract_missing\.js$/,
+        /^_batch_deposit\.sh$/,
         /^RETRANSLATION[_\w]*\.(md|txt)$/,
     ];
 
@@ -1692,6 +1767,9 @@ COMMANDS:
   check                   CI-friendly report with exit codes
   validate                Minimal CI output, exit codes only
   unused                  List dead keys not referenced in codebase
+  missing                 Find keys referenced in code but not in translations
+  missing --deposit       Deposit all missing keys with fallback text (one pass)
+  missing --export        Export missing keys as JSON for review
   audit [LANG]            Deep translation quality audit with grades
   inspect KEY [KEY...]    View key value across all 26 languages
   deposit KEY VALUE       Add a key atomically across ALL files

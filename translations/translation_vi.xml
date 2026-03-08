@@ -2664,5 +2664,105 @@
         <e k="usedplus_common_unknownLand" v="Đất đai không xác định" eh="1b201d84" />
         <e k="usedplus_common_unknownFarm" v="Trang trại không xác định" eh="92a9cc35" />
         <e k="usedplus_common_unknownError" v="Lỗi không xác định" eh="aee9784c" />
+        <e k="usedplus_common_vehicle" v="Phương tiện" eh="d6af9c1e" />
+        <e k="usedplus_electrical_reliability" v="Độ tin cậy điện" eh="ef16f00d" />
+        <e k="usedplus_engine_reliability" v="Độ tin cậy của động cơ" eh="d86b8cc4" />
+        <e k="usedplus_mr_breakdowns" v="Hỏng hóc" eh="ff1cc005" />
+        <e k="usedplus_mr_repairs" v="Sửa chữa" eh="810a4b9e" />
+        <e k="usedplus_repair_title_workshop" v="Sửa chữa tại xưởng" eh="61a80a46" />
+        <e k="usedplus_rp_confirm_title" v="Xác nhận thanh toán" eh="413e8eec" />
+        <e k="usedplus_rp_label_components" v="Linh kiện:" eh="3b7009ae" />
+        <e k="usedplus_rp_label_repaint" v="Sơn lại:" eh="e63bb6f4" />
+        <e k="usedplus_rp_label_repair" v="Sửa chữa:" eh="5dcb42f0" />
+        <e k="usedplus_rp_notification_workshop" v="sửa chữa hoàn toàn tại xưởng" eh="a338c59a" />
+        <e k="usedplus_rp_service_mechanical" v="Sửa chữa cơ khí" eh="60a0d54f" />
+        <e k="usedplus_rp_service_repaint" v="Sơn lại" eh="1d0b7dd4" />
+        <e k="usedplus_rp_service_workshop" v="Sửa chữa tại xưởng" eh="61a80a46" />
+        <e k="usedplus_rvb_parts_status" v="Linh kiện: %d / %d cần sửa chữa" eh="4ad0ab6d" />
+        <e k="usedplus_title_maintenanceReport" v="=== Báo cáo bảo trì ===" eh="984a7db3" />
+        <e k="usedplus_cr_ageBuilding" v="Xây dựng (%d khoản thanh toán)" eh="23775faa" />
+        <e k="usedplus_cr_ageEstablished" v="Thành lập (%d khoản thanh toán)" eh="776f4287" />
+        <e k="usedplus_cr_ageGrowing" v="Phát triển (%d khoản thanh toán)" eh="7ac52629" />
+        <e k="usedplus_cr_ageNew" v="Mới" eh="03c2e7e4" />
+        <e k="usedplus_cr_ageNewCount" v="Mới (%d khoản thanh toán)" eh="3b231c55" />
+        <e k="usedplus_cr_discountRates" v="Tỷ lệ giảm: -%.1f%%" eh="41dcfad7" />
+        <e k="usedplus_cr_factorExcellent" v="Xuất sắc (%d%% đúng hạn)" eh="a393cc84" />
+        <e k="usedplus_cr_factorFair" v="Công bằng (%d%% đúng hạn)" eh="d7cb93a6" />
+        <e k="usedplus_cr_factorGood" v="Tốt (%d%% đúng hạn)" eh="ed07d038" />
+        <e k="usedplus_cr_factorPoor" v="Kém (%d%% đúng hạn)" eh="d3b1e976" />
+        <e k="usedplus_cr_histogramFormat" v="%s  %.0f%% đúng hạn" eh="25531fe2" />
+        <e k="usedplus_cr_legendLate" v="Trễ: %d" eh="710bdbb1" />
+        <e k="usedplus_cr_legendMissed" v="Bỏ lỡ: %d" eh="655c731c" />
+        <e k="usedplus_cr_legendOnTime" v="Đúng hạn: %d" eh="0a4420a4" />
+        <e k="usedplus_cr_penaltyRates" v="Tỷ lệ phạt: +%.1f%%" eh="b83c6923" />
+        <e k="usedplus_cr_standardRates" v="Tỷ lệ tiêu chuẩn" eh="4c7f68aa" />
+        <e k="usedplus_cr_tipConsistency" v="Tập trung vào việc thực hiện các khoản thanh toán đúng hạn liên tục để khôi phục điểm của bạn." eh="fe0b4e10" />
+        <e k="usedplus_cr_tipDebt30" v="Cố gắng giảm tỷ lệ nợ trên tài sản dưới 30%% để có tỷ lệ tốt nhất." eh="521de800" />
+        <e k="usedplus_cr_tipDebtRatio" v="Tỷ lệ nợ trên tài sản của bạn cao. Trả hết các khoản vay hiện tại để cải thiện điểm của bạn." eh="726e898c" />
+        <e k="usedplus_cr_tipExcellent" v="Tín dụng xuất sắc! Bạn đủ điều kiện để nhận tỷ lệ và điều khoản tốt nhất." eh="c4bd3149" />
+        <e k="usedplus_cr_tipGeneral1" v="Thanh toán đúng hạn là yếu tố quan trọng nhất trong điểm tín dụng của bạn." eh="1ebb471c" />
+        <e k="usedplus_cr_tipGeneral2" v="Giữ tỷ lệ nợ trên tài sản dưới 50%% để có tỷ lệ tốt hơn." eh="279b2666" />
+        <e k="usedplus_cr_tipGeneral3" v="Lịch sử tín dụng dài hơn giúp ích — thời gian và sự nhất quán là chìa khóa." eh="f43fdbc2" />
+        <e k="usedplus_cr_tipGeneral4" v="Sự kết hợp các khoản vay mua phương tiện, tài chính đất đai và thuê bao cho thấy sự vay mượn có trách nhiệm." eh="d340b335" />
+        <e k="usedplus_cr_tipGeneral5" v="Bỏ lỡ một khoản thanh toán có tác động lớn hơn so với các khoản thanh toán bổ sung." eh="1b319c2c" />
+        <e k="usedplus_cr_tipGoodProgress" v="Tiến bộ tốt! Tiếp tục thực hiện các khoản thanh toán đúng hạn để đạt được Xuất sắc." eh="0414afc6" />
+        <e k="usedplus_cr_tipHighDebt" v="Phát hiện nợ cao. Tập trung vào việc trả hết các khoản vay hiện tại." eh="4c5c6512" />
+        <e k="usedplus_cr_tipMissedPayments" v="Các khoản thanh toán bỏ lỡ đang kéo điểm của bạn xuống. Ưu tiên đuổi kịp." eh="72f5e32d" />
+        <e k="usedplus_cr_tipMixAccounts" v="Sự kết hợp các loại tài khoản (khoản vay, thuê bao, đất đai) có thể cải thiện điểm của bạn." eh="27d730d4" />
+        <e k="usedplus_cr_tipNoHistory" v="Chưa có lịch sử tín dụng. Lấy một khoản vay nhỏ để bắt đầu xây dựng điểm của bạn." eh="21023caf" />
+        <e k="usedplus_cr_tipOnTime6Months" v="Thực hiện tất cả các khoản thanh toán đúng hạn trong 6 tháng để thấy sự cải thiện đáng kể." eh="a50441bf" />
+        <e k="usedplus_cr_tipOpenDeal" v="Mở một thỏa thuận tài chính để bắt đầu xây dựng lịch sử tín dụng của bạn." eh="27390112" />
+        <e k="usedplus_cr_tipRefinance" v="Hãy cân nhắc tái tài chính các khoản vay cũ để tận dụng tỷ lệ thấp của bạn." eh="d3a3a2e5" />
+        <e k="usedplus_cr_tipStartSmall" v="Bắt đầu với một khoản vay nhỏ và trả nó đúng hạn để xây dựng tín dụng." eh="ac79b368" />
+        <e k="usedplus_cr_tipStreak" v="Xây dựng một chuỗi thanh toán đúng hạn dài hơn để tăng điểm của bạn." eh="196cacdf" />
+        <e k="usedplus_cr_tipTimeBuilds" v="Tín dụng mất thời gian để xây dựng. Tiếp tục thực hiện các khoản thanh toán một cách nhất quán." eh="6508e92a" />
+        <e k="usedplus_cr_trendDeclining" v="Giảm" eh="12175033" />
+        <e k="usedplus_cr_trendExcellent" v="Xuất sắc" eh="fcc2d28a" />
+        <e k="usedplus_cr_trendGood" v="Cải thiện" eh="4ba4dfd7" />
+        <e k="usedplus_cr_trendPoor" v="Kém" eh="0e94d017" />
+        <e k="usedplus_cr_trendStable" v="Ổn định" eh="fa3aff3c" />
+        <e k="usedplus_cr_utilExcellent" v="Xuất sắc (%.0f%% được sử dụng)" eh="7dfc86c1" />
+        <e k="usedplus_cr_utilFair" v="Công bằng (%.0f%% được sử dụng)" eh="a617a851" />
+        <e k="usedplus_cr_utilGood" v="Tốt (%.0f%% được sử dụng)" eh="c0b657d4" />
+        <e k="usedplus_cr_utilHigh" v="Cao (%.0f%% được sử dụng)" eh="86e0b0c5" />
+        <e k="usedplus_dd_bankLoanExtra" v="Thanh toán đặt thành %s (+%d%% thêm)" eh="63c230fc" />
+        <e k="usedplus_dd_bankLoanStandard" v="Thanh toán đặt thành số tiền tiêu chuẩn" eh="e169e647" />
+        <e k="usedplus_dd_buyoutLandMessage" v="Mua đất này với giá %s?&#10;&#10;Giá trị đất: %s&#10;Tiết kiệm so với mua mới: %s&#10;&#10;Tổng chi phí: %s" eh="2764369e" />
+        <e k="usedplus_dd_buyoutLeaseTitle" v="Mua lại hợp thuê" eh="b14741b3" />
+        <e k="usedplus_dd_buyoutVehicleMessage" v="Mua lại hợp thuê này với giá %s?&#10;&#10;Giá trị còn lại: %s&#10;Vốn chủ sở hữu áp dụng: -%s&#10;Hoàn lại tiền gửi bảo mật: -%s&#10;&#10;Chi phí ròng: %s" eh="05504f8c" />
+        <e k="usedplus_dd_earlyPayoffTitle" v="Thanh toán sớm" eh="4ccf6612" />
+        <e k="usedplus_dd_paymentSet" v="Thanh toán đặt thành %s (%.0f%%)" eh="28307eef" />
+        <e k="usedplus_dd_payoffConfirm" v="Thanh toán số dư còn lại %s ngay bây giờ?" eh="491a3bbc" />
+        <e k="usedplus_dd_statusActive" v="Hoạt động" eh="4d3d769b" />
+        <e k="usedplus_dd_termMonths" v="%d tháng" eh="eb5314ed" />
+        <e k="usedplus_dd_termYears" v="%d tháng (%d năm%s)" eh="7b504ff3" />
+        <e k="usedplus_dd_titleFinance" v="Chi tiết tài chính" eh="162264ba" />
+        <e k="usedplus_dd_titleLandLease" v="Chi tiết thuê bao đất" eh="b6577396" />
+        <e k="usedplus_dd_titleLease" v="Chi tiết thuê bao" eh="53e751e8" />
+        <e k="usedplus_dd_typeLandFinance" v="Tài chính đất đai" eh="b6dcb2f3" />
+        <e k="usedplus_dd_typeLandLease" v="Thuê bao đất" eh="9c6119ac" />
+        <e k="usedplus_dd_typeLease" v="Thuê bao" eh="47c96b08" />
+        <e k="usedplus_dd_typeRepaint" v="Sơn lại" eh="1d0b7dd4" />
+        <e k="usedplus_dd_typeRepair" v="Sửa chữa" eh="0493d27e" />
+        <e k="usedplus_dd_typeRepairRepaint" v="Sửa chữa &amp; sơn lại" eh="e53c01f2" />
+        <e k="usedplus_dd_typeVehicleFinance" v="Tài chính phương tiện" eh="6bd5146b" />
+        <e k="usedplus_error_cannotFinance" v="Không thể tài chính: điểm tín dụng %d dưới mức tối thiểu %d" eh="3db1fb5e" />
+        <e k="usedplus_error_cannotLease" v="Không thể thuê bao: điểm tín dụng %d dưới mức tối thiểu %d" eh="03c9bd36" />
+        <e k="usedplus_error_insufficientFundsBuy" v="Không đủ tiền! Cần %s để mua." eh="b1aef085" />
+        <e k="usedplus_error_placeablesNotLeasable" v="Các tòa nhà và vật sắp xếp không thể được thuê bao." eh="fdb637b5" />
+        <e k="usedplus_ft_truckUnavailable" v="Xe tải dịch vụ không còn dostupny." eh="3fd5b50a" />
+        <e k="usedplus_ft_vehicleUnavailable" v="Phương tiện không còn dostupny." eh="82cb8143" />
+        <e k="usedplus_inspection_cached" v="Sử dụng kết quả kiểm tra được lưu trong bộ nhớ đệm (không tính phí)." eh="32ebad96" />
+        <e k="usedplus_inspection_insufficientFunds" v="Không đủ tiền để kiểm tra. Cần thiết: %s" eh="a1f203a9" />
+        <e k="usedplus_maintenance_noDataAvailable" v="Không có dữ liệu bảo trì nào cho phương tiện này." eh="f5963282" />
+        <e k="usedplus_negotiation_cannotAfford" v="Bạn không thể trả giá cho lời đề nghị này." eh="4e8dfdf2" />
+        <e k="usedplus_purchase_complete" v="Mua hàng hoàn tất" eh="7328ece0" />
+        <e k="usedplus_purchase_detail" v="%s được mua với giá %s" eh="a9d8903a" />
+        <e k="usedplus_rp_flatTireLabel" v="Sửa chữa lốp xẹp (%s)" eh="8ba1e25d" />
+        <e k="usedplus_rp_fuelLeakLabel" v="Sửa chữa rò rỉ nhiên liệu (%s)" eh="de978bcc" />
+        <e k="usedplus_rp_includesLabel" v="Bao gồm: " eh="59bef2f2" />
+        <e k="usedplus_runaway_defaultEnded" v="Trốn thoát dừng lại." eh="ed4659ca" />
+        <e k="usedplus_rvb_sectionHeader" v="Chẩn đoán phương tiện" eh="ae666ba0" />
+        <e k="usedplus_vpf_offerValidMonths" v="Lời đề nghị hợp lệ trong %d tháng" eh="5fe704c6" />
 </elements>
 </l10n>

@@ -2668,5 +2668,105 @@
         <e k="usedplus_common_unknownLand" v="未知土地" eh="1b201d84" />
         <e k="usedplus_common_unknownFarm" v="未知農場" eh="92a9cc35" />
         <e k="usedplus_common_unknownError" v="未知錯誤" eh="aee9784c" />
+        <e k="usedplus_common_vehicle" v="車輛" eh="d6af9c1e" />
+        <e k="usedplus_electrical_reliability" v="電氣可靠性" eh="ef16f00d" />
+        <e k="usedplus_engine_reliability" v="引擎可靠性" eh="d86b8cc4" />
+        <e k="usedplus_mr_breakdowns" v="故障" eh="ff1cc005" />
+        <e k="usedplus_mr_repairs" v="維修" eh="810a4b9e" />
+        <e k="usedplus_repair_title_workshop" v="車間維修" eh="61a80a46" />
+        <e k="usedplus_rp_confirm_title" v="確認付款" eh="413e8eec" />
+        <e k="usedplus_rp_label_components" v="零件：" eh="3b7009ae" />
+        <e k="usedplus_rp_label_repaint" v="重新粉刷：" eh="e63bb6f4" />
+        <e k="usedplus_rp_label_repair" v="維修：" eh="5dcb42f0" />
+        <e k="usedplus_rp_notification_workshop" v="完整車間維修" eh="a338c59a" />
+        <e k="usedplus_rp_service_mechanical" v="機械維修" eh="60a0d54f" />
+        <e k="usedplus_rp_service_repaint" v="重新粉刷" eh="1d0b7dd4" />
+        <e k="usedplus_rp_service_workshop" v="車間維修" eh="61a80a46" />
+        <e k="usedplus_rvb_parts_status" v="零件：%d / %d 需要維修" eh="4ad0ab6d" />
+        <e k="usedplus_title_maintenanceReport" v="=== 維護報告 ===" eh="984a7db3" />
+        <e k="usedplus_cr_ageBuilding" v="建設中（%d 次付款）" eh="23775faa" />
+        <e k="usedplus_cr_ageEstablished" v="已建立（%d 次付款）" eh="776f4287" />
+        <e k="usedplus_cr_ageGrowing" v="增長中（%d 次付款）" eh="7ac52629" />
+        <e k="usedplus_cr_ageNew" v="新的" eh="03c2e7e4" />
+        <e k="usedplus_cr_ageNewCount" v="新的（%d 次付款）" eh="3b231c55" />
+        <e k="usedplus_cr_discountRates" v="折扣率：-%.1f%%" eh="41dcfad7" />
+        <e k="usedplus_cr_factorExcellent" v="優秀（%d%% 按時）" eh="a393cc84" />
+        <e k="usedplus_cr_factorFair" v="一般（%d%% 按時）" eh="d7cb93a6" />
+        <e k="usedplus_cr_factorGood" v="良好（%d%% 按時）" eh="ed07d038" />
+        <e k="usedplus_cr_factorPoor" v="不佳（%d%% 按時）" eh="d3b1e976" />
+        <e k="usedplus_cr_histogramFormat" v="%s  %.0f%% 按時" eh="25531fe2" />
+        <e k="usedplus_cr_legendLate" v="逾期：%d" eh="710bdbb1" />
+        <e k="usedplus_cr_legendMissed" v="遺漏：%d" eh="655c731c" />
+        <e k="usedplus_cr_legendOnTime" v="按時：%d" eh="0a4420a4" />
+        <e k="usedplus_cr_penaltyRates" v="罰款率：+%.1f%%" eh="b83c6923" />
+        <e k="usedplus_cr_standardRates" v="標準費率" eh="4c7f68aa" />
+        <e k="usedplus_cr_tipConsistency" v="專注於按時付款以重建信用評分。" eh="fe0b4e10" />
+        <e k="usedplus_cr_tipDebt30" v="努力將債務對資產比例保持在 30%% 以下以獲得最佳利率。" eh="521de800" />
+        <e k="usedplus_cr_tipDebtRatio" v="您的債務對資產比例很高。償還現有貸款以改善信用評分。" eh="726e898c" />
+        <e k="usedplus_cr_tipExcellent" v="信用優異！您符合最佳費率和條件的資格。" eh="c4bd3149" />
+        <e k="usedplus_cr_tipGeneral1" v="按時付款是信用評分中最重要的因素。" eh="1ebb471c" />
+        <e k="usedplus_cr_tipGeneral2" v="將債務對資產比例保持在 50%% 以下以獲得更佳利率。" eh="279b2666" />
+        <e k="usedplus_cr_tipGeneral3" v="更長的信用歷史有幫助——時間和一致性是關鍵。" eh="f43fdbc2" />
+        <e k="usedplus_cr_tipGeneral4" v="混合使用車輛貸款、土地融資和租賃顯示負責任的借貸。" eh="d340b335" />
+        <e k="usedplus_cr_tipGeneral5" v="遺漏付款的影響比額外付款更大。" eh="1b319c2c" />
+        <e k="usedplus_cr_tipGoodProgress" v="進展良好！繼續按時付款以達到優秀。" eh="0414afc6" />
+        <e k="usedplus_cr_tipHighDebt" v="檢測到高債務負擔。專注於償還現有貸款。" eh="4c5c6512" />
+        <e k="usedplus_cr_tipMissedPayments" v="遺漏的付款正在拖累您的信用評分。優先補上。" eh="72f5e32d" />
+        <e k="usedplus_cr_tipMixAccounts" v="混合帳戶類型（貸款、租賃、土地）可以改善您的信用評分。" eh="27d730d4" />
+        <e k="usedplus_cr_tipNoHistory" v="還沒有信用歷史。申請小額貸款以開始建立您的信用評分。" eh="21023caf" />
+        <e k="usedplus_cr_tipOnTime6Months" v="在 6 個月內按時支付所有款項，以看到顯著改善。" eh="a50441bf" />
+        <e k="usedplus_cr_tipOpenDeal" v="開設融資交易以開始建立您的信用歷史。" eh="27390112" />
+        <e k="usedplus_cr_tipRefinance" v="考慮為舊貸款再融資以利用您的低利率。" eh="d3a3a2e5" />
+        <e k="usedplus_cr_tipStartSmall" v="從小額貸款開始，按時償還以建立信用。" eh="ac79b368" />
+        <e k="usedplus_cr_tipStreak" v="建立更長的按時付款記錄以提高信用評分。" eh="196cacdf" />
+        <e k="usedplus_cr_tipTimeBuilds" v="信用需要時間建立。繼續穩定地付款。" eh="6508e92a" />
+        <e k="usedplus_cr_trendDeclining" v="下降" eh="12175033" />
+        <e k="usedplus_cr_trendExcellent" v="優秀" eh="fcc2d28a" />
+        <e k="usedplus_cr_trendGood" v="改善中" eh="4ba4dfd7" />
+        <e k="usedplus_cr_trendPoor" v="不佳" eh="0e94d017" />
+        <e k="usedplus_cr_trendStable" v="穩定" eh="fa3aff3c" />
+        <e k="usedplus_cr_utilExcellent" v="優秀（使用 %.0f%%）" eh="7dfc86c1" />
+        <e k="usedplus_cr_utilFair" v="一般（使用 %.0f%%）" eh="a617a851" />
+        <e k="usedplus_cr_utilGood" v="良好（使用 %.0f%%）" eh="c0b657d4" />
+        <e k="usedplus_cr_utilHigh" v="高（使用 %.0f%%）" eh="86e0b0c5" />
+        <e k="usedplus_dd_bankLoanExtra" v="付款設定為 %s（+%d%% 額外）" eh="63c230fc" />
+        <e k="usedplus_dd_bankLoanStandard" v="付款設定為標準金額" eh="e169e647" />
+        <e k="usedplus_dd_buyoutLandMessage" v="購買此土地需要 %s？&#10;&#10;土地價值：%s&#10;與購買新地相比節省：%s&#10;&#10;總成本：%s" eh="2764369e" />
+        <e k="usedplus_dd_buyoutLeaseTitle" v="租賃買斷" eh="b14741b3" />
+        <e k="usedplus_dd_buyoutVehicleMessage" v="買斷此租賃需要 %s？&#10;&#10;殘值：%s&#10;權益已應用：-%s&#10;安全押金退款：-%s&#10;&#10;淨成本：%s" eh="05504f8c" />
+        <e k="usedplus_dd_earlyPayoffTitle" v="提前償還" eh="4ccf6612" />
+        <e k="usedplus_dd_paymentSet" v="付款設定為 %s（%.0f%%）" eh="28307eef" />
+        <e k="usedplus_dd_payoffConfirm" v="立即償還剩餘餘額 %s？" eh="491a3bbc" />
+        <e k="usedplus_dd_statusActive" v="活躍" eh="4d3d769b" />
+        <e k="usedplus_dd_termMonths" v="%d 個月" eh="eb5314ed" />
+        <e k="usedplus_dd_termYears" v="%d 個月（%d 年%s）" eh="7b504ff3" />
+        <e k="usedplus_dd_titleFinance" v="融資詳情" eh="162264ba" />
+        <e k="usedplus_dd_titleLandLease" v="土地租賃詳情" eh="b6577396" />
+        <e k="usedplus_dd_titleLease" v="租賃詳情" eh="53e751e8" />
+        <e k="usedplus_dd_typeLandFinance" v="土地融資" eh="b6dcb2f3" />
+        <e k="usedplus_dd_typeLandLease" v="土地租賃" eh="9c6119ac" />
+        <e k="usedplus_dd_typeLease" v="租賃" eh="47c96b08" />
+        <e k="usedplus_dd_typeRepaint" v="重新粉刷" eh="1d0b7dd4" />
+        <e k="usedplus_dd_typeRepair" v="維修" eh="0493d27e" />
+        <e k="usedplus_dd_typeRepairRepaint" v="維修和重新粉刷" eh="e53c01f2" />
+        <e k="usedplus_dd_typeVehicleFinance" v="車輛融資" eh="6bd5146b" />
+        <e k="usedplus_error_cannotFinance" v="無法融資：信用評分 %d 低於最低 %d" eh="3db1fb5e" />
+        <e k="usedplus_error_cannotLease" v="無法租賃：信用評分 %d 低於最低 %d" eh="03c9bd36" />
+        <e k="usedplus_error_insufficientFundsBuy" v="資金不足！購買需要 %s。" eh="b1aef085" />
+        <e k="usedplus_error_placeablesNotLeasable" v="建築物和可放置物體無法租賃。" eh="fdb637b5" />
+        <e k="usedplus_ft_truckUnavailable" v="服務卡車不再可用。" eh="3fd5b50a" />
+        <e k="usedplus_ft_vehicleUnavailable" v="車輛不再可用。" eh="82cb8143" />
+        <e k="usedplus_inspection_cached" v="使用緩存檢查結果（無費用）。" eh="32ebad96" />
+        <e k="usedplus_inspection_insufficientFunds" v="檢查資金不足。所需：%s" eh="a1f203a9" />
+        <e k="usedplus_maintenance_noDataAvailable" v="此車輛沒有可用的維護數據。" eh="f5963282" />
+        <e k="usedplus_negotiation_cannotAfford" v="您無法負擔此報價。" eh="4e8dfdf2" />
+        <e k="usedplus_purchase_complete" v="購買完成" eh="7328ece0" />
+        <e k="usedplus_purchase_detail" v="%s 購買價格 %s" eh="a9d8903a" />
+        <e k="usedplus_rp_flatTireLabel" v="輪胎爆裂維修（%s）" eh="8ba1e25d" />
+        <e k="usedplus_rp_fuelLeakLabel" v="燃油洩漏維修（%s）" eh="de978bcc" />
+        <e k="usedplus_rp_includesLabel" v="包含：" eh="59bef2f2" />
+        <e k="usedplus_runaway_defaultEnded" v="逃逸已停止。" eh="ed4659ca" />
+        <e k="usedplus_rvb_sectionHeader" v="車輛診斷" eh="ae666ba0" />
+        <e k="usedplus_vpf_offerValidMonths" v="報價有效期為 %d 個月" eh="5fe704c6" />
 </elements>
 </l10n>

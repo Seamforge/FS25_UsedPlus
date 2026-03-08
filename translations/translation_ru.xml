@@ -2663,5 +2663,105 @@
         <e k="usedplus_common_unknownLand" v="Неизвестная земля" eh="1b201d84" />
         <e k="usedplus_common_unknownFarm" v="Неизвестная ферма" eh="92a9cc35" />
         <e k="usedplus_common_unknownError" v="Неизвестная ошибка" eh="aee9784c" />
+        <e k="usedplus_common_vehicle" v="Транспортное средство" eh="d6af9c1e" />
+        <e k="usedplus_electrical_reliability" v="Надежность электрики" eh="ef16f00d" />
+        <e k="usedplus_engine_reliability" v="Надежность двигателя" eh="d86b8cc4" />
+        <e k="usedplus_mr_breakdowns" v="Поломки" eh="ff1cc005" />
+        <e k="usedplus_mr_repairs" v="Ремонты" eh="810a4b9e" />
+        <e k="usedplus_repair_title_workshop" v="Ремонт в мастерской" eh="61a80a46" />
+        <e k="usedplus_rp_confirm_title" v="Подтвердить платеж" eh="413e8eec" />
+        <e k="usedplus_rp_label_components" v="Компоненты:" eh="3b7009ae" />
+        <e k="usedplus_rp_label_repaint" v="Перекраска:" eh="e63bb6f4" />
+        <e k="usedplus_rp_label_repair" v="Ремонт:" eh="5dcb42f0" />
+        <e k="usedplus_rp_notification_workshop" v="полный ремонт в мастерской" eh="a338c59a" />
+        <e k="usedplus_rp_service_mechanical" v="Механический ремонт" eh="60a0d54f" />
+        <e k="usedplus_rp_service_repaint" v="Перекраска" eh="1d0b7dd4" />
+        <e k="usedplus_rp_service_workshop" v="Ремонт в мастерской" eh="61a80a46" />
+        <e k="usedplus_rvb_parts_status" v="Компоненты: %d / %d требуют ремонта" eh="4ad0ab6d" />
+        <e k="usedplus_title_maintenanceReport" v="=== Отчет о техническом обслуживании ===" eh="984a7db3" />
+        <e k="usedplus_cr_ageBuilding" v="Строительство (%d платежей)" eh="23775faa" />
+        <e k="usedplus_cr_ageEstablished" v="Установлено (%d платежей)" eh="776f4287" />
+        <e k="usedplus_cr_ageGrowing" v="Растет (%d платежей)" eh="7ac52629" />
+        <e k="usedplus_cr_ageNew" v="Новый" eh="03c2e7e4" />
+        <e k="usedplus_cr_ageNewCount" v="Новый (%d платежей)" eh="3b231c55" />
+        <e k="usedplus_cr_discountRates" v="Льготные ставки: -%.1f%%" eh="41dcfad7" />
+        <e k="usedplus_cr_factorExcellent" v="Отлично (%d%% вовремя)" eh="a393cc84" />
+        <e k="usedplus_cr_factorFair" v="Удовлетворительно (%d%% вовремя)" eh="d7cb93a6" />
+        <e k="usedplus_cr_factorGood" v="Хорошо (%d%% вовремя)" eh="ed07d038" />
+        <e k="usedplus_cr_factorPoor" v="Плохо (%d%% вовремя)" eh="d3b1e976" />
+        <e k="usedplus_cr_histogramFormat" v="%s  %.0f%% вовремя" eh="25531fe2" />
+        <e k="usedplus_cr_legendLate" v="Опоздание: %d" eh="710bdbb1" />
+        <e k="usedplus_cr_legendMissed" v="Пропущено: %d" eh="655c731c" />
+        <e k="usedplus_cr_legendOnTime" v="Вовремя: %d" eh="0a4420a4" />
+        <e k="usedplus_cr_penaltyRates" v="Штрафные ставки: +%.1f%%" eh="b83c6923" />
+        <e k="usedplus_cr_standardRates" v="Стандартные ставки" eh="4c7f68aa" />
+        <e k="usedplus_cr_tipConsistency" v="Сосредоточьтесь на последовательных своевременных платежах, чтобы восстановить свой рейтинг." eh="fe0b4e10" />
+        <e k="usedplus_cr_tipDebt30" v="Постарайтесь снизить коэффициент долга к активам ниже 30%% для лучших ставок." eh="521de800" />
+        <e k="usedplus_cr_tipDebtRatio" v="Ваш коэффициент долга к активам высок. Погасите существующие кредиты, чтобы улучшить свой рейтинг." eh="726e898c" />
+        <e k="usedplus_cr_tipExcellent" v="Отличный кредит! Вы соответствуете критериям для лучших ставок и условий." eh="c4bd3149" />
+        <e k="usedplus_cr_tipGeneral1" v="Своевременная оплата является самым важным фактором вашего кредитного рейтинга." eh="1ebb471c" />
+        <e k="usedplus_cr_tipGeneral2" v="Держите коэффициент долга к активам ниже 50%% для лучших ставок." eh="279b2666" />
+        <e k="usedplus_cr_tipGeneral3" v="Более длительная история кредитов помогает — время и последовательность — это ключ." eh="f43fdbc2" />
+        <e k="usedplus_cr_tipGeneral4" v="Комбинация автомобильных кредитов, финансирования земли и аренды демонстрирует ответственное заимствование." eh="d340b335" />
+        <e k="usedplus_cr_tipGeneral5" v="Пропуск платежа оказывает большее влияние, чем дополнительные платежи." eh="1b319c2c" />
+        <e k="usedplus_cr_tipGoodProgress" v="Хороший прогресс! Продолжайте делать своевременные платежи, чтобы достичь Отлично." eh="0414afc6" />
+        <e k="usedplus_cr_tipHighDebt" v="Обнаружена высокая задолженность. Сосредоточьтесь на погашении существующих кредитов." eh="4c5c6512" />
+        <e k="usedplus_cr_tipMissedPayments" v="Пропущенные платежи снижают ваш рейтинг. Приоритет — наверстать упущенное." eh="72f5e32d" />
+        <e k="usedplus_cr_tipMixAccounts" v="Комбинация типов счетов (кредиты, аренда, земля) может улучшить ваш рейтинг." eh="27d730d4" />
+        <e k="usedplus_cr_tipNoHistory" v="Кредитной истории еще нет. Возьмите небольшой кредит, чтобы начать строить свой рейтинг." eh="21023caf" />
+        <e k="usedplus_cr_tipOnTime6Months" v="Делайте все платежи вовремя в течение 6 месяцев, чтобы увидеть значительное улучшение." eh="a50441bf" />
+        <e k="usedplus_cr_tipOpenDeal" v="Откройте финансовую сделку, чтобы начать строить свою кредитную историю." eh="27390112" />
+        <e k="usedplus_cr_tipRefinance" v="Рассмотрите возможность рефинансирования старых кредитов, чтобы воспользоваться вашими низкими ставками." eh="d3a3a2e5" />
+        <e k="usedplus_cr_tipStartSmall" v="Начните с небольшого кредита и погасите его вовремя, чтобы построить кредит." eh="ac79b368" />
+        <e k="usedplus_cr_tipStreak" v="Создайте более длительную серию своевременных платежей, чтобы повысить свой рейтинг." eh="196cacdf" />
+        <e k="usedplus_cr_tipTimeBuilds" v="Кредит требует времени для построения. Продолжайте делать платежи последовательно." eh="6508e92a" />
+        <e k="usedplus_cr_trendDeclining" v="Снижение" eh="12175033" />
+        <e k="usedplus_cr_trendExcellent" v="Отлично" eh="fcc2d28a" />
+        <e k="usedplus_cr_trendGood" v="Улучшение" eh="4ba4dfd7" />
+        <e k="usedplus_cr_trendPoor" v="Плохо" eh="0e94d017" />
+        <e k="usedplus_cr_trendStable" v="Стабильно" eh="fa3aff3c" />
+        <e k="usedplus_cr_utilExcellent" v="Отлично (%.0f%% используется)" eh="7dfc86c1" />
+        <e k="usedplus_cr_utilFair" v="Удовлетворительно (%.0f%% используется)" eh="a617a851" />
+        <e k="usedplus_cr_utilGood" v="Хорошо (%.0f%% используется)" eh="c0b657d4" />
+        <e k="usedplus_cr_utilHigh" v="Высоко (%.0f%% используется)" eh="86e0b0c5" />
+        <e k="usedplus_dd_bankLoanExtra" v="Платеж установлен на %s (+%d%% дополнительно)" eh="63c230fc" />
+        <e k="usedplus_dd_bankLoanStandard" v="Платеж установлен на стандартную сумму" eh="e169e647" />
+        <e k="usedplus_dd_buyoutLandMessage" v="Купить эту землю за %s?&#10;&#10;Стоимость земли: %s&#10;Экономия от покупки новой: %s&#10;&#10;Общая стоимость: %s" eh="2764369e" />
+        <e k="usedplus_dd_buyoutLeaseTitle" v="Выкуп аренды" eh="b14741b3" />
+        <e k="usedplus_dd_buyoutVehicleMessage" v="Выкупить эту аренду за %s?&#10;&#10;Остаточная стоимость: %s&#10;Применяемое капиталовложение: -%s&#10;Возврат гарантийного залога: -%s&#10;&#10;Чистая стоимость: %s" eh="05504f8c" />
+        <e k="usedplus_dd_earlyPayoffTitle" v="Досрочное погашение" eh="4ccf6612" />
+        <e k="usedplus_dd_paymentSet" v="Платеж установлен на %s (%.0f%%)" eh="28307eef" />
+        <e k="usedplus_dd_payoffConfirm" v="Погасить оставшийся баланс %s сейчас?" eh="491a3bbc" />
+        <e k="usedplus_dd_statusActive" v="Активно" eh="4d3d769b" />
+        <e k="usedplus_dd_termMonths" v="%d месяцев" eh="eb5314ed" />
+        <e k="usedplus_dd_termYears" v="%d месяцев (%d год%s)" eh="7b504ff3" />
+        <e k="usedplus_dd_titleFinance" v="Детали финансирования" eh="162264ba" />
+        <e k="usedplus_dd_titleLandLease" v="Детали аренды земли" eh="b6577396" />
+        <e k="usedplus_dd_titleLease" v="Детали аренды" eh="53e751e8" />
+        <e k="usedplus_dd_typeLandFinance" v="Финансирование земли" eh="b6dcb2f3" />
+        <e k="usedplus_dd_typeLandLease" v="Аренда земли" eh="9c6119ac" />
+        <e k="usedplus_dd_typeLease" v="Аренда" eh="47c96b08" />
+        <e k="usedplus_dd_typeRepaint" v="Перекраска" eh="1d0b7dd4" />
+        <e k="usedplus_dd_typeRepair" v="Ремонт" eh="0493d27e" />
+        <e k="usedplus_dd_typeRepairRepaint" v="Ремонт &amp; перекраска" eh="e53c01f2" />
+        <e k="usedplus_dd_typeVehicleFinance" v="Финансирование транспортного средства" eh="6bd5146b" />
+        <e k="usedplus_error_cannotFinance" v="Невозможно финансировать: кредитный рейтинг %d ниже минимума %d" eh="3db1fb5e" />
+        <e k="usedplus_error_cannotLease" v="Невозможно арендовать: кредитный рейтинг %d ниже минимума %d" eh="03c9bd36" />
+        <e k="usedplus_error_insufficientFundsBuy" v="Недостаточно средств! Требуется %s для покупки." eh="b1aef085" />
+        <e k="usedplus_error_placeablesNotLeasable" v="Здания и сооружения нельзя арендовать." eh="fdb637b5" />
+        <e k="usedplus_ft_truckUnavailable" v="Служебный грузовик больше недоступен." eh="3fd5b50a" />
+        <e k="usedplus_ft_vehicleUnavailable" v="Транспортное средство больше недоступно." eh="82cb8143" />
+        <e k="usedplus_inspection_cached" v="Используются кэшированные результаты проверки (без платежей)." eh="32ebad96" />
+        <e k="usedplus_inspection_insufficientFunds" v="Недостаточно средств для проверки. Требуется: %s" eh="a1f203a9" />
+        <e k="usedplus_maintenance_noDataAvailable" v="Нет данных об обслуживании для этого транспортного средства." eh="f5963282" />
+        <e k="usedplus_negotiation_cannotAfford" v="Вы не можете себе позволить это предложение." eh="4e8dfdf2" />
+        <e k="usedplus_purchase_complete" v="Покупка завершена" eh="7328ece0" />
+        <e k="usedplus_purchase_detail" v="%s куплено за %s" eh="a9d8903a" />
+        <e k="usedplus_rp_flatTireLabel" v="Ремонт спущенной шины (%s)" eh="8ba1e25d" />
+        <e k="usedplus_rp_fuelLeakLabel" v="Ремонт утечки топлива (%s)" eh="de978bcc" />
+        <e k="usedplus_rp_includesLabel" v="Включает: " eh="59bef2f2" />
+        <e k="usedplus_runaway_defaultEnded" v="Убежище остановлено." eh="ed4659ca" />
+        <e k="usedplus_rvb_sectionHeader" v="Диагностика транспортного средства" eh="ae666ba0" />
+        <e k="usedplus_vpf_offerValidMonths" v="Предложение действительно %d месяцев" eh="5fe704c6" />
 </elements>
 </l10n>

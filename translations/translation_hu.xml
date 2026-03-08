@@ -2650,5 +2650,105 @@
         <e k="usedplus_common_unknownLand" v="Ismeretlen föld" eh="1b201d84" />
         <e k="usedplus_common_unknownFarm" v="Ismeretlen farm" eh="92a9cc35" />
         <e k="usedplus_common_unknownError" v="Ismeretlen hiba" eh="aee9784c" />
+        <e k="usedplus_common_vehicle" v="Jármű" eh="d6af9c1e" />
+        <e k="usedplus_electrical_reliability" v="Elektromos megbízhatóság" eh="ef16f00d" />
+        <e k="usedplus_engine_reliability" v="Motor megbízhatósága" eh="d86b8cc4" />
+        <e k="usedplus_mr_breakdowns" v="Meghibásodások" eh="ff1cc005" />
+        <e k="usedplus_mr_repairs" v="Javítások" eh="810a4b9e" />
+        <e k="usedplus_repair_title_workshop" v="Műhely szervizelés" eh="61a80a46" />
+        <e k="usedplus_rp_confirm_title" v="Fizetés megerősítése" eh="413e8eec" />
+        <e k="usedplus_rp_label_components" v="Alkatrészek:" eh="3b7009ae" />
+        <e k="usedplus_rp_label_repaint" v="Átfestés:" eh="e63bb6f4" />
+        <e k="usedplus_rp_label_repair" v="Javítás:" eh="5dcb42f0" />
+        <e k="usedplus_rp_notification_workshop" v="teljes műhely szervizelés" eh="a338c59a" />
+        <e k="usedplus_rp_service_mechanical" v="Mechanikai javítás" eh="60a0d54f" />
+        <e k="usedplus_rp_service_repaint" v="Átfestés" eh="1d0b7dd4" />
+        <e k="usedplus_rp_service_workshop" v="Műhely szervizelés" eh="61a80a46" />
+        <e k="usedplus_rvb_parts_status" v="Alkatrészek: %d / %d szükséges javítás" eh="4ad0ab6d" />
+        <e k="usedplus_title_maintenanceReport" v="=== Karbantartási jelentés ===" eh="984a7db3" />
+        <e k="usedplus_cr_ageBuilding" v="Felépítés (%d fizetés)" eh="23775faa" />
+        <e k="usedplus_cr_ageEstablished" v="Megalapozva (%d fizetés)" eh="776f4287" />
+        <e k="usedplus_cr_ageGrowing" v="Növekedés (%d fizetés)" eh="7ac52629" />
+        <e k="usedplus_cr_ageNew" v="Új" eh="03c2e7e4" />
+        <e k="usedplus_cr_ageNewCount" v="Új (%d fizetés)" eh="3b231c55" />
+        <e k="usedplus_cr_discountRates" v="Kedvezményes kamat: -%.1f%%" eh="41dcfad7" />
+        <e k="usedplus_cr_factorExcellent" v="Kiváló (%d%% időben)" eh="a393cc84" />
+        <e k="usedplus_cr_factorFair" v="Megfelelő (%d%% időben)" eh="d7cb93a6" />
+        <e k="usedplus_cr_factorGood" v="Jó (%d%% időben)" eh="ed07d038" />
+        <e k="usedplus_cr_factorPoor" v="Gyenge (%d%% időben)" eh="d3b1e976" />
+        <e k="usedplus_cr_histogramFormat" v="%s  %.0f%% időben" eh="25531fe2" />
+        <e k="usedplus_cr_legendLate" v="Késedelem: %d" eh="710bdbb1" />
+        <e k="usedplus_cr_legendMissed" v="Elmaradt: %d" eh="655c731c" />
+        <e k="usedplus_cr_legendOnTime" v="Időben: %d" eh="0a4420a4" />
+        <e k="usedplus_cr_penaltyRates" v="Büntetés kamat: +%.1f%%" eh="b83c6923" />
+        <e k="usedplus_cr_standardRates" v="Szabványos kamat" eh="4c7f68aa" />
+        <e k="usedplus_cr_tipConsistency" v="Összpontosítson az időben történő fizetésekre, hogy helyrehozza a hitele minőségét." eh="fe0b4e10" />
+        <e k="usedplus_cr_tipDebt30" v="Próbálja meg az adósság/vagyon arányt 30%% alá csökkenteni a legjobb kamatokhoz." eh="521de800" />
+        <e k="usedplus_cr_tipDebtRatio" v="Az adósság/vagyon arány magas. Fizesse le a meglévő kölcsönöket a hitele javításához." eh="726e898c" />
+        <e k="usedplus_cr_tipExcellent" v="Kiváló hitel! Jogosult vagy a legjobb kamatokra és feltételekre." eh="c4bd3149" />
+        <e k="usedplus_cr_tipGeneral1" v="Az időben történő fizetés az egyetlen legfontosabb tényező a hitel minőségében." eh="1ebb471c" />
+        <e k="usedplus_cr_tipGeneral2" v="Tartsd az adósság/vagyon arányt 50%% alatt a jobb kamatokhoz." eh="279b2666" />
+        <e k="usedplus_cr_tipGeneral3" v="Hosszabb hiteltörténet segít — az idő és a következetesség kulcsfontosságú." eh="f43fdbc2" />
+        <e k="usedplus_cr_tipGeneral4" v="A járművek, a föld és a lízingek keveréke felelős kölcsönfelvételt mutat." eh="d340b335" />
+        <e k="usedplus_cr_tipGeneral5" v="A fizetés elmulasztása nagyobb hatást gyakorol, mint a további fizetések." eh="1b319c2c" />
+        <e k="usedplus_cr_tipGoodProgress" v="Jó haladás! Folytassa az időben történő fizetéseket a Kiváló szint eléréséhez." eh="0414afc6" />
+        <e k="usedplus_cr_tipHighDebt" v="Magas adósságterhelés észlelve. Összpontosítson a meglévő kölcsönök lezárására." eh="4c5c6512" />
+        <e k="usedplus_cr_tipMissedPayments" v="Az elmaradott fizetések csökkentik a hitele minőségét. Prioritás az elmaradások bepótlása." eh="72f5e32d" />
+        <e k="usedplus_cr_tipMixAccounts" v="A számlatípusok (kölcsönök, lízing, föld) keveréke javíthatja a hitele minőségét." eh="27d730d4" />
+        <e k="usedplus_cr_tipNoHistory" v="Még nincs hiteltörténet. Vegyél fel egy kis kölcsönt a hitele kezdeményezéséhez." eh="21023caf" />
+        <e k="usedplus_cr_tipOnTime6Months" v="Végezz el minden fizetést időben 6 hónapon keresztül a jelentős javulás érdekében." eh="a50441bf" />
+        <e k="usedplus_cr_tipOpenDeal" v="Nyiss meg egy finanszírozási megállapodást a hiteltörténet kezdeményezéséhez." eh="27390112" />
+        <e k="usedplus_cr_tipRefinance" v="Fontolja meg régebbi kölcsönök refinanszírozását az alacsony kamatokból való előny kihasználásához." eh="d3a3a2e5" />
+        <e k="usedplus_cr_tipStartSmall" v="Kezdj egy kis kölcsönnel és fizess időben a hitel építéséhez." eh="ac79b368" />
+        <e k="usedplus_cr_tipStreak" v="Építs hosszabb időben való fizetés sorozatot a hitele javításához." eh="196cacdf" />
+        <e k="usedplus_cr_tipTimeBuilds" v="A hitel építéséhez szükség van időre. Folytassa az időben történő fizetéseket." eh="6508e92a" />
+        <e k="usedplus_cr_trendDeclining" v="Csökkenő" eh="12175033" />
+        <e k="usedplus_cr_trendExcellent" v="Kiváló" eh="fcc2d28a" />
+        <e k="usedplus_cr_trendGood" v="Javulás" eh="4ba4dfd7" />
+        <e k="usedplus_cr_trendPoor" v="Gyenge" eh="0e94d017" />
+        <e k="usedplus_cr_trendStable" v="Stabil" eh="fa3aff3c" />
+        <e k="usedplus_cr_utilExcellent" v="Kiváló (%.0f%% használva)" eh="7dfc86c1" />
+        <e k="usedplus_cr_utilFair" v="Megfelelő (%.0f%% használva)" eh="a617a851" />
+        <e k="usedplus_cr_utilGood" v="Jó (%.0f%% használva)" eh="c0b657d4" />
+        <e k="usedplus_cr_utilHigh" v="Magas (%.0f%% használva)" eh="86e0b0c5" />
+        <e k="usedplus_dd_bankLoanExtra" v="Fizetés beállítva: %s (+%d%% extra)" eh="63c230fc" />
+        <e k="usedplus_dd_bankLoanStandard" v="Fizetés beállítva alapértékre" eh="e169e647" />
+        <e k="usedplus_dd_buyoutLandMessage" v="Megvenni ezt a földet %s-ért?&#10;&#10;Föld értéke: %s&#10;Megtakarítás az új vásárlás helyett: %s&#10;&#10;Teljes költség: %s" eh="2764369e" />
+        <e k="usedplus_dd_buyoutLeaseTitle" v="Lízing visszavásárlása" eh="b14741b3" />
+        <e k="usedplus_dd_buyoutVehicleMessage" v="Vissza ezést ezt a lízinget %s-ért?&#10;&#10;Maradványérték: %s&#10;Alkalmazott tőke: -%s&#10;Biztosítéki betét visszatérítése: -%s&#10;&#10;Nettó költség: %s" eh="05504f8c" />
+        <e k="usedplus_dd_earlyPayoffTitle" v="Korai törlesztés" eh="4ccf6612" />
+        <e k="usedplus_dd_paymentSet" v="Fizetés beállítva: %s (%.0f%%)" eh="28307eef" />
+        <e k="usedplus_dd_payoffConfirm" v="Fizesse le a fennmaradó %s egyenleget most?" eh="491a3bbc" />
+        <e k="usedplus_dd_statusActive" v="Aktív" eh="4d3d769b" />
+        <e k="usedplus_dd_termMonths" v="%d hónap" eh="eb5314ed" />
+        <e k="usedplus_dd_termYears" v="%d hónap (%d év%s)" eh="7b504ff3" />
+        <e k="usedplus_dd_titleFinance" v="Finanszírozás részletei" eh="162264ba" />
+        <e k="usedplus_dd_titleLandLease" v="Föld lízing részletei" eh="b6577396" />
+        <e k="usedplus_dd_titleLease" v="Lízing részletei" eh="53e751e8" />
+        <e k="usedplus_dd_typeLandFinance" v="Föld finanszírozás" eh="b6dcb2f3" />
+        <e k="usedplus_dd_typeLandLease" v="Föld lízing" eh="9c6119ac" />
+        <e k="usedplus_dd_typeLease" v="Lízing" eh="47c96b08" />
+        <e k="usedplus_dd_typeRepaint" v="Átfestés" eh="1d0b7dd4" />
+        <e k="usedplus_dd_typeRepair" v="Javítás" eh="0493d27e" />
+        <e k="usedplus_dd_typeRepairRepaint" v="Javítás &amp; Átfestés" eh="e53c01f2" />
+        <e k="usedplus_dd_typeVehicleFinance" v="Jármű finanszírozás" eh="6bd5146b" />
+        <e k="usedplus_error_cannotFinance" v="Nem lehet finanszírozni: hitelpontszám %d az alatt van a minimum %d" eh="3db1fb5e" />
+        <e k="usedplus_error_cannotLease" v="Nem lehet lízingelni: hitelpontszám %d az alatt van a minimum %d" eh="03c9bd36" />
+        <e k="usedplus_error_insufficientFundsBuy" v="Elégtelen eszközök! Szükséges %s a vásárláshoz." eh="b1aef085" />
+        <e k="usedplus_error_placeablesNotLeasable" v="Az épületek és objektumok nem lízingelhetőek." eh="fdb637b5" />
+        <e k="usedplus_ft_truckUnavailable" v="A szervizkocsi már nem elérhető." eh="3fd5b50a" />
+        <e k="usedplus_ft_vehicleUnavailable" v="A jármű már nem elérhető." eh="82cb8143" />
+        <e k="usedplus_inspection_cached" v="Gyorsítótárazott ellenőrzési eredmények használata (díjmentes)." eh="32ebad96" />
+        <e k="usedplus_inspection_insufficientFunds" v="Elégtelen eszközök az ellenőrzéshez. Szükséges: %s" eh="a1f203a9" />
+        <e k="usedplus_maintenance_noDataAvailable" v="Ehhez a járműhöz nincs karbantartási adat." eh="f5963282" />
+        <e k="usedplus_negotiation_cannotAfford" v="Nem tudod megfizetni ezt az ajánlatot." eh="4e8dfdf2" />
+        <e k="usedplus_purchase_complete" v="Vásárlás kész" eh="7328ece0" />
+        <e k="usedplus_purchase_detail" v="%s megvásárolva %s-ért" eh="a9d8903a" />
+        <e k="usedplus_rp_flatTireLabel" v="Defekt gumijavítás (%s)" eh="8ba1e25d" />
+        <e k="usedplus_rp_fuelLeakLabel" v="Üzemanyag szivárgás javítás (%s)" eh="de978bcc" />
+        <e k="usedplus_rp_includesLabel" v="Tartalmazza: " eh="59bef2f2" />
+        <e k="usedplus_runaway_defaultEnded" v="Menekülés leállítva." eh="ed4659ca" />
+        <e k="usedplus_rvb_sectionHeader" v="Jármű diagnosztika" eh="ae666ba0" />
+        <e k="usedplus_vpf_offerValidMonths" v="Ajánlat %d hónapig érvényes" eh="5fe704c6" />
 </elements>
 </l10n>

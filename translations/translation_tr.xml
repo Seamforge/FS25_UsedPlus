@@ -2650,5 +2650,105 @@
         <e k="usedplus_common_unknownLand" v="Bilinmeyen Arazi" eh="1b201d84" />
         <e k="usedplus_common_unknownFarm" v="Bilinmeyen Çiftlik" eh="92a9cc35" />
         <e k="usedplus_common_unknownError" v="Bilinmeyen hata" eh="aee9784c" />
+        <e k="usedplus_common_vehicle" v="Araç" eh="d6af9c1e" />
+        <e k="usedplus_electrical_reliability" v="Elektrik Güvenilirliği" eh="ef16f00d" />
+        <e k="usedplus_engine_reliability" v="Motor Güvenilirliği" eh="d86b8cc4" />
+        <e k="usedplus_mr_breakdowns" v="Arızalar" eh="ff1cc005" />
+        <e k="usedplus_mr_repairs" v="Onarımlar" eh="810a4b9e" />
+        <e k="usedplus_repair_title_workshop" v="Atölye Onarımı" eh="61a80a46" />
+        <e k="usedplus_rp_confirm_title" v="Ödemeyi Onayla" eh="413e8eec" />
+        <e k="usedplus_rp_label_components" v="Bileşenler:" eh="3b7009ae" />
+        <e k="usedplus_rp_label_repaint" v="Yeniden Boyama:" eh="e63bb6f4" />
+        <e k="usedplus_rp_label_repair" v="Onarım:" eh="5dcb42f0" />
+        <e k="usedplus_rp_notification_workshop" v="tam atölye onarımı" eh="a338c59a" />
+        <e k="usedplus_rp_service_mechanical" v="Mekanik Onarım" eh="60a0d54f" />
+        <e k="usedplus_rp_service_repaint" v="Yeniden Boyama" eh="1d0b7dd4" />
+        <e k="usedplus_rp_service_workshop" v="Atölye Onarımı" eh="61a80a46" />
+        <e k="usedplus_rvb_parts_status" v="Bileşenler: %d / %d onarım gerekiyor" eh="4ad0ab6d" />
+        <e k="usedplus_title_maintenanceReport" v="=== Bakım Raporu ===" eh="984a7db3" />
+        <e k="usedplus_cr_ageBuilding" v="Kuruluş (%d ödeme)" eh="23775faa" />
+        <e k="usedplus_cr_ageEstablished" v="Kurulu (%d ödeme)" eh="776f4287" />
+        <e k="usedplus_cr_ageGrowing" v="Büyüyen (%d ödeme)" eh="7ac52629" />
+        <e k="usedplus_cr_ageNew" v="Yeni" eh="03c2e7e4" />
+        <e k="usedplus_cr_ageNewCount" v="Yeni (%d ödeme)" eh="3b231c55" />
+        <e k="usedplus_cr_discountRates" v="İndirim oranları: -%.1f%%" eh="41dcfad7" />
+        <e k="usedplus_cr_factorExcellent" v="Mükemmel (%d%% zamanında)" eh="a393cc84" />
+        <e k="usedplus_cr_factorFair" v="Adil (%d%% zamanında)" eh="d7cb93a6" />
+        <e k="usedplus_cr_factorGood" v="İyi (%d%% zamanında)" eh="ed07d038" />
+        <e k="usedplus_cr_factorPoor" v="Zayıf (%d%% zamanında)" eh="d3b1e976" />
+        <e k="usedplus_cr_histogramFormat" v="%s  %.0f%% zamanında" eh="25531fe2" />
+        <e k="usedplus_cr_legendLate" v="Geç: %d" eh="710bdbb1" />
+        <e k="usedplus_cr_legendMissed" v="Kaçırılan: %d" eh="655c731c" />
+        <e k="usedplus_cr_legendOnTime" v="Zamanında: %d" eh="0a4420a4" />
+        <e k="usedplus_cr_penaltyRates" v="Ceza oranları: +%.1f%%" eh="b83c6923" />
+        <e k="usedplus_cr_standardRates" v="Standart oranlar" eh="4c7f68aa" />
+        <e k="usedplus_cr_tipConsistency" v="Puanınızı yeniden oluşturmak için tutarlı zamanında ödemelere odaklanın." eh="fe0b4e10" />
+        <e k="usedplus_cr_tipDebt30" v="Borç-varlık oranını %30'un altına düşürmeye çalışın en iyi oranlar için." eh="521de800" />
+        <e k="usedplus_cr_tipDebtRatio" v="Borç-varlık oranınız yüksek. Puanınızı iyileştirmek için mevcut kredileri ödeyin." eh="726e898c" />
+        <e k="usedplus_cr_tipExcellent" v="Mükemmel kredi! En iyi oranlar ve şartlar için uygunsunuz." eh="c4bd3149" />
+        <e k="usedplus_cr_tipGeneral1" v="Zamanında ödeme kredi puanınızda en önemli faktördür." eh="1ebb471c" />
+        <e k="usedplus_cr_tipGeneral2" v="Borç-varlık oranını %50'nin altında tutun daha iyi oranlar için." eh="279b2666" />
+        <e k="usedplus_cr_tipGeneral3" v="Daha uzun kredi geçmişi yardımcı olur — zaman ve tutarlılık önemlidir." eh="f43fdbc2" />
+        <e k="usedplus_cr_tipGeneral4" v="Araç kredileri, arazi finansmanı ve kiralamalarının karışımı sorumlu borçlanmayı gösterir." eh="d340b335" />
+        <e k="usedplus_cr_tipGeneral5" v="Ödemeyi kaçırmak ek ödeme yapmaktan daha büyük bir etkiye sahiptir." eh="1b319c2c" />
+        <e k="usedplus_cr_tipGoodProgress" v="İyi ilerleme! Mükemmele ulaşmak için zamanında ödemeleri sürdürün." eh="0414afc6" />
+        <e k="usedplus_cr_tipHighDebt" v="Yüksek borç yükü tespit edildi. Mevcut kredileri ödemek üzerine odaklanın." eh="4c5c6512" />
+        <e k="usedplus_cr_tipMissedPayments" v="Kaçırılan ödemeler puanınızı düşürüyor. Yakalamayı önceliklendir." eh="72f5e32d" />
+        <e k="usedplus_cr_tipMixAccounts" v="Hesap türlerinin karışımı (krediler, kiralama, arazi) puanınızı iyileştirebilir." eh="27d730d4" />
+        <e k="usedplus_cr_tipNoHistory" v="Henüz kredi geçmişi yok. Puanınızı oluşturmaya başlamak için küçük bir kredi alın." eh="21023caf" />
+        <e k="usedplus_cr_tipOnTime6Months" v="6 ay boyunca tüm ödemeleri zamanında yapın önemli iyileştirme görmek için." eh="a50441bf" />
+        <e k="usedplus_cr_tipOpenDeal" v="Kredi geçmişinizi oluşturmaya başlamak için bir finansman anlaşması açın." eh="27390112" />
+        <e k="usedplus_cr_tipRefinance" v="Düşük oranlardan yararlanmak için eski kredileri yeniden finansman yapmayı düşünün." eh="d3a3a2e5" />
+        <e k="usedplus_cr_tipStartSmall" v="Küçük bir kredi ile başlayın ve kredi oluşturmak için zamanında ödeyin." eh="ac79b368" />
+        <e k="usedplus_cr_tipStreak" v="Puanınızı artırmak için daha uzun zamanında ödeme serisini oluşturun." eh="196cacdf" />
+        <e k="usedplus_cr_tipTimeBuilds" v="Kredinin oluşturulması zaman alır. Tutarlı ödemeyi sürdürün." eh="6508e92a" />
+        <e k="usedplus_cr_trendDeclining" v="Düşüş" eh="12175033" />
+        <e k="usedplus_cr_trendExcellent" v="Mükemmel" eh="fcc2d28a" />
+        <e k="usedplus_cr_trendGood" v="İyileşme" eh="4ba4dfd7" />
+        <e k="usedplus_cr_trendPoor" v="Zayıf" eh="0e94d017" />
+        <e k="usedplus_cr_trendStable" v="Stabil" eh="fa3aff3c" />
+        <e k="usedplus_cr_utilExcellent" v="Mükemmel (%.0f%% kullanılan)" eh="7dfc86c1" />
+        <e k="usedplus_cr_utilFair" v="Adil (%.0f%% kullanılan)" eh="a617a851" />
+        <e k="usedplus_cr_utilGood" v="İyi (%.0f%% kullanılan)" eh="c0b657d4" />
+        <e k="usedplus_cr_utilHigh" v="Yüksek (%.0f%% kullanılan)" eh="86e0b0c5" />
+        <e k="usedplus_dd_bankLoanExtra" v="Ödeme %s olarak ayarlandı (+%d%% ekstra)" eh="63c230fc" />
+        <e k="usedplus_dd_bankLoanStandard" v="Ödeme standart tutara ayarlandı" eh="e169e647" />
+        <e k="usedplus_dd_buyoutLandMessage" v="Bu araziyi %s-ya satın almak isterim?&#10;&#10;Arazi değeri: %s&#10;Yenisini satın almaya karşı tasarruf: %s&#10;&#10;Toplam maliyet: %s" eh="2764369e" />
+        <e k="usedplus_dd_buyoutLeaseTitle" v="Kiralama Satın Alma" eh="b14741b3" />
+        <e k="usedplus_dd_buyoutVehicleMessage" v="Bu kiralama %s-ya satın almak isterim?&#10;&#10;Artık değeri: %s&#10;Uygulanan öz sermaye: -%s&#10;Güvenlik teminat iadesi: -%s&#10;&#10;Net maliyet: %s" eh="05504f8c" />
+        <e k="usedplus_dd_earlyPayoffTitle" v="Erken Ödeme" eh="4ccf6612" />
+        <e k="usedplus_dd_paymentSet" v="Ödeme %s olarak ayarlandı (%.0f%%)" eh="28307eef" />
+        <e k="usedplus_dd_payoffConfirm" v="%s kalan bakiyeyi şimdi öde?" eh="491a3bbc" />
+        <e k="usedplus_dd_statusActive" v="Aktif" eh="4d3d769b" />
+        <e k="usedplus_dd_termMonths" v="%d ay" eh="eb5314ed" />
+        <e k="usedplus_dd_termYears" v="%d ay (%d yıl%s)" eh="7b504ff3" />
+        <e k="usedplus_dd_titleFinance" v="Finansman Detayları" eh="162264ba" />
+        <e k="usedplus_dd_titleLandLease" v="Arazi Kiralama Detayları" eh="b6577396" />
+        <e k="usedplus_dd_titleLease" v="Kiralama Detayları" eh="53e751e8" />
+        <e k="usedplus_dd_typeLandFinance" v="Arazi Finansmanı" eh="b6dcb2f3" />
+        <e k="usedplus_dd_typeLandLease" v="Arazi Kiralama" eh="9c6119ac" />
+        <e k="usedplus_dd_typeLease" v="Kiralama" eh="47c96b08" />
+        <e k="usedplus_dd_typeRepaint" v="Yeniden Boyama" eh="1d0b7dd4" />
+        <e k="usedplus_dd_typeRepair" v="Onarım" eh="0493d27e" />
+        <e k="usedplus_dd_typeRepairRepaint" v="Onarım &amp; Yeniden Boyama" eh="e53c01f2" />
+        <e k="usedplus_dd_typeVehicleFinance" v="Araç Finansmanı" eh="6bd5146b" />
+        <e k="usedplus_error_cannotFinance" v="Finansman yapılamıyor: kredi puanı %d minimum %d'nin altında" eh="3db1fb5e" />
+        <e k="usedplus_error_cannotLease" v="Kiralama yapılamıyor: kredi puanı %d minimum %d'nin altında" eh="03c9bd36" />
+        <e k="usedplus_error_insufficientFundsBuy" v="Yetersiz fon! Satın almak için %s gerekli." eh="b1aef085" />
+        <e k="usedplus_error_placeablesNotLeasable" v="Binalar ve yerleştirilebilir nesneler kiralanmaz." eh="fdb637b5" />
+        <e k="usedplus_ft_truckUnavailable" v="Servis kamyonu artık mevcut değil." eh="3fd5b50a" />
+        <e k="usedplus_ft_vehicleUnavailable" v="Araç artık mevcut değil." eh="82cb8143" />
+        <e k="usedplus_inspection_cached" v="Önbelleğe alınan muayene sonuçlarını kullanma (ücretsiz)." eh="32ebad96" />
+        <e k="usedplus_inspection_insufficientFunds" v="Muayene için yetersiz fon. Gerekli: %s" eh="a1f203a9" />
+        <e k="usedplus_maintenance_noDataAvailable" v="Bu araç için bakım verisi mevcut değil." eh="f5963282" />
+        <e k="usedplus_negotiation_cannotAfford" v="Bu teklifi alamazsın." eh="4e8dfdf2" />
+        <e k="usedplus_purchase_complete" v="Satın Alma Tamamlandı" eh="7328ece0" />
+        <e k="usedplus_purchase_detail" v="%s %s-ya satın alındı" eh="a9d8903a" />
+        <e k="usedplus_rp_flatTireLabel" v="Patlak lastik onarımı (%s)" eh="8ba1e25d" />
+        <e k="usedplus_rp_fuelLeakLabel" v="Yakıt sızıntısı onarımı (%s)" eh="de978bcc" />
+        <e k="usedplus_rp_includesLabel" v="İçerir: " eh="59bef2f2" />
+        <e k="usedplus_runaway_defaultEnded" v="Kaçış durduruldu." eh="ed4659ca" />
+        <e k="usedplus_rvb_sectionHeader" v="Araç Teşhisi" eh="ae666ba0" />
+        <e k="usedplus_vpf_offerValidMonths" v="Teklif %d ay geçerlidir" eh="5fe704c6" />
 </elements>
 </l10n>

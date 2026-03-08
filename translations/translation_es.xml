@@ -2663,5 +2663,105 @@
         <e k="usedplus_common_unknownLand" v="Terreno desconocido" eh="1b201d84" />
         <e k="usedplus_common_unknownFarm" v="Granja desconocida" eh="92a9cc35" />
         <e k="usedplus_common_unknownError" v="Error desconocido" eh="aee9784c" />
+        <e k="usedplus_common_vehicle" v="Vehículo" eh="d6af9c1e" />
+        <e k="usedplus_electrical_reliability" v="Confiabilidad eléctrica" eh="ef16f00d" />
+        <e k="usedplus_engine_reliability" v="Confiabilidad del motor" eh="d86b8cc4" />
+        <e k="usedplus_mr_breakdowns" v="Averías" eh="ff1cc005" />
+        <e k="usedplus_mr_repairs" v="Reparaciones" eh="810a4b9e" />
+        <e k="usedplus_repair_title_workshop" v="Reparación en taller" eh="61a80a46" />
+        <e k="usedplus_rp_confirm_title" v="Confirmar pago" eh="413e8eec" />
+        <e k="usedplus_rp_label_components" v="Componentes:" eh="3b7009ae" />
+        <e k="usedplus_rp_label_repaint" v="Repintado:" eh="e63bb6f4" />
+        <e k="usedplus_rp_label_repair" v="Reparación:" eh="5dcb42f0" />
+        <e k="usedplus_rp_notification_workshop" v="reparación completa en taller" eh="a338c59a" />
+        <e k="usedplus_rp_service_mechanical" v="Reparación mecánica" eh="60a0d54f" />
+        <e k="usedplus_rp_service_repaint" v="Repintado" eh="1d0b7dd4" />
+        <e k="usedplus_rp_service_workshop" v="Reparación en taller" eh="61a80a46" />
+        <e k="usedplus_rvb_parts_status" v="Componentes: %d / %d necesitan reparación" eh="4ad0ab6d" />
+        <e k="usedplus_title_maintenanceReport" v="=== Informe de mantenimiento ===" eh="984a7db3" />
+        <e k="usedplus_cr_ageBuilding" v="Construcción (%d pagos)" eh="23775faa" />
+        <e k="usedplus_cr_ageEstablished" v="Establecido (%d pagos)" eh="776f4287" />
+        <e k="usedplus_cr_ageGrowing" v="Creciente (%d pagos)" eh="7ac52629" />
+        <e k="usedplus_cr_ageNew" v="Nuevo" eh="03c2e7e4" />
+        <e k="usedplus_cr_ageNewCount" v="Nuevo (%d pagos)" eh="3b231c55" />
+        <e k="usedplus_cr_discountRates" v="Tasas de descuento: -%.1f%%" eh="41dcfad7" />
+        <e k="usedplus_cr_factorExcellent" v="Excelente (%d%% a tiempo)" eh="a393cc84" />
+        <e k="usedplus_cr_factorFair" v="Aceptable (%d%% a tiempo)" eh="d7cb93a6" />
+        <e k="usedplus_cr_factorGood" v="Bueno (%d%% a tiempo)" eh="ed07d038" />
+        <e k="usedplus_cr_factorPoor" v="Bajo (%d%% a tiempo)" eh="d3b1e976" />
+        <e k="usedplus_cr_histogramFormat" v="%s  %.0f%% a tiempo" eh="25531fe2" />
+        <e k="usedplus_cr_legendLate" v="Retrasado: %d" eh="710bdbb1" />
+        <e k="usedplus_cr_legendMissed" v="Omitido: %d" eh="655c731c" />
+        <e k="usedplus_cr_legendOnTime" v="A tiempo: %d" eh="0a4420a4" />
+        <e k="usedplus_cr_penaltyRates" v="Tasas de penalización: +%.1f%%" eh="b83c6923" />
+        <e k="usedplus_cr_standardRates" v="Tasas estándar" eh="4c7f68aa" />
+        <e k="usedplus_cr_tipConsistency" v="Concéntrese en realizar pagos consistentes y a tiempo para reconstruir su puntuación." eh="fe0b4e10" />
+        <e k="usedplus_cr_tipDebt30" v="Intente reducir su relación deuda-a-activo por debajo del 30%% para las mejores tasas." eh="521de800" />
+        <e k="usedplus_cr_tipDebtRatio" v="Su relación deuda-a-activo es alta. Pague los préstamos existentes para mejorar su puntuación." eh="726e898c" />
+        <e k="usedplus_cr_tipExcellent" v="¡Crédito excelente! Califica para las mejores tasas y condiciones." eh="c4bd3149" />
+        <e k="usedplus_cr_tipGeneral1" v="El pago a tiempo es el factor más importante en su puntuación de crédito." eh="1ebb471c" />
+        <e k="usedplus_cr_tipGeneral2" v="Mantenga su relación deuda-a-activo por debajo del 50%% para mejores tasas." eh="279b2666" />
+        <e k="usedplus_cr_tipGeneral3" v="Un historial de crédito más largo ayuda — el tiempo y la consistencia son clave." eh="f43fdbc2" />
+        <e k="usedplus_cr_tipGeneral4" v="Una mezcla de préstamos de vehículos, financiamiento de tierras y arrendamientos muestra endeudamiento responsable." eh="d340b335" />
+        <e k="usedplus_cr_tipGeneral5" v="Un pago omitido tiene un impacto mayor que realizar pagos extra." eh="1b319c2c" />
+        <e k="usedplus_cr_tipGoodProgress" v="¡Buen progreso! Continúe realizando pagos a tiempo para alcanzar Excelente." eh="0414afc6" />
+        <e k="usedplus_cr_tipHighDebt" v="Se detectó carga de deuda alta. Concéntrese en pagar los préstamos existentes." eh="4c5c6512" />
+        <e k="usedplus_cr_tipMissedPayments" v="Los pagos omitidos están arruinando su puntuación. Priorice ponerse al día." eh="72f5e32d" />
+        <e k="usedplus_cr_tipMixAccounts" v="Una mezcla de tipos de cuentas (préstamos, arrendamientos, tierras) puede mejorar su puntuación." eh="27d730d4" />
+        <e k="usedplus_cr_tipNoHistory" v="Sin historial de crédito aún. Solicite un préstamo pequeño para comenzar a construir su puntuación." eh="21023caf" />
+        <e k="usedplus_cr_tipOnTime6Months" v="Realice todos los pagos a tiempo durante 6 meses para ver una mejora significativa." eh="a50441bf" />
+        <e k="usedplus_cr_tipOpenDeal" v="Abra una transacción de financiamiento para comenzar a construir su historial de crédito." eh="27390112" />
+        <e k="usedplus_cr_tipRefinance" v="Considere refinanciar préstamos antiguos para aprovechar sus bajas tasas." eh="d3a3a2e5" />
+        <e k="usedplus_cr_tipStartSmall" v="Comience con un préstamo pequeño y páguelo a tiempo para construir crédito." eh="ac79b368" />
+        <e k="usedplus_cr_tipStreak" v="Construya una serie más larga de pagos a tiempo para impulsar su puntuación." eh="196cacdf" />
+        <e k="usedplus_cr_tipTimeBuilds" v="El crédito toma tiempo para construirse. Continúe realizando pagos de manera consistente." eh="6508e92a" />
+        <e k="usedplus_cr_trendDeclining" v="Decreciente" eh="12175033" />
+        <e k="usedplus_cr_trendExcellent" v="Excelente" eh="fcc2d28a" />
+        <e k="usedplus_cr_trendGood" v="Mejorando" eh="4ba4dfd7" />
+        <e k="usedplus_cr_trendPoor" v="Bajo" eh="0e94d017" />
+        <e k="usedplus_cr_trendStable" v="Estable" eh="fa3aff3c" />
+        <e k="usedplus_cr_utilExcellent" v="Excelente (%.0f%% utilizado)" eh="7dfc86c1" />
+        <e k="usedplus_cr_utilFair" v="Aceptable (%.0f%% utilizado)" eh="a617a851" />
+        <e k="usedplus_cr_utilGood" v="Bueno (%.0f%% utilizado)" eh="c0b657d4" />
+        <e k="usedplus_cr_utilHigh" v="Alto (%.0f%% utilizado)" eh="86e0b0c5" />
+        <e k="usedplus_dd_bankLoanExtra" v="Pago establecido en %s (+%d%% extra)" eh="63c230fc" />
+        <e k="usedplus_dd_bankLoanStandard" v="Pago establecido en cantidad estándar" eh="e169e647" />
+        <e k="usedplus_dd_buyoutLandMessage" v="¿Comprar esta tierra por %s?&#10;&#10;Valor de la tierra: %s&#10;Ahorros vs. compra nueva: %s&#10;&#10;Costo total: %s" eh="2764369e" />
+        <e k="usedplus_dd_buyoutLeaseTitle" v="Compra de arrendamiento" eh="b14741b3" />
+        <e k="usedplus_dd_buyoutVehicleMessage" v="¿Comprar este arrendamiento por %s?&#10;&#10;Valor residual: %s&#10;Equidad aplicada: -%s&#10;Reembolso de depósito de seguridad: -%s&#10;&#10;Costo neto: %s" eh="05504f8c" />
+        <e k="usedplus_dd_earlyPayoffTitle" v="Pago anticipado" eh="4ccf6612" />
+        <e k="usedplus_dd_paymentSet" v="Pago establecido en %s (%.0f%%)" eh="28307eef" />
+        <e k="usedplus_dd_payoffConfirm" v="¿Pagar el saldo restante de %s ahora?" eh="491a3bbc" />
+        <e k="usedplus_dd_statusActive" v="Activo" eh="4d3d769b" />
+        <e k="usedplus_dd_termMonths" v="%d meses" eh="eb5314ed" />
+        <e k="usedplus_dd_termYears" v="%d meses (%d año%s)" eh="7b504ff3" />
+        <e k="usedplus_dd_titleFinance" v="Detalles de financiamiento" eh="162264ba" />
+        <e k="usedplus_dd_titleLandLease" v="Detalles de arrendamiento de tierra" eh="b6577396" />
+        <e k="usedplus_dd_titleLease" v="Detalles de arrendamiento" eh="53e751e8" />
+        <e k="usedplus_dd_typeLandFinance" v="Financiamiento de tierra" eh="b6dcb2f3" />
+        <e k="usedplus_dd_typeLandLease" v="Arrendamiento de tierra" eh="9c6119ac" />
+        <e k="usedplus_dd_typeLease" v="Arrendamiento" eh="47c96b08" />
+        <e k="usedplus_dd_typeRepaint" v="Repintado" eh="1d0b7dd4" />
+        <e k="usedplus_dd_typeRepair" v="Reparación" eh="0493d27e" />
+        <e k="usedplus_dd_typeRepairRepaint" v="Reparación &amp; Repintado" eh="e53c01f2" />
+        <e k="usedplus_dd_typeVehicleFinance" v="Financiamiento de vehículo" eh="6bd5146b" />
+        <e k="usedplus_error_cannotFinance" v="No se puede financiar: puntuación crediticia %d está por debajo del mínimo %d" eh="3db1fb5e" />
+        <e k="usedplus_error_cannotLease" v="No se puede arrendar: puntuación crediticia %d está por debajo del mínimo %d" eh="03c9bd36" />
+        <e k="usedplus_error_insufficientFundsBuy" v="¡Fondos insuficientes! Se necesita %s para comprar." eh="b1aef085" />
+        <e k="usedplus_error_placeablesNotLeasable" v="Los edificios y objetos colocables no se pueden arrendar." eh="fdb637b5" />
+        <e k="usedplus_ft_truckUnavailable" v="El camión de servicio ya no está disponible." eh="3fd5b50a" />
+        <e k="usedplus_ft_vehicleUnavailable" v="El vehículo ya no está disponible." eh="82cb8143" />
+        <e k="usedplus_inspection_cached" v="Usando resultados de inspección en caché (sin costo)." eh="32ebad96" />
+        <e k="usedplus_inspection_insufficientFunds" v="Fondos insuficientes para inspección. Requerido: %s" eh="a1f203a9" />
+        <e k="usedplus_maintenance_noDataAvailable" v="No hay datos de mantenimiento disponibles para este vehículo." eh="f5963282" />
+        <e k="usedplus_negotiation_cannotAfford" v="No puede permitirse esta oferta." eh="4e8dfdf2" />
+        <e k="usedplus_purchase_complete" v="Compra completada" eh="7328ece0" />
+        <e k="usedplus_purchase_detail" v="%s comprado por %s" eh="a9d8903a" />
+        <e k="usedplus_rp_flatTireLabel" v="Reparación de pinchazo (%s)" eh="8ba1e25d" />
+        <e k="usedplus_rp_fuelLeakLabel" v="Reparación de fuga de combustible (%s)" eh="de978bcc" />
+        <e k="usedplus_rp_includesLabel" v="Incluye: " eh="59bef2f2" />
+        <e k="usedplus_runaway_defaultEnded" v="Incumplimiento detenido." eh="ed4659ca" />
+        <e k="usedplus_rvb_sectionHeader" v="Diagnósticos del vehículo" eh="ae666ba0" />
+        <e k="usedplus_vpf_offerValidMonths" v="Oferta válida por %d meses" eh="5fe704c6" />
 </elements>
 </l10n>

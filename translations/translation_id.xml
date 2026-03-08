@@ -2664,5 +2664,105 @@
         <e k="usedplus_common_unknownLand" v="Lahan Tidak Dikenal" eh="1b201d84" />
         <e k="usedplus_common_unknownFarm" v="Pertanian Tidak Dikenal" eh="92a9cc35" />
         <e k="usedplus_common_unknownError" v="Kesalahan tidak diketahui" eh="aee9784c" />
+        <e k="usedplus_common_vehicle" v="Kendaraan" eh="d6af9c1e" />
+        <e k="usedplus_electrical_reliability" v="Keandalan Listrik" eh="ef16f00d" />
+        <e k="usedplus_engine_reliability" v="Keandalan Mesin" eh="d86b8cc4" />
+        <e k="usedplus_mr_breakdowns" v="Kerusakan" eh="ff1cc005" />
+        <e k="usedplus_mr_repairs" v="Perbaikan" eh="810a4b9e" />
+        <e k="usedplus_repair_title_workshop" v="Perbaikan Bengkel" eh="61a80a46" />
+        <e k="usedplus_rp_confirm_title" v="Konfirmasi Pembayaran" eh="413e8eec" />
+        <e k="usedplus_rp_label_components" v="Komponen:" eh="3b7009ae" />
+        <e k="usedplus_rp_label_repaint" v="Cat Ulang:" eh="e63bb6f4" />
+        <e k="usedplus_rp_label_repair" v="Perbaikan:" eh="5dcb42f0" />
+        <e k="usedplus_rp_notification_workshop" v="perbaikan bengkel lengkap" eh="a338c59a" />
+        <e k="usedplus_rp_service_mechanical" v="Perbaikan Mekanis" eh="60a0d54f" />
+        <e k="usedplus_rp_service_repaint" v="Cat Ulang" eh="1d0b7dd4" />
+        <e k="usedplus_rp_service_workshop" v="Perbaikan Bengkel" eh="61a80a46" />
+        <e k="usedplus_rvb_parts_status" v="Komponen: %d / %d memerlukan perbaikan" eh="4ad0ab6d" />
+        <e k="usedplus_title_maintenanceReport" v="=== Laporan Perawatan ===" eh="984a7db3" />
+        <e k="usedplus_cr_ageBuilding" v="Pembangunan (%d pembayaran)" eh="23775faa" />
+        <e k="usedplus_cr_ageEstablished" v="Didirikan (%d pembayaran)" eh="776f4287" />
+        <e k="usedplus_cr_ageGrowing" v="Berkembang (%d pembayaran)" eh="7ac52629" />
+        <e k="usedplus_cr_ageNew" v="Baru" eh="03c2e7e4" />
+        <e k="usedplus_cr_ageNewCount" v="Baru (%d pembayaran)" eh="3b231c55" />
+        <e k="usedplus_cr_discountRates" v="Tarif diskon: -%.1f%%" eh="41dcfad7" />
+        <e k="usedplus_cr_factorExcellent" v="Sangat Baik (%d%% tepat waktu)" eh="a393cc84" />
+        <e k="usedplus_cr_factorFair" v="Wajar (%d%% tepat waktu)" eh="d7cb93a6" />
+        <e k="usedplus_cr_factorGood" v="Baik (%d%% tepat waktu)" eh="ed07d038" />
+        <e k="usedplus_cr_factorPoor" v="Buruk (%d%% tepat waktu)" eh="d3b1e976" />
+        <e k="usedplus_cr_histogramFormat" v="%s  %.0f%% tepat waktu" eh="25531fe2" />
+        <e k="usedplus_cr_legendLate" v="Terlambat: %d" eh="710bdbb1" />
+        <e k="usedplus_cr_legendMissed" v="Terlewat: %d" eh="655c731c" />
+        <e k="usedplus_cr_legendOnTime" v="Tepat Waktu: %d" eh="0a4420a4" />
+        <e k="usedplus_cr_penaltyRates" v="Tarif penalti: +%.1f%%" eh="b83c6923" />
+        <e k="usedplus_cr_standardRates" v="Tarif standar" eh="4c7f68aa" />
+        <e k="usedplus_cr_tipConsistency" v="Fokus pada pembayaran tepat waktu yang konsisten untuk memulihkan skor Anda." eh="fe0b4e10" />
+        <e k="usedplus_cr_tipDebt30" v="Cobalah mengurangi rasio hutang terhadap aset Anda di bawah 30%% untuk mendapatkan tarif terbaik." eh="521de800" />
+        <e k="usedplus_cr_tipDebtRatio" v="Rasio hutang terhadap aset Anda tinggi. Lunasi pinjaman yang ada untuk meningkatkan skor Anda." eh="726e898c" />
+        <e k="usedplus_cr_tipExcellent" v="Kredit sangat baik! Anda memenuhi syarat untuk tarif dan persyaratan terbaik." eh="c4bd3149" />
+        <e k="usedplus_cr_tipGeneral1" v="Pembayaran tepat waktu adalah faktor terpenting dalam skor kredit Anda." eh="1ebb471c" />
+        <e k="usedplus_cr_tipGeneral2" v="Jaga rasio hutang terhadap aset di bawah 50%% untuk mendapatkan tarif yang lebih baik." eh="279b2666" />
+        <e k="usedplus_cr_tipGeneral3" v="Riwayat kredit yang lebih lama membantu — waktu dan konsistensi adalah kunci." eh="f43fdbc2" />
+        <e k="usedplus_cr_tipGeneral4" v="Kombinasi pinjaman kendaraan, pembiayaan tanah, dan sewa menunjukkan peminjaman yang bertanggung jawab." eh="d340b335" />
+        <e k="usedplus_cr_tipGeneral5" v="Melewatkan pembayaran memiliki dampak yang lebih besar daripada melakukan pembayaran tambahan." eh="1b319c2c" />
+        <e k="usedplus_cr_tipGoodProgress" v="Kemajuan yang baik! Terus lakukan pembayaran tepat waktu untuk mencapai Sangat Baik." eh="0414afc6" />
+        <e k="usedplus_cr_tipHighDebt" v="Terdeteksi beban utang tinggi. Fokus pada pelunasan pinjaman yang ada." eh="4c5c6512" />
+        <e k="usedplus_cr_tipMissedPayments" v="Pembayaran yang terlewat menyeret skor Anda ke bawah. Prioritaskan untuk mengejar ketinggalan." eh="72f5e32d" />
+        <e k="usedplus_cr_tipMixAccounts" v="Kombinasi jenis akun (pinjaman, sewa, tanah) dapat meningkatkan skor Anda." eh="27d730d4" />
+        <e k="usedplus_cr_tipNoHistory" v="Belum ada riwayat kredit. Ambil pinjaman kecil untuk mulai membangun skor Anda." eh="21023caf" />
+        <e k="usedplus_cr_tipOnTime6Months" v="Lakukan semua pembayaran tepat waktu selama 6 bulan untuk melihat peningkatan yang signifikan." eh="a50441bf" />
+        <e k="usedplus_cr_tipOpenDeal" v="Buka kesepakatan pembiayaan untuk mulai membangun riwayat kredit Anda." eh="27390112" />
+        <e k="usedplus_cr_tipRefinance" v="Pertimbangkan pembiayaan ulang pinjaman lama untuk memanfaatkan tarif rendah Anda." eh="d3a3a2e5" />
+        <e k="usedplus_cr_tipStartSmall" v="Mulai dengan pinjaman kecil dan lunasi tepat waktu untuk membangun kredit." eh="ac79b368" />
+        <e k="usedplus_cr_tipStreak" v="Bangun seri pembayaran tepat waktu yang lebih lama untuk meningkatkan skor Anda." eh="196cacdf" />
+        <e k="usedplus_cr_tipTimeBuilds" v="Kredit memerlukan waktu untuk dibangun. Terus lakukan pembayaran secara konsisten." eh="6508e92a" />
+        <e k="usedplus_cr_trendDeclining" v="Menurun" eh="12175033" />
+        <e k="usedplus_cr_trendExcellent" v="Sangat Baik" eh="fcc2d28a" />
+        <e k="usedplus_cr_trendGood" v="Meningkat" eh="4ba4dfd7" />
+        <e k="usedplus_cr_trendPoor" v="Buruk" eh="0e94d017" />
+        <e k="usedplus_cr_trendStable" v="Stabil" eh="fa3aff3c" />
+        <e k="usedplus_cr_utilExcellent" v="Sangat Baik (%.0f%% digunakan)" eh="7dfc86c1" />
+        <e k="usedplus_cr_utilFair" v="Wajar (%.0f%% digunakan)" eh="a617a851" />
+        <e k="usedplus_cr_utilGood" v="Baik (%.0f%% digunakan)" eh="c0b657d4" />
+        <e k="usedplus_cr_utilHigh" v="Tinggi (%.0f%% digunakan)" eh="86e0b0c5" />
+        <e k="usedplus_dd_bankLoanExtra" v="Pembayaran ditetapkan ke %s (+%d%% ekstra)" eh="63c230fc" />
+        <e k="usedplus_dd_bankLoanStandard" v="Pembayaran ditetapkan ke jumlah standar" eh="e169e647" />
+        <e k="usedplus_dd_buyoutLandMessage" v="Beli tanah ini dengan harga %s?&#10;&#10;Nilai tanah: %s&#10;Penghematan vs. membeli baru: %s&#10;&#10;Biaya total: %s" eh="2764369e" />
+        <e k="usedplus_dd_buyoutLeaseTitle" v="Pembelian Kembali Sewa" eh="b14741b3" />
+        <e k="usedplus_dd_buyoutVehicleMessage" v="Beli kembali sewa ini dengan harga %s?&#10;&#10;Nilai sisa: %s&#10;Ekuitas yang diterapkan: -%s&#10;Pengembalian deposit keamanan: -%s&#10;&#10;Biaya bersih: %s" eh="05504f8c" />
+        <e k="usedplus_dd_earlyPayoffTitle" v="Pembayaran Awal" eh="4ccf6612" />
+        <e k="usedplus_dd_paymentSet" v="Pembayaran ditetapkan ke %s (%.0f%%)" eh="28307eef" />
+        <e k="usedplus_dd_payoffConfirm" v="Lunasi saldo sisa %s sekarang?" eh="491a3bbc" />
+        <e k="usedplus_dd_statusActive" v="Aktif" eh="4d3d769b" />
+        <e k="usedplus_dd_termMonths" v="%d bulan" eh="eb5314ed" />
+        <e k="usedplus_dd_termYears" v="%d bulan (%d tahun%s)" eh="7b504ff3" />
+        <e k="usedplus_dd_titleFinance" v="Detail Pembiayaan" eh="162264ba" />
+        <e k="usedplus_dd_titleLandLease" v="Detail Sewa Tanah" eh="b6577396" />
+        <e k="usedplus_dd_titleLease" v="Detail Sewa" eh="53e751e8" />
+        <e k="usedplus_dd_typeLandFinance" v="Pembiayaan Tanah" eh="b6dcb2f3" />
+        <e k="usedplus_dd_typeLandLease" v="Sewa Tanah" eh="9c6119ac" />
+        <e k="usedplus_dd_typeLease" v="Sewa" eh="47c96b08" />
+        <e k="usedplus_dd_typeRepaint" v="Cat Ulang" eh="1d0b7dd4" />
+        <e k="usedplus_dd_typeRepair" v="Perbaikan" eh="0493d27e" />
+        <e k="usedplus_dd_typeRepairRepaint" v="Perbaikan &amp; Cat Ulang" eh="e53c01f2" />
+        <e k="usedplus_dd_typeVehicleFinance" v="Pembiayaan Kendaraan" eh="6bd5146b" />
+        <e k="usedplus_error_cannotFinance" v="Tidak dapat membiayai: skor kredit %d di bawah minimum %d" eh="3db1fb5e" />
+        <e k="usedplus_error_cannotLease" v="Tidak dapat menyewa: skor kredit %d di bawah minimum %d" eh="03c9bd36" />
+        <e k="usedplus_error_insufficientFundsBuy" v="Dana tidak cukup! Perlu %s untuk membeli." eh="b1aef085" />
+        <e k="usedplus_error_placeablesNotLeasable" v="Bangunan dan barang yang dapat ditempatkan tidak dapat disewa." eh="fdb637b5" />
+        <e k="usedplus_ft_truckUnavailable" v="Truk layanan tidak lagi tersedia." eh="3fd5b50a" />
+        <e k="usedplus_ft_vehicleUnavailable" v="Kendaraan tidak lagi tersedia." eh="82cb8143" />
+        <e k="usedplus_inspection_cached" v="Menggunakan hasil inspeksi yang di-cache (tanpa biaya)." eh="32ebad96" />
+        <e k="usedplus_inspection_insufficientFunds" v="Dana tidak cukup untuk inspeksi. Diperlukan: %s" eh="a1f203a9" />
+        <e k="usedplus_maintenance_noDataAvailable" v="Tidak ada data perawatan yang tersedia untuk kendaraan ini." eh="f5963282" />
+        <e k="usedplus_negotiation_cannotAfford" v="Anda tidak mampu menerima penawaran ini." eh="4e8dfdf2" />
+        <e k="usedplus_purchase_complete" v="Pembelian Selesai" eh="7328ece0" />
+        <e k="usedplus_purchase_detail" v="%s dibeli dengan harga %s" eh="a9d8903a" />
+        <e k="usedplus_rp_flatTireLabel" v="Perbaikan ban kempes (%s)" eh="8ba1e25d" />
+        <e k="usedplus_rp_fuelLeakLabel" v="Perbaikan kebocoran bahan bakar (%s)" eh="de978bcc" />
+        <e k="usedplus_rp_includesLabel" v="Mencakup: " eh="59bef2f2" />
+        <e k="usedplus_runaway_defaultEnded" v="Pelarian berhenti." eh="ed4659ca" />
+        <e k="usedplus_rvb_sectionHeader" v="Diagnostik Kendaraan" eh="ae666ba0" />
+        <e k="usedplus_vpf_offerValidMonths" v="Penawaran valid untuk %d bulan" eh="5fe704c6" />
 </elements>
 </l10n>

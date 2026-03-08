@@ -2664,5 +2664,105 @@
         <e k="usedplus_common_unknownLand" v="알 수 없는 땅" eh="1b201d84" />
         <e k="usedplus_common_unknownFarm" v="알 수 없는 농장" eh="92a9cc35" />
         <e k="usedplus_common_unknownError" v="알 수 없는 오류" eh="aee9784c" />
+        <e k="usedplus_common_vehicle" v="차량" eh="d6af9c1e" />
+        <e k="usedplus_electrical_reliability" v="전기 안정성" eh="ef16f00d" />
+        <e k="usedplus_engine_reliability" v="엔진 안정성" eh="d86b8cc4" />
+        <e k="usedplus_mr_breakdowns" v="고장" eh="ff1cc005" />
+        <e k="usedplus_mr_repairs" v="수리" eh="810a4b9e" />
+        <e k="usedplus_repair_title_workshop" v="정비소 수리" eh="61a80a46" />
+        <e k="usedplus_rp_confirm_title" v="결제 확인" eh="413e8eec" />
+        <e k="usedplus_rp_label_components" v="부품：" eh="3b7009ae" />
+        <e k="usedplus_rp_label_repaint" v="재도장：" eh="e63bb6f4" />
+        <e k="usedplus_rp_label_repair" v="수리：" eh="5dcb42f0" />
+        <e k="usedplus_rp_notification_workshop" v="완전한 정비소 수리" eh="a338c59a" />
+        <e k="usedplus_rp_service_mechanical" v="기계 수리" eh="60a0d54f" />
+        <e k="usedplus_rp_service_repaint" v="재도장" eh="1d0b7dd4" />
+        <e k="usedplus_rp_service_workshop" v="정비소 수리" eh="61a80a46" />
+        <e k="usedplus_rvb_parts_status" v="부품：%d / %d 수리 필요" eh="4ad0ab6d" />
+        <e k="usedplus_title_maintenanceReport" v="=== 유지보수 보고서 ===" eh="984a7db3" />
+        <e k="usedplus_cr_ageBuilding" v="건설 중(%d 회 결제)" eh="23775faa" />
+        <e k="usedplus_cr_ageEstablished" v="확립됨(%d 회 결제)" eh="776f4287" />
+        <e k="usedplus_cr_ageGrowing" v="성장 중(%d 회 결제)" eh="7ac52629" />
+        <e k="usedplus_cr_ageNew" v="새로움" eh="03c2e7e4" />
+        <e k="usedplus_cr_ageNewCount" v="새로움(%d 회 결제)" eh="3b231c55" />
+        <e k="usedplus_cr_discountRates" v="할인율：-%.1f%%" eh="41dcfad7" />
+        <e k="usedplus_cr_factorExcellent" v="우수(%d%% 정시)" eh="a393cc84" />
+        <e k="usedplus_cr_factorFair" v="보통(%d%% 정시)" eh="d7cb93a6" />
+        <e k="usedplus_cr_factorGood" v="좋음(%d%% 정시)" eh="ed07d038" />
+        <e k="usedplus_cr_factorPoor" v="나쁨(%d%% 정시)" eh="d3b1e976" />
+        <e k="usedplus_cr_histogramFormat" v="%s  %.0f%% 정시" eh="25531fe2" />
+        <e k="usedplus_cr_legendLate" v="연체：%d" eh="710bdbb1" />
+        <e k="usedplus_cr_legendMissed" v="누락：%d" eh="655c731c" />
+        <e k="usedplus_cr_legendOnTime" v="정시：%d" eh="0a4420a4" />
+        <e k="usedplus_cr_penaltyRates" v="페널티율：+%.1f%%" eh="b83c6923" />
+        <e k="usedplus_cr_standardRates" v="표준 금리" eh="4c7f68aa" />
+        <e k="usedplus_cr_tipConsistency" v="신용 점수를 재구축하기 위해 정시 결제에 집중하세요." eh="fe0b4e10" />
+        <e k="usedplus_cr_tipDebt30" v="최고의 금리를 얻기 위해 부채 대비 자산 비율을 30%% 이하로 유지하도록 노력하세요." eh="521de800" />
+        <e k="usedplus_cr_tipDebtRatio" v="부채 대비 자산 비율이 높습니다. 기존 대출을 상환하여 점수를 개선하세요." eh="726e898c" />
+        <e k="usedplus_cr_tipExcellent" v="신용이 우수합니다! 최고의 금리와 조건에 적격입니다." eh="c4bd3149" />
+        <e k="usedplus_cr_tipGeneral1" v="정시 결제는 신용 점수에서 가장 큰 요소입니다." eh="1ebb471c" />
+        <e k="usedplus_cr_tipGeneral2" v="부채 대비 자산 비율을 50%% 이하로 유지하여 더 나은 금리를 받으세요." eh="279b2666" />
+        <e k="usedplus_cr_tipGeneral3" v="더 긴 신용 기록이 도움이 됩니다. 시간과 일관성이 핵심입니다." eh="f43fdbc2" />
+        <e k="usedplus_cr_tipGeneral4" v="자동차 대출, 토지 자금 조달, 리스의 조합은 책임감 있는 차용을 보여줍니다." eh="d340b335" />
+        <e k="usedplus_cr_tipGeneral5" v="결제 누락은 추가 결제보다 더 큰 영향을 미칩니다." eh="1b319c2c" />
+        <e k="usedplus_cr_tipGoodProgress" v="좋은 진전입니다! 정시 결제를 계속하여 우수에 도달하세요." eh="0414afc6" />
+        <e k="usedplus_cr_tipHighDebt" v="높은 채무 부담이 감지되었습니다. 기존 대출 상환에 집중하세요." eh="4c5c6512" />
+        <e k="usedplus_cr_tipMissedPayments" v="누락된 결제가 점수를 떨어뜨리고 있습니다. 우선적으로 따라잡으세요." eh="72f5e32d" />
+        <e k="usedplus_cr_tipMixAccounts" v="다양한 계정 유형(대출, 리스, 토지)의 조합은 점수를 개선할 수 있습니다." eh="27d730d4" />
+        <e k="usedplus_cr_tipNoHistory" v="신용 기록이 아직 없습니다. 소액 대출을 신청하여 점수 구축을 시작하세요." eh="21023caf" />
+        <e k="usedplus_cr_tipOnTime6Months" v="6개월 동안 모든 결제를 정시에 하여 상당한 개선을 보세요." eh="a50441bf" />
+        <e k="usedplus_cr_tipOpenDeal" v="자금 조달 계약을 개설하여 신용 기록 구축을 시작하세요." eh="27390112" />
+        <e k="usedplus_cr_tipRefinance" v="저금리를 활용하기 위해 기존 대출의 재융자를 고려하세요." eh="d3a3a2e5" />
+        <e k="usedplus_cr_tipStartSmall" v="소액 대출로 시작하여 정시 상환하여 신용을 구축하세요." eh="ac79b368" />
+        <e k="usedplus_cr_tipStreak" v="더 긴 정시 결제 기록을 구축하여 점수를 높이세요." eh="196cacdf" />
+        <e k="usedplus_cr_tipTimeBuilds" v="신용은 시간이 필요합니다. 일관되게 결제를 계속하세요." eh="6508e92a" />
+        <e k="usedplus_cr_trendDeclining" v="하락" eh="12175033" />
+        <e k="usedplus_cr_trendExcellent" v="우수" eh="fcc2d28a" />
+        <e k="usedplus_cr_trendGood" v="개선 중" eh="4ba4dfd7" />
+        <e k="usedplus_cr_trendPoor" v="나쁨" eh="0e94d017" />
+        <e k="usedplus_cr_trendStable" v="안정적" eh="fa3aff3c" />
+        <e k="usedplus_cr_utilExcellent" v="우수(%.0f%% 사용됨)" eh="7dfc86c1" />
+        <e k="usedplus_cr_utilFair" v="보통(%.0f%% 사용됨)" eh="a617a851" />
+        <e k="usedplus_cr_utilGood" v="좋음(%.0f%% 사용됨)" eh="c0b657d4" />
+        <e k="usedplus_cr_utilHigh" v="높음(%.0f%% 사용됨)" eh="86e0b0c5" />
+        <e k="usedplus_dd_bankLoanExtra" v="결제를 %s로 설정(+%d%% 추가)" eh="63c230fc" />
+        <e k="usedplus_dd_bankLoanStandard" v="결제를 표준 금액으로 설정" eh="e169e647" />
+        <e k="usedplus_dd_buyoutLandMessage" v="이 토지를 %s로 구매하시겠습니까?&#10;&#10;토지 가치：%s&#10;새로 구매하는 것 대비 절감：%s&#10;&#10;총 비용：%s" eh="2764369e" />
+        <e k="usedplus_dd_buyoutLeaseTitle" v="리스 매입" eh="b14741b3" />
+        <e k="usedplus_dd_buyoutVehicleMessage" v="이 리스를 매입하려면 %s가 필요합니까?&#10;&#10;잔존 가치：%s&#10;적용된 자본：-%s&#10;보증금 환급：-%s&#10;&#10;순 비용：%s" eh="05504f8c" />
+        <e k="usedplus_dd_earlyPayoffTitle" v="조기 상환" eh="4ccf6612" />
+        <e k="usedplus_dd_paymentSet" v="결제를 %s로 설정(%.0f%%)" eh="28307eef" />
+        <e k="usedplus_dd_payoffConfirm" v="%s의 남은 잔액을 지금 상환하시겠습니까?" eh="491a3bbc" />
+        <e k="usedplus_dd_statusActive" v="활성" eh="4d3d769b" />
+        <e k="usedplus_dd_termMonths" v="%d개월" eh="eb5314ed" />
+        <e k="usedplus_dd_termYears" v="%d개월(%d년%s)" eh="7b504ff3" />
+        <e k="usedplus_dd_titleFinance" v="자금 조달 세부 정보" eh="162264ba" />
+        <e k="usedplus_dd_titleLandLease" v="토지 리스 세부 정보" eh="b6577396" />
+        <e k="usedplus_dd_titleLease" v="리스 세부 정보" eh="53e751e8" />
+        <e k="usedplus_dd_typeLandFinance" v="토지 자금 조달" eh="b6dcb2f3" />
+        <e k="usedplus_dd_typeLandLease" v="토지 리스" eh="9c6119ac" />
+        <e k="usedplus_dd_typeLease" v="리스" eh="47c96b08" />
+        <e k="usedplus_dd_typeRepaint" v="재도장" eh="1d0b7dd4" />
+        <e k="usedplus_dd_typeRepair" v="수리" eh="0493d27e" />
+        <e k="usedplus_dd_typeRepairRepaint" v="수리 및 재도장" eh="e53c01f2" />
+        <e k="usedplus_dd_typeVehicleFinance" v="차량 자금 조달" eh="6bd5146b" />
+        <e k="usedplus_error_cannotFinance" v="자금 조달할 수 없음：신용 점수 %d는 최소 %d보다 낮음" eh="3db1fb5e" />
+        <e k="usedplus_error_cannotLease" v="리스할 수 없음：신용 점수 %d는 최소 %d보다 낮음" eh="03c9bd36" />
+        <e k="usedplus_error_insufficientFundsBuy" v="자금이 부족합니다! 구매에 %s가 필요합니다." eh="b1aef085" />
+        <e k="usedplus_error_placeablesNotLeasable" v="건물과 설치물은 리스할 수 없습니다." eh="fdb637b5" />
+        <e k="usedplus_ft_truckUnavailable" v="서비스 트럭을 더 이상 사용할 수 없습니다." eh="3fd5b50a" />
+        <e k="usedplus_ft_vehicleUnavailable" v="차량을 더 이상 사용할 수 없습니다." eh="82cb8143" />
+        <e k="usedplus_inspection_cached" v="캐시된 검사 결과 사용(무료)." eh="32ebad96" />
+        <e k="usedplus_inspection_insufficientFunds" v="검사 자금이 부족합니다. 필요：%s" eh="a1f203a9" />
+        <e k="usedplus_maintenance_noDataAvailable" v="이 차량에 사용 가능한 유지보수 데이터가 없습니다." eh="f5963282" />
+        <e k="usedplus_negotiation_cannotAfford" v="이 제안을 감당할 수 없습니다." eh="4e8dfdf2" />
+        <e k="usedplus_purchase_complete" v="구매 완료" eh="7328ece0" />
+        <e k="usedplus_purchase_detail" v="%s을(를) %s로 구매" eh="a9d8903a" />
+        <e k="usedplus_rp_flatTireLabel" v="펑크 수리(%s)" eh="8ba1e25d" />
+        <e k="usedplus_rp_fuelLeakLabel" v="연료 누수 수리(%s)" eh="de978bcc" />
+        <e k="usedplus_rp_includesLabel" v="포함：" eh="59bef2f2" />
+        <e k="usedplus_runaway_defaultEnded" v="도주 중단." eh="ed4659ca" />
+        <e k="usedplus_rvb_sectionHeader" v="차량 진단" eh="ae666ba0" />
+        <e k="usedplus_vpf_offerValidMonths" v="제안 유효 기간 %d개월" eh="5fe704c6" />
 </elements>
 </l10n>

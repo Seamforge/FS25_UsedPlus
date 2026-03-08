@@ -2650,5 +2650,105 @@
         <e k="usedplus_common_unknownLand" v="不明な土地" eh="1b201d84" />
         <e k="usedplus_common_unknownFarm" v="不明な農場" eh="92a9cc35" />
         <e k="usedplus_common_unknownError" v="不明なエラー" eh="aee9784c" />
+        <e k="usedplus_common_vehicle" v="車両" eh="d6af9c1e" />
+        <e k="usedplus_electrical_reliability" v="電気信頼性" eh="ef16f00d" />
+        <e k="usedplus_engine_reliability" v="エンジン信頼性" eh="d86b8cc4" />
+        <e k="usedplus_mr_breakdowns" v="故障" eh="ff1cc005" />
+        <e k="usedplus_mr_repairs" v="修理" eh="810a4b9e" />
+        <e k="usedplus_repair_title_workshop" v="工場修理" eh="61a80a46" />
+        <e k="usedplus_rp_confirm_title" v="支払い確認" eh="413e8eec" />
+        <e k="usedplus_rp_label_components" v="部品：" eh="3b7009ae" />
+        <e k="usedplus_rp_label_repaint" v="再塗装：" eh="e63bb6f4" />
+        <e k="usedplus_rp_label_repair" v="修理：" eh="5dcb42f0" />
+        <e k="usedplus_rp_notification_workshop" v="完全な工場修理" eh="a338c59a" />
+        <e k="usedplus_rp_service_mechanical" v="機械修理" eh="60a0d54f" />
+        <e k="usedplus_rp_service_repaint" v="再塗装" eh="1d0b7dd4" />
+        <e k="usedplus_rp_service_workshop" v="工場修理" eh="61a80a46" />
+        <e k="usedplus_rvb_parts_status" v="部品：%d / %d 修理が必要" eh="4ad0ab6d" />
+        <e k="usedplus_title_maintenanceReport" v="=== メンテナンスレポート ===" eh="984a7db3" />
+        <e k="usedplus_cr_ageBuilding" v="構築中（%d 回の支払い）" eh="23775faa" />
+        <e k="usedplus_cr_ageEstablished" v="確立（%d 回の支払い）" eh="776f4287" />
+        <e k="usedplus_cr_ageGrowing" v="成長中（%d 回の支払い）" eh="7ac52629" />
+        <e k="usedplus_cr_ageNew" v="新規" eh="03c2e7e4" />
+        <e k="usedplus_cr_ageNewCount" v="新規（%d 回の支払い）" eh="3b231c55" />
+        <e k="usedplus_cr_discountRates" v="割引率：-%.1f%%" eh="41dcfad7" />
+        <e k="usedplus_cr_factorExcellent" v="優秀（%d%% オンタイム）" eh="a393cc84" />
+        <e k="usedplus_cr_factorFair" v="まあまあ（%d%% オンタイム）" eh="d7cb93a6" />
+        <e k="usedplus_cr_factorGood" v="良好（%d%% オンタイム）" eh="ed07d038" />
+        <e k="usedplus_cr_factorPoor" v="不良（%d%% オンタイム）" eh="d3b1e976" />
+        <e k="usedplus_cr_histogramFormat" v="%s  %.0f%% オンタイム" eh="25531fe2" />
+        <e k="usedplus_cr_legendLate" v="遅延：%d" eh="710bdbb1" />
+        <e k="usedplus_cr_legendMissed" v="見逃し：%d" eh="655c731c" />
+        <e k="usedplus_cr_legendOnTime" v="オンタイム：%d" eh="0a4420a4" />
+        <e k="usedplus_cr_penaltyRates" v="ペナルティ率：+%.1f%%" eh="b83c6923" />
+        <e k="usedplus_cr_standardRates" v="標準レート" eh="4c7f68aa" />
+        <e k="usedplus_cr_tipConsistency" v="定期的にオンタイムで支払いをしてクレジットスコアを再構築することに焦点を当てます。" eh="fe0b4e10" />
+        <e k="usedplus_cr_tipDebt30" v="債務対資産比率を 30%% 以下に維持して最高の金利を取得してみてください。" eh="521de800" />
+        <e k="usedplus_cr_tipDebtRatio" v="債務対資産比率が高い。既存のローンを返済してスコアを改善します。" eh="726e898c" />
+        <e k="usedplus_cr_tipExcellent" v="クレジットが優秀です！最高の金利と条件の対象となります。" eh="c4bd3149" />
+        <e k="usedplus_cr_tipGeneral1" v="定期的な支払いはクレジットスコアで最も重要な要因です。" eh="1ebb471c" />
+        <e k="usedplus_cr_tipGeneral2" v="債務対資産比率を 50%% 以下に保つことでより良い金利が得られます。" eh="279b2666" />
+        <e k="usedplus_cr_tipGeneral3" v="より長いクレジット履歴が役立ちます。時間と一貫性が重要です。" eh="f43fdbc2" />
+        <e k="usedplus_cr_tipGeneral4" v="車両ローン、土地融資、リースの組み合わせは責任ある借り入れを示しています。" eh="d340b335" />
+        <e k="usedplus_cr_tipGeneral5" v="支払いの見逃しは追加支払いよりも大きな影響を与えます。" eh="1b319c2c" />
+        <e k="usedplus_cr_tipGoodProgress" v="良い進捗です！定期的な支払いを続けて優秀に達してください。" eh="0414afc6" />
+        <e k="usedplus_cr_tipHighDebt" v="高い債務負荷が検出されました。既存のローンを返済することに焦点を当てます。" eh="4c5c6512" />
+        <e k="usedplus_cr_tipMissedPayments" v="見逃した支払いがスコアを下げています。優先的に追いつきます。" eh="72f5e32d" />
+        <e k="usedplus_cr_tipMixAccounts" v="複数のアカウントタイプ（ローン、リース、土地）はスコアを改善できます。" eh="27d730d4" />
+        <e k="usedplus_cr_tipNoHistory" v="クレジット履歴がまだありません。小規模なローンを取得してスコアの構築を開始します。" eh="21023caf" />
+        <e k="usedplus_cr_tipOnTime6Months" v="6 ヶ月間すべての支払いをオンタイムで行って大幅な改善を確認してください。" eh="a50441bf" />
+        <e k="usedplus_cr_tipOpenDeal" v="融資取引を開いてクレジット履歴の構築を開始します。" eh="27390112" />
+        <e k="usedplus_cr_tipRefinance" v="低金利を活かすために古いローンの再融資を検討してください。" eh="d3a3a2e5" />
+        <e k="usedplus_cr_tipStartSmall" v="少額のローンから始めてオンタイムで支払ってクレジットを構築します。" eh="ac79b368" />
+        <e k="usedplus_cr_tipStreak" v="より長いオンタイム支払いストリークを構築してスコアを上げます。" eh="196cacdf" />
+        <e k="usedplus_cr_tipTimeBuilds" v="クレジットは時間がかかります。定期的に支払いを続けます。" eh="6508e92a" />
+        <e k="usedplus_cr_trendDeclining" v="低下中" eh="12175033" />
+        <e k="usedplus_cr_trendExcellent" v="優秀" eh="fcc2d28a" />
+        <e k="usedplus_cr_trendGood" v="改善中" eh="4ba4dfd7" />
+        <e k="usedplus_cr_trendPoor" v="不良" eh="0e94d017" />
+        <e k="usedplus_cr_trendStable" v="安定" eh="fa3aff3c" />
+        <e k="usedplus_cr_utilExcellent" v="優秀（%.0f%% 使用中）" eh="7dfc86c1" />
+        <e k="usedplus_cr_utilFair" v="まあまあ（%.0f%% 使用中）" eh="a617a851" />
+        <e k="usedplus_cr_utilGood" v="良好（%.0f%% 使用中）" eh="c0b657d4" />
+        <e k="usedplus_cr_utilHigh" v="高（%.0f%% 使用中）" eh="86e0b0c5" />
+        <e k="usedplus_dd_bankLoanExtra" v="支払いを %s に設定（+%d%% 追加）" eh="63c230fc" />
+        <e k="usedplus_dd_bankLoanStandard" v="支払いを標準金額に設定" eh="e169e647" />
+        <e k="usedplus_dd_buyoutLandMessage" v="この土地を %s で購入しますか？&#10;&#10;土地価値：%s&#10;新規購入と比較した節約：%s&#10;&#10;総費用：%s" eh="2764369e" />
+        <e k="usedplus_dd_buyoutLeaseTitle" v="リースバイアウト" eh="b14741b3" />
+        <e k="usedplus_dd_buyoutVehicleMessage" v="このリースをバイアウトするには %s が必要ですか？&#10;&#10;残存価値：%s&#10;適用された持分：-%s&#10;セキュリティデポジット払い戻し：-%s&#10;&#10;純コスト：%s" eh="05504f8c" />
+        <e k="usedplus_dd_earlyPayoffTitle" v="早期返済" eh="4ccf6612" />
+        <e k="usedplus_dd_paymentSet" v="支払いを %s に設定（%.0f%%）" eh="28307eef" />
+        <e k="usedplus_dd_payoffConfirm" v="残りのバランス %s を今すぐ返済しますか？" eh="491a3bbc" />
+        <e k="usedplus_dd_statusActive" v="有効" eh="4d3d769b" />
+        <e k="usedplus_dd_termMonths" v="%d ヶ月" eh="eb5314ed" />
+        <e k="usedplus_dd_termYears" v="%d ヶ月（%d 年%s）" eh="7b504ff3" />
+        <e k="usedplus_dd_titleFinance" v="融資詳細" eh="162264ba" />
+        <e k="usedplus_dd_titleLandLease" v="土地リース詳細" eh="b6577396" />
+        <e k="usedplus_dd_titleLease" v="リース詳細" eh="53e751e8" />
+        <e k="usedplus_dd_typeLandFinance" v="土地融資" eh="b6dcb2f3" />
+        <e k="usedplus_dd_typeLandLease" v="土地リース" eh="9c6119ac" />
+        <e k="usedplus_dd_typeLease" v="リース" eh="47c96b08" />
+        <e k="usedplus_dd_typeRepaint" v="再塗装" eh="1d0b7dd4" />
+        <e k="usedplus_dd_typeRepair" v="修理" eh="0493d27e" />
+        <e k="usedplus_dd_typeRepairRepaint" v="修理と再塗装" eh="e53c01f2" />
+        <e k="usedplus_dd_typeVehicleFinance" v="車両融資" eh="6bd5146b" />
+        <e k="usedplus_error_cannotFinance" v="融資できません：クレジットスコア %d は最小 %d より低い" eh="3db1fb5e" />
+        <e k="usedplus_error_cannotLease" v="リースできません：クレジットスコア %d は最小 %d より低い" eh="03c9bd36" />
+        <e k="usedplus_error_insufficientFundsBuy" v="資金が不足しています！購入に必要な %s。" eh="b1aef085" />
+        <e k="usedplus_error_placeablesNotLeasable" v="建物と設置物はリースできません。" eh="fdb637b5" />
+        <e k="usedplus_ft_truckUnavailable" v="サービストラックは利用できなくなりました。" eh="3fd5b50a" />
+        <e k="usedplus_ft_vehicleUnavailable" v="車両は利用できなくなりました。" eh="82cb8143" />
+        <e k="usedplus_inspection_cached" v="キャッシュされた検査結果を使用します（無料）。" eh="32ebad96" />
+        <e k="usedplus_inspection_insufficientFunds" v="検査資金が不足しています。必要：%s" eh="a1f203a9" />
+        <e k="usedplus_maintenance_noDataAvailable" v="この車両のメンテナンスデータはありません。" eh="f5963282" />
+        <e k="usedplus_negotiation_cannotAfford" v="このオファーはお金に余裕がありません。" eh="4e8dfdf2" />
+        <e k="usedplus_purchase_complete" v="購入完了" eh="7328ece0" />
+        <e k="usedplus_purchase_detail" v="%s を %s で購入" eh="a9d8903a" />
+        <e k="usedplus_rp_flatTireLabel" v="パンク修理（%s）" eh="8ba1e25d" />
+        <e k="usedplus_rp_fuelLeakLabel" v="燃料漏れ修理（%s）" eh="de978bcc" />
+        <e k="usedplus_rp_includesLabel" v="含まれるもの：" eh="59bef2f2" />
+        <e k="usedplus_runaway_defaultEnded" v="逃走が停止しました。" eh="ed4659ca" />
+        <e k="usedplus_rvb_sectionHeader" v="車両診断" eh="ae666ba0" />
+        <e k="usedplus_vpf_offerValidMonths" v="オファーの有効期限は %d ヶ月です" eh="5fe704c6" />
 </elements>
 </l10n>

@@ -2663,5 +2663,105 @@
         <e k="usedplus_common_unknownLand" v="Невідома земля" eh="1b201d84" />
         <e k="usedplus_common_unknownFarm" v="Невідома ферма" eh="92a9cc35" />
         <e k="usedplus_common_unknownError" v="Невідома помилка" eh="aee9784c" />
+        <e k="usedplus_common_vehicle" v="Транспортний засіб" eh="d6af9c1e" />
+        <e k="usedplus_electrical_reliability" v="Надійність електрики" eh="ef16f00d" />
+        <e k="usedplus_engine_reliability" v="Надійність двигуна" eh="d86b8cc4" />
+        <e k="usedplus_mr_breakdowns" v="Поломки" eh="ff1cc005" />
+        <e k="usedplus_mr_repairs" v="Ремонти" eh="810a4b9e" />
+        <e k="usedplus_repair_title_workshop" v="Ремонт у майстерні" eh="61a80a46" />
+        <e k="usedplus_rp_confirm_title" v="Підтвердити платіж" eh="413e8eec" />
+        <e k="usedplus_rp_label_components" v="Компоненти:" eh="3b7009ae" />
+        <e k="usedplus_rp_label_repaint" v="Переофарбування:" eh="e63bb6f4" />
+        <e k="usedplus_rp_label_repair" v="Ремонт:" eh="5dcb42f0" />
+        <e k="usedplus_rp_notification_workshop" v="повний ремонт у майстерні" eh="a338c59a" />
+        <e k="usedplus_rp_service_mechanical" v="Механічний ремонт" eh="60a0d54f" />
+        <e k="usedplus_rp_service_repaint" v="Переофарбування" eh="1d0b7dd4" />
+        <e k="usedplus_rp_service_workshop" v="Ремонт у майстерні" eh="61a80a46" />
+        <e k="usedplus_rvb_parts_status" v="Компоненти: %d / %d потребують ремонту" eh="4ad0ab6d" />
+        <e k="usedplus_title_maintenanceReport" v="=== Звіт про обслуговування ===" eh="984a7db3" />
+        <e k="usedplus_cr_ageBuilding" v="Будування (%d платежів)" eh="23775faa" />
+        <e k="usedplus_cr_ageEstablished" v="Встановлено (%d платежів)" eh="776f4287" />
+        <e k="usedplus_cr_ageGrowing" v="Зростання (%d платежів)" eh="7ac52629" />
+        <e k="usedplus_cr_ageNew" v="Новий" eh="03c2e7e4" />
+        <e k="usedplus_cr_ageNewCount" v="Новий (%d платежів)" eh="3b231c55" />
+        <e k="usedplus_cr_discountRates" v="Дисконтні ставки: -%.1f%%" eh="41dcfad7" />
+        <e k="usedplus_cr_factorExcellent" v="Відмінно (%d%% вчасно)" eh="a393cc84" />
+        <e k="usedplus_cr_factorFair" v="Задовільно (%d%% вчасно)" eh="d7cb93a6" />
+        <e k="usedplus_cr_factorGood" v="Добре (%d%% вчасно)" eh="ed07d038" />
+        <e k="usedplus_cr_factorPoor" v="Погано (%d%% вчасно)" eh="d3b1e976" />
+        <e k="usedplus_cr_histogramFormat" v="%s  %.0f%% вчасно" eh="25531fe2" />
+        <e k="usedplus_cr_legendLate" v="Запізнення: %d" eh="710bdbb1" />
+        <e k="usedplus_cr_legendMissed" v="Пропущено: %d" eh="655c731c" />
+        <e k="usedplus_cr_legendOnTime" v="Вчасно: %d" eh="0a4420a4" />
+        <e k="usedplus_cr_penaltyRates" v="Штрафні ставки: +%.1f%%" eh="b83c6923" />
+        <e k="usedplus_cr_standardRates" v="Стандартні ставки" eh="4c7f68aa" />
+        <e k="usedplus_cr_tipConsistency" v="Зосередьтесь на послідовних вчасних платежах, щоб відновити свій рейтинг." eh="fe0b4e10" />
+        <e k="usedplus_cr_tipDebt30" v="Спробуйте зменшити коефіцієнт боргу до активів нижче 30%% для найкращих ставок." eh="521de800" />
+        <e k="usedplus_cr_tipDebtRatio" v="Ваш коефіцієнт боргу до активів високий. Погасіть існуючі кредити, щоб поліпшити свій рейтинг." eh="726e898c" />
+        <e k="usedplus_cr_tipExcellent" v="Відмінний кредит! Ви відповідаєте критеріям для найкращих ставок і умов." eh="c4bd3149" />
+        <e k="usedplus_cr_tipGeneral1" v="Вчасна оплата є найбільш важливим фактором вашого кредитного рейтингу." eh="1ebb471c" />
+        <e k="usedplus_cr_tipGeneral2" v="Утримуйте коефіцієнт боргу до активів нижче 50%% для кращих ставок." eh="279b2666" />
+        <e k="usedplus_cr_tipGeneral3" v="Довша кредитна історія допомагає — час і послідовність — це ключ." eh="f43fdbc2" />
+        <e k="usedplus_cr_tipGeneral4" v="Комбінація автомобільних кредитів, фінансування земельних ділянок і лізингу демонструє відповідальне запозичення." eh="d340b335" />
+        <e k="usedplus_cr_tipGeneral5" v="Пропуск платежу має більший вплив, ніж додаткові платежі." eh="1b319c2c" />
+        <e k="usedplus_cr_tipGoodProgress" v="Хороший прогрес! Продовжуйте робити вчасні платежі, щоб досягти рівня Відмінно." eh="0414afc6" />
+        <e k="usedplus_cr_tipHighDebt" v="Виявлено високе навантаження боргу. Зосередьтесь на погашенні існуючих кредитів." eh="4c5c6512" />
+        <e k="usedplus_cr_tipMissedPayments" v="Пропущені платежі знижують ваш рейтинг. Пріоритет — наверстати." eh="72f5e32d" />
+        <e k="usedplus_cr_tipMixAccounts" v="Комбінація типів рахунків (кредити, лізинг, земля) може поліпшити ваш рейтинг." eh="27d730d4" />
+        <e k="usedplus_cr_tipNoHistory" v="Кредитної історії ще немає. Отримайте невеликий кредит, щоб почати будувати свій рейтинг." eh="21023caf" />
+        <e k="usedplus_cr_tipOnTime6Months" v="Робіть усі платежі вчасно протягом 6 місяців, щоб побачити значне поліпшення." eh="a50441bf" />
+        <e k="usedplus_cr_tipOpenDeal" v="Відкрийте фінансову угоду, щоб почати будувати свою кредитну історію." eh="27390112" />
+        <e k="usedplus_cr_tipRefinance" v="Розгляньте можливість рефінансування старих кредитів, щоб скористатися вашими низькими ставками." eh="d3a3a2e5" />
+        <e k="usedplus_cr_tipStartSmall" v="Почніть з невеликого кредиту і погасіть його вчасно, щоб побудувати кредит." eh="ac79b368" />
+        <e k="usedplus_cr_tipStreak" v="Створіть довшу серію вчасних платежів, щоб підвищити свій рейтинг." eh="196cacdf" />
+        <e k="usedplus_cr_tipTimeBuilds" v="Кредит потребує часу для будування. Продовжуйте послідовно робити платежі." eh="6508e92a" />
+        <e k="usedplus_cr_trendDeclining" v="Спадання" eh="12175033" />
+        <e k="usedplus_cr_trendExcellent" v="Відмінно" eh="fcc2d28a" />
+        <e k="usedplus_cr_trendGood" v="Поліпшення" eh="4ba4dfd7" />
+        <e k="usedplus_cr_trendPoor" v="Погано" eh="0e94d017" />
+        <e k="usedplus_cr_trendStable" v="Стабільно" eh="fa3aff3c" />
+        <e k="usedplus_cr_utilExcellent" v="Відмінно (%.0f%% використовується)" eh="7dfc86c1" />
+        <e k="usedplus_cr_utilFair" v="Задовільно (%.0f%% використовується)" eh="a617a851" />
+        <e k="usedplus_cr_utilGood" v="Добре (%.0f%% використовується)" eh="c0b657d4" />
+        <e k="usedplus_cr_utilHigh" v="Високо (%.0f%% використовується)" eh="86e0b0c5" />
+        <e k="usedplus_dd_bankLoanExtra" v="Платіж встановлено на %s (+%d%% додатково)" eh="63c230fc" />
+        <e k="usedplus_dd_bankLoanStandard" v="Платіж встановлено на стандартну суму" eh="e169e647" />
+        <e k="usedplus_dd_buyoutLandMessage" v="Купити цю землю за %s?&#10;&#10;Вартість землі: %s&#10;Економія від покупки нової: %s&#10;&#10;Загальна вартість: %s" eh="2764369e" />
+        <e k="usedplus_dd_buyoutLeaseTitle" v="Викуп лізингу" eh="b14741b3" />
+        <e k="usedplus_dd_buyoutVehicleMessage" v="Викупити цей лізинг за %s?&#10;&#10;Залишкова вартість: %s&#10;Застосоване капіталовкладення: -%s&#10;Повернення гарантійного депозиту: -%s&#10;&#10;Чиста вартість: %s" eh="05504f8c" />
+        <e k="usedplus_dd_earlyPayoffTitle" v="Дострокове погашення" eh="4ccf6612" />
+        <e k="usedplus_dd_paymentSet" v="Платіж встановлено на %s (%.0f%%)" eh="28307eef" />
+        <e k="usedplus_dd_payoffConfirm" v="Погасити залишок %s зараз?" eh="491a3bbc" />
+        <e k="usedplus_dd_statusActive" v="Активно" eh="4d3d769b" />
+        <e k="usedplus_dd_termMonths" v="%d місяців" eh="eb5314ed" />
+        <e k="usedplus_dd_termYears" v="%d місяців (%d рік%s)" eh="7b504ff3" />
+        <e k="usedplus_dd_titleFinance" v="Деталі фінансування" eh="162264ba" />
+        <e k="usedplus_dd_titleLandLease" v="Деталі лізингу землі" eh="b6577396" />
+        <e k="usedplus_dd_titleLease" v="Деталі лізингу" eh="53e751e8" />
+        <e k="usedplus_dd_typeLandFinance" v="Фінансування земельної ділянки" eh="b6dcb2f3" />
+        <e k="usedplus_dd_typeLandLease" v="Лізинг земельної ділянки" eh="9c6119ac" />
+        <e k="usedplus_dd_typeLease" v="Лізинг" eh="47c96b08" />
+        <e k="usedplus_dd_typeRepaint" v="Переофарбування" eh="1d0b7dd4" />
+        <e k="usedplus_dd_typeRepair" v="Ремонт" eh="0493d27e" />
+        <e k="usedplus_dd_typeRepairRepaint" v="Ремонт &amp; переофарбування" eh="e53c01f2" />
+        <e k="usedplus_dd_typeVehicleFinance" v="Фінансування транспортного засобу" eh="6bd5146b" />
+        <e k="usedplus_error_cannotFinance" v="Неможливо фінансувати: кредитний рейтинг %d нижче мінімуму %d" eh="3db1fb5e" />
+        <e k="usedplus_error_cannotLease" v="Неможливо здати в лізинг: кредитний рейтинг %d нижче мінімуму %d" eh="03c9bd36" />
+        <e k="usedplus_error_insufficientFundsBuy" v="Недостатньо коштів! Потрібно %s для покупки." eh="b1aef085" />
+        <e k="usedplus_error_placeablesNotLeasable" v="Будівлі та розташованості не можна здати в лізинг." eh="fdb637b5" />
+        <e k="usedplus_ft_truckUnavailable" v="Службовий вантажний автомобіль більше недоступний." eh="3fd5b50a" />
+        <e k="usedplus_ft_vehicleUnavailable" v="Транспортний засіб більше недоступний." eh="82cb8143" />
+        <e k="usedplus_inspection_cached" v="Використовуються кешовані результати перевірки (без платежу)." eh="32ebad96" />
+        <e k="usedplus_inspection_insufficientFunds" v="Недостатньо коштів для перевірки. Потрібно: %s" eh="a1f203a9" />
+        <e k="usedplus_maintenance_noDataAvailable" v="Немає даних про обслуговування для цього транспортного засобу." eh="f5963282" />
+        <e k="usedplus_negotiation_cannotAfford" v="Ви не можете дозволити собі це пропозицію." eh="4e8dfdf2" />
+        <e k="usedplus_purchase_complete" v="Покупка завершена" eh="7328ece0" />
+        <e k="usedplus_purchase_detail" v="%s придбано за %s" eh="a9d8903a" />
+        <e k="usedplus_rp_flatTireLabel" v="Ремонт спущеної шини (%s)" eh="8ba1e25d" />
+        <e k="usedplus_rp_fuelLeakLabel" v="Ремонт витоку палива (%s)" eh="de978bcc" />
+        <e k="usedplus_rp_includesLabel" v="Включає: " eh="59bef2f2" />
+        <e k="usedplus_runaway_defaultEnded" v="Втеча припинена." eh="ed4659ca" />
+        <e k="usedplus_rvb_sectionHeader" v="Діагностика транспортного засобу" eh="ae666ba0" />
+        <e k="usedplus_vpf_offerValidMonths" v="Пропозиція дійсна %d місяців" eh="5fe704c6" />
 </elements>
 </l10n>
