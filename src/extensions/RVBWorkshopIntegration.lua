@@ -88,17 +88,22 @@ function RVBWorkshopIntegration:hookShowDialog()
 
     -- Replace with hooked version
     g_gui.showDialog = function(guiSelf, name, ...)
-        -- Call original first
+        -- Call original first (creates and opens the dialog)
         local result = originalShowDialog(guiSelf, name, ...)
 
         -- Check if this is the RVB Workshop dialog being opened
         if name == "rvbWorkshopDialog" then
             UsedPlus.logDebug("RVBWorkshopIntegration: rvbWorkshopDialog opened")
 
-            -- Try to install our hook on the dialog class (only once)
+            -- Try to install method hooks (only once — repair button, service, diagnostics)
             if not RVBWorkshopIntegration.isHooked then
                 RVBWorkshopIntegration:tryHookUpdateScreen()
             end
+
+            -- DIRECT INJECTION: updateScreen has already run by now, so inject our data
+            -- directly into the dialog's settingsBox and diagnostics list.
+            -- This runs EVERY time the dialog opens (RVB rebuilds everything each open).
+            RVBWorkshopIntegration:directInjectAfterOpen()
         end
 
         return result
@@ -155,12 +160,14 @@ function RVBWorkshopIntegration:tryHookUpdateScreen()
 
     -- Get the updateScreen function - could be on the class or metatable
     local originalUpdateScreen = dialogClass.updateScreen
+    local hookTarget = "instance"
 
     -- Try metatable if not found directly
     if originalUpdateScreen == nil then
         local mt = getmetatable(dialogClass)
         if mt and mt.__index then
             originalUpdateScreen = mt.__index.updateScreen
+            hookTarget = "metatable"
             UsedPlus.logDebug("RVBWorkshopIntegration: Found updateScreen in metatable")
         end
     end
@@ -177,30 +184,56 @@ function RVBWorkshopIntegration:tryHookUpdateScreen()
         return false
     end
 
-    -- Replace with hooked version that dispatches to sub-modules
-    -- SAFETY: Only injects into settingsBox (left side). Never touches diagnosticsList
-    -- or its dataSource — that breaks RVB's toggle mechanism.
-    dialogClass.updateScreen = function(dialogSelf)
+    UsedPlus.logInfo(string.format("RVBWorkshopIntegration: updateScreen found on %s, type=%s", hookTarget, type(originalUpdateScreen)))
+
+    -- Create the hooked function
+    local hookedUpdateScreen = function(dialogSelf)
+        -- DIAGNOSTIC: confirm hook fires (logWarn always prints)
+        UsedPlus.logWarn("RVBWorkshopIntegration: >>> updateScreen HOOK FIRED <<<")
+
         -- Call original first (this populates RVB's data and rebuilds settingsBox)
         local result = originalUpdateScreen(dialogSelf)
 
         -- Inject UsedPlus data into settingsBox (left side only)
         -- RVB deletes and rebuilds settingsBox each updateScreen, so we re-inject after
-        pcall(RVBWorkshopIntegration.injectUsedPlusData, RVBWorkshopIntegration, dialogSelf)
+        local ok1, err1 = pcall(RVBWorkshopIntegration.injectUsedPlusData, RVBWorkshopIntegration, dialogSelf)
+        if not ok1 then
+            UsedPlus.logWarn("RVBWorkshopIntegration: injectUsedPlusData CRASHED: " .. tostring(err1))
+        end
 
         -- Append our hydraulic entry to partBreakdowns so RVB's onClickPart handles it
         -- RVB rebuilds partBreakdowns each updateScreen, so we re-append each time
-        pcall(RVBWorkshopIntegration.injectHydraulicPartEntry, RVBWorkshopIntegration, dialogSelf)
+        local ok2, err2 = pcall(RVBWorkshopIntegration.injectHydraulicPartEntry, RVBWorkshopIntegration, dialogSelf)
+        if not ok2 then
+            UsedPlus.logWarn("RVBWorkshopIntegration: injectHydraulicPartEntry CRASHED: " .. tostring(err2))
+        end
 
         -- Hook setPartsRepairreq on the vehicle to intercept our fake part
-        pcall(RVBWorkshopIntegration.hookSetPartsRepairreq, RVBWorkshopIntegration, dialogSelf)
+        local ok3, err3 = pcall(RVBWorkshopIntegration.hookSetPartsRepairreq, RVBWorkshopIntegration, dialogSelf)
+        if not ok3 then
+            UsedPlus.logWarn("RVBWorkshopIntegration: hookSetPartsRepairreq CRASHED: " .. tostring(err3))
+        end
 
         -- Check for new RVB faults for breakdown degradation tracking
         if dialogSelf.vehicle then
-            pcall(RVBWorkshopIntegration.checkForNewFaults, RVBWorkshopIntegration, dialogSelf.vehicle)
+            local ok4, err4 = pcall(RVBWorkshopIntegration.checkForNewFaults, RVBWorkshopIntegration, dialogSelf.vehicle)
+            if not ok4 then
+                UsedPlus.logWarn("RVBWorkshopIntegration: checkForNewFaults CRASHED: " .. tostring(err4))
+            end
         end
 
         return result
+    end
+
+    -- Install hook on BOTH the instance AND the metatable to catch all call patterns
+    dialogClass.updateScreen = hookedUpdateScreen
+    UsedPlus.logInfo("RVBWorkshopIntegration: Set updateScreen on instance")
+
+    -- Also hook metatable if method came from there (RVB may call via class, not instance)
+    local mt = getmetatable(dialogClass)
+    if mt and mt.__index and type(mt.__index) == "table" and mt.__index.updateScreen then
+        mt.__index.updateScreen = hookedUpdateScreen
+        UsedPlus.logInfo("RVBWorkshopIntegration: Also set updateScreen on metatable.__index")
     end
 
     self.isHooked = true
@@ -220,17 +253,67 @@ function RVBWorkshopIntegration:tryHookUpdateScreen()
     end
 
     -- First-open: inject buttons and hooks (these persist across updateScreen calls)
-    pcall(RVBWorkshopIntegration.hookRepairButton, RVBWorkshopIntegration, dialogClass)
-    pcall(RVBWorkshopIntegration.hookServiceButton, RVBWorkshopIntegration, dialogClass)
+    local okR, errR = pcall(RVBWorkshopIntegration.hookRepairButton, RVBWorkshopIntegration, dialogClass)
+    if not okR then UsedPlus.logWarn("RVBWorkshopIntegration: hookRepairButton CRASHED: " .. tostring(errR)) end
+
+    local okS, errS = pcall(RVBWorkshopIntegration.hookServiceButton, RVBWorkshopIntegration, dialogClass)
+    if not okS then UsedPlus.logWarn("RVBWorkshopIntegration: hookServiceButton CRASHED: " .. tostring(errS)) end
 
     if dialogClass.vehicle then
-        pcall(RVBWorkshopIntegration.initializeFaultTracking, RVBWorkshopIntegration, dialogClass.vehicle)
+        local okF, errF = pcall(RVBWorkshopIntegration.initializeFaultTracking, RVBWorkshopIntegration, dialogClass.vehicle)
+        if not okF then UsedPlus.logWarn("RVBWorkshopIntegration: initializeFaultTracking CRASHED: " .. tostring(errF)) end
     end
 
-    pcall(RVBWorkshopIntegration.injectRepaintButton, RVBWorkshopIntegration, dialogClass)
-    pcall(RVBWorkshopIntegration.injectTiresButton, RVBWorkshopIntegration, dialogClass)
+    local okP, errP = pcall(RVBWorkshopIntegration.injectRepaintButton, RVBWorkshopIntegration, dialogClass)
+    if not okP then UsedPlus.logWarn("RVBWorkshopIntegration: injectRepaintButton CRASHED: " .. tostring(errP)) end
+
+    local okT, errT = pcall(RVBWorkshopIntegration.injectTiresButton, RVBWorkshopIntegration, dialogClass)
+    if not okT then UsedPlus.logWarn("RVBWorkshopIntegration: injectTiresButton CRASHED: " .. tostring(errT)) end
 
     return true
+end
+
+--[[
+    Direct injection after dialog opens.
+    Called from the showDialog hook EVERY time rvbWorkshopDialog opens.
+    updateScreen has already run by this point, so RVB's settingsBox and
+    partBreakdowns are populated — we inject our data on top.
+]]
+function RVBWorkshopIntegration:directInjectAfterOpen()
+    local guiEntry = g_gui and g_gui.guis and g_gui.guis.rvbWorkshopDialog
+    if not guiEntry or not guiEntry.target then
+        UsedPlus.logWarn("RVBWorkshopIntegration:directInjectAfterOpen - dialog not found")
+        return
+    end
+
+    local dialog = guiEntry.target
+    UsedPlus.logInfo("RVBWorkshopIntegration:directInjectAfterOpen - injecting into dialog")
+
+    -- Inject UsedPlus data into settingsBox (left side: maintenance grade, history, assessment)
+    local ok1, err1 = pcall(self.injectUsedPlusData, self, dialog)
+    if not ok1 then
+        UsedPlus.logWarn("RVBWorkshopIntegration: injectUsedPlusData CRASHED: " .. tostring(err1))
+    end
+
+    -- Inject hydraulic part entry into partBreakdowns (right side diagnostics)
+    local ok2, err2 = pcall(self.injectHydraulicPartEntry, self, dialog)
+    if not ok2 then
+        UsedPlus.logWarn("RVBWorkshopIntegration: injectHydraulicPartEntry CRASHED: " .. tostring(err2))
+    end
+
+    -- Hook setPartsRepairreq on the vehicle to intercept our fake hydraulic part toggle
+    local ok3, err3 = pcall(self.hookSetPartsRepairreq, self, dialog)
+    if not ok3 then
+        UsedPlus.logWarn("RVBWorkshopIntegration: hookSetPartsRepairreq CRASHED: " .. tostring(err3))
+    end
+
+    -- Track faults for degradation
+    if dialog.vehicle then
+        local ok4, err4 = pcall(self.checkForNewFaults, self, dialog.vehicle)
+        if not ok4 then
+            UsedPlus.logWarn("RVBWorkshopIntegration: checkForNewFaults CRASHED: " .. tostring(err4))
+        end
+    end
 end
 
 --[[

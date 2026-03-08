@@ -134,12 +134,18 @@ function RVBWorkshopIntegration:injectUsedPlusData(dialog)
         end
     end
 
-    -- Add Mechanic's Assessment as special centered section
-    self:injectMechanicAssessment(dialog, settingsBox, templateRow, colorTable, alternating)
+    -- Add Mechanic's Assessment as full-width centered section
+    local assessmentRefs = self:injectMechanicAssessment(dialog, settingsBox, templateRow, colorTable, alternating)
 
     -- Refresh the layout
     if settingsBox.invalidateLayout then
         settingsBox:invalidateLayout()
+    end
+
+    -- Post-layout: expand assessment labels to full width
+    -- MUST be after invalidateLayout() to prevent layout manager from overriding sizes
+    if assessmentRefs then
+        self:applyFullWidthSizing(assessmentRefs, settingsBox)
     end
 
     UsedPlus.logDebug(string.format("RVBWorkshopIntegration: Injected %d UsedPlus rows for %s",
@@ -351,6 +357,21 @@ function RVBWorkshopIntegration:hookSetPartsRepairreq(dialog)
         origSetParts(self, part, state)
     end
 
+    -- Also hook getRepairPrice_RVBClone to include hydraulic cost.
+    -- RVB's onClickRepair bails if getRepairPrice_RVBClone(true) <= 100.
+    -- Without this, the Repair button does nothing when only hydraulics need repair.
+    local origGetRepairPrice = vehicle.getRepairPrice_RVBClone
+    if origGetRepairPrice then
+        vehicle.getRepairPrice_RVBClone = function(self, ...)
+            local basePrice = origGetRepairPrice(self, ...)
+            if RVBWorkshopIntegration.hydraulicRepairRequested then
+                local hydCost = RVBWorkshopIntegration:calculateHydraulicRepairCost(self)
+                return (basePrice or 0) + (hydCost or 0)
+            end
+            return basePrice
+        end
+    end
+
     vehicle.usedPlusSetPartsHooked = true
     UsedPlus.logDebug("RVBWorkshopIntegration: hookSetPartsRepairreq hooked on vehicle")
 end
@@ -381,9 +402,12 @@ function RVBWorkshopIntegration:calculateHydraulicRepairCost(vehicle)
     local storeItem = g_storeManager:getItemByXMLFilename(vehicle.configFileName)
     local basePrice = storeItem and (StoreItemUtil.getDefaultPrice(storeItem, {}) or storeItem.price or 10000) or 10000
 
-    -- Cost = 0.5% of vehicle price scaled by damage + labor (200 per full repair)
-    local partCost = basePrice * 0.005 * damage
-    local laborCost = 200 * damage
+    -- Hydraulic systems are high-pressure precision components — pumps, cylinders,
+    -- seals, hoses, and specialized fluid. Real-world cost runs 3-8% of vehicle value.
+    -- Gamified at 3.5% parts + $800 labor (significant but not crippling).
+    -- Examples at full damage: $50K tractor → ~$2,550 | $200K → ~$7,800 | $500K → ~$18,300
+    local partCost = basePrice * 0.035 * damage
+    local laborCost = 800 * damage
     local repairMultiplier = UsedPlusSettings and UsedPlusSettings:get("repairCostMultiplier") or 1.0
 
     return math.floor((partCost + laborCost) * repairMultiplier)
@@ -402,31 +426,28 @@ function RVBWorkshopIntegration:adjustRepairButtonPrice(dialog)
     if self.hydraulicRepairRequested then
         local hydraulicCost = self:calculateHydraulicRepairCost(dialog.vehicle)
         if hydraulicCost > 0 then
-            -- Get RVB's repair price and add ours
-            local rvbPrice = 0
+            -- getRepairPrice_RVBClone is hooked to include hydraulic cost,
+            -- so totalPrice already includes both RVB + hydraulic
+            local totalPrice = 0
             if dialog.vehicle.getRepairPrice_RVBClone then
-                rvbPrice = dialog.vehicle:getRepairPrice_RVBClone() or 0
+                totalPrice = dialog.vehicle:getRepairPrice_RVBClone() or 0
             end
-            local totalPrice = rvbPrice + hydraulicCost
 
             -- Update button text with combined price
             dialog.repairButton:setText(string.format("%s (%s)",
                 g_i18n:getText("button_repair"),
                 g_i18n:formatMoney(totalPrice, 0, true, true)))
 
-            -- Enable the button if it was disabled due to low RVB-only cost
-            -- but hydraulic repair is meaningful
-            if rvbPrice <= 100 then
-                local rvb = dialog.vehicle.spec_faultData
-                local activeWork = false
-                if rvb then
-                    activeWork = (rvb.repair and rvb.repair.active)
-                        or (rvb.inspection and rvb.inspection.active)
-                        or (rvb.service and rvb.service.active)
-                end
-                if not activeWork then
-                    dialog.repairButton:setDisabled(false)
-                end
+            -- Enable the button — hydraulic repair is meaningful even if no RVB parts need repair
+            local rvb = dialog.vehicle.spec_faultData
+            local activeWork = false
+            if rvb then
+                activeWork = (rvb.repair and rvb.repair.state and rvb.repair.state ~= 0)
+                    or (rvb.inspection and rvb.inspection.active)
+                    or (rvb.service and rvb.service.active)
+            end
+            if not activeWork then
+                dialog.repairButton:setDisabled(false)
             end
 
             -- Store the cost for the repair completion handler
@@ -487,13 +508,17 @@ function RVBWorkshopIntegration:populateHydraulicCell(cell, hydraulicReliability
         end
     end
 
-    -- Status bar
+    -- Status bar — use RVB's own sizing pattern (normalized coordinates)
     local partBar = cell:getDescendantByName("partBar")
     if partBar then
-        if partBar.setSize then
-            local bgWidth = 176  -- From RVB profile
-            local fillWidth = math.floor(bgWidth * hydraulicReliability)
-            partBar:setSize(fillWidth, nil)
+        if partBar.setSize and partBar.parent and partBar.parent.size then
+            local fullWidth = partBar.parent.size[1] - (partBar.margin and partBar.margin[1] or 0) * 2
+            local minSize = 0
+            if partBar.startSize and partBar.endSize then
+                minSize = partBar.startSize[1] + partBar.endSize[1]
+            end
+            local fillWidth = fullWidth * math.min(hydraulicReliability, 1)
+            partBar:setSize(math.max(minSize, fillWidth), nil)
         end
         if partBar.setImageColor then
             partBar:setImageColor(nil, unpack(conditionColor))
@@ -625,19 +650,108 @@ function RVBWorkshopIntegration:generateFallbackQuote(workhorseLemonScale)
 end
 
 --[[
-    Inject Mechanic's Assessment as a centered display section
-    Creates a visually distinct area with header + quote
-    Includes horizontal rule separator above
+    Convert a cloned label+value template row into a single full-width label.
+    Removes the value element so the label can expand, then sizes the label
+    using parent.size[1] (declared size — always available, unlike getSize()
+    which returns 0 on freshly cloned elements that haven't been laid out).
+]]
+function RVBWorkshopIntegration:makeFullWidthRow(row, label, value)
+    -- Remove the value element entirely (not just hide it)
+    if value then
+        if row.removeElement then
+            row:removeElement(value)
+        else
+            -- Manual fallback: remove from elements array
+            if row.elements then
+                for i = #row.elements, 1, -1 do
+                    if row.elements[i] == value then
+                        table.remove(row.elements, i)
+                        break
+                    end
+                end
+            end
+            value.parent = nil
+        end
+    end
+
+    -- Expand label to full container width using parent's DECLARED size
+    -- (parent = settingsBox ScrollingLayout, .size[1] = declared width from XML)
+    if label then
+        local containerWidth = 0
+        if row.parent and row.parent.size then
+            containerWidth = row.parent.size[1] or 0
+        end
+
+        if containerWidth > 0 and label.setSize then
+            label:setSize(containerWidth * 0.95, nil)
+        end
+
+        if label.setPosition then
+            label:setPosition(0, nil)
+        end
+        if label.setTextAlignment then
+            label:setTextAlignment(RenderText.ALIGN_CENTER)
+        end
+        if label.setTextTruncated then
+            label:setTextTruncated(false)
+        end
+        label.textTruncated = false
+    end
+end
+
+--[[
+    Re-apply full-width sizing and truncation disable after invalidateLayout().
+    Layout passes may reset element sizes/properties, so we re-enforce them.
+    Uses settingsBox.size[1] (declared size) which is always available.
+]]
+function RVBWorkshopIntegration:applyFullWidthSizing(refs, settingsBox)
+    if not refs then
+        return
+    end
+
+    local containerWidth = 0
+    if settingsBox and settingsBox.size then
+        containerWidth = settingsBox.size[1] or 0
+    end
+
+    for _, label in ipairs(refs) do
+        if label then
+            if containerWidth > 0 and label.setSize then
+                label:setSize(containerWidth * 0.95, nil)
+            end
+            if label.setTextTruncated then
+                label:setTextTruncated(false)
+            end
+            label.textTruncated = false
+        end
+    end
+end
+
+--[[
+    Inject Mechanic's Assessment into the settingsBox as full-width centered rows.
+    Uses makeFullWidthRow() to remove the value child so the label gets full width.
+    Returns array of label refs for post-layout truncation reset, or nil if nothing injected.
+
+    Renders as:
+      ─────────────────────────────   (full-width separator)
+      MECHANIC'S ASSESSMENT           (full-width gold header)
+      "quote text here"               (full-width colored quote)
 ]]
 function RVBWorkshopIntegration:injectMechanicAssessment(dialog, settingsBox, templateRow, colorTable, alternating)
     local vehicle = dialog.vehicle
     if vehicle == nil then
-        return
+        return nil
+    end
+
+    -- Only show assessment after RVB inspection is completed
+    local rvb = vehicle.spec_faultData
+    if rvb and rvb.inspection and not rvb.inspection.completed then
+        return nil
     end
 
     local spec = vehicle.spec_usedPlusMaintenance
     if spec == nil then
-        return
+        return nil
     end
 
     -- Get workhorse/lemon scale and quote
@@ -655,7 +769,7 @@ function RVBWorkshopIntegration:injectMechanicAssessment(dialog, settingsBox, te
     end
 
     if mechanicQuote == nil or mechanicQuote == "" then
-        return
+        return nil
     end
 
     -- Determine quote color based on workhorse/lemon scale
@@ -666,7 +780,9 @@ function RVBWorkshopIntegration:injectMechanicAssessment(dialog, settingsBox, te
         quoteColor = {0.95, 0.6, 0.55, 1}  -- Reddish for lemons
     end
 
-    -- Row 0: Horizontal rule separator (centered, full width)
+    local assessmentLabels = {}
+
+    -- Row 0: Separator — full-width dashes
     local separatorRow = templateRow:clone(settingsBox)
     if separatorRow then
         separatorRow:setVisible(true)
@@ -674,37 +790,20 @@ function RVBWorkshopIntegration:injectMechanicAssessment(dialog, settingsBox, te
         if color then
             separatorRow:setImageColor(nil, unpack(color))
         end
-
-        local label = separatorRow:getDescendantByName("label")
-        local value = separatorRow:getDescendantByName("value")
-
-        if label then
-            -- Expand label to full row width and center
-            -- v2.8.0: Fix for cloned elements that may not have getSize method
-            if separatorRow.getSize then
-                local rowWidth, rowHeight = separatorRow:getSize()
-                if rowWidth and rowWidth > 0 then
-                    label:setSize(rowWidth * 0.95, nil)
-                end
+        local sepLabel = separatorRow:getDescendantByName("label")
+        local sepValue = separatorRow:getDescendantByName("value")
+        self:makeFullWidthRow(separatorRow, sepLabel, sepValue)
+        if sepLabel then
+            sepLabel:setText("------------------------------")
+            if sepLabel.setTextColor then
+                sepLabel:setTextColor(0.5, 0.5, 0.5, 1)
             end
-            if label.setTextAlignment then
-                label:setTextAlignment(RenderText.ALIGN_CENTER)
-            end
-            -- Create centered horizontal rule using ASCII dashes
-            label:setText("─────────────────────────────")
-            if label.setTextColor then
-                label:setTextColor(0.5, 0.5, 0.5, 1)  -- Gray color for rule
-            end
+            table.insert(assessmentLabels, sepLabel)
         end
-        if value then
-            value:setText("")
-            value:setVisible(false)
-        end
-
         alternating = not alternating
     end
 
-    -- Row 1: Header "MECHANIC'S ASSESSMENT" - centered, full width
+    -- Row 1: Header — full-width gold bold text
     local headerRow = templateRow:clone(settingsBox)
     if headerRow then
         headerRow:setVisible(true)
@@ -712,48 +811,23 @@ function RVBWorkshopIntegration:injectMechanicAssessment(dialog, settingsBox, te
         if color then
             headerRow:setImageColor(nil, unpack(color))
         end
-
-        local label = headerRow:getDescendantByName("label")
-        local value = headerRow:getDescendantByName("value")
-
-        if label then
-            -- Expand label to full row width and center text
-            -- v2.8.0: Fix for cloned elements that may not have getSize method
-            if headerRow.getSize then
-                local rowWidth, rowHeight = headerRow:getSize()
-                if rowWidth and rowWidth > 0 then
-                    label:setSize(rowWidth * 0.95, nil)  -- 95% of row width
-                end
+        local hdrLabel = headerRow:getDescendantByName("label")
+        local hdrValue = headerRow:getDescendantByName("value")
+        self:makeFullWidthRow(headerRow, hdrLabel, hdrValue)
+        if hdrLabel then
+            hdrLabel:setText(g_i18n:getText("usedplus_mechanic_assessment") or "MECHANIC'S ASSESSMENT")
+            if hdrLabel.setTextColor then
+                hdrLabel:setTextColor(0.9, 0.8, 0.5, 1)  -- Gold
             end
-            if label.setTextAlignment then
-                label:setTextAlignment(RenderText.ALIGN_CENTER)
+            if hdrLabel.setTextBold then
+                hdrLabel:setTextBold(true)
             end
-            -- Disable text truncation (ellipsis)
-            if label.setHandleFocus then
-                label:setHandleFocus(false)
-            end
-            if label.setTextTruncated then
-                label:setTextTruncated(false)
-            end
-
-            label:setText(g_i18n:getText("usedplus_mechanic_assessment") or "MECHANIC'S ASSESSMENT")
-            -- Style as centered header
-            if label.setTextColor then
-                label:setTextColor(0.9, 0.8, 0.5, 1)  -- Gold header color
-            end
-            if label.setTextBold then
-                label:setTextBold(true)
-            end
+            table.insert(assessmentLabels, hdrLabel)
         end
-        if value then
-            value:setText("")  -- Empty value column
-            value:setVisible(false)  -- Hide value column entirely
-        end
-
         alternating = not alternating
     end
 
-    -- Row 2: The quote itself - centered, full width
+    -- Row 2: Quote — full-width colored quote text
     local quoteRow = templateRow:clone(settingsBox)
     if quoteRow then
         quoteRow:setVisible(true)
@@ -761,42 +835,20 @@ function RVBWorkshopIntegration:injectMechanicAssessment(dialog, settingsBox, te
         if color then
             quoteRow:setImageColor(nil, unpack(color))
         end
-
-        local label = quoteRow:getDescendantByName("label")
-        local value = quoteRow:getDescendantByName("value")
-
-        if label then
-            -- Expand label to full row width and center text
-            -- v2.8.0: Fix for cloned elements that may not have getSize method
-            if quoteRow.getSize then
-                local rowWidth, rowHeight = quoteRow:getSize()
-                if rowWidth and rowWidth > 0 then
-                    label:setSize(rowWidth * 0.95, nil)  -- 95% of row width
-                end
+        local qLabel = quoteRow:getDescendantByName("label")
+        local qValue = quoteRow:getDescendantByName("value")
+        self:makeFullWidthRow(quoteRow, qLabel, qValue)
+        if qLabel then
+            qLabel:setText(string.format('"%s"', mechanicQuote))
+            if qLabel.setTextColor then
+                qLabel:setTextColor(unpack(quoteColor))
             end
-            if label.setTextAlignment then
-                label:setTextAlignment(RenderText.ALIGN_CENTER)
-            end
-            -- Disable text truncation (ellipsis)
-            if label.setHandleFocus then
-                label:setHandleFocus(false)
-            end
-            if label.setTextTruncated then
-                label:setTextTruncated(false)
-            end
-
-            -- Format as quote with quotation marks
-            label:setText(string.format('"%s"', mechanicQuote))
-            if label.setTextColor then
-                label:setTextColor(unpack(quoteColor))
-            end
-        end
-        if value then
-            value:setText("")  -- Empty value column
-            value:setVisible(false)  -- Hide value column entirely
+            table.insert(assessmentLabels, qLabel)
         end
     end
 
     UsedPlus.logDebug(string.format("RVBWorkshopIntegration: Added Mechanic's Assessment for %s (scale=%.2f)",
         vehicle:getName(), workhorseLemonScale))
+
+    return assessmentLabels
 end
