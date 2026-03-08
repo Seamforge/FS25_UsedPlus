@@ -207,9 +207,17 @@ function RVBWorkshopIntegration:onEnhancedInspectionClick(dialog)
 
     -- Wrap RVB's original callback to add confirmation notification
     local origCallback = dialog.onYesNoInspectionDialog
+    if origCallback == nil then
+        UsedPlus.logWarn("RVBInspectionButton: onYesNoInspectionDialog is NIL — inspection will not work")
+    end
     local wrappedCallback = function(target, yes)
+        UsedPlus.logInfo(string.format("RVBInspectionButton: Callback fired — yes=%s, origCallback=%s",
+            tostring(yes), tostring(origCallback ~= nil)))
         if origCallback then
-            origCallback(target, yes)
+            local ok, err = pcall(origCallback, target, yes)
+            if not ok then
+                UsedPlus.logWarn("RVBInspectionButton: origCallback CRASHED: " .. tostring(err))
+            end
         end
         if yes and g_currentMission and g_currentMission.hud then
             local msg = string.format(
@@ -324,9 +332,17 @@ function RVBWorkshopIntegration:onEnhancedServiceClick(dialog)
 
     -- Wrap RVB's original callback to add confirmation notification
     local origCallback = dialog.onYesNoServiceDialog
+    if origCallback == nil then
+        UsedPlus.logWarn("RVBInspectionButton: onYesNoServiceDialog is NIL — service will not work")
+    end
     local wrappedCallback = function(target, yes)
+        UsedPlus.logInfo(string.format("RVBInspectionButton: Service callback fired — yes=%s, origCallback=%s",
+            tostring(yes), tostring(origCallback ~= nil)))
         if origCallback then
-            origCallback(target, yes)
+            local ok, err = pcall(origCallback, target, yes)
+            if not ok then
+                UsedPlus.logWarn("RVBInspectionButton: origServiceCallback CRASHED: " .. tostring(err))
+            end
         end
         if yes and g_currentMission and g_currentMission.hud then
             local msg = string.format(

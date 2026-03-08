@@ -1415,15 +1415,34 @@ function UsedPlusMaintenance:onUpdate(dt, isActiveForInput, isActiveForInputIgno
         local progress = math.min(1.0, math.max(0, elapsed / totalDuration))
 
         -- Check if repair is done.
-        -- useTimeProgress: hydraulic-only repair (no RVB parts) — use elapsed time only.
-        -- Otherwise sync with RVB's repair state (state == NONE == 0 means finished).
-        local repairDone = false
-        if pending.useTimeProgress then
-            repairDone = (progress >= 1.0)
-        elseif rvb and rvb.repair and rvb.repair.state then
-            repairDone = (rvb.repair.state == 0)
-        else
-            repairDone = (progress >= 1.0)
+        -- Primary: time-based progress (always checked as failsafe).
+        -- Secondary: RVB's repair state can signal early completion.
+        local repairDone = (progress >= 1.0)
+        if not repairDone and not pending.useTimeProgress then
+            -- RVB sync: also check if RVB finished before our timer
+            if rvb and rvb.repair then
+                local st = rvb.repair.state
+                if st == 0 or st == nil then
+                    repairDone = true
+                end
+            end
+        end
+        -- Diagnostic logging (throttled: first frame + when done)
+        if not pending.lastLoggedProgress or repairDone then
+            UsedPlus.logInfo(string.format(
+                "Gradual repair: progress=%.1f%%, repairDone=%s, useTimeProgress=%s, rvbState=%s, elapsed=%d/%d min",
+                progress * 100,
+                tostring(repairDone),
+                tostring(pending.useTimeProgress),
+                tostring(rvb and rvb.repair and rvb.repair.state),
+                elapsed, totalDuration))
+            pending.lastLoggedProgress = math.floor(progress * 10)
+        elseif math.floor(progress * 10) > (pending.lastLoggedProgress or -1) then
+            UsedPlus.logInfo(string.format(
+                "Gradual repair: progress=%.0f%%, rvbState=%s",
+                progress * 100,
+                tostring(rvb and rvb.repair and rvb.repair.state)))
+            pending.lastLoggedProgress = math.floor(progress * 10)
         end
         if repairDone then progress = 1.0 end
 
@@ -1509,11 +1528,20 @@ function UsedPlusMaintenance:onUpdate(dt, isActiveForInput, isActiveForInputIgno
                 local postEngCap = math.min(spec.maxReliabilityCeiling or 1.0, spec.maxEngineDurability or 1.0)
                 spec.engineReliability = math.min(spec.engineReliability, postEngCap)
             end
+            -- Clear RVB's repair state so workshop stops showing pending time.
+            -- For hydraulic-only repairs, RVB started with 0 parts and never
+            -- transitions out of ACTIVE on its own. For parts+hydraulic, RVB
+            -- should be done by now (we matched their finish time).
+            if rvb and rvb.repair and rvb.repair.state and rvb.repair.state ~= 0 then
+                UsedPlus.logInfo(string.format(
+                    "Clearing stale RVB repair state (%s → 0)", tostring(rvb.repair.state)))
+                rvb.repair.state = 0
+            end
             UsedPlus.logInfo(string.format(
                 "Hydraulic repair completed — hydraulic %.0f%%, engine %.0f%%",
                 spec.hydraulicReliability * 100, spec.engineReliability * 100))
             -- Add entry to RVB's service manual (appears in Service Manual tab)
-            if RVBserviceManual_Event and RVBserviceManual_Event.sendEvent then
+            if rvb then
                 local repairItems = {}
                 if pending.targetHydraulic > pending.startHydraulic + 0.01 then
                     table.insert(repairItems, "usedplus_hydraulic_system")
@@ -1524,14 +1552,27 @@ function UsedPlusMaintenance:onUpdate(dt, isActiveForInput, isActiveForInputIgno
                 local entry = {
                     entryType = 3,  -- REPAIR.SERVICE_MANUAL
                     entryTime = env.currentDay,
-                    operatingHours = rvb and rvb.totaloperatingHours or 0,
+                    operatingHours = rvb.totaloperatingHours or 0,
                     odometer = 0,
                     resultKey = "RVB_WorkshopMessage_repairDone",
                     errorList = repairItems,
                     cost = pending.cost or 0
                 }
-                RVBserviceManual_Event.sendEvent(self, entry)
-                UsedPlus.logInfo("Added hydraulic repair to RVB service manual")
+                -- Try event first (multiplayer sync), fall back to direct insert
+                if RVBserviceManual_Event and RVBserviceManual_Event.sendEvent then
+                    local ok, err = pcall(RVBserviceManual_Event.sendEvent, self, entry)
+                    if ok then
+                        UsedPlus.logInfo("Added hydraulic repair to RVB service manual (via event)")
+                    else
+                        UsedPlus.logWarn("RVBserviceManual_Event.sendEvent failed: " .. tostring(err))
+                    end
+                elseif rvb.serviceManual then
+                    -- Direct insert fallback (same as SyncClientServer_serviceManual)
+                    table.insert(rvb.serviceManual, 1, entry)
+                    UsedPlus.logInfo("Added hydraulic repair to RVB service manual (direct insert)")
+                else
+                    UsedPlus.logWarn("RVB service manual not available — entry not added")
+                end
             end
             spec.pendingHydraulicRepair = nil
         end

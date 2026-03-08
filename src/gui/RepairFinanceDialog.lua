@@ -447,11 +447,6 @@ function RepairFinanceDialog:onAcceptFinance()
         VehicleSellingPointExtension.pendingRepairCallback = nil
         VehicleSellingPointExtension.pendingRepairTarget = nil
 
-        -- Close the RVB workshop dialog (it stays open behind our dialog)
-        local rvbEntry = g_gui and g_gui.guis and g_gui.guis.rvbWorkshopDialog
-        if rvbEntry and rvbEntry.target and rvbEntry.target.close then
-            rvbEntry.target:close()
-        end
     else
         -- Vanilla finance path
         RepairVehicleEvent.sendToServer(
@@ -467,23 +462,49 @@ function RepairFinanceDialog:onAcceptFinance()
         )
     end
 
-    -- Close dialog
-    self:close()
+    -- Defer dialog close to next frame — ensures GUI stack has fully settled.
+    -- Same proven pattern as VehicleInspection.lua and SellerResponseDialog.lua.
+    local wasRVBRepair = self.rvbRepairCost and self.rvbRepairCost > 0
+    local mode = self.mode
+    local vehicleName = self.vehicleName
+    local termMonths = self.termMonths
+    local monthlyPayment = self.monthlyPayment
+    local dialogRef = self
 
-    -- Show success notification
-    g_currentMission:addIngameNotification(
-        FSBaseMission.INGAME_NOTIFICATION_OK,
-        string.format(g_i18n:getText("usedplus_notification_repairFinanced"),
-            self.mode == "repaint" and "Repaint" or "Repair",
-            self.vehicleName,
-            self.termMonths,
-            UIHelper.Text.formatMoney(self.monthlyPayment))
-    )
+    g_currentMission:addUpdateable({
+        frameWait = 2,
+        update = function(updatable, dt)
+            updatable.frameWait = updatable.frameWait - 1
+            if updatable.frameWait > 0 then return end
+            g_currentMission:removeUpdateable(updatable)
 
-    -- Refresh the WorkshopScreen to show updated values
-    if RepairDialog and RepairDialog.refreshWorkshopScreen then
-        RepairDialog.refreshWorkshopScreen()
-    end
+            -- Close RepairFinanceDialog
+            dialogRef:close()
+
+            -- Close the RVB workshop dialog if this was an RVB repair path
+            if wasRVBRepair then
+                local rvbEntry = g_gui and g_gui.guis and g_gui.guis.rvbWorkshopDialog
+                if rvbEntry and rvbEntry.target and rvbEntry.target.close then
+                    rvbEntry.target:close()
+                end
+            end
+
+            -- Show success notification
+            g_currentMission:addIngameNotification(
+                FSBaseMission.INGAME_NOTIFICATION_OK,
+                string.format(g_i18n:getText("usedplus_notification_repairFinanced"),
+                    mode == "repaint" and "Repaint" or "Repair",
+                    vehicleName,
+                    termMonths,
+                    UIHelper.Text.formatMoney(monthlyPayment))
+            )
+
+            -- Refresh the WorkshopScreen to show updated values
+            if RepairDialog and RepairDialog.refreshWorkshopScreen then
+                RepairDialog.refreshWorkshopScreen()
+            end
+        end
+    })
 end
 
 --[[

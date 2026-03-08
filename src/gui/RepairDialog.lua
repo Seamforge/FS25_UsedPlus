@@ -386,6 +386,13 @@ function RepairDialog:updateDisplay()
                 end
             end
         end
+        -- Include UsedPlus Hydraulic System in the count
+        if RVBWorkshopIntegration then
+            totalParts = totalParts + 1
+            if RVBWorkshopIntegration.hydraulicRepairRequested then
+                partsNeedRepair = partsNeedRepair + 1
+            end
+        end
         -- Hide vanilla elements (label, bar, value)
         UIHelper.Element.setVisible(self.repairStatusLabel, false)
         UIHelper.Element.setVisible(self.currentConditionBar, false)
@@ -772,11 +779,6 @@ function RepairDialog:onPayCashConfirmed(yes)
         VehicleSellingPointExtension.pendingRepairCallback = nil
         VehicleSellingPointExtension.pendingRepairTarget = nil
 
-        -- Close the RVB workshop dialog (it stays open behind our RepairDialog)
-        local rvbEntry = g_gui and g_gui.guis and g_gui.guis.rvbWorkshopDialog
-        if rvbEntry and rvbEntry.target and rvbEntry.target.close then
-            rvbEntry.target:close()
-        end
     else
         -- Vanilla repair path
         local sendRepairPercent = 0
@@ -799,32 +801,63 @@ function RepairDialog:onPayCashConfirmed(yes)
         )
     end
 
-    -- Close dialog
-    self:close()
+    -- Defer dialog close to next frame — ensures YesNoDialog and GUI stack
+    -- have fully settled before we close RepairDialog and RVB workshop dialog.
+    -- Same proven pattern as VehicleInspection.lua and SellerResponseDialog.lua.
+    local wasRVBRepair = self.rvbRepairCost and self.rvbRepairCost > 0
+    local repairPercent = self.repairPercent
+    local repaintPercent = self.repaintPercent
+    local currentDamage = self.currentDamage
+    local currentWear = self.currentWear
+    local totalCost = self.totalCost
+    local rvbRepairCost = self.rvbRepairCost
+    local dialogRef = self
 
-    -- Show success notification
-    local repairInfo = ""
-    if self.rvbRepairCost and self.rvbRepairCost > 0 then
-        repairInfo = g_i18n:getText("usedplus_rp_notification_workshop") or "full workshop repair"
-    elseif self.repairPercent > 0 and self.currentDamage > 0.01 then
-        repairInfo = string.format("%d%% mechanical repair", self.repairPercent)
-    end
-    if self.repaintPercent > 0 and self.currentWear > 0.01 then
-        if repairInfo ~= "" then
-            repairInfo = repairInfo .. ", "
+    g_currentMission:addUpdateable({
+        frameWait = 2,
+        update = function(updatable, dt)
+            updatable.frameWait = updatable.frameWait - 1
+            if updatable.frameWait > 0 then return end
+            g_currentMission:removeUpdateable(updatable)
+
+            -- Close RepairDialog (now topmost after YesNoDialog closed)
+            dialogRef:close()
+
+            -- Close the RVB workshop dialog (behind RepairDialog in stack)
+            if wasRVBRepair then
+                local rvbGuiEntry = g_gui and g_gui.guis and g_gui.guis.rvbWorkshopDialog
+                if rvbGuiEntry and rvbGuiEntry.target then
+                    if rvbGuiEntry.target.close then
+                        rvbGuiEntry.target:close()
+                        UsedPlus.logInfo("RepairDialog: Closed RVB workshop dialog after repair")
+                    end
+                end
+            end
+
+            -- Show success notification
+            local repairInfo = ""
+            if rvbRepairCost and rvbRepairCost > 0 then
+                repairInfo = g_i18n:getText("usedplus_rp_notification_workshop") or "full workshop repair"
+            elseif repairPercent > 0 and currentDamage > 0.01 then
+                repairInfo = string.format("%d%% mechanical repair", repairPercent)
+            end
+            if repaintPercent > 0 and currentWear > 0.01 then
+                if repairInfo ~= "" then
+                    repairInfo = repairInfo .. ", "
+                end
+                repairInfo = repairInfo .. string.format("%d%% repaint", repaintPercent)
+            end
+
+            g_currentMission:addIngameNotification(
+                FSBaseMission.INGAME_NOTIFICATION_OK,
+                string.format(g_i18n:getText("usedplus_notification_repairComplete"),
+                    repairInfo,
+                    UIHelper.Text.formatMoney(totalCost))
+            )
+
+            RepairDialog.refreshWorkshopScreen()
         end
-        repairInfo = repairInfo .. string.format("%d%% repaint", self.repaintPercent)
-    end
-
-    g_currentMission:addIngameNotification(
-        FSBaseMission.INGAME_NOTIFICATION_OK,
-        string.format(g_i18n:getText("usedplus_notification_repairComplete"),
-            repairInfo,
-            UIHelper.Text.formatMoney(self.totalCost))
-    )
-
-    -- Refresh the WorkshopScreen to show updated values
-    RepairDialog.refreshWorkshopScreen()
+    })
 end
 
 --[[

@@ -883,8 +883,12 @@ function gateCodebaseValidation(sourceEntries) {
     const { usedKeys, dynamicPrefixes } = scanCodebaseForUsedKeys(modDir, allKeys);
     const unusedKeys = allKeys.filter(k => !usedKeys.has(k));
 
+    // Phantom keys: referenced in code but NOT defined in any translation file.
+    // These cause silent runtime failures (getText returns nil → fallback string).
+    const { missing: phantomKeys } = findMissingKeys(sourceEntries);
+
     _codebaseScanCache = {
-        usedKeys, unusedKeys, dynamicPrefixes,
+        usedKeys, unusedKeys, dynamicPrefixes, phantomKeys,
         activeKeyCount: allKeys.length - unusedKeys.length
     };
 
@@ -961,7 +965,7 @@ function findMissingKeys(sourceEntries) {
     const modDescPath = path.join(modDir, 'modDesc.xml');
     const vehiclesDir = path.join(modDir, 'vehicles');
 
-    // Scan Lua files for getText("key") references
+    // Scan Lua files for getText("key") AND raw "usedplus_*" string references
     for (const dir of [srcDir, vehiclesDir]) {
         const luaFiles = getFilesRecursive(dir, ['.lua']);
         for (const luaFile of luaFiles) {
@@ -969,6 +973,9 @@ function findMissingKeys(sourceEntries) {
             let match;
             const getTextPattern = /getText\("([^"]+)"\)/g;
             while ((match = getTextPattern.exec(content)) !== null) allCodeKeys.add(match[1]);
+            // Also catch raw string references (same pattern as scanCodebaseForUsedKeys)
+            const stringPattern = /"(usedplus_[a-zA-Z0-9_]+|usedPlus_[a-zA-Z0-9_]+)"/g;
+            while ((match = stringPattern.exec(content)) !== null) allCodeKeys.add(match[1]);
         }
     }
 
@@ -994,8 +1001,9 @@ function findMissingKeys(sourceEntries) {
     // Filter to only usedplus_/usedPlus_ keys (ignore game engine keys like input_, fillType_)
     const modKeys = [...allCodeKeys].filter(k => /^usedplus_|^usedPlus_/i.test(k));
 
-    // Find keys referenced in code but missing from English source
-    const missing = modKeys.filter(k => !sourceEntries.has(k)).sort();
+    // Find keys referenced in code but missing from English source.
+    // Exclude dynamic prefix patterns (trailing _ used in concatenation like "prefix_" .. var)
+    const missing = modKeys.filter(k => !sourceEntries.has(k) && !k.endsWith('_')).sort();
 
     return { allCodeKeys: modKeys, missing };
 }
@@ -1030,6 +1038,7 @@ function findMissingKeysWithFallbacks(sourceEntries) {
 function printGateSummary(gate, totalKeys) {
     const used = gate.activeKeyCount;
     const unused = gate.unusedKeys.length;
+    const phantom = gate.phantomKeys ? gate.phantomKeys.length : 0;
     console.log(`Codebase gate: ${used} keys in use, ${unused} unused (of ${totalKeys} total in English)`);
     if (gate.dynamicPrefixes.size > 0) {
         console.log(`  Dynamic prefixes detected: ${[...gate.dynamicPrefixes].join(', ')}`);
@@ -1039,6 +1048,13 @@ function printGateSummary(gate, totalKeys) {
     } else if (unused > 10) {
         console.log(`  Unused keys: ${gate.unusedKeys.slice(0, 5).join(', ')} ... +${unused - 5} more`);
         console.log(`  Run with 'unused' command to see full list`);
+    }
+    if (phantom > 0) {
+        console.log(`  ⚠ PHANTOM KEYS: ${phantom} key(s) referenced in code but NOT in translation files!`);
+        const shown = gate.phantomKeys.slice(0, 10);
+        for (const key of shown) console.log(`    - ${key}`);
+        if (phantom > 10) console.log(`    ... +${phantom - 10} more`);
+        console.log(`  Run 'missing' command to see full list and auto-deposit`);
     }
     console.log();
 }

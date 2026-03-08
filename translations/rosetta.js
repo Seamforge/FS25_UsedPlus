@@ -525,9 +525,18 @@ function cmdValidate() {
         if (hasProblems) break;
     }
 
+    // Check for phantom keys (referenced in code but not in any translation file)
+    const { missing: phantomKeys } = findMissingKeys(store.sourceEntries);
+
     if (formatErrorCount > 0) { console.log(`FAIL: ${formatErrorCount} format specifier error(s) detected`); process.exit(1); }
     else if (doubleEncodedCount > 0) { console.log(`FAIL: ${doubleEncodedCount} double-encoded XML entity(ies) detected`); process.exit(1); }
     else if (hasProblems) { console.log("FAIL: Translation files out of sync"); process.exit(1); }
+    else if (phantomKeys.length > 0) {
+        console.log(`WARN: ${phantomKeys.length} phantom key(s) — referenced in code but missing from translations`);
+        for (const key of phantomKeys) console.log(`  - ${key}`);
+        console.log("Run 'missing --deposit' to auto-add keys with fallback text");
+        process.exit(0);
+    }
     else { console.log("OK: All translation files have required keys"); process.exit(0); }
 }
 

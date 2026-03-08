@@ -299,31 +299,19 @@ function UsedPlusMaintenance.onVehicleRepaired(vehicle, repairCost)
         UsedPlusMaintenance.applyRepairDegradation(vehicle)
     end
 
+    -- Cap calculations — always needed for diagnostic logging below
+    local engineCap = math.min(spec.maxReliabilityCeiling or 1.0, spec.maxEngineDurability or 1.0)
+    local hydraulicCap = math.min(spec.maxReliabilityCeiling or 1.0, spec.maxHydraulicDurability or 1.0)
+    local electricalCap = math.min(spec.maxReliabilityCeiling or 1.0, spec.maxElectricalDurability or 1.0)
+
     -- Skip flat reliability bonus when gradual handler is active — it captures
     -- startHydraulic before this runs and would overwrite the bonus next frame
     if spec.pendingHydraulicRepair == nil then
         -- v2.2.0: Apply repair bonus, capped by BOTH overall ceiling AND component durability
         local repairBonus = UsedPlusMaintenance.CONFIG.reliabilityRepairBonus
 
-        -- Engine: capped by overall ceiling AND component durability
-        local engineCap = math.min(
-            spec.maxReliabilityCeiling or 1.0,
-            spec.maxEngineDurability or 1.0
-        )
         spec.engineReliability = math.min(engineCap, spec.engineReliability + repairBonus)
-
-        -- Hydraulic: capped by overall ceiling AND component durability
-        local hydraulicCap = math.min(
-            spec.maxReliabilityCeiling or 1.0,
-            spec.maxHydraulicDurability or 1.0
-        )
         spec.hydraulicReliability = math.min(hydraulicCap, spec.hydraulicReliability + repairBonus)
-
-        -- Electrical: capped by overall ceiling AND component durability
-        local electricalCap = math.min(
-            spec.maxReliabilityCeiling or 1.0,
-            spec.maxElectricalDurability or 1.0
-        )
         spec.electricalReliability = math.min(electricalCap, spec.electricalReliability + repairBonus)
     end
 

@@ -2781,5 +2781,16 @@
         <e k="usedplus_rvb_workshopCost" v="비용: %s" eh="2c78cd54" />
         <e k="usedplus_rvb_inspectionStarted" v="검사 시작됨 — 완료 시 %s 청구" eh="0c9432aa" />
         <e k="usedplus_rvb_serviceStarted" v="서비스 시작됨 — 완료 시 %s 청구" eh="aa19a47c" />
+        <e k="usedplus_fsk_kit_basic" v="기본 키트" eh="24e6767f" />
+        <e k="usedplus_fsk_kit_professional" v="전문 키트" eh="e10ae62c" />
+        <e k="usedplus_fsk_kit_master" v="마스터 키트" eh="202bbb06" />
+        <e k="usedplus_mp_error_field_repair_failed" v="현장 수리 실패" eh="aee0e67b" />
+        <e k="usedplus_mp_error_invalid_action" v="유효하지 않은 작업" eh="dbf373dd" />
+        <e k="usedplus_mp_error_not_owner" v="이 차량을 소유하지 않았습니다" eh="69aa5d2c" />
+        <e k="usedplus_mp_error_refill_fluids_failed" v="유체 보충 실패" eh="3939405a" />
+        <e k="usedplus_mp_error_replace_tires_failed" v="타이어 교체 실패" eh="33ef4d9c" />
+        <e k="usedplus_mp_success_lease_returned" v="리스가 성공적으로 반환됨" eh="5875d69d" />
+        <e k="usedplus_mp_success_refill_fluids" v="유체가 성공적으로 보충됨" eh="d3bf65e8" />
+        <e k="usedplus_mp_success_replace_tires" v="타이어가 성공적으로 교체됨" eh="e017638b" />
 </elements>
 </l10n>

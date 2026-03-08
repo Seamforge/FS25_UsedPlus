@@ -147,7 +147,10 @@ function RVBWorkshopIntegration:hookRepairCompletion(dialog)
     end
 
     dialog.onYesNoRepairDialog = function(self, yes)
-        -- Call original first (this starts the RVB time-based repair)
+        -- Call original first (this starts the RVB time-based repair and
+        -- populates rvb.repair with correct finish times for the display).
+        -- For 0-part repairs, RVB's state gets stuck at ACTIVE — our gradual
+        -- handler's time-based failsafe + state cleanup handles this.
         origOnYesNoRepair(self, yes)
 
         -- Any workshop repair always includes hydraulic/engine/fluid restoration.
