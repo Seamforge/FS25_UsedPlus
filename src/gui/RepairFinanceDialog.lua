@@ -394,6 +394,11 @@ function RepairFinanceDialog:onAcceptFinance()
     end
 
     if self.rvbRepairCost and self.rvbRepairCost > 0 and VehicleSellingPointExtension then
+        -- Pass repair percentage and scaled cost to hookRepairCompletion
+        RVBWorkshopIntegration.lastRepairPercent = self.repairPercent
+        RVBWorkshopIntegration.lastHydraulicRepairCost = math.floor(
+            (RVBWorkshopIntegration.lastHydraulicRepairCost or 0) * (self.repairPercent / 100))
+
         -- RVB workshop finance path:
         -- RVB's callback deducts cash immediately — but we're financing, so we
         -- temporarily add money for RVB to deduct, then create the finance deal.
@@ -441,6 +446,12 @@ function RepairFinanceDialog:onAcceptFinance()
         -- Clear stored callback
         VehicleSellingPointExtension.pendingRepairCallback = nil
         VehicleSellingPointExtension.pendingRepairTarget = nil
+
+        -- Close the RVB workshop dialog (it stays open behind our dialog)
+        local rvbEntry = g_gui and g_gui.guis and g_gui.guis.rvbWorkshopDialog
+        if rvbEntry and rvbEntry.target and rvbEntry.target.close then
+            rvbEntry.target:close()
+        end
     else
         -- Vanilla finance path
         RepairVehicleEvent.sendToServer(

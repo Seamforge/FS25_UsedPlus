@@ -2764,9 +2764,22 @@
         <e k="usedplus_runaway_defaultEnded" v="Rymlingen stoppade." eh="ed4659ca" />
         <e k="usedplus_rvb_sectionHeader" v="Fordondiagnostik" eh="ae666ba0" />
         <e k="usedplus_vpf_offerValidMonths" v="Erbjudande giltiga för %d månader" eh="5fe704c6" />
-        <e k="usedplus_comp_engineOil" v="[EN] Engine Oil" eh="d2d4a89d" />
-        <e k="usedplus_comp_hydraulicFluid" v="[EN] Hydraulic Fluid" eh="f9c4d7d9" />
-        <e k="usedplus_comp_tires" v="[EN] Tires" eh="3fe2c06a" />
-        <e k="usedplus_comp_fuelSystem" v="[EN] Fuel System" eh="136d85c8" />
+        <e k="usedplus_comp_engineOil" v="Motorolja" eh="d2d4a89d" />
+        <e k="usedplus_comp_hydraulicFluid" v="Hydraulvätska" eh="f9c4d7d9" />
+        <e k="usedplus_comp_tires" v="Däck" eh="3fe2c06a" />
+        <e k="usedplus_comp_fuelSystem" v="Bränsle system" eh="136d85c8" />
+        <e k="usedplus_rvb_inspectQuestion" v="Inspektera detta fordon för %s?" eh="bcfa5162" />
+        <e k="usedplus_rvb_serviceQuestion" v="Serva detta fordon för %s?" eh="a5912327" />
+        <e k="usedplus_rvb_completesAt" v="Beräknad slutföring: %s" eh="354d575d" />
+        <e k="usedplus_rvb_completesTomorrow" v="Slutförd imorgon klockan %s" eh="86ab7bf0" />
+        <e k="usedplus_rvb_totalDuration" v="Total varaktighet: %s" eh="f617e4f0" />
+        <e k="usedplus_rvb_durationHM" v="%d h, %d min" eh="0e4b83e7" />
+        <e k="usedplus_rvb_durationH" v="%d h" eh="c30c071b" />
+        <e k="usedplus_rvb_durationM" v="%d min" eh="ff4f2cb8" />
+        <e k="usedplus_rvb_serviceOverdue" v="(%d timmar förfallen — utökad service)" eh="0762f611" />
+        <e k="usedplus_rvb_currentTime" v="Aktuell tid: %s" eh="e00607d2" />
+        <e k="usedplus_rvb_workshopCost" v="Kostnad: %s" eh="2c78cd54" />
+        <e k="usedplus_rvb_inspectionStarted" v="Inspektion påbörjad — %s debiteras vid slutförande" eh="0c9432aa" />
+        <e k="usedplus_rvb_serviceStarted" v="Service påbörjad — %s debiteras vid slutförande" eh="aa19a47c" />
 </elements>
 </l10n>

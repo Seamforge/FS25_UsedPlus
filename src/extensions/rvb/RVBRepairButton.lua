@@ -166,8 +166,10 @@ function RVBWorkshopIntegration:hookRepairCompletion(dialog)
                 local env = g_currentMission.environment
 
                 -- Capture starting values for interpolation
-                local maxHydraulic = spec.maxHydraulicDurability or spec.maxReliabilityCeiling or 1.0
-                local maxEngine = spec.maxEngineDurability or spec.maxReliabilityCeiling or 1.0
+                -- Effective cap = min of overall ceiling AND component durability
+                local hydraulicCap = math.min(spec.maxReliabilityCeiling or 1.0, spec.maxHydraulicDurability or 1.0)
+                local engineCap = math.min(spec.maxReliabilityCeiling or 1.0, spec.maxEngineDurability or 1.0)
+                local repairFraction = (RVBWorkshopIntegration.lastRepairPercent or 100) / 100
 
                 -- Convert start and finish times to total minutes for progress calc
                 local startMinutes = (env.currentDay * 24 * 60) + (env.currentHour * 60) + env.currentMinute
@@ -199,15 +201,23 @@ function RVBWorkshopIntegration:hookRepairCompletion(dialog)
                 -- don't deduct it separately during the gradual repair handler
                 local isFinanced = RVBWorkshopIntegration.isFinancedRepair or false
 
+                local startH = spec.hydraulicReliability or 1.0
+                local startE = spec.engineReliability or 1.0
+
+                -- Target = start + (cap - start) * fraction, floored at start
+                -- (repair must never decrease reliability)
+                local targetH = math.max(startH, startH + (hydraulicCap - startH) * repairFraction)
+                local targetE = math.max(startE, math.min(engineCap, startE + 0.05))
+
                 spec.pendingHydraulicRepair = {
                     cost = isFinanced and 0 or hydraulicCost,
                     farmId = g_currentMission:getFarmId(),
                     startMinutes = startMinutes,
                     finishMinutes = finishMinutes,
-                    startHydraulic = spec.hydraulicReliability or 1.0,
-                    targetHydraulic = maxHydraulic,
-                    startEngine = spec.engineReliability or 1.0,
-                    targetEngine = math.min(maxEngine, (spec.engineReliability or 1.0) + 0.05),
+                    startHydraulic = startH,
+                    targetHydraulic = targetH,
+                    startEngine = startE,
+                    targetEngine = targetE,
                     startOil = spec.oilLevel or 1.0,
                     startHydFluid = spec.hydraulicFluidLevel or 1.0,
                     startDamage = startDamage,
@@ -215,13 +225,15 @@ function RVBWorkshopIntegration:hookRepairCompletion(dialog)
                     useTimeProgress = not hasRVBRepair
                 }
                 UsedPlus.logInfo(string.format(
-                    "RVBWorkshopIntegration: Workshop repair queued — hydraulic %.0f%%→%.0f%%, cost=$%d, duration=%d min",
-                    (spec.hydraulicReliability or 1.0) * 100, maxHydraulic * 100,
+                    "RVBWorkshopIntegration: Workshop repair queued — hydraulic %.0f%%→%.0f%% (%d%%), cost=$%d, duration=%d min",
+                    startH * 100, spec.pendingHydraulicRepair.targetHydraulic * 100,
+                    RVBWorkshopIntegration.lastRepairPercent or 100,
                     hydraulicCost, finishMinutes - startMinutes))
 
                 -- Reset toggle state
                 RVBWorkshopIntegration.hydraulicRepairRequested = false
                 RVBWorkshopIntegration.lastHydraulicRepairCost = 0
+                RVBWorkshopIntegration.lastRepairPercent = 100
             end
         end
     end

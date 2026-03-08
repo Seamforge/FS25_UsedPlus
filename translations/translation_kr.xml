@@ -2764,9 +2764,22 @@
         <e k="usedplus_runaway_defaultEnded" v="도주 중단." eh="ed4659ca" />
         <e k="usedplus_rvb_sectionHeader" v="차량 진단" eh="ae666ba0" />
         <e k="usedplus_vpf_offerValidMonths" v="제안 유효 기간 %d개월" eh="5fe704c6" />
-        <e k="usedplus_comp_engineOil" v="[EN] Engine Oil" eh="d2d4a89d" />
-        <e k="usedplus_comp_hydraulicFluid" v="[EN] Hydraulic Fluid" eh="f9c4d7d9" />
-        <e k="usedplus_comp_tires" v="[EN] Tires" eh="3fe2c06a" />
-        <e k="usedplus_comp_fuelSystem" v="[EN] Fuel System" eh="136d85c8" />
+        <e k="usedplus_comp_engineOil" v="엔진 오일" eh="d2d4a89d" />
+        <e k="usedplus_comp_hydraulicFluid" v="유압 오일" eh="f9c4d7d9" />
+        <e k="usedplus_comp_tires" v="타이어" eh="3fe2c06a" />
+        <e k="usedplus_comp_fuelSystem" v="연료 시스템" eh="136d85c8" />
+        <e k="usedplus_rvb_inspectQuestion" v="이 차량을 %s 검사하시겠습니까?" eh="bcfa5162" />
+        <e k="usedplus_rvb_serviceQuestion" v="이 차량을 %s 서비스하시겠습니까?" eh="a5912327" />
+        <e k="usedplus_rvb_completesAt" v="예상 완료: %s" eh="354d575d" />
+        <e k="usedplus_rvb_completesTomorrow" v="내일 %s에 완료" eh="86ab7bf0" />
+        <e k="usedplus_rvb_totalDuration" v="총 소요 시간: %s" eh="f617e4f0" />
+        <e k="usedplus_rvb_durationHM" v="%d시간 %d분" eh="0e4b83e7" />
+        <e k="usedplus_rvb_durationH" v="%d시간" eh="c30c071b" />
+        <e k="usedplus_rvb_durationM" v="%d분" eh="ff4f2cb8" />
+        <e k="usedplus_rvb_serviceOverdue" v="(%d시간 지연 — 확장 서비스)" eh="0762f611" />
+        <e k="usedplus_rvb_currentTime" v="현재 시간: %s" eh="e00607d2" />
+        <e k="usedplus_rvb_workshopCost" v="비용: %s" eh="2c78cd54" />
+        <e k="usedplus_rvb_inspectionStarted" v="검사 시작됨 — 완료 시 %s 청구" eh="0c9432aa" />
+        <e k="usedplus_rvb_serviceStarted" v="서비스 시작됨 — 완료 시 %s 청구" eh="aa19a47c" />
 </elements>
 </l10n>

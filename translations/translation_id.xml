@@ -2764,9 +2764,22 @@
         <e k="usedplus_runaway_defaultEnded" v="Pelarian berhenti." eh="ed4659ca" />
         <e k="usedplus_rvb_sectionHeader" v="Diagnostik Kendaraan" eh="ae666ba0" />
         <e k="usedplus_vpf_offerValidMonths" v="Penawaran valid untuk %d bulan" eh="5fe704c6" />
-        <e k="usedplus_comp_engineOil" v="[EN] Engine Oil" eh="d2d4a89d" />
-        <e k="usedplus_comp_hydraulicFluid" v="[EN] Hydraulic Fluid" eh="f9c4d7d9" />
-        <e k="usedplus_comp_tires" v="[EN] Tires" eh="3fe2c06a" />
-        <e k="usedplus_comp_fuelSystem" v="[EN] Fuel System" eh="136d85c8" />
+        <e k="usedplus_comp_engineOil" v="Oli mesin" eh="d2d4a89d" />
+        <e k="usedplus_comp_hydraulicFluid" v="Cairan hidrolik" eh="f9c4d7d9" />
+        <e k="usedplus_comp_tires" v="Ban" eh="3fe2c06a" />
+        <e k="usedplus_comp_fuelSystem" v="Sistem bahan bakar" eh="136d85c8" />
+        <e k="usedplus_rvb_inspectQuestion" v="Periksa kendaraan ini untuk %s?" eh="bcfa5162" />
+        <e k="usedplus_rvb_serviceQuestion" v="Layani kendaraan ini untuk %s?" eh="a5912327" />
+        <e k="usedplus_rvb_completesAt" v="Penyelesaian estimasi: %s" eh="354d575d" />
+        <e k="usedplus_rvb_completesTomorrow" v="Selesai besok jam %s" eh="86ab7bf0" />
+        <e k="usedplus_rvb_totalDuration" v="Durasi total: %s" eh="f617e4f0" />
+        <e k="usedplus_rvb_durationHM" v="%d jam, %d menit" eh="0e4b83e7" />
+        <e k="usedplus_rvb_durationH" v="%d jam" eh="c30c071b" />
+        <e k="usedplus_rvb_durationM" v="%d menit" eh="ff4f2cb8" />
+        <e k="usedplus_rvb_serviceOverdue" v="(%d jam terlambat — layanan diperluas)" eh="0762f611" />
+        <e k="usedplus_rvb_currentTime" v="Waktu saat ini: %s" eh="e00607d2" />
+        <e k="usedplus_rvb_workshopCost" v="Biaya: %s" eh="2c78cd54" />
+        <e k="usedplus_rvb_inspectionStarted" v="Inspeksi dimulai — %s dikenakan saat selesai" eh="0c9432aa" />
+        <e k="usedplus_rvb_serviceStarted" v="Layanan dimulai — %s dikenakan saat selesai" eh="aa19a47c" />
 </elements>
 </l10n>

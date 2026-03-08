@@ -462,19 +462,33 @@ end
     Populate a diagnostics row cell with hydraulic data
 ]]
 function RVBWorkshopIntegration:populateHydraulicCell(cell, hydraulicReliability, dialog)
-    local hydraulicPct = math.floor(hydraulicReliability * 100)
+    -- Get effective ceiling (min of overall ceiling and component durability)
+    local effectiveCeiling = 1.0
+    if dialog and dialog.vehicle and dialog.vehicle.spec_usedPlusMaintenance then
+        local spec = dialog.vehicle.spec_usedPlusMaintenance
+        effectiveCeiling = math.min(spec.maxReliabilityCeiling or 1.0, spec.maxHydraulicDurability or 1.0)
+    end
 
-    -- Determine condition text and color
+    -- Text percentage = fraction of ceiling (100% = fully repaired to current max)
+    -- Bar fill = fraction of 1.0 (visual gap shows ceiling degradation)
+    local ceilingPct = 0
+    if effectiveCeiling > 0.001 then
+        ceilingPct = math.min(100, math.floor((hydraulicReliability / effectiveCeiling) * 100))
+    end
+    local barFill = math.min(hydraulicReliability, 1.0)
+
+    -- Determine condition text and color based on RAW reliability (not ceiling-relative)
+    local rawPct = math.floor(hydraulicReliability * 100)
     local conditionText = "Unknown"
     local conditionColor = {1, 1, 1, 1}
 
-    if hydraulicPct >= 80 then
+    if rawPct >= 80 then
         conditionText = g_i18n:getText("usedplus_condition_good") or "Good"
         conditionColor = {0.3, 1.0, 0.4, 1}
-    elseif hydraulicPct >= 60 then
+    elseif rawPct >= 60 then
         conditionText = g_i18n:getText("usedplus_condition_fair") or "Fair"
         conditionColor = {1.0, 0.85, 0.2, 1}
-    elseif hydraulicPct >= 40 then
+    elseif rawPct >= 40 then
         conditionText = g_i18n:getText("usedplus_condition_poor") or "Poor"
         conditionColor = {1.0, 0.6, 0.2, 1}
     else
@@ -490,10 +504,10 @@ function RVBWorkshopIntegration:populateHydraulicCell(cell, hydraulicReliability
         partName:setText(g_i18n:getText("usedplus_hydraulic_system") or "HYDRAULIC SYSTEM")
     end
 
-    -- Percentage
+    -- Percentage — shows fraction of ceiling (100% = at max possible)
     local partPercent = cell:getDescendantByName("partPercent")
     if partPercent then
-        partPercent:setText(string.format("%d%%", hydraulicPct))
+        partPercent:setText(string.format("%d%%", ceilingPct))
         if partPercent.setTextColor then
             partPercent:setTextColor(unpack(conditionColor))
         end
@@ -508,7 +522,7 @@ function RVBWorkshopIntegration:populateHydraulicCell(cell, hydraulicReliability
         end
     end
 
-    -- Status bar — use RVB's own sizing pattern (normalized coordinates)
+    -- Status bar — fills as fraction of 1.0 (visual gap = ceiling degradation)
     local partBar = cell:getDescendantByName("partBar")
     if partBar then
         if partBar.setSize and partBar.parent and partBar.parent.size then
@@ -517,7 +531,7 @@ function RVBWorkshopIntegration:populateHydraulicCell(cell, hydraulicReliability
             if partBar.startSize and partBar.endSize then
                 minSize = partBar.startSize[1] + partBar.endSize[1]
             end
-            local fillWidth = fullWidth * math.min(hydraulicReliability, 1)
+            local fillWidth = fullWidth * barFill
             partBar:setSize(math.max(minSize, fillWidth), nil)
         end
         if partBar.setImageColor then
@@ -529,7 +543,7 @@ function RVBWorkshopIntegration:populateHydraulicCell(cell, hydraulicReliability
     local checkPart = cell:getDescendantByName("checkPart")
     if checkPart then
         checkPart:setVisible(true)
-        local canToggle = hydraulicReliability < 0.99
+        local canToggle = hydraulicReliability < (effectiveCeiling - 0.01)
         checkPart:setDisabled(not canToggle)
         checkPart:setIsChecked(RVBWorkshopIntegration.hydraulicRepairRequested == true)
     end

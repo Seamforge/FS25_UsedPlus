@@ -1373,7 +1373,8 @@ function UsedPlusMaintenance:onUpdate(dt, isActiveForInput, isActiveForInputIgno
 
     -- v2.8.0: Sleep/wake optimization - skip expensive checks for idle vehicles
     -- Pattern from: MoreRealistic_FS25 performance optimization
-    if UsedPlusMaintenance.isSleeping(self) then
+    -- Exception: pendingHydraulicRepair must keep running — vehicle is parked in workshop
+    if UsedPlusMaintenance.isSleeping(self) and not spec.pendingHydraulicRepair then
         -- Still update critical timers even when sleeping
         if spec.stallCooldown > 0 then
             spec.stallCooldown = spec.stallCooldown - dt
@@ -1468,8 +1469,11 @@ function UsedPlusMaintenance:onUpdate(dt, isActiveForInput, isActiveForInputIgno
         -- Finalize when done
         if repairDone then
             -- Snap to exact targets
-            spec.hydraulicReliability = pending.targetHydraulic
-            spec.engineReliability = pending.targetEngine
+            -- Clamp to current ceiling (may have degraded during repair via applyRepairDegradation)
+            local finalHydCap = math.min(spec.maxReliabilityCeiling or 1.0, spec.maxHydraulicDurability or 1.0)
+            spec.hydraulicReliability = math.min(pending.targetHydraulic, finalHydCap)
+            local finalEngCap = math.min(spec.maxReliabilityCeiling or 1.0, spec.maxEngineDurability or 1.0)
+            spec.engineReliability = math.min(pending.targetEngine, finalEngCap)
             -- Snap base damage to 0 (fully repaired)
             if pending.startDamage and pending.startDamage > 0.001 then
                 if self.getDamageAmount and self.addDamageAmount then
@@ -1495,22 +1499,39 @@ function UsedPlusMaintenance:onUpdate(dt, isActiveForInput, isActiveForInputIgno
                     g_currentMission:addMoney(-pending.cost, pending.farmId, MoneyType.VEHICLE_RUNNING_COSTS, true)
                 end
             end
+            -- Apply deferred repair degradation (skipped during epsilon to avoid
+            -- lowering ceiling before target calculation)
+            if UsedPlusMaintenance.CONFIG.enableLemonScale then
+                UsedPlusMaintenance.applyRepairDegradation(self)
+                -- Re-clamp to post-degradation ceiling
+                local postHydCap = math.min(spec.maxReliabilityCeiling or 1.0, spec.maxHydraulicDurability or 1.0)
+                spec.hydraulicReliability = math.min(spec.hydraulicReliability, postHydCap)
+                local postEngCap = math.min(spec.maxReliabilityCeiling or 1.0, spec.maxEngineDurability or 1.0)
+                spec.engineReliability = math.min(spec.engineReliability, postEngCap)
+            end
             UsedPlus.logInfo(string.format(
                 "Hydraulic repair completed — hydraulic %.0f%%, engine %.0f%%",
                 spec.hydraulicReliability * 100, spec.engineReliability * 100))
-            -- Add entry to RVB's service manual
+            -- Add entry to RVB's service manual (appears in Service Manual tab)
             if RVBserviceManual_Event and RVBserviceManual_Event.sendEvent then
+                local repairItems = {}
+                if pending.targetHydraulic > pending.startHydraulic + 0.01 then
+                    table.insert(repairItems, "usedplus_hydraulic_system")
+                end
+                if pending.targetEngine > pending.startEngine + 0.01 then
+                    table.insert(repairItems, "usedplus_irp_part_engine")
+                end
                 local entry = {
                     entryType = 3,  -- REPAIR.SERVICE_MANUAL
                     entryTime = env.currentDay,
                     operatingHours = rvb and rvb.totaloperatingHours or 0,
                     odometer = 0,
                     resultKey = "RVB_WorkshopMessage_repairDone",
-                    errorList = {"UsedPlus Hydraulic System"},
+                    errorList = repairItems,
                     cost = pending.cost or 0
                 }
                 RVBserviceManual_Event.sendEvent(self, entry)
-                UsedPlus.logDebug("Added hydraulic repair to RVB service manual")
+                UsedPlus.logInfo("Added hydraulic repair to RVB service manual")
             end
             spec.pendingHydraulicRepair = nil
         end

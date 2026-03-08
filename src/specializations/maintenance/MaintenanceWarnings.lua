@@ -290,34 +290,42 @@ function UsedPlusMaintenance.onVehicleRepaired(vehicle, repairCost)
     spec.lastRepairDate = g_currentMission.environment.dayTime or 0
 
     -- v2.2.0: Apply UNIFIED degradation (ceiling + component durability)
-    -- This replaces the old v1.4.0 inline ceiling degradation
-    if UsedPlusMaintenance.CONFIG.enableLemonScale then
+    -- Skip for epsilon repairs triggered by hydraulic-only path — degradation would
+    -- lower the ceiling BEFORE hookRepairCompletion calculates the target, making
+    -- the repair result worse than the starting value. Degradation is applied
+    -- when the gradual handler finishes instead (via ceiling clamp).
+    if UsedPlusMaintenance.CONFIG.enableLemonScale
+        and not (RVBWorkshopIntegration and RVBWorkshopIntegration.hydraulicRepairRequested) then
         UsedPlusMaintenance.applyRepairDegradation(vehicle)
     end
 
-    -- v2.2.0: Apply repair bonus, capped by BOTH overall ceiling AND component durability
-    local repairBonus = UsedPlusMaintenance.CONFIG.reliabilityRepairBonus
+    -- Skip flat reliability bonus when gradual handler is active — it captures
+    -- startHydraulic before this runs and would overwrite the bonus next frame
+    if spec.pendingHydraulicRepair == nil then
+        -- v2.2.0: Apply repair bonus, capped by BOTH overall ceiling AND component durability
+        local repairBonus = UsedPlusMaintenance.CONFIG.reliabilityRepairBonus
 
-    -- Engine: capped by overall ceiling AND component durability
-    local engineCap = math.min(
-        spec.maxReliabilityCeiling or 1.0,
-        spec.maxEngineDurability or 1.0
-    )
-    spec.engineReliability = math.min(engineCap, spec.engineReliability + repairBonus)
+        -- Engine: capped by overall ceiling AND component durability
+        local engineCap = math.min(
+            spec.maxReliabilityCeiling or 1.0,
+            spec.maxEngineDurability or 1.0
+        )
+        spec.engineReliability = math.min(engineCap, spec.engineReliability + repairBonus)
 
-    -- Hydraulic: capped by overall ceiling AND component durability
-    local hydraulicCap = math.min(
-        spec.maxReliabilityCeiling or 1.0,
-        spec.maxHydraulicDurability or 1.0
-    )
-    spec.hydraulicReliability = math.min(hydraulicCap, spec.hydraulicReliability + repairBonus)
+        -- Hydraulic: capped by overall ceiling AND component durability
+        local hydraulicCap = math.min(
+            spec.maxReliabilityCeiling or 1.0,
+            spec.maxHydraulicDurability or 1.0
+        )
+        spec.hydraulicReliability = math.min(hydraulicCap, spec.hydraulicReliability + repairBonus)
 
-    -- Electrical: capped by overall ceiling AND component durability
-    local electricalCap = math.min(
-        spec.maxReliabilityCeiling or 1.0,
-        spec.maxElectricalDurability or 1.0
-    )
-    spec.electricalReliability = math.min(electricalCap, spec.electricalReliability + repairBonus)
+        -- Electrical: capped by overall ceiling AND component durability
+        local electricalCap = math.min(
+            spec.maxReliabilityCeiling or 1.0,
+            spec.maxElectricalDurability or 1.0
+        )
+        spec.electricalReliability = math.min(electricalCap, spec.electricalReliability + repairBonus)
+    end
 
     -- v2.2.0: Also apply RVB degradation if RVB is installed
     if ModCompatibility and ModCompatibility.rvbInstalled then

@@ -2763,9 +2763,22 @@
         <e k="usedplus_runaway_defaultEnded" v="Ausfall beendet." eh="ed4659ca" />
         <e k="usedplus_rvb_sectionHeader" v="Fahrzeugdiagnose" eh="ae666ba0" />
         <e k="usedplus_vpf_offerValidMonths" v="Angebot gültig für %d Monate" eh="5fe704c6" />
-        <e k="usedplus_comp_engineOil" v="[EN] Engine Oil" eh="d2d4a89d" />
-        <e k="usedplus_comp_hydraulicFluid" v="[EN] Hydraulic Fluid" eh="f9c4d7d9" />
-        <e k="usedplus_comp_tires" v="[EN] Tires" eh="3fe2c06a" />
-        <e k="usedplus_comp_fuelSystem" v="[EN] Fuel System" eh="136d85c8" />
+        <e k="usedplus_comp_engineOil" v="Motoröl" eh="d2d4a89d" />
+        <e k="usedplus_comp_hydraulicFluid" v="Hydraulikflüssigkeit" eh="f9c4d7d9" />
+        <e k="usedplus_comp_tires" v="Reifen" eh="3fe2c06a" />
+        <e k="usedplus_comp_fuelSystem" v="Kraftstoffsystem" eh="136d85c8" />
+        <e k="usedplus_rvb_inspectQuestion" v="Dieses Fahrzeug überprüfen für %s?" eh="bcfa5162" />
+        <e k="usedplus_rvb_serviceQuestion" v="Dieses Fahrzeug warten für %s?" eh="a5912327" />
+        <e k="usedplus_rvb_completesAt" v="Geschätzter Abschluss: %s" eh="354d575d" />
+        <e k="usedplus_rvb_completesTomorrow" v="Morgen abgeschlossen um %s" eh="86ab7bf0" />
+        <e k="usedplus_rvb_totalDuration" v="Gesamtdauer: %s" eh="f617e4f0" />
+        <e k="usedplus_rvb_durationHM" v="%d Std., %d Min." eh="0e4b83e7" />
+        <e k="usedplus_rvb_durationH" v="%d Std." eh="c30c071b" />
+        <e k="usedplus_rvb_durationM" v="%d Min." eh="ff4f2cb8" />
+        <e k="usedplus_rvb_serviceOverdue" v="(%d Stunden überfällig — erweiterte Wartung)" eh="0762f611" />
+        <e k="usedplus_rvb_currentTime" v="Aktuelle Zeit: %s" eh="e00607d2" />
+        <e k="usedplus_rvb_workshopCost" v="Kosten: %s" eh="2c78cd54" />
+        <e k="usedplus_rvb_inspectionStarted" v="Inspektion gestartet — %s wird bei Abschluss berechnet" eh="0c9432aa" />
+        <e k="usedplus_rvb_serviceStarted" v="Service gestartet — %s wird bei Abschluss berechnet" eh="aa19a47c" />
 </elements>
 </l10n>

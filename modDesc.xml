@@ -7,7 +7,7 @@
     -->
 
     <author>UsedPlus Team</author>
-    <version>2.15.3.114</version>
+    <version>2.15.3.128</version>
 
     <title>
         <en>UsedPlus - Finance &amp; Marketplace System</en>
@@ -323,6 +323,7 @@ UNTERSTÜTZUNG
         <sourceFile filename="src/extensions/rvb/RVBRepairButton.lua"/>
         <sourceFile filename="src/extensions/rvb/RVBButtonInjection.lua"/>
         <sourceFile filename="src/extensions/rvb/RVBServiceHooks.lua"/>
+        <sourceFile filename="src/extensions/rvb/RVBInspectionButton.lua"/>
         <sourceFile filename="src/extensions/rvb/RVBDiagnostics.lua"/>
         <sourceFile filename="src/extensions/RVBWorkshopIntegration.lua"/>  <!--  v2.1.0: RVB Workshop coordinator -->
         <sourceFile filename="src/extensions/VehicleInfoExtension.lua"/>  <!--  v2.8.0: Oil/Hydraulic fluid in vehicle info box -->

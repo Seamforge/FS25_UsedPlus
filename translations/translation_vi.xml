@@ -2764,9 +2764,22 @@
         <e k="usedplus_runaway_defaultEnded" v="Trốn thoát dừng lại." eh="ed4659ca" />
         <e k="usedplus_rvb_sectionHeader" v="Chẩn đoán phương tiện" eh="ae666ba0" />
         <e k="usedplus_vpf_offerValidMonths" v="Lời đề nghị hợp lệ trong %d tháng" eh="5fe704c6" />
-        <e k="usedplus_comp_engineOil" v="[EN] Engine Oil" eh="d2d4a89d" />
-        <e k="usedplus_comp_hydraulicFluid" v="[EN] Hydraulic Fluid" eh="f9c4d7d9" />
-        <e k="usedplus_comp_tires" v="[EN] Tires" eh="3fe2c06a" />
-        <e k="usedplus_comp_fuelSystem" v="[EN] Fuel System" eh="136d85c8" />
+        <e k="usedplus_comp_engineOil" v="Dầu động cơ" eh="d2d4a89d" />
+        <e k="usedplus_comp_hydraulicFluid" v="Chất lỏng thủy lực" eh="f9c4d7d9" />
+        <e k="usedplus_comp_tires" v="Lốp xe" eh="3fe2c06a" />
+        <e k="usedplus_comp_fuelSystem" v="Hệ thống nhiên liệu" eh="136d85c8" />
+        <e k="usedplus_rvb_inspectQuestion" v="Kiểm tra chiếc xe này cho %s?" eh="bcfa5162" />
+        <e k="usedplus_rvb_serviceQuestion" v="Bảo dưỡng chiếc xe này cho %s?" eh="a5912327" />
+        <e k="usedplus_rvb_completesAt" v="Dự kiến hoàn thành: %s" eh="354d575d" />
+        <e k="usedplus_rvb_completesTomorrow" v="Hoàn thành vào ngày mai lúc %s" eh="86ab7bf0" />
+        <e k="usedplus_rvb_totalDuration" v="Tổng thời gian: %s" eh="f617e4f0" />
+        <e k="usedplus_rvb_durationHM" v="%d giờ, %d phút" eh="0e4b83e7" />
+        <e k="usedplus_rvb_durationH" v="%d giờ" eh="c30c071b" />
+        <e k="usedplus_rvb_durationM" v="%d phút" eh="ff4f2cb8" />
+        <e k="usedplus_rvb_serviceOverdue" v="(%d giờ quá hạn — bảo dưỡng mở rộng)" eh="0762f611" />
+        <e k="usedplus_rvb_currentTime" v="Thời gian hiện tại: %s" eh="e00607d2" />
+        <e k="usedplus_rvb_workshopCost" v="Chi phí: %s" eh="2c78cd54" />
+        <e k="usedplus_rvb_inspectionStarted" v="Kiểm tra đã bắt đầu — %s sẽ được tính khi hoàn thành" eh="0c9432aa" />
+        <e k="usedplus_rvb_serviceStarted" v="Dịch vụ đã bắt đầu — %s sẽ được tính khi hoàn thành" eh="aa19a47c" />
 </elements>
 </l10n>

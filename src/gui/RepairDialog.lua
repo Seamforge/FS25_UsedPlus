@@ -735,8 +735,13 @@ function RepairDialog:onPayCashConfirmed(yes)
         local callback = VehicleSellingPointExtension.pendingRepairCallback
         local target = VehicleSellingPointExtension.pendingRepairTarget
 
-        UsedPlus.logDebug(string.format("RepairDialog: RVB path — callback=%s, target=%s, rvbCost=%s",
-            tostring(callback), tostring(target), tostring(self.rvbRepairCost)))
+        -- Pass repair percentage and scaled cost to hookRepairCompletion
+        RVBWorkshopIntegration.lastRepairPercent = self.repairPercent
+        RVBWorkshopIntegration.lastHydraulicRepairCost = math.floor(
+            (RVBWorkshopIntegration.lastHydraulicRepairCost or 0) * (self.repairPercent / 100))
+
+        UsedPlus.logDebug(string.format("RepairDialog: RVB path — callback=%s, target=%s, rvbCost=%s, repairPercent=%d%%",
+            tostring(callback), tostring(target), tostring(self.rvbRepairCost), self.repairPercent))
 
         if callback then
             -- Trigger RVB's repair (deducts money + repairs components)
@@ -766,6 +771,12 @@ function RepairDialog:onPayCashConfirmed(yes)
         -- Clear stored callback
         VehicleSellingPointExtension.pendingRepairCallback = nil
         VehicleSellingPointExtension.pendingRepairTarget = nil
+
+        -- Close the RVB workshop dialog (it stays open behind our RepairDialog)
+        local rvbEntry = g_gui and g_gui.guis and g_gui.guis.rvbWorkshopDialog
+        if rvbEntry and rvbEntry.target and rvbEntry.target.close then
+            rvbEntry.target:close()
+        end
     else
         -- Vanilla repair path
         local sendRepairPercent = 0

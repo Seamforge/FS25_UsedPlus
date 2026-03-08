@@ -2767,5 +2767,18 @@
         <e k="usedplus_comp_engineOil" v="Engine Oil" eh="d2d4a89d" />
         <e k="usedplus_comp_hydraulicFluid" v="Hydraulic Fluid" eh="f9c4d7d9" />
         <e k="usedplus_comp_tires" v="Tires" eh="3fe2c06a" />
-        <e k="usedplus_comp_fuelSystem" v="Fuel System" eh="136d85c8" /></elements>
+        <e k="usedplus_comp_fuelSystem" v="Fuel System" eh="136d85c8" />
+        <e k="usedplus_rvb_inspectQuestion" v="Inspect this vehicle for %s?" eh="bcfa5162" />
+        <e k="usedplus_rvb_serviceQuestion" v="Service this vehicle for %s?" eh="a5912327" />
+        <e k="usedplus_rvb_completesAt" v="Estimated completion: %s" eh="354d575d" />
+        <e k="usedplus_rvb_completesTomorrow" v="Completed tomorrow at %s" eh="86ab7bf0" />
+        <e k="usedplus_rvb_totalDuration" v="Total duration: %s" eh="f617e4f0" />
+        <e k="usedplus_rvb_durationHM" v="%d hr, %d min" eh="0e4b83e7" />
+        <e k="usedplus_rvb_durationH" v="%d hr" eh="c30c071b" />
+        <e k="usedplus_rvb_durationM" v="%d min" eh="ff4f2cb8" />
+        <e k="usedplus_rvb_serviceOverdue" v="(%d hours overdue — extended service)" eh="0762f611" />
+        <e k="usedplus_rvb_currentTime" v="Current time: %s" eh="e00607d2" />
+        <e k="usedplus_rvb_workshopCost" v="Cost: %s" eh="2c78cd54" />
+        <e k="usedplus_rvb_inspectionStarted" v="Inspection started — %s charged on completion" eh="0c9432aa" />
+        <e k="usedplus_rvb_serviceStarted" v="Service started — %s charged on completion" eh="aa19a47c" /></elements>
 </l10n>

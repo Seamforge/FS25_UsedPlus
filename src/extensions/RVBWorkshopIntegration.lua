@@ -41,6 +41,7 @@ RVBWorkshopIntegration.previousFaultStates = {}  -- { [vehicle] = { [partKey] = 
 -- v2.15.3: Hydraulic toggle state and cost for RVB repair integration
 RVBWorkshopIntegration.hydraulicRepairRequested = false
 RVBWorkshopIntegration.lastHydraulicRepairCost = 0
+RVBWorkshopIntegration.lastRepairPercent = 100
 
 --[[
     Initialize the integration
@@ -258,6 +259,9 @@ function RVBWorkshopIntegration:tryHookUpdateScreen()
 
     local okS, errS = pcall(RVBWorkshopIntegration.hookServiceButton, RVBWorkshopIntegration, dialogClass)
     if not okS then UsedPlus.logWarn("RVBWorkshopIntegration: hookServiceButton CRASHED: " .. tostring(errS)) end
+
+    local okI, errI = pcall(RVBWorkshopIntegration.hookInspectionButton, RVBWorkshopIntegration, dialogClass)
+    if not okI then UsedPlus.logWarn("RVBWorkshopIntegration: hookInspectionButton CRASHED: " .. tostring(errI)) end
 
     if dialogClass.vehicle then
         local okF, errF = pcall(RVBWorkshopIntegration.initializeFaultTracking, RVBWorkshopIntegration, dialogClass.vehicle)
