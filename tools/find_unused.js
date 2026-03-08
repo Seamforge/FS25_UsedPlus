@@ -332,12 +332,12 @@ function gatherStatistics(modRoot) {
         // Categorize
         let categorized = false;
         for (const [prefix, catName] of Object.entries(categories)) {
-            if (relPath.startsWith(prefix.replace(/\//g, '/'))) {
+            if (relPath.startsWith(prefix)) {
                 // Use most specific match
                 const currentDepth = prefix.split('/').length;
                 let foundBetter = false;
                 for (const [otherPrefix, otherCat] of Object.entries(categories)) {
-                    if (relPath.startsWith(otherPrefix.replace(/\//g, '/')) &&
+                    if (relPath.startsWith(otherPrefix) &&
                         otherPrefix.split('/').length > currentDepth) {
                         foundBetter = true;
                         break;
