@@ -2639,31 +2639,26 @@
     "watchers": 6
   },
   {
-    "timestamp": "2026-03-08T06:11:42Z",
+    "timestamp": "2026-03-08T12:05:37Z",
     "date": "2026-03-08",
     "views": {
-      "count": 2921,
-      "uniques": 326
+      "count": 2807,
+      "uniques": 335
     },
     "clones": {
-      "count": 1994,
-      "uniques": 744
+      "count": 1915,
+      "uniques": 721
     },
     "referrers": [
       {
         "referrer": "github.com",
-        "count": 955,
-        "uniques": 136
+        "count": 846,
+        "uniques": 138
       },
       {
         "referrer": "Bing",
-        "count": 148,
-        "uniques": 27
-      },
-      {
-        "referrer": "Yahoo",
-        "count": 31,
-        "uniques": 3
+        "count": 144,
+        "uniques": 24
       },
       {
         "referrer": "DuckDuckGo",
@@ -2671,9 +2666,19 @@
         "uniques": 3
       },
       {
+        "referrer": "Yahoo",
+        "count": 29,
+        "uniques": 2
+      },
+      {
         "referrer": "Google",
-        "count": 9,
-        "uniques": 3
+        "count": 8,
+        "uniques": 2
+      },
+      {
+        "referrer": "com.reddit.frontpage",
+        "count": 7,
+        "uniques": 5
       },
       {
         "referrer": "yandex.ru",
@@ -2690,62 +2695,62 @@
       {
         "path": "/XelaNull/FS25_UsedPlus",
         "title": "GitHub - XelaNull/FS25_UsedPlus: A comprehensive finance and marketplace over...",
-        "count": 918,
-        "uniques": 241
+        "count": 896,
+        "uniques": 250
       },
       {
         "path": "/XelaNull/FS25_UsedPlus/releases",
         "title": "Releases · XelaNull/FS25_UsedPlus",
-        "count": 248,
-        "uniques": 77
+        "count": 244,
+        "uniques": 76
       },
       {
         "path": "/XelaNull/FS25_UsedPlus/issues",
         "title": "GitHub · Where software is built",
-        "count": 195,
-        "uniques": 65
+        "count": 208,
+        "uniques": 66
       },
       {
         "path": "/XelaNull/FS25_UsedPlus/releases/tag/v2.14.2",
         "title": "Release v2.14.2 — Finance & Marketplace System for FS25 · XelaNull/FS25_UsedP...",
-        "count": 110,
-        "uniques": 57
+        "count": 103,
+        "uniques": 50
       },
       {
         "path": "/XelaNull/FS25_UsedPlus/wiki/Other-Mod-Compatibility",
         "title": "Other Mod Compatibility · XelaNull/FS25_UsedPlus Wiki · GitHub",
-        "count": 66,
-        "uniques": 29
-      },
-      {
-        "path": "/XelaNull/FS25_UsedPlus/issues/19",
-        "title": "[Bug]: Repairing a vehicle impossible · Issue #19 · XelaNull/FS25_UsedPlus",
-        "count": 63,
-        "uniques": 23
-      },
-      {
-        "path": "/XelaNull/FS25_UsedPlus/blob/master/screenshots/used_plus_finances_zoomed.png",
-        "title": "FS25_UsedPlus/screenshots/used_plus_finances_zoomed.png at master · XelaNull/...",
-        "count": 58,
-        "uniques": 30
+        "count": 64,
+        "uniques": 27
       },
       {
         "path": "/XelaNull/FS25_UsedPlus/releases/tag/v2.15.2.43",
         "title": "Release v2.15.2.43 — Pre-Release (all changes since v2.14.2) · XelaNull/FS25_...",
-        "count": 56,
-        "uniques": 32
+        "count": 60,
+        "uniques": 36
+      },
+      {
+        "path": "/XelaNull/FS25_UsedPlus/issues/19",
+        "title": "[Bug]: Repairing a vehicle impossible · Issue #19 · XelaNull/FS25_UsedPlus",
+        "count": 59,
+        "uniques": 21
       },
       {
         "path": "/XelaNull/FS25_UsedPlus/releases/tag/v2.15.1.18",
         "title": "Release v2.15.1.18 — Pre-Release (all changes since v2.14.2) · XelaNull/FS25_...",
-        "count": 55,
-        "uniques": 25
+        "count": 52,
+        "uniques": 23
       },
       {
         "path": "/XelaNull/FS25_UsedPlus/wiki/Malfunctions",
         "title": "Malfunctions · XelaNull/FS25_UsedPlus Wiki · GitHub",
-        "count": 52,
+        "count": 51,
         "uniques": 17
+      },
+      {
+        "path": "/XelaNull/FS25_UsedPlus/blob/master/screenshots/used_plus_finances_zoomed.png",
+        "title": "FS25_UsedPlus/screenshots/used_plus_finances_zoomed.png at master · XelaNull/...",
+        "count": 47,
+        "uniques": 29
       }
     ],
     "releases": [
@@ -2774,7 +2779,7 @@
       {
         "assets": [
           {
-            "downloads": 103,
+            "downloads": 105,
             "name": "FS25_UsedPlus.zip"
           }
         ],
