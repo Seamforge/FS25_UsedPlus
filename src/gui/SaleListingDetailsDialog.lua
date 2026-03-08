@@ -82,7 +82,7 @@ function SaleListingDetailsDialog:updateDisplay()
     local listing = self.listing
 
     -- Vehicle Info
-    UIHelper.Element.setText(self.vehicleNameText, listing.vehicleName or "Unknown Vehicle")
+    UIHelper.Element.setText(self.vehicleNameText, listing.vehicleName or g_i18n:getText("usedplus_common_unknownVehicle"))
 
     if self.conditionText then
         local repairPct = listing.repairPercent or 100
@@ -125,7 +125,7 @@ function SaleListingDetailsDialog:updateDisplay()
 
     -- Agent Tier
     local agentTier = listing:getAgentTierConfig()
-    UIHelper.Element.setText(self.agentTierText, agentTier.name or "Unknown")
+    UIHelper.Element.setText(self.agentTierText, agentTier.name or g_i18n:getText("usedplus_common_unknown"))
 
     if self.agentFeeText then
         local feePercent = (agentTier.feePercent or 0) * 100
@@ -152,7 +152,7 @@ function SaleListingDetailsDialog:updateDisplay()
 
     -- Price Tier
     local priceTier = listing:getPriceTierConfig()
-    UIHelper.Element.setText(self.priceTierText, priceTier.name or "Unknown")
+    UIHelper.Element.setText(self.priceTierText, priceTier.name or g_i18n:getText("usedplus_common_unknown"))
 
     if self.priceRangeText then
         self.priceRangeText:setText(UIHelper.Text.formatRange(

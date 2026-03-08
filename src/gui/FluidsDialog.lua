@@ -86,7 +86,7 @@ function FluidsDialog:setVehicle(vehicle, farmId)
     -- Get store item and vehicle name
     local storeItem = g_storeManager:getItemByXMLFilename(vehicle.configFileName)
     self.storeItem = storeItem
-    self.vehicleName = storeItem and storeItem.name or vehicle:getName() or "Unknown Vehicle"
+    self.vehicleName = storeItem and storeItem.name or vehicle:getName() or g_i18n:getText("usedplus_common_unknownVehicle")
     -- Use empty config table to get base store price (not depreciated vehicle price)
     self.basePrice = storeItem and (StoreItemUtil.getDefaultPrice(storeItem, {}) or storeItem.price or 10000) or 10000
 

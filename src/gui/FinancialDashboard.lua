@@ -108,12 +108,12 @@ function FinancialDashboard:updateCreditScoreSection(farm)
     -- Display rating with range (dashboard-specific format)
     if self.creditScoreRating then
         local ratingTexts = {
-            excellent = "Excellent (750-850)",
-            good = "Good (670-749)",
-            fair = "Fair (580-669)",
-            poor = "Poor (300-579)",
+            excellent = g_i18n:getText("usedplus_creditRatingRange_excellent"),
+            good = g_i18n:getText("usedplus_creditRatingRange_good"),
+            fair = g_i18n:getText("usedplus_creditRatingRange_fair"),
+            poor = g_i18n:getText("usedplus_creditRatingRange_poor"),
         }
-        UIHelper.Element.setText(self.creditScoreRating, ratingTexts[self.creditRating] or "Unknown")
+        UIHelper.Element.setText(self.creditScoreRating, ratingTexts[self.creditRating] or g_i18n:getText("usedplus_condition_unknown"))
     end
 
     -- Display trend based on history (nuanced 5-level trend)
@@ -123,15 +123,15 @@ function FinancialDashboard:updateCreditScoreSection(farm)
         local trendText, trendColor
 
         if netChange > 20 then
-            trendText, trendColor = "Trending Up", UIHelper.Colors.TREND_UP
+            trendText, trendColor = g_i18n:getText("usedplus_trend_up"), UIHelper.Colors.TREND_UP
         elseif netChange > 0 then
-            trendText, trendColor = "Slightly Up", UIHelper.Colors.CREDIT_GOOD
+            trendText, trendColor = g_i18n:getText("usedplus_trend_slightlyUp"), UIHelper.Colors.CREDIT_GOOD
         elseif netChange < -20 then
-            trendText, trendColor = "Trending Down", UIHelper.Colors.TREND_DOWN
+            trendText, trendColor = g_i18n:getText("usedplus_trend_down"), UIHelper.Colors.TREND_DOWN
         elseif netChange < 0 then
-            trendText, trendColor = "Slightly Down", UIHelper.Colors.COST_ORANGE
+            trendText, trendColor = g_i18n:getText("usedplus_trend_slightlyDown"), UIHelper.Colors.COST_ORANGE
         else
-            trendText, trendColor = "Stable", UIHelper.Colors.TREND_STABLE
+            trendText, trendColor = g_i18n:getText("usedplus_trend_stable"), UIHelper.Colors.TREND_STABLE
         end
 
         UIHelper.Element.setTextWithColor(self.creditScoreTrend, trendText, trendColor)
@@ -140,7 +140,7 @@ function FinancialDashboard:updateCreditScoreSection(farm)
     -- Display history adjustment
     if self.historyAdjustment and CreditHistory then
         local adjustment = CreditHistory.getScoreAdjustment(self.farmId)
-        UIHelper.Element.setText(self.historyAdjustment, string.format("History: %+d points", adjustment))
+        UIHelper.Element.setText(self.historyAdjustment, string.format(g_i18n:getText("usedplus_credit_historyFormat"), adjustment))
     end
 end
 
@@ -218,15 +218,15 @@ function FinancialDashboard:updateDebtRatioSection(farm)
         local statusText, statusColor
 
         if ratio < 0.2 then
-            statusText, statusColor = "Excellent", UIHelper.Colors.CREDIT_EXCELLENT
+            statusText, statusColor = g_i18n:getText("usedplus_condition_excellent"), UIHelper.Colors.CREDIT_EXCELLENT
         elseif ratio < 0.4 then
-            statusText, statusColor = "Good", UIHelper.Colors.CREDIT_GOOD
+            statusText, statusColor = g_i18n:getText("usedplus_condition_good"), UIHelper.Colors.CREDIT_GOOD
         elseif ratio < 0.6 then
-            statusText, statusColor = "Fair", UIHelper.Colors.CREDIT_FAIR
+            statusText, statusColor = g_i18n:getText("usedplus_condition_fair"), UIHelper.Colors.CREDIT_FAIR
         elseif ratio < 0.8 then
-            statusText, statusColor = "High", UIHelper.Colors.COST_ORANGE
+            statusText, statusColor = g_i18n:getText("usedplus_debtRatio_high"), UIHelper.Colors.COST_ORANGE
         else
-            statusText, statusColor = "Critical", UIHelper.Colors.CREDIT_POOR
+            statusText, statusColor = g_i18n:getText("usedplus_condition_critical"), UIHelper.Colors.CREDIT_POOR
         end
 
         UIHelper.Element.setTextWithColor(self.debtRatioStatus, statusText, statusColor)
@@ -246,7 +246,7 @@ function FinancialDashboard:updateUpcomingPayments(farm)
             for _, deal in ipairs(deals) do
                 if deal.status == "active" then
                     table.insert(payments, {
-                        name = deal.itemName or "Unknown",
+                        name = deal.itemName or g_i18n:getText("usedplus_common_unknown"),
                         amount = deal.monthlyPayment or 0,
                     })
                 end

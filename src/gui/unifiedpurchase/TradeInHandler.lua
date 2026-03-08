@@ -77,7 +77,7 @@ function TradeInHandler.loadEligible(context, farmId)
 
                 table.insert(context.eligibleTradeIns, {
                     vehicle = vehicle,
-                    name = vehicle:getFullName() or "Unknown",
+                    name = vehicle:getFullName() or g_i18n:getText("usedplus_common_unknown"),
                     value = tradeInValue,
                     sellPrice = sellPrice,  -- Store for reference
                     creditMultiplier = creditMultiplier,

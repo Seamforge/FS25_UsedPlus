@@ -244,7 +244,7 @@ end
 function CreditReportDialog:updateHeader()
     -- Farm name
     if self.farmNameText then
-        local farmName = self.farm.name or "Unknown Farm"
+        local farmName = self.farm.name or g_i18n:getText("usedplus_common_unknownFarm")
         self.farmNameText:setText(farmName)
     end
 

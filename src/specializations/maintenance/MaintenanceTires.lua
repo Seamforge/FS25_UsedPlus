@@ -478,6 +478,10 @@ function UsedPlusMaintenance.repairFlatTire(vehicle)
     spec.flatTireSide = 0
     spec.hasShownFlatTireWarning = false
 
+    if vehicle.raiseDirtyFlags and spec.dirtyFlag then
+        vehicle:raiseDirtyFlags(spec.dirtyFlag)
+    end
+
     UsedPlus.logDebug(string.format("Flat tire fixed for %s", vehicle:getName()))
 end
 

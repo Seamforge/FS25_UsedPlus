@@ -126,7 +126,11 @@ function UnifiedPurchaseDialog:onGuiSetupFinished()
 
     -- Setup mode selector
     if self.modeSelector then
-        self.modeSelector:setTexts(UnifiedPurchaseDialog.MODE_TEXTS)
+        self.modeSelector:setTexts({
+            g_i18n:getText("usedplus_mode_cash"),
+            g_i18n:getText("usedplus_mode_finance"),
+            g_i18n:getText("usedplus_mode_lease")
+        })
         self.modeSelector:setState(1)  -- Default to Cash
     end
 
@@ -134,7 +138,8 @@ function UnifiedPurchaseDialog:onGuiSetupFinished()
     if self.financeTermSlider then
         local texts = {}
         for _, years in ipairs(UnifiedPurchaseDialog.FINANCE_TERMS) do
-            table.insert(texts, years .. (years == 1 and " Year" or " Years"))
+            local key = years == 1 and "usedplus_yearSingular" or "usedplus_yearPlural"
+            table.insert(texts, string.format(g_i18n:getText(key), years))
         end
         self.financeTermSlider:setTexts(texts)
         self.financeTermSlider:setState(self.financeTermIndex)
@@ -168,12 +173,13 @@ function UnifiedPurchaseDialog:onGuiSetupFinished()
         local texts = {}
         for _, months in ipairs(UnifiedPurchaseDialog.LEASE_TERMS) do
             if months < 12 then
-                table.insert(texts, months .. (months == 1 and " Month" or " Months"))
+                local key = months == 1 and "usedplus_monthSingular" or "usedplus_monthPlural"
+                table.insert(texts, string.format(g_i18n:getText(key), months))
             elseif months == 12 then
-                table.insert(texts, "1 Year")
+                table.insert(texts, string.format(g_i18n:getText("usedplus_yearSingular"), 1))
             else
                 local years = months / 12
-                table.insert(texts, years .. " Years")
+                table.insert(texts, string.format(g_i18n:getText("usedplus_yearPlural"), years))
             end
         end
         self.leaseTermSlider:setTexts(texts)
@@ -739,7 +745,7 @@ function UnifiedPurchaseDialog:onModeChanged()
                         msgTemplate,
                         self.financeMinScore or 750,
                         self.creditScore or 0,
-                        self.creditRating or "Unknown"
+                        self.creditRating or g_i18n:getText("usedplus_common_unknown")
                     ))
                 else
                     -- Credit score too low for vehicles
@@ -1487,24 +1493,24 @@ end
 function UnifiedPurchaseDialog:buildConfirmationMessage()
     local lines = {}
 
-    table.insert(lines, "CONFIRM PURCHASE")
+    table.insert(lines, g_i18n:getText("usedplus_confirm_title"))
     table.insert(lines, "")
-    table.insert(lines, string.format("Vehicle: %s", self.vehicleName))
-    table.insert(lines, string.format("Price: %s", g_i18n:formatMoney(self.vehiclePrice)))
+    table.insert(lines, string.format(g_i18n:getText("usedplus_confirm_vehicleFormat"), self.vehicleName))
+    table.insert(lines, string.format(g_i18n:getText("usedplus_confirm_priceFormat"), g_i18n:formatMoney(self.vehiclePrice)))
     table.insert(lines, "")
 
     if self.currentMode == UnifiedPurchaseDialog.MODE_CASH then
         -- Cash purchase
         local totalDue = self.vehiclePrice - self.tradeInValue
-        table.insert(lines, "PURCHASE TYPE: Cash")
+        table.insert(lines, g_i18n:getText("usedplus_confirm_typeCash"))
         if self.tradeInEnabled and self.tradeInValue > 0 then
-            table.insert(lines, string.format("Trade-In Credit: -%s", g_i18n:formatMoney(self.tradeInValue)))
+            table.insert(lines, string.format(g_i18n:getText("usedplus_confirm_tradeInFormat"), g_i18n:formatMoney(self.tradeInValue)))
         end
         table.insert(lines, "")
         if totalDue < 0 then
-            table.insert(lines, string.format("REFUND: +%s", g_i18n:formatMoney(math.abs(totalDue))))
+            table.insert(lines, string.format(g_i18n:getText("usedplus_confirm_refundFormat"), g_i18n:formatMoney(math.abs(totalDue))))
         else
-            table.insert(lines, string.format("TOTAL DUE NOW: %s", g_i18n:formatMoney(totalDue)))
+            table.insert(lines, string.format(g_i18n:getText("usedplus_confirm_totalDueFormat"), g_i18n:formatMoney(totalDue)))
         end
 
     elseif self.currentMode == UnifiedPurchaseDialog.MODE_FINANCE then
@@ -1520,22 +1526,22 @@ function UnifiedPurchaseDialog:buildConfirmationMessage()
         local monthlyPayment, totalInterest = FinanceCalculations.calculateMonthlyPayment(
             amountFinanced, self.interestRate, termMonths)
 
-        table.insert(lines, "PURCHASE TYPE: Finance")
-        table.insert(lines, string.format("Term: %d years (%d months)", termYears, termMonths))
-        table.insert(lines, string.format("Interest Rate: %.2f%%", self.interestRate * 100))
-        table.insert(lines, string.format("Amount Financed: %s", g_i18n:formatMoney(amountFinanced)))
+        table.insert(lines, g_i18n:getText("usedplus_confirm_typeFinance"))
+        table.insert(lines, string.format(g_i18n:getText("usedplus_confirm_termFormat"), termYears, termMonths))
+        table.insert(lines, string.format(g_i18n:getText("usedplus_confirm_interestRateFormat"), self.interestRate * 100))
+        table.insert(lines, string.format(g_i18n:getText("usedplus_confirm_amountFinancedFormat"), g_i18n:formatMoney(amountFinanced)))
         table.insert(lines, "")
-        table.insert(lines, string.format("Monthly Payment: %s", g_i18n:formatMoney(monthlyPayment)))
-        table.insert(lines, string.format("Total Interest: %s", g_i18n:formatMoney(totalInterest)))
+        table.insert(lines, string.format(g_i18n:getText("usedplus_confirm_monthlyPaymentFormat"), g_i18n:formatMoney(monthlyPayment)))
+        table.insert(lines, string.format(g_i18n:getText("usedplus_confirm_totalInterestFormat"), g_i18n:formatMoney(totalInterest)))
         table.insert(lines, "")
         -- v2.9.1: Show cashback breakdown if applicable, and net due today
         local netDueToday = math.max(0, downPayment - cashBack)
         if cashBack > 0 then
-            table.insert(lines, string.format("Down Payment: %s", g_i18n:formatMoney(downPayment)))
-            table.insert(lines, string.format("Cash Back: -%s", g_i18n:formatMoney(cashBack)))
-            table.insert(lines, string.format("DUE TODAY: %s", g_i18n:formatMoney(netDueToday)))
+            table.insert(lines, string.format(g_i18n:getText("usedplus_confirm_downPaymentFormat"), g_i18n:formatMoney(downPayment)))
+            table.insert(lines, string.format(g_i18n:getText("usedplus_confirm_cashBackFormat"), g_i18n:formatMoney(cashBack)))
+            table.insert(lines, string.format(g_i18n:getText("usedplus_confirm_dueTodayFormat"), g_i18n:formatMoney(netDueToday)))
         else
-            table.insert(lines, string.format("DUE TODAY: %s (down payment)", g_i18n:formatMoney(netDueToday)))
+            table.insert(lines, string.format(g_i18n:getText("usedplus_confirm_dueTodayDownFormat"), g_i18n:formatMoney(netDueToday)))
         end
 
     elseif self.currentMode == UnifiedPurchaseDialog.MODE_LEASE then
@@ -1552,18 +1558,18 @@ function UnifiedPurchaseDialog:buildConfirmationMessage()
         local securityDeposit = self.calculatedSecurityDeposit or 0
         local totalDueToday = capReduction + securityDeposit
 
-        table.insert(lines, "PURCHASE TYPE: Lease")
-        table.insert(lines, string.format("Term: %d months", termMonths))
-        table.insert(lines, string.format("Monthly Payment: %s", g_i18n:formatMoney(monthlyPayment)))
-        table.insert(lines, string.format("Buyout at End: %s", g_i18n:formatMoney(residualValue)))
+        table.insert(lines, g_i18n:getText("usedplus_confirm_typeLease"))
+        table.insert(lines, string.format(g_i18n:getText("usedplus_confirm_leaseTermFormat"), termMonths))
+        table.insert(lines, string.format(g_i18n:getText("usedplus_confirm_monthlyPaymentFormat"), g_i18n:formatMoney(monthlyPayment)))
+        table.insert(lines, string.format(g_i18n:getText("usedplus_confirm_buyoutFormat"), g_i18n:formatMoney(residualValue)))
         table.insert(lines, "")
         if capReduction > 0 then
-            table.insert(lines, string.format("Cap Reduction: %s", g_i18n:formatMoney(capReduction)))
+            table.insert(lines, string.format(g_i18n:getText("usedplus_confirm_capReductionFormat"), g_i18n:formatMoney(capReduction)))
         end
         if securityDeposit > 0 then
-            table.insert(lines, string.format("Security Deposit: %s", g_i18n:formatMoney(securityDeposit)))
+            table.insert(lines, string.format(g_i18n:getText("usedplus_confirm_securityDepositFormat"), g_i18n:formatMoney(securityDeposit)))
         end
-        table.insert(lines, string.format("DUE TODAY: %s", g_i18n:formatMoney(totalDueToday)))
+        table.insert(lines, string.format(g_i18n:getText("usedplus_confirm_dueTodayFormat"), g_i18n:formatMoney(totalDueToday)))
     end
 
     table.insert(lines, "")
@@ -1614,77 +1620,6 @@ function UnifiedPurchaseDialog:executeCashPurchaseVehicle()
     if success then
         self:close()
     end
-end
-
-function UnifiedPurchaseDialog:executeCashPurchaseVehicle_OLD()
-    local farmId = g_currentMission:getFarmId()
-    local farm = g_farmManager:getFarmById(farmId)
-
-    if not farm then
-        g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_CRITICAL, g_i18n:getText("usedplus_error_farmNotFound"))
-        return
-    end
-
-    local totalDue = self.vehiclePrice - self.tradeInValue
-
-    -- Check if player can afford
-    if totalDue > 0 and farm.money < totalDue then
-        g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_CRITICAL,
-            string.format(g_i18n:getText("usedplus_error_insufficientFundsGeneric"), g_i18n:formatMoney(totalDue, 0, true, true)))
-        return
-    end
-
-    -- Handle trade-in first (adds money to player's account)
-    if self.tradeInEnabled and self.tradeInVehicle then
-        self:executeTradeIn()
-    end
-
-    -- Get configurations from shop screen
-    local configurations = {}
-    local configurationData = nil
-    local licensePlateData = nil
-
-    if self.shopScreen then
-        configurations = self.shopScreen.configurations or {}
-        configurationData = self.shopScreen.configurationData
-        licensePlateData = self.shopScreen.licensePlateData
-    elseif g_shopConfigScreen then
-        configurations = g_shopConfigScreen.configurations or {}
-        configurationData = g_shopConfigScreen.configurationData
-        licensePlateData = g_shopConfigScreen.licensePlateData
-    end
-
-    -- Use BuyVehicleData/BuyVehicleEvent pattern (from HirePurchasing)
-    if BuyVehicleData and BuyVehicleEvent and g_client then
-        local event = BuyVehicleData.new()
-        event:setOwnerFarmId(farmId)
-        event:setPrice(totalDue)
-        event:setStoreItem(self.storeItem)
-        event:setConfigurations(configurations)
-
-        if configurationData then
-            event:setConfigurationData(configurationData)
-        end
-        if licensePlateData then
-            event:setLicensePlateData(licensePlateData)
-        end
-        if self.saleItem then
-            event:setSaleItem(self.saleItem)
-        end
-
-        g_client:getServerConnection():sendEvent(BuyVehicleEvent.new(event))
-
-        UsedPlus.logDebug("Cash purchase: Sent BuyVehicleEvent for " .. tostring(self.vehicleName))
-        g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_OK,
-            string.format(g_i18n:getText("usedplus_notify_vehiclePurchased") or "Purchased %s for %s",
-                self.vehicleName, g_i18n:formatMoney(math.max(0, totalDue))))
-    else
-        UsedPlus.logError("BuyVehicleData/BuyVehicleEvent not available - cannot complete cash purchase")
-        g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_CRITICAL,
-            g_i18n:getText("usedplus_error_purchaseFailed") or "Purchase failed - game API not available")
-    end
-
-    self:close()
 end
 
 --[[
@@ -1849,71 +1784,6 @@ function UnifiedPurchaseDialog:executeCashPurchasePlaceable()
 end
 
 --[[
-    Spawn a vehicle using the game's shop system
-    @param farmId - Owner farm
-    @param price - Price to pay (0 for financed/leased)
-    @return boolean - True if spawn succeeded
-]]
-function UnifiedPurchaseDialog:spawnVehicle(farmId, price)
-    if not self.storeItem then
-        UsedPlus.logError("No storeItem for vehicle spawn")
-        return false
-    end
-
-    -- Try using the shop controller's buy method
-    if g_currentMission.shopController and g_currentMission.shopController.buy then
-        local success = pcall(function()
-            g_currentMission.shopController:buy(self.storeItem, {}, farmId, price or 0)
-        end)
-        if success then
-            UsedPlus.logDebug("Vehicle spawned via shopController:buy()")
-            return true
-        end
-    end
-
-    -- Fallback: Try direct VehicleLoadingUtil
-    if VehicleLoadingUtil and VehicleLoadingUtil.loadVehicle then
-        local x, y, z = self:getVehicleSpawnPosition()
-        local success = pcall(function()
-            VehicleLoadingUtil.loadVehicle(
-                self.storeItem.xmlFilename,
-                {x = x, y = y, z = z},
-                true,   -- addPhysics
-                0,      -- yRotation
-                farmId,
-                {},     -- configurations
-                nil,    -- callback
-                nil,    -- callbackTarget
-                {}      -- callbackArguments
-            )
-        end)
-        if success then
-            UsedPlus.logDebug("Vehicle spawned via VehicleLoadingUtil")
-            return true
-        end
-    end
-
-    UsedPlus.logWarn("Could not spawn vehicle - no suitable spawn method found")
-    return false
-end
-
---[[
-    Get a spawn position for the vehicle (near shop/player)
-]]
-function UnifiedPurchaseDialog:getVehicleSpawnPosition()
-    -- Try to get a position near the player
-    local player = g_currentMission.player
-    if player and player.rootNode then
-        local x, y, z = getWorldTranslation(player.rootNode)
-        -- Offset slightly so vehicle doesn't spawn on player
-        return x + 5, y, z + 5
-    end
-
-    -- Fallback to a default spawn point
-    return 0, 0, 0
-end
-
---[[
     Execute finance purchase
     v2.8.0: Delegates to item-type-specific functions
 ]]
@@ -2058,293 +1928,6 @@ function UnifiedPurchaseDialog:executeFinancePurchasePlaceable()
 
     -- Fallback to old executor (should not be reached)
     PurchaseExecutorPlaceable.executeFinance(self.context, g_currentMission:getFarmId(), self)
-end
-
-function UnifiedPurchaseDialog:executeFinancePurchasePlaceable_OLD()
-    UsedPlus.logInfo("╔════════════════════════════════════════════════════════════════")
-    UsedPlus.logInfo("║ executeFinancePurchasePlaceable() ENTRY - FINANCE PURCHASE")
-    UsedPlus.logInfo("╠════════════════════════════════════════════════════════════════")
-
-    local farmId = g_currentMission:getFarmId()
-    local farm = g_farmManager:getFarmById(farmId)
-
-    UsedPlus.logDebug(string.format("  farmId: %d", farmId))
-    UsedPlus.logDebug(string.format("  farm exists: %s", tostring(farm ~= nil)))
-
-    if not farm then
-        UsedPlus.logWarn("  ✗ Farm not found - ABORTING")
-        g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_CRITICAL, g_i18n:getText("usedplus_error_farmNotFound"))
-        return
-    end
-
-    local initialBalance = farm.money
-    UsedPlus.logInfo(string.format("  Initial balance: %s", g_i18n:formatMoney(initialBalance)))
-
-    -- Credit score check - placeables require Excellent credit (750+)
-    local PLACEABLE_MIN_CREDIT = 750
-    UsedPlus.logDebug(string.format("  Credit score: %d (min required: %d)", self.creditScore, PLACEABLE_MIN_CREDIT))
-
-    if self.creditScore < PLACEABLE_MIN_CREDIT then
-        UsedPlus.logWarn(string.format("  ✗ Credit too low - ABORTING (have %d, need %d)",
-            self.creditScore, PLACEABLE_MIN_CREDIT))
-        g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_CRITICAL,
-            string.format(g_i18n:getText("usedplus_error_buildingFinanceCreditRequired"), PLACEABLE_MIN_CREDIT, self.creditScore))
-        return
-    end
-    UsedPlus.logInfo("  ✓ Credit score check PASSED")
-
-    -- Calculate finance parameters
-    local termYears = self:getSelectedTermYears()
-    local downPct = UnifiedPurchaseDialog.getDownPaymentPercent(self.financeDownIndex, self.creditScore)
-    local downPayment = self.vehiclePrice * (downPct / 100)
-
-    UsedPlus.logInfo(string.format("  Building: %s", tostring(self.vehicleName)))
-    UsedPlus.logInfo(string.format("  Price: %s", g_i18n:formatMoney(self.vehiclePrice)))
-    UsedPlus.logInfo(string.format("  Down payment: %s (%d%%)", g_i18n:formatMoney(downPayment), downPct))
-    UsedPlus.logInfo(string.format("  Term: %d years", termYears))
-    UsedPlus.logInfo(string.format("  Interest rate: %.2f%%", self.interestRate))
-
-    -- Check if player can afford down payment
-    UsedPlus.logDebug(string.format("  Can afford down payment: %s (have %s, need %s)",
-        tostring(farm.money >= downPayment),
-        g_i18n:formatMoney(farm.money),
-        g_i18n:formatMoney(downPayment)))
-
-    if downPayment > farm.money then
-        UsedPlus.logWarn(string.format("  ✗ Insufficient funds for down payment - ABORTING (need %s, have %s)",
-            g_i18n:formatMoney(downPayment), g_i18n:formatMoney(farm.money)))
-        g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_CRITICAL,
-            string.format(g_i18n:getText("usedplus_error_insufficientFundsDownPayment"), g_i18n:formatMoney(downPayment, 0, true, true)))
-        return
-    end
-    UsedPlus.logInfo("  ✓ Down payment affordability check PASSED")
-
-    -- Calculate temp money needed (financed amount = price - down payment)
-    local financedAmount = self.vehiclePrice - downPayment
-
-    UsedPlus.logInfo("╔════════════════════════════════════════════════════════════════")
-    UsedPlus.logInfo("║ TEMP MONEY INJECTION - CRITICAL SECTION")
-    UsedPlus.logInfo("╠════════════════════════════════════════════════════════════════")
-    UsedPlus.logInfo(string.format("  Financed amount calculation:"))
-    UsedPlus.logDebug(string.format("    Price:        %s", g_i18n:formatMoney(self.vehiclePrice)))
-    UsedPlus.logDebug(string.format("    Down payment: %s", g_i18n:formatMoney(downPayment)))
-    UsedPlus.logDebug(string.format("    Financed:     %s (this will be injected)", g_i18n:formatMoney(financedAmount)))
-
-    local balanceBeforeInjection = farm.money
-    UsedPlus.logDebug(string.format("  Balance BEFORE injection: %s", g_i18n:formatMoney(balanceBeforeInjection)))
-
-    -- Inject temp money so player can afford vanilla affordability check
-    -- This will be reconciled after placement (refund removed, finance deal created)
-    UsedPlus.logInfo(string.format("  → INJECTING TEMP MONEY: %s", g_i18n:formatMoney(financedAmount)))
-    g_currentMission:addMoney(financedAmount, farmId, MoneyType.OTHER, true, false)
-
-    -- Verify injection worked
-    local farm2 = g_farmManager:getFarmById(farmId)
-    local balanceAfterInjection = farm2 and farm2.money or 0
-    UsedPlus.logDebug(string.format("  Balance AFTER injection: %s", g_i18n:formatMoney(balanceAfterInjection)))
-    UsedPlus.logDebug(string.format("  Expected after injection: %s",
-        g_i18n:formatMoney(balanceBeforeInjection + financedAmount)))
-
-    if math.abs(balanceAfterInjection - (balanceBeforeInjection + financedAmount)) < 1 then
-        UsedPlus.logInfo("  ✓ Temp money injection VERIFIED")
-    else
-        UsedPlus.logWarn(string.format("  ✗ Temp money injection MISMATCH! Expected %s, got %s",
-            g_i18n:formatMoney(balanceBeforeInjection + financedAmount),
-            g_i18n:formatMoney(balanceAfterInjection)))
-    end
-
-    -- Store pending placeable finance data (picked up by PlaceableSystemExtension after placement)
-    local injectionTimestamp = g_currentMission.time
-    UsedPlus.logInfo("  → Creating pendingPlaceableFinance state")
-
-    UsedPlus.pendingPlaceableFinance = {
-        storeItem = self.storeItem,
-        farmId = farmId,
-        price = self.vehiclePrice,
-        downPayment = downPayment,
-        termYears = termYears,
-        interestRate = self.interestRate,
-        itemName = self.vehicleName,
-        xmlFilename = self.storeItem.xmlFilename,
-
-        -- CRITICAL: Track temp money for cleanup on cancellation
-        tempMoneyInjected = financedAmount,
-        injectionTimestamp = injectionTimestamp,
-        placementActive = true,  -- Flag to prevent double-cleanup
-    }
-
-    UsedPlus.logDebug("  Pending state created with fields:")
-    UsedPlus.logDebug(string.format("    - itemName: %s", self.vehicleName))
-    UsedPlus.logDebug(string.format("    - price: %s", g_i18n:formatMoney(self.vehiclePrice)))
-    UsedPlus.logDebug(string.format("    - downPayment: %s", g_i18n:formatMoney(downPayment)))
-    UsedPlus.logDebug(string.format("    - tempMoneyInjected: %s", g_i18n:formatMoney(financedAmount)))
-    UsedPlus.logDebug(string.format("    - injectionTimestamp: %.0f", injectionTimestamp))
-    UsedPlus.logDebug(string.format("    - placementActive: true"))
-    UsedPlus.logDebug(string.format("    - farmId: %d", farmId))
-    UsedPlus.logDebug(string.format("    - xmlFilename: %s", tostring(self.storeItem.xmlFilename)))
-
-    UsedPlus.logInfo(string.format("  ✓ Pending finance state ready for reconciliation"))
-    UsedPlus.logInfo("╚════════════════════════════════════════════════════════════════")
-
-    -- Use the pending BuyPlaceableData instance stored by BuyPlaceableDataExtension
-    -- CRITICAL: Reuse existing instance instead of creating new one (prevents auto-completion)
-    UsedPlus.logDebug(string.format("  pendingPlaceableData exists: %s",
-        tostring(UsedPlus.pendingPlaceableData ~= nil)))
-
-    if UsedPlus.pendingPlaceableData then
-        UsedPlus.logInfo("  → Using stored BuyPlaceableData instance")
-
-        -- Get the stored instance
-        local placeableData = UsedPlus.pendingPlaceableData
-        UsedPlus.logDebug(string.format("     placeableData type: %s", type(placeableData)))
-        UsedPlus.pendingPlaceableData = nil
-        UsedPlus.logDebug("     Cleared pendingPlaceableData")
-
-        -- CRITICAL: Close dialog FIRST to clear GUI modal stack
-        UsedPlus.logInfo("  → Closing dialog BEFORE buy() (deferred execution pattern)")
-        self:close()
-
-        UsedPlus.logInfo("  → Registering deferred buy() updateable")
-        local deferredStartTime = g_currentMission.time
-
-        -- Defer buy() to next frame (ensures clean GUI state for placement mode)
-        g_currentMission:addUpdateable({
-            update = function(updatable, dt)
-                local deferredElapsed = g_currentMission.time - deferredStartTime
-                UsedPlus.logInfo("╔════════════════════════════════════════════════════════════════")
-                UsedPlus.logInfo("║ DEFERRED CALLBACK - FINANCE PURCHASE")
-                UsedPlus.logInfo("╠════════════════════════════════════════════════════════════════")
-                UsedPlus.logDebug(string.format("  Deferred callback fired after: %.0fms", deferredElapsed))
-                UsedPlus.logDebug(string.format("  dt: %.2fms", dt))
-
-                g_currentMission:removeUpdateable(updatable)
-                UsedPlus.logDebug("  Removed self from updateables")
-
-                -- Guard: Check if pending state still exists (ESC race condition)
-                UsedPlus.logDebug(string.format("  Checking pendingPlaceableFinance exists: %s",
-                    tostring(UsedPlus.pendingPlaceableFinance ~= nil)))
-
-                if not UsedPlus.pendingPlaceableFinance then
-                    UsedPlus.logWarn("  ✗ Pending state cleared (user pressed ESC) - ABORTING deferred buy()")
-                    UsedPlus.logInfo("╚════════════════════════════════════════════════════════════════")
-                    return
-                end
-
-                UsedPlus.logInfo("  ✓ Pending state intact - proceeding with buy()")
-
-                -- Verify current balance state
-                local currentFarm = g_farmManager:getFarmById(farmId)
-                if currentFarm then
-                    local currentBalance = currentFarm.money
-                    local pending = UsedPlus.pendingPlaceableFinance
-                    local expectedBalance = pending.tempMoneyInjected + (initialBalance or 0)
-                    UsedPlus.logDebug(string.format("  Current balance: %s", g_i18n:formatMoney(currentBalance)))
-                    UsedPlus.logDebug(string.format("  Expected balance: %s (initial %s + temp %s)",
-                        g_i18n:formatMoney(expectedBalance),
-                        g_i18n:formatMoney(initialBalance or 0),
-                        g_i18n:formatMoney(pending.tempMoneyInjected)))
-
-                    if math.abs(currentBalance - expectedBalance) < 1 then
-                        UsedPlus.logInfo("  ✓ Balance state verified before buy()")
-                    else
-                        UsedPlus.logWarn(string.format("  ⚠ Balance mismatch! Expected %s, got %s",
-                            g_i18n:formatMoney(expectedBalance),
-                            g_i18n:formatMoney(currentBalance)))
-                    end
-                end
-
-                -- Set bypass flag so our hook doesn't intercept again
-                UsedPlus.bypassPlaceableHook = true
-                UsedPlus.logInfo("  → Set bypassPlaceableHook = true")
-
-                -- Trigger placement mode
-                UsedPlus.logInfo("  → Calling placeableData:buy() - PLACEMENT MODE SHOULD START")
-                UsedPlus.logDebug("     Vanilla will deduct full price, then finalization hook will reconcile")
-                placeableData:buy()
-
-                UsedPlus.logInfo("  ✓ buy() call completed - placement mode active")
-                UsedPlus.logInfo("╚════════════════════════════════════════════════════════════════")
-            end
-        })
-
-        UsedPlus.logInfo("  ✓ Deferred updateable registered - returning control")
-        UsedPlus.logInfo("╚════════════════════════════════════════════════════════════════")
-    else
-        UsedPlus.logWarn("  ✗ No pending BuyPlaceableData - using FALLBACK path (shouldn't happen)")
-
-        -- Close dialog first
-        UsedPlus.logInfo("  → Closing dialog")
-        self:close()
-
-        -- Fallback: create new instance (shouldn't happen normally)
-        if BuyPlaceableData and g_client then
-            UsedPlus.logDebug("  → Registering fallback deferred updateable")
-            local deferredStartTime = g_currentMission.time
-
-            g_currentMission:addUpdateable({
-                update = function(updatable, dt)
-                    local deferredElapsed = g_currentMission.time - deferredStartTime
-                    UsedPlus.logInfo("╔════════════════════════════════════════════════════════════════")
-                    UsedPlus.logInfo("║ DEFERRED CALLBACK - FINANCE FALLBACK")
-                    UsedPlus.logInfo("╠════════════════════════════════════════════════════════════════")
-                    UsedPlus.logDebug(string.format("  Deferred callback fired after: %.0fms", deferredElapsed))
-
-                    g_currentMission:removeUpdateable(updatable)
-
-                    -- Guard: Check if pending state still exists
-                    UsedPlus.logDebug(string.format("  Checking pendingPlaceableFinance exists: %s",
-                        tostring(UsedPlus.pendingPlaceableFinance ~= nil)))
-
-                    if not UsedPlus.pendingPlaceableFinance then
-                        UsedPlus.logWarn("  ✗ Pending state cleared (user cancelled) - ABORTING")
-                        UsedPlus.logInfo("╚════════════════════════════════════════════════════════════════")
-                        return
-                    end
-
-                    UsedPlus.logDebug("  Creating new BuyPlaceableData event")
-                    local event = BuyPlaceableData.new()
-                    event:setOwnerFarmId(farmId)
-                    event:setPrice(self.vehiclePrice)
-                    event:setStoreItem(self.storeItem)
-
-                    -- Get configurations
-                    local configurations = {}
-                    if self.shopScreen then
-                        configurations = self.shopScreen.configurations or {}
-                    elseif g_shopConfigScreen then
-                        configurations = g_shopConfigScreen.configurations or {}
-                    end
-                    event:setConfigurations(configurations)
-                    UsedPlus.logDebug("  Configurations set")
-
-                    UsedPlus.bypassPlaceableHook = true
-                    UsedPlus.logInfo("  → Calling event:buy()")
-                    event:buy()
-                    UsedPlus.logInfo("╚════════════════════════════════════════════════════════════════")
-                end
-            })
-        else
-            UsedPlus.logError("  ✗ BuyPlaceableData not available - CRITICAL FAILURE")
-            UsedPlus.logError("     Temp money was injected but cannot proceed!")
-            UsedPlus.logError("     Attempting to reclaim temp money...")
-
-            -- Emergency cleanup - reclaim temp money
-            if UsedPlus.pendingPlaceableFinance then
-                local pending = UsedPlus.pendingPlaceableFinance
-                if pending.tempMoneyInjected and pending.tempMoneyInjected > 0 then
-                    g_currentMission:addMoney(-pending.tempMoneyInjected, pending.farmId, MoneyType.OTHER, true, false)
-                    UsedPlus.logError(string.format("     Emergency reclaim: %s",
-                        g_i18n:formatMoney(pending.tempMoneyInjected)))
-                end
-                UsedPlus.pendingPlaceableFinance = nil
-            end
-
-            g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_CRITICAL,
-                g_i18n:getText("usedplus_error_purchaseFailedAPI"))
-        end
-
-        UsedPlus.logInfo("╚════════════════════════════════════════════════════════════════")
-    end
 end
 
 --[[

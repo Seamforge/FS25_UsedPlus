@@ -171,6 +171,8 @@ function UsedPlusMaintenance.registerEventListeners(vehicleType)
     SpecializationUtil.registerEventListener(vehicleType, "saveToXMLFile", UsedPlusMaintenance)
     SpecializationUtil.registerEventListener(vehicleType, "onReadStream", UsedPlusMaintenance)
     SpecializationUtil.registerEventListener(vehicleType, "onWriteStream", UsedPlusMaintenance)
+    SpecializationUtil.registerEventListener(vehicleType, "onReadUpdateStream", UsedPlusMaintenance)
+    SpecializationUtil.registerEventListener(vehicleType, "onWriteUpdateStream", UsedPlusMaintenance)
     -- v1.5.1: Listen for vehicle enter to trigger first-start stall check
     SpecializationUtil.registerEventListener(vehicleType, "onEnterVehicle", UsedPlusMaintenance)
 end
@@ -1015,10 +1017,10 @@ function UsedPlusMaintenance:saveToXMLFile(xmlFile, key, usedModNames)
 end
 
 --[[
-    Read data from network stream (multiplayer client join)
-    Pattern from: HeadlandManagement onReadStream
+    Helper: Read all maintenance data from a network stream
+    Used by both onReadStream (initial join) and onReadUpdateStream (incremental sync)
 ]]
-function UsedPlusMaintenance:onReadStream(streamId, connection)
+function UsedPlusMaintenance:readMaintenanceData(streamId)
     local spec = self.spec_usedPlusMaintenance
     if spec == nil then return end
 
@@ -1035,16 +1037,16 @@ function UsedPlusMaintenance:onReadStream(streamId, connection)
     spec.hydraulicReliability = streamReadFloat32(streamId)
     spec.electricalReliability = streamReadFloat32(streamId)
 
-    -- Workhorse/Lemon Scale (v1.4.0+)
+    -- Workhorse/Lemon Scale
     spec.workhorseLemonScale = streamReadFloat32(streamId)
     spec.maxReliabilityCeiling = streamReadFloat32(streamId)
 
-    -- v2.2.0: Component Durability System
+    -- Component Durability System
     spec.maxEngineDurability = streamReadFloat32(streamId)
     spec.maxHydraulicDurability = streamReadFloat32(streamId)
     spec.maxElectricalDurability = streamReadFloat32(streamId)
 
-    -- v2.2.0: RVB Integration Tracking
+    -- RVB Integration Tracking
     spec.rvbLifetimeMultiplier = streamReadFloat32(streamId)
     spec.rvbLifetimesApplied = streamReadBool(streamId)
     spec.rvbTotalDegradation = streamReadFloat32(streamId)
@@ -1063,14 +1065,14 @@ function UsedPlusMaintenance:onReadStream(streamId, connection)
     spec.inspectionCacheDamage = streamReadFloat32(streamId)
     spec.inspectionCacheWear = streamReadFloat32(streamId)
 
-    -- v1.7.0: Tire system
+    -- Tire system
     spec.tireCondition = streamReadFloat32(streamId)
     spec.tireQuality = streamReadInt8(streamId)
     spec.distanceTraveled = streamReadFloat32(streamId)
     spec.hasFlatTire = streamReadBool(streamId)
     spec.flatTireSide = streamReadInt8(streamId)
 
-    -- v2.8.0: Per-wheel distances
+    -- Per-wheel distances
     spec.wheelDistances = spec.wheelDistances or {0, 0, 0, 0}
     spec.wheelConditions = spec.wheelConditions or {1.0, 1.0, 1.0, 1.0}
     for i = 1, 4 do
@@ -1096,32 +1098,32 @@ function UsedPlusMaintenance:onReadStream(streamId, connection)
         spec.tireFailureMultiplier = (config and config.tireNormalFailureMult) or 1.0
     end
 
-    -- v1.7.0: Oil system
+    -- Oil system
     spec.oilLevel = streamReadFloat32(streamId)
     spec.wasLowOil = streamReadBool(streamId)
     spec.hasOilLeak = streamReadBool(streamId)
     spec.oilLeakSeverity = streamReadInt8(streamId)
     spec.engineReliabilityCeiling = streamReadFloat32(streamId)
 
-    -- v1.7.0: Hydraulic fluid system
+    -- Hydraulic fluid system
     spec.hydraulicFluidLevel = streamReadFloat32(streamId)
     spec.wasLowHydraulicFluid = streamReadBool(streamId)
     spec.hasHydraulicLeak = streamReadBool(streamId)
     spec.hydraulicLeakSeverity = streamReadInt8(streamId)
     spec.hydraulicReliabilityCeiling = streamReadFloat32(streamId)
 
-    -- v1.7.0: Fuel leak
+    -- Fuel leak
     spec.hasFuelLeak = streamReadBool(streamId)
     spec.fuelLeakMultiplier = streamReadFloat32(streamId)
 
-    -- v2.4.0: Hydraulic surge event
+    -- Hydraulic surge event
     spec.hydraulicSurgeActive = streamReadBool(streamId)
     spec.hydraulicSurgeEndTime = streamReadFloat32(streamId)
     spec.hydraulicSurgeFadeStartTime = streamReadFloat32(streamId)
     spec.hydraulicSurgeDirection = streamReadInt8(streamId)
     spec.hydraulicSurgeCooldownEnd = streamReadFloat32(streamId)
 
-    -- v2.5.0: Comprehensive hydraulic malfunctions
+    -- Comprehensive hydraulic malfunctions
     spec.runawayActive = streamReadBool(streamId)
     spec.runawayStartTime = streamReadFloat32(streamId)
     spec.implementStuckDown = streamReadBool(streamId)
@@ -1136,28 +1138,26 @@ function UsedPlusMaintenance:onReadStream(streamId, connection)
     spec.reducedTurningActive = streamReadBool(streamId)
     spec.reducedTurningEndTime = streamReadFloat32(streamId)
 
-    -- v2.7.0: Seizure escalation
+    -- Seizure escalation
     spec.engineSeized = streamReadBool(streamId)
     spec.hydraulicsSeized = streamReadBool(streamId)
     spec.electricalSeized = streamReadBool(streamId)
 
-    -- v2.8.0: Global malfunction cooldown
+    -- Global malfunction cooldown
     spec.lastMalfunctionTime = streamReadFloat32(streamId)
 
-    -- v2.8.0: OBD diagnosis tracking (one-time boost per system)
+    -- OBD diagnosis tracking (one-time boost per system)
     spec.obdDiagnosesUsed = spec.obdDiagnosesUsed or {}
     spec.obdDiagnosesUsed.engine = streamReadBool(streamId)
     spec.obdDiagnosesUsed.electrical = streamReadBool(streamId)
     spec.obdDiagnosesUsed.hydraulic = streamReadBool(streamId)
-
-    UsedPlus.logTrace("UsedPlusMaintenance onReadStream complete")
 end
 
 --[[
-    Write data to network stream (multiplayer)
-    Pattern from: HeadlandManagement onWriteStream
+    Helper: Write all maintenance data to a network stream
+    Used by both onWriteStream (initial join) and onWriteUpdateStream (incremental sync)
 ]]
-function UsedPlusMaintenance:onWriteStream(streamId, connection)
+function UsedPlusMaintenance:writeMaintenanceData(streamId)
     local spec = self.spec_usedPlusMaintenance
     if spec == nil then return end
 
@@ -1174,16 +1174,16 @@ function UsedPlusMaintenance:onWriteStream(streamId, connection)
     streamWriteFloat32(streamId, spec.hydraulicReliability)
     streamWriteFloat32(streamId, spec.electricalReliability)
 
-    -- Workhorse/Lemon Scale (v1.4.0+)
+    -- Workhorse/Lemon Scale
     streamWriteFloat32(streamId, spec.workhorseLemonScale)
     streamWriteFloat32(streamId, spec.maxReliabilityCeiling)
 
-    -- v2.2.0: Component Durability System
+    -- Component Durability System
     streamWriteFloat32(streamId, spec.maxEngineDurability)
     streamWriteFloat32(streamId, spec.maxHydraulicDurability)
     streamWriteFloat32(streamId, spec.maxElectricalDurability)
 
-    -- v2.2.0: RVB Integration Tracking
+    -- RVB Integration Tracking
     streamWriteFloat32(streamId, spec.rvbLifetimeMultiplier)
     streamWriteBool(streamId, spec.rvbLifetimesApplied)
     streamWriteFloat32(streamId, spec.rvbTotalDegradation)
@@ -1202,44 +1202,44 @@ function UsedPlusMaintenance:onWriteStream(streamId, connection)
     streamWriteFloat32(streamId, spec.inspectionCacheDamage)
     streamWriteFloat32(streamId, spec.inspectionCacheWear)
 
-    -- v1.7.0: Tire system
+    -- Tire system
     streamWriteFloat32(streamId, spec.tireCondition)
     streamWriteInt8(streamId, spec.tireQuality)
     streamWriteFloat32(streamId, spec.distanceTraveled)
     streamWriteBool(streamId, spec.hasFlatTire)
     streamWriteInt8(streamId, spec.flatTireSide)
 
-    -- v2.8.0: Per-wheel distances
+    -- Per-wheel distances
     for i = 1, 4 do
         streamWriteFloat32(streamId, (spec.wheelDistances and spec.wheelDistances[i]) or 0)
     end
 
-    -- v1.7.0: Oil system
+    -- Oil system
     streamWriteFloat32(streamId, spec.oilLevel)
     streamWriteBool(streamId, spec.wasLowOil)
     streamWriteBool(streamId, spec.hasOilLeak)
     streamWriteInt8(streamId, spec.oilLeakSeverity)
     streamWriteFloat32(streamId, spec.engineReliabilityCeiling)
 
-    -- v1.7.0: Hydraulic fluid system
+    -- Hydraulic fluid system
     streamWriteFloat32(streamId, spec.hydraulicFluidLevel)
     streamWriteBool(streamId, spec.wasLowHydraulicFluid)
     streamWriteBool(streamId, spec.hasHydraulicLeak)
     streamWriteInt8(streamId, spec.hydraulicLeakSeverity)
     streamWriteFloat32(streamId, spec.hydraulicReliabilityCeiling)
 
-    -- v1.7.0: Fuel leak
+    -- Fuel leak
     streamWriteBool(streamId, spec.hasFuelLeak)
     streamWriteFloat32(streamId, spec.fuelLeakMultiplier)
 
-    -- v2.4.0: Hydraulic surge event
+    -- Hydraulic surge event
     streamWriteBool(streamId, spec.hydraulicSurgeActive or false)
     streamWriteFloat32(streamId, spec.hydraulicSurgeEndTime or 0)
     streamWriteFloat32(streamId, spec.hydraulicSurgeFadeStartTime or 0)
     streamWriteInt8(streamId, spec.hydraulicSurgeDirection or 0)
     streamWriteFloat32(streamId, spec.hydraulicSurgeCooldownEnd or 0)
 
-    -- v2.5.0: Comprehensive hydraulic malfunctions
+    -- Comprehensive hydraulic malfunctions
     streamWriteBool(streamId, spec.runawayActive or false)
     streamWriteFloat32(streamId, spec.runawayStartTime or 0)
     streamWriteBool(streamId, spec.implementStuckDown or false)
@@ -1254,21 +1254,60 @@ function UsedPlusMaintenance:onWriteStream(streamId, connection)
     streamWriteBool(streamId, spec.reducedTurningActive or false)
     streamWriteFloat32(streamId, spec.reducedTurningEndTime or 0)
 
-    -- v2.7.0: Seizure escalation
+    -- Seizure escalation
     streamWriteBool(streamId, spec.engineSeized or false)
     streamWriteBool(streamId, spec.hydraulicsSeized or false)
     streamWriteBool(streamId, spec.electricalSeized or false)
 
-    -- v2.8.0: Global malfunction cooldown
+    -- Global malfunction cooldown
     streamWriteFloat32(streamId, spec.lastMalfunctionTime or 0)
 
-    -- v2.8.0: OBD diagnosis tracking (one-time boost per system)
+    -- OBD diagnosis tracking (one-time boost per system)
     local obdUsed = spec.obdDiagnosesUsed or {}
     streamWriteBool(streamId, obdUsed.engine or false)
     streamWriteBool(streamId, obdUsed.electrical or false)
     streamWriteBool(streamId, obdUsed.hydraulic or false)
+end
 
+--[[
+    Read data from network stream (multiplayer client join)
+]]
+function UsedPlusMaintenance:onReadStream(streamId, connection)
+    self:readMaintenanceData(streamId)
+    UsedPlus.logTrace("UsedPlusMaintenance onReadStream complete")
+end
+
+--[[
+    Write data to network stream (multiplayer client join)
+]]
+function UsedPlusMaintenance:onWriteStream(streamId, connection)
+    self:writeMaintenanceData(streamId)
     UsedPlus.logTrace("UsedPlusMaintenance onWriteStream complete")
+end
+
+--[[
+    Read incremental update from server (multiplayer runtime sync)
+    Called when server raises dirty flags via raiseDirtyFlags()
+]]
+function UsedPlusMaintenance:onReadUpdateStream(streamId, timestamp, connection)
+    if connection:getIsServer() then
+        if streamReadBool(streamId) then
+            self:readMaintenanceData(streamId)
+        end
+    end
+end
+
+--[[
+    Write incremental update to clients (multiplayer runtime sync)
+    Triggered by raiseDirtyFlags(spec.dirtyFlag) on the server
+]]
+function UsedPlusMaintenance:onWriteUpdateStream(streamId, connection, dirtyMask)
+    if not connection:getIsServer() then
+        local spec = self.spec_usedPlusMaintenance
+        if streamWriteBool(streamId, bitAND(dirtyMask, spec.dirtyFlag) ~= 0) then
+            self:writeMaintenanceData(streamId)
+        end
+    end
 end
 
 --[[

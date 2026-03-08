@@ -657,7 +657,7 @@ function FieldServiceKitDialog:displayResults()
             self.resultMessageText:setText(g_i18n:getText("usedplus_fsk_result_good"))
         elseif isWrongSystem then
             -- v2.13.2: Tell player their diagnosis was correct but system was wrong
-            local actualSystemName = g_i18n:getText("usedplus_fsk_system_" .. (self.actualFailedSystem or "")) or self.actualFailedSystem or "Unknown"
+            local actualSystemName = g_i18n:getText("usedplus_fsk_system_" .. (self.actualFailedSystem or "")) or self.actualFailedSystem or g_i18n:getText("usedplus_common_unknown")
             self.resultMessageText:setText(string.format(g_i18n:getText("usedplus_fsk_result_wrong_system"), actualSystemName))
         else
             self.resultMessageText:setText(g_i18n:getText("usedplus_fsk_result_wrong_both"))
@@ -669,7 +669,7 @@ function FieldServiceKitDialog:displayResults()
     if self.playerDiagnosisText ~= nil and self.currentScenario ~= nil then
         local playerDiag = self.currentScenario.diagnoses[self.selectedDiagnosis]
         if playerDiag ~= nil then
-            self.playerDiagnosisText:setText(g_i18n:getText(playerDiag) or "Unknown")
+            self.playerDiagnosisText:setText(g_i18n:getText(playerDiag) or g_i18n:getText("usedplus_common_unknown"))
         end
     end
 
@@ -685,7 +685,7 @@ function FieldServiceKitDialog:displayResults()
         if showCorrectAnswer and self.currentScenario ~= nil then
             local correctDiag = self.currentScenario.diagnoses[self.currentScenario.correctDiagnosis]
             if correctDiag ~= nil then
-                self.correctDiagnosisText:setText(g_i18n:getText(correctDiag) or "Unknown")
+                self.correctDiagnosisText:setText(g_i18n:getText(correctDiag) or g_i18n:getText("usedplus_common_unknown"))
             end
         end
     end
@@ -1053,8 +1053,8 @@ function FieldServiceKitDialog:displayMalfunctions()
     -- Update malfunction count
     if self.malfCountText ~= nil then
         if #malfunctions > 0 then
-            self.malfCountText:setText(string.format("%d %s", #malfunctions,
-                #malfunctions == 1 and "issue found" or "issues found"))
+            local key = #malfunctions == 1 and "usedplus_fsk_issueFoundSingular" or "usedplus_fsk_issueFoundPlural"
+            self.malfCountText:setText(string.format(g_i18n:getText(key), #malfunctions))
             self.malfCountText:setTextColor(1, 0.5, 0.2, 1)  -- Orange
         else
             self.malfCountText:setText(g_i18n:getText("usedplus_fsk_no_malfunctions") or "No active malfunctions")
@@ -1565,6 +1565,11 @@ function FieldServiceKitDialog:applyRepair(diagnosisIndex)
         if component then
             self:markOBDDiagnosisUsed(component)
         end
+
+        -- Raise dirty flag for multiplayer sync
+        if self.vehicle.raiseDirtyFlags and maintSpec.dirtyFlag then
+            self.vehicle:raiseDirtyFlags(maintSpec.dirtyFlag)
+        end
     end
 
     -- Move to results step
@@ -1602,6 +1607,11 @@ function FieldServiceKitDialog:applyTireRepair(repairType)
     if self.hasFlatTire and UsedPlusMaintenance and UsedPlusMaintenance.repairFlatTire then
         UsedPlusMaintenance.repairFlatTire(self.vehicle)
         UsedPlus.logInfo(string.format("Flat tire state cleared via %s repair", repairType))
+    end
+
+    -- Raise dirty flag for multiplayer sync
+    if maintSpec and self.vehicle.raiseDirtyFlags and maintSpec.dirtyFlag then
+        self.vehicle:raiseDirtyFlags(maintSpec.dirtyFlag)
     end
 
     -- Consume kit and close

@@ -128,7 +128,7 @@ end
     @return Formatted string like "8.00% (Good)"
 ]]
 function UIHelper.Text.formatInterestRateWithRating(rateDecimal, creditRating)
-    return string.format("%.2f%% (%s)", rateDecimal * 100, creditRating or "Unknown")
+    return string.format("%.2f%% (%s)", rateDecimal * 100, creditRating or g_i18n:getText("usedplus_common_unknown"))
 end
 
 --[[
@@ -141,7 +141,7 @@ function UIHelper.Text.formatCreditScore(score, rating)
     if not rating and CreditScore then
         rating = CreditScore.getRating(score)
     end
-    return string.format("%d (%s)", score, rating or "Unknown")
+    return string.format("%d (%s)", score, rating or g_i18n:getText("usedplus_common_unknown"))
 end
 
 --[[
@@ -399,13 +399,13 @@ function UIHelper.Credit.getRating(score)
 
     -- Fallback if CreditScore not available
     if score >= 750 then
-        return "Excellent"
+        return g_i18n:getText("usedplus_creditRating_excellent")
     elseif score >= 670 then
-        return "Good"
+        return g_i18n:getText("usedplus_creditRating_good")
     elseif score >= 580 then
-        return "Fair"
+        return g_i18n:getText("usedplus_creditRating_fair")
     else
-        return "Poor"
+        return g_i18n:getText("usedplus_creditRating_poor")
     end
 end
 
@@ -747,7 +747,7 @@ end
     @return Resolved string
 ]]
 function UIHelper.Vehicle.resolveL10nString(value, fallback)
-    fallback = fallback or "Unknown"
+    fallback = fallback or g_i18n:getText("usedplus_common_unknown")
     if value == nil then
         return fallback
     elseif type(value) == "string" then

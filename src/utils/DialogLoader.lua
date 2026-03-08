@@ -421,13 +421,4 @@ function DialogLoader.registerAll()
     UsedPlus.logInfo("╚═════════════════════════════════════════════════")
 end
 
---[[
-    Reset all loaded flags (for testing/reload)
-]]
-function DialogLoader.resetAll()
-    for name, _ in pairs(DialogLoader.loaded) do
-        DialogLoader.loaded[name] = false
-    end
-end
-
 UsedPlus.logInfo("DialogLoader loaded")

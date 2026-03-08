@@ -157,7 +157,7 @@ function FinanceManagerFrame:updateFinancesSection(farmId, farm)
                     else
                         dealType = "FINANCE"  -- Vehicle/Equipment/Land Finance
                     end
-                    local itemName = deal.itemName or "Unknown"
+                    local itemName = deal.itemName or g_i18n:getText("usedplus_common_unknown")
 
                     if #itemName > 20 then
                         itemName = string.sub(itemName, 1, 18) .. ".."
@@ -347,7 +347,7 @@ function FinanceManagerFrame:updateFinanceActionButtons()
     if self.selectedDealText then
         if hasSelection then
             local deal = self.activeDeals[self.selectedFinanceRowIndex + 1]
-            local itemName = deal.itemName or "Unknown"
+            local itemName = deal.itemName or g_i18n:getText("usedplus_common_unknown")
             if #itemName > 20 then
                 itemName = string.sub(itemName, 1, 18) .. ".."
             end
@@ -565,7 +565,7 @@ end
 function FinanceManagerFrame:showPaymentOptionsDialog(deal, farm)
     local currentBalance = deal.currentBalance or 0
     local monthlyPayment = deal.monthlyPayment or 0
-    local itemName = deal.itemName or "Unknown"
+    local itemName = deal.itemName or g_i18n:getText("usedplus_common_unknown")
     local farmMoney = farm.money or 0
 
     -- v1.8.1: Handle ELS loans
@@ -754,7 +754,7 @@ function FinanceManagerFrame:onTerminateLeaseConfirm()
         end
 
         local terminationFee = self.pendingTerminationFee or 0
-        local itemName = deal.itemName or "Unknown"
+        local itemName = deal.itemName or g_i18n:getText("usedplus_common_unknown")
 
         YesNoDialog.show(
             function(yes)
@@ -798,7 +798,7 @@ function FinanceManagerFrame:onVehicleLeaseBuyoutConfirm()
         local buyoutPrice = self.pendingVehicleBuyoutPrice or 0
         local equityApplied = self.pendingVehicleEquity or 0
         local depositRefund = self.pendingVehicleDepositRefund or 0
-        local vehicleName = deal.vehicleName or deal.itemName or "Unknown Vehicle"
+        local vehicleName = deal.vehicleName or deal.itemName or g_i18n:getText("usedplus_common_unknownVehicle")
         local netCost = buyoutPrice - depositRefund
 
         local confirmMessage = string.format(
@@ -862,7 +862,7 @@ function FinanceManagerFrame:onLandLeaseBuyoutConfirm()
         if buyoutPrice <= 0 and deal.calculateBuyoutPrice then
             buyoutPrice = deal:calculateBuyoutPrice()
         end
-        local landName = deal.landName or deal.itemName or "Unknown Land"
+        local landName = deal.landName or deal.itemName or g_i18n:getText("usedplus_common_unknownLand")
 
         YesNoDialog.show(
             function(yes)
@@ -903,7 +903,7 @@ function FinanceManagerFrame:onLandLeaseTerminateConfirm()
             return
         end
 
-        local landName = deal.landName or deal.itemName or "Unknown Land"
+        local landName = deal.landName or deal.itemName or g_i18n:getText("usedplus_common_unknownLand")
         local monthsPaid = deal.monthsPaid or 0
         local monthlyPayment = deal.monthlyPayment or 0
         local totalPaid = monthsPaid * monthlyPayment

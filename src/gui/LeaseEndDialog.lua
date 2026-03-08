@@ -105,13 +105,13 @@ function LeaseEndDialog:updateDisplay()
     local deal = self.leaseDeal
 
     -- Vehicle name
-    UIHelper.Element.setText(self.vehicleNameText, deal.itemName or deal.vehicleName or "Unknown Vehicle")
+    UIHelper.Element.setText(self.vehicleNameText, deal.itemName or deal.vehicleName or g_i18n:getText("usedplus_common_unknownVehicle"))
 
     -- Lease summary
     local termYears = math.floor(deal.termMonths / 12)
     local totalPaid = deal.monthlyPayment * deal.monthsPaid
     UIHelper.Element.setText(self.leaseSummaryText,
-        string.format("%d year lease completed. Total payments: %s",
+        string.format(g_i18n:getText("usedplus_le_leaseSummaryFormat"),
             termYears, UIHelper.Text.formatMoney(totalPaid)))
 
     -- Vehicle condition
@@ -123,37 +123,37 @@ function LeaseEndDialog:updateDisplay()
             wear = self.vehicle.spec_wearable.wear or 0
         end
         UIHelper.Element.setText(self.conditionText,
-            string.format("Damage: %s | Wear: %s",
+            string.format(g_i18n:getText("usedplus_le_conditionFormat"),
                 UIHelper.Text.formatPercent(damage, true, 0),
                 UIHelper.Text.formatPercent(wear, true, 0)))
     else
-        UIHelper.Element.setText(self.conditionText, "Vehicle condition: Unknown")
+        UIHelper.Element.setText(self.conditionText, g_i18n:getText("usedplus_le_conditionUnknown"))
     end
 
     -- Damage penalty (red if any, green if none)
     if self.damagePenalty > 0 then
         UIHelper.Element.setTextWithColor(self.penaltyText,
-            UIHelper.Text.formatMoneyWithLabel("Damage Penalty", self.damagePenalty),
+            UIHelper.Text.formatMoneyWithLabel(g_i18n:getText("usedplus_le_damagePenalty"), self.damagePenalty),
             UIHelper.Colors.DEBT_RED)
     else
         UIHelper.Element.setTextWithColor(self.penaltyText,
-            "No damage penalty - vehicle in good condition!",
+            g_i18n:getText("usedplus_le_noPenalty"),
             UIHelper.Colors.MONEY_GREEN)
     end
     UIHelper.Element.setVisible(self.penaltyText, true)
 
     -- Buyout price
     UIHelper.Element.setText(self.buyoutPriceText,
-        UIHelper.Text.formatMoneyWithLabel("Buyout Price", self.buyoutPrice))
+        UIHelper.Text.formatMoneyWithLabel(g_i18n:getText("usedplus_le_buyoutPrice"), self.buyoutPrice))
 
     -- Return cost (just penalty - show as red if non-zero)
     if self.damagePenalty > 0 then
         UIHelper.Element.setTextWithColor(self.returnCostText,
-            UIHelper.Text.formatMoneyWithLabel("Return Cost", self.damagePenalty),
+            UIHelper.Text.formatMoneyWithLabel(g_i18n:getText("usedplus_le_returnCost"), self.damagePenalty),
             UIHelper.Colors.DEBT_RED)
     else
         UIHelper.Element.setTextWithColor(self.returnCostText,
-            UIHelper.Text.formatMoneyWithLabel("Return Cost", 0),
+            UIHelper.Text.formatMoneyWithLabel(g_i18n:getText("usedplus_le_returnCost"), 0),
             UIHelper.Colors.MONEY_GREEN)
     end
 end

@@ -116,13 +116,13 @@ function SaleExpiredDialog:updateDisplay()
     -- Agent tier
     if self.agentTierText then
         local agentConfig = listing:getAgentTierConfig()
-        self.agentTierText:setText(agentConfig.name or "Unknown")
+        self.agentTierText:setText(agentConfig.name or g_i18n:getText("usedplus_common_unknown"))
     end
 
     -- Price tier
     if self.priceTierText then
         local priceConfig = listing:getPriceTierConfig()
-        self.priceTierText:setText(priceConfig.name or "Unknown")
+        self.priceTierText:setText(priceConfig.name or g_i18n:getText("usedplus_common_unknown"))
     end
 
     -- Duration listed

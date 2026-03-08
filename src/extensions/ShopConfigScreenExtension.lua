@@ -403,7 +403,7 @@ function ShopConfigScreenExtension.updateButtonsHook(self, storeItem, vehicle, s
         -- NOTE: Fluids button removed in v1.8.0 - use Oil Service Barrel/Tank placeables
 
         if isOwnedVehicle then
-            local vehicleName = vehicle.getName and vehicle:getName() or "Unknown"
+            local vehicleName = vehicle.getName and vehicle:getName() or g_i18n:getText("usedplus_common_unknown")
             UsedPlus.logDebug("Service buttons shown for owned vehicle: " .. tostring(vehicleName))
         end
 

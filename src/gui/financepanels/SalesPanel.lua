@@ -73,7 +73,7 @@ function FinanceManagerFrame:updateSaleListings(farmId)
                     table.insert(self.activeSaleListings, listing)
 
                     -- Get listing details
-                    local itemName = listing.vehicleName or "Unknown Vehicle"
+                    local itemName = listing.vehicleName or g_i18n:getText("usedplus_common_unknownVehicle")
                     local tierConfig = VehicleSaleListing.SALE_TIERS[listing.agentTier] or VehicleSaleListing.SALE_TIERS[1]
                     local tierName = tierConfig.name or "Local"
                     local status = listing.status or "active"
@@ -288,7 +288,7 @@ function FinanceManagerFrame:onAcceptSaleClick(rowIndex)
 
     local self_ref = self
     local listingId = listing.id
-    local vehicleName = listing.vehicleName or "Unknown"
+    local vehicleName = listing.vehicleName or g_i18n:getText("usedplus_common_unknown")
     local offerAmount = listing.currentOffer or 0
 
     -- Show full SaleOfferDialog for detailed review
@@ -344,7 +344,7 @@ function FinanceManagerFrame:onDeclineSaleClick(rowIndex)
 
     -- Show confirmation dialog
     local offerAmount = listing.currentOffer or 0
-    local vehicleName = listing.vehicleName or "Unknown"
+    local vehicleName = listing.vehicleName or g_i18n:getText("usedplus_common_unknown")
     local message = string.format(
         "Decline offer of %s for %s?\n\nThe agent will continue searching for other buyers.",
         g_i18n:formatMoney(offerAmount, 0, true, true),
@@ -399,7 +399,7 @@ function FinanceManagerFrame:onCancelSaleClick(rowIndex)
     end
 
     -- Show confirmation dialog
-    local vehicleName = listing.vehicleName or "Unknown"
+    local vehicleName = listing.vehicleName or g_i18n:getText("usedplus_common_unknown")
     local agentFee = listing.agentFee or 0
     local message = string.format(
         "Cancel sale listing for %s?\n\n" ..
@@ -459,7 +459,7 @@ function FinanceManagerFrame:onEditSaleClick(rowIndex)
 
     -- Use TextInputDialog to get new price
     local currentPrice = listing.askingPrice or 0
-    local vehicleName = listing.vehicleName or "Unknown"
+    local vehicleName = listing.vehicleName or g_i18n:getText("usedplus_common_unknown")
 
     -- Use proper FS25 showDialog pattern (not showTextInputDialog convenience method)
     local dialog = g_gui:showDialog("TextInputDialog")

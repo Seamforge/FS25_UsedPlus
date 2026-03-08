@@ -111,7 +111,7 @@ function CollateralUtils.getPledgeableVehicles(farmId)
                         table.insert(pledgeable, {
                             vehicle = vehicle,
                             value = value,
-                            name = vehicle:getName() or storeItem.name or "Unknown Vehicle",
+                            name = vehicle:getName() or storeItem.name or g_i18n:getText("usedplus_common_unknownVehicle"),
                             configFile = vehicle.configFileName,
                             vehicleId = vehicleId,
                             objectId = NetworkUtil.getObjectId(vehicle)
@@ -207,34 +207,6 @@ function CollateralUtils.getExcludedVehicleIds(farmId)
     return excluded
 end
 
---[[
-    Calculate maximum loan amount based on available collateral
-
-    @param farmId - The farm ID
-    @return number - Maximum loan amount
-    @return number - Total collateral value
-]]
-function CollateralUtils.calculateMaxLoanAmount(farmId)
-    local pledgeable = CollateralUtils.getPledgeableVehicles(farmId)
-    local totalCollateral = 0
-
-    for _, item in ipairs(pledgeable) do
-        totalCollateral = totalCollateral + item.value
-    end
-
-    -- Also add land value (land can be collateral too, but handled separately)
-    local landValue = CollateralUtils.calculateLandValue(farmId)
-    totalCollateral = totalCollateral + landValue
-
-    -- Subtract existing debt
-    local existingDebt = CollateralUtils.calculateExistingDebt(farmId)
-    totalCollateral = totalCollateral - existingDebt
-
-    -- Apply LTV ratio
-    local maxLoan = math.max(0, totalCollateral * CollateralUtils.LTV_RATIO)
-
-    return math.floor(maxLoan), totalCollateral
-end
 
 --[[
     Calculate total land value for a farm

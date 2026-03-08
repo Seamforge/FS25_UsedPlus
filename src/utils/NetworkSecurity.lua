@@ -80,28 +80,6 @@ end
     @param connection - Network connection
     @return boolean - true if has master rights
 ]]
-function NetworkSecurity.hasMasterRights(connection)
-    if connection == nil then
-        return true  -- Local/server
-    end
-
-    -- Find player by connection
-    local player = g_currentMission:getPlayerByConnection(connection)
-    if player and player.isMasterUser then
-        return true
-    end
-
-    -- Alternative check via user manager
-    if g_currentMission.userManager then
-        local user = g_currentMission.userManager:getUserByConnection(connection)
-        if user and user:getIsMasterUser() then
-            return true
-        end
-    end
-
-    return false
-end
-
 --[[
     Log a security event for audit purposes
 

@@ -238,7 +238,7 @@ function MaintenanceReportDialog:updateDisplay()
         -- v1.5.1: Set mechanic quote defaults for new vehicles
         if self.mechanicQuoteText then
             -- New vehicle gets legendary tier quote
-            local quote = "Vehicle condition assessed."
+            local quote = g_i18n:getText("usedplus_maintenance_conditionAssessed")
             if UsedPlusMaintenance and UsedPlusMaintenance.getInspectorQuote then
                 quote = UsedPlusMaintenance.getInspectorQuote(1.0)  -- 100% reliability
             end
@@ -327,15 +327,15 @@ end
 ]]
 function MaintenanceReportDialog:getRatingText(reliability)
     if reliability >= 0.9 then
-        return "Excellent", "[OK]"
+        return g_i18n:getText("usedplus_condition_excellent"), "[OK]"
     elseif reliability >= 0.7 then
-        return "Good", "[OK]"
+        return g_i18n:getText("usedplus_condition_good"), "[OK]"
     elseif reliability >= 0.5 then
-        return "Acceptable", "[!]"
+        return g_i18n:getText("usedplus_condition_fair"), "[!]"
     elseif reliability >= 0.3 then
-        return "Below Average", "[!]"
+        return g_i18n:getText("usedplus_condition_poor"), "[!]"
     else
-        return "Poor", "[!!]"
+        return g_i18n:getText("usedplus_condition_critical"), "[!!]"
     end
 end
 
@@ -352,40 +352,40 @@ function MaintenanceReportDialog:updateStatusNotes(data)
     local avgRel = ((data.engineReliability or 1) + (data.hydraulicReliability or 1) + (data.electricalReliability or 1)) / 3
 
     if avgRel >= 0.8 then
-        line1 = "All systems operating normally. No maintenance concerns."
+        line1 = g_i18n:getText("usedplus_maintenance_allSystemsNormal")
     elseif avgRel >= 0.5 then
         -- Moderate wear
         local issues = {}
         if (data.engineReliability or 1) < 0.7 then
-            table.insert(issues, "engine")
+            table.insert(issues, g_i18n:getText("usedplus_maintenance_systemEngine"))
         end
         if (data.hydraulicReliability or 1) < 0.7 then
-            table.insert(issues, "hydraulics")
+            table.insert(issues, g_i18n:getText("usedplus_maintenance_systemHydraulics"))
         end
         if (data.electricalReliability or 1) < 0.7 then
-            table.insert(issues, "electrical")
+            table.insert(issues, g_i18n:getText("usedplus_maintenance_systemElectrical"))
         end
 
         if #issues > 0 then
-            line1 = "Some wear detected in: " .. table.concat(issues, ", ") .. "."
-            line2 = "Regular maintenance recommended to prevent breakdowns."
+            line1 = string.format(g_i18n:getText("usedplus_maintenance_wearDetected"), table.concat(issues, ", "))
+            line2 = g_i18n:getText("usedplus_maintenance_recommendMaintenance")
         else
-            line1 = "Vehicle showing normal wear for its age."
+            line1 = g_i18n:getText("usedplus_maintenance_normalWear")
         end
     else
         -- Poor condition
         local criticalIssues = {}
         if (data.engineReliability or 1) < 0.5 then
-            table.insert(criticalIssues, "Engine may stall under heavy load")
+            table.insert(criticalIssues, g_i18n:getText("usedplus_maintenance_engineStall"))
         end
         if (data.hydraulicReliability or 1) < 0.5 then
-            table.insert(criticalIssues, "Hydraulics may drift or fail")
+            table.insert(criticalIssues, g_i18n:getText("usedplus_maintenance_hydraulicDrift"))
         end
         if (data.electricalReliability or 1) < 0.5 then
-            table.insert(criticalIssues, "Electrical cutouts likely")
+            table.insert(criticalIssues, g_i18n:getText("usedplus_maintenance_electricalCutouts"))
         end
 
-        line1 = "WARNING: Vehicle in poor condition - breakdowns expected."
+        line1 = g_i18n:getText("usedplus_maintenance_poorConditionWarning")
         if #criticalIssues > 0 then
             line2 = criticalIssues[1] .. "."
         end
@@ -394,7 +394,7 @@ function MaintenanceReportDialog:updateStatusNotes(data)
     -- Check breakdown history
     if data.failureCount and data.failureCount > 3 then
         if line2 == "" then
-            line2 = string.format("History of %d breakdown(s) on record.", data.failureCount)
+            line2 = string.format(g_i18n:getText("usedplus_maintenance_breakdownHistory"), data.failureCount)
         end
     end
 
@@ -417,7 +417,7 @@ function MaintenanceReportDialog:updateMechanicQuote(data)
                           (data.electricalReliability or 1)) / 3
 
     -- Get quote using the maintenance system's quote function
-    local quote = "Vehicle condition assessed."
+    local quote = g_i18n:getText("usedplus_maintenance_conditionAssessed")
     if UsedPlusMaintenance and UsedPlusMaintenance.getInspectorQuote then
         quote = UsedPlusMaintenance.getInspectorQuote(avgReliability)
     end

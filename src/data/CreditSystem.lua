@@ -307,15 +307,15 @@ end
 ]]
 function CreditScore.getRating(score)
     if score >= 750 then
-        return "Excellent", 1
+        return g_i18n:getText("usedplus_creditRating_excellent"), 1
     elseif score >= 700 then
-        return "Good", 2
+        return g_i18n:getText("usedplus_creditRating_good"), 2
     elseif score >= 650 then
-        return "Fair", 3
+        return g_i18n:getText("usedplus_creditRating_fair"), 3
     elseif score >= 600 then
-        return "Poor", 4
+        return g_i18n:getText("usedplus_creditRating_poor"), 4
     else
-        return "Very Poor", 5
+        return g_i18n:getText("usedplus_creditRating_veryPoor"), 5
     end
 end
 

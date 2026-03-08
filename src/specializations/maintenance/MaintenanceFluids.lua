@@ -521,6 +521,10 @@ function UsedPlusMaintenance.repairFuelLeak(vehicle)
     spec.fuelLeakMultiplier = 1.0
     spec.hasShownFuelLeakWarning = false
 
+    if vehicle.raiseDirtyFlags and spec.dirtyFlag then
+        vehicle:raiseDirtyFlags(spec.dirtyFlag)
+    end
+
     UsedPlus.logDebug(string.format("Fuel leak repaired for %s", vehicle:getName()))
 end
 

@@ -223,13 +223,13 @@ function ServiceTruckDiscoveryDialog:onClickBuyNow()
     local success, reason, extra = ServiceTruckDiscovery.acceptOpportunity(farmId)
 
     if not success then
-        local errorMsg = "Purchase failed"
+        local errorMsg = g_i18n:getText("usedplus_st_purchaseFailed")
         if reason == "insufficient_funds" then
-            errorMsg = string.format("Insufficient funds! You have %s", g_i18n:formatMoney(extra or 0, 0, true, true))
+            errorMsg = string.format(g_i18n:getText("usedplus_st_insufficientFundsFormat"), g_i18n:formatMoney(extra or 0, 0, true, true))
         elseif reason == "spawn_failed" then
-            errorMsg = "Failed to deliver the truck. Contact support."
+            errorMsg = g_i18n:getText("usedplus_st_spawnFailed")
         elseif reason == "no_opportunity" then
-            errorMsg = "This opportunity has expired."
+            errorMsg = g_i18n:getText("usedplus_st_opportunityExpired")
         end
 
         g_currentMission:addIngameNotification(
@@ -237,7 +237,7 @@ function ServiceTruckDiscoveryDialog:onClickBuyNow()
             errorMsg
         )
 
-        UsedPlus.logWarning("ServiceTruckDiscoveryDialog: Purchase failed - %s", reason)
+        UsedPlus.logWarn("ServiceTruckDiscoveryDialog: Purchase failed - %s", reason)
     else
         UsedPlus.logInfo("ServiceTruckDiscoveryDialog: Purchase successful!")
         -- Success notification is shown by ServiceTruckDiscovery.acceptOpportunity

@@ -226,7 +226,7 @@ function UsedVehicleManager:spawnUsedVehicle(listing, farmId)
         farmId = farmId,
         xmlFilename = storeItem.xmlFilename,
         timestamp = g_currentMission.time,
-        storeItemName = listing.storeItemName or storeItem.name or "unknown",
+        storeItemName = listing.storeItemName or storeItem.name or g_i18n:getText("usedplus_common_unknown"),
         category = storeItem.category or "unknown",
     }
     UsedPlus.logDebug(string.format("Stored pending purchase: %s (item: %s, category: %s)",

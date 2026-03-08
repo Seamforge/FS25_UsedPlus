@@ -280,52 +280,6 @@ function DepreciationCalculations.calculateUsedPrice(storeItem, params)
     return math.floor(usedPrice), math.floor(repairPrice), math.floor(repaintPrice)
 end
 
---[[
-    Create used vehicle sale entry for game's vehicle sale system
-    This adds the vehicle to the in-game used vehicles shop
-    Returns: sale ID (or nil if failed)
-]]
-function DepreciationCalculations.createUsedVehicleSale(storeItem, params, configurations)
-    if not g_server then
-        UsedPlus.logWarn("createUsedVehicleSale must be called on server")
-        return nil
-    end
-
-    -- Calculate used price
-    local usedPrice, repairPrice, repaintPrice = DepreciationCalculations.calculateUsedPrice(storeItem, params)
-
-    -- Convert operating hours to milliseconds
-    local operatingTime = params.operatingHours * 60 * 60 * 1000
-
-    -- Create sale entry (pattern from BuyUsedEquipment)
-    local saleEntry = {
-        -- Time until sale expires (24-72 hours)
-        timeLeft = math.random(24, 72),
-
-        -- Mark as player-generated (not random)
-        isGenerated = false,
-
-        -- Vehicle identification
-        xmlFilename = storeItem.xmlFilename,
-
-        -- Condition parameters
-        age = params.age,
-        damage = params.damage,
-        wear = params.wear,
-        operatingTime = operatingTime,
-
-        -- Pricing
-        price = usedPrice,
-
-        -- Configurations (if any)
-        configurations = configurations or {}
-    }
-
-    -- Add to game's vehicle sale system
-    local saleId = g_currentMission.vehicleSaleSystem:addSale(saleEntry)
-
-    return saleId
-end
 
 --[[
     Get condition rating text for display
@@ -361,56 +315,6 @@ end
 ]]
 function DepreciationCalculations.formatOperatingHours(hours)
     return string.format(g_i18n:getText("usedplus_hours"), math.floor(hours))
-end
-
---[[
-    Get discount percentage text for display
-]]
-function DepreciationCalculations.formatDiscount(discount)
-    return string.format("%.0f%% OFF", discount * 100)
-end
-
---[[
-    Estimate value of player's vehicle for trade-in/credit
-    Uses same depreciation system but from current vehicle state
-]]
-function DepreciationCalculations.estimateVehicleValue(vehicle)
-    if vehicle == nil then
-        return 0
-    end
-
-    -- Get store item for base price
-    local storeItem = g_storeManager:getItemByXMLFilename(vehicle.configFileName)
-    if storeItem == nil then
-        return 0
-    end
-
-    -- Get current vehicle condition
-    local age = vehicle.age or 0
-    local operatingTime = vehicle.operatingTime or 0
-    local damage = 0
-    local wear = 0
-
-    if vehicle.spec_wearable then
-        damage = vehicle.spec_wearable.damage or 0
-        wear = vehicle.spec_wearable.wear or 0
-    end
-
-    -- Calculate using game's system
-    local defaultPrice = storeItem.price
-    local repairPrice = Wearable.calculateRepairPrice(defaultPrice, damage)
-    local repaintPrice = Wearable.calculateRepaintPrice(defaultPrice, wear)
-
-    local value = Vehicle.calculateSellPrice(
-        storeItem,
-        age,
-        operatingTime,
-        defaultPrice,
-        repairPrice,
-        repaintPrice
-    )
-
-    return math.floor(value)
 end
 
 UsedPlus.logInfo("DepreciationCalculations utility loaded")

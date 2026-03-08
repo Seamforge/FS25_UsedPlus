@@ -417,19 +417,19 @@ function InspectionReportDialog:updateReliabilityRating(componentType, reliabili
     local percentage = math.floor(reliability * 100)
 
     -- Get rating text (safely handle if function doesn't exist)
-    local ratingText = "Unknown"
+    local ratingText = g_i18n:getText("usedplus_condition_unknown") or "?"
     if UsedPlusMaintenance and UsedPlusMaintenance.getRatingText then
         ratingText = UsedPlusMaintenance.getRatingText(reliability)
     elseif reliability >= 0.75 then
-        ratingText = "Excellent"
+        ratingText = g_i18n:getText("usedplus_condition_excellent")
     elseif reliability >= 0.6 then
-        ratingText = "Good"
+        ratingText = g_i18n:getText("usedplus_condition_good")
     elseif reliability >= 0.45 then
-        ratingText = "Fair"
+        ratingText = g_i18n:getText("usedplus_condition_fair")
     elseif reliability >= 0.3 then
-        ratingText = "Poor"
+        ratingText = g_i18n:getText("usedplus_condition_poor")
     else
-        ratingText = "Critical"
+        ratingText = g_i18n:getText("usedplus_condition_critical")
     end
 
     -- Determine color based on rating

@@ -109,7 +109,7 @@ function FinanceDetailFrame:updateDealInfo()
 
     -- Item name
     if self.itemNameText then
-        local itemName = self.deal.itemName or self.deal.vehicleName or "Unknown"
+        local itemName = self.deal.itemName or self.deal.vehicleName or g_i18n:getText("usedplus_common_unknown")
         self.itemNameText:setText(itemName)
     end
 

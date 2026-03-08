@@ -7,7 +7,7 @@
     -->
 
     <author>UsedPlus Team</author>
-    <version>2.15.3.59</version>
+    <version>2.15.3.74</version>
 
     <title>
         <en>UsedPlus - Finance &amp; Marketplace System</en>
@@ -45,7 +45,7 @@ ADDITIONAL FEATURES
 - ESC menu Finance Manager (Shift+F)
 - Trade-in system with condition-based values
 - Full multiplayer support
-- 15 language translations
+- 25 language translations
 - Configurable settings for all systems
 
 SUPPORT
@@ -125,8 +125,6 @@ UNTERSTÜTZUNG
     <!-- Pattern from: FS25_CutOpenBale which works for on-foot keybinds -->
     <actions>
         <action name="USEDPLUS_OPEN_FINANCE_MANAGER" category="ONFOOT VEHICLE" axisType="HALF"/>
-        <action name="USEDPLUS_SEARCH_USED" category="MENU" axisType="HALF"/>
-        <action name="USEDPLUS_INSPECT_VEHICLE" category="MENU" axisType="HALF"/>
         <action name="USEDPLUS_ACTIVATE_OBD"/>
         <action name="USEDPLUS_TIRES" category="MENU" axisType="HALF"/>
         <action name="USEDPLUS_SERVICE_TRUCK" category="VEHICLE" axisType="HALF"/>
@@ -136,12 +134,6 @@ UNTERSTÜTZUNG
     <inputBinding>
         <actionBinding action="USEDPLUS_OPEN_FINANCE_MANAGER">
             <binding device="KB_MOUSE_DEFAULT" input="KEY_lshift KEY_f"/>
-        </actionBinding>
-        <actionBinding action="USEDPLUS_SEARCH_USED">
-            <binding device="KB_MOUSE_DEFAULT" input="KEY_u"/>
-        </actionBinding>
-        <actionBinding action="USEDPLUS_INSPECT_VEHICLE">
-            <binding device="KB_MOUSE_DEFAULT" input="KEY_i"/>
         </actionBinding>
         <actionBinding action="USEDPLUS_ACTIVATE_OBD">
             <binding device="KB_MOUSE_DEFAULT" input="KEY_o"/>
@@ -199,14 +191,12 @@ UNTERSTÜTZUNG
         <!-- Utility classes (no dependencies except data classes) -->
         <sourceFile filename="src/utils/FinanceCalculations.lua"/>
         <sourceFile filename="src/utils/DepreciationCalculations.lua"/>
-        <sourceFile filename="src/utils/ConfigurationDetector.lua"/>
         <sourceFile filename="src/utils/TradeInCalculations.lua"/>
         <sourceFile filename="src/utils/CollateralUtils.lua"/>  <!-- Collateral/loan value calculations -->
         <sourceFile filename="src/utils/Smoothing.lua"/>  <!-- v2.8.0: EMA smoothing for UI values -->
 
         <!-- UI utilities (depend on utils, used by GUI) -->
         <sourceFile filename="src/utils/UIHelper.lua"/>       <!--  Centralized UI formatting -->
-        <sourceFile filename="src/utils/UsedPlusUI.lua"/>     <!--  UI component system -->
         <sourceFile filename="src/utils/DialogLoader.lua"/>   <!--  Centralized dialog loading -->
         <sourceFile filename="src/utils/UsedPlusAPI.lua"/>    <!--  v2.5.2: Public API for external mod integration -->
         <sourceFile filename="src/utils/NetworkSecurity.lua"/> <!--  v2.7.2: Multiplayer security validation -->
@@ -288,7 +278,6 @@ UNTERSTÜTZUNG
         <sourceFile filename="src/gui/unifiedpurchase/PurchaseContext.lua"/>
         <sourceFile filename="src/gui/unifiedpurchase/CreditCalculations.lua"/>
         <sourceFile filename="src/gui/unifiedpurchase/TradeInHandler.lua"/>
-        <sourceFile filename="src/gui/unifiedpurchase/DisplayUpdater.lua"/>
         <sourceFile filename="src/gui/unifiedpurchase/PurchaseExecutorVehicle.lua"/>
         <sourceFile filename="src/gui/unifiedpurchase/PurchaseExecutorPlaceable.lua"/>
 

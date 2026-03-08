@@ -230,7 +230,7 @@ function ServiceTruckDiscovery.acceptOpportunity(farmId)
     local data = ServiceTruckDiscovery.getFarmData(farmId)
 
     if not data.opportunityActive then
-        UsedPlus.logWarning("ServiceTruckDiscovery: No active opportunity for farm %d", farmId)
+        UsedPlus.logWarn("ServiceTruckDiscovery: No active opportunity for farm %d", farmId)
         return false, "no_opportunity"
     end
 

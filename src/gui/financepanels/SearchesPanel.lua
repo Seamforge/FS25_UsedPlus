@@ -101,14 +101,14 @@ function FinanceManagerFrame:updateSearchesSection(farmId)
 
             if item.type == "search" then
                 search = item.data
-                itemName = search.storeItemName or "Unknown"
+                itemName = search.storeItemName or g_i18n:getText("usedplus_common_unknown")
                 searchLevel = search.searchLevel or 1
                 ttl = search.ttl or 0
                 basePrice = search.basePrice or 0
                 totalCost = totalCost + (search.searchCost or 0)
             else
                 local listing = item.data
-                itemName = listing.storeItemName or "Unknown"
+                itemName = listing.storeItemName or g_i18n:getText("usedplus_common_unknown")
                 searchLevel = listing.searchLevel or 1
                 ttl = 0
                 basePrice = listing.price or 0
@@ -362,7 +362,7 @@ function FinanceManagerFrame:onCancelSearchClick(rowIndex)
     end
 
     -- Show confirmation dialog
-    local itemName = search.storeItemName or "Unknown"
+    local itemName = search.storeItemName or g_i18n:getText("usedplus_common_unknown")
     local searchFee = search.searchCost or 0
     local message = string.format(
         "Cancel search for %s?\n\n" ..

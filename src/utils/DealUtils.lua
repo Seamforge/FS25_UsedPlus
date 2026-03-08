@@ -76,9 +76,9 @@ function DealUtils.getSummary(deal)
     return {
         id = deal.id,
         type = deal.dealType,
-        typeName = DealUtils.TYPE_NAMES[deal.dealType] or "Unknown",
+        typeName = DealUtils.TYPE_NAMES[deal.dealType] or g_i18n:getText("usedplus_common_unknown"),
         farmId = deal.farmId,
-        itemName = deal.itemName or deal.vehicleName or deal.landName or "Unknown",
+        itemName = deal.itemName or deal.vehicleName or deal.landName or g_i18n:getText("usedplus_common_unknown"),
         monthlyPayment = deal.monthlyPayment or 0,
         monthsPaid = deal.monthsPaid or 0,
         totalMonths = deal.termMonths or 0,

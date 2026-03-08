@@ -397,11 +397,11 @@ function ReplaceTiresEvent.emptyNew()
     return self
 end
 
-function ReplaceTiresEvent.new(farmId, vehicleId, tireType, cost)
+function ReplaceTiresEvent.new(farmId, vehicleId, tireQuality, cost)
     local self = ReplaceTiresEvent.emptyNew()
     self.farmId = farmId
     self.vehicleId = vehicleId
-    self.tireType = tireType or "standard"
+    self.tireQuality = tireQuality or 2
     self.cost = cost or 0
     return self
 end
@@ -428,14 +428,14 @@ end
 function ReplaceTiresEvent:writeStream(streamId, connection)
     streamWriteInt32(streamId, self.farmId)
     streamWriteInt32(streamId, self.vehicleId)
-    streamWriteString(streamId, self.tireType)
+    streamWriteInt32(streamId, self.tireQuality)
     streamWriteFloat32(streamId, self.cost)
 end
 
 function ReplaceTiresEvent:readStream(streamId, connection)
     self.farmId = streamReadInt32(streamId)
     self.vehicleId = streamReadInt32(streamId)
-    self.tireType = streamReadString(streamId)
+    self.tireQuality = streamReadInt32(streamId)
     self.cost = streamReadFloat32(streamId)
     self:run(connection)
 end
@@ -542,7 +542,7 @@ function ReplaceTiresEvent:run(connection)
         return
     end
 
-    local success = ReplaceTiresEvent.execute(self.farmId, self.vehicleId, self.tireType, self.cost)
+    local success = ReplaceTiresEvent.execute(self.farmId, self.vehicleId, self.tireQuality, self.cost)
     if success then
         TransactionResponseEvent.sendToClient(connection, self.farmId, true, "usedplus_mp_success_replace_tires")
 

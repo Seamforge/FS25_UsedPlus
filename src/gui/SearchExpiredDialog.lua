@@ -111,7 +111,7 @@ function SearchExpiredDialog:updateDisplay()
 
     -- Vehicle name
     if self.vehicleNameText then
-        self.vehicleNameText:setText(search.storeItemName or "Unknown Vehicle")
+        self.vehicleNameText:setText(search.storeItemName or g_i18n:getText("usedplus_common_unknownVehicle"))
     end
 
     -- v2.1.2: Vehicle preview image
@@ -128,7 +128,7 @@ function SearchExpiredDialog:updateDisplay()
     -- Search tier (FIXED: search.searchLevel not search.tier)
     if self.searchTierText then
         local tierInfo = UsedVehicleSearch.SEARCH_TIERS[search.searchLevel] or {}
-        self.searchTierText:setText(tierInfo.name or "Unknown")
+        self.searchTierText:setText(tierInfo.name or g_i18n:getText("usedplus_common_unknown"))
     end
 
     -- Quality tier (FIXED: search.qualityLevel not search.qualityTier)

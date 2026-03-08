@@ -18,7 +18,7 @@
 <l10n>
     <!--  Finance Dialog -->
     <elements>
-        <e k="usedplus_finance_title" v="Фінансовий транспортний засіб" eh="6efef1bd" />
+        <e k="usedplus_finance_title" v="Фінансувати транспорт" eh="6efef1bd" />
         <e k="usedplus_finance_itemDetails" v="Деталі транспортного засобу" eh="fcb2575f" />
         <e k="usedplus_finance_configuration" v="Конфігурація фінансів" eh="0519e514" />
         <e k="usedplus_finance_term" v="Термін позики" eh="5d1f9c9f" />
@@ -41,7 +41,7 @@
         <e k="usedplus_lease_configuration" v="Конфігурація оренди" eh="07e07e72" />
         <e k="usedplus_lease_term" v="Термін оренди (років)" eh="13fd4421" />
         <e k="usedplus_lease_downPayment" v="Перший внесок" eh="46b7f6c5" />
-        <e k="usedplus_lease_residualValue" v="Залишкова вартість (видатковий платіж)" eh="458fd3b9" />
+        <e k="usedplus_lease_residualValue" v="Залишкова вартість (заключний платіж)" eh="458fd3b9" />
         <e k="usedplus_lease_paymentPreview" v="Попередній перегляд платежу" eh="a3f5396e" />
         <e k="usedplus_lease_monthlyPayment" v="Щомісячна оплата" eh="c102e118" />
         <e k="usedplus_lease_yearlyPayment" v="Щорічна оплата" eh="b4080ee0" />
@@ -74,7 +74,7 @@
         <e k="usedplus_search_qualitySelection" v="Бажана якість" eh="f70a51e0" />
         <e k="usedplus_search_qualityDescription" v="Нижча якість = нижча ціна, але потребує більшого ремонту" eh="f991384c" />
         <e k="usedplus_search_confirmTitle" v="Розпочато пошук" eh="e42ba949" />
-        <e k="usedplus_search_retainer" v="Фіксатор агента" eh="22908ab1" />
+        <e k="usedplus_search_retainer" v="Аванс агента" eh="22908ab1" />
         <e k="usedplus_search_commission" v="Гонорар шукача" eh="1130f6f3" />
         <e k="usedplus_search_commissionInfo" v="%d%% додається до ціни автомобіля" eh="e6462a3c" />
         <e k="usedplus_search_monthProgress" v="Місяць %d з %d" eh="b2af1b34" />
@@ -88,7 +88,7 @@
         <e k="usedplus_notify_vehicleFound" v="Ваш агент знайшов %s!" eh="bf9782f6" />
         <e k="usedplus_notify_searchComplete" v="Пошук завершено: транспортних засобів %d знайдено" eh="dbd32f05" />
         <e k="usedplus_confirmation_title" v="Підтвердження" eh="f4d1ea47" />
-        <e k="usedplus_inGameMenuTitle" v="Used Plus - Фінанси &amp; Пошуки" eh="093c7b9e" />
+        <e k="usedplus_inGameMenuTitle" v="Додатково - Фінанси та пошук" eh="093c7b9e" />
         <e k="usedplus_activeFinanceDeals" v="Активні фінансові угоди:" eh="5cf7fac5" />
         <e k="usedplus_activeSearches" v="Активні пошуки:" eh="274e131d" />
         <e k="usedplus_creditScore" v="Кредитний рейтинг:" eh="0199e1a3" />
@@ -107,7 +107,7 @@
         <e k="usedplus_manager_actions" v="Дії" eh="06df3300" />
         <e k="usedplus_manager_noDeals" v="Немає активних фінансових чи лізингових угод." eh="880134fe" />
         <e k="usedplus_manager_helpText" v="Фінансуйте транспортні засоби з магазину (клавіша F). Пошук вживаного обладнання (клавіша V). Платежі автоматично списуються щомісяця." eh="ea889bec" />
-        <e k="usedplus_vanillaLoan" v="Банківська позика (Ваніль)" eh="ae4b0f92" />
+        <e k="usedplus_vanillaLoan" v="Банківська кредитна лінія" eh="ae4b0f92" />
         <e k="usedplus_loanOpen" v="Відкритий" eh="c3bf447e" />
         <e k="usedplus_loanNoTerm" v="Без терміну" eh="8dbfc606" />
         <e k="usedplus_loanInterestOnly" v="Відсотки" eh="920beb5d" />
@@ -124,14 +124,14 @@
         <e k="usedplus_detail_currentBalance" v="Поточний баланс" eh="91b496c3" />
         <e k="usedplus_detail_principalPaid" v="Основна сума оплачена" eh="dbc03b11" />
         <e k="usedplus_detail_interestPaid" v="Відсотки сплачені" eh="000ffd10" />
-        <e k="usedplus_detail_remainingPrincipal" v="Залишився директор" eh="d6f9e1f5" />
+        <e k="usedplus_detail_remainingPrincipal" v="Залишок основної суми" eh="d6f9e1f5" />
         <e k="usedplus_detail_projectedInterest" v="Прогнозований відсоток (якщо немає передоплати)" eh="30c8b124" />
         <e k="usedplus_detail_makePayment" v="Здійснити доплату" eh="baa79ea4" />
         <e k="usedplus_detail_paymentAmount" v="Сума платежу" eh="5bbe29e8" />
         <e k="usedplus_detail_paymentSummary" v="Підсумок платежу" eh="0ca2b553" />
         <e k="usedplus_detail_paymentTotal" v="Загальна оплата" eh="4935ede3" />
-        <e k="usedplus_detail_toPrincipal" v="Директору" eh="5253f523" />
-        <e k="usedplus_detail_toInterest" v="Зацікавити" eh="d9e82220" />
+        <e k="usedplus_detail_toPrincipal" v="На основну суму" eh="5253f523" />
+        <e k="usedplus_detail_toInterest" v="На відсотки" eh="d9e82220" />
         <e k="usedplus_detail_newBalance" v="Новий баланс" eh="17d35991" />
         <e k="usedplus_detail_prepaymentPenalty" v="Штраф за передоплату" eh="057cca0e" />
         <e k="usedplus_landFinance_title" v="Фінансування сільськогосподарських угідь" eh="4a5ab59c" />
@@ -195,7 +195,7 @@
         <e k="usedplus_condition_fair" v="Задовільний" eh="f7f20cf0" />
         <e k="usedplus_condition_good" v="Добрий" eh="0c6ad70b" />
         <e k="usedplus_condition_excellent" v="Чудовий" eh="fcc2d28a" />
-        <e k="usedplus_condition_poor_desc" v="Вигідна урна – може не працювати або потребувати капітального ремонту" eh="01dfd975" />
+        <e k="usedplus_condition_poor_desc" v="Розпродаж – може не працювати або потребувати капітального ремонту" eh="01dfd975" />
         <e k="usedplus_condition_any_desc" v="Найдешевше в роботі - може знадобитися значний ремонт" eh="4f93d3f3" />
         <e k="usedplus_dealType_finance" v="Фінанси" eh="c482980d" />
         <e k="usedplus_dealType_lease" v="Оренда" eh="47c96b08" />
@@ -214,9 +214,7 @@
         <e k="usedplus_action_openFinanceManager" v="Відкрити фінансовий менеджер" eh="806bb897" />
         <e k="usedplus_action_searchUsed" v="Пошук вживаного обладнання" eh="77397317" />
         <e k="input_USEDPLUS_OPEN_FINANCE_MANAGER" v="Відкрити фінансовий менеджер" eh="806bb897" />
-        <e k="input_USEDPLUS_SEARCH_USED" v="Пошук вживаного обладнання" eh="77397317" />
-        <e k="input_USEDPLUS_INSPECT_VEHICLE" v="Огляньте транспортний засіб" eh="c06f09f1" />
-        <e k="input_USEDPLUS_ACTIVATE_OBD" v="Використати OBD-сканер" eh="9666e26b" />
+<e k="input_USEDPLUS_ACTIVATE_OBD" v="Використати OBD-сканер" eh="9666e26b" />
         <e k="input_USEDPLUS_TIRES" v="Шиномонтаж" eh="b0234f4e" />
         <e k="input_USEDPLUS_SERVICE_TRUCK" v="Керування сервісною вантажівкою" eh="fad0e0f1" />
         <e k="input_USEDPLUS_FAULT_TRACER" v="Трасувальник несправностей" eh="d1b82197" />
@@ -267,12 +265,12 @@
         <e k="usedplus_repair_title_mechanical" v="Механічний ремонт" eh="60a0d54f" />
         <e k="usedplus_repair_title_repaint" v="Перефарбувати автомобіль" eh="d5b4d6be" />
         <e k="usedplus_repair_mechanical" v="РЕМОНТ МЕХАН" eh="6294bbee" />
-        <e k="usedplus_repair_cosmetic" v="ФАРБА &amp; КОСМЕТИЧНА" eh="d111819f" />
+        <e k="usedplus_repair_cosmetic" v="ФАРБА ТА КОСМЕТИКА" eh="d111819f" />
         <e k="usedplus_repair_slider" v="Сума ремонту" eh="0dda5ee8" />
         <e k="usedplus_repair_cost" v="Вартість ремонту" eh="6f0504d5" />
         <e k="usedplus_repair_after" v="Стан Після" eh="d6d75451" />
         <e k="usedplus_repair_payCash" v="Платити готівкою" eh="e490310b" />
-        <e k="usedplus_repair_finance" v="Фінанси Ремонт" eh="70ef80a4" />
+        <e k="usedplus_repair_finance" v="Фінансувати ремонт" eh="70ef80a4" />
         <e k="usedplus_repair_success" v="Ремонт завершено! %s відремонтовано." eh="fecc6480" />
         <e k="usedplus_repaint_slider" v="Сума перефарбування" eh="bf64833d" />
         <e k="usedplus_repaint_cost" v="Вартість перефарбування" eh="b994cb4e" />
@@ -329,7 +327,7 @@
         <e k="usedplus_dashboard_ratio" v="співвідношення" eh="8334a158" />
         <e k="usedplus_dashboard_excellent" v="Чудово" eh="fcc2d28a" />
         <e k="usedplus_dashboard_good" v="добре" eh="0c6ad70b" />
-        <e k="usedplus_dashboard_fair" v="ярмарок" eh="f7f20cf0" />
+        <e k="usedplus_dashboard_fair" v="Задовільний" eh="f7f20cf0" />
         <e k="usedplus_dashboard_high" v="Високий" eh="655d20c1" />
         <e k="usedplus_dashboard_critical" v="Критичний" eh="278d01e5" />
         <e k="usedplus_dashboard_noPayments" v="Немає майбутніх платежів" eh="96a72e57" />
@@ -363,7 +361,7 @@
         <e k="usedplus_sell_localAgent" v="Місцевий агент" eh="082cb5b6" />
         <e k="usedplus_sell_regionalAgent" v="Регіональний агент" eh="403955ba" />
         <e k="usedplus_sell_nationalAgent" v="Національний агент" eh="eef8214f" />
-        <e k="usedplus_sell_expectedReturn" v="Очікуване повернення" eh="20b99f1d" />
+        <e k="usedplus_sell_expectedReturn" v="Очікуваний прибуток" eh="20b99f1d" />
         <e k="usedplus_sell_timeFrame" v="Часові рамки" eh="ced18839" />
         <e k="usedplus_sell_agentFee" v="Агентська винагорода" eh="40f286a6" />
         <e k="usedplus_sell_successRate" v="Коефіцієнт успішності" eh="aac60ede" />
@@ -501,7 +499,7 @@
         <e k="usedplus_credit_tooLowForLeasing" v="Кредитний рейтинг занадто низький для лізингу. Ваша оцінка: %d (потрібно %d+). Лізинг вимагає кращого кредиту, ніж фінансування." eh="50b91953" />
         <e k="usedplus_credit_tooLowForLand" v="Занизький кредитний рейтинг (%d). Потрібен %d+ для фінансування землі." eh="78d73204" />
         <e k="usedplus_credit_tooLowForRepair" v="Занизький кредитний рейтинг (%d). Потрібен %d+ для фінансування ремонту." eh="70147f73" />
-        <e k="usedplus_credit_tooLowForPlaceable" v="Фінансування будівлі вимагає відмінного кредиту (%d+).\nВаш кредит: %d (%s)" eh="0fb63457" />
+        <e k="usedplus_credit_tooLowForPlaceable" v="Фінансування будівлі вимагає відмінного кредиту (%d+).&#10;Ваш кредит: %d (%s)" eh="d1feb796" />
         <e k="usedplus_credit_needScore" v="Кредит: %d (потрібно %d)" eh="82790b98" />
         <e k="usedplus_placeable_cannotLease" v="Будівлі не можна орендувати. Використовуйте варіанти готівки або фінансування." eh="e4fd7eed" />
         <e k="usedplus_finance_amountTooSmall" v="Сума занадто мала для фінансування. Мінімум: %s" eh="3a90d8c2" />
@@ -547,13 +545,13 @@
         <e k="usedplus_notify_offerDeclined" v="Пропозицію відхилено – агент продовжить пошук" eh="957ec943" />
         <e k="usedplus_notify_listingCancelled" v="Оголошення про продаж для %s скасовано" eh="77f331c5" />
         <e k="usedplus_notify_vehiclePurchased" v="Придбано %s за %s" eh="ee85175a" />
-        <e k="usedplus_notify_vehiclePurchasedShop" v="Придбано %s - ​​Відвідайте магазин, щоб отримати автомобіль" eh="3359716e" />
-        <e k="usedplus_notify_vehicleFinanced" v="Профінансовано %s - ​​%s сьогодні" eh="874037b7" />
-        <e k="usedplus_notify_vehicleFinancedShop" v="Фінансовано %s - ​​Відвідайте магазин, щоб отримати автомобіль" eh="815fb77d" />
+        <e k="usedplus_notify_vehiclePurchasedShop" v="Куплено %s - Відвідайте магазин, щоб отримати транспортний засіб" eh="3359716e" />
+        <e k="usedplus_notify_vehicleFinanced" v="Фінансовано %s - %s потрібно сплатити сьогодні" eh="874037b7" />
+        <e k="usedplus_notify_vehicleFinancedShop" v="Фінансовано %s - Відвідайте магазин, щоб отримати транспортний засіб" eh="815fb77d" />
         <e k="usedplus_notify_landPurchased" v="Придбано %s за %s" eh="ee85175a" />
-        <e k="usedplus_notify_landFinanced" v="Профінансовано %s - ​​%s сьогодні" eh="874037b7" />
+        <e k="usedplus_notify_landFinanced" v="Фінансовано %s - %s потрібно сплатити сьогодні" eh="874037b7" />
         <e k="usedplus_notify_vehicleNowYours" v="Щиро вітаю! %s тепер ваш!" eh="f9f453e9" />
-        <e k="usedplus_notify_placeableFinanced" v="Будівлю профінансовано!\n%s\nАванс: %s | Щомісяця: %s протягом %d років" eh="72ebd0e0" />
+        <e k="usedplus_notify_placeableFinanced" v="Будівлю профінансовано!&#10;%s&#10;Аванс: %s | Щомісяця: %s протягом %d років" eh="1503c82e" />
         <e k="usedplus_notify_placeableSoldPayoff" v="Будівля продана. Виплата кредиту: %s" eh="78ac7164" />
         <e k="usedplus_notify_loanPaidOff" v="Кредит погашено! Всього: %s" eh="0ba73cba" />
         <e k="usedplus_notify_paymentProcessed" v="Платіж %s оброблено!" eh="fc4c5db3" />
@@ -589,7 +587,7 @@
         <e k="usedplus_inspection_notDone" v="Транспорт не було оглянуто!" eh="58a6a5a1" />
         <e k="usedplus_inspection_failed" v="Огляд не вдався: %s" eh="13d9eb55" />
         <e k="usedplus_inspectionTitle" v="Огляд транспорту" eh="7276b8fd" />
-        <e k="usedplus_confirmInspection" v="Замовити огляд %s для %s?\n\nГотово приблизно через %d годин." eh="20a936ac" />
+        <e k="usedplus_confirmInspection" v="Замовити огляд %s для %s?&#10;&#10;Готово приблизно через %d годин." eh="2f3b3a7d" />
         <e k="usedplus_selectInspectionTier" v="Виберіть тип огляду:" eh="d920b2ce" />
         <e k="usedplus_tier_quick_desc" v="Лише загальна оцінка" eh="b2f8f4ab" />
         <e k="usedplus_tier_standard_desc" v="Повна надійність + стан деталей" eh="f7939a73" />
@@ -603,8 +601,8 @@
         <e k="usedplus_paymentconfig_selectLoan" v="Виберіть позику вище, щоб змінити її спосіб оплати" eh="9c398fdf" />
         <e k="usedplus_paymentconfig_warningSkip" v="УВАГА: пропуск платежів призведе до збільшення балансу!" eh="edd2053c" />
         <e k="usedplus_paymentconfig_noteNegAmort" v="Примітка. Деякі платежі нараховують лише відсотки" eh="5502d2f3" />
-        <e k="usedplus_repairfinance_title_repaint" v="Фінанси Перефарбувати" eh="fdcf5d38" />
-        <e k="usedplus_repairfinance_title_repair" v="Фінанси Ремонт" eh="70ef80a4" />
+        <e k="usedplus_repairfinance_title_repaint" v="Фінансувати перефарбування" eh="fdcf5d38" />
+        <e k="usedplus_repairfinance_title_repair" v="Фінансувати ремонт" eh="70ef80a4" />
         <e k="usedplus_preview_title" v="Знайдено вживаний автомобіль" eh="ac794919" />
         <e k="usedplus_preview_viewReport" v="Переглянути звіт" eh="7cd1ac84" />
         <e k="usedplus_manager_clickToSelect" v="Натисніть рядок, щоб вибрати" eh="51c56c6f" />
@@ -627,7 +625,7 @@
         <e k="usedplus_land_termYear" v="1 рік" eh="cc1a252a" />
         <e k="usedplus_land_termMonths" v="%d Місяців" eh="d36b3bae" />
         <e k="usedplus_land_termMonth" v="1 місяць" eh="cf13b270" />
-        <e k="usedplus_land_noAdjustment" v="Без коригування (справедливий кредит)" eh="cda8e933" />
+        <e k="usedplus_land_noAdjustment" v="Без коригування (задовільний кредит)" eh="cda8e933" />
         <e k="usedplus_land_noDeposit" v="Без депозиту (%s кредит)" eh="e022dc69" />
         <e k="usedplus_land_depositInfo" v="%s (%d міс., %s кредит)" eh="062ae4ba" />
         <e k="usedplus_land_buyoutAnytime" v="Викуп будь-коли: %s" eh="056478ed" />
@@ -847,8 +845,8 @@
         <e k="usedplus_us_sectionTier" v="РІВЕНЬ ПОШУКУ" eh="2a7a1103" />
         <e k="usedplus_us_sectionQuality" v="БАЖАНА ЯКІСТЬ" eh="4a96fcfe" />
         <e k="usedplus_us_qualityAny" v="Будь-який" eh="ed36a1ef" />
-        <e k="usedplus_us_qualityPoor" v="Бідний" eh="0e94d017" />
-        <e k="usedplus_us_qualityFair" v="ярмарок" eh="f7f20cf0" />
+        <e k="usedplus_us_qualityPoor" v="Поганий" eh="0e94d017" />
+        <e k="usedplus_us_qualityFair" v="Задовільний" eh="f7f20cf0" />
         <e k="usedplus_us_qualityGood" v="добре" eh="0c6ad70b" />
         <e k="usedplus_us_qualityExcellent" v="Чудово" eh="fcc2d28a" />
         <e k="usedplus_us_discountFormat" v="~%d%% знижка" eh="69923e02" />
@@ -1006,7 +1004,7 @@
         <e k="usedplus_cr_tip2" v="Тримайте борг нижче 50% активів" eh="70d62f24" />
         <e k="usedplus_cr_tip3" v="Будуйте історію малими позиками" eh="dc1c9766" />
         <e k="usedplus_cr_creditDisabled" v="Кредитний рейтинг вимкнено" eh="62d14b3c" />
-        <e k="usedplus_cr_creditDisabledHint" v="Увімкніть кредитний рейтинг у налаштуваннях UsedPlus." eh="4c217397" />
+        <e k="usedplus_cr_creditDisabledHint" v="Увімкніть кредитний рейтинг у налаштуваннях UsedPlus, щоб переглянути свій кредитний звіт." eh="4c217397" />
         <e k="usedplus_sd_title" v="ДЕТАЛІ ПОШУКУ" eh="b3338e43" />
         <e k="usedplus_sd_sectionSearching" v="ПОШУК" eh="fb7b73d1" />
         <e k="usedplus_sd_sectionConfig" v="НАЛАШТУВАННЯ ПОШУКУ" eh="b1db3ac1" />
@@ -1027,7 +1025,7 @@
         <e k="usedplus_sd_timeRemaining" v="Залишилось часу:" eh="d67a16ee" />
         <e k="usedplus_sd_started" v="Розпочато:" eh="cf864170" />
         <e k="usedplus_sd_elapsed" v="Минуло:" eh="97ce22df" />
-        <e k="usedplus_sd_infoText" v="Опалюювання включено" eh="83c02892" />
+        <e k="usedplus_sd_infoText" v="Регіональні пошуки пропонують найкраще співвідношення ціни та успіху." eh="83c02892" />
         <e k="usedplus_sld_title" v="ДЕТАЛІ ОГОЛОШЕННЯ ПРО ПРОДАЖ" eh="9e334439" />
         <e k="usedplus_sld_sectionVehicle" v="ТРАНСПОРТ" eh="e9fa318f" />
         <e k="usedplus_sld_sectionStatus" v="СТАТУС" eh="5f241c8c" />
@@ -1173,7 +1171,7 @@
         <e k="usedplus_fd_quick6Months" v="6 Місяців" eh="1d4545e8" />
         <e k="usedplus_fd_quick1Year" v="1 рік" eh="cc1a252a" />
         <e k="usedplus_fd_quickPayOff" v="Погасити" eh="416ff954" />
-        <e k="usedplus_rf_title" v="Фінанси Ремонт" eh="70ef80a4" />
+        <e k="usedplus_rf_title" v="Фінансувати ремонт" eh="70ef80a4" />
         <e k="usedplus_rf_sectionService" v="ДЕТАЛІ ОБСЛУГОВУВАННЯ" eh="22efc112" />
         <e k="usedplus_rf_repairCost" v="Вартість ремонту:" eh="33553cf9" />
         <e k="usedplus_rf_repaintCost" v="Вартість фарбування:" eh="78155645" />
@@ -1588,7 +1586,7 @@
         <e k="usedplus_serviceTruck_paused_parts" v="Відновлення призупинено - потрібні ще запчастини!" eh="bd1c3747" />
         <e k="usedplus_serviceTruck_discoveryTitle" v="ОСОБЛИВА ПРОПОЗИЦІЯ" eh="5859f1ad" />
         <e k="usedplus_serviceTruck_discoverySubtitle" v="Ваш агент має зв'язки" eh="c0c9fe88" />
-        <e k="usedplus_serviceTruck_mechanicQuote" v="&amp;quot;Я знаю механіка, який виходить на пенсію. У нього є повністю обладнана сервісна вантажівка на продаж. Тільки готівка, але я можу домовитись про хорошу ціну. Зацікавлені?&amp;quot;" eh="219139f8" />
+        <e k="usedplus_serviceTruck_mechanicQuote" v="&quot;Я знаю механіка, який виходить на пенсію. У нього є повністю обладнана сервісна вантажівка на продаж. Тільки готівка, але я можу домовитись про хорошу ціну. Зацікавлені?&quot;" eh="219139f8" />
         <e k="usedplus_serviceTruck_vehicleName" v="Сервісна вантажівка GMC C7000" eh="7f78c3d1" />
         <e k="usedplus_serviceTruck_feature1" v="Довготривале відновлення техніки" eh="0fa4b175" />
         <e k="usedplus_serviceTruck_feature2" v="Ремонт максимальної надійності" eh="dee9f0ff" />
@@ -1904,7 +1902,7 @@
         <e k="usedplus_hydraulics_seized" v="ГІДРАВЛІКУ ЗАКЛИНИЛО! Навісне заблоковано на місці." eh="dd09718c" />
         <e k="usedplus_electrical_seized" v="ВІДМОВА ЕЛЕКТРИКИ! Усі системи не працюють." eh="84b7514a" />
         <e k="usedplus_seizure_detected" v="КОМПОНЕНТ ЗАКЛИНИЛО" eh="9def01dd" />
-        <e k="usedplus_seizure_repair_confirm" v="%s заклинило і потребує аварійного ремонту.\n\nВартість ремонту: %s\n\nПродовжити ремонт?" eh="bf702608" />
+        <e k="usedplus_seizure_repair_confirm" v="%s заклинило і потребує аварійного ремонту.&#10;&#10;Вартість ремонту: %s&#10;&#10;Продовжити ремонт?" eh="cd678a07" />
         <e k="usedplus_seizure_repaired" v="%s відремонтовано! Надійність відновлено до %d%%" eh="323fa338" />
         <e k="usedplus_repair_no_money" v="Недостатньо грошей для ремонту!" eh="0c0a7c19" />
         <e k="usedplus_warning_notEnoughMoney" v="Недостатньо грошей!" eh="48f194d4" />
@@ -2083,7 +2081,7 @@
         <e k="usedplus_notification_placementCancelled" v="Розміщення скасовано" eh="2037c247" />
         <e k="usedplus_notification_bankLoanPaidOff" v="Вітаємо! Ваш банківський кредит сплачено!" eh="c84996ef" />
         <e k="usedplus_notification_priorPaymentsCredited" v="UsedPlus: Акредитовано %d попередніх платежів за банківським кредитом до вашої історії!" eh="483eb2b5" />
-        <e k="usedplus_notification_welcome" v="UsedPlus v%s -- Попередній перегляд розробки&amp;#10;Остання версія та підтримка: github.com/XelaNull/FS25_UsedPlus" eh="67beca84" />
+        <e k="usedplus_notification_welcome" v="UsedPlus v%s -- Попередній перегляд розробки&#10;Остання версія та підтримка: github.com/XelaNull/FS25_UsedPlus" eh="67beca84" />
         <e k="usedplus_notification_hpAutoPayments" v="Платежі за оренду HP автоматичні - керуються HirePurchasing" eh="4085cc6e" />
         <e k="usedplus_notification_loansManByELS" v="Кредити керуються EnhancedLoanSystem" eh="d7525a9f" />
         <e k="usedplus_notification_elsPaymentProcessed" v="Платіж за кредит ELS обробено: %s" eh="fcb1d74c" />
@@ -2093,12 +2091,12 @@
         <e k="usedplus_notification_noVehiclesYet" v="Поки жодних транспортних засобів не знайдено. Повертайтеся наступного місяця!" eh="14a083d8" />
         <e k="usedplus_notification_searchInitiated" v="Пошук ініціалізовано для %s (%s, %s)" eh="7e3f56e5" />
         <e k="usedplus_notification_offerDeclinedSeller" v="Пропозиція відхилена. Продавець повідомлено." eh="6309e917" />
-        <e k="usedplus_notification_repairComplete" v="Ремонт завершено!&amp;#10;%s&amp;#10;Вартість: %s" eh="fee4ff60" />
-        <e k="usedplus_notification_repairFinanced" v="%s фінансовано!&amp;#10;%s протягом %d місяців&amp;#10;%s/місяць" eh="9e172df5" />
+        <e k="usedplus_notification_repairComplete" v="Ремонт завершено!&#10;%s&#10;Вартість: %s" eh="fee4ff60" />
+        <e k="usedplus_notification_repairFinanced" v="%s фінансовано!&#10;%s протягом %d місяців&#10;%s/місяць" eh="9e172df5" />
         <e k="usedplus_notification_storageDepleted" v="Сховище вичерпано! %s резервуар: %.0f/%.0fL" eh="8b9b49d3" />
         <e k="usedplus_error_cannotSellLeased" v="Орендовані транспортні засоби не можна продавати. Спочатку припиніть оренду." eh="7385e257" />
         <e k="usedplus_error_cannotSellFinanced" v="Фінансовані транспортні засоби не можна продавати, поки кредит не сплачено." eh="b756f558" />
-        <e k="usedplus_error_vehicleIsCollateral" v="Цей транспортний засіб заставлено як забезпечення для кредиту %s.&amp;#10;Спочатку сплатіть кредит, щоб продати." eh="8037dbf3" />
+        <e k="usedplus_error_vehicleIsCollateral" v="Цей транспортний засіб заставлено як забезпечення для кредиту %s.&#10;Спочатку сплатіть кредит, щоб продати." eh="8037dbf3" />
         <e k="usedplus_error_alreadyListedForSale" v="Цей транспортний засіб вже виставлено на продаж." eh="c1f35ff5" />
         <e k="usedplus_error_saleSystemError" v="Помилка системи продажу. Будь ласка, спробуйте ще раз." eh="7bfb5d68" />
         <e k="usedplus_error_cannotSellLeasedShort" v="Орендовані транспортні засоби не можна продавати." eh="23b543d6" />
@@ -2123,19 +2121,19 @@
         <e k="usedplus_error_tankContainsWrong" v="Резервуар містить %s! Спершу його спорожніть, щоб додати %s." eh="f2b5d5e6" />
         <e k="usedplus_error_tankNotOil" v="Резервуар містить %s, а не моторне масло!" eh="463f93d0" />
         <e k="usedplus_error_tankNotHydraulic" v="Резервуар містить %s, а не гідравлічну рідину!" eh="914123f6" />
-        <e k="usedplus_title_vehicleInspection" v="Vehicle Inspection" eh="7276b8fd" />
-        <e k="usedplus_title_offerWithdrawn" v="Offer Withdrawn" eh="885e18c5" />
-        <e k="usedplus_ui_vanillaSellPrice" v="Vanilla Sell Price:" eh="edc4376c" />
-        <e k="usedplus_ui_thisOffer" v="This Offer:" eh="739d0e14" />
-        <e k="usedplus_ui_usedBadge" v="USED" eh="d725ec43" />
-        <e k="usedplus_neg_fullPrice" v="Full price" eh="dab32e38" />
+        <e k="usedplus_title_vehicleInspection" v="Інспекція транспортного засобу" eh="7276b8fd" />
+        <e k="usedplus_title_offerWithdrawn" v="Пропозицію відхилено" eh="885e18c5" />
+        <e k="usedplus_ui_vanillaSellPrice" v="Ціна продажу за замовчуванням:" eh="edc4376c" />
+        <e k="usedplus_ui_thisOffer" v="Ця пропозиція:" eh="739d0e14" />
+        <e k="usedplus_ui_usedBadge" v="Б/У" eh="d725ec43" />
+        <e k="usedplus_neg_fullPrice" v="Повна ціна" eh="dab32e38" />
         <e k="usedplus_uvp_expired" v="Закінчився" eh="24fe4803" />
         <e k="usedplus_sd_finalMonth" v="Останній місяць" eh="f5ada565" />
         <e k="usedplus_fm_notAvailable" v="Н/Д" eh="382b0f51" />
         <e k="usedplus_cr_notAvailable" v="Н/Д" eh="382b0f51" />
-        <e k="usedplus_cr_noPaymentHistory" v="No payment history yet" eh="2103413b" />
+        <e k="usedplus_cr_noPaymentHistory" v="Історія платежів ще немає" eh="2103413b" />
         <e k="usedplus_cr_makePayments" v="Здійснювати платежі для накопичення історії кредиту" eh="b22a5cbe" />
-        <e k="usedplus_cr_netWorth" v="Net Worth:" eh="e22409e2" />
+        <e k="usedplus_cr_netWorth" v="Чистий капітал:" eh="e22409e2" />
         <e k="usedplus_ft_gaugeFault" v="НЕСПРАВНІСТЬ" eh="893b3aaf" />
         <e k="usedplus_ft_gaugeRed" v="ЧЕРВОНЕ" eh="a2d9547b" />
         <e k="usedplus_ft_gaugeAmber" v="БУР" eh="5d307fe6" />
@@ -2167,87 +2165,87 @@
         <e k="usedplus_ft_howToPlayLine4" v="4. Діагностика кожного позначеного типу несправності" eh="2cd2b9ff" />
         <e k="usedplus_ft_howToPlayLine5" v="5. Розпочніть ремонт, коли позначені всі несправності" eh="b0f8b8ad" />
         <e k="usedplus_ft_diagnoseFaultType" v="ДІАГНОСТИКА ТИПУ НЕСПРАВНОСТІ" eh="28f6e88d" />
-        <e k="usedplus_ft_cellLabel" v="Cell [A1]" eh="c22d69d2" />
+        <e k="usedplus_ft_cellLabel" v="Комірка [A1]" eh="c22d69d2" />
         <e k="usedplus_ft_cancel" v="Скасувати" eh="ea478870" />
-        <e k="usedplus_ft_repairResults" v="REPAIR RESULTS" eh="bb6599cb" />
-        <e k="usedplus_ft_reliabilityGain" v="Reliability Gain:" eh="d8c796d2" />
+        <e k="usedplus_ft_repairResults" v="РЕЗУЛЬТАТИ РЕМОНТУ" eh="bb6599cb" />
+        <e k="usedplus_ft_reliabilityGain" v="Придбання надійності:" eh="d8c796d2" />
         <e k="usedplus_ft_ceilingRestored" v="Стеля відновлена:" eh="311f8021" />
         <e k="usedplus_ft_diagnosisAccuracy" v="Точність діагностики:" eh="3fc65596" />
         <e k="usedplus_ft_oilConsumed" v="Масло спожито:" eh="e88bfeb0" />
-        <e k="usedplus_fsk_selectMode" v="Select service mode" eh="036d55f1" />
-        <e k="usedplus_fsk_modeDiagnose" v="Diagnose Component" eh="3b9e5655" />
+        <e k="usedplus_fsk_selectMode" v="Виберіть режим обслуговування" eh="036d55f1" />
+        <e k="usedplus_fsk_modeDiagnose" v="Діагностика компонента" eh="3b9e5655" />
         <e k="usedplus_fsk_modeDiagnoseDesc" v="Навичкова мініатюра ремонту" eh="5be3de91" />
-        <e k="usedplus_fsk_modeMalfunctions" v="Locate Malfunctions" eh="26d2acee" />
+        <e k="usedplus_fsk_modeMalfunctions" v="Знайти несправності" eh="26d2acee" />
         <e k="usedplus_fsk_modeMalfunctionsDesc" v="Перегляньте активні проблеми" eh="b14c934d" />
         <e k="usedplus_fsk_modeTire" v="Обслуговування шин" eh="b0234f4e" />
         <e k="usedplus_fsk_modeTireDesc" v="Ремонт спущеної шини" eh="354da6fc" />
-        <e k="usedplus_fsk_modeRVB" v="RVB System Analysis" eh="5f5c4944" />
-        <e k="usedplus_fsk_modeRVBDesc" v="View RVB component life" eh="37c67401" />
+        <e k="usedplus_fsk_modeRVB" v="Аналіз системи RVB" eh="5f5c4944" />
+        <e k="usedplus_fsk_modeRVBDesc" v="Переглянути тривалість життя компонента RVB" eh="37c67401" />
         <e k="usedplus_fsk_infoText" v="Використовуйте набір польових послуг для аварійного ремонту в полі" eh="84e02edf" />
-        <e k="usedplus_fsk_connectedTo" v="CONNECTED TO" eh="92e48e0c" />
-        <e k="usedplus_fsk_vehicleLabel" v="Vehicle:" eh="93e64f9c" />
-        <e k="usedplus_fsk_selectSystem" v="SELECT SYSTEM TO DIAGNOSE" eh="78c0faa7" />
-        <e k="usedplus_fsk_engine" v="ENGINE" eh="1942d6cf" />
-        <e k="usedplus_fsk_electrical" v="ELECTRICAL" eh="9f317629" />
-        <e k="usedplus_fsk_hydraulic" v="HYDRAULIC" eh="3e0b9977" />
-        <e k="usedplus_fsk_rvbPartStatus" v="RVB PART STATUS" eh="6668332b" />
-        <e k="usedplus_fsk_engineColon" v="Engine:" eh="c7d60198" />
-        <e k="usedplus_fsk_thermoColon" v="Thermo:" eh="a6c55c64" />
-        <e k="usedplus_fsk_batteryColon" v="Battery:" eh="3db89244" />
-        <e k="usedplus_fsk_generatorColon" v="Generator:" eh="327ab3e8" />
-        <e k="usedplus_fsk_starterColon" v="Starter:" eh="464d7073" />
-        <e k="usedplus_fsk_glowplugColon" v="GlowPlug:" eh="3c4e05dc" />
-        <e k="usedplus_fsk_faultsColon" v="Faults:" eh="53f7ef48" />
-        <e k="usedplus_fsk_tireWear" v="TIRE WEAR (UYT)" eh="85367410" />
-        <e k="usedplus_fsk_fl" v="FL:" eh="2fdbe27c" />
-        <e k="usedplus_fsk_fr" v="FR:" eh="abf2933e" />
-        <e k="usedplus_fsk_rl" v="RL:" eh="05d73353" />
-        <e k="usedplus_fsk_rr" v="RR:" eh="073ffce9" />
-        <e k="usedplus_fsk_worst" v="Worst:" eh="4ca3e96d" />
-        <e k="usedplus_fsk_yourDiagnosis" v="Your diagnosis:" eh="59a422ad" />
-        <e k="usedplus_fsk_correctAnswer" v="Correct answer:" eh="f7248913" />
-        <e k="usedplus_fsk_reliabilityRestored" v="RELIABILITY RESTORED" eh="9cc39e14" />
-        <e k="usedplus_fsk_tireStatus" v="TIRE STATUS" eh="a060ee0a" />
+        <e k="usedplus_fsk_connectedTo" v="ПІДКЛЮЧЕНО ДО" eh="92e48e0c" />
+        <e k="usedplus_fsk_vehicleLabel" v="Транспортний засіб:" eh="93e64f9c" />
+        <e k="usedplus_fsk_selectSystem" v="ВИБЕРІТЬ СИСТЕМУ ДЛЯ ДІАГНОСТИКИ" eh="78c0faa7" />
+        <e k="usedplus_fsk_engine" v="ДВИГУН" eh="1942d6cf" />
+        <e k="usedplus_fsk_electrical" v="ЕЛЕКТРИЧНЕ" eh="9f317629" />
+        <e k="usedplus_fsk_hydraulic" v="ГІДРАВЛІЧНЕ" eh="3e0b9977" />
+        <e k="usedplus_fsk_rvbPartStatus" v="СТАТУС ДЕТАЛЕЙ RVB" eh="6668332b" />
+        <e k="usedplus_fsk_engineColon" v="Двигун:" eh="c7d60198" />
+        <e k="usedplus_fsk_thermoColon" v="Термо:" eh="a6c55c64" />
+        <e k="usedplus_fsk_batteryColon" v="Акумулятор:" eh="3db89244" />
+        <e k="usedplus_fsk_generatorColon" v="Генератор:" eh="327ab3e8" />
+        <e k="usedplus_fsk_starterColon" v="Стартер:" eh="464d7073" />
+        <e k="usedplus_fsk_glowplugColon" v="Свічка розжарення:" eh="3c4e05dc" />
+        <e k="usedplus_fsk_faultsColon" v="Несправності:" eh="53f7ef48" />
+        <e k="usedplus_fsk_tireWear" v="ИЗНОС ШИН (UYT)" eh="85367410" />
+        <e k="usedplus_fsk_fl" v="Л.П:" eh="2fdbe27c" />
+        <e k="usedplus_fsk_fr" v="П.П:" eh="abf2933e" />
+        <e k="usedplus_fsk_rl" v="Л.З:" eh="05d73353" />
+        <e k="usedplus_fsk_rr" v="П.З:" eh="073ffce9" />
+        <e k="usedplus_fsk_worst" v="Найгірше:" eh="4ca3e96d" />
+        <e k="usedplus_fsk_yourDiagnosis" v="Ваша діагностика:" eh="59a422ad" />
+        <e k="usedplus_fsk_correctAnswer" v="Правильна відповідь:" eh="f7248913" />
+        <e k="usedplus_fsk_reliabilityRestored" v="НАДІЙНІСТЬ ВІДНОВЛЕНА" eh="9cc39e14" />
+        <e k="usedplus_fsk_tireStatus" v="СТАТУС ШИН" eh="a060ee0a" />
         <e k="usedplus_fsk_tireFL" v="ПЛ" eh="ac717902" />
         <e k="usedplus_fsk_tireFR" v="ПП" eh="11aedd0e" />
         <e k="usedplus_fsk_tireRL" v="ЗЛ" eh="7f49bbe2" />
         <e k="usedplus_fsk_tireRR" v="ЗП" eh="cb95449a" />
         <e k="usedplus_fsk_activeMalfunctions" v="АКТИВНІ НЕСПРАВНОСТІ" eh="1e105c6d" />
         <e k="usedplus_fsk_visitWorkshop" v="Відвідайте майстерню для повного ремонту" eh="1ea6ac0c" />
-        <e k="usedplus_fsk_rvbAnalysis" v="RVB SYSTEM ANALYSIS" eh="9344b7d5" />
+        <e k="usedplus_fsk_rvbAnalysis" v="АНАЛІЗ СИСТЕМИ RVB" eh="9344b7d5" />
         <e k="usedplus_fsk_rvbDegradeInfo" v="Деталі RVB деградують з часом роботи" eh="fe3100b0" />
         <e k="usedplus_fsk_none" v="Жоден" eh="6adf97f8" />
-        <e k="usedplus_fsk_ok" v="OK" eh="e0aa021e" />
+        <e k="usedplus_fsk_ok" v="ОК" eh="e0aa021e" />
         <e k="usedplus_fsk_failed" v="X" eh="02129bb8" />
-        <e k="usedplus_st_title" v="VEHICLE RESTORATION" eh="c041b062" />
-        <e k="usedplus_st_maxPotential" v="Max Potential: 100%%" eh="6029fca8" />
-        <e k="usedplus_st_selectComponent" v="SELECT COMPONENT TO RESTORE" eh="4b3e2914" />
-        <e k="usedplus_st_engine" v="ENGINE" eh="1942d6cf" />
-        <e k="usedplus_st_electrical" v="ELECTRICAL" eh="9f317629" />
+        <e k="usedplus_st_title" v="ВІДНОВЛЕННЯ ТРАНСПОРТНОГО ЗАСОБУ" eh="c041b062" />
+        <e k="usedplus_st_maxPotential" v="Макс. потенціал: 100%%" eh="6029fca8" />
+        <e k="usedplus_st_selectComponent" v="ВИБЕРІТЬ КОМПОНЕНТ ДЛЯ ВІДНОВЛЕННЯ" eh="4b3e2914" />
+        <e k="usedplus_st_engine" v="ДВИГУН" eh="1942d6cf" />
+        <e k="usedplus_st_electrical" v="ЕЛЕКТРИЧНЕ" eh="9f317629" />
         <e k="usedplus_st_hydraulic" v="ГІДРАВЛІКА" eh="3e0b9977" />
         <e k="usedplus_st_diesel" v="Дизель:" eh="f2c90e25" />
         <e k="usedplus_st_oil" v="Масло:" eh="eb99e035" />
         <e k="usedplus_st_hydraulicFluid" v="Гідравліка:" eh="a39ee8d2" />
-        <e k="usedplus_st_spareParts" v="Spare Parts:" eh="13581a67" />
+        <e k="usedplus_st_spareParts" v="Запасні частини:" eh="13581a67" />
         <e k="usedplus_st_selectHint" v="Виберіть компонент нижче 90%, щоб розпочати перевірку." eh="9edba748" />
         <e k="usedplus_st_inspecting" v="Перевіряю: ДВИГУН" eh="d918fe3e" />
-        <e k="usedplus_st_estimatedTime" v="Estimated restoration: 48 hours" eh="281919bb" />
-        <e k="usedplus_st_diagnosticReadout" v="DIAGNOSTIC READOUT" eh="a2cdbd3d" />
-        <e k="usedplus_st_chooseDiagnosis" v="CHOOSE YOUR DIAGNOSIS" eh="4bac7417" />
-        <e k="usedplus_st_option1" v="Option 1" eh="fd577a8b" />
-        <e k="usedplus_st_option2" v="Option 2" eh="e24963e4" />
+        <e k="usedplus_st_estimatedTime" v="Приблизний час відновлення: 48 годин" eh="281919bb" />
+        <e k="usedplus_st_diagnosticReadout" v="ДІАГНОСТИЧНІ ДАНІ" eh="a2cdbd3d" />
+        <e k="usedplus_st_chooseDiagnosis" v="ВИБЕРІТЬ СВОЮ ДІАГНОСТИКУ" eh="4bac7417" />
+        <e k="usedplus_st_option1" v="Варіант 1" eh="fd577a8b" />
+        <e k="usedplus_st_option2" v="Варіант 2" eh="e24963e4" />
         <e k="usedplus_st_option3" v="Варіант 3" eh="fbeee6bc" />
         <e k="usedplus_st_option4" v="Варіант 4" eh="b32b4636" />
         <e k="usedplus_st_inspectionResult" v="РЕЗУЛЬТАТ ПЕРЕВІРКИ" eh="7df33e46" />
         <e k="usedplus_st_currentTarget" v="Поточна: 72% &gt; Ціль: 90%+" eh="8847daa5" />
         <e k="usedplus_st_sparePartsAvailable" v="Запасні частини: 12 доступних" eh="9cae9be9" />
         <e k="usedplus_st_fluidsConsumed" v="Дизельне паливо, масло, гідравлічна рідина будуть витрачені" eh="f2999b5f" />
-        <e k="usedplus_st_startRestoration" v="START RESTORATION" eh="696ac7a5" />
+        <e k="usedplus_st_startRestoration" v="ПОЧАТИ ВІДНОВЛЕННЯ" eh="696ac7a5" />
         <e k="usedplus_st_cooldownHint" v="Спробуйте інший компонент тим часом." eh="208a1488" />
         <e k="usedplus_st_hintPrefix" v="ПІДКАЗКА: " eh="18811f33" />
         <e k="usedplus_st_diagnosisCorrect" v="ДІАГНОСТИКА ПРАВИЛЬНА" eh="726fa3e3" />
         <e k="usedplus_st_diagnosisIncorrect" v="НЕПРАВИЛЬНА ДІАГНОСТИКА" eh="90b774b8" />
-        <e k="usedplus_st_restorationCanBegin" v="Restoration can begin." eh="a8adb101" />
+        <e k="usedplus_st_restorationCanBegin" v="Відновлення може початися." eh="a8adb101" />
         <e k="usedplus_st_symptomsMismatch" v="Симптоми не відповідають цій діагностиці." eh="62b8aecd" />
         <e k="usedplus_st_cooldownApplied" v="Застосовано період очікування." eh="267c9607" />
         <e k="usedplus_st_vehicleLabel" v="Транспортний засіб: " eh="27cfabe4" />
@@ -2255,41 +2253,41 @@
         <e k="usedplus_std_specialCapabilities" v="СПЕЦІАЛЬНІ МОЖЛИВОСТІ:" eh="d408664f" />
         <e k="usedplus_std_featureRestoration" v="Довгостроке відновлення транспортного засобу" eh="0fa4b175" />
         <e k="usedplus_std_featureCeiling" v="Можливість ремонту стелі (відновлення понад 100%)" eh="fdce0a09" />
-        <e k="usedplus_std_originalPrice" v="Original:" eh="fd5835ce" />
-        <e k="usedplus_std_yourPrice" v="YOUR PRICE:" eh="b30fa470" />
-        <e k="usedplus_std_cashOnly" v="CASH ONLY" eh="087d1524" />
-        <e k="usedplus_irp_engineCore" v="Engine Core" eh="24a06875" />
-        <e k="usedplus_irp_thermostat" v="Thermostat" eh="91e0b95d" />
-        <e k="usedplus_irp_generator" v="Generator" eh="92a8f0b9" />
+        <e k="usedplus_std_originalPrice" v="Оригінальна:" eh="fd5835ce" />
+        <e k="usedplus_std_yourPrice" v="ВАША ЦІНА:" eh="b30fa470" />
+        <e k="usedplus_std_cashOnly" v="ТІЛЬКИ ГОТІВКА" eh="087d1524" />
+        <e k="usedplus_irp_engineCore" v="Ядро двигуна" eh="24a06875" />
+        <e k="usedplus_irp_thermostat" v="Термостат" eh="91e0b95d" />
+        <e k="usedplus_irp_generator" v="Генератор" eh="92a8f0b9" />
         <e k="usedplus_irp_battery" v="Батарея" eh="d67c9286" />
-        <e k="usedplus_irp_starter" v="Starter" eh="ee6085db" />
-        <e k="usedplus_irp_glowPlug" v="Glow Plug" eh="6fdb6ce6" />
-        <e k="usedplus_irp_fl" v="FL" eh="ac717902" />
-        <e k="usedplus_irp_fr" v="FR" eh="11aedd0e" />
+        <e k="usedplus_irp_starter" v="Стартер" eh="ee6085db" />
+        <e k="usedplus_irp_glowPlug" v="Свічка розжарення" eh="6fdb6ce6" />
+        <e k="usedplus_irp_fl" v="Л.П" eh="ac717902" />
+        <e k="usedplus_irp_fr" v="П.П" eh="11aedd0e" />
         <e k="usedplus_irp_rl" v="ЗЛ" eh="7f49bbe2" />
         <e k="usedplus_irp_rr" v="ЗП" eh="cb95449a" />
         <e k="usedplus_fp_tankStatus" v="СТАТУС РЕЗЕРВУАРА" eh="d2069f0d" />
-        <e k="usedplus_fp_currentLevel" v="Current Level:" eh="c204b97c" />
-        <e k="usedplus_fp_contains" v="Contains:" eh="0acb039c" />
+        <e k="usedplus_fp_currentLevel" v="Поточний рівень:" eh="c204b97c" />
+        <e k="usedplus_fp_contains" v="Містить:" eh="0acb039c" />
         <e k="usedplus_fp_empty" v="Порожньо" eh="ce2c8aed" />
         <e k="usedplus_fp_purchase" v="ПОКУПКА" eh="2d2de459" />
         <e k="usedplus_fp_fluidType" v="Тип рідини:" eh="0b009844" />
         <e k="usedplus_fp_amount" v="Кількість:" eh="6702a6e3" />
         <e k="usedplus_fp_cost" v="Вартість:" eh="69edde90" />
-        <e k="usedplus_fp_creditType" v="CREDIT" eh="e3968aae" />
+        <e k="usedplus_fp_creditType" v="КРЕДИТ" eh="e3968aae" />
         <e k="usedplus_fp_revolving" v="Циклічний" eh="4adc0103" />
         <e k="usedplus_fp_open" v="Відкритий" eh="c3bf447e" />
-        <e k="usedplus_vpf_title" v="Found Vehicles" eh="b97c56ec" />
-        <e k="usedplus_vpf_next" v="Next &gt;" eh="dd9644ef" />
-        <e k="usedplus_vpf_vehicle" v="VEHICLE" eh="e9fa318f" />
-        <e k="usedplus_vpf_quality" v="Quality:" eh="3ded0b1d" />
-        <e k="usedplus_vpf_condition" v="Condition:" eh="ed51222f" />
-        <e k="usedplus_vpf_inspected" v="Inspected:" eh="1ff85e69" />
+        <e k="usedplus_vpf_title" v="Знайдені транспортні засоби" eh="b97c56ec" />
+        <e k="usedplus_vpf_next" v="Далі &gt;" eh="dd9644ef" />
+        <e k="usedplus_vpf_vehicle" v="ТРАНСПОРТНИЙ ЗАСІБ" eh="e9fa318f" />
+        <e k="usedplus_vpf_quality" v="Якість:" eh="3ded0b1d" />
+        <e k="usedplus_vpf_condition" v="Стан:" eh="ed51222f" />
+        <e k="usedplus_vpf_inspected" v="Перевірено:" eh="1ff85e69" />
         <e k="usedplus_vpf_no" v="Ні" eh="bafd7322" />
         <e k="usedplus_vpf_pricing" v="ЦІНОУТВОРЕННЯ" eh="99ff3467" />
         <e k="usedplus_vpf_basePrice" v="Базова ціна:" eh="74e3d937" />
         <e k="usedplus_vpf_commission" v="Комісія:" eh="0edf3664" />
-        <e k="usedplus_vpf_askingPrice" v="Asking Price:" eh="c515d94e" />
+        <e k="usedplus_vpf_askingPrice" v="Запитуваною ціна:" eh="c515d94e" />
         <e k="usedplus_vpf_offerExpires" v="Пропозиція закінчується через 2 місяці" eh="a3f4165a" />
         <e k="usedplus_vpf_infoText" v="Перегляньте деталі для перевірки. Відхиліть, щоб видалити з портфеля." eh="09d33c66" />
         <e k="usedplus_vpf_viewDetails" v="Переглянути деталі" eh="5d5cd268" />
@@ -2298,20 +2296,20 @@
         <e k="usedplus_vpf_expires2Months" v="Пропозиція закінчується через 2 місяці" eh="a3f4165a" />
         <e k="usedplus_vpf_browseInstructions" v="Використовуйте Попередньо/Далі для перегляду. Перегляньте деталі для перевірки або покупки." eh="1b4dd747" />
         <e k="usedplus_vpf_viewDetailsInstruction" v="Перегляньте деталі, щоб перевірити стан або придбати цей транспортний засіб." eh="7786ee45" />
-        <e k="usedplus_se_title" v="Search Complete" eh="e92d4ab1" />
-        <e k="usedplus_se_summary" v="SEARCH SUMMARY" eh="6fa784ed" />
-        <e k="usedplus_se_searchedFor" v="Searched For:" eh="e67ff702" />
+        <e k="usedplus_se_title" v="Пошук завершено" eh="e92d4ab1" />
+        <e k="usedplus_se_summary" v="ПІДСУМОК ПОШУКУ" eh="6fa784ed" />
+        <e k="usedplus_se_searchedFor" v="Шукав:" eh="e67ff702" />
         <e k="usedplus_se_agentTier" v="Рівень агента:" eh="4eb7801b" />
         <e k="usedplus_se_quality" v="Якість:" eh="3ded0b1d" />
         <e k="usedplus_se_duration" v="Тривалість:" eh="68311558" />
-        <e k="usedplus_se_results" v="RESULTS" eh="44795920" />
-        <e k="usedplus_se_renewQuestion" v="RENEW SEARCH?" eh="e65ba949" />
+        <e k="usedplus_se_results" v="РЕЗУЛЬТАТИ" eh="44795920" />
+        <e k="usedplus_se_renewQuestion" v="ПОВТОРИТИ ПОШУК?" eh="e65ba949" />
         <e k="usedplus_se_renewInfo" v="Продовжити пошук більшої кількості варіантів" eh="4f6ca32a" />
-        <e k="usedplus_se_renewalCost" v="Renewal Cost:" eh="cab42ff8" />
-        <e k="usedplus_se_renewButton" v="Renew Search" eh="5f2a7f33" />
+        <e k="usedplus_se_renewalCost" v="Вартість поновлення:" eh="cab42ff8" />
+        <e k="usedplus_se_renewButton" v="Повторити пошук" eh="5f2a7f33" />
         <e k="usedplus_se_noOffers" v="Жоден" eh="6adf97f8" />
-        <e k="usedplus_se_noFeePrivate" v="No fee (Private Sale)" eh="2bccd3b4" />
-        <e k="usedplus_se_noVehiclesFound" v="No vehicles found" eh="df1eff24" />
+        <e k="usedplus_se_noFeePrivate" v="Без комісії (Приватний продаж)" eh="2bccd3b4" />
+        <e k="usedplus_se_noVehiclesFound" v="Транспортні засоби не знайдені" eh="df1eff24" />
         <e k="usedplus_si_title" v="Пошук ініційовано" eh="e42ba949" />
         <e k="usedplus_si_searchConfig" v="КОНФІГУРАЦІЯ ПОШУКУ" eh="b1db3ac1" />
         <e k="usedplus_si_searchTier" v="Рівень пошуку" eh="6a442f69" />
@@ -2328,39 +2326,39 @@
         <e k="usedplus_sr_title" v="ВІДПОВІДЬ НА ПРОПОЗИЦІЮ" eh="118271b5" />
         <e k="usedplus_sld_status" v="Статус:" eh="24a23d78" />
         <e k="usedplus_uvp_available" v="Доступне" eh="78945de8" />
-        <e k="usedplus_uvp_inspectionProgress" v="Inspection in progress..." eh="6a1ed94c" />
-        <e k="usedplus_uvp_ok" v="OK" eh="e0aa021e" />
-        <e k="usedplus_sd_viewFoundVehicles" v="View Found Vehicles" eh="45ae1e0b" />
-        <e k="usedplus_sli_noFee" v="No Fee" eh="43c9b021" />
-        <e k="usedplus_fm_view" v="VIEW" eh="5824b315" />
-        <e k="usedplus_fm_skip" v="SKIP" eh="b85df04e" />
+        <e k="usedplus_uvp_inspectionProgress" v="Інспекція в процесі..." eh="6a1ed94c" />
+        <e k="usedplus_uvp_ok" v="ОК" eh="e0aa021e" />
+        <e k="usedplus_sd_viewFoundVehicles" v="Переглянути знайдені транспортні засоби" eh="45ae1e0b" />
+        <e k="usedplus_sli_noFee" v="Без комісії" eh="43c9b021" />
+        <e k="usedplus_fm_view" v="ПЕРЕГЛЯНУТИ" eh="5824b315" />
+        <e k="usedplus_fm_skip" v="ПРОПУСТИТИ" eh="b85df04e" />
         <e k="usedplus_btn_back" v="Назад" eh="0557fa92" />
         <e k="usedplus_btn_close" v="Закрити" eh="d3d2e617" />
-        <e k="usedplus_btn_ok" v="OK" eh="e0aa021e" />
+        <e k="usedplus_btn_ok" v="ОК" eh="e0aa021e" />
         <e k="usedplus_btn_cancel" v="Скасувати" eh="ea478870" />
         <e k="usedplus_action_obdScanner" v="Сканер OBD" eh="96023669" />
         <e k="usedplus_action_obdDisabled" v="Сканер OBD: %s (ВИМКНЕНО)" eh="562a5304" />
         <e k="usedplus_action_obdWithWarnings" v="Сканер OBD: %s (%s)" eh="04f0df6b" />
         <e k="usedplus_action_obdNormal" v="Сканер OBD: %s" eh="6645cd04" />
-        <e k="usedplus_action_fillTank" v="Fill %s Tank (%.0f/%.0fL -&gt; +%.0fL)" eh="6fa80431" />
+        <e k="usedplus_action_fillTank" v="Заповнити резервуар %s (%.0f/%.0fL -&gt; +%.0fL)" eh="6fa80431" />
         <e k="usedplus_action_tankEmpty" v="Резервуар порожній — спершу придбайте %s" eh="c80194d4" />
         <e k="usedplus_action_tankWrongFluid" v="Резервуар містить %s — транспортному засобу потрібен %s" eh="02bf3527" />
-        <e k="usedplus_acp_balance" v="Balance:" eh="b5397350" />
-        <e k="usedplus_acp_creditScore" v="Credit Score:" eh="0199e1a3" />
-        <e k="usedplus_acp_activeDeals" v="Active Deals:" eh="9d92ae65" />
-        <e k="usedplus_acp_totalDebt" v="Total Debt:" eh="3deb323c" />
-        <e k="usedplus_acp_eng100" v="Eng 100%" eh="6b2496ef" />
-        <e k="usedplus_acp_eng50" v="Eng 50%" eh="e5b41dac" />
-        <e k="usedplus_acp_eng10" v="Eng 10%" eh="3d831656" />
-        <e k="usedplus_acp_hyd100" v="Hyd 100%" eh="5b316f07" />
-        <e k="usedplus_acp_hyd50" v="Hyd 50%" eh="a0dcb21a" />
-        <e k="usedplus_acp_hyd10" v="Hyd 10%" eh="ca55d820" />
-        <e k="usedplus_acp_elec100" v="Elec 100%" eh="d7f83824" />
-        <e k="usedplus_acp_elec50" v="Elec 50%" eh="f49dcc7b" />
-        <e k="usedplus_acp_elec10" v="Elec 10%" eh="9f33c4bc" />
-        <e k="usedplus_acp_emptyOil" v="Empty Oil" eh="3e5913d0" />
-        <e k="usedplus_acp_emptyHyd" v="Empty Hyd" eh="8fe8c5a7" />
-        <e k="usedplus_acp_resetCooldowns" v="Reset Cooldowns" eh="5142227b" />
+        <e k="usedplus_acp_balance" v="Залишок:" eh="b5397350" />
+        <e k="usedplus_acp_creditScore" v="Кредитний рейтинг:" eh="0199e1a3" />
+        <e k="usedplus_acp_activeDeals" v="Активні угоди:" eh="9d92ae65" />
+        <e k="usedplus_acp_totalDebt" v="Загальний борг:" eh="3deb323c" />
+        <e k="usedplus_acp_eng100" v="Дв 100%" eh="6b2496ef" />
+        <e k="usedplus_acp_eng50" v="Дв 50%" eh="e5b41dac" />
+        <e k="usedplus_acp_eng10" v="Дв 10%" eh="3d831656" />
+        <e k="usedplus_acp_hyd100" v="Гід 100%" eh="5b316f07" />
+        <e k="usedplus_acp_hyd50" v="Гід 50%" eh="a0dcb21a" />
+        <e k="usedplus_acp_hyd10" v="Гід 10%" eh="ca55d820" />
+        <e k="usedplus_acp_elec100" v="Елек 100%" eh="d7f83824" />
+        <e k="usedplus_acp_elec50" v="Елек 50%" eh="f49dcc7b" />
+        <e k="usedplus_acp_elec10" v="Елек 10%" eh="9f33c4bc" />
+        <e k="usedplus_acp_emptyOil" v="Пусто масло" eh="3e5913d0" />
+        <e k="usedplus_acp_emptyHyd" v="Пусто гід" eh="8fe8c5a7" />
+        <e k="usedplus_acp_resetCooldowns" v="Скинути часи охолодження" eh="5142227b" />
         <e k="usedplus_acp_serviceTruckTanks" v="Резервуари службового автомобіля" eh="a61ce179" />
         <e k="usedplus_acp_drainOil" v="Зливання масла" eh="229adbdc" />
         <e k="usedplus_acp_drainHyd" v="Зливання гідравліки" eh="2df1c578" />
@@ -2377,18 +2375,18 @@
         <e k="usedplus_common_unknownVehicle" v="Невідомий транспортний засіб" eh="4fc625b9" />
         <e k="usedplus_dd_paymentsOfTotal" v="%d з %d" eh="8e44b212" />
         <e k="usedplus_dd_moreItems" v="...та ще %d предмет(ів)" eh="c57c3704" />
-        <e k="usedplus_dd_totalRepossessed" v="Total value repossessed: %s" eh="d810ed77" />
+        <e k="usedplus_dd_totalRepossessed" v="Загальна вартість конфіскована: %s" eh="d810ed77" />
         <e k="usedplus_dd_repossessionInfo" v="Наступні %d предмет(и) були вилучені через пропущені платежі:" eh="1af1da28" />
         <e k="usedplus_repo_consecutive" v="%d послідовних" eh="142731fb" />
         <e k="usedplus_repo_cleared" v=" (очищено)" eh="0618d9ef" />
         <e k="usedplus_fdf_termFormat" v="%d років (%d місяців)" eh="58629dfc" />
         <e k="usedplus_fdf_dayFormat" v="День %d" eh="61eed6c7" />
-        <e k="usedplus_fmf_btnCreditReport" v="Credit Report" eh="3b3acbdd" />
-        <e k="usedplus_fmf_btnTakeLoan" v="Take Loan" eh="40fe67fa" />
+        <e k="usedplus_fmf_btnCreditReport" v="Кредитний звіт" eh="3b3acbdd" />
+        <e k="usedplus_fmf_btnTakeLoan" v="Взяти кредит" eh="40fe67fa" />
         <e k="usedplus_fmf_versionFooter" v="UsedPlus v%s | Попередній перегляд | github.com/XelaNull/FS25_UsedPlus" eh="e86cc1be" />
         <e k="usedplus_fmf_assetsWithFields" v="Активи: %s (%d полів)" eh="dd6f8cc6" />
         <e k="usedplus_fmf_historyPoints" v="Історія: %+d пт" eh="890d1766" />
-        <e k="usedplus_vpf_prev" v="&amp;lt; Prev" eh="93819e8f" />
+        <e k="usedplus_vpf_prev" v="&lt; Попередній" eh="93819e8f" />
         <e k="usedplus_vpf_navFormat" v="%d з %d" eh="8e44b212" />
         <e k="usedplus_sd_agentFeeFormat" v="%s + %d%% comm." eh="d71bd831" />
         <e k="usedplus_sd_statusSearching" v="Пошук..." eh="1243daf5" />
@@ -2413,107 +2411,107 @@
         <e k="usedplus_sp_offerStatus" v="ПРОПОЗИЦІЯ: %s" eh="868cdf29" />
         <e k="usedplus_sp_searching" v="Пошук..." eh="1243daf5" />
         <e k="usedplus_sp_listingsWithOffers" v="%d/%d (%d пропозицій!)" eh="bc5e0961" />
-        <e k="usedplus_sp_editPricePrompt" v="Enter new asking price for %s&amp;#10;(Current: %s)" eh="0d0736e4" />
+        <e k="usedplus_sp_editPricePrompt" v="Введіть нову запропоновану ціну для %s&#10;(Поточна: %s)" eh="0d0736e4" />
         <e k="usedplus_srp_noSearches" v="Немає пошуків (0/%d). Почніть зі Магазину." eh="8b454ea0" />
         <e k="usedplus_se_offersDeclined" v="%d (%d відхилено)" eh="6f4f73a8" />
         <e k="usedplus_se_nonRefundable" v=" (без повернення)" eh="5e83c5f8" />
         <e k="usedplus_se_durationFormat" v="%d місяц%s" eh="272b73f2" />
         <e k="usedplus_se_vehiclesFoundCount" v="Знайдено %d транспортний засіб%s" eh="68fa345e" />
-        <e k="usedplus_si_defaultTier" v="Regional" eh="9c1c6794" />
+        <e k="usedplus_si_defaultTier" v="Регіональний" eh="9c1c6794" />
         <e k="usedplus_si_defaultDuration" v="3 місяці" eh="de0353ca" />
-        <e k="usedplus_si_defaultQuality" v="Any Condition" eh="902a1b99" />
-        <e k="usedplus_si_maxFinds" v="Up to %d finds" eh="b7712c83" />
-        <e k="usedplus_sli_defaultPriceTier" v="Market Price" eh="04cf089e" />
+        <e k="usedplus_si_defaultQuality" v="Будь-який стан" eh="902a1b99" />
+        <e k="usedplus_si_maxFinds" v="До %d знахідок" eh="b7712c83" />
+        <e k="usedplus_sli_defaultPriceTier" v="Ринкова ціна" eh="04cf089e" />
         <e k="usedplus_sli_durationMonths" v="%d місяц(і)" eh="b6d6640d" />
         <e k="usedplus_sli_durationRange" v="%d - %d місяців" eh="5d231cef" />
         <e k="usedplus_status_active" v="Активний" eh="4d3d769b" />
-        <e k="usedplus_status_paidOff" v="Paid Off" eh="564a69ad" />
+        <e k="usedplus_status_paidOff" v="Сплачено" eh="564a69ad" />
         <e k="usedplus_status_completed" v="Завершено" eh="07ca5050" />
         <e k="usedplus_status_terminated" v="Припинено" eh="fba9c4da" />
         <e k="usedplus_status_expired" v="Закінчився" eh="24fe4803" />
         <e k="usedplus_status_defaulted" v="Невиконано" eh="02f56691" />
-        <e k="usedplus_vsl_statusSearching" v="Searching for buyer..." eh="28e37076" />
+        <e k="usedplus_vsl_statusSearching" v="Пошук покупця..." eh="28e37076" />
         <e k="usedplus_vsl_statusOffer" v="ПРОПОЗИЦІЯ: %s (закінчується за %d год)" eh="ea1515d3" />
-        <e k="usedplus_vsl_statusSold" v="SOLD for %s" eh="737a574b" />
+        <e k="usedplus_vsl_statusSold" v="ПРОДАНО за %s" eh="737a574b" />
         <e k="usedplus_vsl_statusExpired" v="Закінчився - Покупця не знайдено" eh="3e3e51fd" />
         <e k="usedplus_vsl_statusCancelled" v="Скасовано" eh="a149e85a" />
-        <e k="usedplus_agent_privateSale" v="Private Sale" eh="1be4ac47" />
-        <e k="usedplus_agent_privateSaleDesc" v="Без комісії агента, але править довше і має нижчий відсоток успіху." eh="01191ca2" />
-        <e k="usedplus_agent_local" v="Local Agent" eh="082cb5b6" />
+        <e k="usedplus_agent_privateSale" v="Приватний продаж" eh="1be4ac47" />
+        <e k="usedplus_agent_privateSaleDesc" v="Без комісії агента, але триватиме довше і має нижчий відсоток успіху." eh="01191ca2" />
+        <e k="usedplus_agent_local" v="Місцевий агент" eh="082cb5b6" />
         <e k="usedplus_agent_localDesc" v="Швидкий оборот, обмежена група покупців." eh="75810dde" />
-        <e k="usedplus_agent_regional" v="Regional Agent" eh="403955ba" />
-        <e k="usedplus_agent_regionalDesc" v="Balanced reach and timing." eh="77696fb3" />
-        <e k="usedplus_agent_national" v="National Agent" eh="eef8214f" />
-        <e k="usedplus_agent_nationalDesc" v="Maximum exposure, longest wait." eh="2a049c74" />
-        <e k="usedplus_price_quickSale" v="Quick Sale" eh="bd7d9f3e" />
+        <e k="usedplus_agent_regional" v="Регіональний агент" eh="403955ba" />
+        <e k="usedplus_agent_regionalDesc" v="Збалансований охват та час." eh="77696fb3" />
+        <e k="usedplus_agent_national" v="Національний агент" eh="eef8214f" />
+        <e k="usedplus_agent_nationalDesc" v="Максимум показу, найдовший період очікування." eh="2a049c74" />
+        <e k="usedplus_price_quickSale" v="Швидкий продаж" eh="bd7d9f3e" />
         <e k="usedplus_price_quickSaleDesc" v="Ціна розпродажу. Легко знайти покупців." eh="7373ee56" />
-        <e k="usedplus_price_market" v="Market Price" eh="04cf089e" />
+        <e k="usedplus_price_market" v="Ринкова ціна" eh="04cf089e" />
         <e k="usedplus_price_marketDesc" v="Справедлива ринкова вартість. Стандартні шанси." eh="2d860d33" />
-        <e k="usedplus_price_premium" v="Premium Price" eh="c7f0f08d" />
+        <e k="usedplus_price_premium" v="Преміум-ціна" eh="c7f0f08d" />
         <e k="usedplus_price_premiumDesc" v="Ціна преміум-класу. Потребує бездоганного стану." eh="a73d75ff" />
-        <e k="usedplus_searchTier_local" v="Local Search" eh="e1ea5bc1" />
+        <e k="usedplus_searchTier_local" v="Місцевий пошук" eh="e1ea5bc1" />
         <e k="usedplus_searchTier_localDesc" v="Швидкий місцевий пошук з невеликою групою покупців. 1 місяць, 30% щомісячне значення, до 3 знахідок." eh="9a61c1d4" />
-        <e k="usedplus_searchTier_regional" v="Regional Search" eh="722cc490" />
+        <e k="usedplus_searchTier_regional" v="Регіональний пошук" eh="722cc490" />
         <e k="usedplus_searchTier_regionalDesc" v="Збалансований пошук з більшим охватом. До 3 місяців, 55% щомісячне значення, до 6 знахідок." eh="20eaa884" />
-        <e k="usedplus_searchTier_national" v="National Search" eh="c967061f" />
+        <e k="usedplus_searchTier_national" v="Національний пошук" eh="c967061f" />
         <e k="usedplus_searchTier_nationalDesc" v="Преміум національний пошук. До 6 місяців, 85% щомісячне значення, до 10 знахідок. Гарантовано мінімум 1." eh="8e1f6391" />
-        <e k="usedplus_quality_any" v="Any Condition" eh="902a1b99" />
+        <e k="usedplus_quality_any" v="Будь-який стан" eh="902a1b99" />
         <e k="usedplus_quality_anyDesc" v="Джокер - висока варіабельність якості та ціни" eh="d4ac3330" />
-        <e k="usedplus_quality_poor" v="Poor Condition" eh="99c00753" />
+        <e k="usedplus_quality_poor" v="Поганий стан" eh="99c00753" />
         <e k="usedplus_quality_poorDesc" v="Грошовий шанс - потребує значних ремонтів" eh="59e39eef" />
-        <e k="usedplus_quality_fair" v="Fair Condition" eh="ee8ccfe1" />
+        <e k="usedplus_quality_fair" v="Задовільний стан" eh="ee8ccfe1" />
         <e k="usedplus_quality_fairDesc" v="Помірний знос - деякі ремонти ймовірні" eh="d84528e2" />
-        <e k="usedplus_quality_good" v="Good Condition" eh="fcee437c" />
+        <e k="usedplus_quality_good" v="Хороший стан" eh="fcee437c" />
         <e k="usedplus_quality_goodDesc" v="Добре утримуються - мінімальні ремонти" eh="274bcd85" />
-        <e k="usedplus_quality_excellent" v="Excellent Condition" eh="f2e7b4c1" />
+        <e k="usedplus_quality_excellent" v="Чудовий стан" eh="f2e7b4c1" />
         <e k="usedplus_quality_excellentDesc" v="Як нові - готові до роботи негайно" eh="ae7d5360" />
         <e k="usedplus_creditRating_excellent" v="Відмінний" eh="fcc2d28a" />
         <e k="usedplus_creditRating_good" v="Хороший" eh="0c6ad70b" />
         <e k="usedplus_creditRating_fair" v="Задовільний" eh="f7f20cf0" />
         <e k="usedplus_creditRating_poor" v="Поганий" eh="0e94d017" />
-        <e k="usedplus_creditRating_veryPoor" v="Very Poor" eh="2796b346" />
+        <e k="usedplus_creditRating_veryPoor" v="Дуже поганий" eh="2796b346" />
         <e k="usedplus_time_months" v="%d місяців" eh="eb5314ed" />
         <e k="usedplus_time_1month" v="1 місяць" eh="1634e66b" />
         <e k="usedplus_time_complete" v="Завершено" eh="ae94f80b" />
-        <e k="usedplus_sell_privateSale" v="Private Sale (3-6 mo)" eh="a71a8e34" />
-        <e k="usedplus_sell_quickSale" v="Quick Sale (75-85%)" eh="37d1f4dc" />
-        <e k="usedplus_sell_marketPrice" v="Market Price (95-105%)" eh="1ac71025" />
+        <e k="usedplus_sell_privateSale" v="Приватний продаж (3-6 міс)" eh="a71a8e34" />
+        <e k="usedplus_sell_quickSale" v="Швидкий продаж (75-85%)" eh="37d1f4dc" />
+        <e k="usedplus_sell_marketPrice" v="Ринкова ціна (95-105%)" eh="1ac71025" />
         <e k="usedplus_sell_premium" v="Преміум (115-130%)" eh="c37c4a25" />
-        <e k="usedplus_deal_fairOffer" v="Fair Offer" eh="b2134054" />
-        <e k="usedplus_deal_goodDeal" v="Good Deal" eh="e183104a" />
-        <e k="usedplus_deal_greatDeal" v="Great Deal" eh="9f2a01f0" />
-        <e k="usedplus_deal_excellentDeal" v="Excellent Deal" eh="fc0e87c7" />
+        <e k="usedplus_deal_fairOffer" v="Справедлива пропозиція" eh="b2134054" />
+        <e k="usedplus_deal_goodDeal" v="Хороша угода" eh="e183104a" />
+        <e k="usedplus_deal_greatDeal" v="Чудова угода" eh="9f2a01f0" />
+        <e k="usedplus_deal_excellentDeal" v="Відмінна угода" eh="fc0e87c7" />
         <e k="usedplus_trend_improving" v="Поліпшується" eh="4ba4dfd7" />
         <e k="usedplus_trend_declining" v="Погіршується" eh="12175033" />
-        <e k="usedplus_trend_stable" v="Stable" eh="fa3aff3c" />
+        <e k="usedplus_trend_stable" v="Стабільно" eh="fa3aff3c" />
         <e k="usedplus_ui_conditionSummary" v="Стан: %d%% (Ремонт: %d%%, Фарба: %d%%)" eh="784d31c9" />
         <e k="usedplus_ui_conditionPercent" v="Стан: %d%%" eh="810c5870" />
         <e k="usedplus_cond_excellent" v="Відмінний" eh="fcc2d28a" />
-        <e k="usedplus_cond_likeNew" v="Like new" eh="36c3af97" />
-        <e k="usedplus_cond_veryGood" v="Very good" eh="df89f42d" />
-        <e k="usedplus_cond_minorScratches" v="Minor scratches" eh="db41b330" />
-        <e k="usedplus_cond_goodCondition" v="Good condition" eh="2acb21a1" />
-        <e k="usedplus_cond_someWearVisible" v="Some wear visible" eh="f86836e8" />
+        <e k="usedplus_cond_likeNew" v="Як нове" eh="36c3af97" />
+        <e k="usedplus_cond_veryGood" v="Дуже хороше" eh="df89f42d" />
+        <e k="usedplus_cond_minorScratches" v="Невеликі подряпини" eh="db41b330" />
+        <e k="usedplus_cond_goodCondition" v="Хороший стан" eh="2acb21a1" />
+        <e k="usedplus_cond_someWearVisible" v="Видимі сліди носіння" eh="f86836e8" />
         <e k="usedplus_cond_fairShowsUse" v="Задовільний, виглядає використаним" eh="55051e97" />
         <e k="usedplus_cond_fadedNeedsTouchup" v="Вицвітає, потребує ретушування" eh="54a73462" />
         <e k="usedplus_cond_wornNeedsWork" v="Зношено, потребує роботи" eh="cbe46eba" />
         <e k="usedplus_cond_weatheredRepaintAdvised" v="Побите часом, рекомендується перефарбування" eh="22e86375" />
         <e k="usedplus_cond_poorMajorRepairs" v="Погане, потребує значних ремонтів" eh="0c43488d" />
         <e k="usedplus_cond_poorSignificantFading" v="Погане, значне вицвітання" eh="a6a99071" />
-        <e k="usedplus_cr_bankCreditLine" v="Bank Credit Line" eh="ae4b0f92" />
-        <e k="usedplus_cr_bankLoan" v="Bank Loan" eh="b8ba96a9" />
+        <e k="usedplus_cr_bankCreditLine" v="Кредитна лінія банку" eh="ae4b0f92" />
+        <e k="usedplus_cr_bankLoan" v="Банківський кредит" eh="b8ba96a9" />
         <e k="usedplus_cr_statusActive" v="Активний" eh="4d3d769b" />
         <e k="usedplus_cr_typeLoan" v="Позика" eh="9ad81a8f" />
         <e k="usedplus_cr_typeLease" v="Оренда" eh="47c96b08" />
         <e k="usedplus_cr_typeFinance" v="Фінансування" eh="c482980d" />
-        <e k="usedplus_cr_typeCashLoan" v="Cash Loan" eh="c1b883d7" />
+        <e k="usedplus_cr_typeCashLoan" v="Грошовий кредит" eh="c1b883d7" />
         <e k="usedplus_ir_vehicleDetailsFormat" v="Години: %d | Вік: %d років | Шкода: %d%%" eh="2dda5f52" />
         <e k="usedplus_mr_vehicleDetailsFormat" v="Години: %s | Вік: %d років | Шкода: %d%%" eh="b160c943" />
         <e k="usedplus_neg_whisperDefault" v="Між нами кажучи... виглядає як простий продавець." eh="bc649dcc" />
         <e k="usedplus_neg_whisperWeatherGood" v="Плюс, при такій погоді, вони можуть захотіти закрити угоду швидко." eh="a5b78ec8" />
         <e k="usedplus_neg_whisperWeatherBad" v="Прекрасний день, але... не чекайте послуг." eh="bf201d88" />
         <e k="usedplus_neg_savingsFormat" v="%s (%d%% знижки)" eh="072ccdcf" />
-        <e k="usedplus_sr_youSaved" v="You saved %s!" eh="438ec0a8" />
+        <e k="usedplus_sr_youSaved" v="Ви збереглись %s!" eh="438ec0a8" />
         <e k="usedplus_upd_repairPercent" v="Ремонт: %d%%" eh="c4bca797" />
         <e k="usedplus_upd_damaged" v=" (пошкоджено)" eh="4467bfca" />
         <e k="usedplus_upd_paintPercent" v="Фарба: %d%%" eh="207936b7" />
@@ -2521,34 +2519,34 @@
         <e k="usedplus_upd_hoursFormat" v="Години: %d" eh="731c8e56" />
         <e k="usedplus_upd_percentOfSell" v="(%d%% від вартості продажу)" eh="1db8ab06" />
         <e k="usedplus_upd_creditCond" v="Кредит: %d%% | Стан: %d%%" eh="3eec7030" />
-        <e k="usedplus_workshop_inspectionConfirm" v="Pay %s for a comprehensive vehicle inspection?&amp;#10;&amp;#10;This will check mechanical condition, reliability ratings, and provide a detailed report.&amp;#10;&amp;#10;Inspection results are available immediately." eh="ff4e58b0" />
+        <e k="usedplus_workshop_inspectionConfirm" v="Оплатити %s за комплексну інспекцію автомобіля?&#10;&#10;Це перевірить механічний стан, рейтинги надійності та надасть детальний звіт.&#10;&#10;Результати інспекції доступні негайно." eh="ff4e58b0" />
         <e k="usedplus_ph_progressFormat" v="%d з %d платежів (%d%%)" eh="a1779bd1" />
         <e k="usedplus_la_termYears" v="%d років" eh="86730d79" />
         <e k="usedplus_lr_termYears" v="%.0f рік(и)" eh="75bc9b86" />
         <e k="usedplus_lr_termMonths" v="%d місяців" eh="eb5314ed" />
         <e k="usedplus_tires_worstFormat" v="Найгірший: %s %.0f%%" eh="1158a3fb" />
-        <e k="usedplus_std_yourCash" v="Your Cash: %s" eh="7bc506bb" />
+        <e k="usedplus_std_yourCash" v="Ваші готівка: %s" eh="7bc506bb" />
         <e k="usedplus_dealType_repair" v="Фінансування ремонту/фарбування" eh="b5bba0b1" />
         <e k="usedplus_dealType_repairDesc" v="Фінансуйте ремонти та перефарбування автомобілів з часом." eh="fbdc9b3c" />
-        <e k="usedplus_dealType_vehicleFinance" v="Vehicle Financing" eh="c19b65b7" />
+        <e k="usedplus_dealType_vehicleFinance" v="Фінансування транспортного засобу" eh="c19b65b7" />
         <e k="usedplus_dealType_vehicleFinanceDesc" v="Купуйте транспортні засоби з щомісячними платежами." eh="b62fa38c" />
-        <e k="usedplus_dealType_vehicleLease" v="Vehicle Leasing" eh="55a7f9a8" />
+        <e k="usedplus_dealType_vehicleLease" v="Лізинг транспортного засобу" eh="55a7f9a8" />
         <e k="usedplus_dealType_vehicleLeaseDesc" v="Орендуйте транспортні засоби з опцією купівлі в кінці терміну." eh="722d9fec" />
-        <e k="usedplus_dealType_landFinance" v="Land Financing" eh="c00854e3" />
+        <e k="usedplus_dealType_landFinance" v="Фінансування землі" eh="c00854e3" />
         <e k="usedplus_dealType_landFinanceDesc" v="Купуйте сільськогосподарські землі з іпотечними платежами." eh="0c5bcb3a" />
-        <e k="usedplus_dealType_cashLoan" v="Cash Loan" eh="c1b883d7" />
+        <e k="usedplus_dealType_cashLoan" v="Грошовий кредит" eh="c1b883d7" />
         <e k="usedplus_dealType_cashLoanDesc" v="Позичайте на вашому майні для отримання готівки негайно." eh="b032157c" />
-        <e k="usedplus_osp_tankFull" v="Tank Full!" eh="bbd165a9" />
+        <e k="usedplus_osp_tankFull" v="Бак повний!" eh="bbd165a9" />
         <e k="usedplus_osp_emptyCapacity" v="%s [Порожньо - %.0fL ємність]" eh="99343849" />
         <e k="usedplus_osp_fillingProgress" v="Заповнення %s Бака... %.0f/%.0fL" eh="a9b92a05" />
         <e k="usedplus_osp_nothing" v="нічого" eh="3e47b750" />
-        <e k="usedplus_osp_serviceVehicle" v="Service Vehicle" eh="490a5409" />
-        <e k="usedplus_osp_storageTankEmpty" v="Storage tank is empty!" eh="87848abb" />
+        <e k="usedplus_osp_serviceVehicle" v="Обслуговування транспортного засобу" eh="490a5409" />
+        <e k="usedplus_osp_storageTankEmpty" v="Резервуар зберігання порожній!" eh="87848abb" />
         <e k="usedplus_osp_tankFilled" v="Бак %s наповнено! (%.0f/%.0fL)" eh="0846e8fa" />
         <e k="usedplus_osp_tankIsFull" v="Бак %s повний! (%.0f/%.0fL)" eh="3b27d285" />
         <e k="usedplus_st_cooldownMessage" v="Цей компонент не можна переглянути протягом %d годин ігрового часу." eh="bfd3f006" />
         <e k="usedplus_st_degradedCount" v="%d компонент%s нижче 90%%" eh="97e59707" />
-        <e k="usedplus_st_estimatedTimeResult" v="Estimated time: %d hours" eh="1d3deb3e" />
+        <e k="usedplus_st_estimatedTimeResult" v="Приблизний час: %d годин" eh="1d3deb3e" />
         <e k="usedplus_st_low" v="(НИЗЬКО)" eh="02937491" />
         <e k="usedplus_st_statusCritical" v="Критично" eh="278d01e5" />
         <e k="usedplus_st_statusDegraded" v="Погіршено" eh="aa95669c" />
@@ -2557,7 +2555,7 @@
         <e k="usedplus_label_landLease" v=" (Оренда землі)" eh="b87349ef" />
         <e k="usedplus_label_pluralS" v="s" eh="03c7c0ac" />
         <e k="usedplus_label_assets" v="активи" eh="32bb6361" />
-        <e k="usedplus_label_landParcels" v="land parcels" eh="b5a627f3" />
+        <e k="usedplus_label_landParcels" v="земельні ділянки" eh="b5a627f3" />
         <e k="usedplus_label_vehicles" v="транспортні засоби" eh="56bb5580" />
         <e k="usedplus_notification_buildingFinanceCreditLow" v="Фінансування будівництва вимагає кредиту 750+. Ваш рахунок: %d. Тільки готівкова покупка." eh="009ec60f" />
         <e k="usedplus_notification_ensureFundsLandSeized" v="Ваш наступний платіж незабаром. Переконайтесь, що у вас достатньо коштів, або ваша земля буде вилучена." eh="5ec00447" />
@@ -2567,24 +2565,103 @@
         <e k="usedplus_notification_missedLandLeaseEnsureFunds" v="Ваш наступний платіж незабаром. Переконайтесь, що у вас достатньо коштів, або ваша оренда землі буде припинена." eh="dd4b0ce0" />
         <e k="usedplus_notification_missedLeasePaymentFinalPopup" v="Ваш наступний платіж незабаром. Переконайтесь, що у вас достатньо коштів, або ваш транспортний засіб буде вилучений." eh="5d398699" />
         <e k="usedplus_notification_placeableFinanced" v="%s ФІНАНСОВАНО! Тимчасовий кредит: %s (позика) | Повна ціна: %s | Ваша вартість сьогодні: %s авансом | Щомісячно: %s протягом %d років" eh="a78638ad" />
-        <e k="usedplus_notification_missedLoanPayment1stCollateral" v="Пропущений платіж по позиці! Додана плата %s. Ваше опціональне забезпечення (%d предметів) під ризиком! (1-е попередження)" eh="34ce171a" />
+        <e k="usedplus_notification_missedLoanPayment1stCollateral" v="Пропущений платіж по позиці! Додана плата %s. Ваше заставлене забезпечення (%d предметів) під ризиком! (1-е попередження)" eh="34ce171a" />
         <e k="usedplus_notification_missedLoanPaymentFinalCollateral" v="ОСТАННЄ ПОПЕРЕДЖЕННЯ: Пропущений платіж по позиці! Ще одне = ЗАБЕЗПЕЧЕННЯ ВИЛУЧЕНО! (%d транспортних засобів під ризиком)" eh="c50d6889" />
-        <e k="usedplus_serviceTruck_purchased" v="Service Truck purchased!" eh="39a5b8ae" />
-        <e k="usedplus_serviceTruck_purchaseFailed" v="Purchase failed" eh="e1928808" />
+        <e k="usedplus_serviceTruck_purchased" v="Сервісне авто куплено!" eh="39a5b8ae" />
+        <e k="usedplus_serviceTruck_purchaseFailed" v="Покупка не вдалася" eh="e1928808" />
         <e k="usedplus_term_1year" v="1 рік" eh="ca4c73c1" />
         <e k="usedplus_term_months" v="%d місяців" eh="eb5314ed" />
         <e k="usedplus_term_years" v="%d років" eh="86730d79" />
         <e k="usedplus_uvp_condition" v="Стан" eh="9e2941b3" />
         <e k="usedplus_uvp_expiresFormat" v="%d місяц%s (закінчується %s)" eh="7917cee0" />
-        <e k="usedplus_warning_flattire" v="FLAT TIRE!" eh="75fc9ab9" />
+        <e k="usedplus_warning_flattire" v="СПУЩЕНА ШИН!" eh="75fc9ab9" />
         <e k="usedplus_error_fillTypeNotRegistered" v="Помилка: Тип заповнення не зареєстрований!" eh="8ac3f268" />
         <e k="usedplus_error_noMatchingFluid" v="Немає відповідного типу рідини для цього бака!" eh="2efd6c76" />
-        <e k="usedplus_fp_containsLabel" v="Contains:" eh="0acb039c" />
-        <e k="usedplus_leaseEnd_title" v="End of Lease" eh="35022911" />
+        <e k="usedplus_fp_containsLabel" v="Містить:" eh="0acb039c" />
+        <e k="usedplus_leaseEnd_title" v="Кінець лізингу" eh="35022911" />
         <e k="usedplus_serviceTruck_agentMessage" v="Ваш Національний агент має для вас спеціальну можливість..." eh="e7d6295a" />
         <e k="usedplus_serviceTruck_expiryNotice" v="Пропозиція закінчується за %d днів" eh="9d7bc900" />
-        <e k="usedplus_st_maxPotential" v="Max Potential: 100%%" eh="6029fca8" />
         <e k="usedplus_error_spawnFailed" v="Не вдалося запустити транспортний засіб. Гроші повернені." eh="9025f5e7" />
         <e k="usedplus_error_systemUnavailable" v="Система використаних транспортних засобів недоступна!" eh="09843635" />
-    </elements>
+        <e k="usedplus_condition_acceptable" v="Задовільний" eh="e684de7f" />
+        <e k="usedplus_condition_belowAverage" v="Нижче середнього" eh="271d9709" />
+        <e k="usedplus_condition_unknown" v="Невідомо" eh="88183b94" />
+        <e k="usedplus_maintenance_allSystemsNormal" v="Всі системи працюють нормально. Немає проблем з обслуговуванням." eh="25f3e220" />
+        <e k="usedplus_maintenance_wearDetected" v="Виявлено деяке зношення в: %s." eh="4475afd0" />
+        <e k="usedplus_maintenance_normalWear" v="Машина показує нормальне зношення для свого віку." eh="012f2b36" />
+        <e k="usedplus_maintenance_engineStall" v="Двигун може зупинитися під великим навантаженням" eh="f9e00f63" />
+        <e k="usedplus_maintenance_hydraulicDrift" v="Гідравліка може відхилитися або відмовити" eh="82ae5fef" />
+        <e k="usedplus_maintenance_electricalCutouts" v="Вірогідні електричні перебої" eh="fb7858b3" />
+        <e k="usedplus_maintenance_poorConditionWarning" v="УВАГА: Машина в поганому стані - очікуються поломки." eh="1ad78fdf" />
+        <e k="usedplus_maintenance_breakdownHistory" v="Історія %d поломки(ок) на запису." eh="f520ff71" />
+        <e k="usedplus_maintenance_recommendMaintenance" v="Рекомендується регулярне обслуговування для запобігання поломкам." eh="6df6c637" />
+        <e k="usedplus_lr_vehicleLeaseComplete" v="Період оренди машини завершений" eh="dde70a52" />
+        <e k="usedplus_lr_landLeaseComplete" v="Період оренди землі завершений" eh="6690614c" />
+        <e k="usedplus_maintenance_systemEngine" v="двигун" eh="ad1943a9" />
+        <e k="usedplus_maintenance_systemHydraulics" v="гідравліка" eh="f98887ed" />
+        <e k="usedplus_maintenance_systemElectrical" v="електрична" eh="9d05d847" />
+        <e k="usedplus_lr_depositRefundFormat" v="%s повернення" eh="5e06e98b" />
+        <e k="usedplus_lr_noRefund" v="Без повернення" eh="7fe4d589" />
+        <e k="usedplus_lr_equityAppliedFormat" v="%s застосовано" eh="1f233e87" />
+        <e k="usedplus_fsk_issueFoundSingular" v="Знайдено %d проблему" eh="c97903bb" />
+        <e k="usedplus_fsk_issueFoundPlural" v="Знайдено %d проблем" eh="33f9ee6d" />
+        <e k="usedplus_confirm_title" v="ПІДТВЕРДІТЬ ПОКУПКУ" eh="82292b4b" />
+        <e k="usedplus_confirm_vehicleFormat" v="Транспорт: %s" eh="ef07dbe0" />
+        <e k="usedplus_confirm_priceFormat" v="Ціна: %s" eh="4bc91ba3" />
+        <e k="usedplus_confirm_typeCash" v="ТИП ПОКУПКИ: Готівка" eh="ae276583" />
+        <e k="usedplus_confirm_typeFinance" v="ТИП ПОКУПКИ: Фінансування" eh="225d3c79" />
+        <e k="usedplus_confirm_typeLease" v="ТИП ПОКУПКИ: Оренда" eh="f853b118" />
+        <e k="usedplus_confirm_tradeInFormat" v="Кредит на обмін: -%s" eh="2f0cd273" />
+        <e k="usedplus_confirm_refundFormat" v="ПОВЕРНЕННЯ: +%s" eh="11d3fc1c" />
+        <e k="usedplus_confirm_totalDueFormat" v="РАЗОМ ДО СПЛАТИ: %s" eh="04b44c17" />
+        <e k="usedplus_confirm_dueTodayFormat" v="ДО СПЛАТИ СЬОГОДНІ: %s" eh="05dfe671" />
+        <e k="usedplus_confirm_termFormat" v="Термін: %d років (%d місяців)" eh="7c94c89a" />
+        <e k="usedplus_confirm_interestRateFormat" v="Процентна ставка: %.2f%%" eh="fd35dcea" />
+        <e k="usedplus_confirm_amountFinancedFormat" v="Сума фінансування: %s" eh="f47c2a56" />
+        <e k="usedplus_confirm_monthlyPaymentFormat" v="Щомісячний платіж: %s" eh="9c3b5bba" />
+        <e k="usedplus_confirm_totalInterestFormat" v="Загальні відсотки: %s" eh="2daca0b7" />
+        <e k="usedplus_confirm_downPaymentFormat" v="Авансовий платіж: %s" eh="acef6f86" />
+        <e k="usedplus_confirm_cashBackFormat" v="Кешбек: -%s" eh="8d80e398" />
+        <e k="usedplus_confirm_dueTodayDownFormat" v="ДО СПЛАТИ СЬОГОДНІ: %s (авансовий платіж)" eh="f9303f58" />
+        <e k="usedplus_confirm_leaseTermFormat" v="Термін: %d місяців" eh="d0d56230" />
+        <e k="usedplus_confirm_buyoutFormat" v="Викуп наприкінці: %s" eh="66d5f955" />
+        <e k="usedplus_confirm_capReductionFormat" v="Зменшення капіталізації: %s" eh="e52fe681" />
+        <e k="usedplus_confirm_securityDepositFormat" v="Гарантійний депозит: %s" eh="797af4bc" />
+        <e k="usedplus_yearSingular" v="%d рік" eh="6aef49f2" />
+        <e k="usedplus_yearPlural" v="%d років" eh="b655468c" />
+        <e k="usedplus_monthSingular" v="%d місяць" eh="4019ccf8" />
+        <e k="usedplus_monthPlural" v="%d місяців" eh="d36b3bae" />
+        <e k="usedplus_rp_confirmMessageFormat" v="Підтвердіть платіж %s&#10;&#10;Транспорт: %s&#10;Обслуговування: %d%% %s&#10;&#10;Загальна вартість: %s&#10;&#10;Продовжити оплату?" eh="4491eabd" />
+        <e k="usedplus_le_leaseSummaryFormat" v="Закінчена оренда на %d рік. Загальні платежі: %s" eh="e8e10629" />
+        <e k="usedplus_le_conditionFormat" v="Пошкодження: %s | Зношення: %s" eh="4dcf114f" />
+        <e k="usedplus_le_conditionUnknown" v="Стан транспорту: Невідомий" eh="766d01ee" />
+        <e k="usedplus_le_damagePenalty" v="Штраф за пошкодження" eh="46f268ef" />
+        <e k="usedplus_le_noPenalty" v="Без штрафу за пошкодження - транспорт у гарному стані\!" eh="a9decfc9" />
+        <e k="usedplus_le_buyoutPrice" v="Ціна викупу" eh="8d6be5af" />
+        <e k="usedplus_le_returnCost" v="Вартість повернення" eh="568aeef2" />
+        <e k="usedplus_soil_excellent" v="Чудово" eh="fcc2d28a" />
+        <e k="usedplus_soil_good" v="Добре" eh="0c6ad70b" />
+        <e k="usedplus_soil_average" v="Середній" eh="b1897515" />
+        <e k="usedplus_soil_standard" v="Стандартний" eh="eb6d8ae6" />
+        <e k="usedplus_soil_poor" v="Погано" eh="0e94d017" />
+        <e k="usedplus_land_farmlandFormat" v="Сільськогосподарські угіддя %d" eh="1fc104e6" />
+        <e k="usedplus_creditRatingRange_excellent" v="Чудовий (750-850)" eh="b6f713de" />
+        <e k="usedplus_creditRatingRange_good" v="Добрий (670-749)" eh="f75bbb9d" />
+        <e k="usedplus_creditRatingRange_fair" v="Задовільний (580-669)" eh="3307aa8d" />
+        <e k="usedplus_creditRatingRange_poor" v="Поганий (300-579)" eh="2c4e3957" />
+        <e k="usedplus_trend_up" v="Зростає тренд" eh="b308896e" />
+        <e k="usedplus_trend_slightlyUp" v="Трохи зростає" eh="ffad0472" />
+        <e k="usedplus_trend_down" v="Тренд падає" eh="39e2d7ed" />
+        <e k="usedplus_trend_slightlyDown" v="Трохи падає" eh="850e6a06" />
+        <e k="usedplus_credit_historyFormat" v="Історія: %+d балів" eh="11ca1889" />
+        <e k="usedplus_debtRatio_high" v="Висока" eh="655d20c1" />
+        <e k="usedplus_st_purchaseFailed" v="Покупка не вдалася" eh="e1928808" />
+        <e k="usedplus_st_insufficientFundsFormat" v="Недостатньо коштів\! У вас є %s" eh="468b40b7" />
+        <e k="usedplus_st_spawnFailed" v="Не вдалося доставити вантажівку. Зв'яжіться з підтримкою." eh="5d952efb" />
+        <e k="usedplus_st_opportunityExpired" v="Цієї можливості більше не існує." eh="21042fb5" />
+        <e k="usedplus_maintenance_conditionAssessed" v="Стан транспорту оцінено." eh="89cc4bc6" />
+        <e k="usedplus_common_unknownLand" v="Невідома земля" eh="1b201d84" />
+        <e k="usedplus_common_unknownFarm" v="Невідома ферма" eh="92a9cc35" />
+        <e k="usedplus_common_unknownError" v="Невідома помилка" eh="aee9784c" />
+</elements>
 </l10n>

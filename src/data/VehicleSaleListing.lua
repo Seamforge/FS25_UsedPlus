@@ -160,7 +160,7 @@ function VehicleSaleListing.new(farmId, vehicle, vehicleData, saleTier, priceTie
     -- Vehicle information (stored for persistence)
     self.vehicleId = vehicle and vehicle.id or nil
     self.vehicleConfigFile = vehicleData.configFileName
-    self.vehicleName = vehicleData.name or "Unknown Vehicle"
+    self.vehicleName = vehicleData.name or g_i18n:getText("usedplus_common_unknownVehicle")
     self.vehicleImageFile = vehicleData.imageFilename or ""
     self.vanillaSellPrice = vehicleData.vanillaSellPrice or 0
 

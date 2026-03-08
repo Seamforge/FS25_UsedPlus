@@ -214,9 +214,7 @@
         <e k="usedplus_action_openFinanceManager" v="Open Finance Manager" eh="806bb897" />
         <e k="usedplus_action_searchUsed" v="Search Used Equipment" eh="77397317" />
         <e k="input_USEDPLUS_OPEN_FINANCE_MANAGER" v="Open Finance Manager" eh="806bb897" />
-        <e k="input_USEDPLUS_SEARCH_USED" v="Search Used Equipment" eh="77397317" />
-        <e k="input_USEDPLUS_INSPECT_VEHICLE" v="Inspect Vehicle" eh="c06f09f1" />
-        <e k="input_USEDPLUS_ACTIVATE_OBD" v="Use OBD Scanner" eh="9666e26b" />
+<e k="input_USEDPLUS_ACTIVATE_OBD" v="Use OBD Scanner" eh="9666e26b" />
         <e k="input_USEDPLUS_TIRES" v="Tire Service" eh="b0234f4e" />
         <e k="input_USEDPLUS_SERVICE_TRUCK" v="Service Truck Control" eh="fad0e0f1" />
         <e k="input_USEDPLUS_FAULT_TRACER" v="Fault Tracer" eh="d1b82197" />
@@ -501,7 +499,7 @@
         <e k="usedplus_credit_tooLowForLeasing" v="Credit score too low for leasing. Your score: %d (need %d+). Leasing requires better credit than financing." eh="50b91953" />
         <e k="usedplus_credit_tooLowForLand" v="Credit score too low (%d). Need %d+ to finance land." eh="78d73204" />
         <e k="usedplus_credit_tooLowForRepair" v="Credit score too low (%d). Need %d+ to finance repairs." eh="70147f73" />
-        <e k="usedplus_credit_tooLowForPlaceable" v="Building financing requires Excellent credit (%d+).\nYour credit: %d (%s)" eh="0fb63457" />
+        <e k="usedplus_credit_tooLowForPlaceable" v="Building financing requires Excellent credit (%d+).&#10;Your credit: %d (%s)" eh="d1feb796" />
         <e k="usedplus_credit_needScore" v="Credit: %d (need %d)" eh="82790b98" />
         <e k="usedplus_placeable_cannotLease" v="Buildings cannot be leased. Use Cash or Finance options." eh="e4fd7eed" />
         <e k="usedplus_finance_amountTooSmall" v="Amount too small for financing. Minimum: %s" eh="3a90d8c2" />
@@ -553,7 +551,7 @@
         <e k="usedplus_notify_landPurchased" v="Purchased %s for %s" eh="ee85175a" />
         <e k="usedplus_notify_landFinanced" v="Financed %s - %s due today" eh="874037b7" />
         <e k="usedplus_notify_vehicleNowYours" v="Congratulations! %s is now yours!" eh="f9f453e9" />
-        <e k="usedplus_notify_placeableFinanced" v="Building Financed!\n%s\nDown: %s | Monthly: %s for %d years" eh="72ebd0e0" />
+        <e k="usedplus_notify_placeableFinanced" v="Building Financed!&#10;%s&#10;Down: %s | Monthly: %s for %d years" eh="1503c82e" />
         <e k="usedplus_notify_placeableSoldPayoff" v="Building sold. Loan payoff: %s" eh="78ac7164" />
         <e k="usedplus_notify_loanPaidOff" v="Loan paid off! Total: %s" eh="0ba73cba" />
         <e k="usedplus_notify_paymentProcessed" v="Payment of %s processed!" eh="fc4c5db3" />
@@ -589,7 +587,7 @@
         <e k="usedplus_inspection_notDone" v="Vehicle has not been inspected!" eh="58a6a5a1" />
         <e k="usedplus_inspection_failed" v="Inspection failed: %s" eh="13d9eb55" />
         <e k="usedplus_inspectionTitle" v="Vehicle Inspection" eh="7276b8fd" />
-        <e k="usedplus_confirmInspection" v="Request %s inspection for %s?\n\nReady in ~%d hours." eh="20a936ac" />
+        <e k="usedplus_confirmInspection" v="Request %s inspection for %s?&#10;&#10;Ready in ~%d hours." eh="2f3b3a7d" />
         <e k="usedplus_selectInspectionTier" v="Select Inspection Type:" eh="d920b2ce" />
         <e k="usedplus_tier_quick_desc" v="Overall rating only" eh="b2f8f4ab" />
         <e k="usedplus_tier_standard_desc" v="Full reliability + parts condition" eh="f7939a73" />
@@ -1904,7 +1902,7 @@
         <e k="usedplus_hydraulics_seized" v="HYDRAULICS SEIZED! Implements are locked in place." eh="dd09718c" />
         <e k="usedplus_electrical_seized" v="ELECTRICAL FAILURE! All systems are dead." eh="84b7514a" />
         <e k="usedplus_seizure_detected" v="COMPONENT SEIZED" eh="9def01dd" />
-        <e k="usedplus_seizure_repair_confirm" v="%s is seized and requires emergency repair.\n\nRepair cost: %s\n\nProceed with repair?" eh="bf702608" />
+        <e k="usedplus_seizure_repair_confirm" v="%s is seized and requires emergency repair.&#10;&#10;Repair cost: %s&#10;&#10;Proceed with repair?" eh="cd678a07" />
         <e k="usedplus_seizure_repaired" v="%s repaired! Reliability restored to %d%%" eh="323fa338" />
         <e k="usedplus_repair_no_money" v="Not enough money for repair!" eh="0c0a7c19" />
         <e k="usedplus_warning_notEnoughMoney" v="Not enough money!" eh="48f194d4" />
@@ -2583,8 +2581,87 @@
         <e k="usedplus_leaseEnd_title" v="End of Lease" eh="35022911" />
         <e k="usedplus_serviceTruck_agentMessage" v="Your National Agent has a special opportunity for you..." eh="e7d6295a" />
         <e k="usedplus_serviceTruck_expiryNotice" v="Offer expires in %d days" eh="9d7bc900" />
-        <e k="usedplus_st_maxPotential" v="Max Potential: 100%%" eh="6029fca8" />
         <e k="usedplus_error_spawnFailed" v="Failed to spawn vehicle. Money refunded." eh="9025f5e7" />
         <e k="usedplus_error_systemUnavailable" v="Used vehicle system not available!" eh="09843635" />
-    </elements>
+
+        <e k="usedplus_condition_acceptable" v="Acceptable" eh="e684de7f" />
+        <e k="usedplus_condition_belowAverage" v="Below Average" eh="271d9709" />
+        <e k="usedplus_condition_unknown" v="Unknown" eh="88183b94" />
+        <e k="usedplus_maintenance_allSystemsNormal" v="All systems operating normally. No maintenance concerns." eh="25f3e220" />
+        <e k="usedplus_maintenance_wearDetected" v="Some wear detected in: %s." eh="4475afd0" />
+        <e k="usedplus_maintenance_normalWear" v="Vehicle showing normal wear for its age." eh="012f2b36" />
+        <e k="usedplus_maintenance_engineStall" v="Engine may stall under heavy load" eh="f9e00f63" />
+        <e k="usedplus_maintenance_hydraulicDrift" v="Hydraulics may drift or fail" eh="82ae5fef" />
+        <e k="usedplus_maintenance_electricalCutouts" v="Electrical cutouts likely" eh="fb7858b3" />
+        <e k="usedplus_maintenance_poorConditionWarning" v="WARNING: Vehicle in poor condition - breakdowns expected." eh="1ad78fdf" />
+        <e k="usedplus_maintenance_breakdownHistory" v="History of %d breakdown(s) on record." eh="f520ff71" />
+        <e k="usedplus_maintenance_recommendMaintenance" v="Regular maintenance recommended to prevent breakdowns." eh="6df6c637" />
+        <e k="usedplus_lr_vehicleLeaseComplete" v="Vehicle Lease Term Complete" eh="dde70a52" />
+        <e k="usedplus_lr_landLeaseComplete" v="Land Lease Term Complete" eh="6690614c" />
+        <e k="usedplus_maintenance_systemEngine" v="engine" eh="ad1943a9" />
+        <e k="usedplus_maintenance_systemHydraulics" v="hydraulics" eh="f98887ed" />
+        <e k="usedplus_maintenance_systemElectrical" v="electrical" eh="9d05d847" />
+        <e k="usedplus_lr_depositRefundFormat" v="%s refund" eh="5e06e98b" />
+        <e k="usedplus_lr_noRefund" v="No refund" eh="7fe4d589" />
+        <e k="usedplus_lr_equityAppliedFormat" v="%s applied" eh="1f233e87" />
+        <e k="usedplus_fsk_issueFoundSingular" v="%d issue found" eh="c97903bb" />
+        <e k="usedplus_fsk_issueFoundPlural" v="%d issues found" eh="33f9ee6d" />
+        <e k="usedplus_confirm_title" v="CONFIRM PURCHASE" eh="82292b4b" />
+        <e k="usedplus_confirm_vehicleFormat" v="Vehicle: %s" eh="ef07dbe0" />
+        <e k="usedplus_confirm_priceFormat" v="Price: %s" eh="4bc91ba3" />
+        <e k="usedplus_confirm_typeCash" v="PURCHASE TYPE: Cash" eh="ae276583" />
+        <e k="usedplus_confirm_typeFinance" v="PURCHASE TYPE: Finance" eh="225d3c79" />
+        <e k="usedplus_confirm_typeLease" v="PURCHASE TYPE: Lease" eh="f853b118" />
+        <e k="usedplus_confirm_tradeInFormat" v="Trade-In Credit: -%s" eh="2f0cd273" />
+        <e k="usedplus_confirm_refundFormat" v="REFUND: +%s" eh="11d3fc1c" />
+        <e k="usedplus_confirm_totalDueFormat" v="TOTAL DUE NOW: %s" eh="04b44c17" />
+        <e k="usedplus_confirm_dueTodayFormat" v="DUE TODAY: %s" eh="05dfe671" />
+        <e k="usedplus_confirm_termFormat" v="Term: %d years (%d months)" eh="7c94c89a" />
+        <e k="usedplus_confirm_interestRateFormat" v="Interest Rate: %.2f%%" eh="fd35dcea" />
+        <e k="usedplus_confirm_amountFinancedFormat" v="Amount Financed: %s" eh="f47c2a56" />
+        <e k="usedplus_confirm_monthlyPaymentFormat" v="Monthly Payment: %s" eh="9c3b5bba" />
+        <e k="usedplus_confirm_totalInterestFormat" v="Total Interest: %s" eh="2daca0b7" />
+        <e k="usedplus_confirm_downPaymentFormat" v="Down Payment: %s" eh="acef6f86" />
+        <e k="usedplus_confirm_cashBackFormat" v="Cash Back: -%s" eh="8d80e398" />
+        <e k="usedplus_confirm_dueTodayDownFormat" v="DUE TODAY: %s (down payment)" eh="f9303f58" />
+        <e k="usedplus_confirm_leaseTermFormat" v="Term: %d months" eh="d0d56230" />
+        <e k="usedplus_confirm_buyoutFormat" v="Buyout at End: %s" eh="66d5f955" />
+        <e k="usedplus_confirm_capReductionFormat" v="Cap Reduction: %s" eh="e52fe681" />
+        <e k="usedplus_confirm_securityDepositFormat" v="Security Deposit: %s" eh="797af4bc" />
+        <e k="usedplus_yearSingular" v="%d Year" eh="6aef49f2" />
+        <e k="usedplus_yearPlural" v="%d Years" eh="b655468c" />
+        <e k="usedplus_monthSingular" v="%d Month" eh="4019ccf8" />
+        <e k="usedplus_monthPlural" v="%d Months" eh="d36b3bae" />
+        <e k="usedplus_rp_confirmMessageFormat" v="Confirm %s Payment&#10;&#10;Vehicle: %s&#10;Service: %d%% %s&#10;&#10;Total Cost: %s&#10;&#10;Proceed with payment?" eh="e92f3faa" />
+        <e k="usedplus_le_leaseSummaryFormat" v="%d year lease completed. Total payments: %s" eh="e8e10629" />
+        <e k="usedplus_le_conditionFormat" v="Damage: %s | Wear: %s" eh="4dcf114f" />
+        <e k="usedplus_le_conditionUnknown" v="Vehicle condition: Unknown" eh="766d01ee" />
+        <e k="usedplus_le_damagePenalty" v="Damage Penalty" eh="46f268ef" />
+        <e k="usedplus_le_noPenalty" v="No damage penalty - vehicle in good condition\!" eh="a9decfc9" />
+        <e k="usedplus_le_buyoutPrice" v="Buyout Price" eh="8d6be5af" />
+        <e k="usedplus_le_returnCost" v="Return Cost" eh="568aeef2" />
+        <e k="usedplus_soil_excellent" v="Excellent" eh="fcc2d28a" />
+        <e k="usedplus_soil_good" v="Good" eh="0c6ad70b" />
+        <e k="usedplus_soil_average" v="Average" eh="b1897515" />
+        <e k="usedplus_soil_standard" v="Standard" eh="eb6d8ae6" />
+        <e k="usedplus_soil_poor" v="Poor" eh="0e94d017" />
+        <e k="usedplus_land_farmlandFormat" v="Farmland %d" eh="1fc104e6" />
+        <e k="usedplus_creditRatingRange_excellent" v="Excellent (750-850)" eh="b6f713de" />
+        <e k="usedplus_creditRatingRange_good" v="Good (670-749)" eh="f75bbb9d" />
+        <e k="usedplus_creditRatingRange_fair" v="Fair (580-669)" eh="3307aa8d" />
+        <e k="usedplus_creditRatingRange_poor" v="Poor (300-579)" eh="2c4e3957" />
+        <e k="usedplus_trend_up" v="Trending Up" eh="b308896e" />
+        <e k="usedplus_trend_slightlyUp" v="Slightly Up" eh="ffad0472" />
+        <e k="usedplus_trend_down" v="Trending Down" eh="39e2d7ed" />
+        <e k="usedplus_trend_slightlyDown" v="Slightly Down" eh="850e6a06" />
+        <e k="usedplus_credit_historyFormat" v="History: %+d points" eh="11ca1889" />
+        <e k="usedplus_debtRatio_high" v="High" eh="655d20c1" />
+        <e k="usedplus_st_purchaseFailed" v="Purchase failed" eh="e1928808" />
+        <e k="usedplus_st_insufficientFundsFormat" v="Insufficient funds\! You have %s" eh="468b40b7" />
+        <e k="usedplus_st_spawnFailed" v="Failed to deliver the truck. Contact support." eh="5d952efb" />
+        <e k="usedplus_st_opportunityExpired" v="This opportunity has expired." eh="21042fb5" />
+        <e k="usedplus_maintenance_conditionAssessed" v="Vehicle condition assessed." eh="89cc4bc6" />
+        <e k="usedplus_common_unknownLand" v="Unknown Land" eh="1b201d84" />
+        <e k="usedplus_common_unknownFarm" v="Unknown Farm" eh="92a9cc35" />
+        <e k="usedplus_common_unknownError" v="Unknown error" eh="aee9784c" /></elements>
 </l10n>

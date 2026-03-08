@@ -219,7 +219,7 @@ function SaleOfferDialog:updateDisplay()
     -- ================================================================
     -- SECTION 1: Vehicle Info
     -- ================================================================
-    UIHelper.Element.setText(self.vehicleNameText, self.listing.vehicleName or "Unknown Vehicle")
+    UIHelper.Element.setText(self.vehicleNameText, self.listing.vehicleName or g_i18n:getText("usedplus_common_unknownVehicle"))
     UIHelper.Image.setImagePath(self.vehicleImage, self.listing.vehicleImageFile)
 
     -- Agent info: "Standard Agent · Fair Market"
@@ -412,7 +412,7 @@ end
 ]]
 function SaleOfferDialog:onClickDecline()
     -- Cache values before closing
-    local vehicleName = self.listing and self.listing.vehicleName or "Unknown"
+    local vehicleName = self.listing and self.listing.vehicleName or g_i18n:getText("usedplus_common_unknown")
     local callback = self.callback
 
     -- Close dialog first

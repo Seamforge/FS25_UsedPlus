@@ -119,7 +119,7 @@ function SearchDetailsDialog:updateDisplay()
 
     -- Vehicle Info
     if self.vehicleNameText then
-        self.vehicleNameText:setText(search.storeItemName or "Unknown Vehicle")
+        self.vehicleNameText:setText(search.storeItemName or g_i18n:getText("usedplus_common_unknownVehicle"))
     end
 
     -- Search Tier

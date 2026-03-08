@@ -699,8 +699,10 @@ function LeaseRenewalEvent:readStream(streamId, connection)
     end
     if not isValidAction then
         UsedPlus.logError(string.format("[SECURITY] Invalid lease renewal action: %d", self.action))
-        -- Set to a safe default (return) and continue to drain stream
-        self.action = LeaseRenewalEvent.ACTION_RETURN
+        -- CRITICAL: Don't read action-specific data - writeStream wrote none for invalid actions.
+        -- Reading here would consume bytes from the next event, corrupting the entire TCP stream.
+        self:run(connection)
+        return
     end
 
     -- Deserialize data based on action

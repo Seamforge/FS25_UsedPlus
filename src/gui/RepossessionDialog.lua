@@ -79,7 +79,7 @@ function RepossessionDialog:setData(data, callback)
     end
 
     self.repossessionType = data.type or RepossessionDialog.TYPE.VEHICLE
-    self.itemName = data.itemName or "Unknown"
+    self.itemName = data.itemName or g_i18n:getText("usedplus_common_unknown")
     self.itemValue = data.itemValue or 0
     self.missedPayments = data.missedPayments or 3
     self.balanceOwed = data.balanceOwed or 0
@@ -275,7 +275,7 @@ function RepossessionDialog.showCollateralRepossession(repossessedItems, missedP
 
     local data = {
         type = RepossessionDialog.TYPE.COLLATERAL,
-        itemName = primaryItem.name or "Unknown Vehicle",
+        itemName = primaryItem.name or g_i18n:getText("usedplus_common_unknownVehicle"),
         itemValue = primaryItem.value or 0,
         missedPayments = missedPayments or 3,
         balanceOwed = balanceOwed or 0,

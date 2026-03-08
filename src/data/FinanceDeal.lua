@@ -903,7 +903,7 @@ function FinanceDeal:repossessCollateral()
                 if vehicle then
                     -- Store repossession record for history
                     table.insert(self.repossessedItems, {
-                        name = collateralItem.name or vehicle:getName() or "Unknown Vehicle",
+                        name = collateralItem.name or vehicle:getName() or g_i18n:getText("usedplus_common_unknownVehicle"),
                         value = collateralItem.value or 0,
                         type = "vehicle",
                         configFile = collateralItem.configFile or vehicle.configFileName,
@@ -931,7 +931,7 @@ function FinanceDeal:repossessCollateral()
 
                     -- Still record it as repossessed for history
                     table.insert(self.repossessedItems, {
-                        name = collateralItem.name or "Unknown Vehicle",
+                        name = collateralItem.name or g_i18n:getText("usedplus_common_unknownVehicle"),
                         value = collateralItem.value or 0,
                         type = "vehicle",
                         configFile = collateralItem.configFile,

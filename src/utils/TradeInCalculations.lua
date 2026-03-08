@@ -60,11 +60,6 @@ function TradeInCalculations.getBrandLoyaltyBonus()
     return settingsBonus / 100  -- Convert to decimal (5 -> 0.05)
 end
 
--- Legacy constants (deprecated - use functions above)
-TradeInCalculations.BASE_TRADE_IN_MIN = 0.50  -- Use getTradeInRange() instead
-TradeInCalculations.BASE_TRADE_IN_MAX = 0.65  -- Use getTradeInRange() instead
-TradeInCalculations.BRAND_LOYALTY_BONUS = 0.05  -- Use getBrandLoyaltyBonus() instead
-
 -- Condition impact multipliers
 -- Damage has bigger impact than cosmetic wear
 TradeInCalculations.DAMAGE_IMPACT_MAX = 0.20   -- Up to 20% reduction for heavy damage
@@ -471,95 +466,6 @@ function TradeInCalculations.isVehicleFinanced(vehicle, farmId)
     end
 
     return false
-end
-
---[[
-    Execute trade-in transaction
-    @param vehicle - The vehicle being traded in
-    @param farmId - The farm ID
-    @param tradeInValue - The agreed trade-in value
-    @return true if successful
-]]
-function TradeInCalculations.executeTradeIn(vehicle, farmId, tradeInValue)
-    if vehicle == nil or farmId == nil or tradeInValue <= 0 then
-        return false
-    end
-
-    -- Remove the vehicle from the game
-    if vehicle.delete then
-        -- Credit the trade-in value to the farm
-        -- Note: This is handled externally - the trade-in value reduces purchase price
-
-        -- Delete the vehicle
-        vehicle:delete()
-
-        UsedPlus.logDebug(string.format("Trade-in executed: Vehicle removed, value $%d", tradeInValue))
-
-        return true
-    end
-
-    return false
-end
-
---[[
-    Format trade-in breakdown for display
-    @param breakdown - The breakdown table from calculateTradeInValue
-    @return Formatted string for UI
-]]
-function TradeInCalculations.formatBreakdown(breakdown)
-    if breakdown == nil then
-        return "No trade-in available"
-    end
-
-    local lines = {}
-
-    table.insert(lines, string.format("Vanilla Sell Value: %s", g_i18n:formatMoney(breakdown.vanillaSellPrice, 0, true, true)))
-    table.insert(lines, string.format("Trade-In Rate: %d%%", breakdown.basePercent))
-    table.insert(lines, "")
-    table.insert(lines, string.format("Repair Condition: %d%%", breakdown.repairPercent))
-    table.insert(lines, string.format("Paint Condition: %d%%", breakdown.paintPercent))
-
-    if breakdown.conditionImpactPercent > 0 then
-        table.insert(lines, string.format("Condition Penalty: -%d%%", breakdown.conditionImpactPercent))
-    end
-
-    if breakdown.isSameBrand then
-        table.insert(lines, string.format("Brand Loyalty: +%d%%", breakdown.brandBonusPercent))
-    end
-
-    -- Maintenance history impact (Phase 5)
-    if breakdown.maintenanceImpactPercent and breakdown.maintenanceImpactPercent ~= 0 then
-        if breakdown.maintenanceImpactPercent > 0 then
-            table.insert(lines, string.format("Maintenance History: +%d%%", breakdown.maintenanceImpactPercent))
-        else
-            table.insert(lines, string.format("Maintenance History: %d%%", breakdown.maintenanceImpactPercent))
-        end
-    end
-
-    table.insert(lines, "---")
-    table.insert(lines, string.format("Trade-In Value: %s", g_i18n:formatMoney(breakdown.finalValue, 0, true, true)))
-    table.insert(lines, string.format("(%d%% of vanilla sell)", breakdown.percentOfVanilla))
-
-    return table.concat(lines, "\n")
-end
-
---[[
-    Get condition rating text based on percentage
-    @param percent - Condition percentage (0-100)
-    @return rating text and color table {r, g, b, a}
-]]
-function TradeInCalculations.getConditionRating(percent)
-    if percent >= 90 then
-        return "Excellent", {0.2, 0.9, 0.2, 1}  -- Green
-    elseif percent >= 70 then
-        return "Good", {0.5, 0.9, 0.2, 1}       -- Yellow-green
-    elseif percent >= 50 then
-        return "Fair", {0.9, 0.7, 0.2, 1}       -- Orange
-    elseif percent >= 30 then
-        return "Poor", {0.9, 0.4, 0.2, 1}       -- Red-orange
-    else
-        return "Critical", {0.9, 0.2, 0.2, 1}   -- Red
-    end
 end
 
 UsedPlus.logInfo("TradeInCalculations loaded (with condition-based pricing)")

@@ -1,6 +1,6 @@
 # CLAUDE.md - FS25 Modding Workspace Guide
 
-**Last Updated:** 2026-02-22 | **Active Project:** FS25_UsedPlus (Finance & Marketplace System)
+**Last Updated:** 2026-03-07 | **Active Project:** FS25_UsedPlus (Finance & Marketplace System)
 
 ---
 
@@ -106,45 +106,24 @@ At these stages, Claude and Samantha MUST have explicit dialog:
 
 ## Translation Workflow
 
-FS25_UsedPlus supports **25 languages** with **~2,567 translation entries** each. Use `translations/rosetta.js` to manage translations.
+**Full reference:** See [`translations/README.md`](translations/README.md) for complete rosetta commands, quality detection, language codes, and AMBER mode protocol.
 
-### Rosetta.js Commands
+**Quick Reference:**
 ```bash
 cd translations
-node rosetta.js status              # Quick overview table per language
-node rosetta.js report [LANG]       # Detailed breakdown with key lists
-node rosetta.js sync                # Add missing keys, update hashes
-node rosetta.js validate            # CI-friendly: exit codes only
-node rosetta.js doctor [--fix]      # Health check + auto-fix
-node rosetta.js deposit KEY "text"  # Add key to ALL 26 files
-node rosetta.js amend KEY "text"    # Change English, mark stale
-node rosetta.js rename OLD NEW      # Rename, preserve translations
-node rosetta.js remove KEY1 KEY2    # Delete from ALL files
-node rosetta.js translate LANG      # Export untranslated as JSON (add --compact for 70% smaller)
-node rosetta.js import FILE.json    # Import with format specifier validation
-node rosetta.js fix-stale [LANG]    # Accept current translations, update hashes
+node rosetta.js status                                  # Overview table
+node rosetta.js audit [LANG]                            # Quality grades (A-F)
+node rosetta.js validate                                # CI-friendly check
+node rosetta.js translate LANG                          # Export untranslated JSON
+node rosetta.js translate LANG --quality --filter=TYPE  # Export quality-flagged
+node rosetta.js import FILE.json [FILE2.json...]        # Import translations
+node rosetta.js deposit KEY "text"                      # Add key to all 26 files
+node rosetta.js inspect KEY [KEY]                       # View key across all languages
 ```
 
-### Adding New Keys
-1. `node rosetta.js deposit usedplus_new_key "English text"`
-2. `node rosetta.js translate LANG` → export JSON
-3. Dispatch translator agent (see below)
-4. `node rosetta.js status` → verify counts
+**RULE:** For bulk translation, ALWAYS use the custom Haiku translator agent at `.claude/agents/translator.md`. NEVER use Opus agents for translation — it wastes tokens. Dispatch: `Agent tool -> subagent_type: "translator"`.
 
-### Bulk Translation — Use Translator Agent (MANDATORY)
-
-**RULE:** For bulk translation, ALWAYS use the custom Haiku translator agent at `.claude/agents/translator.md`. NEVER use Opus agents for translation — it wastes tokens.
-
-```
-Agent tool → subagent_type: "translator"
-Prompt: "Translate FS25_UsedPlus to Finnish (fi)."
-```
-
-The translator agent handles: JSON protocol, format specifier preservation, import schema, file naming, and the rosetta import command. All rules are baked into the agent definition — dispatch prompts only need the language code.
-
-**Rules:** `rosetta.js` lives in `translations/`. Only `build.js`, `generateIcons.js`, `deploy-gcp.js` belong in `tools/`.
-
-**Current Status:** See `node translations/rosetta.js status` for live counts
+**Rules:** `rosetta.js` + `rosetta_lib.js` live in `translations/`. Only `build.js`, `generateIcons.js`, `deploy-gcp.js` belong in `tools/`.
 
 ---
 
@@ -214,7 +193,7 @@ X position = element CENTER, not left edge. Calculate: `X ± (width/2)` must sta
 
 ## Project: FS25_UsedPlus
 
-### Current Version: 2.15.2
+### Current Version: 2.15.3
 
 ### Features
 - Vehicle/equipment financing (1-15 years) and land financing (1-20 years) with dynamic credit scoring (300-850)
@@ -226,10 +205,10 @@ X position = element CENTER, not left edge. Calculate: `X ± (width/2)` must sta
 ### Architecture
 ```
 FS25_UsedPlus/
-├── src/{data, utils, events, managers, gui, extensions}/
-├── gui/                # XML dialog definitions (33 dialogs)
-├── translations/       # 26 languages, 1,954 keys
-├── tools/              # 17 dev tools (build, validate, stats)
+├── src/{core, data, utils, events, managers, gui, extensions, settings, specializations}/
+├── gui/                # XML dialog definitions (39 dialogs)
+├── translations/       # 26 languages, 2,567 keys
+├── tools/              # 14 dev tools (build, validate, stats)
 └── modDesc.xml
 ```
 
@@ -324,6 +303,7 @@ FS25_UsedPlus/
 | "green mode" / "feature gap" / "build this" | GREEN | No — explicit request |
 | "gold mode" / "polish" / "quality sweep" | GOLD | No — explicit request |
 | "violet mode" / "vision audit" / "align to spec" | VIOLET | No — explicit request |
+| "amber mode" / "translation quality" / "translation sweep" | AMBER | No — explicit request |
 | "Lua error" / "dialog won't open" / "not working" | BLUE | No — clear regression |
 | "add support for..." / "I want the mod to..." | GREEN | No — clear additive |
 | "something's off" / "X isn't right" | GATE | **Yes** — ask before routing |
@@ -422,13 +402,15 @@ Read-only exploration. Identify affected files, read source, note patterns/conve
 
 | Subsystem | Key Files |
 |-----------|-----------|
+| Core | `src/core/` — mod entry point (UsedPlusCore) |
 | Data Models | `src/data/` — loan records, credit scores, marketplace data |
 | Utilities | `src/utils/` — UIHelper, formatting, calculations |
+| Settings | `src/settings/` — mod settings, presets |
 | Network Events | `src/events/` — all multiplayer event classes |
 | Managers | `src/managers/` — singleton managers (Finance, Marketplace, etc.) |
 | GUI Dialogs | `src/gui/` + `gui/*.xml` — dialog Lua + XML pairs |
-| Extensions | `src/extensions/` — vehicle/shop specialization extensions |
-| Translations | `translations/` — 25 language XML files |
+| Extensions | `src/extensions/` + `src/specializations/` — vehicle/shop extensions, maintenance |
+| Translations | `translations/` — 26 language XML files |
 | Config | `modDesc.xml` — source files, specializations, input bindings |
 
 Output: Relevant files · Current code path · Existing patterns to follow · Impact assessment
@@ -502,13 +484,14 @@ Files in the same subsystem stay together. No two subagents write to the same fi
 
 | Zone | Covers |
 |------|--------|
+| CORE | `src/core/` — mod entry point (UsedPlusCore) |
 | DATA | `src/data/` — data models and records |
 | EVENTS | `src/events/` — network event classes |
 | MANAGERS | `src/managers/` — singleton managers |
 | GUI | `src/gui/` + `gui/*.xml` — dialog Lua and XML pairs |
-| EXTENSIONS | `src/extensions/` — vehicle/shop extensions |
-| UTILS | `src/utils/` — helpers, formatters, calculations |
-| TRANSLATIONS | `translations/` — 25 language XML files |
+| EXTENSIONS | `src/extensions/` + `src/specializations/` — vehicle/shop extensions, maintenance |
+| UTILS | `src/utils/` + `src/settings/` — helpers, formatters, calculations, settings |
+| TRANSLATIONS | `translations/` — 26 language XML files |
 | CONFIG | `modDesc.xml`, `tools/` — build/deploy scripts, mod descriptor |
 
 ### The 8 Issue Categories
@@ -646,6 +629,49 @@ After all waves: verify (`node tools/build.js`, check log.txt, `node translation
 
 ---
 
+## AMBER MODE — Translation Quality Convergence Protocol
+
+### What Is Amber Mode?
+
+Amber Mode is a **translation-focused quality convergence loop** that spot-checks all 25 languages, improves rosetta's detection when needed, retranslates quality-flagged entries, and repeats until all languages pass clean. Unlike Gold (code quality) or Blue (diagnostics), Amber exclusively targets translation quality.
+
+**RULE**: Amber Mode is **explicit-only** — never auto-triggered by the Color Gate. Full protocol in [`translations/README.md`](translations/README.md). Max 5 passes.
+
+**Activation Triggers**: "amber mode" / "translation quality" / "translation sweep" / "translation convergence"
+
+### The Convergent Loop (Summary)
+
+Each pass launches **5 parallel spot-check workers** (one per language family):
+
+| Worker | Languages | Family |
+|--------|-----------|--------|
+| W1 | de, fr, es, it, pt | Western European |
+| W2 | pl, cz, hu, ro, tr | Central/Eastern European |
+| W3 | nl, da, no, sv, fi | Nordic + Dutch |
+| W4 | ru, uk, vi, id, br | Slavic + SEA + Brazil |
+| W5 | ct, jp, kr, ea, fc | CJK + Regional Variants |
+
+**Worker tasks:** `rosetta audit` per language + manual spot-check of 10-15 entries + evaluate rosetta detection accuracy + return structured report.
+
+**Between passes (main agent):**
+1. **Phase A — Rosetta Improvement**: Fix false positives/negatives in `rosetta_lib.js` BEFORE retranslation
+2. **Phase B — Quality Retranslation**: Export flagged entries, dispatch Haiku translator agents
+3. **Phase C — Completion Check**: Verify all 25 languages at 100% (2567/2567)
+4. **Phase D — Convergence Check**: Issues must monotonically decrease; 0 = done; stalled = HALT
+
+### Verdict Scale
+
+| Verdict | Meaning |
+|---------|---------|
+| PRISTINE | Pass 1: all grade A, 0 issues |
+| POLISHED | Converged to 0 within passes 2-5 |
+| ACCEPTABLE | Halted with <=5 LOW-severity issues |
+| NEEDS ATTENTION | Unresolved MED/HIGH or did not converge |
+
+**Full protocol details:** See [`translations/README.md` — AMBER MODE section](translations/README.md#amber-mode--translation-quality-convergence-protocol)
+
+---
+
 ## GitHub Issue Workflow
 
 ### Follow-Up = Edit, Don't Comment
@@ -762,6 +788,6 @@ gh project item-edit \
 
 ## Changelog
 
-See **[FS25_UsedPlus/CHANGELOG.md](FS25_UsedPlus/CHANGELOG.md)** for full version history.
+See **[CHANGELOG.md](CHANGELOG.md)** for full version history.
 
-**Recent:** v2.15.2 (2026-02-22) - Gradual oil/hydraulic fill, laptop animation fix, GCP server setup
+**Recent:** v2.15.3 - i18n localization, translation quality tooling, multiplayer state sync

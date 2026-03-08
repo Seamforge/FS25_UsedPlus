@@ -244,7 +244,7 @@ function UnifiedLandPurchaseDialog:setLandData(farmlandId, farmland, price)
             end
         end
     else
-        self.landName = string.format("Farmland %d", farmlandId or 0)
+        self.landName = string.format(g_i18n:getText("usedplus_land_farmlandFormat"), farmlandId or 0)
         self.landSize = 0
         self.soilQuality = "Unknown"
     end
@@ -484,7 +484,13 @@ function UnifiedLandPurchaseDialog:updateDisplay()
     UIHelper.Element.setText(self.landPriceText, UIHelper.Text.formatMoney(self.landPrice))
     UIHelper.Element.setText(self.landPricePerHaText, UIHelper.Text.formatMoney(self.pricePerHa) .. "/ha")
     UIHelper.Element.setText(self.landPricePerAcreText, UIHelper.Text.formatMoney(self.pricePerAcre or 0) .. "/acre")
-    UIHelper.Element.setText(self.landSoilText, self.soilQuality or "Standard")
+    local soilI18nMap = {
+        Excellent = "usedplus_soil_excellent", Good = "usedplus_soil_good",
+        Average = "usedplus_soil_average", Standard = "usedplus_soil_standard",
+        Poor = "usedplus_soil_poor", Unknown = "usedplus_condition_unknown"
+    }
+    local soilKey = soilI18nMap[self.soilQuality] or "usedplus_soil_standard"
+    UIHelper.Element.setText(self.landSoilText, g_i18n:getText(soilKey))
 
     -- Update credit adjustment display elements (if they exist in XML)
     if self.basePriceText then

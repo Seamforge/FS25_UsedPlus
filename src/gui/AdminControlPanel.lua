@@ -1451,7 +1451,7 @@ function AdminControlPanel:updateDiagnostics()
     self:setDiagSection(row, "VEHICLE IDENTITY")
     row = row + 1
 
-    local vehName = self.vehicle:getName() or "Unknown"
+    local vehName = self.vehicle:getName() or g_i18n:getText("usedplus_common_unknown")
     self:setDiagRow(row, "Vehicle:", vehName, AdminControlPanel.DIAG.INFO)
     row = row + 1
 

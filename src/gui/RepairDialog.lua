@@ -617,7 +617,7 @@ function RepairDialog:onPayCash()
     local workPercent = (self.mode == RepairDialog.MODE_REPAIR) and self.repairPercent or self.repaintPercent
 
     local confirmMessage = string.format(
-        "Confirm %s Payment\n\nVehicle: %s\nService: %d%% %s\n\nTotal Cost: %s\n\nProceed with payment?",
+        g_i18n:getText("usedplus_rp_confirmMessageFormat"),
         serviceType,
         self.vehicleName,
         workPercent,

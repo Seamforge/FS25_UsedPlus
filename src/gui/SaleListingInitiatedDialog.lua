@@ -107,7 +107,7 @@ end
 function SaleListingInitiatedDialog:updateDisplay(details)
     -- Vehicle name
     if self.vehicleNameText then
-        self.vehicleNameText:setText(details.vehicleName or "Unknown Vehicle")
+        self.vehicleNameText:setText(details.vehicleName or g_i18n:getText("usedplus_common_unknownVehicle"))
     end
 
     -- Agent type

@@ -198,11 +198,11 @@ function LeaseRenewalDialog:updateDisplay()
     if deal == nil then return end
 
     -- Title
-    local title = self.isLandLease and "Land Lease Term Complete" or "Vehicle Lease Term Complete"
+    local title = self.isLandLease and g_i18n:getText("usedplus_lr_landLeaseComplete") or g_i18n:getText("usedplus_lr_vehicleLeaseComplete")
     UIHelper.Element.setText(self.titleText, title)
 
     -- Asset name
-    local assetName = deal.itemName or deal.vehicleName or deal.landName or "Unknown"
+    local assetName = deal.itemName or deal.vehicleName or deal.landName or g_i18n:getText("usedplus_common_unknown")
     UIHelper.Element.setText(self.assetNameText, assetName)
 
     -- Lease summary
@@ -242,9 +242,9 @@ function LeaseRenewalDialog:updateDisplay()
 
     -- Return option
     if self.depositRefund > 0 then
-        UIHelper.Element.setText(self.returnRefundText, UIHelper.Text.formatMoney(self.depositRefund) .. " refund")
+        UIHelper.Element.setText(self.returnRefundText, string.format(g_i18n:getText("usedplus_lr_depositRefundFormat"), UIHelper.Text.formatMoney(self.depositRefund)))
     else
-        UIHelper.Element.setText(self.returnRefundText, "No refund")
+        UIHelper.Element.setText(self.returnRefundText, g_i18n:getText("usedplus_lr_noRefund"))
     end
 
     -- Buyout option
@@ -266,7 +266,7 @@ function LeaseRenewalDialog:updateDisplay()
     end
 
     -- Renew option
-    UIHelper.Element.setText(self.renewEquityText, UIHelper.Text.formatMoney(self.equityAccumulated) .. " applied")
+    UIHelper.Element.setText(self.renewEquityText, string.format(g_i18n:getText("usedplus_lr_equityAppliedFormat"), UIHelper.Text.formatMoney(self.equityAccumulated)))
 
     -- Help text (use i18n key from XML, supports all languages)
     UIHelper.Element.setText(self.helpText, g_i18n:getText("usedplus_lr_helpText"))
@@ -286,13 +286,13 @@ function LeaseRenewalDialog:getConditionText()
     end
 
     if damage < 0.05 and wear < 0.10 then
-        return "Excellent"
+        return g_i18n:getText("usedplus_condition_excellent")
     elseif damage < 0.15 and wear < 0.25 then
-        return "Good"
+        return g_i18n:getText("usedplus_condition_good")
     elseif damage < 0.30 and wear < 0.40 then
-        return "Fair"
+        return g_i18n:getText("usedplus_condition_fair")
     else
-        return "Poor"
+        return g_i18n:getText("usedplus_condition_poor")
     end
 end
 

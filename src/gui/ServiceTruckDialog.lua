@@ -486,7 +486,7 @@ function ServiceTruckDialog:displaySuccessDetails()
 
     -- Vehicle name
     if self.detailVehicleText then
-        self.detailVehicleText:setText(string.format(g_i18n:getText("usedplus_st_vehicleLabel"), self.vehicle:getName() or "Unknown"))
+        self.detailVehicleText:setText(string.format(g_i18n:getText("usedplus_st_vehicleLabel"), self.vehicle:getName() or g_i18n:getText("usedplus_common_unknown")))
     end
 
     -- Requirements

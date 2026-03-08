@@ -155,7 +155,7 @@ function UsedVehiclePreviewDialog:updateDisplay()
 
     -- Vehicle name
     if self.vehicleNameText then
-        self.vehicleNameText:setText(listing.storeItemName or "Unknown Vehicle")
+        self.vehicleNameText:setText(listing.storeItemName or g_i18n:getText("usedplus_common_unknownVehicle"))
     end
 
     -- Price
@@ -575,7 +575,7 @@ function UsedVehiclePreviewDialog:requestInspectionTier(tierIndex)
         self:updateDisplay()
     else
         g_currentMission:showBlinkingWarning(
-            string.format(g_i18n:getText("usedplus_inspection_failed") or "Inspection failed: %s", errorMsg or "Unknown error"),
+            string.format(g_i18n:getText("usedplus_inspection_failed") or "Inspection failed: %s", errorMsg or g_i18n:getText("usedplus_common_unknownError")),
             3000
         )
     end

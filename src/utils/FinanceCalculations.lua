@@ -355,52 +355,6 @@ function FinanceCalculations.calculateLeasePayment(vehiclePrice, residualValue, 
     return math.ceil(depreciationPerMonth + interestPerMonth)
 end
 
---[[
-    Calculate total cost of finance over full term
-    Used for preview in finance dialog
-    Returns: totalCost, totalInterest
-]]
-function FinanceCalculations.calculateTotalCost(principal, monthlyPayment, termMonths)
-    local totalPaid = monthlyPayment * termMonths
-    local totalInterest = totalPaid - principal
-
-    return totalPaid, totalInterest
-end
-
---[[
-    Calculate early payoff amount
-    Includes prepayment penalty
-]]
-function FinanceCalculations.calculatePayoffAmount(currentBalance, monthsPaid, termMonths)
-    local remainingMonths = termMonths - monthsPaid
-
-    -- Determine prepayment penalty rate
-    local penaltyRate = 0.02  -- 2% default
-    if remainingMonths <= 12 then
-        penaltyRate = 0.01     -- 1% if less than 1 year remaining
-    end
-
-    local penalty = currentBalance * penaltyRate
-    local payoffAmount = currentBalance + penalty
-
-    return payoffAmount, penalty
-end
-
---[[
-    Calculate lease termination fee
-    Fee is 50% of (remaining payments + residual value)
-]]
-function FinanceCalculations.calculateLeaseTerminationFee(monthlyPayment, monthsPaid, termMonths, residualValue)
-    local remainingMonths = termMonths - monthsPaid
-    local remainingPayments = monthlyPayment * remainingMonths
-    local totalRemaining = remainingPayments + residualValue
-
-    -- Fee is 50% of total obligations
-    local fee = totalRemaining * 0.50
-
-    return fee
-end
-
 -- NOTE: formatMoney() and formatPercent() removed - use UIHelper.Text instead
 
 --[[
@@ -423,11 +377,11 @@ function FinanceCalculations.getSecurityDepositMonths(creditScore)
     local rating, level = CreditScore.getRating(creditScore)
 
     local deposits = {
-        [1] = { months = 0, name = "Excellent" },   -- 750+: Trusted, no deposit
-        [2] = { months = 1, name = "Good" },        -- 700-749: Minimal deposit
-        [3] = { months = 2, name = "Fair" },        -- 650-699: Standard deposit
-        [4] = { months = 3, name = "Poor" },        -- 600-649: Higher deposit
-        [5] = { months = 6, name = "Very Poor" },   -- <600: Maximum deposit
+        [1] = { months = 0, name = g_i18n:getText("usedplus_creditRating_excellent") },   -- 750+: Trusted, no deposit
+        [2] = { months = 1, name = g_i18n:getText("usedplus_creditRating_good") },        -- 700-749: Minimal deposit
+        [3] = { months = 2, name = g_i18n:getText("usedplus_creditRating_fair") },        -- 650-699: Standard deposit
+        [4] = { months = 3, name = g_i18n:getText("usedplus_creditRating_poor") },        -- 600-649: Higher deposit
+        [5] = { months = 6, name = g_i18n:getText("usedplus_creditRating_veryPoor") },   -- <600: Maximum deposit
     }
 
     local deposit = deposits[level] or deposits[3]  -- Default to Fair if unknown
@@ -472,11 +426,11 @@ function FinanceCalculations.getLandPriceModifier(creditScore)
     local rating, level = CreditScore.getRating(creditScore)
 
     local modifiers = {
-        [1] = { multiplier = 0.95, percent = -5, name = "Excellent" },   -- 750+
-        [2] = { multiplier = 0.98, percent = -2, name = "Good" },        -- 700-749
-        [3] = { multiplier = 1.00, percent = 0, name = "Fair" },         -- 650-699
-        [4] = { multiplier = 1.05, percent = 5, name = "Poor" },         -- 600-649
-        [5] = { multiplier = 1.10, percent = 10, name = "Very Poor" },   -- <600
+        [1] = { multiplier = 0.95, percent = -5, name = g_i18n:getText("usedplus_creditRating_excellent") },   -- 750+
+        [2] = { multiplier = 0.98, percent = -2, name = g_i18n:getText("usedplus_creditRating_good") },        -- 700-749
+        [3] = { multiplier = 1.00, percent = 0, name = g_i18n:getText("usedplus_creditRating_fair") },         -- 650-699
+        [4] = { multiplier = 1.05, percent = 5, name = g_i18n:getText("usedplus_creditRating_poor") },         -- 600-649
+        [5] = { multiplier = 1.10, percent = 10, name = g_i18n:getText("usedplus_creditRating_veryPoor") },   -- <600
     }
 
     local modifier = modifiers[level] or modifiers[3]  -- Default to Fair if unknown
@@ -570,56 +524,6 @@ function FinanceCalculations.calculateSecurityDepositRefund(securityDeposit, dam
     local refundAmount = math.max(0, securityDeposit - totalDeductions)
 
     return refundAmount, deductions
-end
-
---[[
-    Calculate lease renewal terms
-    When renewing, equity rolls over as a discount on the new lease
-
-    @param currentEquity - Equity accumulated from current lease
-    @param newTermMonths - New lease term in months
-    @param monthlyPayment - Current monthly payment
-    @param residualValue - Current residual/buyout value
-    @return newMonthlyPayment - Payment for renewed lease
-    @return equityRollover - Amount of equity applied
-    @return newResidualValue - Updated residual after equity application
-]]
-function FinanceCalculations.calculateLeaseRenewal(currentEquity, newTermMonths, monthlyPayment, residualValue)
-    -- Equity reduces the residual value (buyout price)
-    -- This makes buyout cheaper after renewal
-    local equityRollover = currentEquity
-    local newResidualValue = math.max(0, residualValue - equityRollover)
-
-    -- New monthly payment is recalculated based on remaining value to depreciate
-    -- For simplicity, we'll use same payment rate but could adjust
-    local newMonthlyPayment = monthlyPayment  -- Keep same for consistency
-
-    return newMonthlyPayment, equityRollover, newResidualValue
-end
-
---[[
-    Calculate buyout price with equity applied
-    Buyout = Residual Value - Equity Accumulated
-
-    @param residualValue - Original residual/balloon value
-    @param equityAccumulated - Equity built during lease
-    @return buyoutPrice - Net price to purchase asset
-]]
-function FinanceCalculations.calculateLeaseBuyout(residualValue, equityAccumulated)
-    return math.max(0, residualValue - equityAccumulated)
-end
-
---[[
-    Determine if a deal is a lease that has expired
-    @param deal - The FinanceDeal object
-    @return isExpired - true if lease term is complete
-    @return isLease - true if this is a lease deal
-]]
-function FinanceCalculations.isLeaseExpired(deal)
-    local isLease = (deal.dealType == 2) or (deal.itemType == "lease")
-    local isExpired = deal.monthsPaid >= deal.termMonths
-
-    return isExpired, isLease
 end
 
 UsedPlus.logInfo("FinanceCalculations utility loaded")

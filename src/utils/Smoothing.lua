@@ -33,11 +33,6 @@ end
     @param factor - Smoothing factor (0.1-0.5)
     @return smoothedPercent (clamped 0-100)
 ]]
-function Smoothing.emaPercent(newPercent, oldPercent, factor)
-    local smoothed = Smoothing.ema(newPercent, oldPercent, factor)
-    return math.max(0, math.min(100, smoothed))
-end
-
 --[[
     Smooth a condition value (0.0-1.0 scale)
     @param newCondition - New condition (0-1)

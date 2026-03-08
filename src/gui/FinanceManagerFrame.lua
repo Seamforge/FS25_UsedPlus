@@ -478,7 +478,7 @@ function FinanceManagerFrame:updateStatsSection(farmId, farm)
         assets = CreditScore.calculateAssets(farm)
         debt = CreditScore.calculateDebt(farm)
 
-        local ratingText = rating or "Unknown"
+        local ratingText = rating or g_i18n:getText("usedplus_common_unknown")
         local adjText = interestAdj >= 0 and string.format("+%.1f%% interest", interestAdj) or string.format("%.1f%% interest", interestAdj)
 
         if self.creditScoreValueText then

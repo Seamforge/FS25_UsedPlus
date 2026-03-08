@@ -234,15 +234,15 @@ end
 function UsedPlusMaintenance.getRatingText(reliability)
     -- v2.13.2: Use ASCII-safe icons — FS25 font lacks Unicode ✓/✗/⚠
     if reliability >= 0.8 then
-        return "Good", "[OK]"
+        return g_i18n:getText("usedplus_condition_good"), "[OK]"
     elseif reliability >= 0.6 then
-        return "Acceptable", "[OK]"
+        return g_i18n:getText("usedplus_condition_acceptable"), "[OK]"
     elseif reliability >= 0.4 then
-        return "Below Average", "[!]"
+        return g_i18n:getText("usedplus_condition_belowAverage"), "[!]"
     elseif reliability >= 0.2 then
-        return "Poor", "[!]"
+        return g_i18n:getText("usedplus_condition_poor"), "[!]"
     else
-        return "Critical", "[!!]"
+        return g_i18n:getText("usedplus_condition_critical"), "[!!]"
     end
 end
 
