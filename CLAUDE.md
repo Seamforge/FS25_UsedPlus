@@ -135,7 +135,7 @@ node rosetta.js inspect KEY [KEY]                       # View key across all la
 | `os.time()` / `os.date()` | Not available | Use `g_currentMission.time` / `.environment.currentDay` |
 | `Slider` widgets | Unreliable events | Use quick buttons or `MultiTextOption` |
 | `DialogElement` base | Deprecated | Use `MessageDialog` pattern |
-| `parent="handTool"` | Game prefixes mod name | Use `parent="base"` |
+| `parent="base"` for hand tools | Inherits Motorized spec → shop crash | Use `parent="handTool"` for hand tool types |
 | Mod prefix in own specs | `<specialization name="ModName.Spec"/>` fails | Omit prefix for same-mod |
 | `getWeatherTypeAtTime()` | Requires time param | Use `getCurrentWeatherType()` |
 | `setTextColorByName()` | Doesn't exist | Use `setTextColor(r, g, b, a)` |

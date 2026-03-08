@@ -69,6 +69,16 @@
         vehicleTriggerNode="vehicleTrigger"
     />
 
+    <!-- Minimal motor stub: parent="base" includes Motorized specialization which
+         crashes (nil power) in shop preview if no motor data exists. This stub provides
+         the minimum data Motorized needs. The shop uses SHOP_HANDTOOL_BUY category
+         which skips the vehicle stats display. -->
+    <motorized>
+        <motorConfigurations>
+            <motorConfiguration name="default" hp="0" maxForwardSpeed="0" maxBackwardSpeed="0"/>
+        </motorConfigurations>
+    </motorized>
+
     <!-- TestRunner compliance: foliageBending, wearable, washable -->
     <foliageBending>
         <bendingNode minX="-0.25" maxX="0.25" minZ="-0.25" maxZ="0.25" yOffset="0.0"/>
