@@ -368,37 +368,8 @@ function RepairDialog:updateDisplay()
     end
     UIHelper.Element.setText(self.workSliderLabel, sliderLabel)
 
-    -- Set explanatory text based on mode
-    if isRVBRepair and self.rvbParts then
-        -- v2.15.4: Show only parts needing repair, split across two lines
-        local repairParts = {}
-        for _, part in ipairs(self.rvbParts) do
-            if part.repairreq then
-                local name = part.key:gsub("_", " "):gsub("(%a)([%w]*)", function(a, b) return string.upper(a) .. b end)
-                table.insert(repairParts, string.format("%s %d%%", name, part.condition or 100))
-            end
-        end
-
-        -- Split into two lines (~6 parts each)
-        local mid = math.ceil(#repairParts / 2)
-        local line1 = {}
-        local line2 = {}
-        for i, entry in ipairs(repairParts) do
-            if i <= mid then
-                table.insert(line1, entry)
-            else
-                table.insert(line2, entry)
-            end
-        end
-
-        UIHelper.Element.setText(self.percentExplainText, table.concat(line1, "  |  "))
-        UIHelper.Element.setVisible(self.rvbPartsLine2, #line2 > 0)
-        UIHelper.Element.setText(self.rvbPartsLine2, table.concat(line2, "  |  "))
-    else
-        local explainKey = isRepairMode and "usedplus_rp_percentExplain" or "usedplus_rp_percentExplainPaint"
-        UIHelper.Element.setText(self.percentExplainText, g_i18n:getText(explainKey))
-        UIHelper.Element.setVisible(self.rvbPartsLine2, false)
-    end
+    -- Populate component grid (unified: UsedPlus maintenance + RVB components)
+    self:updateComponentGrid(isRepairMode)
 
     -- Current condition displays
     if isRVBRepair then
@@ -584,6 +555,108 @@ function RepairDialog:onWorkSliderChanged(sliderOrValue, value)
 end
 
 --[[
+    Populate the unified component grid with UsedPlus maintenance + RVB components.
+    Shows all vehicle subsystem conditions in a 2-column layout.
+]]
+function RepairDialog:updateComponentGrid(isRepairMode)
+    local NUM_SLOTS = 16
+    local components = {}
+
+    -- Collect repairable components only (no fluid levels — those aren't repair items)
+    local hasRVB = self.vehicle and self.vehicle.spec_faultData and self.vehicle.spec_faultData.parts
+    local maintSpec = self.vehicle and self.vehicle.spec_usedPlusMaintenance
+
+    -- UsedPlus maintenance components (only actual repairable items, not fluid levels)
+    if maintSpec and isRepairMode and not hasRVB then
+        -- Only show these in non-RVB mode; RVB handles its own component list
+        local tirePct = math.floor((maintSpec.tireCondition or 1) * 100)
+        table.insert(components, { name = g_i18n:getText("usedplus_comp_tires") or "Tires", condition = tirePct, bad = maintSpec.hasFlatTire or tirePct < 30 })
+        if maintSpec.hasFuelLeak then
+            table.insert(components, { name = g_i18n:getText("usedplus_comp_fuelSystem") or "Fuel System", condition = 0, bad = true })
+        end
+    end
+
+    -- RVB components: only parts toggled for repair, skip tires and our fake hydraulic
+    -- Use vehicle:getPartsPercentage() for accurate condition (not part.condition which doesn't exist)
+    local TIRE_PARTS = { TIREFL = true, TIREFR = true, TIRERL = true, TIRERR = true }
+    if hasRVB and isRepairMode then
+        for partKey, part in pairs(self.vehicle.spec_faultData.parts) do
+            if part.repairreq and partKey ~= "USEDPLUS_HYDRAULIC" and not TIRE_PARTS[partKey] then
+                -- Get condition from RVB's actual percentage calculation
+                local conditionPct = 100
+                if self.vehicle.getPartsPercentage then
+                    local ok, pct = pcall(self.vehicle.getPartsPercentage, self.vehicle, partKey)
+                    if ok and pct then
+                        -- RVB returns wear% (0=new, 100=worn); convert to condition% (100=new, 0=worn)
+                        conditionPct = math.max(0, math.floor(100 - pct))
+                    end
+                end
+                -- Display name: try RVB's i18n, fallback to our own readable names
+                local RVB_PART_NAMES = {
+                    ENGINE = "Engine", THERMOSTAT = "Thermostat", GENERATOR = "Generator",
+                    BATTERY = "Battery", SELFSTARTER = "Starter", GLOWPLUG = "Glow Plug",
+                    LIGHTINGS = "Lighting", WIPERS = "Wipers"
+                }
+                local rvbName = g_i18n:getText("RVB_faultText_" .. partKey)
+                local name = RVB_PART_NAMES[partKey] or partKey
+                if rvbName and not rvbName:find("Missing") and rvbName ~= ("RVB_faultText_" .. partKey) then
+                    name = rvbName
+                end
+                table.insert(components, { name = name, condition = conditionPct, bad = true })
+            end
+        end
+
+        -- Include UsedPlus Hydraulic System if toggled for repair
+        if RVBWorkshopIntegration and RVBWorkshopIntegration.hydraulicRepairRequested and maintSpec then
+            local hydRelPct = math.floor((maintSpec.hydraulicReliability or 1) * 100)
+            table.insert(components, {
+                name = g_i18n:getText("usedplus_hydraulic_system") or "Hydraulic System",
+                condition = hydRelPct, bad = true
+            })
+        end
+    end
+
+    -- Collect vanilla damage info (when not in RVB mode and no maintenance spec)
+    if #components == 0 and isRepairMode then
+        local dmgPct = math.floor((1 - (self.currentDamage or 0)) * 100)
+        table.insert(components, { name = g_i18n:getText("usedplus_rp_mechanical") or "Mechanical", condition = dmgPct, bad = dmgPct < 50 })
+    end
+    if not isRepairMode then
+        local paintPct = math.floor((1 - (self.currentWear or 0)) * 100)
+        table.insert(components, { name = g_i18n:getText("usedplus_rp_paint") or "Paint", condition = paintPct, bad = paintPct < 50 })
+    end
+
+    -- Sort: bad components first, then by condition ascending
+    table.sort(components, function(a, b)
+        if a.bad ~= b.bad then return a.bad end
+        return a.condition < b.condition
+    end)
+
+    -- Populate grid slots (fill left column first, then right)
+    for i = 1, NUM_SLOTS do
+        local slot = self["compSlot" .. i]
+        if slot then
+            local comp = components[i]
+            if comp then
+                -- No prefix indicator — color alone communicates state (red/yellow/green)
+                slot:setText(string.format("%s  %d%%", comp.name, comp.condition))
+                if comp.bad then
+                    slot:setTextColor(1, 0.4, 0.3, 1)        -- Red for needs repair
+                elseif comp.condition < 50 then
+                    slot:setTextColor(1, 0.8, 0.2, 1)        -- Yellow for worn
+                else
+                    slot:setTextColor(0.4, 0.9, 0.4, 1)      -- Green for good
+                end
+                slot:setVisible(true)
+            else
+                slot:setText("")
+                slot:setVisible(false)
+            end
+        end
+    end
+end
+
+--[[
      Pay cash button clicked - shows confirmation dialog first
 ]]
 function RepairDialog:onPayCash()
@@ -662,20 +735,31 @@ function RepairDialog:onPayCashConfirmed(yes)
         local callback = VehicleSellingPointExtension.pendingRepairCallback
         local target = VehicleSellingPointExtension.pendingRepairTarget
 
+        UsedPlus.logDebug(string.format("RepairDialog: RVB path — callback=%s, target=%s, rvbCost=%s",
+            tostring(callback), tostring(target), tostring(self.rvbRepairCost)))
+
         if callback then
             -- Trigger RVB's repair (deducts money + repairs components)
-            callback(target, true)
-            UsedPlus.logDebug("RepairDialog: Triggered RVB repair callback")
+            local ok, err = pcall(callback, target, true)
+            if ok then
+                UsedPlus.logDebug("RepairDialog: Triggered RVB repair callback successfully")
+            else
+                UsedPlus.logError("RepairDialog: RVB repair callback FAILED: " .. tostring(err))
+            end
+        else
+            UsedPlus.logWarn("RepairDialog: pendingRepairCallback is NIL — RVB component repair will NOT fire!")
         end
 
-        -- Also trigger our side effects (seizures, fluids, steering pull) with $0 cost
-        -- RVB already handled money deduction, so we pass 0 for totalCost
+        -- Trigger side effects (seizures, fluids, steering pull) with epsilon repair
+        -- Epsilon (0.001) triggers all side-effect guards (> 0) but does negligible
+        -- base damage repair. Real base damage repair is handled gradually by
+        -- UsedPlusMaintenance.onUpdate alongside hydraulic interpolation.
         RepairVehicleEvent.sendToServer(
             self.vehicle,
             self.farmId,
-            1.0,  -- Full repair percent to trigger all side effects
-            0,    -- No repaint
-            0,    -- $0 cost (RVB already deducted)
+            0.001,  -- Epsilon: triggers side effects, negligible base damage change
+            0,      -- No repaint
+            0,      -- $0 cost (RVB already deducted)
             false
         )
 
@@ -869,7 +953,8 @@ function RepairDialog:onFinanceRepair()
         capturedTotalCost,
         capturedRepairPercent,
         capturedRepaintPercent,
-        capturedMode
+        capturedMode,
+        self.rvbRepairCost  -- Pass RVB context so finance path can trigger RVB repair
     )
 end
 

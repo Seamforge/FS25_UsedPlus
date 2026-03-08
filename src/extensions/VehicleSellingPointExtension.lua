@@ -452,14 +452,10 @@ function VehicleSellingPointExtension.hookShowYesNoDialog()
                 end
 
                 -- v2.15.4: Pass RVB's repair cost so our dialog shows the correct price
+                -- getRepairPrice_RVBClone is hooked to include hydraulic cost when toggled
                 local rvbRepairCost = nil
                 if isRepair and ModCompatibility and ModCompatibility.rvbInstalled and vehicle.getRepairPrice_RVBClone then
                     rvbRepairCost = vehicle:getRepairPrice_RVBClone() or 0
-                    -- Include hydraulic cost if toggled on
-                    if RVBWorkshopIntegration and RVBWorkshopIntegration.hydraulicRepairRequested then
-                        local hydCost = RVBWorkshopIntegration:calculateHydraulicRepairCost(vehicle)
-                        rvbRepairCost = rvbRepairCost + (hydCost or 0)
-                    end
                 end
 
                 -- Show our custom dialog
@@ -950,12 +946,27 @@ function VehicleSellingPointExtension.hookAllDialogs()
                             end
 
                             -- v2.15.4: Pass RVB's repair cost so our dialog shows the correct price
+                            -- getRepairPrice_RVBClone is hooked to include hydraulic cost when toggled
                             local rvbRepairCost = nil
                             if isRepair and ModCompatibility and ModCompatibility.rvbInstalled and vehicle.getRepairPrice_RVBClone then
                                 rvbRepairCost = vehicle:getRepairPrice_RVBClone() or 0
-                                if RVBWorkshopIntegration and RVBWorkshopIntegration.hydraulicRepairRequested then
-                                    local hydCost = RVBWorkshopIntegration:calculateHydraulicRepairCost(vehicle)
-                                    rvbRepairCost = rvbRepairCost + (hydCost or 0)
+
+                                -- Capture RVB's repair callback from the workshop dialog.
+                                -- We can't hook the button (FS25 stores function refs at XML parse time),
+                                -- so we look up the dialog at interception time instead.
+                                local rvbDialog = nil
+                                if g_gui and g_gui.guis and g_gui.guis.rvbWorkshopDialog then
+                                    rvbDialog = g_gui.guis.rvbWorkshopDialog.target or g_gui.guis.rvbWorkshopDialog
+                                end
+                                if rvbDialog == nil and _G.rvbWorkshopDialog then
+                                    rvbDialog = _G.rvbWorkshopDialog.INSTANCE or _G.rvbWorkshopDialog
+                                end
+                                if rvbDialog and rvbDialog.onYesNoRepairDialog then
+                                    VehicleSellingPointExtension.pendingRepairCallback = rvbDialog.onYesNoRepairDialog
+                                    VehicleSellingPointExtension.pendingRepairTarget = rvbDialog
+                                    UsedPlus.logDebug(string.format("Captured RVB repair callback from dialog: %s", tostring(rvbDialog)))
+                                else
+                                    UsedPlus.logWarn("Could not find RVB workshop dialog to capture repair callback")
                                 end
                             end
 

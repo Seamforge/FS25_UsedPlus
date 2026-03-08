@@ -10,7 +10,7 @@
     <GuiElement profile="newLayer" />
     <Bitmap profile="dialogFullscreenBg" id="dialogBg" />
 
-    <GuiElement profile="dialogBg" id="dialogElement" size="780px 640px">
+    <GuiElement profile="dialogBg" id="dialogElement" size="780px 740px">
         <ThreePartBitmap profile="fs25_dialogBgMiddle" />
         <ThreePartBitmap profile="fs25_dialogBgTop" />
         <ThreePartBitmap profile="fs25_dialogBgBottom" />
@@ -38,9 +38,9 @@
                         <Text profile="rpStatusLabel" id="repairStatusLabel" position="0px 0px" text="$l10n_usedplus_rp_mechanical"/>
                         <Slider profile="rpProgressBar" id="currentConditionBar" position="100px 0px" disabled="true"/>
                         <Text profile="rpConditionValue" id="currentConditionText" position="215px 0px" text=""/>
-                        <!-- RVB: Single wide text spanning the full area -->
-                        <Text profile="rpRVBStatusLine" id="rvbStatusText" position="0px 0px" text=""/>
                     </GuiElement>
+                    <!-- RVB: Component status line, positioned beneath vehicle name -->
+                    <Text profile="rpRVBStatusLine" id="rvbStatusText" position="120px -40px" text=""/>
 
                     <!-- Repaint Status (shown in repaint mode) -->
                     <GuiElement id="repaintStatusSection" position="120px -40px">
@@ -51,61 +51,70 @@
             </GuiElement>
 
             <!-- ========== SECTION 2: Service Options ========== -->
-            <!-- After Status (145px) + 10px gap = -60 - 145 - 15 = -220 -->
             <GuiElement profile="rpWorkSection" id="workSection" position="0px -220px">
                 <Bitmap profile="rpWorkSectionBg" position="0px 0px"/>
                 <Text profile="rpSectionHeader" id="workSectionTitle" position="0px -5px" text="$l10n_usedplus_rp_sectionRepair"/>
-                <Text profile="rpHelpText" id="workSliderLabel" position="0px -28px" text="$l10n_usedplus_rp_selectAmount"/>
 
-                <!-- Quick Percentage Buttons - Styled like FinanceManagerFrame -->
-                <GuiElement profile="rpButtonRow" position="0px -58px">
-                    <!-- 25% Button -->
+                <!-- Component Grid: 2 columns × 8 rows = 16 slots -->
+                <!-- Left column: x=-170px, Right column: x=170px -->
+                <Text profile="rpCompSlot" id="compSlot1"  position="-170px -28px" text=""/>
+                <Text profile="rpCompSlot" id="compSlot2"  position="170px -28px" text=""/>
+                <Text profile="rpCompSlot" id="compSlot3"  position="-170px -44px" text=""/>
+                <Text profile="rpCompSlot" id="compSlot4"  position="170px -44px" text=""/>
+                <Text profile="rpCompSlot" id="compSlot5"  position="-170px -60px" text=""/>
+                <Text profile="rpCompSlot" id="compSlot6"  position="170px -60px" text=""/>
+                <Text profile="rpCompSlot" id="compSlot7"  position="-170px -76px" text=""/>
+                <Text profile="rpCompSlot" id="compSlot8"  position="170px -76px" text=""/>
+                <Text profile="rpCompSlot" id="compSlot9"  position="-170px -92px" text=""/>
+                <Text profile="rpCompSlot" id="compSlot10" position="170px -92px" text=""/>
+                <Text profile="rpCompSlot" id="compSlot11" position="-170px -108px" text=""/>
+                <Text profile="rpCompSlot" id="compSlot12" position="170px -108px" text=""/>
+                <Text profile="rpCompSlot" id="compSlot13" position="-170px -124px" text=""/>
+                <Text profile="rpCompSlot" id="compSlot14" position="170px -124px" text=""/>
+                <Text profile="rpCompSlot" id="compSlot15" position="-170px -140px" text=""/>
+                <Text profile="rpCompSlot" id="compSlot16" position="170px -140px" text=""/>
+
+                <!-- Repair amount selection -->
+                <Text profile="rpHelpText" id="workSliderLabel" position="0px -158px" text="$l10n_usedplus_rp_selectAmount"/>
+
+                <!-- Quick Percentage Buttons -->
+                <GuiElement profile="rpButtonRow" position="0px -178px">
                     <Bitmap profile="rpQuickBtnBg" id="btn25Bg" position="-185px 0px"/>
                     <Button profile="rpQuickBtnHit" id="quickButton25" onClick="onQuickButton25" position="-185px 0px"/>
                     <Text profile="rpQuickBtnText" id="btn25Text" position="-185px -5px" text="25%"/>
 
-                    <!-- 50% Button -->
                     <Bitmap profile="rpQuickBtnBg" id="btn50Bg" position="-60px 0px"/>
                     <Button profile="rpQuickBtnHit" id="quickButton50" onClick="onQuickButton50" position="-60px 0px"/>
                     <Text profile="rpQuickBtnText" id="btn50Text" position="-60px -5px" text="50%"/>
 
-                    <!-- 75% Button -->
                     <Bitmap profile="rpQuickBtnBg" id="btn75Bg" position="65px 0px"/>
                     <Button profile="rpQuickBtnHit" id="quickButton75" onClick="onQuickButton75" position="65px 0px"/>
                     <Text profile="rpQuickBtnText" id="btn75Text" position="65px -5px" text="75%"/>
 
-                    <!-- 100% Button (highlighted as recommended) -->
                     <Bitmap profile="rpQuickBtnBgFull" id="btn100Bg" position="190px 0px"/>
                     <Button profile="rpQuickBtnHit" id="quickButton100" onClick="onQuickButton100" position="190px 0px"/>
                     <Text profile="rpQuickBtnText" id="btn100Text" position="190px -5px" text="100%"/>
                 </GuiElement>
 
-                <!-- Explanatory text below buttons -->
-                <Text profile="rpExplainText" id="percentExplainText" position="0px -95px" text="$l10n_usedplus_rp_percentExplain"/>
-                <!-- RVB: Second line for overflow parts -->
-                <Text profile="rpExplainText" id="rvbPartsLine2" position="0px -109px" text=""/>
-
                 <!-- Selection Display - 3 columns -->
-                <Text profile="rpLabel" position="-220px -118px" text="$l10n_usedplus_rp_selected"/>
-                <Text profile="rpPercentValue" id="workPercentText" position="-220px -138px" text=""/>
+                <Text profile="rpLabel" position="-220px -218px" text="$l10n_usedplus_rp_selected"/>
+                <Text profile="rpPercentValue" id="workPercentText" position="-220px -238px" text=""/>
 
-                <Text profile="rpLabel" position="0px -118px" text="$l10n_usedplus_rp_cost"/>
-                <Text profile="rpCostValue" id="workCostText" position="0px -138px" text=""/>
+                <Text profile="rpLabel" position="0px -218px" text="$l10n_usedplus_rp_cost"/>
+                <Text profile="rpCostValue" id="workCostText" position="0px -238px" text=""/>
 
-                <Text profile="rpLabel" position="220px -118px" text="$l10n_usedplus_rp_after"/>
-                <Text profile="rpAfterValue" id="workAfterText" position="220px -138px" text=""/>
+                <Text profile="rpLabel" position="220px -218px" text="$l10n_usedplus_rp_after"/>
+                <Text profile="rpAfterValue" id="workAfterText" position="220px -238px" text=""/>
 
                 <!-- v2.7.0: Additional repairs included (fuel leak, flat tire) -->
-                <Text profile="rpAdditionalRepairs" id="additionalRepairsText" position="0px -160px" text=""/>
+                <Text profile="rpAdditionalRepairs" id="additionalRepairsText" position="0px -260px" text=""/>
             </GuiElement>
 
             <!-- ========== SECTION 3: Payment Summary ========== -->
-            <!-- After Work (170px) + 15px gap = -220 - 170 - 15 = -405 -->
-            <GuiElement profile="rpPaymentSection" position="0px -405px">
+            <GuiElement profile="rpPaymentSection" position="0px -505px">
                 <Bitmap profile="rpPaymentSectionBg" position="0px 0px"/>
                 <Text profile="rpSectionHeader" id="paymentTitle" position="0px -5px" text="$l10n_usedplus_rp_sectionPayment"/>
 
-                <!-- Two-column layout: Cost | Result (game UI shows player money) -->
                 <Text profile="rpTotalLabel" position="-150px -35px" text="$l10n_usedplus_rp_totalCost"/>
                 <Text profile="rpTotalValue" id="totalCostText" position="-150px -60px" text=""/>
 
@@ -114,8 +123,7 @@
             </GuiElement>
 
             <!-- ========== INFO TEXT ========== -->
-            <!-- After Payment (110px) + 15px gap = -405 - 110 - 15 = -530 -->
-            <Text profile="rpInfoText" position="0px -530px" text="$l10n_usedplus_rp_infoText"/>
+            <Text profile="rpInfoText" position="0px -630px" text="$l10n_usedplus_rp_infoText"/>
 
         </GuiElement>
 
@@ -136,7 +144,7 @@
         </Profile>
 
         <Profile name="rpWorkSection" extends="emptyPanel" with="anchorTopCenter">
-            <size value="720px 170px"/>
+            <size value="720px 270px"/>
         </Profile>
 
         <Profile name="rpPaymentSection" extends="emptyPanel" with="anchorTopCenter">
@@ -152,7 +160,7 @@
 
         <!-- Work: Slightly lighter with blue tint (service/action) -->
         <Profile name="rpWorkSectionBg" extends="baseReference" with="anchorTopCenter">
-            <size value="720px 170px"/>
+            <size value="720px 270px"/>
             <imageColor value="0.06 0.08 0.12 0.9"/>
         </Profile>
 
@@ -267,13 +275,19 @@
             <textBold value="true"/>
         </Profile>
 
+        <!-- Component grid slot: 2-column layout for unified component listing -->
+        <Profile name="rpCompSlot" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="320px 16px"/>
+            <textSize value="12px"/>
+            <textColor value="0.7 0.7 0.7 1"/>
+        </Profile>
+
         <!-- RVB: Wide status line spanning full repair status area -->
-        <Profile name="rpRVBStatusLine" extends="fs25_textDefault" with="anchorTopLeft">
+        <Profile name="rpRVBStatusLine" extends="fs25_textDefault" with="anchorTopCenter">
             <size value="350px 20px"/>
             <textSize value="14px"/>
             <textBold value="true"/>
             <textColor value="0.9 0.9 0.9 1"/>
-            <textAlignment value="left"/>
         </Profile>
 
         <!-- ========== WORK VALUES ========== -->

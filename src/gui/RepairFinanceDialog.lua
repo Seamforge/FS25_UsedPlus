@@ -128,7 +128,7 @@ end
     @param repaintPercent - Repaint percentage (0-100)
     @param mode - "repair" or "repaint"
 ]]
-function RepairFinanceDialog:setData(vehicle, farmId, repairCost, repairPercent, repaintPercent, mode)
+function RepairFinanceDialog:setData(vehicle, farmId, repairCost, repairPercent, repaintPercent, mode, rvbRepairCost)
     -- v2.6.2: Check master repair system toggle
     if UsedPlusSettings and UsedPlusSettings:get("enableRepairSystem") == false then
         UsedPlus.logDebug("RepairFinanceDialog: Repair system disabled in settings, canceling")
@@ -142,6 +142,7 @@ function RepairFinanceDialog:setData(vehicle, farmId, repairCost, repairPercent,
     self.repairPercent = repairPercent
     self.repaintPercent = repaintPercent
     self.mode = mode or "repair"
+    self.rvbRepairCost = rvbRepairCost or 0
     self.storeItem = nil
 
     -- Get vehicle name using consolidated utility
@@ -392,19 +393,68 @@ function RepairFinanceDialog:onAcceptFinance()
         return
     end
 
-    -- Send repair event with finance flag
-    -- Note: repairPercent and repaintPercent are already mode-specific (0 for inactive mode)
-    RepairVehicleEvent.sendToServer(
-        self.vehicle,
-        self.farmId,
-        self.repairPercent / 100,
-        self.repaintPercent / 100,
-        self.repairCost,
-        true,  -- Financed
-        self.termMonths,
-        self.monthlyPayment,
-        downPayment
-    )
+    if self.rvbRepairCost and self.rvbRepairCost > 0 and VehicleSellingPointExtension then
+        -- RVB workshop finance path:
+        -- RVB's callback deducts cash immediately — but we're financing, so we
+        -- temporarily add money for RVB to deduct, then create the finance deal.
+        -- Net result: farm money unchanged, repair starts, player pays over time.
+        local callback = VehicleSellingPointExtension.pendingRepairCallback
+        local target = VehicleSellingPointExtension.pendingRepairTarget
+
+        if callback then
+            -- Signal to hookRepairCompletion that this is financed
+            -- (so it doesn't deduct hydraulic cost separately — it's in the deal)
+            RVBWorkshopIntegration.isFinancedRepair = true
+
+            -- Temporarily fund the RVB deduction
+            g_currentMission:addMoney(self.rvbRepairCost, self.farmId, MoneyType.VEHICLE_REPAIR, true)
+
+            -- Trigger RVB callback (repairs components + deducts the same amount → net zero)
+            local ok, err = pcall(callback, target, true)
+            if ok then
+                UsedPlus.logInfo(string.format("RepairFinanceDialog: RVB callback triggered, temporary fund $%d added and deducted", self.rvbRepairCost))
+            else
+                -- Callback failed — remove the temporary funds
+                g_currentMission:addMoney(-self.rvbRepairCost, self.farmId, MoneyType.VEHICLE_REPAIR, true)
+                UsedPlus.logError("RepairFinanceDialog: RVB callback failed: " .. tostring(err))
+            end
+
+            RVBWorkshopIntegration.isFinancedRepair = false
+        else
+            UsedPlus.logWarn("RepairFinanceDialog: pendingRepairCallback is NIL — RVB component repair will NOT fire!")
+        end
+
+        -- Create finance deal + epsilon base repair for side effects
+        -- Gradual handler (pendingHydraulicRepair) handles base damage + hydraulic interpolation
+        RepairVehicleEvent.sendToServer(
+            self.vehicle,
+            self.farmId,
+            0.001,  -- Epsilon: side effects only, gradual handler does base damage
+            0,      -- No repaint via epsilon
+            self.repairCost,  -- Full cost for the finance deal
+            true,   -- Financed
+            self.termMonths,
+            self.monthlyPayment,
+            downPayment
+        )
+
+        -- Clear stored callback
+        VehicleSellingPointExtension.pendingRepairCallback = nil
+        VehicleSellingPointExtension.pendingRepairTarget = nil
+    else
+        -- Vanilla finance path
+        RepairVehicleEvent.sendToServer(
+            self.vehicle,
+            self.farmId,
+            self.repairPercent / 100,
+            self.repaintPercent / 100,
+            self.repairCost,
+            true,  -- Financed
+            self.termMonths,
+            self.monthlyPayment,
+            downPayment
+        )
+    end
 
     -- Close dialog
     self:close()
