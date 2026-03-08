@@ -1398,6 +1398,124 @@ function UsedPlusMaintenance:onUpdate(dt, isActiveForInput, isActiveForInputIgno
         end
     end
 
+    -- ========== GRADUAL WORKSHOP REPAIR (RVB integration) ==========
+    -- All systems (hydraulic, engine, fluids, base damage) repair gradually
+    -- alongside RVB's time-based component repair over the same time window.
+    if spec.pendingHydraulicRepair then
+        -- Keep vehicle active so onUpdate keeps firing during repair
+        self:raiseActive()
+
+        local pending = spec.pendingHydraulicRepair
+        local rvb = self.spec_faultData
+        local env = g_currentMission.environment
+        local nowMinutes = (env.currentDay * 24 * 60) + (env.currentHour * 60) + env.currentMinute
+        local totalDuration = pending.finishMinutes - pending.startMinutes
+        local elapsed = nowMinutes - pending.startMinutes
+        local progress = math.min(1.0, math.max(0, elapsed / totalDuration))
+
+        -- Check if repair is done.
+        -- useTimeProgress: hydraulic-only repair (no RVB parts) — use elapsed time only.
+        -- Otherwise sync with RVB's repair state (state == NONE == 0 means finished).
+        local repairDone = false
+        if pending.useTimeProgress then
+            repairDone = (progress >= 1.0)
+        elseif rvb and rvb.repair and rvb.repair.state then
+            repairDone = (rvb.repair.state == 0)
+        else
+            repairDone = (progress >= 1.0)
+        end
+        if repairDone then progress = 1.0 end
+
+        -- Lerp hydraulic reliability
+        local hydRange = pending.targetHydraulic - pending.startHydraulic
+        spec.hydraulicReliability = pending.startHydraulic + (hydRange * progress)
+
+        -- Lerp engine reliability
+        local engRange = pending.targetEngine - pending.startEngine
+        spec.engineReliability = pending.startEngine + (engRange * progress)
+
+        -- Lerp base vehicle damage (reduce toward 0)
+        if pending.startDamage and pending.startDamage > 0.001 then
+            local targetDamage = pending.startDamage * (1.0 - progress)
+            if self.getDamageAmount and self.addDamageAmount then
+                local currentDamage = self:getDamageAmount() or 0
+                local desiredReduction = currentDamage - targetDamage
+                if desiredReduction > 0.001 then
+                    self:addDamageAmount(-desiredReduction, true)
+                end
+            end
+        end
+
+        -- Lerp fluid levels (only upward — don't reduce if already full)
+        if pending.startHydFluid < 1.0 then
+            spec.hydraulicFluidLevel = pending.startHydFluid + ((1.0 - pending.startHydFluid) * progress)
+        end
+        if pending.startOil < 1.0 then
+            spec.oilLevel = pending.startOil + ((1.0 - pending.startOil) * progress)
+        end
+
+        -- Deduct cost at halfway point (RVB deducts at completion, we split the difference)
+        if not pending.costDeducted and progress >= 0.5 then
+            if pending.cost and pending.cost > 0 and pending.farmId then
+                if g_currentMission:getMoney(pending.farmId) >= pending.cost then
+                    g_currentMission:addMoney(-pending.cost, pending.farmId, MoneyType.VEHICLE_RUNNING_COSTS, true)
+                    UsedPlus.logInfo(string.format("Hydraulic repair cost deducted: $%d", pending.cost))
+                end
+            end
+            pending.costDeducted = true
+        end
+
+        -- Finalize when done
+        if repairDone then
+            -- Snap to exact targets
+            spec.hydraulicReliability = pending.targetHydraulic
+            spec.engineReliability = pending.targetEngine
+            -- Snap base damage to 0 (fully repaired)
+            if pending.startDamage and pending.startDamage > 0.001 then
+                if self.getDamageAmount and self.addDamageAmount then
+                    local remaining = self:getDamageAmount() or 0
+                    if remaining > 0.001 then
+                        self:addDamageAmount(-remaining, true)
+                    end
+                end
+            end
+            if pending.startHydFluid < 1.0 then
+                spec.hydraulicFluidLevel = 1.0
+                spec.hasHydraulicLeak = false
+                spec.hydraulicLeakSeverity = 0
+            end
+            if pending.startOil < 1.0 then
+                spec.oilLevel = 1.0
+                spec.hasOilLeak = false
+                spec.oilLeakSeverity = 0
+            end
+            -- Deduct if not yet done (e.g., very fast repair)
+            if not pending.costDeducted and pending.cost and pending.cost > 0 and pending.farmId then
+                if g_currentMission:getMoney(pending.farmId) >= pending.cost then
+                    g_currentMission:addMoney(-pending.cost, pending.farmId, MoneyType.VEHICLE_RUNNING_COSTS, true)
+                end
+            end
+            UsedPlus.logInfo(string.format(
+                "Hydraulic repair completed — hydraulic %.0f%%, engine %.0f%%",
+                spec.hydraulicReliability * 100, spec.engineReliability * 100))
+            -- Add entry to RVB's service manual
+            if RVBserviceManual_Event and RVBserviceManual_Event.sendEvent then
+                local entry = {
+                    entryType = 3,  -- REPAIR.SERVICE_MANUAL
+                    entryTime = env.currentDay,
+                    operatingHours = rvb and rvb.totaloperatingHours or 0,
+                    odometer = 0,
+                    resultKey = "RVB_WorkshopMessage_repairDone",
+                    errorList = {"UsedPlus Hydraulic System"},
+                    cost = pending.cost or 0
+                }
+                RVBserviceManual_Event.sendEvent(self, entry)
+                UsedPlus.logDebug("Added hydraulic repair to RVB service manual")
+            end
+            spec.pendingHydraulicRepair = nil
+        end
+    end
+
     -- ========== PER-FRAME CHECKS ==========
     local config = UsedPlusMaintenance.CONFIG
 

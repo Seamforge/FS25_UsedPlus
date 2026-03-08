@@ -67,9 +67,45 @@ function RVBWorkshopIntegration:hookRepairButton(dialog)
     -- Store original for fallback
     dialog.usedPlusOriginalOnClickRepair = origOnClickRepair
 
-    -- Replace with our redirect
+    -- Replace with our redirect (dialog method — may not fire due to raiseCallback caching)
     dialog.onClickRepair = function(self, ...)
         RVBWorkshopIntegration:onRVBRepairButtonClick(self)
+    end
+
+    -- CRITICAL: Also replace the button element's onClickCallback directly.
+    -- FS25's raiseCallback("onClickCallback") resolves button["onClickCallback"] at click time.
+    -- When only hydraulic needs repair, RVB's onClickRepair bails (no faultListText),
+    -- so we need our own handler to show the repair dialog.
+    if dialog.repairButton then
+        local origBtnCallback = dialog.repairButton.onClickCallback
+        dialog.repairButton.onClickCallback = function(target, element, ...)
+            -- Check if only hydraulic needs repair (no RVB parts selected)
+            local hasRVBParts = false
+            local vehicle = dialog.vehicle
+            if vehicle and vehicle.spec_faultData and vehicle.spec_faultData.parts then
+                for _, key in ipairs(g_vehicleBreakdownsPartKeys or {}) do
+                    local part = vehicle.spec_faultData.parts[key]
+                    if part and part.repairreq then
+                        hasRVBParts = true
+                        break
+                    end
+                end
+            end
+
+            if not hasRVBParts and RVBWorkshopIntegration.hydraulicRepairRequested then
+                -- No RVB parts need repair but hydraulic is toggled
+                -- Show repair dialog directly, bypassing RVB's onClickRepair gates
+                UsedPlus.logInfo("RVBRepairButton: Hydraulic-only repair — bypassing RVB onClickRepair")
+                RVBWorkshopIntegration:showHydraulicOnlyRepair(dialog)
+                return
+            end
+
+            -- Normal case: RVB parts need repair, call original (goes through RVB flow)
+            if origBtnCallback then
+                origBtnCallback(target, element, ...)
+            end
+        end
+        UsedPlus.logInfo("RVBWorkshopIntegration: Replaced repairButton.onClickCallback")
     end
 
     dialog.usedPlusRepairHooked = true
@@ -111,52 +147,79 @@ function RVBWorkshopIntegration:hookRepairCompletion(dialog)
     end
 
     dialog.onYesNoRepairDialog = function(self, yes)
-        -- Call original first (this does the actual RVB repair)
+        -- Call original first (this starts the RVB time-based repair)
         origOnYesNoRepair(self, yes)
 
-        -- If player confirmed repair and hydraulic toggle was on, repair hydraulics
-        if yes and self.vehicle and RVBWorkshopIntegration.hydraulicRepairRequested then
+        -- Any workshop repair always includes hydraulic/engine/fluid restoration.
+        -- Hydraulics degrade over time — a full workshop repair restores them to
+        -- their current max ceiling (which itself degrades with vehicle history).
+        -- The toggle only controls whether the player pays extra for hydraulic repair.
+        if yes and self.vehicle then
             local spec = self.vehicle.spec_usedPlusMaintenance
-            if spec then
-                -- Deduct hydraulic repair cost from farm
-                local hydraulicCost = RVBWorkshopIntegration.lastHydraulicRepairCost or 0
-                if hydraulicCost > 0 then
-                    local farmId = g_currentMission:getFarmId()
-                    if g_currentMission:getMoney(farmId) >= hydraulicCost then
-                        g_currentMission:addMoney(-hydraulicCost, farmId, MoneyType.VEHICLE_RUNNING_COSTS, true)
-                        UsedPlus.logInfo(string.format(
-                            "RVBWorkshopIntegration: Deducted $%d for hydraulic repair", hydraulicCost))
-                    end
+            local rvb = self.vehicle.spec_faultData
+            if spec and rvb then
+                -- Only charge hydraulic cost if toggle was checked
+                local hydraulicCost = 0
+                if RVBWorkshopIntegration.hydraulicRepairRequested then
+                    hydraulicCost = RVBWorkshopIntegration.lastHydraulicRepairCost or 0
                 end
+                local env = g_currentMission.environment
 
-                -- Full hydraulic repair — restore to max ceiling
-                local oldHydraulic = spec.hydraulicReliability or 1.0
+                -- Capture starting values for interpolation
                 local maxHydraulic = spec.maxHydraulicDurability or spec.maxReliabilityCeiling or 1.0
-                spec.hydraulicReliability = maxHydraulic
-
-                -- Engine gets a small boost from the work
-                local oldEngine = spec.engineReliability or 1.0
                 local maxEngine = spec.maxEngineDurability or spec.maxReliabilityCeiling or 1.0
-                spec.engineReliability = math.min(maxEngine, oldEngine + 0.05)
 
-                -- Top up fluids as part of repair
-                if spec.hydraulicFluidLevel and spec.hydraulicFluidLevel < 1.0 then
-                    spec.hydraulicFluidLevel = 1.0
-                    spec.hasHydraulicLeak = false
-                    spec.hydraulicLeakSeverity = 0
+                -- Convert start and finish times to total minutes for progress calc
+                local startMinutes = (env.currentDay * 24 * 60) + (env.currentHour * 60) + env.currentMinute
+                local finishMinutes = startMinutes + 60  -- fallback: 1 hour
+                if rvb.repair and rvb.repair.finishDay then
+                    finishMinutes = (rvb.repair.finishDay * 24 * 60)
+                        + ((rvb.repair.finishHour or 0) * 60)
+                        + (rvb.repair.finishMinute or 0)
                 end
-                if spec.oilLevel and spec.oilLevel < 1.0 then
-                    spec.oilLevel = 1.0
-                    spec.hasOilLeak = false
-                    spec.oilLeakSeverity = 0
+                -- Ensure at least 1 minute duration
+                if finishMinutes <= startMinutes then
+                    finishMinutes = startMinutes + 60
                 end
 
+                -- Capture starting base damage for gradual repair
+                local startDamage = 0
+                if self.vehicle.getDamageAmount then
+                    startDamage = self.vehicle:getDamageAmount() or 0
+                end
+
+                -- Detect if RVB actually started a real repair (with parts).
+                -- If not (hydraulic-only), use time-based progress instead of RVB state.
+                -- Without this, WorkshopRepair finishes instantly (0 parts = 0 time)
+                -- and our gradual handler would snap to targets on the next frame.
+                local hasRVBRepair = rvb.repair and rvb.repair.state and rvb.repair.state ~= 0
+                    and rvb.repair.finishDay and rvb.repair.finishDay > 0
+
+                -- When financed, hydraulic cost is included in the finance deal —
+                -- don't deduct it separately during the gradual repair handler
+                local isFinanced = RVBWorkshopIntegration.isFinancedRepair or false
+
+                spec.pendingHydraulicRepair = {
+                    cost = isFinanced and 0 or hydraulicCost,
+                    farmId = g_currentMission:getFarmId(),
+                    startMinutes = startMinutes,
+                    finishMinutes = finishMinutes,
+                    startHydraulic = spec.hydraulicReliability or 1.0,
+                    targetHydraulic = maxHydraulic,
+                    startEngine = spec.engineReliability or 1.0,
+                    targetEngine = math.min(maxEngine, (spec.engineReliability or 1.0) + 0.05),
+                    startOil = spec.oilLevel or 1.0,
+                    startHydFluid = spec.hydraulicFluidLevel or 1.0,
+                    startDamage = startDamage,
+                    costDeducted = isFinanced,  -- Already paid via finance deal
+                    useTimeProgress = not hasRVBRepair
+                }
                 UsedPlus.logInfo(string.format(
-                    "RVBWorkshopIntegration: Repair completed — hydraulic %.0f%% -> %.0f%%, engine %.0f%% -> %.0f%%",
-                    oldHydraulic * 100, spec.hydraulicReliability * 100,
-                    oldEngine * 100, spec.engineReliability * 100))
+                    "RVBWorkshopIntegration: Workshop repair queued — hydraulic %.0f%%→%.0f%%, cost=$%d, duration=%d min",
+                    (spec.hydraulicReliability or 1.0) * 100, maxHydraulic * 100,
+                    hydraulicCost, finishMinutes - startMinutes))
 
-                -- Reset toggle state after repair
+                -- Reset toggle state
                 RVBWorkshopIntegration.hydraulicRepairRequested = false
                 RVBWorkshopIntegration.lastHydraulicRepairCost = 0
             end
@@ -172,13 +235,56 @@ end
     Shows our RepairDialog in MODE_REPAIR with RVB's calculated cost
 ]]
 function RVBWorkshopIntegration:onRVBRepairButtonClick(dialog)
-    -- Let RVB handle repair natively — its component-based system shows proper
-    -- part breakdowns, costs, and repair times. Our RepairDialog is designed for
-    -- vanilla FS25 damage/wear, not RVB components.
-    -- hookRepairCompletion handles hydraulic repair when RVB's repair completes.
+    UsedPlus.logDebug("RVBRepairButton: onRVBRepairButtonClick called")
     if dialog.usedPlusOriginalOnClickRepair then
+        -- Pre-store RVB's repair callback so VehicleSellingPointExtension's showDialog
+        -- hook can pass it to our RepairDialog. The showDialog hook intercepts by dialog
+        -- name and doesn't have access to YesNoDialog.show()'s callback argument.
+        -- We know RVB's onClickRepair will call YesNoDialog.show(self.onYesNoRepairDialog, self, ...)
+        if VehicleSellingPointExtension then
+            VehicleSellingPointExtension.pendingRepairCallback = dialog.onYesNoRepairDialog
+            VehicleSellingPointExtension.pendingRepairTarget = dialog
+            UsedPlus.logDebug(string.format("RVBRepairButton: Pre-stored callback=%s, target=%s",
+                tostring(dialog.onYesNoRepairDialog), tostring(dialog)))
+        end
         dialog.usedPlusOriginalOnClickRepair(dialog)
     else
         UsedPlus.logWarn("RVBWorkshopIntegration: usedPlusOriginalOnClickRepair is nil")
+    end
+end
+
+--[[
+    Handle hydraulic-only repair (no RVB components need repair).
+    Bypasses RVB's onClickRepair entirely and shows our RepairDialog directly.
+    RVB's onClickRepair has two gates that block when only hydraulic is toggled:
+      1. getRepairPrice_RVBClone(true) <= 100  (hooked, but not enough)
+      2. #faultListText > 0  (only counts g_vehicleBreakdownsPartKeys, not our hydraulic)
+]]
+function RVBWorkshopIntegration:showHydraulicOnlyRepair(dialog)
+    local vehicle = dialog.vehicle
+    if vehicle == nil then
+        return
+    end
+
+    local hydraulicCost = self:calculateHydraulicRepairCost(vehicle)
+    if hydraulicCost <= 0 then
+        return
+    end
+
+    -- Pre-store the callback and target for our RepairDialog's RVB path
+    if VehicleSellingPointExtension then
+        VehicleSellingPointExtension.pendingRepairCallback = dialog.onYesNoRepairDialog
+        VehicleSellingPointExtension.pendingRepairTarget = dialog
+    end
+
+    -- Show our RepairDialog directly with hydraulic cost
+    local mode = RepairDialog.MODE_REPAIR
+    if VehicleSellingPointExtension and VehicleSellingPointExtension.showRepairDialog then
+        local success = VehicleSellingPointExtension.showRepairDialog(vehicle, mode, hydraulicCost)
+        if success then
+            UsedPlus.logInfo(string.format("RVBRepairButton: Showed hydraulic-only RepairDialog (cost=$%d)", hydraulicCost))
+        else
+            UsedPlus.logWarn("RVBRepairButton: Failed to show RepairDialog for hydraulic-only repair")
+        end
     end
 end
