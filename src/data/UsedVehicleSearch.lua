@@ -981,15 +981,17 @@ function UsedVehicleSearch:generateRVBPartsData(damage, wear, operatingHours)
         return math.floor(usedPercent * defaultLifetime)
     end
 
-    -- RVB default lifetimes (from RVB mod configuration)
-    -- These are approximate values - actual RVB values may vary
+    -- RVB default base lifetimes (from RVBMain.lua defaults)
+    -- These match RVB's actual values; maxLifetime = base * difficultyMult * daysPerPeriod
+    -- NOTE: Only used for generating .operatingHours in listing data.
+    -- The apply step (initializeRVBPartsFromListing) recalculates using RVB's actual runtime values.
     local RVB_LIFETIMES = {
-        ENGINE = 1500,      -- Engine block
-        THERMOSTAT = 800,   -- Cooling system
-        GENERATOR = 1200,   -- Alternator
-        BATTERY = 600,      -- Battery (shorter life)
-        SELFSTARTER = 1000, -- Starter motor
-        GLOWPLUG = 500      -- Glow plugs (diesel)
+        ENGINE = 210,       -- Engine block
+        THERMOSTAT = 150,   -- Cooling system
+        GENERATOR = 180,    -- Alternator
+        BATTERY = 140,      -- Battery
+        SELFSTARTER = 3,    -- Starter motor (very short in RVB)
+        GLOWPLUG = 2        -- Glow plugs (very short in RVB)
     }
 
     -- Generate part data

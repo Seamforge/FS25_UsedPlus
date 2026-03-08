@@ -1905,22 +1905,89 @@ function ModCompatibility.initializeRVBPartsFromListing(vehicle, rvbPartsData)
     -- RVB calculates life from: 1 - (operatingHours / tmp_lifetime)
     local partsApplied = 0
 
+    -- RVB's actual default base lifetimes (from RVBMain.lua)
+    -- Used as last-resort fallback if we can't read from RVB at runtime
+    local RVB_DEFAULT_BASE = {
+        ENGINE = 210, THERMOSTAT = 150, GENERATOR = 180,
+        BATTERY = 140, SELFSTARTER = 3, GLOWPLUG = 2
+    }
+
     for partKey, partData in pairs(rvbPartsData) do
         local rvbPart = rvb.parts[partKey]
         if rvbPart then
-            -- Set the operating hours to match the pre-generated life
-            -- If RVB's lifetime differs from ours, recalculate hours
-            local rvbLifetime = rvbPart.tmp_lifetime or partData.lifetime or 1000
-            local targetLife = partData.life or 1.0
+            -- Get RVB's actual maxLifetime through multiple fallbacks:
+            -- 1. PartManager API (most accurate — includes difficulty & daysPerPeriod)
+            -- 2. cachedMaxLifetime on spec (populated during VehicleBreakdowns lifecycle)
+            -- 3. Compute from g_rvbMain gameplay settings
+            -- 4. Hardcoded RVB defaults as last resort
+            local maxLifetime = nil
 
-            -- hours = (1 - life) * lifetime
-            local targetHours = math.floor((1 - targetLife) * rvbLifetime)
+            -- Method 1: PartManager.getMaxPartLifetime (global function from RVB)
+            if PartManager and PartManager.getMaxPartLifetime then
+                local ok, result = pcall(PartManager.getMaxPartLifetime, vehicle, partKey)
+                if ok and result and result > 0 then
+                    maxLifetime = result
+                end
+            end
+
+            -- Method 2: cachedMaxLifetime on the vehicle's spec_faultData
+            if maxLifetime == nil or maxLifetime <= 0 then
+                if rvb.cachedMaxLifetime and rvb.cachedMaxLifetime[partKey] then
+                    local cached = rvb.cachedMaxLifetime[partKey]
+                    if cached > 0 then
+                        maxLifetime = cached
+                    end
+                end
+            end
+
+            -- Method 3: Compute from RVB gameplay settings + difficulty + daysPerPeriod
+            if maxLifetime == nil or maxLifetime <= 0 then
+                local baseLifetime = nil
+                if g_rvbMain and g_rvbMain.gameplaySettings then
+                    local gpset = g_rvbMain.gameplaySettings
+                    local settingsMap = {
+                        ENGINE = gpset.engineLifetime,
+                        THERMOSTAT = gpset.thermostatLifetime,
+                        GENERATOR = gpset.generatorLifetime,
+                        BATTERY = gpset.batteryLifetime,
+                        SELFSTARTER = gpset.selfstarterLifetime,
+                        GLOWPLUG = gpset.glowplugLifetime
+                    }
+                    baseLifetime = settingsMap[partKey]
+                end
+                if baseLifetime and baseLifetime > 0 then
+                    -- Apply difficulty multiplier (same formula as PartManager.getMaxPartLifetime)
+                    local difficulty = 2
+                    if g_rvbMain and g_rvbMain.gameplaySettings then
+                        difficulty = g_rvbMain.gameplaySettings.difficulty or 2
+                    end
+                    local diffMult = (difficulty == 1 and 2) or (difficulty == 2 and 1) or 0.5
+                    local daysPerPeriod = 1
+                    if g_currentMission and g_currentMission.environment then
+                        daysPerPeriod = g_currentMission.environment.plannedDaysPerPeriod or 1
+                    end
+                    maxLifetime = baseLifetime * diffMult * daysPerPeriod
+                end
+            end
+
+            -- Method 4: Hardcoded RVB defaults (last resort)
+            if maxLifetime == nil or maxLifetime <= 0 then
+                maxLifetime = RVB_DEFAULT_BASE[partKey] or 100
+            end
+
+            -- Calculate operating hours from target life
+            -- RVB formula: condition% = 100 - (operatingHours * 100 / maxLifetime)
+            -- So: operatingHours = (1 - targetLife) * maxLifetime
+            local targetLife = partData.life or 1.0
+            local targetHours = (1 - targetLife) * maxLifetime
             rvbPart.operatingHours = targetHours
 
-            UsedPlus.logDebug(string.format("  RVB %s: Set hours to %d (life %.0f%%)",
-                partKey, targetHours, targetLife * 100))
+            UsedPlus.logDebug(string.format("  RVB %s: maxLifetime=%.1f, targetLife=%.2f, setHours=%.2f (expect condition ~%d%%)",
+                partKey, maxLifetime, targetLife, targetHours, math.floor(targetLife * 100)))
 
             partsApplied = partsApplied + 1
+        else
+            UsedPlus.logDebug(string.format("  RVB %s: NOT FOUND in rvb.parts (skipped)", partKey))
         end
     end
 
