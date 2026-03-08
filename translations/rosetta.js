@@ -1358,7 +1358,8 @@ function cmdImport() {
     const resolvedFiles = [];
     for (const arg of args) {
         if (arg.includes('*') || arg.includes('?')) {
-            const pattern = new RegExp('^' + arg.replace(/\./g, '\\.').replace(/\*/g, '.*').replace(/\?/g, '.') + '$');
+            const escaped = arg.replace(/[.+^${}()|[\]\\]/g, '\\$&');
+            const pattern = new RegExp('^' + escaped.replace(/\*/g, '.*').replace(/\?/g, '.') + '$');
             const matches = fs.readdirSync('.').filter(f => pattern.test(f) && f.endsWith('.json')).sort();
             if (matches.length === 0) { console.error(`No files matching: ${arg}`); process.exit(1); }
             resolvedFiles.push(...matches);

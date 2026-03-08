@@ -117,7 +117,8 @@ function checkFormatSpecifiers(sourceValue, targetValue, key) {
 
 function normalizeXmlEntities(s) {
     if (!s) return s;
-    return s.replace(/&gt;/g, '>').replace(/&lt;/g, '<').replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&apos;/g, "'");
+    const entityMap = { '&gt;': '>', '&lt;': '<', '&amp;': '&', '&quot;': '"', '&apos;': "'" };
+    return s.replace(/&(?:gt|lt|amp|quot|apos);/g, m => entityMap[m]);
 }
 
 // --- COGNATE DETECTION
