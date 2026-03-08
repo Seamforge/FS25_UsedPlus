@@ -384,6 +384,21 @@ function DialogLoader.registerAll()
         DialogLoader.register("FaultTracerDialog", FaultTracerDialog, "gui/FaultTracerDialog.xml")
     end
 
+    -- v1.9.2: Fluid purchase dialog for Oil Service Point
+    if FluidPurchaseDialog then
+        DialogLoader.register("FluidPurchaseDialog", FluidPurchaseDialog, "gui/FluidPurchaseDialog.xml")
+    end
+
+    -- v1.8.0: Field Service Kit dialog
+    if FieldServiceKitDialog then
+        DialogLoader.register("FieldServiceKitDialog", FieldServiceKitDialog, "gui/FieldServiceKitDialog.xml")
+    end
+
+    -- v2.9.0: Service Truck dialog
+    if ServiceTruckDialog then
+        DialogLoader.register("ServiceTruckDialog", ServiceTruckDialog, "gui/ServiceTruckDialog.xml")
+    end
+
     -- Count registered dialogs
     local count = 0
     for dialogName, _ in pairs(DialogLoader.dialogs or {}) do

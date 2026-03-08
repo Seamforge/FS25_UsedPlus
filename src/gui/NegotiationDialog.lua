@@ -351,13 +351,13 @@ function NegotiationDialog:updateButtonHighlights()
 
             if isSelected then
                 -- Selected state - green highlight
-                btn.bg:setImageColor(selectedColor[1], selectedColor[2], selectedColor[3], selectedColor[4])
+                btn.bg:setImageColor(nil, selectedColor[1], selectedColor[2], selectedColor[3], selectedColor[4])
             elseif btn.percent == 100 then
                 -- 100% has special color
-                btn.bg:setImageColor(fullPriceColor[1], fullPriceColor[2], fullPriceColor[3], fullPriceColor[4])
+                btn.bg:setImageColor(nil, fullPriceColor[1], fullPriceColor[2], fullPriceColor[3], fullPriceColor[4])
             else
                 -- Normal state
-                btn.bg:setImageColor(normalColor[1], normalColor[2], normalColor[3], normalColor[4])
+                btn.bg:setImageColor(nil, normalColor[1], normalColor[2], normalColor[3], normalColor[4])
             end
 
             -- Update text color (brighter when selected)

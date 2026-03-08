@@ -378,7 +378,7 @@ function UsedVehiclePreviewDialog:onTierBtnHighlight(element)
 
     -- Lighten the background color on hover
     if bgElement then
-        bgElement:setImageColor(GuiUtils.getColorArray("0.20 0.25 0.20 1"))
+        bgElement:setImageColor(nil, 0.20, 0.25, 0.20, 1)
     end
 end
 
@@ -398,7 +398,7 @@ function UsedVehiclePreviewDialog:onTierBtnUnhighlight(element)
 
     -- Restore the original background color
     if bgElement then
-        bgElement:setImageColor(GuiUtils.getColorArray("0.12 0.15 0.12 1"))
+        bgElement:setImageColor(nil, 0.12, 0.15, 0.12, 1)
     end
 end
 

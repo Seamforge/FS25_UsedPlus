@@ -8,7 +8,7 @@
     <GuiElement profile="newLayer" />
     <Bitmap profile="dialogFullscreenBg" id="dialogBg" />
 
-    <GuiElement profile="dialogBg" id="dialogElement" size="720px 580px">
+    <GuiElement profile="dialogBg" id="dialogElement" size="860px 580px">
         <ThreePartBitmap profile="fs25_dialogBgMiddle" />
         <ThreePartBitmap profile="fs25_dialogBgTop" />
         <ThreePartBitmap profile="fs25_dialogBgBottom" />
@@ -65,7 +65,7 @@
                 <Text profile="sdLabelSmall" position="-270px -52px" text="$l10n_usedplus_sd_qualityRange"/>
                 <Text profile="sdValueSmall" id="conditionRangeText" position="-170px -52px" text=""/>
                 <Text profile="sdLabelSmall" position="-30px -52px" text="$l10n_usedplus_sd_priceRange"/>
-                <Text profile="sdValueSmall" id="priceRangeText" position="70px -52px" text=""/>
+                <Text profile="sdValuePriceRange" id="priceRangeText" position="100px -52px" text=""/>
             </GuiElement>
 
             <!-- ===== STATUS SECTION (3-column) ===== -->
@@ -102,37 +102,37 @@
     <GUIProfiles>
         <!-- ========== SECTION CONTAINERS ========== -->
         <Profile name="sdSectionContainer" extends="emptyPanel" with="anchorTopCenter">
-            <size value="660px 60px"/>
+            <size value="800px 60px"/>
         </Profile>
 
         <Profile name="sdSectionContainerTall" extends="emptyPanel" with="anchorTopCenter">
-            <size value="660px 80px"/>
+            <size value="800px 80px"/>
         </Profile>
 
         <!-- ========== SECTION BACKGROUNDS ========== -->
         <Profile name="sdSectionBg" extends="baseReference" with="anchorTopCenter">
-            <size value="660px 60px"/>
+            <size value="800px 60px"/>
             <imageColor value="0.08 0.08 0.12 0.9"/>
         </Profile>
 
         <Profile name="sdSectionBgTall" extends="baseReference" with="anchorTopCenter">
-            <size value="660px 80px"/>
+            <size value="800px 80px"/>
             <imageColor value="0.08 0.08 0.12 0.9"/>
         </Profile>
 
         <Profile name="sdSectionBgGreen" extends="baseReference" with="anchorTopCenter">
-            <size value="660px 80px"/>
+            <size value="800px 80px"/>
             <imageColor value="0.06 0.1 0.08 0.9"/>
         </Profile>
 
         <Profile name="sdSectionBgStatus" extends="baseReference" with="anchorTopCenter">
-            <size value="660px 80px"/>
+            <size value="800px 80px"/>
             <imageColor value="0.1 0.1 0.06 0.9"/>
         </Profile>
 
         <!-- ========== SECTION HEADER ========== -->
         <Profile name="sdSectionHeader" extends="fs25_textDefault" with="anchorTopCenter">
-            <size value="660px 22px"/>
+            <size value="800px 22px"/>
             <textSize value="14px"/>
             <textBold value="true"/>
             <textColor value="1 0.8 0.2 1"/>
@@ -141,7 +141,7 @@
 
         <!-- ========== VEHICLE NAME ========== -->
         <Profile name="sdVehicleName" extends="fs25_textDefault" with="anchorTopCenter">
-            <size value="640px 22px"/>
+            <size value="780px 22px"/>
             <textSize value="16px"/>
             <textBold value="true"/>
             <textColor value="0.4 0.8 1 1"/>
@@ -178,10 +178,17 @@
         </Profile>
 
         <Profile name="sdValueFee" extends="fs25_textDefault" with="anchorTopCenter">
-            <size value="100px 18px"/>
+            <size value="140px 18px"/>
             <textSize value="13px"/>
             <textBold value="true"/>
             <textColor value="1 0.5 0.5 1"/>
+        </Profile>
+
+        <Profile name="sdValuePriceRange" extends="fs25_textDefault" with="anchorTopCenter">
+            <size value="180px 18px"/>
+            <textSize value="13px"/>
+            <textBold value="true"/>
+            <textColor value="1 1 1 1"/>
         </Profile>
 
         <Profile name="sdValueMod" extends="fs25_textDefault" with="anchorTopCenter">
@@ -235,7 +242,7 @@
 
         <!-- ========== INFO TEXT ========== -->
         <Profile name="sdInfoText" extends="fs25_textDefault" with="anchorTopCenter">
-            <size value="640px 20px"/>
+            <size value="780px 20px"/>
             <textSize value="12px"/>
             <textColor value="0.5 0.7 0.5 1"/>
             <textAlignment value="center"/>

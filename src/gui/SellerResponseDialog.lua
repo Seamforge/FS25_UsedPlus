@@ -136,7 +136,7 @@ function SellerResponseDialog:displayAccept()
 
     -- Background color (green tint)
     if self.responseBg then
-        self.responseBg:setImageColor(0.06, 0.14, 0.08, 0.95)
+        self.responseBg:setImageColor(nil, 0.06, 0.14, 0.08, 0.95)
     end
 
     -- Icon - v2.9.5: Use image icon instead of text
@@ -204,7 +204,7 @@ function SellerResponseDialog:displayCounter()
 
     -- Background color (orange tint)
     if self.responseBg then
-        self.responseBg:setImageColor(0.14, 0.10, 0.06, 0.95)
+        self.responseBg:setImageColor(nil, 0.14, 0.10, 0.06, 0.95)
     end
 
     -- Icon - v2.9.5: Use image icon instead of text
@@ -272,7 +272,7 @@ function SellerResponseDialog:displayReject()
 
     -- Background color (red tint)
     if self.responseBg then
-        self.responseBg:setImageColor(0.14, 0.06, 0.06, 0.95)
+        self.responseBg:setImageColor(nil, 0.14, 0.06, 0.06, 0.95)
     end
 
     -- Icon - v2.9.5: Use image icon instead of text

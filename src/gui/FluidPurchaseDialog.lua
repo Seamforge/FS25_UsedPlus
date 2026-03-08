@@ -332,19 +332,8 @@ end
     @param servicePoint - The OilServicePoint placeable
 ]]
 function FluidPurchaseDialog.show(servicePoint)
-    -- Ensure dialog is loaded first
-    FluidPurchaseDialog.ensureLoaded()
-
-    -- Get the controller instance from the GUI system
-    local guiEntry = g_gui.guis["FluidPurchaseDialog"]
-    if guiEntry == nil or guiEntry.target == nil then
-        UsedPlus.logError("FluidPurchaseDialog.show - Failed to get dialog instance")
-        return
-    end
-
-    -- Set service point and show
-    guiEntry.target:setServicePoint(servicePoint)
-    g_gui:showDialog("FluidPurchaseDialog")
+    -- Use DialogLoader for consistent loading (eagerly loaded at init time)
+    DialogLoader.show("FluidPurchaseDialog", "setServicePoint", servicePoint)
 end
 
 UsedPlus.logInfo("FluidPurchaseDialog.lua loaded")
