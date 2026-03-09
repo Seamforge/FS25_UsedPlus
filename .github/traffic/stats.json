@@ -2791,36 +2791,36 @@
     "watchers": 6
   },
   {
-    "timestamp": "2026-03-09T00:15:19Z",
+    "timestamp": "2026-03-09T06:20:22Z",
     "date": "2026-03-09",
     "views": {
-      "count": 2807,
-      "uniques": 335
+      "count": 2583,
+      "uniques": 334
     },
     "clones": {
-      "count": 1915,
-      "uniques": 721
+      "count": 1974,
+      "uniques": 710
     },
     "referrers": [
       {
         "referrer": "github.com",
-        "count": 846,
-        "uniques": 138
+        "count": 785,
+        "uniques": 133
       },
       {
         "referrer": "Bing",
-        "count": 144,
-        "uniques": 24
-      },
-      {
-        "referrer": "DuckDuckGo",
-        "count": 29,
-        "uniques": 3
+        "count": 130,
+        "uniques": 25
       },
       {
         "referrer": "Yahoo",
-        "count": 29,
-        "uniques": 2
+        "count": 19,
+        "uniques": 3
+      },
+      {
+        "referrer": "com.reddit.frontpage",
+        "count": 9,
+        "uniques": 6
       },
       {
         "referrer": "Google",
@@ -2828,9 +2828,9 @@
         "uniques": 2
       },
       {
-        "referrer": "com.reddit.frontpage",
+        "referrer": "DuckDuckGo",
         "count": 7,
-        "uniques": 5
+        "uniques": 3
       },
       {
         "referrer": "yandex.ru",
@@ -2841,71 +2841,85 @@
         "referrer": "l.facebook.com",
         "count": 2,
         "uniques": 2
+      },
+      {
+        "referrer": "reddit.com",
+        "count": 1,
+        "uniques": 1
       }
     ],
     "popular_paths": [
       {
         "path": "/XelaNull/FS25_UsedPlus",
         "title": "GitHub - XelaNull/FS25_UsedPlus: A comprehensive finance and marketplace over...",
-        "count": 896,
-        "uniques": 250
+        "count": 849,
+        "uniques": 249
       },
       {
         "path": "/XelaNull/FS25_UsedPlus/releases",
         "title": "Releases · XelaNull/FS25_UsedPlus",
-        "count": 244,
-        "uniques": 76
+        "count": 213,
+        "uniques": 75
       },
       {
         "path": "/XelaNull/FS25_UsedPlus/issues",
         "title": "GitHub · Where software is built",
-        "count": 208,
-        "uniques": 66
+        "count": 206,
+        "uniques": 67
       },
       {
         "path": "/XelaNull/FS25_UsedPlus/releases/tag/v2.14.2",
         "title": "Release v2.14.2 — Finance & Marketplace System for FS25 · XelaNull/FS25_UsedP...",
-        "count": 103,
-        "uniques": 50
+        "count": 88,
+        "uniques": 43
       },
       {
         "path": "/XelaNull/FS25_UsedPlus/wiki/Other-Mod-Compatibility",
         "title": "Other Mod Compatibility · XelaNull/FS25_UsedPlus Wiki · GitHub",
-        "count": 64,
-        "uniques": 27
-      },
-      {
-        "path": "/XelaNull/FS25_UsedPlus/releases/tag/v2.15.2.43",
-        "title": "Release v2.15.2.43 — Pre-Release (all changes since v2.14.2) · XelaNull/FS25_...",
-        "count": 60,
-        "uniques": 36
-      },
-      {
-        "path": "/XelaNull/FS25_UsedPlus/issues/19",
-        "title": "[Bug]: Repairing a vehicle impossible · Issue #19 · XelaNull/FS25_UsedPlus",
-        "count": 59,
-        "uniques": 21
-      },
-      {
-        "path": "/XelaNull/FS25_UsedPlus/releases/tag/v2.15.1.18",
-        "title": "Release v2.15.1.18 — Pre-Release (all changes since v2.14.2) · XelaNull/FS25_...",
-        "count": 52,
-        "uniques": 23
+        "count": 53,
+        "uniques": 25
       },
       {
         "path": "/XelaNull/FS25_UsedPlus/wiki/Malfunctions",
         "title": "Malfunctions · XelaNull/FS25_UsedPlus Wiki · GitHub",
-        "count": 51,
-        "uniques": 17
+        "count": 49,
+        "uniques": 15
       },
       {
-        "path": "/XelaNull/FS25_UsedPlus/blob/master/screenshots/used_plus_finances_zoomed.png",
-        "title": "FS25_UsedPlus/screenshots/used_plus_finances_zoomed.png at master · XelaNull/...",
-        "count": 47,
-        "uniques": 29
+        "path": "/XelaNull/FS25_UsedPlus/releases/tag/v2.15.2.43",
+        "title": "Release v2.15.2.43 — Pre-Release (all changes since v2.14.2) · XelaNull/FS25_...",
+        "count": 46,
+        "uniques": 27
+      },
+      {
+        "path": "/XelaNull/FS25_UsedPlus/wiki",
+        "title": "Home · XelaNull/FS25_UsedPlus Wiki",
+        "count": 45,
+        "uniques": 24
+      },
+      {
+        "path": "/XelaNull/FS25_UsedPlus/issues/19",
+        "title": "[Bug]: Repairing a vehicle impossible · Issue #19 · XelaNull/FS25_UsedPlus",
+        "count": 45,
+        "uniques": 19
+      },
+      {
+        "path": "/XelaNull/FS25_UsedPlus/wiki/RVB-Integration",
+        "title": "RVB Integration · XelaNull/FS25_UsedPlus Wiki · GitHub",
+        "count": 42,
+        "uniques": 14
       }
     ],
     "releases": [
+      {
+        "assets": [
+          {
+            "downloads": 1,
+            "name": "FS25_UsedPlus_v2.15.4.9_20260309_001547.zip"
+          }
+        ],
+        "tag": "v2.15.4.9"
+      },
       {
         "assets": [],
         "tag": "v2.15.2.43"
@@ -2931,7 +2945,7 @@
       {
         "assets": [
           {
-            "downloads": 107,
+            "downloads": 108,
             "name": "FS25_UsedPlus.zip"
           }
         ],
