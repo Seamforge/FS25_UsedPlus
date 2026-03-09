@@ -924,8 +924,8 @@ function FinanceManagerFrame:onLandLeaseTerminateConfirm()
             nil,
             string.format(
                 "WARNING: Terminate lease for %s?\n\n" ..
-                "• Land will revert to NPC ownership\n" ..
-                "• All %d payments (%s) will be lost\n\n" ..
+                "- Land will revert to NPC ownership\n" ..
+                "- All %d payments (%s) will be lost\n\n" ..
                 "Are you sure?",
                 landName, monthsPaid, g_i18n:formatMoney(totalPaid, 0, true, true)
             ),

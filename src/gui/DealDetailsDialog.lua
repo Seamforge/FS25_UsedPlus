@@ -804,7 +804,7 @@ function DealDetailsDialog:updateRepossessedItemsDisplay()
         if itemElement then
             local item = items[i]
             if item then
-                local itemText = string.format("• %s - %s",
+                local itemText = string.format("- %s - %s",
                     item.name or g_i18n:getText("usedplus_common_unknownVehicle"),
                     g_i18n:formatMoney(item.value or 0, 0, true, true))
                 itemElement:setText(itemText)

@@ -477,7 +477,7 @@ function RepairDialog:updateDisplay()
         UIHelper.Text.formatMoney(self.totalCost), UIHelper.Colors.COST_ORANGE)
 
     -- Result in payment section (shows what condition will be after work)
-    UIHelper.Element.setText(self.paymentResultText, string.format("→ %d%%", workAfter))
+    UIHelper.Element.setText(self.paymentResultText, string.format("> %d%%", workAfter))
 
     -- Enable/disable pay cash button based on funds (game UI shows player money)
     if self.payCashButton then

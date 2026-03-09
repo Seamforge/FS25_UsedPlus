@@ -728,7 +728,7 @@ function UnifiedLandPurchaseDialog:updateLeaseDisplay()
 
     -- Show rate breakdown
     if self.leaseRateText then
-        local rateInfo = string.format("%s/ha × %.0f%% soil × %.0f%% credit",
+        local rateInfo = string.format("%s/ha x %.0f%% soil x %.0f%% credit",
             UIHelper.Text.formatMoney(UnifiedLandPurchaseDialog.LEASE_BASE_RATE_PER_HA),
             soilMult * 100,
             creditMult * 100)

@@ -24,7 +24,7 @@ function FinanceVehicleEvent.emptyNew()
     return self
 end
 
-function FinanceVehicleEvent.new(farmId, itemType, itemId, itemName, basePrice, downPayment, termYears, cashBack, configurations, configurationData, licensePlateData)
+function FinanceVehicleEvent.new(farmId, itemType, itemId, itemName, basePrice, downPayment, termYears, cashBack, configurations, configurationData, licensePlateData, clientSpawnedVehicle)
     local self = FinanceVehicleEvent.emptyNew()
     self.farmId = farmId
     self.itemType = itemType
@@ -38,16 +38,18 @@ function FinanceVehicleEvent.new(farmId, itemType, itemId, itemName, basePrice, 
     -- v2.13.2: Custom color RGB data + license plate (Issue #6)
     self.configurationData = configurationData
     self.licensePlateData = licensePlateData
+    -- v2.15.4: Skip server-side vehicle spawn when client already sent BuyVehicleEvent with saleItem (Issue #30)
+    self.clientSpawnedVehicle = clientSpawnedVehicle or false
     return self
 end
 
-function FinanceVehicleEvent.sendToServer(farmId, itemType, itemId, itemName, basePrice, downPayment, termYears, cashBack, configurations, configurationData, licensePlateData)
+function FinanceVehicleEvent.sendToServer(farmId, itemType, itemId, itemName, basePrice, downPayment, termYears, cashBack, configurations, configurationData, licensePlateData, clientSpawnedVehicle)
     if g_server ~= nil then
         -- Single-player: pass configurationData directly (no serialization needed)
-        FinanceVehicleEvent.execute(farmId, itemType, itemId, itemName, basePrice, downPayment, termYears, cashBack, configurations, configurationData, licensePlateData)
+        FinanceVehicleEvent.execute(farmId, itemType, itemId, itemName, basePrice, downPayment, termYears, cashBack, configurations, configurationData, licensePlateData, clientSpawnedVehicle)
     else
         g_client:getServerConnection():sendEvent(
-            FinanceVehicleEvent.new(farmId, itemType, itemId, itemName, basePrice, downPayment, termYears, cashBack, configurations, configurationData, licensePlateData)
+            FinanceVehicleEvent.new(farmId, itemType, itemId, itemName, basePrice, downPayment, termYears, cashBack, configurations, configurationData, licensePlateData, clientSpawnedVehicle)
         )
     end
 end
@@ -126,6 +128,9 @@ function FinanceVehicleEvent:writeStream(streamId, connection)
         streamWriteInt32(streamId, self.licensePlateData.variation or 1)
         streamWriteInt32(streamId, self.licensePlateData.placementIndex or 1)
     end
+
+    -- v2.15.4: Client already spawned vehicle with saleItem — skip server-side spawn (Issue #30)
+    streamWriteBool(streamId, self.clientSpawnedVehicle or false)
 end
 
 function FinanceVehicleEvent:readStream(streamId, connection)
@@ -219,10 +224,13 @@ function FinanceVehicleEvent:readStream(streamId, connection)
         }
     end
 
+    -- v2.15.4: Read clientSpawnedVehicle flag (Issue #30)
+    self.clientSpawnedVehicle = streamReadBool(streamId)
+
     self:run(connection)
 end
 
-function FinanceVehicleEvent.execute(farmId, itemType, itemId, itemName, basePrice, downPayment, termYears, cashBack, configurations, configurationData, licensePlateData)
+function FinanceVehicleEvent.execute(farmId, itemType, itemId, itemName, basePrice, downPayment, termYears, cashBack, configurations, configurationData, licensePlateData, clientSpawnedVehicle)
     -- v2.6.2: Validate finance system is enabled
     if UsedPlusSettings and UsedPlusSettings:get("enableFinanceSystem") == false then
         UsedPlus.logWarn("FinanceVehicleEvent rejected: Finance system disabled in settings")
@@ -285,7 +293,7 @@ function FinanceVehicleEvent.execute(farmId, itemType, itemId, itemName, basePri
 
     local deal = g_financeManager:createFinanceDeal(
         farmId, itemType, itemId, itemName, basePrice, downPayment, termYears, cashBack, configurations or {},
-        configurationData, licensePlateData
+        configurationData, licensePlateData, clientSpawnedVehicle
     )
 
     if deal then
@@ -316,7 +324,7 @@ function FinanceVehicleEvent:run(connection)
     local success, msgKey = FinanceVehicleEvent.execute(
         self.farmId, self.itemType, self.itemId, self.itemName,
         self.basePrice, self.downPayment, self.termYears, self.cashBack, self.configurations,
-        self.configurationData, self.licensePlateData
+        self.configurationData, self.licensePlateData, self.clientSpawnedVehicle
     )
     TransactionResponseEvent.sendToClient(connection, self.farmId, success, msgKey)
 

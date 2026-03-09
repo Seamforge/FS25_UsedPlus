@@ -494,6 +494,7 @@ function UsedVehicleManager:generateUsedVehicleListingFromData(search, listingDa
         generationName = listingData.generationName or "Unknown",
         qualityLevel = listingData.qualityLevel or search.qualityLevel,
         qualityName = listingData.qualityName or "Any",
+        searchLevel = search.searchLevel,  -- v2.15.4: Propagate for ServiceTruckDiscovery
         listingDate = g_currentMission.environment.currentDay,
         status = "available"
     }

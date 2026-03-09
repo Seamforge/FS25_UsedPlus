@@ -703,10 +703,12 @@ function VehicleSaleManager:acceptOffer(listingId)
         end
     })
 
-    -- Credit NET sale price to farm (use changeBalance — addMoney crashes from nested dialog callbacks)
+    -- Credit NET sale price to farm
+    -- v2.15.4: Fixed MoneyType.VEHICLE_SELL → MoneyType.OTHER (VEHICLE_SELL doesn't exist in FS25,
+    -- was nil, causing changeBalance to silently fail — player never received sale proceeds) (Issue #30)
     local saleFarm = g_farmManager:getFarmById(farmId)
     if saleFarm then
-        saleFarm:changeBalance(netSalePrice, MoneyType.VEHICLE_SELL)
+        saleFarm:changeBalance(netSalePrice, MoneyType.OTHER)
     end
 
     -- Track statistics (record gross sale for reporting)

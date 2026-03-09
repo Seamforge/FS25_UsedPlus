@@ -225,7 +225,7 @@ function SaleOfferDialog:updateDisplay()
     -- Agent info: "Standard Agent · Fair Market"
     local agentTier = self.listing:getAgentTierConfig()
     local priceTier = self.listing:getPriceTierConfig()
-    local agentInfo = string.format("%s · %s", agentTier.name or "Agent", priceTier.name or "Standard")
+    local agentInfo = string.format("%s - %s", agentTier.name or "Agent", priceTier.name or "Standard")
     UIHelper.Element.setText(self.agentTierText, agentInfo)
 
     -- ================================================================
@@ -355,7 +355,7 @@ function SaleOfferDialog:updateDisplay()
         for _, amt in ipairs(history) do
             table.insert(parts, UIHelper.Text.formatMoney(amt))
         end
-        UIHelper.Element.setText(self.prevOffersText, table.concat(parts, " · "))
+        UIHelper.Element.setText(self.prevOffersText, table.concat(parts, " | "))
     elseif self.prevOffersLabel then
         self.prevOffersLabel:setVisible(false)
         if self.prevOffersText then

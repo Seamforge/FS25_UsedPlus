@@ -291,6 +291,11 @@ function FinanceManagerFrame:onAcceptSaleClick(rowIndex)
     local vehicleName = listing.vehicleName or g_i18n:getText("usedplus_common_unknown")
     local offerAmount = listing.currentOffer or 0
 
+    -- v2.15.4: Calculate net amount for notification (gross minus agent commission) (Issue #30)
+    local agentTierConfig = listing:getAgentTierConfig()
+    local commissionPercent = (agentTierConfig.feePercent or 0.04)
+    local netAmount = math.floor(offerAmount * (1 - commissionPercent))
+
     -- Show full SaleOfferDialog for detailed review
     local callback = function(accepted)
         if accepted then
@@ -298,13 +303,13 @@ function FinanceManagerFrame:onAcceptSaleClick(rowIndex)
                 SaleListingActionEvent.sendToServer(listingId, SaleListingActionEvent.ACTION_ACCEPT)
                 g_currentMission:addIngameNotification(
                     FSBaseMission.INGAME_NOTIFICATION_OK,
-                    string.format(g_i18n:getText("usedplus_notify_vehicleSold"), vehicleName, g_i18n:formatMoney(offerAmount, 0, true, true))
+                    string.format(g_i18n:getText("usedplus_notify_vehicleSold"), vehicleName, g_i18n:formatMoney(netAmount, 0, true, true))
                 )
             elseif AcceptSaleOfferEvent then
                 AcceptSaleOfferEvent.sendToServer(listingId)
                 g_currentMission:addIngameNotification(
                     FSBaseMission.INGAME_NOTIFICATION_OK,
-                    string.format(g_i18n:getText("usedplus_notify_vehicleSold"), vehicleName, g_i18n:formatMoney(offerAmount, 0, true, true))
+                    string.format(g_i18n:getText("usedplus_notify_vehicleSold"), vehicleName, g_i18n:formatMoney(netAmount, 0, true, true))
                 )
             end
         end

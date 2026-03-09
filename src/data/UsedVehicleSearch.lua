@@ -1186,6 +1186,7 @@ function UsedVehicleSearch:saveListingToXML(xmlFile, key, listing)
     xmlFile:setInt(key .. "#operatingHours", listing.operatingHours or 0)
     xmlFile:setInt(key .. "#foundMonth", listing.foundMonth or 0)
     xmlFile:setString(key .. "#qualityName", listing.qualityName or "")
+    xmlFile:setInt(key .. "#searchLevel", listing.searchLevel or 0)
 
     -- Save usedPlusData if present
     if listing.usedPlusData then
@@ -1351,12 +1352,18 @@ function UsedVehicleSearch:loadListingFromXML(xmlFile, key)
         operatingHours = xmlFile:getInt(key .. "#operatingHours", 0),
         foundMonth = xmlFile:getInt(key .. "#foundMonth", 0),
         qualityName = xmlFile:getString(key .. "#qualityName", ""),
+        searchLevel = xmlFile:getInt(key .. "#searchLevel", 0),
 
         -- Copy from search for convenience
         storeItemIndex = self.storeItemIndex,
         storeItemName = self.storeItemName,
         farmId = self.farmId
     }
+
+    -- v2.15.4: Backward compat — old savegames won't have searchLevel on listing
+    if listing.searchLevel == 0 then
+        listing.searchLevel = self.searchLevel
+    end
 
     -- Set price for compatibility
     listing.price = listing.askingPrice

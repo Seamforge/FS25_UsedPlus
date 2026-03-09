@@ -1404,7 +1404,7 @@ function UnifiedPurchaseDialog:updateLeaseDisplay()
     -- This helps players understand why their trade-in didn't reduce monthly payment
     if tradeInExcess > 100 then
         dueTodayText = dueTodayText .. string.format(
-            "\n💡 Trade-in excess: %s → Lease-end equity",
+            "\nTrade-in excess: %s > Lease-end equity",
             UIHelper.Text.formatMoney(math.floor(tradeInExcess))
         )
     end
@@ -1878,6 +1878,36 @@ function UnifiedPurchaseDialog:executeFinancePurchaseVehicle()
         licensePlateData = g_shopConfigScreen.licensePlateData
     end
 
+    -- v2.15.4: For used vehicles (saleItem present), the client must send BuyVehicleEvent
+    -- directly with setSaleItem() so the vanilla game removes the used listing (Issue #30).
+    -- saleItem is a game engine object that cannot be serialized through our FinanceVehicleEvent stream,
+    -- so we send BuyVehicleEvent on the client side and tell the server to skip its own vehicle spawn.
+    local clientSpawnedVehicle = false
+    if self.saleItem then
+        UsedPlus.logDebug("Used vehicle finance: sending BuyVehicleEvent with saleItem on client side")
+        local storeItem = self.storeItem
+        if storeItem then
+            local buyData = BuyVehicleData.new()
+            buyData:setOwnerFarmId(farmId)
+            buyData:setPrice(0)  -- Already paid via down payment
+            buyData:setStoreItem(storeItem)
+            buyData:setSaleItem(self.saleItem)
+
+            -- Apply configurations
+            buyData:setConfigurations(configurations)
+            if configurationData and buyData.setConfigurationData then
+                buyData:setConfigurationData(configurationData)
+            end
+            if licensePlateData and buyData.setLicensePlateData then
+                buyData:setLicensePlateData(licensePlateData)
+            end
+
+            g_client:getServerConnection():sendEvent(BuyVehicleEvent.new(buyData))
+            clientSpawnedVehicle = true
+            UsedPlus.logDebug("BuyVehicleEvent sent with saleItem — server will skip vehicle spawn")
+        end
+    end
+
     -- Send finance event to server (creates the deal AND spawns vehicle via BuyVehicleEvent)
     FinanceVehicleEvent.sendToServer(
         farmId,
@@ -1890,7 +1920,8 @@ function UnifiedPurchaseDialog:executeFinancePurchaseVehicle()
         cashBack,            -- cashBack
         configurations,      -- configurations from shop screen
         configurationData,   -- v2.13.2: custom color RGB data (Issue #6)
-        licensePlateData     -- v2.13.2: license plate data
+        licensePlateData,    -- v2.13.2: license plate data
+        clientSpawnedVehicle -- v2.15.4: skip server spawn for used vehicles (Issue #30)
     )
 
     -- v2.9.1: Show net due today (down payment minus cashback) not just down payment

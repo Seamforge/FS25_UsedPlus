@@ -514,7 +514,7 @@ function FinanceCalculations.calculateSecurityDepositRefund(securityDeposit, dam
         local penaltyPerMiss = isLand and 200 or 100
         local missedPenalty = missedPayments * penaltyPerMiss
         table.insert(deductions, {
-            reason = string.format("Missed payments (%d × %s)", missedPayments, g_i18n:formatMoney(penaltyPerMiss, 0, true, true)),
+            reason = string.format("Missed payments (%d x %s)", missedPayments, g_i18n:formatMoney(penaltyPerMiss, 0, true, true)),
             amount = missedPenalty
         })
         totalDeductions = totalDeductions + missedPenalty

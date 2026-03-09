@@ -380,9 +380,25 @@ function LeaseEndEvent:processReturn(deal, farm, connection)
         )
     end
 
+    -- v2.15.4: Clear lease flags before removal (Issue #34)
     local vehicle = deal:findVehicle()
     if vehicle then
+        UsedPlus.logDebug(string.format("LeaseEndEvent:processReturn - found vehicle for %s (objectId=%s)", deal.itemName, tostring(deal.objectId)))
+        vehicle.isLeased = false
+        vehicle.leaseDealId = nil
         g_currentMission:removeVehicle(vehicle)
+    else
+        -- v2.15.4: Vehicle not found — clear orphaned flags as safety net
+        UsedPlus.logWarn(string.format("LeaseEndEvent:processReturn - vehicle NOT found for %s (objectId=%s, config=%s)", deal.itemName or "?", tostring(deal.objectId), tostring(deal.vehicleConfig)))
+        if deal.vehicleConfig then
+            for _, v in pairs(g_currentMission.vehicleSystem.vehicles) do
+                if v.configFileName == deal.vehicleConfig and v.ownerFarmId == deal.farmId and v.isLeased then
+                    UsedPlus.logWarn(string.format("LeaseEndEvent:processReturn - clearing orphaned isLeased on %s", v:getName()))
+                    v.isLeased = false
+                    v.leaseDealId = nil
+                end
+            end
+        end
     end
 
     deal.status = "completed"
@@ -797,10 +813,26 @@ function LeaseRenewalEvent:processReturn(deal, farm, isLandLease, connection)
                 deal.itemName, UIHelper.Text.formatMoney(depositRefund))
         )
     else
-        -- Remove vehicle
+        -- Remove vehicle (v2.15.4: Clear lease flags before removal — Issue #34)
         local vehicle = self:findVehicle(deal)
         if vehicle then
+            UsedPlus.logDebug(string.format("LeaseRenewalEvent:processReturn - found vehicle for %s (objectId=%s)", deal.itemName, tostring(deal.objectId)))
+            vehicle.isLeased = false
+            vehicle.leaseDealId = nil
             g_currentMission:removeVehicle(vehicle)
+        else
+            -- v2.15.4: Vehicle not found — clear isLeased on ALL matching vehicles as safety net
+            UsedPlus.logWarn(string.format("LeaseRenewalEvent:processReturn - vehicle NOT found for %s (objectId=%s, config=%s)", deal.itemName, tostring(deal.objectId), tostring(deal.vehicleConfig or deal.itemId)))
+            local configFile = deal.itemId or deal.vehicleConfig
+            if configFile then
+                for _, v in pairs(g_currentMission.vehicleSystem.vehicles) do
+                    if v.configFileName == configFile and v.ownerFarmId == deal.farmId and v.isLeased then
+                        UsedPlus.logWarn(string.format("LeaseRenewalEvent:processReturn - clearing orphaned isLeased flag on %s", v:getName()))
+                        v.isLeased = false
+                        v.leaseDealId = nil
+                    end
+                end
+            end
         end
 
         g_currentMission:addIngameNotification(
@@ -950,9 +982,14 @@ end
     Find vehicle for a deal
 ]]
 function LeaseRenewalEvent:findVehicle(deal)
+    -- v2.15.4: Enhanced logging for Issue #34 diagnosis
     if deal.objectId then
         local vehicle = NetworkUtil.getObject(deal.objectId)
-        if vehicle then return vehicle end
+        if vehicle then
+            UsedPlus.logDebug(string.format("findVehicle: found by objectId %s", tostring(deal.objectId)))
+            return vehicle
+        end
+        UsedPlus.logDebug(string.format("findVehicle: objectId %s returned nil, trying configFile fallback", tostring(deal.objectId)))
     end
 
     local configFile = deal.itemId or deal.vehicleConfig
@@ -960,9 +997,13 @@ function LeaseRenewalEvent:findVehicle(deal)
         for _, vehicle in pairs(g_currentMission.vehicleSystem.vehicles) do
             if vehicle.configFileName == configFile and
                vehicle.ownerFarmId == deal.farmId then
+                UsedPlus.logDebug(string.format("findVehicle: found by configFile match: %s", configFile))
                 return vehicle
             end
         end
+        UsedPlus.logDebug(string.format("findVehicle: no vehicle matches configFile=%s farmId=%d", configFile, deal.farmId or 0))
+    else
+        UsedPlus.logWarn("findVehicle: no configFile available (itemId and vehicleConfig both nil)")
     end
 
     return nil

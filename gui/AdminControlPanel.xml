@@ -448,6 +448,17 @@
                     <Bitmap profile="acpActionBtn2" id="bgCreditDown" position="55px -230px"/>
                     <Text profile="acpActionBtn2Text" position="55px -238px" text="-50"/>
                     <Button profile="acpActionBtn2Hit" id="btnCreditDown" position="55px -230px" onClick="onCreditDownClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+
+                    <!-- Lease Testing -->
+                    <Text profile="acpActionSectionHeader" position="0px -265px" text="Lease Testing"/>
+
+                    <Bitmap profile="acpActionBtnWide" id="bgCreateLease" position="0px -285px"/>
+                    <Text profile="acpActionBtnWideText" position="0px -293px" text="Create Test Lease"/>
+                    <Button profile="acpActionBtnWideHit" id="btnCreateLease" position="0px -285px" onClick="onCreateTestLeaseClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
+
+                    <Bitmap profile="acpActionBtnWide" id="bgExpireLease" position="0px -320px"/>
+                    <Text profile="acpActionBtnWideText" position="0px -328px" text="Expire Lease"/>
+                    <Button profile="acpActionBtnWideHit" id="btnExpireLease" position="0px -320px" onClick="onExpireLeaseClick" onHighlight="onBtnHighlight" onHighlightRemove="onBtnUnhighlight"/>
                 </GuiElement>
             </GuiElement>
 

@@ -139,15 +139,21 @@ function InGameMenuMapFrameExtension.setMapInputContext(self, superFunc, enterVe
         self.contextActions[InGameMenuMapFrame.ACTIONS.REPAIR_VEHICLE].isActive = false
     end
 
-    -- Show "Finance Land" when "Buy Farmland" is available (unowned farmland selected) AND finance is enabled
-    if buyFarmlandActive and financeEnabled and self.contextActions[InGameMenuMapFrame.ACTIONS.FINANCE_LAND] then
+    -- v2.15.4: Hide Finance/Lease for free ($0) farmlands — nothing to finance or lease
+    local isFreeField = false
+    if buyFarmlandActive and self.selectedFarmland then
+        isFreeField = (self.selectedFarmland.price == nil or self.selectedFarmland.price <= 0)
+    end
+
+    -- Show "Finance Land" when "Buy Farmland" is available (unowned farmland selected) AND finance is enabled AND not free
+    if buyFarmlandActive and financeEnabled and not isFreeField and self.contextActions[InGameMenuMapFrame.ACTIONS.FINANCE_LAND] then
         self.contextActions[InGameMenuMapFrame.ACTIONS.FINANCE_LAND].isActive = true
     elseif self.contextActions[InGameMenuMapFrame.ACTIONS.FINANCE_LAND] then
         self.contextActions[InGameMenuMapFrame.ACTIONS.FINANCE_LAND].isActive = false
     end
 
-    -- Show "Lease Land" when "Buy Farmland" is available (unowned farmland selected) AND lease is enabled
-    if buyFarmlandActive and leaseEnabled and self.contextActions[InGameMenuMapFrame.ACTIONS.LEASE_LAND] then
+    -- Show "Lease Land" when "Buy Farmland" is available (unowned farmland selected) AND lease is enabled AND not free
+    if buyFarmlandActive and leaseEnabled and not isFreeField and self.contextActions[InGameMenuMapFrame.ACTIONS.LEASE_LAND] then
         self.contextActions[InGameMenuMapFrame.ACTIONS.LEASE_LAND].isActive = true
     elseif self.contextActions[InGameMenuMapFrame.ACTIONS.LEASE_LAND] then
         self.contextActions[InGameMenuMapFrame.ACTIONS.LEASE_LAND].isActive = false
@@ -197,6 +203,15 @@ function InGameMenuMapFrameExtension.onFinanceLand(inGameMenuMapFrame, element)
     local selectedFarmland = inGameMenuMapFrame.selectedFarmland
     UsedPlus.logDebug("onFinanceLand: Farmland ID=" .. tostring(selectedFarmland.id) .. ", Price=" .. tostring(selectedFarmland.price))
 
+    -- v2.15.4: Free farmlands ($0) — can't finance free land, use vanilla buy
+    if selectedFarmland.price == nil or selectedFarmland.price <= 0 then
+        UsedPlus.logDebug("onFinanceLand: Free farmland, using vanilla purchase")
+        if InGameMenuMapFrameExtension.originalBuyCallback then
+            return InGameMenuMapFrameExtension.originalBuyCallback(inGameMenuMapFrame, element)
+        end
+        return true
+    end
+
     -- Check if there's a mission running on this farmland
     if g_missionManager:getIsMissionRunningOnFarmland(selectedFarmland) then
         InfoDialog.show(g_i18n:getText(InGameMenuMapFrame.L10N_SYMBOL.DIALOG_BUY_FARMLAND_ACTIVE_MISSION))
@@ -240,6 +255,15 @@ function InGameMenuMapFrameExtension.onLeaseLand(inGameMenuMapFrame, element)
 
     local selectedFarmland = inGameMenuMapFrame.selectedFarmland
     UsedPlus.logDebug("onLeaseLand: Farmland ID=" .. tostring(selectedFarmland.id) .. ", Price=" .. tostring(selectedFarmland.price))
+
+    -- v2.15.4: Free farmlands ($0) — can't lease free land, use vanilla buy
+    if selectedFarmland.price == nil or selectedFarmland.price <= 0 then
+        UsedPlus.logDebug("onLeaseLand: Free farmland, using vanilla purchase")
+        if InGameMenuMapFrameExtension.originalBuyCallback then
+            return InGameMenuMapFrameExtension.originalBuyCallback(inGameMenuMapFrame, element)
+        end
+        return true
+    end
 
     -- Check if there's a mission running on this farmland
     if g_missionManager:getIsMissionRunningOnFarmland(selectedFarmland) then
@@ -354,6 +378,15 @@ function InGameMenuMapFrameExtension.onBuyFarmland(inGameMenuMapFrame, element)
 
     local selectedFarmland = inGameMenuMapFrame.selectedFarmland
     UsedPlus.logDebug("onBuyFarmland: Farmland ID=" .. tostring(selectedFarmland.id) .. ", Price=" .. tostring(selectedFarmland.price))
+
+    -- v2.15.4: Free farmlands ($0) — use vanilla purchase (nothing to finance)
+    if selectedFarmland.price == nil or selectedFarmland.price <= 0 then
+        UsedPlus.logDebug("onBuyFarmland: Free farmland, using vanilla purchase")
+        if InGameMenuMapFrameExtension.originalBuyCallback then
+            return InGameMenuMapFrameExtension.originalBuyCallback(inGameMenuMapFrame, element)
+        end
+        return true
+    end
 
     -- Check if there's a mission running on this farmland
     if g_missionManager:getIsMissionRunningOnFarmland(selectedFarmland) then

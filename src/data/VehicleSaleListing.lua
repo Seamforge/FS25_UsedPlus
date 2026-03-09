@@ -620,7 +620,7 @@ function VehicleSaleListing:saveToXMLFile(xmlFile, key)
     -- Vehicle data
     xmlFile:setString(key .. "#vehicleId", tostring(self.vehicleId or ""))
     xmlFile:setString(key .. "#vehicleConfigFile", self.vehicleConfigFile or "")
-    xmlFile:setString(key .. "#vehicleName", self.vehicleName)
+    xmlFile:setString(key .. "#vehicleName", self.vehicleName or "")
     xmlFile:setString(key .. "#vehicleImageFile", self.vehicleImageFile or "")
     xmlFile:setFloat(key .. "#vanillaSellPrice", self.vanillaSellPrice)
 
@@ -656,7 +656,7 @@ function VehicleSaleListing:saveToXMLFile(xmlFile, key)
     end
 
     -- Status
-    xmlFile:setString(key .. "#status", self.status)
+    xmlFile:setString(key .. "#status", self.status or "available")
     xmlFile:setInt(key .. "#createdAt", self.createdAt)
     xmlFile:setInt(key .. "#completedAt", self.completedAt)
     xmlFile:setFloat(key .. "#finalSalePrice", self.finalSalePrice)

@@ -686,7 +686,7 @@ function TakeLoanDialog:updateDisplay()
         local infoMsg = ""
         if #self.selectedCollateral == 0 then
             -- NO collateral selected - show error message
-            infoMsg = "⚠️ Please select at least one asset as collateral to submit your loan application"
+            infoMsg = "Please select at least one asset as collateral to submit your loan application"
             -- Set text color to warning/error (orange/red)
             self.infoText:setTextColor(1, 0.4, 0.1, 1)  -- Orange warning
         else

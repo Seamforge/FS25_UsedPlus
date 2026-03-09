@@ -636,7 +636,7 @@ end
     Create new finance deal
     Called from network event (client request → server execution)
 ]]
-function FinanceManager:createFinanceDeal(farmId, itemType, itemId, itemName, price, downPayment, termYears, cashBack, configurations, configurationData, licensePlateData)
+function FinanceManager:createFinanceDeal(farmId, itemType, itemId, itemName, price, downPayment, termYears, cashBack, configurations, configurationData, licensePlateData, clientSpawnedVehicle)
     if not self.isServer then
         UsedPlus.logError("createFinanceDeal must be called on server")
         return nil
@@ -692,49 +692,57 @@ function FinanceManager:createFinanceDeal(farmId, itemType, itemId, itemName, pr
         UsedPlus.logDebug(string.format("Transferred financed land ownership: Field %d to Farm %d", itemId, farmId))
 
     elseif itemType == "vehicle" and itemId then
-        -- Purchase vehicle using game's built-in system
-        local storeItem = g_storeManager:getItemByXMLFilename(itemId)
-
-        if storeItem then
-            -- Create BuyVehicleData with user's configurations
-            local buyData = BuyVehicleData.new()
-            buyData:setOwnerFarmId(farmId)
-            buyData:setPrice(0)  -- Already paid via down payment
-            buyData:setStoreItem(storeItem)
-
-            -- Apply user-selected configurations
-            local vehicleConfigs = configurations or {}
-            buyData:setConfigurations(vehicleConfigs)
-
-            -- v2.13.2: Apply custom color data (Issue #6 — colors revert to white without this)
-            -- configurationData contains actual RGB values for custom colors (e.g., from Unlimited Color Configurations)
-            if configurationData and buyData.setConfigurationData then
-                buyData:setConfigurationData(configurationData)
-                UsedPlus.logDebug(string.format("Applied configurationData (%d color entries)",
-                    configurationData and #configurationData or 0))
-            end
-
-            -- v2.13.2: Apply license plate data
-            if licensePlateData and buyData.setLicensePlateData then
-                buyData:setLicensePlateData(licensePlateData)
-                UsedPlus.logDebug("Applied licensePlateData")
-            end
-
-            -- Debug log configurations being applied
-            local configCount = 0
-            for k, v in pairs(vehicleConfigs) do
-                UsedPlus.logDebug(string.format("  Applying config: %s = %d", tostring(k), v))
-                configCount = configCount + 1
-            end
-            UsedPlus.logDebug(string.format("Total configurations applied: %d", configCount))
-
-            -- Send buy event to spawn vehicle (works on both client and server)
-            -- Pattern from HirePurchasing mod - always use event system
-            g_client:getServerConnection():sendEvent(BuyVehicleEvent.new(buyData))
-
-            UsedPlus.logDebug(string.format("Purchased financed vehicle: %s", itemName))
+        -- v2.15.4: Skip server-side spawn if client already sent BuyVehicleEvent with saleItem (Issue #30)
+        -- For used vehicles, the client must send BuyVehicleEvent directly (with setSaleItem) because
+        -- saleItem is a game engine object that cannot be serialized through our FinanceVehicleEvent stream.
+        -- The clientSpawnedVehicle flag tells us the vehicle is already being spawned on the client side.
+        if clientSpawnedVehicle then
+            UsedPlus.logDebug(string.format("Skipping server vehicle spawn — client already sent BuyVehicleEvent with saleItem: %s", itemName))
         else
-            UsedPlus.logWarn(string.format("Could not find storeItem for: %s", itemId))
+            -- Purchase vehicle using game's built-in system
+            local storeItem = g_storeManager:getItemByXMLFilename(itemId)
+
+            if storeItem then
+                -- Create BuyVehicleData with user's configurations
+                local buyData = BuyVehicleData.new()
+                buyData:setOwnerFarmId(farmId)
+                buyData:setPrice(0)  -- Already paid via down payment
+                buyData:setStoreItem(storeItem)
+
+                -- Apply user-selected configurations
+                local vehicleConfigs = configurations or {}
+                buyData:setConfigurations(vehicleConfigs)
+
+                -- v2.13.2: Apply custom color data (Issue #6 — colors revert to white without this)
+                -- configurationData contains actual RGB values for custom colors (e.g., from Unlimited Color Configurations)
+                if configurationData and buyData.setConfigurationData then
+                    buyData:setConfigurationData(configurationData)
+                    UsedPlus.logDebug(string.format("Applied configurationData (%d color entries)",
+                        configurationData and #configurationData or 0))
+                end
+
+                -- v2.13.2: Apply license plate data
+                if licensePlateData and buyData.setLicensePlateData then
+                    buyData:setLicensePlateData(licensePlateData)
+                    UsedPlus.logDebug("Applied licensePlateData")
+                end
+
+                -- Debug log configurations being applied
+                local configCount = 0
+                for k, v in pairs(vehicleConfigs) do
+                    UsedPlus.logDebug(string.format("  Applying config: %s = %d", tostring(k), v))
+                    configCount = configCount + 1
+                end
+                UsedPlus.logDebug(string.format("Total configurations applied: %d", configCount))
+
+                -- Send buy event to spawn vehicle (works on both client and server)
+                -- Pattern from HirePurchasing mod - always use event system
+                g_client:getServerConnection():sendEvent(BuyVehicleEvent.new(buyData))
+
+                UsedPlus.logDebug(string.format("Purchased financed vehicle: %s", itemName))
+            else
+                UsedPlus.logWarn(string.format("Could not find storeItem for: %s", itemId))
+            end
         end
     end
 

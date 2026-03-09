@@ -60,8 +60,18 @@ function FarmlandManagerExtension.onClickBuyLand(self, superFunc)
         return superFunc(self)
     end
 
-    -- Get land price
-    local price = g_farmlandManager:getFarmlandPricePerHa(farmland.id) * farmland.areaInSqMeters / 10000
+    -- Get land price (areaInHa is already hectares — no /10000 needed)
+    local pricePerHa = g_farmlandManager:getFarmlandPricePerHa(farmland.id)
+    if pricePerHa == nil or pricePerHa <= 0 then
+        -- v2.15.4: Free/utility areas ($0) — let vanilla handle directly
+        UsedPlus.logDebug("FarmlandManagerExtension: Free farmland (pricePerHa=" .. tostring(pricePerHa) .. "), using vanilla purchase")
+        return superFunc(self)
+    end
+    local price = pricePerHa * (farmland.areaInHa or (farmland.areaInSqMeters and farmland.areaInSqMeters / 10000) or 0)
+    if price <= 0 then
+        UsedPlus.logDebug("FarmlandManagerExtension: Zero total price, using vanilla purchase")
+        return superFunc(self)
+    end
 
     -- Store reference for potential fallback
     FarmlandManagerExtension.pendingFarmland = farmland

@@ -294,9 +294,10 @@ function ShopConfigScreenExtension.updateButtonsHook(self, storeItem, vehicle, s
                 -- FINANCEABLE NEW ITEM: Set our UnifiedPurchaseDialog callback
                 local shopScreen = self
                 local currentStoreItem = storeItem
+                local currentSaleItem = saleItem  -- v2.15.4: Capture saleItem for used vehicle listing removal (Issue #30)
                 self.buyButton.onClickCallback = function()
                     UsedPlus.logDebug("Buy button clicked - financeable item: " .. tostring(currentStoreItem and currentStoreItem.name or "nil"))
-                    ShopConfigScreenExtension.onUnifiedBuyClick(shopScreen, currentStoreItem, UnifiedPurchaseDialog.MODE_CASH)
+                    ShopConfigScreenExtension.onUnifiedBuyClick(shopScreen, currentStoreItem, UnifiedPurchaseDialog.MODE_CASH, currentSaleItem)
                 end
                 UsedPlus.logDebug("Buy button: set UsedPlus callback for financeable item")
             end
@@ -337,6 +338,11 @@ function ShopConfigScreenExtension.updateButtonsHook(self, storeItem, vehicle, s
                 -- Restore vanilla callback - we don't want to intercept these
                 self.leaseButton.onClickCallback = self.usedPlusOriginalLeaseCallback
                 UsedPlus.logDebug("Lease button: restored original callback for non-leaseable item: " .. tostring(storeItem and storeItem.name or "nil"))
+            elseif saleItem ~= nil then
+                -- v2.15.4: USED VEHICLE — restore vanilla lease callback (Issue #30)
+                -- Used vehicles can't be leased through UsedPlus; vanilla handles its own lease flow
+                self.leaseButton.onClickCallback = self.usedPlusOriginalLeaseCallback
+                UsedPlus.logDebug("Lease button: restored original callback for used vehicle (saleItem present)")
             else
                 -- LEASEABLE NEW ITEM: Set our UnifiedPurchaseDialog callback
                 local shopScreen = self
@@ -365,8 +371,9 @@ function ShopConfigScreenExtension.updateButtonsHook(self, storeItem, vehicle, s
             self.usedPlusFinanceButton:setDisabled(not showFinanceButton)
 
             if showFinanceButton then
+                local currentSaleItem = saleItem  -- v2.15.4: Capture saleItem for used vehicle listing removal (Issue #30)
                 self.usedPlusFinanceButton.onClickCallback = function()
-                    ShopConfigScreenExtension.onUnifiedBuyClick(self, storeItem, UnifiedPurchaseDialog.MODE_FINANCE)
+                    ShopConfigScreenExtension.onUnifiedBuyClick(self, storeItem, UnifiedPurchaseDialog.MODE_FINANCE, currentSaleItem)
                 end
             end
         else
@@ -646,13 +653,14 @@ end
     Unified Buy click handler
     Refactored to use DialogLoader for centralized loading
 ]]
-function ShopConfigScreenExtension.onUnifiedBuyClick(shopScreen, storeItem, initialMode)
+function ShopConfigScreenExtension.onUnifiedBuyClick(shopScreen, storeItem, initialMode, saleItem)
     UsedPlus.logDebug("========================================")
     UsedPlus.logDebug("UNIFIED BUY CLICKED")
     UsedPlus.logDebug("  Item: " .. tostring(storeItem.name))
     UsedPlus.logDebug("  Species: " .. tostring(storeItem.species))
     UsedPlus.logDebug("  Category: " .. tostring(storeItem.categoryName))
     UsedPlus.logDebug("  Mode: " .. tostring(initialMode))
+    UsedPlus.logDebug("  SaleItem: " .. tostring(saleItem ~= nil))
     UsedPlus.logDebug("========================================")
 
     g_shopConfigScreen:playSample(GuiSoundPlayer.SOUND_SAMPLES.CLICK)
@@ -679,7 +687,8 @@ function ShopConfigScreenExtension.onUnifiedBuyClick(shopScreen, storeItem, init
 
         UsedPlus.logDebug("Calling setVehicleData on " .. dialogName)
         -- Pass shopScreen reference so dialog can use vanilla buy flow for cash purchases
-        dialog:setVehicleData(storeItem, price, nil, shopScreen)
+        -- v2.15.4: Pass saleItem so used vehicle listing is removed after purchase (Issue #30)
+        dialog:setVehicleData(storeItem, price, saleItem, shopScreen)
         dialog:setInitialMode(initialMode or UnifiedPurchaseDialog.MODE_CASH)
 
         UsedPlus.logDebug("Calling g_gui:showDialog('" .. dialogName .. "')")

@@ -187,10 +187,12 @@ end
 function LeaseDeal:repossessVehicle()
     if not g_server then return end
 
-    -- Find and remove the vehicle
+    -- Find and remove the vehicle (v2.15.4: Clear lease flags — Issue #34)
     local vehicle = self:findVehicle()
     if vehicle then
         UsedPlus.logDebug(string.format("Repossessing leased vehicle: %s (deal %s)", self.itemName, self.id))
+        vehicle.isLeased = false
+        vehicle.leaseDealId = nil
         g_currentMission:removeVehicle(vehicle)
     end
 
@@ -312,9 +314,11 @@ function LeaseDeal:terminateEarly()
     -- Deduct fee (use changeBalance — the actual Farm money API)
     farm:changeBalance(-terminationFee, MoneyType.LEASING_COSTS)
 
-    -- Find and remove vehicle
+    -- Find and remove vehicle (v2.15.4: Clear lease flags — Issue #34)
     local vehicle = self:findVehicle()
     if vehicle ~= nil then
+        vehicle.isLeased = false
+        vehicle.leaseDealId = nil
         g_currentMission:removeVehicle(vehicle)
     end
 
@@ -372,11 +376,11 @@ end
     Similar to FinanceDeal but includes vehicle condition data
 ]]
 function LeaseDeal:saveToXMLFile(xmlFile, key)
-    xmlFile:setString(key .. "#id", self.id)
+    xmlFile:setString(key .. "#id", self.id or "")
     xmlFile:setInt(key .. "#dealType", self.dealType)
     xmlFile:setInt(key .. "#farmId", self.farmId)
-    xmlFile:setString(key .. "#vehicleConfig", self.vehicleConfig)
-    xmlFile:setString(key .. "#vehicleName", self.vehicleName)
+    xmlFile:setString(key .. "#vehicleConfig", self.vehicleConfig or "")
+    xmlFile:setString(key .. "#vehicleName", self.vehicleName or "")
     xmlFile:setFloat(key .. "#baseCost", self.baseCost)
     xmlFile:setFloat(key .. "#downPayment", self.downPayment)
     xmlFile:setFloat(key .. "#residualValue", self.residualValue)
@@ -386,7 +390,7 @@ function LeaseDeal:saveToXMLFile(xmlFile, key)
     xmlFile:setFloat(key .. "#monthlyPayment", self.monthlyPayment)
     xmlFile:setFloat(key .. "#startDamage", self.startDamage)
     xmlFile:setFloat(key .. "#startWear", self.startWear)
-    xmlFile:setString(key .. "#status", self.status)
+    xmlFile:setString(key .. "#status", self.status or "active")
     xmlFile:setInt(key .. "#createdDate", self.createdDate)
     xmlFile:setInt(key .. "#createdMonth", self.createdMonth or 1)
     xmlFile:setInt(key .. "#createdYear", self.createdYear or 2025)

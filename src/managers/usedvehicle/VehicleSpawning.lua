@@ -329,8 +329,8 @@ function UsedVehicleManager:applyUsedConditionToVehicle(vehicle, listing)
     end
 
     -- After UsedPlus maintenance data applied, check for Service Truck discovery
-    -- Only trigger for National Agent purchases (qualityLevel 3)
-    if listing.qualityLevel == 3 then
+    -- Only trigger for National Agent purchases (searchLevel 3)
+    if listing.searchLevel and listing.searchLevel >= 3 then
         local farmId = vehicle:getOwnerFarmId()
         if ServiceTruckDiscovery and ServiceTruckDiscovery.onNationalAgentTransaction then
             ServiceTruckDiscovery.onNationalAgentTransaction(farmId, "purchase")

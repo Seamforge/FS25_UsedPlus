@@ -919,7 +919,7 @@ function AdminControlPanel:onCreditUpClick()
 
     local score = CreditScore.calculate(farmId)
     local rating = CreditScore.getRating(score)
-    self:setStatus(string.format("Credit nudged up → %d (%s)", score, rating))
+    self:setStatus(string.format("Credit nudged up > %d (%s)", score, rating))
     self:updateFinanceInfo()
 end
 
@@ -937,8 +937,67 @@ function AdminControlPanel:onCreditDownClick()
 
     local score = CreditScore.calculate(farmId)
     local rating = CreditScore.getRating(score)
-    self:setStatus(string.format("Credit nudged down → %d (%s)", score, rating))
+    self:setStatus(string.format("Credit nudged down > %d (%s)", score, rating))
     self:updateFinanceInfo()
+end
+
+-- ========== LEASE TESTING (v2.15.4 — Issue #34) ==========
+
+function AdminControlPanel:onCreateTestLeaseClick()
+    if not g_financeManager then
+        self:setStatus("FinanceManager not ready", nil, "error")
+        return
+    end
+
+    local farmId = g_currentMission:getFarmId()
+    local vehicle = g_currentMission.controlledVehicle
+
+    if not vehicle then
+        self:setStatus("Enter a vehicle first", nil, "error")
+        return
+    end
+
+    local name = vehicle:getName() or "Test Vehicle"
+    local config = vehicle.configFileName or ""
+    local price = vehicle:getPrice() or 50000
+
+    -- Create a 1-year lease via FinanceManager (termYears=1 → 12 months)
+    local deal = g_financeManager:createLeaseDeal(farmId, config, name, price, 0, 1)
+    if not deal then
+        self:setStatus("Failed to create lease", nil, "error")
+        return
+    end
+
+    -- Mark vehicle as leased
+    vehicle.isLeased = true
+    vehicle.leaseDealId = deal.id
+    deal.objectId = vehicle.id
+
+    self:setStatus(string.format("Lease created: %s (12mo, $%d/mo)", name, math.floor(deal.monthlyPayment)))
+    self:updateFinanceInfo()
+end
+
+function AdminControlPanel:onExpireLeaseClick()
+    if not g_financeManager then
+        self:setStatus("FinanceManager not ready", nil, "error")
+        return
+    end
+
+    local farmId = g_currentMission:getFarmId()
+    local deals = g_financeManager:getDealsForFarm(farmId)
+
+    -- Find first active lease
+    for _, deal in ipairs(deals) do
+        if deal.dealType == DealUtils.TYPE.LEASE and deal.status == "active" then
+            deal.monthsPaid = deal.termMonths  -- Fast-forward to expiry
+            deal.currentBalance = 0
+            self:setStatus(string.format("Expired: %s (%dmo) - wait for next month tick", deal.itemName or deal.vehicleName or "?", deal.termMonths))
+            self:updateFinanceInfo()
+            return
+        end
+    end
+
+    self:setStatus("No active lease found", nil, "error")
 end
 
 -- ========== TAB 5: DIALOG HANDLERS ==========
