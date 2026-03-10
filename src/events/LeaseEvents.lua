@@ -386,7 +386,9 @@ function LeaseEndEvent:processReturn(deal, farm, connection)
         UsedPlus.logDebug(string.format("LeaseEndEvent:processReturn - found vehicle for %s (objectId=%s)", deal.itemName, tostring(deal.objectId)))
         vehicle.isLeased = false
         vehicle.leaseDealId = nil
-        g_currentMission:removeVehicle(vehicle)
+        if vehicle.delete then
+            vehicle:delete()
+        end
     else
         -- v2.15.4: Vehicle not found — clear orphaned flags as safety net
         UsedPlus.logWarn(string.format("LeaseEndEvent:processReturn - vehicle NOT found for %s (objectId=%s, config=%s)", deal.itemName or "?", tostring(deal.objectId), tostring(deal.vehicleConfig)))
@@ -613,7 +615,9 @@ function TerminateLeaseEvent:run(connection)
     if vehicle then
         vehicle.isLeased = false
         vehicle.leaseDealId = nil
-        g_currentMission:removeVehicle(vehicle)
+        if vehicle.delete then
+            vehicle:delete()
+        end
     end
 
     deal.status = "terminated"
@@ -819,7 +823,9 @@ function LeaseRenewalEvent:processReturn(deal, farm, isLandLease, connection)
             UsedPlus.logDebug(string.format("LeaseRenewalEvent:processReturn - found vehicle for %s (objectId=%s)", deal.itemName, tostring(deal.objectId)))
             vehicle.isLeased = false
             vehicle.leaseDealId = nil
-            g_currentMission:removeVehicle(vehicle)
+            if vehicle.delete then
+                vehicle:delete()
+            end
         else
             -- v2.15.4: Vehicle not found — clear isLeased on ALL matching vehicles as safety net
             UsedPlus.logWarn(string.format("LeaseRenewalEvent:processReturn - vehicle NOT found for %s (objectId=%s, config=%s)", deal.itemName, tostring(deal.objectId), tostring(deal.vehicleConfig or deal.itemId)))

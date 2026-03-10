@@ -478,6 +478,16 @@ function FinanceCalculations.calculateLeaseEquity(monthlyPayment, monthsPaid, to
 end
 
 --[[
+    Calculate lease buyout price (residual value minus accumulated equity)
+    @param residualValue - Vehicle residual value at end of term
+    @param equity - Equity accumulated through lease payments
+    @return buyoutPrice - Net cost to purchase the leased asset
+]]
+function FinanceCalculations.calculateLeaseBuyout(residualValue, equity)
+    return math.max(0, math.floor((residualValue or 0) - (equity or 0)))
+end
+
+--[[
     Calculate security deposit refund at lease end
     Full refund if no issues, reduced for damage/missed payments
 

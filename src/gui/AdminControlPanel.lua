@@ -949,22 +949,23 @@ function AdminControlPanel:onCreateTestLeaseClick()
         return
     end
 
-    local farmId = g_currentMission:getFarmId()
-    local vehicle = g_currentMission.controlledVehicle
-
+    -- v2.15.4: Use self.vehicle (set at dialog open), not controlledVehicle (nil when GUI open)
+    local vehicle = self.vehicle
     if not vehicle then
-        self:setStatus("Enter a vehicle first", nil, "error")
+        self:setStatus("Open AdminCP while in a vehicle", nil, "error")
         return
     end
 
+    local farmId = g_currentMission:getFarmId()
     local name = vehicle:getName() or "Test Vehicle"
     local config = vehicle.configFileName or ""
-    local price = vehicle:getPrice() or 50000
+    local storeItem = g_storeManager:getItemByXMLFilename(config)
+    local price = (storeItem and storeItem.price) or 50000
 
     -- Create a 1-year lease via FinanceManager (termYears=1 → 12 months)
     local deal = g_financeManager:createLeaseDeal(farmId, config, name, price, 0, 1)
     if not deal then
-        self:setStatus("Failed to create lease", nil, "error")
+        self:setStatus("Failed to create lease (check log)", nil, "error")
         return
     end
 

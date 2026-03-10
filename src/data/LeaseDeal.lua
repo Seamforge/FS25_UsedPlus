@@ -193,7 +193,9 @@ function LeaseDeal:repossessVehicle()
         UsedPlus.logDebug(string.format("Repossessing leased vehicle: %s (deal %s)", self.itemName, self.id))
         vehicle.isLeased = false
         vehicle.leaseDealId = nil
-        g_currentMission:removeVehicle(vehicle)
+        if vehicle.delete then
+            vehicle:delete()
+        end
     end
 
     -- Mark lease as defaulted (no refund of any payments)
@@ -319,7 +321,9 @@ function LeaseDeal:terminateEarly()
     if vehicle ~= nil then
         vehicle.isLeased = false
         vehicle.leaseDealId = nil
-        g_currentMission:removeVehicle(vehicle)
+        if vehicle.delete then
+            vehicle:delete()
+        end
     end
 
     -- Mark lease as terminated
