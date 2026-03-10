@@ -59,16 +59,7 @@ function CreateSaleListingEvent:readStream(streamId, connection)
 end
 
 function CreateSaleListingEvent.execute(farmId, vehicleId, agentTier, priceTier)
-    local vehicle = nil
-    if g_currentMission and g_currentMission.vehicleSystem then
-        for _, v in pairs(g_currentMission.vehicleSystem.vehicles) do
-            if v.id == vehicleId then
-                vehicle = v
-                break
-            end
-        end
-    end
-
+    local vehicle = DealUtils.findVehicleById(vehicleId)
     if vehicle == nil then
         UsedPlus.logError(string.format("CreateSaleListingEvent - Vehicle %d not found", vehicleId))
         return false
@@ -439,20 +430,14 @@ end
 
 function TradeInVehicleEvent.execute(farmId, vehicleId, tradeInValue)
     -- Find the vehicle by id
-    local vehicle = nil
+    local vehicle = DealUtils.findVehicleById(vehicleId)
     local vehicleName = "Unknown"
-    if g_currentMission and g_currentMission.vehicleSystem then
-        for _, v in pairs(g_currentMission.vehicleSystem.vehicles) do
-            if v ~= nil and v.id == vehicleId then
-                vehicle = v
-                -- Get vehicle name for logging/history
-                if v.getName then
-                    vehicleName = v:getName()
-                elseif v.storeItem and v.storeItem.name then
-                    vehicleName = g_i18n:getText(v.storeItem.name) or v.storeItem.name
-                end
-                break
-            end
+    if vehicle ~= nil then
+        -- Get vehicle name for logging/history
+        if vehicle.getName then
+            vehicleName = vehicle:getName()
+        elseif vehicle.storeItem and vehicle.storeItem.name then
+            vehicleName = g_i18n:getText(vehicle.storeItem.name) or vehicle.storeItem.name
         end
     end
 

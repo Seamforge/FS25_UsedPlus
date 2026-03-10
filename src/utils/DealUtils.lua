@@ -212,4 +212,24 @@ function DealUtils.validate(deal)
     return #missing == 0, missing
 end
 
+--[[
+    Find a vehicle by its entity ID (vehicle.id).
+    Used by event execute() methods to resolve vehicleId from stream data.
+    @param vehicleId number - The vehicle entity ID (vehicle.id)
+    @return vehicle object or nil
+]]
+function DealUtils.findVehicleById(vehicleId)
+    if vehicleId == nil then
+        return nil
+    end
+    if g_currentMission and g_currentMission.vehicleSystem then
+        for _, v in pairs(g_currentMission.vehicleSystem.vehicles) do
+            if v.id == vehicleId then
+                return v
+            end
+        end
+    end
+    return nil
+end
+
 UsedPlus.logInfo("DealUtils utility loaded")

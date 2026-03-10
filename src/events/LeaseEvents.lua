@@ -576,15 +576,7 @@ function TerminateLeaseEvent:run(connection)
     end
 
     -- Vehicle lease termination
-    local vehicle = nil
-    if deal.vehicleId then
-        for _, v in pairs(g_currentMission.vehicles) do
-            if v.id == deal.vehicleId then
-                vehicle = v
-                break
-            end
-        end
-    end
+    local vehicle = deal:findVehicle()
 
     local totalPenalty = 0
 

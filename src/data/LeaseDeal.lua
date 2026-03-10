@@ -367,7 +367,7 @@ function LeaseDeal:findVehicle()
         if vehicle.configFileName == self.vehicleConfig and
            vehicle.ownerFarmId == self.farmId then
             -- Found matching vehicle, cache objectId
-            self.objectId = vehicle.id
+            self.objectId = NetworkUtil.getObjectId(vehicle)
             return vehicle
         end
     end
@@ -390,7 +390,7 @@ function LeaseDeal:saveToXMLFile(xmlFile, key)
     xmlFile:setFloat(key .. "#residualValue", self.residualValue)
     xmlFile:setInt(key .. "#termMonths", self.termMonths)
     xmlFile:setInt(key .. "#monthsPaid", self.monthsPaid)
-    xmlFile:setFloat(key .. "#interestRate", self.interestRate * 100)
+    xmlFile:setFloat(key .. "#interestRate", (self.interestRate or 0) * 100)
     xmlFile:setFloat(key .. "#monthlyPayment", self.monthlyPayment)
     xmlFile:setFloat(key .. "#startDamage", self.startDamage)
     xmlFile:setFloat(key .. "#startWear", self.startWear)
@@ -427,7 +427,7 @@ function LeaseDeal:loadFromXMLFile(xmlFile, key)
     self.residualValue = xmlFile:getFloat(key .. "#residualValue")
     self.termMonths = xmlFile:getInt(key .. "#termMonths")
     self.monthsPaid = xmlFile:getInt(key .. "#monthsPaid")
-    self.interestRate = xmlFile:getFloat(key .. "#interestRate") / 100
+    self.interestRate = xmlFile:getFloat(key .. "#interestRate", 0) / 100
     self.monthlyPayment = xmlFile:getFloat(key .. "#monthlyPayment")
     self.startDamage = xmlFile:getFloat(key .. "#startDamage", 0)
     self.startWear = xmlFile:getFloat(key .. "#startWear", 0)

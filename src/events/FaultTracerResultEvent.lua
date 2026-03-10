@@ -75,15 +75,7 @@ function FaultTracerResultEvent:run(connection)
     -- v2.15.0: Broadcast statistics sync to all clients
     if success and g_server ~= nil then
         -- Extract farmId from vehicle for stats sync
-        local vehicle = nil
-        if g_currentMission and g_currentMission.vehicleSystem then
-            for _, v in pairs(g_currentMission.vehicleSystem.vehicles) do
-                if v.id == self.vehicleId then
-                    vehicle = v
-                    break
-                end
-            end
-        end
+        local vehicle = DealUtils.findVehicleById(self.vehicleId)
         if vehicle and vehicle:getOwnerFarmId() then
             SyncStatisticsEvent.broadcastForFarm(vehicle:getOwnerFarmId())
         end
@@ -122,16 +114,7 @@ function FaultTracerResultEvent.execute(vehicleId, truckId, component, reliabili
     end
 
     -- Find target vehicle
-    local vehicle = nil
-    if g_currentMission and g_currentMission.vehicleSystem then
-        for _, v in pairs(g_currentMission.vehicleSystem.vehicles) do
-            if v.id == vehicleId then
-                vehicle = v
-                break
-            end
-        end
-    end
-
+    local vehicle = DealUtils.findVehicleById(vehicleId)
     if vehicle == nil then
         UsedPlus.logError(string.format("FaultTracerResultEvent - Vehicle %d not found", vehicleId))
         return false
@@ -144,16 +127,7 @@ function FaultTracerResultEvent.execute(vehicleId, truckId, component, reliabili
     end
 
     -- Find service truck
-    local truck = nil
-    if g_currentMission and g_currentMission.vehicleSystem then
-        for _, v in pairs(g_currentMission.vehicleSystem.vehicles) do
-            if v.id == truckId then
-                truck = v
-                break
-            end
-        end
-    end
-
+    local truck = DealUtils.findVehicleById(truckId)
     if truck == nil then
         UsedPlus.logError(string.format("FaultTracerResultEvent - Service Truck %d not found", truckId))
         return false

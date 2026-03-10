@@ -1116,7 +1116,7 @@ function FinanceDeal:saveToXMLFile(xmlFile, key)
     xmlFile:setFloat(key .. "#cashBack", self.cashBack)
     xmlFile:setFloat(key .. "#amountFinanced", self.amountFinanced)
     xmlFile:setInt(key .. "#termMonths", self.termMonths)
-    xmlFile:setFloat(key .. "#interestRate", self.interestRate * 100)  -- Save as percentage
+    xmlFile:setFloat(key .. "#interestRate", (self.interestRate or 0) * 100)  -- Save as percentage
     xmlFile:setFloat(key .. "#monthlyPayment", self.monthlyPayment)
     xmlFile:setFloat(key .. "#currentBalance", self.currentBalance)
     xmlFile:setInt(key .. "#monthsPaid", self.monthsPaid)
@@ -1199,7 +1199,7 @@ function FinanceDeal:loadFromXMLFile(xmlFile, key)
     self.cashBack = xmlFile:getFloat(key .. "#cashBack", 0)
     self.amountFinanced = xmlFile:getFloat(key .. "#amountFinanced")
     self.termMonths = xmlFile:getInt(key .. "#termMonths")
-    self.interestRate = xmlFile:getFloat(key .. "#interestRate") / 100  -- Convert from percentage
+    self.interestRate = xmlFile:getFloat(key .. "#interestRate", 0) / 100  -- Convert from percentage
     self.monthlyPayment = xmlFile:getFloat(key .. "#monthlyPayment")
     self.currentBalance = xmlFile:getFloat(key .. "#currentBalance")
     self.monthsPaid = xmlFile:getInt(key .. "#monthsPaid")

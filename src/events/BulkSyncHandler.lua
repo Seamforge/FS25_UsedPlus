@@ -121,6 +121,10 @@ function BulkSyncHandler.syncAllDataToConnection(connection)
         end
     end
 
+    -- 6. Sync global settings (not per-farm)
+    UsedPlusSettingsEvent.sendAllToConnection(connection)
+    totalEvents = totalEvents + 1
+
     UsedPlus.logInfo(string.format("BulkSyncHandler: Sent %d sync events to joining client", totalEvents))
 end
 

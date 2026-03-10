@@ -104,16 +104,7 @@ function FieldRepairEvent.execute(farmId, vehicleId, component, cost)
     end
 
     -- Find vehicle by ID
-    local vehicle = nil
-    if g_currentMission and g_currentMission.vehicleSystem then
-        for _, v in pairs(g_currentMission.vehicleSystem.vehicles) do
-            if v.id == vehicleId then
-                vehicle = v
-                break
-            end
-        end
-    end
-
+    local vehicle = DealUtils.findVehicleById(vehicleId)
     if vehicle == nil then
         UsedPlus.logError(string.format("FieldRepairEvent - Vehicle %d not found", vehicleId))
         return false
@@ -289,16 +280,7 @@ function RefillFluidsEvent.execute(farmId, vehicleId, fluidType, cost)
     end
 
     -- Find vehicle by ID
-    local vehicle = nil
-    if g_currentMission and g_currentMission.vehicleSystem then
-        for _, v in pairs(g_currentMission.vehicleSystem.vehicles) do
-            if v.id == vehicleId then
-                vehicle = v
-                break
-            end
-        end
-    end
-
+    local vehicle = DealUtils.findVehicleById(vehicleId)
     if vehicle == nil then
         UsedPlus.logError(string.format("RefillFluidsEvent - Vehicle %d not found", vehicleId))
         return false
@@ -464,16 +446,7 @@ function ReplaceTiresEvent.execute(farmId, vehicleId, tireQuality, cost)
     end
 
     -- Find vehicle by ID
-    local vehicle = nil
-    if g_currentMission and g_currentMission.vehicleSystem then
-        for _, v in pairs(g_currentMission.vehicleSystem.vehicles) do
-            if v.id == vehicleId then
-                vehicle = v
-                break
-            end
-        end
-    end
-
+    local vehicle = DealUtils.findVehicleById(vehicleId)
     if vehicle == nil then
         UsedPlus.logError(string.format("ReplaceTiresEvent - Vehicle %d not found", vehicleId))
         return false
