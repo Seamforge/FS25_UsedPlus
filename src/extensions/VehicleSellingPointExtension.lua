@@ -562,6 +562,11 @@ function VehicleSellingPointExtension.hookAllDialogs()
     if g_gui.showDialog ~= nil then
         VehicleSellingPointExtension.originalShowDialog = g_gui.showDialog
         g_gui.showDialog = function(guiSelf, name, ...)
+            -- v2.15.4: Skip all interception during save serialization (Issue #21)
+            if UsedPlus.isSaving then
+                return VehicleSellingPointExtension.originalShowDialog(guiSelf, name, ...)
+            end
+
             -- Always log dialog opens for debugging (DEBUG level to appear in log)
             UsedPlus.logDebug(string.format("=== showDialog called: name='%s' ===", tostring(name)))
 

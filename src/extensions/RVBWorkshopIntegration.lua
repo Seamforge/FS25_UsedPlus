@@ -36,7 +36,8 @@ RVBWorkshopIntegration.isHooked = false
 RVBWorkshopIntegration.showDialogHooked = false
 
 -- v2.2.0: Track previous fault states for breakdown detection
-RVBWorkshopIntegration.previousFaultStates = {}  -- { [vehicle] = { [partKey] = faultState, ... } }
+-- v2.15.4: Keyed by vehicle.id (integer) instead of object reference (Issue #21)
+RVBWorkshopIntegration.previousFaultStates = {}  -- { [vehicleId] = { [partKey] = faultState, ... } }
 
 -- v2.15.3: Hydraulic toggle state and cost for RVB repair integration
 RVBWorkshopIntegration.hydraulicRepairRequested = false
@@ -89,6 +90,11 @@ function RVBWorkshopIntegration:hookShowDialog()
 
     -- Replace with hooked version
     g_gui.showDialog = function(guiSelf, name, ...)
+        -- v2.15.4: Skip RVB hook logic during save serialization (Issue #21)
+        if UsedPlus.isSaving then
+            return originalShowDialog(guiSelf, name, ...)
+        end
+
         -- Call original first (creates and opens the dialog)
         local result = originalShowDialog(guiSelf, name, ...)
 

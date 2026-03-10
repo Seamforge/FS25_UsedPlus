@@ -522,6 +522,9 @@ function UsedPlus.loadSavegameData()
     UsedPlus.pendingMissionInfo = nil
 end
 
+-- v2.15.4: Save re-entry guard — prevents RVB hooks from firing during serialization (Issue #21)
+UsedPlus.isSaving = false
+
 -- Hook savegame save (save mod data to savegame)
 FSCareerMissionInfo.saveToXMLFile = Utils.appendedFunction(
     FSCareerMissionInfo.saveToXMLFile,
@@ -529,34 +532,55 @@ FSCareerMissionInfo.saveToXMLFile = Utils.appendedFunction(
         UsedPlus.logInfo(string.format("saveToXMLFile hook: Saving to %s",
             missionInfo and missionInfo.savegameDirectory or "nil"))
 
-        if g_financeManager then
-            g_financeManager:saveToXMLFile(missionInfo)
-        end
+        -- Set re-entry guard BEFORE any save operations (Issue #21)
+        UsedPlus.isSaving = true
 
-        if g_usedVehicleManager then
-            g_usedVehicleManager:saveToXMLFile(missionInfo)
-        end
-
-        -- NEW - Save vehicle sale listings
-        if g_vehicleSaleManager then
-            g_vehicleSaleManager:saveToXMLFile(missionInfo)
-        end
-
-        -- v2.9.0: Save Service Truck Discovery state
-        if ServiceTruckDiscovery and missionInfo and missionInfo.savegameDirectory then
-            local xmlPath = missionInfo.savegameDirectory .. "/usedPlus_serviceTruckDiscovery.xml"
-            local xmlFile = XMLFile.create("serviceTruckDiscovery", xmlPath, "serviceTruckDiscovery")
-            if xmlFile then
-                ServiceTruckDiscovery.saveToXML(xmlFile, "serviceTruckDiscovery")
-                xmlFile:save()
-                xmlFile:delete()
-                UsedPlus.logInfo("Service Truck Discovery data saved")
+        -- Prune stale vehicle entries from RVB fault cache before saving
+        if RVBWorkshopIntegration and RVBWorkshopIntegration.pruneStaleVehicles then
+            local pruneOk, pruneErr = pcall(RVBWorkshopIntegration.pruneStaleVehicles, RVBWorkshopIntegration)
+            if not pruneOk then
+                UsedPlus.logWarn("saveToXMLFile: pruneStaleVehicles failed: " .. tostring(pruneErr))
             end
         end
 
-        -- v2.9.6: Save settings to savegame
-        if UsedPlusSettings and UsedPlusSettings.saveToXMLFile then
-            UsedPlusSettings:saveToXMLFile(missionInfo)
+        -- Wrap all save operations in pcall so isSaving flag always clears
+        local saveOk, saveErr = pcall(function()
+            if g_financeManager then
+                g_financeManager:saveToXMLFile(missionInfo)
+            end
+
+            if g_usedVehicleManager then
+                g_usedVehicleManager:saveToXMLFile(missionInfo)
+            end
+
+            -- NEW - Save vehicle sale listings
+            if g_vehicleSaleManager then
+                g_vehicleSaleManager:saveToXMLFile(missionInfo)
+            end
+
+            -- v2.9.0: Save Service Truck Discovery state
+            if ServiceTruckDiscovery and missionInfo and missionInfo.savegameDirectory then
+                local xmlPath = missionInfo.savegameDirectory .. "/usedPlus_serviceTruckDiscovery.xml"
+                local xmlFile = XMLFile.create("serviceTruckDiscovery", xmlPath, "serviceTruckDiscovery")
+                if xmlFile then
+                    ServiceTruckDiscovery.saveToXML(xmlFile, "serviceTruckDiscovery")
+                    xmlFile:save()
+                    xmlFile:delete()
+                    UsedPlus.logInfo("Service Truck Discovery data saved")
+                end
+            end
+
+            -- v2.9.6: Save settings to savegame
+            if UsedPlusSettings and UsedPlusSettings.saveToXMLFile then
+                UsedPlusSettings:saveToXMLFile(missionInfo)
+            end
+        end)
+
+        -- ALWAYS clear re-entry guard, even if save errored
+        UsedPlus.isSaving = false
+
+        if not saveOk then
+            UsedPlus.logError("saveToXMLFile hook: Save FAILED: " .. tostring(saveErr))
         end
 
         UsedPlus.logInfo("saveToXMLFile hook: Complete")

@@ -111,9 +111,10 @@ end
 --[[
     Initialize fault state tracking for a vehicle
     Called when dialog opens to establish baseline
+    v2.15.4: Uses vehicle.id (integer key) instead of object reference (Issue #21)
 ]]
 function RVBWorkshopIntegration:initializeFaultTracking(vehicle)
-    if vehicle == nil then
+    if vehicle == nil or vehicle.id == nil then
         return
     end
 
@@ -122,27 +123,35 @@ function RVBWorkshopIntegration:initializeFaultTracking(vehicle)
         return
     end
 
+    local vid = vehicle.id
+
     -- Initialize tracking table for this vehicle
-    if self.previousFaultStates[vehicle] == nil then
-        self.previousFaultStates[vehicle] = {}
+    if self.previousFaultStates[vid] == nil then
+        self.previousFaultStates[vid] = {}
     end
 
     -- Record current fault states as baseline
     for partKey, part in pairs(rvb.parts) do
         local currentState = part.fault or "empty"
-        self.previousFaultStates[vehicle][partKey] = currentState
+        self.previousFaultStates[vid][partKey] = currentState
     end
 
-    UsedPlus.logDebug(string.format("RVBWorkshopIntegration: Initialized fault tracking for %s (%d parts)",
-        vehicle:getName(), self:countParts(rvb.parts)))
+    UsedPlus.logDebug(string.format("RVBWorkshopIntegration: Initialized fault tracking for %s (id=%d, %d parts)",
+        vehicle:getName(), vid, self:countParts(rvb.parts)))
 end
 
 --[[
     Check for new faults since last check
     Called periodically or when dialog updates
+    v2.15.4: Skips during save serialization (Issue #21)
 ]]
 function RVBWorkshopIntegration:checkForNewFaults(vehicle)
-    if vehicle == nil then
+    if vehicle == nil or vehicle.id == nil then
+        return
+    end
+
+    -- v2.15.4: Skip fault checking during save to prevent re-entrant operations
+    if UsedPlus.isSaving then
         return
     end
 
@@ -151,8 +160,10 @@ function RVBWorkshopIntegration:checkForNewFaults(vehicle)
         return
     end
 
+    local vid = vehicle.id
+
     -- Initialize if not done yet
-    if self.previousFaultStates[vehicle] == nil then
+    if self.previousFaultStates[vid] == nil then
         self:initializeFaultTracking(vehicle)
         return  -- No comparison possible on first check
     end
@@ -160,7 +171,7 @@ function RVBWorkshopIntegration:checkForNewFaults(vehicle)
     -- Check each part for new faults
     for partKey, part in pairs(rvb.parts) do
         local currentState = part.fault or "empty"
-        local previousState = self.previousFaultStates[vehicle][partKey] or "empty"
+        local previousState = self.previousFaultStates[vid][partKey] or "empty"
 
         -- Detect transition TO "fault" state (breakdown occurred)
         if currentState == "fault" and previousState ~= "fault" then
@@ -175,7 +186,41 @@ function RVBWorkshopIntegration:checkForNewFaults(vehicle)
         end
 
         -- Update tracking
-        self.previousFaultStates[vehicle][partKey] = currentState
+        self.previousFaultStates[vid][partKey] = currentState
+    end
+end
+
+--[[
+    Prune stale vehicle entries from previousFaultStates
+    v2.15.4: Called before save to remove entries for vehicles that no longer exist (Issue #21)
+]]
+function RVBWorkshopIntegration:pruneStaleVehicles()
+    if not g_currentMission or not g_currentMission.vehicleSystem then
+        return
+    end
+
+    -- Build set of current vehicle IDs
+    local currentIds = {}
+    local vehicles = g_currentMission.vehicleSystem.vehicles
+    if vehicles then
+        for _, vehicle in ipairs(vehicles) do
+            if vehicle.id then
+                currentIds[vehicle.id] = true
+            end
+        end
+    end
+
+    -- Remove entries for vehicles that no longer exist
+    local pruned = 0
+    for vid, _ in pairs(self.previousFaultStates) do
+        if not currentIds[vid] then
+            self.previousFaultStates[vid] = nil
+            pruned = pruned + 1
+        end
+    end
+
+    if pruned > 0 then
+        UsedPlus.logDebug(string.format("RVBWorkshopIntegration: Pruned %d stale vehicle entries from fault cache", pruned))
     end
 end
 
