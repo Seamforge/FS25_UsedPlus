@@ -9,6 +9,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { execSync } = require('child_process');
 
 const lib = require('./rosetta_lib');
 const {
@@ -300,6 +301,38 @@ function cmdStatus() {
     console.log(`Format: ${store.format}${store.format === 'elements' ? ' (hash-enabled)' : ''}`);
     console.log();
     printGateSummary(store.gate, store.sourceEntries.size);
+
+    // XML well-formedness check on all translation files
+    const xmlErrors = [];
+    const sourceXml = getSourceFilePath(store.filePrefix);
+    const allXmlFiles = [sourceXml, ...store.enabledLangs.map(l => getLangFilePath(store.filePrefix, l.code))];
+    let hasXmllint = true;
+    try { execSync('which xmllint', { stdio: 'pipe' }); } catch { hasXmllint = false; }
+
+    if (hasXmllint) {
+        for (const xmlFile of allXmlFiles) {
+            if (!fs.existsSync(xmlFile)) continue;
+            try {
+                execSync(`xmllint --noout "${xmlFile}"`, { stdio: 'pipe' });
+            } catch (e) {
+                const stderr = e.stderr ? e.stderr.toString().trim() : 'unknown error';
+                const firstLine = stderr.split('\n')[0];
+                xmlErrors.push({ file: path.basename(xmlFile), error: firstLine });
+            }
+        }
+        if (xmlErrors.length > 0) {
+            console.log("XML VALIDATION ERRORS (game will fail to load these files!)");
+            console.log("-----------------------------------------------------------------------------------------------");
+            for (const err of xmlErrors) {
+                console.log(`  FAIL: ${err.file} — ${err.error}`);
+            }
+            console.log("-----------------------------------------------------------------------------------------------");
+            console.log();
+        } else {
+            console.log("XML validation: All files well-formed");
+            console.log();
+        }
+    }
 
     console.log("Language            | Translated |  Stale  | Untranslated | Missing | Dups | Orphaned");
     console.log("-----------------------------------------------------------------------------------------------");
