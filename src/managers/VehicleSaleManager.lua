@@ -109,37 +109,11 @@ function VehicleSaleManager:onHourChanged()
     end
 
     -- v1.9.7: Check for pending offers from previous session on first tick
-    -- v2.15.4: Non-blocking notification instead of modal dialog (Issue #27)
     if self.checkPendingOnFirstTick then
         self.checkPendingOnFirstTick = false
-
-        -- Count pending offers from previous session
-        local pendingCount = 0
-        local playerFarmId = g_currentMission.player and g_currentMission.player.farmId or 1
-        local farm = g_farmManager:getFarmById(playerFarmId)
-        if farm and farm.vehicleSaleListings then
-            for _, listing in ipairs(farm.vehicleSaleListings) do
-                if listing:hasPendingOffer() and not listing.offerShownToUser then
-                    pendingCount = pendingCount + 1
-                end
-            end
-        end
-
-        if pendingCount > 0 then
-            local notifyMsg = string.format(
-                g_i18n:getText("usedplus_notify_pendingOffersReminder") or "You have %d pending sale offer(s) -- Review in Finance Manager",
-                pendingCount
-            )
-            g_currentMission:addIngameNotification(
-                FSBaseMission.INGAME_NOTIFICATION_OK,
-                notifyMsg
-            )
-        end
-
-        -- Validate vehicles and mark offers as shown
-        local processed = self:showNextPendingOffer()
-        if processed then
-            UsedPlus.logDebug("onHourChanged: Processed pending offers from previous session")
+        local shown = self:showNextPendingOffer()
+        if shown then
+            UsedPlus.logDebug("onHourChanged: Showed pending offer from previous session")
         end
     end
 
@@ -200,38 +174,12 @@ end
 
 --[[
     v2.12.2: Handle sleep state changes (Issue #7)
-    When player wakes up, notify player of any sale offers that arrived during sleep
-    v2.15.4: Non-blocking notifications instead of modal dialog (Issue #27)
+    When player wakes up, show any sale offers that were deferred during sleep
 ]]
 function VehicleSaleManager:onSleepingStateChanged(isSleeping)
     if not isSleeping then
+        -- Player woke up - show any pending offers that were deferred during sleep
         UsedPlus.logDebug("VehicleSaleManager: Player woke up, checking for deferred sale offers")
-
-        -- Count pending offers that arrived during sleep (not yet shown)
-        local pendingCount = 0
-        local playerFarmId = g_currentMission.player and g_currentMission.player.farmId or 1
-        local farm = g_farmManager:getFarmById(playerFarmId)
-        if farm and farm.vehicleSaleListings then
-            for _, listing in ipairs(farm.vehicleSaleListings) do
-                if listing:hasPendingOffer() and not listing.offerShownToUser then
-                    pendingCount = pendingCount + 1
-                end
-            end
-        end
-
-        -- Send notification for deferred offers (non-blocking)
-        if pendingCount > 0 then
-            local notifyMsg = string.format(
-                g_i18n:getText("usedplus_notify_pendingOffersReminder") or "You have %d pending sale offer(s) -- Review in Finance Manager",
-                pendingCount
-            )
-            g_currentMission:addIngameNotification(
-                FSBaseMission.INGAME_NOTIFICATION_OK,
-                notifyMsg
-            )
-        end
-
-        -- Validate vehicles and mark offers as shown
         self:showNextPendingOffer()
     end
 end
@@ -279,10 +227,9 @@ end
 --[[
     Handle new offer received
     v1.9.7: Refactored to use queue-based presentation pattern
-    v2.15.4: Non-blocking notification only — no modal dialog (Issue #27)
-    - Sends notification guiding player to Finance Manager
-    - Calls showNextPendingOffer() for vehicle validation and flag marking
-    - Player reviews and accepts/declines via Sales Panel on-demand
+    - Sends notification to alert player
+    - Calls showNextPendingOffer() which checks offerShownToUser flag
+    - This prevents race conditions when multiple offers arrive in same tick
 ]]
 function VehicleSaleManager:onOfferReceived(farmId, listing)
     UsedPlus.logDebug(string.format("onOfferReceived ENTERED for %s: $%d",
@@ -294,10 +241,9 @@ function VehicleSaleManager:onOfferReceived(farmId, listing)
         return
     end
 
-    -- Step 1: Show notification to alert the player (always, non-blocking)
-    -- v2.15.4: Enhanced text guides player to Finance Manager (Issue #27)
+    -- Step 1: Show notification to alert the player (always)
     local notifyMessage = string.format(
-        g_i18n:getText("usedplus_notify_saleOfferReview") or "Buyer found for %s! Offering %s -- Review in Finance Manager",
+        g_i18n:getText("usedplus_notify_saleOffer") or "Buyer found for %s! Offering %s",
         listing.vehicleName,
         g_i18n:formatMoney(listing.currentOffer, 0, true, true)
     )
@@ -327,12 +273,12 @@ function VehicleSaleManager:onOfferReceived(farmId, listing)
     UsedPlus.logDebug(string.format("onOfferReceived: farmId=%s, playerFarmId=%s, shouldShow=%s",
         tostring(farmId), tostring(playerFarmId), tostring(shouldShowDialog)))
 
-    -- Step 3: Validate vehicle and mark offer as shown
-    -- v2.15.4: No longer opens modal dialog — player reviews via Finance Manager (Issue #27)
-    -- v2.12.2: Skip during sleep (Issue #7) — offers stay queued, notified on wake
+    -- Step 3: Use queue-based presentation - showNextPendingOffer checks offerShownToUser flag
+    -- This ensures if another dialog is open, this offer waits its turn
+    -- v2.12.2: Also skip dialog during sleep (Issue #7) - offers stay queued
     if shouldShowDialog then
         if g_sleepManager ~= nil and g_sleepManager.isSleeping then
-            UsedPlus.logDebug("onOfferReceived: Deferring — player is sleeping, will notify on wake")
+            UsedPlus.logDebug("onOfferReceived: Deferring dialog - player is sleeping")
         else
             self:showNextPendingOffer(farmId)
         end
@@ -354,16 +300,11 @@ function VehicleSaleManager:onOfferExpired(farmId, listing)
 end
 
 --[[
-    Validate and mark pending offers as shown
-    v1.9.7: Original queue-based dialog presentation
-    v2.15.4: Rewritten for Issue #27 — no longer opens modal dialog
-    - Validates vehicle existence (auto-cancels ghost vehicles)
-    - Marks offers as shown (offerShownToUser = true)
-    - Loops ALL pending offers in one pass (no recursive callback chain)
-    - Notifications are handled by callers (onOfferReceived, onSleepingStateChanged, onHourChanged)
-    - Player reviews offers on-demand via Finance Manager > Sales Panel
-    @param farmId - Optional farm ID to filter by, nil = check player's farm
-    @return true if any pending offers were processed
+    Show the next pending offer that hasn't been shown to user yet
+    Called after dialog closes to ensure all offers are eventually presented
+    v1.9.7: Added to fix race condition when multiple offers arrive in same tick
+    @param farmId - Optional farm ID to filter by, nil = check all farms
+    @return true if a dialog was shown
 ]]
 function VehicleSaleManager:showNextPendingOffer(farmId)
     -- Check if game is ready
@@ -372,8 +313,8 @@ function VehicleSaleManager:showNextPendingOffer(farmId)
         return false
     end
 
-    -- v2.12.2: Skip during sleep (Issue #7)
-    -- Offers stay queued (offerShownToUser = false) and are notified when player wakes up
+    -- v2.12.2: Skip during sleep to prevent modal dialog freeze (Issue #7)
+    -- Offers stay queued (offerShownToUser = false) and show when player wakes up
     if g_sleepManager ~= nil and g_sleepManager.isSleeping then
         UsedPlus.logTrace("showNextPendingOffer: Skipping - player is sleeping")
         return false
@@ -409,12 +350,9 @@ function VehicleSaleManager:showNextPendingOffer(farmId)
         return false
     end
 
-    local foundAny = false
-
-    -- v2.15.4: Loop ALL pending offers in one pass (no recursive callback chain)
     for _, listing in ipairs(farm.vehicleSaleListings) do
         if listing:hasPendingOffer() and not listing.offerShownToUser then
-            -- v2.13.2: Verify the vehicle still exists before processing
+            -- v2.13.2: Verify the vehicle still exists before showing the offer
             -- If another listing already sold and deleted this vehicle, auto-cancel
             local vehicleStillExists = false
             if listing.vehicleId and g_currentMission and g_currentMission.vehicleSystem then
@@ -431,23 +369,53 @@ function VehicleSaleManager:showNextPendingOffer(farmId)
                     listing.id, listing.vehicleName))
                 listing:cancel()
                 self.activeListings[listing.id] = nil
+                -- Continue to next listing (don't show dialog for a ghost vehicle)
             else
-                -- Mark as shown — player will review via Finance Manager > Sales Panel
-                listing.offerShownToUser = true
-                foundAny = true
-                UsedPlus.logDebug(string.format("showNextPendingOffer: Marked offer shown for %s ($%d) — queued for SalesPanel review",
-                    listing.vehicleName, listing.currentOffer))
+            -- Found an unshown offer - show it now
+            UsedPlus.logDebug(string.format("showNextPendingOffer: Showing offer for %s ($%d)",
+                listing.vehicleName, listing.currentOffer))
+
+            -- Mark as shown BEFORE opening dialog to prevent re-entry
+            listing.offerShownToUser = true
+
+            -- Create callback
+            local listingId = listing.id
+            local self_ref = self  -- Capture self for callback closure
+            local callback = function(accepted)
+                UsedPlus.logDebug(string.format("SaleOfferDialog callback: accepted=%s, listingId=%s",
+                    tostring(accepted), tostring(listingId)))
+                if accepted then
+                    -- v2.13.2: Call accept directly (no outer deferral needed)
+                    -- Vehicle deletion is already safely deferred inside acceptOffer()
+                    -- Removing the outer deferral eliminates the race condition where the listing
+                    -- stays OFFER_PENDING for one frame, allowing potential re-accept
+                    SaleListingActionEvent.sendToServer(listingId, SaleListingActionEvent.ACTION_ACCEPT)
+                else
+                    SaleListingActionEvent.sendToServer(listingId, SaleListingActionEvent.ACTION_DECLINE)
+                end
+
+                -- v2.13.2: Refresh Finance page so stale buttons disappear
+                if FinanceManagerFrame and FinanceManagerFrame.refresh then
+                    FinanceManagerFrame.refresh()
+                end
+
+                -- After handling this offer, check for more pending offers
+                if self_ref then
+                    self_ref:showNextPendingOffer(targetFarmId)
+                end
             end
+
+            -- Show the dialog
+            if DialogLoader and DialogLoader.show then
+                DialogLoader.show("SaleOfferDialog", "setListing", listing, callback)
+                return true
+            end
+            end -- end of else (vehicle still exists)
         end
     end
 
-    if foundAny then
-        UsedPlus.logDebug("showNextPendingOffer: Processed pending offers (validation + flagging)")
-    else
-        UsedPlus.logTrace("showNextPendingOffer: No unshown pending offers found")
-    end
-
-    return foundAny
+    UsedPlus.logTrace("showNextPendingOffer: No unshown pending offers found")
+    return false
 end
 
 --[[
