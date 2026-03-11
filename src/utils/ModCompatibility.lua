@@ -137,17 +137,16 @@
        Setting: enableFMIntegration (default: true)
 
        Architecture: FS25 sandboxes mod globals, so FM's RmFmAvailability is NOT
-       accessible to us. Instead, both mods hook setMapInputContext(). Our hook calls
-       superFunc() FIRST (letting FM run), then checks the BUY action state:
-       - BUY.isActive=false → FM blocked the field → hide Finance/Lease
-       - BUY.isActive=true → field purchasable (vanilla or FM negotiation) → show Finance/Lease
-       Note: FM sets .title="Make Offer" on ALL fields when negotiation is enabled,
-       so we cannot use .title to distinguish for-sale from not-for-sale fields.
+       accessible at runtime. Instead, we read FM's savegame XML file
+       ({savegameDir}/rm_FarmlandMarket.xml) at load time and after each save.
+       This gives us per-farmland isForSale data without crossing the sandbox.
+       FM's server-side FarmlandStateEvent.run hook provides backup rejection.
 
        What UsedPlus does WITH FM:
-       - Observes FM's effect on BUY action after hook chain runs
-       - HIDES Finance/Lease when FM blocks or relabels the buy button
-       - Works regardless of mod load order (always checks AFTER super)
+       - Reads FM availability from savegame XML, caches per-farmland isForSale
+       - HIDES Finance/Lease for farmlands FM marks as not-for-sale
+       - Refreshes cache after each game save (hooks FSCareerMissionInfo.saveToXMLFile)
+       - Falls back to "available" if FM hasn't saved yet (new game)
 
        What UsedPlus does WITHOUT FM:
        - Finance/Lease available for all purchasable farmlands
@@ -193,6 +192,7 @@ ModCompatibility.elsDetected = false
 ModCompatibility.bcDetected = false  -- v2.15.2: Better Contracts
 ModCompatibility.farmlandMarketInstalled = false  -- v2.15.4: FM farmland availability
 ModCompatibility.fmDetected = false  -- v2.15.4: Raw detection for UI
+ModCompatibility.fmAvailabilityCache = {}  -- v2.15.5: Cached FM availability {farmlandId = isForSale}
 
 ModCompatibility.initialized = false
 
@@ -476,6 +476,20 @@ function ModCompatibility.init()
     end
 
     UsedPlus.logInfo("==========================================")
+
+    -- v2.15.5: Read FM availability from savegame XML (if FM is installed)
+    ModCompatibility.readFMAvailability()
+
+    -- v2.15.5: Hook game save to refresh FM cache after FM writes its XML
+    if ModCompatibility.farmlandMarketInstalled and FSCareerMissionInfo ~= nil then
+        FSCareerMissionInfo.saveToXMLFile = Utils.appendedFunction(
+            FSCareerMissionInfo.saveToXMLFile,
+            function()
+                ModCompatibility.readFMAvailability()
+            end
+        )
+        UsedPlus.logDebug("FM save refresh hook installed")
+    end
 
     ModCompatibility.initialized = true
 end
@@ -1421,14 +1435,75 @@ function ModCompatibility.shouldInitUsedVehicleManager()
 end
 
 --[[
-    v2.15.5: DEPRECATED — FM integration now works via hook chain observation.
-    FS25 sandboxes mod globals, so RmFmAvailability is NEVER visible to us.
-    Instead, InGameMenuMapFrameExtension.setMapInputContext() calls superFunc first,
-    then checks BUY action state (isActive + title) to detect FM's decisions.
-    This stub remains for backwards compatibility — always returns false.
+    v2.15.5: Read FM availability from savegame XML and cache it.
+    FM saves to: {savegameDir}/rm_FarmlandMarket.xml
+    XML format: rmFarmlandMarket.availability.farmland(N)#id, #isForSale
+
+    Called at load time and after each game save to keep cache fresh.
+    Between saves, cache may be slightly stale if FM changes availability
+    via daily evaluation — but FM's server-side FarmlandStateEvent.run
+    hook still rejects invalid purchases, so no actual harm.
+]]
+function ModCompatibility.readFMAvailability()
+    if not ModCompatibility.farmlandMarketInstalled then
+        ModCompatibility.fmAvailabilityCache = {}
+        return
+    end
+
+    local savegameDir = nil
+    if g_currentMission and g_currentMission.missionInfo then
+        savegameDir = g_currentMission.missionInfo.savegameDirectory
+    end
+    if savegameDir == nil then
+        UsedPlus.logWarn("FM availability: Cannot determine savegame directory")
+        return
+    end
+
+    local xmlPath = savegameDir .. "/rm_FarmlandMarket.xml"
+    local xmlId = loadXMLFile("FMAvail", xmlPath)
+    if xmlId == nil or xmlId == 0 then
+        UsedPlus.logInfo("FM availability: No savegame file (new save or FM not yet saved)")
+        ModCompatibility.fmAvailabilityCache = {}
+        return
+    end
+
+    local cache = {}
+    local count = 0
+    local i = 0
+    while true do
+        local entryKey = string.format("rmFarmlandMarket.availability.farmland(%d)", i)
+        if not hasXMLProperty(xmlId, entryKey) then
+            break
+        end
+        local farmlandId = getXMLInt(xmlId, entryKey .. "#id")
+        local isForSale = getXMLBool(xmlId, entryKey .. "#isForSale")
+        if farmlandId ~= nil then
+            cache[farmlandId] = (isForSale == true)
+            count = count + 1
+        end
+        i = i + 1
+    end
+
+    delete(xmlId)
+    ModCompatibility.fmAvailabilityCache = cache
+    UsedPlus.logInfo(string.format("FM availability: Cached %d farmland entries from savegame", count))
+end
+
+--[[
+    Check if a farmland is blocked by Farmland Market (not for sale).
+    Uses cached availability data read from FM's savegame XML.
+    @param farmlandId - The farmland ID to check
+    @return boolean - true if FM says this farmland is NOT for sale
 ]]
 function ModCompatibility.isFarmlandBlockedByFM(farmlandId)
-    return false
+    if not ModCompatibility.farmlandMarketInstalled or farmlandId == nil then
+        return false
+    end
+    local isForSale = ModCompatibility.fmAvailabilityCache[farmlandId]
+    if isForSale == nil then
+        return false  -- Not in cache (new field, FM hasn't saved yet) — assume available
+    end
+    return not isForSale
 end
 
 --[[

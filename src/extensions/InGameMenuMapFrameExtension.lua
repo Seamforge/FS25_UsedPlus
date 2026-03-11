@@ -13,7 +13,6 @@
 ]]
 
 InGameMenuMapFrameExtension = {}
-InGameMenuMapFrameExtension.actionsShifted = false
 
 -- Dialog loading now handled by DialogLoader utility
 
@@ -55,78 +54,45 @@ function InGameMenuMapFrameExtension.onLoadMapFinished(self, superFunc)
         -- Replace with our callback
         self.contextActions[InGameMenuMapFrame.ACTIONS.BUY].callback = InGameMenuMapFrameExtension.onBuyFarmland
         UsedPlus.logDebug("Intercepted BUY action callback (ID=" .. tostring(InGameMenuMapFrame.ACTIONS.BUY) .. ")")
-
-        -- Insert FINANCE_LAND and LEASE_LAND right after BUY
-        -- We need to shift all actions with ID > BUY up by 2 to make room
-        local buyId = InGameMenuMapFrame.ACTIONS.BUY
-        local financeId = buyId + 1
-        local leaseId = buyId + 2
-
-        -- Only shift actions once (re-entrancy guard to prevent double-shifting IDs)
-        if not InGameMenuMapFrameExtension.actionsShifted then
-            InGameMenuMapFrameExtension.actionsShifted = true
-
-            -- Collect all actions that need to be shifted (ID > buyId)
-            local actionsToShift = {}
-            for actionName, actionId in pairs(InGameMenuMapFrame.ACTIONS) do
-                if type(actionId) == "number" and actionId > buyId then
-                    table.insert(actionsToShift, {name = actionName, oldId = actionId})
-                end
-            end
-
-            -- Sort by ID descending so we shift highest first (avoid collisions)
-            table.sort(actionsToShift, function(a, b) return a.oldId > b.oldId end)
-
-            -- Shift each action's ID up by 2
-            for _, action in ipairs(actionsToShift) do
-                local newId = action.oldId + 2
-                InGameMenuMapFrame.ACTIONS[action.name] = newId
-
-                -- Also move the contextAction entry
-                if self.contextActions[action.oldId] then
-                    self.contextActions[newId] = self.contextActions[action.oldId]
-                    self.contextActions[action.oldId] = nil
-                end
-
-                UsedPlus.logDebug("Shifted action " .. action.name .. " from ID " .. action.oldId .. " to " .. newId)
-            end
-        end
-
-        -- Now register our actions in the gap we created
-        if InGameMenuMapFrame.ACTIONS.FINANCE_LAND == nil then
-            InGameMenuMapFrame.ACTIONS["FINANCE_LAND"] = financeId
-
-            self.contextActions[financeId] = {
-                ["title"] = g_i18n:getText("usedplus_action_financeLand") or "Finance",
-                ["callback"] = InGameMenuMapFrameExtension.onFinanceLand,
-                ["isActive"] = false
-            }
-
-            UsedPlus.logDebug("Registered FINANCE_LAND action (ID=" .. tostring(financeId) .. ")")
-        end
-
-        if InGameMenuMapFrame.ACTIONS.LEASE_LAND == nil then
-            InGameMenuMapFrame.ACTIONS["LEASE_LAND"] = leaseId
-
-            self.contextActions[leaseId] = {
-                ["title"] = g_i18n:getText("usedplus_action_leaseLand") or "Lease",
-                ["callback"] = InGameMenuMapFrameExtension.onLeaseLand,
-                ["isActive"] = false
-            }
-
-            UsedPlus.logDebug("Registered LEASE_LAND action (ID=" .. tostring(leaseId) .. ")")
-        end
     else
         UsedPlus.logWarn("Could not intercept BUY action")
+    end
+
+    -- Register FINANCE_LAND and LEASE_LAND at the end of action list
+    -- Appending avoids shifting vanilla action IDs which disrupts button bar alignment
+    if InGameMenuMapFrame.ACTIONS.FINANCE_LAND == nil then
+        InGameMenuMapFrame.ACTIONS["FINANCE_LAND"] = count + 1
+        count = count + 1
+
+        self.contextActions[InGameMenuMapFrame.ACTIONS.FINANCE_LAND] = {
+            ["title"] = g_i18n:getText("usedplus_action_financeLand") or "Finance",
+            ["callback"] = InGameMenuMapFrameExtension.onFinanceLand,
+            ["isActive"] = false
+        }
+
+        UsedPlus.logDebug("Registered FINANCE_LAND action (ID=" .. tostring(InGameMenuMapFrame.ACTIONS.FINANCE_LAND) .. ")")
+    end
+
+    if InGameMenuMapFrame.ACTIONS.LEASE_LAND == nil then
+        InGameMenuMapFrame.ACTIONS["LEASE_LAND"] = count + 1
+        count = count + 1
+
+        self.contextActions[InGameMenuMapFrame.ACTIONS.LEASE_LAND] = {
+            ["title"] = g_i18n:getText("usedplus_action_leaseLand") or "Lease",
+            ["callback"] = InGameMenuMapFrameExtension.onLeaseLand,
+            ["isActive"] = false
+        }
+
+        UsedPlus.logDebug("Registered LEASE_LAND action (ID=" .. tostring(InGameMenuMapFrame.ACTIONS.LEASE_LAND) .. ")")
     end
 end
 
 --[[
     Hook setMapInputContext to show Repair, Finance Land, and Lease Land options
     v1.4.0: Check settings system for feature toggles
-    v2.15.5: Call superFunc FIRST so FM and other mods can modify BUY state,
-             then observe the result to control Finance/Lease visibility.
-             This avoids FS25 mod sandbox issues — we observe effects, not data.
+    v2.15.5: Call superFunc FIRST, then check FM availability via savegame XML cache.
+             FS25 sandboxes mod globals, so we read FM's rm_FarmlandMarket.xml at load
+             time and after each save to know which fields FM considers "for sale".
 ]]
 function InGameMenuMapFrameExtension.setMapInputContext(self, superFunc, enterVehicleActive, resetVehicleActive, sellVehicleActive, visitPlaceActive, setMarkerActive, removeMarkerActive, buyFarmlandActive, sellFarmlandActive, manageActive)
 
@@ -145,12 +111,18 @@ function InGameMenuMapFrameExtension.setMapInputContext(self, superFunc, enterVe
         self.contextActions[InGameMenuMapFrame.ACTIONS.REPAIR_VEHICLE].isActive = false
     end
 
-    -- v2.15.5: Check if buy is available after the full hook chain has run.
-    -- FM sets BUY.isActive=false for blocked fields (not for sale, no negotiation).
-    -- We show Finance/Lease whenever BUY is active — this covers both vanilla buy
-    -- and FM's "Make Offer" mode (where the purchase goes through FM's server validation).
-    local buyAction = self.contextActions[InGameMenuMapFrame.ACTIONS.BUY]
-    local isBuyAvailable = buyAction and buyAction.isActive
+    -- v2.15.5: Determine if Finance/Lease should be available for this farmland.
+    -- Use buyFarmlandActive (vanilla's decision) as baseline, then check FM cache.
+    -- FM's savegame XML tells us which fields are actually for sale.
+    local isBuyAvailable = buyFarmlandActive
+
+    -- v2.15.5: Check FM availability cache (read from FM's savegame XML at load time)
+    local isFMBlocked = false
+    if isBuyAvailable and self.selectedFarmland and ModCompatibility
+       and ModCompatibility.isFarmlandBlockedByFM(self.selectedFarmland.id) then
+        isFMBlocked = true
+        isBuyAvailable = false
+    end
 
     -- v2.15.4: Hide Finance/Lease for free ($0) farmlands — nothing to finance or lease
     local isFreeField = false
@@ -432,7 +404,6 @@ end
     Reset state on mission delete to prevent stale data in new sessions
 ]]
 function InGameMenuMapFrameExtension.onMissionDelete()
-    InGameMenuMapFrameExtension.actionsShifted = false
     InGameMenuMapFrameExtension.originalBuyCallback = nil
     UsedPlus.logDebug("InGameMenuMapFrameExtension: Reset state for new mission")
 end
