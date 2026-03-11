@@ -140,8 +140,9 @@
        accessible to us. Instead, both mods hook setMapInputContext(). Our hook calls
        superFunc() FIRST (letting FM run), then checks the BUY action state:
        - BUY.isActive=false → FM blocked the field → hide Finance/Lease
-       - BUY.title ~= nil → FM relabeled to "Make Offer" → hide Finance/Lease
-       - BUY.isActive=true, title=nil → normal buy → show Finance/Lease
+       - BUY.isActive=true → field purchasable (vanilla or FM negotiation) → show Finance/Lease
+       Note: FM sets .title="Make Offer" on ALL fields when negotiation is enabled,
+       so we cannot use .title to distinguish for-sale from not-for-sale fields.
 
        What UsedPlus does WITH FM:
        - Observes FM's effect on BUY action after hook chain runs

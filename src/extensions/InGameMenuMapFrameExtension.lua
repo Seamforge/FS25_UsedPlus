@@ -145,27 +145,28 @@ function InGameMenuMapFrameExtension.setMapInputContext(self, superFunc, enterVe
         self.contextActions[InGameMenuMapFrame.ACTIONS.REPAIR_VEHICLE].isActive = false
     end
 
-    -- v2.15.5: Check if vanilla buy is available after the full hook chain has run.
-    -- FM sets BUY.isActive=false for blocked fields, and BUY.title="Make Offer" for negotiation.
-    -- We only show Finance/Lease when buy is a standard vanilla purchase (active + no title override).
+    -- v2.15.5: Check if buy is available after the full hook chain has run.
+    -- FM sets BUY.isActive=false for blocked fields (not for sale, no negotiation).
+    -- We show Finance/Lease whenever BUY is active — this covers both vanilla buy
+    -- and FM's "Make Offer" mode (where the purchase goes through FM's server validation).
     local buyAction = self.contextActions[InGameMenuMapFrame.ACTIONS.BUY]
-    local isVanillaBuy = buyAction and buyAction.isActive and (buyAction.title == nil)
+    local isBuyAvailable = buyAction and buyAction.isActive
 
     -- v2.15.4: Hide Finance/Lease for free ($0) farmlands — nothing to finance or lease
     local isFreeField = false
-    if isVanillaBuy and self.selectedFarmland then
+    if isBuyAvailable and self.selectedFarmland then
         isFreeField = (self.selectedFarmland.price == nil or self.selectedFarmland.price <= 0)
     end
 
     -- Show "Finance Land" when vanilla buy is available AND finance enabled AND not free
-    if isVanillaBuy and financeEnabled and not isFreeField and self.contextActions[InGameMenuMapFrame.ACTIONS.FINANCE_LAND] then
+    if isBuyAvailable and financeEnabled and not isFreeField and self.contextActions[InGameMenuMapFrame.ACTIONS.FINANCE_LAND] then
         self.contextActions[InGameMenuMapFrame.ACTIONS.FINANCE_LAND].isActive = true
     elseif self.contextActions[InGameMenuMapFrame.ACTIONS.FINANCE_LAND] then
         self.contextActions[InGameMenuMapFrame.ACTIONS.FINANCE_LAND].isActive = false
     end
 
     -- Show "Lease Land" when vanilla buy is available AND lease enabled AND not free
-    if isVanillaBuy and leaseEnabled and not isFreeField and self.contextActions[InGameMenuMapFrame.ACTIONS.LEASE_LAND] then
+    if isBuyAvailable and leaseEnabled and not isFreeField and self.contextActions[InGameMenuMapFrame.ACTIONS.LEASE_LAND] then
         self.contextActions[InGameMenuMapFrame.ACTIONS.LEASE_LAND].isActive = true
     elseif self.contextActions[InGameMenuMapFrame.ACTIONS.LEASE_LAND] then
         self.contextActions[InGameMenuMapFrame.ACTIONS.LEASE_LAND].isActive = false
