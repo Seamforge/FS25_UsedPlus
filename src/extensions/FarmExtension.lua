@@ -31,6 +31,10 @@ FarmExtension.lastVanillaLoanBalances = {}
 -- Once seeded, a farm will never be seeded again
 FarmExtension.retroactiveCreditSeeded = {}
 
+-- v2.15.5: Track which farms have received HP (HirePurchasing) retroactive credit seeding
+-- Separate from vanilla seeding - persisted to prevent re-seeding on every load (Issue #28)
+FarmExtension.hpRetroactiveSeeded = {}
+
 --[[
     Initialize farm extension
     Subscribe to game events for payment processing
@@ -287,6 +291,125 @@ function FarmExtension:seedRetroactiveVanillaLoanCredit(farm, currentLoan)
         farmId, paymentsToCredit, estimatedMonthlyPayment))
 end
 
+--[[
+    v2.15.5: Seed retroactive credit from HirePurchasing lease payment history (Issue #28)
+
+    When a player has been using HirePurchasing with on-time payments and then adds UsedPlus,
+    their existing payment history should be recognized in the credit score.
+    Uses the same conservative approach as vanilla loan seeding: one-time, capped, persisted.
+
+    Called via deferred trigger in onStartMission to ensure HP data is fully loaded.
+]]
+function FarmExtension:seedRetroactiveHPCredit(farm)
+    local farmId = farm.farmId
+
+    -- Server-only: credit operations must be server-authoritative
+    if not g_server then return end
+
+    -- Check if this farm has already been seeded for HP
+    if FarmExtension.hpRetroactiveSeeded[farmId] then
+        UsedPlus.logDebug(string.format(
+            "Farm %d: Already seeded HP retroactive credit - skipping",
+            farmId))
+        return
+    end
+
+    -- Check if HP is detected and installed
+    if not ModCompatibility or not ModCompatibility.hirePurchasingInstalled then
+        return
+    end
+
+    -- Check if PaymentTracker is available
+    if not PaymentTracker then
+        UsedPlus.logDebug("PaymentTracker not available for HP retroactive credit")
+        return
+    end
+
+    -- Safety: Check if we already have hp_lease payment history for this farm
+    local existingPayments = PaymentTracker.getPaymentHistory(farmId) or {}
+    for _, payment in ipairs(existingPayments) do
+        if payment.dealType == "hp_lease" then
+            UsedPlus.logDebug(string.format(
+                "Farm %d: Already has HP lease payment history - skipping retroactive seed",
+                farmId))
+            FarmExtension.hpRetroactiveSeeded[farmId] = true
+            return
+        end
+    end
+
+    -- Get HP leases for this farm using existing ModCompatibility accessor
+    local hpLeases = ModCompatibility.getHPLeases(farmId)
+    if #hpLeases == 0 then
+        -- No HP leases found for this farm - do NOT mark as seeded
+        -- (player might install HP later and should get credit then)
+        return
+    end
+
+    -- Sum total payments made across all HP leases
+    local totalHPPayments = 0
+    for _, lease in ipairs(hpLeases) do
+        local monthsPaid = lease.monthsPaid or 0
+        if monthsPaid > 0 then
+            totalHPPayments = totalHPPayments + monthsPaid
+        end
+    end
+
+    if totalHPPayments == 0 then
+        UsedPlus.logDebug(string.format(
+            "Farm %d: HP leases found but zero payments made - skipping",
+            farmId))
+        return
+    end
+
+    -- Cap retroactive payments at 24 (matches vanilla loan cap for consistency)
+    local maxRetroactivePayments = 24
+    local paymentsToCredit = math.min(totalHPPayments, maxRetroactivePayments)
+
+    -- Estimate a representative monthly payment from the HP leases
+    -- Use the average monthly payment across all leases with payments
+    local totalMonthly = 0
+    local leaseCount = 0
+    for _, lease in ipairs(hpLeases) do
+        if (lease.monthsPaid or 0) > 0 and lease.monthlyPayment and lease.monthlyPayment > 0 then
+            totalMonthly = totalMonthly + lease.monthlyPayment
+            leaseCount = leaseCount + 1
+        end
+    end
+    local estimatedPayment = leaseCount > 0 and math.floor(totalMonthly / leaseCount) or 0
+
+    -- Seed the payments into PaymentTracker
+    for i = 1, paymentsToCredit do
+        PaymentTracker.recordPayment(
+            farmId,
+            "HP_LEASE_RETRO",
+            PaymentTracker.STATUS_ON_TIME,
+            estimatedPayment,
+            "hp_lease"
+        )
+    end
+
+    -- Record a summary CreditHistory event
+    if CreditHistory then
+        CreditHistory.recordEvent(farmId, "PAYMENT_ON_TIME",
+            string.format("Hire Purchase: %d prior lease payments credited (%d leases)",
+                paymentsToCredit, #hpLeases))
+    end
+
+    -- Mark this farm as seeded (CRITICAL - prevents re-seeding)
+    FarmExtension.hpRetroactiveSeeded[farmId] = true
+
+    -- Notify the player
+    g_currentMission:addIngameNotification(
+        FSBaseMission.INGAME_NOTIFICATION_OK,
+        string.format(g_i18n:getText("usedplus_notification_priorPaymentsCredited"),
+            paymentsToCredit)
+    )
+
+    UsedPlus.logInfo(string.format(
+        "Farm %d: Seeded %d retroactive HP lease payments (est. $%d each, %d leases) - marked as seeded (Issue #28)",
+        farmId, paymentsToCredit, estimatedPayment, #hpLeases))
+end
+
 -- v2.12.2: processMonthlyPaymentsForFarm, processPaymentForDeal, sendPaymentSummaryNotification,
 -- checkCreditTierChange, getDealTypeName, handleMissedPayment, and seizeLand removed (Issue #7).
 -- These were duplicating FinanceManager's payment processing, causing double deductions.
@@ -320,6 +443,18 @@ function FarmExtension.saveToXMLFile(xmlFile, key)
     end
 
     UsedPlus.logDebug(string.format("FarmExtension: Saved %d vanilla loan balances", balanceIndex))
+
+    -- v2.15.5: Save HP retroactive credit seeding flags (Issue #28)
+    local hpIndex = 0
+    for farmId, seeded in pairs(FarmExtension.hpRetroactiveSeeded) do
+        if seeded then
+            local hpKey = string.format("%s.hpRetroactiveSeeded.farm(%d)", key, hpIndex)
+            xmlFile:setInt(hpKey .. "#farmId", farmId)
+            hpIndex = hpIndex + 1
+        end
+    end
+
+    UsedPlus.logDebug(string.format("FarmExtension: Saved %d HP retroactive seeding flags", hpIndex))
 end
 
 --[[
@@ -355,6 +490,19 @@ function FarmExtension.loadFromXMLFile(xmlFile, key)
     end)
 
     UsedPlus.logDebug(string.format("FarmExtension: Loaded %d vanilla loan balances", balanceCount))
+
+    -- v2.15.5: Load HP retroactive credit seeding flags (Issue #28)
+    FarmExtension.hpRetroactiveSeeded = {}
+    local hpCount = 0
+    xmlFile:iterate(key .. ".hpRetroactiveSeeded.farm", function(_, hpKey)
+        local farmId = xmlFile:getInt(hpKey .. "#farmId")
+        if farmId then
+            FarmExtension.hpRetroactiveSeeded[farmId] = true
+            hpCount = hpCount + 1
+        end
+    end)
+
+    UsedPlus.logDebug(string.format("FarmExtension: Loaded %d HP retroactive seeding flags", hpCount))
 end
 
 --[[
@@ -371,6 +519,7 @@ function FarmExtension:delete()
     FarmExtension.initialized = false
     FarmExtension.lastVanillaLoanBalances = {}
     FarmExtension.retroactiveCreditSeeded = {}
+    FarmExtension.hpRetroactiveSeeded = {}
 
     UsedPlus.logInfo("FarmExtension cleaned up")
 end

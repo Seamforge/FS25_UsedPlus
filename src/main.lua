@@ -294,6 +294,25 @@ Mission00.onStartMission = Utils.appendedFunction(
             UsedPlus.logError("Failed to create FinanceManagerFrame")
         end
 
+        -- v2.15.5: Deferred HP payment history seeding (Issue #28)
+        -- Uses one-frame deferral to ensure all mods (including HirePurchasing) have
+        -- finished their onStartMission hooks and populated their data tables
+        if g_server and ModCompatibility and ModCompatibility.hirePurchasingInstalled then
+            g_currentMission:addUpdateable({
+                update = function(self, dt)
+                    UsedPlus.logDebug("HP retroactive credit seeding: deferred trigger fired")
+                    local farms = g_farmManager:getFarms()
+                    for _, farm in pairs(farms) do
+                        if farm.farmId ~= FarmManager.SPECTATOR_FARM_ID then
+                            FarmExtension:seedRetroactiveHPCredit(farm)
+                        end
+                    end
+                    g_currentMission:removeUpdateable(self)
+                end
+            })
+            UsedPlus.logDebug("HP retroactive credit seeding: deferred trigger scheduled")
+        end
+
         -- v2.13.1: Show startup notification with version and official source (Issue #7)
         -- Ensures every player knows the real version and where to get updates,
         -- regardless of which site they downloaded from
@@ -1029,7 +1048,7 @@ local DEBUG_OFF_MSG = "Error: Enable debug mode first (upAdminCP > State > Toggl
 
     function UsedPlus:consoleCommandCreditScore()
         if not UsedPlus.DEBUG then return DEBUG_OFF_MSG end
-        local farmId = g_currentMission.player.farmId
+        local farmId = g_currentMission:getFarmId()
         local score = CreditScore.calculate(farmId)
         local rating, level = CreditScore.getRating(score)
 
@@ -1048,7 +1067,7 @@ local DEBUG_OFF_MSG = "Error: Enable debug mode first (upAdminCP > State > Toggl
             return "FinanceManager not initialized"
         end
 
-        local farmId = g_currentMission.player.farmId
+        local farmId = g_currentMission:getFarmId()
         local deals = g_financeManager:getDealsForFarm(farmId)
 
         if #deals == 0 then
@@ -1075,7 +1094,7 @@ local DEBUG_OFF_MSG = "Error: Enable debug mode first (upAdminCP > State > Toggl
             return "UsedVehicleManager not initialized"
         end
 
-        local farmId = g_currentMission.player.farmId
+        local farmId = g_currentMission:getFarmId()
         local farm = g_farmManager:getFarmById(farmId)
 
         if farm.usedVehicleSearches == nil or #farm.usedVehicleSearches == 0 then
