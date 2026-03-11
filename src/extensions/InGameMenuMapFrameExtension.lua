@@ -124,8 +124,14 @@ end
 --[[
     Hook setMapInputContext to show Repair, Finance Land, and Lease Land options
     v1.4.0: Check settings system for feature toggles
+    v2.15.5: Call superFunc FIRST so FM and other mods can modify BUY state,
+             then observe the result to control Finance/Lease visibility.
+             This avoids FS25 mod sandbox issues — we observe effects, not data.
 ]]
 function InGameMenuMapFrameExtension.setMapInputContext(self, superFunc, enterVehicleActive, resetVehicleActive, sellVehicleActive, visitPlaceActive, setMarkerActive, removeMarkerActive, buyFarmlandActive, sellFarmlandActive, manageActive)
+
+    -- Call original function chain FIRST so FM and other mods can modify buy state
+    superFunc(self, enterVehicleActive, resetVehicleActive, sellVehicleActive, visitPlaceActive, setMarkerActive, removeMarkerActive, buyFarmlandActive, sellFarmlandActive, manageActive)
 
     -- v1.4.0: Check settings for each feature
     local repairEnabled = not UsedPlusSettings or UsedPlusSettings:isSystemEnabled("Repair")
@@ -139,28 +145,31 @@ function InGameMenuMapFrameExtension.setMapInputContext(self, superFunc, enterVe
         self.contextActions[InGameMenuMapFrame.ACTIONS.REPAIR_VEHICLE].isActive = false
     end
 
+    -- v2.15.5: Check if vanilla buy is available after the full hook chain has run.
+    -- FM sets BUY.isActive=false for blocked fields, and BUY.title="Make Offer" for negotiation.
+    -- We only show Finance/Lease when buy is a standard vanilla purchase (active + no title override).
+    local buyAction = self.contextActions[InGameMenuMapFrame.ACTIONS.BUY]
+    local isVanillaBuy = buyAction and buyAction.isActive and (buyAction.title == nil)
+
     -- v2.15.4: Hide Finance/Lease for free ($0) farmlands — nothing to finance or lease
     local isFreeField = false
-    if buyFarmlandActive and self.selectedFarmland then
+    if isVanillaBuy and self.selectedFarmland then
         isFreeField = (self.selectedFarmland.price == nil or self.selectedFarmland.price <= 0)
     end
 
-    -- Show "Finance Land" when "Buy Farmland" is available (unowned farmland selected) AND finance is enabled AND not free
-    if buyFarmlandActive and financeEnabled and not isFreeField and self.contextActions[InGameMenuMapFrame.ACTIONS.FINANCE_LAND] then
+    -- Show "Finance Land" when vanilla buy is available AND finance enabled AND not free
+    if isVanillaBuy and financeEnabled and not isFreeField and self.contextActions[InGameMenuMapFrame.ACTIONS.FINANCE_LAND] then
         self.contextActions[InGameMenuMapFrame.ACTIONS.FINANCE_LAND].isActive = true
     elseif self.contextActions[InGameMenuMapFrame.ACTIONS.FINANCE_LAND] then
         self.contextActions[InGameMenuMapFrame.ACTIONS.FINANCE_LAND].isActive = false
     end
 
-    -- Show "Lease Land" when "Buy Farmland" is available (unowned farmland selected) AND lease is enabled AND not free
-    if buyFarmlandActive and leaseEnabled and not isFreeField and self.contextActions[InGameMenuMapFrame.ACTIONS.LEASE_LAND] then
+    -- Show "Lease Land" when vanilla buy is available AND lease enabled AND not free
+    if isVanillaBuy and leaseEnabled and not isFreeField and self.contextActions[InGameMenuMapFrame.ACTIONS.LEASE_LAND] then
         self.contextActions[InGameMenuMapFrame.ACTIONS.LEASE_LAND].isActive = true
     elseif self.contextActions[InGameMenuMapFrame.ACTIONS.LEASE_LAND] then
         self.contextActions[InGameMenuMapFrame.ACTIONS.LEASE_LAND].isActive = false
     end
-
-    -- Call original function
-    superFunc(self, enterVehicleActive, resetVehicleActive, sellVehicleActive, visitPlaceActive, setMarkerActive, removeMarkerActive, buyFarmlandActive, sellFarmlandActive, manageActive)
 end
 
 --[[

@@ -58,6 +58,7 @@ UsedPlusSettings.DEFAULTS = {
     enableBUEIntegration = true,     -- v2.6.2: Toggle BuyUsedEquipment integration (hides Search button)
     enableELSIntegration = true,     -- v2.6.2: Toggle EnhancedLoanSystem integration (disables loans)
     enableBCIntegration = true,      -- v2.15.2: Toggle Better Contracts integration (farmland discounts)
+    enableFMIntegration = true,      -- v2.15.4: Toggle Farmland Market integration (defers to FM availability)
 
     -- === SHOP BEHAVIOR (v2.7.0) ===
     -- v2.7.0: Override shop Buy/Lease buttons to show UnifiedPurchaseDialog

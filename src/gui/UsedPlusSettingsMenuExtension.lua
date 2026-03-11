@@ -306,6 +306,15 @@ function UsedPlusSettingsMenuExtension:addSettingsElements(frame)
         )
     end
 
+    -- v2.15.4: FM Integration toggle (only show if FM detected)
+    if ModCompatibility and ModCompatibility.fmDetected then
+        frame.usedplus_fmIntegrationToggle = UsedPlusSettingsMenuExtension:addBinaryOption(
+            frame, "onFMIntegrationToggleChanged",
+            g_i18n:getText("usedplus_setting_fmIntegration") or "Farmland Market",
+            g_i18n:getText("usedplus_setting_fmIntegration_desc") or "Enable Farmland Market integration. Respects FM's field availability — not-for-sale fields cannot be financed or leased."
+        )
+    end
+
     -- v2.7.0: Shop Buy/Lease override toggle (always shown)
     frame.usedplus_overrideShopBuyLeaseToggle = UsedPlusSettingsMenuExtension:addBinaryOption(
         frame, "onOverrideShopBuyLeaseToggleChanged",
@@ -604,6 +613,7 @@ function UsedPlusSettingsMenuExtension:updateSettingsUI(frame)
     setChecked(frame.usedplus_bueIntegrationToggle, "enableBUEIntegration") -- v2.6.2
     setChecked(frame.usedplus_elsIntegrationToggle, "enableELSIntegration") -- v2.6.2
     setChecked(frame.usedplus_bcIntegrationToggle, "enableBCIntegration") -- v2.15.2
+    setChecked(frame.usedplus_fmIntegrationToggle, "enableFMIntegration") -- v2.15.4
     setChecked(frame.usedplus_overrideShopBuyLeaseToggle, "overrideShopBuyLease") -- v2.7.0
     setChecked(frame.usedplus_overrideRVBRepairToggle, "overrideRVBRepair") -- v2.7.0
 
@@ -825,6 +835,17 @@ end
 function UsedPlusSettingsMenuExtension:onBCIntegrationToggleChanged(state)
     if UsedPlusSettings then
         UsedPlusSettings:set("enableBCIntegration", state == BinaryOptionElement.STATE_RIGHT)
+        -- Refresh ModCompatibility flags
+        if ModCompatibility and ModCompatibility.refreshIntegrationSettings then
+            ModCompatibility.refreshIntegrationSettings()
+        end
+    end
+end
+
+-- v2.15.4: NEW - Farmland Market Integration toggle
+function UsedPlusSettingsMenuExtension:onFMIntegrationToggleChanged(state)
+    if UsedPlusSettings then
+        UsedPlusSettings:set("enableFMIntegration", state == BinaryOptionElement.STATE_RIGHT)
         -- Refresh ModCompatibility flags
         if ModCompatibility and ModCompatibility.refreshIntegrationSettings then
             ModCompatibility.refreshIntegrationSettings()

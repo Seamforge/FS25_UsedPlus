@@ -44,6 +44,7 @@ SettingsPresets.easy = {
     enableFarmlandDifficultyScaling = true,  -- v2.0.0: Scale land with difficulty
     enableBankInterest = true,               -- v2.0.0: Earn interest on cash
     enableBCIntegration = true,              -- v2.15.2: BC farmland discounts
+    enableFMIntegration = true,              -- v2.15.4: FM farmland availability
 
     -- Very forgiving economics
     baseInterestRate = 0.04,            -- 4% (very low)
@@ -83,6 +84,7 @@ SettingsPresets.balanced = {
     enableFarmlandDifficultyScaling = true,  -- v2.0.0: Scale land with difficulty
     enableBankInterest = true,               -- v2.0.0: Earn interest on cash
     enableBCIntegration = true,              -- v2.15.2: BC farmland discounts
+    enableFMIntegration = true,              -- v2.15.4: FM farmland availability
 
     -- Default economics
     baseInterestRate = 0.08,            -- 8%
@@ -125,6 +127,7 @@ SettingsPresets.challenging = {
     enableFarmlandDifficultyScaling = true,  -- v2.0.0: Scale land with difficulty
     enableBankInterest = true,               -- v2.0.0: Minimal interest
     enableBCIntegration = true,              -- v2.15.2: BC farmland discounts
+    enableFMIntegration = true,              -- v2.15.4: FM farmland availability
 
     -- Tighter economics
     baseInterestRate = 0.10,            -- 10%
@@ -168,6 +171,7 @@ SettingsPresets.hardcore = {
     enableFarmlandDifficultyScaling = true,  -- v2.0.0: Scale land with difficulty
     enableBankInterest = false,              -- v2.0.0: No free money!
     enableBCIntegration = true,              -- v2.15.2: BC farmland discounts
+    enableFMIntegration = true,              -- v2.15.4: FM farmland availability
 
     -- Punishing economics
     baseInterestRate = 0.12,            -- 12%
@@ -211,6 +215,7 @@ SettingsPresets.streamlined = {
     enableFarmlandDifficultyScaling = false, -- v2.0.0: Keep vanilla land prices
     enableBankInterest = false,              -- v2.0.0: No extras
     enableBCIntegration = true,              -- v2.15.2: BC farmland discounts
+    enableFMIntegration = true,              -- v2.15.4: FM farmland availability
 
     -- Relaxed economics
     baseInterestRate = 0.06,            -- 6%
@@ -248,6 +253,7 @@ SettingsPresets.immersive = {
     enableFarmlandDifficultyScaling = true,  -- v2.0.0: Scale land with difficulty
     enableBankInterest = true,               -- v2.0.0: Realistic interest
     enableBCIntegration = true,              -- v2.15.2: BC farmland discounts
+    enableFMIntegration = true,              -- v2.15.4: FM farmland availability
 
     -- Realistic economics
     baseInterestRate = 0.08,            -- 8%

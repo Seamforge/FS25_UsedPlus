@@ -2792,5 +2792,7 @@
         <e k="usedplus_mp_success_lease_returned" v="Lease returned successfully" eh="5875d69d" />
         <e k="usedplus_mp_success_refill_fluids" v="Fluids refilled successfully" eh="d3bf65e8" />
         <e k="usedplus_mp_success_replace_tires" v="Tires replaced successfully" eh="e017638b" />
-    </elements>
+    
+        <e k="usedplus_setting_fmIntegration" v="Farmland Market" eh="c405015d" />
+        <e k="usedplus_setting_fmIntegration_desc" v="Enable Farmland Market integration. Respects FM's field availability — not-for-sale fields cannot be financed or leased." eh="19a9edc3" /></elements>
 </l10n>

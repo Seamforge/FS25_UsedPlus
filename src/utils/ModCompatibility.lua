@@ -132,6 +132,26 @@
        - getELSLoans() - reads ELS loan data for display
        - payELSLoan() - makes payments on ELS loans
 
+    7. FARMLAND MARKET (FM) by Ritter
+       Integration Level: HOOK CHAIN OBSERVATION (v2.15.5)
+       Setting: enableFMIntegration (default: true)
+
+       Architecture: FS25 sandboxes mod globals, so FM's RmFmAvailability is NOT
+       accessible to us. Instead, both mods hook setMapInputContext(). Our hook calls
+       superFunc() FIRST (letting FM run), then checks the BUY action state:
+       - BUY.isActive=false → FM blocked the field → hide Finance/Lease
+       - BUY.title ~= nil → FM relabeled to "Make Offer" → hide Finance/Lease
+       - BUY.isActive=true, title=nil → normal buy → show Finance/Lease
+
+       What UsedPlus does WITH FM:
+       - Observes FM's effect on BUY action after hook chain runs
+       - HIDES Finance/Lease when FM blocks or relabels the buy button
+       - Works regardless of mod load order (always checks AFTER super)
+
+       What UsedPlus does WITHOUT FM:
+       - Finance/Lease available for all purchasable farmlands
+       - No availability restrictions beyond vanilla game rules
+
     ============================================================================
     SETTINGS FAILSAFE (v2.6.2)
     ============================================================================
@@ -170,6 +190,8 @@ ModCompatibility.hpDetected = false
 ModCompatibility.bueDetected = false
 ModCompatibility.elsDetected = false
 ModCompatibility.bcDetected = false  -- v2.15.2: Better Contracts
+ModCompatibility.farmlandMarketInstalled = false  -- v2.15.4: FM farmland availability
+ModCompatibility.fmDetected = false  -- v2.15.4: Raw detection for UI
 
 ModCompatibility.initialized = false
 
@@ -310,12 +332,26 @@ function ModCompatibility.init()
         UsedPlus.logDebug("BC: Better Contracts not found in g_modIsLoaded")
     end
 
+    -- v2.15.4: Detect Farmland Market (RmFmAvailability is the key global)
+    local fmDetected = false
+    if RmFmAvailability ~= nil then
+        fmDetected = true
+        UsedPlus.logDebug("FM detected via RmFmAvailability global")
+    elseif RmFarmlandMarket ~= nil then
+        fmDetected = true
+        UsedPlus.logDebug("FM detected via RmFarmlandMarket global")
+    elseif g_modIsLoaded and g_modIsLoaded["FS25_FarmlandMarket"] then
+        fmDetected = true
+        UsedPlus.logInfo("FM: Farmland Market DETECTED via g_modIsLoaded")
+    end
+
     -- v2.6.2: Check integration settings for compatible mods
     local amSettingEnabled = not UsedPlusSettings or UsedPlusSettings:get("enableAMIntegration") ~= false
     local hpSettingEnabled = not UsedPlusSettings or UsedPlusSettings:get("enableHPIntegration") ~= false
     local bueSettingEnabled = not UsedPlusSettings or UsedPlusSettings:get("enableBUEIntegration") ~= false
     local elsSettingEnabled = not UsedPlusSettings or UsedPlusSettings:get("enableELSIntegration") ~= false
     local bcSettingEnabled = not UsedPlusSettings or UsedPlusSettings:get("enableBCIntegration") ~= false
+    local fmSettingEnabled = not UsedPlusSettings or UsedPlusSettings:get("enableFMIntegration") ~= false
 
     -- Combine detection with settings
     ModCompatibility.advancedMaintenanceInstalled = amDetected and amSettingEnabled
@@ -323,6 +359,7 @@ function ModCompatibility.init()
     ModCompatibility.buyUsedEquipmentInstalled = bueDetected and bueSettingEnabled
     ModCompatibility.enhancedLoanSystemInstalled = elsDetected and elsSettingEnabled
     ModCompatibility.betterContractsInstalled = bcDetected and bcSettingEnabled
+    ModCompatibility.farmlandMarketInstalled = fmDetected and fmSettingEnabled
 
     -- Store raw detection for UI display
     ModCompatibility.amDetected = amDetected
@@ -330,6 +367,7 @@ function ModCompatibility.init()
     ModCompatibility.bueDetected = bueDetected
     ModCompatibility.elsDetected = elsDetected
     ModCompatibility.bcDetected = bcDetected
+    ModCompatibility.fmDetected = fmDetected
 
     -- ========================================================================
     -- LOG DETECTION RESULTS
@@ -408,6 +446,16 @@ function ModCompatibility.init()
         end
     end
 
+    if ModCompatibility.fmDetected then
+        if ModCompatibility.farmlandMarketInstalled then
+            UsedPlus.logInfo("  [COMPATIBLE] Farmland Market DETECTED")
+            UsedPlus.logInfo("    -> UsedPlus defers to FM availability (not-for-sale fields blocked)")
+            UsedPlus.logInfo("    -> Finance/Lease hidden for unavailable farmlands")
+        else
+            UsedPlus.logInfo("  [DISABLED] Farmland Market detected but INTEGRATION DISABLED in settings")
+        end
+    end
+
     -- Special combined modes
     if ModCompatibility.rvbInstalled and ModCompatibility.uytInstalled then
         UsedPlus.logInfo("  [FULL STACK] RVB + UYT + UsedPlus = Best experience!")
@@ -419,7 +467,8 @@ function ModCompatibility.init()
                         ModCompatibility.hirePurchasingInstalled or
                         ModCompatibility.buyUsedEquipmentInstalled or
                         ModCompatibility.enhancedLoanSystemInstalled or
-                        ModCompatibility.betterContractsInstalled
+                        ModCompatibility.betterContractsInstalled or
+                        ModCompatibility.farmlandMarketInstalled
 
     if not anyDetected then
         UsedPlus.logInfo("  No compatible mods detected - standalone mode")
@@ -445,6 +494,7 @@ function ModCompatibility.refreshIntegrationSettings()
     local bueSettingEnabled = not UsedPlusSettings or UsedPlusSettings:get("enableBUEIntegration") ~= false
     local elsSettingEnabled = not UsedPlusSettings or UsedPlusSettings:get("enableELSIntegration") ~= false
     local bcSettingEnabled = not UsedPlusSettings or UsedPlusSettings:get("enableBCIntegration") ~= false
+    local fmSettingEnabled = not UsedPlusSettings or UsedPlusSettings:get("enableFMIntegration") ~= false
 
     -- Store old values
     local oldRVB = ModCompatibility.rvbInstalled
@@ -454,6 +504,7 @@ function ModCompatibility.refreshIntegrationSettings()
     local oldBUE = ModCompatibility.buyUsedEquipmentInstalled
     local oldELS = ModCompatibility.enhancedLoanSystemInstalled
     local oldBC = ModCompatibility.betterContractsInstalled
+    local oldFM = ModCompatibility.farmlandMarketInstalled
 
     -- Update installed flags (detection AND setting)
     ModCompatibility.rvbInstalled = ModCompatibility.rvbDetected and rvbSettingEnabled
@@ -463,6 +514,7 @@ function ModCompatibility.refreshIntegrationSettings()
     ModCompatibility.buyUsedEquipmentInstalled = ModCompatibility.bueDetected and bueSettingEnabled
     ModCompatibility.enhancedLoanSystemInstalled = ModCompatibility.elsDetected and elsSettingEnabled
     ModCompatibility.betterContractsInstalled = ModCompatibility.bcDetected and bcSettingEnabled
+    ModCompatibility.farmlandMarketInstalled = ModCompatibility.fmDetected and fmSettingEnabled
 
     -- Log changes
     if oldRVB ~= ModCompatibility.rvbInstalled then
@@ -485,6 +537,9 @@ function ModCompatibility.refreshIntegrationSettings()
     end
     if oldBC ~= ModCompatibility.betterContractsInstalled then
         UsedPlus.logInfo(ModCompatibility.betterContractsInstalled and "BC Integration ENABLED" or "BC Integration DISABLED")
+    end
+    if oldFM ~= ModCompatibility.farmlandMarketInstalled then
+        UsedPlus.logInfo(ModCompatibility.farmlandMarketInstalled and "FM Integration ENABLED" or "FM Integration DISABLED")
     end
 end
 
@@ -1365,6 +1420,17 @@ function ModCompatibility.shouldInitUsedVehicleManager()
 end
 
 --[[
+    v2.15.5: DEPRECATED — FM integration now works via hook chain observation.
+    FS25 sandboxes mod globals, so RmFmAvailability is NEVER visible to us.
+    Instead, InGameMenuMapFrameExtension.setMapInputContext() calls superFunc first,
+    then checks BUY action state (isActive + title) to detect FM's decisions.
+    This stub remains for backwards compatibility — always returns false.
+]]
+function ModCompatibility.isFarmlandBlockedByFM(farmlandId)
+    return false
+end
+
+--[[
     Should UsedPlus initialize FinanceManager?
     @return boolean - false if EnhancedLoanSystem handles loans
     Note: We still initialize for lease tracking even with ELS
@@ -1432,6 +1498,9 @@ function ModCompatibility.getStatusString()
     end
     if ModCompatibility.betterContractsInstalled then
         table.insert(parts, "BC")
+    end
+    if ModCompatibility.farmlandMarketInstalled then
+        table.insert(parts, "FM")
     end
 
     if #parts == 0 then
