@@ -9,8 +9,8 @@
         </GuiElement>
 
         <!-- Page Description / Mod Information Panel -->
-        <GuiElement position="25px 560px" size="1640px 135px">
-            <Bitmap profile="baseReference" imageColor="0.06 0.06 0.08 1" size="1640px 135px"/>
+        <GuiElement position="25px 560px" size="1590px 135px">
+            <Bitmap profile="baseReference" imageColor="0.06 0.06 0.08 1" size="1590px 135px"/>
 
             <!-- Row 1: Three columns of feature descriptions -->
             <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_overview" position="15px 115px" size="520px 15px" textSize="11px" textBold="true" textColor="0.6 0.7 0.8 1"/>
@@ -25,10 +25,10 @@
             <Text profile="fs25_textDefault" position="560px 85px" size="520px 15px" textSize="10px" textColor="0.7 0.7 0.7 1"
                 text="$l10n_usedplus_fmf_buyingLine2"/>
 
-            <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_sellingEquip" position="1100px 115px" size="520px 15px" textSize="11px" textBold="true" textColor="0.5 0.9 0.5 1"/>
-            <Text profile="fs25_textDefault" position="1100px 100px" size="520px 15px" textSize="10px" textColor="0.7 0.7 0.7 1"
+            <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_sellingEquip" position="1100px 115px" size="470px 15px" textSize="11px" textBold="true" textColor="0.5 0.9 0.5 1"/>
+            <Text profile="fs25_textDefault" position="1100px 100px" size="470px 15px" textSize="10px" textColor="0.7 0.7 0.7 1"
                 text="$l10n_usedplus_fmf_sellingLine1"/>
-            <Text profile="fs25_textDefault" position="1100px 85px" size="520px 15px" textSize="10px" textColor="0.7 0.7 0.7 1"
+            <Text profile="fs25_textDefault" position="1100px 85px" size="470px 15px" textSize="10px" textColor="0.7 0.7 0.7 1"
                 text="$l10n_usedplus_fmf_sellingLine2"/>
 
             <!-- Row 2: Credit system explanation -->
@@ -38,15 +38,15 @@
             <Text profile="fs25_textDefault" position="15px 30px" size="1060px 15px" textSize="10px" textColor="0.65 0.65 0.65 1"
                 text="$l10n_usedplus_fmf_creditLine2"/>
 
-            <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_quickRef" position="1100px 60px" size="520px 15px" textSize="11px" textBold="true" textColor="0.8 0.8 0.8 1"/>
-            <Text profile="fs25_textDefault" position="1100px 45px" size="520px 15px" textSize="10px" textColor="0.7 0.7 0.7 1"
+            <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_quickRef" position="1100px 60px" size="470px 15px" textSize="11px" textBold="true" textColor="0.8 0.8 0.8 1"/>
+            <Text profile="fs25_textDefault" position="1100px 45px" size="470px 15px" textSize="10px" textColor="0.7 0.7 0.7 1"
                 text="$l10n_usedplus_fmf_quickRefLine1"/>
-            <Text profile="fs25_textDefault" position="1100px 30px" size="520px 15px" textSize="10px" textColor="0.7 0.7 0.7 1"
+            <Text profile="fs25_textDefault" position="1100px 30px" size="470px 15px" textSize="10px" textColor="0.7 0.7 0.7 1"
                 text="$l10n_usedplus_fmf_quickRefLine2"/>
         </GuiElement>
 
         <!-- Content area - Three column layout (Y increases upward from bottom) -->
-        <GuiElement position="25px 80px" size="1640px 475px">
+        <GuiElement position="25px 80px" size="1590px 475px">
 
             <!-- LEFT COLUMN: Active Finances (narrowed to give more room to Used Marketplace) -->
             <GuiElement position="0px 0px" size="600px 475px">
@@ -481,11 +481,11 @@
             </GuiElement>
 
             <!-- RIGHT COLUMN: Stats & Credit Score -->
-            <GuiElement position="1130px 0px" size="510px 475px">
+            <GuiElement position="1130px 0px" size="460px 475px">
 
                 <!-- Lifetime Stats (at bottom) - Two column layout, reduced height to avoid overlap -->
-                <GuiElement position="0px 0px" size="510px 255px">
-                    <Bitmap profile="baseReference" imageColor="0.08 0.08 0.08 1" size="510px 255px"/>
+                <GuiElement position="0px 0px" size="460px 255px">
+                    <Bitmap profile="baseReference" imageColor="0.08 0.08 0.08 1" size="460px 255px"/>
 
                     <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_lifetimeStats" position="12px 230px" textSize="14px" textBold="true" textColor="0.8 0.8 0.8 1"/>
 
@@ -500,11 +500,11 @@
                     <Text profile="fs25_textDefault" id="lifetimeFinancedText" text="" position="150px 160px" size="100px 16px" textSize="13px" textBold="true" textColor="1 0.8 0.2 1"/>
 
                     <!-- Right column -->
-                    <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_interestPaid" position="260px 180px" size="115px 16px" textSize="13px" textColor="0.6 0.6 0.6 1"/>
-                    <Text profile="fs25_textDefault" id="lifetimeInterestText" text="" position="380px 180px" size="120px 16px" textSize="13px" textBold="true" textColor="1 0.6 0.6 1"/>
+                    <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_interestPaid" position="240px 180px" size="110px 16px" textSize="13px" textColor="0.6 0.6 0.6 1"/>
+                    <Text profile="fs25_textDefault" id="lifetimeInterestText" text="" position="355px 180px" size="100px 16px" textSize="13px" textBold="true" textColor="1 0.6 0.6 1"/>
 
-                    <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_paymentsMade" position="260px 160px" size="115px 16px" textSize="13px" textColor="0.6 0.6 0.6 1"/>
-                    <Text profile="fs25_textDefault" id="lifetimePaymentsText" text="" position="380px 160px" size="120px 16px" textSize="13px" textBold="true" textColor="1 1 1 1"/>
+                    <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_paymentsMade" position="240px 160px" size="110px 16px" textSize="13px" textColor="0.6 0.6 0.6 1"/>
+                    <Text profile="fs25_textDefault" id="lifetimePaymentsText" text="" position="355px 160px" size="100px 16px" textSize="13px" textBold="true" textColor="1 1 1 1"/>
 
                     <!-- Search History - Two columns -->
                     <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_searchHistory" position="12px 130px" textSize="13px" textColor="0.9 0.7 0.4 1"/>
@@ -517,28 +517,28 @@
                     <Text profile="fs25_textDefault" id="lifetimeFoundText" text="" position="150px 85px" size="100px 16px" textSize="13px" textBold="true" textColor="0.5 1 0.5 1"/>
 
                     <!-- Right column -->
-                    <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_feesSpent" position="260px 105px" size="115px 16px" textSize="13px" textColor="0.6 0.6 0.6 1"/>
-                    <Text profile="fs25_textDefault" id="lifetimeFeesText" text="" position="380px 105px" size="120px 16px" textSize="13px" textBold="true" textColor="1 0.8 0.2 1"/>
+                    <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_feesSpent" position="240px 105px" size="110px 16px" textSize="13px" textColor="0.6 0.6 0.6 1"/>
+                    <Text profile="fs25_textDefault" id="lifetimeFeesText" text="" position="355px 105px" size="100px 16px" textSize="13px" textBold="true" textColor="1 0.8 0.2 1"/>
 
-                    <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_successRate" position="260px 85px" size="115px 16px" textSize="13px" textColor="0.6 0.6 0.6 1"/>
-                    <Text profile="fs25_textDefault" id="lifetimeSuccessRateText" text="" position="380px 85px" size="120px 16px" textSize="13px" textBold="true" textColor="0.5 1 0.5 1"/>
+                    <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_successRate" position="240px 85px" size="110px 16px" textSize="13px" textColor="0.6 0.6 0.6 1"/>
+                    <Text profile="fs25_textDefault" id="lifetimeSuccessRateText" text="" position="355px 85px" size="100px 16px" textSize="13px" textBold="true" textColor="0.5 1 0.5 1"/>
                 </GuiElement>
 
                 <!-- Credit Score Box (hidden when credit system disabled) -->
-                <GuiElement id="creditScoreBox" position="0px 260px" size="510px 170px">
-                    <Bitmap profile="baseReference" imageColor="0.12 0.12 0.12 1" size="510px 170px"/>
+                <GuiElement id="creditScoreBox" position="0px 260px" size="460px 170px">
+                    <Bitmap profile="baseReference" imageColor="0.12 0.12 0.12 1" size="460px 170px"/>
 
                     <!-- Title row -->
                     <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_yourCreditScore" position="12px 145px" textSize="14px" textBold="true" textColor="0.8 0.8 0.8 1"/>
 
                     <!-- Score display area - score on left, rating info on right -->
                     <Text profile="fs25_textDefault" id="creditScoreValueText" text="" position="20px 112px" textSize="42px" textBold="true" textColor="0.4 1 0.7 1"/>
-                    <Text profile="fs25_textDefault" id="creditRatingText" text="" position="140px 120px" size="360px 24px" textSize="20px" textBold="true" textColor="0.4 1 0.7 1"/>
-                    <Text profile="fs25_textDefault" id="interestAdjustText" text="" position="140px 102px" size="360px 16px" textSize="13px" textColor="0.7 0.7 0.7 1"/>
+                    <Text profile="fs25_textDefault" id="creditRatingText" text="" position="140px 120px" size="310px 24px" textSize="20px" textBold="true" textColor="0.4 1 0.7 1"/>
+                    <Text profile="fs25_textDefault" id="interestAdjustText" text="" position="140px 102px" size="310px 16px" textSize="13px" textColor="0.7 0.7 0.7 1"/>
 
                     <!-- Credit Score Ranges Help - REALISTIC FICO VALUES (300-850) -->
                     <!-- Each tier has a background (for highlight) and text (with ID for styling) -->
-                    <Bitmap profile="baseReference" imageColor="0.18 0.18 0.18 1" position="12px 5px" size="486px 80px"/>
+                    <Bitmap profile="baseReference" imageColor="0.18 0.18 0.18 1" position="12px 5px" size="436px 80px"/>
                     <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_creditRanges" position="20px 62px" textSize="12px" textBold="true" textColor="0.7 0.7 0.7 1"/>
 
                     <!-- Left column tiers - backgrounds moved up 2px more to align with text -->
@@ -552,18 +552,18 @@
                     <Text profile="fs25_textDefault" id="tierFairText" text="$l10n_usedplus_fmf_tierFair" position="20px 15px" size="225px 14px" textSize="11px" textColor="1 0.9 0.5 1"/>
 
                     <!-- Right column tiers - backgrounds moved up 2px more to align with text -->
-                    <Bitmap profile="baseReference" id="tierPoorBg" imageColor="0 0 0 0" position="255px 47px" size="230px 16px"/>
-                    <Text profile="fs25_textDefault" id="tierPoorText" text="$l10n_usedplus_fmf_tierPoor" position="260px 45px" size="225px 14px" textSize="11px" textColor="1 0.7 0.5 1"/>
+                    <Bitmap profile="baseReference" id="tierPoorBg" imageColor="0 0 0 0" position="235px 47px" size="210px 16px"/>
+                    <Text profile="fs25_textDefault" id="tierPoorText" text="$l10n_usedplus_fmf_tierPoor" position="240px 45px" size="205px 14px" textSize="11px" textColor="1 0.7 0.5 1"/>
 
-                    <Bitmap profile="baseReference" id="tierVeryPoorBg" imageColor="0 0 0 0" position="255px 32px" size="230px 16px"/>
-                    <Text profile="fs25_textDefault" id="tierVeryPoorText" text="$l10n_usedplus_fmf_tierVeryPoor" position="260px 30px" size="225px 14px" textSize="11px" textColor="1 0.5 0.5 1"/>
+                    <Bitmap profile="baseReference" id="tierVeryPoorBg" imageColor="0 0 0 0" position="235px 32px" size="210px 16px"/>
+                    <Text profile="fs25_textDefault" id="tierVeryPoorText" text="$l10n_usedplus_fmf_tierVeryPoor" position="240px 30px" size="205px 14px" textSize="11px" textColor="1 0.5 0.5 1"/>
 
-                    <Text profile="fs25_textDefault" id="assetsText" text="" position="260px 15px" size="230px 14px" textSize="11px" textColor="0.6 0.6 0.6 1"/>
+                    <Text profile="fs25_textDefault" id="assetsText" text="" position="240px 15px" size="205px 14px" textSize="11px" textColor="0.6 0.6 0.6 1"/>
                 </GuiElement>
 
                 <!-- Section Header (text changes when credit system disabled) -->
-                <GuiElement position="0px 435px" size="510px 40px">
-                    <Bitmap profile="baseReference" imageColor="0.25 0.4 0.25 1" size="510px 40px"/>
+                <GuiElement position="0px 435px" size="460px 40px">
+                    <Bitmap profile="baseReference" imageColor="0.25 0.4 0.25 1" size="460px 40px"/>
                     <Bitmap profile="iconProfile24" id="creditSectionIcon" position="10px 8px"/>
                     <Text profile="fs25_textDefault" id="statsSectionHeaderText" text="$l10n_usedplus_fmf_sectionCredit" position="40px 10px" textSize="20px" textBold="true" textColor="1 1 1 1"/>
                 </GuiElement>
@@ -572,14 +572,14 @@
         </GuiElement>
 
         <!-- v2.13.1: Version & Source Footer - ensures players know official source regardless of download origin -->
-        <GuiElement position="25px 45px" size="1640px 30px">
-            <Bitmap profile="baseReference" imageColor="0.04 0.04 0.06 1" size="1640px 30px"/>
-            <Text profile="fs25_textDefault" id="versionFooterText" text="" position="0px 8px" size="1440px 20px" textSize="11px" textColor="0.45 0.45 0.5 1" textAlignment="center"/>
+        <GuiElement position="25px 45px" size="1590px 30px">
+            <Bitmap profile="baseReference" imageColor="0.04 0.04 0.06 1" size="1590px 30px"/>
+            <Text profile="fs25_textDefault" id="versionFooterText" text="" position="0px 8px" size="1390px 20px" textSize="11px" textColor="0.45 0.45 0.5 1" textAlignment="center"/>
 
             <!-- Admin Panel Button (v2.15.1) — opens debug/QA panel with current vehicle context -->
-            <Bitmap profile="baseReference" id="adminPanelBtnBg" position="1440px 3px" size="190px 24px" imageColor="0.18 0.22 0.35 1"/>
-            <Button profile="financeActionBtn" id="adminPanelBtn" text="" onClick="onAdminPanelClick" onHighlight="onAdminBtnHighlight" onHighlightRemove="onAdminBtnUnhighlight" position="1440px 3px" size="190px 24px"/>
-            <Text profile="fs25_textDefault" id="adminPanelBtnText" text="$l10n_usedplus_btn_admin_panel" position="1440px 7px" size="190px 18px" textSize="12px" textBold="true" textColor="0.6 0.8 1 1" textAlignment="center"/>
+            <Bitmap profile="baseReference" id="adminPanelBtnBg" position="1390px 3px" size="190px 24px" imageColor="0.18 0.22 0.35 1"/>
+            <Button profile="financeActionBtn" id="adminPanelBtn" text="" onClick="onAdminPanelClick" onHighlight="onAdminBtnHighlight" onHighlightRemove="onAdminBtnUnhighlight" position="1390px 3px" size="190px 24px"/>
+            <Text profile="fs25_textDefault" id="adminPanelBtnText" text="$l10n_usedplus_btn_admin_panel" position="1390px 7px" size="190px 18px" textSize="12px" textBold="true" textColor="0.6 0.8 1 1" textAlignment="center"/>
         </GuiElement>
 
     </GuiElement>
