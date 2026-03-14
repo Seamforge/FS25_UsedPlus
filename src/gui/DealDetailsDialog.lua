@@ -670,9 +670,7 @@ function DealDetailsDialog:executePayoff()
     -- v2.8.0: Use network event for multiplayer synchronization
     -- FinancePaymentEvent handles: validation, money deduction, deal completion,
     -- statistics tracking, credit history, and deal removal when amount >= balance
-    -- Note: sendToServer is an instance method, so we create the event first
-    local paymentEvent = FinancePaymentEvent.new(deal.id, payoffAmount, farmId)
-    paymentEvent:sendToServer(deal.id, payoffAmount, farmId)
+    FinancePaymentEvent.sendToServer(deal.id, payoffAmount, farmId)
 
     -- Store callback before closing (dialog close clears it)
     local refreshCallback = self.onCloseCallback

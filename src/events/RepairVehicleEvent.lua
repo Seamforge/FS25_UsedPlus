@@ -89,11 +89,13 @@ function RepairVehicleEvent.sendToServer(vehicle, farmId, repairPercent, repaint
     if g_server ~= nil then
         -- Single-player or server - execute directly
         RepairVehicleEvent.execute(vehicleId, farmId, repairPercent, repaintPercent, totalCost, isFinanced, termMonths, monthlyPayment, downPayment)
-    else
+    elseif g_client then
         -- Multiplayer client - send to server
         g_client:getServerConnection():sendEvent(
             RepairVehicleEvent.new(vehicleId, farmId, repairPercent, repaintPercent, totalCost, isFinanced, termMonths, monthlyPayment, downPayment)
         )
+    else
+        UsedPlus.logError("RepairVehicleEvent: g_client is nil, cannot send to server")
     end
 end
 

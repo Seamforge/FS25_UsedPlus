@@ -42,11 +42,13 @@ function FaultTracerResultEvent.sendToServer(vehicleId, truckId, component, reli
     if g_server ~= nil then
         -- Single-player or server - execute directly
         FaultTracerResultEvent.execute(vehicleId, truckId, component, reliabilityGain, ceilingGain, oilUsed)
-    else
+    elseif g_client then
         -- Multiplayer client - send to server
         g_client:getServerConnection():sendEvent(
             FaultTracerResultEvent.new(vehicleId, truckId, component, reliabilityGain, ceilingGain, oilUsed)
         )
+    else
+        UsedPlus.logError("FaultTracerResultEvent: g_client is nil, cannot send to server")
     end
 end
 

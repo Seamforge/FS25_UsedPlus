@@ -16,8 +16,8 @@ UsedPlus = {}
 -- Mod metadata
 UsedPlus.MOD_NAME = "FS25_UsedPlus"
 UsedPlus.MOD_DIR = g_currentModDirectory
-UsedPlus.VERSION = "2.15.4.35"  -- Synced by build.js from modDesc.xml
-UsedPlus.DEBUG = true  -- TEMP: Enabled for RVB Workshop diagnostics
+UsedPlus.VERSION = "2.15.4.70"  -- Synced by build.js from modDesc.xml
+UsedPlus.DEBUG = false
 
 -- Log levels control what gets printed
 UsedPlus.LOG_LEVEL = {
@@ -71,65 +71,5 @@ function UsedPlus.logTrace(message, prefix)
     UsedPlus.log(message, UsedPlus.LOG_LEVEL.TRACE, prefix)
 end
 
---[[
-    DEBUG UTILITY: Dump complete GUI state for forensic analysis
-    Use only for debugging GUI/dialog issues - should not be called in production code
-    @param context - String describing when/where this dump was taken
-]]
-function UsedPlus.dumpGuiState(context)
-    UsedPlus.logInfo(string.format("┌─── GUI STATE DUMP: %s ───", context))
-
-    -- Current GUI
-    local currentGui = g_gui.currentGui
-    UsedPlus.logInfo(string.format("│ currentGui: %s", currentGui and currentGui.name or "nil"))
-    if currentGui then
-        UsedPlus.logInfo(string.format("│   - isOpen: %s", tostring(currentGui.isOpen)))
-        UsedPlus.logInfo(string.format("│   - isVisible: %s", tostring(currentGui.isVisible)))
-    end
-
-    -- Current modal
-    local currentModal = g_gui.currentModal
-    UsedPlus.logInfo(string.format("│ currentModal: %s", currentModal and currentModal.name or "nil"))
-
-    -- Dialog visibility
-    local dialogVisible = g_gui:getIsDialogVisible()
-    UsedPlus.logInfo(string.format("│ isDialogVisible: %s", tostring(dialogVisible)))
-
-    -- Check our specific dialog
-    local ourDialog = g_gui.guis["UnifiedPurchaseDialogPlaceable"]
-    if ourDialog then
-        UsedPlus.logInfo(string.format("│ UnifiedPurchaseDialogPlaceable exists: true"))
-        UsedPlus.logInfo(string.format("│   - isOpen: %s", tostring(ourDialog.isOpen)))
-        UsedPlus.logInfo(string.format("│   - isVisible: %s", tostring(ourDialog.isVisible)))
-        UsedPlus.logInfo(string.format("│   - target: %s", tostring(ourDialog.target)))
-    else
-        UsedPlus.logInfo(string.format("│ UnifiedPurchaseDialogPlaceable: NOT IN g_gui.guis"))
-    end
-
-    -- GUI screens stack
-    if g_gui.screenStack and #g_gui.screenStack > 0 then
-        UsedPlus.logInfo(string.format("│ screenStack (%d items):", #g_gui.screenStack))
-        for i, screen in ipairs(g_gui.screenStack) do
-            UsedPlus.logInfo(string.format("│   [%d] %s", i, screen.name or "unnamed"))
-        end
-    else
-        UsedPlus.logInfo("│ screenStack: empty")
-    end
-
-    -- Dialogs stack
-    if g_gui.dialogs and #g_gui.dialogs > 0 then
-        UsedPlus.logInfo(string.format("│ dialogs stack (%d items):", #g_gui.dialogs))
-        for i, dialog in ipairs(g_gui.dialogs) do
-            UsedPlus.logInfo(string.format("│   [%d] %s (visible=%s)",
-                i,
-                dialog.name or "unnamed",
-                tostring(dialog.isVisible)))
-        end
-    else
-        UsedPlus.logInfo("│ dialogs stack: empty")
-    end
-
-    UsedPlus.logInfo("└────────────────────────────────────")
-end
 
 UsedPlus.logInfo("UsedPlusCore loaded")

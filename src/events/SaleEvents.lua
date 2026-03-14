@@ -36,10 +36,12 @@ end
 function CreateSaleListingEvent.sendToServer(farmId, vehicleId, agentTier, priceTier)
     if g_server ~= nil then
         CreateSaleListingEvent.execute(farmId, vehicleId, agentTier, priceTier)
-    else
+    elseif g_client then
         g_client:getServerConnection():sendEvent(
             CreateSaleListingEvent.new(farmId, vehicleId, agentTier, priceTier)
         )
+    else
+        UsedPlus.logError("CreateSaleListingEvent: g_client is nil, cannot send to server")
     end
 end
 
@@ -157,10 +159,12 @@ end
 function SaleListingActionEvent.sendToServer(listingId, actionType)
     if g_server ~= nil then
         SaleListingActionEvent.execute(listingId, actionType)
-    else
+    elseif g_client then
         g_client:getServerConnection():sendEvent(
             SaleListingActionEvent.new(listingId, actionType)
         )
+    else
+        UsedPlus.logError("SaleListingActionEvent: g_client is nil, cannot send to server")
     end
 end
 
@@ -304,10 +308,12 @@ end
 function ModifyListingPriceEvent.sendToServer(listingId, newPrice)
     if g_server ~= nil then
         ModifyListingPriceEvent.execute(listingId, newPrice)
-    else
+    elseif g_client then
         g_client:getServerConnection():sendEvent(
             ModifyListingPriceEvent.new(listingId, newPrice)
         )
+    else
+        UsedPlus.logError("ModifyListingPriceEvent: g_client is nil, cannot send to server")
     end
 end
 
@@ -408,10 +414,12 @@ end
 function TradeInVehicleEvent.sendToServer(farmId, vehicleId, tradeInValue)
     if g_server ~= nil then
         TradeInVehicleEvent.execute(farmId, vehicleId, tradeInValue)
-    else
+    elseif g_client then
         g_client:getServerConnection():sendEvent(
             TradeInVehicleEvent.new(farmId, vehicleId, tradeInValue)
         )
+    else
+        UsedPlus.logError("TradeInVehicleEvent: g_client is nil, cannot send to server")
     end
 end
 

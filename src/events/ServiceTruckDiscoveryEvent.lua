@@ -82,9 +82,11 @@ function ServiceTruckDiscoveryEvent.sendDiscoveryToServer(farmId)
     if g_server ~= nil then
         -- Single-player or server: execute directly and broadcast
         ServiceTruckDiscoveryEvent.executeDiscovery(farmId)
-    else
+    elseif g_client then
         -- Multiplayer client: send to server
         g_client:getServerConnection():sendEvent(ServiceTruckDiscoveryEvent.new(farmId))
+    else
+        UsedPlus.logError("ServiceTruckDiscoveryEvent: g_client is nil, cannot send to server")
     end
 end
 
@@ -247,10 +249,13 @@ function ServiceTruckPurchaseEvent.sendPurchaseToServer(farmId)
         end
 
         return success, errorMsg
-    else
+    elseif g_client then
         -- Multiplayer client: send to server
         g_client:getServerConnection():sendEvent(ServiceTruckPurchaseEvent.new(farmId, false, ""))
         return true, nil  -- Request sent, actual result will come via callback
+    else
+        UsedPlus.logError("ServiceTruckPurchaseEvent: g_client is nil, cannot send to server")
+        return false, "g_client is nil"
     end
 end
 

@@ -360,7 +360,7 @@ function FinanceDetailFrame:onClickMakePayment()
     end
 
     -- Send payment event to server
-    FinancePaymentEvent:sendToServer(self.dealId, paymentAmount, self.farmId)
+    FinancePaymentEvent.sendToServer(self.dealId, paymentAmount, self.farmId)
 
     -- Close frame
     self:close()

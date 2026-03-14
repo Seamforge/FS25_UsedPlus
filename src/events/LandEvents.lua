@@ -39,9 +39,11 @@ function PurchaseLandCashEvent.sendToServer(farmId, farmlandId, landPrice, landN
     if g_server ~= nil then
         -- Single player / host - execute directly
         event:run(nil)  -- v2.9.1: Server doesn't need connection
-    else
+    elseif g_client then
         -- Multiplayer client - send to server
         g_client:getServerConnection():sendEvent(event)
+    else
+        UsedPlus.logError("PurchaseLandCashEvent: g_client is nil, cannot send to server")
     end
 end
 
@@ -204,8 +206,10 @@ function LandLeaseEvent.sendToServer(farmId, farmlandId, fieldName, landPrice, t
     local event = LandLeaseEvent.new(farmId, farmlandId, fieldName, landPrice, termMonths, securityDeposit, monthlyPayment)
     if g_server ~= nil then
         event:run(nil)  -- v2.9.1: Server doesn't need connection
-    else
+    elseif g_client then
         g_client:getServerConnection():sendEvent(event)
+    else
+        UsedPlus.logError("LandLeaseEvent: g_client is nil, cannot send to server")
     end
 end
 
@@ -405,8 +409,10 @@ function LandLeaseBuyoutEvent.sendToServer(dealId)
     local event = LandLeaseBuyoutEvent.new(dealId)
     if g_server ~= nil then
         event:run(nil)  -- v2.9.1: Server doesn't need connection
-    else
+    elseif g_client then
         g_client:getServerConnection():sendEvent(event)
+    else
+        UsedPlus.logError("LandLeaseBuyoutEvent: g_client is nil, cannot send to server")
     end
 end
 

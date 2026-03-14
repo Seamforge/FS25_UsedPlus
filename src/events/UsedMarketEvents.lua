@@ -37,15 +37,17 @@ end
 function RequestUsedItemEvent.sendToServer(farmId, storeItemIndex, storeItemName, basePrice, searchLevel, qualityLevel)
     if g_server ~= nil then
         RequestUsedItemEvent.execute(farmId, storeItemIndex, storeItemName, basePrice, searchLevel, qualityLevel)
-    else
+    elseif g_client then
         g_client:getServerConnection():sendEvent(
             RequestUsedItemEvent.new(farmId, storeItemIndex, storeItemName, basePrice, searchLevel, qualityLevel)
         )
+    else
+        UsedPlus.logError("RequestUsedItemEvent: g_client is nil, cannot send to server")
     end
 end
 
 function RequestUsedItemEvent:writeStream(streamId, connection)
-    NetworkUtil.writeNodeObjectId(streamId, self.farmId)
+    streamWriteInt32(streamId, self.farmId)
     streamWriteString(streamId, self.storeItemIndex or "")
     streamWriteString(streamId, self.storeItemName)
     streamWriteFloat32(streamId, self.basePrice)
@@ -54,7 +56,7 @@ function RequestUsedItemEvent:writeStream(streamId, connection)
 end
 
 function RequestUsedItemEvent:readStream(streamId, connection)
-    self.farmId = NetworkUtil.readNodeObjectId(streamId)
+    self.farmId = streamReadInt32(streamId)
     self.storeItemIndex = streamReadString(streamId)
     self.storeItemName = streamReadString(streamId)
     self.basePrice = streamReadFloat32(streamId)
@@ -249,7 +251,7 @@ function UsedItemFoundEvent:sendToFarm(farmId, listingId, storeItemName, usedPri
 end
 
 function UsedItemFoundEvent:writeStream(streamId, connection)
-    NetworkUtil.writeNodeObjectId(streamId, self.farmId)
+    streamWriteInt32(streamId, self.farmId)
     streamWriteString(streamId, self.listingId)
     streamWriteString(streamId, self.storeItemName)
     streamWriteFloat32(streamId, self.usedPrice)
@@ -260,7 +262,7 @@ function UsedItemFoundEvent:writeStream(streamId, connection)
 end
 
 function UsedItemFoundEvent:readStream(streamId, connection)
-    self.farmId = NetworkUtil.readNodeObjectId(streamId)
+    self.farmId = streamReadInt32(streamId)
     self.listingId = streamReadString(streamId)
     self.storeItemName = streamReadString(streamId)
     self.usedPrice = streamReadFloat32(streamId)
@@ -322,9 +324,11 @@ function CancelSearchEvent.sendToServer(searchId)
     if g_server ~= nil then
         -- Single player or server - execute directly
         CancelSearchEvent.execute(searchId)
-    else
+    elseif g_client then
         -- Multiplayer client - send to server
         g_client:getServerConnection():sendEvent(CancelSearchEvent.new(searchId))
+    else
+        UsedPlus.logError("CancelSearchEvent: g_client is nil, cannot send to server")
     end
 end
 
@@ -416,9 +420,11 @@ function DeclineListingEvent.sendToServer(searchId, listingId)
     if g_server ~= nil then
         -- Single player or server - execute directly
         DeclineListingEvent.execute(searchId, listingId)
-    else
+    elseif g_client then
         -- Multiplayer client - send to server
         g_client:getServerConnection():sendEvent(DeclineListingEvent.new(searchId, listingId))
+    else
+        UsedPlus.logError("DeclineListingEvent: g_client is nil, cannot send to server")
     end
 end
 
@@ -544,9 +550,11 @@ function PurchaseUsedVehicleEvent.sendToServer(farmId, searchId, listingId)
     if g_server ~= nil then
         -- Single player or server - execute directly
         PurchaseUsedVehicleEvent.execute(farmId, searchId, listingId)
-    else
+    elseif g_client then
         -- Multiplayer client - send to server
         g_client:getServerConnection():sendEvent(PurchaseUsedVehicleEvent.new(farmId, searchId, listingId))
+    else
+        UsedPlus.logError("PurchaseUsedVehicleEvent: g_client is nil, cannot send to server")
     end
 end
 

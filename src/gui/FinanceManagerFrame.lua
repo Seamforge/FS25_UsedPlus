@@ -20,7 +20,7 @@ FinanceManagerFrame._mt = Class(FinanceManagerFrame, TabbedMenuFrameElement)
 FinanceManagerFrame.instance = nil
 
 -- Constants
-FinanceManagerFrame.MAX_FINANCE_ROWS = 9
+FinanceManagerFrame.MAX_FINANCE_ROWS = 11
 FinanceManagerFrame.MAX_SEARCH_ROWS = 5
 FinanceManagerFrame.MAX_SALE_ROWS = 3
 
@@ -131,10 +131,11 @@ function FinanceManagerFrame:onGuiSetupFinished()
     -- Cache reference to finance table container
     self.financeTableContainer = self.financeTableContainer
 
-    -- Row Y positions for click detection
+    -- Row Y positions for click detection (expanded layout: 495px container, 11 rows)
     self.financeRowPositions = {
-        [0] = 324, [1] = 288, [2] = 252, [3] = 216,
-        [4] = 180, [5] = 144, [6] = 108, [7] = 72, [8] = 36
+        [0] = 459, [1] = 423, [2] = 387, [3] = 351,
+        [4] = 315, [5] = 279, [6] = 243, [7] = 207,
+        [8] = 171, [9] = 135, [10] = 99
     }
     self.financeRowHeight = 36
 
@@ -426,11 +427,11 @@ function FinanceManagerFrame:mouseEvent(posX, posY, isDown, isUp, button, eventU
        posY >= containerY and posY <= containerY + containerH then
 
         local relativeY = posY - containerY
-        local containerHeightPx = 360
+        local containerHeightPx = 495
         local pixelY = (relativeY / containerH) * containerHeightPx
 
         local clickedRow = -1
-        for rowIndex = 0, 8 do
+        for rowIndex = 0, 10 do
             local rowY = self.financeRowPositions[rowIndex]
             if pixelY >= rowY and pixelY < rowY + self.financeRowHeight then
                 clickedRow = rowIndex

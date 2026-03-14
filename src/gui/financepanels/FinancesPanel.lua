@@ -459,6 +459,8 @@ function FinanceManagerFrame:onFinanceRowClick5() self:selectFinanceRow(5) end
 function FinanceManagerFrame:onFinanceRowClick6() self:selectFinanceRow(6) end
 function FinanceManagerFrame:onFinanceRowClick7() self:selectFinanceRow(7) end
 function FinanceManagerFrame:onFinanceRowClick8() self:selectFinanceRow(8) end
+function FinanceManagerFrame:onFinanceRowClick9() self:selectFinanceRow(9) end
+function FinanceManagerFrame:onFinanceRowClick10() self:selectFinanceRow(10) end
 
 -- Finance row hover handlers
 function FinanceManagerFrame:onFinanceRowHighlight(element)
@@ -961,15 +963,8 @@ function FinanceManagerFrame:processPayoff(deal, amount)
         return
     end
 
-    if FinancePaymentEvent and FinancePaymentEvent.sendPayoffToServer then
-        FinancePaymentEvent.sendPayoffToServer(deal.id, amount, farm.farmId)
-        g_currentMission:addIngameNotification(
-            FSBaseMission.INGAME_NOTIFICATION_OK,
-            string.format(g_i18n:getText("usedplus_notify_loanPaidOff"), g_i18n:formatMoney(amount, 0, true, true))
-        )
-    elseif FinancePaymentEvent then
-        local event = FinancePaymentEvent.new(deal.id, amount, farm.farmId, true)
-        event:sendToServer(deal.id, amount, farm.farmId, true)
+    if FinancePaymentEvent then
+        FinancePaymentEvent.sendToServer(deal.id, amount, farm.farmId)
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_OK,
             string.format(g_i18n:getText("usedplus_notify_loanPaidOff"), g_i18n:formatMoney(amount, 0, true, true))
@@ -1021,8 +1016,7 @@ function FinanceManagerFrame:processPayment(deal, amount)
     end
 
     if FinancePaymentEvent then
-        local event = FinancePaymentEvent.new(deal.id, amount, farm.farmId)
-        event:sendToServer(deal.id, amount, farm.farmId)
+        FinancePaymentEvent.sendToServer(deal.id, amount, farm.farmId)
 
         g_currentMission:addIngameNotification(
             FSBaseMission.INGAME_NOTIFICATION_OK,
@@ -1418,8 +1412,7 @@ function FinanceManagerFrame:onBulkPaymentConfirm(yes)
         local amount = paymentInfo.amount
 
         if FinancePaymentEvent then
-            local event = FinancePaymentEvent.new(deal.id, amount, data.farm.farmId)
-            event:sendToServer(deal.id, amount, data.farm.farmId)
+            FinancePaymentEvent.sendToServer(deal.id, amount, data.farm.farmId)
             successCount = successCount + 1
         else
             failCount = failCount + 1

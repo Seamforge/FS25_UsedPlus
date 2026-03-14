@@ -45,14 +45,16 @@ function LeaseVehicleEvent.sendToServer(farmId, vehicleConfig, vehicleName, base
     if g_server ~= nil then
         UsedPlus.logDebug("LeaseVehicleEvent: Running on server directly")
         event:run(nil)  -- v2.9.1: Server doesn't need connection
-    else
+    elseif g_client then
         UsedPlus.logDebug("LeaseVehicleEvent: Sending to server from client")
         g_client:getServerConnection():sendEvent(event)
+    else
+        UsedPlus.logError("LeaseVehicleEvent: g_client is nil, cannot send to server")
     end
 end
 
 function LeaseVehicleEvent:writeStream(streamId, connection)
-    NetworkUtil.writeNodeObjectId(streamId, self.farmId)
+    streamWriteInt32(streamId, self.farmId)
     streamWriteString(streamId, self.vehicleConfig)
     streamWriteString(streamId, self.vehicleName)
     streamWriteFloat32(streamId, self.basePrice)
@@ -72,7 +74,7 @@ function LeaseVehicleEvent:writeStream(streamId, connection)
 end
 
 function LeaseVehicleEvent:readStream(streamId, connection)
-    self.farmId = NetworkUtil.readNodeObjectId(streamId)
+    self.farmId = streamReadInt32(streamId)
     self.vehicleConfig = streamReadString(streamId)
     self.vehicleName = streamReadString(streamId)
     self.basePrice = streamReadFloat32(streamId)
@@ -247,7 +249,12 @@ function LeaseVehicleEvent:spawnLeasedVehicle(storeItem, farmId, configurations,
     local buyEvent = BuyVehicleEvent.new(buyData)
 
     UsedPlus.logDebug("spawnLeasedVehicle: Sending BuyVehicleEvent via client connection")
-    g_client:getServerConnection():sendEvent(buyEvent)
+    if g_client then
+        g_client:getServerConnection():sendEvent(buyEvent)
+    else
+        UsedPlus.logError("spawnLeasedVehicle: g_client is nil, cannot send BuyVehicleEvent to server")
+        return false
+    end
 
     return true
 end
@@ -292,8 +299,10 @@ function LeaseEndEvent.sendToServer(dealId, action, amount)
     local event = LeaseEndEvent.new(dealId, action, amount)
     if g_server ~= nil then
         event:run(nil)  -- v2.9.1: Server doesn't need connection
-    else
+    elseif g_client then
         g_client:getServerConnection():sendEvent(event)
+    else
+        UsedPlus.logError("LeaseEndEvent: g_client is nil, cannot send to server")
     end
 end
 
@@ -482,19 +491,21 @@ function TerminateLeaseEvent.sendToServer(dealId, farmId)
     local event = TerminateLeaseEvent.new(dealId, farmId)
     if g_server ~= nil then
         event:run(nil)  -- v2.9.1: Server doesn't need connection
-    else
+    elseif g_client then
         g_client:getServerConnection():sendEvent(event)
+    else
+        UsedPlus.logError("TerminateLeaseEvent: g_client is nil, cannot send to server")
     end
 end
 
 function TerminateLeaseEvent:writeStream(streamId, connection)
     streamWriteString(streamId, self.dealId)
-    NetworkUtil.writeNodeObjectId(streamId, self.farmId)
+    streamWriteInt32(streamId, self.farmId)
 end
 
 function TerminateLeaseEvent:readStream(streamId, connection)
     self.dealId = streamReadString(streamId)
-    self.farmId = NetworkUtil.readNodeObjectId(streamId)
+    self.farmId = streamReadInt32(streamId)
     self:run(connection)
 end
 
@@ -668,8 +679,10 @@ function LeaseRenewalEvent.sendToServer(dealId, action, data)
     local event = LeaseRenewalEvent.new(dealId, action, data)
     if g_server ~= nil then
         event:run(nil)  -- v2.9.1: Server doesn't need connection
-    else
+    elseif g_client then
         g_client:getServerConnection():sendEvent(event)
+    else
+        UsedPlus.logError("LeaseRenewalEvent: g_client is nil, cannot send to server")
     end
 end
 

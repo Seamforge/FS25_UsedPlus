@@ -52,11 +52,13 @@ function SetPaymentConfigEvent.sendToServer(dealId, paymentMode, customAmount, m
     if g_server ~= nil then
         -- Single-player or server - execute directly
         SetPaymentConfigEvent.execute(dealId, paymentMode, customAmount, multiplier)
-    else
+    elseif g_client then
         -- Multiplayer client - send to server
         g_client:getServerConnection():sendEvent(
             SetPaymentConfigEvent.new(dealId, paymentMode, customAmount, multiplier)
         )
+    else
+        UsedPlus.logError("SetPaymentConfigEvent: g_client is nil, cannot send to server")
     end
 end
 

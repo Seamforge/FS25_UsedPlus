@@ -47,15 +47,17 @@ function FinanceVehicleEvent.sendToServer(farmId, itemType, itemId, itemName, ba
     if g_server ~= nil then
         -- Single-player: pass configurationData directly (no serialization needed)
         FinanceVehicleEvent.execute(farmId, itemType, itemId, itemName, basePrice, downPayment, termYears, cashBack, configurations, configurationData, licensePlateData, clientSpawnedVehicle)
-    else
+    elseif g_client then
         g_client:getServerConnection():sendEvent(
             FinanceVehicleEvent.new(farmId, itemType, itemId, itemName, basePrice, downPayment, termYears, cashBack, configurations, configurationData, licensePlateData, clientSpawnedVehicle)
         )
+    else
+        UsedPlus.logError("FinanceVehicleEvent: g_client is nil, cannot send to server")
     end
 end
 
 function FinanceVehicleEvent:writeStream(streamId, connection)
-    NetworkUtil.writeNodeObjectId(streamId, self.farmId)
+    streamWriteInt32(streamId, self.farmId)
     streamWriteString(streamId, self.itemType)
 
     if self.itemType == "land" then
@@ -134,7 +136,7 @@ function FinanceVehicleEvent:writeStream(streamId, connection)
 end
 
 function FinanceVehicleEvent:readStream(streamId, connection)
-    self.farmId = NetworkUtil.readNodeObjectId(streamId)
+    self.farmId = streamReadInt32(streamId)
     self.itemType = streamReadString(streamId)
 
     if self.itemType == "land" then
@@ -357,26 +359,28 @@ function FinancePaymentEvent.new(dealId, paymentAmount, farmId)
     return self
 end
 
-function FinancePaymentEvent:sendToServer(dealId, paymentAmount, farmId)
+function FinancePaymentEvent.sendToServer(dealId, paymentAmount, farmId)
     if g_server ~= nil then
-        self:run(nil)  -- v2.9.1: Server doesn't need connection
-    else
+        FinancePaymentEvent.new(dealId, paymentAmount, farmId):run(nil)
+    elseif g_client then
         g_client:getServerConnection():sendEvent(
             FinancePaymentEvent.new(dealId, paymentAmount, farmId)
         )
+    else
+        UsedPlus.logError("FinancePaymentEvent: g_client is nil, cannot send to server")
     end
 end
 
 function FinancePaymentEvent:writeStream(streamId, connection)
     streamWriteString(streamId, self.dealId)
     streamWriteFloat32(streamId, self.paymentAmount)
-    NetworkUtil.writeNodeObjectId(streamId, self.farmId)
+    streamWriteInt32(streamId, self.farmId)
 end
 
 function FinancePaymentEvent:readStream(streamId, connection)
     self.dealId = streamReadString(streamId)
     self.paymentAmount = streamReadFloat32(streamId)
-    self.farmId = NetworkUtil.readNodeObjectId(streamId)
+    self.farmId = streamReadInt32(streamId)
     self:run(connection)
 end
 
@@ -533,11 +537,13 @@ end
 
 function TakeLoanEvent.sendToServer(farmId, loanAmount, termYears, interestRate, monthlyPayment, collateralItems)
     if g_server ~= nil then
-        TakeLoanEvent.execute(farmId, loanAmount, termYears, interestRate, monthlyPayment, collateralItems)
-    else
+        return TakeLoanEvent.execute(farmId, loanAmount, termYears, interestRate, monthlyPayment, collateralItems)
+    elseif g_client then
         g_client:getServerConnection():sendEvent(
             TakeLoanEvent.new(farmId, loanAmount, termYears, interestRate, monthlyPayment, collateralItems)
         )
+    else
+        UsedPlus.logError("TakeLoanEvent: g_client is nil, cannot send to server")
     end
 end
 
@@ -647,13 +653,17 @@ function TakeLoanEvent.execute(farmId, loanAmount, termYears, interestRate, mont
     end
 
     -- v2.7.2 SECURITY: Validate loan doesn't exceed collateral value (if collateral required)
+    -- Note: Selected collateral may be a subset of total assets. The UI calculates max loan
+    -- against total collateral with credit multiplier. The security check here uses a generous
+    -- 3x cap on selected collateral to prevent obvious exploits while allowing legitimate
+    -- high-credit loans where selected collateral is a fraction of total assets.
     if collateralItems and #collateralItems > 0 then
         local collateralValue = 0
         for _, item in ipairs(collateralItems) do
             collateralValue = collateralValue + (item.value or 0)
         end
-        if loanAmount > collateralValue * 1.5 then
-            UsedPlus.logError(string.format("[SECURITY] Loan $%.0f exceeds 150%% of collateral value $%.0f", loanAmount, collateralValue))
+        if loanAmount > collateralValue * 3.0 then
+            UsedPlus.logError(string.format("[SECURITY] Loan $%.0f exceeds 300%% of selected collateral value $%.0f", loanAmount, collateralValue))
             return false
         end
     end
@@ -767,11 +777,13 @@ function VanillaLoanPaymentEvent.sendToServer(farmId, paymentAmount)
     if g_server ~= nil then
         -- Single-player or server: execute directly
         VanillaLoanPaymentEvent.execute(farmId, paymentAmount)
-    else
+    elseif g_client then
         -- Multiplayer client: send to server
         g_client:getServerConnection():sendEvent(
             VanillaLoanPaymentEvent.new(farmId, paymentAmount)
         )
+    else
+        UsedPlus.logError("VanillaLoanPaymentEvent: g_client is nil, cannot send to server")
     end
 end
 

@@ -1002,7 +1002,7 @@ function TakeLoanDialog:onAcceptLoan()
     }
 
     -- Send loan event to server with collateral
-    TakeLoanEvent.sendToServer(
+    local result = TakeLoanEvent.sendToServer(
         self.farmId,
         self.loanAmount,
         self.termYears,
@@ -1010,6 +1010,13 @@ function TakeLoanDialog:onAcceptLoan()
         self.monthlyPayment,
         self.selectedCollateral  -- Pass the selected collateral items
     )
+
+    -- In single-player, execute() returns false if validation failed
+    if result == false then
+        UsedPlus.logWarn("TakeLoanDialog: Loan rejected by server validation")
+        self:close()
+        return
+    end
 
     -- Close dialog
     self:close()

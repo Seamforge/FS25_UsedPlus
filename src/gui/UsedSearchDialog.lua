@@ -54,9 +54,62 @@ function UsedSearchDialog:onCreate()
 
     -- Store icon directory
     self.iconDir = UsedPlus.MOD_DIR .. "gui/icons/"
+end
 
-    -- v2.9.5: Setup icons
+--[[
+     Called after GUI element binding is complete (required by GUI system)
+     Button onClick handlers are only wired after this callback
+]]
+function UsedSearchDialog:onGuiSetupFinished()
+    UsedSearchDialog:superClass().onGuiSetupFinished(self)
+
+    -- v2.9.5: Setup icons (element refs only valid after setup finished)
     self:setupSectionIcons()
+
+    -- Diagnostic: confirm setup ran and check button state
+    UsedPlus.logDebug(string.format("UsedSearchDialog:onGuiSetupFinished - startSearchButton=%s, cancelButton=%s",
+        tostring(self.startSearchButton ~= nil),
+        tostring(self.cancelButton ~= nil)))
+
+    -- Belt-and-suspenders: manually wire button callbacks via onClickCallback
+    -- XML onClick should handle this, but if it doesn't, this catches it
+    if self.startSearchButton then
+        local dialogSelf = self  -- capture ref for closure
+        self.startSearchButton.onClickCallback = function()
+            UsedPlus.logDebug("startSearchButton.onClickCallback fired (manual wiring)")
+            UsedPlus.logDebug(string.format("  self type=%s, storeItem=%s, selectedTier=%s",
+                tostring(type(dialogSelf)), tostring(dialogSelf.storeItem ~= nil), tostring(dialogSelf.selectedTier)))
+            local ok, err = pcall(function()
+                dialogSelf:onStartSearch()
+            end)
+            if not ok then
+                UsedPlus.logError("onStartSearch CRASHED: " .. tostring(err))
+            else
+                UsedPlus.logDebug("onStartSearch completed without error")
+            end
+        end
+    end
+    if self.cancelButton then
+        self.cancelButton.onClickCallback = function()
+            UsedPlus.logDebug("cancelButton.onClickCallback fired (manual wiring)")
+            self:onCancel()
+        end
+    end
+
+    -- Also try binding via dialogElement:getDescendantByName if self refs are nil
+    if not self.startSearchButton and self.dialogElement then
+        local btn = self.dialogElement:getDescendantByName("startSearchButton")
+        if btn then
+            UsedPlus.logDebug("Found startSearchButton via getDescendantByName")
+            self.startSearchButton = btn
+            btn.onClickCallback = function()
+                UsedPlus.logDebug("startSearchButton.onClickCallback fired (descendant wiring)")
+                self:onStartSearch()
+            end
+        else
+            UsedPlus.logWarn("startSearchButton NOT found via getDescendantByName either!")
+        end
+    end
 end
 
 --[[
@@ -225,26 +278,6 @@ function UsedSearchDialog:setData(storeItem, storeItemIndex, farmId)
     self.storeItem = storeItem
     self.storeItemIndex = storeItemIndex
     self.farmId = farmId
-
-    -- DEBUG - Dump all storeItem properties
-    UsedPlus.logTrace("=== STORE ITEM DEBUG ===")
-    UsedPlus.logTrace(string.format("storeItem.name: %s", tostring(storeItem.name)))
-    UsedPlus.logTrace(string.format("storeItem.category: %s", tostring(storeItem.category)))
-    UsedPlus.logTrace(string.format("storeItem.categoryName: %s", tostring(storeItem.categoryName)))
-    UsedPlus.logTrace(string.format("storeItem.brand: %s", tostring(storeItem.brand)))
-    UsedPlus.logTrace(string.format("storeItem.configurations: %s", tostring(storeItem.configurations)))
-
-    if storeItem.configurations then
-        UsedPlus.logTrace(string.format("configurations type: %s", type(storeItem.configurations)))
-        if type(storeItem.configurations) == "table" then
-            UsedPlus.logTrace(string.format("configurations count: %d", #storeItem.configurations))
-            for i, config in ipairs(storeItem.configurations) do
-                UsedPlus.logTrace(string.format("  Config %d: name=%s, title=%s", i, tostring(config.name), tostring(config.title)))
-            end
-        end
-    end
-
-    UsedPlus.logTrace("=== END STORE ITEM DEBUG ===")
 
     self.basePrice = StoreItemUtil.getDefaultPrice(storeItem, {})
 

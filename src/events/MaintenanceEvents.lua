@@ -44,11 +44,13 @@ function FieldRepairEvent.sendToServer(farmId, vehicleId, component, cost)
     if g_server ~= nil then
         -- Single-player or server - execute directly
         FieldRepairEvent.execute(farmId, vehicleId, component, cost)
-    else
+    elseif g_client then
         -- Multiplayer client - send to server
         g_client:getServerConnection():sendEvent(
             FieldRepairEvent.new(farmId, vehicleId, component, cost)
         )
+    else
+        UsedPlus.logError("FieldRepairEvent: g_client is nil, cannot send to server")
     end
 end
 
@@ -233,11 +235,13 @@ function RefillFluidsEvent.sendToServer(farmId, vehicleId, fluidType, cost)
     if g_server ~= nil then
         -- Single-player or server - execute directly
         RefillFluidsEvent.execute(farmId, vehicleId, fluidType, cost)
-    else
+    elseif g_client then
         -- Multiplayer client - send to server
         g_client:getServerConnection():sendEvent(
             RefillFluidsEvent.new(farmId, vehicleId, fluidType, cost)
         )
+    else
+        UsedPlus.logError("RefillFluidsEvent: g_client is nil, cannot send to server")
     end
 end
 
@@ -399,11 +403,13 @@ function ReplaceTiresEvent.sendToServer(farmId, vehicleId, tireQuality, cost)
     if g_server ~= nil then
         -- Single-player or server - execute directly
         ReplaceTiresEvent.execute(farmId, vehicleId, tireQuality, cost)
-    else
+    elseif g_client then
         -- Multiplayer client - send to server
         g_client:getServerConnection():sendEvent(
             ReplaceTiresEvent.new(farmId, vehicleId, tireQuality, cost)
         )
+    else
+        UsedPlus.logError("ReplaceTiresEvent: g_client is nil, cannot send to server")
     end
 end
 
