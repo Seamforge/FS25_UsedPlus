@@ -1,7 +1,7 @@
 # FS25_UsedPlus — Traffic Dashboard
 
-**Last updated:** 2026-03-14T12:06:12Z
-**Days tracked:** 25 | **Download snapshots:** 564 (hourly)
+**Last updated:** 2026-03-14T18:06:50Z
+**Days tracked:** 25 | **Download snapshots:** 570 (hourly)
 
 ---
 
@@ -30,9 +30,9 @@
 
 ![Conversion](charts/conversion.png)
 
-> **14-day conversion:** 852 of 322 visitors cloned or downloaded (**264.5%**)
+> **14-day conversion:** 859 of 322 visitors cloned or downloaded (**266.7%**)
 >
-> Unique cloners: 719 | Release downloads: 133
+> Unique cloners: 719 | Release downloads: 140
 
 ---
 
@@ -42,9 +42,9 @@
 
 | Channel | Count |
 |---------|-------|
-| Zip Downloads | 133 |
+| Zip Downloads | 140 |
 | Git Clones (14-day) | 2219 |
-| **Total Acquisitions** | **2352** |
+| **Total Acquisitions** | **2359** |
 
 ---
 
