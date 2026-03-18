@@ -4079,31 +4079,36 @@
     "watchers": 5
   },
   {
-    "timestamp": "2026-03-18T00:17:37Z",
+    "timestamp": "2026-03-18T06:22:18Z",
     "date": "2026-03-18",
     "views": {
-      "count": 2267,
-      "uniques": 308
+      "count": 2087,
+      "uniques": 306
     },
     "clones": {
-      "count": 2200,
-      "uniques": 717
+      "count": 2181,
+      "uniques": 703
     },
     "referrers": [
       {
         "referrer": "github.com",
-        "count": 759,
-        "uniques": 132
+        "count": 689,
+        "uniques": 125
       },
       {
         "referrer": "Bing",
-        "count": 93,
-        "uniques": 19
+        "count": 83,
+        "uniques": 18
       },
       {
         "referrer": "Google",
-        "count": 54,
+        "count": 55,
         "uniques": 15
+      },
+      {
+        "referrer": "Yahoo",
+        "count": 23,
+        "uniques": 3
       },
       {
         "referrer": "com.reddit.frontpage",
@@ -4111,14 +4116,14 @@
         "uniques": 6
       },
       {
+        "referrer": "qwant.com",
+        "count": 4,
+        "uniques": 1
+      },
+      {
         "referrer": "DuckDuckGo",
         "count": 3,
         "uniques": 3
-      },
-      {
-        "referrer": "Yahoo",
-        "count": 3,
-        "uniques": 2
       },
       {
         "referrer": "l.facebook.com",
@@ -4140,62 +4145,62 @@
       {
         "path": "/XelaNull/FS25_UsedPlus",
         "title": "GitHub - XelaNull/FS25_UsedPlus: A comprehensive finance and marketplace over...",
-        "count": 825,
-        "uniques": 230
+        "count": 762,
+        "uniques": 223
       },
       {
         "path": "/XelaNull/FS25_UsedPlus/issues",
         "title": "GitHub · Where software is built",
-        "count": 198,
-        "uniques": 59
+        "count": 176,
+        "uniques": 56
       },
       {
         "path": "/XelaNull/FS25_UsedPlus/releases",
         "title": "Releases · XelaNull/FS25_UsedPlus",
-        "count": 174,
-        "uniques": 70
+        "count": 165,
+        "uniques": 66
       },
       {
         "path": "/XelaNull/FS25_UsedPlus/releases/tag/v2.14.2",
         "title": "Release v2.14.2 — Finance & Marketplace System for FS25 · XelaNull/FS25_UsedP...",
-        "count": 88,
-        "uniques": 42
-      },
-      {
-        "path": "/XelaNull/FS25_UsedPlus/wiki",
-        "title": "Home · XelaNull/FS25_UsedPlus Wiki",
-        "count": 39,
-        "uniques": 20
-      },
-      {
-        "path": "/XelaNull/FS25_UsedPlus/issues/30",
-        "title": "[Bug]: Used = new · Issue #30 · XelaNull/FS25_UsedPlus",
-        "count": 37,
-        "uniques": 19
-      },
-      {
-        "path": "/XelaNull/FS25_UsedPlus/releases/tag/v2.15.4.22",
-        "title": "Release v2.15.4.22 — Pre-Release (all changes since v2.14.2) · XelaNull/FS25_...",
-        "count": 35,
-        "uniques": 25
+        "count": 78,
+        "uniques": 38
       },
       {
         "path": "/XelaNull/FS25_UsedPlus/issues/36",
         "title": "[Bug]: UsedPlus UI display issue on right side · Issue #36 · XelaNull/FS25_Us...",
-        "count": 32,
-        "uniques": 13
+        "count": 41,
+        "uniques": 15
+      },
+      {
+        "path": "/XelaNull/FS25_UsedPlus/releases/tag/v2.15.4.22",
+        "title": "Release v2.15.4.22 — Pre-Release (all changes since v2.14.2) · XelaNull/FS25_...",
+        "count": 39,
+        "uniques": 26
+      },
+      {
+        "path": "/XelaNull/FS25_UsedPlus/wiki",
+        "title": "Home · XelaNull/FS25_UsedPlus Wiki",
+        "count": 36,
+        "uniques": 20
       },
       {
         "path": "/XelaNull/FS25_UsedPlus/issues/32",
         "title": "[Bug]: LUA Error · Issue #32 · XelaNull/FS25_UsedPlus",
-        "count": 31,
+        "count": 32,
+        "uniques": 17
+      },
+      {
+        "path": "/XelaNull/FS25_UsedPlus/issues/30",
+        "title": "[Bug]: Used = new · Issue #30 · XelaNull/FS25_UsedPlus",
+        "count": 29,
         "uniques": 16
       },
       {
-        "path": "/XelaNull/FS25_UsedPlus/wiki/Malfunctions",
-        "title": "Malfunctions · XelaNull/FS25_UsedPlus Wiki · GitHub",
-        "count": 29,
-        "uniques": 14
+        "path": "/XelaNull/FS25_UsedPlus/blob/master/screenshots/used_plus_finances_zoomed.png",
+        "title": "GitHub - XelaNull/FS25_UsedPlus: A comprehensive finance and marketplace over...",
+        "count": 27,
+        "uniques": 21
       }
     ],
     "releases": [
@@ -4211,7 +4216,7 @@
       {
         "assets": [
           {
-            "downloads": 124,
+            "downloads": 126,
             "name": "FS25_UsedPlus.zip"
           }
         ],
