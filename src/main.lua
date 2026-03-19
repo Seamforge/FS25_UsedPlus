@@ -227,17 +227,10 @@ Mission00.onStartMission = Utils.appendedFunction(
     function(mission)
         UsedPlus.logDebug("Mission00.onStartMission hook fired")
 
-        -- v2.8.0: NOW load savegame data - farms are guaranteed to exist at this point!
-        -- Check if farms exist
-        local farm1 = g_farmManager and g_farmManager:getFarmById(1)
-        UsedPlus.logDebug(string.format("Farm check: g_farmManager=%s, farm1=%s",
-            tostring(g_farmManager ~= nil), tostring(farm1 ~= nil)))
-
-        if farm1 then
-            UsedPlus.loadSavegameData()
-        else
-            UsedPlus.logError("CRITICAL: Farm 1 still doesn't exist in onStartMission!")
-        end
+        -- v2.15.4: Load savegame data unconditionally (Issue #38)
+        -- Managers use XMLFile.loadIfExists — gracefully handles missing files on fresh games.
+        -- Previous Farm 1 gate broke dedicated servers where farms don't exist until players connect.
+        UsedPlus.loadSavegameData()
 
         -- Initialize managers (call loadMapFinished)
         UsedPlus.logDebug("Initializing managers...")
