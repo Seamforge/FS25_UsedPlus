@@ -92,12 +92,17 @@ function RVBWorkshopIntegration:hookRepairButton(dialog)
                 end
             end
 
-            if not hasRVBParts and RVBWorkshopIntegration.hydraulicRepairRequested then
-                -- No RVB parts need repair but hydraulic is toggled
-                -- Show repair dialog directly, bypassing RVB's onClickRepair gates
-                UsedPlus.logInfo("RVBRepairButton: Hydraulic-only repair — bypassing RVB onClickRepair")
-                RVBWorkshopIntegration:showHydraulicOnlyRepair(dialog)
-                return
+            if not hasRVBParts then
+                -- v2.15.4: No RVB parts need repair — check for UsedPlus hydraulic issues (Issue #43)
+                -- Previously required hydraulicRepairRequested flag, creating chicken-and-egg:
+                -- flag only set inside RepairDialog, but dialog couldn't open without the flag
+                local spec = vehicle and vehicle.spec_usedPlusMaintenance
+                local hasHydraulicIssue = spec and (spec.hydraulicReliability or 1.0) < 0.95
+                if hasHydraulicIssue or RVBWorkshopIntegration.hydraulicRepairRequested then
+                    UsedPlus.logInfo("RVBRepairButton: Hydraulic-only repair — bypassing RVB onClickRepair")
+                    RVBWorkshopIntegration:showHydraulicOnlyRepair(dialog)
+                    return
+                end
             end
 
             -- Normal case: RVB parts need repair, call original (goes through RVB flow)
