@@ -16,7 +16,7 @@ UsedPlus = {}
 -- Mod metadata
 UsedPlus.MOD_NAME = "FS25_UsedPlus"
 UsedPlus.MOD_DIR = g_currentModDirectory
-UsedPlus.VERSION = "2.15.4.77"  -- Synced by build.js from modDesc.xml
+UsedPlus.VERSION = "2.15.4.78"  -- Synced by build.js from modDesc.xml
 UsedPlus.DEBUG = false
 
 -- Log levels control what gets printed

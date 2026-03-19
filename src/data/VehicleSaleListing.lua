@@ -158,7 +158,9 @@ function VehicleSaleListing.new(farmId, vehicle, vehicleData, saleTier, priceTie
     self.farmId = farmId
 
     -- Vehicle information (stored for persistence)
+    -- v2.15.4: Store uniqueId (savegame-persistent) alongside entity id (Issue #39)
     self.vehicleId = vehicle and vehicle.id or nil
+    self.vehicleUniqueId = vehicle and vehicle.getUniqueId and vehicle:getUniqueId() or nil
     self.vehicleConfigFile = vehicleData.configFileName
     self.vehicleName = vehicleData.name or g_i18n:getText("usedplus_common_unknownVehicle")
     self.vehicleImageFile = vehicleData.imageFilename or ""
@@ -619,6 +621,7 @@ function VehicleSaleListing:saveToXMLFile(xmlFile, key)
 
     -- Vehicle data
     xmlFile:setString(key .. "#vehicleId", tostring(self.vehicleId or ""))
+    xmlFile:setString(key .. "#vehicleUniqueId", tostring(self.vehicleUniqueId or ""))
     xmlFile:setString(key .. "#vehicleConfigFile", self.vehicleConfigFile or "")
     xmlFile:setString(key .. "#vehicleName", self.vehicleName or "")
     xmlFile:setString(key .. "#vehicleImageFile", self.vehicleImageFile or "")
@@ -679,6 +682,7 @@ function VehicleSaleListing:loadFromXMLFile(xmlFile, key)
 
     -- Vehicle data
     self.vehicleId = xmlFile:getString(key .. "#vehicleId", "")
+    self.vehicleUniqueId = xmlFile:getString(key .. "#vehicleUniqueId", "")
     self.vehicleConfigFile = xmlFile:getString(key .. "#vehicleConfigFile", "")
     self.vehicleName = xmlFile:getString(key .. "#vehicleName", "Unknown Vehicle")
     self.vehicleImageFile = xmlFile:getString(key .. "#vehicleImageFile", "")

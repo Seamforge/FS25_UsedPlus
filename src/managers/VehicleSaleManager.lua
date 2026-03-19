@@ -353,14 +353,15 @@ function VehicleSaleManager:showNextPendingOffer(farmId)
     for _, listing in ipairs(farm.vehicleSaleListings) do
         if listing:hasPendingOffer() and not listing.offerShownToUser then
             -- v2.13.2: Verify the vehicle still exists before showing the offer
-            -- If another listing already sold and deleted this vehicle, auto-cancel
+            -- v2.15.4: Use resolveVehicle for stable matching (Issue #39)
             local vehicleStillExists = false
-            if listing.vehicleId and g_currentMission and g_currentMission.vehicleSystem then
-                for _, v in pairs(g_currentMission.vehicleSystem.vehicles) do
-                    if tostring(v.id) == tostring(listing.vehicleId) then
-                        vehicleStillExists = true
-                        break
-                    end
+            local resolvedV = self:resolveVehicle(listing.vehicleUniqueId, listing.vehicleId)
+            if resolvedV then
+                vehicleStillExists = true
+                -- Update listing's entity ID to current value (migration for old listings)
+                listing.vehicleId = resolvedV.id
+                if not listing.vehicleUniqueId or listing.vehicleUniqueId == "" then
+                    listing.vehicleUniqueId = resolvedV.getUniqueId and resolvedV:getUniqueId() or nil
                 end
             end
 
@@ -652,6 +653,8 @@ function VehicleSaleManager:acceptOffer(listingId)
     local grossSalePrice = listing.currentOffer
     local farmId = listing.farmId
     local vehicleName = listing.vehicleName
+    -- v2.15.4: Prefer uniqueId for stable vehicle resolution (Issue #39)
+    local vehicleUniqueId = listing.vehicleUniqueId
     local vehicleId = listing.vehicleId
 
     -- Calculate agent commission from the listing's agent tier (matches what was shown at listing time)
@@ -662,43 +665,51 @@ function VehicleSaleManager:acceptOffer(listingId)
 
     -- v2.8.0: Close workshop screen if it's showing the vehicle being sold
     -- This prevents the "ghost vehicle" issue where workshop still displays sold vehicle
-    self:closeWorkshopIfShowingVehicle(vehicleId)
+    -- v2.15.4: Resolve vehicle by uniqueId first for stable matching (Issue #39)
+    local resolvedVehicle = self:resolveVehicle(vehicleUniqueId, vehicleId)
+    local resolvedVehicleId = resolvedVehicle and resolvedVehicle.id or vehicleId
+    self:closeWorkshopIfShowingVehicle(resolvedVehicleId)
 
     -- Accept the offer (updates listing status)
     listing:acceptOffer()
 
     -- v2.13.2: Cancel any OTHER active/pending listings for the same vehicle
-    -- This prevents the duplicate listing bug where a vehicle gets listed twice
-    -- (e.g., from save/load edge cases) and accepting one leaves the other active
+    -- v2.15.4: Match by uniqueId when available (Issue #39)
     local farm = g_farmManager:getFarmById(farmId)
     if farm and farm.vehicleSaleListings then
         for _, otherListing in ipairs(farm.vehicleSaleListings) do
             if otherListing.id ~= listingId
-               and otherListing.vehicleId and tostring(otherListing.vehicleId) == tostring(vehicleId)
                and (otherListing:isActive() or otherListing.status == VehicleSaleListing.STATUS.OFFER_PENDING) then
-                UsedPlus.logInfo(string.format("v2.13.2: Auto-cancelling sibling listing %s for sold vehicle %s",
-                    otherListing.id, vehicleName))
-                otherListing:cancel()
-                self.activeListings[otherListing.id] = nil
+                local isSameVehicle = false
+                if vehicleUniqueId and vehicleUniqueId ~= "" and otherListing.vehicleUniqueId and otherListing.vehicleUniqueId ~= "" then
+                    isSameVehicle = (otherListing.vehicleUniqueId == vehicleUniqueId)
+                elseif otherListing.vehicleId and tostring(otherListing.vehicleId) == tostring(vehicleId) then
+                    isSameVehicle = true
+                end
+                if isSameVehicle then
+                    UsedPlus.logInfo(string.format("v2.13.2: Auto-cancelling sibling listing %s for sold vehicle %s",
+                        otherListing.id, vehicleName))
+                    otherListing:cancel()
+                    self.activeListings[otherListing.id] = nil
+                end
             end
         end
     end
 
     -- v2.11.0: Defer vehicle deletion to next frame to prevent GUI event queue conflicts
-    -- Issue: If vehicle is deleted immediately, pending mouse events may still reference it
-    -- causing FSBaseMission.lua:2472 "attempt to index nil with 'id'" crash
-    -- Solution: Schedule deletion for next frame after GUI events are processed
-    local vehicleIdToDelete = vehicleId
+    -- v2.15.4: Use uniqueId for stable vehicle resolution across save/load (Issue #39)
+    local uniqueIdToDelete = vehicleUniqueId
+    local entityIdToDelete = resolvedVehicleId
     local listingIdForLog = listingId
 
     g_currentMission:addUpdateable({
         update = function(self, dt)
-            -- Delete the vehicle on next frame
-            local vehicleDeleted = g_vehicleSaleManager:deleteVehicleById(vehicleIdToDelete)
+            -- v2.15.4: Resolve by uniqueId first, fall back to entity ID
+            local vehicleDeleted = g_vehicleSaleManager:deleteVehicle(uniqueIdToDelete, entityIdToDelete)
             if not vehicleDeleted then
-                UsedPlus.logWarn(string.format("Could not find vehicle to delete for listing %s", listingIdForLog))
+                UsedPlus.logWarn(string.format("Could not find vehicle to delete for listing %s (uniqueId=%s, entityId=%s)",
+                    listingIdForLog, tostring(uniqueIdToDelete), tostring(entityIdToDelete)))
             end
-            -- Remove this updateable after one execution
             g_currentMission:removeUpdateable(self)
         end
     })
@@ -911,24 +922,52 @@ end
     @param vehicleId - The vehicle ID (from vehicle.id)
     @return true if vehicle was found and deleted
 ]]
-function VehicleSaleManager:deleteVehicleById(vehicleId)
-    if vehicleId == nil or vehicleId == "" then
-        return false
+--[[
+    v2.15.4: Resolve a vehicle by uniqueId (preferred) or entity ID (fallback)
+    Returns the vehicle object or nil
+    @param uniqueId - Savegame-persistent unique ID (string)
+    @param entityId - Runtime entity ID (may be stale after save/load)
+    @return vehicle object or nil
+]]
+function VehicleSaleManager:resolveVehicle(uniqueId, entityId)
+    if not g_currentMission or not g_currentMission.vehicleSystem then
+        return nil
     end
 
-    -- Search through all vehicles
-    if g_currentMission and g_currentMission.vehicleSystem then
+    -- Prefer uniqueId — stable across save/load (Issue #39)
+    if uniqueId and uniqueId ~= "" and g_currentMission.vehicleSystem.getVehicleByUniqueId then
+        local vehicle = g_currentMission.vehicleSystem:getVehicleByUniqueId(uniqueId)
+        if vehicle then
+            return vehicle
+        end
+    end
+
+    -- Fallback to entity ID (for old listings without uniqueId)
+    if entityId and entityId ~= "" then
         for _, vehicle in pairs(g_currentMission.vehicleSystem.vehicles) do
-            if tostring(vehicle.id) == tostring(vehicleId) then
-                if vehicle.delete then
-                    vehicle:delete()
-                    UsedPlus.logTrace(string.format("Deleted vehicle ID: %s", tostring(vehicleId)))
-                    return true
-                end
+            if tostring(vehicle.id) == tostring(entityId) then
+                return vehicle
             end
         end
     end
 
+    return nil
+end
+
+--[[
+    v2.15.4: Delete a vehicle by uniqueId (preferred) or entity ID (fallback)
+    @param uniqueId - Savegame-persistent unique ID
+    @param entityId - Runtime entity ID
+    @return true if vehicle was found and deleted
+]]
+function VehicleSaleManager:deleteVehicle(uniqueId, entityId)
+    local vehicle = self:resolveVehicle(uniqueId, entityId)
+    if vehicle and vehicle.delete then
+        UsedPlus.logTrace(string.format("Deleted vehicle (uniqueId=%s, entityId=%s)",
+            tostring(uniqueId), tostring(vehicle.id)))
+        vehicle:delete()
+        return true
+    end
     return false
 end
 
@@ -940,25 +979,27 @@ end
 function VehicleSaleManager:isVehicleListed(vehicle)
     if vehicle == nil then return false end
 
+    -- v2.15.4: Match by uniqueId (stable) with entity ID fallback (Issue #39)
+    local vehicleUniqueId = vehicle.getUniqueId and vehicle:getUniqueId() or nil
     local vehicleId = tostring(vehicle.id)
 
-    -- v2.13.2: Check BOTH activeListings hash AND farm.vehicleSaleListings array
-    -- Previously only checked activeListings, which is cleared on accept,
-    -- allowing duplicate listings for the same vehicle after sale
     for _, listing in pairs(self.activeListings) do
-        if listing.vehicleId and tostring(listing.vehicleId) == vehicleId then
-            if listing:isActive() or listing.status == VehicleSaleListing.STATUS.OFFER_PENDING then
+        if listing:isActive() or listing.status == VehicleSaleListing.STATUS.OFFER_PENDING then
+            if vehicleUniqueId and listing.vehicleUniqueId and listing.vehicleUniqueId ~= "" then
+                if listing.vehicleUniqueId == vehicleUniqueId then return true end
+            elseif listing.vehicleId and tostring(listing.vehicleId) == vehicleId then
                 return true
             end
         end
     end
 
-    -- Also check farm's listing array (includes sold/completed listings)
     local farm = g_farmManager:getFarmById(vehicle.ownerFarmId)
     if farm and farm.vehicleSaleListings then
         for _, listing in ipairs(farm.vehicleSaleListings) do
-            if listing.vehicleId and tostring(listing.vehicleId) == vehicleId then
-                if listing:isActive() or listing.status == VehicleSaleListing.STATUS.OFFER_PENDING then
+            if listing:isActive() or listing.status == VehicleSaleListing.STATUS.OFFER_PENDING then
+                if vehicleUniqueId and listing.vehicleUniqueId and listing.vehicleUniqueId ~= "" then
+                    if listing.vehicleUniqueId == vehicleUniqueId then return true end
+                elseif listing.vehicleId and tostring(listing.vehicleId) == vehicleId then
                     return true
                 end
             end
@@ -1149,6 +1190,19 @@ function VehicleSaleManager:loadFromXMLFile(missionInfo)
                         -- Re-register active listings
                         if listing:isActive() or listing.status == VehicleSaleListing.STATUS.OFFER_PENDING then
                             self.activeListings[listing.id] = listing
+
+                            -- v2.15.4: Migrate old listings — capture uniqueId if missing (Issue #39)
+                            if not listing.vehicleUniqueId or listing.vehicleUniqueId == "" then
+                                local resolved = self:resolveVehicle(nil, listing.vehicleId)
+                                if resolved then
+                                    listing.vehicleUniqueId = resolved.getUniqueId and resolved:getUniqueId() or nil
+                                    listing.vehicleId = resolved.id
+                                    if listing.vehicleUniqueId then
+                                        UsedPlus.logInfo(string.format("    Migrated listing %s: captured uniqueId %s",
+                                            listing.id, listing.vehicleUniqueId))
+                                    end
+                                end
+                            end
                         end
 
                         UsedPlus.logInfo(string.format("    Loaded sale listing: %s (%s) status=%s",
