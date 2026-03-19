@@ -47,37 +47,13 @@ function InGameMenuVehiclesFrameExtension:init()
     -- Hook YesNoDialog to intercept vehicle sell confirmations
     self:hookYesNoDialog()
 
-    -- If sell button wasn't hooked directly, schedule a deferred retry.
-    -- Note: YesNoDialog hook catches sell actions regardless.
     if not sellHooked then
-        UsedPlus.logDebug("Sell button not hooked directly - scheduling deferred retry in 5 seconds")
-        addTimer(5000, "retryFrameHook", InGameMenuVehiclesFrameExtension)
+        UsedPlus.logInfo("[SELL-DIAG] Sell button not hooked at init — will retry via onInGameMenuOpen/onFrameOpen recovery")
     else
         self.isInitialized = true
     end
-    UsedPlus.logInfo("InGameMenuVehiclesFrameExtension initialized (sellHooked=" .. tostring(sellHooked) .. ", menuHooked=" .. tostring(menuHooked) .. ")")
-end
-
---[[
-    Deferred retry for finding the vehicles frame
-    Called via addTimer after mission fully loads
-]]
-function InGameMenuVehiclesFrameExtension:retryFrameHook()
-    if self.isInitialized then return end
-
-    UsedPlus.logDebug("retryFrameHook: Attempting deferred frame lookup...")
-
-    -- The vehicles display is part of g_inGameMenu itself (no separate frame class).
-    -- The sell button is still intercepted via YesNoDialog hook regardless.
-    -- This retry only matters for direct sell button hooking.
-    if InGameMenuVehiclesFrame and InGameMenuVehiclesFrame.onClickSell then
-        self:hookSellButton()
-        self:hookMenuButtons()
-        self.isInitialized = true
-        UsedPlus.logInfo("retryFrameHook: Hooked InGameMenuVehiclesFrame on deferred retry")
-    else
-        UsedPlus.logDebug("retryFrameHook: InGameMenuVehiclesFrame still not available (sell intercepted via YesNoDialog hook)")
-    end
+    UsedPlus.logInfo(string.format("InGameMenuVehiclesFrameExtension initialized (sellHooked=%s, menuHooked=%s, isInitialized=%s)",
+        tostring(sellHooked), tostring(menuHooked), tostring(self.isInitialized)))
 end
 
 --[[
@@ -121,12 +97,20 @@ function InGameMenuVehiclesFrameExtension:hookYesNoDialog()
         if isSellConfirmation and saleEnabled and g_vehicleSaleManager and UsedPlus and UsedPlus.instance then
             -- Try to get the vehicle from the current context
             local vehicle = nil
+            local vehicleSource = "none"
+
+            -- Method 0: Check cached reference from frame hooks (most reliable when direct hooks failed)
+            if InGameMenuVehiclesFrameExtension.lastSelectedVehicle then
+                vehicle = InGameMenuVehiclesFrameExtension.lastSelectedVehicle
+                vehicleSource = "M0(cached)"
+            end
 
             -- Method 1: Check if we're on the Vehicles page
-            if g_currentMission and g_currentMission.inGameMenu then
+            if vehicle == nil and g_currentMission and g_currentMission.inGameMenu then
                 local inGameMenu = g_currentMission.inGameMenu
                 if inGameMenu.pageVehicles and inGameMenu.pageVehicles.getSelectedVehicle then
                     vehicle = inGameMenu.pageVehicles:getSelectedVehicle()
+                    if vehicle then vehicleSource = "M1(mission.inGameMenu)" end
                 end
             end
 
@@ -134,19 +118,41 @@ function InGameMenuVehiclesFrameExtension:hookYesNoDialog()
             if vehicle == nil and g_inGameMenu and g_inGameMenu.pageVehicles then
                 if g_inGameMenu.pageVehicles.getSelectedVehicle then
                     vehicle = g_inGameMenu.pageVehicles:getSelectedVehicle()
+                    if vehicle then vehicleSource = "M2(g_inGameMenu)" end
                 end
             end
 
-            -- Method 3: Check target for vehicle reference
+            -- Method 3: Check target for vehicle reference (property access)
             if vehicle == nil and target then
                 if target.selectedVehicle then
                     vehicle = target.selectedVehicle
+                    if vehicle then vehicleSource = "M3(target.selectedVehicle)" end
                 elseif target.items and target.itemsList and target.itemsList.selectedIndex then
                     vehicle = target.items[target.itemsList.selectedIndex]
+                    if vehicle then vehicleSource = "M3(target.items)" end
+                end
+            end
+
+            -- Method 4: Try calling getSelectedVehicle() as a method on target
+            if vehicle == nil and target and target.getSelectedVehicle then
+                vehicle = target:getSelectedVehicle()
+                if vehicle then vehicleSource = "M4(target:getSelectedVehicle)" end
+            end
+
+            -- Method 5: Try vehiclesList on InGameMenu (confirmed working via onPopulateCellHook)
+            if vehicle == nil and g_inGameMenu and g_inGameMenu.vehiclesList then
+                local selectedIdx = g_inGameMenu.vehiclesList.selectedIndex
+                if selectedIdx and g_inGameMenu.vehiclesList.elements then
+                    local element = g_inGameMenu.vehiclesList.elements[selectedIdx]
+                    if element and element.vehicle then
+                        vehicle = element.vehicle
+                        if vehicle then vehicleSource = "M5(vehiclesList)" end
+                    end
                 end
             end
 
             if vehicle then
+                UsedPlus.logDebug(string.format("[SELL-DIAG] YesNoDialog vehicle found via %s: %s", vehicleSource, tostring(vehicle.configFileName or "unknown")))
                 local farmId = g_currentMission:getFarmId()
 
                 -- Guard: ownership check
@@ -209,7 +215,11 @@ function InGameMenuVehiclesFrameExtension:hookYesNoDialog()
                 InGameMenuVehiclesFrameExtension:showSellDialog(vehicle, farmId, nil)
                 return  -- Don't show the vanilla YesNoDialog
             else
-                UsedPlus.logDebug("Could not find vehicle for sell intercept, falling back to vanilla")
+                UsedPlus.logInfo(string.format("[SELL-DIAG] Vehicle detection FAILED: M0(cached)=%s M1(mission)=%s M2(g_inGameMenu)=%s M3(target)=%s — falling back to vanilla",
+                    tostring(InGameMenuVehiclesFrameExtension.lastSelectedVehicle ~= nil),
+                    tostring(g_currentMission and g_currentMission.inGameMenu and g_currentMission.inGameMenu.pageVehicles ~= nil),
+                    tostring(g_inGameMenu and g_inGameMenu.pageVehicles ~= nil),
+                    tostring(target ~= nil)))
             end
         end
 
@@ -246,6 +256,15 @@ function InGameMenuVehiclesFrameExtension:hookMenuButtons()
                 InGameMenuVehiclesFrameExtension.lastSelectedFrame = frame
                 if frame and frame.getSelectedVehicle then
                     InGameMenuVehiclesFrameExtension.lastSelectedVehicle = frame:getSelectedVehicle()
+                end
+                -- Recovery: if sell hook not installed, try now (frame exists since it's opening)
+                if not InGameMenuVehiclesFrameExtension.isInitialized and frame.onClickSell then
+                    UsedPlus.logInfo("[SELL-DIAG] onFrameOpen(class) recovery: attempting hookSellButton")
+                    InGameMenuVehiclesFrameExtension:hookSellButton()
+                    if InGameMenuVehiclesFrameExtension.originalOnClickSell then
+                        InGameMenuVehiclesFrameExtension.isInitialized = true
+                        UsedPlus.logInfo("[SELL] Hook installed via: onFrameOpen(class) recovery")
+                    end
                 end
             end
         )
@@ -453,6 +472,8 @@ function InGameMenuVehiclesFrameExtension:hookSellButton()
     end
 
     -- Try 1: Global InGameMenuVehiclesFrame class - check multiple method names
+    UsedPlus.logDebug(string.format("[SELL-DIAG] hookSellButton Try1: InGameMenuVehiclesFrame=%s, .onClickSell=%s",
+        tostring(InGameMenuVehiclesFrame ~= nil), tostring(InGameMenuVehiclesFrame and InGameMenuVehiclesFrame.onClickSell ~= nil)))
     if InGameMenuVehiclesFrame ~= nil then
         -- Try onClickSell
         if InGameMenuVehiclesFrame.onClickSell ~= nil then
@@ -573,10 +594,17 @@ function InGameMenuVehiclesFrameExtension:onClickSellOverride(frame)
         return
     end
 
-    -- Get selected vehicle
+    -- Get selected vehicle (try frame first, fall back to cached reference)
     local vehicle = frame:getSelectedVehicle()
+    local vehicleSource = "frame"
+    if vehicle == nil and InGameMenuVehiclesFrameExtension.lastSelectedVehicle then
+        vehicle = InGameMenuVehiclesFrameExtension.lastSelectedVehicle
+        vehicleSource = "lastSelectedVehicle"
+    end
+    UsedPlus.logDebug(string.format("[SELL-DIAG] onClickSellOverride: vehicle=%s source=%s frame=%s",
+        tostring(vehicle ~= nil), vehicleSource, tostring(frame)))
     if vehicle == nil then
-        UsedPlus.logDebug("No vehicle selected for sale")
+        UsedPlus.logInfo("[SELL-DIAG] No vehicle found from frame or cache — sell blocked")
         return
     end
 
@@ -1069,6 +1097,30 @@ function InGameMenuVehiclesFrameExtension.onInGameMenuOpen(inGameMenu, superFunc
                         end
                     )
                     UsedPlus.logInfo("Hooked onListSelectionChanged via pageVehicles")
+                end
+
+                -- Hook onFrameOpen on the INSTANCE (not the class) to cache vehicle
+                -- and provide a recovery path for sell hook installation
+                if frame.onFrameOpen then
+                    frame.onFrameOpen = Utils.appendedFunction(
+                        frame.onFrameOpen,
+                        function(frm, ...)
+                            InGameMenuVehiclesFrameExtension.lastSelectedFrame = frm
+                            if frm and frm.getSelectedVehicle then
+                                InGameMenuVehiclesFrameExtension.lastSelectedVehicle = frm:getSelectedVehicle()
+                            end
+                            -- Recovery: if sell hook still not installed, try now
+                            if not InGameMenuVehiclesFrameExtension.isInitialized and frm.onClickSell then
+                                UsedPlus.logInfo("[SELL-DIAG] onFrameOpen recovery: attempting hookSellButton on frame instance")
+                                InGameMenuVehiclesFrameExtension:hookSellButton()
+                                if InGameMenuVehiclesFrameExtension.originalOnClickSell then
+                                    InGameMenuVehiclesFrameExtension.isInitialized = true
+                                    UsedPlus.logInfo("[SELL] Hook installed via: onFrameOpen recovery")
+                                end
+                            end
+                        end
+                    )
+                    UsedPlus.logInfo("[SELL-DIAG] Hooked onFrameOpen on pageVehicles instance")
                 end
 
                 InGameMenuVehiclesFrameExtension.isInitialized = true
