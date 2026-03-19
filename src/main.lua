@@ -281,8 +281,13 @@ Mission00.onStartMission = Utils.appendedFunction(
         local financeFrame = FinanceManagerFrame.new()
         g_usedPlusFinanceFrame = financeFrame
 
-        -- Load GUI XML
-        local xmlPath = Utils.getFilename("gui/FinanceManagerFrame.xml", UsedPlus.MOD_DIR)
+        -- Load GUI XML (v2.15.4: dual layout for wide aspect ratios — Issue #36)
+        local xmlFile = "gui/FinanceManagerFrame.xml"
+        if g_aspectScaleX ~= nil and g_aspectScaleX < 0.8 then
+            xmlFile = "gui/FinanceManagerFrameWide.xml"
+            UsedPlus.logInfo(string.format("Wide aspect ratio detected (g_aspectScaleX=%.3f), using compact layout", g_aspectScaleX))
+        end
+        local xmlPath = Utils.getFilename(xmlFile, UsedPlus.MOD_DIR)
         g_gui:loadGui(xmlPath, "usedPlusManager", financeFrame, true)
 
         -- Initialize frame

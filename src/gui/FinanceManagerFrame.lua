@@ -307,6 +307,26 @@ function FinanceManagerFrame:onFrameOpen()
         g_messageCenter:subscribe(MessageType.MONEY_CHANGED, self.onMoneyChanged, self)
     end
 
+    -- v2.15.4: Triple-screen diagnostic logging (Issue #36)
+    if not FinanceManagerFrame.hasLoggedScreenDiag then
+        FinanceManagerFrame.hasLoggedScreenDiag = true
+        local scaleX = g_aspectScaleX or -1
+        local scaleY = g_aspectScaleY or -1
+        local sw = g_screenWidth or -1
+        local sh = g_screenHeight or -1
+        local ar = g_screenAspectRatio or -1
+        UsedPlus.logInfo(string.format(
+            "Screen diagnostics: aspectScaleX=%.4f aspectScaleY=%.4f screenW=%.4f screenH=%.4f aspectRatio=%.4f",
+            scaleX, scaleY, sw, sh, ar))
+        if self.elements and self.elements[1] then
+            local root = self.elements[1]
+            UsedPlus.logInfo(string.format(
+                "Container absPos=[%.6f, %.6f] absSize=[%.6f, %.6f]",
+                root.absPosition[1], root.absPosition[2],
+                root.absSize[1], root.absSize[2]))
+        end
+    end
+
     self:setMenuButtonInfoDirty()
     self:updateDisplay()
 end

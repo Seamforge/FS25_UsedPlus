@@ -1,0 +1,588 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<GUI name="usedPlusManager">
+    <!-- Main container for InGameMenu page -->
+    <!-- Container visible area: 1480px wide x 1080px tall (frame coords 0-1480 visible) -->
+    <GuiElement profile="fs25_menuContainer">
+
+        <!-- Header section -->
+        <GuiElement profile="fs25_menuHeaderPanel">
+            <Text profile="fs25_menuHeaderTitle" text="$l10n_usedplus_inGameMenuTitle"/>
+        </GuiElement>
+
+        <!-- Page Description / Mod Information Panel (compacted: 75px, no Row 2) -->
+        <GuiElement position="0px 670px" size="1480px 75px">
+            <Bitmap profile="baseReference" imageColor="0.06 0.06 0.08 1" size="1480px 75px"/>
+
+            <!-- Three columns of feature descriptions -->
+            <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_overview" position="15px 55px" size="480px 15px" textSize="11px" textBold="true" textColor="0.6 0.7 0.8 1"/>
+            <Text profile="fs25_textDefault" position="15px 38px" size="480px 15px" textSize="10px" textColor="0.7 0.7 0.7 1"
+                text="$l10n_usedplus_fmf_overviewLine1"/>
+            <Text profile="fs25_textDefault" position="15px 21px" size="480px 15px" textSize="10px" textColor="0.7 0.7 0.7 1"
+                text="$l10n_usedplus_fmf_overviewLine2"/>
+
+            <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_buyingUsed" position="510px 55px" size="480px 15px" textSize="11px" textBold="true" textColor="0.9 0.7 0.4 1"/>
+            <Text profile="fs25_textDefault" position="510px 38px" size="480px 15px" textSize="10px" textColor="0.7 0.7 0.7 1"
+                text="$l10n_usedplus_fmf_buyingLine1"/>
+            <Text profile="fs25_textDefault" position="510px 21px" size="480px 15px" textSize="10px" textColor="0.7 0.7 0.7 1"
+                text="$l10n_usedplus_fmf_buyingLine2"/>
+
+            <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_sellingEquip" position="1000px 55px" size="470px 15px" textSize="11px" textBold="true" textColor="0.5 0.9 0.5 1"/>
+            <Text profile="fs25_textDefault" position="1000px 38px" size="470px 15px" textSize="10px" textColor="0.7 0.7 0.7 1"
+                text="$l10n_usedplus_fmf_sellingLine1"/>
+            <Text profile="fs25_textDefault" position="1000px 21px" size="470px 15px" textSize="10px" textColor="0.7 0.7 0.7 1"
+                text="$l10n_usedplus_fmf_sellingLine2"/>
+        </GuiElement>
+
+        <!-- Content area - Three column layout (Y increases upward from bottom) -->
+        <!-- Columns: Left=500 + 10gap + Center=500 + 10gap + Right=460 = 1480 -->
+        <GuiElement position="0px 55px" size="1480px 610px">
+
+            <!-- LEFT COLUMN: Active Finances (500px wide) -->
+            <GuiElement position="0px 0px" size="500px 610px">
+
+                <!-- Finance Table Data Rows Container (495px tall) -->
+                <GuiElement id="financeTableContainer" position="0px 0px" size="500px 495px">
+                    <Bitmap profile="baseReference" imageColor="0.08 0.08 0.08 1" size="500px 495px"/>
+
+                    <!-- Empty state text (centered in container) -->
+                    <Text profile="fs25_textDefault" id="financeEmptyText" text="$l10n_usedplus_fmf_noActiveDeals" position="160px 240px" textSize="16px" textColor="0.5 0.5 0.5 1"/>
+
+                    <!-- Row 0 (at top of container, highest Y) -->
+                    <GuiElement id="financeRow0" position="0px 459px" size="500px 36px" visible="false">
+                        <Bitmap profile="baseReference" id="financeRow0Bg" imageColor="0.1 0.1 0.1 1" size="500px 36px"/>
+                        <Button profile="fmfRowHit" id="financeRow0Hit" position="0px 0px" size="500px 36px" onClick="onFinanceRowClick0" onHighlight="onFinanceRowHighlight" onHighlightRemove="onFinanceRowUnhighlight"/>
+                        <Text profile="fs25_textDefault" id="financeRow0Type" text="" position="5px 10px" textSize="12px" textColor="0.5 0.8 1 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow0Item" text="" position="55px 10px" textSize="12px" textColor="1 1 1 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow0Balance" text="" position="145px 10px" textSize="12px" textColor="1 0.8 0.2 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow0Monthly" text="" position="235px 10px" textSize="12px" textColor="1 0.6 0.6 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow0Progress" text="" position="320px 10px" textSize="12px" textColor="0.7 0.7 0.7 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow0Remaining" text="" position="420px 10px" textSize="12px" textColor="0.6 0.6 0.6 1"/>
+                    </GuiElement>
+
+                    <!-- Row 1 -->
+                    <GuiElement id="financeRow1" position="0px 423px" size="500px 36px" visible="false">
+                        <Bitmap profile="baseReference" id="financeRow1Bg" imageColor="0.12 0.12 0.12 1" size="500px 36px"/>
+                        <Button profile="fmfRowHit" id="financeRow1Hit" position="0px 0px" size="500px 36px" onClick="onFinanceRowClick1" onHighlight="onFinanceRowHighlight" onHighlightRemove="onFinanceRowUnhighlight"/>
+                        <Text profile="fs25_textDefault" id="financeRow1Type" text="" position="5px 10px" textSize="12px" textColor="0.5 0.8 1 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow1Item" text="" position="55px 10px" textSize="12px" textColor="1 1 1 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow1Balance" text="" position="145px 10px" textSize="12px" textColor="1 0.8 0.2 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow1Monthly" text="" position="235px 10px" textSize="12px" textColor="1 0.6 0.6 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow1Progress" text="" position="320px 10px" textSize="12px" textColor="0.7 0.7 0.7 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow1Remaining" text="" position="420px 10px" textSize="12px" textColor="0.6 0.6 0.6 1"/>
+                    </GuiElement>
+
+                    <!-- Row 2 -->
+                    <GuiElement id="financeRow2" position="0px 387px" size="500px 36px" visible="false">
+                        <Bitmap profile="baseReference" id="financeRow2Bg" imageColor="0.1 0.1 0.1 1" size="500px 36px"/>
+                        <Button profile="fmfRowHit" id="financeRow2Hit" position="0px 0px" size="500px 36px" onClick="onFinanceRowClick2" onHighlight="onFinanceRowHighlight" onHighlightRemove="onFinanceRowUnhighlight"/>
+                        <Text profile="fs25_textDefault" id="financeRow2Type" text="" position="5px 10px" textSize="12px" textColor="0.5 0.8 1 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow2Item" text="" position="55px 10px" textSize="12px" textColor="1 1 1 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow2Balance" text="" position="145px 10px" textSize="12px" textColor="1 0.8 0.2 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow2Monthly" text="" position="235px 10px" textSize="12px" textColor="1 0.6 0.6 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow2Progress" text="" position="320px 10px" textSize="12px" textColor="0.7 0.7 0.7 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow2Remaining" text="" position="420px 10px" textSize="12px" textColor="0.6 0.6 0.6 1"/>
+                    </GuiElement>
+
+                    <!-- Row 3 -->
+                    <GuiElement id="financeRow3" position="0px 351px" size="500px 36px" visible="false">
+                        <Bitmap profile="baseReference" id="financeRow3Bg" imageColor="0.12 0.12 0.12 1" size="500px 36px"/>
+                        <Button profile="fmfRowHit" id="financeRow3Hit" position="0px 0px" size="500px 36px" onClick="onFinanceRowClick3" onHighlight="onFinanceRowHighlight" onHighlightRemove="onFinanceRowUnhighlight"/>
+                        <Text profile="fs25_textDefault" id="financeRow3Type" text="" position="5px 10px" textSize="12px" textColor="0.5 0.8 1 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow3Item" text="" position="55px 10px" textSize="12px" textColor="1 1 1 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow3Balance" text="" position="145px 10px" textSize="12px" textColor="1 0.8 0.2 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow3Monthly" text="" position="235px 10px" textSize="12px" textColor="1 0.6 0.6 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow3Progress" text="" position="320px 10px" textSize="12px" textColor="0.7 0.7 0.7 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow3Remaining" text="" position="420px 10px" textSize="12px" textColor="0.6 0.6 0.6 1"/>
+                    </GuiElement>
+
+                    <!-- Row 4 -->
+                    <GuiElement id="financeRow4" position="0px 315px" size="500px 36px" visible="false">
+                        <Bitmap profile="baseReference" id="financeRow4Bg" imageColor="0.1 0.1 0.1 1" size="500px 36px"/>
+                        <Button profile="fmfRowHit" id="financeRow4Hit" position="0px 0px" size="500px 36px" onClick="onFinanceRowClick4" onHighlight="onFinanceRowHighlight" onHighlightRemove="onFinanceRowUnhighlight"/>
+                        <Text profile="fs25_textDefault" id="financeRow4Type" text="" position="5px 10px" textSize="12px" textColor="0.5 0.8 1 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow4Item" text="" position="55px 10px" textSize="12px" textColor="1 1 1 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow4Balance" text="" position="145px 10px" textSize="12px" textColor="1 0.8 0.2 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow4Monthly" text="" position="235px 10px" textSize="12px" textColor="1 0.6 0.6 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow4Progress" text="" position="320px 10px" textSize="12px" textColor="0.7 0.7 0.7 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow4Remaining" text="" position="420px 10px" textSize="12px" textColor="0.6 0.6 0.6 1"/>
+                    </GuiElement>
+
+                    <!-- Row 5 -->
+                    <GuiElement id="financeRow5" position="0px 279px" size="500px 36px" visible="false">
+                        <Bitmap profile="baseReference" id="financeRow5Bg" imageColor="0.12 0.12 0.12 1" size="500px 36px"/>
+                        <Button profile="fmfRowHit" id="financeRow5Hit" position="0px 0px" size="500px 36px" onClick="onFinanceRowClick5" onHighlight="onFinanceRowHighlight" onHighlightRemove="onFinanceRowUnhighlight"/>
+                        <Text profile="fs25_textDefault" id="financeRow5Type" text="" position="5px 10px" textSize="12px" textColor="0.5 0.8 1 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow5Item" text="" position="55px 10px" textSize="12px" textColor="1 1 1 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow5Balance" text="" position="145px 10px" textSize="12px" textColor="1 0.8 0.2 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow5Monthly" text="" position="235px 10px" textSize="12px" textColor="1 0.6 0.6 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow5Progress" text="" position="320px 10px" textSize="12px" textColor="0.7 0.7 0.7 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow5Remaining" text="" position="420px 10px" textSize="12px" textColor="0.6 0.6 0.6 1"/>
+                    </GuiElement>
+
+                    <!-- Row 6 -->
+                    <GuiElement id="financeRow6" position="0px 243px" size="500px 36px" visible="false">
+                        <Bitmap profile="baseReference" id="financeRow6Bg" imageColor="0.1 0.1 0.1 1" size="500px 36px"/>
+                        <Button profile="fmfRowHit" id="financeRow6Hit" position="0px 0px" size="500px 36px" onClick="onFinanceRowClick6" onHighlight="onFinanceRowHighlight" onHighlightRemove="onFinanceRowUnhighlight"/>
+                        <Text profile="fs25_textDefault" id="financeRow6Type" text="" position="5px 10px" textSize="12px" textColor="0.5 0.8 1 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow6Item" text="" position="55px 10px" textSize="12px" textColor="1 1 1 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow6Balance" text="" position="145px 10px" textSize="12px" textColor="1 0.8 0.2 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow6Monthly" text="" position="235px 10px" textSize="12px" textColor="1 0.6 0.6 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow6Progress" text="" position="320px 10px" textSize="12px" textColor="0.7 0.7 0.7 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow6Remaining" text="" position="420px 10px" textSize="12px" textColor="0.6 0.6 0.6 1"/>
+                    </GuiElement>
+
+                    <!-- Row 7 -->
+                    <GuiElement id="financeRow7" position="0px 207px" size="500px 36px" visible="false">
+                        <Bitmap profile="baseReference" id="financeRow7Bg" imageColor="0.12 0.12 0.12 1" size="500px 36px"/>
+                        <Button profile="fmfRowHit" id="financeRow7Hit" position="0px 0px" size="500px 36px" onClick="onFinanceRowClick7" onHighlight="onFinanceRowHighlight" onHighlightRemove="onFinanceRowUnhighlight"/>
+                        <Text profile="fs25_textDefault" id="financeRow7Type" text="" position="5px 10px" textSize="12px" textColor="0.5 0.8 1 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow7Item" text="" position="55px 10px" textSize="12px" textColor="1 1 1 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow7Balance" text="" position="145px 10px" textSize="12px" textColor="1 0.8 0.2 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow7Monthly" text="" position="235px 10px" textSize="12px" textColor="1 0.6 0.6 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow7Progress" text="" position="320px 10px" textSize="12px" textColor="0.7 0.7 0.7 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow7Remaining" text="" position="420px 10px" textSize="12px" textColor="0.6 0.6 0.6 1"/>
+                    </GuiElement>
+
+                    <!-- Row 8 -->
+                    <GuiElement id="financeRow8" position="0px 171px" size="500px 36px" visible="false">
+                        <Bitmap profile="baseReference" id="financeRow8Bg" imageColor="0.1 0.1 0.1 1" size="500px 36px"/>
+                        <Button profile="fmfRowHit" id="financeRow8Hit" position="0px 0px" size="500px 36px" onClick="onFinanceRowClick8" onHighlight="onFinanceRowHighlight" onHighlightRemove="onFinanceRowUnhighlight"/>
+                        <Text profile="fs25_textDefault" id="financeRow8Type" text="" position="5px 10px" textSize="12px" textColor="0.5 0.8 1 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow8Item" text="" position="55px 10px" textSize="12px" textColor="1 1 1 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow8Balance" text="" position="145px 10px" textSize="12px" textColor="1 0.8 0.2 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow8Monthly" text="" position="235px 10px" textSize="12px" textColor="1 0.6 0.6 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow8Progress" text="" position="320px 10px" textSize="12px" textColor="0.7 0.7 0.7 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow8Remaining" text="" position="420px 10px" textSize="12px" textColor="0.6 0.6 0.6 1"/>
+                    </GuiElement>
+
+                    <!-- Row 9 -->
+                    <GuiElement id="financeRow9" position="0px 135px" size="500px 36px" visible="false">
+                        <Bitmap profile="baseReference" id="financeRow9Bg" imageColor="0.12 0.12 0.12 1" size="500px 36px"/>
+                        <Button profile="fmfRowHit" id="financeRow9Hit" position="0px 0px" size="500px 36px" onClick="onFinanceRowClick9" onHighlight="onFinanceRowHighlight" onHighlightRemove="onFinanceRowUnhighlight"/>
+                        <Text profile="fs25_textDefault" id="financeRow9Type" text="" position="5px 10px" textSize="12px" textColor="0.5 0.8 1 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow9Item" text="" position="55px 10px" textSize="12px" textColor="1 1 1 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow9Balance" text="" position="145px 10px" textSize="12px" textColor="1 0.8 0.2 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow9Monthly" text="" position="235px 10px" textSize="12px" textColor="1 0.6 0.6 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow9Progress" text="" position="320px 10px" textSize="12px" textColor="0.7 0.7 0.7 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow9Remaining" text="" position="420px 10px" textSize="12px" textColor="0.6 0.6 0.6 1"/>
+                    </GuiElement>
+
+                    <!-- Row 10 -->
+                    <GuiElement id="financeRow10" position="0px 99px" size="500px 36px" visible="false">
+                        <Bitmap profile="baseReference" id="financeRow10Bg" imageColor="0.1 0.1 0.1 1" size="500px 36px"/>
+                        <Button profile="fmfRowHit" id="financeRow10Hit" position="0px 0px" size="500px 36px" onClick="onFinanceRowClick10" onHighlight="onFinanceRowHighlight" onHighlightRemove="onFinanceRowUnhighlight"/>
+                        <Text profile="fs25_textDefault" id="financeRow10Type" text="" position="5px 10px" textSize="12px" textColor="0.5 0.8 1 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow10Item" text="" position="55px 10px" textSize="12px" textColor="1 1 1 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow10Balance" text="" position="145px 10px" textSize="12px" textColor="1 0.8 0.2 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow10Monthly" text="" position="235px 10px" textSize="12px" textColor="1 0.6 0.6 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow10Progress" text="" position="320px 10px" textSize="12px" textColor="0.7 0.7 0.7 1"/>
+                        <Text profile="fs25_textDefault" id="financeRow10Remaining" text="" position="420px 10px" textSize="12px" textColor="0.6 0.6 0.6 1"/>
+                    </GuiElement>
+                </GuiElement>
+
+                <!-- Table Header Row (above data container) -->
+                <GuiElement position="0px 500px" size="500px 24px">
+                    <Bitmap profile="baseReference" imageColor="0.18 0.18 0.18 1" size="500px 24px"/>
+                    <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_headerType" position="5px 5px" textSize="11px" textBold="true" textColor="0.7 0.7 0.7 1"/>
+                    <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_headerItem" position="55px 5px" textSize="11px" textBold="true" textColor="0.7 0.7 0.7 1"/>
+                    <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_headerBalance" position="145px 5px" textSize="11px" textBold="true" textColor="0.7 0.7 0.7 1"/>
+                    <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_headerMonthly" position="235px 5px" textSize="11px" textBold="true" textColor="0.7 0.7 0.7 1"/>
+                    <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_headerProgress" position="320px 5px" textSize="11px" textBold="true" textColor="0.7 0.7 0.7 1"/>
+                    <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_headerLeft" position="420px 5px" textSize="11px" textBold="true" textColor="0.7 0.7 0.7 1"/>
+                </GuiElement>
+
+                <!-- Summary stats row (above header row) - Shows totals -->
+                <GuiElement position="0px 529px" size="500px 40px">
+                    <Bitmap profile="baseReference" imageColor="0.12 0.12 0.12 1" size="500px 40px"/>
+
+                    <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_totalOwed" position="8px 4px" textSize="11px" textColor="0.6 0.6 0.6 1"/>
+                    <Text profile="fs25_textDefault" id="totalFinancedText" text="" position="8px 20px" textSize="13px" textBold="true" textColor="1 0.8 0.2 1"/>
+
+                    <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_monthlyLabel" position="115px 4px" textSize="11px" textColor="0.6 0.6 0.6 1"/>
+                    <Text profile="fs25_textDefault" id="monthlyTotalText" text="" position="115px 20px" textSize="13px" textBold="true" textColor="1 0.5 0.5 1"/>
+
+                    <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_interestLabel" position="215px 4px" textSize="11px" textColor="0.6 0.6 0.6 1"/>
+                    <Text profile="fs25_textDefault" id="totalInterestText" text="" position="215px 20px" textSize="13px" textBold="true" textColor="1 0.6 0.6 1"/>
+
+                    <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_dealsLabel" position="280px 4px" textSize="11px" textColor="0.6 0.6 0.6 1"/>
+                    <Text profile="fs25_textDefault" id="dealsCountText" text="" position="280px 20px" textSize="13px" textBold="true" textColor="0.5 1 0.8 1"/>
+
+                    <!-- Action buttons -->
+                    <Bitmap profile="baseReference" id="payBtnBg" position="310px 5px" size="110px 30px" imageColor="0.15 0.15 0.15 1"/>
+                    <Button profile="financeActionBtn" id="paySelectedBtn" text="" onClick="onPaySelected" position="310px 5px" size="110px 30px"/>
+                    <Text profile="fs25_textDefault" id="payBtnText" text="$l10n_usedplus_fmf_payEarly" position="315px 12px" size="100px 16px" textSize="12px" textBold="true"/>
+
+                    <Bitmap profile="baseReference" id="infoBtnBg" position="430px 5px" size="55px 30px" imageColor="0.15 0.15 0.15 1"/>
+                    <Button profile="financeActionBtn" id="infoSelectedBtn" text="" onClick="onInfoSelected" position="430px 5px" size="55px 30px"/>
+                    <Text profile="fs25_textDefault" id="infoBtnText" text="$l10n_usedplus_fmf_info" position="440px 12px" size="40px 16px" textSize="12px" textBold="true"/>
+
+                </GuiElement>
+
+                <!-- Section Header -->
+                <GuiElement position="0px 570px" size="500px 40px">
+                    <Bitmap profile="baseReference" imageColor="0.2 0.35 0.5 1" size="500px 40px"/>
+                    <Bitmap profile="iconProfile24" id="financeSectionIcon" position="10px 8px"/>
+                    <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_sectionFinances" position="40px 10px" textSize="18px" textBold="true" textColor="1 1 1 1"/>
+                </GuiElement>
+            </GuiElement>
+
+            <!-- CENTER COLUMN: Used Marketplace (500px wide) -->
+            <GuiElement position="510px 0px" size="500px 610px">
+
+                <!-- BOTTOM: Search Tier Information -->
+                <GuiElement position="0px 0px" size="500px 140px">
+                    <Bitmap profile="baseReference" imageColor="0.1 0.1 0.1 1" size="500px 140px"/>
+                    <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_searchTierInfo" position="10px 115px" textSize="14px" textBold="true" textColor="0.8 0.8 0.8 1"/>
+
+                    <Bitmap profile="baseReference" imageColor="0.15 0.15 0.15 1" position="10px 8px" size="470px 100px"/>
+
+                    <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_localSearch" position="20px 85px" textSize="12px" textBold="true" textColor="0.5 0.8 1 1"/>
+                    <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_localStats" position="20px 68px" textSize="11px" textColor="0.6 0.6 0.6 1"/>
+
+                    <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_regionalSearch" position="20px 48px" textSize="12px" textBold="true" textColor="0.7 0.9 0.5 1"/>
+                    <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_regionalStats" position="20px 31px" textSize="11px" textColor="0.6 0.6 0.6 1"/>
+
+                    <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_nationalSearch" position="295px 85px" textSize="12px" textBold="true" textColor="1 0.8 0.4 1"/>
+                    <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_nationalStats" position="295px 68px" textSize="11px" textColor="0.6 0.6 0.6 1"/>
+
+                    <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_startFromShop" position="295px 35px" textSize="11px" textColor="0.5 0.5 0.5 1"/>
+                </GuiElement>
+
+                <!-- MIDDLE-LOWER: Used Vehicle Searches Table -->
+                <GuiElement position="0px 140px" size="500px 265px">
+                    <!-- Search Table Section Header -->
+                    <GuiElement position="0px 240px" size="500px 25px">
+                        <Bitmap profile="baseReference" imageColor="0.18 0.18 0.18 1" size="500px 25px"/>
+                        <Bitmap profile="iconProfile20" id="searchSectionIcon" position="6px 3px"/>
+                        <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_usedVehicleSearches" position="30px 5px" textSize="13px" textBold="true" textColor="0.9 0.7 0.4 1"/>
+                        <Text profile="fs25_textDefault" id="searchesCountText" text="" position="465px 5px" textSize="12px" textColor="0.6 0.6 0.6 1"/>
+                    </GuiElement>
+
+                    <!-- Search Table Data Rows Container -->
+                    <GuiElement id="searchTableContainer" position="0px 0px" size="500px 240px">
+                        <Bitmap profile="baseReference" imageColor="0.08 0.08 0.08 1" size="500px 240px"/>
+
+                        <!-- Column Headers Row -->
+                        <GuiElement position="0px 216px" size="500px 24px">
+                            <Bitmap profile="baseReference" imageColor="0.14 0.14 0.14 1" size="500px 24px"/>
+                            <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_headerItem" position="5px 5px" textSize="10px" textBold="true" textColor="0.6 0.6 0.6 1"/>
+                            <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_headerPrice" position="140px 5px" textSize="10px" textBold="true" textColor="0.6 0.6 0.6 1"/>
+                            <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_headerTier" position="230px 5px" textSize="10px" textBold="true" textColor="0.6 0.6 0.6 1"/>
+                            <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_headerChance" position="295px 5px" textSize="10px" textBold="true" textColor="0.6 0.6 0.6 1"/>
+                            <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_headerTime" position="370px 5px" textSize="10px" textBold="true" textColor="0.6 0.6 0.6 1"/>
+                        </GuiElement>
+
+                        <!-- Empty state text -->
+                        <Text profile="fs25_textDefault" id="searchEmptyText" text="$l10n_usedplus_fmf_noActiveSearches" position="170px 110px" textSize="11px" textColor="0.5 0.5 0.5 1"/>
+
+                        <!-- Row 0 -->
+                        <GuiElement id="searchRow0" position="0px 192px" size="500px 24px" visible="false">
+                            <Bitmap profile="baseReference" id="searchRow0Bg" imageColor="0.1 0.1 0.1 1" size="500px 24px"/>
+                            <Button profile="fmfRowHit" id="searchRow0Hit" position="0px 0px" size="440px 24px" onClick="onSearchRowClick0" onHighlight="onSearchRowHighlight" onHighlightRemove="onSearchRowUnhighlight"/>
+                            <Text profile="fs25_textDefault" id="searchRow0Item" text="" position="5px 5px" textSize="11px" textColor="1 1 1 1"/>
+                            <Text profile="fs25_textDefault" id="searchRow0Price" text="" position="140px 5px" textSize="11px" textColor="1 0.8 0.2 1"/>
+                            <Text profile="fs25_textDefault" id="searchRow0Tier" text="" position="230px 5px" textSize="11px" textColor="0.5 0.8 1 1"/>
+                            <Text profile="fs25_textDefault" id="searchRow0Chance" text="" position="295px 5px" textSize="11px" textColor="0.5 1 0.5 1"/>
+                            <Text profile="fs25_textDefault" id="searchRow0Time" text="" position="370px 5px" textSize="11px" textColor="0.7 0.7 0.7 1"/>
+                            <Bitmap profile="baseReference" id="searchRow0InfoBtnBg" position="450px 1px" size="26px 22px" imageColor="0.18 0.18 0.18 1"/>
+                            <Button profile="financeActionBtn" id="searchRow0InfoBtn" text="" onClick="onInfoSearch0" position="450px 1px" size="26px 22px"/>
+                            <Text profile="fs25_textDefault" id="searchRow0InfoBtnText" text="?" position="450px 4px" size="26px 18px" textSize="12px" textBold="true" textAlignment="center"/>
+                            <Bitmap profile="baseReference" id="searchRow0CancelBtnBg" position="480px 1px" size="30px 22px" imageColor="0.18 0.18 0.18 1"/>
+                            <Button profile="financeActionBtn" id="searchRow0CancelBtn" text="" onClick="onCancelSearch0" position="480px 1px" size="30px 22px"/>
+                            <Text profile="fs25_textDefault" id="searchRow0CancelBtnText" text="X" position="480px 4px" size="30px 18px" textSize="12px" textBold="true" textAlignment="center" textColor="1 0.5 0.5 1"/>
+                        </GuiElement>
+
+                        <!-- Row 1 -->
+                        <GuiElement id="searchRow1" position="0px 168px" size="500px 24px" visible="false">
+                            <Bitmap profile="baseReference" id="searchRow1Bg" imageColor="0.12 0.12 0.12 1" size="500px 24px"/>
+                            <Button profile="fmfRowHit" id="searchRow1Hit" position="0px 0px" size="440px 24px" onClick="onSearchRowClick1" onHighlight="onSearchRowHighlight" onHighlightRemove="onSearchRowUnhighlight"/>
+                            <Text profile="fs25_textDefault" id="searchRow1Item" text="" position="5px 5px" textSize="11px" textColor="1 1 1 1"/>
+                            <Text profile="fs25_textDefault" id="searchRow1Price" text="" position="140px 5px" textSize="11px" textColor="1 0.8 0.2 1"/>
+                            <Text profile="fs25_textDefault" id="searchRow1Tier" text="" position="230px 5px" textSize="11px" textColor="0.5 0.8 1 1"/>
+                            <Text profile="fs25_textDefault" id="searchRow1Chance" text="" position="295px 5px" textSize="11px" textColor="0.5 1 0.5 1"/>
+                            <Text profile="fs25_textDefault" id="searchRow1Time" text="" position="370px 5px" textSize="11px" textColor="0.7 0.7 0.7 1"/>
+                            <Bitmap profile="baseReference" id="searchRow1InfoBtnBg" position="450px 1px" size="26px 22px" imageColor="0.18 0.18 0.18 1"/>
+                            <Button profile="financeActionBtn" id="searchRow1InfoBtn" text="" onClick="onInfoSearch1" position="450px 1px" size="26px 22px"/>
+                            <Text profile="fs25_textDefault" id="searchRow1InfoBtnText" text="?" position="450px 4px" size="26px 18px" textSize="12px" textBold="true" textAlignment="center"/>
+                            <Bitmap profile="baseReference" id="searchRow1CancelBtnBg" position="480px 1px" size="30px 22px" imageColor="0.18 0.18 0.18 1"/>
+                            <Button profile="financeActionBtn" id="searchRow1CancelBtn" text="" onClick="onCancelSearch1" position="480px 1px" size="30px 22px"/>
+                            <Text profile="fs25_textDefault" id="searchRow1CancelBtnText" text="X" position="480px 4px" size="30px 18px" textSize="12px" textBold="true" textAlignment="center" textColor="1 0.5 0.5 1"/>
+                        </GuiElement>
+
+                        <!-- Row 2 -->
+                        <GuiElement id="searchRow2" position="0px 144px" size="500px 24px" visible="false">
+                            <Bitmap profile="baseReference" id="searchRow2Bg" imageColor="0.1 0.1 0.1 1" size="500px 24px"/>
+                            <Button profile="fmfRowHit" id="searchRow2Hit" position="0px 0px" size="440px 24px" onClick="onSearchRowClick2" onHighlight="onSearchRowHighlight" onHighlightRemove="onSearchRowUnhighlight"/>
+                            <Text profile="fs25_textDefault" id="searchRow2Item" text="" position="5px 5px" textSize="11px" textColor="1 1 1 1"/>
+                            <Text profile="fs25_textDefault" id="searchRow2Price" text="" position="140px 5px" textSize="11px" textColor="1 0.8 0.2 1"/>
+                            <Text profile="fs25_textDefault" id="searchRow2Tier" text="" position="230px 5px" textSize="11px" textColor="0.5 0.8 1 1"/>
+                            <Text profile="fs25_textDefault" id="searchRow2Chance" text="" position="295px 5px" textSize="11px" textColor="0.5 1 0.5 1"/>
+                            <Text profile="fs25_textDefault" id="searchRow2Time" text="" position="370px 5px" textSize="11px" textColor="0.7 0.7 0.7 1"/>
+                            <Bitmap profile="baseReference" id="searchRow2InfoBtnBg" position="450px 1px" size="26px 22px" imageColor="0.18 0.18 0.18 1"/>
+                            <Button profile="financeActionBtn" id="searchRow2InfoBtn" text="" onClick="onInfoSearch2" position="450px 1px" size="26px 22px"/>
+                            <Text profile="fs25_textDefault" id="searchRow2InfoBtnText" text="?" position="450px 4px" size="26px 18px" textSize="12px" textBold="true" textAlignment="center"/>
+                            <Bitmap profile="baseReference" id="searchRow2CancelBtnBg" position="480px 1px" size="30px 22px" imageColor="0.18 0.18 0.18 1"/>
+                            <Button profile="financeActionBtn" id="searchRow2CancelBtn" text="" onClick="onCancelSearch2" position="480px 1px" size="30px 22px"/>
+                            <Text profile="fs25_textDefault" id="searchRow2CancelBtnText" text="X" position="480px 4px" size="30px 18px" textSize="12px" textBold="true" textAlignment="center" textColor="1 0.5 0.5 1"/>
+                        </GuiElement>
+
+                        <!-- Row 3 -->
+                        <GuiElement id="searchRow3" position="0px 120px" size="500px 24px" visible="false">
+                            <Bitmap profile="baseReference" id="searchRow3Bg" imageColor="0.12 0.12 0.12 1" size="500px 24px"/>
+                            <Button profile="fmfRowHit" id="searchRow3Hit" position="0px 0px" size="440px 24px" onClick="onSearchRowClick3" onHighlight="onSearchRowHighlight" onHighlightRemove="onSearchRowUnhighlight"/>
+                            <Text profile="fs25_textDefault" id="searchRow3Item" text="" position="5px 5px" textSize="11px" textColor="1 1 1 1"/>
+                            <Text profile="fs25_textDefault" id="searchRow3Price" text="" position="140px 5px" textSize="11px" textColor="1 0.8 0.2 1"/>
+                            <Text profile="fs25_textDefault" id="searchRow3Tier" text="" position="230px 5px" textSize="11px" textColor="0.5 0.8 1 1"/>
+                            <Text profile="fs25_textDefault" id="searchRow3Chance" text="" position="295px 5px" textSize="11px" textColor="0.5 1 0.5 1"/>
+                            <Text profile="fs25_textDefault" id="searchRow3Time" text="" position="370px 5px" textSize="11px" textColor="0.7 0.7 0.7 1"/>
+                            <Bitmap profile="baseReference" id="searchRow3InfoBtnBg" position="450px 1px" size="26px 22px" imageColor="0.18 0.18 0.18 1"/>
+                            <Button profile="financeActionBtn" id="searchRow3InfoBtn" text="" onClick="onInfoSearch3" position="450px 1px" size="26px 22px"/>
+                            <Text profile="fs25_textDefault" id="searchRow3InfoBtnText" text="?" position="450px 4px" size="26px 18px" textSize="12px" textBold="true" textAlignment="center"/>
+                            <Bitmap profile="baseReference" id="searchRow3CancelBtnBg" position="480px 1px" size="30px 22px" imageColor="0.18 0.18 0.18 1"/>
+                            <Button profile="financeActionBtn" id="searchRow3CancelBtn" text="" onClick="onCancelSearch3" position="480px 1px" size="30px 22px"/>
+                            <Text profile="fs25_textDefault" id="searchRow3CancelBtnText" text="X" position="480px 4px" size="30px 18px" textSize="12px" textBold="true" textAlignment="center" textColor="1 0.5 0.5 1"/>
+                        </GuiElement>
+
+                        <!-- Row 4 -->
+                        <GuiElement id="searchRow4" position="0px 96px" size="500px 24px" visible="false">
+                            <Bitmap profile="baseReference" id="searchRow4Bg" imageColor="0.1 0.1 0.1 1" size="500px 24px"/>
+                            <Button profile="fmfRowHit" id="searchRow4Hit" position="0px 0px" size="440px 24px" onClick="onSearchRowClick4" onHighlight="onSearchRowHighlight" onHighlightRemove="onSearchRowUnhighlight"/>
+                            <Text profile="fs25_textDefault" id="searchRow4Item" text="" position="5px 5px" textSize="11px" textColor="1 1 1 1"/>
+                            <Text profile="fs25_textDefault" id="searchRow4Price" text="" position="140px 5px" textSize="11px" textColor="1 0.8 0.2 1"/>
+                            <Text profile="fs25_textDefault" id="searchRow4Tier" text="" position="230px 5px" textSize="11px" textColor="0.5 0.8 1 1"/>
+                            <Text profile="fs25_textDefault" id="searchRow4Chance" text="" position="295px 5px" textSize="11px" textColor="0.5 1 0.5 1"/>
+                            <Text profile="fs25_textDefault" id="searchRow4Time" text="" position="370px 5px" textSize="11px" textColor="0.7 0.7 0.7 1"/>
+                            <Bitmap profile="baseReference" id="searchRow4InfoBtnBg" position="450px 1px" size="26px 22px" imageColor="0.18 0.18 0.18 1"/>
+                            <Button profile="financeActionBtn" id="searchRow4InfoBtn" text="" onClick="onInfoSearch4" position="450px 1px" size="26px 22px"/>
+                            <Text profile="fs25_textDefault" id="searchRow4InfoBtnText" text="?" position="450px 4px" size="26px 18px" textSize="12px" textBold="true" textAlignment="center"/>
+                            <Bitmap profile="baseReference" id="searchRow4CancelBtnBg" position="480px 1px" size="30px 22px" imageColor="0.18 0.18 0.18 1"/>
+                            <Button profile="financeActionBtn" id="searchRow4CancelBtn" text="" onClick="onCancelSearch4" position="480px 1px" size="30px 22px"/>
+                            <Text profile="fs25_textDefault" id="searchRow4CancelBtnText" text="X" position="480px 4px" size="30px 18px" textSize="12px" textBold="true" textAlignment="center" textColor="1 0.5 0.5 1"/>
+                        </GuiElement>
+                    </GuiElement>
+                </GuiElement>
+
+                <!-- MIDDLE-UPPER: Vehicles For Sale Section -->
+                <GuiElement position="0px 405px" size="500px 165px">
+                    <!-- Sale Listings Header -->
+                    <GuiElement position="0px 140px" size="500px 25px">
+                        <Bitmap profile="baseReference" imageColor="0.15 0.35 0.15 1" size="500px 25px"/>
+                        <Bitmap profile="iconProfile20" id="saleSectionIcon" position="6px 3px"/>
+                        <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_vehiclesForSale" position="30px 5px" textSize="13px" textBold="true" textColor="0.8 1 0.8 1"/>
+                        <Text profile="fs25_textDefault" id="saleListingsCountText" text="" position="465px 5px" textSize="12px" textColor="0.6 0.6 0.6 1"/>
+                    </GuiElement>
+
+                    <!-- Sale Listing Rows Container -->
+                    <GuiElement id="saleTableContainer" position="0px 0px" size="500px 140px">
+                        <Bitmap profile="baseReference" imageColor="0.06 0.08 0.06 1" size="500px 140px"/>
+
+                        <!-- Column Headers Row -->
+                        <GuiElement position="0px 116px" size="500px 24px">
+                            <Bitmap profile="baseReference" imageColor="0.14 0.14 0.14 1" size="500px 24px"/>
+                            <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_headerItem" position="5px 5px" textSize="10px" textBold="true" textColor="0.6 0.6 0.6 1"/>
+                            <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_headerStatus" position="140px 5px" textSize="10px" textBold="true" textColor="0.6 0.6 0.6 1"/>
+                            <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_headerTier" position="230px 5px" textSize="10px" textBold="true" textColor="0.6 0.6 0.6 1"/>
+                            <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_headerOffers" position="295px 5px" textSize="10px" textBold="true" textColor="0.6 0.6 0.6 1"/>
+                            <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_headerTime" position="370px 5px" textSize="10px" textBold="true" textColor="0.6 0.6 0.6 1"/>
+                        </GuiElement>
+
+                        <!-- Empty state text -->
+                        <Text profile="fs25_textDefault" id="saleEmptyText" text="$l10n_usedplus_fmf_noListings" position="180px 45px" textSize="11px" textColor="0.4 0.5 0.4 1"/>
+
+                        <!-- Sale Row 0 -->
+                        <GuiElement id="saleRow0" position="0px 91px" size="500px 25px" visible="false">
+                            <Bitmap profile="baseReference" id="saleRow0Bg" imageColor="0.1 0.12 0.1 1" size="500px 25px"/>
+                            <Text profile="fs25_textDefault" id="saleRow0Item" text="" position="5px 5px" textSize="11px" textColor="1 1 1 1"/>
+                            <Text profile="fs25_textDefault" id="saleRow0Status" text="" position="140px 5px" textSize="11px" textColor="0.7 0.7 0.7 1"/>
+                            <Text profile="fs25_textDefault" id="saleRow0Tier" text="" position="230px 5px" textSize="11px" textColor="0.5 0.8 1 1"/>
+                            <Text profile="fs25_textDefault" id="saleRow0Offers" text="" position="295px 5px" textSize="11px" textColor="0.9 0.7 0.4 1"/>
+                            <Text profile="fs25_textDefault" id="saleRow0Time" text="" position="370px 5px" textSize="11px" textColor="0.7 0.7 0.7 1"/>
+                            <Bitmap profile="baseReference" id="saleRow0AcceptBtnBg" position="425px 1px" size="36px 22px" imageColor="0.15 0.25 0.15 1" visible="false"/>
+                            <Button profile="financeActionBtn" id="saleRow0AcceptBtn" text="" onClick="onAcceptSale0" position="425px 1px" size="36px 22px" visible="false"/>
+                            <Text profile="fs25_textDefault" id="saleRow0AcceptBtnText" text="$l10n_usedplus_fm_view" position="425px 4px" size="36px 18px" textSize="10px" textBold="true" textAlignment="center" textColor="0.4 1 0.4 1" visible="false"/>
+                            <Bitmap profile="baseReference" id="saleRow0DeclineBtnBg" position="465px 1px" size="36px 22px" imageColor="0.25 0.15 0.15 1" visible="false"/>
+                            <Button profile="financeActionBtn" id="saleRow0DeclineBtn" text="" onClick="onDeclineSale0" position="465px 1px" size="36px 22px" visible="false"/>
+                            <Text profile="fs25_textDefault" id="saleRow0DeclineBtnText" text="$l10n_usedplus_fm_skip" position="465px 4px" size="36px 18px" textSize="10px" textBold="true" textAlignment="center" textColor="1 0.5 0.5 1" visible="false"/>
+                            <Bitmap profile="baseReference" id="saleRow0InfoBtnBg" position="463px 1px" size="26px 22px" imageColor="0.18 0.18 0.18 1"/>
+                            <Button profile="financeActionBtn" id="saleRow0InfoBtn" text="" onClick="onInfoSale0" position="463px 1px" size="26px 22px"/>
+                            <Text profile="fs25_textDefault" id="saleRow0InfoBtnText" text="?" position="463px 4px" size="26px 18px" textSize="12px" textBold="true" textAlignment="center"/>
+                            <Bitmap profile="baseReference" id="saleRow0CancelBtnBg" position="490px 1px" size="26px 22px" imageColor="0.25 0.15 0.15 1" visible="false"/>
+                            <Button profile="financeActionBtn" id="saleRow0CancelBtn" text="" onClick="onCancelSale0" position="490px 1px" size="26px 22px" visible="false"/>
+                            <Text profile="fs25_textDefault" id="saleRow0CancelBtnText" text="X" position="490px 4px" size="26px 18px" textSize="12px" textBold="true" textAlignment="center" textColor="1 0.5 0.5 1" visible="false"/>
+                        </GuiElement>
+
+                        <!-- Sale Row 1 -->
+                        <GuiElement id="saleRow1" position="0px 66px" size="500px 25px" visible="false">
+                            <Bitmap profile="baseReference" id="saleRow1Bg" imageColor="0.08 0.1 0.08 1" size="500px 25px"/>
+                            <Text profile="fs25_textDefault" id="saleRow1Item" text="" position="5px 5px" textSize="11px" textColor="1 1 1 1"/>
+                            <Text profile="fs25_textDefault" id="saleRow1Status" text="" position="140px 5px" textSize="11px" textColor="0.7 0.7 0.7 1"/>
+                            <Text profile="fs25_textDefault" id="saleRow1Tier" text="" position="230px 5px" textSize="11px" textColor="0.5 0.8 1 1"/>
+                            <Text profile="fs25_textDefault" id="saleRow1Offers" text="" position="295px 5px" textSize="11px" textColor="0.9 0.7 0.4 1"/>
+                            <Text profile="fs25_textDefault" id="saleRow1Time" text="" position="370px 5px" textSize="11px" textColor="0.7 0.7 0.7 1"/>
+                            <Bitmap profile="baseReference" id="saleRow1AcceptBtnBg" position="425px 1px" size="36px 22px" imageColor="0.15 0.25 0.15 1" visible="false"/>
+                            <Button profile="financeActionBtn" id="saleRow1AcceptBtn" text="" onClick="onAcceptSale1" position="425px 1px" size="36px 22px" visible="false"/>
+                            <Text profile="fs25_textDefault" id="saleRow1AcceptBtnText" text="$l10n_usedplus_fm_view" position="425px 4px" size="36px 18px" textSize="10px" textBold="true" textAlignment="center" textColor="0.4 1 0.4 1" visible="false"/>
+                            <Bitmap profile="baseReference" id="saleRow1DeclineBtnBg" position="465px 1px" size="36px 22px" imageColor="0.25 0.15 0.15 1" visible="false"/>
+                            <Button profile="financeActionBtn" id="saleRow1DeclineBtn" text="" onClick="onDeclineSale1" position="465px 1px" size="36px 22px" visible="false"/>
+                            <Text profile="fs25_textDefault" id="saleRow1DeclineBtnText" text="$l10n_usedplus_fm_skip" position="465px 4px" size="36px 18px" textSize="10px" textBold="true" textAlignment="center" textColor="1 0.5 0.5 1" visible="false"/>
+                            <Bitmap profile="baseReference" id="saleRow1InfoBtnBg" position="463px 1px" size="26px 22px" imageColor="0.18 0.18 0.18 1"/>
+                            <Button profile="financeActionBtn" id="saleRow1InfoBtn" text="" onClick="onInfoSale1" position="463px 1px" size="26px 22px"/>
+                            <Text profile="fs25_textDefault" id="saleRow1InfoBtnText" text="?" position="463px 4px" size="26px 18px" textSize="12px" textBold="true" textAlignment="center"/>
+                            <Bitmap profile="baseReference" id="saleRow1CancelBtnBg" position="490px 1px" size="26px 22px" imageColor="0.25 0.15 0.15 1" visible="false"/>
+                            <Button profile="financeActionBtn" id="saleRow1CancelBtn" text="" onClick="onCancelSale1" position="490px 1px" size="26px 22px" visible="false"/>
+                            <Text profile="fs25_textDefault" id="saleRow1CancelBtnText" text="X" position="490px 4px" size="26px 18px" textSize="12px" textBold="true" textAlignment="center" textColor="1 0.5 0.5 1" visible="false"/>
+                        </GuiElement>
+
+                        <!-- Sale Row 2 -->
+                        <GuiElement id="saleRow2" position="0px 41px" size="500px 25px" visible="false">
+                            <Bitmap profile="baseReference" id="saleRow2Bg" imageColor="0.1 0.12 0.1 1" size="500px 25px"/>
+                            <Text profile="fs25_textDefault" id="saleRow2Item" text="" position="5px 5px" textSize="11px" textColor="1 1 1 1"/>
+                            <Text profile="fs25_textDefault" id="saleRow2Status" text="" position="140px 5px" textSize="11px" textColor="0.7 0.7 0.7 1"/>
+                            <Text profile="fs25_textDefault" id="saleRow2Tier" text="" position="230px 5px" textSize="11px" textColor="0.5 0.8 1 1"/>
+                            <Text profile="fs25_textDefault" id="saleRow2Offers" text="" position="295px 5px" textSize="11px" textColor="0.9 0.7 0.4 1"/>
+                            <Text profile="fs25_textDefault" id="saleRow2Time" text="" position="370px 5px" textSize="11px" textColor="0.7 0.7 0.7 1"/>
+                            <Bitmap profile="baseReference" id="saleRow2AcceptBtnBg" position="425px 1px" size="36px 22px" imageColor="0.15 0.25 0.15 1" visible="false"/>
+                            <Button profile="financeActionBtn" id="saleRow2AcceptBtn" text="" onClick="onAcceptSale2" position="425px 1px" size="36px 22px" visible="false"/>
+                            <Text profile="fs25_textDefault" id="saleRow2AcceptBtnText" text="$l10n_usedplus_fm_view" position="425px 4px" size="36px 18px" textSize="10px" textBold="true" textAlignment="center" textColor="0.4 1 0.4 1" visible="false"/>
+                            <Bitmap profile="baseReference" id="saleRow2DeclineBtnBg" position="465px 1px" size="36px 22px" imageColor="0.25 0.15 0.15 1" visible="false"/>
+                            <Button profile="financeActionBtn" id="saleRow2DeclineBtn" text="" onClick="onDeclineSale2" position="465px 1px" size="36px 22px" visible="false"/>
+                            <Text profile="fs25_textDefault" id="saleRow2DeclineBtnText" text="$l10n_usedplus_fm_skip" position="465px 4px" size="36px 18px" textSize="10px" textBold="true" textAlignment="center" textColor="1 0.5 0.5 1" visible="false"/>
+                            <Bitmap profile="baseReference" id="saleRow2InfoBtnBg" position="463px 1px" size="26px 22px" imageColor="0.18 0.18 0.18 1"/>
+                            <Button profile="financeActionBtn" id="saleRow2InfoBtn" text="" onClick="onInfoSale2" position="463px 1px" size="26px 22px"/>
+                            <Text profile="fs25_textDefault" id="saleRow2InfoBtnText" text="?" position="463px 4px" size="26px 18px" textSize="12px" textBold="true" textAlignment="center"/>
+                            <Bitmap profile="baseReference" id="saleRow2CancelBtnBg" position="490px 1px" size="26px 22px" imageColor="0.25 0.15 0.15 1" visible="false"/>
+                            <Button profile="financeActionBtn" id="saleRow2CancelBtn" text="" onClick="onCancelSale2" position="490px 1px" size="26px 22px" visible="false"/>
+                            <Text profile="fs25_textDefault" id="saleRow2CancelBtnText" text="X" position="490px 4px" size="26px 18px" textSize="12px" textBold="true" textAlignment="center" textColor="1 0.5 0.5 1" visible="false"/>
+                        </GuiElement>
+                    </GuiElement>
+                </GuiElement>
+
+                <!-- TOP: Section Header - Used Marketplace -->
+                <GuiElement position="0px 570px" size="500px 40px">
+                    <Bitmap profile="baseReference" imageColor="0.4 0.3 0.15 1" size="500px 40px"/>
+                    <Bitmap profile="iconProfile24" id="marketplaceSectionIcon" position="10px 8px"/>
+                    <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_sectionMarketplace" position="40px 10px" textSize="20px" textBold="true" textColor="1 1 1 1"/>
+                </GuiElement>
+            </GuiElement>
+
+            <!-- RIGHT COLUMN: Stats & Credit Score (460px wide) -->
+            <GuiElement position="1020px 0px" size="460px 610px">
+
+                <!-- Lifetime Stats (at bottom) -->
+                <GuiElement position="0px 0px" size="460px 345px">
+                    <Bitmap profile="baseReference" imageColor="0.08 0.08 0.08 1" size="460px 345px"/>
+
+                    <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_lifetimeStats" position="12px 320px" textSize="14px" textBold="true" textColor="0.8 0.8 0.8 1"/>
+
+                    <!-- Finance History -->
+                    <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_financeHistory" position="12px 295px" textSize="13px" textColor="0.5 0.7 0.9 1"/>
+
+                    <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_dealsCompleted" position="12px 270px" size="135px 16px" textSize="13px" textColor="0.6 0.6 0.6 1"/>
+                    <Text profile="fs25_textDefault" id="lifetimeDealsText" text="" position="150px 270px" size="100px 16px" textSize="13px" textBold="true" textColor="1 1 1 1"/>
+
+                    <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_totalFinanced" position="12px 250px" size="135px 16px" textSize="13px" textColor="0.6 0.6 0.6 1"/>
+                    <Text profile="fs25_textDefault" id="lifetimeFinancedText" text="" position="150px 250px" size="100px 16px" textSize="13px" textBold="true" textColor="1 0.8 0.2 1"/>
+
+                    <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_interestPaid" position="250px 270px" size="120px 16px" textSize="13px" textColor="0.6 0.6 0.6 1"/>
+                    <Text profile="fs25_textDefault" id="lifetimeInterestText" text="" position="370px 270px" size="100px 16px" textSize="13px" textBold="true" textColor="1 0.6 0.6 1"/>
+
+                    <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_paymentsMade" position="250px 250px" size="120px 16px" textSize="13px" textColor="0.6 0.6 0.6 1"/>
+                    <Text profile="fs25_textDefault" id="lifetimePaymentsText" text="" position="370px 250px" size="100px 16px" textSize="13px" textBold="true" textColor="1 1 1 1"/>
+
+                    <!-- Search History -->
+                    <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_searchHistory" position="12px 220px" textSize="13px" textColor="0.9 0.7 0.4 1"/>
+
+                    <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_searchesStarted" position="12px 195px" size="135px 16px" textSize="13px" textColor="0.6 0.6 0.6 1"/>
+                    <Text profile="fs25_textDefault" id="lifetimeSearchesText" text="" position="150px 195px" size="100px 16px" textSize="13px" textBold="true" textColor="1 1 1 1"/>
+
+                    <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_vehiclesFound" position="12px 175px" size="135px 16px" textSize="13px" textColor="0.6 0.6 0.6 1"/>
+                    <Text profile="fs25_textDefault" id="lifetimeFoundText" text="" position="150px 175px" size="100px 16px" textSize="13px" textBold="true" textColor="0.5 1 0.5 1"/>
+
+                    <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_feesSpent" position="250px 195px" size="120px 16px" textSize="13px" textColor="0.6 0.6 0.6 1"/>
+                    <Text profile="fs25_textDefault" id="lifetimeFeesText" text="" position="370px 195px" size="100px 16px" textSize="13px" textBold="true" textColor="1 0.8 0.2 1"/>
+
+                    <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_successRate" position="250px 175px" size="120px 16px" textSize="13px" textColor="0.6 0.6 0.6 1"/>
+                    <Text profile="fs25_textDefault" id="lifetimeSuccessRateText" text="" position="370px 175px" size="100px 16px" textSize="13px" textBold="true" textColor="0.5 1 0.5 1"/>
+                </GuiElement>
+
+                <!-- Credit Score Box -->
+                <GuiElement id="creditScoreBox" position="0px 350px" size="460px 220px">
+                    <Bitmap profile="baseReference" imageColor="0.12 0.12 0.12 1" size="460px 220px"/>
+
+                    <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_yourCreditScore" position="12px 195px" textSize="14px" textBold="true" textColor="0.8 0.8 0.8 1"/>
+
+                    <Text profile="fs25_textDefault" id="creditScoreValueText" text="" position="20px 160px" textSize="42px" textBold="true" textColor="0.4 1 0.7 1"/>
+                    <Text profile="fs25_textDefault" id="creditRatingText" text="" position="140px 168px" size="330px 24px" textSize="20px" textBold="true" textColor="0.4 1 0.7 1"/>
+                    <Text profile="fs25_textDefault" id="interestAdjustText" text="" position="140px 150px" size="330px 16px" textSize="13px" textColor="0.7 0.7 0.7 1"/>
+
+                    <!-- Credit Score Ranges -->
+                    <Bitmap profile="baseReference" imageColor="0.18 0.18 0.18 1" position="12px 5px" size="436px 130px"/>
+                    <Text profile="fs25_textDefault" text="$l10n_usedplus_fmf_creditRanges" position="20px 112px" textSize="12px" textBold="true" textColor="0.7 0.7 0.7 1"/>
+
+                    <Bitmap profile="baseReference" id="tierExcellentBg" imageColor="0 0 0 0" position="15px 97px" size="220px 16px"/>
+                    <Text profile="fs25_textDefault" id="tierExcellentText" text="$l10n_usedplus_fmf_tierExcellent" position="20px 95px" size="215px 14px" textSize="11px" textColor="0.4 1 0.7 1"/>
+
+                    <Bitmap profile="baseReference" id="tierGoodBg" imageColor="0 0 0 0" position="15px 82px" size="220px 16px"/>
+                    <Text profile="fs25_textDefault" id="tierGoodText" text="$l10n_usedplus_fmf_tierGood" position="20px 80px" size="215px 14px" textSize="11px" textColor="0.7 1 0.7 1"/>
+
+                    <Bitmap profile="baseReference" id="tierFairBg" imageColor="0 0 0 0" position="15px 67px" size="220px 16px"/>
+                    <Text profile="fs25_textDefault" id="tierFairText" text="$l10n_usedplus_fmf_tierFair" position="20px 65px" size="215px 14px" textSize="11px" textColor="1 0.9 0.5 1"/>
+
+                    <Bitmap profile="baseReference" id="tierPoorBg" imageColor="0 0 0 0" position="235px 97px" size="220px 16px"/>
+                    <Text profile="fs25_textDefault" id="tierPoorText" text="$l10n_usedplus_fmf_tierPoor" position="240px 95px" size="215px 14px" textSize="11px" textColor="1 0.7 0.5 1"/>
+
+                    <Bitmap profile="baseReference" id="tierVeryPoorBg" imageColor="0 0 0 0" position="235px 82px" size="220px 16px"/>
+                    <Text profile="fs25_textDefault" id="tierVeryPoorText" text="$l10n_usedplus_fmf_tierVeryPoor" position="240px 80px" size="215px 14px" textSize="11px" textColor="1 0.5 0.5 1"/>
+
+                    <Text profile="fs25_textDefault" id="assetsText" text="" position="240px 65px" size="215px 14px" textSize="11px" textColor="0.6 0.6 0.6 1"/>
+                </GuiElement>
+
+                <!-- Section Header -->
+                <GuiElement position="0px 570px" size="460px 40px">
+                    <Bitmap profile="baseReference" imageColor="0.25 0.4 0.25 1" size="460px 40px"/>
+                    <Bitmap profile="iconProfile24" id="creditSectionIcon" position="10px 8px"/>
+                    <Text profile="fs25_textDefault" id="statsSectionHeaderText" text="$l10n_usedplus_fmf_sectionCredit" position="40px 10px" textSize="20px" textBold="true" textColor="1 1 1 1"/>
+                </GuiElement>
+            </GuiElement>
+
+        </GuiElement>
+
+        <!-- Version & Source Footer -->
+        <GuiElement position="0px 20px" size="1480px 30px">
+            <Bitmap profile="baseReference" imageColor="0.04 0.04 0.06 1" size="1480px 30px"/>
+            <Text profile="fs25_textDefault" id="versionFooterText" text="" position="0px 8px" size="1280px 20px" textSize="11px" textColor="0.45 0.45 0.5 1" textAlignment="center"/>
+
+            <Bitmap profile="baseReference" id="adminPanelBtnBg" position="1280px 3px" size="190px 24px" imageColor="0.18 0.22 0.35 1"/>
+            <Button profile="financeActionBtn" id="adminPanelBtn" text="" onClick="onAdminPanelClick" onHighlight="onAdminBtnHighlight" onHighlightRemove="onAdminBtnUnhighlight" position="1280px 3px" size="190px 24px"/>
+            <Text profile="fs25_textDefault" id="adminPanelBtnText" text="$l10n_usedplus_btn_admin_panel" position="1280px 7px" size="190px 18px" textSize="12px" textBold="true" textColor="0.6 0.8 1 1" textAlignment="center"/>
+        </GuiElement>
+
+    </GuiElement>
+
+    <GUIProfiles>
+        <Profile name="iconProfile20" extends="baseReference">
+            <size value="20px 20px"/>
+            <imageSliceId value="noSlice"/>
+        </Profile>
+        <Profile name="iconProfile24" extends="baseReference">
+            <size value="24px 24px"/>
+            <imageSliceId value="noSlice"/>
+        </Profile>
+        <Profile name="iconProfile40" extends="baseReference">
+            <size value="40px 40px"/>
+            <imageSliceId value="noSlice"/>
+        </Profile>
+        <Profile name="financeActionBtn" extends="emptyPanel">
+            <isFocusable value="true"/>
+        </Profile>
+        <Profile name="fmfRowHit" extends="emptyPanel">
+            <isFocusable value="true"/>
+        </Profile>
+        <Profile name="financeActionBtnText" extends="fs25_textDefault">
+            <textSize value="12px"/>
+            <textBold value="true"/>
+            <textAlignment value="center"/>
+            <textColor value="1 1 1 1"/>
+        </Profile>
+    </GUIProfiles>
+</GUI>
