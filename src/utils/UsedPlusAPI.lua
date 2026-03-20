@@ -1115,7 +1115,14 @@ function UsedPlusAPI.getFeatureAvailability()
 end
 
 --============================================================================
--- INITIALIZATION
+-- INITIALIZATION & GLOBAL EXPORT
 --============================================================================
 
-UsedPlus.logInfo("UsedPlusAPI v" .. UsedPlusAPI.VERSION .. " loaded - Public API ready for external mods")
+-- Export to shared global scope for cross-mod access
+-- FS25 sandboxes mod environments: bare assignment stays in mod env only.
+-- rawset(_G, ...) writes directly to the real global table, making UsedPlusAPI
+-- visible to external mods via their environment's __index fallthrough.
+rawset(_G, "UsedPlusAPI", UsedPlusAPI)
+
+local globalExportOk = rawget(_G, "UsedPlusAPI") ~= nil
+UsedPlus.logInfo("UsedPlusAPI v" .. UsedPlusAPI.VERSION .. " loaded - Global export: " .. (globalExportOk and "OK" or "FAILED"))
