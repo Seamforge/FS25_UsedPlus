@@ -819,13 +819,14 @@ end
     Confirm purchase button clicked
 ]]
 function UnifiedLandPurchaseDialog:onConfirmPurchase()
+    -- v2.15.5: Clear FM interception flag before executing any payment (#29)
+    if self.isFromFMNegotiation and self.farmlandId then
+        UsedPlus.logDebug(string.format("[FM-INTEGRATION] onConfirmPurchase: mode=%d, farmland=%d, price=%.0f",
+            self.currentMode, self.farmlandId, self.landPrice or 0))
+        ModCompatibility.clearFMInterception(self.farmlandId)
+    end
+
     if self.currentMode == UnifiedLandPurchaseDialog.MODE_CASH then
-        -- v2.15.5: FM negotiated cash purchase — use FM's original flow (#29)
-        if self.isFromFMNegotiation and self.fmSnapshot then
-            ModCompatibility.executeFMCashPurchase(self.fmSnapshot)
-            self:close()
-            return
-        end
         self:executeCashPurchase()
     elseif self.currentMode == UnifiedLandPurchaseDialog.MODE_FINANCE then
         self:executeFinancePurchase()
@@ -918,6 +919,9 @@ function UnifiedLandPurchaseDialog:executeFinancePurchase()
     -- - Land ownership transfer (for itemType="land")
     -- - Finance deal creation
     -- - Cash back (not applicable for land, so pass 0)
+    UsedPlus.logDebug(string.format("[FM-INTEGRATION] executeFinancePurchase: farmId=%d, farmland=%d, price=%.0f, down=%.0f, term=%d",
+        farmId, self.farmlandId, self.landPrice, downPayment, termYears))
+
     FinanceVehicleEvent.sendToServer(
         farmId,
         "land",                 -- itemType

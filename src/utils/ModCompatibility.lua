@@ -1535,9 +1535,11 @@ function ModCompatibility.readFMNegotiationSetting(xmlId)
 end
 
 --[[
-    Hook FM's executeDeal function via getfenv to intercept negotiated purchases.
-    This allows UsedPlus to offer financing/leasing at the negotiated price
-    instead of FM's cash-only purchase flow.
+    Hook FarmlandStateEvent.run() on the server to intercept FM negotiated purchases.
+    FM's globals are sandboxed — we cannot access RmNegotiationUI or executeDeal
+    directly. Instead, we intercept the vanilla FarmlandStateEvent that FM sends
+    after deal completion. When the event price differs from the farmland's market
+    price, we know FM negotiated a different price.
 
     v2.15.5: Issue #29 — Farmland Market negotiation + financing integration
 ]]
@@ -1545,102 +1547,108 @@ function ModCompatibility.hookFMExecuteDeal()
     if not ModCompatibility.farmlandMarketInstalled then return end
     if ModCompatibility.fmExecuteDealHooked then return end
     if not ModCompatibility.fmNegotiationEnabled then
-        UsedPlus.logDebug("FM negotiation disabled — skipping executeDeal hook")
+        UsedPlus.logDebug("FM negotiation disabled — skipping FarmlandStateEvent hook")
         return
     end
 
-    -- Access FM's module environment via getfenv on a known FM function
-    if RmNegotiationUI == nil or RmNegotiationUI.startBuyNegotiation == nil then
-        UsedPlus.logWarn("FM integration: RmNegotiationUI.startBuyNegotiation not found — cannot hook executeDeal")
+    if FarmlandStateEvent == nil then
+        UsedPlus.logWarn("FM integration: FarmlandStateEvent not available — cannot hook")
         return
     end
 
-    local fmEnv = getfenv(RmNegotiationUI.startBuyNegotiation)
-    if fmEnv == nil or fmEnv.executeDeal == nil then
-        UsedPlus.logWarn("FM integration: executeDeal not found in FM environment — falling back to standard flow")
-        return
-    end
+    -- Hook FarmlandStateEvent.run() on the server.
+    -- FS25_FarmlandMarket (F) loads before FS25_UsedPlus (U) alphabetically,
+    -- so FM's hook installs first. Our hook wraps FM's — we are the outermost
+    -- wrapper and can decide whether to call superFunc.
+    -- Track farmland IDs we've already intercepted (for listen server double-fire)
+    ModCompatibility.fmInterceptedFarmlands = {}
 
-    -- Store original for Cash passthrough
-    ModCompatibility.fmOrigExecuteDeal = fmEnv.executeDeal
-
-    -- Replace with our wrapper
-    fmEnv.executeDeal = function(snapshot)
-        -- Pass through SELL mode unchanged
-        if snapshot.mode == "sell" then
-            UsedPlus.logDebug("[FM-INTEGRATION] Sell mode — passing through to FM")
-            ModCompatibility.fmOrigExecuteDeal(snapshot)
+    FarmlandStateEvent.run = Utils.overwrittenFunction(FarmlandStateEvent.run, function(self, superFunc, connection)
+        -- On listen servers, FarmlandStateEvent fires TWICE:
+        -- 1st: server processing (connection from client, getIsServer=false)
+        -- 2nd: broadcast back to host-as-client (connection IS server, getIsServer=true)
+        -- We must block BOTH firings for intercepted farmlands.
+        if ModCompatibility.fmInterceptedFarmlands[self.id] then
+            -- Second firing of an already-intercepted purchase — block it
+            UsedPlus.logDebug(string.format("[FM-INTEGRATION] Blocking second firing for farmland %d", self.id))
             return
         end
 
-        -- BUY mode: intercept and show payment dialog
-        local farmlandId = snapshot.farmlandId
-        local finalPrice = snapshot.finalPrice
-        local farmId = nil
-
-        -- Get current farmId from FM's UI state or mission
-        if RmNegotiationUI and RmNegotiationUI.currentFarmId then
-            farmId = RmNegotiationUI.currentFarmId
-        end
-        if not farmId then
-            farmId = g_currentMission:getFarmId()
+        -- Only intercept on the server receiving from a client
+        if connection == nil or connection:getIsServer() then
+            return superFunc(self, connection)
         end
 
-        UsedPlus.logInfo(string.format("[FM-INTEGRATION] Negotiated purchase intercepted: farmland=%d, price=%.0f, farm=%d",
-            farmlandId, finalPrice, farmId))
-
-        -- Get farmland object for the dialog
-        local farmland = g_farmlandManager:getFarmlandById(farmlandId)
-        if not farmland then
-            UsedPlus.logWarn("[FM-INTEGRATION] Farmland not found — falling back to FM cash flow")
-            ModCompatibility.fmOrigExecuteDeal(snapshot)
-            return
+        -- Only intercept when FM integration is active
+        if not ModCompatibility.farmlandMarketInstalled or not ModCompatibility.fmNegotiationEnabled then
+            return superFunc(self, connection)
         end
 
-        -- Close FM's negotiation dialog (FM expects this)
-        -- FM's executeDeal normally calls closeNegotiationDialog() and clearState()
-        -- We need to do this too since we're replacing executeDeal
-        if fmEnv.closeNegotiationDialog then
-            fmEnv.closeNegotiationDialog()
-        end
-        if RmNegotiationUI.clearState then
-            RmNegotiationUI.clearState()
+        -- Check if this is a negotiated purchase (price differs from market price)
+        local farmland = g_farmlandManager:getFarmlandById(self.id)
+        if farmland == nil then
+            return superFunc(self, connection)
         end
 
-        -- Show our payment dialog with the negotiated price
-        if not DialogLoader.ensureLoaded("UnifiedLandPurchaseDialog") then
-            UsedPlus.logError("[FM-INTEGRATION] Failed to load dialog — falling back to FM cash flow")
-            ModCompatibility.fmOrigExecuteDeal(snapshot)
-            return
+        -- FarmlandStateEvent stores the 3rd constructor param as self.price
+        local eventPrice = self.price or 0
+
+        if eventPrice == nil or eventPrice <= 0 then
+            return superFunc(self, connection)
         end
 
-        local dialog = DialogLoader.getDialog("UnifiedLandPurchaseDialog")
-        if dialog then
-            dialog:setFMNegotiatedData(farmlandId, farmland, finalPrice, snapshot)
-            dialog:setInitialMode(UnifiedLandPurchaseDialog.MODE_FINANCE)
-            g_gui:showDialog("UnifiedLandPurchaseDialog")
-            UsedPlus.logDebug("[FM-INTEGRATION] Payment dialog shown with negotiated price")
+        if math.abs(eventPrice - farmland.price) < 1 then
+            -- Same price — not a negotiated deal, pass through
+            return superFunc(self, connection)
+        end
+
+        -- Negotiated purchase detected! Block vanilla and send prompt to client.
+        -- FM's pendingDeals[farmlandId] is already set (by completeSession).
+        -- When our payment events call setLandOwnership, FM's onOwnershipChanged
+        -- cleanup hook fires and clears pendingDeals.
+        UsedPlus.logInfo(string.format("[FM-INTEGRATION] Negotiated purchase intercepted: farmland=%d, negotiated=%.0f, market=%.0f, farm=%d",
+            self.id, eventPrice, farmland.price, self.farmId))
+
+        -- Mark as intercepted to block the second firing on listen servers
+        ModCompatibility.fmInterceptedFarmlands[self.id] = true
+
+        -- Clear interception flag after a delay (safety net for cancellation)
+        -- In normal flow, clearFMInterception() is called when the user picks a payment method
+        Timer.createOneshot(120000, function()
+            if ModCompatibility.fmInterceptedFarmlands[self.id] then
+                ModCompatibility.fmInterceptedFarmlands[self.id] = nil
+                UsedPlus.logDebug(string.format("[FM-INTEGRATION] Interception timeout for farmland %d — cleared", self.id))
+            end
+        end)
+
+        -- Determine land name
+        local landName = farmland.name or string.format("Field %d", self.id)
+
+        -- Send prompt to the client that initiated this purchase
+        if FMFinancePromptEvent then
+            FMFinancePromptEvent.sendToClient(connection, self.id, self.farmId, eventPrice, landName)
         else
-            UsedPlus.logError("[FM-INTEGRATION] Dialog not found — falling back to FM cash flow")
-            ModCompatibility.fmOrigExecuteDeal(snapshot)
+            -- FMFinancePromptEvent not loaded — fall through to vanilla
+            ModCompatibility.fmInterceptedFarmlands[self.id] = nil
+            UsedPlus.logWarn("[FM-INTEGRATION] FMFinancePromptEvent not available — allowing vanilla purchase")
+            return superFunc(self, connection)
         end
-    end
+
+        -- Do NOT call superFunc — blocks the vanilla purchase and money deduction
+    end)
 
     ModCompatibility.fmExecuteDealHooked = true
-    UsedPlus.logInfo("FM integration: executeDeal hook installed via getfenv (#29)")
+    UsedPlus.logInfo("FM integration: FarmlandStateEvent.run hook installed (#29)")
 end
 
 --[[
-    Execute FM's original cash purchase flow.
-    Called when user selects "Cash" in the payment dialog after FM negotiation.
-    @param snapshot - The FM negotiation snapshot
+    Clear FM interception flag for a farmland.
+    Called after the user completes or cancels the payment dialog.
+    @param farmlandId - The farmland ID to clear
 ]]
-function ModCompatibility.executeFMCashPurchase(snapshot)
-    if ModCompatibility.fmOrigExecuteDeal then
-        UsedPlus.logInfo("[FM-INTEGRATION] Executing FM cash purchase flow")
-        ModCompatibility.fmOrigExecuteDeal(snapshot)
-    else
-        UsedPlus.logError("[FM-INTEGRATION] Original executeDeal not available")
+function ModCompatibility.clearFMInterception(farmlandId)
+    if ModCompatibility.fmInterceptedFarmlands then
+        ModCompatibility.fmInterceptedFarmlands[farmlandId] = nil
     end
 end
 
