@@ -302,7 +302,8 @@ UsedPlusMaintenance.CONFIG = {
 
     -- v1.7.0: Hydraulic Fluid System Settings
     enableHydraulicFluidSystem = true,
-    hydraulicFluidDepletionPerAction = 0.0001, -- 0.01% per second of hydraulic use (~3 hours active use to empty)
+    hydraulicFluidDepletionPerAction = 0.00001, -- v2.15.4: 10x slower base drain (~28 hrs active use to empty, Issue #43)
+    -- Base drain creates gradual reliability pressure; leaks (2x-10x mult) create real urgency.
     hydraulicFluidWarnThreshold = 0.25,   -- Warn when below 25%
     hydraulicFluidCriticalThreshold = 0.10, -- Critical warning below 10%
     hydraulicFluidLowDamageMultiplier = 2.0, -- 2x hydraulic wear when low
