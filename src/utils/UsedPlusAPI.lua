@@ -17,8 +17,13 @@
     end
     ```
 
-    VERSION: 1.0.0
+    VERSION: 1.1.0
     STABILITY: Stable - breaking changes will be versioned
+
+    v1.1.0 Changes:
+    - External deals now persist to savegame (survive save/load)
+    - External debt included in credit score debt-to-asset calculation
+    - Credit Bureau API promoted from experimental to beta
 
     All functions return nil/false gracefully if UsedPlus subsystems unavailable.
 ]]
@@ -26,7 +31,7 @@
 UsedPlusAPI = {}
 
 -- API Version for compatibility checking
-UsedPlusAPI.VERSION = "1.0.0"
+UsedPlusAPI.VERSION = "1.1.0"
 UsedPlusAPI.MOD_VERSION = UsedPlus.VERSION
 
 --============================================================================

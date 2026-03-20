@@ -1172,6 +1172,34 @@ function FinanceManager:saveToXMLFile(missionInfo)
             end
         end
 
+        -- v2.15.4: Save external deals from Credit Bureau API (Issue #40)
+        if UsedPlusAPI and UsedPlusAPI.externalDeals then
+            local extIndex = 0
+            for dealId, deal in pairs(UsedPlusAPI.externalDeals) do
+                if type(deal) == "table" and deal.externalDealId then
+                    local extKey = string.format("usedPlus.externalDeals.deal(%d)", extIndex)
+                    xmlFile:setString(extKey .. "#externalDealId", deal.externalDealId or "")
+                    xmlFile:setString(extKey .. "#modName", deal.modName or "")
+                    xmlFile:setString(extKey .. "#originalDealId", tostring(deal.originalDealId or ""))
+                    xmlFile:setInt(extKey .. "#farmId", deal.farmId or 0)
+                    xmlFile:setString(extKey .. "#dealType", deal.dealType or "")
+                    xmlFile:setString(extKey .. "#itemName", deal.itemName or "")
+                    xmlFile:setFloat(extKey .. "#originalAmount", deal.originalAmount or 0)
+                    xmlFile:setFloat(extKey .. "#currentBalance", deal.currentBalance or 0)
+                    xmlFile:setFloat(extKey .. "#monthlyPayment", deal.monthlyPayment or 0)
+                    xmlFile:setFloat(extKey .. "#interestRate", deal.interestRate or 0)
+                    xmlFile:setInt(extKey .. "#termMonths", deal.termMonths or 0)
+                    xmlFile:setInt(extKey .. "#monthsPaid", deal.monthsPaid or 0)
+                    xmlFile:setInt(extKey .. "#missedPayments", deal.missedPayments or 0)
+                    xmlFile:setString(extKey .. "#status", deal.status or "active")
+                    extIndex = extIndex + 1
+                end
+            end
+            if extIndex > 0 then
+                UsedPlus.logDebug(string.format("Saved %d external deals from Credit Bureau API", extIndex))
+            end
+        end
+
         xmlFile:save()
         xmlFile:delete()
 
@@ -1295,6 +1323,40 @@ function FinanceManager:loadFromXMLFile(missionInfo)
             if farmId and multiplier > 1.0 then
                 self.vanillaLoanMultipliers[farmId] = multiplier
                 UsedPlus.logDebug(string.format("Loaded vanilla loan multiplier for farm %d: %.1fx", farmId, multiplier))
+            end
+        end)
+
+        -- v2.15.4: Load external deals for Credit Bureau API (Issue #40)
+        UsedPlusAPI.externalDeals = {}
+        UsedPlusAPI.externalDeals.byFarm = {}
+        xmlFile:iterate("usedPlus.externalDeals.deal", function(_, extKey)
+            local deal = {
+                externalDealId = xmlFile:getString(extKey .. "#externalDealId", ""),
+                modName = xmlFile:getString(extKey .. "#modName", ""),
+                originalDealId = xmlFile:getString(extKey .. "#originalDealId", ""),
+                farmId = xmlFile:getInt(extKey .. "#farmId", 0),
+                dealType = xmlFile:getString(extKey .. "#dealType", ""),
+                itemName = xmlFile:getString(extKey .. "#itemName", ""),
+                originalAmount = xmlFile:getFloat(extKey .. "#originalAmount", 0),
+                currentBalance = xmlFile:getFloat(extKey .. "#currentBalance", 0),
+                monthlyPayment = xmlFile:getFloat(extKey .. "#monthlyPayment", 0),
+                interestRate = xmlFile:getFloat(extKey .. "#interestRate", 0),
+                termMonths = xmlFile:getInt(extKey .. "#termMonths", 0),
+                monthsPaid = xmlFile:getInt(extKey .. "#monthsPaid", 0),
+                missedPayments = xmlFile:getInt(extKey .. "#missedPayments", 0),
+                status = xmlFile:getString(extKey .. "#status", "active"),
+            }
+
+            if deal.externalDealId ~= "" then
+                UsedPlusAPI.externalDeals[deal.externalDealId] = deal
+
+                if not UsedPlusAPI.externalDeals.byFarm[deal.farmId] then
+                    UsedPlusAPI.externalDeals.byFarm[deal.farmId] = {}
+                end
+                table.insert(UsedPlusAPI.externalDeals.byFarm[deal.farmId], deal.externalDealId)
+
+                UsedPlus.logDebug(string.format("  Loaded external deal: %s from %s (farm %d, balance $%.0f)",
+                    deal.externalDealId, deal.modName, deal.farmId, deal.currentBalance))
             end
         end)
 

@@ -292,6 +292,11 @@ function CreditScore.calculateDebt(farm)
         end
     end
 
+    -- v2.15.4: Include external mod deals in debt calculation (Issue #40)
+    if UsedPlusAPI and UsedPlusAPI.getExternalDebt then
+        total = total + UsedPlusAPI.getExternalDebt(farm.farmId)
+    end
+
     return total
 end
 
