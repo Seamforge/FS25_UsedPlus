@@ -212,6 +212,11 @@ function UnifiedLandPurchaseDialog:setLandData(farmlandId, farmland, price)
     self.farmland = farmland
     self.baseLandPrice = price or 0  -- Store original price
 
+    -- v2.15.5: Always reset FM negotiation state here (#29)
+    -- setFMNegotiatedData will re-set these AFTER calling us
+    self.isFromFMNegotiation = false
+    self.fmSnapshot = nil
+
     -- Verbose debug logging
     UsedPlus.logDebug(string.format("setLandData: farmlandId=%s, basePrice=%s", tostring(farmlandId), tostring(price)))
     if farmland then
@@ -273,6 +278,35 @@ function UnifiedLandPurchaseDialog:setLandData(farmlandId, farmland, price)
         self.landSizeAcres = 0
         self.pricePerAcre = 0
     end
+end
+
+--[[
+    Set land data from an FM negotiated deal.
+    Uses the negotiated price as the base — no credit price adjustment.
+    v2.15.5: Issue #29 — FM negotiation + financing integration
+    @param farmlandId - Farmland ID
+    @param farmland - Farmland object
+    @param negotiatedPrice - The price agreed during FM negotiation
+    @param fmSnapshot - FM's negotiation snapshot (stored for Cash fallback)
+]]
+function UnifiedLandPurchaseDialog:setFMNegotiatedData(farmlandId, farmland, negotiatedPrice, fmSnapshot)
+    -- Set land data normally (populates name, size, soil quality, BC discount)
+    -- This resets isFromFMNegotiation and fmSnapshot — we set them after
+    self:setLandData(farmlandId, farmland, negotiatedPrice)
+
+    -- Set FM negotiation state AFTER setLandData (which resets them)
+    self.isFromFMNegotiation = true
+    self.fmSnapshot = fmSnapshot
+
+    -- Override the credit-adjusted price with the negotiated price.
+    -- The price was already negotiated — credit score affects interest rate,
+    -- not the principal.
+    self.landPrice = negotiatedPrice
+    self.creditAdjustment = 0
+    self.creditModifierPct = 0
+
+    UsedPlus.logDebug(string.format("[FM-INTEGRATION] Dialog set with negotiated price: $%.0f (market: $%.0f)",
+        negotiatedPrice, farmland.price or 0))
 end
 
 --[[
@@ -786,6 +820,12 @@ end
 ]]
 function UnifiedLandPurchaseDialog:onConfirmPurchase()
     if self.currentMode == UnifiedLandPurchaseDialog.MODE_CASH then
+        -- v2.15.5: FM negotiated cash purchase — use FM's original flow (#29)
+        if self.isFromFMNegotiation and self.fmSnapshot then
+            ModCompatibility.executeFMCashPurchase(self.fmSnapshot)
+            self:close()
+            return
+        end
         self:executeCashPurchase()
     elseif self.currentMode == UnifiedLandPurchaseDialog.MODE_FINANCE then
         self:executeFinancePurchase()

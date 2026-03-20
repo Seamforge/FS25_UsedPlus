@@ -124,6 +124,14 @@ function InGameMenuMapFrameExtension.setMapInputContext(self, superFunc, enterVe
         isBuyAvailable = false
     end
 
+    -- v2.15.5: When FM negotiation is active, hide Finance/Lease buttons (#29)
+    -- Player should use FM's "Make Offer" flow — our executeDeal hook will
+    -- intercept and show the payment dialog after negotiation completes.
+    if isBuyAvailable and ModCompatibility and ModCompatibility.fmNegotiationEnabled
+       and ModCompatibility.fmExecuteDealHooked then
+        isBuyAvailable = false
+    end
+
     -- v2.15.4: Hide Finance/Lease for free ($0) farmlands — nothing to finance or lease
     local isFreeField = false
     if isBuyAvailable and self.selectedFarmland then

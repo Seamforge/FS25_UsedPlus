@@ -193,6 +193,9 @@ ModCompatibility.bcDetected = false  -- v2.15.2: Better Contracts
 ModCompatibility.farmlandMarketInstalled = false  -- v2.15.4: FM farmland availability
 ModCompatibility.fmDetected = false  -- v2.15.4: Raw detection for UI
 ModCompatibility.fmAvailabilityCache = {}  -- v2.15.5: Cached FM availability {farmlandId = isForSale}
+ModCompatibility.fmNegotiationEnabled = false  -- v2.15.5: FM negotiation setting from XML
+ModCompatibility.fmExecuteDealHooked = false  -- v2.15.5: Whether executeDeal hook is installed
+ModCompatibility.fmOrigExecuteDeal = nil  -- v2.15.5: Original executeDeal function reference
 
 ModCompatibility.initialized = false
 
@@ -486,10 +489,15 @@ function ModCompatibility.init()
             FSCareerMissionInfo.saveToXMLFile,
             function()
                 ModCompatibility.readFMAvailability()
+                -- v2.15.5: Retry hook installation after FM writes XML (new game case)
+                ModCompatibility.hookFMExecuteDeal()
             end
         )
         UsedPlus.logDebug("FM save refresh hook installed")
     end
+
+    -- v2.15.5: Hook FM's executeDeal to intercept negotiated purchases for financing (#29)
+    ModCompatibility.hookFMExecuteDeal()
 
     ModCompatibility.initialized = true
 end
@@ -1484,6 +1492,9 @@ function ModCompatibility.readFMAvailability()
         i = i + 1
     end
 
+    -- v2.15.5: Also read negotiation setting from the same XML (#29)
+    ModCompatibility.readFMNegotiationSetting(xmlId)
+
     delete(xmlId)
     ModCompatibility.fmAvailabilityCache = cache
     UsedPlus.logInfo(string.format("FM availability: Cached %d farmland entries from savegame", count))
@@ -1504,6 +1515,133 @@ function ModCompatibility.isFarmlandBlockedByFM(farmlandId)
         return false  -- Not in cache (new field, FM hasn't saved yet) — assume available
     end
     return not isForSale
+end
+
+--[[
+    Read FM negotiation enabled setting from savegame XML.
+    Called from readFMAvailability() since it reads the same XML file.
+    @param xmlId - Open XML file ID for rm_FarmlandMarket.xml
+]]
+function ModCompatibility.readFMNegotiationSetting(xmlId)
+    if xmlId == nil or xmlId == 0 then
+        ModCompatibility.fmNegotiationEnabled = false
+        return
+    end
+    -- FM stores: rmFarmlandMarket.settings#negotiationEnabled (1=Off, 2=On)
+    local negotiationState = getXMLInt(xmlId, "rmFarmlandMarket.settings#negotiationEnabled")
+    ModCompatibility.fmNegotiationEnabled = (negotiationState == 2)
+    UsedPlus.logDebug(string.format("FM negotiation setting: %s (raw=%s)",
+        tostring(ModCompatibility.fmNegotiationEnabled), tostring(negotiationState)))
+end
+
+--[[
+    Hook FM's executeDeal function via getfenv to intercept negotiated purchases.
+    This allows UsedPlus to offer financing/leasing at the negotiated price
+    instead of FM's cash-only purchase flow.
+
+    v2.15.5: Issue #29 — Farmland Market negotiation + financing integration
+]]
+function ModCompatibility.hookFMExecuteDeal()
+    if not ModCompatibility.farmlandMarketInstalled then return end
+    if ModCompatibility.fmExecuteDealHooked then return end
+    if not ModCompatibility.fmNegotiationEnabled then
+        UsedPlus.logDebug("FM negotiation disabled — skipping executeDeal hook")
+        return
+    end
+
+    -- Access FM's module environment via getfenv on a known FM function
+    if RmNegotiationUI == nil or RmNegotiationUI.startBuyNegotiation == nil then
+        UsedPlus.logWarn("FM integration: RmNegotiationUI.startBuyNegotiation not found — cannot hook executeDeal")
+        return
+    end
+
+    local fmEnv = getfenv(RmNegotiationUI.startBuyNegotiation)
+    if fmEnv == nil or fmEnv.executeDeal == nil then
+        UsedPlus.logWarn("FM integration: executeDeal not found in FM environment — falling back to standard flow")
+        return
+    end
+
+    -- Store original for Cash passthrough
+    ModCompatibility.fmOrigExecuteDeal = fmEnv.executeDeal
+
+    -- Replace with our wrapper
+    fmEnv.executeDeal = function(snapshot)
+        -- Pass through SELL mode unchanged
+        if snapshot.mode == "sell" then
+            UsedPlus.logDebug("[FM-INTEGRATION] Sell mode — passing through to FM")
+            ModCompatibility.fmOrigExecuteDeal(snapshot)
+            return
+        end
+
+        -- BUY mode: intercept and show payment dialog
+        local farmlandId = snapshot.farmlandId
+        local finalPrice = snapshot.finalPrice
+        local farmId = nil
+
+        -- Get current farmId from FM's UI state or mission
+        if RmNegotiationUI and RmNegotiationUI.currentFarmId then
+            farmId = RmNegotiationUI.currentFarmId
+        end
+        if not farmId then
+            farmId = g_currentMission:getFarmId()
+        end
+
+        UsedPlus.logInfo(string.format("[FM-INTEGRATION] Negotiated purchase intercepted: farmland=%d, price=%.0f, farm=%d",
+            farmlandId, finalPrice, farmId))
+
+        -- Get farmland object for the dialog
+        local farmland = g_farmlandManager:getFarmlandById(farmlandId)
+        if not farmland then
+            UsedPlus.logWarn("[FM-INTEGRATION] Farmland not found — falling back to FM cash flow")
+            ModCompatibility.fmOrigExecuteDeal(snapshot)
+            return
+        end
+
+        -- Close FM's negotiation dialog (FM expects this)
+        -- FM's executeDeal normally calls closeNegotiationDialog() and clearState()
+        -- We need to do this too since we're replacing executeDeal
+        if fmEnv.closeNegotiationDialog then
+            fmEnv.closeNegotiationDialog()
+        end
+        if RmNegotiationUI.clearState then
+            RmNegotiationUI.clearState()
+        end
+
+        -- Show our payment dialog with the negotiated price
+        if not DialogLoader.ensureLoaded("UnifiedLandPurchaseDialog") then
+            UsedPlus.logError("[FM-INTEGRATION] Failed to load dialog — falling back to FM cash flow")
+            ModCompatibility.fmOrigExecuteDeal(snapshot)
+            return
+        end
+
+        local dialog = DialogLoader.getDialog("UnifiedLandPurchaseDialog")
+        if dialog then
+            dialog:setFMNegotiatedData(farmlandId, farmland, finalPrice, snapshot)
+            dialog:setInitialMode(UnifiedLandPurchaseDialog.MODE_FINANCE)
+            g_gui:showDialog("UnifiedLandPurchaseDialog")
+            UsedPlus.logDebug("[FM-INTEGRATION] Payment dialog shown with negotiated price")
+        else
+            UsedPlus.logError("[FM-INTEGRATION] Dialog not found — falling back to FM cash flow")
+            ModCompatibility.fmOrigExecuteDeal(snapshot)
+        end
+    end
+
+    ModCompatibility.fmExecuteDealHooked = true
+    UsedPlus.logInfo("FM integration: executeDeal hook installed via getfenv (#29)")
+end
+
+--[[
+    Execute FM's original cash purchase flow.
+    Called when user selects "Cash" in the payment dialog after FM negotiation.
+    @param snapshot - The FM negotiation snapshot
+]]
+function ModCompatibility.executeFMCashPurchase(snapshot)
+    if ModCompatibility.fmOrigExecuteDeal then
+        UsedPlus.logInfo("[FM-INTEGRATION] Executing FM cash purchase flow")
+        ModCompatibility.fmOrigExecuteDeal(snapshot)
+    else
+        UsedPlus.logError("[FM-INTEGRATION] Original executeDeal not available")
+    end
 end
 
 --[[
