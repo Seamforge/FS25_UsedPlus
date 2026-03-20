@@ -29,11 +29,19 @@ function BuyPlaceableDataExtension.buyHook(self, superFunc, callback, callbackTa
     UsedPlus.logInfo("BuyPlaceableDataExtension.buyHook() - PRE-BUY INTERCEPTION")
     UsedPlus.logInfo("═══════════════════════════════════════════════════════════")
 
+    -- v2.15.5: Check if finance system is enabled (#42)
+    -- Must pass through to vanilla when disabled — vanilla buy() handles
+    -- fence/meadow customization that our interception would skip.
+    local financeEnabled = not UsedPlusSettings or UsedPlusSettings:isSystemEnabled("Finance")
+    if not financeEnabled then
+        return superFunc(self, callback, callbackTarget, callbackArguments)
+    end
+
     -- Get the store item
     local storeItem = self.storeItem
 
     if not storeItem then
-        UsedPlus.logWarn("⚠️  No storeItem - falling back to vanilla")
+        UsedPlus.logWarn("No storeItem - falling back to vanilla")
         return superFunc(self, callback, callbackTarget, callbackArguments)
     end
 
