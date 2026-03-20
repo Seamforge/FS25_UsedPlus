@@ -1172,6 +1172,27 @@ function FinanceManager:saveToXMLFile(missionInfo)
             end
         end
 
+        -- v2.15.4: Save market modifiers from Market Modifier API (Issue #44)
+        if UsedPlusAPI and UsedPlusAPI.marketModifiers then
+            local modIndex = 0
+            for id, mod in pairs(UsedPlusAPI.marketModifiers) do
+                if type(mod) == "table" and mod.id then
+                    local modKey = string.format("usedPlus.marketModifiers.modifier(%d)", modIndex)
+                    xmlFile:setString(modKey .. "#id", mod.id or "")
+                    xmlFile:setString(modKey .. "#modName", mod.modName or "")
+                    xmlFile:setFloat(modKey .. "#multiplier", mod.multiplier or 1.0)
+                    xmlFile:setString(modKey .. "#category", mod.category or "ALL")
+                    xmlFile:setInt(modKey .. "#expiresAtHour", mod.expiresAtHour or 0)
+                    xmlFile:setInt(modKey .. "#createdAtHour", mod.createdAtHour or 0)
+                    xmlFile:setString(modKey .. "#description", mod.description or "")
+                    modIndex = modIndex + 1
+                end
+            end
+            if modIndex > 0 then
+                UsedPlus.logDebug(string.format("Saved %d market modifiers", modIndex))
+            end
+        end
+
         -- v2.15.4: Save external deals from Credit Bureau API (Issue #40)
         if UsedPlusAPI and UsedPlusAPI.externalDeals then
             local extIndex = 0
@@ -1323,6 +1344,26 @@ function FinanceManager:loadFromXMLFile(missionInfo)
             if farmId and multiplier > 1.0 then
                 self.vanillaLoanMultipliers[farmId] = multiplier
                 UsedPlus.logDebug(string.format("Loaded vanilla loan multiplier for farm %d: %.1fx", farmId, multiplier))
+            end
+        end)
+
+        -- v2.15.4: Load market modifiers from Market Modifier API (Issue #44)
+        UsedPlusAPI.marketModifiers = {}
+        xmlFile:iterate("usedPlus.marketModifiers.modifier", function(_, modKey)
+            local mod = {
+                id = xmlFile:getString(modKey .. "#id", ""),
+                modName = xmlFile:getString(modKey .. "#modName", ""),
+                multiplier = xmlFile:getFloat(modKey .. "#multiplier", 1.0),
+                category = xmlFile:getString(modKey .. "#category", "ALL"),
+                expiresAtHour = xmlFile:getInt(modKey .. "#expiresAtHour", 0),
+                createdAtHour = xmlFile:getInt(modKey .. "#createdAtHour", 0),
+                description = xmlFile:getString(modKey .. "#description", ""),
+            }
+
+            if mod.id ~= "" then
+                UsedPlusAPI.marketModifiers[mod.id] = mod
+                UsedPlus.logDebug(string.format("  Loaded market modifier: %s (x%.2f, category=%s)",
+                    mod.id, mod.multiplier, mod.category))
             end
         end)
 

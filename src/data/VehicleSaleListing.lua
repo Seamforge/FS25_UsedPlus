@@ -335,6 +335,21 @@ function VehicleSaleListing:generateOffer()
     local variance = 0.95 + (math.random() * 0.10)
     local rawOffer = math.floor(self.vanillaSellPrice * priceMultiplier * variance)
 
+    -- v2.15.4: Apply market modifier from external mods (Issue #44)
+    if UsedPlusAPI and UsedPlusAPI.getMarketMultiplier then
+        local category = nil
+        if self.vehicleConfigFile then
+            local storeItem = g_storeManager:getItemByXMLFilename(self.vehicleConfigFile)
+            if storeItem then
+                category = storeItem.categoryName
+            end
+        end
+        local marketMult = UsedPlusAPI.getMarketMultiplier(category)
+        if marketMult ~= 1.0 then
+            rawOffer = math.floor(rawOffer * marketMult)
+        end
+    end
+
     -- Round to nearest $100
     rawOffer = math.floor(rawOffer / 100) * 100
 

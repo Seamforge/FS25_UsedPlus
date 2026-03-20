@@ -101,6 +101,17 @@ end
 function VehicleSaleManager:onHourChanged()
     if not self.isServer then return end
 
+    -- v2.15.4: Clean expired market modifiers (Issue #44)
+    if UsedPlusAPI and UsedPlusAPI.marketModifiers then
+        local currentGameHour = (g_currentMission.environment.currentDay - 1) * 24 + g_currentMission.environment.currentHour
+        for id, mod in pairs(UsedPlusAPI.marketModifiers) do
+            if type(mod) == "table" and mod.expiresAtHour > 0 and currentGameHour >= mod.expiresAtHour then
+                UsedPlusAPI.marketModifiers[id] = nil
+                UsedPlus.logInfo(string.format("Market modifier expired: %s (%s)", id, mod.description or ""))
+            end
+        end
+    end
+
     -- Check if vehicle sale system is enabled
     local saleEnabled = not UsedPlusSettings or UsedPlusSettings:get("enableVehicleSaleSystem") ~= false
     if not saleEnabled then

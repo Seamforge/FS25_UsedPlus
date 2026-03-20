@@ -827,6 +827,126 @@ function UsedPlusAPI.getExternalMonthlyPayments(farmId)
 end
 
 --============================================================================
+-- MARKET MODIFIER API
+-- Allow external mods to apply temporary price multipliers to offers
+-- v2.15.4: Issue #44 — Cross-mod market integration
+--============================================================================
+
+-- Storage for active market modifiers
+UsedPlusAPI.marketModifiers = {}
+
+--[[
+    Apply a market modifier that affects used vehicle offer prices
+    @param modName - Name of the calling mod (e.g., "MarketDynamics")
+    @param modifierId - Unique identifier within that mod (e.g., "drought_001")
+    @param multiplier - Price multiplier (clamped to 0.5-2.0)
+    @param durationHours - Duration in game hours (0 = permanent until removed)
+    @param category - Vehicle category string or "ALL" for all categories
+    @param description - Human-readable description (e.g., "Regional Drought")
+    @return string|nil - Unique modifier ID, or nil on failure
+]]
+function UsedPlusAPI.applyMarketModifier(modName, modifierId, multiplier, durationHours, category, description)
+    if not modName or not modifierId or not multiplier then
+        UsedPlus.logWarn("UsedPlusAPI.applyMarketModifier: Missing required parameters")
+        return nil
+    end
+
+    local id = modName .. "_" .. modifierId
+    multiplier = math.max(0.5, math.min(2.0, multiplier))
+    durationHours = durationHours or 0
+    category = category or "ALL"
+    description = description or ""
+
+    local currentGameHour = 0
+    if g_currentMission and g_currentMission.environment then
+        currentGameHour = (g_currentMission.environment.currentDay - 1) * 24 + g_currentMission.environment.currentHour
+    end
+
+    local expiresAtHour = 0
+    if durationHours > 0 then
+        expiresAtHour = currentGameHour + durationHours
+    end
+
+    UsedPlusAPI.marketModifiers[id] = {
+        id = id,
+        modName = modName,
+        multiplier = multiplier,
+        category = category,
+        expiresAtHour = expiresAtHour,
+        createdAtHour = currentGameHour,
+        description = description,
+    }
+
+    UsedPlus.logInfo(string.format("Market modifier applied: %s (x%.2f, category=%s, duration=%s)",
+        id, multiplier, category, durationHours > 0 and (durationHours .. "h") or "permanent"))
+
+    return id
+end
+
+--[[
+    Remove a market modifier by ID
+    @param id - The modifier ID returned by applyMarketModifier
+    @return boolean - true if removed, false if not found
+]]
+function UsedPlusAPI.removeMarketModifier(id)
+    if UsedPlusAPI.marketModifiers[id] then
+        UsedPlus.logInfo(string.format("Market modifier removed: %s", id))
+        UsedPlusAPI.marketModifiers[id] = nil
+        return true
+    end
+    return false
+end
+
+--[[
+    Get the combined market multiplier for a given vehicle category
+    Multiplies all matching modifiers together, auto-removes expired ones
+    @param category - Vehicle category string, or nil for uncategorized
+    @return number - Combined multiplier (clamped to 0.5-2.0)
+]]
+function UsedPlusAPI.getMarketMultiplier(category)
+    local combined = 1.0
+    local currentGameHour = 0
+    if g_currentMission and g_currentMission.environment then
+        currentGameHour = (g_currentMission.environment.currentDay - 1) * 24 + g_currentMission.environment.currentHour
+    end
+
+    for id, mod in pairs(UsedPlusAPI.marketModifiers) do
+        if type(mod) == "table" then
+            -- Auto-remove expired modifiers
+            if mod.expiresAtHour > 0 and currentGameHour >= mod.expiresAtHour then
+                UsedPlusAPI.marketModifiers[id] = nil
+            elseif mod.category == "ALL" or mod.category == category then
+                combined = combined * mod.multiplier
+            end
+        end
+    end
+
+    return math.max(0.5, math.min(2.0, combined))
+end
+
+--[[
+    Get all active market modifiers
+    @return table - Copy of all active modifier entries
+]]
+function UsedPlusAPI.getActiveMarketModifiers()
+    local result = {}
+    for id, mod in pairs(UsedPlusAPI.marketModifiers) do
+        if type(mod) == "table" then
+            result[id] = {
+                id = mod.id,
+                modName = mod.modName,
+                multiplier = mod.multiplier,
+                category = mod.category,
+                expiresAtHour = mod.expiresAtHour,
+                createdAtHour = mod.createdAtHour,
+                description = mod.description,
+            }
+        end
+    end
+    return result
+end
+
+--============================================================================
 -- RESALE VALUE API
 -- Calculate vehicle values with condition factors
 --============================================================================
