@@ -1119,10 +1119,16 @@ end
 --============================================================================
 
 -- Export to shared global scope for cross-mod access
--- FS25 sandboxes mod environments: bare assignment stays in mod env only.
--- rawset(_G, ...) writes directly to the real global table, making UsedPlusAPI
--- visible to external mods via their environment's __index fallthrough.
+-- FS25 sandboxes mod environments: each mod's _G is its own env table.
+-- rawset(_G, ...) writes to OUR sandbox's _G, not the shared game table.
+-- It still works for mods whose __index falls through to the same table,
+-- but is NOT reliable for all mods (#40 confirmed by FS25_MarketDynamics).
 rawset(_G, "UsedPlusAPI", UsedPlusAPI)
 
+-- v2.15.5: Attach to g_currentMission for guaranteed cross-mod access (#40)
+-- g_currentMission is a C++ engine object shared across ALL mod sandboxes.
+-- External mods should access: g_currentMission.usedPlusAPI
+-- This is set in main.lua onStartMission (when g_currentMission exists).
+
 local globalExportOk = rawget(_G, "UsedPlusAPI") ~= nil
-UsedPlus.logInfo("UsedPlusAPI v" .. UsedPlusAPI.VERSION .. " loaded - Global export: " .. (globalExportOk and "OK" or "FAILED"))
+UsedPlus.logInfo("UsedPlusAPI v" .. UsedPlusAPI.VERSION .. " loaded - rawset export: " .. (globalExportOk and "OK" or "FAILED") .. " (cross-mod: use g_currentMission.usedPlusAPI)")

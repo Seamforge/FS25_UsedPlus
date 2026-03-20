@@ -227,6 +227,14 @@ Mission00.onStartMission = Utils.appendedFunction(
     function(mission)
         UsedPlus.logDebug("Mission00.onStartMission hook fired")
 
+        -- v2.15.5: Attach UsedPlusAPI to g_currentMission for cross-mod access (#40)
+        -- FS25 sandboxes mod _G per-mod, so rawset(_G) doesn't cross sandboxes.
+        -- g_currentMission is a C++ engine object shared by all mods.
+        if g_currentMission and UsedPlusAPI then
+            g_currentMission.usedPlusAPI = UsedPlusAPI
+            UsedPlus.logInfo("UsedPlusAPI attached to g_currentMission for cross-mod access")
+        end
+
         -- v2.15.4: Load savegame data unconditionally (Issue #38)
         -- Managers use XMLFile.loadIfExists — gracefully handles missing files on fresh games.
         -- Previous Farm 1 gate broke dedicated servers where farms don't exist until players connect.
