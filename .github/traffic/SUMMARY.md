@@ -1,7 +1,7 @@
 # FS25_UsedPlus — Traffic Dashboard
 
-**Last updated:** 2026-03-22T06:16:08Z
-**Days tracked:** 33 | **Download snapshots:** 745 (hourly)
+**Last updated:** 2026-03-22T12:06:11Z
+**Days tracked:** 33 | **Download snapshots:** 751 (hourly)
 
 ---
 
@@ -11,10 +11,10 @@
 
 | Metric | 14-Day Total | Unique |
 |--------|-------------|--------|
-| Page Views | 1939 | 294 |
-| Git Clones | 2271 | 699 |
+| Page Views | 1846 | 271 |
+| Git Clones | 2216 | 679 |
 
-> **Engagement:** 6.5 pages per visitor (14-day avg)
+> **Engagement:** 6.8 pages per visitor (14-day avg)
 
 ---
 
@@ -30,9 +30,9 @@
 
 ![Conversion](charts/conversion.png)
 
-> **14-day conversion:** 866 of 294 visitors cloned or downloaded (**294.5%**)
+> **14-day conversion:** 846 of 271 visitors cloned or downloaded (**312.1%**)
 >
-> Unique cloners: 699 | Release downloads: 167
+> Unique cloners: 679 | Release downloads: 167
 
 ---
 
@@ -43,8 +43,8 @@
 | Channel | Count |
 |---------|-------|
 | Zip Downloads | 167 |
-| Git Clones (14-day) | 2271 |
-| **Total Acquisitions** | **2438** |
+| Git Clones (14-day) | 2216 |
+| **Total Acquisitions** | **2383** |
 
 ---
 
@@ -62,14 +62,14 @@
 
 | Source | Views | Unique |
 |--------|-------|--------|
-| github.com | 655 | 132 |
-| Bing | 85 | 18 |
-| Google | 57 | 15 |
+| github.com | 618 | 126 |
+| Bing | 83 | 17 |
+| Google | 63 | 15 |
 | Yahoo | 27 | 3 |
-| com.reddit.frontpage | 9 | 6 |
 | qwant.com | 4 | 1 |
 | DuckDuckGo | 2 | 2 |
 | reddit.com | 2 | 2 |
+| com.reddit.frontpage | 2 | 1 |
 | search.brave.com | 2 | 1 |
 
 ---
@@ -90,16 +90,16 @@
 
 | Page | Views | Unique |
 |------|-------|--------|
-| `/XelaNull/FS25_UsedPlus` | 746 | 220 |
-| `/XelaNull/FS25_UsedPlus/issues` | 168 | 58 |
-| `/XelaNull/FS25_UsedPlus/releases` | 145 | 61 |
-| `/XelaNull/FS25_UsedPlus/releases/tag/v2.14.2` | 71 | 36 |
-| `/XelaNull/FS25_UsedPlus/issues/36` | 44 | 17 |
+| `/XelaNull/FS25_UsedPlus` | 687 | 194 |
+| `/XelaNull/FS25_UsedPlus/issues` | 164 | 53 |
+| `/XelaNull/FS25_UsedPlus/releases` | 143 | 58 |
+| `/XelaNull/FS25_UsedPlus/releases/tag/v2.14.2` | 66 | 35 |
+| `/XelaNull/FS25_UsedPlus/issues/36` | 55 | 17 |
+| `/XelaNull/FS25_UsedPlus/issues/40` | 43 | 10 |
 | `/XelaNull/FS25_UsedPlus/releases/tag/v2.15.4.22` | 40 | 27 |
-| `/XelaNull/FS25_UsedPlus/issues/40` | 38 | 9 |
-| `/XelaNull/FS25_UsedPlus/wiki` | 31 | 17 |
-| `/XelaNull/FS25_UsedPlus/issues/30` | 22 | 14 |
-| `/XelaNull/FS25_UsedPlus/wiki/Malfunctions` | 22 | 14 |
+| `/XelaNull/FS25_UsedPlus/wiki` | 29 | 15 |
+| `/XelaNull/FS25_UsedPlus/issues/30` | 21 | 15 |
+| `/XelaNull/FS25_UsedPlus/wiki/Malfunctions` | 21 | 13 |
 
 ---
 
