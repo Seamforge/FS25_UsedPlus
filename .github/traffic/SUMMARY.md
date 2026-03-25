@@ -1,7 +1,7 @@
 # FS25_UsedPlus — Traffic Dashboard
 
-**Last updated:** 2026-03-25T06:21:59Z
-**Days tracked:** 36 | **Download snapshots:** 815 (hourly)
+**Last updated:** 2026-03-25T12:13:47Z
+**Days tracked:** 36 | **Download snapshots:** 821 (hourly)
 
 ---
 
@@ -78,7 +78,7 @@
 
 | Metric | Current |
 |--------|---------|
-| Stars | 23 |
+| Stars | 25 |
 | Forks | 0 |
 | Watchers | 5 |
 
