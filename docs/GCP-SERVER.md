@@ -5,7 +5,6 @@
 | Resource | Value |
 |----------|-------|
 | **GCP Project** | `fs25-dedicated` |
-| **Billing Account** | `017B40-04F445-C6229C` |
 | **VM** | `fs25-server` (e2-medium, 2 vCPU, 4GB RAM) |
 | **Zone** | `us-east1-b` |
 | **OS** | Debian 12 (bookworm) |
@@ -24,7 +23,6 @@
 | **Game Server** | `35.229.101.149:10823` (connect with FS25 game client) |
 | **SSH (direct)** | `ssh -i ~/.ssh/google_compute_engine shouden@35.229.101.149` |
 | **SSH (gcloud)** | `gcloud compute ssh fs25-server --zone=us-east1-b --project=fs25-dedicated` |
-| **VNC** | `http://35.229.101.149:6080/vnc.html` (password: `UsedPlusDev2026`) — for manual setup/debugging only |
 
 ## Firewall Rules
 
@@ -113,11 +111,6 @@ scp -i ~/.ssh/google_compute_engine "C:/path/to/mod.zip" shouden@35.229.101.149:
 # Start VM back up
 "C:/Users/mrath/AppData/Local/Google/Cloud SDK/google-cloud-sdk/bin/gcloud.cmd" compute instances start fs25-server --zone=us-east1-b --project=fs25-dedicated
 ```
-
-## Local Reference Server
-
-A working FS25 dedicated server also exists on the local network at `interstitch.shouden.us` (192.168.88.150), RHEL/CentOS 9, same Docker container. SSH: `ssh mrathbone@192.168.88.150`. Game files were originally rsync'd from here to GCP.
-
 ---
 
 ## Dev Iteration Workflow
