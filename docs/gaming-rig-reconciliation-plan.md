@@ -232,6 +232,16 @@ usedplus_fp_purchase, usedplus_fp_revolving, usedplus_fp_tankStatus
 - [ ] Delegate translation of 119 new keys to Haiku subagent (25 languages × 119 keys)
 - [ ] Run `node translations/rosetta.js validate` — confirm no format specifier errors
 
+### Phase 2 — COMPLETED 2026-04-04
+Full audit confirmed: master's translation_en.xml already covers all 969 unique keys
+called in master's code. Zero missing keys. The gaming-rig-wip "missing 119 keys"
+finding was an agent error caused by old key names (pre-Format suffix refactor).
+No rosetta.js work needed.
+
+Minor cosmetic issue found: `SaleListingDetailsDialog.lua:103` uses `tostring()` for
+operating hours instead of `g_i18n:formatNumber()` — no crash risk, just locale
+formatting inconsistency. Low priority fix in a future commit.
+
 ### Phase 3 — Close Out
 - [ ] Confirm `gaming-rig-wip` branch is NOT pushed to origin (it's local archive only)
 - [ ] Build and deploy: `node tools/build.js --deploy`
