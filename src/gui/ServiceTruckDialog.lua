@@ -481,7 +481,14 @@ function ServiceTruckDialog:displaySuccessDetails()
             reliability = maintSpec.hydraulicReliability or 1.0
         end
         local currentPct = math.floor(reliability * 100)
-        self.detailCurrentText:setText(string.format(g_i18n:getText("usedplus_st_currentTarget"), currentPct))
+        local fmt = g_i18n:getText("usedplus_st_currentTarget")
+        local ok, result = pcall(string.format, fmt, currentPct)
+        if ok then
+            self.detailCurrentText:setText(result)
+        else
+            Logging.warning("UsedPlus ServiceTruckDialog: format failed for usedplus_st_currentTarget: " .. tostring(result) .. " (currentPct=" .. tostring(currentPct) .. ", lang=" .. tostring(g_languageShort) .. ")")
+            self.detailCurrentText:setText(tostring(currentPct) .. "%")
+        end
     end
 
     -- Vehicle name
