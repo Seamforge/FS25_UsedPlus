@@ -2243,7 +2243,7 @@ Fortsæt med reparation?" eh="cd678a07" />
         <e k="usedplus_st_option4" v="Mulighed 4" eh="b32b4636" />
         <e k="usedplus_st_inspectionResult" v="INSPEKTIONSRESULTAT" eh="7df33e46" />
         <e k="usedplus_st_currentTarget" v="Nuværende: %d%%  &gt;  Mål: 90%%+" eh="8847daa5" />
-        <e k="usedplus_st_sparePartsAvailable" v="Reservedele: 12 tilgængelige" eh="9cae9be9" />
+        <e k="usedplus_st_sparePartsAvailable" v="Reservedele: %d tilgængelige%s" eh="9cae9be9" />
         <e k="usedplus_st_fluidsConsumed" v="Diesel, olie, hydraulikvæske vil blive forbrugt" eh="f2999b5f" />
         <e k="usedplus_st_startRestoration" v="START RESTAURERING" eh="696ac7a5" />
         <e k="usedplus_st_cooldownHint" v="Prøv en anden komponent i mellemtiden." eh="208a1488" />
@@ -2253,7 +2253,7 @@ Fortsæt med reparation?" eh="cd678a07" />
         <e k="usedplus_st_restorationCanBegin" v="Restaurering kan begynde." eh="a8adb101" />
         <e k="usedplus_st_symptomsMismatch" v="Symptomerne matcher ikke denne diagnose." eh="62b8aecd" />
         <e k="usedplus_st_cooldownApplied" v="En afkølingsperiode er blevet anvendt." eh="267c9607" />
-        <e k="usedplus_st_vehicleLabel" v="Køretøj: " eh="27cfabe4" />
+        <e k="usedplus_st_vehicleLabel" v="Køretøj: %s" eh="27cfabe4" />
         <e k="usedplus_std_vehicleName" v="GMC C7000 Servicetruck" eh="7f78c3d1" />
         <e k="usedplus_std_specialCapabilities" v="SÆRLIGE EGENSKABER:" eh="d408664f" />
         <e k="usedplus_std_featureRestoration" v="Langsigtet køretøjsrestaurering" eh="0fa4b175" />

@@ -2239,7 +2239,7 @@
         <e k="usedplus_st_option4" v="Tùy Chọn 4" eh="b32b4636" />
         <e k="usedplus_st_inspectionResult" v="KẾT QUẢ KIỂM TRA" eh="7df33e46" />
         <e k="usedplus_st_currentTarget" v="Hiện tại: %d%%  &gt;  Mục tiêu: 90%%+" eh="8847daa5" />
-        <e k="usedplus_st_sparePartsAvailable" v="Linh Kiện Thay Thế: 12 sẵn có" eh="9cae9be9" />
+        <e k="usedplus_st_sparePartsAvailable" v="Linh Kiện Thay Thế: %d sẵn có%s" eh="9cae9be9" />
         <e k="usedplus_st_fluidsConsumed" v="Diesel, Dầu, Chất lỏng thủy lực sẽ được tiêu thụ" eh="f2999b5f" />
         <e k="usedplus_st_startRestoration" v="BẮT ĐẦU PHỤC HỒI" eh="696ac7a5" />
         <e k="usedplus_st_cooldownHint" v="Hãy thử một thành phần khác trong khi chờ." eh="208a1488" />
@@ -2249,7 +2249,7 @@
         <e k="usedplus_st_restorationCanBegin" v="Có thể bắt đầu phục hồi." eh="a8adb101" />
         <e k="usedplus_st_symptomsMismatch" v="Các triệu chứng không phù hợp với chẩn đoán này." eh="62b8aecd" />
         <e k="usedplus_st_cooldownApplied" v="Đã áp dụng thời gian chờ." eh="267c9607" />
-        <e k="usedplus_st_vehicleLabel" v="Xe:" eh="27cfabe4" />
+        <e k="usedplus_st_vehicleLabel" v="Xe: %s" eh="27cfabe4" />
         <e k="usedplus_std_vehicleName" v="Xe Dịch Vụ GMC C7000" eh="7f78c3d1" />
         <e k="usedplus_std_specialCapabilities" v="KHẢ NĂNG ĐẶC BIỆT:" eh="d408664f" />
         <e k="usedplus_std_featureRestoration" v="Phục hồi xe dài hạn" eh="0fa4b175" />

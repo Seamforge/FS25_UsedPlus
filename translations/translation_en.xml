@@ -2238,7 +2238,7 @@
         <e k="usedplus_st_option4" v="Option 4" eh="b32b4636" />
         <e k="usedplus_st_inspectionResult" v="INSPECTION RESULT" eh="7df33e46" />
         <e k="usedplus_st_currentTarget" v="Current: %d%%  >  Target: 90%%+" eh="8847daa5" />
-        <e k="usedplus_st_sparePartsAvailable" v="Spare Parts: 12 available" eh="9cae9be9" />
+        <e k="usedplus_st_sparePartsAvailable" v="Spare Parts: %d available%s" eh="9cae9be9" />
         <e k="usedplus_st_fluidsConsumed" v="Diesel, Oil, Hydraulic fluid will be consumed" eh="f2999b5f" />
         <e k="usedplus_st_startRestoration" v="START RESTORATION" eh="696ac7a5" />
         <e k="usedplus_st_cooldownHint" v="Try a different component in the meantime." eh="208a1488" />
@@ -2248,7 +2248,7 @@
         <e k="usedplus_st_restorationCanBegin" v="Restoration can begin." eh="a8adb101" />
         <e k="usedplus_st_symptomsMismatch" v="The symptoms don't match this diagnosis." eh="62b8aecd" />
         <e k="usedplus_st_cooldownApplied" v="A cooldown has been applied." eh="267c9607" />
-        <e k="usedplus_st_vehicleLabel" v="Vehicle: " eh="27cfabe4" />
+        <e k="usedplus_st_vehicleLabel" v="Vehicle: %s" eh="27cfabe4" />
         <e k="usedplus_std_vehicleName" v="GMC C7000 Service Truck" eh="7f78c3d1" />
         <e k="usedplus_std_specialCapabilities" v="SPECIAL CAPABILITIES:" eh="d408664f" />
         <e k="usedplus_std_featureRestoration" v="Long-term vehicle restoration" eh="0fa4b175" />

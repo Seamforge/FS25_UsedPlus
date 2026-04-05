@@ -84,9 +84,35 @@ function extractFormatSpecifiersSorted(str) {
     return extractFormatSpecifiers(str).sort();
 }
 
+// Detect bare % signs not part of a valid Lua format token or %% escape.
+// Returns an error object if found, null if clean.
+function checkBarePercent(value, key, label) {
+    if (!value) return null;
+    // Remove %% pairs and all valid format specifiers, then check for remaining %
+    const stripped = value
+        .replace(/%%/g, '\x00')
+        .replace(/%[-+0#]*(?:\d+)?(?:\.\d+)?(?:hh?|ll?|L|z|j|t)?[diouxXeEfFgGaAcspn]/g, '\x00');
+    if (stripped.includes('%')) {
+        return {
+            key,
+            type: 'bare_percent',
+            message: `${label || 'Value'} contains unescaped '%' — will crash string.format() at runtime (use %% for a literal percent)`
+        };
+    }
+    return null;
+}
+
 function checkFormatSpecifiers(sourceValue, targetValue, key) {
     const sourceSpecs = extractFormatSpecifiersSorted(sourceValue);
     const targetSpecs = extractFormatSpecifiersSorted(targetValue);
+
+    // Check for bare % in target only when source is a format string.
+    // Without knowing which keys are used with string.format(), we can't
+    // safely scan display-only strings (legitimate % in tooltip text).
+    if (sourceSpecs.length > 0) {
+        const bareIssue = checkBarePercent(targetValue, key, 'Translation');
+        if (bareIssue) return bareIssue;
+    }
 
     if (sourceSpecs.length !== targetSpecs.length) {
         return {
@@ -1317,7 +1343,7 @@ function printCheckSummaryTable(summary) {
 module.exports = {
     VERSION, CONFIG, LANGUAGE_NAMES, CJK_LANGS, DIACRITIC_LANGS,
     COMMA_DECIMAL_LANGS, VARIANT_PAIRS,
-    getHash, escapeRegex, escapeXml, extractFormatSpecifiers, checkFormatSpecifiers,
+    getHash, escapeRegex, escapeXml, extractFormatSpecifiers, checkFormatSpecifiers, checkBarePercent,
     isFormatOnlyString, isCognateOrInternationalTerm,
     detectDoubleEncodedEntities, detectEnglishFunctionWords, detectCJKRatio,
     detectDiacriticStripping, detectEnglishMorphologySuffix,

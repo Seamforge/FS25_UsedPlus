@@ -2239,7 +2239,7 @@
         <e k="usedplus_st_option4" v="Alternativ 4" eh="b32b4636" />
         <e k="usedplus_st_inspectionResult" v="INSPEKSJONSRESULTAT" eh="7df33e46" />
         <e k="usedplus_st_currentTarget" v="Nåværende: %d%%  &gt;  Mål: 90%%+" eh="8847daa5" />
-        <e k="usedplus_st_sparePartsAvailable" v="Reservedeler: 12 tilgjengelige" eh="9cae9be9" />
+        <e k="usedplus_st_sparePartsAvailable" v="Reservedeler: %d tilgjengelige%s" eh="9cae9be9" />
         <e k="usedplus_st_fluidsConsumed" v="Diesel, olje, hydraulikkväske vil bli forbrukt" eh="f2999b5f" />
         <e k="usedplus_st_startRestoration" v="START GJENOPPRETTING" eh="696ac7a5" />
         <e k="usedplus_st_cooldownHint" v="Prøv en annen komponent i mellomtiden." eh="208a1488" />
@@ -2249,7 +2249,7 @@
         <e k="usedplus_st_restorationCanBegin" v="Gjenoppretting kan begynne." eh="a8adb101" />
         <e k="usedplus_st_symptomsMismatch" v="Symptomene stemmer ikke med denne diagnosen." eh="62b8aecd" />
         <e k="usedplus_st_cooldownApplied" v="En kjølefase har blitt påført." eh="267c9607" />
-        <e k="usedplus_st_vehicleLabel" v="Kjøretøy: " eh="27cfabe4" />
+        <e k="usedplus_st_vehicleLabel" v="Kjøretøy: %s" eh="27cfabe4" />
         <e k="usedplus_std_vehicleName" v="GMC C7000 Servicebil" eh="7f78c3d1" />
         <e k="usedplus_std_specialCapabilities" v="SPESIELLE EVNER:" eh="d408664f" />
         <e k="usedplus_std_featureRestoration" v="Langsiktig kjøretøyrestaurering" eh="0fa4b175" />

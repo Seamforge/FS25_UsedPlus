@@ -17,6 +17,7 @@ const {
     VARIANT_PAIRS,
     getHash, escapeRegex,
     isFormatOnlyString, detectVariantDivergence,
+    checkBarePercent,
     classifyEntries, parseTranslationFile,
     getSourceFilePath, getLangFilePath, getEnabledLanguages,
     autoDetectFilePrefix, autoDetectXmlFormat,

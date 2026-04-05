@@ -2238,7 +2238,7 @@
         <e k="usedplus_st_option4" v="Opcja 4" eh="b32b4636" />
         <e k="usedplus_st_inspectionResult" v="WYNIK INSPEKCJI" eh="7df33e46" />
         <e k="usedplus_st_currentTarget" v="Bieżące: %d%%  &gt;  Cel: 90%%+" eh="8847daa5" />
-        <e k="usedplus_st_sparePartsAvailable" v="Części Zamienne: 12 dostępnych" eh="9cae9be9" />
+        <e k="usedplus_st_sparePartsAvailable" v="Części Zamienne: %d dostępnych%s" eh="9cae9be9" />
         <e k="usedplus_st_fluidsConsumed" v="Olej napędowy, olej silnikowy i płyn hydrauliczny będą zużyte" eh="f2999b5f" />
         <e k="usedplus_st_startRestoration" v="ROZPOCZNIJ RENOWACJĘ" eh="696ac7a5" />
         <e k="usedplus_st_cooldownHint" v="W międzyczasie spróbuj innego elementu." eh="208a1488" />
@@ -2248,7 +2248,7 @@
         <e k="usedplus_st_restorationCanBegin" v="Renowacja może się rozpocząć." eh="a8adb101" />
         <e k="usedplus_st_symptomsMismatch" v="Objawy nie pasują do tej diagnozy." eh="62b8aecd" />
         <e k="usedplus_st_cooldownApplied" v="Zastosowano czas oczekiwania." eh="267c9607" />
-        <e k="usedplus_st_vehicleLabel" v="Pojazd: " eh="27cfabe4" />
+        <e k="usedplus_st_vehicleLabel" v="Pojazd: %s" eh="27cfabe4" />
         <e k="usedplus_std_vehicleName" v="Samochód Serwisowy GMC C7000" eh="7f78c3d1" />
         <e k="usedplus_std_specialCapabilities" v="SPECJALNE MOŻLIWOŚCI:" eh="d408664f" />
         <e k="usedplus_std_featureRestoration" v="Długoterminowa restauracja pojazdu" eh="0fa4b175" />

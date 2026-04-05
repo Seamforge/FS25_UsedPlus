@@ -2239,7 +2239,7 @@
         <e k="usedplus_st_option4" v="Option 4" eh="b32b4636" />
         <e k="usedplus_st_inspectionResult" v="RÉSULTAT DE L'INSPECTION" eh="7df33e46" />
         <e k="usedplus_st_currentTarget" v="Courant: %d%%  &gt;  Cible: 90%%+" eh="8847daa5" />
-        <e k="usedplus_st_sparePartsAvailable" v="Pièces de rechange : 12 disponibles" eh="9cae9be9" />
+        <e k="usedplus_st_sparePartsAvailable" v="Pièces de rechange : %d disponibles%s" eh="9cae9be9" />
         <e k="usedplus_st_fluidsConsumed" v="Le diesel, l'huile et le liquide hydraulique seront consommés" eh="f2999b5f" />
         <e k="usedplus_st_startRestoration" v="DÉMARRER LA RESTAURATION" eh="696ac7a5" />
         <e k="usedplus_st_cooldownHint" v="Essayez un autre composant en attendant." eh="208a1488" />
@@ -2249,7 +2249,7 @@
         <e k="usedplus_st_restorationCanBegin" v="La restauration peut commencer." eh="a8adb101" />
         <e k="usedplus_st_symptomsMismatch" v="Les symptômes ne correspondent pas à ce diagnostic." eh="62b8aecd" />
         <e k="usedplus_st_cooldownApplied" v="Une période de refroidissement a été appliquée." eh="267c9607" />
-        <e k="usedplus_st_vehicleLabel" v="Véhicule: " eh="27cfabe4" />
+        <e k="usedplus_st_vehicleLabel" v="Véhicule: %s" eh="27cfabe4" />
         <e k="usedplus_std_vehicleName" v="Camion de service GMC C7000" eh="7f78c3d1" />
         <e k="usedplus_std_specialCapabilities" v="CAPACITÉS SPÉCIALES :" eh="d408664f" />
         <e k="usedplus_std_featureRestoration" v="Restauration de véhicule à long terme" eh="0fa4b175" />

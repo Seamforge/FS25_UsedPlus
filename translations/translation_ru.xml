@@ -2238,7 +2238,7 @@
         <e k="usedplus_st_option4" v="Вариант 4" eh="b32b4636" />
         <e k="usedplus_st_inspectionResult" v="РЕЗУЛЬТАТ ПРОВЕРКИ" eh="7df33e46" />
         <e k="usedplus_st_currentTarget" v="Текущая: %d%%  &gt;  Целевая: 90%%+" eh="8847daa5" />
-        <e k="usedplus_st_sparePartsAvailable" v="Запасные части: 12 доступны" eh="9cae9be9" />
+        <e k="usedplus_st_sparePartsAvailable" v="Запасные части: %d доступны%s" eh="9cae9be9" />
         <e k="usedplus_st_fluidsConsumed" v="Дизельное топливо, масло и гидравлическая жидкость будут потреблены" eh="f2999b5f" />
         <e k="usedplus_st_startRestoration" v="НАЧАТЬ ВОССТАНОВЛЕНИЕ" eh="696ac7a5" />
         <e k="usedplus_st_cooldownHint" v="Попробуйте другой компонент в то же время." eh="208a1488" />
@@ -2248,7 +2248,7 @@
         <e k="usedplus_st_restorationCanBegin" v="Восстановление может начаться." eh="a8adb101" />
         <e k="usedplus_st_symptomsMismatch" v="Симптомы не соответствуют этому диагнозу." eh="62b8aecd" />
         <e k="usedplus_st_cooldownApplied" v="Была применена задержка." eh="267c9607" />
-        <e k="usedplus_st_vehicleLabel" v="Транспорт: " eh="27cfabe4" />
+        <e k="usedplus_st_vehicleLabel" v="Транспорт: %s" eh="27cfabe4" />
         <e k="usedplus_std_vehicleName" v="Сервисный грузовик GMC C7000" eh="7f78c3d1" />
         <e k="usedplus_std_specialCapabilities" v="СПЕЦИАЛЬНЫЕ ВОЗМОЖНОСТИ:" eh="d408664f" />
         <e k="usedplus_std_featureRestoration" v="Долгосрочное восстановление транспорта" eh="0fa4b175" />

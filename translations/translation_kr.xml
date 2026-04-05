@@ -2239,7 +2239,7 @@
         <e k="usedplus_st_option4" v="옵션 4" eh="b32b4636" />
         <e k="usedplus_st_inspectionResult" v="검사 결과" eh="7df33e46" />
         <e k="usedplus_st_currentTarget" v="현재: %d%%  &gt;  목표: 90%%+" eh="8847daa5" />
-        <e k="usedplus_st_sparePartsAvailable" v="예비 부품: 12개 가능" eh="9cae9be9" />
+        <e k="usedplus_st_sparePartsAvailable" v="예비 부품: %d개 가능%s" eh="9cae9be9" />
         <e k="usedplus_st_fluidsConsumed" v="디젤, 오일, 유압액이 소비됩니다" eh="f2999b5f" />
         <e k="usedplus_st_startRestoration" v="복원 시작" eh="696ac7a5" />
         <e k="usedplus_st_cooldownHint" v="그 동안 다른 구성 요소를 시도하세요." eh="208a1488" />
@@ -2249,7 +2249,7 @@
         <e k="usedplus_st_restorationCanBegin" v="복원을 시작할 수 있습니다." eh="a8adb101" />
         <e k="usedplus_st_symptomsMismatch" v="증상이 이 진단과 일치하지 않습니다." eh="62b8aecd" />
         <e k="usedplus_st_cooldownApplied" v="쿨다운이 적용되었습니다." eh="267c9607" />
-        <e k="usedplus_st_vehicleLabel" v="차량: " eh="27cfabe4" />
+        <e k="usedplus_st_vehicleLabel" v="차량: %s" eh="27cfabe4" />
         <e k="usedplus_std_vehicleName" v="GMC C7000 서비스 트럭" eh="7f78c3d1" />
         <e k="usedplus_std_specialCapabilities" v="특수 기능:" eh="d408664f" />
         <e k="usedplus_std_featureRestoration" v="장기 차량 복원" eh="0fa4b175" />

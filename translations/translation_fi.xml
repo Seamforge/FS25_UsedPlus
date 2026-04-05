@@ -2239,7 +2239,7 @@
         <e k="usedplus_st_option4" v="Vaihtoehto 4" eh="b32b4636" />
         <e k="usedplus_st_inspectionResult" v="TARKASTUS TULOS" eh="7df33e46" />
         <e k="usedplus_st_currentTarget" v="Nykyinen: %d%%  &gt;  Tavoite: 90%%+" eh="8847daa5" />
-        <e k="usedplus_st_sparePartsAvailable" v="Varaosat: 12 saatavilla" eh="9cae9be9" />
+        <e k="usedplus_st_sparePartsAvailable" v="Varaosat: %d saatavilla%s" eh="9cae9be9" />
         <e k="usedplus_st_fluidsConsumed" v="Diesel, öljy ja hydraulieste kulutetaan" eh="f2999b5f" />
         <e k="usedplus_st_startRestoration" v="ALOITA PALAUTUS" eh="696ac7a5" />
         <e k="usedplus_st_cooldownHint" v="Kokeile muuta komponenttia väliaikaisesti." eh="208a1488" />
@@ -2249,7 +2249,7 @@
         <e k="usedplus_st_restorationCanBegin" v="Palautus voi alkaa." eh="a8adb101" />
         <e k="usedplus_st_symptomsMismatch" v="Oireet eivät vastaa tätä diagnoosia." eh="62b8aecd" />
         <e k="usedplus_st_cooldownApplied" v="Jäähdytysaika on käytössä." eh="267c9607" />
-        <e k="usedplus_st_vehicleLabel" v="Ajoneuvo: " eh="27cfabe4" />
+        <e k="usedplus_st_vehicleLabel" v="Ajoneuvo: %s" eh="27cfabe4" />
         <e k="usedplus_std_vehicleName" v="GMC C7000 palveluauto" eh="7f78c3d1" />
         <e k="usedplus_std_specialCapabilities" v="ERITYISOMINAISUUDET:" eh="d408664f" />
         <e k="usedplus_std_featureRestoration" v="Pitkäaikainen ajoneuvon palautus" eh="0fa4b175" />

@@ -2225,7 +2225,7 @@
         <e k="usedplus_st_option4" v="オプション4" eh="b32b4636" />
         <e k="usedplus_st_inspectionResult" v="検査結果" eh="7df33e46" />
         <e k="usedplus_st_currentTarget" v="現在: %d%%  &gt;  目標: 90%%以上" eh="8847daa5" />
-        <e k="usedplus_st_sparePartsAvailable" v="スペアパーツ: 12個利用可能" eh="9cae9be9" />
+        <e k="usedplus_st_sparePartsAvailable" v="スペアパーツ: %d個利用可能%s" eh="9cae9be9" />
         <e k="usedplus_st_fluidsConsumed" v="ディーゼル、オイル、油圧液が消費されます" eh="f2999b5f" />
         <e k="usedplus_st_startRestoration" v="復元開始" eh="696ac7a5" />
         <e k="usedplus_st_cooldownHint" v="その間に別のコンポーネントを試してください。" eh="208a1488" />
@@ -2235,7 +2235,7 @@
         <e k="usedplus_st_restorationCanBegin" v="復元を開始できます。" eh="a8adb101" />
         <e k="usedplus_st_symptomsMismatch" v="症状がこの診断と一致しません。" eh="62b8aecd" />
         <e k="usedplus_st_cooldownApplied" v="クールダウンが適用されました。" eh="267c9607" />
-        <e k="usedplus_st_vehicleLabel" v="車両: " eh="27cfabe4" />
+        <e k="usedplus_st_vehicleLabel" v="車両: %s" eh="27cfabe4" />
         <e k="usedplus_std_vehicleName" v="GMC C7000 サービストラック" eh="7f78c3d1" />
         <e k="usedplus_std_specialCapabilities" v="特別な機能:" eh="d408664f" />
         <e k="usedplus_std_featureRestoration" v="長期車両レストレーション" eh="0fa4b175" />
