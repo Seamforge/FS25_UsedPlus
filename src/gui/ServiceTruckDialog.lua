@@ -501,7 +501,7 @@ function ServiceTruckDialog:displaySuccessDetails()
         local spec = self.serviceTruck and self.serviceTruck.spec_serviceTruck
         local partsAvailable = spec and spec.totalPartsAvailable or 0
         local hasParts = partsAvailable >= 10
-        local lowSuffix = hasParts and "" or (" " .. g_i18n:getText("usedplus_st_low"))
+        local lowSuffix = hasParts and "" or (" " .. (g_i18n:getText("usedplus_st_low") or ""))
         self.reqPartsText:setText(string.format(g_i18n:getText("usedplus_st_sparePartsAvailable"), partsAvailable, lowSuffix))
         if not hasParts then
             self.reqPartsText:setTextColor(1.0, 0.3, 0.3, 1)
