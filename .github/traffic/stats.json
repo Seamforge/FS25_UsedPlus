@@ -7123,36 +7123,41 @@
     "watchers": 6
   },
   {
-    "timestamp": "2026-04-08T06:17:06Z",
+    "timestamp": "2026-04-08T18:01:19Z",
     "date": "2026-04-08",
     "views": {
-      "count": 2063,
-      "uniques": 347
+      "count": 2101,
+      "uniques": 352
     },
     "clones": {
-      "count": 1451,
-      "uniques": 656
+      "count": 1430,
+      "uniques": 651
     },
     "referrers": [
       {
         "referrer": "github.com",
-        "count": 514,
-        "uniques": 103
+        "count": 523,
+        "uniques": 104
       },
       {
         "referrer": "Bing",
-        "count": 201,
-        "uniques": 32
+        "count": 200,
+        "uniques": 33
       },
       {
         "referrer": "Google",
-        "count": 81,
-        "uniques": 32
+        "count": 76,
+        "uniques": 30
       },
       {
         "referrer": "reddit.com",
-        "count": 23,
-        "uniques": 12
+        "count": 24,
+        "uniques": 13
+      },
+      {
+        "referrer": "DuckDuckGo",
+        "count": 12,
+        "uniques": 3
       },
       {
         "referrer": "com.reddit.frontpage",
@@ -7161,13 +7166,8 @@
       },
       {
         "referrer": "chatgpt.com",
-        "count": 6,
+        "count": 7,
         "uniques": 2
-      },
-      {
-        "referrer": "DuckDuckGo",
-        "count": 4,
-        "uniques": 3
       },
       {
         "referrer": "search.brave.com",
@@ -7189,62 +7189,62 @@
       {
         "path": "/Seamforge/FS25_UsedPlus",
         "title": "Overview",
-        "count": 502,
-        "uniques": 163
+        "count": 549,
+        "uniques": 175
       },
       {
         "path": "/XelaNull/FS25_UsedPlus",
         "title": "Overview",
-        "count": 210,
-        "uniques": 91
+        "count": 178,
+        "uniques": 81
       },
       {
         "path": "/Seamforge/FS25_UsedPlus/releases",
         "title": "/releases",
-        "count": 156,
-        "uniques": 54
+        "count": 164,
+        "uniques": 58
       },
       {
         "path": "/Seamforge/FS25_UsedPlus/issues",
         "title": "/issues",
-        "count": 121,
+        "count": 127,
         "uniques": 43
       },
       {
         "path": "/XelaNull/FS25_UsedPlus/releases",
         "title": "/releases",
-        "count": 75,
+        "count": 63,
+        "uniques": 25
+      },
+      {
+        "path": "/Seamforge/FS25_UsedPlus/releases/tag/v2.14.2",
+        "title": "/releases/tag/v2.14.2",
+        "count": 57,
         "uniques": 29
       },
       {
         "path": "/Seamforge/FS25_UsedPlus/releases/tag/v2.15.4.98-pre1",
         "title": "/releases/tag/v2.15.4.98-pre1",
-        "count": 49,
-        "uniques": 23
-      },
-      {
-        "path": "/XelaNull/FS25_UsedPlus/issues",
-        "title": "/issues",
-        "count": 47,
-        "uniques": 22
-      },
-      {
-        "path": "/Seamforge/FS25_UsedPlus/releases/tag/v2.14.2",
-        "title": "/releases/tag/v2.14.2",
-        "count": 46,
-        "uniques": 25
+        "count": 51,
+        "uniques": 24
       },
       {
         "path": "/Seamforge/FS25_UsedPlus/tree/master",
         "title": "/tree/master",
-        "count": 38,
+        "count": 42,
         "uniques": 6
+      },
+      {
+        "path": "/XelaNull/FS25_UsedPlus/issues",
+        "title": "/issues",
+        "count": 36,
+        "uniques": 19
       },
       {
         "path": "/XelaNull/FS25_UsedPlus/releases/tag/v2.14.2",
         "title": "/releases/tag/v2.14.2",
-        "count": 37,
-        "uniques": 23
+        "count": 33,
+        "uniques": 21
       }
     ],
     "releases": [
@@ -7260,7 +7260,7 @@
       {
         "assets": [
           {
-            "downloads": 213,
+            "downloads": 214,
             "name": "FS25_UsedPlus.zip"
           }
         ],
