@@ -1,7 +1,7 @@
 # FS25_UsedPlus — Traffic Dashboard
 
-**Last updated:** 2026-04-09T18:01:14Z
-**Days tracked:** 51 | **Download snapshots:** 1111 (hourly)
+**Last updated:** 2026-04-10T06:28:50Z
+**Days tracked:** 52 | **Download snapshots:** 1119 (hourly)
 
 ---
 
@@ -11,10 +11,10 @@
 
 | Metric | 14-Day Total | Unique |
 |--------|-------------|--------|
-| Page Views | 2045 | 347 |
-| Git Clones | 1384 | 634 |
+| Page Views | 2029 | 314 |
+| Git Clones | 1393 | 636 |
 
-> **Engagement:** 5.8 pages per visitor (14-day avg)
+> **Engagement:** 6.4 pages per visitor (14-day avg)
 
 ---
 
@@ -30,9 +30,9 @@
 
 ![Conversion](charts/conversion.png)
 
-> **14-day conversion:** 932 of 347 visitors cloned or downloaded (**268.5%**)
+> **14-day conversion:** 937 of 314 visitors cloned or downloaded (**298.4%**)
 >
-> Unique cloners: 634 | Release downloads: 298
+> Unique cloners: 636 | Release downloads: 301
 
 ---
 
@@ -42,9 +42,9 @@
 
 | Channel | Count |
 |---------|-------|
-| Zip Downloads | 298 |
-| Git Clones (14-day) | 1384 |
-| **Total Acquisitions** | **1682** |
+| Zip Downloads | 301 |
+| Git Clones (14-day) | 1393 |
+| **Total Acquisitions** | **1694** |
 
 ---
 
@@ -62,15 +62,15 @@
 
 | Source | Views | Unique |
 |--------|-------|--------|
-| github.com | 510 | 103 |
-| Bing | 210 | 35 |
-| Google | 49 | 26 |
+| github.com | 521 | 106 |
+| Bing | 210 | 38 |
+| Google | 50 | 24 |
 | reddit.com | 24 | 13 |
-| DuckDuckGo | 12 | 3 |
+| DuckDuckGo | 13 | 4 |
 | com.reddit.frontpage | 10 | 8 |
 | chatgpt.com | 7 | 2 |
-| search.brave.com | 3 | 2 |
 | yandex.ru | 3 | 1 |
+| search.brave.com | 1 | 1 |
 | steamcommunity.com | 1 | 1 |
 
 ---
@@ -91,16 +91,16 @@
 
 | Page | Views | Unique |
 |------|-------|--------|
-| `/Seamforge/FS25_UsedPlus` | 586 | 184 |
-| `/Seamforge/FS25_UsedPlus/releases` | 174 | 61 |
-| `/XelaNull/FS25_UsedPlus` | 129 | 59 |
-| `/Seamforge/FS25_UsedPlus/issues` | 129 | 43 |
-| `/Seamforge/FS25_UsedPlus/releases/tag/v2.14.2` | 60 | 32 |
-| `/Seamforge/FS25_UsedPlus/releases/tag/v2.15.4.98-pre1` | 52 | 25 |
-| `/XelaNull/FS25_UsedPlus/releases` | 46 | 21 |
-| `/Seamforge/FS25_UsedPlus/tree/master` | 43 | 6 |
-| `/XelaNull/FS25_UsedPlus/issues` | 32 | 17 |
-| `/Seamforge/FS25_UsedPlus/wiki` | 30 | 10 |
+| `/Seamforge/FS25_UsedPlus` | 629 | 197 |
+| `/Seamforge/FS25_UsedPlus/releases` | 188 | 68 |
+| `/Seamforge/FS25_UsedPlus/issues` | 133 | 46 |
+| `/XelaNull/FS25_UsedPlus` | 98 | 43 |
+| `/Seamforge/FS25_UsedPlus/releases/tag/v2.14.2` | 67 | 35 |
+| `/Seamforge/FS25_UsedPlus/releases/tag/v2.15.4.98-pre1` | 53 | 26 |
+| `/Seamforge/FS25_UsedPlus/tree/master` | 45 | 6 |
+| `/Seamforge/FS25_UsedPlus/wiki` | 36 | 12 |
+| `/XelaNull/FS25_UsedPlus/releases` | 34 | 15 |
+| `/Seamforge/FS25_UsedPlus/wiki/Other-Mod-Compatibility` | 27 | 12 |
 
 ---
 
