@@ -1,7 +1,7 @@
 # FS25_UsedPlus — Traffic Dashboard
 
-**Last updated:** 2026-04-17T18:49:09Z
-**Days tracked:** 58 | **Download snapshots:** 1243 (hourly)
+**Last updated:** 2026-04-18T06:09:06Z
+**Days tracked:** 59 | **Download snapshots:** 1251 (hourly)
 
 ---
 
@@ -11,8 +11,8 @@
 
 | Metric | 14-Day Total | Unique |
 |--------|-------------|--------|
-| Page Views | 1680 | 303 |
-| Git Clones | 1670 | 706 |
+| Page Views | 1616 | 293 |
+| Git Clones | 1718 | 719 |
 
 > **Engagement:** 5.5 pages per visitor (14-day avg)
 
@@ -30,9 +30,9 @@
 
 ![Conversion](charts/conversion.png)
 
-> **14-day conversion:** 1046 of 303 visitors cloned or downloaded (**345.2%**)
+> **14-day conversion:** 1067 of 293 visitors cloned or downloaded (**364.1%**)
 >
-> Unique cloners: 706 | Release downloads: 340
+> Unique cloners: 719 | Release downloads: 348
 
 ---
 
@@ -42,9 +42,9 @@
 
 | Channel | Count |
 |---------|-------|
-| Zip Downloads | 340 |
-| Git Clones (14-day) | 1670 |
-| **Total Acquisitions** | **2010** |
+| Zip Downloads | 348 |
+| Git Clones (14-day) | 1718 |
+| **Total Acquisitions** | **2066** |
 
 ---
 
@@ -62,15 +62,15 @@
 
 | Source | Views | Unique |
 |--------|-------|--------|
-| github.com | 353 | 92 |
-| Bing | 142 | 42 |
-| Google | 104 | 35 |
-| reddit.com | 25 | 14 |
-| DuckDuckGo | 17 | 5 |
-| com.reddit.frontpage | 10 | 8 |
-| chatgpt.com | 10 | 3 |
+| github.com | 345 | 96 |
+| Bing | 134 | 38 |
+| Google | 110 | 37 |
+| reddit.com | 21 | 11 |
+| DuckDuckGo | 18 | 6 |
 | yandex.ru | 8 | 4 |
+| chatgpt.com | 8 | 2 |
 | search.brave.com | 7 | 3 |
+| com.reddit.frontpage | 5 | 4 |
 | Yahoo | 2 | 1 |
 
 ---
@@ -91,16 +91,16 @@
 
 | Page | Views | Unique |
 |------|-------|--------|
-| `/Seamforge/FS25_UsedPlus` | 665 | 231 |
-| `/Seamforge/FS25_UsedPlus/releases` | 159 | 61 |
-| `/Seamforge/FS25_UsedPlus/issues` | 115 | 49 |
-| `/Seamforge/FS25_UsedPlus/releases/tag/v2.14.2` | 84 | 46 |
-| `/Seamforge/FS25_UsedPlus/tree/master` | 48 | 7 |
-| `/Seamforge/FS25_UsedPlus/wiki` | 47 | 19 |
+| `/Seamforge/FS25_UsedPlus` | 637 | 222 |
+| `/Seamforge/FS25_UsedPlus/releases` | 156 | 63 |
+| `/Seamforge/FS25_UsedPlus/issues` | 110 | 47 |
+| `/Seamforge/FS25_UsedPlus/releases/tag/v2.14.2` | 84 | 49 |
+| `/Seamforge/FS25_UsedPlus/wiki` | 49 | 21 |
+| `/Seamforge/FS25_UsedPlus/tree/master` | 39 | 6 |
 | `/Seamforge/FS25_UsedPlus/wiki/Other-Mod-Compatibility` | 36 | 17 |
-| `/Seamforge/FS25_UsedPlus/releases/tag/v2.15.4.98-pre1` | 33 | 19 |
+| `/Seamforge/FS25_UsedPlus/releases/tag/v2.15.4.98-pre1` | 31 | 18 |
 | `/Seamforge/FS25_UsedPlus/wiki/Service-Truck` | 23 | 10 |
-| `/Seamforge/FS25_UsedPlus/blob/master/screenshots/used_plus_finances_zoomed.png` | 21 | 19 |
+| `/Seamforge/FS25_UsedPlus/wiki/RVB-Integration` | 21 | 12 |
 
 ---
 
