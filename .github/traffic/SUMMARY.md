@@ -1,7 +1,7 @@
 # FS25_UsedPlus — Traffic Dashboard
 
-**Last updated:** 2026-04-21T06:55:03Z
-**Days tracked:** 62 | **Download snapshots:** 1304 (hourly)
+**Last updated:** 2026-04-22T06:54:24Z
+**Days tracked:** 63 | **Download snapshots:** 1319 (hourly)
 
 ---
 
@@ -11,10 +11,10 @@
 
 | Metric | 14-Day Total | Unique |
 |--------|-------------|--------|
-| Page Views | 1363 | 265 |
-| Git Clones | 1874 | 797 |
+| Page Views | 1254 | 252 |
+| Git Clones | 1952 | 806 |
 
-> **Engagement:** 5.1 pages per visitor (14-day avg)
+> **Engagement:** 4.9 pages per visitor (14-day avg)
 
 ---
 
@@ -30,9 +30,9 @@
 
 ![Conversion](charts/conversion.png)
 
-> **14-day conversion:** 1163 of 265 visitors cloned or downloaded (**438.8%**)
+> **14-day conversion:** 1179 of 252 visitors cloned or downloaded (**467.8%**)
 >
-> Unique cloners: 797 | Release downloads: 366
+> Unique cloners: 806 | Release downloads: 373
 
 ---
 
@@ -42,9 +42,9 @@
 
 | Channel | Count |
 |---------|-------|
-| Zip Downloads | 366 |
-| Git Clones (14-day) | 1874 |
-| **Total Acquisitions** | **2240** |
+| Zip Downloads | 373 |
+| Git Clones (14-day) | 1952 |
+| **Total Acquisitions** | **2325** |
 
 ---
 
@@ -62,16 +62,16 @@
 
 | Source | Views | Unique |
 |--------|-------|--------|
-| github.com | 322 | 97 |
-| Bing | 104 | 33 |
-| Google | 101 | 34 |
-| DuckDuckGo | 16 | 6 |
-| Yahoo | 11 | 3 |
+| github.com | 313 | 96 |
+| Bing | 99 | 32 |
+| Google | 93 | 31 |
+| Yahoo | 13 | 4 |
+| DuckDuckGo | 8 | 5 |
 | search.brave.com | 7 | 3 |
-| chatgpt.com | 5 | 3 |
 | yandex.ru | 5 | 3 |
-| reddit.com | 2 | 2 |
+| chatgpt.com | 4 | 2 |
 | doubao.com | 1 | 1 |
+| reddit.com | 1 | 1 |
 
 ---
 
@@ -91,16 +91,16 @@
 
 | Page | Views | Unique |
 |------|-------|--------|
-| `/Seamforge/FS25_UsedPlus` | 549 | 212 |
-| `/Seamforge/FS25_UsedPlus/releases` | 138 | 58 |
-| `/Seamforge/FS25_UsedPlus/issues` | 95 | 39 |
-| `/Seamforge/FS25_UsedPlus/releases/tag/v2.14.2` | 68 | 44 |
-| `/Seamforge/FS25_UsedPlus/wiki` | 34 | 16 |
-| `/Seamforge/FS25_UsedPlus/tree/master` | 30 | 5 |
+| `/Seamforge/FS25_UsedPlus` | 527 | 201 |
+| `/Seamforge/FS25_UsedPlus/releases` | 133 | 54 |
+| `/Seamforge/FS25_UsedPlus/issues` | 89 | 38 |
+| `/Seamforge/FS25_UsedPlus/releases/tag/v2.14.2` | 63 | 41 |
 | `/Seamforge/FS25_UsedPlus/wiki/Other-Mod-Compatibility` | 28 | 13 |
-| `/Seamforge/FS25_UsedPlus/branches` | 21 | 3 |
-| `/Seamforge/FS25_UsedPlus/wiki/RVB-Integration` | 19 | 11 |
-| `/Seamforge/FS25_UsedPlus/releases/tag/v2.15.4.98-pre1` | 18 | 15 |
+| `/Seamforge/FS25_UsedPlus/tree/master` | 26 | 5 |
+| `/Seamforge/FS25_UsedPlus/wiki` | 23 | 13 |
+| `/Seamforge/FS25_UsedPlus/branches` | 22 | 3 |
+| `/Seamforge/FS25_UsedPlus/wiki/RVB-Integration` | 18 | 10 |
+| `/Seamforge/FS25_UsedPlus/releases/tag/v2.15.4.98-pre1` | 17 | 14 |
 
 ---
 
