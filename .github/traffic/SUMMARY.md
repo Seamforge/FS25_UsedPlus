@@ -1,7 +1,7 @@
 # FS25_UsedPlus — Traffic Dashboard
 
-**Last updated:** 2026-04-22T06:54:24Z
-**Days tracked:** 63 | **Download snapshots:** 1319 (hourly)
+**Last updated:** 2026-04-23T06:58:15Z
+**Days tracked:** 64 | **Download snapshots:** 1334 (hourly)
 
 ---
 
@@ -11,8 +11,8 @@
 
 | Metric | 14-Day Total | Unique |
 |--------|-------------|--------|
-| Page Views | 1254 | 252 |
-| Git Clones | 1952 | 806 |
+| Page Views | 1253 | 252 |
+| Git Clones | 2218 | 878 |
 
 > **Engagement:** 4.9 pages per visitor (14-day avg)
 
@@ -30,9 +30,9 @@
 
 ![Conversion](charts/conversion.png)
 
-> **14-day conversion:** 1179 of 252 visitors cloned or downloaded (**467.8%**)
+> **14-day conversion:** 1255 of 252 visitors cloned or downloaded (**498.0%**)
 >
-> Unique cloners: 806 | Release downloads: 373
+> Unique cloners: 878 | Release downloads: 377
 
 ---
 
@@ -42,9 +42,9 @@
 
 | Channel | Count |
 |---------|-------|
-| Zip Downloads | 373 |
-| Git Clones (14-day) | 1952 |
-| **Total Acquisitions** | **2325** |
+| Zip Downloads | 377 |
+| Git Clones (14-day) | 2218 |
+| **Total Acquisitions** | **2595** |
 
 ---
 
@@ -62,9 +62,9 @@
 
 | Source | Views | Unique |
 |--------|-------|--------|
-| github.com | 313 | 96 |
-| Bing | 99 | 32 |
-| Google | 93 | 31 |
+| github.com | 311 | 97 |
+| Google | 96 | 31 |
+| Bing | 87 | 29 |
 | Yahoo | 13 | 4 |
 | DuckDuckGo | 8 | 5 |
 | search.brave.com | 7 | 3 |
@@ -91,16 +91,16 @@
 
 | Page | Views | Unique |
 |------|-------|--------|
-| `/Seamforge/FS25_UsedPlus` | 527 | 201 |
-| `/Seamforge/FS25_UsedPlus/releases` | 133 | 54 |
-| `/Seamforge/FS25_UsedPlus/issues` | 89 | 38 |
-| `/Seamforge/FS25_UsedPlus/releases/tag/v2.14.2` | 63 | 41 |
+| `/Seamforge/FS25_UsedPlus` | 524 | 204 |
+| `/Seamforge/FS25_UsedPlus/releases` | 134 | 55 |
+| `/Seamforge/FS25_UsedPlus/issues` | 91 | 40 |
+| `/Seamforge/FS25_UsedPlus/releases/tag/v2.14.2` | 62 | 39 |
 | `/Seamforge/FS25_UsedPlus/wiki/Other-Mod-Compatibility` | 28 | 13 |
-| `/Seamforge/FS25_UsedPlus/tree/master` | 26 | 5 |
+| `/Seamforge/FS25_UsedPlus/tree/master` | 28 | 6 |
 | `/Seamforge/FS25_UsedPlus/wiki` | 23 | 13 |
-| `/Seamforge/FS25_UsedPlus/branches` | 22 | 3 |
+| `/Seamforge/FS25_UsedPlus/branches` | 20 | 3 |
+| `/Seamforge/FS25_UsedPlus/releases/tag/v2.15.4.98-pre1` | 19 | 14 |
 | `/Seamforge/FS25_UsedPlus/wiki/RVB-Integration` | 18 | 10 |
-| `/Seamforge/FS25_UsedPlus/releases/tag/v2.15.4.98-pre1` | 17 | 14 |
 
 ---
 
